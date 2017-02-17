@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4147A1CA-4783-4718-8A5D-79AFA3CB93B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSTech.GestaoEscolar.DAL</RootNamespace>
+    <AssemblyName>MSTech.GestaoEscolar.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Serviços|AnyCPU'">
+    <OutputPath>bin\Release Serviços\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAlunos|AnyCPU'">
+    <OutputPath>bin\ReleaseAlunos\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MSTech.Data.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstracts\AbstractCLS_QualificadorAtividadeDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoAnexoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoAnotacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoAvaliacaoObservacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoCurriculoAvaliacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoCurriculoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoCurriculoDocumentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoEquipamentoDeficienteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoEscolaOrigemDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoCertificadoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoObservacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoProjetoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaAbonoFaltaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoRecursoAvaliacaoINEPDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoResponsavelDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AreaConhecimentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ArquivoAreaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AvaliacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AvaliacaoRelacionadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AvisoTextoGeralDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioAnualDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioCursoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioEscolaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioEventoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoDisciplinaEletivaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoEscolaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoEscolaPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralVigenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoRequisitoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoTurnoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CursoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CursoRelacionadoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CursoReunioesDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_DisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_DisciplinaMacroCampoEletivaAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_DocenteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EscalaAvaliacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EscalaAvaliacaoNumericaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EscalaAvaliacaoParecerDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EventoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EventoLimiteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_FichaMedicaContatoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_FormatoAvaliacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_HistoricoObservacaoPadraoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_MotivoBaixaFrequenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ParametroAcademicoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ParametroBuscaAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ParametroIntegracaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_RecomendacaoAlunoResponsavelDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_RecursosAulaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ReligiaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TerritorioExperienciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoAnotacaoAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoAreaDocumentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoCicloDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoCurriculoPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDesempenhoAprendizadoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDeficienciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDocenteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoEquipamentoDeficienteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoEventoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoEventoGrupoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoFormacaoDocenteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoJustificativaExclusaoAulasDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoJustificativaFaltaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoMacroCampoEletivaAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoModalidadeEnsinoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoMovimentacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoNivelEnsinoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoPeriodoCalendarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoQualidadeAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoRecursoAvaliacaoINEPDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoResponsavelAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoResultadoCurriculoPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoResultadoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoTurnoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TurnoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TurnoEscolaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TurnoHorarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoAcademicoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoMigracaoRioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoInscricaoCrecheDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_CorRelatorioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_FaixaRelatorioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_HistoricoConceitoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_HistoricoPedagogicoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_HistoricoPedagogicoTipoCurriculoPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ModuloClasseDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ObservacaoBoletimDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ParametroDocumentoAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ParametroMensagemDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_PermissaoDocenteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_PermissaoModuloOperacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_RelatorioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_RelatorioDocumentoAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_RelatorioDocumentoDocenteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_RelatorioServidorRelatorioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ServidorRelatorioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDesempenhoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaDesempenhoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaMediaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaObservacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaQualidadeDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaRecomendacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaObservacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaQualidadeDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaRecomendacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoFechamentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoFechamentoPendenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamentoRelacionadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoProjetoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoTurmaDisciplinaOrientacaoCurricularDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ArquivoEfetivacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_CompensacaoAusenciaAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_CompensacaoAusenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ConfiguracaoAtividadeDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ConfiguracaoAtividadeQualificadorDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ConfiguracaoAtividadeTipoAtividadeDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_FechamentoJustificativaPendenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoResponsaveisDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoCicloDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnosticoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoRelacionadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaAlunoTipoAnotacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaDisciplinaRelacionadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaGeradaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaOrientacaoCurricularDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaPendenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaPlanoDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaRecursoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaRecursoRegenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaRegenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaTerritorioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaDisciplinaPlanejamentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaAlunoOrientacaoCurricularDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaOrientacaoCurricularDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaRegenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaRelacionadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_AgendaHorarioRequisicaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_AgendaRequisicaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ApiRequisicaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_LogDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ProtocoloAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ProtocoloDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ProtocoloHistoricoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ProtocoloReprocessoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_RequisicaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaCalendarioPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaClassificacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaClassificacaoVigenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaOrgaoSupervisaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaVinculadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_PredioCaracteristicasDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_PredioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_PredioEnderecoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_TipoClassificacaoEscolaCargosDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_TipoClassificacaoEscolaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_TipoRedeEnsinoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaContatoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaDiretorDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEnsinoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEquipamentosDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaPredioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_AvaliacaoMedia_AlteracaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_MatriculaTurmaDisciplinaExcluidaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_MovimentacaoAcertoSituacaoAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_TurmaAula_AlteracaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_TurmaAula_ExclusaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_TurmaNota_AlteracaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoCalendarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoCursoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoEscolaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoProcessoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoProcessoLocalDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoVagasDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_DocumentoMatriculaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MatriculaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MatriculaTurmaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MatriculaTurmaDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MomentoAnoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MomentoCalendarioPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MotivoTransferenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MovimentacaoDadosAdicionaisDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MovimentacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroFormacaoTurmaCapacidadeDeficienteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroFormacaoTurmaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroFormacaoTurmaTipoDeficienciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroFormacaoTurmaTurnoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroTipoMovimentacaoCurriculoPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroTipoMovimentacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ProcessoFechamentoInicioCursoRelacionadoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ProcessoFechamentoInicioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ProcessoFechamentoInicioEtapaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ProcessoFechamentoInicioHistoricoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMomentoAnoCurriculoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMomentoAnoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMomentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMovimentacaoCurriculoPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMovimentacaoCursoMomentoCalendarioPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMovimentacaoCursoMomentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMovimentacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_ConteudoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_ConteudoItemDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_ConteudoTipoPeriodoCalendarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_HabilidadesDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_MatrizHabilidadesDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_NivelAprendizadoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_NivelDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_ObjetivoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricularDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricularNivelAprendizadoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricularRelacionamentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_REL_TurmaDisciplinaSituacaoFechamentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RES_ChaveResourceDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_CargaHorariaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_CargoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_CargoDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_ColaboradorCargoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_ColaboradorCargoDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_ColaboradorDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_ColaboradorFuncaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_FuncaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_TipoVinculoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_ArquivoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_EquipamentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_EquipamentoUnidadeAdministrativaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_ServicosDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_ServicosLogExecucaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_ItemAvaliacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_MetodoAvaliacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TipoAtendimentoTurmaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaAberturaAnosAnterioresDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaAtendimentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaCurriculoAvaliacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaCurriculoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaAulaPrevistaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaCalendarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaMultisseriadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaNaoAvaliadoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaRelacionadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaRelDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaTerritorioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDocenteDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDocenteProjetoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaRelTurmaDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoFichaMedicaDAO.cs" />
+    <Compile Include="ACA_AlunoAnexoDAO.cs" />
+    <Compile Include="ACA_AlunoAnotacaoDAO.cs" />
+    <Compile Include="ACA_AlunoAvaliacaoObservacaoDAO.cs" />
+    <Compile Include="ACA_AlunoCurriculoAvaliacaoDAO.cs" />
+    <Compile Include="ACA_AlunoCurriculoDAO.cs" />
+    <Compile Include="ACA_AlunoCurriculoDocumentoDAO.cs" />
+    <Compile Include="ACA_AlunoDAO.cs" />
+    <Compile Include="ACA_AlunoEquipamentoDeficienteDAO.cs" />
+    <Compile Include="ACA_AlunoEscolaOrigemDAO.cs" />
+    <Compile Include="ACA_AlunoHistoricoCertificadoDAO.cs" />
+    <Compile Include="ACA_AlunoHistoricoDAO.cs" />
+    <Compile Include="ACA_AlunoHistoricoDisciplinaDAO.cs" />
+    <Compile Include="ACA_AlunoHistoricoObservacaoDAO.cs" />
+    <Compile Include="ACA_AlunoHistoricoProjetoDAO.cs" />
+    <Compile Include="ACA_AlunoJustificativaAbonoFaltaDAO.cs" />
+    <Compile Include="ACA_AlunoRecursoAvaliacaoINEPDAO.cs" />
+    <Compile Include="ACA_AlunoResponsavelDAO.cs" />
+    <Compile Include="ACA_AreaConhecimentoDAO.cs" />
+    <Compile Include="ACA_ArquivoAreaDAO.cs" />
+    <Compile Include="ACA_AvaliacaoDAO.cs" />
+    <Compile Include="ACA_AvaliacaoRelacionadaDAO.cs" />
+    <Compile Include="ACA_AvisoTextoGeralDAO.cs" />
+    <Compile Include="ACA_CalendarioAnualDAO.cs" />
+    <Compile Include="ACA_CalendarioCursoDAO.cs" />
+    <Compile Include="ACA_CalendarioEscolaDAO.cs" />
+    <Compile Include="ACA_CalendarioEventoDAO.cs" />
+    <Compile Include="ACA_CalendarioPeriodoDAO.cs" />
+    <Compile Include="ACA_CompromissoEstudoDAO.cs" />
+    <Compile Include="ACA_CoordenadorDisciplinaDAO.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
+    <Compile Include="ACA_CurriculoDAO.cs" />
+    <Compile Include="ACA_CurriculoDisciplinaDAO.cs" />
+    <Compile Include="ACA_CurriculoDisciplinaEletivaDAO.cs" />
+    <Compile Include="ACA_CurriculoEscolaDAO.cs" />
+    <Compile Include="ACA_CurriculoEscolaPeriodoDAO.cs" />
+    <Compile Include="ACA_CurriculoPeriodoDAO.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralVigenciaDAO.cs" />
+    <Compile Include="ACA_CurriculoRequisitoDAO.cs" />
+    <Compile Include="ACA_CurriculoTurnoDAO.cs" />
+    <Compile Include="ACA_CursoDAO.cs" />
+    <Compile Include="ACA_CursoRelacionadoDAO.cs" />
+    <Compile Include="ACA_CursoReunioesDAO.cs" />
+    <Compile Include="ACA_DisciplinaDAO.cs" />
+    <Compile Include="ACA_DisciplinaMacroCampoEletivaAlunoDAO.cs" />
+    <Compile Include="ACA_DocenteDAO.cs" />
+    <Compile Include="ACA_EscalaAvaliacaoDAO.cs" />
+    <Compile Include="ACA_EscalaAvaliacaoNumericaDAO.cs" />
+    <Compile Include="ACA_EscalaAvaliacaoParecerDAO.cs" />
+    <Compile Include="ACA_EventoDAO.cs" />
+    <Compile Include="ACA_EventoLimiteDAO.cs" />
+    <Compile Include="ACA_FichaMedicaContatoDAO.cs" />
+    <Compile Include="ACA_FormatoAvaliacaoDAO.cs" />
+    <Compile Include="ACA_HistoricoObservacaoPadraoDAO.cs" />
+    <Compile Include="ACA_MotivoBaixaFrequenciaDAO.cs" />
+    <Compile Include="ACA_ParametroAcademicoDAO.cs" />
+    <Compile Include="ACA_ParametroBuscaAlunoDAO.cs" />
+    <Compile Include="ACA_ParametroIntegracaoDAO.cs" />
+    <Compile Include="ACA_RecomendacaoAlunoResponsavelDAO.cs" />
+    <Compile Include="ACA_RecursosAulaDAO.cs" />
+    <Compile Include="ACA_ReligiaoDAO.cs" />
+    <Compile Include="ACA_TerritorioExperienciaDAO.cs" />
+    <Compile Include="ACA_TipoAnotacaoAlunoDAO.cs" />
+    <Compile Include="ACA_TipoAreaDocumentoDAO.cs" />
+    <Compile Include="ACA_TipoCicloDAO.cs" />
+    <Compile Include="ACA_TipoCurriculoPeriodoDAO.cs" />
+    <Compile Include="ACA_TipoDesempenhoAprendizadoDAO.cs" />
+    <Compile Include="ACA_TipoDisciplinaDAO.cs" />
+    <Compile Include="ACA_TipoDisciplinaDeficienciaDAO.cs" />
+    <Compile Include="ACA_TipoDocenteDAO.cs" />
+    <Compile Include="ACA_TipoEquipamentoDeficienteDAO.cs" />
+    <Compile Include="ACA_TipoEventoDAO.cs" />
+    <Compile Include="ACA_TipoEventoGrupoDAO.cs" />
+    <Compile Include="ACA_TipoFormacaoDocenteDAO.cs" />
+    <Compile Include="ACA_TipoJustificativaExclusaoAulasDAO.cs" />
+    <Compile Include="ACA_TipoJustificativaFaltaDAO.cs" />
+    <Compile Include="ACA_TipoMacroCampoEletivaAlunoDAO.cs" />
+    <Compile Include="ACA_TipoModalidadeEnsinoDAO.cs" />
+    <Compile Include="ACA_TipoMovimentacaoDAO.cs" />
+    <Compile Include="ACA_TipoNivelEnsinoDAO.cs" />
+    <Compile Include="ACA_TipoPeriodoCalendarioDAO.cs" />
+    <Compile Include="ACA_TipoQualidadeAlunoDAO.cs" />
+    <Compile Include="ACA_TipoRecursoAvaliacaoINEPDAO.cs" />
+    <Compile Include="ACA_TipoResponsavelAlunoDAO.cs" />
+    <Compile Include="ACA_TipoResultadoCurriculoPeriodoDAO.cs" />
+    <Compile Include="ACA_TipoResultadoDAO.cs" />
+    <Compile Include="ACA_TipoTurnoDAO.cs" />
+    <Compile Include="ACA_TurnoDAO.cs" />
+    <Compile Include="ACA_TurnoEscolaDAO.cs" />
+    <Compile Include="ACA_TurnoHorarioDAO.cs" />
+    <Compile Include="ApiDAO.cs" />
+    <Compile Include="CFG_ConfiguracaoAcademicoDAO.cs" />
+    <Compile Include="CFG_ConfiguracaoMigracaoRioDAO.cs" />
+    <Compile Include="CFG_ConfiguracaoInscricaoCrecheDAO.cs" />
+    <Compile Include="CFG_CorRelatorioDAO.cs" />
+    <Compile Include="CFG_FaixaRelatorioDAO.cs" />
+    <Compile Include="CFG_HistoricoConceitoDAO.cs" />
+    <Compile Include="CFG_HistoricoPedagogicoDAO.cs" />
+    <Compile Include="CFG_HistoricoPedagogicoTipoCurriculoPeriodoDAO.cs" />
+    <Compile Include="CFG_ModuloClasseDAO.cs" />
+    <Compile Include="CFG_ObservacaoBoletimDAO.cs" />
+    <Compile Include="CFG_ParametroDocumentoAlunoDAO.cs" />
+    <Compile Include="CFG_ParametroMensagemDAO.cs" />
+    <Compile Include="CFG_PermissaoDocenteDAO.cs" />
+    <Compile Include="CFG_PermissaoModuloOperacaoDAO.cs" />
+    <Compile Include="CFG_RelatorioDAO.cs" />
+    <Compile Include="CFG_RelatorioDocumentoAlunoDAO.cs" />
+    <Compile Include="CFG_RelatorioDocumentoDocenteDAO.cs" />
+    <Compile Include="CFG_RelatorioServidorRelatorioDAO.cs" />
+    <Compile Include="CFG_ServidorRelatorioDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDesempenhoDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaDesempenhoDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaMediaDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaObservacaoDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaQualidadeDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaRecomendacaoDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaObservacaoDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaQualidadeDAO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacaoDAO.cs" />
+    <Compile Include="CLS_AlunoFechamentoDAO.cs" />
+    <Compile Include="CLS_AlunoFechamentoPendenciaDAO.cs" />
+    <Compile Include="CLS_AlunoPlanejamentoDAO.cs" />
+    <Compile Include="CLS_AlunoPlanejamentoRelacionadaDAO.cs" />
+    <Compile Include="CLS_AlunoProjetoDAO.cs" />
+    <Compile Include="CLS_AlunoTurmaDisciplinaOrientacaoCurricularDAO.cs" />
+    <Compile Include="CLS_ArquivoEfetivacaoDAO.cs" />
+    <Compile Include="CLS_CompensacaoAusenciaAlunoDAO.cs" />
+    <Compile Include="CLS_CompensacaoAusenciaDAO.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividadeDAO.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividadeQualificadorDAO.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividadeTipoAtividadeDAO.cs" />
+    <Compile Include="CLS_FechamentoJustificativaPendenciaDAO.cs" />
+    <Compile Include="CLS_FrequenciaReuniaoDAO.cs" />
+    <Compile Include="CLS_FrequenciaReuniaoResponsaveisDAO.cs" />
+    <Compile Include="CLS_PlanejamentoCicloDAO.cs" />
+    <Compile Include="CLS_PlanejamentoOrientacaoCurricularDAO.cs" />
+    <Compile Include="CLS_PlanejamentoOrientacaoCurricularDiagnosticoDAO.cs" />
+    <Compile Include="CLS_PlanejamentoProjetoDAO.cs" />
+    <Compile Include="CLS_PlanejamentoProjetoRelacionadaDAO.cs" />
+    <Compile Include="CLS_QualificadorAtividadeDAO.cs" />
+    <Compile Include="CLS_TipoAtividadeAvaliativaDAO.cs" />
+    <Compile Include="CLS_TurmaAulaAlunoDAO.cs" />
+    <Compile Include="CLS_TurmaAulaAlunoTipoAnotacaoDAO.cs" />
+    <Compile Include="CLS_TurmaAulaDAO.cs" />
+    <Compile Include="CLS_TurmaAulaDisciplinaRelacionadaDAO.cs" />
+    <Compile Include="CLS_TurmaAulaGeradaDAO.cs" />
+    <Compile Include="CLS_TurmaAulaOrientacaoCurricularDAO.cs" />
+    <Compile Include="CLS_TurmaAulaPendenciaDAO.cs" />
+    <Compile Include="CLS_TurmaAulaPlanoDisciplinaDAO.cs" />
+    <Compile Include="CLS_TurmaAulaRecursoDAO.cs" />
+    <Compile Include="CLS_TurmaAulaRecursoRegenciaDAO.cs" />
+    <Compile Include="CLS_TurmaAulaRegenciaDAO.cs" />
+    <Compile Include="CLS_TurmaAulaTerritorioDAO.cs" />
+    <Compile Include="CLS_TurmaDisciplinaPlanejamentoDAO.cs" />
+    <Compile Include="CLS_TurmaNotaAlunoDAO.cs" />
+    <Compile Include="CLS_TurmaNotaAlunoOrientacaoCurricularDAO.cs" />
+    <Compile Include="CLS_TurmaNotaDAO.cs" />
+    <Compile Include="ACA_AlunoFichaMedicaDAO.cs" />
+    <Compile Include="CLS_TurmaNotaOrientacaoCurricularDAO.cs" />
+    <Compile Include="CLS_TurmaNotaRegenciaDAO.cs" />
+    <Compile Include="CLS_TurmaNotaRelacionadaDAO.cs" />
+    <Compile Include="DCL_AgendaHorarioRequisicaoDAO.cs" />
+    <Compile Include="DCL_AgendaRequisicaoDAO.cs" />
+    <Compile Include="DCL_ApiRequisicaoDAO.cs" />
+    <Compile Include="DCL_LogDAO.cs" />
+    <Compile Include="DCL_ProtocoloAlunoDAO.cs" />
+    <Compile Include="DCL_ProtocoloDAO.cs" />
+    <Compile Include="DCL_ProtocoloHistoricoDAO.cs" />
+    <Compile Include="DCL_ProtocoloReprocessoDAO.cs" />
+    <Compile Include="DCL_RequisicaoDAO.cs" />
+    <Compile Include="ESC_EscolaCalendarioPeriodoDAO.cs" />
+    <Compile Include="ESC_EscolaClassificacaoDAO.cs" />
+    <Compile Include="ESC_EscolaClassificacaoVigenciaDAO.cs" />
+    <Compile Include="ESC_EscolaDAO.cs" />
+    <Compile Include="ESC_EscolaOrgaoSupervisaoDAO.cs" />
+    <Compile Include="ESC_EscolaVinculadaDAO.cs" />
+    <Compile Include="ESC_PredioCaracteristicasDAO.cs" />
+    <Compile Include="ESC_PredioDAO.cs" />
+    <Compile Include="ESC_PredioEnderecoDAO.cs" />
+    <Compile Include="ESC_TipoClassificacaoEscolaCargosDAO.cs" />
+    <Compile Include="ESC_TipoClassificacaoEscolaDAO.cs" />
+    <Compile Include="ESC_TipoRedeEnsinoDAO.cs" />
+    <Compile Include="ESC_UnidadeEscolaContatoDAO.cs" />
+    <Compile Include="ESC_UnidadeEscolaDAO.cs" />
+    <Compile Include="ESC_EscolaDiretorDAO.cs" />
+    <Compile Include="ESC_UnidadeEscolaEnsinoDAO.cs" />
+    <Compile Include="ESC_UnidadeEscolaEquipamentosDAO.cs" />
+    <Compile Include="ESC_UnidadeEscolaPredioDAO.cs" />
+    <Compile Include="GestaoEscolarServicoDAO.cs" />
+    <Compile Include="LOG_AvaliacaoMedia_AlteracaoDAO.cs" />
+    <Compile Include="LOG_MatriculaTurmaDisciplinaExcluidaDAO.cs" />
+    <Compile Include="LOG_MovimentacaoAcertoSituacaoAlunoDAO.cs" />
+    <Compile Include="LOG_TurmaAula_AlteracaoDAO.cs" />
+    <Compile Include="LOG_TurmaAula_ExclusaoDAO.cs" />
+    <Compile Include="LOG_TurmaNota_AlteracaoDAO.cs" />
+    <Compile Include="MTR_ConfiguracaoCalendarioDAO.cs" />
+    <Compile Include="MTR_ConfiguracaoCursoDAO.cs" />
+    <Compile Include="MTR_ConfiguracaoDAO.cs" />
+    <Compile Include="MTR_ConfiguracaoEscolaDAO.cs" />
+    <Compile Include="MTR_ConfiguracaoProcessoDAO.cs" />
+    <Compile Include="MTR_ConfiguracaoProcessoLocalDAO.cs" />
+    <Compile Include="MTR_ConfiguracaoVagasDAO.cs" />
+    <Compile Include="MTR_DocumentoMatriculaDAO.cs" />
+    <Compile Include="MTR_MatriculaDAO.cs" />
+    <Compile Include="MTR_MatriculaTurmaDAO.cs" />
+    <Compile Include="MTR_MatriculaTurmaDisciplinaDAO.cs" />
+    <Compile Include="MTR_MomentoAnoDAO.cs" />
+    <Compile Include="MTR_MomentoCalendarioPeriodoDAO.cs" />
+    <Compile Include="MTR_MotivoTransferenciaDAO.cs" />
+    <Compile Include="MTR_MovimentacaoDadosAdicionaisDAO.cs" />
+    <Compile Include="MTR_MovimentacaoDAO.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaCapacidadeDeficienteDAO.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaDAO.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaTipoDeficienciaDAO.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaTurnoDAO.cs" />
+    <Compile Include="MTR_ParametroTipoMovimentacaoCurriculoPeriodoDAO.cs" />
+    <Compile Include="MTR_ParametroTipoMovimentacaoDAO.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioCursoRelacionadoDAO.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioDAO.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioEtapaDAO.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioHistoricoDAO.cs" />
+    <Compile Include="MTR_TipoMomentoAnoCurriculoDAO.cs" />
+    <Compile Include="MTR_TipoMomentoAnoDAO.cs" />
+    <Compile Include="MTR_TipoMomentoDAO.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCurriculoPeriodoDAO.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCursoMomentoCalendarioPeriodoDAO.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCursoMomentoDAO.cs" />
+    <Compile Include="MTR_TipoMovimentacaoDAO.cs" />
+    <Compile Include="ORC_ConteudoDAO.cs" />
+    <Compile Include="ORC_ConteudoItemDAO.cs" />
+    <Compile Include="ORC_ConteudoTipoPeriodoCalendarioDAO.cs" />
+    <Compile Include="ORC_HabilidadesDAO.cs" />
+    <Compile Include="ORC_MatrizHabilidadesDAO.cs" />
+    <Compile Include="ORC_NivelAprendizadoDAO.cs" />
+    <Compile Include="ORC_NivelDAO.cs" />
+    <Compile Include="ORC_ObjetivoDAO.cs" />
+    <Compile Include="ORC_OrientacaoCurricularDAO.cs" />
+    <Compile Include="ORC_OrientacaoCurricularNivelAprendizadoDAO.cs" />
+    <Compile Include="ORC_OrientacaoCurricularRelacionamentoDAO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="REL_TurmaDisciplinaSituacaoFechamentoDAO.cs" />
+    <Compile Include="RES_ChaveResourceDAO.cs" />
+    <Compile Include="RHU_CargaHorariaDAO.cs" />
+    <Compile Include="RHU_CargoDAO.cs" />
+    <Compile Include="RHU_CargoDisciplinaDAO.cs" />
+    <Compile Include="RHU_ColaboradorCargoDAO.cs" />
+    <Compile Include="RHU_ColaboradorCargoDisciplinaDAO.cs" />
+    <Compile Include="RHU_ColaboradorDAO.cs" />
+    <Compile Include="RHU_ColaboradorFuncaoDAO.cs" />
+    <Compile Include="RHU_FuncaoDAO.cs" />
+    <Compile Include="RHU_TipoVinculoDAO.cs" />
+    <Compile Include="SYS_ArquivoDAO.cs" />
+    <Compile Include="SYS_EquipamentoDAO.cs" />
+    <Compile Include="SYS_EquipamentoUnidadeAdministrativaDAO.cs" />
+    <Compile Include="SYS_ServicosDAO.cs" />
+    <Compile Include="SYS_ServicosLogExecucaoDAO.cs" />
+    <Compile Include="TUR_ItemAvaliacaoDAO.cs" />
+    <Compile Include="TUR_MetodoAvaliacaoDAO.cs" />
+    <Compile Include="TUR_TipoAtendimentoTurmaDAO.cs" />
+    <Compile Include="TUR_TurmaAberturaAnosAnterioresDAO.cs" />
+    <Compile Include="TUR_TurmaAtendimentoDAO.cs" />
+    <Compile Include="TUR_TurmaCurriculoAvaliacaoDAO.cs" />
+    <Compile Include="TUR_TurmaCurriculoDAO.cs" />
+    <Compile Include="TUR_TurmaDAO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaAulaPrevistaDAO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaCalendarioDAO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaDAO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaMultisseriadaDAO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaNaoAvaliadoDAO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaRelacionadaDAO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaRelDisciplinaDAO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaTerritorioDAO.cs" />
+    <Compile Include="TUR_TurmaDocenteDAO.cs" />
+    <Compile Include="TUR_TurmaDocenteProjetoDAO.cs" />
+    <Compile Include="TUR_TurmaRelTurmaDisciplinaDAO.cs" />
+    <Compile Include="UsuarioDAO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.Entities\MSTech.GestaoEscolar.Entities.csproj">
+      <Project>{FA6964EB-E31C-406F-A1D5-A15482CE71D6}</Project>
+      <Name>MSTech.GestaoEscolar.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

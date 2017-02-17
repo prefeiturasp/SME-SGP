@@ -1,0 +1,171 @@
+<asp:TextBox   runat="server" CSSClass="text2C"  SkinID="text2C" />
+<asp:TextBox   runat="server" CSSClass="text10C"  SkinID="text10C" />
+<asp:TextBox   runat="server" CSSClass="text15C"  SkinID="text15C" />
+<asp:TextBox   runat="server" CSSClass="text20C"  SkinID="text20C" />
+<asp:TextBox   runat="server" CSSClass="text30C"  SkinID="text30C" />
+<asp:TextBox   runat="server" CSSClass="text40C"  SkinID="text40C" />
+<asp:TextBox   runat="server" CSSClass="text60C"  SkinID="text60C" />
+<asp:TextBox   runat="server" CSSClass="text10C maskData calendar"  SkinID="Data" />
+<asp:TextBox   runat="server" CSSClass="text10C maskData"  SkinID="DataSemCalendario" />
+<asp:TextBox   runat="server" CSSClass="text10C maskHora"  SkinID="Hora" />
+<asp:TextBox   runat="server" CSSClass="text10C numeric" SkinID="Numerico" />
+<asp:TextBox   runat="server" CSSClass="text4C currency" SkinID="Decimal" />
+<asp:TextBox   runat="server" CSSClass="text10C numeric tbCep_incremental" SkinID="CepIncremental" />
+<asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite4000" onkeypress="Max(this,4000);" OnKeyUp="Max(this,4000);" />
+<asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite2000" onkeypress="Max(this,2000);" OnKeyUp="Max(this,2000);" />
+<asp:TextBox   runat="server" CSSClass="text30C maskCodValidacao"  SkinID="CodigoValidacao" />
+<asp:TextBox   runat="server" CSSClass="text60C input-search"  SkinID="text60CSearch" />
+
+<asp:ListBox runat="server" CssClass="lista" />
+
+<asp:DropDownList  runat="server" CSSClass="text2C"  SkinID="text2C" />
+<asp:DropDownList  runat="server" CSSClass="text10C"  SkinID="text10C" />
+<asp:DropDownList  runat="server" CSSClass="text15C"  SkinID="text15C" />
+<asp:DropDownList  runat="server" CSSClass="text20C"  SkinID="text20C" />
+<asp:DropDownList  runat="server" CSSClass="text30C"  SkinID="text30C" />
+<asp:DropDownList  runat="server" CSSClass="text60C"  SkinID="text60C" />
+<asp:DropDownList  runat="server" CSSClass="text30C tbZona_incremental" SkinID="ComboZonaEndereco" />
+
+<asp:GridView runat="server" CssClass="grid"  GridLines="None">
+    <RowStyle CssClass="gridRow" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow" />
+</asp:GridView>
+
+<asp:GridView runat="server" CssClass="grid" SkinID="noHover" GridLines="None">
+    <RowStyle CssClass="gridViewRow" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridViewSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridViewRow" />
+    <AlternatingRowStyle CssClass="gridViewRow" />
+</asp:GridView>
+
+<asp:GridView runat="server" CSSClass="grid freeze" SkinID="freeze" GridLines="None">
+    <RowStyle CssClass="gridRow" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow" />
+</asp:GridView>
+
+<asp:GridView runat="server" CSSClass="gridChild" SkinID="child" GridLines="None">
+    <RowStyle CssClass="gridRow" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow" />
+</asp:GridView>
+
+<asp:DataGrid runat="server" CSSClass="grid freeze" SkinID="freeze" GridLines="None">
+    <PagerStyle CssClass="gridPager" />
+    <EditItemStyle CssClass="gridRow" />
+    <SelectedItemStyle CssClass="gridSelectedRow" />
+    <AlternatingItemStyle CssClass="gridAlternatingRow" />
+    <ItemStyle CssClass="gridRow" />
+    <HeaderStyle CssClass="gridHeader" />
+</asp:DataGrid>
+
+<asp:LinkButton runat="server" CssClass="ui-icon ui-icon-circle-triangle-e" SkinID="Arrow" />
+<asp:LinkButton runat="server" CssClass="btn" SkinID="botao" />
+<asp:Button runat="server" CssClass="btn btLoader" SkinID="btLoader" />
+<asp:Button runat="server" CssClass="btn" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/tempo-real.png"  SkinID="btTempoReal" Width="20px" Height="20px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/icoRelatorio.png"  SkinID="btRelatorio" Width="20px" Height="20px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico-formulario.png" SkinID="btFormulario" Width="20px" Height="20px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excluir.png" CssClass="btExcluir" SkinID="btExcluir" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excluir.png" CssClass="btExcluir" SkinID="btExcluirPlanejamento" style="display:inline-block;padding:0; vertical-align:bottom;" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excluir.png" CssClass="btExcluirSemMensagem" SkinID="btExcluirSemMensagem" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excluir.png" CssClass="btExcluirTurno" SkinID="btExcluirTurno" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/permissao.png" CssClass="bt_permissao" SkinID="btPermissao" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/pesquisar.png" CSSClass="btn bt_pesquisar" SkinID="btPesquisar" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/limpar.png" CssClass="bt_limpar" SkinID="btLimpar" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/desfazer.png" CssClass="bt_desfazer" SkinID="btDesfazer" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico_dependencias.png" CssClass="btExcluirSemMensagem" Width="24px" Height="24px" SkinID="btDependencias" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/novo.png"  SkinID="btNovo" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/alterar.png"  SkinID="btEditar" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/cancelar.gif"  SkinID="btCancelar" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/detalhar.gif"  SkinID="btDetalhar" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/convocar.png"  SkinID="btConvocar" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/confirmar.png"  SkinID="btConfirmar" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ativar.png"  SkinID="btAtivar" Width="24px" Height="24px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/desativar.png"  SkinID="btDesativar" Width="24px" Height="24px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/imprimir.png"  SkinID="btImprimir" Width="24px" Height="24px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/expandir.png"  SkinID="btExpandir" Width="24px" Height="24px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excel.png"  SkinID="btExcel" Width="24px" Height="24px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico-planejamento.png"  SkinID="btPlanejamento" Width="24px" Height="24px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico-aulas.png"  SkinID="btAulas" Width="24px" Height="24px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/atualizar.png" SkinID="btAtualizar" Width="24px" Height="24px" />
+
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/tempo-real.png" SkinID="imgTempoReal" Width="20px" Height="20px" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/confirmar.png"  SkinID="imgConfirmar" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/confirmarAmarelo.png"  SkinID="imgConfirmarAmarelo" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/folder.png" SkinID="imgFolder" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/notepad.png" SkinID="imgNotepad" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ajax-loader.gif" SkinID="imgLoader" CssClass="imgLoader" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/warning.png" SkinID="imgAviso" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/imgsAreaAluno/fotoAluno.png" alt="Foto do aluno" class="imgFoto" SkinID="imgFoto" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/icoInformacoes.png" alt="Informação" SkinID="imgInfo" />
+
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/statusAlertaPendencia.png" ToolTip="Foram encontradas pendências para esse item."
+    SkinID="imgStatusAlertaPendencia" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/statusSucessoPendencia.png" ToolTip="Nenhuma pendência foi encontrada!"
+    SkinID="imgStatusSucessoPendencia" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/verificaPendencia.png" ToolTip="Validar pendências."
+    SkinID="btVerificaPendencia" />
+
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/icoAlerta.png" ToolTip="Plano de aula não preenchido"
+    SkinID="imgStatusAlertaAulaSemPlano" />
+
+<asp:HyperLink runat="server" ImageUrl="~/App_Themes/IntranetSME/images/anexar.png" SkinID="hplAnexo" />
+<asp:HyperLink runat="server" ImageUrl="~/App_Themes/IntranetSME/images/iconeHelp.png" SkinID="hplHelp"
+     CssClass="hplHelp" Width="32" Height="32" />
+
+<asp:CheckBox runat="server" CssClass="checkbox" />
+<asp:CheckBox runat="server" CssClass="checkbox chkTodos" SkinID="chkTodos" />
+<asp:CheckBox runat="server" CssClass="checkboxCentralizado" SkinID="chkCentralizado" />
+<asp:CheckBox runat="server" CssClass="checkbox DragHeader DropHeader" SkinID="CheckboxDrag" />
+<asp:CheckBox runat="server" CssClass="checkboxSemProfessor" SkinId="checkboxSemProfessor" />
+
+<asp:CheckBoxList runat="server" CssClass="checkBoxList"></asp:CheckBoxList>
+ 
+<asp:RadioButtonList runat="server" CssClass="radio"></asp:RadioButtonList>
+
+<asp:Label   runat="server" CssClass="ui-state-error ui-corner-all" SkinID="Erro" />
+<asp:Label   runat="server" CssClass="DragCell" SkinID="Drag" />
+<asp:Label   runat="server" CssClass="msgErroCombo" SkinID="SkinMsgErroCombo" />
+<asp:Label   runat="server" CssClass="summaryRed" SkinID="SummaryRed" />
+<asp:ValidationSummary runat="server"  CssClass="summaryMensagem" DisplayMode="List" />
+<asp:CompareValidator runat="server" ForeColor="#df0000" />
+<asp:RequiredFieldValidator runat="server" ForeColor="#df0000" />
+<asp:RegularExpressionValidator runat="server" ForeColor="#df0000" />
+<asp:label runat="server" CssClass="fieldCamposObrigatorios" SkinID="lblObrigatorioAsterisco" />
+
+<asp:GridView SkinID="Collapsible" runat="server" CssClass="grid"  GridLines="None">
+    <RowStyle CssClass="gridRow collapsibleContainer" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow collapsibleContainer" />
+</asp:GridView>
+
+<asp:GridView SkinID="GridResponsive" runat="server" CssClass="grid grid-responsive-list"  GridLines="None">
+    <RowStyle CssClass="gridRow collapsibleContainer" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow collapsibleContainer" />
+</asp:GridView>

@@ -1,0 +1,671 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FA6964EB-E31C-406F-A1D5-A15482CE71D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSTech.GestaoEscolar.Entities</RootNamespace>
+    <AssemblyName>MSTech.GestaoEscolar.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Serviços|AnyCPU'">
+    <OutputPath>bin\Release Serviços\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAlunos|AnyCPU'">
+    <OutputPath>bin\ReleaseAlunos\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MSTech.CoreSSO.Entities">
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Data.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstracts\AbstractCLS_QualificadorAtividade.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Aluno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoAnexo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoAnotacao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoAvaliacaoObservacao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoCurriculo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoCurriculoAvaliacao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoCurriculoDocumento.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoEquipamentoDeficiente.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoEscolaOrigem.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistorico.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoCertificado.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoObservacao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoProjeto.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaAbonoFalta.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoRecursoAvaliacaoINEP.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoResponsavel.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AreaConhecimento.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ArquivoArea.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Avaliacao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AvaliacaoRelacionada.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AvisoTextoGeral.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioAnual.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioCurso.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioEscola.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioEvento.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CalendarioPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Curriculo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoDisciplinaEletiva.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoEscola.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoEscolaPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralVigencia.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoRequisito.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoTurno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Curso.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CursoRelacionado.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CursoReunioes.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Disciplina.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_DisciplinaMacroCampoEletivaAluno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Docente.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EscalaAvaliacao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EscalaAvaliacaoNumerica.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EscalaAvaliacaoParecer.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Evento.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_EventoLimite.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_FichaMedicaContato.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_FormatoAvaliacao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_HistoricoObservacaoPadrao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_MotivoBaixaFrequencia.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ParametroAcademico.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ParametroBuscaAluno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ParametroIntegracao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_RecomendacaoAlunoResponsavel.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_RecursosAula.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Religiao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TerritorioExperiencia.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoAnotacaoAluno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoAreaDocumento.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoCiclo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoCurriculoPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDesempenhoAprendizado.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDeficiencia.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDocente.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoEquipamentoDeficiente.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoEvento.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoEventoGrupo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoFormacaoDocente.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoJustificativaExclusaoAulas.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoJustificativaFalta.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoMacroCampoEletivaAluno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoModalidadeEnsino.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoMovimentacao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoNivelEnsino.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoPeriodoCalendario.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoQualidadeAluno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoRecursoAvaliacaoINEP.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoResponsavelAluno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoResultado.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoResultadoCurriculoPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoTurno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_Turno.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TurnoEscola.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TurnoHorario.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoAcademico.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoMigracaoRio.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoInscricaoCreche.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_CorRelatorio.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_FaixaRelatorio.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_HistoricoConceito.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_HistoricoPedagogico.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_HistoricoPedagogicoTipoCurriculoPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ModuloClasse.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ObservacaoBoletim.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ParametroDocumentoAluno.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ParametroMensagem.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_PermissaoDocente.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_PermissaoModuloOperacao.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_Relatorio.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_RelatorioDocumentoAluno.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_RelatorioDocumentoDocente.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_RelatorioServidorRelatorio.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_ServidorRelatorio.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurma.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDesempenho.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaDesempenho.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaMedia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaObservacao.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaQualidade.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaDisciplinaRecomendacao.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaObservacao.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaQualidade.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaRecomendacao.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoFechamento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoFechamentoPendencia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamentoRelacionada.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoProjeto.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoTurmaDisciplinaOrientacaoCurricular.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ArquivoEfetivacao.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_CompensacaoAusencia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_CompensacaoAusenciaAluno.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ConfiguracaoAtividade.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ConfiguracaoAtividadeQualificador.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ConfiguracaoAtividadeTipoAtividade.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_FechamentoJustificativaPendencia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniao.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoResponsaveis.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoCiclo.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricular.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnostico.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjeto.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoRelacionada.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativa.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAula.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaAluno.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaAlunoTipoAnotacao.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaDisciplinaRelacionada.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaGerada.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaOrientacaoCurricular.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaPendencia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaPlanoDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaRecurso.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaRecursoRegencia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaRegencia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAulaTerritorio.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaDisciplinaPlanejamento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNota.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaAluno.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaAlunoOrientacaoCurricular.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaOrientacaoCurricular.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaRegencia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaNotaRelacionada.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_AgendaHorarioRequisicao.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_AgendaRequisicao.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ApiRequisicao.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_Log.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_Protocolo.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ProtocoloAluno.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ProtocoloHistorico.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_ProtocoloReprocesso.cs" />
+    <Compile Include="Abstracts\Abstract_DCL_Requisicao.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_Escola.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaCalendarioPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaClassificacao.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaClassificacaoVigencia.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaOrgaoSupervisao.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaVinculada.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_Predio.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_PredioCaracteristicas.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_PredioEndereco.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_TipoClassificacaoEscola.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_TipoClassificacaoEscolaCargos.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_TipoRedeEnsino.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscola.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaContato.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_EscolaDiretor.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEnsino.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEquipamentos.cs" />
+    <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaPredio.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_AvaliacaoMedia_Alteracao.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_MatriculaTurmaDisciplinaExcluida.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_MovimentacaoAcertoSituacaoAluno.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_TurmaAula_Alteracao.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_TurmaAula_Exclusao.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_TurmaNota_Alteracao.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_Configuracao.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoCalendario.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoCurso.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoEscola.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoProcesso.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoProcessoLocal.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ConfiguracaoVagas.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_DocumentoMatricula.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_Matricula.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MatriculaTurma.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MatriculaTurmaDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MomentoAno.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MomentoCalendarioPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MotivoTransferencia.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_Movimentacao.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_MovimentacaoDadosAdicionais.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroFormacaoTurma.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroFormacaoTurmaCapacidadeDeficiente.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroFormacaoTurmaTipoDeficiencia.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroFormacaoTurmaTurno.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroTipoMovimentacao.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ParametroTipoMovimentacaoCurriculoPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ProcessoFechamentoInicio.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ProcessoFechamentoInicioCursoRelacionado.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ProcessoFechamentoInicioEtapa.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_ProcessoFechamentoInicioHistorico.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMomento.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMomentoAno.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMomentoAnoCurriculo.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMovimentacao.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMovimentacaoCurriculoPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMovimentacaoCursoMomento.cs" />
+    <Compile Include="Abstracts\Abstract_MTR_TipoMovimentacaoCursoMomentoCalendarioPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_Conteudo.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_ConteudoItem.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_ConteudoTipoPeriodoCalendario.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_Habilidades.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_MatrizHabilidades.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_Nivel.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_NivelAprendizado.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_Objetivo.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricular.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricularNivelAprendizado.cs" />
+    <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricularRelacionamento.cs" />
+    <Compile Include="Abstracts\Abstract_REL_TurmaDisciplinaSituacaoFechamento.cs" />
+    <Compile Include="Abstracts\Abstract_RES_ChaveResource.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_CargaHoraria.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_Cargo.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_CargoDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_Colaborador.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_ColaboradorCargo.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_ColaboradorCargoDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_ColaboradorFuncao.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_Funcao.cs" />
+    <Compile Include="Abstracts\Abstract_RHU_TipoVinculo.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_Arquivo.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_Equipamento.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_EquipamentoUnidadeAdministrativa.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_Servicos.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_ServicosLogExecucao.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_ItemAvaliacao.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_MetodoAvaliacao.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TipoAtendimentoTurma.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_Turma.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaAberturaAnosAnteriores.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaAtendimento.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaCurriculo.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaCurriculoAvaliacao.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaAulaPrevista.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaCalendario.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaMultisseriada.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaNaoAvaliado.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaRelacionada.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaRelDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaTerritorio.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDocente.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaDocenteProjeto.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaRelTurmaDisciplina.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoFichaMedica.cs" />
+    <Compile Include="ACA_AlunoAnexo.cs" />
+    <Compile Include="ACA_AlunoAnotacao.cs" />
+    <Compile Include="ACA_AlunoHistoricoCertificado.cs" />
+    <Compile Include="ACA_AlunoHistoricoProjeto.cs" />
+    <Compile Include="ACA_AlunoJustificativaAbonoFalta.cs" />
+    <Compile Include="ACA_AreaConhecimento.cs" />
+    <Compile Include="ACA_ArquivoArea.cs" />
+    <Compile Include="ACA_CompromissoEstudo.cs" />
+    <Compile Include="ACA_EventoLimite.cs" />
+    <Compile Include="ACA_MotivoBaixaFrequencia.cs" />
+    <Compile Include="ACA_TerritorioExperiencia.cs" />
+    <Compile Include="ACA_TipoAnotacaoAluno.cs" />
+    <Compile Include="ACA_TipoAreaDocumento.cs" />
+    <Compile Include="ACA_TipoCiclo.cs" />
+    <Compile Include="ACA_TipoCurriculoPeriodo.cs" />
+    <Compile Include="ACA_TipoDisciplinaDeficiencia.cs" />
+    <Compile Include="ACA_TipoDocente.cs" />
+    <Compile Include="ACA_TipoEventoGrupo.cs" />
+    <Compile Include="ACA_TipoJustificativaExclusaoAulas.cs" />
+    <Compile Include="ACA_TipoResultado.cs" />
+    <Compile Include="ACA_TipoResultadoCurriculoPeriodo.cs" />
+    <Compile Include="CFG_CorRelatorio.cs" />
+    <Compile Include="CFG_HistoricoPedagogico.cs" />
+    <Compile Include="CFG_HistoricoPedagogicoTipoCurriculoPeriodo.cs" />
+    <Compile Include="CFG_ModuloClasse.cs" />
+    <Compile Include="CFG_PermissaoDocente.cs" />
+    <Compile Include="CFG_PermissaoModuloOperacao.cs" />
+    <Compile Include="CFG_Relatorio.cs" />
+    <Compile Include="CFG_RelatorioDocumentoDocente.cs" />
+    <Compile Include="CFG_FaixaRelatorio.cs" />
+    <Compile Include="CFG_RelatorioServidorRelatorio.cs" />
+    <Compile Include="CFG_ServidorRelatorio.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaMedia.cs" />
+    <Compile Include="ACA_Aluno.cs" />
+    <Compile Include="ACA_AlunoAvaliacaoObservacao.cs" />
+    <Compile Include="ACA_AlunoCurriculo.cs" />
+    <Compile Include="ACA_AlunoCurriculoAvaliacao.cs" />
+    <Compile Include="ACA_AlunoCurriculoDocumento.cs" />
+    <Compile Include="ACA_AlunoEquipamentoDeficiente.cs" />
+    <Compile Include="ACA_AlunoEscolaOrigem.cs" />
+    <Compile Include="ACA_AlunoHistorico.cs" />
+    <Compile Include="ACA_AlunoHistoricoDisciplina.cs" />
+    <Compile Include="ACA_AlunoHistoricoObservacao.cs" />
+    <Compile Include="ACA_AlunoRecursoAvaliacaoINEP.cs" />
+    <Compile Include="ACA_AlunoResponsavel.cs" />
+    <Compile Include="ACA_Avaliacao.cs" />
+    <Compile Include="ACA_AvaliacaoRelacionada.cs" />
+    <Compile Include="ACA_AvisoTextoGeral.cs" />
+    <Compile Include="ACA_CalendarioAnual.cs" />
+    <Compile Include="ACA_CalendarioCurso.cs" />
+    <Compile Include="ACA_CalendarioEscola.cs" />
+    <Compile Include="ACA_CalendarioEvento.cs" />
+    <Compile Include="ACA_CalendarioPeriodo.cs" />
+    <Compile Include="ACA_CoordenadorDisciplina.cs" />
+    <Compile Include="ACA_Curriculo.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralDisciplina.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodo.cs" />
+    <Compile Include="ACA_CurriculoDisciplina.cs" />
+    <Compile Include="ACA_CurriculoDisciplinaEletiva.cs" />
+    <Compile Include="ACA_CurriculoEscola.cs" />
+    <Compile Include="ACA_CurriculoEscolaPeriodo.cs" />
+    <Compile Include="ACA_CurriculoPeriodo.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralVigencia.cs" />
+    <Compile Include="ACA_CurriculoRequisito.cs" />
+    <Compile Include="ACA_CurriculoTurno.cs" />
+    <Compile Include="ACA_Curso.cs" />
+    <Compile Include="ACA_CursoRelacionado.cs" />
+    <Compile Include="ACA_CursoReunioes.cs" />
+    <Compile Include="ACA_Disciplina.cs" />
+    <Compile Include="ACA_DisciplinaMacroCampoEletivaAluno.cs" />
+    <Compile Include="ACA_Docente.cs" />
+    <Compile Include="ACA_EscalaAvaliacao.cs" />
+    <Compile Include="ACA_EscalaAvaliacaoNumerica.cs" />
+    <Compile Include="ACA_EscalaAvaliacaoParecer.cs" />
+    <Compile Include="ACA_Evento.cs" />
+    <Compile Include="ACA_FichaMedicaContato.cs" />
+    <Compile Include="ACA_FormatoAvaliacao.cs" />
+    <Compile Include="ACA_HistoricoObservacaoPadrao.cs" />
+    <Compile Include="ACA_ParametroAcademico.cs" />
+    <Compile Include="ACA_ParametroBuscaAluno.cs" />
+    <Compile Include="ACA_ParametroIntegracao.cs" />
+    <Compile Include="ACA_RecomendacaoAlunoResponsavel.cs" />
+    <Compile Include="ACA_RecursosAula.cs" />
+    <Compile Include="ACA_Religiao.cs" />
+    <Compile Include="ACA_TipoDesempenhoAprendizado.cs" />
+    <Compile Include="ACA_TipoDisciplina.cs" />
+    <Compile Include="ACA_TipoEquipamentoDeficiente.cs" />
+    <Compile Include="ACA_TipoEvento.cs" />
+    <Compile Include="ACA_TipoFormacaoDocente.cs" />
+    <Compile Include="ACA_TipoJustificativaFalta.cs" />
+    <Compile Include="ACA_TipoMacroCampoEletivaAluno.cs" />
+    <Compile Include="ACA_TipoModalidadeEnsino.cs" />
+    <Compile Include="ACA_TipoMovimentacao.cs" />
+    <Compile Include="ACA_TipoNivelEnsino.cs" />
+    <Compile Include="ACA_TipoPeriodoCalendario.cs" />
+    <Compile Include="ACA_TipoQualidadeAluno.cs" />
+    <Compile Include="ACA_TipoRecursoAvaliacaoINEP.cs" />
+    <Compile Include="ACA_TipoResponsavelAluno.cs" />
+    <Compile Include="ACA_TipoTurno.cs" />
+    <Compile Include="ACA_Turno.cs" />
+    <Compile Include="ACA_TurnoEscola.cs" />
+    <Compile Include="ACA_TurnoHorario.cs" />
+    <Compile Include="CFG_ConfiguracaoAcademico.cs" />
+    <Compile Include="CFG_ConfiguracaoMigracaoRio.cs" />
+    <Compile Include="CFG_ConfiguracaoInscricaoCreche.cs" />
+    <Compile Include="CFG_HistoricoConceito.cs" />
+    <Compile Include="CFG_ObservacaoBoletim.cs" />
+    <Compile Include="CFG_ParametroDocumentoAluno.cs" />
+    <Compile Include="CFG_ParametroMensagem.cs" />
+    <Compile Include="CFG_RelatorioDocumentoAluno.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurma.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDesempenho.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplina.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaDesempenho.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaObservacao.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaQualidade.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaRecomendacao.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaObservacao.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaQualidade.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacao.cs" />
+    <Compile Include="CLS_AlunoFechamento.cs" />
+    <Compile Include="CLS_AlunoFechamentoPendencia.cs" />
+    <Compile Include="CLS_AlunoPlanejamento.cs" />
+    <Compile Include="CLS_AlunoPlanejamentoRelacionada.cs" />
+    <Compile Include="CLS_AlunoProjeto.cs" />
+    <Compile Include="CLS_AlunoTurmaDisciplinaOrientacaoCurricular.cs" />
+    <Compile Include="CLS_ArquivoEfetivacao.cs" />
+    <Compile Include="CLS_CompensacaoAusencia.cs" />
+    <Compile Include="CLS_CompensacaoAusenciaAluno.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividade.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividadeQualificador.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividadeTipoAtividade.cs" />
+    <Compile Include="CLS_FechamentoJustificativaPendencia.cs" />
+    <Compile Include="CLS_FrequenciaReuniao.cs" />
+    <Compile Include="CLS_FrequenciaReuniaoResponsaveis.cs" />
+    <Compile Include="CLS_PlanejamentoCiclo.cs" />
+    <Compile Include="CLS_PlanejamentoOrientacaoCurricular.cs" />
+    <Compile Include="CLS_PlanejamentoOrientacaoCurricularDiagnostico.cs" />
+    <Compile Include="CLS_PlanejamentoProjeto.cs" />
+    <Compile Include="CLS_PlanejamentoProjetoRelacionada.cs" />
+    <Compile Include="CLS_QualificadorAtividade.cs" />
+    <Compile Include="CLS_TipoAtividadeAvaliativa.cs" />
+    <Compile Include="CLS_TurmaAula.cs" />
+    <Compile Include="CLS_TurmaAulaAluno.cs" />
+    <Compile Include="CLS_TurmaAulaAlunoTipoAnotacao.cs" />
+    <Compile Include="CLS_TurmaAulaDisciplinaRelacionada.cs" />
+    <Compile Include="CLS_TurmaAulaGerada.cs" />
+    <Compile Include="CLS_TurmaAulaOrientacaoCurricular.cs" />
+    <Compile Include="CLS_TurmaAulaPendencia.cs" />
+    <Compile Include="CLS_TurmaAulaPlanoDisciplina.cs" />
+    <Compile Include="CLS_TurmaAulaRecurso.cs" />
+    <Compile Include="CLS_TurmaAulaRecursoRegencia.cs" />
+    <Compile Include="CLS_TurmaAulaRegencia.cs" />
+    <Compile Include="CLS_TurmaAulaTerritorio.cs" />
+    <Compile Include="CLS_TurmaDisciplinaPlanejamento.cs" />
+    <Compile Include="CLS_TurmaNota.cs" />
+    <Compile Include="CLS_TurmaNotaAluno.cs" />
+    <Compile Include="ACA_AlunoFichaMedica.cs" />
+    <Compile Include="CLS_TurmaNotaAlunoOrientacaoCurricular.cs" />
+    <Compile Include="CLS_TurmaNotaOrientacaoCurricular.cs" />
+    <Compile Include="CLS_TurmaNotaRegencia.cs" />
+    <Compile Include="CLS_TurmaNotaRelacionada.cs" />
+    <Compile Include="DCL_AgendaHorarioRequisicao.cs" />
+    <Compile Include="DCL_AgendaRequisicao.cs" />
+    <Compile Include="DCL_ApiRequisicao.cs" />
+    <Compile Include="DCL_Log.cs" />
+    <Compile Include="DCL_Protocolo.cs" />
+    <Compile Include="DCL_ProtocoloAluno.cs" />
+    <Compile Include="DCL_ProtocoloHistorico.cs" />
+    <Compile Include="DCL_ProtocoloReprocesso.cs" />
+    <Compile Include="DCL_Requisicao.cs" />
+    <Compile Include="ESC_Escola.cs" />
+    <Compile Include="ESC_EscolaCalendarioPeriodo.cs" />
+    <Compile Include="ESC_EscolaClassificacao.cs" />
+    <Compile Include="ESC_EscolaClassificacaoVigencia.cs" />
+    <Compile Include="ESC_EscolaOrgaoSupervisao.cs" />
+    <Compile Include="ESC_EscolaVinculada.cs" />
+    <Compile Include="ESC_Predio.cs" />
+    <Compile Include="ESC_PredioCaracteristicas.cs" />
+    <Compile Include="ESC_PredioEndereco.cs" />
+    <Compile Include="ESC_TipoClassificacaoEscola.cs" />
+    <Compile Include="ESC_TipoClassificacaoEscolaCargos.cs" />
+    <Compile Include="ESC_TipoRedeEnsino.cs" />
+    <Compile Include="ESC_UnidadeEscola.cs" />
+    <Compile Include="ESC_UnidadeEscolaContato.cs" />
+    <Compile Include="ESC_EscolaDiretor.cs" />
+    <Compile Include="ESC_UnidadeEscolaEnsino.cs" />
+    <Compile Include="ESC_UnidadeEscolaEquipamentos.cs" />
+    <Compile Include="ESC_UnidadeEscolaPredio.cs" />
+    <Compile Include="Interfaces\ICFG_Configuracao.cs" />
+    <Compile Include="LOG_AvaliacaoMedia_Alteracao.cs" />
+    <Compile Include="LOG_MatriculaTurmaDisciplinaExcluida.cs" />
+    <Compile Include="LOG_MovimentacaoAcertoSituacaoAluno.cs" />
+    <Compile Include="LOG_TurmaAula_Alteracao.cs" />
+    <Compile Include="LOG_TurmaAula_Exclusao.cs" />
+    <Compile Include="LOG_TurmaNota_Alteracao.cs" />
+    <Compile Include="MTR_Configuracao.cs" />
+    <Compile Include="MTR_ConfiguracaoCalendario.cs" />
+    <Compile Include="MTR_ConfiguracaoCurso.cs" />
+    <Compile Include="MTR_ConfiguracaoEscola.cs" />
+    <Compile Include="MTR_ConfiguracaoProcesso.cs" />
+    <Compile Include="MTR_ConfiguracaoProcessoLocal.cs" />
+    <Compile Include="MTR_ConfiguracaoVagas.cs" />
+    <Compile Include="MTR_DocumentoMatricula.cs" />
+    <Compile Include="MTR_Matricula.cs" />
+    <Compile Include="MTR_MatriculaTurma.cs" />
+    <Compile Include="MTR_MatriculaTurmaDisciplina.cs" />
+    <Compile Include="MTR_MomentoAno.cs" />
+    <Compile Include="MTR_MomentoCalendarioPeriodo.cs" />
+    <Compile Include="MTR_MotivoTransferencia.cs" />
+    <Compile Include="MTR_Movimentacao.cs" />
+    <Compile Include="MTR_MovimentacaoDadosAdicionais.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurma.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaCapacidadeDeficiente.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaTipoDeficiencia.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaTurno.cs" />
+    <Compile Include="MTR_ParametroTipoMovimentacao.cs" />
+    <Compile Include="MTR_ParametroTipoMovimentacaoCurriculoPeriodo.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicio.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioCursoRelacionado.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioEtapa.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioHistorico.cs" />
+    <Compile Include="MTR_TipoMomento.cs" />
+    <Compile Include="MTR_TipoMomentoAno.cs" />
+    <Compile Include="MTR_TipoMomentoAnoCurriculo.cs" />
+    <Compile Include="MTR_TipoMovimentacao.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCurriculoPeriodo.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCursoMomento.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCursoMomentoCalendarioPeriodo.cs" />
+    <Compile Include="ORC_Conteudo.cs" />
+    <Compile Include="ORC_ConteudoItem.cs" />
+    <Compile Include="ORC_ConteudoTipoPeriodoCalendario.cs" />
+    <Compile Include="ORC_Habilidades.cs" />
+    <Compile Include="ORC_MatrizHabilidades.cs" />
+    <Compile Include="ORC_Nivel.cs" />
+    <Compile Include="ORC_NivelAprendizado.cs" />
+    <Compile Include="ORC_Objetivo.cs" />
+    <Compile Include="ORC_OrientacaoCurricular.cs" />
+    <Compile Include="ORC_OrientacaoCurricularNivelAprendizado.cs" />
+    <Compile Include="ORC_OrientacaoCurricularRelacionamento.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="REL_TurmaDisciplinaSituacaoFechamento.cs" />
+    <Compile Include="RES_ChaveResource.cs" />
+    <Compile Include="RHU_CargaHoraria.cs" />
+    <Compile Include="RHU_Cargo.cs" />
+    <Compile Include="RHU_CargoDisciplina.cs" />
+    <Compile Include="RHU_Colaborador.cs" />
+    <Compile Include="RHU_ColaboradorCargo.cs" />
+    <Compile Include="RHU_ColaboradorCargoDisciplina.cs" />
+    <Compile Include="RHU_ColaboradorFuncao.cs" />
+    <Compile Include="RHU_Funcao.cs" />
+    <Compile Include="RHU_TipoVinculo.cs" />
+    <Compile Include="SYS_Arquivo.cs" />
+    <Compile Include="SYS_Equipamento.cs" />
+    <Compile Include="SYS_EquipamentoUnidadeAdministrativa.cs" />
+    <Compile Include="SYS_Servicos.cs" />
+    <Compile Include="SYS_ServicosLogExecucao.cs" />
+    <Compile Include="TUR_ItemAvaliacao.cs" />
+    <Compile Include="TUR_MetodoAvaliacao.cs" />
+    <Compile Include="TUR_TipoAtendimentoTurma.cs" />
+    <Compile Include="TUR_Turma.cs" />
+    <Compile Include="TUR_TurmaAberturaAnosAnteriores.cs" />
+    <Compile Include="TUR_TurmaAtendimento.cs" />
+    <Compile Include="TUR_TurmaCurriculo.cs" />
+    <Compile Include="TUR_TurmaCurriculoAvaliacao.cs" />
+    <Compile Include="TUR_TurmaDisciplina.cs" />
+    <Compile Include="TUR_TurmaDisciplinaAulaPrevista.cs" />
+    <Compile Include="TUR_TurmaDisciplinaCalendario.cs" />
+    <Compile Include="TUR_TurmaDisciplinaMultisseriada.cs" />
+    <Compile Include="TUR_TurmaDisciplinaNaoAvaliado.cs" />
+    <Compile Include="TUR_TurmaDisciplinaRelacionada.cs" />
+    <Compile Include="TUR_TurmaDisciplinaRelDisciplina.cs" />
+    <Compile Include="TUR_TurmaDisciplinaTerritorio.cs" />
+    <Compile Include="TUR_TurmaDocente.cs" />
+    <Compile Include="TUR_TurmaDocenteProjeto.cs" />
+    <Compile Include="TUR_TurmaRelTurmaDisciplina.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

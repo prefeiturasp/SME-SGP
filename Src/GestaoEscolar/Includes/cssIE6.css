@@ -1,0 +1,12 @@
+html {
+	background:none;
+}
+div#hd div.menu-hd {
+}
+div#login input.btn {
+	margin-top:-10px;
+}
+input.checkbox,
+input.radio {
+	margin-top:2px;
+}

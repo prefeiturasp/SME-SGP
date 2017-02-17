@@ -1,0 +1,19 @@
+﻿
+Using IIS 7
+
+<system.webserver>
+  <modules>
+    <add name="MinifyHTML" type="MSTech.GestaoEscolar.Web.WebProject.HttpModules.MinifyHTML.HttpModule, MSTech.GestaoEscolar.Web.WebProject"></add>
+  </modules>
+</system.webserver>
+
+
+
+Using IIS 6
+
+<system.web>
+  <httpmodules>
+    <add name="MinifyHTML" type="MSTech.GestaoEscolar.Web.WebProject.HttpModules.MinifyHTML.HttpModule, MSTech.GestaoEscolar.Web.WebProject"></add>
+  </httpmodules>
+</system.web>
+

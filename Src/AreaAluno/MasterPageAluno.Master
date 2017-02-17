@@ -1,0 +1,123 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPageAluno.master.cs" Inherits="AreaAluno.MasterPageAluno" %>
+
+<%@ Register Src="~/WebControls/Sistemas/UCSistemas.ascx" TagPrefix="uc1" TagName="UCSistemas" %>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store" />
+    <meta http-equiv="Pragma" content="no-cache, no-store" />
+    <meta http-equiv="Expires" content="0" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <!--[if IE]>
+<style type="text/css">
+   fieldset {
+     position:relative;
+     clear:both;
+   }
+   legend {
+      margin-top:-10px;
+   }
+   .summary td {
+        padding:10px;
+        padding-left:50px;
+    }
+    .ui-state-error {
+	    margin-bottom:20px;
+    }
+</style>
+<![endif]-->
+    <!--[if lte IE 7]>
+<style type="text/css">
+   #SiteMap .txtSubMenu {
+      float:left;
+   }
+  legend {
+      margin-left:-18px;
+
+   }
+</style>
+<![endif]-->
+    <style type="text/css">
+        /*#bd {
+            position: static !important;
+        }*/
+
+        #ft
+        {
+            position: absolute;
+            bottom: 0;
+        }
+
+        body
+        {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <!-- Cabeçalho -->
+        <div id="hd">
+            <div id="sistemas" >
+                <uc1:UCSistemas runat="server" id="UCSistemas1" />
+            </div>
+            <div id="acessibilidade">
+                <a href="#" title="Diminuir Tamanho da Fonte" class="lnkDiminuirFonte">A</a><a href="#"
+                    title="Tamanho da Fonte Normal" class="lnkFonteNormal">A</a><a href="#" title="Aumentar Tamanho da Fonte"
+                        class="lnkAumentarFonte">A</a><a href="#" title="Mudar esquema de cores para Alto Contraste"
+                            rel="altoContraste" class="lnkAltoContraste styleSwitch" style="display:none;">C</a>
+            </div>
+            <h1 class="logo" runat="server" id="h1Logo">
+                <asp:HyperLink ID="ImgLogoGeral" runat="server">
+                    <asp:Image ID="imgGeral" runat="server" />
+                </asp:HyperLink>
+            </h1>
+            <h2 class="logoSistemaAtual">
+                <asp:HyperLink ID="ImgLogoSistemaAtual" runat="server">
+                    <!--<asp:Image ID="imgSistemaAtual" runat="server" />-->
+                    <asp:Image ID="imgLogoAreaAluno" runat="server" SkinID="imgLogoAreaAluno" ToolTip="Área do Aluno" />
+                    <asp:Image ID="imgLogoAreaResp" runat="server" SkinID="imglogoAreaResponsavel" ToolTip="Área do Responsável" />
+                </asp:HyperLink>
+            </h2>
+             <a id="A1" href="~/Logout.ashx" class="bt_sair" runat="server">Sair</a>
+        </div>
+        <!-- /Cabeçalho -->
+        <!-- Conteudo -->
+        <div id="bd">
+            <!-- INFOS NOVO! -->
+            <div class="caixaInfo">
+                <span><asp:Literal ID="litNomeAluno" runat="server"></asp:Literal><b>
+                    <asp:Label ID="lblNomeAluno" runat="server" Text=""></asp:Label>
+                </b>
+                    <br />
+                    <asp:Label ID="lblNroMatricula" runat="server" />
+                    <b>
+                        <asp:Label ID="lblMatricula" runat="server" Text=""></asp:Label></b><br />
+                    <asp:LinkButton ID="lbSelecaoAlunos" runat="server" Text="Seleção de aluno" PostBackUrl="~/IndexSelecaoAluno.aspx" CssClass="linkTopo"></asp:LinkButton></span>
+               
+            </div>
+            <%-- MENU --%>
+            <div id="menuAreaAluno">
+                <div id="menuAreaAlunoComponentes" runat="server">
+                </div>
+            </div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!-- /Conteudo -->
+        <!-- Rodapé -->
+        <div id="ft">
+            <asp:Label ID="lblCopyright" runat="server" Text=""></asp:Label>
+        </div>
+        <!-- /Rodapé -->
+    </form>
+</body>
+</html>

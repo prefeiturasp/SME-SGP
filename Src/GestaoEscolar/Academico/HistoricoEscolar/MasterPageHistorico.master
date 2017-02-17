@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="MasterPageHistorico.master.cs"
+    Inherits="GestaoEscolar.Academico.HistoricoEscolar.MasterPageHistorico" %>
+
+<%@ Register Src="~/WebControls/InfoComplementarAluno/InfoComplementarAluno.ascx" TagName="UCInfoComplementarAluno" TagPrefix="uc3" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Label runat="server" ID="lblMessage" EnableViewState="false"></asp:Label>
+    <fieldset>
+        <legend><asp:Label ID="lblLegendInfoComplementar" runat="server" Text="<%$ Resources:Documentos, HistoricoEscolar.HistoricoEscolar.lblLegendInfoComplementar.Text %>"></asp:Label></legend>
+        <uc3:UCInfoComplementarAluno ID="InfoComplementarAluno1" runat="server" />
+    </fieldset>
+    <div id="divTabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="hide ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+            <li id="liDadosAluno" runat="server" class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active">
+                <asp:HyperLink ID="hplDadosAlunos" runat="server" Text="<%$ Resources:Documentos, HistoricoEscolar.HistoricoEscolar.DivTabs.Tab0 %>"
+                    NavigateUrl="~/Academico/HistoricoEscolar/DadosAluno.aspx" CssClass="btnTabs btnTab0"></asp:HyperLink>
+            </li>
+            <li id="liEnsinoFundamental" runat="server" class="ui-state-default ui-corner-top">
+                <asp:HyperLink ID="hplEnsinoFundamental" runat="server" Text="<%$ Resources:Documentos, HistoricoEscolar.HistoricoEscolar.DivTabs.Tab1 %>"
+                    NavigateUrl="~/Academico/HistoricoEscolar/EnsinoFundamental.aspx" CssClass="btnTabs btnTab1"></asp:HyperLink>
+            </li>
+            <li id="liTransferencia" runat="server" class="ui-state-default ui-corner-top">
+                <asp:HyperLink ID="hplTransferencia" runat="server" Text="<%$ Resources:Documentos, HistoricoEscolar.HistoricoEscolar.DivTabs.Tab2 %>"
+                    NavigateUrl="~/Academico/HistoricoEscolar/Transferencia.aspx" CssClass="btnTabs btnTab2"></asp:HyperLink>
+            </li>
+            <li id="liInformacoesComplementares" runat="server" class="ui-state-default ui-corner-top">
+                <asp:HyperLink ID="hplInformacoesComplementares" runat="server" Text="<%$ Resources:Documentos, HistoricoEscolar.HistoricoEscolar.DivTabs.Tab3 %>"
+                    NavigateUrl="~/Academico/HistoricoEscolar/InformacoesComplementares.aspx" CssClass="btnTabs btnTab3"></asp:HyperLink>
+            </li>
+        </ul>
+    </div>
+
+    <asp:ContentPlaceHolder runat="server" ID="contentTab"></asp:ContentPlaceHolder>
+
+</asp:Content>

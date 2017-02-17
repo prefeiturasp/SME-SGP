@@ -1,0 +1,1843 @@
+﻿div[style*="overflow"] {
+    width: 100%;
+}
+
+span.asteriscoObrigatorio {
+    color: #df0000;
+    display: inline;
+}
+
+.campoObrigatorio {
+    color: #df0000;
+    display: inline-block;
+}
+
+/*divPesquisa: Alinha Radio e Chebkbox */
+.divPesquisa input[type="checkbox"] {
+    float: none !important;
+    margin: 0 !important;
+}
+
+.divPesquisa .checkbox label {
+    display: inline;
+    clear: none;
+    width: auto;
+    margin-left: 4px !important;
+}
+
+.divPesquisa input[type="radio"] {
+    border: 2px 0 0;
+    float: none !important;
+    margin: 0 4px 0 0 !important;
+}
+
+.divPesquisa .radio label {
+    display: inline;
+    clear: none;
+    width: auto;
+    margin-right: 10px !important;
+}
+/*/divPesquisa: Alinha Radio e Chebkbox */
+
+/* Plugin tablesorter */
+table.tablesorter {
+    width: 100%;
+}
+
+    table.grid th.headerSortUp,
+    table.tablesorter thead tr .headerSortUp,
+    table.tablesorter thead tr .tablesorter-headerSortUp {
+        background-image: url(images/asc.gif);
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-color: #ccc;
+        padding-right: 15px;
+    }
+
+    table.tablesorter thead tr .header,
+    table.tablesorter thead tr .tablesorter-header {
+        background-repeat: no-repeat;
+        background-position: center right;
+        cursor: pointer;
+    }
+
+    table.grid th.headerSortDown table.tablesorter thead tr .headerSortDown,
+    table.tablesorter thead tr .tablesorter-headerSortDown {
+        background-image: url(images/desc.gif);
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-color: #ccc;
+        padding-right: 15px;
+    }
+
+table.grid th.headerSortDown a,
+table.grid th.headerSortUp a {
+    color: #333 !important;
+}
+
+table.grid th a {
+    color: #333 !important;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.tbGrid .gridAlternatingRow td {
+    background: #ddd;
+}
+
+.tbGrid td.center {
+    text-align: center !important;
+}
+
+.tbGrid td .checkbox {
+    display: inline-block !important;
+}
+
+
+.tbGrid .semBorda {
+    border: none;
+}
+
+
+.tbGrid .thLeft {
+    text-align: left;
+}
+
+.tbGridTurmaCenter {
+    text-align: center !important;
+}
+
+    .tbGridTurmaCenter .checkbox {
+        display: inline-block !important;
+    }
+
+.msgErroCombo {
+    background: #fff url("images/errorCombo.png") no-repeat 30px 50%;
+    display: inline-block;
+    background-position: 15px 3px !important;
+    padding: 5px;
+    padding-left: 50px;
+    padding-right: 20px;
+    margin-bottom: 0px;
+    margin-top: -10px;
+    margin-left: 10px;
+    border: 1px solid #E8B909;
+    background-color: #FFFCDF !important;
+    color: #363636 !important;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-weight: bold;
+    width: auto;
+    height: 16px;
+}
+
+.wrap a {
+    width: 600px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.msgTabs {
+    background: #fff url("images/icoInformacoes.png") no-repeat 10px center !important;
+    position: absolute;
+    padding: 7px;
+    padding-left: 50px;
+    padding-right: 20px;
+    margin-bottom: 0px;
+    margin-top: -10px;
+    margin-left: 10px;
+    border: 1px solid #E8B909;
+    background-color: #FFFCDF !important;
+    color: #363636 !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-weight: bold;
+    width: 150px;
+    height: auto;
+    font-size: 0.9em;
+    top: 0px;
+    z-index: 950;
+    right: 3px;
+    box-shadow: 1px 1px 1px #444;
+}
+
+.msgInformacao {
+    background: #fff url("images/icoInformacoes.png") no-repeat 10px !important;
+    position: absolute;
+    padding: 7px;
+    padding-left: 50px;
+    margin-bottom: 0px;
+    border: 1px solid #E8B909;
+    background-color: #FFFCDF !important;
+    color: #363636 !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-weight: bold;
+    width: 250px;
+    height: auto;
+    font-size: 0.9em;
+    margin-top: 24px !important;
+    right: 40px;
+    box-shadow: 1px 1px 1px #444;
+    z-index: 9;
+}
+
+fieldset[id$='fdsUploadArquivo'] .msgInformacao, fieldset[id$='fdsImportacaoArquivo'] .msgInformacao {
+    width: 350px;
+    margin-top: 5px !important;
+    right: 10px;
+}
+
+.map {
+    margin: 10px;
+    clear: both;
+}
+
+.mapDireita {
+    text-align: right;
+    margin: 10px;
+    clear: both;
+}
+
+
+.separator {
+    margin-bottom: -2px;
+}
+
+.passo_atual, .passo {
+    padding-top: 7px;
+    margin-left: -20px;
+    color: #fff !important;
+    background-repeat: no-repeat;
+    font-size: 1.0em;
+    vertical-align: text-bottom;
+    display: inline-block;
+    text-align: center;
+    height: 32px;
+    width: 250px;
+    line-height: 20px;
+    position: relative;
+}
+
+.passo_atual {
+    background-image: url(images/setaDestaque.png);
+}
+
+.passo {
+    background-image: url(images/seta.png);
+}
+
+    .passo:first-child, .passo_atual:first-child {
+        margin-left: -10px;
+    }
+
+.secao_atual {
+    padding-top: 7px;
+    position: relative;
+    color: #fff !important;
+    background-image: url(images/setaDestaque_.png);
+    background-repeat: no-repeat;
+    font-size: 1.0em;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    height: 32px;
+    width: 125px;
+}
+
+.secao {
+    padding-top: 7px;
+    position: absolute;
+    color: #fff !important;
+    background-image: url(images/seta_.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    height: 32px;
+    width: 125px;
+}
+
+.wrap690px {
+    max-width: 690px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.wrap600px {
+    max-width: 600px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.wrap400px {
+    max-width: 400px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.wrap300px {
+    max-width: 300px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.wrap250px {
+    max-width: 250px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.wrap200px {
+    max-width: 200px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.wrap150px {
+    max-width: 150px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.wrap100px {
+    max-width: 100px;
+    display: block;
+    word-wrap: break-word;
+}
+
+.imgExportarExcel {
+    background-image: url(images/excel.png);
+    display: inline-block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
+
+.imgExportarCsv {
+    background-image: url(images/csv.png);
+    display: inline-block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
+
+.imgAjuda {
+    background-image: url(images/icoAjuda.png);
+    display: inline-block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
+
+.imgRelatorio {
+    background-image: url(images/icoRelatorio.png);
+    display: inline-block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
+
+.imgExpandirMapa {
+    background-image: url(images/expandir-mapa.png);
+    display: inline-block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+}
+
+.lkbLote {
+    text-decoration: none;
+}
+
+.msgLote:hover {
+    text-decoration: underline;
+}
+
+.msgLote {
+    display: inline-block;
+    font-weight: bold;
+    padding-left: 5px;
+    vertical-align: middle;
+    height: 30px;
+}
+
+.instrucao li {
+    margin-left: 50px;
+    margin-top: 5px;
+}
+
+.instrucao {
+    margin: auto auto;
+    width: 40em;
+}
+
+    .instrucao p {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-left: 50px;
+    }
+
+.divSelecionaPaginas {
+    background: #9FBFD6;
+    margin: 5px auto;
+    padding: 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    color: black;
+    font-weight: bold;
+    display: inline-block;
+    width: auto;
+}
+
+.paddingDiv {
+    padding-left: 15px;
+}
+
+/*Estilos do tooltip*/
+
+.tooltip {
+    display: none;
+    width: 180px;
+    padding: 10px;
+    padding-left: 45px;
+    border: 1px solid #E8B909;
+    background: #FFFCDF url('images/icoInformacoes.png') no-repeat 10px 50% !important;
+    color: #363636 !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-weight: bold;
+    word-wrap: break-word;
+    font-size: 1.2em;
+    box-shadow: 1px 1px 5px #444;
+    -webkit-box-shadow: 1px 1px 5px #444;
+    -moz-box-shadow: 1px 1px 5px #444;
+}
+
+/****************************
+
+   Planejamento de Aulas
+
+ ****************************/
+
+.fdsPlanejamento {
+    background: #fff;
+    height: 357PX;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    overflow: hidden;
+}
+
+    .fdsPlanejamento legend {
+        margin-bottom: 5px;
+    }
+
+.planEscopo {
+    border-bottom: 1px solid #ddd;
+    margin: 0 -10px 0 -10px;
+    padding: 10px 10px 5px 10px;
+    background: #E9E9E9;
+}
+
+.planEscopoCompartilhada {
+    border-bottom: 1px solid #ddd;
+    margin: 0 -10px 0 -10px;
+    padding: 10px 10px 5px 10px;
+    background: #E9E9E9;
+}
+
+    .planEscopoCompartilhada span {
+        padding: 0 0 0 5px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+.planColEsquerda {
+    width: 200px;
+    float: left;
+    background: #E9E9E9;
+    border-right: 1px solid #ddd;
+    margin: 0 0 -10px -10px;
+    padding: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.planColDireita {
+    background: #fff;
+    float: left;
+    overflow: auto;
+    margin-right: -10px;
+    margin-bottom: -10px;
+    position: relative;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.planColEsquerda ul {
+    list-style: none;
+    display: block;
+}
+
+.planColEsquerda .summary {
+    margin: 10px;
+}
+
+.planColDireita fieldset {
+    margin: 10px auto;
+    width: 95%;
+    background: #F4F4F4;
+}
+
+    .planColDireita fieldset fieldset {
+        background: #ddd;
+    }
+
+        .planColDireita fieldset fieldset input.text20C {
+            width: 90px;
+        }
+
+.planColDireita .summaryMensagem {
+    margin: 10px;
+}
+
+.planAula {
+    display: block;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    background: #efefef;
+}
+
+    .planAula a {
+        display: block;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 5px 30px 5px 5px;
+    }
+
+        .planAula a .btExcluir {
+            padding: 0;
+        }
+
+.planAtividade {
+    display: block;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    background: #ddd;
+    padding-left: 20px;
+}
+
+    .planAtividade a {
+        display: block;
+        text-decoration: none;
+        padding: 5px 30px 5px 5px;
+    }
+
+    .planAula .btExcluir,
+    .planAtividade .btExcluir {
+        position: absolute;
+        right: 10px;
+        top: 6px;
+        padding: 0 !important;
+    }
+
+    .planAtividade .btExcluir {
+        top: 5px !important;
+    }
+
+.planAula.prevista {
+    background: #efefef;
+}
+
+.planAula.dada {
+    background: #C4E2FF;
+}
+
+.planAula.cancelada {
+    background: #FFE1CD;
+}
+
+.planAtividade.prevista {
+    background: #ddd;
+}
+
+.planAtividade.dada {
+    background: #b4d2ee;
+}
+
+.planAtividade.cancelada {
+    background: #eed1bc;
+}
+
+.escopo {
+    background: #E9E9E9;
+    margin: 0 -10px 10px -10px;
+    text-align: left;
+    padding: 10px 10px 5px 10px;
+    background: #E9E9E9;
+    border-bottom: 1px solid #DDD;
+}
+
+.planColDireita .right {
+    text-align: left;
+}
+
+.btnsDireita {
+    float: right;
+    margin-right: 5px;
+}
+
+.tituloAula, .tituloAtividade {
+    font-size: 1.2em;
+    border: none;
+    background: #555;
+    padding: 5px 0;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.tituloAula {
+    padding-right: 20px;
+}
+
+.alternaMenu {
+    position: absolute;
+    top: -20px;
+}
+
+.MensagemInf {
+    background: #fff url("images/icoInformacoes.png") no-repeat 10px !important;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-bottom: 0px;
+    border: 1px solid #E8B909;
+    background-color: #FFFCDF !important;
+    color: #363636 !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.tblBoletim {
+    border-spacing: 0px;
+    border-collapse: collapse;
+    background-color: #fff;
+    width: 920px;
+    margin: 0 auto;
+}
+
+    .tblBoletim th {
+        padding: 5px;
+        background-color: #EEE;
+        font-weight: normal;
+    }
+
+    .tblBoletim td {
+        padding: 5px;
+        background-color: #fff;
+    }
+
+#divBoletimRecuperacaoParalela {
+    margin: 15px;
+}
+
+div .ui-accordion-content {
+    max-height: 380px !important;
+    overflow: auto !important;
+}
+
+.ui-state-active:hover, .ui-state-active a:hover {
+    color: #1A75BB !important;
+}
+
+/* CSS Declarações */
+
+.declaracao {
+    background: #fff;
+    padding: 15mm 20mm 50mm 20mm;
+    width: 170mm;
+    height: 232mm;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+    .declaracao .cabecalho {
+        width: 450px;
+        display: block;
+        margin: auto;
+        text-align: center;
+    }
+
+        .declaracao .cabecalho span {
+            font-family: 'Times New Roman';
+            font-size: 10pt;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .declaracao .cabecalho .brasao {
+            float: left;
+            width: 85px;
+            margin-left: -98px;
+        }
+
+        .declaracao .cabecalho .titPrefeitura {
+            font-family: Arial;
+            font-size: 13pt;
+            font-style: normal;
+            color: #000;
+        }
+
+        .declaracao .cabecalho .titSEC {
+            font-family: Arial;
+            font-size: 10pt;
+            font-style: normal;
+            color: #000;
+        }
+
+        .declaracao .cabecalho .nomeEscola {
+            font-style: normal;
+            color: #000;
+        }
+
+    .declaracao .titDeclaracao {
+        font-family: 'Times New Roman';
+        font-size: 18pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: underline;
+        color: #000;
+    }
+
+    .declaracao .titDeclaracaoTrabalho {
+        font-family: 'Arial';
+        font-size: 18pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        color: #000;
+    }
+
+    .declaracao .txtDeclaracao, .declaracao .txtAvisoDeclaracao, .declaracao .txtDataDeclaracao {
+        font-family: 'Times New Roman';
+        font-size: 14pt;
+        text-align: justify;
+        text-indent: 40px;
+        color: #000;
+    }
+
+    .declaracao .txtDeclaracaoTrabalho {
+        font-family: 'Arial';
+        font-size: 13pt;
+        text-align: justify;
+        text-indent: 40px;
+        line-height: 33px;
+        color: #000;
+    }
+
+    .declaracao .AssDeclaracaoTrabalho {
+        font-family: 'Arial';
+        font-size: 16pt;
+        text-transform: uppercase;
+        text-align: center;
+        color: #000;
+    }
+
+    .declaracao .txtDeclaracaoSolicTransferencia {
+        font-family: 'Times New Roman';
+        font-size: 14pt;
+        text-align: justify;
+        text-indent: 20px;
+        color: #000;
+    }
+
+    .declaracao .txtDeclaracaoTrabalho {
+        font-family: 'Arial';
+        font-size: 13pt;
+        text-align: justify;
+        text-indent: 40px;
+        line-height: 33px;
+        color: #000;
+    }
+
+    .declaracao .AssDeclaracaoTrabalho {
+        font-family: 'Arial';
+        font-size: 16pt;
+        text-transform: uppercase;
+        text-align: center;
+        color: #000;
+    }
+
+    .declaracao .txtDeclaracaoSolicTransferencia {
+        font-family: 'Times New Roman';
+        font-size: 14pt;
+        text-align: justify;
+        text-indent: 20px;
+        color: #000;
+    }
+
+    .declaracao .txtAvisoDeclaracao {
+        text-align: center;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .declaracao .txtDataDeclaracao {
+        text-align: center;
+        color: #000;
+    }
+
+    .declaracao .txtDataDeclaracaoRight {
+        font-family: 'Arial';
+        font-size: 13pt;
+        text-align: right;
+        color: #000;
+    }
+
+/* Ajax Loader */
+.loader {
+    position: fixed;
+    background: #E8E8E8;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999;
+    opacity: 0.50;
+    filter: alpha(opacity=50);
+    overflow: hidden;
+}
+
+.imgLoader {
+    position: absolute;
+    top: 47%;
+    left: 47%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+@media print {
+    body {
+        background: #fff;
+    }
+
+    #hd,
+    .m,
+    .breadCrumb,
+    #ft,
+    legend,
+    .btnImprimir,
+    .btn {
+        display: none !important;
+    }
+
+    #bd,
+    #e,
+    fieldset {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        min-width: 0 !important;
+        display: inline !important;
+    }
+
+    .declaracao {
+        width: auto;
+        height: auto;
+        padding: 0 !important;
+        page-break-after: always !important;
+        margin: auto;
+    }
+
+        .declaracao:last-child {
+            page-break-after: auto !important;
+        }
+}
+
+.textareaComInfo {
+    position: relative;
+}
+
+.textareaInfo {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    color: #999;
+}
+
+.checkboxCentralizado input {
+    text-align: center;
+    border: none;
+}
+
+.m .s .i a {
+    width: 200px;
+}
+
+
+/*
+    Painel de Alertas
+*/
+
+.fdsPainelAlertas {
+    padding: 0 !important;
+}
+
+    .fdsPainelAlertas legend {
+        padding: 7px 0 !important;
+        margin: 0;
+    }
+
+        .fdsPainelAlertas legend span {
+            display: inline-block;
+            padding: 5px 10px;
+        }
+
+        .fdsPainelAlertas legend img {
+            vertical-align: middle;
+            margin-bottom: 7px;
+        }
+
+    .fdsPainelAlertas .right {
+        margin: 0;
+        text-align: left;
+    }
+
+    .fdsPainelAlertas .btnsTopo {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 10px 5px 10px;
+        background: #E9E9E9;
+        clear: both;
+    }
+
+    .fdsPainelAlertas .fdsPainelAlertas .right,
+    .fdsPainelAlertas .fdsPainelAlertas .btnsTopo {
+        background: #E0E0E0;
+    }
+
+    .fdsPainelAlertas .colEsquerda {
+        float: left;
+        vertical-align: top;
+        width: 45%;
+    }
+
+        .fdsPainelAlertas .colEsquerda .borderRight {
+            border-right: 1px solid #ddd;
+        }
+
+    .fdsPainelAlertas .colDireita {
+        float: left;
+        width: 55%;
+        vertical-align: top;
+    }
+
+    .fdsPainelAlertas .cdPadding {
+        padding: 10px;
+    }
+
+    .fdsPainelAlertas .assuntos {
+        background: #E9E9E9;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        font-size: 13px;
+        font-weight: bold;
+        text-decoration: none;
+        -webkit-transition: background 0.2s ease-in;
+    }
+
+        .fdsPainelAlertas .assuntos:hover {
+            background: #D6D6D6;
+        }
+
+        .fdsPainelAlertas .assuntos span {
+            display: block;
+            padding: 10px 20px;
+        }
+
+    .fdsPainelAlertas .alertas {
+        display: none;
+    }
+
+    .fdsPainelAlertas .alertasItem {
+        border-bottom: 1px solid #ddd;
+        padding: 5px 5px 5px 30px;
+    }
+
+        .fdsPainelAlertas .alertasItem input {
+            display: inline-block;
+            margin: 0 5px 0 0;
+            vertical-align: middle;
+        }
+
+        .fdsPainelAlertas .alertasItem span {
+            display: inline-block;
+            width: 90%;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+
+    .fdsPainelAlertas .summary {
+        margin: 10px;
+        top: 4px;
+        position: relative;
+    }
+
+/*
+    Clear Fix: http://css-tricks.com/snippets/css/clear-fix/
+*/
+.group:before, .group:after {
+    content: "";
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+.group {
+    zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.divEndCont {
+    border: 1px solid #ccc;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    padding: 5px 5px 5px 5px;
+    background-color: #fff;
+    width: 60%;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    margin: 3px;
+    display: inline-block;
+}
+
+.divEndContBot {
+    width: 20%;
+    display: inline-block;
+    vertical-align: central;
+    text-align: right;
+}
+
+.chkPrincipal {
+    font-weight: bold;
+    margin-bottom: -2px;
+    margin-top: 0;
+    position: relative;
+    top: -38px;
+    left: 115px;
+    display: inline-block;
+}
+
+.ui-accordion .ui-accordion-content-active {
+    width: auto;
+}
+
+.spnHelpDesk {
+    position: absolute;
+    right: 50px;
+    top: 85px;
+    color: #666;
+    font-size: 1.1em;
+    display: block;
+}
+
+.divPesquisa {
+    clear: both;
+}
+
+.planColDireita .grid .textareaComInfo textarea {
+    height: 150px;
+    width: 650px;
+}
+
+table[id$="grvGerarAulas"] {
+    table-layout: fixed;
+}
+
+/********************************************
+
+      Treeview
+
+********************************************/
+
+.treeview {
+}
+
+    .treeview .checkbox {
+        display: inline-block;
+        margin: 0 3px;
+    }
+
+.fsdTreeview {
+    background: #FFF;
+    position: relative;
+}
+
+    .fsdTreeview .Info {
+        color: #999;
+        position: absolute;
+        bottom: 0px;
+    }
+
+    .fsdTreeview legend {
+        margin-bottom: 0;
+    }
+
+.divTreeviewScroll {
+    height: 200px;
+    overflow: auto;
+    margin: -10px;
+    padding: 0 10px !important;
+    position: relative;
+    z-index: 10;
+}
+
+.divTreeLayout, .divTreeLayoutBim {
+    width: 376px;
+    height: 209px;
+    position: absolute;
+    background: #efefef;
+    top: 37px;
+    right: 0;
+    z-index: 1;
+}
+
+
+.treeview ul {
+    border-top: 1px solid #DDD;
+}
+
+.treeview li {
+    border-bottom: 1px solid #DDD;
+}
+
+    .treeview li:last-child {
+        border-bottom: none;
+    }
+
+.divTreeLayoutPA, .divArvorePlanAnual {
+    width: 265px;
+    height: 220px;
+    position: absolute;
+    background: #efefef;
+    top: 26px;
+    right: 0;
+    z-index: 1;
+}
+
+
+.divTreeviewScrollPA, .divTreeviewScrollPlanAnual {
+    height: 210px;
+    overflow: auto;
+    padding: 0 0 0 16px;
+    position: relative;
+    margin: 0 -10px -10px;
+    z-index: 10;
+}
+
+.divTreeviewScrollCOC, .divTreeviewScrollPlanBim {
+    height: 210px;
+    overflow-y: scroll;
+    padding: 0 0 0 16px;
+    margin: 0 -10px -10px;
+    position: relative;
+    z-index: 10;
+}
+
+.divTreeviewScrollAula {
+    height: 210px;
+    overflow-y: scroll;
+    padding: 0 0 0 16px;
+    margin: 0 -10px -10px;
+    z-index: 10;
+}
+
+
+.divExpandeLinha {
+    padding: 10px;
+    background: #F5F5F5;
+    border-bottom: 2px solid #DDD;
+    border-top: 1px solid #CCC;
+    top: -1px;
+    position: relative;
+    margin-bottom: -1px !important;
+}
+
+    .divExpandeLinha:hover {
+        background: #F1F1F1;
+    }
+
+.ui-dialog .summary {
+    font-size: 1em;
+}
+
+.ui-accordion {
+    clear: both;
+}
+
+.btn.periodo_selecionado,
+.btn.periodo_selecionado:disabled {
+    background-color: #00375b !important;
+    opacity: 1;
+    color: #FFFFFF !important;
+    cursor: default;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn.opcao_selecionada,
+.btn.opcao_selecionada:disabled {
+    background-color: #00375b !important;
+    opacity: 1;
+    color: #FFFFFF !important;
+    cursor: default;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.lblInfoCabecalho {
+    display: block;
+    text-align: left;
+    float: left;
+    font-size: .9em;
+}
+
+.legendMinhasTurmas .btn {
+    font-size: .7em;
+}
+
+.tbEndereco {
+    clear: both;
+}
+
+
+.tamanho-lbl-aluno {
+    display: block;
+    width: 300px;
+}
+
+
+input.text4C, select.text4C {
+    width: 60px;
+}
+
+.btnImprimir {
+    background-image: url(images/imgsAreaAluno/icoImprimir-branco.png);
+}
+
+.divRelatorio {
+    clear: both;
+}
+
+.divOrientacaoCurricular label {
+    display: block;
+    white-space: nowrap;
+    margin: 0;
+    margin-bottom: 5px !important;
+}
+
+.divOrientacaoCurricular .checkbox input {
+    margin: 0;
+}
+
+.divScrollEfetivacao {
+    width: 0;
+    height: 500px;
+    overflow: scroll;
+}
+
+.param-help-desk {
+    vertical-align: middle;
+    bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block !important;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    right: 0;
+    padding: 5px 10px;
+    color: #fff;
+    text-decoration: none;
+    line-height: 37px;
+    background-color: #414649;
+    background-image: -moz-linear-gradient(center top, #5f5f5f, #414649);
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#5f5f5f), to(#414649));
+    background-image: -ms-linear-gradient(top, #5f5f5f, #414649);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5f5f5f), color-stop(100%, #414649));
+    background-image: -webkit-linear-gradient(top, #5f5f5f, #414649);
+    background-image: -o-linear-gradient(top, #5f5f5f, #414649);
+    background-image: linear-gradient(top, #5f5f5f, #414649);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+    .param-help-desk img {
+        vertical-align: middle;
+        margin-right: 2px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .param-help-desk .tutorial {
+        display: none;
+        display: inline-block;
+        position: absolute;
+        right: 120px;
+    }
+
+
+/* 
+    CSS para a pagina de Classe 
+        -   Confirmação de efetivação
+*/
+.ConfirmacaoEfetivacaoMessageRelatorio div {
+    margin-bottom: 20px;
+}
+
+
+/* 
+	styles for the psuedo-select box 
+*/
+div.mcdropdown {
+    position: absolute;
+    /*border: 1px solid #8e9daa;*/
+    padding: 1px;
+    display: -moz-inline-block;
+    display: inline-block;
+    width: 408px;
+    height: 14px;
+    padding: 2px;
+}
+
+    /* style either the input or div where the plug-in is attached to */
+    div.mcdropdown input,
+    div.mcdropdown div {
+        position: absolute;
+        background-color: #fff;
+        left: 0;
+        top: 0;
+        width: 98%;
+        border: 0;
+        padding: 2px 0 0 3px;
+        font: 11px Arial, Helvetica, sans-serif;
+    }
+
+    div.mcdropdown a {
+        position: absolute;
+        right: 1px;
+        top: 1px;
+        background: transparent url(images/mcdropdown/mcdd_select_button_sprite.gif) no-repeat top left;
+        display: -moz-inline-block;
+        display: inline-block;
+        height: 16px;
+        width: 15px;
+        text-decoration: none;
+        font-size: 0pt;
+        z-index: 2;
+        outline: 0;
+    }
+
+        div.mcdropdown a:hover, div.mcdropdown a:focus {
+            background-position: 0% -16px;
+        }
+
+        div.mcdropdown a:active {
+            background-position: 0% -32px;
+            outline: none; /* hide dotted outline in Firefox */
+        }
+
+div.mcdropdownDisabled {
+    background-color: #e1e0e0;
+    filter: alpha(opacity=75);
+    -moz-opacity: 0.75;
+    opacity: 0.75;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -moz-user-focus: ignore;
+    -moz-user-input: disabled;
+}
+
+    div.mcdropdownDisabled input {
+        cursor: default;
+    }
+
+    div.mcdropdownDisabled a:hover, div.mcdropdownDisabled a:focus {
+        background-position: 0 0;
+        cursor: default;
+    }
+
+/* 
+	styles for the dropdown menu 
+*/
+ul.mcdropdown_menu {
+    display: none;
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    /* float so we can calculate the size of the columns */
+    float: left;
+    clear: both;
+    z-index: 10000;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -moz-user-focus: ignore;
+    -moz-user-input: disabled;
+}
+
+    ul.mcdropdown_menu ul {
+        display: none;
+        font: 11px Arial, Helvetica, sans-serif;
+        /* float so we can calculate the size of the columns */
+        /*
+	float: left;
+*/
+    }
+
+    /* -- Sub-Menus -- */
+    ul.mcdropdown_menu ul {
+        position: absolute;
+        list-style-type: none;
+        margin: 0px;
+        margin-left: 30px;
+        padding: 0px;
+        z-index: 10000;
+    }
+
+        ul.mcdropdown_menu ul li {
+            margin: 0px;
+            min-width: 150px;
+            _width: 150px; /* ie6 min-width hack */
+        }
+
+
+/* color schema */
+ul.mcdropdown_menu {
+    /*
+	height: 19px;
+*/
+    height: auto;
+    background-color: #e1e0e0;
+    padding: 5px 5px;
+    /* define font here for IE6 */
+    font: 11px Arial, Helvetica, sans-serif;
+}
+
+    ul.mcdropdown_menu li {
+        padding: 2px 20px 2px 6px;
+        /* this is needed to ensure that all browsers have the same line-height--fixes issues in Chrome (Mac) and IE10 */
+        line-height: 14px;
+    }
+
+        /* we don't use "ul.mcdropdown_menu > li" here so that IE6 knows how to style the root level */
+        ul.mcdropdown_menu li.mc_root {
+            cursor: pointer;
+            white-space: nowrap;
+            color: #666;
+            border-top: 1px solid #fff;
+            padding: 2px 20px 2px 6px;
+            margin: 0 10px;
+        }
+
+    ul.mcdropdown_menu > li.mc_endcol {
+        border-bottom: 1px solid #fff;
+    }
+
+    /* this is for IE6 only */
+    ul.mcdropdown_menu li.mc_hover {
+        background-color: #ccc !important;
+    }
+
+    ul.mcdropdown_menu > li:hover {
+        border-top: 1px solid #999;
+        background-color: #999 !important;
+        color: #fff;
+    }
+
+        ul.mcdropdown_menu > li:hover.mc_endcol {
+            border-bottom: 1px solid #999;
+        }
+
+        ul.mcdropdown_menu > li:hover + li:not(.mc_firstrow) {
+            border-top: 1px solid #999;
+        }
+
+    ul.mcdropdown_menu li.mc_parent {
+        padding-right: 20px !important;
+        background: url(images/mcdropdown/mcdd_icon_normal.gif) no-repeat 100% 50%;
+    }
+
+    ul.mcdropdown_menu li:hover.mc_parent {
+        background: #999 url(images/mcdropdown/mcdd_icon_hover.gif) no-repeat 100% 50% !important;
+        color: #fff !important;
+    }
+
+    ul.mcdropdown_menu ul {
+        background: #f0f0f0;
+        /* add a slight border for better visualization of deep menus */
+        border: 1px solid #d0d0d0;
+        padding-bottom: 10px;
+        /* IE 6/7 will bleed through the background color if we don't set the visibility to hidden */
+        visibility: hidden;
+    }
+
+        ul.mcdropdown_menu ul li {
+            background: #f0f0f0;
+            padding-left: 16px !important;
+            border-top: 1px solid #fff;
+            color: #666;
+            white-space: nowrap;
+        }
+
+            ul.mcdropdown_menu ul li.mc_firstrow {
+                border-top: 1px solid #f0f0f0;
+            }
+
+            ul.mcdropdown_menu ul li.mc_endcol {
+                border-bottom: 1px solid #fff;
+            }
+
+            ul.mcdropdown_menu ul li:hover {
+                background-color: #d6d6d6;
+                border-top: 1px solid #dedede;
+                color: #666;
+            }
+
+            ul.mcdropdown_menu ul li.mc_endcol:hover {
+                border-bottom: 1px solid #dedede;
+            }
+
+            ul.mcdropdown_menu ul li:hover + li:not(.mc_firstrow) {
+                border-top: 1px solid #dedede;
+            }
+
+/*
+ * drop down shadows
+ */
+div.mcdropdown_shadow {
+    display: none;
+    position: absolute;
+    margin: 3px 0 0 3px;
+    /* for IE6, we use just a square transparent image */
+    background: #000;
+    filter: alpha(opacity=33);
+}
+
+/* ie6 ignores this selector */
+html > body div.mcdropdown_shadow {
+    /* let's use a transparent PNG */
+    margin: 5px 0 0 5px;
+    padding: 5px 0 0 5px;
+    background: transparent url(images/mcdropdown/shadow.png) right bottom no-repeat !important;
+    /* remove the filter for IE7 */
+    filter: none;
+}
+
+/* 
+ * styles for the dropdown menu 
+ */
+/* autocomplete styles */
+ul.mcdropdown_autocomplete {
+    display: block;
+    position: absolute;
+    height: auto;
+    max-height: 210px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    clear: both;
+    padding: 5px 10px;
+    background-color: #e1e0e0;
+    z-index: 10000;
+    margin: 0px;
+    list-style-type: none;
+    width: 392px;
+    font: 11px Arial, Helvetica, sans-serif;
+}
+
+    ul.mcdropdown_autocomplete ul {
+        display: none;
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+    }
+
+        ul.mcdropdown_autocomplete ul li {
+            margin: 0px;
+        }
+
+    ul.mcdropdown_autocomplete li {
+        display: block;
+        font: 11px Arial, Helvetica, sans-serif;
+        cursor: pointer;
+        white-space: nowrap;
+        color: #666;
+        border-top: 1px solid #fff;
+        padding: 2px 26px 2px 6px;
+    }
+
+        ul.mcdropdown_autocomplete li.mc_endcol {
+            border-bottom: 1px solid #fff;
+        }
+
+        ul.mcdropdown_autocomplete li.mc_parent {
+            padding-right: 20px !important;
+            background: url(images/mcdropdown/mcdd_icon_normal.gif) no-repeat 100% 50%;
+        }
+
+        ul.mcdropdown_autocomplete li.mc_hover {
+            border-top: 1px solid #999;
+            background-color: #999 !important;
+            color: #fff;
+        }
+
+        ul.mcdropdown_autocomplete li.mc_hover_parent {
+            background: #999 url(images/mcdropdown/mcdd_icon_hover.gif) no-repeat 100% 50% !important;
+            color: #fff !important;
+        }
+
+blockquote, .codeblock {
+    border: 1px solid #08084d;
+    background-color: #f2f2ff;
+    margin: 20px;
+    padding: 10px;
+}
+
+    blockquote strong {
+        color: #08084d;
+    }
+
+.comboHierarquicoButton {
+    background: #fff url(images/mcdropdown/mcdd_icon_rotate.gif) no-repeat 100% 50%;
+    width: 310px !important;
+    height: 25px !important;
+    text-align: left !important;
+    padding: 3px 4px !important;
+    padding-right: 15px !important;
+}
+
+.comboHierarquicoItens {
+    background: #fff;
+    position: absolute !important;
+    width: 302px !important;
+    z-index: 2 !important;
+    text-align: left !important;
+    padding: 3px 4px !important;
+    line-height: 1px !important;
+    color: #404040 !important;
+    border: 1px solid #CCC !important;
+    -webkit-border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    border-radius: 3px !important;
+    margin-top: 0 !important;
+}
+
+    .comboHierarquicoItens td {
+        background: #fff !important;
+        padding: 1px !important;
+        line-height: normal !important;
+        white-space: normal !important;
+    }
+
+        .comboHierarquicoItens td div {
+            width: 5px !important;
+        }
+
+.comboHierarquicoNodes table {
+    text-align: left !important;
+    margin: 0 !important;
+    background: #fff;
+}
+
+.comboHierarquicoNodes div {
+    display: table;
+}
+
+.comboHierarquicoNodes {
+    text-align: left !important;
+    margin: 0 !important;
+}
+
+.tdSemBordaInferior td {
+    border-bottom: none !important;
+}
+
+.divParametroProgSociais label {
+    display: block;
+    white-space: nowrap;
+    margin: 0;
+    margin-bottom: 5px !important;
+}
+
+.divParametroProgSociais .checkbox input {
+    margin: 0;
+}
+
+.divListaoLancamentoFrequencia .lblInicio {
+    font-size: 1.2em;
+}
+
+.divListaoLancamentoFrequencia .lblFim {
+    font-size: 1.2em;
+}
+
+.fdsCursosRelacionados .checkBoxList {
+    display: block;
+}
+
+    .fdsCursosRelacionados .checkBoxList span {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .fdsCursosRelacionados .checkBoxList label {
+        width: 350px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+.ui-dialog fieldset legend {
+    font-size: 1.17em;
+}
+
+/* Utilizado para limitar o tamanho de um checkboxlist dentro de um grid. 
+   Utilizado no cadastro de avaliacoes automaticas do formato de avaliacao */
+.grid .wrap105px {
+    max-width: 105px;
+    max-height: 180px;
+    overflow: auto;
+}
+
+.grid .wrap205px {
+    max-width: 205px;
+    max-height: 180px;
+    overflow: auto;
+}
+
+    .grid .wrap105px input[type=checkbox] + label,
+    .grid .wrap205px input[type=checkbox] + label,
+    .grid .wrap105px input[type=radio] + label,
+    .grid .wrap205px input[type=radio] + label {
+        display: inline;
+        white-space: normal;
+        margin: 0 0 0 3px;
+    }
+/***/
+
+
+.divScrollEfetivacao, .divScrollResponsivo {
+    height: auto !important;
+    overflow-x: scroll !important;
+}
+
+    .divScrollEfetivacao .grid,
+    .divScrollResponsivo .grid {
+        margin-bottom: 0;
+    }
+
+
+.checkboxCursosEquivalentes label {
+    width: 300px;
+}
+
+.mensagemPendenciaFechamentoMinhasTurmas {
+    background-color: #008b8b;
+    padding: 1%;
+    width: 100%;
+    margin-top: 1%;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+    .mensagemPendenciaFechamentoMinhasTurmas a {
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+.ui-widget-content fieldset .mensagemPendenciaFechamentoMinhaEscolaGestor {
+    background-color: #008b8b;
+    padding: 1%;
+    width: 100%;
+    margin-top: 1%;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+    .ui-widget-content fieldset .mensagemPendenciaFechamentoMinhaEscolaGestor a {
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+.mensagemSemPendenciaFechamento {
+    background-color: #008b8b;
+    padding: 1%;
+    width: 100%;
+    margin-top: 1%;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-left-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.dataProcessamentoPendencia {
+    float: right;
+    margin-right: 1%;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.area-botoes-bottom {
+}

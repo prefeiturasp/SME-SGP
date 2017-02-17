@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1C0C0417-1689-48C9-A95E-7E7F8FD85463}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSTech.GestaoEscolar.RelatoriosDevExpress</RootNamespace>
+    <AssemblyName>MSTech.GestaoEscolar.RelatoriosDevExpress</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAlunos|AnyCPU'">
+    <OutputPath>bin\ReleaseAlunos\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Charts.v16.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Data.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Printing.v16.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.RichEdit.v16.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Utils.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Web.ASPxHtmlEditor.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Web.Resources.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Web.Resources.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Web.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Web.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.XtraCharts.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.XtraEditors.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.XtraReports.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1.Web, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.XtraReports.v16.1.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Business.Common">
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Business.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Data.Common">
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Doctos.Spo\DocDctPlanoAnual.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\DocDctPlanoAnual.Designer.cs">
+      <DependentUpon>DocDctPlanoAnual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\DocDctPlanoCicloSerie.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\DocDctPlanoCicloSerie.Designer.cs">
+      <DependentUpon>DocDctPlanoCicloSerie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\DSGestaoEscolar.cs">
+      <DependentUpon>DSGestaoEscolar.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\DSGestaoEscolar.Designer.cs">
+      <DependentUpon>DSGestaoEscolar.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Doctos.Spo\HistoricoEscolar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\HistoricoEscolar.Designer.cs">
+      <DependentUpon>HistoricoEscolar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelAvaliacaoAtividadeAvaliativa.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelAvaliacaoAtividadeAvaliativa.Designer.cs">
+      <DependentUpon>RelAvaliacaoAtividadeAvaliativa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelAvaliacaoEfetivacao.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelAvaliacaoEfetivacao.Designer.cs">
+      <DependentUpon>RelAvaliacaoEfetivacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafComponenteCurricularTurmas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafComponenteCurricularTurmas.Designer.cs">
+      <DependentUpon>RelGrafComponenteCurricularTurmas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafConsolidadoAtivAvaliada.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafConsolidadoAtivAvaliada.Designer.cs">
+      <DependentUpon>RelGrafConsolidadoAtivAvaliada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafIndividualNotaComponente.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafIndividualNotaComponente.Designer.cs">
+      <DependentUpon>RelGrafIndividualNotaComponente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafIndividualNotas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafIndividualNotas.Designer.cs">
+      <DependentUpon>RelGrafIndividualNotas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafTurmaMatrizCurricular.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\RelGrafTurmaMatrizCurricular.Designer.cs">
+      <DependentUpon>RelGrafTurmaMatrizCurricular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarAssinatura.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarAssinatura.Designer.cs">
+      <DependentUpon>SubHistoricoEscolarAssinatura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarCertificado.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarCertificado.Designer.cs">
+      <DependentUpon>SubHistoricoEscolarCertificado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarComplementar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarComplementar.Designer.cs">
+      <DependentUpon>SubHistoricoEscolarComplementar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarEstudos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarEstudos.Designer.cs">
+      <DependentUpon>SubHistoricoEscolarEstudos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarGrade.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarGrade.Designer.cs">
+      <DependentUpon>SubHistoricoEscolarGrade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarObservacao.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarObservacao.Designer.cs">
+      <DependentUpon>SubHistoricoEscolarObservacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarTransferencia.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubHistoricoEscolarTransferencia.Designer.cs">
+      <DependentUpon>SubHistoricoEscolarTransferencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubRelGrafConsolidadoAtivAvaliada.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubRelGrafConsolidadoAtivAvaliada.Designer.cs">
+      <DependentUpon>SubRelGrafConsolidadoAtivAvaliada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubRelGrafIndividualNotas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\SubRelGrafIndividualNotas.Designer.cs">
+      <DependentUpon>SubRelGrafIndividualNotas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RelatoriosDevUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Doctos.Spo\DSGestaoEscolar.xsc">
+      <DependentUpon>DSGestaoEscolar.xsd</DependentUpon>
+    </None>
+    <None Include="Doctos.Spo\DSGestaoEscolar.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSGestaoEscolar.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Doctos.Spo\DSGestaoEscolar.xss">
+      <DependentUpon>DSGestaoEscolar.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Doctos.Spo\DocDctPlanoAnual.resx">
+      <DependentUpon>DocDctPlanoAnual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\DocDctPlanoCicloSerie.resx">
+      <DependentUpon>DocDctPlanoCicloSerie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\HistoricoEscolar.resx">
+      <DependentUpon>HistoricoEscolar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\RelAvaliacaoAtividadeAvaliativa.resx">
+      <DependentUpon>RelAvaliacaoAtividadeAvaliativa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\RelAvaliacaoEfetivacao.resx">
+      <DependentUpon>RelAvaliacaoEfetivacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\RelGrafComponenteCurricularTurmas.resx">
+      <DependentUpon>RelGrafComponenteCurricularTurmas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\RelGrafConsolidadoAtivAvaliada.resx">
+      <DependentUpon>RelGrafConsolidadoAtivAvaliada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\RelGrafIndividualNotaComponente.resx">
+      <DependentUpon>RelGrafIndividualNotaComponente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\RelGrafIndividualNotas.resx">
+      <DependentUpon>RelGrafIndividualNotas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\RelGrafTurmaMatrizCurricular.resx">
+      <DependentUpon>RelGrafTurmaMatrizCurricular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubHistoricoEscolarAssinatura.resx">
+      <DependentUpon>SubHistoricoEscolarAssinatura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubHistoricoEscolarCertificado.resx">
+      <DependentUpon>SubHistoricoEscolarCertificado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubHistoricoEscolarComplementar.resx">
+      <DependentUpon>SubHistoricoEscolarComplementar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubHistoricoEscolarEstudos.resx">
+      <DependentUpon>SubHistoricoEscolarEstudos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubHistoricoEscolarGrade.resx">
+      <DependentUpon>SubHistoricoEscolarGrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubHistoricoEscolarObservacao.resx">
+      <DependentUpon>SubHistoricoEscolarObservacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubHistoricoEscolarTransferencia.resx">
+      <DependentUpon>SubHistoricoEscolarTransferencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubRelGrafConsolidadoAtivAvaliada.resx">
+      <DependentUpon>SubRelGrafConsolidadoAtivAvaliada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\SubRelGrafIndividualNotas.resx">
+      <DependentUpon>SubRelGrafIndividualNotas.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.BLL\MSTech.GestaoEscolar.BLL.csproj">
+      <Project>{9c22f480-d173-413a-843d-5a4799484db3}</Project>
+      <Name>MSTech.GestaoEscolar.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.DAL\MSTech.GestaoEscolar.DAL.csproj">
+      <Project>{4147a1ca-4783-4718-8a5d-79afa3cb93b5}</Project>
+      <Name>MSTech.GestaoEscolar.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.Entities\MSTech.GestaoEscolar.Entities.csproj">
+      <Project>{fa6964eb-e31c-406f-a1d5-a15482ce71d6}</Project>
+      <Name>MSTech.GestaoEscolar.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

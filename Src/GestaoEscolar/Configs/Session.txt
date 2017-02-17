@@ -1,0 +1,51 @@
+﻿
+	<!-- 
+	Para gravar os dados da Session no Redis, basta comentar a configuração '<sessionState mode="InProc' 
+	e adicionar o bloco abaixo.
+		
+	Atenção:
+	host="192.168.10.21" (Servidor de Redis que o DevOps criou) 
+	port="6379" (Porta padrão para comunicação com o Redis)
+		
+	Site de monitoramento do Redis: http://192.168.10.21:4567
+
+	*Favor alterar conforme a necessidade do ambiente.
+	-->
+		
+	<sessionState mode="Custom" cookieName="DF696E5B-5B19-4f6f-9B2B-28DA5B7837A5" cookieless="UseCookies" timeout="30" customProvider="MySessionStateStore">
+      <providers>
+        <add name="MySessionStateStore" 
+             type="Microsoft.Web.Redis.RedisSessionStateProvider" 
+             host="192.168.10.21" 
+             port="6379" 
+             accessKey="" 
+             ssl="false" 
+             throwOnError = "true" 
+             connectionTimeoutInMilliseconds = "0" 
+             operationTimeoutInMilliseconds = "0" />
+      </providers>
+    </sessionState>
+
+
+
+	<!-- 
+    *opção-1: usar 'connectionString' and provide all parameters as string OU, 
+    *opção-2: usar 'host','port','accessKey','ssl', 'connectionTimeoutInMilliseconds' and 'operationTimeoutInMilliseconds' 
+	Nas duas opções pode-se utilizar o 'throwOnError', 'retryTimeoutInMilliseconds', 'databaseId' and 'applicationName'. 
+
+	#Exemplo 
+    <add name="MySessionStateStore" 
+        host = "127.0.0.1" [String]
+        port = "" [number]
+        accessKey = "" [String]
+        ssl = "false" [true|false]
+        throwOnError = "true" [true|false]
+        retryTimeoutInMilliseconds = "5000" [number]
+        databaseId = "0" [number]
+        applicationName = "" [String]
+        connectionTimeoutInMilliseconds = "5000" [number]
+        operationTimeoutInMilliseconds = "1000" [number]
+        connectionString = "<valid StackExchange.Redis connection string>" [String]
+    />
+    -->
+

@@ -1,0 +1,161 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="MasterPage" CodeBehind="MasterPage.master.cs" %>
+
+<%@ Register Src="~/WebControls/Sistemas/UCSistemas.ascx" TagName="UCSistemas" TagPrefix="uc1" %>
+<%@ Register Src="WebControls/Mensagens/UCLoader.ascx" TagName="UCLoader" TagPrefix="uc2" %>
+
+<%@ Register Src="~/WebControls/Imagem/UCImagem.ascx" TagName="UCImagem" TagPrefix="uc3" %>
+
+<!doctype html>
+<html class="no-js" lang="pt-br">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store" />
+    <meta http-equiv="Pragma" content="no-cache, no-store" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <title>MSTECH</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <!--[if IE]>
+<style type="text/css">
+   fieldset {
+     position:relative;
+     clear:both;
+   }
+   .summary td {
+        padding:10px;
+        padding-left:50px;
+    }
+    .ui-state-error {
+	    margin-bottom:20px;
+    }
+    .divTreeviewScroll {
+      margin-top:-10px!important;
+    }
+</style>
+<![endif]-->
+    <!--[if IE 8]>
+<style type="text/css">
+   legend {
+     margin-top:-15px!important;
+     margin-bottom:10px;
+   }
+.divTreeviewScroll {
+      margin-top:-21px!important;
+    }
+    .divTreeLayout {
+      top:27px!important;
+   }
+</style>
+<![endif]-->
+    <!--[if lte IE 7]>
+<style type="text/css">
+   fieldset {
+      padding-top:10px!important;
+      }
+   #SiteMap .txtSubMenu {
+      float:left;
+   }
+  legend {
+      margin-top:-10px;
+      margin-left:-18px!important;
+      margin-bottom:10px;
+   }
+   .m {
+      margin-left:-20px!important;
+   }
+   .planColDireita fieldset {
+      width:90%!important;
+   }
+</style>
+<![endif]-->
+</head>
+<body>
+    <div class="row">
+        <div class="small-12 colums">
+            <form id="form1" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server" OnAsyncPostBackError="ScriptManager1_AsyncPostBackError">
+                </asp:ScriptManager>
+                <uc2:UCLoader ID="Loader" runat="server" />
+
+                <div id="divBarraSP" runat="server" class="barraSP" visible="false"><span>Portal da Secretaria Municipal de Educação</span><a href="http://www.capital.sp.gov.br/portal/"><asp:Image runat="server" ID="imgLogoBarraSP" ImageUrl="~/App_Themes/IntranetSME/images/logos/logo-barra-sp.gif" /></a></div>
+                <!-- Cabeçalho -->
+                <div id="hd">
+                    <div id="acessibilidade">
+                        <a href="#" title="Diminuir Tamanho da Fonte" class="lnkDiminuirFonte">A</a> <a href="#"
+                            title="Tamanho da Fonte Normal" class="lnkFonteNormal">A</a> <a href="#" title="Aumentar Tamanho da Fonte"
+                                class="lnkAumentarFonte">A</a> <a href="#" title="Mudar esquema de cores para Alto Contraste"
+                                    rel="altoContraste" class="lnkAltoContraste styleSwitch">C</a>
+                    </div>
+                    <h1 class="logo">
+                        <asp:HyperLink ID="ImgLogoGeral" runat="server">
+                            <uc3:UCImagem ID="imgGeral" runat="server" />
+                        </asp:HyperLink>
+                    </h1>
+                    <h2 class="logoSistemaAtual">
+                        <asp:HyperLink ID="ImgLogoSistemaAtual" runat="server">
+                            <uc3:UCImagem ID="imgSistemaAtual" runat="server" />
+                        </asp:HyperLink>
+                    </h2>
+                    <h2 class="logoInstitiuicao">
+                        <asp:HyperLink ID="ImgLogoInstitiuicao" runat="server" Target="_blank">
+                            <uc3:UCImagem ID="imgInstituicao" runat="server" />
+                        </asp:HyperLink>
+                    </h2>
+                    <!-- Usuário -->
+                    <div class="user">
+                        Bem-vindo, <strong>
+                            <asp:Literal ID="lblUsuario" runat="server" Text="Usuário"></asp:Literal></strong>
+                        <span class="user-divider">|</span>
+            <div id="divMeusDados" runat="server" style="display: inline">
+                <asp:HyperLink ID="hplMeusDados" runat="server" NavigateUrl="~/MeusDados.aspx">Meus dados</asp:HyperLink>
+                <span class="user-divider">|</span>
+            </div>
+                        <uc1:UCSistemas ID="UCSistemas1" runat="server" />
+                        <span class="user-divider">|</span>
+            <asp:HyperLink ID="hplSair" runat="server" NavigateUrl="~/Logout.ashx">Sair</asp:HyperLink>
+                    </div>
+                    <span id="spnHelpDesk" class="spnHelpDesk" runat="server"></span>
+                    <asp:HyperLink ID="hplHelp" runat="server" Target="_blank" SkinID="hplHelp" Font-Bold="False" Font-Italic="False" Font-Overline="False">
+                    </asp:HyperLink>
+                </div>
+                <!-- /Cabeçalho -->
+                <!-- Menu -->
+                <asp:Menu ID="Menu1" runat="server" DataSourceID="XmlDataSource1" Orientation="Horizontal">
+                    <DataBindings>
+                        <asp:MenuItemBinding DataMember="menu" NavigateUrlField="url" TextField="id" />
+                        <asp:MenuItemBinding DataMember="item" NavigateUrlField="url" TextField="id" />
+                        <asp:MenuItemBinding DataMember="subitem" NavigateUrlField="url" TextField="id" />
+                        <asp:MenuItemBinding DataMember="subitem2" NavigateUrlField="url" TextField="id" />
+                    </DataBindings>
+                </asp:Menu>
+                <asp:XmlDataSource ID="XmlDataSource1" runat="server" CacheKeyDependency="id" XPath="/menus/menu"></asp:XmlDataSource>
+                <!-- /Menu -->
+                <!-- SiteMap -->
+                <div class="breadCrumb">
+                    Você está em:<asp:SiteMapPath ID="SiteMapPath1" RenderCurrentNodeAsLink="true" runat="server"
+                        SiteMapProvider="SsoSiteMapProvider">
+                    </asp:SiteMapPath>
+                </div>
+                <!-- /SiteMap -->
+                <!-- /Header -->
+                <!-- Conteudo -->
+                <div id="bd">
+                    <div id="e">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <!-- /Conteudo -->
+                <!-- Rodapé -->
+                <div id="ft">
+                    <asp:Label ID="lblCopyright" runat="server" Text="Label"></asp:Label>
+                </div>
+                <!-- /Rodapé -->
+            </form>
+        </div>
+    </div>
+</body>
+</html>

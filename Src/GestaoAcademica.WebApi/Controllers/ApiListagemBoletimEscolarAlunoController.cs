@@ -1,0 +1,67 @@
+﻿using MSTech.GestaoEscolar.BLL;
+using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada;
+using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
+using MSTech.GestaoEscolar.Web.WebProject;
+using System;
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Cors;
+
+
+namespace GestaoAcademica.WebApi.Controllers
+{
+    
+    public class ApiListagemBoletimEscolarAlunoController : ApiController
+    {
+        /// <summary>
+        /// Retorna o boletim escolar do aluno
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada</param>
+        /// <returns></returns>
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "get")]
+        public List<BuscaBoletimEscolarAlunoSaidaDTO> GetAll([FromUri] BuscaBoletimEscolarAlunoEntradaDTO filtros)
+        {
+            try
+            {
+                return ApiBO.BuscaBoletimEscolarAluno(filtros);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+
+                List<BuscaBoletimEscolarAlunoSaidaDTO> list = new List<BuscaBoletimEscolarAlunoSaidaDTO>();
+                BuscaBoletimEscolarAlunoSaidaDTO buscaBoletimEscolarAlunoSaidaDTO = new BuscaBoletimEscolarAlunoSaidaDTO();
+                buscaBoletimEscolarAlunoSaidaDTO.Status = 1;
+                buscaBoletimEscolarAlunoSaidaDTO.StatusDescription = "Ocorreu um erro ao carregar dados.";
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// Retorna o boletim escolar dos alunos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "get")]
+        public List<BuscaBoletimEscolarDosAlunosSaidaDTO> GetBoletimEscolarDosAlunos([FromUri] BuscaBoletimEscolarDosAlunosEntradaDTO filtros)
+        {
+            try
+            {
+                return ApiBO.BuscaBoletimEscolarDosAlunos(filtros);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+
+                List<BuscaBoletimEscolarDosAlunosSaidaDTO> list = new List<BuscaBoletimEscolarDosAlunosSaidaDTO>();
+                BuscaBoletimEscolarDosAlunosSaidaDTO buscaBoletimEscolarDosAlunosSaidaDTO = new BuscaBoletimEscolarDosAlunosSaidaDTO();
+                buscaBoletimEscolarDosAlunosSaidaDTO.Status = 1;
+                buscaBoletimEscolarDosAlunosSaidaDTO.StatusDescription = "Ocorreu um erro ao carregar dados.";
+                list.Add(buscaBoletimEscolarDosAlunosSaidaDTO);
+                return list;
+            }
+        }
+
+    }
+}

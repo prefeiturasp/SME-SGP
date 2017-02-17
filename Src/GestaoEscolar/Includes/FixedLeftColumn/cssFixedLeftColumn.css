@@ -1,0 +1,44 @@
+﻿/* No css do tema, para a tabela especifica, deve ter um width (pode ser em porcentagem) */
+.fixedLeftColumnWrapper {
+	position: relative; 
+}
+
+.fixedLeftColumnWrapper .fixedLeftColumnInnerWrapper {
+	overflow: auto;
+}
+
+.fixedLeftColumnWrapper .fixedLeftColumn {
+	position: absolute;
+}
+.fixedLeftColumnWrapper .marginLeft {
+	margin-left: 337px;
+}
+.fixedLeftColumnWrapper #tabela{
+	/*width: auto !important;*/
+}
+
+
+
+
+
+/* No css do tema, para a tabela especifica, todas as colunas da tabela devem ter uma largura fixa. 
+    Exemplo para a primeira e segunda coluna fixas:
+    
+    // As colunas fixas devem ter tambem uma cor de background
+    // Primeira coluna fixa
+    [seletorEspecifico] .fixedLeftColumnWrapper thead th:first-child, [seletorEspecifico] .fixedLeftColumnWrapper tbody td:first-child  {
+	    width: 60px;
+	    background-color:white;
+    }
+    // Segunda coluna fixa
+    [seletorEspecifico] .fixedLeftColumnWrapper thead th:nth-child(2), [seletorEspecifico] .fixedLeftColumnWrapper tbody td:nth-child(2) {
+	    width: 200px;
+	    background-color:white;
+    }
+    // Para as demais colunas apenas a largura
+    // Demais colunas permitem scroll
+    [seletorEspecifico] .fixedLeftColumnWrapper thead th:nth-child(n +3), [seletorEspecifico] .fixedLeftColumnWrapper tbody td:nth-child(n +3){
+	    width: 60px;
+    }
+*/
+

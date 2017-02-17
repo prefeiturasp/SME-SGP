@@ -1,0 +1,4 @@
+BIBLIOTECA USADA PARA O PROTOCOLO DE CONSULTA DE ACERVO DE BIBLIOTECAS EXTERNAS.
+
+REF: http://www.csharpmarc.net/
+     http://www.assembla.com/code/wasolic/subversion/nodes/ZOOM.NET/Zoom.Net.YazSharp

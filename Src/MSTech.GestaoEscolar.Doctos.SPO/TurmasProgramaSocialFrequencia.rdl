@@ -1,0 +1,938 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Subreport Name="Subreport2">
+        <ReportName>DocDctSubCabecalhoRetrato</ReportName>
+        <Parameters>
+          <Parameter Name="dre">
+            <Value>=Fields!DRE.Value</Value>
+          </Parameter>
+          <Parameter Name="escola">
+            <Value>=Fields!Escola.Value</Value>
+          </Parameter>
+          <Parameter Name="nomeMunicipio">
+            <Value>=Parameters!nomeMunicipio.Value</Value>
+          </Parameter>
+          <Parameter Name="nomeSecretaria">
+            <Value>=Parameters!nomeSecretaria.Value</Value>
+          </Parameter>
+          <Parameter Name="logo">
+            <Value>=Parameters!logo.Value</Value>
+          </Parameter>
+        </Parameters>
+        <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
+        <Height>0.75cm</Height>
+        <Width>16.5205cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Subreport>
+      <Rectangle Name="Rectangle4">
+        <ReportItems>
+          <Image Name="warning2">
+            <Source>Embedded</Source>
+            <Value>icoInformacoes</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.26458cm</Top>
+            <Left>0.26978cm</Left>
+            <Height>0.64348cm</Height>
+            <Width>0.68775cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox71">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Não existe resultado para a pesquisa selecionada.</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>0.26458cm</Top>
+            <Left>1.29751cm</Left>
+            <Height>0.6cm</Height>
+            <Width>11.91365cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
+        <Top>3.60953cm</Top>
+        <Height>1.22556cm</Height>
+        <Width>16.5205cm</Width>
+        <ZIndex>1</ZIndex>
+        <Visibility>
+          <Hidden>=iif(RowNumber("DataSet1") &gt; 0, true, false)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Color>#e8b909</Color>
+            <Style>Solid</Style>
+          </Border>
+          <BackgroundColor>#fffcdf</BackgroundColor>
+        </Style>
+      </Rectangle>
+      <Textbox Name="Textbox266">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!tituloRelatorio.Value</Value>
+                <Style>
+                  <FontFamily>arial</FontFamily>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Ano letivo: </Value>
+                <Style>
+                  <FontFamily>arial</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!cal_ano.Value</Value>
+                <Style>
+                  <FontFamily>arial</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox263</rd:DefaultName>
+        <Top>0.82408cm</Top>
+        <Height>1.03603cm</Height>
+        <Width>16.5205cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix2">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>6.87206cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.55357cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.62136cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>4.47351cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.57354cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox267">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!periodo.Value</Value>
+                              <Style>
+                                <FontFamily>arial</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox263</rd:DefaultName>
+                      <ZIndex>2</ZIndex>
+                      <Style>
+                        <Border>
+                          <Color>White</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>3</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Data de emissão:</Value>
+                              <Style>
+                                <FontFamily>arial</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value xml:space="preserve"> </Value>
+                              <Style>
+                                <FontFamily>arial</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Format(Now(), "dd/MM/yyyy")</Value>
+                              <Style>
+                                <FontFamily>arial</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>White</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.51208cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox25">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Parameters!nomePeriodoCurso.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox25</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Style>Solid</Style>
+                        </LeftBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox26">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Turma</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox26</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Style>Solid</Style>
+                        </LeftBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox27">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Status</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox27</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>2</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.55844cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="crp_descricao">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!crp_descricao.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>crp_descricao</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Style>Solid</Style>
+                        </LeftBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="tur_codigo">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!tur_codigo.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>tur_codigo</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <TopBorder>
+                          <Color>Black</Color>
+                          <Style>None</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>Black</Color>
+                          <Style>None</Style>
+                        </RightBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Rectangle Name="Rectangle7">
+                      <ReportItems>
+                        <Tablix Name="Tablix5">
+                          <TablixBody>
+                            <TablixColumns>
+                              <TablixColumn>
+                                <Width>3.38312cm</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>3.71175cm</Width>
+                              </TablixColumn>
+                            </TablixColumns>
+                            <TablixRows>
+                              <TablixRow>
+                                <Height>0.51905cm</Height>
+                                <TablixCells>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Rectangle Name="Rectangle8">
+                                        <ReportItems>
+                                          <Image Name="imgIncompleto">
+                                            <Source>Embedded</Source>
+                                            <Value>warning</Value>
+                                            <Sizing>Fit</Sizing>
+                                            <Top>0.04939cm</Top>
+                                            <Left>2.97312cm</Left>
+                                            <Height>0.41cm</Height>
+                                            <Width>0.41cm</Width>
+                                            <Visibility>
+                                              <Hidden>=iif(Fields!statusTurma.Value = "Incompleto", False, True)</Hidden>
+                                            </Visibility>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                            </Style>
+                                          </Image>
+                                          <Image Name="imgNaoPreenchido">
+                                            <Source>Embedded</Source>
+                                            <Value>excluir</Value>
+                                            <Sizing>Fit</Sizing>
+                                            <Top>0.04939cm</Top>
+                                            <Left>2.97312cm</Left>
+                                            <Height>0.4cm</Height>
+                                            <Width>0.4cm</Width>
+                                            <ZIndex>1</ZIndex>
+                                            <Visibility>
+                                              <Hidden>=iif(Fields!statusTurma.Value = "Não preenchido", False, True)</Hidden>
+                                            </Visibility>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                            </Style>
+                                          </Image>
+                                          <Image Name="imgPreenchido">
+                                            <Source>Embedded</Source>
+                                            <Value>confirmar</Value>
+                                            <Sizing>Fit</Sizing>
+                                            <Top>0.03939cm</Top>
+                                            <Left>2.97312cm</Left>
+                                            <Height>0.4cm</Height>
+                                            <Width>0.4cm</Width>
+                                            <ZIndex>2</ZIndex>
+                                            <Visibility>
+                                              <Hidden>=iif(Fields!statusTurma.Value = "Preenchido", False, True)</Hidden>
+                                            </Visibility>
+                                            <Style>
+                                              <Border>
+                                                <Style>None</Style>
+                                              </Border>
+                                            </Style>
+                                          </Image>
+                                        </ReportItems>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                        </Style>
+                                      </Rectangle>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="statusTurma">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!statusTurma.Value</Value>
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Left</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>statusTurma</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Color>LightGrey</Color>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <PaddingLeft>2pt</PaddingLeft>
+                                          <PaddingRight>2pt</PaddingRight>
+                                          <PaddingTop>2pt</PaddingTop>
+                                          <PaddingBottom>2pt</PaddingBottom>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                </TablixCells>
+                              </TablixRow>
+                            </TablixRows>
+                          </TablixBody>
+                          <TablixColumnHierarchy>
+                            <TablixMembers>
+                              <TablixMember />
+                              <TablixMember />
+                            </TablixMembers>
+                          </TablixColumnHierarchy>
+                          <TablixRowHierarchy>
+                            <TablixMembers>
+                              <TablixMember />
+                            </TablixMembers>
+                          </TablixRowHierarchy>
+                          <DataSetName>DataSet1</DataSetName>
+                          <Top>0.03939cm</Top>
+                          <Height>0.51905cm</Height>
+                          <Width>7.09487cm</Width>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Tablix>
+                      </ReportItems>
+                      <KeepTogether>true</KeepTogether>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <TopBorder>
+                          <Style>None</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Style>Solid</Style>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Style>Solid</Style>
+                        </RightBorder>
+                      </Style>
+                    </Rectangle>
+                    <ColSpan>2</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="periodo">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!periodo.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+              <SortExpressions>
+                <SortExpression>
+                  <Value>=Fields!periodo.Value</Value>
+                </SortExpression>
+              </SortExpressions>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
+        <DataSetName>DataSet1</DataSetName>
+        <Top>1.89186cm</Top>
+        <Height>1.64406cm</Height>
+        <Width>16.5205cm</Width>
+        <ZIndex>3</ZIndex>
+        <Visibility>
+          <Hidden>=iif(RowNumber("DataSet1") &gt; 0, false, true)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+    </ReportItems>
+    <Height>4.83509cm</Height>
+    <Style />
+  </Body>
+  <Width>16.62278cm</Width>
+  <Page>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DSGestaoEscolar">
+      <DataSourceReference>DSGestaoEscolar</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>97dfa2c1-a2cc-473e-bc71-a22913f2157a</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DSGestaoEscolar</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@uad_idSuperior">
+            <Value>=Parameters!uad_idSuperior.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@esc_id">
+            <Value>=Parameters!esc_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@uni_id">
+            <Value>=Parameters!uni_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@cur_id">
+            <Value>=Parameters!cur_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@crr_id">
+            <Value>=Parameters!crr_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@crp_id">
+            <Value>=Parameters!crp_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@tur_id">
+            <Value>=Parameters!tur_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@cal_id">
+            <Value>=Parameters!cal_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@pso_id">
+            <Value>=Parameters!pso_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@psp_id">
+            <Value>=Parameters!psp_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ent_id">
+            <Value>=Parameters!ent_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@adm">
+            <Value>=Parameters!adm.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@usu_id">
+            <Value>=Parameters!usu_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@gru_id">
+            <Value>=Parameters!gru_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@mostraCodigoEscola">
+            <Value>=Parameters!mostraCodigoEscola.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>NEW_Relatorio_TurmaProgramaSocialFrequencia</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="tur_id">
+          <DataField>tur_id</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="tur_codigo">
+          <DataField>tur_codigo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="crp_descricao">
+          <DataField>crp_descricao</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="statusTurma">
+          <DataField>statusTurma</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Escola">
+          <DataField>Escola</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DRE">
+          <DataField>DRE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="periodo">
+          <DataField>periodo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="uad_idSuperior">
+      <DataType>String</DataType>
+      <Prompt>uad id Superior</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="esc_id">
+      <DataType>Integer</DataType>
+      <Prompt>esc id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="uni_id">
+      <DataType>Integer</DataType>
+      <Prompt>uni id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cur_id">
+      <DataType>Integer</DataType>
+      <Prompt>cur id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="crr_id">
+      <DataType>Integer</DataType>
+      <Prompt>crr id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="crp_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>crp id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cal_id">
+      <DataType>Integer</DataType>
+      <Prompt>cal id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="pso_id">
+      <DataType>Integer</DataType>
+      <Prompt>pso id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="psp_id">
+      <DataType>Integer</DataType>
+      <Prompt>psp id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ent_id">
+      <DataType>String</DataType>
+      <Prompt>ent id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="adm">
+      <DataType>Boolean</DataType>
+      <Prompt>adm</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="usu_id">
+      <DataType>String</DataType>
+      <Prompt>usu id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="gru_id">
+      <DataType>String</DataType>
+      <Prompt>gru id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nomeMunicipio">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>nomeMunicipio</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nomeSecretaria">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>nomeSecretaria</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="logo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>logo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="mostraCodigoEscola">
+      <DataType>Boolean</DataType>
+      <Prompt>mostra Codigo Escola</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nomePeriodoCurso">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>nomePeriodoCurso</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tur_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>tur id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tituloRelatorio">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>tituloRelatorio</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cal_ano">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>cal_ano</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <EmbeddedImages>
+    <EmbeddedImage Name="icoInformacoes">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAP7SURBVEhLzZV7TFNXHMc1S/aff5BtBh/UKTodkrkRiARQ2KBUuAUmAhoLIghYAcezLZSOR3kXqG2l0KpQKuVRoFDWpDIFQamE6RxU5tjD8dA4DHPukWWPLPrdZcmuI+0FNP6xk3xyc3O+5/c599z8clat+j8Mhs9hB0++stq3qPlr/5ru2YBqwyP/GsN9/wr9tFeOquE1l0jH597njqgs1z0lusEi4yiM1hmorkxAcuEmKsyfQtJ3E4qBcXSNTUF6eQKB5W233LMVAc8k8xaq40+2Wx6bxqeQbxwBuXsQMiNCT3+EMJKFJyHvBUvajQ9aB2GyfgtR73V4CtQ1KxLtFaqTc7osODtkBVPSiRBZz7LsqzGQm7kGjeU2fPPOmEnRalqZt6Aunq+/ggKDBURNF9hSw4ohyOyxcxegH52EV3btObuSLUzuWq7mIrRXrSCqOsC2Q8+Nr/D7n3/h83vzYJa32WSIKj2yWwYg6LiK3WmKIBuRB7+ux0gWYZbqQFS22eWX3/7AvyNBbbKbCSbXDt2eQVBR4x0bSab2Y1T0DIMoa6Fl/qdfKQm7nD7HUXSjynwD7xwr3keJPLkV6d3Xya8o1IAobaaFKW5Cv/UOMjXmJXOBYi3OD43Di6dsoSR+vNrJ+r5RsAoawS7WvhDah63w4SknKQlTqJqV9ZJHVdiAULGGlomZuX+O6/GTJwheJiszDiO6svkRJfHJkN+VdF7GewIlmLn1tNyd/5H6J0ky/ZLZ0rZLiJXofqYkO+OLZwu0ZridqIRHShUtMw9+oCRRJY1LZhfqsfiK
+h5RkO0c0Ju0cgGucGG5JZbRMzz2kJJGFZ5fMNpivYTsnf4KSOEfwMxvMI9h6OA+74sW0TM99T0nCRfW0OZfYApzq6MemCJ5+Ua9EF51BhqIdrjEiWqa+eyoJy1HQ5rxPlCFLacCmsDS/RZKN7HTTebMFTiFpePOgwC5T9+efNmOW1G5mR5QAJstn2BUttO34NyJSN/unlEPe3oet+zOwLTzThm/uPaAkPolFNvPO5LpDeacRKawFg0i1f7+sC+AmJIjViOSfwutEKjazF8MISoZA3oojHyrJ+ZRF8wvvvgmFUHVeAiM4tWnJe2UjiyuKEcqRIWnCBv9EMAKPL4sTMwkHMqtQp+8Dg8UdW8nFtZosfsD9EA+mwU9AJJfAwZMDR9+jWO8XT7HOLw6vesdgT0wuDBdHwE4pg+O7ifKVCKjMhoDj2xy8OIbw9GrkK3SQNvVArGzFyRIVcqVaKHQmiOTNiBHISHHsrVf2HvV4JsF/w1v2Z61d436w8uWd7/c7+cV+8VZo8qRzQNyXL7mEDK1xi6hfH5z89nMXf5EL/wb7wxN26/JoGAAAAABJRU5ErkJggg==</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="confirmar">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>/9j/4AAQSkZJRgABAQEAYABgAAD/4QA6RXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAAAAFESAAQAAAABAAAAAAAAAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAQABADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9qPBn7bXwr8ffDnUPFem+M9M/sXSbaO8vHu0ls7i3gkOIZGt5lSbZKcCJtmJSQE3ZGflXxz498Vf8FRfjra/D3T5d
+V8LfCvTfL1PXoIJWt726sg58s3bodySXLoyQ26sAipNPIXkjSGLj/wBvH4JXnwW+NekaRpXhFfE1t4ivJLnwBss1kl069nbFxpschBEKq7+ajEoiwSMoAjtXYfbP7Hf7Mtr+y18HbfRWni1LxFqUp1HxBqaKVGo3zqocqDyIkVUijU8iONMktuY/B4PE51mOPlhMXT9jRov3nFv9694qLfwwtZzV2/st2vfwY4jE4nFywzhy06drv+Z7pLy6y37dWf/Z</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="excluir">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgABAExAAIAAAARAAAAPlEQAAEAAAABAQAAAFERAAQAAAABAAAAAFESAAQAAAABAAAAAAAAAABBZG9iZSBJbWFnZVJlYWR5AAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAQABADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDt/wBpr9rb9of9hT/goZeeKPHF4zavI/7qJA39j6zpe/iKFeP3
+OOMffRxk/Pli39mf9rX9ob9uv/gobZ+KPA94yazG/wC8icN/Y2jaXv5inXn9zg4xne7nIO/BHHftR/s2/tMft8/8FNdQ8B+NLJbfxBCd8U6mQ6Foekb/AJZ4Wx/qD643ySHB+c4C/st/s1/tNfsEf8FNNP8AAvguyW48QSEPNO5kGha5pG/5p5mx/qff76SDA+cYP4l9Txv13er9X9rfrzc3+d/6uf299dyP+xdsJ/aH1W3T2fJb7rW/rlP/2Q==</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="warning">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>/9j/4AAQSkZJRgABAQEAYABgAAD/4QBYRXhpZgAATU0AKgAAAAgABAExAAIAAAARAAAAPlEQAAEAAAABAQAAAFERAAQAAAABAAAAAFESAAQAAAABAAAAAAAAAABBZG9iZSBJbWFnZVJlYWR5AAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAZABkDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9+Ly8h06zluLiSOG3gQySSSMFWNQMliTwABzmvzw/aN/aq8I+
+Etb034jeMP8AhJlvvFWsjSfCsmmbvN0dADJDMYmkSMLHGqyyK4cmSV12sMKPov8A4KK/GQ+C/hjYeD7Ft2r+PJzZGMH5vsS7ftH4PvjhPtOxH3a/On/gsj8NPFXjT4Yfs+6T4P0/VNWuLH4p6TBqZsbZ5zFazJMs80m0HZECBudsKoIyRX8w+NHGlGfEWXcKvESpU3J1KsoT5JK0ZOC5umqu097x6o+xyPLqiwNXGRjeT0jdX0urv57fefr18JvHv/Cx/AtnqUkcdvfAtbX9ujFltrqJikqAnkrvUlWIG5CrdGFdJXzd+z/8UI/DPxkl0+WTbpvjI7Qc/LFfxJ+7b282BChJ/it4VHL19I1+t+FfHFPivhrD5ure0a5aiXSpHSS8k/iX92SPCzjLZ4HFSoyWm69H/Vvkfnz+1s/iLS/25NU1zxfoviEaJZ2UNr4Vl0/RrvUoL1AgJCm3jkxMskk5KMFblSAyqGrg/j9+zb8Vv2uNP8L23hHw78UvDNpousx6pdXEsVvosOpxqrAQv9puIrhMEh1byXAIBKMQMfppq/8Ax82P/Xx/7K1Xq+Wx/gTkmN4knxNiq9aVVu6jeHJHS1knBtrXS700tsmenT4qxNPBrBQhHlStezu/x+/ufH/hH9jj4q+NNZsZPE114L8IaTHdw3VxHpl5c6rqJEUqyhY5Wjgjhfcgw+2Tb1AyBX2BRRX6BwfwNknC+Flg8joeyhJ8z96Um3ZK7cm3su9jyMyzXFY6aqYqXM1otErL5JH/2Q==</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>36db7b3e-0dbe-4032-9d63-96cfa61a1236</rd:ReportID>
+</Report>

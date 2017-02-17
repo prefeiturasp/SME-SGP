@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{566A89E0-BFC1-4EEA-8FA0-C590E2FB48BA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSTech.GestaoEscolar.Web.WebProject</RootNamespace>
+    <AssemblyName>MSTech.GestaoEscolar.Web.WebProject</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Serviços|AnyCPU'">
+    <OutputPath>bin\Release Serviços\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAlunos|AnyCPU'">
+    <OutputPath>bin\ReleaseAlunos\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BarcodeControl, Version=1.0.2520.30942, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\BarcodeControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.5, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Business.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Business.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.Adapters, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.Adapters.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.BLL.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.Providers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Data.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.IO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.LDAP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.LDAP.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Log, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Providers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.SAML20, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.SAML20.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Security.Cryptography, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Security.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Web.Mail, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Web.Mail.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Web.Util.GeraHTML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Web.Util.GeraHTML.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Web.WebProject, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Web.WebProject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationWEB.cs" />
+    <Compile Include="HttpHandlers\Barcode.cs" />
+    <Compile Include="HttpHandlers\CacheEfetivacaoHandler.cs" />
+    <Compile Include="HttpHandlers\FileHandler.cs" />
+    <Compile Include="HttpHandlers\ImageHandler.cs" />
+    <Compile Include="HttpHandlers\LimpaCacheHandler.cs" />
+    <Compile Include="HttpHandlers\Status.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HttpModules\MinifyHTML\HttpModule.cs" />
+    <Compile Include="HttpModules\MinifyHTML\WhitespaceFilter.cs" />
+    <Compile Include="Login.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MotherMasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MotherPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MotherPageLogado.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MotherPageLogadoCompressedViewState.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MotherUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionWEB.cs" />
+    <Compile Include="UsuarioWEB.cs" />
+    <Compile Include="Util\WsProxy.cs" />
+    <Compile Include="Util\ZipFileUtil.cs" />
+    <Compile Include="ViewState\GlobalViewStateSingleton.cs" />
+    <Compile Include="ViewState\ProviderBase\ViewStateProviderBase.cs" />
+    <Compile Include="ViewState\ProviderBase\ViewStateProviderCollection.cs" />
+    <Compile Include="ViewState\ProviderBase\ViewStateProviderService.cs" />
+    <Compile Include="ViewState\ProviderBase\ViewStateProviderServiceSection.cs" />
+    <Compile Include="ViewState\ViewStateProviderCache.cs" />
+    <Compile Include="ViewState\ViewStateProviderGlobal.cs" />
+    <Compile Include="ViewState\ViewStateProviderSession.cs" />
+    <Compile Include="WebArea\Area.cs" />
+    <Compile Include="WebArea\WebSubArea\SubAreaHome.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MSQuartz.Core\MSQuartz.Core.csproj">
+      <Project>{9382E234-40E3-40D1-9A6F-5EF63CF09C90}</Project>
+      <Name>MSQuartz.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.BLL\MSTech.GestaoEscolar.BLL.csproj">
+      <Project>{9C22F480-D173-413A-843D-5A4799484DB3}</Project>
+      <Name>MSTech.GestaoEscolar.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.DAL\MSTech.GestaoEscolar.DAL.csproj">
+      <Project>{4147A1CA-4783-4718-8A5D-79AFA3CB93B5}</Project>
+      <Name>MSTech.GestaoEscolar.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.Entities\MSTech.GestaoEscolar.Entities.csproj">
+      <Project>{FA6964EB-E31C-406F-A1D5-A15482CE71D6}</Project>
+      <Name>MSTech.GestaoEscolar.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MStech.Infrastructure.Caching.Memory\MStech.Infrastructure.Caching.Memory.csproj">
+      <Project>{b5ac608f-d85a-469a-bcba-a398c8805dee}</Project>
+      <Name>MStech.Infrastructure.Caching.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MStech.Infrastructure\MStech.Infrastructure.csproj">
+      <Project>{013609f4-d499-47d6-aa44-83b9f796f051}</Project>
+      <Name>MStech.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HttpModules\MinifyHTML\Configuracao_WebConfig.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

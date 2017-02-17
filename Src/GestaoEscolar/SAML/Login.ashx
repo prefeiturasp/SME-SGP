@@ -1,0 +1,1 @@
+﻿<%@ WebHandler Class="MSTech.GestaoEscolar.Web.WebProject.Login" %>

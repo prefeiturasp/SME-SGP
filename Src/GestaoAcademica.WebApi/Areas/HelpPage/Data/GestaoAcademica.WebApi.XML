@@ -1,0 +1,1434 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GestaoAcademica.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:GestaoAcademica.WebApi.Controllers.aluno_fechamento_pendenciaController.GetFila">
+            <summary>
+            Seleciona a fila de alunoFechamentoPendencia do serviço
+            -- Utilização: URL_API/servicos/GetFila/
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemBoletimEscolarAlunoController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaBoletimEscolarAlunoEntradaDTO)">
+            <summary>
+            Retorna o boletim escolar do aluno
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemBoletimEscolarAlunoController.GetBoletimEscolarDosAlunos(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaBoletimEscolarDosAlunosEntradaDTO)">
+            <summary>
+            Retorna o boletim escolar dos alunos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.areas_conhecimentoController.GetAll">
+            <summary>
+            Seleciona todas as áreas de conhecimento ativas.
+            -- Utilização: URL_API/area_conhecimento
+            -- Parâmetros: Sem parâmetros.
+            </summary>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.areas_conhecimentoController.Get(System.Int32)">
+            <summary>
+            Seleciona os dados da área do conhecimento por id.
+            -- Utilização: URL_API/area_conhecimento/1
+            -- Parâmetros: id da area do conhecimento
+            </summary>
+            <param name="id">Id da área de conhecimento.</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.areas_conhecimentoController.Post">
+            <summary>
+            Persiste os dados do Json.
+            -- Utilização: URL_API/area_conhecimento/
+                           - Deve ser informado json contendo um array com as áreas do conhecimento a serem persistidos;
+                           - O formato do json deve seguir o modelo do método que seleciona todas as áreas do conhecimento;
+            </summary>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.GetAll(System.Int32)">
+            <summary>
+            Seleciona todos os calendários anuais ativos.
+            -- Utilização: URL_API/calendario_anual/?cal_ano={1}
+            -- Parâmetros: cal_ano (Ano do calendário anual) 
+            </summary>
+            <param name="filtro">CalendarioAnualEntradaDTO.</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.Get(System.Int32)">
+            <summary>
+            Seleciona os dados do calendario anual por id.
+            -- Utilização: URL_API/calendario_anual/1
+            -- Parâmetros: id do calendario anual
+            </summary>
+            <param name="id">Id do calendário anual.</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.GetByEsc_id(System.Int64)">
+            <summary>
+            Seleciona os dados do calendario anual por esc_id.
+            </summary>
+            <param name="esc_id">Id da escola</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.GetByIDDataBase(System.Int32,System.String)">
+            <summary>
+            Seleciona os dados do calendario anual por id.
+            -- Utilização: URL_API/calendario_anual/1
+            -- Parâmetros: id do calendario anual
+            </summary>
+            <param name="id">Id do calendário anual.</param>
+            <param name="dataBase">Id do calendário anual.</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.Post">
+            <summary>
+            Persiste os dados do Json.
+            -- Utilização: URL_API/calendario_anual/
+            -- Utilização: URL_API/tipos_disciplina/
+                           - Deve ser informado json contendo um array com os calendarios anuais a serem persistidos;
+                           - O formato do json deve seguir o modelo do método que seleciona todos os calendarios anuais;
+                           - Para o método POST é necessário informar todos os atributos dos itens da listaCalendarioPeriodo,
+                             pois é realizado uma série de validações na camada de negócios. 
+                             [Em fase de desenvolvimento]
+            </summary>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.cargas_horariasController.GetPorEntidadeEscolaDataBase(System.String,System.String)">
+            <summary>
+            Busca os cargos por situação e por docente
+            </summary>
+            <param name="idsCargo">Ids de cargos de docente</param>
+            <param name="ent_id">Ids da entidade</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.cargosController.Get(System.Boolean,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Busca os cargos por situação e por docente
+            </summary>
+            <param name="docente"></param>
+            <param name="bloqueado"></param>
+            <param name="ent_id">Ids da entidade</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.colaboradoresController.Post">
+            <summary>
+            Persiste os dados do Json.
+            -- Utilização: URL_API/colaboradore/
+                           - Deve ser informado json contendo um array com os cargos/funções a serem persistidos;
+                           - O formato do json deve seguir o modelo do método que seleciona todos os colaboradores;
+                           - Para o método POST é necessário informar todos os atributos dos itens da lista colaboradorCargo 
+                             e/ou colaboradorFuncao, pois é realizado uma série de validações na camada de negócios.
+            </summary>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.curriculos_periodoController.GetCurriculoPeriodoPorEscola(System.Int32)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.Get(System.Int64)">
+            <summary>
+            Descrição: Retorna o registro de escola pelo id
+            -- Utilização: URL_API/escolas/1
+            -- Parâmetros: id=corresponde ao id da escola.
+            </summary>
+            <param name="id">esc_id</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorTurmaDisciplina(System.Int64)">
+            <summary>
+            Busca as orientacoes curriculares pela turmadisciplina
+            </summary>
+            <param name="tud_id"></param>        
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorTurmaDisciplinaDataBase(System.Int64,System.String)">
+            <summary>
+            Busca as orientacoes curriculares pela database e pela turmadisciplina
+            </summary>
+            <param name="tud_id"></param>
+            <param name="dataBase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorTurmaDisciplinaTipoPeriodoCalendario(System.Int64,System.Int64)">
+            <summary>
+            Busca as orientações curriculares pela turma disciplina e tipo periodo calendario
+            </summary>
+            <param name="tud_id"></param>
+            <param name="tpc_id">Tipo Periodo Calendario</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorTurmaDisciplinaDataBaseOrientacaoSuperior(System.Int64,System.String,System.Int64,System.Nullable{System.Int64})">
+            <summary>
+            Busca as orientacoes curriculares pela database, pela turmadisciplina , pela orientacao curricular superior e por Tipo Periodo calendario
+            </summary>
+            <param name="tud_id"></param>
+            <param name="dataBase"></param>
+            <param name="ocr_idSuperior"></param>
+            <param name="tpc_id">Tipo Periodo Calendario, Opcional</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorEscolaDataBase(System.Int32)">
+            <summary>
+            Busca as orientacoes curriculares pela escola
+            </summary>
+            <param name="esc_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorEscolaDataBase(System.Guid)">
+            <summary>
+            Busca as orientacoes curriculares pela entidade
+            </summary>
+            <param name="ent_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorEscolaDataBase(System.Guid,System.String)">
+            <summary>
+            Busca as orientacoes curriculares pela entidade e dataBase
+            </summary>
+            <param name="ent_id"></param>
+            <param name="dataBase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorEscolaDataBase(System.Int32,System.String)">
+            <summary>
+            Busca as orientacoes curriculares pela database e escola
+            </summary>
+            <param name="esc_id"></param>
+            <param name="dataBase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.GetPorEntidadeEscolaDataBase(System.Guid,System.Int32,System.String)">
+            <summary>
+            Busca as orientacoes curriculares pela database, entidade e escola
+            </summary>
+            <param name="ent_id"></param>
+            <param name="esc_id"></param>
+            <param name="dataBase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.escolasController.Get(System.Int32)">
+            <summary>
+            Descrição: Retorna o registro de escola pelo id
+            -- Utilização: URL_API/escolas/1
+            -- Parâmetros: id=corresponde ao id da escola.
+            </summary>
+            <param name="id">esc_id</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.escolasController.GetPorCodigo(System.String)">
+            <summary>
+            Descrição: Retorna o registro de escola pelo código
+            -- Utilização: URL_API/escolas?esc_codigo=1111
+            -- Parâmetros: esc_codigo = codigo da escola
+            </summary>
+            <param name="esc_codigo">codigo da escola</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.escolasController.GetPorEntidade(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.escolasController.GetPorUsuarioUASuperior(System.Guid,System.Guid,System.Guid,System.Guid)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.movimentacoesController.GetAll(System.String)">
+            <summary>
+            Seleciona todas as movimentações(Struct) posterior a data informada.
+                Struct {
+                    alu_id: Id do Aluno
+                    , tmo_id: Id do tipo de movimentacao
+                    , escolaSaida: Id da escola de saida
+                    , turmaSaida: Id da turma de saida
+                    , escolaEntrada: Id da escola de entrada
+                    , turmaEntrada: Id da turma de entrada
+                }        
+            -- Utilização: URL_API/movimentacoes/?dataAlteracao=0000-00-00T00:00:00
+            -- Parâmetros: dataAlteracao: Data em que a movimentação foi realizada.
+            </summary>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.movimentacoesController.Get(System.String)">
+            <summary>
+            Seleciona todas as movimentações(Entidade) posterior a data informada.
+            -- Utilização: URL_API/movimentacoes/?mov_dataAlteracao=0000-00-00T00:00:00
+            -- Parâmetros: mov_dataAlteracao: Data em que a movimentação foi realizada.
+            </summary>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.movimentacoesController.Get(System.Int64,System.Int32)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.protocolosController.Get(System.String)">
+            <summary>
+            Descrição: retorna um registro de protocolo pelo id (Guid)
+            -- Utilização: URL_API/protocolos/00000000-0000-0000-0000-000000000000
+            -- Parâmetros: id= id do protocolo (pro_id)
+            </summary>
+            <param name="id">pro_id=id do protocolo</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.protocolosController.GetByEscola(GestaoAcademica.WebApi.Controllers.protocolosController.ProtocoloFiltro)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.protocolosController.Post(MSTech.GestaoEscolar.Entities.DCL_Protocolo)">
+            <summary>
+            Descrição: recebe e persiste um protocolo no SGP para ser processado.
+            -- Utilização: URL_API/protocolos
+            </summary>
+            <param name="protocolo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.recursos_aulaController.Get(System.Int32)">
+            <summary>
+            Descrição: retorna um registro do recurso (ACA_RecursosAula) pelo id
+            -- Utilização: URL_API/recursos_aula/1
+            -- Parâmetros: id= id do recurso (rsa_id)
+            </summary>
+            <param name="id">rsa_id</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.recursos_aulaController.GetAll">
+            <summary>
+            Descrição: retorna uma lista com todos os recursos ativos que podem ser utilizados na aula.
+            -- Utilização: URL_API/recursos_aula
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemEventosController.GetByEscola(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEventosEntradaDTO)">
+            <summary>
+            Retornas todos os eventos do tipo fechamento para a escola
+            </summary>
+            <param name="buscaEventosEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiPlanejamentoController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.PlanejamentoEntradaDTO)">
+            <summary>
+            Retorna o planejamento filtrado pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiAssociaEscolaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AssociaEscolaEntradaDTO)">
+            <summary>
+            Associa o tablet com uma escola através da tabela SYS_EquipamentoUnidadeAdministrativa
+            do banco DiarioClasse.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiBuscaDataHoraController">
+            <summary>
+            Api utilizada para buscar a data e hora do servidor e sincronizar com o tablet.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiBuscaFotoAlunoController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaFotoAlunoEntradaDTO)">
+            <summary>
+            Busca a foto do respectivo aluno, redimenciona ela para o tamanho utilizado no tablet, transforma em Base64 envia a informacao
+            </summary>
+            <param name="filtroEntrada">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiBuscaPlanejamentoAnualController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.PlanejamentoAnualEntradaDTO)">
+            <summary>
+            Retorna os calendários de acordo com a escola passada
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiBuscaUsuarioController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDadosUsuarioEntradaDTO)">
+            <summary>
+            Busca informações do usuário atravéz do login.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiDiarioClasseDadosIniciaisController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDadosIniciaisEntradaDTO)">
+            <summary>
+            Busca informações como endereço da APK e horário de sincronizações.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiGravaFotoAlunosController.Post(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.SincronizacaoDiarioClasseEntradaDTO)">
+            <summary>
+            Recebe e grava uma lista de fotos de alunos.
+            </summary>
+            <param name="filtroEntrada">Objeto com os itens de entrada.</param>
+            <returns>Protocolo</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiGravaLogsController.Post(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.SincronizacaoDiarioClasseEntradaDTO)">
+            <summary>
+            Recebe e sincroniza todas as informações necessárias referentes a log
+            </summary>
+            <param name="SincronizacaoGravaLogsEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiGravaPlanejamentoAnualController.Post(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.SincronizacaoDiarioClasseEntradaDTO)">
+            <summary>
+            Grava dados do planejamento anual
+            </summary>
+            <param name="GravaPlanejamentoAnualEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemAlunosTurmaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaAlunosTurmaEntradaDTO)">
+            <summary>
+            Retorna os alunos das turmas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemAulasController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaAulaEntradaDTO)">
+            <summary>
+            Retornas as últimas aulas da turma e disciplina passadas como parametros de entrada.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemCalendarioAnualController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.CalendarioAnualEntradaDTO)">
+            <summary>
+            Retorna os calendários de acordo com a escola passada
+            
+            Obsoleto: utilize a API /calendarios_anuais
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemCompensacaoFaltaController">
+            <summary>
+            Retorna listagem de compensações de falta por escola
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemEscalaAvaliacaoController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEscalaAvaliacaoEntradaDTO)">
+            <summary>
+            Retorna a listagem de todas as escalas de avaliação de acordo com a entidade.
+            </summary>
+            <param name="filtroEntrada"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemEscolasController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEscolaEntradaDTO)">
+            <summary>
+            Retorna as escolas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemEscolasProfessorController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEscolasProfessorEntradaDTO)">
+            <summary>
+            Busca as escolas de acordo com o usuário do professor passado.
+            </summary>
+            <param name="filtroEntrada"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemJustificativasFaltaController.GetAll">
+            <summary>
+            Retorna justificativas faltas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemParametrosAcademicosController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaParametrosAcademicosEntradaDTO)">
+            <summary>
+            Retorna os valores dos parâmetros acadêmicos informador pelo filtro.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemRecursosAulaController.GetAll">
+            <summary>
+            Retorna os recursos aula
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemStatusProtocolosController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.ProtocoloEntradaDTO)">
+            <summary>
+            Retorna os status dos protocolos que estão pendentes.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemTiposAtividadeAvaliativaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaTiposAtividadeAvaliativaEntradaDTO)">
+            <summary>
+            Retorna os tipos de atividades avaliativas.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemTurmasController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaTurmasEntradaDTO)">
+            <summary>
+            Retorna as turmas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemUsuariosController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaUsuariosEntradaDTO)">
+            <summary>
+            Retorna os usuários filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiRetornaEscolaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.RetornaEscolaEntradaDTO)">
+            <summary>
+            Busca a escola referente a unidade administrativa passada
+            </summary>
+            <param name="filtroEntrada"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiSyncDiarioClasseController.Post(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.SincronizacaoDiarioClasseEntradaDTO)">
+            <summary>
+            Recebe e sincroniza todas as informações necessárias referentes a uma aula.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiSyncJustificativasFaltaAlunoController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.SincronizacaoDiarioClasseEntradaDTO)">
+            <summary>
+            Recebe e sincroniza todas as informações necessárias referentes a justificativa falta dos alunos
+            </summary>
+            <param name="SincronizacaoJustificativasFaltaAlunoEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemPlanejamentoTurmaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaTurmasEntradaDTO)">
+            <summary>
+            Retorna o planejamento filtrado pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_anotacoes_alunoController.Get(System.Int32)">
+            <summary>
+            Descrição: retorna o registro de um tipo de anotação do aluno por id
+            -- Utilização: URL_API/tipos_anotacoes_aluno/{id}
+            -- Parâmetros: id: id do tipo de anotação
+            </summary>
+            <param name="id">id do tipo de anotação</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_anotacoes_alunoController.GetPorEntidade(System.Guid)">
+            <summary>
+            Descrição: retorna uma lista de tipos de anotações dos alunos ativos por entidade
+            -- Utilização: URL_API/tipos_anotacoes_aluno?ent_id={ent_id}
+            -- Parâmetros: ent_id: id da entidade
+            </summary>
+            <param name="ent_id">id da entidade</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.tipos_anotacoes_alunoController.GetPorEntidadeDataBase(System.Guid,System.String)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_turnoController.GetAll">
+            <summary>
+            Seleciona todos os tipos de turno ativas.
+            -- Utilização: URL_API/tipos_turno       
+            </summary>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_turnoController.Get(System.Int32)">
+            <summary>
+            Seleciona os dados do tipo de turnos por id.
+            -- Utilização: URL_API/tipos_turno/1
+            -- Parâmetros: Id do tipo de turno
+            </summary>
+            <param name="id">Id do tipo de turno.</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_cicloController.GetAll">
+            <summary>
+            Seleciona todos os tipos de ciclo ativos.
+            </summary>
+            <param name="buscaEscolaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_atividade_avaliativaController.Get(System.Int32)">
+            <summary>
+            Descrição: retorna o registro do tipo de atividade avaliativa pelo id
+            -- Utilização: URL_API/tipos_atividade_avaliativa/1
+            -- Parâmetros: id - id do tipo de atividade avaliativa (tav_id)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_atividade_avaliativaController.GetAll">
+            <summary>
+            Descrição: retorna uma lista com os tipos de atividade avaliativas ativos.
+            -- Utilização: URL_API/tipos_atividade_avaliativa
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_nivel_ensinoController.Get(System.Int32)">
+            <summary>
+            Seleciona todos os niveis de ensino ativos.
+            </summary>
+            <param name="id">tne_id</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.cursosController.Get(System.Int32)">
+            <summary>
+            Seleciona todos os cursos ativos.
+            </summary>
+            <param name="id">cur_id</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.cursosController.Get(System.Int64)">
+            <summary>
+            Seleciona todos os cursos ativos vinculados a escola passada por parametro.
+            </summary>
+            <param name="esc_id">Id da escola</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.alunosController.Get(System.Int64)">
+            <summary>
+            Descrição: retorna registro de aluno pelo id
+            -- Utilização: URL_API/aluno/1
+            -- Parâmetros: id: id do aluno
+            </summary>
+            <param name="id">id do aluno</param>
+            <returns>registro de aluno</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.alunosController.GetAlunosPorIds(System.String)">
+            <summary>
+            Descrição: retorna registros de alunos pelos ids concatenados com fotos compactadas
+            -- Utilização: URL_API/alunos?ids=1;2;3
+            -- Parâmetros: ids: ids dos alunos concatenados
+            </summary>
+            <param name="ids">ids de alunos concatenados</param>
+            <returns>lista de alunos</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.alunosController.GetAlunosFotosPorIds(System.String)">
+            <summary>
+            Descrição: retorna registros de usuário dos alunos pelos ids concatenados
+            -- Utilização: URL_API/alunos?alu_ids=1;2;3
+            -- Parâmetros: ids: ids dos alunos concatenados
+            </summary>
+            <param name="ids">ids de alunos concatenados</param>
+            <returns>lista de alunos</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.alunosController.GetAlunosFotosPorIds(System.String,System.Int32,System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.alunosController.GetAlunosPorEscola(System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.alunosController.GetAlunosPorTurma(System.Int32)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiBuscaDadosDocenteController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDadosDocenteEntradaDTO)">
+            <summary>
+            Retorna os dados do docente filtrado pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaDadosDocenteEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiBuscaDadosTurmasPlataformaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDadosTurmasEntradaDTO)">
+            <summary>
+            Retorna as turmas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaDadosTurmaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemAlunosEscolaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaAlunosDetalhadoEscolaEntradaDTO)">
+            <summary>
+            Retorna alunos ativos de acordo com os filtros informados.
+            </summary>
+            <param name="filtros">Entidade de filtros informados</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemDadosCursosEntidadeController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDadosCursosEntidadeEntradaDTO)">
+            <summary>
+            Retorna todos os níveis de ensino, cursos e currículos mediante a entidade informada.
+            </summary>
+            <param name="BuscaDadosCursosEntidadeEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemDadosTurmasController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDadosTurmasEntradaDTO)">
+            <summary>
+            Retorna as turmas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaDadosTurmaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemAlunosAtivosController.GetAll(GestaoAcademica.WebApi.Controllers.FiltrosAlunos)">
+            <summary>
+            Retorna alunos ativos de acordo com os filtros informados.
+            </summary>
+            <param name="filtros">Entidade de filtros informados</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemAlunosMatriculaTurmaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaAlunosMatriculadosTurmaEntradaDTO)">
+            <summary>
+            Retorna os alunos matriculados na turma
+            </summary>
+            <param name="BuscaAlunosMatriculadosTurmaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemCalendariosController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaCalendarioEntidadeEntradaDTO)">
+            <summary>
+            Retorna os calendarios filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaCalendarioEntidadeEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemColaboradoresController.GetAll(GestaoAcademica.WebApi.Controllers.FiltrosColaboradores)">
+            <summary>
+            Retorna alunos ativos de acordo com os filtros informados.
+            </summary>
+            <param name="filtros">Entidade de filtros informados</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemCurriculoPeriodoPorEscolaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaCurriculoPeriodoEntradaDTO)">
+            <summary>
+            Retorna os periodos(series) filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaCurriculoPeriodoEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemCurriculoPeriodoController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaCurriculoPeriodoEntradaDTO)">
+            <summary>
+            Retorna os periodos(serie) filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaCurriculoPeriodoEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemCursosController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaCursosEntradaDTO)">
+            <summary>
+            Retorna os cursos filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaCursosEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemCursosPorEscolaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaCursosEntradaDTO)">
+            <summary>
+            Retorna os cursos filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaCursosEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemDadosTurmasDocenteController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDadosTurmasEntradaDTO)">
+            <summary>
+            Retorna as turmas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaDadosTurmaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemDocentesTurmaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDocentesTurmaEntradaDTO)">
+            <summary>
+            Retorna os dados do docente filtrado pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaDocentesTurmaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemEscolasEntidadeController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEscolasEntidadeEntradaDTO)">
+            <summary>
+            Retorna os cursos filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaCursosEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemEscolasPermissaoUsuarioController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEscolasPorUsuarioEntradaDTO)">
+            <summary>
+            Retorna os cursos filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaCursosEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemEscolasUsuarioUnidadeAdmController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEscolasPorUsuarioEntradaDTO)">
+            <summary>
+            Retorna os cursos filtrados pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaCursosEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemParametrosAcademicosPlataformaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaParametrosAcademicosEntradaDTO)">
+            <summary>
+            Retorna os dados do docente filtrado pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaDadosDocenteEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemDadosDisciplinasTipoNivelEnsinoController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaDadosDisciplinasEntradaDTO)">
+            <summary>
+            Retorna os dados das disciplinas filtrados pelo objeto com parâmetros de entrada [tne_id].
+            </summary>
+            <param name="BuscaDadosDisciplinasEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.tipos_disciplinaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.TipoDisciplinaEntradaDTO)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_disciplinaController.Get(System.Int32)">
+            <summary>
+            Seleciona os dados do tipo de disciplina por id.
+            -- Utilização: URL_API/tipos_disciplina/1
+            -- Parâmetros: Id do tipo de disciplina
+            </summary>
+            <param name="id">Id do tipo de disciplina.</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_disciplinaController.GetPorNivelEnsino(System.Int32)">
+            <summary>
+            Seleciona os dados do tipo de disciplina por Tipo Nivel Ensino.
+            -- Utilização: URL_API/tipos_disciplina?tne_id=1
+            -- Parâmetros: Id do tipo de nivel ensino
+            </summary>
+            <param name="id">Id do tipo de nivel ensino.</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemTipoDisciplinaDocenteController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaTurmaDisciplinaEntradaDTO)">
+            <summary>
+            Retorna as turmas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaTurmaDisciplinaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemTipoJustificativaFaltaController.GetAll">
+            <summary>
+            Retorna os tipos de justificativa falta
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemTipoNivelEnsinoController.GetAll">
+            <summary>
+            Retorna os tipos de nivel de ensino
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemTipoDisciplinaTurmaController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaTurmaDisciplinaEntradaDTO)">
+            <summary>
+            Retorna as turmas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaTurmaDisciplinaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemTipoDisciplinaTurmaDocenteController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaTurmaDisciplinaEntradaDTO)">
+            <summary>
+            Retorna as turmas filtradas pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaTurmaDisciplinaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemTurnosController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaTurnosEntradaDTO)">
+            <summary>
+            Retorna os dados do docente filtrado pelo objeto com parâmetros de entrada.
+            </summary>
+            <param name="BuscaDocentesTurmaEntradaDTO">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.escalas_avaliacaoController.Get(System.Int32)">
+            <summary>
+            Descrição: Retorna os dados da escala de avaliação numerica, de parecer ou de relatorio pelo id.
+            -- Utilização: URL_API/escalas_avaliacao/1
+            -- Paramêtros: id da escala de avaliação.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.disciplinasController.Get(System.Int64)">
+            <summary>
+            Descrição: retorna um registro da disciplina da turma por id.
+            -- Utilização: URL_API/disciplinas/1
+            -- Parâmetros: id=corresponde ao id da turma disciplina.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.disciplinasController.GetDisciplinasPorDocente(System.Int64)">
+            <summary>
+            Descrição: retorna as disciplinas que o docente esta vinculado.
+            -- utilização : URL_API/disciplinas?doc_id=1
+            -- parâmetros : doc_id: id do docente
+            </summary>
+            <param name="doc_id">id do docente</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.disciplinasController.GetDisciplinasPorTurma(System.Int64)">
+            <summary>
+            Descrição: retorna as disciplinas da turma.
+            -- utilização : URL_API/disciplinas?tur_id=1
+            -- parâmetros : tur_id: id da turma
+            </summary>
+            <param name="tur_id">id da turma</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.disciplinasController.GetDisciplinasPorDocenteTurma(System.Int64,System.Int64)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.disciplinasController.GetDisciplinasPorEscola(System.Int32)">
+            <summary>
+            Descrição: Retorna uma listagem de disciplinas ativas por escola
+            --Utilização: URL_API/disciplinas?esc_id=1
+            --Paramêtros: esc_id id da escola
+            </summary>
+            <param name="esc_id">id da escola</param>
+            <param name="dataBase">data base para seleção dos registros</param>
+            <returns>dataTable com as disciplinas</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.disciplinasController.GetDisciplinasPorEscolaDataBase(System.Int32,System.String)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.docentesController.Get(System.Int32)">
+            <summary>
+            Descrição: retorna o registro de docente pelo id
+            -- Utilização: URL_API/docentes/1
+            -- Parâmetros: id do docente
+            </summary>
+            <param name="id">id do docente</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.docentesController.GetDocentesPorTurma(System.Int64)" -->
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.docentesController.GetDocentesPorEscola(System.Int32)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.docentesController.GetDocentesPorVinculoDeTrabalho(System.String,System.String,System.Guid,System.String,System.Boolean)">
+            <summary>
+            Descrição: Retorna uma listagem de docentes por vínculo de trabalho e data base. 
+            --Utilização:
+            --Paramêtros: psd_numeroCPF = cpf do docente / psd_numeroRG = rg / ent_id = entidade /  coc_matricula = matrícula do docente /coc_vinculoSede = true se o docente possuir vínculo
+            </summary>
+            <param name="psd_numeroCPF, psd_numeroRG, ent_id, coc_matricula, coc_vinculoSede,psd_numeroRG,ent_id,coc_matricula,coc_vinculoSede"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.docentesController.GetDocentesPorUsuarioGrupo(System.Guid,System.Guid,System.Int32,System.String,System.String,System.String)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.formatos_avaliacaoController.Get(System.Int32)">
+            <summary>
+            Descrição: Retorna o registro de formato de avaliação pelo id.
+            -- Utilização: URL_API/formatos_avaliacao/1
+            -- Paramêtros: id - id do formato de avaliação.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_curriculo_periodoController.GetTipoCurriculoPeriodoDTO(System.Int32,System.Int32)">
+            <summary>
+            Descrição: Retorna uma lista de descrição da série.
+            -- Utilização: 
+            -- Parametros: tme_id = modalidade de ensino / tne_id = nível de ensino
+            </summary>
+            <returns></returns>
+            <param name="tme_id, tne_id,tne_id"></param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.tipos_modalidade_ensinoController.GetAtivas">
+            <summary>
+            Seleciona todas as modalidades de ensino ativas.
+            </summary>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.servicosController.GetStatusServicos">
+            <summary>
+            Seleciona o status dos serviços configurados
+            -- Utilização: URL_API/servicos/GetStatusServicos/
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.servicosController.Post">
+            <summary>
+            Salva o serviço (reativa a trigger no Quartz)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.servicosController.SalvarServico(System.String)">
+            <summary>
+            Salva o serviço (reativa a trigger no Quartz)
+            </summary>
+            <param name="json">Parâmetros</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.turmasController.Get(System.Int64)">
+            <summary>
+            Descrição: retorna o registro de turma pelo id
+            -- Utilização: URL_API/turmas/1
+            -- Parâmetros: id=corresponde ao id da turma.
+            </summary>
+            <param name="id">tur_id</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.turmasController.GetTurmaPorEscolaDocente(GestaoAcademica.WebApi.Controllers.turmasController.TurmaFiltros)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.turmasController.Post(GestaoAcademica.WebApi.Controllers.turmasController.TurmaFiltros)">
+            <summary>
+            Recebe a turma pra salvar 
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.turmas_aulasController.Get(System.Int64,System.Int32)">
+            <summary>
+            Retorna a aula pelo id
+            </summary>
+            <param name="tud_id"></param>
+            <param name="tau_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.turmas_aulasController.GetAulasDaDisciplina(System.Int64,System.DateTime,System.DateTime)">
+            <summary>
+            Retorna as aulas pela disciplina dentro do periodo.
+            </summary>
+            <param name="tud_id">id da disciplina do professor na turma</param>
+            <param name="dataInicio">data de inicio do periodo</param>
+            <param name="dataFim">data fim do periodo</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.turmas_aulasController.GetAulasDaDisciplinaPorPosicao(System.Int64,System.Byte,System.DateTime,System.DateTime)">
+            <summary>
+            Retorna as aulas pela disciplina e posição do professor dentro do periodo.
+            </summary>
+            <param name="tud_id">id da disciplina do professor na turma</param>
+            <param name="tdt_posicao">posição do professor na turma</param>
+            <param name="dataInicio">data de inicio do periodo</param>
+            <param name="dataFim">data fim do periodo</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.turmas_aulasController.GetAulasDaDisciplinaPorPosicao(System.Int64,System.Byte,System.DateTime,System.DateTime,System.Guid)">
+            <summary>
+            Retorna as aulas pela disciplina e posição do professor dentro do periodo.
+            </summary>
+            <param name="tud_id">id da disciplina do professor na turma</param>
+            <param name="tdt_posicao">posição do professor na turma</param>
+            <param name="dataInicio">data de inicio do periodo</param>
+            <param name="dataFim">data fim do periodo</param>
+            <param name="usu_id">ID do usuário que criou a aula</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.turmas_aulasController.GetAulasDaTurma(System.Int64,System.String)">
+            <summary>
+            retorna as aulas ativas e excluidas da turma a partir da data base.
+            </summary>
+            <param name="tur_id">id da turma</param>
+            <param name="dataBase">data base para a consulta (yyyy-MM-ddTHH:mm:ss.SSS)</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.turmas_aulasController.GetAulasDaEscola(System.Int32,System.String)">
+            <summary>
+            retorna as aulas ativas e excluidas da escola a partir da data base.
+            </summary>
+            <param name="esc_id">id da escola</param>
+            <param name="dataBase">data base para a consulta (yyyy-MM-ddTHH:mm:ss.SSS)</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.usuariosController.Get(System.Guid)">
+            <summary>
+            Seleciona os dados do usuário por id.
+            -- Utilização: URL_API/usuario/00000000-0000-0000-0000-000000000000
+            -- Parâmetros: id do usuario
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.usuariosController.GetPorEscola(System.Int64)">
+            <summary>
+            Seleciona os dados do usuário por escola.
+            </summary>
+            <param name="esc_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.usuariosController.GetPorEntidade(System.Guid)">
+            <summary>
+            Seleciona os dados do usuário por entidade.
+            </summary>
+            <param name="ent_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.usuariosController.GetPorEntidade(System.Guid,System.DateTime)">
+            <summary>
+            Seleciona os dados do usuário por entidade e data base.
+            </summary>
+            <param name="ent_id"></param>
+            <param name="dataBase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.usuariosController.GetAll(System.Int64,System.DateTime)">
+            <summary>
+            Seleciona os dados do usuário por escola e data base.
+            </summary>
+            <param name="esc_id"></param>
+            <param name="dataBase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.usuariosController.GetAllEntidade(System.Int64,System.Guid,System.DateTime)">
+            <summary>
+            Seleciona os dados do usuário por escola, entidade e data base.
+            </summary>
+            <param name="esc_id"></param>
+            <param name="ent_id"></param>
+            <param name="dataBase"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.usuariosController.SelecionaAlunoDocentePorUsuario(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.UsuarioEntradaDTO)" -->
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,GestaoAcademica.WebApi.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,GestaoAcademica.WebApi.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create one using <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.ObjectGenerator"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},GestaoAcademica.WebApi.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.#ctor(GestaoAcademica.WebApi.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,GestaoAcademica.WebApi.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:GestaoAcademica.WebApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GestaoAcademica.WebApi.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Security.PrincipalProvider.UserName">
+            <summary>
+            Usuário configurado para autenticação da WebApi.
+            </summary>
+        </member>
+        <member name="P:GestaoAcademica.WebApi.Security.PrincipalProvider.Password">
+            <summary>
+            Senha configurada para autenticação da WebApi.
+            </summary>
+        </member>
+    </members>
+</doc>

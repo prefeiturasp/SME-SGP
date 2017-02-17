@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1DC26E20-22F9-4197-BA74-677B5882F203}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSTech.GestaoEscolar.ObjetosSincronizacao</RootNamespace>
+    <AssemblyName>MSTech.GestaoEscolar.ObjetosSincronizacao</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAlunos|AnyCPU'">
+    <OutputPath>bin\ReleaseAlunos\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MSTech.CoreSSO.Entities">
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Data.Common">
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTO\Entrada\AssociaEscolaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaAlunosDetalhadoEscolaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaAlunosMatriculadosTurmaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaAlunosTurmaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaAulaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaBoletimEscolarAlunoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaBoletimEscolarDosAlunosEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaCalendarioEntidadeEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaCalendariosEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaCurriculoPeriodoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaCursosEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaDadosDocenteEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaDadosCursosEntidadeEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaDadosIniciaisEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaDadosTurmasEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaDadosUsuarioEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaDocentesTurmaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaEscalaAvaliacaoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaEscolaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaEscolasEntidadeEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaEscolasPorUsuarioEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaEscolasProfessorEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaEventosEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaFotoAlunoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaParametrosAcademicosEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaTiposAtividadeAvaliativaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaDadosDisciplinasEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaTurmaDisciplinaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaTurmasEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaTurnosEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaUsuariosEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\BuscaJustificativasFaltaAlunoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\CalendarioAnualEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\PlanejamentoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\CursoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\DownloadArquivoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\ListagemCompensacaoFaltaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\TipoDisciplinaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\PlanejamentoAnualEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\ProtocoloEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\RetornaEscolaEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\SincronizacaoDiarioClasseEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\UsuarioEntradaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaAlunosDetalhadoEscolaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaBoletimEscolarAlunoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaBoletimEscolarDosAlunosSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaBoletimEscolarDosAlunosSaidaNotasDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaBoletimEscolarDosAlunosSaidaPeriodosDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaBoletimEscolarDosAlunosSaidaTodasDisciplinasDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaEventosSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaTipoCicloSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\FilaAlunoFechamentoPendenciaDTO.cs" />
+    <Compile Include="DTO\Saida\PlanejamentoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\ListagemTurmaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaDadosCursosEntidadeSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaDataHoraDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaEscolasEntidadeSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaDadosDisciplinasSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\CalendarioAnualSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\DownloadArquivoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\ListagemArquivoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\AssociaEscolaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaAlunosMatriculadosTurmaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaAlunosTurmaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaAulaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaCalendariosSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaCurriculoPeriodoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaCursosSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaDadosDocenteSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaDadosIniciaisSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaDadosUsuarioSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaDocentesTurmaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaEscalaAvaliacaoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaEscolaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaEscolasPorUsuarioSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaEscolasProfessorSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaFotoAlunoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaTipoJustificativaFaltaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaJustificativasFaltaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaParametrosAcademicosSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaRecursosAulaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaTipoNivelEnsinoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaTiposAtividadeAvaliativaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaTurmaDisciplinaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaTurmasPlataformaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaTurmasSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaTurnosSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaUsuariosSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\BuscaJustificativasFaltaAlunoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\ListagemCompensacaoFaltaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\ListagemPermissoesTipoDocenteDTO.cs" />
+    <Compile Include="DTO\Saida\ListagemPlanejamentoTurmaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\PlanejamentoAnualSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\ProtocoloSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\RetornaEscolaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\SincronizacaoDiarioClasseSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\StatusServicosDTO.cs" />
+    <Compile Include="Entities\ACA_AlunoCurriculoDTO.cs" />
+    <Compile Include="Entities\ACA_AlunoDTO.cs" />
+    <Compile Include="Entities\ACA_AreaConhecimentoDTO.cs" />
+    <Compile Include="Entities\ACA_CalendarioAnualDTO.cs" />
+    <Compile Include="Entities\ACA_CalendarioCursoDTO.cs" />
+    <Compile Include="Entities\ACA_CalendarioPeriodoDTO.cs" />
+    <Compile Include="Entities\ACA_CurriculoEscolaPeriodoDTO.cs" />
+    <Compile Include="Entities\ACA_DocenteDTO.cs" />
+    <Compile Include="Entities\ACA_EscalaAvaliacaoDTO.cs" />
+    <Compile Include="Entities\ACA_EscalaAvaliacaoNumericaDTO.cs" />
+    <Compile Include="Entities\ACA_EscalaAvaliacaoParecerDTO.cs" />
+    <Compile Include="Entities\ACA_FormatoAvaliacaoDTO.cs" />
+    <Compile Include="Entities\ACA_TipoAnotacaoAlunoDTO.cs" />
+    <Compile Include="Entities\ACA_TipoTurnoDTO.cs" />
+    <Compile Include="Entities\ACA_TipoDisciplinaDeficienciaDTO.cs" />
+    <Compile Include="Entities\ACA_TipoDisciplinaDTO.cs" />
+    <Compile Include="Entities\ACA_RecursosAulaDTO.cs" />
+    <Compile Include="Entities\ACA_TipoMovimentacaoDTO.cs" />
+    <Compile Include="Entities\ACA_TipoNivelEnsinoDTO.cs" />
+    <Compile Include="Entities\ACA_TipoPeriodoCalendarioDTO.cs" />
+    <Compile Include="Entities\Administrador.cs" />
+    <Compile Include="Entities\AgendaHorarios.cs" />
+    <Compile Include="Entities\AgendaRequisicao.cs" />
+    <Compile Include="Entities\AlunoDetalhado.cs" />
+    <Compile Include="Entities\AlunoProtocoloExcedente.cs" />
+    <Compile Include="Entities\AlunoTurmaDisciplinaOrientacaoCurricular.cs" />
+    <Compile Include="Entities\Api.cs" />
+    <Compile Include="Entities\Arquivo.cs" />
+    <Compile Include="Entities\Atividade.cs" />
+    <Compile Include="Entities\AtividadeAluno.cs" />
+    <Compile Include="Entities\Aula.cs" />
+    <Compile Include="Entities\Calendario.cs" />
+    <Compile Include="Entities\ACA_TipoModalidadeEnsinoDTO.cs" />
+    <Compile Include="Entities\ACA_TipoCurriculoPeriodoDTO.cs" />
+    <Compile Include="Entities\CLS_TurmaAulaOrientacaoCurricularDTO.cs" />
+    <Compile Include="Entities\CLS_TurmaDisciplinaPlanejamentoDTO.cs" />
+    <Compile Include="Entities\CLS_TurmaAulaAlunoDTO.cs" />
+    <Compile Include="Entities\CLS_TurmaAulaDTO.cs" />
+    <Compile Include="Entities\CLS_TurmaAulaRecursoDTO.cs" />
+    <Compile Include="Entities\CLS_TurmaNotaAlunoDTO.cs" />
+    <Compile Include="Entities\CLS_TurmaNotaDTO.cs" />
+    <Compile Include="Entities\ACA_TipoCicloDTO.cs" />
+    <Compile Include="Entities\Curriculo.cs" />
+    <Compile Include="Entities\CurriculoPeriodo.cs" />
+    <Compile Include="Entities\Curso.cs" />
+    <Compile Include="Entities\CLS_TipoAtividadeAvaliativaDTO.cs" />
+    <Compile Include="Entities\CompensacaoFalta.cs" />
+    <Compile Include="Entities\CadastroTurmaDisciplinaDTO.cs" />
+    <Compile Include="Entities\ACA_CurriculoDTO.cs" />
+    <Compile Include="Entities\ACA_CurriculoPeriodoDTO.cs" />
+    <Compile Include="Entities\ACA_CurriculoDisciplinaDTO.cs" />
+    <Compile Include="Entities\Disciplina.cs" />
+    <Compile Include="Entities\END_EnderecoDTO.cs" />
+    <Compile Include="Entities\ESC_EscolaClassificacaoDTO.cs" />
+    <Compile Include="Entities\ESC_EscolaClassificacaoVigenciaDTO.cs" />
+    <Compile Include="Entities\ESC_EscolaOrgaoSupervisaoDTO.cs" />
+    <Compile Include="Entities\ESC_PredioDTO.cs" />
+    <Compile Include="Entities\ESC_PredioEnderecoDTO.cs" />
+    <Compile Include="Entities\ESC_UnidadeEscolaContatoDTO.cs" />
+    <Compile Include="Entities\ESC_UnidadeEscolaDTO.cs" />
+    <Compile Include="Entities\ESC_UnidadeEscolaPredioDTO.cs" />
+    <Compile Include="Entities\MTR_MatriculaTurmaDisciplinaDTO.cs" />
+    <Compile Include="Entities\MTR_MatriculaTurmaDTO.cs" />
+    <Compile Include="Entities\ACA_DisciplinaDTO.cs" />
+    <Compile Include="Entities\ACA_CurriculoDisciplinaEletivaDTO.cs" />
+    <Compile Include="Entities\ACA_CursoRelacionadoDTO.cs" />
+    <Compile Include="Entities\MTR_MovimentacaoDTO.cs" />
+    <Compile Include="Entities\MTR_TipoMovimentacaoDTO.cs" />
+    <Compile Include="Entities\RHU_CargaHorariaDTO.cs" />
+    <Compile Include="Entities\RHU_CargoDTO.cs" />
+    <Compile Include="Entities\RHU_ColaboradorDTO.cs" />
+    <Compile Include="Entities\TUR_TurmaDisciplinaRelacionadaDTO.cs" />
+    <Compile Include="Entities\TUR_TurmaCurriculoAvaliacaoDTO.cs" />
+    <Compile Include="Entities\TUR_TurmaCurriculoDTO.cs" />
+    <Compile Include="Entities\ACA_CursoDTO.cs" />
+    <Compile Include="Entities\DCL_ProtocoloDTO.cs" />
+    <Compile Include="Entities\Deficiencia.cs" />
+    <Compile Include="Entities\EscalaAvaliacaoNumerica.cs" />
+    <Compile Include="Entities\EscalaAvaliacaoParecer.cs" />
+    <Compile Include="Entities\EscolaEntidade.cs" />
+    <Compile Include="Entities\ESC_EscolaDTO.cs" />
+    <Compile Include="Entities\NivelAprendizado.cs" />
+    <Compile Include="Entities\ORCNivel.cs" />
+    <Compile Include="Entities\ORCNivelAprendizado.cs" />
+    <Compile Include="Entities\ORCOrientacaoCurricular.cs" />
+    <Compile Include="Entities\ORCOrientacaoCurricularNivelAprendizado.cs" />
+    <Compile Include="Entities\OrientacaoCurricularNivelAprendizado.cs" />
+    <Compile Include="Entities\PermissaoDocente.cs" />
+    <Compile Include="Entities\PES_PessoaDTO.cs" />
+    <Compile Include="Entities\Planejamento.cs" />
+    <Compile Include="Entities\PlanejamentoOrientacaoCurricular.cs" />
+    <Compile Include="Entities\PlanejamentoOrientacaoCurricularDiagnostico.cs" />
+    <Compile Include="Entities\Regencia.cs" />
+    <Compile Include="Entities\SYS_UsuarioDTO.cs" />
+    <Compile Include="Entities\TipoDocente.cs" />
+    <Compile Include="Entities\TipoNivelEnsino.cs" />
+    <Compile Include="Entities\Turma.cs" />
+    <Compile Include="Entities\TurmaDisciplina.cs" />
+    <Compile Include="Entities\Docente.cs" />
+    <Compile Include="Entities\EscalaAvaliacao.cs" />
+    <Compile Include="Entities\FormatoAvaliacao.cs" />
+    <Compile Include="Entities\Foto.cs" />
+    <Compile Include="Entities\JustificativaFalta.cs" />
+    <Compile Include="Entities\JustificativaFaltaAluno.cs" />
+    <Compile Include="Entities\MatriculaTurma.cs" />
+    <Compile Include="Entities\Nivel.cs" />
+    <Compile Include="Entities\NivelEnsino.cs" />
+    <Compile Include="Entities\OrientacaoCurricular.cs" />
+    <Compile Include="Entities\ParametrosAcademicos.cs" />
+    <Compile Include="Entities\Professor.cs" />
+    <Compile Include="Entities\Protocolo.cs" />
+    <Compile Include="Entities\RecursosAula.cs" />
+    <Compile Include="Entities\TipoJustificativaFalta.cs" />
+    <Compile Include="Entities\TurmaAulaRecurso.cs" />
+    <Compile Include="Entities\TipoAtividadeAvaliativa.cs" />
+    <Compile Include="Entities\TurmaAlunos.cs" />
+    <Compile Include="Entities\TurmaCurriculo.cs" />
+    <Compile Include="Entities\TurmaDisciplinaPlanejamento.cs" />
+    <Compile Include="Entities\Turno.cs" />
+    <Compile Include="Entities\TUR_TurmaDisciplinaDTO.cs" />
+    <Compile Include="Entities\TUR_TurmaDisciplinaTerritorioDTO.cs" />
+    <Compile Include="Entities\TUR_TurmaDocenteDTO.cs" />
+    <Compile Include="Entities\ORC_OrientacaoCurricularDTO.cs" />
+    <Compile Include="Entities\TUR_TurmaDTO.cs" />
+    <Compile Include="Entities\UsuarioGrupo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\DateUtil.cs" />
+    <Compile Include="Util\Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.Entities\MSTech.GestaoEscolar.Entities.csproj">
+      <Project>{fa6964eb-e31c-406f-a1d5-a15482ce71d6}</Project>
+      <Name>MSTech.GestaoEscolar.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

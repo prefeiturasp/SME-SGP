@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C22F480-D173-413A-843D-5A4799484DB3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSTech.GestaoEscolar.BLL</RootNamespace>
+    <AssemblyName>MSTech.GestaoEscolar.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\RuleSet.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Serviços|AnyCPU'">
+    <OutputPath>bin\Release Serviços\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseAlunos|AnyCPU'">
+    <OutputPath>bin\ReleaseAlunos\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Data.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.Printing.v16.1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.XtraReports.v16.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1.Extensions, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.XtraReports.v16.1.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.1.Web, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_External_Dependencies\DevExpress\DevExpress.XtraReports.v16.1.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\MSTechLibrary\DLLS\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Business.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Business.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.BLL.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.CoreSSO.WebServices.Consumer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.WebServices.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Data.Common, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Security.Cryptography">
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Security.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="MSTech.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Office.Excel.Helper">
+      <HintPath>..\_External_Dependencies\Office.Excel.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ACA_AlunoAnexoBO.cs" />
+    <Compile Include="ACA_AlunoAnotacaoBO.cs" />
+    <Compile Include="ACA_AlunoAvaliacaoObservacaoBO.cs" />
+    <Compile Include="ACA_AlunoBO.cs" />
+    <Compile Include="ACA_AlunoCurriculoAvaliacaoBO.cs" />
+    <Compile Include="ACA_AlunoCurriculoBO.cs" />
+    <Compile Include="ACA_AlunoCurriculoDocumentoBO.cs" />
+    <Compile Include="ACA_AlunoEquipamentoDeficienteBO.cs" />
+    <Compile Include="ACA_AlunoEscolaOrigemBO.cs" />
+    <Compile Include="ACA_AlunoFichaMedicaBO.cs" />
+    <Compile Include="ACA_AlunoHistoricoBO.cs" />
+    <Compile Include="ACA_AlunoHistoricoCertificadoBO.cs" />
+    <Compile Include="ACA_AlunoHistoricoDisciplinaBO.cs" />
+    <Compile Include="ACA_AlunoHistoricoObservacaoBO.cs" />
+    <Compile Include="ACA_AlunoHistoricoProjetoBO.cs" />
+    <Compile Include="ACA_AlunoJustificativaAbonoFaltaBO.cs" />
+    <Compile Include="ACA_AlunoRecursoAvaliacaoINEPBO.cs" />
+    <Compile Include="ACA_AlunoResponsavelBO.cs" />
+    <Compile Include="ACA_AreaConhecimentoBO.cs" />
+    <Compile Include="ACA_ArquivoAreaBO.cs" />
+    <Compile Include="ACA_AvisoTextoGeralBO.cs" />
+    <Compile Include="ACA_CalendarioAnualBO.cs" />
+    <Compile Include="ACA_CalendarioCursoBO.cs" />
+    <Compile Include="ACA_CalendarioEscolaBO.cs" />
+    <Compile Include="ACA_CalendarioEventoBO.cs" />
+    <Compile Include="ACA_CalendarioPeriodoBO.cs" />
+    <Compile Include="ACA_CompromissoEstudoBO.cs" />
+    <Compile Include="ACA_CoordenadorDisciplinaBO.cs" />
+    <Compile Include="ACA_CurriculoBO.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralDisciplinaBO.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodoBO.cs" />
+    <Compile Include="ACA_CurriculoControleSemestralVigenciaBO.cs" />
+    <Compile Include="ACA_CurriculoDisciplinaBO.cs" />
+    <Compile Include="ACA_CurriculoDisciplinaEletivaBO.cs" />
+    <Compile Include="ACA_CurriculoEscolaBO.cs" />
+    <Compile Include="ACA_CurriculoPeriodoBO.cs" />
+    <Compile Include="ACA_CurriculoPeriodoVigenciaBO.cs" />
+    <Compile Include="ACA_CurriculoTurnoBO.cs" />
+    <Compile Include="ACA_CursoBO.cs" />
+    <Compile Include="ACA_CursoRelacionadoBO.cs" />
+    <Compile Include="ACA_CursoReunioesBO.cs" />
+    <Compile Include="ACA_DisciplinaBO.cs" />
+    <Compile Include="ACA_DisciplinaMacroCampoEletivaAlunoBO.cs" />
+    <Compile Include="ACA_DocenteBO.cs" />
+    <Compile Include="ACA_EscalaAvaliacaoBO.cs" />
+    <Compile Include="ACA_EscalaAvaliacaoNumericaBO.cs" />
+    <Compile Include="ACA_EscalaAvaliacaoParecerBO.cs" />
+    <Compile Include="ACA_EventoBO.cs" />
+    <Compile Include="ACA_EventoLimiteBO.cs" />
+    <Compile Include="ACA_FichaMedicaContatoBO.cs" />
+    <Compile Include="ACA_FormatoAvaliacaoBO.cs" />
+    <Compile Include="ACA_HistoricoObservacaoPadraoBO.cs" />
+    <Compile Include="ACA_MotivoBaixaFrequenciaBO.cs" />
+    <Compile Include="ACA_ParametroAcademicoBO.cs" />
+    <Compile Include="ACA_ParametroBuscaAlunoBO.cs" />
+    <Compile Include="ACA_ParametroIntegracaoBO.cs" />
+    <Compile Include="ACA_RecomendacaoAlunoResponsavelBO.cs" />
+    <Compile Include="ACA_RecursosAulaBO.cs" />
+    <Compile Include="ACA_ReligiaoBO.cs" />
+    <Compile Include="ACA_TerritorioExperienciaBO.cs" />
+    <Compile Include="ACA_TipoAnotacaoAlunoBO.cs" />
+    <Compile Include="ACA_TipoAreaDocumentoBO.cs" />
+    <Compile Include="ACA_TipoCicloBO.cs" />
+    <Compile Include="ACA_TipoCurriculoPeriodoBO.cs" />
+    <Compile Include="ACA_TipoDesempenhoAprendizadoBO.cs" />
+    <Compile Include="ACA_TipoDisciplinaBO.cs" />
+    <Compile Include="ACA_TipoDisciplinaDeficienciaBO.cs" />
+    <Compile Include="ACA_TipoDocenteBO.cs" />
+    <Compile Include="ACA_TipoEquipamentoDeficienteBO.cs" />
+    <Compile Include="ACA_TipoEventoBO.cs" />
+    <Compile Include="ACA_TipoEventoGrupoBO.cs" />
+    <Compile Include="ACA_TipoFormacaoDocenteBO.cs" />
+    <Compile Include="ACA_TipoJustificativaExclusaoAulasBO.cs" />
+    <Compile Include="ACA_TipoJustificativaFaltaBO.cs" />
+    <Compile Include="ACA_TipoMacroCampoEletivaAlunoBO.cs" />
+    <Compile Include="ACA_TipoMovimentacaoBO.cs" />
+    <Compile Include="ACA_TipoNivelEnsinoBO.cs" />
+    <Compile Include="ACA_TipoPeriodoCalendarioBO.cs" />
+    <Compile Include="ACA_TipoQualidadeAlunoBO.cs" />
+    <Compile Include="ACA_TipoRecursoAvaliacaoINEPBO.cs" />
+    <Compile Include="ACA_TipoResponsavelAlunoBO.cs" />
+    <Compile Include="ACA_TipoResultadoBO.cs" />
+    <Compile Include="ACA_TipoResultadoCurriculoPeriodoBO.cs" />
+    <Compile Include="ACA_TipoTurnoBO.cs" />
+    <Compile Include="ACA_TurnoBO.cs" />
+    <Compile Include="ACA_TurnoEscolaBO.cs" />
+    <Compile Include="ACA_TurnoHorarioBO.cs" />
+    <Compile Include="ACA_AvaliacaoBO.cs" />
+    <Compile Include="ACA_AvaliacaoRelacionadaBO.cs" />
+    <Compile Include="ApiBO.cs" />
+    <Compile Include="Caching\CacheManager.cs" />
+    <Compile Include="Caching\ModelCache.cs" />
+    <Compile Include="CFG_ConfiguracaoAcademicoBO.cs" />
+    <Compile Include="CFG_ConfiguracaoBO.cs" />
+    <Compile Include="CFG_ConfiguracaoMigracaoRioBO.cs" />
+    <Compile Include="CFG_ConfiguracaoInscricaoCrecheBO.cs" />
+    <Compile Include="CFG_CorRelatorioBO.cs" />
+    <Compile Include="CFG_FaixaRelatorioBO.cs" />
+    <Compile Include="CFG_HistoricoConceitoBO.cs" />
+    <Compile Include="CFG_HistoricoPedagogicoBO.cs" />
+    <Compile Include="CFG_HistoricoPedagogicoTipoCurriculoPeriodoBO.cs" />
+    <Compile Include="CFG_ModuloClasseBO.cs" />
+    <Compile Include="CFG_ObservacaoBoletimBO.cs" />
+    <Compile Include="CFG_ParametroDocumentoAlunoBO.cs" />
+    <Compile Include="CFG_ParametroMensagemBO.cs" />
+    <Compile Include="CFG_PermissaoDocenteBO.cs" />
+    <Compile Include="CFG_PermissaoModuloOperacaoBO.cs" />
+    <Compile Include="CFG_RelatorioBO.cs" />
+    <Compile Include="CFG_RelatorioDocumentoAlunoBO.cs" />
+    <Compile Include="CFG_RelatorioDocumentoDocenteBO.cs" />
+    <Compile Include="CFG_RelatorioServidorRelatorioBO.cs" />
+    <Compile Include="CFG_ServidorRelatorioBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDesempenhoBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaDesempenhoBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaMediaBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaObservacaoBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaQualidadeBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaRecomendacaoBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaObservacaoBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaQualidadeBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacaoBO.cs" />
+    <Compile Include="CLS_AlunoFechamentoBO.cs" />
+    <Compile Include="CLS_AlunoFechamentoPendenciaBO.cs" />
+    <Compile Include="CLS_AlunoPlanejamentoBO.cs" />
+    <Compile Include="CLS_AlunoPlanejamentoRelacionadaBO.cs" />
+    <Compile Include="CLS_AlunoProjetoBO.cs" />
+    <Compile Include="CLS_AlunoTurmaDisciplinaOrientacaoCurricularBO.cs" />
+    <Compile Include="CLS_ArquivoEfetivacaoBO.cs" />
+    <Compile Include="CLS_CompensacaoAusenciaAlunoBO.cs" />
+    <Compile Include="CLS_CompensacaoAusenciaBO.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividadeBO.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividadeQualificadorBO.cs" />
+    <Compile Include="CLS_ConfiguracaoAtividadeTipoAtividadeBO.cs" />
+    <Compile Include="CLS_FechamentoJustificativaPendenciaBO.cs" />
+    <Compile Include="CLS_FrequenciaReuniaoBO.cs" />
+    <Compile Include="CLS_FrequenciaReuniaoResponsaveisBO.cs" />
+    <Compile Include="CLS_PlanejamentoCicloBO.cs" />
+    <Compile Include="CLS_PlanejamentoOrientacaoCurricularBO.cs" />
+    <Compile Include="CLS_PlanejamentoOrientacaoCurricularDiagnosticoBO.cs" />
+    <Compile Include="CLS_PlanejamentoProjetoBO.cs" />
+    <Compile Include="CLS_PlanejamentoProjetoRelacionadaBO.cs" />
+    <Compile Include="CLS_QualificadorAtividadeBO.cs" />
+    <Compile Include="CLS_TipoAtividadeAvaliativaBO.cs" />
+    <Compile Include="CLS_TurmaAulaAlunoTipoAnotacaoBO.cs" />
+    <Compile Include="CLS_TurmaAulaDisciplinaRelacionadaBO.cs" />
+    <Compile Include="CLS_TurmaAulaGeradaBO.cs" />
+    <Compile Include="CLS_TurmaAulaOrientacaoCurricularBO.cs" />
+    <Compile Include="CLS_TurmaAulaPendenciaBO.cs" />
+    <Compile Include="CLS_TurmaAulaPlanoDisciplinaBO.cs" />
+    <Compile Include="CLS_TurmaAulaRecursoBO.cs" />
+    <Compile Include="CLS_TurmaAulaRecursoRegenciaBO.cs" />
+    <Compile Include="CLS_TurmaAulaRegenciaBO.cs" />
+    <Compile Include="CLS_TurmaAulaTerritorioBO.cs" />
+    <Compile Include="CLS_TurmaDisciplinaPlanejamentoBO.cs" />
+    <Compile Include="CLS_TurmaNotaAlunoOrientacaoCurricularBO.cs" />
+    <Compile Include="CLS_TurmaNotaOrientacaoCurricularBO.cs" />
+    <Compile Include="CLS_TurmaNotaRegenciaBO.cs" />
+    <Compile Include="CLS_TurmaNotaRelacionadaBO.cs" />
+    <Compile Include="DCL_AgendaHorarioRequisicaoBO.cs" />
+    <Compile Include="DCL_AgendaRequisicaoBO.cs" />
+    <Compile Include="DCL_ApiRequisicaoBO.cs" />
+    <Compile Include="DCL_LogBO.cs" />
+    <Compile Include="DCL_ProtocoloAlunoBO.cs" />
+    <Compile Include="DCL_ProtocoloBO.cs" />
+    <Compile Include="DCL_ProtocoloHistoricoBO.cs" />
+    <Compile Include="DCL_ProtocoloReprocessoBO.cs" />
+    <Compile Include="DCL_RequisicaoBO.cs" />
+    <Compile Include="DiarioClasseUtilBO.cs" />
+    <Compile Include="ESC_EscolaCalendarioPeriodoBO.cs" />
+    <Compile Include="ESC_EscolaClassificacaoBO.cs" />
+    <Compile Include="ESC_EscolaClassificacaoVigenciaBO.cs" />
+    <Compile Include="ESC_PredioCaracteristicasBO.cs" />
+    <Compile Include="ESC_TipoClassificacaoEscolaBO.cs" />
+    <Compile Include="ESC_TipoClassificacaoEscolaCargosBO.cs" />
+    <Compile Include="ESC_UnidadeEscolaEquipamentosBO.cs" />
+    <Compile Include="FormacaoTurmaBO.cs" />
+    <Compile Include="GestaoEscolarServicosBO.cs" />
+    <Compile Include="GestaoEscolarUtilBO.cs" />
+    <Compile Include="CLS_TurmaAulaAlunoBO.cs" />
+    <Compile Include="CLS_TurmaAulaBO.cs" />
+    <Compile Include="CLS_TurmaNotaAlunoBO.cs" />
+    <Compile Include="CLS_TurmaNotaBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaBO.cs" />
+    <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaBO.cs" />
+    <Compile Include="LOG_AvaliacaoMedia_AlteracaoBO.cs" />
+    <Compile Include="LOG_MatriculaTurmaDisciplinaExcluidaBO.cs" />
+    <Compile Include="LOG_MovimentacaoAcertoSituacaoAlunoBO.cs" />
+    <Compile Include="LOG_TurmaAula_AlteracaoBO.cs" />
+    <Compile Include="LOG_TurmaAula_ExclusaoBO.cs" />
+    <Compile Include="LOG_TurmaNota_AlteracaoBO.cs" />
+    <Compile Include="MTR_MomentoAnoBO.cs" />
+    <Compile Include="MTR_MomentoCalendarioPeriodoBO.cs" />
+    <Compile Include="MTR_MotivoTransferenciaBO.cs" />
+    <Compile Include="MTR_MovimentacaoDadosAdicionaisBO.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaBO.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaCapacidadeDeficienteBO.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaTipoDeficienciaBO.cs" />
+    <Compile Include="MTR_ParametroFormacaoTurmaTurnoBO.cs" />
+    <Compile Include="MTR_ParametroTipoMovimentacaoBO.cs" />
+    <Compile Include="MTR_ParametroTipoMovimentacaoCurriculoPeriodoBO.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioBO.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioCursoRelacionadoBO.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioEtapaBO.cs" />
+    <Compile Include="MTR_ProcessoFechamentoInicioHistoricoBO.cs" />
+    <Compile Include="MTR_TipoMomentoAnoBO.cs" />
+    <Compile Include="MTR_TipoMomentoAnoCurriculoBO.cs" />
+    <Compile Include="MTR_TipoMomentoBO.cs" />
+    <Compile Include="MTR_TipoMovimentacaoBO.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCurriculoPeriodoBO.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCursoMomentoBO.cs" />
+    <Compile Include="MTR_TipoMovimentacaoCursoMomentoCalendarioPeriodoBO.cs" />
+    <Compile Include="ORC_ConteudoBO.cs" />
+    <Compile Include="ORC_ConteudoItemBO.cs" />
+    <Compile Include="ORC_ConteudoTipoPeriodoCalendarioBO.cs" />
+    <Compile Include="ORC_HabilidadesBO.cs" />
+    <Compile Include="ORC_MatrizHabilidadesBO.cs" />
+    <Compile Include="ORC_NivelAprendizadoBO.cs" />
+    <Compile Include="ORC_NivelBO.cs" />
+    <Compile Include="ORC_ObjetivoBO.cs" />
+    <Compile Include="ORC_OrientacaoCurricularBO.cs" />
+    <Compile Include="ORC_OrientacaoCurricularNivelAprendizadoBO.cs" />
+    <Compile Include="ORC_OrientacaoCurricularRelacionamentoBO.cs" />
+    <Compile Include="REL_TurmaDisciplinaSituacaoFechamentoBO.cs" />
+    <Compile Include="RHU_CargaHorariaBO.cs" />
+    <Compile Include="RHU_CargoDisciplinaBO.cs" />
+    <Compile Include="RHU_ColaboradorCargoDisciplinaBO.cs" />
+    <Compile Include="SYS_ArquivoBO.cs" />
+    <Compile Include="SYS_EquipamentoBO.cs" />
+    <Compile Include="SYS_EquipamentoUnidadeAdministrativaBO.cs" />
+    <Compile Include="SYS_ServicosBO.cs" />
+    <Compile Include="SYS_ServicosLogExecucaoBO.cs" />
+    <Compile Include="TUR_TurmaAberturaAnosAnterioresBO.cs" />
+    <Compile Include="TUR_TurmaCurriculoAvaliacaoBO.cs" />
+    <Compile Include="TUR_TurmaCurriculoBO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaAulaPrevistaBO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaCalendarioBO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaMultisseriadaBO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaNaoAvaliadoBO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaRelacionadaBO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaRelDisciplinaBO.cs" />
+    <Compile Include="MTR_ConfiguracaoBO.cs" />
+    <Compile Include="MTR_ConfiguracaoCalendarioBO.cs" />
+    <Compile Include="MTR_ConfiguracaoCursoBO.cs" />
+    <Compile Include="MTR_ConfiguracaoEscolaBO.cs" />
+    <Compile Include="MTR_ConfiguracaoProcessoBO.cs" />
+    <Compile Include="MTR_ConfiguracaoProcessoLocalBO.cs" />
+    <Compile Include="MTR_ConfiguracaoVagasBO.cs" />
+    <Compile Include="MTR_MatriculaBO.cs" />
+    <Compile Include="MTR_MovimentacaoBO.cs" />
+    <Compile Include="RHU_CargoBO.cs" />
+    <Compile Include="RHU_ColaboradorBO.cs" />
+    <Compile Include="RHU_ColaboradorCargoBO.cs" />
+    <Compile Include="RHU_ColaboradorFuncaoBO.cs" />
+    <Compile Include="RHU_FuncaoBO.cs" />
+    <Compile Include="RHU_TipoVinculoBO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaTerritorioBO.cs" />
+    <Compile Include="TUR_TurmaDocenteBO.cs" />
+    <Compile Include="TUR_TurmaDocenteProjetoBO.cs" />
+    <Compile Include="MTR_DocumentoMatriculaBO.cs" />
+    <Compile Include="MTR_MatriculaTurmaDisciplinaBO.cs" />
+    <Compile Include="MTR_MatriculaTurmaBO.cs" />
+    <Compile Include="TUR_TurmaDisciplinaBO.cs" />
+    <Compile Include="TUR_TurmaRelTurmaDisciplinaBO.cs" />
+    <Compile Include="TUR_TurmaBO.cs" />
+    <Compile Include="TUR_TurmaAtendimentoBO.cs" />
+    <Compile Include="TUR_TipoAtendimentoTurmaBO.cs" />
+    <Compile Include="ESC_EscolaOrgaoSupervisaoBO.cs" />
+    <Compile Include="ESC_PredioBO.cs" />
+    <Compile Include="ESC_PredioEnderecoBO.cs" />
+    <Compile Include="ESC_UnidadeEscolaBO.cs" />
+    <Compile Include="ESC_EscolaBO.cs" />
+    <Compile Include="ACA_TipoModalidadeEnsinoBO.cs" />
+    <Compile Include="ESC_TipoRedeEnsinoBO.cs" />
+    <Compile Include="ESC_UnidadeEscolaContatoBO.cs" />
+    <Compile Include="ESC_EscolaDiretorBO.cs" />
+    <Compile Include="ESC_UnidadeEscolaEnsinoBO.cs" />
+    <Compile Include="ESC_UnidadeEscolaPredioBO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TUR_ItemAvaliacaoBO.cs" />
+    <Compile Include="TUR_MetodoAvaliacaoBO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.CustomResourceProviders\MSTech.GestaoEscolar.CustomResourceProviders.csproj">
+      <Project>{1cf1e620-6b79-4958-ad24-c6c0d9f8d372}</Project>
+      <Name>MSTech.GestaoEscolar.CustomResourceProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.DAL\MSTech.GestaoEscolar.DAL.csproj">
+      <Project>{4147A1CA-4783-4718-8A5D-79AFA3CB93B5}</Project>
+      <Name>MSTech.GestaoEscolar.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.Entities\MSTech.GestaoEscolar.Entities.csproj">
+      <Project>{FA6964EB-E31C-406F-A1D5-A15482CE71D6}</Project>
+      <Name>MSTech.GestaoEscolar.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.ObjetosSincronizacao\MSTech.GestaoEscolar.ObjetosSincronizacao.csproj">
+      <Project>{1dc26e20-22f9-4197-ba74-677b5882f203}</Project>
+      <Name>MSTech.GestaoEscolar.ObjetosSincronizacao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MStech.Infrastructure.Caching.Memory\MStech.Infrastructure.Caching.Memory.csproj">
+      <Project>{b5ac608f-d85a-469a-bcba-a398c8805dee}</Project>
+      <Name>MStech.Infrastructure.Caching.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MStech.Infrastructure\MStech.Infrastructure.csproj">
+      <Project>{013609f4-d499-47d6-aa44-83b9f796f051}</Project>
+      <Name>MStech.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

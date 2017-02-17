@@ -1,0 +1,409 @@
+﻿* {
+    color:#fff;
+    text-shadow:none!important;
+}
+html {
+    color:#fff!important;
+    background-color:#000!important;
+}
+body {
+    color:#fff;
+	background-image:url(../App_Themes/IntranetSME/images/fundoHTMLAC.png);
+    background-color:#000;
+}
+#aspnetForm {
+    background-color:#000;
+}
+
+fieldset {
+    background:#333!important;
+    border-color:#666!important;
+}
+body.login, body.sistemas {
+    background-color:#4F4F4F!important;
+    background-image:none!important;
+}
+#login {
+   background:#333!important;
+}
+
+#login fieldset {
+    background: none!important;
+}
+div#login input, div#login select {
+   color:#999;
+}
+div#login input:focus, div#login select:focus {
+   color:#fff;
+}
+div#login label {
+   color:#eee;
+}
+div#login a, .listaSistemas span a {
+   color:#fff;
+}
+div#login input.btn {
+   color:#222!important;
+}
+div#login input.btn:hover,
+div#login input.btn:focus {
+   color:#fff!important;
+}
+legend {
+    color:#fff!important;
+	background:#4f4f4f;
+    border:1px solid #666!important;
+}                           
+input, select, textarea, option {
+    color:#fff;
+    background:#111!important;
+    border-color:#666!important;
+}
+input.btn, .ui-button {
+    color:#222!important;
+    background:#fff!important;
+    border-color:#fff!important
+}
+input.btn:hover, input.btn:focus, .ui-button.ui-state-hover {
+    color:#fff!important;
+    background:#666!important;
+    border-color:#666!important;
+}
+strong {
+    color:#eee;
+}
+a , div.breadCrumb a {
+    color:#fff;
+}
+
+div#hd {
+     background:url(../App_Themes/IntranetSME/images/fundoHTML.png) center top repeat-x ;
+}
+
+div#hd #acessibilidade {
+    color:#fff!important;
+	background:#666;
+}
+div#hd #acessibilidade a {
+    color:#fff;
+}
+div#hd #acessibilidade a:hover {
+    background:#aaa!important;
+    color:#000;
+}
+
+div#hd .user, div#hd .user strong, div#hd .user span, div#hd .user a { color:#000!important; }
+
+div#hd .user span a { color:#000!important;}
+
+div#hd .user span a.hplSistemas { color:#000!important; }
+
+.gridHeader th {
+    color:#fff!important;
+	border-color:#b0b0b0;
+	background-color:#4f4f4f;
+}
+
+div#ft {
+    border-top-color:#000;
+   background:#000;
+}
+body.login div#ft, body.sistemas div#ft {
+   background:#4f4f4f;
+}
+.gridRow {
+	background:#000;
+}
+
+.gridViewRow {
+    background:#000;
+}
+
+.gridAlternatingRow {
+	background:#131313;
+}
+
+.gridRow:hover,
+.gridAlternatingRow:hover,
+.gridSelectedRow,
+.gridHover {
+	background:#333;
+	color:#000;
+}
+
+.gridPager a, .gridPager span, .gridPager a:hover {
+	border-color:#bbb;
+	color:#bbb;
+}
+
+
+.summary, .summary td, .summaryMensagem {
+	background-color:#E8B909!important;
+	color:#000!important;
+	border-color:#E8B909!important;
+}
+
+.ui-widget-content {  border-color:#e7e7e7!important; background: #333; color: #fff; }
+.ui-widget-content a { color: #fff; }
+.ui-widget-header {  border-color:#e7e7e7; background-color: #e7e7e7!important; background-image:none; color: #000!important; }
+.ui-widget-header a { color: #fff!important; border-color:#333!important; background: #333 }
+
+.ui-state-default, .ui-widget-content .ui-state-default { border-color: #e7e7e7; background-color: #e7e7e7; background-image:none; color: #000; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #000; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border-color: #333!important; background-color: #333!important; color: #fff!important; }
+.ui-state-hover a, .ui-state-hover a:hover { color: #e7e7e7!important;}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border-color: #e7e7e7!important; background: #131313!important; color: #fff;}
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #fff;}
+
+.ui-dialog-buttonpane {background-color:#222!important; border-color:#666!important;}
+
+.ui-state-error, .ui-widget-content .ui-state-error { background-color:#CD0A0A; background-image:none; border-color:#CD0A0A; }
+
+.ui-dialog-buttonpane .ui-state-default {
+    color:#000!important;
+    background:#e8e8e8!important;
+    border-color:#e8e8e8!important;
+}
+
+.ui-dialog-buttonpane .ui-state-default .ui-button-text {
+   color:#000;
+}
+
+
+.ui-dialog-buttonpane .ui-state-hover, .ui-dialog-buttonpane .ui-state-focus {
+    color:#fff!important;
+    background:#333!important;
+}
+
+.ui-dialog-buttonpane .ui-state-hover .ui-button-text, .ui-dialog-buttonpane .ui-state-focus .ui-button-text {
+   color:#fff;
+}
+
+.ui-tabs .ui-tabs-nav {
+    border-bottom-color: #e7e7e7;
+    background-color:#000!important;
+}
+.ui-tabs .ui-tabs-nav .ui-state-default {
+    background-color:#131313!important;
+    border-color:#131313!important;
+}
+.ui-tabs .ui-tabs-nav .ui-state-default a {
+    color:#fff!important;
+}
+.ui-tabs .ui-tabs-nav .ui-state-active {
+    background-color:#e7e7e7!important;
+    border-color:#e7e7e7!important;
+}
+.ui-tabs .ui-tabs-nav .ui-state-active a {
+   background-color:#e7e7e7!important;
+   color:#000!important;
+}
+
+
+#divCategoria h1 {
+    color:#555;
+}
+#divCategoria h2 {
+    color:#9e9e9e;
+}
+#divCategoria a {
+    border-bottom-color:#3d3d3d;
+}
+#divCategoria p {
+    color:#ddd ;
+}
+
+.ui-datepicker-title, .ui-datepicker-month, .ui-datepicker-year {
+    color:#000!important;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight {
+    background:#4D4D4D;
+    color:#fff;
+    
+}
+.ui-dialog .ui-dialog-title {
+    color:#000!important;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+    background-color:#4D4D4D;
+}
+.proximo,
+.anterior {
+    color:#fff!important;
+	background-color:#4f4f4f;
+	background-image:url(../App_Themes/IntranetSME/images/fundoAzulAC.png);
+
+}
+
+.ui-widget-overlay {
+    background:#ddd;
+}
+
+
+div#dicas, div#infos {
+    background:#ccc;
+}
+div#dicas h1, div#infos h1 {
+    border-bottom-color: #000;
+    color:#fff!important;
+	background-color:#4f4f4f;
+	background-image:url(../App_Themes/IntranetSME/images/fundoAzulAC.png);
+}
+.lnkMaximizar, .lnkMinimizar {
+     background-image:url(../App_Themes/IntranetSME/images/icomaxMinAC.gif);
+}
+div#dicas .conteudoDicas, div#infos .conteudoInfos { color:#000; }
+
+.m {
+	background:#666;
+}
+
+.m .i a { /* Menu lvl 1*/
+	background-image:url(../App_Themes/IntranetSME/images/fundoLinkMenuAC.gif);
+}
+
+.m .s a { /* submenu lvl 1*/
+	color:#fff;
+	border-top-color:#7f7f7f;
+	border-bottom-color:#373737;
+	background:#555;
+}
+
+.m .s .i .s a { border-bottom-color:#373737; }/* submenu lvl 2*/
+
+/* Padrão links*/
+.m a {
+	color:#FFF;
+}
+
+.m .s .p a {
+   	border-top-color:#000;
+}
+
+.m a:hover,
+.m a:active,
+.m a:focus { 
+	background:#aaa!important;
+	color:#000!important;
+	border-bottom-color:#aaa;
+}
+
+.i:hover > a {
+	background:#aaa!important;
+	color:#000!important;
+	border-bottom-color:#aaa;
+}
+
+div.right {
+   background:#222!important;
+   border-color:#666!important;
+}
+
+.menuSistemas ul {
+    background:#333!important;
+    border-color:#666!important;
+}
+.menuSistemas ul li a:hover {
+   background:#222;
+}
+
+#SiteMap a.link { color:#fff; }
+
+.btExcluir {
+   background-color:transparent!important;
+}
+
+/****************************
+
+   Planejamento de Aulas
+
+ ****************************/
+
+.fdsPlanejamento {
+   background:#222;
+}
+
+.planColEsquerda {
+   background:#222;
+   border-right-color:#666;
+}
+
+.planColDireita {
+   background:#000;
+}
+
+.planAula {
+   border-bottom-color:#666;
+   background:#efefef;
+}
+
+.planAtividade {
+   border-bottom-color: #666;
+   background:#ddd;
+}
+
+.planAula.prevista { background: #444; }
+
+.planAula.dada { background: #0066ff; }
+
+.planAula.cancelada { background: #ff5050; }
+
+.planAtividade.prevista { background: #333; }
+
+.planAtividade.dada { background: #3385FF; }
+
+.planAtividade.cancelada { background: #FF7373; }
+
+.escopo,.planEscopo {
+   background:#222!important;
+   border-color:#666!important;
+}
+.campoObrigatorio
+{
+    color:#FFC0C0;
+}
+
+.passo_atual {
+    background-image: url(../App_Themes/IntranetSME/images/setaDestaqueAC.png)!important;
+}
+
+.passo {
+    background-image: url(../App_Themes/IntranetSME/images/setaAC.png)!important;
+}
+
+.msgInformacao {
+	background-color:#E8B909!important;
+	color:#000!important;
+	border-color:#E8B909!important;
+}
+
+#hd .txtHelpDesk { color:#000; }
+#hd .txtHelpDeskLink { color:#000 !important; }
+
+.MensagemInf
+     {
+     background: #fff url("images/icoInformacoes.png") no-repeat 10px!important;
+    padding-top: 6px;
+    padding-bottom: 6px; 
+    padding-left:60px;
+    padding-right:60px;
+    margin-bottom:0px;
+    border:1px solid #E8B909;
+    background-color: #FFFCDF!important;
+    color: #363636!important;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    font-weight:bold;
+    font-size: 0.9em; 
+     }
+
+
+label {
+    color: #fff;
+}
+
+.mensagens-filtros {
+    background: #222;
+}
