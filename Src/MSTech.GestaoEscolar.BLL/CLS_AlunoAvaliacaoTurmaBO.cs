@@ -268,6 +268,7 @@ namespace MSTech.GestaoEscolar.BLL
 
         public bool lancaParecerFinal;
         public int faltasExternas;
+        public bool possuiFrequenciaExterna;
     }
 
     /// <summary>
