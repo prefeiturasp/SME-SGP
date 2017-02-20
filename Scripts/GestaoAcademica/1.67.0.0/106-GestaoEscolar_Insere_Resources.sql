@@ -18,6 +18,13 @@ SET XACT_ABORT ON
 
 	*/
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'UCAlunoEfetivacaoObservacaoGeral.lblFaltasExternas.Text' 
+            , @rcr_NomeResource = 'UserControl'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Falta outra rede'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

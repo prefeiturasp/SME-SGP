@@ -334,6 +334,34 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                     Param.Value = DBNull.Value;
                 }
                 qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@atd_numeroFaltasExterna";
+                Param.Size = 4;
+                if (entity.atd_numeroFaltasExterna > 0)
+                {
+                    Param.Value = entity.atd_numeroFaltasExterna;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@atd_numeroAulasExterna";
+                Param.Size = 4;
+                if (entity.atd_numeroAulasExterna > 0)
+                {
+                    Param.Value = entity.atd_numeroAulasExterna;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
             }
         }
 		
@@ -597,6 +625,34 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                     Param.Value = DBNull.Value;
                 }
                 qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@atd_numeroFaltasExterna";
+                Param.Size = 4;
+                if (entity.atd_numeroFaltasExterna > 0)
+                {
+                    Param.Value = entity.atd_numeroFaltasExterna;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@atd_numeroAulasExterna";
+                Param.Size = 4;
+                if (entity.atd_numeroAulasExterna > 0)
+                {
+                    Param.Value = entity.atd_numeroAulasExterna;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
             }
         }
 
@@ -662,6 +718,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			}
 
 			return false;
-		}		
+		}	
 	}
 }

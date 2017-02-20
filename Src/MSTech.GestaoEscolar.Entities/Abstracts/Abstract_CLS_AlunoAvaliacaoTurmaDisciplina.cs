@@ -162,5 +162,15 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         /// Propriedade atd_numeroAulasReposicao.
         /// </summary>
         public virtual int atd_numeroAulasReposicao { get; set; }
+
+        /// <summary>
+		/// Propriedade atd_numeroFaltasExterna.
+		/// </summary>
+		public virtual int atd_numeroFaltasExterna { get; set; }
+
+        /// <summary>
+        /// Propriedade atd_numeroAulasExterna.
+        /// </summary>
+        public virtual int atd_numeroAulasExterna { get; set; }
     }
 }

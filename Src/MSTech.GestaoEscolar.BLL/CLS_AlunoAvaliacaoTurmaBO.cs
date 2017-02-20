@@ -267,7 +267,7 @@ namespace MSTech.GestaoEscolar.BLL
         public long tur_idDisciplina;
 
         public bool lancaParecerFinal;
-
+        public int faltasExternas;
     }
 
     /// <summary>

@@ -481,6 +481,24 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao {
         protected global::System.Web.UI.WebControls.Label lblCompAusencia;
         
         /// <summary>
+        /// thFaltasExternas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell thFaltasExternas;
+        
+        /// <summary>
+        /// lblFaltasExternas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFaltasExternas;
+        
+        /// <summary>
         /// thFreqFinal control.
         /// </summary>
         /// <remarks>
@@ -560,6 +578,24 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPeriodosNomesEnriquecimento;
+        
+        /// <summary>
+        /// thFaltasExternasEnriquecimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell thFaltasExternasEnriquecimento;
+        
+        /// <summary>
+        /// lblFaltasExternasEnriquecimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFaltasExternasEnriquecimento;
         
         /// <summary>
         /// thFreqFinalEnriquecimento control.
@@ -650,6 +686,24 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPeriodosNomesEI;
+        
+        /// <summary>
+        /// thFaltasExternasEI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell thFaltasExternasEI;
+        
+        /// <summary>
+        /// lblFaltasExternasEI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFaltasExternasEI;
         
         /// <summary>
         /// thFreqFinalEI control.
