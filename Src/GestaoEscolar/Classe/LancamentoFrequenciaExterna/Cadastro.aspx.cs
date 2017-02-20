@@ -1,5 +1,6 @@
 ﻿namespace GestaoEscolar.Classe.LancamentoFrequenciaExterna
 {
+    using MSTech.CoreSSO.BLL;
     using MSTech.GestaoEscolar.Web.WebProject;
     using System;
     using System.Collections.Generic;
@@ -15,7 +16,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         #endregion Page Life Cicle

@@ -35,9 +35,9 @@ SET XACT_ABORT ON
 		,@nomeModuloPai = 'Registro de Classe' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Lançamento de ausência em outras redes' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Lançamento de ausência em outras redes'
-		,@SiteMap1Url = '~/Classe/LancamentoFrequenciaExterna/Cadastro.aspx'
-		,@SiteMap2Nome = NULL
-		,@SiteMap2Url = NULL
+		,@SiteMap1Url = '~/Classe/LancamentoFrequenciaExterna/Busca.aspx'
+		,@SiteMap2Nome = 'Lançamento de ausência em outras redes'
+		,@SiteMap2Url = '~/Classe/LancamentoFrequenciaExterna/Cadastro.aspx'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
