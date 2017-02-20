@@ -940,7 +940,8 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
                                          "&numeroDiasUteis=" + numeroDiasUteis +
                                          "&visaoGestor=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) +
                                          "&cal_ano=" + UCBuscaDocenteTurma.ComboCalendario.Cal_ano.ToString() +
-                                         "&documentoOficial=true";
+                                         "&documentoOficial=true" +
+                                         "&mensagemFrequenciaExterna=" + ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MENSAGEM_FREQUENCIA_EXTERNA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
                             break;
                         case DocDctRelSinteseEnriquecimentoCurricular:
                             report = ((int)ReportNameGestaoAcademicaDocumentosDocente.DocDctRelSinteseEnriquecimentoCurricular).ToString();
