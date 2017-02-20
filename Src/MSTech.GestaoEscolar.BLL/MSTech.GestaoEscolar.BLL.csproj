@@ -272,6 +272,7 @@
     <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacaoBO.cs" />
     <Compile Include="CLS_AlunoFechamentoBO.cs" />
     <Compile Include="CLS_AlunoFechamentoPendenciaBO.cs" />
+    <Compile Include="CLS_AlunoFrequenciaExternaBO.cs" />
     <Compile Include="CLS_AlunoPlanejamentoBO.cs" />
     <Compile Include="CLS_AlunoPlanejamentoRelacionadaBO.cs" />
     <Compile Include="CLS_AlunoProjetoBO.cs" />

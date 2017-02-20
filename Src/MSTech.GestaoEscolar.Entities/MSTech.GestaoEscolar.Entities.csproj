@@ -215,6 +215,7 @@
     <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaRecomendacao.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoFechamento.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoFechamentoPendencia.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoFrequenciaExterna.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamento.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamentoRelacionada.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoProjeto.cs" />
@@ -489,6 +490,7 @@
     <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacao.cs" />
     <Compile Include="CLS_AlunoFechamento.cs" />
     <Compile Include="CLS_AlunoFechamentoPendencia.cs" />
+    <Compile Include="CLS_AlunoFrequenciaExterna.cs" />
     <Compile Include="CLS_AlunoPlanejamento.cs" />
     <Compile Include="CLS_AlunoPlanejamentoRelacionada.cs" />
     <Compile Include="CLS_AlunoProjeto.cs" />
