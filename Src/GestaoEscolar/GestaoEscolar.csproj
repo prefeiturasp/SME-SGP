@@ -1739,6 +1739,13 @@
     <Compile Include="WebControls\Busca\UCPessoasAluno.ascx.designer.cs">
       <DependentUpon>UCPessoasAluno.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Calendario\UCCalendario.ascx.cs">
+      <DependentUpon>UCCalendario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Calendario\UCCalendario.ascx.designer.cs">
+      <DependentUpon>UCCalendario.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Cargo\UCCadastroCargo.ascx.cs">
       <DependentUpon>UCCadastroCargo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2088,6 +2095,13 @@
     </Compile>
     <Compile Include="WebControls\Combos\UCComboTipoDocente.ascx.designer.cs">
       <DependentUpon>UCComboTipoDocente.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboTipoHorario.ascx.cs">
+      <DependentUpon>UCComboTipoHorario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboTipoHorario.ascx.designer.cs">
+      <DependentUpon>UCComboTipoHorario.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Combos\UCComboTipoMovimentacaoMatriculaCombo.ascx.cs">
       <DependentUpon>UCComboTipoMovimentacaoMatriculaCombo.ascx</DependentUpon>
@@ -3556,6 +3570,7 @@
     <Content Include="WebControls\BuscaDocente\UCBuscaDocenteTurma.ascx" />
     <Content Include="WebControls\BuscaLancamentoClasse\UCBuscaLancamentoClasse.ascx" />
     <Content Include="WebControls\Busca\UCAlunoEducacaoEspecial.ascx" />
+    <Content Include="WebControls\Calendario\UCCalendario.ascx" />
     <Content Include="WebControls\Combos\ComboNacionalidade.ascx" />
     <Content Include="WebControls\Combos\ComboTipoDeficiencia.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoEvento.ascx" />
@@ -3585,6 +3600,7 @@
     <Content Include="WebControls\Combos\UCComboTipoClassificacaoEscola.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoCurriculoPeriodo.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoDocente.ascx" />
+    <Content Include="WebControls\Combos\UCComboTipoHorario.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoMovimentacaoMatriculaCombo.ascx" />
     <Content Include="WebControls\Combos\UCComboTurmaDisciplinaRelacionada.ascx" />
     <Content Include="WebControls\Combos\UCTipoMovimentacao_MatriculaAntesFechamento.ascx" />
