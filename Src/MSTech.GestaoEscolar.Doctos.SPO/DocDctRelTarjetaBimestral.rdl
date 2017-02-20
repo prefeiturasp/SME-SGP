@@ -267,7 +267,6 @@
                                       <PaddingBottom>2pt</PaddingBottom>
                                     </Style>
                                   </Textbox>
-                                  <rd:Selected>true</rd:Selected>
                                 </CellContents>
                               </TablixCell>
                               <TablixCell>
@@ -575,8 +574,11 @@
                         <Parameter Name="corAlunoFrequenciaLimite">
                           <Value>=Parameters!corAlunoFrequenciaLimite.Value</Value>
                         </Parameter>
-						<Parameter Name="documentoOficial">
+                        <Parameter Name="documentoOficial">
                           <Value>=Parameters!documentoOficial.Value</Value>
+                        </Parameter>
+                        <Parameter Name="mensagemFrequenciaExterna">
+                          <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
                         </Parameter>
                       </Parameters>
                       <Visibility>
@@ -615,8 +617,11 @@
                         <Parameter Name="corAlunoFrequenciaLimite">
                           <Value>=Parameters!corAlunoFrequenciaLimite.Value</Value>
                         </Parameter>
-						<Parameter Name="documentoOficial">
+                        <Parameter Name="documentoOficial">
                           <Value>=Parameters!documentoOficial.Value</Value>
+                        </Parameter>
+                        <Parameter Name="mensagemFrequenciaExterna">
+                          <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
                         </Parameter>
                       </Parameters>
                       <Visibility>
@@ -629,6 +634,7 @@
                       </Style>
                     </Subreport>
                     <ColSpan>3</ColSpan>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -1601,9 +1607,15 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>cal_ano</Prompt>
     </ReportParameter>
-	<ReportParameter Name="documentoOficial">
+    <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documentoOficial</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="mensagemFrequenciaExterna">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>mensagemFrequenciaExterna</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>

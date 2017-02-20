@@ -1858,7 +1858,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!atd_numeroFaltas.Value</Value>
+                              <Value>=CStr(Fields!atd_numeroFaltas.Value) + IIF(CBool(Fields!PossuiFreqExterna.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -1962,7 +1962,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!atd_frequencia.Value</Value>
+                              <Value>=CStr(Fields!atd_frequencia.Value) + IIF(CBool(Fields!PossuiFreqExterna.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -2065,7 +2065,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!atd_numeroFaltas.Value</Value>
+                              <Value>=CStr(Fields!atd_numeroFaltas.Value) + IIF(CBool(Fields!PossuiFreqExterna.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -2116,7 +2116,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!atd_numeroFaltas.Value)</Value>
+                              <Value>=CStr(Sum(Fields!atd_numeroFaltas.Value)) + IIF(CBool(Fields!PossuiFreqExterna.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -2218,7 +2218,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!frequenciaFinalAjustada.Value</Value>
+                              <Value>=CStr(Fields!frequenciaFinalAjustada.Value) + IIF(CBool(Fields!PossuiFreqExterna.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -2270,7 +2270,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!atd_numeroFaltas.Value</Value>
+                              <Value>=CStr(Fields!atd_numeroFaltas.Value) + IIF(CBool(Fields!PossuiFreqExterna.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -2321,7 +2321,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!atd_numeroFaltas.Value)</Value>
+                              <Value>=CStr(Sum(Fields!atd_numeroFaltas.Value)) + IIF(CBool(Fields!PossuiFreqExterna.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -2423,7 +2423,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!frequenciaFinalAjustada.Value</Value>
+                              <Value>=CStr(Fields!frequenciaFinalAjustada.Value) + IIF(CBool(Fields!PossuiFreqExterna.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -2527,7 +2527,6 @@
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -4392,7 +4391,7 @@
         </Field>
         <Field Name="mtu_situacao">
           <DataField>mtu_situacao</DataField>
-          <rd:TypeName>System.Byte</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="mtd_resultadoDescricao">
           <DataField>mtd_resultadoDescricao</DataField>
@@ -4412,7 +4411,11 @@
         </Field>
         <Field Name="atd_AusenciasCompensadasVC">
           <DataField>atd_AusenciasCompensadasVC</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="mtu_id">
+          <DataField>mtu_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="totalFaltas">
           <DataField>totalFaltas</DataField>
@@ -4420,7 +4423,7 @@
         </Field>
         <Field Name="totalAusenciasCompensadas">
           <DataField>totalAusenciasCompensadas</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="frequenciaFinalAjustada">
           <DataField>frequenciaFinalAjustada</DataField>
@@ -4441,6 +4444,10 @@
         <Field Name="frequenciaFinalAjustadaRegencia">
           <DataField>frequenciaFinalAjustadaRegencia</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PossuiFreqExterna">
+          <DataField>PossuiFreqExterna</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>

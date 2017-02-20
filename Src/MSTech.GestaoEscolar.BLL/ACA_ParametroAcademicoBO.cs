@@ -1054,6 +1054,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
         [parametroAcademicoAttributes("Exibir no planejamento a aba plano para o aluno para o ensino infantil", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXIBIR_ABA_PLANEJAMENTO_PLANO_ALUNO_ENSINO_INFANTIL
+        ,
+        [parametroAcademicoAttributes("Mensagem de aviso para alunos com frequência externa", "É obrigatório informar uma mensagem.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.text)]
+        MENSAGEM_FREQUENCIA_EXTERNA
     }   
 
     #endregion Enumerador

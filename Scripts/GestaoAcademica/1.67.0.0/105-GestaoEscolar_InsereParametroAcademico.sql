@@ -28,6 +28,13 @@ SET XACT_ABORT ON
 
 	*/
 
+	EXEC MS_InsereParametroAcademico
+		@pac_chave = 'MENSAGEM_FREQUENCIA_EXTERNA' -- Chave do parâmetro. (Obrigatório)
+		,@pac_valor = 'Registro com frequência externa.' -- Valor do parâmetro. (Obrigatório)
+		,@pac_descricao = 'Mensagem de aviso para alunos com frequência externa.' -- Descrição do parâmetro. (Obrigatório)
+		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
+		,@ent_id = @entId
+		
 -- Fechar transação	
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
