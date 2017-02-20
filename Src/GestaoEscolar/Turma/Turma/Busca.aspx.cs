@@ -71,6 +71,17 @@ public partial class Academico_Turma_Busca : MotherPageLogado
     }
 
     /// <summary>
+    /// Propriedade que retorno o turno da turma
+    /// </summary>
+    public int Edit_trn_id
+    {
+        get
+        {
+            return Convert.ToInt32(grvTurma.DataKeys[grvTurma.SelectedIndex]["trn_id"]);
+        }
+    }
+
+    /// <summary>
     /// Guarda o sortExpression da coluna ordenada.
     /// </summary>
     private string VS_Ordenacao

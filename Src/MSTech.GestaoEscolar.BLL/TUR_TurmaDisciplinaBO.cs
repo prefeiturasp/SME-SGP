@@ -311,6 +311,57 @@ namespace MSTech.GestaoEscolar.BLL
         public const string Cache_GetSelectBy_TurmaDocente = "Cache_GetSelectBy_TurmaDocente";
         public const string Cache_GetSelectBy_tur_id = "Cache_GetSelectBy_tur_id";
 
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sTurmaDisciplina> GetSelectBy_tur_id
+        (
+            long tur_id
+            , Guid ent_id
+            , bool mostraFilhosRegencia
+            , bool mostraRegencia
+            , int AppMinutosCacheLongo = 0
+        )
+        {
+            List<sTurmaDisciplina> lista = null;
+
+            if (AppMinutosCacheLongo > 0 && HttpContext.Current != null)
+            {
+                // Chave padrão do cache - nome do método + parâmetros.
+                string chave = RetornaChaveCache_GetSelectBy_tur_id(tur_id, ent_id, mostraFilhosRegencia, mostraRegencia);
+                object cache = HttpContext.Current.Cache[chave];
+
+                if (cache == null)
+                {
+                    TUR_TurmaDisciplinaDAO dao = new TUR_TurmaDisciplinaDAO();
+                    lista = (from dr in dao.SelectBy_tur_id(tur_id, ent_id, mostraFilhosRegencia, mostraRegencia).AsEnumerable()
+                             select (sTurmaDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTurmaDisciplina())).ToList();
+
+                    // Adiciona cache com validade do tempo informado na configuração.
+                    HttpContext.Current.Cache.Insert(chave, lista, null, DateTime.Now.AddMinutes(AppMinutosCacheLongo), System.Web.Caching.Cache.NoSlidingExpiration);
+                }
+                else
+                    lista = (List<sTurmaDisciplina>)cache;
+            }
+            else
+            {
+                TUR_TurmaDisciplinaDAO dao = new TUR_TurmaDisciplinaDAO();
+                lista = (from dr in dao.SelectBy_tur_id(tur_id, ent_id, mostraFilhosRegencia, mostraRegencia).AsEnumerable()
+                         select (sTurmaDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTurmaDisciplina())).ToList();
+            }
+
+            return lista;
+        }
+
+        /// <summary>
+        /// Retorna a chave para guardar em cache a busca das disciplinas pela turma
+        /// </summary>
+        /// <returns></returns>
+        public static string RetornaChaveCache_GetSelectBy_tur_id(long tur_id, Guid ent_id, bool mostraFilhosRegencia, bool mostraRegencia)
+        {
+            return string.Format(Cache_GetSelectBy_tur_id + "_{0}_{1}_{2}_{3}", tur_id, ent_id, mostraFilhosRegencia, mostraRegencia);
+        }
+
+
         /// <summary>
         /// Retorna a chave do cache utilizada para carregar o combo de escolas
         /// </summary>

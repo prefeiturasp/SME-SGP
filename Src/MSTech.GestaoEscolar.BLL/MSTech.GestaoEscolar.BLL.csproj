@@ -240,6 +240,7 @@
     <Compile Include="ApiBO.cs" />
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\ModelCache.cs" />
+    <Compile Include="CalendarioBO.cs" />
     <Compile Include="CFG_ConfiguracaoAcademicoBO.cs" />
     <Compile Include="CFG_ConfiguracaoBO.cs" />
     <Compile Include="CFG_ConfiguracaoMigracaoRioBO.cs" />
@@ -410,6 +411,7 @@
     <Compile Include="MTR_MatriculaTurmaDisciplinaBO.cs" />
     <Compile Include="MTR_MatriculaTurmaBO.cs" />
     <Compile Include="TUR_TurmaDisciplinaBO.cs" />
+    <Compile Include="TUR_TurmaHorarioBO.cs" />
     <Compile Include="TUR_TurmaRelTurmaDisciplinaBO.cs" />
     <Compile Include="TUR_TurmaBO.cs" />
     <Compile Include="TUR_TurmaAtendimentoBO.cs" />

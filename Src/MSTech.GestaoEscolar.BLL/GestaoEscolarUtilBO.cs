@@ -1359,6 +1359,22 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna um IEnumerable do objeto T
+        /// </summary>
+        /// <typeparam name="T">Classe do Tipo para ser retornado</typeparam>
+        /// <param name="dataTable"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> MapToEnumerable<T>(DataTable dataTable) where T : class, new()
+        {
+            foreach (DataRow row in dataTable.Rows)
+            {
+                T entity = new T();
+
+                yield return (T)GestaoEscolarUtilBO.DataRowToEntity(row, entity);
+            }
+        }
+
+        /// <summary>
         /// Valida a entidade, e se não estiver válida, dispara um ValidationException.
         /// </summary>
         /// <param name="entity">Entidade a ser validada</param>
@@ -2161,6 +2177,76 @@ namespace MSTech.GestaoEscolar.BLL
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Preenche o combo de acordo com o enumerador.
+        /// </summary>
+        /// <typeparam name="T">Enumerador.</typeparam>
+        /// <param name="cbo">Combo a ser populado.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Método genérico para carregar o combo de acordo com um numerador T")]
+        public static void CarregarComboEnum<T>(ListItemCollection Items, bool ordenar = false)
+        {
+            if (Items != null)
+            {
+                ListItem[] lstItems = EnumToArrayListItem<T>();
+                if (ordenar)
+                {
+                    lstItems = lstItems.OrderBy(p => p.Value).ToArray();
+                }
+                Items.AddRange(lstItems);
+            }
+        }
+
+        /// <summary>
+        /// Retorna uma array[] de ListItem de acordo com o enumerador.
+        /// </summary>
+        /// <typeparam name="T">Enumerador.</typeparam>
+        /// <returns ListItem[]></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Método genérico para carregar o combo de acordo com um numerador T")]
+        public static ListItem[] EnumToArrayListItem<T>()
+        {
+            List<ListItem> lst = new List<ListItem>();
+
+            Type objType = typeof(T);
+            FieldInfo[] propriedades = objType.GetFields();
+            foreach (FieldInfo objField in propriedades)
+            {
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])objField.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                if (attributes.Length > 0)
+                {
+                    lst.Add(new ListItem(CustomResource.GetGlobalResourceObject("Enumerador", attributes[0].Description), Convert.ToString(objField.GetRawConstantValue())));
+                }
+            }
+
+            return lst.ToArray();
+        }
+
+        /// <summary>
+        /// Retorna uma array[] de ListItem de acordo com o enumerador.
+        /// </summary>
+        /// <typeparam name="T">Enumerador.</typeparam>
+        /// <returns ListItem[]></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Método genérico para carregar o combo de acordo com um numerador T")]
+        public static string GetEnumDescription(Enum value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("value");
+            }
+
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+            if (fi != null)
+            {
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (attributes.Length > 0)
+                {
+                    return CustomResource.GetGlobalResourceObject("Enumerador", attributes[0].Description);
+                }
+            }
+
+            return string.Empty;
         }
 
         /// <summary>

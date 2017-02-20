@@ -357,6 +357,7 @@
     <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaTerritorioDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaDocenteDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaDocenteProjetoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaHorarioDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaRelTurmaDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoFichaMedicaDAO.cs" />
     <Compile Include="ACA_AlunoAnexoDAO.cs" />
@@ -635,6 +636,7 @@
     <Compile Include="TUR_TurmaDisciplinaTerritorioDAO.cs" />
     <Compile Include="TUR_TurmaDocenteDAO.cs" />
     <Compile Include="TUR_TurmaDocenteProjetoDAO.cs" />
+    <Compile Include="TUR_TurmaHorarioDAO.cs" />
     <Compile Include="TUR_TurmaRelTurmaDisciplinaDAO.cs" />
     <Compile Include="UsuarioDAO.cs" />
   </ItemGroup>

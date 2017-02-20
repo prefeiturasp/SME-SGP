@@ -364,6 +364,7 @@
     <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaTerritorio.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaDocente.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaDocenteProjeto.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaHorario.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaRelTurmaDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoFichaMedica.cs" />
     <Compile Include="ACA_AlunoAnexo.cs" />
@@ -641,6 +642,7 @@
     <Compile Include="TUR_TurmaDisciplinaTerritorio.cs" />
     <Compile Include="TUR_TurmaDocente.cs" />
     <Compile Include="TUR_TurmaDocenteProjeto.cs" />
+    <Compile Include="TUR_TurmaHorario.cs" />
     <Compile Include="TUR_TurmaRelTurmaDisciplina.cs" />
   </ItemGroup>
   <ItemGroup>

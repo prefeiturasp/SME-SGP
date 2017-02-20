@@ -55,7 +55,7 @@ namespace GestaoEscolar.Turma.Turma {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl UCCalendario;
+        protected global::GestaoEscolar.WebControls.Calendario.UCCalendario UCCalendario;
         
         /// <summary>
         /// hdnMinTime control.
@@ -199,7 +199,7 @@ namespace GestaoEscolar.Turma.Turma {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl UCComboTipoHorario;
+        protected global::GestaoEscolar.WebControls.Combos.UCComboTipoHorario UCComboTipoHorario;
         
         /// <summary>
         /// UCCTurmaDisciplina control.
