@@ -738,6 +738,13 @@
     <Compile Include="Classe\JustificativaAbonoFalta\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2799,6 +2806,7 @@
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Cadastro.aspx" />
     <None Include="Configs\Session.txt" />
+    <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
     <Content Include="Configuracao\FilaFechamento\Busca.aspx" />
