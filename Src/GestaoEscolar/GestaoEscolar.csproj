@@ -1603,6 +1603,13 @@
     <Compile Include="Turma\TurmaEletivaAluno\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Turma\Turma\QuadroHorarios.aspx.cs">
+      <DependentUpon>QuadroHorarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Turma\Turma\QuadroHorarios.aspx.designer.cs">
+      <DependentUpon>QuadroHorarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\AlunoAnotacoes\UCAlunoAnotacoes.ascx.cs">
       <DependentUpon>UCAlunoAnotacoes.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3534,6 +3541,7 @@
     <Content Include="Relatorios\SinteseResultadosAvaliacao\GraficoTurmaMatrizCurricular\Busca.aspx" />
     <Content Include="Turma\TurmaMultisseriada\Busca.aspx" />
     <Content Include="Turma\TurmaMultisseriada\Cadastro.aspx" />
+    <Content Include="Turma\Turma\QuadroHorarios.aspx" />
     <Content Include="version.xml" />
     <Content Include="WebControls\AlunoAnotacoes\UCAlunoAnotacoes.ascx" />
     <Content Include="WebControls\AlunoDeficiente\UCAlunoDeficiente.ascx" />
