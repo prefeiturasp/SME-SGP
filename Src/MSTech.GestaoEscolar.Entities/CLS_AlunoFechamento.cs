@@ -33,6 +33,8 @@ namespace MSTech.GestaoEscolar.Entities
             dtAlunoFechamento.Columns.Add("caf_avaliacao", typeof(String));
             dtAlunoFechamento.Columns.Add("caf_efetivado", typeof(Boolean));
             dtAlunoFechamento.Columns.Add("caf_dataAlteracao", typeof(DateTime));
+            dtAlunoFechamento.Columns.Add("caf_qtFaltasExterna", typeof(Int32));
+            dtAlunoFechamento.Columns.Add("caf_qtAulasExterna", typeof(Int32));
 
             return dtAlunoFechamento;
         }
