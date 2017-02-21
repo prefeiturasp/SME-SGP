@@ -164,6 +164,7 @@ namespace MSTech.GestaoEscolar.BLL
         public string ParecerConclusivo;
         public string usuarioParecerConclusivo;
         public DateTime dataAlteracaoParecerConclusivo;
+        public bool possuiFreqExterna;
 
         public decimal fav_variacao;
         public string frequencia;
