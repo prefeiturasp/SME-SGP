@@ -672,6 +672,9 @@
                                 </div>
                             </div>
                         </div>
+                            
+                        <asp:Label ID="lblMensagemFrequenciaExterna" runat="server" Visible="false" ></asp:Label>
+                        
                         <div id="divLegenda" runat="server" visible="false" class="legenda">
                             <hr />
                             <b>
