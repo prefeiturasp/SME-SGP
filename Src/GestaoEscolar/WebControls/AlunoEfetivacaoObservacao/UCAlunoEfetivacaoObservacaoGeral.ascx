@@ -98,6 +98,8 @@
                         </div>
 
                         <div id="divBoletim" runat="server">
+                            <asp:Label ID="lblMensagemFrequenciaExterna" runat="server" Visible="false" ></asp:Label>
+
                             <div class="div-gestor-scroll" id="divDisciplinas" runat="server">
                                 <table class="table-boletim">
                                     <thead>
@@ -672,9 +674,7 @@
                                 </div>
                             </div>
                         </div>
-                            
-                        <asp:Label ID="lblMensagemFrequenciaExterna" runat="server" Visible="false" ></asp:Label>
-                        
+
                         <div id="divLegenda" runat="server" visible="false" class="legenda">
                             <hr />
                             <b>
