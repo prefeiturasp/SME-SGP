@@ -204,6 +204,38 @@ namespace MSTech.GestaoEscolar.BLL
         public int AlunoForaDaRede { get; set; }
     }
 
+    /// <summary>
+    /// Dados de observaçao do aluno.
+    /// </summary>
+    [Serializable]
+    public struct DadosAlunoEntradaRede
+    {
+        public long tur_id { get; set; }
+        public int esc_id { get; set; }
+        public long alu_id { get; set; }
+        public int mtu_id { get; set; }
+        public bool inativoBimestre { get; set; }
+        public string pes_nome { get; set; }
+        public long arq_idFoto { get; set; }
+        public int mtu_numeroChamada { get; set; }
+        public string alc_matricula { get; set; }
+        public DateTime mtu_dataMatricula { get; set; }
+        public DateTime mtu_dataSaida { get; set; }
+        public int cal_id { get; set; }
+        public int cal_ano { get; set; }
+        public int tpc_id { get; set; }
+        public int tpc_ordem { get; set; }
+        public string cap_descricao { get; set; }
+        public bool calendarioFinalizado { get; set; }
+        public bool bimestreAtual { get; set; }
+        public bool periodoPassado { get; set; }
+        public bool eventoAberto { get; set; }
+        public bool ultimoPeriodo { get; set; }
+        public bool bimestreAtivo { get; set; }
+        public DateTime cap_dataInicio { get; set; }
+        public DateTime cap_dataFim { get; set; }
+    }
+
     #endregion
 
     public class MTR_MatriculaTurmaBO : BusinessBase<MTR_MatriculaTurmaDAO, MTR_MatriculaTurma>
@@ -1129,6 +1161,34 @@ namespace MSTech.GestaoEscolar.BLL
         {
             MTR_MatriculaTurmaDAO dao = new MTR_MatriculaTurmaDAO();
             return dao.SelecionaPeriodosAvaliacaoPorAluno(alu_id, cur_id, crr_id, crp_id);
+        }
+
+
+        /// <summary>
+        /// Retorna os alunos que foram transferidos de outra rede.
+        /// </summary>
+        /// <param name="tur_id">ID da turma de destino.</param>
+        /// <returns></returns>
+        public static DataTable SelecionaAlunosEntradaOutrasRedes(long tur_id)
+        {
+            totalRecords = 0;
+            return new MTR_MatriculaTurmaDAO().SelecionaAlunosEntradaOutrasRedes(tur_id, out totalRecords);
+        }
+
+        /// <summary>
+        /// Seleciona os dados de aluno que esteve fora da rede.
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <param name="tev_idFechamento"></param>
+        /// <param name="documentoOficial"></param>
+        /// <returns></returns>
+        public static List<DadosAlunoEntradaRede> SelecionarDadosAlunoEntradaRede(long alu_id, int mtu_id, int tev_idFechamento, bool documentoOficial)
+        {
+            return new MTR_MatriculaTurmaDAO().SelecionarDadosAlunoEntradaRede(alu_id, mtu_id, tev_idFechamento, documentoOficial)
+                                              .Select()
+                                              .Select(p => (DadosAlunoEntradaRede)GestaoEscolarUtilBO.DataRowToEntity(p, new DadosAlunoEntradaRede()))
+                                              .ToList();
         }
 
         #endregion Consultas
