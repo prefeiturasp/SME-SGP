@@ -28,6 +28,7 @@ namespace MSTech.GestaoEscolar.BLL
             foreach (MTR_MatriculaTurmaDisciplina item in listaMtds)
             {
                 DataRow dr = GestaoEscolarUtilBO.EntityToDataRow(dt, item);
+                dt.Rows.Add(dr);
             }
 
             DataTable dtRet = new CLS_AlunoFrequenciaExternaDAO().SelecionaPor_MatriculasDisciplinaPeriodo(dt, tpc_id);
