@@ -45,6 +45,46 @@ namespace MSTech.GestaoEscolar.DAL
             return qs.Return;
         }
 
+        /// <summary>
+        /// Seleciona os dados para lançamento de frequencia externa do aluno
+        /// </summary>
+        /// <param name="alu_id">ID do aluno</param>
+        /// <param name="mtu_id">ID da matrícula turma do aluno</param>
+        /// <returns></returns>
+        public DataTable SelecionaDadosAlunoLancamentoFrequenciaExterna(long alu_id, int mtu_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_AlunoFrequenciaExterna_DadosAlunoLancamentoFrequenciaExterna", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@alu_id";
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@mtu_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = mtu_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #endregion
 
         #region Métodos sobrescritos

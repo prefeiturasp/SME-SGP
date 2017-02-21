@@ -454,6 +454,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         DivergenciasRematriculas
+        ,
+
+        LancamentoFrequenciaExterna
     }
 
     [Serializable]
