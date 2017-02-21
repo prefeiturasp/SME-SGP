@@ -2272,6 +2272,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     lblMensagemSemDados.Text = UtilBO.GetErroMessage(RetornaValorResource("lblMensagemSemDados.Text"), UtilBO.TipoMensagem.Informacao);
                 }
 
+                lblMensagemFrequenciaExterna.Text = UtilBO.GetErroMessage(ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MENSAGEM_FREQUENCIA_EXTERNA, __SessionWEB.__UsuarioWEB.Usuario.ent_id), UtilBO.TipoMensagem.Informacao);
+
                 ScriptManager.RegisterStartupScript(Page, typeof(Page), "Boletim",
                        "$('.tblBoletim tbody tr:even').addClass('linhaImpar');"
                        + "$('.tblBoletim tbody tr:odd').addClass('linhaPar');"
@@ -3090,7 +3092,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                                 ? p.faltasExternas : 0)).ToString()
                                         ,
                                         possuiFrequenciaExterna = (!BimestreAtivo(g.Last().tpc_id) || NaoVisualizarDados(g.Last().tpc_id)) ? false :
-                                                                    ParecerConclusivoDados.Any(b => b.tud_id == g.Key && b.tpc_id == g.Last().tpc_id && b.possuiFrequenciaExterna)
+                                                                    ParecerConclusivoDados.Any(b => b.tud_id == g.Key && b.possuiFrequenciaExterna)
                                     }).ToList();
 
             List<ACA_Evento> eventos = ACA_EventoBO.GetEntity_Efetivacao_List(ParecerConclusivoDados.OrderByDescending(i => i.tpc_ordem).FirstOrDefault().cal_id,
@@ -3116,6 +3118,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             // "Agrupa" a frequência das disciplinas
             QtComponentes = dispOrdenadas.Count(p => (p.mostrarDisciplina > 0));
 
+            lblMensagemFrequenciaExterna.Visible = false;
+
             if (!ensinoInfantil)
             {
                 divDisciplinas.Visible = true;
@@ -3126,6 +3130,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                 {
                     exibirFaltasExternas = ExibeCompensacaoAusencia && dispOrdenadas.Any(p => p.mostrarDisciplina > 0 && p.possuiFrequenciaExterna);
                     thFaltasExternas.Visible = exibirFaltasExternas;
+                    if (exibirFaltasExternas)
+                    {
+                        lblMensagemFrequenciaExterna.Visible = true;
+                    }
                 }
 
                 rptDisciplinas.DataSource = dispOrdenadas.Where(p => p.mostrarDisciplina > 0);
@@ -3161,6 +3169,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                 {
                     exibirFaltasExternas = ExibeCompensacaoAusencia && (dispOrdenadasEnriquecimento.Any(p => p.mostrarDisciplina > 0 && p.possuiFrequenciaExterna) || experiencias.Any(p => p.mostrarDisciplina > 0 && p.possuiFrequenciaExterna));
                     thFaltasExternasEnriquecimento.Visible = exibirFaltasExternas;
+                    if (exibirFaltasExternas)
+                    {
+                        lblMensagemFrequenciaExterna.Visible = true;
+                    }
                 }
 
                 rptDisciplinasEnriquecimentoCurricular.DataSource = dispOrdenadasEnriquecimento.Where(p => p.mostrarDisciplina > 0);
@@ -3188,6 +3200,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                 {
                     exibirFaltasExternas = ExibeCompensacaoAusencia && dispOrdenadas.Any(p => p.mostrarDisciplina > 0 && p.possuiFrequenciaExterna);
                     thFaltasExternasEI.Visible = exibirFaltasExternas;
+                    if (exibirFaltasExternas)
+                    {
+                        lblMensagemFrequenciaExterna.Visible = true;
+                    }
                 }
 
                 rptDisciplinasEnsinoInfantil.DataSource = dispOrdenadas.Where(p => p.mostrarDisciplina > 0);
