@@ -9,13 +9,41 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using System;
     using System.Data;
+    using System.Data.SqlClient;
 
     /// <summary>
     /// Description: .
     /// </summary>
     public class CLS_AlunoFrequenciaExternaDAO : Abstract_CLS_AlunoFrequenciaExternaDAO
 	{
-        #region Métodos de consulta
+        #region Consultas
+
+        public DataTable SelecionaPor_MatriculasDisciplinaPeriodo(DataTable tbMatriculaTurmaDisciplina, int tpc_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_AlunoFrequenciaExterna_SelectBy_MatriculasDisciplinaPeriodo", _Banco);
+
+            #region PARAMETROS
+
+            SqlParameter sqlParam = new SqlParameter();
+            sqlParam.ParameterName = "@tbMatriculaTurmaDisciplina";
+            sqlParam.SqlDbType = SqlDbType.Structured;
+            sqlParam.TypeName = "TipoTabela_AlunoMatriculaTurmaDisciplina";
+            sqlParam.Value = tbMatriculaTurmaDisciplina;
+            qs.Parameters.Add(sqlParam);
+            
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@tpc_id";
+            Param.Size = 4;
+            Param.Value = tpc_id;
+            qs.Parameters.Add(Param);
+
+            #endregion PARAMETROS
+
+            qs.Execute();
+
+            return qs.Return;
+        }
 
         /// <summary>
         /// Seleciona os dados para lançamento de frequencia externa do aluno
@@ -57,7 +85,7 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
-        #endregion Métodos de consulta
+        #endregion
 
         #region Métodos sobrescritos
 

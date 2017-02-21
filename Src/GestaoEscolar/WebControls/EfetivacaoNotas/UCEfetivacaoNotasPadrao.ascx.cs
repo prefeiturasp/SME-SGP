@@ -1457,6 +1457,16 @@ namespace GestaoEscolar.WebControls.EfetivacaoNotas
                                     listaDisciplina.OrderBy(p => Int32.TryParse(p.mtd_numeroChamada, out numeroChamada) ? numeroChamada : -1).ThenBy(p => p.pes_nome).ToList()
                                     : listaDisciplina.OrderBy(p => p.pes_nome).ToList();
 
+
+            if (Tud_id > 0 && VS_tpc_id > 0 && listaDisciplina != null && listaDisciplina.Count > 0)
+            {
+                List<MTR_MatriculaTurmaDisciplina> listaMtds = 
+                    listaDisciplina.Select(p => new MTR_MatriculaTurmaDisciplina { alu_id = p.alu_id, mtu_id = p.mtu_id, mtd_id = p.mtd_id }).ToList();
+
+                // Buscar frequências externas para exibir na tela.
+                List<CLS_AlunoFrequenciaExterna> freqExterna = CLS_AlunoFrequenciaExternaBO.SelecionaPor_MatriculasDisciplinaPeriodo(listaMtds, VS_tpc_id);
+            }
+
             // Mostra total de aulas cadastradas no período.
             SetaQuantidadeAulas(VS_tpc_id);
 
