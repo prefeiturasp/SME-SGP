@@ -93,6 +93,15 @@ namespace MSTech.GestaoEscolar.DAL
         {
             entity.afx_dataCriacao = entity.afx_dataAlteracao = DateTime.Now;
             base.ParamInserir(qs, entity);
+
+            if (entity.afx_qtdFaltas > -1)
+            {
+                qs.Parameters["@afx_qtdFaltas"].Value = entity.afx_qtdFaltas;
+            }
+            else
+            {
+                qs.Parameters["@afx_qtdFaltas"].Value = DBNull.Value;
+            }
         }
 
         protected override void ParamAlterar(QueryStoredProcedure qs, CLS_AlunoFrequenciaExterna entity)
@@ -100,6 +109,15 @@ namespace MSTech.GestaoEscolar.DAL
             entity.afx_dataAlteracao = DateTime.Now;
             base.ParamAlterar(qs, entity);
             qs.Parameters.RemoveAt("@afx_dataCriacao");
+
+            if (entity.afx_qtdFaltas > -1)
+            {
+                qs.Parameters["@afx_qtdFaltas"].Value = entity.afx_qtdFaltas;
+            }
+            else
+            {
+                qs.Parameters["@afx_qtdFaltas"].Value = DBNull.Value;
+            }
         }
 
         protected override bool Alterar(CLS_AlunoFrequenciaExterna entity)

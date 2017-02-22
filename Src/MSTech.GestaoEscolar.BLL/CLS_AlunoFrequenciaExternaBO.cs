@@ -26,6 +26,8 @@ namespace MSTech.GestaoEscolar.BLL
         public int tpc_ordem;
         public int mtd_id;
         public long tud_id;
+        public int mtd_idRegencia;
+        public long tud_idRegencia;
         public string Disciplina;
         public string tpc_nome;
         public int numeroFaltas;
