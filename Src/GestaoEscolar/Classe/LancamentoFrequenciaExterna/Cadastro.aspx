@@ -40,7 +40,7 @@
                                 </th>
                                 <asp:Repeater ID="rptPeriodosNomes" runat="server">
                                     <ItemTemplate>
-                                        <th class="th-periodo" runat="server" colspan="2">
+                                        <th class="th-periodo" runat="server" colspan="3">
                                             <span><%#Eval("tpc_nome") %></span>
                                         </th>
                                     </ItemTemplate>
@@ -49,6 +49,9 @@
                             <tr>
                                 <asp:Repeater ID="rptPeriodosColunasFixas" runat="server">
                                     <ItemTemplate>
+                                        <th class="th-aula-prevista">
+                                            <asp:Label runat="server" ID="lblQtdAulasPrevistas" Text="Aulas previstas"></asp:Label>
+                                        </th>
                                         <th class="th-aulas">
                                             <asp:Label runat="server" ID="lblQtdAulas" Text="Aulas"></asp:Label>
                                         </th>
@@ -73,6 +76,11 @@
                                                 <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                 <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
                                                 <asp:HiddenField ID="hdnTudTipo" runat="server" Value='<%#Eval("frequencia.tud_tipo") %>' />
+                                                <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
+                                                <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
+                                                <td class="td-notas">
+                                                    <%#Eval("frequencia.numeroAulasPrevistas")%>
+                                                </td>
                                                 <td class="td-notas" id="tdAulas" runat="server">
                                                     <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
                                                 </td>
@@ -95,6 +103,11 @@
                                                 <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                 <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
                                                 <asp:HiddenField ID="hdnTudTipo" runat="server" Value='<%#Eval("frequencia.tud_tipo") %>' />
+                                                <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
+                                                <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
+                                                <td class="td-notas">
+                                                    <%#Eval("frequencia.numeroAulasPrevistas")%>
+                                                </td>
                                                 <td class="td-notas" id="tdAulas" runat="server">
                                                     <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
                                                 </td>
@@ -120,7 +133,7 @@
                                     </th>
                                     <asp:Repeater ID="rptPeriodosNomesEnriquecimento" runat="server">
                                         <ItemTemplate>
-                                            <th id="Th2" class="th-periodo" runat="server" colspan="2">
+                                            <th id="Th2" class="th-periodo" runat="server" colspan="3">
                                                 <span><%#Eval("tpc_nome") %></span>
                                             </th>
                                         </ItemTemplate>
@@ -129,6 +142,9 @@
                                 <tr>
                                     <asp:Repeater ID="rptPeriodosColunasFixasEnriquecimento" runat="server">
                                         <ItemTemplate>
+                                            <th class="th-aula-prevista">
+                                                <asp:Label runat="server" ID="lblQtdAulasPrevistas" Text="Aulas previstas"></asp:Label>
+                                            </th>
                                             <th class="th-aulas">
                                                 <asp:Label runat="server" ID="lblQtdAulas" Text="Aulas"></asp:Label>
                                             </th>
@@ -151,6 +167,11 @@
                                                     <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
                                                     <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                     <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                    <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
+                                                    <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
+                                                    <td class="td-notas">
+                                                        <%#Eval("frequencia.numeroAulasPrevistas")%>
+                                                    </td>
                                                     <td class="td-notas" id="tdAulas" runat="server">
                                                         <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
                                                     </td>
@@ -171,6 +192,11 @@
                                                     <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
                                                     <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                     <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                    <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
+                                                    <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
+                                                    <td class="td-notas">
+                                                        <%#Eval("frequencia.numeroAulasPrevistas")%>
+                                                    </td>
                                                     <td class="td-notas" id="tdAulas" runat="server">
                                                         <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
                                                     </td>
@@ -194,6 +220,11 @@
                                                     <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
                                                     <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                     <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                    <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
+                                                    <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
+                                                    <td class="td-notas">
+                                                        <%#Eval("frequencia.numeroAulasPrevistas")%>
+                                                    </td>
                                                     <td class="td-notas" id="tdAulas" runat="server">
                                                         <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
                                                     </td>
@@ -214,6 +245,11 @@
                                                     <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
                                                     <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                     <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                    <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
+                                                    <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
+                                                    <td class="td-notas">
+                                                        <%#Eval("frequencia.numeroAulasPrevistas")%>
+                                                    </td>
                                                     <td class="td-notas" id="tdAulas" runat="server">
                                                         <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
                                                     </td>
@@ -228,6 +264,100 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+            <div id="divEnsinoInfantil" runat="server">
+                <hr />
+                <div class="div-gestor-scroll">
+                    <table class="table-boletim">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="th-disciplina">
+                                    <asp:Label runat="server" ID="lblEI" Text="Ensino Infantil"></asp:Label>
+                                </th>
+                                <asp:Repeater ID="rptPeriodosNomesEI" runat="server">
+                                    <ItemTemplate>
+                                        <th id="Th2" class="th-periodo" runat="server" colspan="3">
+                                            <span><%#Eval("tpc_nome") %></span>
+                                        </th>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tr>
+                            <tr>
+                                <asp:Repeater ID="rptPeriodosColunasFixasEI" runat="server">
+                                    <ItemTemplate>
+                                        <th class="th-aula-prevista">
+                                            <asp:Label runat="server" ID="lblQtdAulasPrevistas" Text="Aulas previstas"></asp:Label>
+                                        </th>
+                                        <th class="th-aulas">
+                                            <asp:Label runat="server" ID="lblQtdAulas" Text="Aulas"></asp:Label>
+                                        </th>
+                                        <th class="th-faltas">
+                                            <asp:Label runat="server" ID="lblQtdFaltas" Text="Faltas"></asp:Label>
+                                        </th>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <asp:Repeater ID="rptDisciplinasEnsinoInfantil" runat="server" OnItemDataBound="rptDisciplinasEnsinoInfantil_ItemDataBound">
+                                <ItemTemplate>
+                                    <tr class='tr-disciplina'>
+                                        <th id="tdNomeDiciplina" runat="server" class="th-disciplina">
+                                            <asp:Literal ID="litNomeDisciplina" runat="server" Text='<%#Eval("Disciplina")%>'></asp:Literal>
+                                        </th>
+                                        <asp:Repeater ID="rptNotasDisciplina" OnItemDataBound="rptFrequenciaDisciplina_ItemDataBound" runat="server" DataSource='<%#Eval("frequencias") %>'>
+                                            <ItemTemplate>
+                                                <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
+                                                <asp:HiddenField ID="hdnMtdIdReg" runat="server" Value='<%#Eval("frequencia.mtd_idRegencia") %>' />
+                                                <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
+                                                <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                <asp:HiddenField ID="hdnTudTipo" runat="server" Value='<%#Eval("frequencia.tud_tipo") %>' />
+                                                <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
+                                                <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
+                                                <td class="td-notas">
+                                                    <%#Eval("frequencia.numeroAulasPrevistas")%>
+                                                </td>
+                                                <td class="td-notas" id="tdAulas" runat="server">
+                                                    <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                </td>
+                                                <td class="td-notas" id="tdFaltas" runat="server">
+                                                    <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                </td>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tr>
+                                </ItemTemplate>
+                                <AlternatingItemTemplate>
+                                    <tr class='tr-disciplina alternada'>
+                                        <th id="tdNomeDiciplina" runat="server" class="th-disciplina">
+                                            <asp:Literal ID="litNomeDisciplina" runat="server" Text='<%#Eval("Disciplina")%>'></asp:Literal>
+                                        </th>
+                                        <asp:Repeater ID="rptNotasDisciplina" OnItemDataBound="rptFrequenciaDisciplina_ItemDataBound" runat="server" DataSource='<%#Eval("frequencias") %>'>
+                                            <ItemTemplate>
+                                                <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
+                                                <asp:HiddenField ID="hdnMtdIdReg" runat="server" Value='<%#Eval("frequencia.mtd_idRegencia") %>' />
+                                                <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
+                                                <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                <asp:HiddenField ID="hdnTudTipo" runat="server" Value='<%#Eval("frequencia.tud_tipo") %>' />
+                                                <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
+                                                <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
+                                                <td class="td-notas">
+                                                    <%#Eval("frequencia.numeroAulasPrevistas")%>
+                                                </td>
+                                                <td class="td-notas" id="tdAulas" runat="server">
+                                                    <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                </td>
+                                                <td class="td-notas" id="tdFaltas" runat="server">
+                                                    <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                </td>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tr>
+                                </AlternatingItemTemplate>
+                            </asp:Repeater>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </fieldset>

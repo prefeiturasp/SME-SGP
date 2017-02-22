@@ -152,16 +152,23 @@
 
                 #endregion
 
-                CarregarLancamento(dados);
+                CarregarLancamento();
             }
         }
 
-        private void CarregarLancamento(DadosAlunoEntradaRede dados)
+        private void CarregarLancamento()
         {
             List<DadosLancamentoFreqExterna> lDadosAluno = CLS_AlunoFrequenciaExternaBO.SelecionaDadosAlunoLancamentoFrequenciaExterna(VS_alu_id, VS_mtu_id);
 
             if (lDadosAluno.Any())
             {
+                int cur_id = lDadosAluno.First().cur_id;
+                ACA_Curso cur = new ACA_Curso { cur_id = cur_id };
+                ACA_CursoBO.GetEntity(cur);
+
+                //Verifica se o nível de ensino do curso é do ensino infantil.
+                bool ensinoInfantil = cur.tne_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
                 #region Períodos
 
                 var periodos = from DadosAlunoEntradaRede item in VS_ListaDadosPeriodo
@@ -181,11 +188,15 @@
                 rptPeriodosNomes.DataSource = periodos;
                 rptPeriodosColunasFixas.DataSource = periodos;
                 rptPeriodosNomesEnriquecimento.DataSource = periodos;
+                rptPeriodosNomesEI.DataSource = periodos;
                 rptPeriodosColunasFixasEnriquecimento.DataSource = periodos;
+                rptPeriodosColunasFixasEI.DataSource = periodos;
                 rptPeriodosNomes.DataBind();
                 rptPeriodosColunasFixas.DataBind();
                 rptPeriodosNomesEnriquecimento.DataBind();
+                rptPeriodosNomesEI.DataBind();
                 rptPeriodosColunasFixasEnriquecimento.DataBind();
+                rptPeriodosColunasFixasEI.DataBind();
 
                 #endregion Períodos
 
@@ -229,6 +240,11 @@
                                                                                  bFrequencia.numeroAulas
                                                                                  ,
                                                                                  bFrequencia.numeroFaltas
+                                                                                 ,
+                                                                                 numeroAulasPrevistas = bFrequencia.possuiLancamentoAulasPrevistas ?
+                                                                                    bFrequencia.numeroAulasPrevistas.ToString() : "-"
+                                                                                 ,
+                                                                                 bFrequencia.possuiLancamentoAulasPrevistas
                                                                                  ,
                                                                                  tud_Tipo = g.First().tud_tipo
                                                                                  ,
@@ -285,6 +301,11 @@
                                                                              ,
                                                                              bFrequencia.numeroFaltas
                                                                              ,
+                                                                             numeroAulasPrevistas = bFrequencia.possuiLancamentoAulasPrevistas ?
+                                                                                 bFrequencia.numeroAulasPrevistas.ToString() : "-"
+                                                                             ,
+                                                                             bFrequencia.possuiLancamentoAulasPrevistas
+                                                                             ,
                                                                              tud_Tipo = g.First().tud_tipo
                                                                              ,
                                                                              bFrequencia.tud_id
@@ -320,8 +341,16 @@
                 // "Agrupa" a frequência das disciplinas
                 QtComponentes = dispOrdenadas.Count();
 
-                rptDisciplinas.DataSource = dispOrdenadas;
-                rptDisciplinas.DataBind();
+                if (!ensinoInfantil)
+                {
+                    divDisciplinas.Visible = true;
+                    rptDisciplinas.DataSource = dispOrdenadas;
+                    rptDisciplinas.DataBind();
+                }
+                else
+                {
+                    divDisciplinas.Visible = false;
+                }
 
                 #endregion Disciplinas
 
@@ -354,6 +383,20 @@
                 }
 
                 #endregion Disciplinas de enriquecimento curricular
+
+                #region Ensino Infantil
+
+                if (ensinoInfantil)
+                {
+                    divEnsinoInfantil.Visible = true;
+
+                    rptDisciplinasEnsinoInfantil.DataSource = dispOrdenadas;
+                    rptDisciplinasEnsinoInfantil.DataBind();
+                }
+                else
+                    divEnsinoInfantil.Visible = false;
+
+                #endregion
             }
         }
 
@@ -457,7 +500,43 @@
                          IsNew = afx_id <= 0
                      });
 
-                if (CLS_AlunoFrequenciaExternaBO.Salvar(lstAlunoFrequenciaExterna))
+                lstAlunoFrequenciaExterna.AddRange
+                    (from RepeaterItem item in rptDisciplinasEnsinoInfantil.Items
+                     where item.ItemType == ListItemType.AlternatingItem || item.ItemType == ListItemType.Item
+                     let rptFrequenciaDisciplina = (Repeater)item.FindControl("rptFrequenciaDisciplina")
+                     from RepeaterItem itemFreq in rptFrequenciaDisciplina.Items
+                     where itemFreq.ItemType == ListItemType.AlternatingItem || itemFreq.ItemType == ListItemType.Item
+                     let hdnMtdId = (HiddenField)itemFreq.FindControl("hdnMtdId")
+                     let hdnMtdIdReg = (HiddenField)itemFreq.FindControl("hdnMtdIdReg")
+                     let hdnTpc = (HiddenField)itemFreq.FindControl("hdnTpc")
+                     let hdnAfx = (HiddenField)itemFreq.FindControl("hdnAfx")
+                     let afx_id = string.IsNullOrEmpty(hdnAfx.Value) ? -1 : Convert.ToInt32(hdnAfx.Value)
+                     let txtAulas = (TextBox)itemFreq.FindControl("txtAulas")
+                     let txtFaltas = (TextBox)itemFreq.FindControl("txtFaltas")
+                     let hdnTudTipo = (HiddenField)itemFreq.FindControl("hdnTudTipo")
+                     let tud_tipo = Convert.ToByte(hdnTudTipo.Value)
+                     where txtAulas.Visible && txtFaltas.Visible
+                     select new CLS_AlunoFrequenciaExterna
+                     {
+                         alu_id = VS_alu_id
+                         ,
+                         mtu_id = VS_mtu_id
+                         ,
+                         mtd_id = tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia ?
+                                    Convert.ToInt32(hdnMtdIdReg.Value) : Convert.ToInt32(hdnMtdId.Value)
+                         ,
+                         tpc_id = Convert.ToInt32(hdnTpc.Value)
+                         ,
+                         afx_id = afx_id
+                         ,
+                         afx_qtdAulas = string.IsNullOrEmpty(txtAulas.Text) ? 0 : Convert.ToInt32(txtAulas.Text)
+                         ,
+                         afx_qtdFaltas = string.IsNullOrEmpty(txtFaltas.Text) ? 0 : Convert.ToInt32(txtFaltas.Text)
+                         ,
+                         IsNew = afx_id <= 0
+                     });
+
+                if (CLS_AlunoFrequenciaExternaBO.Salvar(lstAlunoFrequenciaExterna.Where(p => p.afx_qtdAulas > 0).ToList()))
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, string.Format("Lançamento de ausência em outras redes: alu_id: {0} | mtu_id: {1}", VS_alu_id, VS_mtu_id));
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage("Lançamento de ausência em outras redes realizado com sucesso.", UtilBO.TipoMensagem.Sucesso);
@@ -525,6 +604,15 @@
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             RedirecionarPagina("~/Classe/LancamentoFrequenciaExterna/Busca.aspx");
+        }
+
+        protected void rptDisciplinasEnsinoInfantil_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                byte tud_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tud_Tipo"));
+                ControleMescla = (tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia);
+            }
         }
     }
 }

@@ -20,6 +20,9 @@ namespace MSTech.GestaoEscolar.BLL
     {
         public long alu_id;
         public int mtu_id;
+        public int cur_id;
+        public int crr_id;
+        public int crp_id;
         public string tur_codigo;
         public long tur_id;
         public int tpc_id;
@@ -37,6 +40,8 @@ namespace MSTech.GestaoEscolar.BLL
         public int tds_ordem;
         public bool EnriquecimentoCurricular;
         public int numeroAulas;
+        public int numeroAulasPrevistas;
+        public bool possuiLancamentoAulasPrevistas;
     }
 	
     #endregion Estrutura
@@ -91,6 +96,11 @@ namespace MSTech.GestaoEscolar.BLL
 
             try
             {
+                if (lstAlunoFrequenciaExterna.Any(p => p.afx_qtdFaltas > p.afx_qtdAulas))
+                {
+                    throw new ValidationException("Quantidade de aulas deve ser maior ou igual do que a quantidade de faltas no bimestre.");
+                }
+
                 return lstAlunoFrequenciaExterna.Aggregate(true, (salvou, freq) => salvou & Save(freq, banco));
             }
             catch (Exception ex)
