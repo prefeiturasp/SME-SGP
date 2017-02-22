@@ -678,6 +678,8 @@ namespace GestaoEscolar.WebControls.EfetivacaoNotas
         /// </summary>
         private bool avaliacaoUltimoPerido;
 
+        private List<CLS_AlunoFrequenciaExterna> listaFrequenciaExterna;
+
         #endregion Usadas no DataBound
 
         #region Parâmetros acadêmicos
@@ -1464,7 +1466,7 @@ namespace GestaoEscolar.WebControls.EfetivacaoNotas
                     listaDisciplina.Select(p => new MTR_MatriculaTurmaDisciplina { alu_id = p.alu_id, mtu_id = p.mtu_id, mtd_id = p.mtd_id }).ToList();
 
                 // Buscar frequências externas para exibir na tela.
-                List<CLS_AlunoFrequenciaExterna> freqExterna = CLS_AlunoFrequenciaExternaBO.SelecionaPor_MatriculasDisciplinaPeriodo(listaMtds, VS_tpc_id);
+                listaFrequenciaExterna = CLS_AlunoFrequenciaExternaBO.SelecionaPor_MatriculasDisciplinaPeriodo(listaMtds, VS_tpc_id);
             }
 
             // Mostra total de aulas cadastradas no período.
@@ -6616,6 +6618,20 @@ namespace GestaoEscolar.WebControls.EfetivacaoNotas
                         case (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.Dia:
                             cvQtFaltas.ErrorMessage = "A quantidade de faltas deve ser menor ou igual à quantidade de dias de aulas.";
                             break;
+                    }
+                }
+
+                ImageButton btnFaltasExternas = (ImageButton)e.Row.FindControl("btnFaltasExternas");
+                if (btnFaltasExternas != null && listaFrequenciaExterna != null && listaFrequenciaExterna.Count > 0)
+                {
+                    long alu_id = Convert.ToInt64(gvAlunos.DataKeys[e.Row.RowIndex]["alu_id"]);
+                    int mtu_id = Convert.ToInt32(gvAlunos.DataKeys[e.Row.RowIndex]["mtu_id"]);
+                    int mtd_id = Convert.ToInt32(gvAlunos.DataKeys[e.Row.RowIndex]["mtd_id"]);
+
+                    CLS_AlunoFrequenciaExterna ext = listaFrequenciaExterna.Find(p => p.alu_id == alu_id && p.mtu_id == mtu_id && p.mtd_id == mtd_id);
+                    if (ext != null)
+                    {
+
                     }
                 }
             }
