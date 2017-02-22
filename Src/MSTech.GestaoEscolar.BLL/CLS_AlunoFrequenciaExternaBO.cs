@@ -96,11 +96,6 @@ namespace MSTech.GestaoEscolar.BLL
 
             try
             {
-                if (lstAlunoFrequenciaExterna.Any(p => p.afx_qtdFaltas > p.afx_qtdAulas))
-                {
-                    throw new ValidationException("Quantidade de aulas deve ser maior ou igual do que a quantidade de faltas no bimestre.");
-                }
-
                 return lstAlunoFrequenciaExterna.Aggregate(true, (salvou, freq) => salvou & Save(freq, banco));
             }
             catch (Exception ex)

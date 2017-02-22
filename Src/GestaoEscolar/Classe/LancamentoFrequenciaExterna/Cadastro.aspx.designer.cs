@@ -265,6 +265,33 @@ namespace GestaoEscolar.Classe.LancamentoFrequenciaExterna {
         protected global::System.Web.UI.WebControls.Repeater rptDisciplinasEnsinoInfantil;
         
         /// <summary>
+        /// divAvisoAulasPrevistas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAvisoAulasPrevistas;
+        
+        /// <summary>
+        /// imgLegendaAvisoAulasPrevistas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgLegendaAvisoAulasPrevistas;
+        
+        /// <summary>
+        /// lit2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lit2;
+        
+        /// <summary>
         /// btnSalvar control.
         /// </summary>
         /// <remarks>

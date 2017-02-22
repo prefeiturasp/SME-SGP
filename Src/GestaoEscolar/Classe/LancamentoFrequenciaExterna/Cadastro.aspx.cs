@@ -99,6 +99,7 @@
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroFrequenciaExterna.js"));
             }
 
             if (!IsPostBack)
@@ -410,6 +411,7 @@
                      let rptFrequenciaDisciplina = (Repeater)item.FindControl("rptFrequenciaDisciplina")
                      from RepeaterItem itemFreq in rptFrequenciaDisciplina.Items
                      where itemFreq.ItemType == ListItemType.AlternatingItem || itemFreq.ItemType == ListItemType.Item
+                     let hdnMtuId = (HiddenField)itemFreq.FindControl("hdnMtuId")
                      let hdnMtdId = (HiddenField)itemFreq.FindControl("hdnMtdId")
                      let hdnMtdIdReg = (HiddenField)itemFreq.FindControl("hdnMtdIdReg")
                      let hdnTpc = (HiddenField)itemFreq.FindControl("hdnTpc")
@@ -424,7 +426,7 @@
                      {
                          alu_id = VS_alu_id
                          ,
-                         mtu_id = VS_mtu_id
+                         mtu_id = Convert.ToInt32(hdnMtuId.Value)
                          ,
                          mtd_id = tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia ?
                                     Convert.ToInt32(hdnMtdIdReg.Value) : Convert.ToInt32(hdnMtdId.Value)
@@ -445,6 +447,7 @@
                      where item.ItemType == ListItemType.AlternatingItem || item.ItemType == ListItemType.Item
                      let rptFrequenciaDisciplina = (Repeater)item.FindControl("rptFrequenciaDisciplina")
                      from RepeaterItem itemFreq in rptFrequenciaDisciplina.Items
+                     let hdnMtuId = (HiddenField)itemFreq.FindControl("hdnMtuId")
                      let hdnMtdId = (HiddenField)itemFreq.FindControl("hdnMtdId")
                      let hdnTpc = (HiddenField)itemFreq.FindControl("hdnTpc")
                      let hdnAfx = (HiddenField)itemFreq.FindControl("hdnAfx")
@@ -455,7 +458,7 @@
                      {
                          alu_id = VS_alu_id
                          ,
-                         mtu_id = VS_mtu_id
+                         mtu_id = Convert.ToInt32(hdnMtuId.Value)
                          ,
                          mtd_id = Convert.ToInt32(hdnMtdId.Value)
                          ,
@@ -475,6 +478,7 @@
                      where item.ItemType == ListItemType.AlternatingItem || item.ItemType == ListItemType.Item
                      let rptFrequenciaDisciplina = (Repeater)item.FindControl("rptFrequenciaDisciplina")
                      from RepeaterItem itemFreq in rptFrequenciaDisciplina.Items
+                     let hdnMtuId = (HiddenField)itemFreq.FindControl("hdnMtuId")
                      let hdnMtdId = (HiddenField)itemFreq.FindControl("hdnMtdId")
                      let hdnTpc = (HiddenField)itemFreq.FindControl("hdnTpc")
                      let hdnAfx = (HiddenField)itemFreq.FindControl("hdnAfx")
@@ -485,7 +489,7 @@
                      {
                          alu_id = VS_alu_id
                          ,
-                         mtu_id = VS_mtu_id
+                         mtu_id = Convert.ToInt32(hdnMtuId.Value)
                          ,
                          mtd_id = Convert.ToInt32(hdnMtdId.Value)
                          ,
@@ -506,6 +510,7 @@
                      let rptFrequenciaDisciplina = (Repeater)item.FindControl("rptFrequenciaDisciplina")
                      from RepeaterItem itemFreq in rptFrequenciaDisciplina.Items
                      where itemFreq.ItemType == ListItemType.AlternatingItem || itemFreq.ItemType == ListItemType.Item
+                     let hdnMtuId = (HiddenField)itemFreq.FindControl("hdnMtuId")
                      let hdnMtdId = (HiddenField)itemFreq.FindControl("hdnMtdId")
                      let hdnMtdIdReg = (HiddenField)itemFreq.FindControl("hdnMtdIdReg")
                      let hdnTpc = (HiddenField)itemFreq.FindControl("hdnTpc")
@@ -520,7 +525,7 @@
                      {
                          alu_id = VS_alu_id
                          ,
-                         mtu_id = VS_mtu_id
+                         mtu_id = Convert.ToInt32(hdnMtuId.Value)
                          ,
                          mtd_id = tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia ?
                                     Convert.ToInt32(hdnMtdIdReg.Value) : Convert.ToInt32(hdnMtdId.Value)
@@ -536,7 +541,7 @@
                          IsNew = afx_id <= 0
                      });
 
-                if (CLS_AlunoFrequenciaExternaBO.Salvar(lstAlunoFrequenciaExterna.Where(p => p.afx_qtdAulas > 0).ToList()))
+                if (CLS_AlunoFrequenciaExternaBO.Salvar(lstAlunoFrequenciaExterna))
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, string.Format("Lançamento de ausência em outras redes: alu_id: {0} | mtu_id: {1}", VS_alu_id, VS_mtu_id));
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage("Lançamento de ausência em outras redes realizado com sucesso.", UtilBO.TipoMensagem.Sucesso);
@@ -571,18 +576,32 @@
                 {
                     if (!ControleMescla)
                     {
+                        var tdAulasPrevistas = (HtmlTableCell)e.Item.FindControl("tdAulasPrevistas");
                         var tdAulas = (HtmlTableCell)e.Item.FindControl("tdAulas");
                         var tdFaltas = (HtmlTableCell)e.Item.FindControl("tdFaltas");
+                        tdAulasPrevistas.RowSpan = QtComponenteRegencia;
                         tdAulas.RowSpan = QtComponenteRegencia;
                         tdFaltas.RowSpan = QtComponenteRegencia;
                     }
                     else
                     {
+                        var tdAulasPrevistas = (HtmlTableCell)e.Item.FindControl("tdAulasPrevistas");
                         var tdAulas = (HtmlTableCell)e.Item.FindControl("tdAulas");
                         var tdFaltas = (HtmlTableCell)e.Item.FindControl("tdFaltas");
+                        tdAulasPrevistas.Visible = false;
                         tdAulas.Visible = false;
                         tdFaltas.Visible = false;
                     }
+                }
+
+                bool possuiLancamentoAulasPrevistas = Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "frequencia.possuiLancamentoAulasPrevistas"));
+                int qtdeAulasPrevistas = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "frequencia.numeroAulasPrevistas"));
+                int qtdeFaltas = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "frequencia.numeroFaltas"));
+
+                if (possuiLancamentoAulasPrevistas && qtdeFaltas > qtdeAulasPrevistas)
+                {
+                    var imgAvisoAulasPrevistas = (Image)e.Item.FindControl("imgAvisoAulasPrevistas");
+                    imgAvisoAulasPrevistas.CssClass = "";
                 }
             }
         }

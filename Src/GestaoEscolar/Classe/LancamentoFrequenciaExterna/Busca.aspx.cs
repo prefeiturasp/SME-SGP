@@ -201,7 +201,7 @@
             UCCTurma.Valor = new long[] { -1, -1, -1 };
             UCCTurma.PermiteEditar = false;
             UCFiltroEscolas.SelecionaCombosAutomatico = false;
-            UCFiltroEscolas._LoadInicial();
+            UCFiltroEscolas._LoadInicial(false);
             updPesquisa.Update();
         }
 
