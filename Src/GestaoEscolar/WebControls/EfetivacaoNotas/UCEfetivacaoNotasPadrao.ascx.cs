@@ -6631,7 +6631,10 @@ namespace GestaoEscolar.WebControls.EfetivacaoNotas
                     CLS_AlunoFrequenciaExterna ext = listaFrequenciaExterna.Find(p => p.alu_id == alu_id && p.mtu_id == mtu_id && p.mtd_id == mtd_id);
                     if (ext != null)
                     {
-
+                        btnFaltasExternas.Visible = true;
+                        btnFaltasExternas.OnClientClick = 
+                            "AbrePopupFrequenciaExterna('" + ext.afx_qtdAulas + "','" + ext.afx_qtdFaltas + 
+                                "'); return false;";
                     }
                 }
             }

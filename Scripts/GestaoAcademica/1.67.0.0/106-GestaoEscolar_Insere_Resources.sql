@@ -25,6 +25,23 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Falta outra rede'
 
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'EfetivacaoNotas.UCEfetivacaoNotas.btnFaltasExternas.ToolTip'
+            , @rcr_NomeResource = 'UserControl'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Exibir ausências de outras redes'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'EfetivacaoNotas.UCEfetivacaoNotas.divFrequenciaExterna.title'
+            , @rcr_NomeResource = 'UserControl'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Ausências de outras redes'
+
+			
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

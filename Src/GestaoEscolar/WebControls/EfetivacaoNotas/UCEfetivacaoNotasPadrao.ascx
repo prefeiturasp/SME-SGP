@@ -183,7 +183,8 @@
                             <asp:CustomValidator ID="cvQtFaltas" runat="server" ControlToValidate="txtQtdeFalta"
                                 OnServerValidate="cvQtFaltas_Validar" EnableClientScript="true" Display="Dynamic"
                                 ErrorMessage="A quantidade de faltas deve ser menor ou igual à quantidade de dias de aulas.">*</asp:CustomValidator>
-                            <asp:ImageButton ID="btnFaltasExternas" runat="server" ToolTip="Exibir a quantidade de faltas fora da rede" SkinID="btDetalhar" />
+                            <asp:ImageButton ID="btnFaltasExternas" runat="server" Visible="false" 
+                                ToolTip="<%$ Resources:UserControl, EfetivacaoNotas.UCEfetivacaoNotas.btnFaltasExternas.ToolTip %>" SkinID="btDetalhar"/>
                         </ItemTemplate>
                         <HeaderStyle CssClass="center" />
                         <ItemStyle HorizontalAlign="Center" CssClass="colunaQtdeFalta" />
@@ -488,10 +489,18 @@
 
 
 <!-- Confirma quais campos deseja atualizar -->
-<div id="divFrequenciaExterna" title="Frequência de outras redes" class="hide">
+<div id="divFrequenciaExterna" runat="server" title="<%$ Resources:UserControl, EfetivacaoNotas.UCEfetivacaoNotas.divFrequenciaExterna.title %>" 
+    class="hide divFrequenciaExterna">
     <fieldset>
         <asp:Label ID="Label2" Text="<b>Quantidade de aulas: </b>" runat="server"></asp:Label>
-        <asp:Label ID="lblQtAulasExterna" Text="<b>Quantidade de aulas: </b>" runat="server"></asp:Label>
+        <asp:Label ID="lblQtAulasExterna" Text="" runat="server"></asp:Label>
         <br />
+        <br />
+        <asp:Label ID="Label3" Text="<b>Quantidade de faltas: </b>" runat="server"></asp:Label>
+        <asp:Label ID="lblQtFaltasExterna" Text="" runat="server"></asp:Label>
+        <br />
+        <div class="right">
+            <asp:Button ID="btnFecharFreqExt" runat="server" Text="Voltar" OnClientClick="$('.divFrequenciaExterna').dialog('close'); return false;" />
+        </div>
     </fieldset>
 </div>

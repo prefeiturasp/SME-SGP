@@ -1184,6 +1184,7 @@ namespace GestaoEscolar.WebControls.Fechamento
                     sm.Scripts.Add(new ScriptReference("~/Includes/jquery.PrintBoletim.js"));
                     //recarrega sempre pare pegar os campos que antes estavam invisiveis na tela
                     sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroEfetivacao.js"));
+                    sm.Scripts.Add(new ScriptReference("~/Includes/jsPopupFrequenciaExterna.js"));
                 }
 
                 UCAlunoEfetivacaoObservacaoGeral.ReturnValues += UCAlunoEfetivacaoObservacaoGeral_ReturnValues;
