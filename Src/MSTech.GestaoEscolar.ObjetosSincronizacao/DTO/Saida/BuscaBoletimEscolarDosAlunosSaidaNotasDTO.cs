@@ -21,5 +21,6 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida
         public string numeroAulas { get; set; }
         public string numeroFaltas { get; set; }
         public byte tud_Tipo { get; set; }
+        public bool possuiFreqExterna { get; set; }
     }
 }
