@@ -378,7 +378,7 @@
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar pesquisar.", UtilBO.TipoMensagem.Erro);
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar pesquisar os alunos.", UtilBO.TipoMensagem.Erro);
                 updMensagem.Update();
             }
         }
@@ -404,7 +404,7 @@
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar pesquisar.", UtilBO.TipoMensagem.Erro);
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar pesquisar os alunos.", UtilBO.TipoMensagem.Erro);
                 updMensagem.Update();
             }
         }

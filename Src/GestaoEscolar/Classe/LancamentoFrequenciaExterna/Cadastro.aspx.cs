@@ -107,12 +107,20 @@
 
             if (!IsPostBack)
             {
-                if (PreviousPage != null && PreviousPage.IsCrossPagePostBack)
+                try
                 {
-                    VS_alu_id = PreviousPage.EditAluId;
-                    VS_mtu_id = PreviousPage.EditMtuId;
+                    if (PreviousPage != null && PreviousPage.IsCrossPagePostBack)
+                    {
+                        VS_alu_id = PreviousPage.EditAluId;
+                        VS_mtu_id = PreviousPage.EditMtuId;
 
-                    CarregarDadosAluno();
+                        CarregarDadosAluno();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }
@@ -579,7 +587,7 @@
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao salvar.", UtilBO.TipoMensagem.Erro);
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o lançamento de ausência em outras redes.", UtilBO.TipoMensagem.Erro);
             }
         }
 
