@@ -454,6 +454,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         DivergenciasRematriculas
+        ,
+
+        LancamentoFrequenciaExterna
     }
 
     [Serializable]
@@ -1009,6 +1012,50 @@ namespace MSTech.GestaoEscolar.BLL
             }
 
             return objectClone;
+        }
+
+
+        /// <summary>
+        /// Retorna a linha da tabela com as propriedades carregadas.
+        /// </summary>
+        /// <param name="dr">Linha do dataTable</param>
+        /// <param name="entity">Entidade utilizada para carregar os valores</param>
+        /// <returns>Uma entidade carregada com os valores</returns>
+        public static DataRow EntityToDataRow(DataTable dt, object entity)
+        {
+            try
+            {
+                DataRow drRetorno = dt.NewRow();
+
+                DataColumnCollection columnList = dt.Columns;
+                Type tp = entity.GetType();
+                // Preenche propriedades.
+                PropertyInfo[] properties = tp.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                // Preenche variáveis.
+                FieldInfo[] fields = tp.GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+                foreach (DataColumn coluna in columnList)
+                {
+                    PropertyInfo prop = properties.ToList().Find(p => p.Name == coluna.ColumnName);
+                    if (prop != null)
+                    {
+                        drRetorno[coluna] = prop.GetValue(entity);
+                    }
+
+                    FieldInfo field = fields.ToList().Find(p => p.Name == coluna.ColumnName);
+                    if (field != null)
+                    {
+                        drRetorno[coluna] = field.GetValue(entity);
+                    }
+                }
+
+
+                return drRetorno;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -2269,6 +2316,20 @@ namespace MSTech.GestaoEscolar.BLL
                     table.Rows.Add(properties.Select(p => p.GetValue(l, null)).ToArray());
 
             return table;
+        }
+
+        /// <summary>
+        /// Retorna uma Lista da entidade informada, alimentada pelo DataTable.
+        /// </summary>
+        public static List<T> DataTableToListEntity<T>(DataTable table) where T : class, new ()
+        {
+            List<T> list = new List<T>();
+            foreach (DataRow dr in table.Rows)
+            {
+                list.Add((T)DataRowToEntity(dr, new T()));
+            }
+
+            return list;
         }
 
         /// <summary>
