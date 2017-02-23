@@ -16,12 +16,12 @@
             <asp:Label ID="lblMensagem" runat="server" EnableViewState="false"></asp:Label>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:Panel ID="pnlPesquisa" runat="server" GroupingText="Lançamento de ausência em outras redes">
+    <asp:Panel ID="pnlPesquisa" runat="server" GroupingText="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Busca, pnlPesquisa.Text %>">
         <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
         <div id="divPesquisa">
             <asp:UpdatePanel ID="updPesquisa" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <asp:CheckBox ID="chkTurmaExtinta" runat="server" Text="Marque essa opção para acessar turmas extintas" AutoPostBack="true" OnCheckedChanged="chkTurmaExtinta_CheckedChanged" />
+                    <asp:CheckBox ID="chkTurmaExtinta" runat="server" Text="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Busca, chkTurmaExtinta.Text %>" AutoPostBack="true" OnCheckedChanged="chkTurmaExtinta_CheckedChanged" />
                     <uc2:UCFiltroEscolas ID="UCFiltroEscolas" runat="server" EscolaCampoObrigatorio="true" UnidadeAdministrativaCampoObrigatorio="true" />
                     <uc3:UCCCalendario ID="UCCCalendario" runat="server" Obrigatorio="true" MostrarMensagemSelecione="true" ValidationGroup="Busca" />
                     <uc4:UCCTurma ID="UCCTurma" runat="server" Obrigatorio="true" MostrarMensagemSelecione="true" ValidationGroup="Busca" />
@@ -29,35 +29,35 @@
             </asp:UpdatePanel>
         </div>
         <div class="right area-form">
-            <asp:Button ID="btnPesquisar" runat="server" Text="Pesquisar" OnClick="btnPesquisar_Click" ValidationGroup="Busca" />
-            <asp:Button ID="btnLimparPesquisa" runat="server" CausesValidation="false" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click" />
+            <asp:Button ID="btnPesquisar" runat="server" Text="<%$ Resources:Padrao, Padrao.Pesquisar.Text %>" OnClick="btnPesquisar_Click" ValidationGroup="Busca" />
+            <asp:Button ID="btnLimparPesquisa" runat="server" CausesValidation="false" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click" />
         </div>
     </asp:Panel>
 
     <asp:UpdatePanel ID="updResultado" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="area-form">
-                <asp:Panel ID="pnlResultados" runat="server" GroupingText="Resultados" Visible="false">
+                <asp:Panel ID="pnlResultados" runat="server" GroupingText="<%$ Resources:Padrao, Padrao.Resultados.Text %>" Visible="false">
                     <uc5:UCComboQtdePaginacao ID="UCComboQtdePaginacao" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged" />
-                    <asp:GridView ID="grvResultado" runat="server" AutoGenerateColumns="false" EmptyDataText="A pesquisa não encontrou resultados." DataKeyNames="alu_id, mtu_id"
+                    <asp:GridView ID="grvResultado" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>" DataKeyNames="alu_id, mtu_id"
                         AllowSorting="true" AllowPaging="true" OnDataBound="grvResultado_DataBound" OnRowEditing="grvResultado_RowEditing" OnPageIndexChanging="grvResultado_PageIndexChanging"
                         OnSorting="grvResultado_Sorting" SkinID="GridResponsive">
                         <Columns>
-                            <asp:BoundField HeaderText="Nº" DataField="mtu_numeroChamada" SortExpression="mtu_numeroChamada" />
-                            <asp:TemplateField HeaderText="Nome" SortExpression="pes_nome">
+                            <asp:BoundField HeaderText="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Busca, ctrl_45.HeaderText %>" DataField="mtu_numeroChamada" SortExpression="mtu_numeroChamada" />
+                            <asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.Nome.Text %>" SortExpression="pes_nome">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lkbNome" runat="server" Text='<%# Bind("pes_nome") %>' CommandName="Edit" PostBackUrl="~/Classe/LancamentoFrequenciaExterna/Cadastro.aspx"></asp:LinkButton>
                                 </ItemTemplate>
                                 <ItemStyle CssClass="grid-responsive-item-inline grid-responsive-no-header" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="pes_dataNascimento" HeaderText="Data de nascimento" DataFormatString="{0:dd/MM/yyy}"
+                            <asp:BoundField DataField="pes_dataNascimento" HeaderText="<%$ Resources:Padrao, Padrao.DataNascimento.Text %>" DataFormatString="{0:dd/MM/yyy}"
                                 SortExpression="pes_dataNascimento">
                                 <HeaderStyle CssClass="center" />
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
-                            <asp:BoundField HeaderText="Nome da mãe" DataField="pes_nomeMae" SortExpression="pes_nomeMae" />
-                            <asp:BoundField HeaderText="Matrícula" DataField="alc_matricula" SortExpression="alc_matricula" />
-                            <asp:BoundField DataField="mtu_dataMatricula" HeaderText="Data de matrícula" DataFormatString="{0:dd/MM/yyy}"
+                            <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.NomeMae.Text %>" DataField="pes_nomeMae" SortExpression="pes_nomeMae" />
+                            <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Matricula.Text %>" DataField="alc_matricula" SortExpression="alc_matricula" />
+                            <asp:BoundField DataField="mtu_dataMatricula" HeaderText="<%$ Resources:Padrao, Padrao.DataMatricula.Text %>" DataFormatString="{0:dd/MM/yyy}"
                                 SortExpression="mtu_dataMatricula">
                                 <HeaderStyle CssClass="center" />
                                 <ItemStyle HorizontalAlign="Center" />

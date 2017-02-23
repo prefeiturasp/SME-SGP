@@ -40,7 +40,278 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Ausências de outras redes'
 
-			
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lit_9.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Lançamento de ausência em outras redes'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblNomeAlunoTitulo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nome do aluno: '
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblTurmaTitulo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turma: '
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblNumeroChamadaTitulo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'N° de chamada: '
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblCodigoEolTitulo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Código EOL: '
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdAulasPrevistas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdAulas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdFaltas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Faltas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgAvisoAulasPrevistas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgAvisoAulasPrevistas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdAulasPrevistas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdAulas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdFaltas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Faltas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgAvisoAulasPrevistas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgAvisoAulasPrevistas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgAvisoAulasPrevistas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgAvisoAulasPrevistas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblEI.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Ensino Infantil'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdAulasPrevistas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdAulas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblQtdFaltas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Faltas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgAvisoAulasPrevistas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgAvisoAulasPrevistas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_394.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lit2.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de faltas maior que quantidade de aulas previstas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Salvar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Salvar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Cancelar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'pnlPesquisa.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Lançamento de ausência em outras redes'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'chkTurmaExtinta.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Marque essa opção para acessar turmas extintas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Pesquisar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Pesquisar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.LimparPesquisa.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Limpar pesquisa'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Resultados.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Resultados'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.SemResultado.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'A pesquisa não encontrou resultados.'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_45.HeaderText' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.LancamentoFrequenciaExterna.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nº'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Nome.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nome'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.DataNascimento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data de nascimento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.NomeMae.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nome da mãe'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Matricula.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Matrícula'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.DataMatricula.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data de matrícula'		
 
 -- Fechar transação     
 SET XACT_ABORT OFF 
