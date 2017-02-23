@@ -32,6 +32,8 @@ namespace MSTech.GestaoEscolar.BLL
 
         public bool afp_nota { get; set; }
 
+        public bool afp_frequenciaExterna { get; set; }
+
         public Byte afp_processado { get; set; }
 
     }
@@ -354,6 +356,7 @@ namespace MSTech.GestaoEscolar.BLL
             dr["tpc_id"] = alunoFechamentoPendencia.tpc_id;
             dr["afp_frequencia"] = alunoFechamentoPendencia.afp_frequencia;
             dr["afp_nota"] = alunoFechamentoPendencia.afp_nota;
+            dr["afp_frequenciaExterna"] = alunoFechamentoPendencia.afp_frequenciaExterna;
             dr["afp_processado"] = alunoFechamentoPendencia.afp_processado;
 
             return dr;
