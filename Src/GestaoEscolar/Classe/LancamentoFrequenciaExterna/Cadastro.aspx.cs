@@ -431,8 +431,11 @@
                      let afx_id = string.IsNullOrEmpty(hdnAfx.Value) ? -1 : Convert.ToInt32(hdnAfx.Value)
                      let txtAulas = (TextBox)itemFreq.FindControl("txtAulas")
                      let txtFaltas = (TextBox)itemFreq.FindControl("txtFaltas")
+                     let hdnTudId = (HiddenField)itemFreq.FindControl("hdnTudId")
+                     let hdnTudIdRegencia = (HiddenField)itemFreq.FindControl("hdnTudIdRegencia")
                      let hdnTudTipo = (HiddenField)itemFreq.FindControl("hdnTudTipo")
                      let tud_tipo = Convert.ToByte(hdnTudTipo.Value)
+                     let regencia = tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia
                      where txtAulas.Visible  && txtFaltas.Visible
                      select new CLS_AlunoFrequenciaExterna
                      {
@@ -440,8 +443,7 @@
                          ,
                          mtu_id = Convert.ToInt32(hdnMtuId.Value)
                          ,
-                         mtd_id = tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia ?
-                                    Convert.ToInt32(hdnMtdIdReg.Value) : Convert.ToInt32(hdnMtdId.Value)
+                         mtd_id = regencia ? Convert.ToInt32(hdnMtdIdReg.Value) : Convert.ToInt32(hdnMtdId.Value)
                          ,
                          tpc_id = Convert.ToInt32(hdnTpc.Value)
                          ,
@@ -452,6 +454,8 @@
                          afx_qtdFaltas = string.IsNullOrEmpty(txtFaltas.Text) ? 0 : Convert.ToInt32(txtFaltas.Text)
                          ,
                          IsNew = afx_id <= 0
+                         ,
+                         tud_id = regencia ? Convert.ToInt64(hdnTudIdRegencia.Value) : Convert.ToInt64(hdnTudId.Value)
                      }).ToList();
 
                 lstAlunoFrequenciaExterna.AddRange
@@ -464,6 +468,7 @@
                      let hdnTpc = (HiddenField)itemFreq.FindControl("hdnTpc")
                      let hdnAfx = (HiddenField)itemFreq.FindControl("hdnAfx")
                      let afx_id = string.IsNullOrEmpty(hdnAfx.Value) ? -1 : Convert.ToInt32(hdnAfx.Value)
+                     let hdnTudId = (HiddenField)itemFreq.FindControl("hdnTudId")
                      let txtAulas = (TextBox)itemFreq.FindControl("txtAulas")
                      let txtFaltas = (TextBox)itemFreq.FindControl("txtFaltas")
                      select new CLS_AlunoFrequenciaExterna
@@ -483,6 +488,8 @@
                          afx_qtdFaltas = string.IsNullOrEmpty(txtFaltas.Text) ? 0 : Convert.ToInt32(txtFaltas.Text)
                          ,
                          IsNew = afx_id <= 0
+                         ,
+                         tud_id = Convert.ToInt64(hdnTudId.Value)
                      });
 
                 lstAlunoFrequenciaExterna.AddRange
@@ -495,6 +502,7 @@
                      let hdnTpc = (HiddenField)itemFreq.FindControl("hdnTpc")
                      let hdnAfx = (HiddenField)itemFreq.FindControl("hdnAfx")
                      let afx_id = string.IsNullOrEmpty(hdnAfx.Value) ? -1 : Convert.ToInt32(hdnAfx.Value)
+                     let hdnTudId = (HiddenField)itemFreq.FindControl("hdnTudId")
                      let txtAulas = (TextBox)itemFreq.FindControl("txtAulas")
                      let txtFaltas = (TextBox)itemFreq.FindControl("txtFaltas")
                      select new CLS_AlunoFrequenciaExterna
@@ -514,6 +522,8 @@
                          afx_qtdFaltas = string.IsNullOrEmpty(txtFaltas.Text) ? 0 : Convert.ToInt32(txtFaltas.Text)
                          ,
                          IsNew = afx_id <= 0
+                         ,
+                         tud_id = Convert.ToInt64(hdnTudId.Value)
                      });
 
                 lstAlunoFrequenciaExterna.AddRange
@@ -528,10 +538,13 @@
                      let hdnTpc = (HiddenField)itemFreq.FindControl("hdnTpc")
                      let hdnAfx = (HiddenField)itemFreq.FindControl("hdnAfx")
                      let afx_id = string.IsNullOrEmpty(hdnAfx.Value) ? -1 : Convert.ToInt32(hdnAfx.Value)
+                     let hdnTudId = (HiddenField)itemFreq.FindControl("hdnTudId")
+                     let hdnTudIdRegencia = (HiddenField)itemFreq.FindControl("hdnTudIdRegencia")
                      let txtAulas = (TextBox)itemFreq.FindControl("txtAulas")
                      let txtFaltas = (TextBox)itemFreq.FindControl("txtFaltas")
                      let hdnTudTipo = (HiddenField)itemFreq.FindControl("hdnTudTipo")
                      let tud_tipo = Convert.ToByte(hdnTudTipo.Value)
+                     let regencia = tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia
                      where txtAulas.Visible && txtFaltas.Visible
                      select new CLS_AlunoFrequenciaExterna
                      {
@@ -539,8 +552,7 @@
                          ,
                          mtu_id = Convert.ToInt32(hdnMtuId.Value)
                          ,
-                         mtd_id = tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia ?
-                                    Convert.ToInt32(hdnMtdIdReg.Value) : Convert.ToInt32(hdnMtdId.Value)
+                         mtd_id =  regencia ? Convert.ToInt32(hdnMtdIdReg.Value) : Convert.ToInt32(hdnMtdId.Value)
                          ,
                          tpc_id = Convert.ToInt32(hdnTpc.Value)
                          ,
@@ -551,9 +563,13 @@
                          afx_qtdFaltas = string.IsNullOrEmpty(txtFaltas.Text) ? 0 : Convert.ToInt32(txtFaltas.Text)
                          ,
                          IsNew = afx_id <= 0
+                         ,
+                         tud_id = regencia ? Convert.ToInt64(hdnTudIdRegencia.Value) : Convert.ToInt64(hdnTudId.Value)
                      });
 
-                if (CLS_AlunoFrequenciaExternaBO.Salvar(lstAlunoFrequenciaExterna))
+                int fav_id = VS_ListaDadosPeriodo.Where(p => p.alu_id == VS_alu_id && p.mtu_id == VS_mtu_id).FirstOrDefault().fav_id;
+
+                if (CLS_AlunoFrequenciaExternaBO.Salvar(lstAlunoFrequenciaExterna, fav_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, string.Format("Lançamento de ausência em outras redes: alu_id: {0} | mtu_id: {1}", VS_alu_id, VS_mtu_id));
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage("Lançamento de ausência em outras redes realizado com sucesso.", UtilBO.TipoMensagem.Sucesso);

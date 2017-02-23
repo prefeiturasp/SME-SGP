@@ -90,13 +90,64 @@ namespace MSTech.GestaoEscolar.BLL
 
         #region Métodos de salvar
 
-        public static bool Salvar(List<CLS_AlunoFrequenciaExterna> lstAlunoFrequenciaExterna)
+        public static bool Salvar(List<CLS_AlunoFrequenciaExterna> lstAlunoFrequenciaExterna, int fav_id, Guid ent_id)
         {
             TalkDBTransaction banco = new CLS_AlunoFrequenciaExternaDAO()._Banco.CopyThisInstance();
+            List<AlunoFechamentoPendencia> FilaProcessamento = new List<AlunoFechamentoPendencia>();
 
             try
             {
-                return lstAlunoFrequenciaExterna.Aggregate(true, (salvou, freq) => salvou & Save(freq, banco));
+                if (lstAlunoFrequenciaExterna.Aggregate(true, (salvou, freq) => salvou & Save(freq, banco)))
+                {
+                    ACA_FormatoAvaliacao entFormatoAvaliacao = new ACA_FormatoAvaliacao { fav_id = fav_id };
+                    ACA_FormatoAvaliacaoBO.GetEntity(entFormatoAvaliacao, banco);
+
+                    if (entFormatoAvaliacao.fav_fechamentoAutomatico)
+                    {
+                        FilaProcessamento.AddRange
+                        (lstAlunoFrequenciaExterna.GroupBy(p => new { p.tud_id, p.tpc_id })
+                                                  .Select(p => new AlunoFechamentoPendencia
+                                                  {
+                                                      tud_id = p.Key.tud_id
+                                                      ,
+                                                      tpc_id = p.Key.tpc_id
+                                                      ,
+                                                      afp_frequencia = false
+                                                      ,
+                                                      afp_nota = false
+                                                      ,
+                                                      afp_frequenciaExterna = true
+                                                      ,
+                                                      afp_processado = 0
+                                                  })
+                        );
+
+                        if (FilaProcessamento.Any())
+                        {
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(
+                                FilaProcessamento
+                                .GroupBy(g => new { g.tud_id, g.tpc_id })
+                                .Select(p => new AlunoFechamentoPendencia
+                                {
+                                    tud_id = p.FirstOrDefault().tud_id,
+                                    tpc_id = p.FirstOrDefault().tpc_id,
+                                    afp_frequencia = p.FirstOrDefault().afp_frequencia,
+                                    afp_nota = p.FirstOrDefault().afp_nota,
+                                    afp_frequenciaExterna = p.FirstOrDefault().afp_frequenciaExterna,
+                                    afp_processado = FilaProcessamento
+                                        .Where(w => w.tud_id == p.FirstOrDefault().tud_id && w.tpc_id == p.FirstOrDefault().tpc_id)
+                                        .Min(m => m.afp_processado)
+                                })
+                                .Where(w => w.tpc_id > 0 && w.tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, ent_id))
+                                .ToList()
+                            , banco);
+                        }
+                    }
+                    
+                    return true;
+                }
+
+                return false;
             }
             catch (Exception ex)
             {

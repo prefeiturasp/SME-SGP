@@ -77,6 +77,8 @@
                                                     <asp:HiddenField ID="hdnMtdIdReg" runat="server" Value='<%#Eval("frequencia.mtd_idRegencia") %>' />
                                                     <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                     <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                    <asp:HiddenField ID="hdnTudId" runat="server" Value='<%#Eval("frequencia.tud_id") %>' />
+                                                    <asp:HiddenField ID="hdnTudIdRegencia" runat="server" Value='<%#Eval("frequencia.tud_idRegencia") %>' />
                                                     <asp:HiddenField ID="hdnTudTipo" runat="server" Value='<%#Eval("frequencia.tud_tipo") %>' />
                                                     <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
                                                     <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
@@ -106,6 +108,8 @@
                                                     <asp:HiddenField ID="hdnMtdIdReg" runat="server" Value='<%#Eval("frequencia.mtd_idRegencia") %>' />
                                                     <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                     <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                    <asp:HiddenField ID="hdnTudId" runat="server" Value='<%#Eval("frequencia.tud_id") %>' />
+                                                    <asp:HiddenField ID="hdnTudIdRegencia" runat="server" Value='<%#Eval("frequencia.tud_idRegencia") %>' />
                                                     <asp:HiddenField ID="hdnTudTipo" runat="server" Value='<%#Eval("frequencia.tud_tipo") %>' />
                                                     <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
                                                     <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
@@ -173,6 +177,7 @@
                                                         <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
                                                         <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                         <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                        <asp:HiddenField ID="hdnTudId" runat="server" Value='<%#Eval("frequencia.tud_id") %>' />
                                                         <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
                                                         <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
                                                         <td class="td-aulasPrevistas" id="tdAulasPrevistas" runat="server">
@@ -200,6 +205,7 @@
                                                         <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
                                                         <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                         <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                        <asp:HiddenField ID="hdnTudId" runat="server" Value='<%#Eval("frequencia.tud_id") %>' />
                                                         <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
                                                         <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
                                                         <td class="td-aulasPrevistas" id="tdAulasPrevistas" runat="server">
@@ -230,6 +236,7 @@
                                                         <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
                                                         <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                         <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                        <asp:HiddenField ID="hdnTudId" runat="server" Value='<%#Eval("frequencia.tud_id") %>' />
                                                         <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
                                                         <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
                                                         <td class="td-aulasPrevistas" id="tdAulasPrevistas" runat="server">
@@ -257,6 +264,7 @@
                                                         <asp:HiddenField ID="hdnMtdId" runat="server" Value='<%#Eval("frequencia.mtd_id") %>' />
                                                         <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                         <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                        <asp:HiddenField ID="hdnTudId" runat="server" Value='<%#Eval("frequencia.tud_id") %>' />
                                                         <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
                                                         <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
                                                         <td class="td-aulasPrevistas" id="tdAulasPrevistas" runat="server">
@@ -325,6 +333,8 @@
                                                         <asp:HiddenField ID="hdnMtdIdReg" runat="server" Value='<%#Eval("frequencia.mtd_idRegencia") %>' />
                                                         <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                         <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                        <asp:HiddenField ID="hdnTudId" runat="server" Value='<%#Eval("frequencia.tud_id") %>' />
+                                                        <asp:HiddenField ID="hdnTudIdRegencia" runat="server" Value='<%#Eval("frequencia.tud_idRegencia") %>' />
                                                         <asp:HiddenField ID="hdnTudTipo" runat="server" Value='<%#Eval("frequencia.tud_tipo") %>' />
                                                         <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
                                                         <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />
@@ -354,6 +364,8 @@
                                                         <asp:HiddenField ID="hdnMtdIdReg" runat="server" Value='<%#Eval("frequencia.mtd_idRegencia") %>' />
                                                         <asp:HiddenField ID="hdnTpc" runat="server" Value='<%#Eval("tpc_id") %>' />
                                                         <asp:HiddenField ID="hdnAfx" runat="server" Value='<%#Eval("frequencia.afx_id") %>' />
+                                                        <asp:HiddenField ID="hdnTudId" runat="server" Value='<%#Eval("frequencia.tud_id") %>' />
+                                                        <asp:HiddenField ID="hdnTudIdRegencia" runat="server" Value='<%#Eval("frequencia.tud_idRegencia") %>' />
                                                         <asp:HiddenField ID="hdnTudTipo" runat="server" Value='<%#Eval("frequencia.tud_tipo") %>' />
                                                         <asp:HiddenField ID="hdnPossuiAulasPrev" runat="server" Value='<%#Eval("frequencia.possuiLancamentoAulasPrevistas") %>' />
                                                         <asp:HiddenField ID="hdnAulasPrev" runat="server" Value='<%#Eval("frequencia.numeroAulasPrevistas") %>' />

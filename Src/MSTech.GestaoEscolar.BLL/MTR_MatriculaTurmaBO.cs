@@ -212,6 +212,7 @@ namespace MSTech.GestaoEscolar.BLL
     {
         public long tur_id { get; set; }
         public string tur_codigo { get; set; }
+        public int fav_id { get; set; }
         public int esc_id { get; set; }
         public long alu_id { get; set; }
         public int mtu_id { get; set; }
