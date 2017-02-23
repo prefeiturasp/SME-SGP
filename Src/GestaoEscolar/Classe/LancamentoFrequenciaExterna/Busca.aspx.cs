@@ -102,7 +102,7 @@
             try
             {
                 if (UCFiltroEscolas._VS_FiltroEscola)
-                    UCFiltroEscolas._UnidadeEscola_LoadBy_uad_idSuperior(UCFiltroEscolas._UCComboUnidadeAdministrativa_Uad_ID, false);
+                    UCFiltroEscolas._UnidadeEscola_LoadBy_uad_idSuperior(UCFiltroEscolas._UCComboUnidadeAdministrativa_Uad_ID, true, false);
 
                 UCFiltroEscolas._ComboUnidadeEscola.Enabled = UCFiltroEscolas._UCComboUnidadeAdministrativa_Uad_ID != Guid.Empty;
 
@@ -204,12 +204,12 @@
             UCCTurma.Valor = new long[] { -1, -1, -1 };
             UCCTurma.PermiteEditar = false;
             UCFiltroEscolas.SelecionaCombosAutomatico = false;
+            UCFiltroEscolas._LoadInicial(false, true);
             if (UCFiltroEscolas._VS_FiltroEscola)
             {
-                UCFiltroEscolas._ComboUnidadeAdministrativa.ValidationGroup = "Busca";
+                UCFiltroEscolas._cvUnidadeAdministrativa.ValidationGroup = "Busca";
             }
-            UCFiltroEscolas._ComboUnidadeEscola.ValidationGroup = "Busca";
-            UCFiltroEscolas._LoadInicial(false);
+            UCFiltroEscolas._cvUnidadeEscola.ValidationGroup = "Busca";
             updPesquisa.Update();
         }
 

@@ -84,10 +84,10 @@
                                                         <%#Eval("frequencia.numeroAulasPrevistas")%>
                                                     </td>
                                                     <td class="td-aulas" id="tdAulas" runat="server">
-                                                        <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                        <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                     </td>
                                                     <td class="td-faltas" id="tdFaltas" runat="server">
-                                                        <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                        <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                         <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="Quantidade de faltas maior que quantidade de aulas previstas" />
                                                     </td>
                                                 </ItemTemplate>
@@ -113,10 +113,10 @@
                                                         <%#Eval("frequencia.numeroAulasPrevistas")%>
                                                     </td>
                                                     <td class="td-aulas" id="tdAulas" runat="server">
-                                                        <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                        <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                     </td>
                                                     <td class="td-faltas" id="tdFaltas" runat="server">
-                                                        <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                        <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                         <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="Quantidade de faltas maior que quantidade de aulas previstas" />
                                                     </td>
                                                 </ItemTemplate>
@@ -179,10 +179,10 @@
                                                             <%#Eval("frequencia.numeroAulasPrevistas")%>
                                                         </td>
                                                         <td class="td-aulas" id="tdAulas" runat="server">
-                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
-                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                             <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="Quantidade de faltas maior que quantidade de aulas previstas" />
                                                         </td>
                                                     </ItemTemplate>
@@ -206,10 +206,10 @@
                                                             <%#Eval("frequencia.numeroAulasPrevistas")%>
                                                         </td>
                                                         <td class="td-aulas" id="tdAulas" runat="server">
-                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
-                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                             <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="Quantidade de faltas maior que quantidade de aulas previstas" />
                                                         </td>
                                                     </ItemTemplate>
@@ -236,10 +236,10 @@
                                                             <%#Eval("frequencia.numeroAulasPrevistas")%>
                                                         </td>
                                                         <td class="td-aulas" id="tdAulas" runat="server">
-                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
-                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                             <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="Quantidade de faltas maior que quantidade de aulas previstas" />
                                                         </td>
                                                     </ItemTemplate>
@@ -263,10 +263,10 @@
                                                             <%#Eval("frequencia.numeroAulasPrevistas")%>
                                                         </td>
                                                         <td class="td-aulas" id="tdAulas" runat="server">
-                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
-                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                             <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="Quantidade de faltas maior que quantidade de aulas previstas" />
                                                         </td>
                                                     </ItemTemplate>
@@ -332,10 +332,10 @@
                                                             <%#Eval("frequencia.numeroAulasPrevistas")%>
                                                         </td>
                                                         <td class="td-aulas" id="tdAulas" runat="server">
-                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
-                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                             <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="Quantidade de faltas maior que quantidade de aulas previstas" />
                                                         </td>
                                                     </ItemTemplate>
@@ -361,10 +361,10 @@
                                                             <%#Eval("frequencia.numeroAulasPrevistas")%>
                                                         </td>
                                                         <td class="td-aulas" id="tdAulas" runat="server">
-                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtAulas" runat="server" Text='<%#Eval("frequencia.numeroAulas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
-                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' SkinID="Numerico"></asp:TextBox>
+                                                            <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
                                                             <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="Quantidade de faltas maior que quantidade de aulas previstas" />
                                                         </td>
                                                     </ItemTemplate>
