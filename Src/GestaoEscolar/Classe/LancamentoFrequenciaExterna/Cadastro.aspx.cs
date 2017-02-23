@@ -49,6 +49,9 @@
             }
         }
 
+        /// <summary>
+        /// Lista de períodos em que o aluno esteve fora
+        /// </summary>
         private List<DadosAlunoEntradaRede> VS_ListaDadosPeriodo
         {
             get
@@ -118,6 +121,9 @@
 
         #region Métodos
 
+        /// <summary>
+        /// Carrega os dados do aluno
+        /// </summary>
         public void CarregarDadosAluno()
         {
             int tev_idFechamento = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_NOTAS, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
@@ -157,6 +163,9 @@
             }
         }
 
+        /// <summary>
+        /// Carrega os dados de lançamento de frequência externa do aluno
+        /// </summary>
         private void CarregarLancamento()
         {
             List<DadosLancamentoFreqExterna> lDadosAluno = CLS_AlunoFrequenciaExternaBO.SelecionaDadosAlunoLancamentoFrequenciaExterna(VS_alu_id, VS_mtu_id);
@@ -401,6 +410,9 @@
             }
         }
 
+        /// <summary>
+        /// Salva os lançamentos de frequência externa do aluno
+        /// </summary>
         private void Salvar()
         {
             try
@@ -557,6 +569,8 @@
 
         #endregion Métodos
 
+        #region Eventos
+
         protected void rptDisciplinas_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -595,10 +609,13 @@
                 }
 
                 bool possuiLancamentoAulasPrevistas = Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "frequencia.possuiLancamentoAulasPrevistas"));
-                int qtdeAulasPrevistas = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "frequencia.numeroAulasPrevistas"));
-                int qtdeFaltas = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "frequencia.numeroFaltas"));
+                int qtdeAulasPrevistas = 0;
+                int qtdeFaltas = 0;
 
-                if (possuiLancamentoAulasPrevistas && qtdeFaltas > qtdeAulasPrevistas)
+                if (possuiLancamentoAulasPrevistas && 
+                    int.TryParse(DataBinder.Eval(e.Item.DataItem, "frequencia.numeroAulasPrevistas").ToString(), out qtdeAulasPrevistas) &&
+                    int.TryParse(DataBinder.Eval(e.Item.DataItem, "frequencia.numeroFaltas").ToString(), out qtdeFaltas) &&
+                    qtdeFaltas > qtdeAulasPrevistas)
                 {
                     var imgAvisoAulasPrevistas = (Image)e.Item.FindControl("imgAvisoAulasPrevistas");
                     imgAvisoAulasPrevistas.CssClass = "";
@@ -617,7 +634,10 @@
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            Salvar();
+            if (Page.IsValid)
+            {
+                Salvar();
+            }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -633,5 +653,7 @@
                 ControleMescla = (tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || tud_tipo == (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia);
             }
         }
+
+        #endregion Eventos
     }
 }

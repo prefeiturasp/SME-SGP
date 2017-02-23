@@ -193,6 +193,9 @@
 
         #region Métodos
 
+        /// <summary>
+        /// Inicializa componentes da tela
+        /// </summary>
         private void InicializarTela()
         {
             UCCCalendario.CarregarCalendarioAnual();
@@ -201,10 +204,18 @@
             UCCTurma.Valor = new long[] { -1, -1, -1 };
             UCCTurma.PermiteEditar = false;
             UCFiltroEscolas.SelecionaCombosAutomatico = false;
+            if (UCFiltroEscolas._VS_FiltroEscola)
+            {
+                UCFiltroEscolas._ComboUnidadeAdministrativa.ValidationGroup = "Busca";
+            }
+            UCFiltroEscolas._ComboUnidadeEscola.ValidationGroup = "Busca";
             UCFiltroEscolas._LoadInicial(false);
             updPesquisa.Update();
         }
 
+        /// <summary>
+        /// Realiza a pesquisa de alunos para lançamento de frequência externa
+        /// </summary>
         private void Pesquisar()
         {
             using (DataTable dt = MTR_MatriculaTurmaBO.SelecionaAlunosEntradaOutrasRedes(UCCTurma.Valor[0]))
@@ -248,6 +259,9 @@
             #endregion Salvar busca realizada
         }
 
+        /// <summary>
+        /// Verifica busca já realizada
+        /// </summary>
         private void VerificarBusca()
         {
             if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.LancamentoFrequenciaExterna)
@@ -302,6 +316,9 @@
             }
         }
 
+        /// <summary>
+        /// Carrega o combo de turmas conforme os filtros
+        /// </summary>
         private void CarregarComboTurma()
         {
             UCCTurma.Valor = new long[] { -1, -1, -1 };
@@ -323,6 +340,8 @@
         }
 
         #endregion Métodos
+
+        #region Eventos
 
         protected void chkTurmaExtinta_CheckedChanged(object sender, EventArgs e)
         {
@@ -419,5 +438,7 @@
             __SessionWEB.BuscaRealizada = new BuscaGestao();
             RedirecionarPagina("~/Classe/LancamentoFrequenciaExterna/Busca.aspx");
         }
+
+        #endregion Eventos
     }
 }
