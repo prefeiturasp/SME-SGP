@@ -239,6 +239,35 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Salva item na fila de processamento com a flag frequência externa marcada.
+        /// </summary>
+        /// <param name="listFila">Lista com tpc_ids e tud_ids.</param>
+        public static void SalvarFilaFrequenciaExterna(List<AlunoFechamentoPendencia> listFila, TalkDBTransaction banco)
+        {
+            object lockObject = new object();
+
+            CLS_AlunoFechamentoPendenciaDAO dao = new CLS_AlunoFechamentoPendenciaDAO { _Banco = banco };
+            DataTable dtAlunoFechamentoPendencia = CLS_AlunoFechamentoPendencia.TipoTabela_AlunoFechamentoPendencia();
+            if (listFila.Any())
+            {
+                Parallel.ForEach
+                (
+                    listFila,
+                    alunoFechamentoPendencia =>
+                    {
+                        lock (lockObject)
+                        {
+                            RemoveCacheFechamentoAutomatico(alunoFechamentoPendencia.tud_id);
+                            DataRow dr = dtAlunoFechamentoPendencia.NewRow();
+                            dtAlunoFechamentoPendencia.Rows.Add(AlunoFechamentoPendenciaToDataRow(alunoFechamentoPendencia, dr));
+                        }
+                    }
+                );
+            }
+            dao.SalvarFilaFrequenciaExterna(dtAlunoFechamentoPendencia);
+        }
+
+        /// <summary>
         /// Salva item na fila de processamento com a processo = 2, para verificar pendencia de fechamento.
         /// </summary>
         /// <param name="tud_id">Id da disciplina na turma.</param>

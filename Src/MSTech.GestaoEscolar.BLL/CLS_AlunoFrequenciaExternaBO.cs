@@ -124,7 +124,7 @@ namespace MSTech.GestaoEscolar.BLL
 
                         if (FilaProcessamento.Any())
                         {
-                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaFrequenciaExterna(
                                 FilaProcessamento
                                 .GroupBy(g => new { g.tud_id, g.tpc_id })
                                 .Select(p => new AlunoFechamentoPendencia
