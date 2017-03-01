@@ -1,7 +1,9 @@
 ﻿function jsCadastroFrequenciaExterna() {
     $('td.td-faltas input[type="text"]').unbind('change').bind('change', function () {
         var qtdFaltas = $(this).val();
-        var qtdAulasPrevistas = $(this).parent('td').parent('tr').find('td.td-aulasPrevistas').html().trim();
+        var tr = $(this).parent('td').parent('tr');
+        var index = tr.find('td.td-faltas').index($(this).parent('td'));
+        var qtdAulasPrevistas = $(tr.find('td.td-aulasPrevistas').get(index)).html().trim();
 
         if (qtdAulasPrevistas != "-" && parseInt(qtdAulasPrevistas) < parseInt(qtdFaltas)) {
             $(this).parent('td').find('img[id$="imgAvisoAulasPrevistas"]').removeClass('hide');
