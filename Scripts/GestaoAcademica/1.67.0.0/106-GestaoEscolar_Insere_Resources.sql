@@ -312,6 +312,13 @@ SET XACT_ABORT ON
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Data de matrícula'		
+		
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Voltar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Voltar'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 

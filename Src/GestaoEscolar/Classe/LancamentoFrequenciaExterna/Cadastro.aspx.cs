@@ -2,6 +2,7 @@
 {
     using MSTech.CoreSSO.BLL;
     using MSTech.GestaoEscolar.BLL;
+    using MSTech.GestaoEscolar.CustomResourceProviders;
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.Web.WebProject;
     using System;
@@ -115,6 +116,15 @@
                         VS_mtu_id = PreviousPage.EditMtuId;
 
                         CarregarDadosAluno();
+
+                        bool permisao = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar || __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
+                        HabilitaControles(divBoletim.Controls, permisao);
+                        btnSalvar.Visible = permisao;
+
+                        if (!permisao)
+                        {
+                            btnCancelar.Text = CustomResource.GetGlobalResourceObject("Padrao", "Padrao.Voltar.Text").ToString();
+                        }
                     }
                 }
                 catch (Exception ex)
