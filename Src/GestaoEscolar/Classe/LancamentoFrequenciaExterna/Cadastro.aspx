@@ -90,7 +90,7 @@
                                                     </td>
                                                     <td class="td-faltas" id="tdFaltas" runat="server">
                                                         <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
-                                                        <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
+                                                        <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="AbsMiddle" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
                                                     </td>
                                                 </ItemTemplate>
                                             </asp:Repeater>
@@ -121,7 +121,7 @@
                                                     </td>
                                                     <td class="td-faltas" id="tdFaltas" runat="server">
                                                         <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
-                                                        <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
+                                                        <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="AbsMiddle" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
                                                     </td>
                                                 </ItemTemplate>
                                             </asp:Repeater>
@@ -188,7 +188,7 @@
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
                                                             <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
-                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
+                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="AbsMiddle" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
                                                         </td>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -216,7 +216,7 @@
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
                                                             <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
-                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
+                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="AbsMiddle" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
                                                         </td>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -247,7 +247,7 @@
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
                                                             <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
-                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
+                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="AbsMiddle" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
                                                         </td>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -275,7 +275,7 @@
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
                                                             <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
-                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
+                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="AbsMiddle" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
                                                         </td>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -346,7 +346,7 @@
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
                                                             <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
-                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
+                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="AbsMiddle" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
                                                         </td>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -377,7 +377,7 @@
                                                         </td>
                                                         <td class="td-faltas" id="tdFaltas" runat="server">
                                                             <asp:TextBox ID="txtFaltas" runat="server" Text='<%#Eval("frequencia.numeroFaltas")%>' MaxLength="5" SkinID="Numerico2c"></asp:TextBox>
-                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="Top" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
+                                                            <asp:Image ID="imgAvisoAulasPrevistas" runat="server" SkinID="imgAviso" CssClass="hide" Width="16px" Height="16px" ImageAlign="AbsMiddle" ToolTip="<%$ Resources:GestaoEscolar.Classe.LancamentoFrequenciaExterna.Cadastro, imgAvisoAulasPrevistas.ToolTip %>" />
                                                         </td>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
