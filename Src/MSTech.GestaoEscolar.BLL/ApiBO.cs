@@ -6248,7 +6248,7 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         #endregion
-
+        
         #endregion Geral - Sistema Gestão Escolar
 
         #region Plataforma de Itens e Avaliações
