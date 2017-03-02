@@ -6248,7 +6248,47 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         #endregion
-        
+
+        #region TurmaHorario
+
+        /// <summary>
+        /// Salva os dados informados no arquivo.
+        /// </summary>
+        /// <param name="dados">Lista TUR_TurmaHorario(conteúdo JSon enviado no post)</param>
+        /// <returns></returns>
+        public static List<TUR_TurmaHorarioDTO> SalvarTurmaHorario(string Json)
+        {
+            List<TUR_TurmaHorarioDTO> lista = new List<TUR_TurmaHorarioDTO>();
+            TalkDBTransaction banco = new TUR_TurmaHorarioDAO()._Banco;
+
+            try
+            {
+                JArray listaDados = (JArray.Parse(Json) ?? new JArray());
+
+                lista = (from item in listaDados.AsEnumerable()
+                         select (TUR_TurmaHorarioDTO)JsonConvert.DeserializeObject<TUR_TurmaHorarioDTO>(item.ToString()))
+                        .Where(t => t.tud_id > 0).ToList();
+
+                banco.Open();
+
+                TUR_TurmaHorarioBO.SalvarTurmaHorarioAPI(lista, banco);
+            }
+            catch (Exception ex)
+            {
+                banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                banco.Close();
+            }
+
+            return lista;
+        }
+
+
+        #endregion
+
         #endregion Geral - Sistema Gestão Escolar
 
         #region Plataforma de Itens e Avaliações
