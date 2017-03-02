@@ -260,7 +260,7 @@ namespace GestaoEscolar.Turma.Turma
                               p.trh_tipo == (byte)ACA_TurnoHorarioTipo.AulaForaPeriodo) ? "1" : "0")
                     ,
                         title = "<span class=\"quadro-title\">" + (p.tud_id > 0 && !string.IsNullOrEmpty(p.tud_nome) ? p.tud_nome + "</span>" : disciplinaNaoInformada(p.trh_tipo)) +
-                                "<span class=\"quadro-tipo\">" + GestaoEscolarUtilBO.GetEnumDescription((ACA_TurnoHorarioTipo)Enum.ToObject(typeof(ACA_TurnoHorarioTipo), p.trh_tipo)) + "</span>"
+                                "<br/><span class=\"quadro-tipo\">" + GestaoEscolarUtilBO.GetEnumDescription((ACA_TurnoHorarioTipo)Enum.ToObject(typeof(ACA_TurnoHorarioTipo), p.trh_tipo)) + "</span>"
                     ,
                         allDay = false
                     ,
