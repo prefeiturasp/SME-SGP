@@ -320,6 +320,34 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Voltar'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoHorarioBO.ACA_TurnoHorarioTipo.AulaForaPeriodo' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aula fora do período do turno'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoHorarioBO.ACA_TurnoHorarioTipo.AulaNormal' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aula normal'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoHorarioBO.ACA_TurnoHorarioTipo.IntervaloEntreAulas' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Intervalo entre aulas'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoHorarioBO.ACA_TurnoHorarioTipo.IntervaloEntrePeriodos' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Intervalo entre períodos'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
