@@ -2908,14 +2908,14 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                         ,
                                             cal_id = g.First().cal_id
                                             ,
-                                            faltasExternas = (!g.Any(b => BimestreAtivo(b.tpc_id)) || !g.Any(b => NaoVisualizarDados(b.tpc_id))) ? "-" :
+                                            faltasExternas = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? "-" :
                                                                 g.First().tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada || g.Any(p => p.naoExibirFrequencia) ? "-" : (g.Sum(p =>
                                                                     (p.mostraFrequencia && !p.naoExibirFrequencia &&
                                                                     (p.NotaID > 0 || tipoComponenteRegencia(p.tud_tipo))
                                                                     && p.tpc_ordem <= tpc_ordem)
                                                                     ? p.faltasExternas : 0)).ToString()
                                             ,
-                                            possuiFrequenciaExterna = (!g.Any(b => BimestreAtivo(b.tpc_id)) || !g.Any(b => NaoVisualizarDados(b.tpc_id))) ? false :
+                                            possuiFrequenciaExterna = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? false :
                                                                         g.First().tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada || g.Any(p => p.naoExibirFrequencia) ? false :
                                                                         ParecerConclusivoDados.Any(b => b.Disciplina == g.Key && b.possuiFrequenciaExterna)
                                         }).ToList();
@@ -3084,14 +3084,14 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                     ,
                                         cal_id = g.First().cal_id
                                         ,
-                                        faltasExternas = (!g.Any(b => BimestreAtivo(b.tpc_id)) || !g.Any(b => NaoVisualizarDados(b.tpc_id))) ? "-" :
+                                        faltasExternas = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? "-" :
                                                             (g.Sum(p =>
                                                                 (p.mostraFrequencia && !p.naoExibirFrequencia &&
                                                                 (p.NotaID > 0)
                                                                 && p.tpc_ordem <= tpc_ordem)
                                                                 ? p.faltasExternas : 0)).ToString()
                                         ,
-                                        possuiFrequenciaExterna = (!g.Any(b => BimestreAtivo(b.tpc_id)) || !g.Any(b => NaoVisualizarDados(b.tpc_id))) ? false :
+                                        possuiFrequenciaExterna = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? false :
                                                                     ParecerConclusivoDados.Any(b => b.tud_id == g.Key && b.possuiFrequenciaExterna)
                                     }).ToList();
 
