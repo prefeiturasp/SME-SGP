@@ -1050,6 +1050,9 @@
           <Parameter Name="documentoOficial">
             <Value>=Parameters!documentoOficial.Value</Value>
           </Parameter>
+          <Parameter Name="mensagemFrequenciaExterna">
+            <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
+          </Parameter>
         </Parameters>
         <Top>2.27753cm</Top>
         <Height>0.77375cm</Height>
@@ -1273,11 +1276,13 @@
     </ReportParameter>
     <ReportParameter Name="nomeMunicipio">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>nomeMunicipio</Prompt>
     </ReportParameter>
     <ReportParameter Name="nomeSecretaria">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>nomeSecretaria</Prompt>
     </ReportParameter>
@@ -1290,6 +1295,12 @@
     <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documentoOficial</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="mensagemFrequenciaExterna">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>mensagemFrequenciaExterna</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
