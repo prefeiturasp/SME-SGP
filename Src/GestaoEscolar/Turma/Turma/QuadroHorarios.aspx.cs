@@ -136,8 +136,8 @@ namespace GestaoEscolar.Turma.Turma
                             }
                             else
                             {
-                                btnCancelar.Visible = btnCancelarAtribuicao.Visible = UCCTurmaDisciplina.PermiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
-                                btnVoltar.Visible = btnFecharAtribuicao.Visible = !__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                                btnCancelar.Visible = btnCancelarAtribuicao.Visible = UCCTurmaDisciplina.PermiteEditar = false;
+                                btnVoltar.Visible = btnFecharAtribuicao.Visible = true;
                             }
                         }
                         else
