@@ -1064,7 +1064,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.49741cm</Height>
+              <Height>0.43cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1166,8 +1166,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.42529cm</Top>
-        <Height>0.49741cm</Height>
+        <Top>1.35473cm</Top>
+        <Height>0.43cm</Height>
         <Width>12.9388cm</Width>
         <ZIndex>1</ZIndex>
         <Visibility>
@@ -1180,7 +1180,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.75697in</Height>
+    <Height>0.70265in</Height>
     <Style />
   </Body>
   <Width>5.15921in</Width>

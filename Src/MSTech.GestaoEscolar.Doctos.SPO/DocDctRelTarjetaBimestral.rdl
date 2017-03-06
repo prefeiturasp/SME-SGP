@@ -634,7 +634,6 @@
                       </Style>
                     </Subreport>
                     <ColSpan>3</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -642,7 +641,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.64552cm</Height>
+              <Height>0.60552cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -672,7 +671,7 @@
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.49741cm</Height>
+                                <Height>0.43cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -955,7 +954,7 @@
                             </TablixMembers>
                           </TablixRowHierarchy>
                           <Top>0.14811cm</Top>
-                          <Height>0.49741cm</Height>
+                          <Height>0.43cm</Height>
                           <Width>12.9388cm</Width>
                           <Style>
                             <Border>
@@ -1350,7 +1349,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.00978cm</Top>
         <Left>0.01567cm</Left>
-        <Height>5.81623cm</Height>
+        <Height>5.77623cm</Height>
         <Width>27.5265cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
