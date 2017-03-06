@@ -140,6 +140,10 @@
           <DataField>PossuiFreqExternaAtual</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
+        <Field Name="PossuiFreqExternaAcum">
+          <DataField>PossuiFreqExternaAcum</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
         <Field Name="possuiFreqExterna">
           <DataField>possuiFreqExterna</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
@@ -393,7 +397,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!atd_numeroFaltas.Value)</Value>
+                                  <Value>=CStr(Sum(Fields!atd_numeroFaltas.Value)) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                                   <Style>
                                     <FontSize>8.5pt</FontSize>
                                   </Style>
@@ -424,7 +428,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CStr(Sum(Fields!atd_numeroFaltas.Value)) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
+                                  <Value>=CStr(Sum(Fields!atd_numeroFaltas.Value)) + IIF(CBool(Fields!PossuiFreqExternaAcum.Value) = true, "*", "")</Value>
                                   <Style>
                                     <FontSize>8.5pt</FontSize>
                                   </Style>
@@ -486,7 +490,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CStr(Fields!frequenciaFinalAjustada.Value) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
+                                  <Value>=CStr(Fields!frequenciaFinalAjustada.Value) + IIF(CBool(Fields!PossuiFreqExternaAcum.Value) = true, "*", "")</Value>
                                   <Style>
                                     <FontSize>8.5pt</FontSize>
                                   </Style>
@@ -506,7 +510,6 @@
                             <VerticalAlign>Middle</VerticalAlign>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
