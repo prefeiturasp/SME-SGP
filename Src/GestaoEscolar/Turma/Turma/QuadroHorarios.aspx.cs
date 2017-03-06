@@ -128,17 +128,15 @@ namespace GestaoEscolar.Turma.Turma
                             // Se exister algum registro externo, não permite a edição via sistema
                             if (VS_lstTurmaHorario.Exists(p => p.thr_registroExterno) || VS_turmaMultisseriada)
                             {
-                                btnSalvar.Visible = false;
                                 btnCancelar.Visible = false;
                                 btnCancelarAtribuicao.Visible = false;
-                                btnAtribuiDisciplina.Visible = false;
                                 UCCTurmaDisciplina.PermiteEditar = false;
 
                                 btnVoltar.Visible = btnFecharAtribuicao.Visible = true;
                             }
                             else
                             {
-                                btnSalvar.Visible = btnCancelar.Visible = btnCancelarAtribuicao.Visible = btnAtribuiDisciplina.Visible = UCCTurmaDisciplina.PermiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                                btnCancelar.Visible = btnCancelarAtribuicao.Visible = UCCTurmaDisciplina.PermiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                                 btnVoltar.Visible = btnFecharAtribuicao.Visible = !__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                             }
                         }
@@ -195,7 +193,7 @@ namespace GestaoEscolar.Turma.Turma
             UCComboTipoHorario.Carregar();
 
             UCCTurmaDisciplina.CarregarTurmaDisciplina(VS_tur_id, true);
-            UCCTurmaDisciplina.PermiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+            UCCTurmaDisciplina.PermiteEditar = false;
             
             VS_lstTurmaHorario = TUR_TurmaHorarioBO.SelecionaPorTurma(VS_tur_id);
 
@@ -399,89 +397,11 @@ namespace GestaoEscolar.Turma.Turma
 
             UCCalendario.CarregarCalendarioSemanal(lstEventos, option, inicializar, slotMin, slotMax);
         }
-
-        /// <summary>
-        /// Salva os dados do quadro de horários das disciplinas.
-        /// </summary>
-        private void Salvar()
-        {
-            try
-            {
-                if (TUR_TurmaHorarioBO.SalvarTurmaHorario(VS_tur_id, VS_lstTurmaHorario))
-                {
-                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "Quadro de horários da turma | tur_id : " + VS_tur_id);
-                    __SessionWEB.PostMessages = UtilBO.GetErroMessage(CustomResource.GetGlobalResourceObject("Turma", "Turma.QuadroHorarios.SalvoComSucesso"), UtilBO.TipoMensagem.Sucesso);
-
-                    RedirecionarPagina(VS_PaginaVoltar);
-                    HttpContext.Current.ApplicationInstance.CompleteRequest();
-                }
-            }
-            catch (ValidationException ex)
-            {
-                lblMensagem.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-            }
-            catch (Exception ex)
-            {
-                lblMensagem.Text = UtilBO.GetErroMessage(CustomResource.GetGlobalResourceObject("Turma", "Turma.QuadroHorarios.ErroSalvar"), UtilBO.TipoMensagem.Erro);
-                ApplicationWEB._GravaErro(ex);
-            }
-            finally
-            {
-                CarregarCalendario(false);
-                updMensagem.Update();
-                ScriptManager.RegisterStartupScript(Page, typeof(Page), "GoToTop", "$(document).ready(function() { scrollToTop(); return false; });", true);
-            }
-        }
-
+        
         #endregion Métodos
 
         #region Eventos
-
-        protected void btnAtribuiDisciplina_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int trn_id, trh_id;
-                string[] lstParam = null;
-
-                lstParam = hdnHorario.Value.Split(';');
-
-                trn_id = Convert.ToInt32(lstParam[0]);
-                trh_id = Convert.ToInt32(lstParam[1]);
-
-                VS_lstTurmaHorario.Where(p => p.trn_id == trn_id && p.trh_id == trh_id)
-                                  .ToList()
-                                  .ForEach
-                                  (
-                                      p =>
-                                      {
-                                          p.tud_id = UCCTurmaDisciplina.Valor;
-                                          p.tud_nome = UCCTurmaDisciplina.Valor > 0 ? UCCTurmaDisciplina.Texto : string.Empty;
-                                      }
-                                  );
-
-                ScriptManager.RegisterStartupScript(Page, typeof(Page), "CadastroHorarios", "$(document).ready(function(){ $('.divAtribuirDisciplina').dialog('close'); return false; });", true);
-                updAtribuirDisciplina.Update();
-
-                lblMensagem.Text = UtilBO.GetErroMessage(CustomResource.GetGlobalResourceObject("Turma", "Turma.QuadroHorarios.SucessoAtribuicao"), UtilBO.TipoMensagem.Sucesso);
-            }
-            catch (Exception ex)
-            {
-                lblMensagem.Text = UtilBO.GetErroMessage(CustomResource.GetGlobalResourceObject("Turma", "Turma.QuadroHorarios.ErroAtribuicao"), UtilBO.TipoMensagem.Erro);
-                ApplicationWEB._GravaErro(ex);
-            }
-            finally
-            {
-                CarregarCalendario(false);
-                updMensagem.Update();
-            }
-        }
-
-        protected void btnSalvar_Click(object sender, EventArgs e)
-        {
-            Salvar();
-        }
-
+        
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             RedirecionarPagina(VS_PaginaVoltar);
