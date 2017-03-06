@@ -2120,7 +2120,7 @@
                         </BottomBorder>
                         <LeftBorder>
                           <Color>Black</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                           <Width>1pt</Width>
                         </LeftBorder>
                         <RightBorder>

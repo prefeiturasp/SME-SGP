@@ -738,7 +738,7 @@
                                           </BottomBorder>
                                           <LeftBorder>
                                             <Color>Black</Color>
-                                            <Style>Solid</Style>
+                                            <Style>None</Style>
                                             <Width>1pt</Width>
                                           </LeftBorder>
                                           <RightBorder>
@@ -752,6 +752,7 @@
                                           <PaddingBottom>2pt</PaddingBottom>
                                         </Style>
                                       </Textbox>
+                                      <rd:Selected>true</rd:Selected>
                                     </CellContents>
                                   </TablixCell>
                                   <TablixCell>
@@ -775,6 +776,18 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
+                                          <TopBorder>
+                                            <Style>Solid</Style>
+                                          </TopBorder>
+                                          <BottomBorder>
+                                            <Style>Solid</Style>
+                                          </BottomBorder>
+                                          <LeftBorder>
+                                            <Style>None</Style>
+                                          </LeftBorder>
+                                          <RightBorder>
+                                            <Style>Solid</Style>
+                                          </RightBorder>
                                           <BackgroundColor>=Parameters!corAlunoFrequenciaLimite.Value</BackgroundColor>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
@@ -819,7 +832,7 @@
                                           </BottomBorder>
                                           <LeftBorder>
                                             <Color>Black</Color>
-                                            <Style>Solid</Style>
+                                            <Style>None</Style>
                                             <Width>1pt</Width>
                                           </LeftBorder>
                                           <RightBorder>
@@ -856,6 +869,18 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
+                                          <TopBorder>
+                                            <Style>Solid</Style>
+                                          </TopBorder>
+                                          <BottomBorder>
+                                            <Style>Solid</Style>
+                                          </BottomBorder>
+                                          <LeftBorder>
+                                            <Style>None</Style>
+                                          </LeftBorder>
+                                          <RightBorder>
+                                            <Style>Solid</Style>
+                                          </RightBorder>
                                           <BackgroundColor>Orange</BackgroundColor>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
@@ -918,7 +943,7 @@
                                           </BottomBorder>
                                           <LeftBorder>
                                             <Color>Black</Color>
-                                            <Style>Solid</Style>
+                                            <Style>None</Style>
                                             <Width>1pt</Width>
                                           </LeftBorder>
                                           <RightBorder>

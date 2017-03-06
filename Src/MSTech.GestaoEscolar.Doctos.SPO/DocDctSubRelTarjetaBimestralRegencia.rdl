@@ -1068,7 +1068,7 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox2">
+                    <Textbox Name="Textbox6">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -1091,12 +1091,16 @@
                         <Border>
                           <Style>Solid</Style>
                         </Border>
+                        <RightBorder>
+                          <Width>0.5pt</Width>
+                        </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1136,7 +1140,7 @@
                         </BottomBorder>
                         <LeftBorder>
                           <Color>Black</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                           <Width>1pt</Width>
                         </LeftBorder>
                         <RightBorder>
