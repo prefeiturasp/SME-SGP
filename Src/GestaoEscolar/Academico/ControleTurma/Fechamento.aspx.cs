@@ -285,6 +285,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         Session["tdt_posicao"] = valor[3].ToString();
                         Session["PaginaRetorno"] = UCNavegacaoTelaPeriodo.VS_paginaRetorno;
                         Session["VS_TpcId"] = UCNavegacaoTelaPeriodo.VS_tpc_id;
+                        Session["VS_TpcOrdem"] = UCNavegacaoTelaPeriodo.VS_tpc_ordem;
 
                         if (valor.Length > 7)
                         {
@@ -333,6 +334,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     Session["tdt_posicao"] = valor[3].ToString();
                     Session["PaginaRetorno"] = UCNavegacaoTelaPeriodo.VS_paginaRetorno;
                     Session["VS_TpcId"] = UCNavegacaoTelaPeriodo.VS_tpc_id;
+                    Session["VS_TpcOrdem"] = UCNavegacaoTelaPeriodo.VS_tpc_ordem;
                     Session["TudIdCompartilhada"] = tud_id.ToString();
                     Session["Historico"] = VS_historico;
 
@@ -433,6 +435,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                             UCControleTurma1.VS_tciIds = VS_EntitiesControleTurma.tciIds;
                             if (Session["VS_TpcId"] != null)
                                 UCNavegacaoTelaPeriodo.VS_tpc_id = Convert.ToInt32(Session["VS_TpcId"]);
+                            if (Session["VS_TpcOrdem"] != null)
+                                UCNavegacaoTelaPeriodo.VS_tpc_ordem = Convert.ToInt32(Session["VS_TpcOrdem"]);
                         }
                         else if (PreviousPage != null && PreviousPage.IsCrossPagePostBack)
                         {
