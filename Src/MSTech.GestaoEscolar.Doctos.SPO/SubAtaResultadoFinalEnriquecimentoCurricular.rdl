@@ -776,7 +776,6 @@
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2986,7 +2985,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.49741cm</Height>
+              <Height>0.43cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3088,8 +3087,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.71793cm</Top>
-        <Height>0.49741cm</Height>
+        <Top>1.64737cm</Top>
+        <Height>0.43cm</Height>
         <Width>12.9388cm</Width>
         <ZIndex>1</ZIndex>
         <Visibility>
@@ -3102,7 +3101,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.87218in</Height>
+    <Height>0.81786in</Height>
     <Style />
   </Body>
   <Width>12.9388cm</Width>

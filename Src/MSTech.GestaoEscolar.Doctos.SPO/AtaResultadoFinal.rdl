@@ -269,7 +269,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.49741cm</Height>
+                  <Height>0.43cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -617,7 +617,7 @@
                 <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
-            <Height>0.49741cm</Height>
+            <Height>0.43cm</Height>
             <Width>12.9388cm</Width>
             <Style>
               <Border>

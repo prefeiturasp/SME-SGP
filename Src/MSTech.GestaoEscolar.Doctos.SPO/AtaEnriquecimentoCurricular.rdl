@@ -301,7 +301,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.03528cm</Top>
-        <Height>2.15278cm</Height>
+        <Height>2.15277cm</Height>
         <Width>25.51813cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -330,7 +330,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.49741cm</Height>
+                  <Height>0.43cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -574,7 +574,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <Top>0.02111cm</Top>
-            <Height>0.49741cm</Height>
+            <Height>0.43cm</Height>
             <Width>8.80692cm</Width>
             <Visibility>
               <Hidden>= Fields!docenciaCompartilhada.Value = True</Hidden>
@@ -1047,7 +1047,7 @@
           <Parameter Name="corAlunoFrequenciaLimite">
             <Value>=Parameters!corAlunoFrequenciaLimite.Value</Value>
           </Parameter>
-		  <Parameter Name="documentoOficial">
+          <Parameter Name="documentoOficial">
             <Value>=Parameters!documentoOficial.Value</Value>
           </Parameter>
         </Parameters>
@@ -1092,7 +1092,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0cm</Top>
           <Left>22.62125cm</Left>
           <Height>0.6cm</Height>
           <Width>2.89688cm</Width>
@@ -1288,7 +1287,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>cal_ano</Prompt>
     </ReportParameter>
-	<ReportParameter Name="documentoOficial">
+    <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documentoOficial</Prompt>
     </ReportParameter>
