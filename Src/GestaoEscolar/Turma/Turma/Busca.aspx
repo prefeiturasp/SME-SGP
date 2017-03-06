@@ -84,7 +84,7 @@
                 <asp:TemplateField HeaderText="Quadro de horários">
                     <ItemTemplate>
                         <asp:ImageButton ID="btnQuadroHorarios" SkinID="btIndicadores" runat="server" CommandName="Select"
-                            PostBackUrl="~/Turma/Turma/QuadroHorarios.aspx" ToolTip="Edição do quadro de horários da turma" />
+                            PostBackUrl="~/Turma/Turma/QuadroHorarios.aspx" ToolTip="Visualizar o quadro de horários da turma" />
                     </ItemTemplate>
                      <HeaderStyle HorizontalAlign="center"></HeaderStyle>
                     <ItemStyle HorizontalAlign="center"></ItemStyle>
