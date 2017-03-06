@@ -19,6 +19,12 @@ SET XACT_ABORT ON
 		,@SiteMapUrl = '~/Configuracao/TipoEvento/Busca.aspx' -- Url da SiteMap (Obrigatório)
 	*/
 
+	EXEC MS_InsereSiteMap
+		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
+		,@nomeModulo = 'Manutenção de turmas' -- Nome do módulo (Obrigatório)
+		,@SiteMapNome = 'Quadro de horários' -- Nome do SiteMap (Obrigatório)
+		,@SiteMapUrl = '~/Turma/Turma/QuadroHorarios.aspx' -- Url da SiteMap (Obrigatório)
+		
 -- Fechar transação
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
