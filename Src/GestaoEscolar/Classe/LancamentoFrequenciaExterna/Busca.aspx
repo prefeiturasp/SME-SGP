@@ -56,7 +56,7 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:BoundField>
                             <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.NomeMae.Text %>" DataField="pes_nomeMae" SortExpression="pes_nomeMae" />
-                            <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Matricula.Text %>" DataField="alc_matricula" SortExpression="alc_matricula" />
+                            <asp:BoundField HeaderText="<%$ Resources:Mensagens, MSG_NUMEROMATRICULA %>" DataField="alc_matricula" SortExpression="alc_matricula" />
                             <asp:BoundField DataField="mtu_dataMatricula" HeaderText="<%$ Resources:Padrao, Padrao.DataMatricula.Text %>" DataFormatString="{0:dd/MM/yyy}"
                                 SortExpression="mtu_dataMatricula">
                                 <HeaderStyle CssClass="center" />
