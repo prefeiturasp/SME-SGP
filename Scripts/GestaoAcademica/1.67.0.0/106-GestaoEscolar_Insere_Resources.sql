@@ -483,7 +483,7 @@ SET XACT_ABORT ON
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Combos.UCComboTipoHorario.lblTipoHorario.Text' 
-		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_NomeResource = 'UserControl'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Tipo de horário'
