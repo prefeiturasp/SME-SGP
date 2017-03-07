@@ -53,7 +53,7 @@
                 CausesValidation="true" ValidationGroup="CompAusencia" />
             <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click"
                 CausesValidation="False" />
-            <div class="area-botoes-bottom" >
+            <div class="area-botoes-bottom" style="display:inline">
                 <asp:Button ID="btnNovo" runat="server" Text="Incluir nova compensação" OnClick="btnNovo_Click"
                     CausesValidation="False" />
             </div>
