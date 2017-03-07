@@ -6267,7 +6267,7 @@ namespace MSTech.GestaoEscolar.BLL
 
                 lista = (from item in listaDados.AsEnumerable()
                          select (TUR_TurmaHorarioDTO)JsonConvert.DeserializeObject<TUR_TurmaHorarioDTO>(item.ToString()))
-                        .Where(t => t.tud_id > 0).ToList();
+                        .Where(t => t.tud_id > 0 && t.trh_id > 0 && t.trn_id > 0).ToList();
 
                 banco.Open();
 
