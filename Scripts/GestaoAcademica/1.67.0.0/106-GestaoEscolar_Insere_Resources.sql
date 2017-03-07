@@ -432,6 +432,62 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Hora inicial'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoBO.DiasSemana.Domingo' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Domingo'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoBO.DiasSemana.Quarta' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quarta-feira'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoBO.DiasSemana.Quinta' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quinta-feira'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoBO.DiasSemana.Sabado' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Sábado'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoBO.DiasSemana.Segunda' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Segunda-feira'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoBO.DiasSemana.Sexta' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Sexta-feira'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ACA_TurnoBO.DiasSemana.Terca' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Terça-feira'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Combos.UCComboTipoHorario.lblTipoHorario.Text' 
+		, @rcr_NomeResource = 'Enumerador'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Tipo de horário'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
