@@ -348,6 +348,90 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Intervalo entre períodos'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.litLegendaQuadro.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quadro de horários'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.btnCancelar.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.btnCancelarAtribuicao.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.btnFecharAtribuicao.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Fechar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.btnVoltar.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Voltar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.DisciplinaNaoInformada' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Disciplina não informada'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.divAtribuirDisciplina.title' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Atribuição de disciplina ao horário'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.ErroCarregar' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar carregar os dados.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.lblDados.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<b>Turma:</b> {0}<br /><b>Escola:</b> {1}<br /><b>Calendário:</b> {2}<br /><b>Curso:</b> {3}<br /><b>Turno:</b> {4}<br /><br />'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.lblDiaSemana.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Dia da semana'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.lblHoraFinal.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Hora final'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Turma.QuadroHorarios.lblHoraInicial.Text' 
+		, @rcr_NomeResource = 'Turma'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Hora inicial'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
