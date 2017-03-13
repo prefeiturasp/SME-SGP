@@ -2,7 +2,7 @@
 <Include>
   <!-- Versão do instalador -->
   <?define Major="1" ?>
-  <?define Minor="65" ?>
+  <?define Minor="67" ?>
   <?define Revision="0" ?>
   <?define Build="0" ?>
   <?define VersionNumber="$(var.Major).$(var.Minor).$(var.Revision).$(var.Build)" ?>
