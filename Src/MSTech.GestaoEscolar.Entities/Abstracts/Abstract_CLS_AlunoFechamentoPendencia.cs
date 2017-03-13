@@ -63,5 +63,11 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual DateTime afp_dataAlteracao { get; set; }
 
+        /// <summary>
+		/// Indica se deve processar os cálculos relacionados a frequência externa.
+		/// </summary>
+		[MSNotNullOrEmpty]
+        public virtual bool afp_frequenciaExterna { get; set; }
+
     }
 }

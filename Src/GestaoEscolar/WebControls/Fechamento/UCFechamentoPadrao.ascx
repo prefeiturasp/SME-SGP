@@ -127,6 +127,7 @@
                         <ItemTemplate>
                             <asp:TextBox ID="txtQtdeFalta" runat="server" MaxLength="5" SkinID="Numerico2c">
                             </asp:TextBox>
+                            <asp:ImageButton ID="btnFaltasExternas" runat="server" Visible="false" ToolTip="Exibir ausências de outras redes" SkinID="btDetalhar" />
                         </ItemTemplate>
                         <HeaderStyle CssClass="center" />
                         <ItemStyle HorizontalAlign="Center" CssClass="colunaQtdeFalta grid-responsive-item-inline grid-responsive-header-block" />
@@ -301,3 +302,21 @@
         <asp:HiddenField ID="hdnLocalImgCheckSituacao" runat="server" />
     </ContentTemplate>
 </asp:UpdatePanel>
+
+
+<!-- Confirma quais campos deseja atualizar -->
+<div id="divFrequenciaExterna" runat="server" title="<%$ Resources:UserControl, EfetivacaoNotas.UCEfetivacaoNotas.divFrequenciaExterna.title %>" 
+    class="hide divFrequenciaExterna">
+    <fieldset>
+        <asp:Label ID="Label2" Text="<b>Quantidade de aulas: </b>" runat="server"></asp:Label>
+        <asp:Label ID="lblQtAulasExterna" Text="" runat="server"></asp:Label>
+        <br />
+        <br />
+        <asp:Label ID="Label3" Text="<b>Quantidade de faltas: </b>" runat="server"></asp:Label>
+        <asp:Label ID="lblQtFaltasExterna" Text="" runat="server"></asp:Label>
+        <br />
+        <div class="right">
+            <asp:Button ID="btnFecharFreqExt" runat="server" Text="Voltar" OnClientClick="$('.divFrequenciaExterna').dialog('close'); return false;" />
+        </div>
+    </fieldset>
+</div>

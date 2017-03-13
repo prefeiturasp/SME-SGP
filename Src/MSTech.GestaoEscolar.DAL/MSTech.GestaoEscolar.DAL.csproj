@@ -208,6 +208,7 @@
     <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaRecomendacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoFechamentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoFechamentoPendenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoFrequenciaExternaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamentoRelacionadaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoProjetoDAO.cs" />
@@ -357,6 +358,7 @@
     <Compile Include="Abstracts\Abstract_TUR_TurmaDisciplinaTerritorioDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaDocenteDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaDocenteProjetoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_TUR_TurmaHorarioDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TurmaRelTurmaDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoFichaMedicaDAO.cs" />
     <Compile Include="ACA_AlunoAnexoDAO.cs" />
@@ -482,6 +484,7 @@
     <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacaoDAO.cs" />
     <Compile Include="CLS_AlunoFechamentoDAO.cs" />
     <Compile Include="CLS_AlunoFechamentoPendenciaDAO.cs" />
+    <Compile Include="CLS_AlunoFrequenciaExternaDAO.cs" />
     <Compile Include="CLS_AlunoPlanejamentoDAO.cs" />
     <Compile Include="CLS_AlunoPlanejamentoRelacionadaDAO.cs" />
     <Compile Include="CLS_AlunoProjetoDAO.cs" />
@@ -635,6 +638,7 @@
     <Compile Include="TUR_TurmaDisciplinaTerritorioDAO.cs" />
     <Compile Include="TUR_TurmaDocenteDAO.cs" />
     <Compile Include="TUR_TurmaDocenteProjetoDAO.cs" />
+    <Compile Include="TUR_TurmaHorarioDAO.cs" />
     <Compile Include="TUR_TurmaRelTurmaDisciplinaDAO.cs" />
     <Compile Include="UsuarioDAO.cs" />
   </ItemGroup>

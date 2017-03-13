@@ -329,7 +329,8 @@ namespace GestaoEscolar.Relatorios.AtaFinalEnriquecimentoCurricular
                         + "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio")
                         + "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria")
                         + "&cal_ano=" + UCComboCalendario1.Cal_ano.ToString()
-                        + "&documentoOficial=true";
+                        + "&documentoOficial=true"
+                        + "&mensagemFrequenciaExterna=" + ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MENSAGEM_FREQUENCIA_EXTERNA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
 
             MSTech.GestaoEscolar.BLL.CFG_RelatorioBO.CallReport("Relatorios", report, parameter, HttpContext.Current);
         }

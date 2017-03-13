@@ -738,6 +738,20 @@
     <Compile Include="Classe\JustificativaAbonoFalta\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx.cs">
       <DependentUpon>BuscaCabecalhoAvisosTextos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1603,6 +1617,13 @@
     <Compile Include="Turma\TurmaEletivaAluno\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Turma\Turma\QuadroHorarios.aspx.cs">
+      <DependentUpon>QuadroHorarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Turma\Turma\QuadroHorarios.aspx.designer.cs">
+      <DependentUpon>QuadroHorarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\AlunoAnotacoes\UCAlunoAnotacoes.ascx.cs">
       <DependentUpon>UCAlunoAnotacoes.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1731,6 +1752,13 @@
     </Compile>
     <Compile Include="WebControls\Busca\UCPessoasAluno.ascx.designer.cs">
       <DependentUpon>UCPessoasAluno.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Calendario\UCCalendario.ascx.cs">
+      <DependentUpon>UCCalendario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Calendario\UCCalendario.ascx.designer.cs">
+      <DependentUpon>UCCalendario.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Cargo\UCCadastroCargo.ascx.cs">
       <DependentUpon>UCCadastroCargo.ascx</DependentUpon>
@@ -2081,6 +2109,13 @@
     </Compile>
     <Compile Include="WebControls\Combos\UCComboTipoDocente.ascx.designer.cs">
       <DependentUpon>UCComboTipoDocente.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboTipoHorario.ascx.cs">
+      <DependentUpon>UCComboTipoHorario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboTipoHorario.ascx.designer.cs">
+      <DependentUpon>UCComboTipoHorario.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Combos\UCComboTipoMovimentacaoMatriculaCombo.ascx.cs">
       <DependentUpon>UCComboTipoMovimentacaoMatriculaCombo.ascx</DependentUpon>
@@ -2771,6 +2806,8 @@
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Cadastro.aspx" />
     <None Include="Configs\Session.txt" />
+    <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
+    <Content Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
     <Content Include="Configuracao\FilaFechamento\Busca.aspx" />
     <Content Include="Configuracao\FilaFechamento\Fila.aspx" />
@@ -3446,8 +3483,11 @@
     <Content Include="Includes\jsAlunoJustificativaAbonoFalta.js" />
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
+    <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsFilaFilaFechamento.js" />
+    <Content Include="Includes\jsPopupFrequenciaExterna.js" />
+    <Content Include="Includes\jsQuadroHorarios.js" />
     <Content Include="Includes\jsResponsividadeTabelas.js" />
     <Content Include="Includes\jsAtribuicaoDocente.js" />
     <Content Include="Includes\jsCadastroEventoLimite.js" />
@@ -3496,6 +3536,7 @@
     <Content Include="Includes\jsUCAlunoAnotacoes.js" />
     <Content Include="Includes\jsUCAlunoEfetivacaoObservacao.js" />
     <Content Include="Includes\jsUCAlunoEfetivacaoObservacaoGeral.js" />
+    <Content Include="Includes\jsUCCalendario.js" />
     <Content Include="Includes\jsUCInformacoesComplementares.js" />
     <Content Include="Includes\jsUCPlanejamentoProjetos.js" />
     <Content Include="Includes\jsUCSelecaoDisciplinaCompartilhada.js" />
@@ -3534,6 +3575,7 @@
     <Content Include="Relatorios\SinteseResultadosAvaliacao\GraficoTurmaMatrizCurricular\Busca.aspx" />
     <Content Include="Turma\TurmaMultisseriada\Busca.aspx" />
     <Content Include="Turma\TurmaMultisseriada\Cadastro.aspx" />
+    <Content Include="Turma\Turma\QuadroHorarios.aspx" />
     <Content Include="version.xml" />
     <Content Include="WebControls\AlunoAnotacoes\UCAlunoAnotacoes.ascx" />
     <Content Include="WebControls\AlunoDeficiente\UCAlunoDeficiente.ascx" />
@@ -3548,6 +3590,7 @@
     <Content Include="WebControls\BuscaDocente\UCBuscaDocenteTurma.ascx" />
     <Content Include="WebControls\BuscaLancamentoClasse\UCBuscaLancamentoClasse.ascx" />
     <Content Include="WebControls\Busca\UCAlunoEducacaoEspecial.ascx" />
+    <Content Include="WebControls\Calendario\UCCalendario.ascx" />
     <Content Include="WebControls\Combos\ComboNacionalidade.ascx" />
     <Content Include="WebControls\Combos\ComboTipoDeficiencia.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoEvento.ascx" />
@@ -3577,6 +3620,7 @@
     <Content Include="WebControls\Combos\UCComboTipoClassificacaoEscola.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoCurriculoPeriodo.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoDocente.ascx" />
+    <Content Include="WebControls\Combos\UCComboTipoHorario.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoMovimentacaoMatriculaCombo.ascx" />
     <Content Include="WebControls\Combos\UCComboTurmaDisciplinaRelacionada.ascx" />
     <Content Include="WebControls\Combos\UCTipoMovimentacao_MatriculaAntesFechamento.ascx" />
@@ -3716,6 +3760,75 @@
     <Content Include="Includes\Excluidos\jquery.meio.mask.js" />
     <Content Include="Includes\Excluidos\jquery.validate.additional-methods.js" />
     <Content Include="Includes\Excluidos\jquery.validation.js" />
+	<Content Include="Includes\fullcalendar\fullcalendar.css" />
+    <Content Include="Includes\fullcalendar\fullcalendar.js" />
+    <Content Include="Includes\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Includes\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Includes\fullcalendar\gcal.js" />
+    <Content Include="Includes\fullcalendar\lang-all.js" />
+    <Content Include="Includes\fullcalendar\lang\ar-ma.js" />
+    <Content Include="Includes\fullcalendar\lang\ar-sa.js" />
+    <Content Include="Includes\fullcalendar\lang\ar.js" />
+    <Content Include="Includes\fullcalendar\lang\bg.js" />
+    <Content Include="Includes\fullcalendar\lang\ca.js" />
+    <Content Include="Includes\fullcalendar\lang\cs.js" />
+    <Content Include="Includes\fullcalendar\lang\da.js" />
+    <Content Include="Includes\fullcalendar\lang\de-at.js" />
+    <Content Include="Includes\fullcalendar\lang\de.js" />
+    <Content Include="Includes\fullcalendar\lang\el.js" />
+    <Content Include="Includes\fullcalendar\lang\en-au.js" />
+    <Content Include="Includes\fullcalendar\lang\en-ca.js" />
+    <Content Include="Includes\fullcalendar\lang\en-gb.js" />
+    <Content Include="Includes\fullcalendar\lang\es.js" />
+    <Content Include="Includes\fullcalendar\lang\fa.js" />
+    <Content Include="Includes\fullcalendar\lang\fi.js" />
+    <Content Include="Includes\fullcalendar\lang\fr-ca.js" />
+    <Content Include="Includes\fullcalendar\lang\fr.js" />
+    <Content Include="Includes\fullcalendar\lang\hi.js" />
+    <Content Include="Includes\fullcalendar\lang\hr.js" />
+    <Content Include="Includes\fullcalendar\lang\hu.js" />
+    <Content Include="Includes\fullcalendar\lang\id.js" />
+    <Content Include="Includes\fullcalendar\lang\is.js" />
+    <Content Include="Includes\fullcalendar\lang\it.js" />
+    <Content Include="Includes\fullcalendar\lang\ja.js" />
+    <Content Include="Includes\fullcalendar\lang\ko.js" />
+    <Content Include="Includes\fullcalendar\lang\lt.js" />
+    <Content Include="Includes\fullcalendar\lang\lv.js" />
+    <Content Include="Includes\fullcalendar\lang\nl.js" />
+    <Content Include="Includes\fullcalendar\lang\pl.js" />
+    <Content Include="Includes\fullcalendar\lang\pt-br.js" />
+    <Content Include="Includes\fullcalendar\lang\pt.js" />
+    <Content Include="Includes\fullcalendar\lang\ro.js" />
+    <Content Include="Includes\fullcalendar\lang\ru.js" />
+    <Content Include="Includes\fullcalendar\lang\sk.js" />
+    <Content Include="Includes\fullcalendar\lang\sl.js" />
+    <Content Include="Includes\fullcalendar\lang\sr-cyr.js" />
+    <Content Include="Includes\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="Includes\fullcalendar\lang\sr.js" />
+    <Content Include="Includes\fullcalendar\lang\sv.js" />
+    <Content Include="Includes\fullcalendar\lang\th.js" />
+    <Content Include="Includes\fullcalendar\lang\tr.js" />
+    <Content Include="Includes\fullcalendar\lang\uk.js" />
+    <Content Include="Includes\fullcalendar\lang\vi.js" />
+    <Content Include="Includes\fullcalendar\lang\zh-cn.js" />
+    <Content Include="Includes\fullcalendar\lang\zh-tw.js" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Includes\fullcalendar\lib\moment.min.js" />
     <Content Include="Includes\JS-ModuloAcademico.js" />
     <Content Include="Includes\jsAlunosTurma.js" />
     <Content Include="Includes\jsBuscaAlunos.js" />

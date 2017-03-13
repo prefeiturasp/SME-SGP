@@ -32,6 +32,8 @@ namespace MSTech.GestaoEscolar.BLL
 
         public bool afp_nota { get; set; }
 
+        public bool afp_frequenciaExterna { get; set; }
+
         public Byte afp_processado { get; set; }
 
     }
@@ -237,6 +239,35 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Salva item na fila de processamento com a flag frequência externa marcada.
+        /// </summary>
+        /// <param name="listFila">Lista com tpc_ids e tud_ids.</param>
+        public static void SalvarFilaFrequenciaExterna(List<AlunoFechamentoPendencia> listFila, TalkDBTransaction banco)
+        {
+            object lockObject = new object();
+
+            CLS_AlunoFechamentoPendenciaDAO dao = new CLS_AlunoFechamentoPendenciaDAO { _Banco = banco };
+            DataTable dtAlunoFechamentoPendencia = CLS_AlunoFechamentoPendencia.TipoTabela_AlunoFechamentoPendencia();
+            if (listFila.Any())
+            {
+                Parallel.ForEach
+                (
+                    listFila,
+                    alunoFechamentoPendencia =>
+                    {
+                        lock (lockObject)
+                        {
+                            RemoveCacheFechamentoAutomatico(alunoFechamentoPendencia.tud_id);
+                            DataRow dr = dtAlunoFechamentoPendencia.NewRow();
+                            dtAlunoFechamentoPendencia.Rows.Add(AlunoFechamentoPendenciaToDataRow(alunoFechamentoPendencia, dr));
+                        }
+                    }
+                );
+            }
+            dao.SalvarFilaFrequenciaExterna(dtAlunoFechamentoPendencia);
+        }
+
+        /// <summary>
         /// Salva item na fila de processamento com a processo = 2, para verificar pendencia de fechamento.
         /// </summary>
         /// <param name="tud_id">Id da disciplina na turma.</param>
@@ -354,6 +385,7 @@ namespace MSTech.GestaoEscolar.BLL
             dr["tpc_id"] = alunoFechamentoPendencia.tpc_id;
             dr["afp_frequencia"] = alunoFechamentoPendencia.afp_frequencia;
             dr["afp_nota"] = alunoFechamentoPendencia.afp_nota;
+            dr["afp_frequenciaExterna"] = alunoFechamentoPendencia.afp_frequenciaExterna;
             dr["afp_processado"] = alunoFechamentoPendencia.afp_processado;
 
             return dr;

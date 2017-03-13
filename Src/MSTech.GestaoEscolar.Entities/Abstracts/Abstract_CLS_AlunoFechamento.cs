@@ -107,5 +107,14 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual DateTime caf_dataAlteracao { get; set; }
 
+        /// <summary>
+		/// Número de faltas externas.
+		/// </summary>
+		public virtual int caf_qtFaltasExterna { get; set; }
+
+        /// <summary>
+        /// Número de aulas externas.
+        /// </summary>
+        public virtual int caf_qtAulasExterna { get; set; }
     }
 }

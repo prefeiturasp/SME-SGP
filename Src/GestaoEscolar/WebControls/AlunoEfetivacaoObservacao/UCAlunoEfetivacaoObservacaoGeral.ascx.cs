@@ -681,11 +681,6 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
         private bool ControleMescla = false;
 
         /// <summary>
-        /// Variável de controle para colocar Rowspan apenas na primeira linha quando for disciplina.
-        /// </summary>
-        private bool ControleMesclaDisciplina = false;
-
-        /// <summary>
         /// Variável de controle para colocar Rowspan apenas na primeira linha quando for disciplina de regência.
         /// </summary>
         private bool ControleMesclaDisciplinaRegencia = false;
@@ -718,6 +713,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
         }
 
         private List<ACA_Evento> ltEventoAux;
+
+        private bool exibirFaltasExternas = false;
 
         #endregion Variáveis
 
@@ -1063,6 +1060,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
                     //Mescla as linhas de falta, total de ausencias, %freq e total comp. para os componentes da regencia
                     byte tud_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tud_Tipo"));
+
                     if (tipoComponenteRegencia(tud_tipo))
                     {
                         if (!ControleMesclaDisciplinaRegencia)
@@ -1073,6 +1071,14 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                 tdTotAusenciasCompensadas = (HtmlTableCell)e.Item.FindControl("tdTotAusenciasCompensadas");
                                 tdTotAusenciasCompensadas.RowSpan = QtComponenteRegencia;
                                 tdTotAusenciasCompensadas.Visible = true;
+
+                                if (exibirFaltasExternas)
+                                {
+                                    var tdTotFaltasExternas = new HtmlTableCell();
+                                    tdTotFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
+                                    tdTotFaltasExternas.RowSpan = QtComponenteRegencia;
+                                    tdTotFaltasExternas.Visible = true;
+                                }
 
                                 var tdTotFrequenciaAjustada = new HtmlTableCell();
                                 tdTotFrequenciaAjustada = (HtmlTableCell)e.Item.FindControl("tdTotFrequenciaAjustada");
@@ -1090,6 +1096,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                 tdTotAusenciasCompensadas = (HtmlTableCell)e.Item.FindControl("tdTotAusenciasCompensadas");
                                 tdTotAusenciasCompensadas.Visible = false;
 
+                                var tdTotFaltasExternas = new HtmlTableCell();
+                                tdTotFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
+                                tdTotFaltasExternas.Visible = false;
+
                                 var tdTotFrequenciaAjustada = new HtmlTableCell();
                                 tdTotFrequenciaAjustada = (HtmlTableCell)e.Item.FindControl("tdTotFrequenciaAjustada");
                                 tdTotFrequenciaAjustada.Visible = false;
@@ -1102,6 +1112,13 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                         var tdTotAusenciasCompensadas = new HtmlTableCell();
                         tdTotAusenciasCompensadas = (HtmlTableCell)e.Item.FindControl("tdTotAusenciasCompensadas");
                         tdTotAusenciasCompensadas.Visible = true;
+
+                        if (exibirFaltasExternas)
+                        {
+                            var tdTotFaltasExternas = new HtmlTableCell();
+                            tdTotFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
+                            tdTotFaltasExternas.Visible = true;
+                        }
 
                         var tdTotFrequenciaAjustada = new HtmlTableCell();
                         tdTotFrequenciaAjustada = (HtmlTableCell)e.Item.FindControl("tdTotFrequenciaAjustada");
@@ -1146,6 +1163,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
                     HtmlTableCell tdAusenciasCompensadas = (HtmlTableCell)e.Item.FindControl("tdTotAusenciasCompensadas");
                     AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdAusenciasCompensadas, false, "", false, false,
+                                    eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
+
+                    HtmlTableCell tdFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false,
                                     eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                 }
             }
@@ -1199,6 +1220,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                         }
                     }
 
+                    if (exibirFaltasExternas)
+                    {
+                        var tdTotFaltasExternas = new HtmlTableCell();
+                        tdTotFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
+                        tdTotFaltasExternas.Visible = true;
+                    }
 
                     //Mescla as linhas de falta, total de ausencias e total comp. para os componentes da regencia
                     if (tipoComponenteRegencia(tud_tipo))
@@ -1234,6 +1261,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                             tdFrequenciaAjustada.Style.Add("border-style", "solid");
                         }
                     }
+
+                    HtmlTableCell tdFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false,
+                                    eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                 }
             }
             catch (Exception ex)
@@ -1286,6 +1317,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                         }
                     }
 
+                    if (exibirFaltasExternas)
+                    {
+                        var tdTotFaltasExternas = new HtmlTableCell();
+                        tdTotFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
+                        tdTotFaltasExternas.Visible = true;
+                    }
 
                     //Mescla as linhas de falta, total de ausencias e total comp. para os componentes da regencia
                     if (tipoComponenteRegencia(tud_tipo))
@@ -1321,6 +1358,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                             tdFrequenciaAjustada.Style.Add("border-style", "solid");
                         }
                     }
+
+                    HtmlTableCell tdFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false,
+                                    eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                 }
             }
             catch (Exception ex)
@@ -2231,6 +2272,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     lblMensagemSemDados.Text = UtilBO.GetErroMessage(RetornaValorResource("lblMensagemSemDados.Text"), UtilBO.TipoMensagem.Informacao);
                 }
 
+                lblMensagemFrequenciaExterna.Text = UtilBO.GetErroMessage(ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MENSAGEM_FREQUENCIA_EXTERNA, __SessionWEB.__UsuarioWEB.Usuario.ent_id), UtilBO.TipoMensagem.Informacao);
+
                 ScriptManager.RegisterStartupScript(Page, typeof(Page), "Boletim",
                        "$('.tblBoletim tbody tr:even').addClass('linhaImpar');"
                        + "$('.tblBoletim tbody tr:odd').addClass('linhaPar');"
@@ -2864,6 +2907,17 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                         })
                                                         ,
                                             cal_id = g.First().cal_id
+                                            ,
+                                            faltasExternas = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? "-" :
+                                                                g.First().tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada || g.Any(p => p.naoExibirFrequencia) ? "-" : (g.Sum(p =>
+                                                                    (p.mostraFrequencia && !p.naoExibirFrequencia &&
+                                                                    (p.NotaID > 0 || tipoComponenteRegencia(p.tud_tipo))
+                                                                    && p.tpc_ordem <= tpc_ordem)
+                                                                    ? p.faltasExternas : 0)).ToString()
+                                            ,
+                                            possuiFrequenciaExterna = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? false :
+                                                                        g.First().tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada || g.Any(p => p.naoExibirFrequencia) ? false :
+                                                                        ParecerConclusivoDados.Any(b => b.Disciplina == g.Key && b.possuiFrequenciaExterna)
                                         }).ToList();
 
             var experiencias = (from DadosFechamento item in ParecerConclusivoDados
@@ -3029,6 +3083,16 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                     })
                                                     ,
                                         cal_id = g.First().cal_id
+                                        ,
+                                        faltasExternas = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? "-" :
+                                                            (g.Sum(p =>
+                                                                (p.mostraFrequencia && !p.naoExibirFrequencia &&
+                                                                (p.NotaID > 0)
+                                                                && p.tpc_ordem <= tpc_ordem)
+                                                                ? p.faltasExternas : 0)).ToString()
+                                        ,
+                                        possuiFrequenciaExterna = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? false :
+                                                                    ParecerConclusivoDados.Any(b => b.tud_id == g.Key && b.possuiFrequenciaExterna)
                                     }).ToList();
 
             List<ACA_Evento> eventos = ACA_EventoBO.GetEntity_Efetivacao_List(ParecerConclusivoDados.OrderByDescending(i => i.tpc_ordem).FirstOrDefault().cal_id,
@@ -3054,9 +3118,24 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             // "Agrupa" a frequência das disciplinas
             QtComponentes = dispOrdenadas.Count(p => (p.mostrarDisciplina > 0));
 
+            lblMensagemFrequenciaExterna.Visible = false;
+
             if (!ensinoInfantil)
             {
                 divDisciplinas.Visible = true;
+                exibirFaltasExternas = false;
+
+                HtmlTableCell thFaltasExternas = (HtmlTableCell)divBoletim.FindControl("thFaltasExternas");
+                if (thFaltasExternas != null)
+                {
+                    exibirFaltasExternas = ExibeCompensacaoAusencia && dispOrdenadas.Any(p => p.mostrarDisciplina > 0 && p.possuiFrequenciaExterna);
+                    thFaltasExternas.Visible = exibirFaltasExternas;
+                    if (exibirFaltasExternas)
+                    {
+                        lblMensagemFrequenciaExterna.Visible = true;
+                    }
+                }
+
                 rptDisciplinas.DataSource = dispOrdenadas.Where(p => p.mostrarDisciplina > 0);
                 rptDisciplinas.DataBind();
             }
@@ -3078,10 +3157,23 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             if (disciplinasEnriquecimentoCurricular.Count() > 0 || experiencias.Count() > 0)
             {
                 divEnriquecimentoCurricular.Visible = true;
+                exibirFaltasExternas = false;
+
                 // Realiza uma ordenação posterior em que so importa se a disciplina é ou nao regencia/componente da regencia para manter o agrupamento
                 var dispOrdenadasEnriquecimento = from item in disciplinasEnriquecimentoCurricular
                                                   orderby item.regencia, controleOrdemDisciplinas ? item.tds_ordem.ToString() : item.Disciplina
                                                   select item;
+                
+                HtmlTableCell thFaltasExternasEnriquecimento = (HtmlTableCell)divBoletim.FindControl("thFaltasExternasEnriquecimento");
+                if (thFaltasExternasEnriquecimento != null)
+                {
+                    exibirFaltasExternas = ExibeCompensacaoAusencia && (dispOrdenadasEnriquecimento.Any(p => p.mostrarDisciplina > 0 && p.possuiFrequenciaExterna) || experiencias.Any(p => p.mostrarDisciplina > 0 && p.possuiFrequenciaExterna));
+                    thFaltasExternasEnriquecimento.Visible = exibirFaltasExternas;
+                    if (exibirFaltasExternas)
+                    {
+                        lblMensagemFrequenciaExterna.Visible = true;
+                    }
+                }
 
                 rptDisciplinasEnriquecimentoCurricular.DataSource = dispOrdenadasEnriquecimento.Where(p => p.mostrarDisciplina > 0);
                 rptDisciplinasEnriquecimentoCurricular.DataBind();
@@ -3101,6 +3193,19 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             if (ensinoInfantil)
             {
                 divEnsinoInfantil.Visible = true;
+                exibirFaltasExternas = false;
+
+                HtmlTableCell thFaltasExternasEI = (HtmlTableCell)divBoletim.FindControl("thFaltasExternasEI");
+                if (thFaltasExternasEI != null)
+                {
+                    exibirFaltasExternas = ExibeCompensacaoAusencia && dispOrdenadas.Any(p => p.mostrarDisciplina > 0 && p.possuiFrequenciaExterna);
+                    thFaltasExternasEI.Visible = exibirFaltasExternas;
+                    if (exibirFaltasExternas)
+                    {
+                        lblMensagemFrequenciaExterna.Visible = true;
+                    }
+                }
+
                 rptDisciplinasEnsinoInfantil.DataSource = dispOrdenadas.Where(p => p.mostrarDisciplina > 0);
                 rptDisciplinasEnsinoInfantil.DataBind();
             }

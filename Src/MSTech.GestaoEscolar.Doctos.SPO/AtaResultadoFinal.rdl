@@ -269,7 +269,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.49741cm</Height>
+                  <Height>0.43cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -358,7 +358,7 @@
                             </BottomBorder>
                             <LeftBorder>
                               <Color>Black</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                               <Width>0.5pt</Width>
                             </LeftBorder>
                             <RightBorder>
@@ -372,6 +372,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -408,7 +409,7 @@
                             </BottomBorder>
                             <LeftBorder>
                               <Color>Black</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                               <Width>0.5pt</Width>
                             </LeftBorder>
                             <RightBorder>
@@ -461,7 +462,7 @@
                             </BottomBorder>
                             <LeftBorder>
                               <Color>Black</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                               <Width>0.5pt</Width>
                             </LeftBorder>
                             <RightBorder>
@@ -511,7 +512,7 @@
                             </BottomBorder>
                             <LeftBorder>
                               <Color>Black</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                               <Width>0.5pt</Width>
                             </LeftBorder>
                             <RightBorder>
@@ -582,7 +583,7 @@
                             </BottomBorder>
                             <LeftBorder>
                               <Color>Black</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                               <Width>0.5pt</Width>
                             </LeftBorder>
                             <RightBorder>
@@ -617,7 +618,7 @@
                 <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
-            <Height>0.49741cm</Height>
+            <Height>0.43cm</Height>
             <Width>12.9388cm</Width>
             <Style>
               <Border>
@@ -1094,8 +1095,11 @@
           <Parameter Name="Regencia">
             <Value>=First(Fields!regencia.Value, "DataSet1")</Value>
           </Parameter>
-		 <Parameter Name="documentoOficial">
+          <Parameter Name="documentoOficial">
             <Value>=Parameters!documentoOficial.Value</Value>
+          </Parameter>
+          <Parameter Name="mensagemFrequenciaExterna">
+            <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
           </Parameter>
         </Parameters>
         <Top>2.30928cm</Top>
@@ -1127,8 +1131,11 @@
           <Parameter Name="corAlunoFrequenciaLimite">
             <Value>=Parameters!corAlunoFrequenciaLimite.Value</Value>
           </Parameter>
-		  <Parameter Name="documentoOficial">
+          <Parameter Name="documentoOficial">
             <Value>=Parameters!documentoOficial.Value</Value>
+          </Parameter>
+          <Parameter Name="mensagemFrequenciaExterna">
+            <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
           </Parameter>
         </Parameters>
         <Top>3.11891cm</Top>
@@ -1368,9 +1375,15 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>cal_ano</Prompt>
     </ReportParameter>
-	<ReportParameter Name="documentoOficial">
+    <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documentoOficial</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="mensagemFrequenciaExterna">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>mensagemFrequenciaExterna</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>

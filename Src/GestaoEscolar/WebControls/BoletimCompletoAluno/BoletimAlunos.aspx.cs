@@ -66,6 +66,9 @@ namespace GestaoEscolar.WebControls.BoletimCompletoAluno
                 divRodapeInfantil.Visible = !string.IsNullOrWhiteSpace(textoRodapeInfantil);
                 lblRodapeInfantil.Text = textoRodapeInfantil;
 
+                var textoRodapeFreqExterna = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MENSAGEM_FREQUENCIA_EXTERNA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                lblFreqExterna.Text = !string.IsNullOrEmpty(textoRodapeFreqExterna) ? "* " + textoRodapeFreqExterna : textoRodapeFreqExterna;
+                lblFreqExternaInfantil.Text = !string.IsNullOrEmpty(textoRodapeFreqExterna) ? "* " + textoRodapeFreqExterna : textoRodapeFreqExterna;
             }
         }
     }

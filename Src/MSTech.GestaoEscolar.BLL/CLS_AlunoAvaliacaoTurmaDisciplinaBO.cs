@@ -561,7 +561,8 @@ namespace MSTech.GestaoEscolar.BLL
                             esconderPendencia = true,
                             mtu_resultado = itemCopiar.mtu_resultado,
                             usuarioParecerConclusivo = itemCopiar.usuarioParecerConclusivo,
-                            dataAlteracaoParecerConclusivo = itemCopiar.dataAlteracaoParecerConclusivo
+                            dataAlteracaoParecerConclusivo = itemCopiar.dataAlteracaoParecerConclusivo,
+                            faltasExternas = itemCopiar.faltasExternas
                         });
                     }
                 }
@@ -1716,6 +1717,24 @@ namespace MSTech.GestaoEscolar.BLL
             else
             {
                 dr["atd_numeroFaltasReposicao"] = DBNull.Value;
+            }
+
+            if (entity.atd_numeroAulasExterna > -1)
+            {
+                dr["atd_numeroAulasExterna"] = entity.atd_numeroAulasExterna;
+            }
+            else
+            {
+                dr["atd_numeroAulasExterna"] = DBNull.Value;
+            }
+
+            if (entity.atd_numeroFaltasExterna > -1)
+            {
+                dr["atd_numeroFaltasExterna"] = entity.atd_numeroFaltasExterna;
+            }
+            else
+            {
+                dr["atd_numeroFaltasExterna"] = DBNull.Value;
             }
 
             return dr;

@@ -284,6 +284,7 @@
     <Compile Include="Entities\TUR_TurmaDocenteDTO.cs" />
     <Compile Include="Entities\ORC_OrientacaoCurricularDTO.cs" />
     <Compile Include="Entities\TUR_TurmaDTO.cs" />
+    <Compile Include="Entities\TUR_TurmaHorarioDTO.cs" />
     <Compile Include="Entities\UsuarioGrupo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\DateUtil.cs" />

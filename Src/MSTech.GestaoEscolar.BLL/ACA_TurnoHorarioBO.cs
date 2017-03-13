@@ -15,12 +15,16 @@ namespace MSTech.GestaoEscolar.BLL
     /// </summary>
     public enum ACA_TurnoHorarioTipo : byte
     {
+        [Description("ACA_TurnoHorarioBO.ACA_TurnoHorarioTipo.AulaNormal")]
         AulaNormal = 1
         ,
+        [Description("ACA_TurnoHorarioBO.ACA_TurnoHorarioTipo.AulaForaPeriodo")]
         AulaForaPeriodo = 2
         ,
+        [Description("ACA_TurnoHorarioBO.ACA_TurnoHorarioTipo.IntervaloEntreAulas")]
         IntervaloEntreAulas = 3
         ,
+        [Description("ACA_TurnoHorarioBO.ACA_TurnoHorarioTipo.IntervaloEntrePeriodos")]
         IntervaloEntrePeriodos = 4
     }    
 

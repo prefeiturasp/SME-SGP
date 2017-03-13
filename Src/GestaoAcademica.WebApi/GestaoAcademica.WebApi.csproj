@@ -336,6 +336,7 @@
     <Compile Include="Controllers\servicosController.cs" />
     <Compile Include="Controllers\turmasController.cs" />
     <Compile Include="Controllers\turmas_aulasController.cs" />
+    <Compile Include="Controllers\turma_horariosController.cs" />
     <Compile Include="Controllers\usuariosController.cs" />
     <Compile Include="Documentations\XmlCommentDocumentationProvider.cs" />
     <Compile Include="Global.asax.cs">

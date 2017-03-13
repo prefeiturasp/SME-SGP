@@ -274,7 +274,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!totalFaltasRegencia.Value</Value>
+                              <Value>=CStr(Fields!totalFaltasRegencia.Value) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -376,7 +376,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!frequenciaFinalAjustadaRegencia.Value</Value>
+                              <Value>=CStr(Fields!frequenciaFinalAjustadaRegencia.Value) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -478,7 +478,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!atd_numeroFaltas.Value)</Value>
+                              <Value>=CStr(Sum(Fields!atd_numeroFaltas.Value)) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -580,7 +580,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!frequenciaFinalAjustada.Value</Value>
+                              <Value>=CStr(Fields!frequenciaFinalAjustada.Value) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -631,7 +631,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!totalFaltasRegencia.Value</Value>
+                              <Value>=CStr(Fields!totalFaltasRegencia.Value) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -733,7 +733,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!frequenciaFinalAjustadaRegencia.Value</Value>
+                              <Value>=CStr(Fields!frequenciaFinalAjustadaRegencia.Value) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -885,7 +885,6 @@
                       <VerticalAlign>Middle</VerticalAlign>
                     </Style>
                   </Textbox>
-                  <rd:Selected>true</rd:Selected>
                 </CellContents>
               </TablixHeader>
               <TablixMembers>
@@ -2037,11 +2036,141 @@
           <FontSize>7pt</FontSize>
         </Style>
       </Tablix>
+      <Tablix Name="Tablix2">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>0.6cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>12.3388cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.43cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox5">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value EvaluationMode="Constant">*</Value>
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox12">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
+                              <Style>
+                                <FontFamily>arial</FontFamily>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <TopBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Color>Black</Color>
+                          <Style>None</Style>
+                          <Width>1pt</Width>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>Black</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </RightBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSet1</DataSetName>
+        <Top>1.37966cm</Top>
+        <Height>0.43cm</Height>
+        <Width>12.9388cm</Width>
+        <ZIndex>1</ZIndex>
+        <Visibility>
+          <Hidden>=IIF(Parameters!mensagemFrequenciaExterna.Value &lt;&gt; "" And CBool(First(Fields!PossuiFreqExterna.Value, "DataSet1")) = True, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
     </ReportItems>
-    <Height>0.50845in</Height>
+    <Height>0.71247in</Height>
     <Style />
   </Body>
-  <Width>11.24344cm</Width>
+  <Width>12.9388cm</Width>
   <Page>
     <PageHeight>21cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
@@ -2076,7 +2205,7 @@
           <QueryParameter Name="@Executar">
             <Value>=Parameters!Executar.Value</Value>
           </QueryParameter>
-		  <QueryParameter Name="@documentoOficial">
+          <QueryParameter Name="@documentoOficial">
             <Value>=Parameters!documentoOficial.Value</Value>
           </QueryParameter>
         </QueryParameters>
@@ -2191,7 +2320,7 @@
         </Field>
         <Field Name="totalAusenciasCompensadas">
           <DataField>totalAusenciasCompensadas</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="frequenciaFinalAjustada">
           <DataField>frequenciaFinalAjustada</DataField>
@@ -2212,6 +2341,14 @@
         <Field Name="frequenciaFinalAjustadaRegencia">
           <DataField>frequenciaFinalAjustadaRegencia</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PossuiFreqExternaAtual">
+          <DataField>PossuiFreqExternaAtual</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="PossuiFreqExterna">
+          <DataField>possuiFreqExterna</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -2237,9 +2374,15 @@
       <DataType>Boolean</DataType>
       <Prompt>Executar</Prompt>
     </ReportParameter>
-	<ReportParameter Name="documentoOficial">
+    <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documentoOficial</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="mensagemFrequenciaExterna">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>mensagemFrequenciaExterna</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>

@@ -495,6 +495,8 @@ namespace GestaoEscolar.WebControls.Fechamento
         /// </summary>
         private bool avaliacaoUltimoPerido;
 
+        private List<CLS_AlunoFrequenciaExterna> listaFrequenciaExterna;
+
         #endregion Usadas no DataBound
 
         #region Parâmetros acadêmicos
@@ -1133,6 +1135,15 @@ namespace GestaoEscolar.WebControls.Fechamento
 
             // Mostra total de aulas cadastradas no período.
             SetaQuantidadeAulas(VS_tpc_id);
+
+            if (Tud_id > 0 && VS_tpc_id > 0 && listaDisciplina != null && listaDisciplina.Count > 0)
+            {
+                List<MTR_MatriculaTurmaDisciplina> listaMtds =
+                    listaDisciplina.Select(p => new MTR_MatriculaTurmaDisciplina { alu_id = p.alu_id, mtu_id = p.mtu_id, mtd_id = p.mtd_id }).ToList();
+
+                // Buscar frequências externas para exibir na tela.
+                listaFrequenciaExterna = CLS_AlunoFrequenciaExternaBO.SelecionaPor_MatriculasDisciplinaPeriodo(listaMtds, VS_tpc_id);
+            }
 
             bool pendenciaFechamento = false;
             lstAlunosPendentes = new List<UCFechamento.AlunoDisciplina>();
@@ -2194,6 +2205,7 @@ namespace GestaoEscolar.WebControls.Fechamento
                 Row.Enabled = true;
                 Row.Cells[colunaBoletim].Enabled = true;
                 Row.Cells[colunaObservacaoConselho].Enabled = true;
+                Row.Cells[colunaFaltas].Enabled = true;
 
                 ImageButton btnBoletim = (ImageButton)Row.FindControl("btnBoletim");
                 if (btnBoletim != null)
@@ -2206,6 +2218,13 @@ namespace GestaoEscolar.WebControls.Fechamento
                 {
                     btnObservacaoConselho.Enabled = true;
                 }
+
+                ImageButton btnFaltasExternas = (ImageButton)Row.FindControl("btnFaltasExternas");
+                if (btnFaltasExternas != null)
+                {
+                    btnFaltasExternas.Enabled = true;
+                }
+                btnFaltasExternas.Enabled = true;
             }
         }
 
@@ -4017,6 +4036,23 @@ namespace GestaoEscolar.WebControls.Fechamento
                 if (txtQtdeFalta != null)
                 {
                     txtQtdeFalta.Text = DataBinder.Eval(e.Row.DataItem, "QtFaltasAluno").ToString();
+                }
+
+                ImageButton btnFaltasExternas = (ImageButton)e.Row.FindControl("btnFaltasExternas");
+                if (btnFaltasExternas != null && listaFrequenciaExterna != null && listaFrequenciaExterna.Count > 0)
+                {
+                    long alu_id = Convert.ToInt64(gvAlunos.DataKeys[e.Row.RowIndex]["alu_id"]);
+                    int mtu_id = Convert.ToInt32(gvAlunos.DataKeys[e.Row.RowIndex]["mtu_id"]);
+                    int mtd_id = Convert.ToInt32(gvAlunos.DataKeys[e.Row.RowIndex]["mtd_id"]);
+
+                    CLS_AlunoFrequenciaExterna ext = listaFrequenciaExterna.Find(p => p.alu_id == alu_id && p.mtu_id == mtu_id && p.mtd_id == mtd_id);
+                    if (ext != null)
+                    {
+                        btnFaltasExternas.Visible = true;
+                        btnFaltasExternas.OnClientClick =
+                            "AbrePopupFrequenciaExterna('" + ext.afx_qtdAulas + "','" + ext.afx_qtdFaltas +
+                                "'); return false;";
+                    }
                 }
             }
         }

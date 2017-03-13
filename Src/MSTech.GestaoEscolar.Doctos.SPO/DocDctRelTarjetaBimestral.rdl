@@ -267,7 +267,6 @@
                                       <PaddingBottom>2pt</PaddingBottom>
                                     </Style>
                                   </Textbox>
-                                  <rd:Selected>true</rd:Selected>
                                 </CellContents>
                               </TablixCell>
                               <TablixCell>
@@ -575,8 +574,11 @@
                         <Parameter Name="corAlunoFrequenciaLimite">
                           <Value>=Parameters!corAlunoFrequenciaLimite.Value</Value>
                         </Parameter>
-						<Parameter Name="documentoOficial">
+                        <Parameter Name="documentoOficial">
                           <Value>=Parameters!documentoOficial.Value</Value>
+                        </Parameter>
+                        <Parameter Name="mensagemFrequenciaExterna">
+                          <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
                         </Parameter>
                       </Parameters>
                       <Visibility>
@@ -615,8 +617,11 @@
                         <Parameter Name="corAlunoFrequenciaLimite">
                           <Value>=Parameters!corAlunoFrequenciaLimite.Value</Value>
                         </Parameter>
-						<Parameter Name="documentoOficial">
+                        <Parameter Name="documentoOficial">
                           <Value>=Parameters!documentoOficial.Value</Value>
+                        </Parameter>
+                        <Parameter Name="mensagemFrequenciaExterna">
+                          <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
                         </Parameter>
                       </Parameters>
                       <Visibility>
@@ -636,7 +641,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.64552cm</Height>
+              <Height>0.60552cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -666,7 +671,7 @@
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.49741cm</Height>
+                                <Height>0.43cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -733,7 +738,7 @@
                                           </BottomBorder>
                                           <LeftBorder>
                                             <Color>Black</Color>
-                                            <Style>Solid</Style>
+                                            <Style>None</Style>
                                             <Width>1pt</Width>
                                           </LeftBorder>
                                           <RightBorder>
@@ -747,6 +752,7 @@
                                           <PaddingBottom>2pt</PaddingBottom>
                                         </Style>
                                       </Textbox>
+                                      <rd:Selected>true</rd:Selected>
                                     </CellContents>
                                   </TablixCell>
                                   <TablixCell>
@@ -770,6 +776,18 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
+                                          <TopBorder>
+                                            <Style>Solid</Style>
+                                          </TopBorder>
+                                          <BottomBorder>
+                                            <Style>Solid</Style>
+                                          </BottomBorder>
+                                          <LeftBorder>
+                                            <Style>None</Style>
+                                          </LeftBorder>
+                                          <RightBorder>
+                                            <Style>Solid</Style>
+                                          </RightBorder>
                                           <BackgroundColor>=Parameters!corAlunoFrequenciaLimite.Value</BackgroundColor>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
@@ -814,7 +832,7 @@
                                           </BottomBorder>
                                           <LeftBorder>
                                             <Color>Black</Color>
-                                            <Style>Solid</Style>
+                                            <Style>None</Style>
                                             <Width>1pt</Width>
                                           </LeftBorder>
                                           <RightBorder>
@@ -851,6 +869,18 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
+                                          <TopBorder>
+                                            <Style>Solid</Style>
+                                          </TopBorder>
+                                          <BottomBorder>
+                                            <Style>Solid</Style>
+                                          </BottomBorder>
+                                          <LeftBorder>
+                                            <Style>None</Style>
+                                          </LeftBorder>
+                                          <RightBorder>
+                                            <Style>Solid</Style>
+                                          </RightBorder>
                                           <BackgroundColor>Orange</BackgroundColor>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
@@ -913,7 +943,7 @@
                                           </BottomBorder>
                                           <LeftBorder>
                                             <Color>Black</Color>
-                                            <Style>Solid</Style>
+                                            <Style>None</Style>
                                             <Width>1pt</Width>
                                           </LeftBorder>
                                           <RightBorder>
@@ -949,7 +979,7 @@
                             </TablixMembers>
                           </TablixRowHierarchy>
                           <Top>0.14811cm</Top>
-                          <Height>0.49741cm</Height>
+                          <Height>0.43cm</Height>
                           <Width>12.9388cm</Width>
                           <Style>
                             <Border>
@@ -1344,7 +1374,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.00978cm</Top>
         <Left>0.01567cm</Left>
-        <Height>5.81623cm</Height>
+        <Height>5.77623cm</Height>
         <Width>27.5265cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -1601,9 +1631,15 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>cal_ano</Prompt>
     </ReportParameter>
-	<ReportParameter Name="documentoOficial">
+    <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documentoOficial</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="mensagemFrequenciaExterna">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>mensagemFrequenciaExterna</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>

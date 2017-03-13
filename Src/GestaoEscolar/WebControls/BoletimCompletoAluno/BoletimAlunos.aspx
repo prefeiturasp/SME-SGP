@@ -451,12 +451,24 @@
                                     </span>
                                 </div>
                                 <div ng-if="!boletim.ensinoInfantil" id="divRodape" runat="server" class="rodapeBoletim">
+                                    <div ng-if="boletim.possuiFreqExterna" id="divFreqExterna" runat="server" style="text-align:left;">
+                                        <span>
+                                            <span>
+                                                <asp:Literal ID="lblFreqExterna" runat="server"></asp:Literal></span>
+                                        </span>
+                                    </div>
                                     <span>
                                         <span>
                                             <asp:Literal ID="lblRodape" runat="server" /></span>
                                     </span>
                                 </div>
                                 <div ng-if="boletim.ensinoInfantil" id="divRodapeInfantil" runat="server" class="rodapeBoletim">
+                                    <div ng-if="boletim.possuiFreqExterna" id="divFreqExternaInfantil" runat="server" style="text-align:left;">
+                                        <span>
+                                            <span>
+                                                <asp:Literal ID="lblFreqExternaInfantil" runat="server"></asp:Literal></span>
+                                        </span>
+                                    </div>
                                     <span>
                                         <span>
                                             <asp:Literal ID="lblRodapeInfantil" runat="server" /></span>

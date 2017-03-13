@@ -10,6 +10,37 @@ using MSTech.Validation.Exceptions;
 
 namespace MSTech.GestaoEscolar.BLL
 {
+    #region Enumeradores
+
+    /// <summary>
+    /// Situações da movimentação dos tipos de movimentação
+    /// </summary>
+    public enum eDiasSemana : byte
+    {
+        [Description("ACA_TurnoBO.DiasSemana.Domingo")]
+        Domingo = 1,
+
+        [Description("ACA_TurnoBO.DiasSemana.Segunda")]
+        Segunda = 2,
+
+        [Description("ACA_TurnoBO.DiasSemana.Terca")]
+        Terca = 3,
+
+        [Description("ACA_TurnoBO.DiasSemana.Quarta")]
+        Quarta = 4,
+
+        [Description("ACA_TurnoBO.DiasSemana.Quinta")]
+        Quinta = 5,
+
+        [Description("ACA_TurnoBO.DiasSemana.Sexta")]
+        Sexta = 6,
+
+        [Description("ACA_TurnoBO.DiasSemana.Sabado")]
+        Sabado = 7
+    }
+
+    #endregion Enumeradores
+
     public class ACA_TurnoBO : BusinessBase<ACA_TurnoDAO, ACA_Turno>
     {
         /// <summary>

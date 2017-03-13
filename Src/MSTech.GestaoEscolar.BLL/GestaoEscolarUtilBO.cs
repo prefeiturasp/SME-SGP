@@ -454,6 +454,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         DivergenciasRematriculas
+        ,
+
+        LancamentoFrequenciaExterna
     }
 
     [Serializable]
@@ -1011,6 +1014,50 @@ namespace MSTech.GestaoEscolar.BLL
             return objectClone;
         }
 
+
+        /// <summary>
+        /// Retorna a linha da tabela com as propriedades carregadas.
+        /// </summary>
+        /// <param name="dr">Linha do dataTable</param>
+        /// <param name="entity">Entidade utilizada para carregar os valores</param>
+        /// <returns>Uma entidade carregada com os valores</returns>
+        public static DataRow EntityToDataRow(DataTable dt, object entity)
+        {
+            try
+            {
+                DataRow drRetorno = dt.NewRow();
+
+                DataColumnCollection columnList = dt.Columns;
+                Type tp = entity.GetType();
+                // Preenche propriedades.
+                PropertyInfo[] properties = tp.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                // Preenche variáveis.
+                FieldInfo[] fields = tp.GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+                foreach (DataColumn coluna in columnList)
+                {
+                    PropertyInfo prop = properties.ToList().Find(p => p.Name == coluna.ColumnName);
+                    if (prop != null)
+                    {
+                        drRetorno[coluna] = prop.GetValue(entity);
+                    }
+
+                    FieldInfo field = fields.ToList().Find(p => p.Name == coluna.ColumnName);
+                    if (field != null)
+                    {
+                        drRetorno[coluna] = field.GetValue(entity);
+                    }
+                }
+
+
+                return drRetorno;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// Retorna um objeto carregado de acordo com os valores do dataTable.
         /// </summary>
@@ -1356,6 +1403,22 @@ namespace MSTech.GestaoEscolar.BLL
                            ((p2Fim.Date <= p1Fim.Date))));
 
             return ((!isValidFim) || (!isValidInicio));
+        }
+
+        /// <summary>
+        /// Retorna um IEnumerable do objeto T
+        /// </summary>
+        /// <typeparam name="T">Classe do Tipo para ser retornado</typeparam>
+        /// <param name="dataTable"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> MapToEnumerable<T>(DataTable dataTable) where T : class, new()
+        {
+            foreach (DataRow row in dataTable.Rows)
+            {
+                T entity = new T();
+
+                yield return (T)GestaoEscolarUtilBO.DataRowToEntity(row, entity);
+            }
         }
 
         /// <summary>
@@ -2164,6 +2227,76 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Preenche o combo de acordo com o enumerador.
+        /// </summary>
+        /// <typeparam name="T">Enumerador.</typeparam>
+        /// <param name="cbo">Combo a ser populado.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Método genérico para carregar o combo de acordo com um numerador T")]
+        public static void CarregarComboEnum<T>(ListItemCollection Items, bool ordenar = false)
+        {
+            if (Items != null)
+            {
+                ListItem[] lstItems = EnumToArrayListItem<T>();
+                if (ordenar)
+                {
+                    lstItems = lstItems.OrderBy(p => p.Value).ToArray();
+                }
+                Items.AddRange(lstItems);
+            }
+        }
+
+        /// <summary>
+        /// Retorna uma array[] de ListItem de acordo com o enumerador.
+        /// </summary>
+        /// <typeparam name="T">Enumerador.</typeparam>
+        /// <returns ListItem[]></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Método genérico para carregar o combo de acordo com um numerador T")]
+        public static ListItem[] EnumToArrayListItem<T>()
+        {
+            List<ListItem> lst = new List<ListItem>();
+
+            Type objType = typeof(T);
+            FieldInfo[] propriedades = objType.GetFields();
+            foreach (FieldInfo objField in propriedades)
+            {
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])objField.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                if (attributes.Length > 0)
+                {
+                    lst.Add(new ListItem(CustomResource.GetGlobalResourceObject("Enumerador", attributes[0].Description), Convert.ToString(objField.GetRawConstantValue())));
+                }
+            }
+
+            return lst.ToArray();
+        }
+
+        /// <summary>
+        /// Retorna uma array[] de ListItem de acordo com o enumerador.
+        /// </summary>
+        /// <typeparam name="T">Enumerador.</typeparam>
+        /// <returns ListItem[]></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Método genérico para carregar o combo de acordo com um numerador T")]
+        public static string GetEnumDescription(Enum value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("value");
+            }
+
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+            if (fi != null)
+            {
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (attributes.Length > 0)
+                {
+                    return CustomResource.GetGlobalResourceObject("Enumerador", attributes[0].Description);
+                }
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Convert uma entidade para uma tabela com suas propriedades
         /// populando a tabela com a lista de entidades
         /// </summary>
@@ -2183,6 +2316,20 @@ namespace MSTech.GestaoEscolar.BLL
                     table.Rows.Add(properties.Select(p => p.GetValue(l, null)).ToArray());
 
             return table;
+        }
+
+        /// <summary>
+        /// Retorna uma Lista da entidade informada, alimentada pelo DataTable.
+        /// </summary>
+        public static List<T> DataTableToListEntity<T>(DataTable table) where T : class, new ()
+        {
+            List<T> list = new List<T>();
+            foreach (DataRow dr in table.Rows)
+            {
+                list.Add((T)DataRowToEntity(dr, new T()));
+            }
+
+            return list;
         }
 
         /// <summary>
