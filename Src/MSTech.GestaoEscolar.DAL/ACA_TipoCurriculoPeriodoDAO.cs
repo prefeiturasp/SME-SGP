@@ -137,7 +137,37 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
-        
+
         #endregion Consultas
+
+        #region Métodos Sobrescritos
+
+        /// <summary>
+        /// Parâmetros para efetuar a alteração preservando a data de criação.
+        /// </summary>
+        /// <param name="qs"></param>
+        /// <param name="entity"></param>
+        protected override void ParamAlterar(Data.Common.QueryStoredProcedure qs, Entities.ACA_TipoCurriculoPeriodo entity)
+        {
+            entity.tcp_dataAlteracao = DateTime.Now;
+
+            base.ParamAlterar(qs, entity);
+
+            qs.Parameters.RemoveAt("@tcp_dataCriacao");
+        }
+
+        /// <summary>
+        /// Método alterado para que o update não faça alteração na data. 
+        /// </summary>
+        /// <param name="entity">Entidade ACA_TipoCurriculoPeriodo</param>
+        /// <returns>true = sucesso | false = fracasso</returns>
+        protected override bool Alterar(Entities.ACA_TipoCurriculoPeriodo entity)
+        {
+            __STP_UPDATE = "NEW_ACA_TipoCurriculoPeriodo_UPDATE";
+
+            return base.Alterar(entity);
+        }
+
+        #endregion Métodos Sobrescritos
     }
 }

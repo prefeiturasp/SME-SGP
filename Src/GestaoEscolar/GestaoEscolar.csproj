@@ -577,6 +577,13 @@
     <Compile Include="Academico\NivelAprendizado\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx.cs">
+      <DependentUpon>BuscaDisciplina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx.designer.cs">
+      <DependentUpon>BuscaDisciplina.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\OrientacaoCurricular\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2781,6 +2788,7 @@
     <Content Include="Academico\MatrizHabilidades\Cadastro.aspx" />
     <Content Include="Academico\NivelAprendizado\Busca.aspx" />
     <Content Include="Academico\NivelAprendizado\Cadastro.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx" />
     <Content Include="Academico\OrientacaoCurricular\Busca.aspx" />
     <Content Include="Academico\OrientacaoCurricular\CadastroHabilidade.aspx" />
     <Content Include="Academico\ParametrizacaoDisciplinas\Busca.aspx" />
@@ -3760,7 +3768,7 @@
     <Content Include="Includes\Excluidos\jquery.meio.mask.js" />
     <Content Include="Includes\Excluidos\jquery.validate.additional-methods.js" />
     <Content Include="Includes\Excluidos\jquery.validation.js" />
-	<Content Include="Includes\fullcalendar\fullcalendar.css" />
+    <Content Include="Includes\fullcalendar\fullcalendar.css" />
     <Content Include="Includes\fullcalendar\fullcalendar.js" />
     <Content Include="Includes\fullcalendar\fullcalendar.min.js" />
     <Content Include="Includes\fullcalendar\fullcalendar.print.css" />

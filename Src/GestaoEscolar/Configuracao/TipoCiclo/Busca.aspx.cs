@@ -61,6 +61,15 @@ namespace GestaoEscolar.Configuracao.TipoCiclo
 
         #region Eventos
 
+        protected void chkObjetoAprendizagem_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+            GridViewRow gr = (GridViewRow)chk.Parent.Parent;
+            var tci_id = grvTpCiclo.DataKeys[gr.RowIndex].Value.ToString();
+
+            ACA_TipoCicloBO.AtualizaObjetoAprendizagem(int.Parse(tci_id), chk.Checked);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -130,6 +139,15 @@ namespace GestaoEscolar.Configuracao.TipoCiclo
                     _btnDescer.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "baixo.png";
                     _btnDescer.CommandArgument = e.Row.RowIndex.ToString();
                     _btnDescer.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                }
+
+                HiddenField field = e.Row.FindControl("hdfObjetoAprendizagem") as HiddenField;
+                CheckBox chkObjetoAprendizagem = (CheckBox)e.Row.FindControl("chkObjetoAprendizagem");
+                if(field != null && chkObjetoAprendizagem != null)
+                {
+                    var check = Convert.ToBoolean(Convert.ToInt16(field.Value));
+
+                    chkObjetoAprendizagem.Checked = check;
                 }
             }
         }
