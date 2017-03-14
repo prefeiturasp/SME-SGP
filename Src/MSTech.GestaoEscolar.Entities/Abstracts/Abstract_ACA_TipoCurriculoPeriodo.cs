@@ -51,10 +51,15 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual short tcp_ordem { get; set; }
 
-		/// <summary>
-		/// Campo situação da tabela ACA_TipoCurriculoPeriodo.
-		/// </summary>
-		[MSNotNullOrEmpty]
+        /// <summary>
+        /// Campo que define se o tipo de periodo do curso pode possuir objeto de aprendizagem
+        /// </summary>
+        public virtual bool tcp_objetoAprendizagem { get; set; }
+
+        /// <summary>
+        /// Campo situação da tabela ACA_TipoCurriculoPeriodo.
+        /// </summary>
+        [MSNotNullOrEmpty]
 		public virtual short tcp_situacao { get; set; }
 
 		/// <summary>

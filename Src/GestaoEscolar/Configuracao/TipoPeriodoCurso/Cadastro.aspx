@@ -29,12 +29,16 @@
                             PermiteEditar="false" ValidationGroup="vgTipoPeriodoCurso" />   
                         <asp:Label ID="lblDescricao" runat="server" AssociatedControlID="txtDescricao"></asp:Label>
                         <asp:TextBox ID="txtDescricao" runat="server" MaxLength="100" Width="100px" ValidationGroup ="vgTipoPeriodoCurso" Enabled="false"></asp:TextBox>
+                        <asp:Label ID="lblObjetoAprendizagem" runat="server" AssociatedControlID="chkObjetoAprendizagem"></asp:Label>
+                        <asp:CheckBox ID="chkObjetoAprendizagem" runat="server" />
                         <asp:RequiredFieldValidator ID="rfvDescricaoPeriodo" runat="server" ControlToValidate="txtDescricao"
                             ValidationGroup="vgTipoPeriodoCurso" Display="Dynamic" ErrorMessage="Tipo de período do curso é obrigatório.">*</asp:RequiredFieldValidator>
                 </fieldset>
                 <fieldset>
                     <div class="right">
-                        <asp:Button ID="btnCancelar" runat="server" Text="Voltar" CausesValidation="False"
+                        <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click"
+                            ValidationGroup="vgTipoPeriodoCurso" />
+                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CausesValidation="False"
                             OnClick="btnCancelarClick" />
                     </div>
                 </fieldset>

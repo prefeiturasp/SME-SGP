@@ -31,6 +31,12 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="tci_exibirBoletim" HeaderText="Exibir compromisso do aluno no boletim"/>  
+                            <asp:TemplateField HeaderText="Possui objeto de aprendizagem" >
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="chkObjetoAprendizagem" OnCheckedChanged="chkObjetoAprendizagem_CheckedChanged" AutoPostBack="true" runat="server"/>
+                                    <asp:HiddenField ID="hdfObjetoAprendizagem" runat="server" Value='<%#Eval("tci_objetoAprendizagem")%>'/>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Ordem" SortExpression="tpc_ordem">
                                 <EditItemTemplate>
                                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("tci_ordem") %>'></asp:TextBox>

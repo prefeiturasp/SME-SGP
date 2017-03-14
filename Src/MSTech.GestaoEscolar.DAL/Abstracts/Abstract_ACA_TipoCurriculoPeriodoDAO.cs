@@ -153,6 +153,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@tcp_objetoAprendizagem";
+                Param.Size = 1;
+                Param.Value = entity.tcp_objetoAprendizagem;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
                 Param.DbType = DbType.Byte;
                 Param.ParameterName = "@tcp_situacao";
                 Param.Size = 1;
