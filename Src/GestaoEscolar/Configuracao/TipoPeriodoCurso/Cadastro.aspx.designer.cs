@@ -111,6 +111,24 @@ public partial class Configuracao_TipoPeriodoCurso_Cadastro {
     protected global::System.Web.UI.WebControls.TextBox txtDescricao;
     
     /// <summary>
+    /// lblObjetoAprendizagem control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblObjetoAprendizagem;
+    
+    /// <summary>
+    /// chkObjetoAprendizagem control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.CheckBox chkObjetoAprendizagem;
+    
+    /// <summary>
     /// rfvDescricaoPeriodo control.
     /// </summary>
     /// <remarks>
@@ -118,6 +136,15 @@ public partial class Configuracao_TipoPeriodoCurso_Cadastro {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescricaoPeriodo;
+    
+    /// <summary>
+    /// btnSalvar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnSalvar;
     
     /// <summary>
     /// btnCancelar control.

@@ -4,19 +4,39 @@
 
 namespace MSTech.GestaoEscolar.BLL
 {
-	using MSTech.Business.Common;
-	using MSTech.GestaoEscolar.Entities;
-	using MSTech.GestaoEscolar.DAL;
-    using System.Data;
-    using System.ComponentModel;
-    using System;
+    using MSTech.Business.Common;
+    using MSTech.GestaoEscolar.DAL;
+    using MSTech.GestaoEscolar.Entities;
     using MSTech.Validation.Exceptions;
-	
-	/// <summary>
-	/// Description: ACA_TipoCurriculoPeriodo Business Object. 
-	/// </summary>
-	public class ACA_TipoCurriculoPeriodoBO : BusinessBase<ACA_TipoCurriculoPeriodoDAO, ACA_TipoCurriculoPeriodo>
-	{        			
+    using System.ComponentModel;
+    using System.Data;
+
+    /// <summary>
+    /// Description: ACA_TipoCurriculoPeriodo Business Object. 
+    /// </summary>
+    public class ACA_TipoCurriculoPeriodoBO : BusinessBase<ACA_TipoCurriculoPeriodoDAO, ACA_TipoCurriculoPeriodo>
+    {
+        /// <summary>
+        /// Inclui ou altera o tipo de curriculo periodo 
+        /// </summary>
+        /// <param name="entity">Entidade ACA_TipoCurriculoPeriodo</param>
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public static bool SalvarCurriculoPeriodo
+        (
+        ACA_TipoCurriculoPeriodo entity
+        )
+        {
+            ACA_TipoCurriculoPeriodoDAO dao = new ACA_TipoCurriculoPeriodoDAO();
+
+            if (entity.Validate())
+            {
+                return dao.Salvar(entity);
+            }
+
+            throw new ValidationException(entity.PropertiesErrorList[0].Message);
+        }
+
+
         /// <summary>
         /// Retorna todos os tipos de currículo período pelo ano letivo e tipo nivel ensino
         /// </summary>        
@@ -36,7 +56,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tme_id">Tipo modalidade de ensino</param>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public static DataTable SelectByPesquisa
-        (            
+        (
             int tne_id
             , int tme_id
          )
@@ -81,6 +101,6 @@ namespace MSTech.GestaoEscolar.BLL
 
             return true;
         }
-        
-	}
+
+    }
 }

@@ -48,6 +48,11 @@ namespace MSTech.GestaoEscolar.Entities
         public override short tcp_ordem { get; set; }
 
         /// <summary>
+        /// Campo que define se o tipo de periodo do curso pode possuir objeto de aprendizagem
+        /// </summary>
+        public override bool tcp_objetoAprendizagem { get; set; }
+
+        /// <summary>
         /// Campo situação da tabela ACA_TipoCurriculoPeriodo.
         /// </summary>
         [MSDefaultValue(1)]

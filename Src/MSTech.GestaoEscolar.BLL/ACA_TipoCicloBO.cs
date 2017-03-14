@@ -56,6 +56,13 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.Select_MaiorOrdem();
         }
 
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public static bool AtualizaObjetoAprendizagem(int tci_id, bool tci_objetoAprendizagem)
+        {
+            ACA_TipoCicloDAO dao = new ACA_TipoCicloDAO();
+            return dao.AtualizaObjetoAprendizagem(tci_id, tci_objetoAprendizagem);
+        }
+
         /// <summary>
         /// Altera a ordem do tipo ciclo tci_ordem
         /// </summary>
