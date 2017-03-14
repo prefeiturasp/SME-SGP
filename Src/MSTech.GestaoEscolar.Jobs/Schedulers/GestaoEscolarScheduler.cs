@@ -115,6 +115,9 @@ namespace MSTech.GestaoEscolar.Jobs.Schedulers
             jobDetail.Durable = true;
             AddJob(jobDetail);
 
+            jobDetail = new JobDetailImpl(typeof(MS_JOB_ProcessamentoSugestaoAulasPrevistas).Name, typeof(MS_JOB_ProcessamentoSugestaoAulasPrevistas));
+            jobDetail.Durable = true;
+            AddJob(jobDetail);
         }
     }
 }

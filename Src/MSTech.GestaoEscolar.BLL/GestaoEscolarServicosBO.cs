@@ -416,5 +416,12 @@ namespace MSTech.GestaoEscolar.BLL
             new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoDivergenciasRematriculas(sle_id);
         }
 
+        /// <summary>
+        /// Processa os dados para a sugestão das aulas previstas.
+        /// </summary>
+        public static void ExecJOB_ProcessamentoSugestaoAulasPrevistas(Guid sle_id)
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas(sle_id);
+        }
     }
 }

@@ -144,6 +144,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         ProcessamentoDivergenciasRematriculas = 51
+        ,
+
+        ProcessamentoSugestaoAulasPrevistas = 52
     }
 
     #endregion Enumerador
