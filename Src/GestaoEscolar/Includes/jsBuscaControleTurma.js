@@ -17,6 +17,11 @@ function jsBuscaControleTurma() {
 
         $('.lblPrevistas').text(total);
     });
+
+    $("a[id$='lnkSugestao'").click(function () {
+        var linha = $(this).parents('tr');
+        linha.find('.txtPrevistas').val($(this).text());
+    });
 }
 
 function CarregarCacheEfetivacao(btn) {

@@ -421,6 +421,18 @@
                                 <asp:BoundField HeaderText="Bimestre" DataField="cap_descricao" FooterText="Total" />
                                 <asp:BoundField HeaderText="Período" DataField="periodo" />
                                 <%--<asp:BoundField HeaderText="Previstas" DataField="aulasPrevistas" />--%>
+                                <asp:TemplateField HeaderText="Sugestão">
+                                    <ItemTemplate>
+                                        <asp:HyperLink runat="server" ID="lnkSugestao" Text='<%# Bind("aulasSugestao") %>' style="cursor:pointer"></asp:HyperLink>
+                                        <asp:Label runat="server" ID="lblSugestao" Text='<%# Bind("aulasSugestao") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Label runat="server" ID="lblTotalSugestao" ></asp:Label>
+                                    </FooterTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <FooterStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Previstas *">
                                     <ItemTemplate>
                                         <asp:TextBox runat="server" ID="txtPrevistas" Text='<%# Bind("aulasPrevistas") %>'
@@ -434,8 +446,11 @@
                                             ValueToCompare="0" Display="Dynamic" ValidationGroup="AulasPrevistas">*</asp:CompareValidator>
                                     </ItemTemplate>
                                     <FooterTemplate>
-                                        <asp:Label runat="server" ID="lblTotalPrevistas" CssClass="lblPrevistas" Text="sdadas"></asp:Label>
+                                        <asp:Label runat="server" ID="lblTotalPrevistas" CssClass="lblPrevistas" Text=""></asp:Label>
                                     </FooterTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <%--<asp:BoundField HeaderText="Cumpridas" DataField="aulasDadas" />--%>
                                 <asp:TemplateField HeaderText="Cumpridas">
@@ -445,6 +460,9 @@
                                     <FooterTemplate>
                                         <asp:Label runat="server" ID="lblTotalDadas"></asp:Label>
                                     </FooterTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <%--<asp:BoundField HeaderText="Reposições" DataField="aulasRepostas" />--%>
                                 <asp:TemplateField HeaderText="Reposições">
@@ -454,6 +472,9 @@
                                     <FooterTemplate>
                                         <asp:Label runat="server" ID="lblTotalReposicoes"></asp:Label>
                                     </FooterTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
