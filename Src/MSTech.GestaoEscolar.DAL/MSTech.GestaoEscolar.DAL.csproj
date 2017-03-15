@@ -141,6 +141,8 @@
     <Compile Include="Abstracts\Abstract_ACA_FormatoAvaliacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_HistoricoObservacaoPadraoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_MotivoBaixaFrequenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagemCicloPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagemDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroAcademicoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroBuscaAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroIntegracaoDAO.cs" />
@@ -416,6 +418,8 @@
     <Compile Include="ACA_FormatoAvaliacaoDAO.cs" />
     <Compile Include="ACA_HistoricoObservacaoPadraoDAO.cs" />
     <Compile Include="ACA_MotivoBaixaFrequenciaDAO.cs" />
+    <Compile Include="ACA_ObjetoAprendizagemCicloPeriodoDAO.cs" />
+    <Compile Include="ACA_ObjetoAprendizagemDAO.cs" />
     <Compile Include="ACA_ParametroAcademicoDAO.cs" />
     <Compile Include="ACA_ParametroBuscaAlunoDAO.cs" />
     <Compile Include="ACA_ParametroIntegracaoDAO.cs" />

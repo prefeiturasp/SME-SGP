@@ -8,6 +8,14 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 {
     public partial class BuscaDisciplina : MotherPageLogado
     {
+        public int tds_id
+        {
+            get
+            {
+                return Convert.ToInt32(_grvTipoDisciplina.DataKeys[_grvTipoDisciplina.EditIndex].Value);
+            }
+        }
+
         private DataTable VS_Disciplinas
         {
             get
@@ -66,6 +74,11 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
         protected void _grvTipoDisciplina_DataBound(object sender, EventArgs e)
         {
             UCTotalRegistros1.Total = _grvTipoDisciplina.Rows.Count;
+        }
+
+        protected void _grvTipoDisciplina_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
+        {
+            _grvTipoDisciplina.EditIndex = e.NewEditIndex;
         }
     }
 }

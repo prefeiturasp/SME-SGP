@@ -32,12 +32,13 @@
         <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Always">
             <ContentTemplate>
                 <asp:GridView ID="_grvTipoDisciplina" runat="server" AutoGenerateColumns="False" OnDataBound="_grvTipoDisciplina_DataBound"
-                    DataKeyNames="tds_id,tds_ordem" EmptyDataText="<%$ Resources:Configuracao, TipoDisciplina.Busca._dgvTipoDisciplina.EmptyDataText %>">
+                    DataKeyNames="tds_id,tds_ordem" EmptyDataText="<%$ Resources:Configuracao, TipoDisciplina.Busca._dgvTipoDisciplina.EmptyDataText %>"
+                    OnRowEditing="_grvTipoDisciplina_RowEditing" >
                     <Columns>
                         <asp:TemplateField HeaderText="Disciplina">
                             <ItemTemplate>
                                 <asp:LinkButton ID="_btnSelecionar" runat="server" CommandName="Edit" Text='<%# Bind("tds_nome") %>'
-                                    PostBackUrl="~/Academico/ObjetoAprendizagem/BuscaDisciplina.aspx"></asp:LinkButton>
+                                    PostBackUrl="~/Academico/ObjetoAprendizagem/Busca.aspx"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="tne_nome" HeaderText="Tipo de nível de ensino" />

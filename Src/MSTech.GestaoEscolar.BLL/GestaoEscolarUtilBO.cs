@@ -457,6 +457,8 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         LancamentoFrequenciaExterna
+        ,
+        ObjetoAprendizagemDisciplina
     }
 
     [Serializable]

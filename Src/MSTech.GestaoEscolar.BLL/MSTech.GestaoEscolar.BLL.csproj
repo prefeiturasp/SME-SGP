@@ -201,6 +201,8 @@
     <Compile Include="ACA_FormatoAvaliacaoBO.cs" />
     <Compile Include="ACA_HistoricoObservacaoPadraoBO.cs" />
     <Compile Include="ACA_MotivoBaixaFrequenciaBO.cs" />
+    <Compile Include="ACA_ObjetoAprendizagemBO.cs" />
+    <Compile Include="ACA_ObjetoAprendizagemCicloPeriodoBO.cs" />
     <Compile Include="ACA_ParametroAcademicoBO.cs" />
     <Compile Include="ACA_ParametroBuscaAlunoBO.cs" />
     <Compile Include="ACA_ParametroIntegracaoBO.cs" />
