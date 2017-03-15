@@ -139,7 +139,9 @@
                                             <span class="ico-font ico-planejamento"><asp:ImageButton ID="btnPlanejamento"
                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                     runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
-                                                    ToolTip="Planejamento" /></span>
+                                                    ToolTip="Planejamento" />
+                                                    <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
+                                                        Visible="false" /></span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <%--Diário de Classe--%>
@@ -301,6 +303,8 @@
                                             CommandArgument='<%# Container.DataItemIndex %>'
                                             runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                             ToolTip="Planejamento" /></span>
+                                    <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
+                                        Visible="false" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <%--Diário de Classe--%>

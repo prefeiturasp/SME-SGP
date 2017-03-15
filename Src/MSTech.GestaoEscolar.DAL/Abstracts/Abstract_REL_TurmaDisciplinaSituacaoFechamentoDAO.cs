@@ -85,6 +85,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
             Param = qs.NewParameter();
             Param.DbType = DbType.Boolean;
+            Param.ParameterName = "@PendentePlanejamento";
+            Param.Size = 1;
+            Param.Value = entity.PendentePlanejamento;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Boolean;
             Param.ParameterName = "@PendenteParecer";
             Param.Size = 1;
             Param.Value = entity.PendenteParecer;
@@ -137,6 +144,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Size = 1;
 			Param.Value = entity.Pendente;
 			qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Boolean;
+            Param.ParameterName = "@PendentePlanejamento";
+            Param.Size = 1;
+            Param.Value = entity.PendentePlanejamento;
+            qs.Parameters.Add(Param);
 
             Param = qs.NewParameter();
             Param.DbType = DbType.Boolean;

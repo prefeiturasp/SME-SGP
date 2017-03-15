@@ -1580,9 +1580,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                     long tud_id = Convert.ToInt64(grid.DataKeys[row.RowIndex].Values["tud_id"]);
                     byte tud_tipo = Convert.ToByte(grid.DataKeys[row.RowIndex].Values["tud_tipo"]);
                     Image imgPendenciaFechamento = (Image)row.FindControl("imgPendenciaFechamento");
+                    Image imgPendenciaPlanejamento = (Image)row.FindControl("imgPendenciaPlanejamento");
                     if (imgPendenciaFechamento != null)
                     {
                         imgPendenciaFechamento.Visible = false;
+                    }
+                    if (imgPendenciaPlanejamento != null)
+                    {
+                        imgPendenciaPlanejamento.Visible = false;
                     }
 
                     if (tud_tipo == (byte)TurmaDisciplinaTipo.Regencia)
@@ -1605,13 +1610,19 @@ namespace GestaoEscolar.Academico.ControleTurma
                         else if (!possuiPendencia && VS_listaPendenciaFechamento[grid.ClientID].Any(item => (item.Pendente || item.PendenteParecer) && item.tud_id == tud_id))
                             possuiPendencia = true;
                     }
+
+                    if (VS_listaPendenciaFechamento[grid.ClientID].Any(item => item.PendentePlanejamento && item.tud_id == tud_id))
+                    {
+                        if (imgPendenciaPlanejamento != null)
+                            imgPendenciaPlanejamento.Visible = true;
+                    }
                 }
 
                 if (!possuiPendencia && VS_listaPendenciaFechamento[grid.ClientID].Any(item => (item.Pendente || item.PendenteParecer)))
                 {
                     possuiPendencia = true;
                 }
-
+                
                 if (VS_visaoDocente)
                 {
                     RepeaterItem rptItem = (RepeaterItem)grid.NamingContainer;
@@ -1622,7 +1633,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         {
                             divMensagemFechamentoPendencia.Visible = possuiPendencia;
                         }
-
+                        
                         HtmlGenericControl mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamento");
                         if (mensagemSemPendenciaFechamento != null)
                         {
