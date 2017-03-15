@@ -9,14 +9,14 @@ namespace MSTech.GestaoEscolar.DAL
 	/// <summary>
 	/// Description: .
 	/// </summary>
-	public class ACA_ObjetoAprendizagemCicloPeriodoDAO : Abstract_ACA_ObjetoAprendizagemCicloPeriodoDAO
+	public class ACA_ObjetoAprendizagemTipoCicloDAO : Abstract_ACA_ObjetoAprendizagemTipoCicloDAO
 	{
 		///// <summary>
         ///// Inseri os valores da classe em um registro ja existente.
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem modificados.</param>
         ///// <returns>True - Operacao bem sucedida.</returns>
-        // protected override bool Alterar(ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // protected override bool Alterar(ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    return base.Alterar(entity);
         // }
@@ -25,7 +25,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem inseridos.</param>
         ///// <returns>True - Operacao bem sucedida.</returns>
-        // protected override bool Inserir(ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // protected override bool Inserir(ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    return base.Inserir(entity);
         // }
@@ -34,7 +34,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem carregados.</param>
         ///// <returns>True - Operacao bem sucedida.</returns>
-        // public override bool Carregar(ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // public override bool Carregar(ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    return base.Carregar(entity);
         // }
@@ -43,7 +43,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem apagados.</param>
         ///// <returns>True - Operacao bem sucedida.</returns>
-        // public override bool Delete(ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // public override bool Delete(ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    return base.Delete(entity);
         // }
@@ -52,7 +52,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// </summary>
         ///// <param name="qs">Objeto da Store Procedure.</param>
         ///// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        // protected override void ParamAlterar(QueryStoredProcedure qs, ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // protected override void ParamAlterar(QueryStoredProcedure qs, ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    base.ParamAlterar(qs, entity);
         // }
@@ -61,7 +61,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// </summary>
         ///// <param name="qs">Objeto da Store Procedure.</param>
         ///// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        // protected override void ParamCarregar(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // protected override void ParamCarregar(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    base.ParamCarregar(qs, entity);
         // }
@@ -70,7 +70,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// </summary>
         ///// <param name="qs">Objeto da Store Procedure.</param>
         ///// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        // protected override void ParamDeletar(QueryStoredProcedure qs, ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // protected override void ParamDeletar(QueryStoredProcedure qs, ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    base.ParamDeletar(qs, entity);
         // }
@@ -79,7 +79,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// </summary>
         ///// <param name="qs">Objeto da Store Procedure.</param>
         ///// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        // protected override void ParamInserir(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // protected override void ParamInserir(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    base.ParamInserir(qs, entity);
         // }
@@ -88,7 +88,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// </summary>
         ///// <param name="entity">Entidade com os dados para preenchimento para inserir ou alterar.</param>
         ///// <returns>True - Operacao bem sucedida.</returns>
-        // public override bool Salvar(ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // public override bool Salvar(ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    return base.Salvar(entity);
         // }
@@ -96,7 +96,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// Realiza o select da tabela.
         ///// </summary>
         ///// <returns>Lista com todos os registros da tabela.</returns>
-        // public override IList<ACA_ObjetoAprendizagemCicloPeriodo> Select()
+        // public override IList<ACA_ObjetoAprendizagemTipoCiclo> Select()
         // {
         //    return base.Select();
         // }
@@ -107,7 +107,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// <param name="pageSize">Tamanho da pagina.</param>
         ///// <param name="totalRecord">Total de registros na tabela original.</param>
         ///// <returns>Lista com todos os registros da p�gina.</returns>
-        // public override IList<ACA_ObjetoAprendizagemCicloPeriodo> Select_Paginado(int currentPage, int pageSize, out int totalRecord)
+        // public override IList<ACA_ObjetoAprendizagemTipoCiclo> Select_Paginado(int currentPage, int pageSize, out int totalRecord)
         // {
         //    return base.Select_Paginado(currentPage, pageSize, out totalRecord);
         // }
@@ -117,7 +117,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// <param name="qs">Objeto da Store Procedure.</param>
         ///// <param name="entity">Entidade com os dados.</param>
         ///// <returns>True - Operacao bem sucedida.</returns>
-        // protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    return base.ReceberAutoIncremento(qs, entity);
         // }
@@ -127,7 +127,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// <param name="dr">DataRow do datatable preenchido.</param>
         ///// <param name="entity">Entidade onde ser�o transferidos os dados.</param>
         ///// <returns>Entidade preenchida.</returns>
-        // public override ACA_ObjetoAprendizagemCicloPeriodo DataRowToEntity(DataRow dr, ACA_ObjetoAprendizagemCicloPeriodo entity)
+        // public override ACA_ObjetoAprendizagemTipoCiclo DataRowToEntity(DataRow dr, ACA_ObjetoAprendizagemTipoCiclo entity)
         // {
         //    return base.DataRowToEntity(dr, entity);
         // }
@@ -138,7 +138,7 @@ namespace MSTech.GestaoEscolar.DAL
         ///// <param name="entity">Entidade onde ser�o transferidos os dados.</param>
         ///// <param name="limparEntity">Indica se a entidade deve ser limpada antes da transferencia.</param>
         ///// <returns>Entidade preenchida.</returns>
-        // public override ACA_ObjetoAprendizagemCicloPeriodo DataRowToEntity(DataRow dr, ACA_ObjetoAprendizagemCicloPeriodo entity, bool limparEntity)
+        // public override ACA_ObjetoAprendizagemTipoCiclo DataRowToEntity(DataRow dr, ACA_ObjetoAprendizagemTipoCiclo entity, bool limparEntity)
         // {
         //    return base.DataRowToEntity(dr, entity, limparEntity);
         // }

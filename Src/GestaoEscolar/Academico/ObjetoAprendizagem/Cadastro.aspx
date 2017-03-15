@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Cadastro.aspx.cs" Inherits="GestaoEscolar.Academico.ObjetoAprendizagem.Cadastro" %>
 
+<%@ PreviousPageType VirtualPath="~/Academico/ObjetoAprendizagem/Busca.aspx" %>
 
 <%@ Register Src="../../WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios"
     TagPrefix="uc5" %>
@@ -13,6 +14,9 @@
             <fieldset>
                 <legend>Cadastro de objeto de aprendizagem</legend>
                 <uc5:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
+
+                <asp:Label ID="_lblDisciplina" runat="server" Text="Disciplina" AssociatedControlID="txtDisciplina"></asp:Label>
+                <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
 
                 <asp:Label ID="_lblDescricao" runat="server" Text="Descrição *" AssociatedControlID="_txtDescricao"></asp:Label>
                 <asp:TextBox ID="_txtDescricao" runat="server" Rows="4" TextMode="MultiLine" SkinID="text60C"></asp:TextBox>

@@ -16,7 +16,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 	/// Description: .
 	/// </summary>
 	[Serializable]
-    public abstract class Abstract_ACA_ObjetoAprendizagemCicloPeriodo : Abstract_Entity
+    public abstract class Abstract_ACA_ObjetoAprendizagemTipoCiclo : Abstract_Entity
     {
 		
 		/// <summary>
@@ -32,13 +32,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		[DataObjectField(true, false, false)]
 		public virtual int tci_id { get; set; }
-
-		/// <summary>
-		/// Propriedade tcp_id.
-		/// </summary>
-		[MSNotNullOrEmpty]
-		[DataObjectField(true, false, false)]
-		public virtual int tcp_id { get; set; }
 
     }
 }

@@ -12,21 +12,33 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 {
     public partial class Busca : MotherPageLogado
     {
+        public int oap_id
+        {
+            get
+            {
+                return Convert.ToInt32(_grvObjetoAprendizagem.DataKeys[_grvObjetoAprendizagem.EditIndex].Value);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
+            if (!IsPostBack)
             {
-                LoadPage(PreviousPage.tds_id);
-            }
-            else if(Session["tds_id_oap"] != null)
-            {
-                LoadPage(Convert.ToInt32(Session["tds_id_oap"]));
-                Session["tds_id_oap"] = null;
-            }
-            else
-            {
-                Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/BuscaDisciplina.aspx", false);
-                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
+                {
+                    Session["tds_id_oap"] = PreviousPage.tds_id;
+                    LoadPage(PreviousPage.tds_id);
+                }
+                else if (Session["tds_id_oap"] != null)
+                {
+                    LoadPage(Convert.ToInt32(Session["tds_id_oap"]));
+                    Session["tds_id_oap"] = null;
+                }
+                else
+                {
+                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/BuscaDisciplina.aspx", false);
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                }
             }
         }
 

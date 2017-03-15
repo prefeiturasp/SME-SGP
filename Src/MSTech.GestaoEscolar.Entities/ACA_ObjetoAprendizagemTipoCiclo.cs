@@ -9,7 +9,7 @@ namespace MSTech.GestaoEscolar.Entities
 	/// <summary>
 	/// Description: .
 	/// </summary>
-	public class ACA_ObjetoAprendizagemCicloPeriodo : Abstract_ACA_ObjetoAprendizagemCicloPeriodo
+	public class ACA_ObjetoAprendizagemTipoCiclo : Abstract_ACA_ObjetoAprendizagemTipoCiclo
 	{
 	}
 }

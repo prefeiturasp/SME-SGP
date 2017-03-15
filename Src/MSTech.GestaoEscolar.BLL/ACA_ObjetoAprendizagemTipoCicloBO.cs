@@ -9,9 +9,9 @@ namespace MSTech.GestaoEscolar.BLL
 	using MSTech.GestaoEscolar.DAL;
 	
 	/// <summary>
-	/// Description: ACA_ObjetoAprendizagemCicloPeriodo Business Object. 
+	/// Description: ACA_ObjetoAprendizagemTipoCiclo Business Object. 
 	/// </summary>
-	public class ACA_ObjetoAprendizagemCicloPeriodoBO : BusinessBase<ACA_ObjetoAprendizagemCicloPeriodoDAO, ACA_ObjetoAprendizagemCicloPeriodo>
+	public class ACA_ObjetoAprendizagemTipoCicloBO : BusinessBase<ACA_ObjetoAprendizagemTipoCicloDAO, ACA_ObjetoAprendizagemTipoCiclo>
 	{
 				
 	}

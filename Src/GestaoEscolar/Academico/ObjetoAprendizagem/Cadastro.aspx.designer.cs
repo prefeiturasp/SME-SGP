@@ -40,6 +40,24 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios3;
         
         /// <summary>
+        /// _lblDisciplina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _lblDisciplina;
+        
+        /// <summary>
+        /// txtDisciplina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDisciplina;
+        
+        /// <summary>
         /// _lblDescricao control.
         /// </summary>
         /// <remarks>
@@ -110,5 +128,17 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button _btnCancelar;
+        
+        /// <summary>
+        /// PreviousPage property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new GestaoEscolar.Academico.ObjetoAprendizagem.Busca PreviousPage {
+            get {
+                return ((GestaoEscolar.Academico.ObjetoAprendizagem.Busca)(base.PreviousPage));
+            }
+        }
     }
 }
