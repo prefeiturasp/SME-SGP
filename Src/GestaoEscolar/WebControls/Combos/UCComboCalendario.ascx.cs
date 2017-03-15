@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Web.WebProject;
+using MSTech.CoreSSO.BLL;
 
 public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
 {
@@ -239,27 +240,7 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
                 IndexChanged();
         }
     }
-
-    /// <summary>
-    /// Mostra os dados não excluídos logicamente no dropdownlist
-    /// </summary>
-    public void CarregarCalendarioAnual_Esc_id(int esc_id)
-    {
-        ddlComboCalendario.DataSourceID = odsDados.ID;
-        ddlComboCalendario.DataSource = null;
-
-        ddlComboCalendario.Items.Clear();
-        odsDados.SelectParameters.Clear();
-
-        odsDados.SelectMethod = "SelecionaCalendarioAnual_Esc_id";
-        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
-        odsDados.SelectParameters.Add("esc_id", esc_id.ToString());
-        odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
-        ddlComboCalendario.Items.Insert(0, new ListItem("-- Selecione um calendário escolar --", "-1", true));
-        ddlComboCalendario.DataBind();
-        SelecionaOpcaoAnoCorrente();
-    }
-
+    
     /// <summary>
     /// Retorna todos os calendários não excluídos logicamente que possuem vinculo com curso filtrando pelo id da escola
     /// </summary>
@@ -272,7 +253,22 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         ddlComboCalendario.Items.Clear();
         odsDados.SelectParameters.Clear();
 
-        odsDados.SelectMethod = "SelecionarCalendarioAnualRelCurso_EscId";
+        //Se for visão de docente carrega apenas os calendários que o docente tem acesso
+        if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+        {
+            odsDados.SelectMethod = "SelecionarCalendarioAnualRelCurso_EscId";
+            odsDados.SelectParameters.Add("doc_id", __SessionWEB.__UsuarioWEB.Docente.doc_id.ToString());
+        }
+        //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
+        else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
+        {
+            odsDados.SelectMethod = "SelecionarCalendarioAnualRelCurso_EscId";
+            odsDados.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+            odsDados.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString());
+        }
+        //Carrega todos os calendários
+        else
+            odsDados.SelectMethod = "SelecionarCalendarioAnualRelCurso_EscId";
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
         odsDados.SelectParameters.Add("esc_id", esc_id.ToString());
         odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
@@ -280,28 +276,7 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         ddlComboCalendario.DataBind();
         SelecionaOpcaoAnoCorrente();
     }
-
-    /// <summary>
-    /// Mostra os dados não excluídos logicamente no dropdownlist
-    /// </summary>
-    public void CarregarCalendarioAnual_AnoBase_Esc_id(int anobase, int esc_id)
-    {
-        ddlComboCalendario.DataSourceID = odsDados.ID;
-        ddlComboCalendario.DataSource = null;
-
-        ddlComboCalendario.Items.Clear();
-        odsDados.SelectParameters.Clear();
-
-        odsDados.SelectMethod = "SelecionaCalendarioAnual_AnoBase_Esc_id";
-        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
-        odsDados.SelectParameters.Add("ano_base", anobase.ToString());
-        odsDados.SelectParameters.Add("esc_id", esc_id.ToString());
-        odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
-        ddlComboCalendario.Items.Insert(0, new ListItem("-- Selecione um calendário escolar --", "-1", true));
-        ddlComboCalendario.DataBind();
-        SelecionaOpcaoAnoCorrente();
-    }
-
+    
     /// <summary>
     /// Mostra os dados não excluídos logicamente no dropdownlist
     /// </summary>
@@ -313,7 +288,22 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         ddlComboCalendario.Items.Clear();
         odsDados.SelectParameters.Clear();
 
-        odsDados.SelectMethod = "SelecionaCalendarioAnual";
+        //Se for visão de docente carrega apenas os calendários que o docente tem acesso
+        if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+        {
+            odsDados.SelectMethod = "SelecionaCalendarioAnual";
+            odsDados.SelectParameters.Add("doc_id", __SessionWEB.__UsuarioWEB.Docente.doc_id.ToString());
+        }
+        //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
+        else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
+        {
+            odsDados.SelectMethod = "SelecionaCalendarioAnual";
+            odsDados.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+            odsDados.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString());
+        }
+        //Carrega todos os calendários
+        else
+            odsDados.SelectMethod = "SelecionaCalendarioAnual";
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
         odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
 
@@ -333,7 +323,22 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         ddlComboCalendario.Items.Clear();
         odsDados.SelectParameters.Clear();
 
-        odsDados.SelectMethod = "SelecionaCalendarioAnualPorCurso";
+        //Se for visão de docente carrega apenas os calendários que o docente tem acesso
+        if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+        {
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCurso";
+            odsDados.SelectParameters.Add("doc_id", __SessionWEB.__UsuarioWEB.Docente.doc_id.ToString());
+        }
+        //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
+        else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
+        {
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCurso";
+            odsDados.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+            odsDados.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString());
+        }
+        //Carrega todos os calendários
+        else
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCurso";
         odsDados.SelectParameters.Add("cur_id", cur_id.ToString());
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
         odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
@@ -358,7 +363,22 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         ddlComboCalendario.Items.Clear();
         odsDados.SelectParameters.Clear();
 
-        odsDados.SelectMethod = "SelecionaCalendarioAnualPorCursoAnoInicio";
+        //Se for visão de docente carrega apenas os calendários que o docente tem acesso
+        if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+        {
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCursoAnoInicio";
+            odsDados.SelectParameters.Add("doc_id", __SessionWEB.__UsuarioWEB.Docente.doc_id.ToString());
+        }
+        //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
+        else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
+        {
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCursoAnoInicio";
+            odsDados.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+            odsDados.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString());
+        }
+        //Carrega todos os calendários
+        else
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCursoAnoInicio";
         odsDados.SelectParameters.Add("cur_id", cur_id.ToString());
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
         odsDados.SelectParameters.Add("pfi_id", pfi_id.ToString());
@@ -380,7 +400,22 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         ddlComboCalendario.Items.Clear();
         odsDados.SelectParameters.Clear();
 
-        odsDados.SelectMethod = "SelecionaPorCursoComDisciplinaEletiva";
+        //Se for visão de docente carrega apenas os calendários que o docente tem acesso
+        if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+        {
+            odsDados.SelectMethod = "SelecionaPorCursoComDisciplinaEletiva";
+            odsDados.SelectParameters.Add("doc_id", __SessionWEB.__UsuarioWEB.Docente.doc_id.ToString());
+        }
+        //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
+        else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
+        {
+            odsDados.SelectMethod = "SelecionaPorCursoComDisciplinaEletiva";
+            odsDados.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+            odsDados.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString());
+        }
+        //Carrega todos os calendários
+        else
+            odsDados.SelectMethod = "SelecionaPorCursoComDisciplinaEletiva";
         odsDados.SelectParameters.Add("cur_id", cur_id.ToString());
         odsDados.SelectParameters.Add("esc_id", esc_id.ToString());
         odsDados.SelectParameters.Add("uni_id", uni_id.ToString());
@@ -405,7 +440,22 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         ddlComboCalendario.Items.Clear();
         odsDados.SelectParameters.Clear();
 
-        odsDados.SelectMethod = "SelecionaCalendarioAnualPorCursoQtdePeriodos";
+        //Se for visão de docente carrega apenas os calendários que o docente tem acesso
+        if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+        {
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCursoQtdePeriodos";
+            odsDados.SelectParameters.Add("doc_id", __SessionWEB.__UsuarioWEB.Docente.doc_id.ToString());
+        }
+        //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
+        else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
+        {
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCursoQtdePeriodos";
+            odsDados.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+            odsDados.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString());
+        }
+        //Carrega todos os calendários
+        else
+            odsDados.SelectMethod = "SelecionaCalendarioAnualPorCursoQtdePeriodos";
         odsDados.SelectParameters.Add("cur_id", cur_id.ToString());
         odsDados.SelectParameters.Add("qtdePeriodos", qtdePeriodos.ToString());
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
@@ -415,27 +465,7 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         ddlComboCalendario.DataBind();
         SelecionaOpcaoAnoCorrente();
     }
-
-    /// <summary>
-    /// Mostra os calendários do ano base atual
-    /// </summary>
-    public void CarregarCalendarioAnoBaseAtual()
-    {
-        ddlComboCalendario.DataSourceID = odsDados.ID;
-        ddlComboCalendario.DataSource = null;
-
-        ddlComboCalendario.Items.Clear();
-        odsDados.SelectParameters.Clear();
-
-        odsDados.SelectMethod = "SelecionaCalendarioAnualByAno";
-        odsDados.SelectParameters.Add("cal_ano", (DateTime.Now.Year).ToString());
-        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
-        odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
-
-        ddlComboCalendario.Items.Insert(0, new ListItem("-- Selecione um calendário escolar --", "-1", true));
-        ddlComboCalendario.DataBind();
-    }
-
+    
     #endregion Métodos
 
     #region Eventos

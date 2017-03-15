@@ -48,6 +48,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         private const int grvTurma_ColunaAvaliacao = 9;
         private const int grvTurma_ColunaEfetivacao = 10;
         private const int grvTurma_ColunaAlunos = 11;
+        private const int grvPeriodosAulas_ColunaSugestao = 2;
 
         #endregion Constantes
 
@@ -316,7 +317,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
-        private int totalPrevistas = 0, totalDadas = 0, totalRepostas = 0;
+        private int totalPrevistas = 0, totalDadas = 0, totalRepostas = 0, totalSugestao = 0;
 
         private byte tdt_posicao;
 
@@ -573,7 +574,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         tur_idAula = tur_id;
                         cal_idAula = cal_id;
 
-                        totalPrevistas = totalDadas = totalRepostas = 0;
+                        totalPrevistas = totalDadas = totalRepostas = totalSugestao = 0;
 
                         mostraSalvar = false;
                         periodosEfetivados = "";
@@ -587,6 +588,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                             lblPeriodoEfetivado.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleTurma.Busca.AulasPrevistas.MensagemEfetivado").ToString(),
                                                                              UtilBO.TipoMensagem.Informacao);
                         }
+
+                        grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = totalSugestao > 0;
                     }
                 }
             }
@@ -631,7 +634,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         tur_idAula = tur_id;
                         cal_idAula = cal_id;
 
-                        totalPrevistas = totalDadas = totalRepostas = 0;
+                        totalPrevistas = totalDadas = totalRepostas = totalSugestao = 0;
                         mostraSalvar = false;
                         grvPeriodosAulas.DataSource = ACA_CalendarioPeriodoBO.Seleciona_QtdeAulas_TurmaDiscplina(tur_id, tud_id, cal_id, tdt_posicaoLocal, __SessionWEB.__UsuarioWEB.Docente.doc_id);
                         tdt_posicao = tdt_posicao == 0 ? tdt_posicaoLocal : tdt_posicao;
@@ -651,6 +654,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                             // quando o usuário muda o combo.
                             VS_ChavesRedirecionaDiario = new long[] { tud_id, tdt_posicaoLocal };
                         }
+
+                        grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = totalSugestao > 0;
                     }
                 }
             }
@@ -1575,9 +1580,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                     long tud_id = Convert.ToInt64(grid.DataKeys[row.RowIndex].Values["tud_id"]);
                     byte tud_tipo = Convert.ToByte(grid.DataKeys[row.RowIndex].Values["tud_tipo"]);
                     Image imgPendenciaFechamento = (Image)row.FindControl("imgPendenciaFechamento");
+                    Image imgPendenciaPlanejamento = (Image)row.FindControl("imgPendenciaPlanejamento");
                     if (imgPendenciaFechamento != null)
                     {
                         imgPendenciaFechamento.Visible = false;
+                    }
+                    if (imgPendenciaPlanejamento != null)
+                    {
+                        imgPendenciaPlanejamento.Visible = false;
                     }
 
                     if (tud_tipo == (byte)TurmaDisciplinaTipo.Regencia)
@@ -1600,13 +1610,19 @@ namespace GestaoEscolar.Academico.ControleTurma
                         else if (!possuiPendencia && VS_listaPendenciaFechamento[grid.ClientID].Any(item => (item.Pendente || item.PendenteParecer) && item.tud_id == tud_id))
                             possuiPendencia = true;
                     }
+
+                    if (VS_listaPendenciaFechamento[grid.ClientID].Any(item => item.PendentePlanejamento && item.tud_id == tud_id))
+                    {
+                        if (imgPendenciaPlanejamento != null)
+                            imgPendenciaPlanejamento.Visible = true;
+                    }
                 }
 
                 if (!possuiPendencia && VS_listaPendenciaFechamento[grid.ClientID].Any(item => (item.Pendente || item.PendenteParecer)))
                 {
                     possuiPendencia = true;
                 }
-
+                
                 if (VS_visaoDocente)
                 {
                     RepeaterItem rptItem = (RepeaterItem)grid.NamingContainer;
@@ -1617,7 +1633,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         {
                             divMensagemFechamentoPendencia.Visible = possuiPendencia;
                         }
-
+                        
                         HtmlGenericControl mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamento");
                         if (mensagemSemPendenciaFechamento != null)
                         {
@@ -2652,6 +2668,19 @@ namespace GestaoEscolar.Academico.ControleTurma
                         mostraSalvar = true;
                         text.Enabled = true;
                     }
+
+                    HyperLink lnkSugestao = (HyperLink)e.Row.FindControl("lnkSugestao");
+                    Label lblSugestao = (Label)e.Row.FindControl("lblSugestao");
+
+                    if (lblSugestao != null)
+                    {
+                        int sugestao = int.Parse(lblSugestao.Text);
+                        totalSugestao += sugestao;
+
+                        lblSugestao.Visible = sugestao > 0 && !text.Enabled;
+                        if (lnkSugestao != null)
+                            lnkSugestao.Visible = sugestao > 0 && text.Enabled;
+                    }
                 }
 
                 Label label = (Label)e.Row.FindControl("lblDadas");
@@ -2673,6 +2702,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                 label = (Label)e.Row.FindControl("lblTotalReposicoes");
                 if (label != null)
                     label.Text = totalRepostas.ToString();
+                label = (Label)e.Row.FindControl("lblTotalSugestao");
+                if (label != null)
+                    label.Text = totalSugestao.ToString();
 
                 e.Row.CssClass = "gridRow";
             }
