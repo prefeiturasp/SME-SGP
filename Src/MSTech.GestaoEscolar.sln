@@ -96,6 +96,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MStech.Infrastructure.Cachi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetupMultiInstanceGestaoEscolarServerScheduler", "SetupMultiInstanceGestaoEscolarServerScheduler\SetupMultiInstanceGestaoEscolarServerScheduler.csproj", "{C577C0C8-9482-42AE-8AD2-D704ED17EB2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoEscolar.Api", "GestaoEscolar.Api\GestaoEscolar.Api.csproj", "{6376EB97-0276-4C31-BA63-62B2D8FA6A72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -610,6 +612,42 @@ Global
 		{C577C0C8-9482-42AE-8AD2-D704ED17EB2C}.ReleaseAlunos|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C577C0C8-9482-42AE-8AD2-D704ED17EB2C}.ReleaseAlunos|Mixed Platforms.Build.0 = Release|Any CPU
 		{C577C0C8-9482-42AE-8AD2-D704ED17EB2C}.ReleaseAlunos|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|x86.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|x86.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|Any CPU.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|Any CPU.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|Mixed Platforms.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|x86.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|Any CPU.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|Any CPU.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|Mixed Platforms.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|x86.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|x86.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|Any CPU.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|Any CPU.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|Mixed Platforms.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -640,5 +678,6 @@ Global
 		{013609F4-D499-47D6-AA44-83B9F796F051} = {B3B9995A-3F0F-4B57-9B8D-51DCC750412B}
 		{B5AC608F-D85A-469A-BCBA-A398C8805DEE} = {CCDABCF8-E687-49E0-9624-522ECA6CADA5}
 		{C577C0C8-9482-42AE-8AD2-D704ED17EB2C} = {6B734CAA-5F81-46B3-BB95-6181FFEDB15D}
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72} = {9D9FCAB2-B05C-483E-8AAE-636E5F8E8849}
 	EndGlobalSection
 EndGlobal
