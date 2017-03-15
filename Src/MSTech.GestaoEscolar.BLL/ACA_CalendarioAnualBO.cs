@@ -89,7 +89,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <returns></returns>
         private static string RetornaChaveCache_SelecionaCalendarioAnual_Esc_id(int esc_id, Guid ent_id, long doc_id, Guid usu_id, Guid gru_id)
         {
-            return String.Format("Cache_SelecionaCalendarioAnual_Esc_id_{0}_{1_{2}_{3}_{4}}", esc_id, ent_id, doc_id, usu_id, gru_id);
+            return String.Format("Cache_SelecionaCalendarioAnual_Esc_id_{0}_{1}_{2}_{3}_{4}", esc_id, ent_id, doc_id, usu_id, gru_id);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <returns></returns>
         private static string RetornaChaveCache_SelecionaCalendarioAnualPorCurso(int cur_id, Guid ent_id, long doc_id, Guid usu_id, Guid gru_id)
         {
-            return String.Format("Cache_SelecionaCalendarioAnualPorCurso_{0}_{1}_{2}_{3}_{4}", cur_id, ent_id);
+            return String.Format("Cache_SelecionaCalendarioAnualPorCurso_{0}_{1}_{2}_{3}_{4}", cur_id, ent_id, doc_id, usu_id, gru_id);
         }
 
         /// <summary>

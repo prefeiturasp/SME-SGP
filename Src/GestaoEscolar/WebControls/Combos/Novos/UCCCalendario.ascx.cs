@@ -325,10 +325,16 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         {
             //Se for visão de docente carrega apenas os calendários que o docente tem acesso
             if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+            {
+                SelecionarAnoCorrente = true;
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, ApplicationWEB.AppMinutosCacheLongo));
+            }
             //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
             else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
-                CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo));
+            {
+                SelecionarAnoCorrente = true;
+                CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, ApplicationWEB.AppMinutosCacheLongo));
+            }
             //Carrega todos os calendários
             else
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
@@ -343,10 +349,16 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         {
             //Se for visão de docente carrega apenas os calendários que o docente tem acesso
             if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+            {
+                SelecionarAnoCorrente = true;
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual_Esc_id(esc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, ApplicationWEB.AppMinutosCacheLongo));
+            }
             //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
             else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
-                CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual_Esc_id(esc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo));
+            {
+                SelecionarAnoCorrente = true;
+                CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual_Esc_id(esc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, ApplicationWEB.AppMinutosCacheLongo));
+            }
             //Carrega todos os calendários
             else
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual_Esc_id(esc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
@@ -371,10 +383,16 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         {
             //Se for visão de docente carrega apenas os calendários que o docente tem acesso
             if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+            {
+                SelecionarAnoCorrente = true;
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnualPorCurso(cur_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, ApplicationWEB.AppMinutosCacheLongo));
+            }
             //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
             else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
-                CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnualPorCurso(cur_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo));
+            {
+                SelecionarAnoCorrente = true;
+                CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnualPorCurso(cur_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, ApplicationWEB.AppMinutosCacheLongo));
+            }
             //Carrega todos os calendários
             else
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnualPorCurso(cur_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
@@ -387,10 +405,16 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         {
             //Se for visão de docente carrega apenas os calendários que o docente tem acesso
             if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+            {
+                SelecionarAnoCorrente = true;
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, ApplicationWEB.AppMinutosCacheLongo));
+            }
             //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
             else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
-                CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo));
+            {
+                SelecionarAnoCorrente = true;
+                CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, ApplicationWEB.AppMinutosCacheLongo));
+            }
             //Carrega todos os calendários
             else
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
@@ -407,11 +431,17 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         {
             //Se for visão de docente carrega apenas os calendários que o docente tem acesso
             if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+            {
+                SelecionarAnoCorrente = true;
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendariosComBimestresAberto_Por_EntidadeEscola(__SessionWEB.__UsuarioWEB.Usuario.ent_id, esc_id, VerificaEscolaCalendarioPeriodo, __SessionWEB.__UsuarioWEB.Docente.doc_id));
+            }
             //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
             else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
+            {
+                SelecionarAnoCorrente = true;
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendariosComBimestresAberto_Por_EntidadeEscola(__SessionWEB.__UsuarioWEB.Usuario.ent_id, esc_id, VerificaEscolaCalendarioPeriodo,
-                                                                                                              __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id));
+                                                                                                              __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id));
+            }
             //Carrega todos os calendários
             else
                 CarregarCombo(ACA_CalendarioAnualBO.SelecionaCalendariosComBimestresAberto_Por_EntidadeEscola(__SessionWEB.__UsuarioWEB.Usuario.ent_id, esc_id, VerificaEscolaCalendarioPeriodo));
@@ -426,10 +456,16 @@ namespace GestaoEscolar.WebControls.Combos.Novos
 
             //Se for visão de docente carrega apenas os calendários que o docente tem acesso
             if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+            {
+                SelecionarAnoCorrente = true;
                 lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, ApplicationWEB.AppMinutosCacheLongo);
+            }
             //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
             else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
-                lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo);
+            {
+                SelecionarAnoCorrente = true;
+                lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, ApplicationWEB.AppMinutosCacheLongo);
+            }
             //Carrega todos os calendários
             else
                 lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id);
