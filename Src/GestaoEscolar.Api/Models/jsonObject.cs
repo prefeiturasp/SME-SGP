@@ -6,10 +6,9 @@ using System.Web;
 
 namespace GestaoEscolar.Api.Models
 {
-    public class User
+    public class jsonObject
     {
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public Guid Entity { get; set; }
+        public string id { get; set; }
+        public string text { get; set; }
     }
 }

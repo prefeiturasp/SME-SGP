@@ -1,6 +1,7 @@
 ﻿using GestaoEscolar.Api.Areas.HelpPage.Attributes;
 using GestaoEscolar.Api.Controllers.Base;
 using GestaoEscolar.Api.Models;
+using MSTech.CoreSSO.BLL;
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Web.WebProject;
 using System;
@@ -21,31 +22,35 @@ namespace GestaoEscolar.Api.Areas.v1
         /// </summary>
         /// <returns>Lista de diretorias</returns>
         [Route("")]
-        [ResponseType(typeof(List<htmlSelect>))]
-        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.NotFound, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
+        [ResponseType(typeof(Diretoria))]
+        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
         public HttpResponseMessage GetDiretorias()
         {
             try
             {
-                Guid tua_id = ACA_ParametroAcademicoBO.VerificaFiltroEscolaPorEntidade(__userLogged.Usuario.ent_id);
-                var lst = ESC_UnidadeEscolaBO.GetSelectBy_PesquisaTodos_Cache(
-                        tua_id,
-                        __userLogged.Usuario.ent_id,
-                        ApplicationWEB.AppMinutosCacheLongo);
-
-                if (lst.Count > 0)
-                    return Request.CreateResponse(HttpStatusCode.OK,
-                        lst.Select(p => new htmlSelect { id = p.uad_id.ToString(), parentId = p.uad_idSuperior.ToString(), text = p.uad_nome })
-                        );
+                Diretoria diretoria = new Diretoria();
+                if ((__userLogged.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) ||
+                    !ACA_ParametroAcademicoBO.VerificaFiltroUniAdmSuperiorPorEntidade(__userLogged.Usuario.ent_id))
+                {
+                    diretoria.visible = false;
+                }
                 else
-                    return Request.CreateResponse(HttpStatusCode.NotFound, "");
+                {
+                    Guid tua_id = ACA_ParametroAcademicoBO.VerificaFiltroEscolaPorEntidade(__userLogged.Usuario.ent_id);
+                    var lst = ESC_UnidadeEscolaBO.GetSelectBy_PesquisaTodos_Cache(
+                            tua_id,
+                            __userLogged.Usuario.ent_id,
+                            ApplicationWEB.AppMinutosCacheLongo);
+                    diretoria.visible = true;
+                    diretoria.diretorias = lst.Select(p => new jsonObject { id = p.uad_id.ToString(), text = p.uad_nome }).ToList();
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, diretoria);
             }
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
-
-            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
     }

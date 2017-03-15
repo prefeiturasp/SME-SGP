@@ -23,23 +23,54 @@ namespace GestaoEscolar.Api.Areas.v1
         /// <summary>
         /// Busca escolas de acordo com a permissão do grupo do usuário do token e o id da diretoria
         /// </summary>
-        /// <param name="diretoriaId">Id da diretoria(Guid)</param>
+        /// <param name="diretoriaId">(Opcional) Id da diretoria(Guid)</param>
         /// <returns>Retorna uma lista de escolas</returns>
         [Route("Diretoria/{diretoriaId:guid}")]
-        [ResponseType(typeof(List<htmlSelect>))]
+        [ResponseType(typeof(List<Escola>))]
         [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.NotFound, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
-        public HttpResponseMessage GetEscolas(string diretoriaId)
+        public HttpResponseMessage GetEscolas(Guid diretoriaId)
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.NotImplemented, "");
+                List<sComboUAEscola> lst = new List<sComboUAEscola>();
+                if ((__userLogged.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) ||
+                    !ACA_ParametroAcademicoBO.VerificaFiltroUniAdmSuperiorPorEntidade(__userLogged.Usuario.ent_id))
+                {
+                    lst = ESC_UnidadeEscolaBO.SelecionaEscolasControladas(
+                            __userLogged.Usuario.ent_id,
+                            __userLogged.Grupo.gru_id,
+                            __userLogged.Usuario.usu_id,
+                            true,
+                            ApplicationWEB.AppMinutosCacheLongo);
+                }
+                else {
+                    lst = ESC_UnidadeEscolaBO.SelecionaEscolasControladasPorUASuperior(
+                        diretoriaId,
+                        __userLogged.Usuario.ent_id,
+                        __userLogged.Grupo.gru_id,
+                        __userLogged.Usuario.usu_id,
+                        (byte)1,
+                        true,
+                        ApplicationWEB.AppMinutosCacheLongo);
+                }
+
+                if (lst.Count > 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                            lst.Select(p => new Escola {
+                                id = p.esc_id.ToString(),
+                                unidadeId = p.uni_id.ToString(),
+                                text = p.uni_escolaNome })
+                            );
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "");
             }
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
 
-            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
     }

@@ -6,10 +6,8 @@ using System.Web;
 
 namespace GestaoEscolar.Api.Models
 {
-    public class htmlSelect
+    public class Curso : jsonObject
     {
-        public string id { get; set; }
-        public string parentId { get; set; }
-        public string text { get; set; }
+        public string curriculoId { get; set; }
     }
 }

@@ -235,6 +235,9 @@ namespace MSTech.GestaoEscolar.DAL
         public DataTable SelectBy_Entidade
         (
            Guid ent_id
+            , long doc_id = 0
+            , Guid usu_id = new Guid()
+            , Guid gru_id = new Guid()
         )
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CalendarioAnual_SelectBy_Entidade", _Banco);
@@ -246,6 +249,36 @@ namespace MSTech.GestaoEscolar.DAL
             Param.ParameterName = "@ent_id";
             Param.Size = 16;
             Param.Value = ent_id;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int64;
+            Param.ParameterName = "@doc_id";
+            Param.Size = 8;
+            if (doc_id > 0)
+                Param.Value = doc_id;
+            else
+                Param.Value = DBNull.Value;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Guid;
+            Param.ParameterName = "@usu_id";
+            Param.Size = 16;
+            if (usu_id != new Guid())
+                Param.Value = usu_id;
+            else
+                Param.Value = DBNull.Value;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Guid;
+            Param.ParameterName = "@gru_id";
+            Param.Size = 16;
+            if (gru_id != new Guid())
+                Param.Value = gru_id;
+            else
+                Param.Value = DBNull.Value;
             qs.Parameters.Add(Param);
 
             #endregion
