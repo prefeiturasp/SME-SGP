@@ -180,7 +180,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <summary>
         /// Processa os dados para a sugestão das aulas previstas.
         /// </summary>
-        public void ExecJOB_ProcessamentoSugestaoAulasPrevistas(Guid sle_id)
+        public void ExecJOB_ProcessamentoSugestaoAulasPrevistas()
         {
             QueryStoredProcedureAsync qs = new QueryStoredProcedureAsync("MS_JOB_ProcessamentoSugestaoAulasPrevistas", _Banco);
 
