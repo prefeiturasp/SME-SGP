@@ -7,7 +7,24 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.Business.Common;
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.DAL;
+    using System;
+    using System.Linq;
     using System.Data;
+    using System.Collections.Generic;
+
+
+    /// <summary>
+    /// Estrutura com períodos do calendário
+    /// </summary>
+    [Serializable]
+    public struct Struct_ObjetosAprendizagem
+    {
+        public int oap_id { get; set; }
+        public string oap_descricao { get; set; }
+        public byte oap_situacao { get; set; }
+        public int tds_id { get; set; }
+        public int tud_id { get; set; }
+    }
 
     /// <summary>
     /// Description: ACA_ObjetoAprendizagem Business Object. 
@@ -21,5 +38,17 @@ namespace MSTech.GestaoEscolar.BLL
             ACA_ObjetoAprendizagemDAO dao = new ACA_ObjetoAprendizagemDAO();
             return dao.SelectBy_TipoDisciplina(tds_id, out totalRecords);
         }
+
+        public static List<Struct_ObjetosAprendizagem> SelectListaBy_TipoDisciplina(int tds_id, long tud_id)
+        {
+            totalRecords = 0;
+            List<Struct_ObjetosAprendizagem> dados = null;
+
+            dados = (from DataRow dr in new ACA_ObjetoAprendizagemDAO().SelectListaBy_TipoDisciplina(tds_id, tud_id, out totalRecords).Rows
+                     select (Struct_ObjetosAprendizagem)GestaoEscolarUtilBO.DataRowToEntity(dr, new Struct_ObjetosAprendizagem())).ToList();
+
+            return dados;
+        }
     }
+  
 }

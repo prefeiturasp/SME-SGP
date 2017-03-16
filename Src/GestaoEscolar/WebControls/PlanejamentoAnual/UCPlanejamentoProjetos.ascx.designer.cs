@@ -157,6 +157,24 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         protected global::System.Web.UI.WebControls.Literal litDocumentos;
         
         /// <summary>
+        /// abaobjAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl abaobjAprendizagem;
+        
+        /// <summary>
+        /// litObjetoAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litObjetoAprendizagem;
+        
+        /// <summary>
         /// divTabsPlanoCiclo control.
         /// </summary>
         /// <remarks>
@@ -587,6 +605,33 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptAreas;
+        
+        /// <summary>
+        /// divTabsObjetoAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTabsObjetoAprendizagem;
+        
+        /// <summary>
+        /// updObjetosAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updObjetosAprendizagem;
+        
+        /// <summary>
+        /// rptobjAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptobjAprendizagem;
         
         /// <summary>
         /// selected_tab control.

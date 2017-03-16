@@ -42,6 +42,40 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Retorna os parâmetros ativos e vigentes.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SelectListaBy_TipoDisciplina(int tds_id, long tud_id, out int totalRecords)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemCollection_SELECT_Bytds_id_tud_id", _Banco);
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Value = tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tud_id";
+                Param.Size = 4;
+                Param.Value = tud_id;                
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                totalRecords = qs.Return.Rows.Count;
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #region Métodos Sobrescritos
 
         /// <summary>
