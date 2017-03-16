@@ -437,7 +437,7 @@ namespace GestaoEscolar.WebControls.BuscaDocente
                     }
                     else
                     {
-                        UCCCalendario.CarregarPorEscola(UCComboUAEscola.Esc_ID);
+                        UCCCalendario.CarregarCalendarioAnual();
                     }
                     UCCCalendario.SetarFoco();
                     UCCCalendario.PermiteEditar = true;
