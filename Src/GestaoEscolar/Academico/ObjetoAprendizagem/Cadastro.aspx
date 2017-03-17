@@ -10,6 +10,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+            <asp:Label ID="_lblMessage" runat="server" EnableViewState="False"></asp:Label>
             <asp:ValidationSummary ID="ValidationSummary" runat="server" ValidationGroup="objetoAprendizagem" />
             <fieldset>
                 <legend>Cadastro de objeto de aprendizagem</legend>
@@ -22,6 +23,8 @@
                 <asp:TextBox ID="_txtDescricao" runat="server" Rows="4" TextMode="MultiLine" SkinID="text60C"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Descrição é obrigatório."
                     Display="Dynamic" ControlToValidate="_txtDescricao" ValidationGroup="objetoAprendizagem">*</asp:RequiredFieldValidator>
+
+                <asp:CheckBox ID="_ckbBloqueado" runat="server" Text="Bloqueado" />
             </fieldset>
 
         </ContentTemplate>
