@@ -60,6 +60,7 @@ namespace MSTech.GestaoEscolar.BLL
         public static bool AtualizaObjetoAprendizagem(int tci_id, bool tci_objetoAprendizagem)
         {
             ACA_TipoCicloDAO dao = new ACA_TipoCicloDAO();
+            GestaoEscolarUtilBO.LimpaCache(RetornaChaveCache_SelecionaTipoCicloAtivos());
             return dao.AtualizaObjetoAprendizagem(tci_id, tci_objetoAprendizagem);
         }
 
