@@ -179,7 +179,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
                 txtDisciplina.Text = tds.tds_nome;
 
-                rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivos();
+                rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivos(true, ApplicationWEB.AppMinutosCacheLongo);
                 rptCampos.DataBind();
             }
             catch (Exception ex)
