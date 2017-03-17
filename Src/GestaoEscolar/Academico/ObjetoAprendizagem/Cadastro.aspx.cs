@@ -80,7 +80,8 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     IsNew = _VS_oap_id <= 0,
                     oap_descricao = _txtDescricao.Text,
                     tds_id = _VS_tds_id,
-                    oap_situacao = (byte)(_ckbBloqueado.Checked ? 2 : 1),
+                    oap_situacao = (_ckbBloqueado.Checked ? (byte)ObjetoAprendizagemSituacao.Bloqueado 
+                                                          : (byte)ObjetoAprendizagemSituacao.Ativo),
                     oap_id = _VS_oap_id
                 };
 
@@ -143,12 +144,13 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
         {
             try
             {
-                var objetoAp = new ACA_ObjetoAprendizagem { oap_id = oap_id };
+                ACA_ObjetoAprendizagem objetoAp = new ACA_ObjetoAprendizagem { oap_id = oap_id };
                 ACA_ObjetoAprendizagemBO.GetEntity(objetoAp);
 
                 _txtDescricao.Text = objetoAp.oap_descricao;
+                _ckbBloqueado.Checked = objetoAp.oap_situacao == (byte)ObjetoAprendizagemSituacao.Bloqueado;
 
-                var ciclos = ACA_ObjetoAprendizagemTipoCicloBO.SelectBy_ObjetoAprendizagem(oap_id);
+                List<int> ciclos = ACA_ObjetoAprendizagemTipoCicloBO.SelectBy_ObjetoAprendizagem(oap_id);
 
                 foreach (RepeaterItem item in rptCampos.Items)
                 {

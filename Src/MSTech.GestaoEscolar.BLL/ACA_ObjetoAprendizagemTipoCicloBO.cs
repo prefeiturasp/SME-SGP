@@ -23,7 +23,7 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectBy_TipoDisciplina(tds_id, out totalRecords);
         }
 
-        public static IEnumerable<int> SelectBy_ObjetoAprendizagem(int oap_id)
+        public static List<int> SelectBy_ObjetoAprendizagem(int oap_id)
         {
             ACA_ObjetoAprendizagemTipoCicloDAO dao = new ACA_ObjetoAprendizagemTipoCicloDAO();
             return dao.SelectBy_ObjetoAprendizagem(oap_id);
