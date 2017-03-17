@@ -421,7 +421,16 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_ProcessamentoSugestaoAulasPrevistas()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas();
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas(false);
+        }
+
+        /// <summary>
+        /// Processa os dados para a sugestão das aulas previstas,
+        /// para eventos cadastrados para toda a rede.
+        /// </summary>
+        public static void ExecJOB_ProcessamentoSugestaoAulasPrevistas_TodaRede()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas(true);
         }
     }
 }
