@@ -224,6 +224,8 @@
     <Compile Include="Abstracts\Abstract_CLS_FechamentoJustificativaPendenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoResponsaveisDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ObjetoAprendizagemTurmaAulaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ObjetoAprendizagemTurmaDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoCicloDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnosticoDAO.cs" />
@@ -502,6 +504,8 @@
     <Compile Include="CLS_FechamentoJustificativaPendenciaDAO.cs" />
     <Compile Include="CLS_FrequenciaReuniaoDAO.cs" />
     <Compile Include="CLS_FrequenciaReuniaoResponsaveisDAO.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaAulaDAO.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaDisciplinaDAO.cs" />
     <Compile Include="CLS_PlanejamentoCicloDAO.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricularDAO.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricularDiagnosticoDAO.cs" />

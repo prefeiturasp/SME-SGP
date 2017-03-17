@@ -16,7 +16,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 	/// Description: .
 	/// </summary>
 	[Serializable]
-    public abstract class Abstract_CLS_ObjetoAprendizagemTurmaDisciplina : Abstract_Entity
+    public abstract class Abstract_CLS_ObjetoAprendizagemTurmaAula : Abstract_Entity
     {
 		
 		/// <summary>
@@ -27,18 +27,18 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		public virtual long tud_id { get; set; }
 
 		/// <summary>
+		/// ID da tabela CLS_TurmaAula.
+		/// </summary>
+		[MSNotNullOrEmpty]
+		[DataObjectField(true, false, false)]
+		public virtual int tau_id { get; set; }
+
+		/// <summary>
 		/// ID da tabela ACA_ObjetoAprendizagem.
 		/// </summary>
 		[MSNotNullOrEmpty]
 		[DataObjectField(true, false, false)]
 		public virtual int oap_id { get; set; }
-
-		/// <summary>
-		/// ID da tabela ACA_TipoPeriodoCalendario.
-		/// </summary>
-		[MSNotNullOrEmpty]
-		[DataObjectField(true, false, false)]
-		public virtual int tpc_id { get; set; }
 
     }
 }

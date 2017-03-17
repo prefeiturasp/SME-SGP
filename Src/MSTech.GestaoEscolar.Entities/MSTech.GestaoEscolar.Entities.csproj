@@ -231,6 +231,8 @@
     <Compile Include="Abstracts\Abstract_CLS_FechamentoJustificativaPendencia.cs" />
     <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniao.cs" />
     <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoResponsaveis.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ObjetoAprendizagemTurmaAula.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ObjetoAprendizagemTurmaDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoCiclo.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricular.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnostico.cs" />
@@ -508,6 +510,8 @@
     <Compile Include="CLS_FechamentoJustificativaPendencia.cs" />
     <Compile Include="CLS_FrequenciaReuniao.cs" />
     <Compile Include="CLS_FrequenciaReuniaoResponsaveis.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaAula.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaDisciplina.cs" />
     <Compile Include="CLS_PlanejamentoCiclo.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricular.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricularDiagnostico.cs" />
