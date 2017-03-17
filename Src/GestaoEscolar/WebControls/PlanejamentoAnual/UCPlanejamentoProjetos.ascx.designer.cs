@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GestaoEscolar.WebControls.PlanejamentoAnual {
-    
-    
-    public partial class UCPlanejamentoProjetos {
-        
+namespace GestaoEscolar.WebControls.PlanejamentoAnual
+{
+
+
+    public partial class UCPlanejamentoProjetos
+    {
+
         /// <summary>
         /// divPlanoAluno control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPlanoAluno;
-        
+
         /// <summary>
         /// txtPlanoAlunoPopUp control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPlanoAlunoPopUp;
-        
+
         /// <summary>
         /// btnFecharPlanoAluno control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnFecharPlanoAluno;
-        
+
         /// <summary>
         /// updReplicarPlanejamentoAnual control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updReplicarPlanejamentoAnual;
-        
+
         /// <summary>
         /// lblMessageReplicar control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessageReplicar;
-        
+
         /// <summary>
         /// lblMensagemReplicacaoAnual control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensagemReplicacaoAnual;
-        
+
         /// <summary>
         /// chkTurmas control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList chkTurmas;
-        
+
         /// <summary>
         /// btnReplicar control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReplicar;
-        
+
         /// <summary>
         /// btnCancelar control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar;
-        
+
         /// <summary>
         /// abaPlanoCiclo control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl abaPlanoCiclo;
-        
+
         /// <summary>
         /// litPlanoCiclo control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litPlanoCiclo;
-        
+
         /// <summary>
         /// abaPlanoAnual control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl abaPlanoAnual;
-        
+
         /// <summary>
         /// litPlanoAnual control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litPlanoAnual;
-        
+
         /// <summary>
         /// abaPlanoAluno control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl abaPlanoAluno;
-        
+
         /// <summary>
         /// litPlanoAluno control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litPlanoAluno;
-        
+
         /// <summary>
         /// litDocumentos control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litDocumentos;
-        
+
         /// <summary>
         /// abaobjAprendizagem control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl abaobjAprendizagem;
-        
+
         /// <summary>
         /// litObjetoAprendizagem control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litObjetoAprendizagem;
-        
+
         /// <summary>
         /// divTabsPlanoCiclo control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTabsPlanoCiclo;
-        
+
         /// <summary>
         /// updCiclo control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updCiclo;
-        
+
         /// <summary>
         /// vsPlanoCiclo control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary vsPlanoCiclo;
-        
+
         /// <summary>
         /// lblMensagemCiclo control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensagemCiclo;
-        
+
         /// <summary>
         /// lblCiclo control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCiclo;
-        
+
         /// <summary>
         /// lbkAlterarCiclo control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbkAlterarCiclo;
-        
+
         /// <summary>
         /// uccTipoCiclo control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCComboGenerico uccTipoCiclo;
-        
+
         /// <summary>
         /// btnCancelarAlterarCiclo control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnCancelarAlterarCiclo;
-        
+
         /// <summary>
         /// lblMsgTodosProfessores control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMsgTodosProfessores;
-        
+
         /// <summary>
         /// txtPlanoCiclo control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::CKEditor.NET.CKEditorControl txtPlanoCiclo;
-        
+
         /// <summary>
         /// rfvPlanoCiclo control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPlanoCiclo;
-        
+
         /// <summary>
         /// lblUsuarioCiclo control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUsuarioCiclo;
-        
+
         /// <summary>
         /// imgHistoricoAlteracaoCiclo control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgHistoricoAlteracaoCiclo;
-        
+
         /// <summary>
         /// divEditarPlanoCiclo control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEditarPlanoCiclo;
-        
+
         /// <summary>
         /// btnCancelarCiclo control.
         /// </summary>
@@ -308,7 +310,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelarCiclo;
-        
+
         /// <summary>
         /// btnEditarPlanoCiclo control.
         /// </summary>
@@ -317,7 +319,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEditarPlanoCiclo;
-        
+
         /// <summary>
         /// divTabsPlanoAnual control.
         /// </summary>
@@ -326,7 +328,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTabsPlanoAnual;
-        
+
         /// <summary>
         /// updAnual control.
         /// </summary>
@@ -335,7 +337,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updAnual;
-        
+
         /// <summary>
         /// lblMensagemAnual control.
         /// </summary>
@@ -344,7 +346,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensagemAnual;
-        
+
         /// <summary>
         /// lblDiagnosticoInicial control.
         /// </summary>
@@ -353,7 +355,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDiagnosticoInicial;
-        
+
         /// <summary>
         /// btnTextoGrandeDiagnosticoInicial control.
         /// </summary>
@@ -362,7 +364,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnTextoGrandeDiagnosticoInicial;
-        
+
         /// <summary>
         /// btnVoltaEstadoAnteriorTextoDiagnosticoInicial control.
         /// </summary>
@@ -371,7 +373,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnVoltaEstadoAnteriorTextoDiagnosticoInicial;
-        
+
         /// <summary>
         /// lblDiagnosticoInicialInfo control.
         /// </summary>
@@ -380,7 +382,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDiagnosticoInicialInfo;
-        
+
         /// <summary>
         /// txtDiagnosticoInicial control.
         /// </summary>
@@ -389,7 +391,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDiagnosticoInicial;
-        
+
         /// <summary>
         /// lblProposta control.
         /// </summary>
@@ -398,7 +400,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProposta;
-        
+
         /// <summary>
         /// btnTextoGrandeProposta control.
         /// </summary>
@@ -407,7 +409,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnTextoGrandeProposta;
-        
+
         /// <summary>
         /// btnVoltaEstadoAnteriorTextoProposta control.
         /// </summary>
@@ -416,7 +418,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton btnVoltaEstadoAnteriorTextoProposta;
-        
+
         /// <summary>
         /// lblPropostaInfo control.
         /// </summary>
@@ -425,7 +427,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPropostaInfo;
-        
+
         /// <summary>
         /// txtProposta control.
         /// </summary>
@@ -434,7 +436,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtProposta;
-        
+
         /// <summary>
         /// rptPlanejamentoBimestre control.
         /// </summary>
@@ -443,7 +445,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPlanejamentoBimestre;
-        
+
         /// <summary>
         /// divTabsPlanoAluno control.
         /// </summary>
@@ -452,7 +454,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTabsPlanoAluno;
-        
+
         /// <summary>
         /// updAluno control.
         /// </summary>
@@ -461,7 +463,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updAluno;
-        
+
         /// <summary>
         /// lblMensagemAluno control.
         /// </summary>
@@ -470,7 +472,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensagemAluno;
-        
+
         /// <summary>
         /// lblMensagemAviso control.
         /// </summary>
@@ -479,7 +481,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensagemAviso;
-        
+
         /// <summary>
         /// lblSelecioneAluno control.
         /// </summary>
@@ -488,7 +490,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSelecioneAluno;
-        
+
         /// <summary>
         /// UCCAlunos control.
         /// </summary>
@@ -497,7 +499,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCComboGenerico UCCAlunos;
-        
+
         /// <summary>
         /// divAluno control.
         /// </summary>
@@ -506,7 +508,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAluno;
-        
+
         /// <summary>
         /// chlTurmaDiscRelacionada control.
         /// </summary>
@@ -515,7 +517,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList chlTurmaDiscRelacionada;
-        
+
         /// <summary>
         /// lblDescTurmaAluno control.
         /// </summary>
@@ -524,7 +526,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescTurmaAluno;
-        
+
         /// <summary>
         /// txtPlanoAluno control.
         /// </summary>
@@ -533,7 +535,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::CKEditor.NET.CKEditorControl txtPlanoAluno;
-        
+
         /// <summary>
         /// fdsTurmasAluno control.
         /// </summary>
@@ -542,7 +544,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsTurmasAluno;
-        
+
         /// <summary>
         /// lblTurmaAluno control.
         /// </summary>
@@ -551,7 +553,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTurmaAluno;
-        
+
         /// <summary>
         /// UCCTurmaAluno control.
         /// </summary>
@@ -560,7 +562,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCComboGenerico UCCTurmaAluno;
-        
+
         /// <summary>
         /// divTurmaDisciplinaAluno control.
         /// </summary>
@@ -569,7 +571,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTurmaDisciplinaAluno;
-        
+
         /// <summary>
         /// grvTurmaDisciplinaAluno control.
         /// </summary>
@@ -578,7 +580,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvTurmaDisciplinaAluno;
-        
+
         /// <summary>
         /// updDocumentos control.
         /// </summary>
@@ -587,7 +589,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updDocumentos;
-        
+
         /// <summary>
         /// lblSemAreas control.
         /// </summary>
@@ -596,7 +598,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSemAreas;
-        
+
         /// <summary>
         /// rptAreas control.
         /// </summary>
@@ -605,7 +607,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptAreas;
-        
+
         /// <summary>
         /// divTabsObjetoAprendizagem control.
         /// </summary>
@@ -614,7 +616,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTabsObjetoAprendizagem;
-        
+
         /// <summary>
         /// updObjetosAprendizagem control.
         /// </summary>
@@ -623,7 +625,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updObjetosAprendizagem;
-        
+
         /// <summary>
         /// rptobjAprendizagem control.
         /// </summary>
@@ -632,7 +634,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptobjAprendizagem;
-        
+
         /// <summary>
         /// selected_tab control.
         /// </summary>
@@ -641,7 +643,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField selected_tab;
-        
+
         /// <summary>
         /// updHistoricoCiclo control.
         /// </summary>
@@ -650,7 +652,7 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updHistoricoCiclo;
-        
+
         /// <summary>
         /// grvHistoricoCiclo control.
         /// </summary>

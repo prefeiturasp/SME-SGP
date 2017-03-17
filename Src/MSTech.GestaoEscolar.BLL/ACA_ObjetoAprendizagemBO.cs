@@ -66,6 +66,16 @@ namespace MSTech.GestaoEscolar.BLL
             else
                 throw new ValidationException(UtilBO.ErrosValidacao(entity));
         }
+
+        public static List<Struct_ObjetosAprendizagem> SelectListaBy_TipoDisciplina(int tds_id, long tud_id)
+        {
+            totalRecords = 0;
+            List<Struct_ObjetosAprendizagem> dados = null;
+
+            dados = (from DataRow dr in new ACA_ObjetoAprendizagemDAO().SelectListaBy_TipoDisciplina(tds_id, tud_id, out totalRecords).Rows
+                     select (Struct_ObjetosAprendizagem)GestaoEscolarUtilBO.DataRowToEntity(dr, new Struct_ObjetosAprendizagem())).ToList();
+
+            return dados;
+        }
     }
-  
 }

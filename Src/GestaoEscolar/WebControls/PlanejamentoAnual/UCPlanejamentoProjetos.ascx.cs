@@ -351,7 +351,7 @@
             get
             {
                 return (VS_turmaDisciplinaCompartilhada != null || ACA_TipoDocenteBO.SelecionaPosicaoPorTipoDocenteCache(EnumTipoDocente.Compartilhado, ApplicationWEB.AppMinutosCacheLongo) == VS_tdt_posicao)
-                       || ACA_TipoDocenteBO.SelecionaPosicaoPorTipoDocenteCache(EnumTipoDocente.SegundoTitular, ApplicationWEB.AppMinutosCacheLongo) == VS_tdt_posicao 
+                       || ACA_TipoDocenteBO.SelecionaPosicaoPorTipoDocenteCache(EnumTipoDocente.SegundoTitular, ApplicationWEB.AppMinutosCacheLongo) == VS_tdt_posicao
                        ? ACA_TipoDocenteBO.SelecionaPosicaoPorTipoDocenteCache(EnumTipoDocente.Titular, ApplicationWEB.AppMinutosCacheLongo) : VS_tdt_posicao;
             }
         }
@@ -449,7 +449,7 @@
                                             new object[]
                                                 {
                                                     "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "CreateDiv",
-	                                                "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ,"-", "BidiLtr", "BidiRtl"
+                                                    "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ,"-", "BidiLtr", "BidiRtl"
                                                 },
                                             new object[]
                                                 {
@@ -494,7 +494,7 @@
                                             new object[]
                                                 {
                                                     "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "CreateDiv",
-	                                                "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ,"-", "BidiLtr", "BidiRtl"
+                                                    "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ,"-", "BidiLtr", "BidiRtl"
                                                 },
                                             new object[]
                                                 {
@@ -575,7 +575,7 @@
             {
                 string[] vetTipoCiclo = tciIds.Split(',');
                 var elements = from element in vetTipoCiclo
-                                select Convert.ToInt32(element);
+                               select Convert.ToInt32(element);
                 VS_tciIdsTurma = elements.ToList();
             }
             else
@@ -628,7 +628,7 @@
                 List<ESC_EscolaCalendarioPeriodo> lstEscCalPeriodo = ESC_EscolaCalendarioPeriodoBO.SelectEscolasCalendarioCache(VS_cal_id, ApplicationWEB.AppMinutosCacheCurto);
                 lstCalendarioPeriodos = lstCalendarioPeriodos.Where(calP => (lstEscCalPeriodo.Where(escP => (escP.esc_id == VS_esc_id && escP.tpc_id == calP.tpc_id)).Count() == 0)).ToList();
             }
-            
+
             #endregion Objeto Aprendizagem
 
 
@@ -899,10 +899,10 @@
                 rptPlanejamentoBimestre.DataBind();
 
                 if (VS_visaoDocente &&
-                    // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                         (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                    // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                    // nao permite lancar o planejamento em conjunto com o titular
+                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                        // nao permite lancar o planejamento em conjunto com o titular
                         || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     txtDiagnosticoInicial.ReadOnly = txtProposta.ReadOnly = true;
             }
@@ -939,11 +939,11 @@
                         VS_tdp_id = Convert.ToInt32(dtPlanejamentoAnual.Rows[0]["tdp_id"]);
 
                     CLS_TurmaDisciplinaPlanejamento planejamento = new CLS_TurmaDisciplinaPlanejamento
-                                                                        {
-                                                                            tud_id = tud_id,
-                                                                            tdp_id = tdp_id,
-                                                                            tpc_id = -1
-                                                                        };
+                    {
+                        tud_id = tud_id,
+                        tdp_id = tdp_id,
+                        tpc_id = -1
+                    };
 
                     CLS_TurmaDisciplinaPlanejamentoBO.GetEntity(planejamento);
 
@@ -976,11 +976,11 @@
                                                  .FirstOrDefault().Field<object>("tdp_id"));
 
                         planejamento = new CLS_TurmaDisciplinaPlanejamento
-                                            {
-                                                tud_id = tud_id,
-                                                tdp_id = tdp_id,
-                                                tpc_id = Convert.ToInt32(hdnTpcId.Value)
-                                            };
+                        {
+                            tud_id = tud_id,
+                            tdp_id = tdp_id,
+                            tpc_id = Convert.ToInt32(hdnTpcId.Value)
+                        };
 
                         CLS_TurmaDisciplinaPlanejamentoBO.GetEntity(planejamento);
 
@@ -1032,21 +1032,21 @@
             try
             {
                 if (VS_visaoDocente &&
-                    // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                         (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                    // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                    // nao permite lancar o planejamento em conjunto com o titular
+                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                        // nao permite lancar o planejamento em conjunto com o titular
                         || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     return false;
 
                 List<CLS_TurmaDisciplinaPlanejamento> lstPlanejamento = new List<CLS_TurmaDisciplinaPlanejamento>();
 
                 CLS_TurmaDisciplinaPlanejamento planejamento = new CLS_TurmaDisciplinaPlanejamento
-                                                                    {
-                                                                        tud_id = VS_tud_id,
-                                                                        tdp_id = VS_tdp_id,
-                                                                        tpc_id = -1
-                                                                    };
+                {
+                    tud_id = VS_tud_id,
+                    tdp_id = VS_tdp_id,
+                    tpc_id = -1
+                };
                 CLS_TurmaDisciplinaPlanejamentoBO.GetEntity(planejamento);
 
                 planejamento.tdp_diagnostico = txtDiagnosticoInicial.Text;
@@ -1066,11 +1066,11 @@
                     TextBox txtPlanejamentoBimestre = (TextBox)item.FindControl("txtPlanejamentoBimestre");
 
                     planejamento = new CLS_TurmaDisciplinaPlanejamento
-                                        {
-                                            tud_id = VS_tud_id,
-                                            tdp_id = string.IsNullOrEmpty(hdnTdpId.Value) ? -1 : Convert.ToInt32(hdnTdpId.Value),
-                                            tpc_id = Convert.ToInt32(hdnTpcId.Value)
-                                        };
+                    {
+                        tud_id = VS_tud_id,
+                        tdp_id = string.IsNullOrEmpty(hdnTdpId.Value) ? -1 : Convert.ToInt32(hdnTdpId.Value),
+                        tpc_id = Convert.ToInt32(hdnTpcId.Value)
+                    };
                     CLS_TurmaDisciplinaPlanejamentoBO.GetEntity(planejamento);
 
                     planejamento.tdp_planejamento = txtPlanejamentoBimestre.Text;
@@ -1237,10 +1237,10 @@
                     divAluno.Visible = true;
 
                     if (VS_visaoDocente &&
-                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                            // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                             (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                        // nao permite lancar o planejamento em conjunto com o titular
+                            // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                            // nao permite lancar o planejamento em conjunto com o titular
                             || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     {
                         txtPlanoAluno.ReadOnly = true;
@@ -1271,10 +1271,10 @@
                 SalvaPlanoAluno(alu_id);
 
                 if (VS_visaoDocente &&
-                    // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                         (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                    // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                    // nao permite lancar o planejamento em conjunto com o titular
+                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                        // nao permite lancar o planejamento em conjunto com o titular
                         || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     return false;
 
@@ -1417,10 +1417,10 @@
                 btnVoltaEstadoAnteriorTextoPlanejamentoBimestre.OnClientClick = "abrirTextoPequeno('" + lblPlanejamentoBimestre.ClientID + "', '" + txtPlanejamentoBimestre.ClientID + "', '" + btnTextoGrandePlanejamentoBimestre.ClientID + "', '" + btnVoltaEstadoAnteriorTextoPlanejamentoBimestre.ClientID + "', '" + hdnBimestreVisivel.Value + "'); return false;";
 
                 if (VS_visaoDocente &&
-                    // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                         (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                    // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                    // nao permite lancar o planejamento em conjunto com o titular
+                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                        // nao permite lancar o planejamento em conjunto com o titular
                         || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     txtPlanejamentoBimestre.ReadOnly = true;
             }
