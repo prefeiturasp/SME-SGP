@@ -108,6 +108,12 @@ namespace MSTech.GestaoEscolar.BLL
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public static List<sComboTipoCiclo> SelecionaTipoCicloAtivos(int appMinutosCacheLongo = 0)
         {
+            return SelecionaTipoCicloAtivos(false, appMinutosCacheLongo);
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sComboTipoCiclo> SelecionaTipoCicloAtivos(bool objetoAprendizagem, int appMinutosCacheLongo = 0)
+        {
             List<sComboTipoCiclo> dados = null;
 
             if (appMinutosCacheLongo > 0 && HttpContext.Current != null)
@@ -120,6 +126,7 @@ namespace MSTech.GestaoEscolar.BLL
                     using (DataTable dt = new ACA_TipoCicloDAO().SelecionarAtivos(out totalRecords))
                     {
                         dados = (from DataRow dr in dt.Rows
+                                 where !objetoAprendizagem || Convert.ToBoolean(dr["tci_objetoAprendizagem"])
                                  select new sComboTipoCiclo
                                  {
                                      tci_id = dr["tci_id"].ToString()
