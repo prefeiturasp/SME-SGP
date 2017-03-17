@@ -71,6 +71,7 @@ namespace GestaoEscolar.Configuracao.TipoCiclo
             {
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "tci_id: " + tci_id.ToString());
                 lblMessage.Text = UtilBO.GetErroMessage("Tipo de ciclo alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                updResultado.Update();
             }
         }
 
