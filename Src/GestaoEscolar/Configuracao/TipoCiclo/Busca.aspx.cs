@@ -143,11 +143,9 @@ namespace GestaoEscolar.Configuracao.TipoCiclo
 
                 HiddenField field = e.Row.FindControl("hdfObjetoAprendizagem") as HiddenField;
                 CheckBox chkObjetoAprendizagem = (CheckBox)e.Row.FindControl("chkObjetoAprendizagem");
-                if(field != null && chkObjetoAprendizagem != null)
+                if(field != null && chkObjetoAprendizagem != null && !string.IsNullOrEmpty(field.Value))
                 {
-                    var check = Convert.ToBoolean(Convert.ToInt16(field.Value));
-
-                    chkObjetoAprendizagem.Checked = check;
+                    chkObjetoAprendizagem.Checked = Convert.ToBoolean(field.Value);
                 }
             }
         }
