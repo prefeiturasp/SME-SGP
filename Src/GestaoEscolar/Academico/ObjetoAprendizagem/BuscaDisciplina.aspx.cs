@@ -2,6 +2,7 @@
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Web.WebProject;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace GestaoEscolar.Academico.ObjetoAprendizagem
@@ -33,8 +34,33 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             {
                 UCComboTipoNivelEnsino1.MostrarMessageSelecione = true;
                 fdsResultados.Visible = false;
-            }
 
+                VerificaBusca();
+            }
+        }
+
+        /// <summary>
+        /// Verifica se tem busca salva na sessão e realiza automaticamente, caso positivo.
+        /// </summary>
+        private void VerificaBusca()
+        {
+            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.ObjetoAprendizagem)
+            {
+                // Recuperar busca realizada e pesquisar automaticamente
+                string valor;
+
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("base", out valor);
+                _ddlBase.SelectedValue = valor;
+
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tne_id", out valor);
+                UCComboTipoNivelEnsino1.Valor = Convert.ToInt32(valor);
+
+                LoadGridView();
+            }
+            else
+            {
+                fdsResultados.Visible = false;
+            }
         }
 
         private void LoadGridView()
@@ -53,9 +79,23 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 else if (UCComboTipoNivelEnsino1.Texto != "-- Selecione um nível de ensino --")
                     filter = string.Concat("tne_nome = '", UCComboTipoNivelEnsino1.Texto, "'");
 
+                Dictionary<string, string> filtros = new Dictionary<string, string>();
+
+                filtros.Add("base", _ddlBase.SelectedValue);
+                filtros.Add("tne_id", UCComboTipoNivelEnsino1.Valor.ToString());
+
+                __SessionWEB.BuscaRealizada = new BuscaGestao
+                {
+                    PaginaBusca = PaginaGestao.ObjetoAprendizagem
+                    ,
+                    Filtros = filtros
+                };
+
                 _grvTipoDisciplina.PageSize = itensPagina;
                 _grvTipoDisciplina.DataSource = VS_Disciplinas.Select(filter).CopyToDataTable();
                 _grvTipoDisciplina.DataBind();
+
+                fdsResultados.Visible = true;
             }
             catch (Exception ex)
             {
@@ -67,16 +107,12 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
         protected void _btnPesquisar_Click(object sender, EventArgs e)
         {
             LoadGridView();
-
-            fdsResultados.Visible = true;
         }
 
         protected void _btnLimparPesquisa_Click(object sender, EventArgs e)
         {
-            UCComboTipoNivelEnsino1.Valor = -1;
-            _ddlBase.SelectedValue = "-1";
-
-            fdsResultados.Visible = false;
+            __SessionWEB.BuscaRealizada = new BuscaGestao();
+            Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/BuscaDisciplina.aspx", false);
         }
 
         protected void _grvTipoDisciplina_DataBound(object sender, EventArgs e)

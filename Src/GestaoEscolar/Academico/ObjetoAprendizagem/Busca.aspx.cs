@@ -163,37 +163,6 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             UCTotalRegistros1.Total = ACA_ObjetoAprendizagemBO.GetTotalRecords();
             // Seta propriedades necessárias para ordenação nas colunas.
             ConfiguraColunasOrdenacao(_grvObjetoAprendizagem);
-
-            if ((!string.IsNullOrEmpty(_grvObjetoAprendizagem.SortExpression)) &&
-               (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.ObjetoAprendizagemDisciplina))
-            {
-                Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
-
-                if (filtros.ContainsKey("VS_Ordenacao"))
-                {
-                    filtros["VS_Ordenacao"] = _grvObjetoAprendizagem.SortExpression;
-                }
-                else
-                {
-                    filtros.Add("VS_Ordenacao", _grvObjetoAprendizagem.SortExpression);
-                }
-
-                if (filtros.ContainsKey("VS_SortDirection"))
-                {
-                    filtros["VS_SortDirection"] = _grvObjetoAprendizagem.SortDirection.ToString();
-                }
-                else
-                {
-                    filtros.Add("VS_SortDirection", _grvObjetoAprendizagem.SortDirection.ToString());
-                }
-
-                __SessionWEB.BuscaRealizada = new BuscaGestao
-                {
-                    PaginaBusca = PaginaGestao.ObjetoAprendizagemDisciplina
-                    ,
-                    Filtros = filtros
-                };
-            }
         }
 
         protected void UCComboQtdePaginacao1_IndexChanged()

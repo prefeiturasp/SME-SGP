@@ -8,14 +8,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="updResultado" runat="server" UpdateMode="Conditional">
         <contenttemplate>
             <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Qualidade" />
-        </contenttemplate>
-    </asp:UpdatePanel>
-    <asp:UpdatePanel ID="updResultado" runat="server" UpdateMode="Conditional">
-        <contenttemplate>
             <fieldset id="fdsResultados" runat="server" visible="false">
                 <legend>Listagem de tipos de ciclo</legend>
                 <div id="divResultado" runat="server">
