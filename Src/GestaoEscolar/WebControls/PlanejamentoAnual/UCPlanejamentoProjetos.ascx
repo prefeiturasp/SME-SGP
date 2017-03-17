@@ -173,6 +173,8 @@
             <asp:Literal ID="litProjetos" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.litProjetos.Text %>"></asp:Literal></a></li>--%>
         <li><a href="#divTabs-Documentos">
             <asp:Literal ID="litDocumentos" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.litDocumentos.Text %>"></asp:Literal></a></li>
+        <li runat="server" id="abaobjAprendizagem"><a href="#<%= divTabsObjetoAprendizagem.ClientID %>">
+            <asp:Literal ID="litObjetoAprendizagem" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.litObjetoAprendizagem.Text %>"></asp:Literal></a></li>
     </ul>
     <div id="divTabsPlanoCiclo" runat="server">
         <asp:UpdatePanel ID="updCiclo" runat="server">
@@ -331,6 +333,60 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
+    <div id="divTabsObjetoAprendizagem" runat="server">
+        <asp:UpdatePanel ID="updObjetosAprendizagem" runat="server">
+            <ContentTemplate>
+
+                <asp:Repeater ID="rptobjAprendizagem" runat="server" OnItemDataBound="rptobjAprendizagem_ItemDataBound">
+                    <HeaderTemplate>
+                        <div>
+                            <table id="tblObjetosAprendizagem" class="grid sortableAvaliacoes grid-responsive-list">
+                                <thead>
+                                    <tr class="gridHeader" style="height: 30px;">
+                                        <th class="center">
+                                            <asp:Label ID="_lblobjetos" runat="server" Text='Objetos de Aprendizagem'></asp:Label>
+                                        </th>
+                                        <asp:Repeater ID="rptBimestre" runat="server">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px;">
+                                                    <asp:Label ID="lblPeriodo" runat="server" Text='<%# Eval("cap_descricao") %>' />
+                                                    <asp:HiddenField ID="hdnPeriodo" runat="server" Value='<%# Eval("tpc_id") %>' />
+                                                    <asp:HiddenField ID="hdnPeriodoOrdem" runat="server" Value='<%# Eval("tpc_ordem") %>' />
+                                                    <asp:Label ID="lblNomeAbreviado" runat="server" Text='<%# Eval("tpc_nomeAbreviado") %>' style="display:none;" CssClass="abbr-periodo"/>
+                                                    <asp:HiddenField ID="hdnIdAvaliacao" runat="server" />
+                                                    <asp:HiddenField ID="hdnAvaliacaoTipo" runat="server" />
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <tr class="gridRow grid-linha-destaque">
+                            <td>
+                                <asp:Label ID="lblobjetos" runat="server" Text='<%# Eval("oap_descricao") %>'></asp:Label>
+                            </td>
+                            <asp:Repeater ID="rptchkBimestre" runat="server">
+                                <ItemTemplate>
+                                    <td>
+                                        <asp:CheckBox ID="chkBimestre" runat="server" Text="" Style="display: inline-block;" />
+                                    </td>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </tbody>
+                        </table></div>
+                    </FooterTemplate>
+                </asp:Repeater>
+
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+
     <asp:HiddenField ID="selected_tab" runat="server" />
 </div>
 

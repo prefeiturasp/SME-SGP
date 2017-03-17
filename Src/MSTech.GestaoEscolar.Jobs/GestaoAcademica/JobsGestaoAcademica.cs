@@ -435,7 +435,7 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
             try
             {
                 Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistas);
-                GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas(sle_id);
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas();
                 SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
             }
             catch (Exception ex)

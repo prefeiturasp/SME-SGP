@@ -419,9 +419,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// <summary>
         /// Processa os dados para a sugestão das aulas previstas.
         /// </summary>
-        public static void ExecJOB_ProcessamentoSugestaoAulasPrevistas(Guid sle_id)
+        public static void ExecJOB_ProcessamentoSugestaoAulasPrevistas()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas(sle_id);
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas();
         }
     }
 }

@@ -7,11 +7,27 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.Business.Common;
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.DAL;
+    using System;
+    using System.Linq;
     using System.Data;
     using System.Collections.Generic;
     using Validation.Exceptions;
     using CoreSSO.BLL;
     using System.Linq;
+
+
+    /// <summary>
+    /// Estrutura com períodos do calendário
+    /// </summary>
+    [Serializable]
+    public struct Struct_ObjetosAprendizagem
+    {
+        public int oap_id { get; set; }
+        public string oap_descricao { get; set; }
+        public byte oap_situacao { get; set; }
+        public int tds_id { get; set; }
+        public int tud_id { get; set; }
+    }
 
     /// <summary>
     /// Description: ACA_ObjetoAprendizagem Business Object. 
@@ -51,4 +67,5 @@ namespace MSTech.GestaoEscolar.BLL
                 throw new ValidationException(UtilBO.ErrosValidacao(entity));
         }
     }
+  
 }

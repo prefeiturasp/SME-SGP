@@ -468,7 +468,46 @@ namespace GestaoEscolar.WebControls.Combos.Novos
             }
             //Carrega todos os calendários
             else
-                lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo);
+
+            if (lstCalendario.Any())
+            {
+                if (lstCalendario.Any(c => Convert.ToInt32(c.cal_ano) >= DateTime.Today.Year))
+                    lstCalendario = lstCalendario.Where(c => Convert.ToInt32(c.cal_ano) >= DateTime.Today.Year).ToList();
+                else
+                    lstCalendario = lstCalendario.Where(c => Convert.ToInt32(c.cal_ano) == Convert.ToInt32(lstCalendario.OrderBy(p => p.cal_ano).LastOrDefault().cal_ano)).ToList();
+            }
+            CarregarCombo(lstCalendario.AsEnumerable()
+                            .Select(p => new
+                            {
+                                cal_ano_desc = p.cal_ano_desc.ToString()
+                                ,
+                                cal_id = p.cal_id.ToString()
+                            }));
+        }
+
+        /// <summary>
+        /// Carrega todos os calendários não excluídos logicamente
+        /// </summary>
+        public void CarregarCalendarioAnualAnoAtualEscola(int esc_id)
+        {
+            List<sComboCalendario> lstCalendario = new List<sComboCalendario>();
+
+            //Se for visão de docente carrega apenas os calendários que o docente tem acesso
+            if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+            {
+                SelecionarAnoCorrente = true;
+                lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual_Esc_id(esc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, ApplicationWEB.AppMinutosCacheLongo);
+            }
+            //Se for visão de unidade escolar carrega apenas os calendários ligados aos cursos da escola
+            else if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa)
+            {
+                SelecionarAnoCorrente = true;
+                lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual_Esc_id(esc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, ApplicationWEB.AppMinutosCacheLongo);
+            }
+            //Carrega todos os calendários
+            else
+                lstCalendario = ACA_CalendarioAnualBO.SelecionaCalendarioAnual_Esc_id(esc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo);
 
             if (lstCalendario.Any())
             {

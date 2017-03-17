@@ -14,6 +14,9 @@
 
     public partial class UCPlanejamentoProjetos : MotherUserControl
     {
+
+        public List<Struct_CalendarioPeriodos> lstCalendarioPeriodos { get; set; }
+        public List<Struct_ObjetosAprendizagem> lstObjetosAprendizagem { get; set; }
         #region Propriedades
 
         /// <summary>
@@ -601,6 +604,34 @@
             }
             //CarregarProjeto();
             CarregarDocumentos();
+
+            #region Objeto Aprendizagem
+
+            ACA_CurriculoPeriodo crp = new ACA_CurriculoPeriodo { cur_id = VS_cur_id, crr_id = VS_crr_id, crp_id = VS_crp_id };
+            ACA_CurriculoPeriodoBO.GetEntity(crp);
+
+            ACA_TipoCiclo tci = new ACA_TipoCiclo { tci_id = crp.tci_id };
+            ACA_TipoCicloBO.GetEntity(tci);
+
+            ACA_TipoCurriculoPeriodo tcp = new ACA_TipoCurriculoPeriodo { tcp_id = crp.tcp_id };
+            ACA_TipoCurriculoPeriodoBO.GetEntity(tcp);
+
+            abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = (Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem));
+
+            if (abaobjAprendizagem.Visible)
+            {
+                lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TipoDisciplina(VS_tds_id, VS_tud_id);
+
+
+                lstCalendarioPeriodos = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(VS_cal_id, ApplicationWEB.AppMinutosCacheLongo, false, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                lstCalendarioPeriodos = lstCalendarioPeriodos.FindAll(p => p.tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
+                List<ESC_EscolaCalendarioPeriodo> lstEscCalPeriodo = ESC_EscolaCalendarioPeriodoBO.SelectEscolasCalendarioCache(VS_cal_id, ApplicationWEB.AppMinutosCacheCurto);
+                lstCalendarioPeriodos = lstCalendarioPeriodos.Where(calP => (lstEscCalPeriodo.Where(escP => (escP.esc_id == VS_esc_id && escP.tpc_id == calP.tpc_id)).Count() == 0)).ToList();
+            }
+            
+            #endregion Objeto Aprendizagem
+
+
         }
 
         /// <summary>
@@ -1490,6 +1521,33 @@
         }
 
         #endregion Documentos
+
+        #region Objetos Aprendizagem
+
+        protected void rptobjAprendizagem_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Header)
+            {
+                Repeater rptBimestre = (Repeater)e.Item.FindControl("rptBimestre");
+                if (rptBimestre != null)
+                {
+                    rptBimestre.DataSource = lstCalendarioPeriodos;
+                    rptBimestre.DataBind();
+                }
+            }
+            else if ((e.Item.ItemType == ListItemType.Item) ||
+                (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                Repeater rptchkBimestre = (Repeater)e.Item.FindControl("rptchkBimestre");
+                if (rptchkBimestre != null)
+                {
+                    rptchkBimestre.DataSource = lstCalendarioPeriodos;
+                    rptchkBimestre.DataBind();
+                }
+            }
+        }
+
+        #endregion Objetos Aprendizagem
 
         #endregion Eventos
     }

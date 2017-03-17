@@ -18,6 +18,14 @@ SET XACT_ABORT ON
 
 	*/
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'UCPlanejamentoProjetos.litObjetoAprendizagem.Text' 
+        , @rcr_NomeResource = 'UserControl'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Objetos de Aprendizagem'
+
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
