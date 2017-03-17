@@ -4,14 +4,94 @@
 
 namespace MSTech.GestaoEscolar.DAL
 {
-	using MSTech.GestaoEscolar.DAL.Abstracts;
-	
-	/// <summary>
-	/// Description: .
-	/// </summary>
-	public class ACA_ObjetoAprendizagemTipoCicloDAO : Abstract_ACA_ObjetoAprendizagemTipoCicloDAO
-	{
-		///// <summary>
+    using Data.Common;
+    using MSTech.GestaoEscolar.DAL.Abstracts;
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+
+    /// <summary>
+    /// Description: .
+    /// </summary>
+    public class ACA_ObjetoAprendizagemTipoCicloDAO : Abstract_ACA_ObjetoAprendizagemTipoCicloDAO
+    {
+        public DataTable SelectBy_TipoDisciplina
+        (
+             int tds_id
+            , out int totalRecords
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemTipoCiclo_ByTipoDisciplina", _Banco);
+
+            #region PARAMETROS
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@tds_id";
+            Param.Size = 4;
+            Param.Value = tds_id;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.Execute();
+
+            totalRecords = qs.Return.Rows.Count;
+
+            return qs.Return;
+        }
+
+        public IEnumerable<int> SelectBy_ObjetoAprendizagem
+        (
+             int oap_id
+        )
+        {
+            var listTci_ids = new List<int>();
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemTipoCiclo_By_Oap_Id", _Banco);
+
+            #region PARAMETROS
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@oap_id";
+            Param.Size = 4;
+            Param.Value = oap_id;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.Execute();
+
+            if(qs.Return.Rows.Count > 0)
+                listTci_ids = (from DataRow dr in qs.Return.Rows
+                         select Convert.ToInt32(dr["tci_id"])).ToList();
+
+            return listTci_ids;
+        }
+
+        public void DeleteNew
+        (
+             int oap_id
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemTipoCiclo_DELETE", _Banco);
+
+            #region PARAMETROS
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@oap_id";
+            Param.Size = 4;
+            Param.Value = oap_id;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.Execute();
+        }
+
+        ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente.
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem modificados.</param>
@@ -142,5 +222,5 @@ namespace MSTech.GestaoEscolar.DAL
         // {
         //    return base.DataRowToEntity(dr, entity, limparEntity);
         // }
-	}
+    }
 }

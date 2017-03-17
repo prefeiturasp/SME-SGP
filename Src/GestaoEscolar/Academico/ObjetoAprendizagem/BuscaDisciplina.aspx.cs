@@ -39,21 +39,29 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
         private void LoadGridView()
         {
-            string qtItensPagina = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.QT_ITENS_PAGINACAO);
-            int itensPagina = string.IsNullOrEmpty(qtItensPagina) ? ApplicationWEB._Paginacao : Convert.ToInt32(qtItensPagina);
+            try
+            {
+                string qtItensPagina = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.QT_ITENS_PAGINACAO);
+                int itensPagina = string.IsNullOrEmpty(qtItensPagina) ? ApplicationWEB._Paginacao : Convert.ToInt32(qtItensPagina);
 
-            string filter = string.Empty;
+                string filter = string.Empty;
 
-            if (_ddlBase.SelectedIndex > 0 && UCComboTipoNivelEnsino1.Texto != "-- Selecione um nível de ensino --")
-                filter = string.Concat("tds_base_nome = '", _ddlBase.SelectedItem.Text, "' AND tne_nome = '", UCComboTipoNivelEnsino1.Texto, "'");
-            else if (_ddlBase.SelectedIndex > 0)
-                filter = string.Concat("tds_base_nome = '", _ddlBase.SelectedItem.Text, "'");
-            else if (UCComboTipoNivelEnsino1.Texto != "-- Selecione um nível de ensino --")
-                filter = string.Concat("tne_nome = '", UCComboTipoNivelEnsino1.Texto, "'");
+                if (_ddlBase.SelectedIndex > 0 && UCComboTipoNivelEnsino1.Texto != "-- Selecione um nível de ensino --")
+                    filter = string.Concat("tds_base_nome = '", _ddlBase.SelectedItem.Text, "' AND tne_nome = '", UCComboTipoNivelEnsino1.Texto, "'");
+                else if (_ddlBase.SelectedIndex > 0)
+                    filter = string.Concat("tds_base_nome = '", _ddlBase.SelectedItem.Text, "'");
+                else if (UCComboTipoNivelEnsino1.Texto != "-- Selecione um nível de ensino --")
+                    filter = string.Concat("tne_nome = '", UCComboTipoNivelEnsino1.Texto, "'");
 
-            _grvTipoDisciplina.PageSize = itensPagina;
-            _grvTipoDisciplina.DataSource = VS_Disciplinas.Select(filter).CopyToDataTable();
-            _grvTipoDisciplina.DataBind();
+                _grvTipoDisciplina.PageSize = itensPagina;
+                _grvTipoDisciplina.DataSource = VS_Disciplinas.Select(filter).CopyToDataTable();
+                _grvTipoDisciplina.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar tipos de disciplinas.", UtilBO.TipoMensagem.Erro);
+            }
         }
 
         protected void _btnPesquisar_Click(object sender, EventArgs e)

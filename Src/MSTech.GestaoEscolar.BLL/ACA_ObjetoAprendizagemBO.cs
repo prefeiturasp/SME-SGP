@@ -11,6 +11,9 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Linq;
     using System.Data;
     using System.Collections.Generic;
+    using Validation.Exceptions;
+    using CoreSSO.BLL;
+    using System.Linq;
 
 
     /// <summary>
@@ -39,15 +42,29 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectBy_TipoDisciplina(tds_id, out totalRecords);
         }
 
-        public static List<Struct_ObjetosAprendizagem> SelectListaBy_TipoDisciplina(int tds_id, long tud_id)
+        public static void Save(ACA_ObjetoAprendizagem entity, IEnumerable<int> listTci_ids)
         {
-            totalRecords = 0;
-            List<Struct_ObjetosAprendizagem> dados = null;
+            if (entity.Validate())
+            {
+                var dao = new ACA_ObjetoAprendizagemDAO();
+                dao.Salvar(entity);
 
-            dados = (from DataRow dr in new ACA_ObjetoAprendizagemDAO().SelectListaBy_TipoDisciplina(tds_id, tud_id, out totalRecords).Rows
-                     select (Struct_ObjetosAprendizagem)GestaoEscolarUtilBO.DataRowToEntity(dr, new Struct_ObjetosAprendizagem())).ToList();
+                var list = listTci_ids.Select(x => new ACA_ObjetoAprendizagemTipoCiclo
+                {
+                    oap_id = entity.oap_id,
+                    tci_id = x
+                }).ToList();
 
-            return dados;
+                var daoTipoCiclo = new ACA_ObjetoAprendizagemTipoCicloDAO();
+                daoTipoCiclo.DeleteNew(entity.oap_id);
+
+                foreach (var item in list)
+                {
+                    daoTipoCiclo.Salvar(item);
+                }
+            }
+            else
+                throw new ValidationException(UtilBO.ErrosValidacao(entity));
         }
     }
   

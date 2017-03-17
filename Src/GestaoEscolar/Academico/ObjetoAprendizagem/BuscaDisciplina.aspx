@@ -32,7 +32,7 @@
         <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Always">
             <ContentTemplate>
                 <asp:GridView ID="_grvTipoDisciplina" runat="server" AutoGenerateColumns="False" OnDataBound="_grvTipoDisciplina_DataBound"
-                    DataKeyNames="tds_id,tds_ordem" EmptyDataText="<%$ Resources:Configuracao, TipoDisciplina.Busca._dgvTipoDisciplina.EmptyDataText %>"
+                    DataKeyNames="tds_id" EmptyDataText="<%$ Resources:Configuracao, TipoDisciplina.Busca._dgvTipoDisciplina.EmptyDataText %>"
                     OnRowEditing="_grvTipoDisciplina_RowEditing" >
                     <Columns>
                         <asp:TemplateField HeaderText="Disciplina">

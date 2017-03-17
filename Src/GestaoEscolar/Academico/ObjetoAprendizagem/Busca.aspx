@@ -14,18 +14,22 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <fieldset id="fds" runat="server">
-        <legend>Consulta de objetos de aprendizagem</legend>
-        <asp:Label ID="_lblMessage" runat="server" EnableViewState="False"></asp:Label>
-        <div id="_divPesquisa" runat="server">
-            <asp:Label ID="_lblDisciplina" runat="server" Text="Disciplina" AssociatedControlID="txtDisciplina"></asp:Label>
-            <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
-        </div>
-        <div class="right">
-            <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo objeto de aprendizagem" OnClick="_btnNovo_Click" />
-            <asp:Button ID="_btnCancelar" runat="server" Text="Cancelar" OnClick="_btnCancelar_Click" />
-        </div>
-    </fieldset>
+    <asp:UpdatePanel ID="_updDadosBasicos" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <fieldset id="fds" runat="server">
+                <legend>Consulta de objetos de aprendizagem</legend>
+                <asp:Label ID="_lblMessage" runat="server" EnableViewState="False"></asp:Label>
+                <div id="_divPesquisa" runat="server">
+                    <asp:Label ID="_lblDisciplina" runat="server" Text="Disciplina" AssociatedControlID="txtDisciplina"></asp:Label>
+                    <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
+                </div>
+                <div class="right">
+                    <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo objeto de aprendizagem" PostBackUrl="~/Academico/ObjetoAprendizagem/Cadastro.aspx" />
+                    <asp:Button ID="_btnCancelar" runat="server" Text="Cancelar" OnClick="_btnCancelar_Click" />
+                </div>
+            </fieldset>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <fieldset id="fdsResultados" runat="server">
         <legend>Resultados</legend>
         <asp:UpdatePanel ID="upd" runat="server" UpdateMode="Always">
@@ -44,6 +48,13 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="ciclos" HeaderText="Tipos de ciclo" />
                         <asp:BoundField DataField="oap_situacao" HeaderText="Situação" />
+                        <asp:TemplateField HeaderText="Excluir">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="_btnExcluir" SkinID="btExcluir" runat="server" CommandName="Deletar" />
+                            </ItemTemplate>
+                            <HeaderStyle CssClass="center" />
+                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                        </asp:TemplateField>
                     </Columns>
                     <HeaderStyle HorizontalAlign="Center" />
                 </asp:GridView>
@@ -52,6 +63,6 @@
         </asp:UpdatePanel>
     </fieldset>
     <asp:ObjectDataSource ID="_odsObjeto" runat="server" SelectMethod="SelectBy_TipoDisciplina"
-        DeleteMethod="Delete" TypeName="MSTech.GestaoEscolar.BLL.ACA_ObjetoAprendizagemBO"
+        TypeName="MSTech.GestaoEscolar.BLL.ACA_ObjetoAprendizagemTipoCicloBO"
         DataObjectTypeName="MSTech.GestaoEscolar.Entities.ACA_ObjetoAprendizagem"></asp:ObjectDataSource>
 </asp:Content>
