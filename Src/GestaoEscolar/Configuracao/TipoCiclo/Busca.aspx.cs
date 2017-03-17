@@ -65,9 +65,13 @@ namespace GestaoEscolar.Configuracao.TipoCiclo
         {
             CheckBox chk = (CheckBox)sender;
             GridViewRow gr = (GridViewRow)chk.Parent.Parent;
-            var tci_id = grvTpCiclo.DataKeys[gr.RowIndex].Value.ToString();
+            int tci_id = Convert.ToInt32(grvTpCiclo.DataKeys[gr.RowIndex].Value);
 
-            ACA_TipoCicloBO.AtualizaObjetoAprendizagem(int.Parse(tci_id), chk.Checked);
+            if (ACA_TipoCicloBO.AtualizaObjetoAprendizagem(tci_id, chk.Checked))
+            {
+                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "tci_id: " + tci_id.ToString());
+                lblMessage.Text = UtilBO.GetErroMessage("Tipo de ciclo alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
