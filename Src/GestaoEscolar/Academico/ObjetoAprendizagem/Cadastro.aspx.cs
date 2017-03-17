@@ -98,6 +98,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage("Objeto de aprendizagem incluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
                 }
 
+                Session["tds_id_oap"] = _VS_tds_id;
                 Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/Busca.aspx", false);
                 HttpContext.Current.ApplicationInstance.CompleteRequest();
             }
