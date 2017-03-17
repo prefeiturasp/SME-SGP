@@ -9,7 +9,7 @@ namespace MSTech.GestaoEscolar.Entities
     /// <summary>
     /// Description: .
     /// </summary>
-    public class CLS_ObjetoAprendizagemTurmaDisciplina : Abstract_CLS_ObjetoAprendizagemTurmaDisciplina
+    public class CLS_ObjetoAprendizagemTurmaAula : Abstract_CLS_ObjetoAprendizagemTurmaAula
     {
         /// <summary>
         /// ID da tabela TUR_TurmaDisciplina.
@@ -18,15 +18,15 @@ namespace MSTech.GestaoEscolar.Entities
         public override long tud_id { get; set; }
 
         /// <summary>
+        /// ID da tabela CLS_TurmaAula.
+        /// </summary>
+        [MSNotNullOrEmpty("ID da tabela é CLS_TurmaAula obrigatório.")]
+        public override int tau_id { get; set; }
+
+        /// <summary>
         /// ID da tabela ACA_ObjetoAprendizagem.
         /// </summary>
         [MSNotNullOrEmpty("ID da tabela é ACA_ObjetoAprendizagem obrigatório.")]
         public override int oap_id { get; set; }
-
-        /// <summary>
-        /// ID da tabela ACA_TipoPeriodoCalendario.
-        /// </summary>
-        [MSNotNullOrEmpty("ID da tabela é ACA_TipoPeriodoCalendario obrigatório.")]
-        public override int tpc_id { get; set; }
     }
 }

@@ -1036,6 +1036,30 @@
                                                     </div>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
+                                            <div id="divObjetosAprendizagem" runat="server">
+                                                <asp:UpdatePanel ID="updCalendario" runat="server" UpdateMode="Always">
+                                                    <ContentTemplate>
+                                                        <fieldset>
+                                                            <legend><asp:Label ID="lblLgdObjAprendizagem" CssClass="textareaInfo" runat="server"
+                                                                    Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.lblLgdObjAprendizagem.Text %>"></asp:Label></legend>
+                                                            <div></div>
+                                                            <asp:Repeater ID="rptCampos" runat="server">
+                                                                <HeaderTemplate>
+                                                                    <div class="checkboxlist-columns">
+                                                                </HeaderTemplate>
+                                                                <ItemTemplate>
+                                                                    <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("oap_id") %>' />
+                                                                    <asp:CheckBox ID="ckbCampo" runat="server" Text='<%# Eval("oap_descricao") %>' />
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    </div> 
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+
+                                                        </fieldset>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
                                         </div>
                                         <fieldset runat="server" id="fsRecursosUtilizados">
                                             <legend>Recursos utilizados</legend>

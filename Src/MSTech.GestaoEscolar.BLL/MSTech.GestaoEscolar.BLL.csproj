@@ -288,6 +288,8 @@
     <Compile Include="CLS_FechamentoJustificativaPendenciaBO.cs" />
     <Compile Include="CLS_FrequenciaReuniaoBO.cs" />
     <Compile Include="CLS_FrequenciaReuniaoResponsaveisBO.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaAulaBO.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaDisciplinaBO.cs" />
     <Compile Include="CLS_PlanejamentoCicloBO.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricularBO.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricularDiagnosticoBO.cs" />

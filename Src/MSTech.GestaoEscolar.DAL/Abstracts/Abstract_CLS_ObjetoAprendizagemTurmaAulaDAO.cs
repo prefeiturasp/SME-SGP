@@ -11,9 +11,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 	using MSTech.GestaoEscolar.Entities;
 	
 	/// <summary>
-	/// Classe abstrata de CLS_ObjetoAprendizagemTurmaDisciplina.
+	/// Classe abstrata de CLS_ObjetoAprendizagemTurmaAula.
 	/// </summary>
-	public abstract class Abstract_CLS_ObjetoAprendizagemTurmaDisciplinaDAO : Abstract_DAL<CLS_ObjetoAprendizagemTurmaDisciplina>
+	public abstract class Abstract_CLS_ObjetoAprendizagemTurmaAulaDAO : Abstract_DAL<CLS_ObjetoAprendizagemTurmaAula>
 	{
         /// <summary>
 		/// ConnectionString.
@@ -31,7 +31,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		/// </summary>
 		/// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-		protected override void ParamCarregar(QuerySelectStoredProcedure qs, CLS_ObjetoAprendizagemTurmaDisciplina entity)
+		protected override void ParamCarregar(QuerySelectStoredProcedure qs, CLS_ObjetoAprendizagemTurmaAula entity)
 		{
 			if (entity != null & qs != null)
             {
@@ -44,16 +44,16 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@oap_id";
+			Param.ParameterName = "@tau_id";
 			Param.Size = 4;
-			Param.Value = entity.oap_id;
+			Param.Value = entity.tau_id;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@tpc_id";
+			Param.ParameterName = "@oap_id";
 			Param.Size = 4;
-			Param.Value = entity.tpc_id;
+			Param.Value = entity.oap_id;
 			qs.Parameters.Add(Param);
 
 
@@ -65,7 +65,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		/// </summary>
 		/// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-		protected override void ParamInserir(QuerySelectStoredProcedure qs, CLS_ObjetoAprendizagemTurmaDisciplina entity)
+		protected override void ParamInserir(QuerySelectStoredProcedure qs, CLS_ObjetoAprendizagemTurmaAula entity)
 		{
 			if (entity != null & qs != null)
             {
@@ -78,16 +78,16 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@oap_id";
+			Param.ParameterName = "@tau_id";
 			Param.Size = 4;
-			Param.Value = entity.oap_id;
+			Param.Value = entity.tau_id;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@tpc_id";
+			Param.ParameterName = "@oap_id";
 			Param.Size = 4;
-			Param.Value = entity.tpc_id;
+			Param.Value = entity.oap_id;
 			qs.Parameters.Add(Param);
 
 
@@ -99,7 +99,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		/// </summary>
 		/// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-		protected override void ParamAlterar(QueryStoredProcedure qs, CLS_ObjetoAprendizagemTurmaDisciplina entity)
+		protected override void ParamAlterar(QueryStoredProcedure qs, CLS_ObjetoAprendizagemTurmaAula entity)
 		{
 			if (entity != null & qs != null)
             {
@@ -112,16 +112,16 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@oap_id";
+			Param.ParameterName = "@tau_id";
 			Param.Size = 4;
-			Param.Value = entity.oap_id;
+			Param.Value = entity.tau_id;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@tpc_id";
+			Param.ParameterName = "@oap_id";
 			Param.Size = 4;
-			Param.Value = entity.tpc_id;
+			Param.Value = entity.oap_id;
 			qs.Parameters.Add(Param);
 
 
@@ -133,7 +133,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		/// </summary>
 		/// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-		protected override void ParamDeletar(QueryStoredProcedure qs, CLS_ObjetoAprendizagemTurmaDisciplina entity)
+		protected override void ParamDeletar(QueryStoredProcedure qs, CLS_ObjetoAprendizagemTurmaAula entity)
 		{
 			if (entity != null & qs != null)
             {
@@ -146,16 +146,16 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@oap_id";
+			Param.ParameterName = "@tau_id";
 			Param.Size = 4;
-			Param.Value = entity.oap_id;
+			Param.Value = entity.tau_id;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@tpc_id";
+			Param.ParameterName = "@oap_id";
 			Param.Size = 4;
-			Param.Value = entity.tpc_id;
+			Param.Value = entity.oap_id;
 			qs.Parameters.Add(Param);
 
 
@@ -168,7 +168,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		/// <param name="qs">Objeto da Store Procedure.</param>
 		/// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
 		/// <returns>TRUE - Se entity.ParametroId > 0</returns>
-		protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, CLS_ObjetoAprendizagemTurmaDisciplina entity)
+		protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, CLS_ObjetoAprendizagemTurmaAula entity)
 		{
 			if (entity != null & qs != null)
             {
