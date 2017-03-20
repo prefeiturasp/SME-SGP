@@ -46,22 +46,22 @@ namespace MSTech.GestaoEscolar.DAL
         /// Retorna os parâmetros ativos e vigentes.
         /// </summary>
         /// <returns></returns>
-        public DataTable SelectListaBy_TipoDisciplina(int tds_id, long tud_id, out int totalRecords)
+        public DataTable SelectListaBy_TurmaDisciplina(long tud_id, int cal_id, out int totalRecords)
         {
-            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemCollection_SELECT_Bytds_id_tud_id", _Banco);
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemCollection_SELECT_By_tud_id_cal_id", _Banco);
             try
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_id";
-                Param.Value = tds_id;
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@tud_id";
+                Param.Size = 4;
+                Param.Value = tud_id;                
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tud_id";
-                Param.Size = 4;
-                Param.Value = tud_id;                
+                Param.ParameterName = "@cal_id";
+                Param.Value = cal_id;
                 qs.Parameters.Add(Param);
 
                 qs.Execute();

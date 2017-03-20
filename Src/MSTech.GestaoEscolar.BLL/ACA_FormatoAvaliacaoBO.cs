@@ -240,10 +240,14 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="tud_id">Id da disciplina da turma.</param>
         /// <returns>Formato de avaliação.</returns>
-        public new static ACA_FormatoAvaliacao CarregarPorTud(long tud_id)
+        public new static ACA_FormatoAvaliacao CarregarPorTud(long tud_id, TalkDBTransaction banco = null)
         {
             ACA_FormatoAvaliacao entity = new ACA_FormatoAvaliacao();
             string chave = string.Format(ModelCache.FORMATO_AVALIACAO_POR_TURMADISCIPLINA_MODEL_KEY, tud_id);
+
+            ACA_FormatoAvaliacaoDAO dao = new ACA_FormatoAvaliacaoDAO();
+            if (banco != null)
+                dao._Banco = banco;
 
             GestaoEscolarUtilBO.CopiarEntity
             (
@@ -252,7 +256,7 @@ namespace MSTech.GestaoEscolar.BLL
                     chave,
                     () =>
                     {
-                        entity = new ACA_FormatoAvaliacaoDAO().SelecionarPorTud(tud_id);
+                        entity = dao.SelecionarPorTud(tud_id);
                         return entity;
                     },
                     GestaoEscolarUtilBO.MinutosCacheMedio

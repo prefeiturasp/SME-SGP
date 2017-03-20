@@ -55,6 +55,40 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
+
+        /// <summary>
+        /// Deleta todos os relacionamentos da turma disciplina com objetos de aprendizagem
+        /// </summary>
+        /// <param name="tud_id">ID da turma disciplina</param>
+        public bool DeletarObjTud(long tud_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_ObjetoAprendizagemTurmaDisciplina_DELETETudDis", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@tud_id";
+                Param.Size = 8;
+                Param.Value = tud_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return true;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
         ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente.
         ///// </summary>
