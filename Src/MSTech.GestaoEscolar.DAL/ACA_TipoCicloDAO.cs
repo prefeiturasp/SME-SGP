@@ -43,7 +43,7 @@ namespace MSTech.GestaoEscolar.DAL
 
                 qs.Execute();
 
-                return qs.Return.Rows.Count > 0;
+                return true;
             }
             catch
             {

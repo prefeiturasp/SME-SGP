@@ -42,12 +42,12 @@ namespace MSTech.GestaoEscolar.DAL
             return qs.Return;
         }
 
-        public IEnumerable<int> SelectBy_ObjetoAprendizagem
+        public List<int> SelectBy_ObjetoAprendizagem
         (
              int oap_id
         )
         {
-            var listTci_ids = new List<int>();
+            List<int> listTci_ids = new List<int>();
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemTipoCiclo_By_Oap_Id", _Banco);
 
             #region PARAMETROS

@@ -15,6 +15,12 @@ namespace MSTech.GestaoEscolar.BLL
     using CoreSSO.BLL;
     using System.Linq;
 
+    public enum ObjetoAprendizagemSituacao
+    {
+        Ativo = 1,
+        Bloqueado = 2,
+        Excluido = 3
+    }
 
     /// <summary>
     /// Estrutura com períodos do calendário

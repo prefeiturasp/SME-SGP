@@ -13,13 +13,13 @@ namespace GestaoEscolar.Configuracao.TipoCiclo {
     public partial class Busca {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// updResultado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel updResultado;
         
         /// <summary>
         /// lblMessage control.
@@ -38,15 +38,6 @@ namespace GestaoEscolar.Configuracao.TipoCiclo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
-        
-        /// <summary>
-        /// updResultado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updResultado;
         
         /// <summary>
         /// fdsResultados control.

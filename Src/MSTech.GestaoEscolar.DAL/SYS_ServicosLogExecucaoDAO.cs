@@ -57,6 +57,34 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        public bool VerificaServicoRodando(byte ser_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_SYS_ServicosLogExecucao_SELECT_AtivoBy_servico", _Banco);
+            qs.TimeOut = 0;
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@ser_id";
+                Param.DbType = DbType.Byte;
+                Param.Size = 1;
+                Param.Value = ser_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #endregion Métodos de consulta
     }
 }
