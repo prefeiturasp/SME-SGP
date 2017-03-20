@@ -250,7 +250,7 @@
     </asp:UpdatePanel>
     <div style="width: 40%; float: left; clear: none;" class="area-selecao-documento-aluno">
         <fieldset id="fdsDocumentos" runat="server" style="margin-right: 10px;">
-            <legend>Documentos</legend>
+            <legend>Relatórios de alunos</legend>
             <div id="_divRelatorio" class="divRelatorio" runat="server">
                 <asp:RadioButtonList ID="_rdbRelatorios" runat="server" DataSourceID="odsDocumentos"
                     AutoPostBack="true" DataTextField="rda_nomeDocumento" DataValueField="rlt_id"
