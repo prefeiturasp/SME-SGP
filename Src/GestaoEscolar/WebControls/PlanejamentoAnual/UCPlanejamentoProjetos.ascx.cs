@@ -1367,7 +1367,7 @@
 
             try
             {
-                CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(lista, VS_tud_id);
+                CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(lista, VS_tud_id, VS_cal_id);
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, String.Format("Objeto Aprendizagem Turma Disciplina | tud_id: {0}; ", VS_tud_id.ToString()));
             }
             catch (ValidationException ex)
@@ -1640,10 +1640,6 @@
             }
         }
 
-        #endregion Objetos Aprendizagem
-
-        #endregion Eventos
-
         protected void rptchkBimestre_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if ((e.Item.ItemType == ListItemType.Item) ||
@@ -1656,5 +1652,9 @@
                 }
             }
         }
+
+        #endregion Objetos Aprendizagem
+
+        #endregion Eventos
     }
 }

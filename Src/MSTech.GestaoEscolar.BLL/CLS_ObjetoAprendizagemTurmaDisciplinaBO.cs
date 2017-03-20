@@ -30,10 +30,16 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelecionaObjTudTpc(tud_id, tpc_id);
         }
 
-        public static void SalvarLista(List<CLS_ObjetoAprendizagemTurmaDisciplina> listObjTudDis, long tud_id, TalkDBTransaction banco = null)
+        /// <summary>
+        /// Salva os objetos de aprendizagem da turma disciplina
+        /// </summary>
+        /// <param name="listObjTudDis">Lista de objetos selecionados</param>
+        /// <param name="tud_id">ID da turma disciplina</param>
+        /// <param name="cal_id">ID do calendário</param>
+        /// <param name="banco">Transação do banco</param>
+        public static void SalvarLista(List<CLS_ObjetoAprendizagemTurmaDisciplina> listObjTudDis, long tud_id, int cal_id, TalkDBTransaction banco = null)
         {
             CLS_ObjetoAprendizagemTurmaDisciplinaDAO dao = new CLS_ObjetoAprendizagemTurmaDisciplinaDAO();
-
             if (banco != null)
                 dao._Banco = banco;
             else
@@ -41,11 +47,18 @@ namespace MSTech.GestaoEscolar.BLL
 
             try
             {
-
                 DeletarObjTud(tud_id, dao._Banco);
 
                 foreach (CLS_ObjetoAprendizagemTurmaDisciplina oad in listObjTudDis)
                     Save(oad, dao._Banco);
+                
+                if (ACA_FormatoAvaliacaoBO.CarregarPorTud(tud_id, dao._Banco).fav_fechamentoAutomatico)
+                {
+                    List<Struct_ObjetosAprendizagem> lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(tud_id, cal_id, dao._Banco);
+
+                    foreach (int tpc_id in lstObjetosAprendizagem.GroupBy(p => p.tpc_id).Select(p => p.Key))
+                        CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(tud_id, tpc_id, dao._Banco);
+                }
             }
             catch (Exception ex)
             {
@@ -58,8 +71,6 @@ namespace MSTech.GestaoEscolar.BLL
                 if (banco == null)
                     dao._Banco.Close();
             }
-
-            
         }
 
         /// <summary>
