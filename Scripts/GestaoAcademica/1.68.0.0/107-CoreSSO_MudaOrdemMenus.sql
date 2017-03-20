@@ -1,5 +1,4 @@
-USE [CoreSSO]
-GO
+
 
 DECLARE @sis_id INT = 102
 DECLARE @visaoDocente INT = 4
@@ -72,7 +71,7 @@ SET @mod_idPai = (SELECT mod_id FROM [SYS_Modulo] WHERE mod_nome = 'Registro de 
 	WHERE VMM.sis_id = @sis_id
 	and vis_id = @visaoDocente
 	and m.mod_idPai = @mod_idPai
-	and m.mod_nome = 'Compensação de ausência'
+	and m.mod_nome = 'Compensação de ausências'
 	and m.mod_situacao = 1
 
 	UPDATE VMM
@@ -232,7 +231,7 @@ SET @mod_idPai = (SELECT mod_id FROM [SYS_Modulo] WHERE mod_nome = 'Registro de 
 	WHERE VMM.sis_id = @sis_id
 	and vis_id = @visaoDiretor
 	and m.mod_idPai = @mod_idPai
-	and m.mod_nome = 'Registro de justificativa de falta - Criar os menus caso não existam. Permissão inclusão para Docente, CP e diretor, demais apenas consulta)'
+	and m.mod_nome = 'Registro de justificativa de falta'
 	and m.mod_situacao = 1
 
 	UPDATE VMM
@@ -244,7 +243,7 @@ SET @mod_idPai = (SELECT mod_id FROM [SYS_Modulo] WHERE mod_nome = 'Registro de 
 	WHERE VMM.sis_id = @sis_id
 	and vis_id = @visaoDiretor
 	and m.mod_idPai = @mod_idPai
-	and m.mod_nome = 'Registro de justificativa de falta EF - Criar os menus caso não existam. Permissão inclusão para Docente EF, CP e secretario, demais apenas consulta)'
+	and m.mod_nome = 'Registro de justificativa de falta EF'
 	and m.mod_situacao = 1
 
 SET @mod_idPai = (SELECT mod_id FROM [SYS_Modulo] WHERE mod_nome = 'Registro de classe' and sis_id = @sis_id and mod_situacao = 1)
