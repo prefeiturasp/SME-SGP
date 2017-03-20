@@ -24,9 +24,10 @@ namespace MSTech.GestaoEscolar.BLL
     {
         public int oap_id { get; set; }
         public string oap_descricao { get; set; }
-        public byte oap_situacao { get; set; }
-        public int tds_id { get; set; }
-        public int tud_id { get; set; }
+        public int tpc_id { get; set; }
+        public string tpc_nome { get; set; }
+        public int tpc_ordem { get; set; }
+        public bool selecionado { get; set; }
     }
 
     /// <summary>
@@ -67,12 +68,12 @@ namespace MSTech.GestaoEscolar.BLL
                 throw new ValidationException(UtilBO.ErrosValidacao(entity));
         }
 
-        public static List<Struct_ObjetosAprendizagem> SelectListaBy_TipoDisciplina(int tds_id, long tud_id)
+        public static List<Struct_ObjetosAprendizagem> SelectListaBy_TurmaDisciplina(long tud_id, int cal_id)
         {
             totalRecords = 0;
             List<Struct_ObjetosAprendizagem> dados = null;
 
-            dados = (from DataRow dr in new ACA_ObjetoAprendizagemDAO().SelectListaBy_TipoDisciplina(tds_id, tud_id, out totalRecords).Rows
+            dados = (from DataRow dr in new ACA_ObjetoAprendizagemDAO().SelectListaBy_TurmaDisciplina(tud_id, cal_id, out totalRecords).Rows
                      select (Struct_ObjetosAprendizagem)GestaoEscolarUtilBO.DataRowToEntity(dr, new Struct_ObjetosAprendizagem())).ToList();
 
             return dados;

@@ -349,12 +349,8 @@
                                         <asp:Repeater ID="rptBimestre" runat="server">
                                             <ItemTemplate>
                                                 <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px;">
-                                                    <asp:Label ID="lblPeriodo" runat="server" Text='<%# Eval("cap_descricao") %>' />
-                                                    <asp:HiddenField ID="hdnPeriodo" runat="server" Value='<%# Eval("tpc_id") %>' />
+                                                    <asp:Label ID="lblNomeAbreviado" runat="server" Text='<%# Eval("tpc_nome") %>' CssClass="abbr-periodo" />
                                                     <asp:HiddenField ID="hdnPeriodoOrdem" runat="server" Value='<%# Eval("tpc_ordem") %>' />
-                                                    <asp:Label ID="lblNomeAbreviado" runat="server" Text='<%# Eval("tpc_nomeAbreviado") %>' style="display:none;" CssClass="abbr-periodo"/>
-                                                    <asp:HiddenField ID="hdnIdAvaliacao" runat="server" />
-                                                    <asp:HiddenField ID="hdnAvaliacaoTipo" runat="server" />
                                                 </th>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -364,14 +360,16 @@
                                 <tbody>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <tr class="gridRow grid-linha-destaque">
+                        <tr class="gridRow grid-linha">
                             <td>
                                 <asp:Label ID="lblobjetos" runat="server" Text='<%# Eval("oap_descricao") %>'></asp:Label>
                             </td>
-                            <asp:Repeater ID="rptchkBimestre" runat="server">
+                            <asp:Repeater ID="rptchkBimestre" runat="server" OnItemDataBound="rptchkBimestre_ItemDataBound">
                                 <ItemTemplate>
-                                    <td>
-                                        <asp:CheckBox ID="chkBimestre" runat="server" Text="" Style="display: inline-block;" />
+                                    <td class="center">
+                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%# Eval("tpc_id") %>' />
+                                        <asp:HiddenField ID="hdnPeriodo" runat="server" Value='<%# Eval("oap_id") %>' />
+                                        <asp:CheckBox ID="ckbCampo" runat="server" Checked='<%# Eval("selecionado") %>' style="text-align: center;"/>
                                     </td>
                                 </ItemTemplate>
                             </asp:Repeater>

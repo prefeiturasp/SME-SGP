@@ -14,9 +14,6 @@
 
     public partial class UCPlanejamentoProjetos : MotherUserControl
     {
-
-        public List<Struct_CalendarioPeriodos> lstCalendarioPeriodos { get; set; }
-        public List<Struct_ObjetosAprendizagem> lstObjetosAprendizagem { get; set; }
         #region Propriedades
 
         /// <summary>
@@ -333,6 +330,14 @@
 
         #endregion Plano Aluno
 
+        #region Objetos de Aprendizagem
+
+        public List<Struct_ObjetosAprendizagem> lstObjetosAprendizagem { get; set; }
+
+        public bool abaObjAprendVisivel { get; set; }
+
+        #endregion Objetos de Aprendizagem
+
         /// <summary>
         /// Retorna se o usuário logado é docente.
         /// </summary>
@@ -616,17 +621,18 @@
             ACA_TipoCurriculoPeriodo tcp = new ACA_TipoCurriculoPeriodo { tcp_id = crp.tcp_id };
             ACA_TipoCurriculoPeriodoBO.GetEntity(tcp);
 
-            abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = (Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem));
+            abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = (Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem));
 
             if (abaobjAprendizagem.Visible)
             {
-                lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TipoDisciplina(VS_tds_id, VS_tud_id);
-
-
-                lstCalendarioPeriodos = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(VS_cal_id, ApplicationWEB.AppMinutosCacheLongo, false, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-                lstCalendarioPeriodos = lstCalendarioPeriodos.FindAll(p => p.tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
-                List<ESC_EscolaCalendarioPeriodo> lstEscCalPeriodo = ESC_EscolaCalendarioPeriodoBO.SelectEscolasCalendarioCache(VS_cal_id, ApplicationWEB.AppMinutosCacheCurto);
-                lstCalendarioPeriodos = lstCalendarioPeriodos.Where(calP => (lstEscCalPeriodo.Where(escP => (escP.esc_id == VS_esc_id && escP.tpc_id == calP.tpc_id)).Count() == 0)).ToList();
+                lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
+                
+                rptobjAprendizagem.DataSource = lstObjetosAprendizagem.Select(p => new
+                {
+                    oap_id = p.oap_id,
+                    oap_descricao = p.oap_descricao
+                }).OrderBy(r => r.oap_descricao).Distinct();
+                rptobjAprendizagem.DataBind();
             }
 
             #endregion Objeto Aprendizagem
@@ -1331,6 +1337,72 @@
 
         #endregion Documentos
 
+        #region Objeto de Aprendizagem
+
+        /// <summary>
+        /// Salva no banco, todas as alterações dos objetos de aprendizagem
+        /// </summary>
+        /// <returns></returns>
+        public void SalvarObjetoAprendizagemTurmaDisciplina()
+        {
+            List<CLS_ObjetoAprendizagemTurmaDisciplina> lista = CriarListaObjetoAprendizagemTurmaDisciplina();
+
+            try
+            {
+                CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(lista, VS_tud_id);
+                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, String.Format("Objeto Aprendizagem Turma Disciplina | tud_id: {0}; ", VS_tud_id.ToString()));
+            }
+            catch (ValidationException ex)
+            {
+                lblMensagemAluno.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMensagemAluno.Text = UtilBO.GetErroMessage("Erro ao tentar gravar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        private List<CLS_ObjetoAprendizagemTurmaDisciplina> CriarListaObjetoAprendizagemTurmaDisciplina()
+        {
+            List<CLS_ObjetoAprendizagemTurmaDisciplina> lstObjTudDis = new List<CLS_ObjetoAprendizagemTurmaDisciplina>();
+            foreach (RepeaterItem item in rptobjAprendizagem.Items)
+            {
+
+                if ((item.ItemType == ListItemType.Item) ||
+                (item.ItemType == ListItemType.AlternatingItem))
+                {
+                    Repeater rptchkBimestre = (Repeater)item.FindControl("rptchkBimestre");
+
+                    if (rptchkBimestre != null)
+                    {
+                        foreach (RepeaterItem chk in rptchkBimestre.Items)
+                        {
+                            CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
+
+                            if (ckbCampo != null && ckbCampo.Checked)
+                            {
+                                HiddenField tpc_id = (HiddenField)item.FindControl("tpc_id");
+                                HiddenField oap_id = (HiddenField)item.FindControl("oap_id");
+                                if (tpc_id != null && oap_id != null)
+                                {
+                                    lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                    {
+                                        tud_id = VS_tud_id,
+                                        tpc_id = Convert.ToInt32(tpc_id.Value),
+                                        oap_id = Convert.ToInt32(oap_id.Value)
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return lstObjTudDis;
+        }
+
+        #endregion Objeto de Aprendizagem
+
         #endregion Métodos
 
         #region Eventos
@@ -1531,7 +1603,8 @@
                 Repeater rptBimestre = (Repeater)e.Item.FindControl("rptBimestre");
                 if (rptBimestre != null)
                 {
-                    rptBimestre.DataSource = lstCalendarioPeriodos;
+                    rptBimestre.DataSource = lstObjetosAprendizagem.OrderBy(r => r.tpc_ordem)
+                                             .Select(p => new { tpc_id = p.tpc_id, tpc_nome = p.tpc_nome, tpc_ordem = p.tpc_ordem }).Distinct();
                     rptBimestre.DataBind();
                 }
             }
@@ -1541,7 +1614,9 @@
                 Repeater rptchkBimestre = (Repeater)e.Item.FindControl("rptchkBimestre");
                 if (rptchkBimestre != null)
                 {
-                    rptchkBimestre.DataSource = lstCalendarioPeriodos;
+                    var lst = lstObjetosAprendizagem.Where(p => p.oap_id == Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oap_id")))
+                                                .OrderBy(r => r.tpc_ordem).Select(p => new { tpc_id = p.tpc_id, oap_id = p.oap_id, selecionado = p.selecionado });
+                    rptchkBimestre.DataSource = lst;
                     rptchkBimestre.DataBind();
                 }
             }
@@ -1550,5 +1625,18 @@
         #endregion Objetos Aprendizagem
 
         #endregion Eventos
+
+        protected void rptchkBimestre_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if ((e.Item.ItemType == ListItemType.Item) ||
+                (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                CheckBox ckb = (CheckBox)e.Item.FindControl("ckbCampo");
+                if (ckb != null)
+                {
+                    ckb.Enabled = PermiteEdicao;
+                }
+            }
+        }
     }
 }
