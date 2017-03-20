@@ -260,6 +260,8 @@ public partial class MasterPage : MotherMasterPage
                                                                        ApplicationWEB.SistemaID);
                     if (!string.IsNullOrEmpty(urlHelp))
                     {
+                        if (!urlHelp.StartsWith("~") && !urlHelp.StartsWith("http://"))
+                            urlHelp = "http://" + urlHelp;
                         hplHelp.Visible = true;
                         hplHelp.NavigateUrl = urlHelp;
                         hplHelp.ToolTip = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.MENSAGEM_ICONE_HELP);
