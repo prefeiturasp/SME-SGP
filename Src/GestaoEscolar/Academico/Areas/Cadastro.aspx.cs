@@ -117,7 +117,7 @@
                 if (ACA_TipoAreaDocumentoBO.SalvarArea(entity))
                 {
                     ApplicationWEB._GravaLogSistema(VS_tad_id > 0 ? LOG_SistemaTipo.Update : LOG_SistemaTipo.Insert, "tad_id: " + entity.tad_id);
-                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Tipo de área " + (VS_tad_id > 0 ? "alterado" : "incluído") + " com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Documento " + (VS_tad_id > 0 ? "alterado" : "incluído") + " com sucesso.", UtilBO.TipoMensagem.Sucesso);
 
                     RedirecionarPagina("~/Academico/Areas/Busca.aspx");
                 }
