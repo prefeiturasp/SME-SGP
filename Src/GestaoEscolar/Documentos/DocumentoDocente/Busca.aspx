@@ -21,7 +21,7 @@
     </asp:UpdatePanel>
     <div style="width: 40%; float: left; clear: none;" class="area-selecao-documento">
         <fieldset>
-            <legend>Documentos do docente</legend>
+            <legend>Relatórios do docente</legend>
             <div id="divRelatorio" class="divRelatorio" runat="server">
                 <asp:RadioButtonList ID="rdbRelatorios" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rdbRelatorios_OnSelectedIndexChanged"
                     CausesValidation="false">
