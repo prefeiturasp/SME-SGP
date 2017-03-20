@@ -367,8 +367,8 @@
                             <asp:Repeater ID="rptchkBimestre" runat="server" OnItemDataBound="rptchkBimestre_ItemDataBound">
                                 <ItemTemplate>
                                     <td class="center">
-                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%# Eval("tpc_id") %>' />
-                                        <asp:HiddenField ID="hdnPeriodo" runat="server" Value='<%# Eval("oap_id") %>' />
+                                        <asp:HiddenField ID="tpc_id" runat="server" Value='<%# Eval("tpc_id") %>' />
+                                        <asp:HiddenField ID="oap_id" runat="server" Value='<%# Eval("oap_id") %>' />
                                         <asp:CheckBox ID="ckbCampo" runat="server" Checked='<%# Eval("selecionado") %>' style="text-align: center;"/>
                                     </td>
                                 </ItemTemplate>

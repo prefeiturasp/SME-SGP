@@ -334,7 +334,25 @@
 
         public List<Struct_ObjetosAprendizagem> lstObjetosAprendizagem { get; set; }
 
-        public bool abaObjAprendVisivel { get; set; }
+        public bool abaObjAprendVisivel
+        {
+            get
+            {
+                if (ViewState["abaObjAprendVisivel"] != null)
+                {
+                    return Convert.ToBoolean(ViewState["abaObjAprendVisivel"]);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            set
+            {
+                ViewState["abaObjAprendVisivel"] = value;
+            }
+        }
 
         #endregion Objetos de Aprendizagem
 
@@ -1366,9 +1384,9 @@
         private List<CLS_ObjetoAprendizagemTurmaDisciplina> CriarListaObjetoAprendizagemTurmaDisciplina()
         {
             List<CLS_ObjetoAprendizagemTurmaDisciplina> lstObjTudDis = new List<CLS_ObjetoAprendizagemTurmaDisciplina>();
+
             foreach (RepeaterItem item in rptobjAprendizagem.Items)
             {
-
                 if ((item.ItemType == ListItemType.Item) ||
                 (item.ItemType == ListItemType.AlternatingItem))
                 {
@@ -1378,12 +1396,12 @@
                     {
                         foreach (RepeaterItem chk in rptchkBimestre.Items)
                         {
-                            CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
+                            CheckBox ckbCampo = (CheckBox)chk.FindControl("ckbCampo");
 
                             if (ckbCampo != null && ckbCampo.Checked)
                             {
-                                HiddenField tpc_id = (HiddenField)item.FindControl("tpc_id");
-                                HiddenField oap_id = (HiddenField)item.FindControl("oap_id");
+                                HiddenField tpc_id = (HiddenField)chk.FindControl("tpc_id");
+                                HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
                                 if (tpc_id != null && oap_id != null)
                                 {
                                     lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
