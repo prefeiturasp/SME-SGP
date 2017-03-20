@@ -180,9 +180,20 @@ namespace MSTech.GestaoEscolar.DAL
         /// <summary>
         /// Processa os dados para a sugestão das aulas previstas.
         /// </summary>
-        public void ExecJOB_ProcessamentoSugestaoAulasPrevistas()
+        public void ExecJOB_ProcessamentoSugestaoAulasPrevistas(bool todaRede)
         {
-            QueryStoredProcedureAsync qs = new QueryStoredProcedureAsync("MS_JOB_ProcessamentoSugestaoAulasPrevistas", _Banco);
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoSugestaoAulasPrevistas", _Banco);
+
+            #region Parâmetros
+
+            DbParameter Param = qs.NewParameter();
+            Param.DbType = DbType.Boolean;
+            Param.ParameterName = "@todaRede";
+            Param.Size = 1;
+            Param.Value = todaRede;
+            qs.Parameters.Add(Param);
+
+            #endregion
 
             qs.Execute();
         }

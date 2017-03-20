@@ -65,9 +65,14 @@ namespace GestaoEscolar.Configuracao.TipoCiclo
         {
             CheckBox chk = (CheckBox)sender;
             GridViewRow gr = (GridViewRow)chk.Parent.Parent;
-            var tci_id = grvTpCiclo.DataKeys[gr.RowIndex].Value.ToString();
+            int tci_id = Convert.ToInt32(grvTpCiclo.DataKeys[gr.RowIndex].Value);
 
-            ACA_TipoCicloBO.AtualizaObjetoAprendizagem(int.Parse(tci_id), chk.Checked);
+            if (ACA_TipoCicloBO.AtualizaObjetoAprendizagem(tci_id, chk.Checked))
+            {
+                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "tci_id: " + tci_id.ToString());
+                lblMessage.Text = UtilBO.GetErroMessage("Tipo de ciclo alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                updResultado.Update();
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -143,11 +148,9 @@ namespace GestaoEscolar.Configuracao.TipoCiclo
 
                 HiddenField field = e.Row.FindControl("hdfObjetoAprendizagem") as HiddenField;
                 CheckBox chkObjetoAprendizagem = (CheckBox)e.Row.FindControl("chkObjetoAprendizagem");
-                if(field != null && chkObjetoAprendizagem != null)
+                if(field != null && chkObjetoAprendizagem != null && !string.IsNullOrEmpty(field.Value))
                 {
-                    var check = Convert.ToBoolean(Convert.ToInt16(field.Value));
-
-                    chkObjetoAprendizagem.Checked = check;
+                    chkObjetoAprendizagem.Checked = Convert.ToBoolean(field.Value);
                 }
             }
         }

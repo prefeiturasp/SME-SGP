@@ -32,6 +32,12 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Objetos de Aprendizagem'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'PlanejamentoDiario.Cadastro.MensagemAulasPrevistas' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Não é possível gerar aulas pois as disciplinas estão sem aulas previstas:'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 

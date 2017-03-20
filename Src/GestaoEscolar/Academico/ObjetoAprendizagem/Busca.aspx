@@ -16,9 +16,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdatePanel ID="_updDadosBasicos" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
+            <asp:Label ID="_lblMessage" runat="server" EnableViewState="False"></asp:Label>
             <fieldset id="fds" runat="server">
                 <legend>Consulta de objetos de aprendizagem</legend>
-                <asp:Label ID="_lblMessage" runat="server" EnableViewState="False"></asp:Label>
                 <div id="_divPesquisa" runat="server">
                     <asp:Label ID="_lblDisciplina" runat="server" Text="Disciplina" AssociatedControlID="txtDisciplina"></asp:Label>
                     <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>

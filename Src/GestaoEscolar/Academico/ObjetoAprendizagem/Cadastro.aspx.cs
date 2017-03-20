@@ -2,6 +2,7 @@
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
+using MSTech.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,16 +70,22 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
         {
             try
             {
-                var obj = new ACA_ObjetoAprendizagem
+                List<int> lstCiclos = CriarListaTipoCiclo();
+
+                if (!lstCiclos.Any())
+                    throw new ValidationException("Selecione pelo menos um ciclo.");
+
+                ACA_ObjetoAprendizagem obj = new ACA_ObjetoAprendizagem
                 {
                     IsNew = _VS_oap_id <= 0,
                     oap_descricao = _txtDescricao.Text,
                     tds_id = _VS_tds_id,
-                    oap_situacao = (byte)(_ckbBloqueado.Checked ? 2 : 1),
+                    oap_situacao = (_ckbBloqueado.Checked ? (byte)ObjetoAprendizagemSituacao.Bloqueado 
+                                                          : (byte)ObjetoAprendizagemSituacao.Ativo),
                     oap_id = _VS_oap_id
                 };
 
-                ACA_ObjetoAprendizagemBO.Save(obj, CriarListaTipoCiclo());
+                ACA_ObjetoAprendizagemBO.Save(obj, lstCiclos);
 
                 if (_VS_oap_id > 0)
                 {
@@ -91,10 +98,11 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage("Objeto de aprendizagem incluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
                 }
 
+                Session["tds_id_oap"] = _VS_tds_id;
                 Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/Busca.aspx", false);
                 HttpContext.Current.ApplicationInstance.CompleteRequest();
             }
-            catch (MSTech.Validation.Exceptions.ValidationException ex)
+            catch (ValidationException ex)
             {
                 _lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
@@ -109,9 +117,9 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
-        private IEnumerable<int> CriarListaTipoCiclo()
+        private List<int> CriarListaTipoCiclo()
         {
-            var list = new List<int>();
+            List<int> list = new List<int>();
             foreach (RepeaterItem item in rptCampos.Items)
             {
                 CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
@@ -137,12 +145,13 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
         {
             try
             {
-                var objetoAp = new ACA_ObjetoAprendizagem { oap_id = oap_id };
+                ACA_ObjetoAprendizagem objetoAp = new ACA_ObjetoAprendizagem { oap_id = oap_id };
                 ACA_ObjetoAprendizagemBO.GetEntity(objetoAp);
 
                 _txtDescricao.Text = objetoAp.oap_descricao;
+                _ckbBloqueado.Checked = objetoAp.oap_situacao == (byte)ObjetoAprendizagemSituacao.Bloqueado;
 
-                var ciclos = ACA_ObjetoAprendizagemTipoCicloBO.SelectBy_ObjetoAprendizagem(oap_id);
+                List<int> ciclos = ACA_ObjetoAprendizagemTipoCicloBO.SelectBy_ObjetoAprendizagem(oap_id);
 
                 foreach (RepeaterItem item in rptCampos.Items)
                 {
@@ -171,7 +180,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
                 txtDisciplina.Text = tds.tds_nome;
 
-                rptCampos.DataSource = ACA_TipoCicloBO.GetSelect();
+                rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivos(true, ApplicationWEB.AppMinutosCacheLongo);
                 rptCampos.DataBind();
             }
             catch (Exception ex)
