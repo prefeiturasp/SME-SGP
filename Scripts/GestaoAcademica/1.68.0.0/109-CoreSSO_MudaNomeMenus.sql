@@ -1,7 +1,10 @@
 USE [CoreSSO]
 GO
 
-DECLARE @sis_id INT = 102
+BEGIN TRANSACTION 
+SET XACT_ABORT ON   
+
+	DECLARE @sis_id INT = 102
 
 	DECLARE @mod_idPai INT
 
@@ -70,19 +73,47 @@ DECLARE @sis_id INT = 102
 
 		IF(@mod_idPai <> NULL)
 		BEGIN
+			
+			DECLARE @mod_id INT = (SELECT TOP 1 mod_id FROM SYS_Modulo WITH(NOLOCK) WHERE mod_nome = 'Áreas' AND sis_id = @sis_id AND mod_situacao <> 3)
+			
+			IF(@mod_id <> NULL)
+			BEGIN
+				UPDATE msp
+				SET msp.msm_nome = 'Cadastro de links/documentos'
+				FROM [SYS_ModuloSitemap] msp
+				WHERE msp.msm_nome = 'Cadastro de documentos'
+				and msp.sis_id = @sis_id 
+				and msp.mod_id = @mod_id 
+				and msp.mod_situacao = 1
+				
+				UPDATE msp
+				SET msp.msm_nome = 'Cadastro de documentos'
+				FROM [SYS_ModuloSitemap] msp
+				WHERE msp.msm_nome = 'Cadastro de áreas para links e documentos.'
+				and msp.sis_id = @sis_id 
+				and msp.mod_id = @mod_id 
+				and msp.mod_situacao = 1
+
+				UPDATE msp
+				SET msp.msm_nome = 'Busca de documentos'
+				FROM [SYS_ModuloSiteMap] msp
+				WHERE msm_nome = 'Busca de áreas'
+				and sis_id = @sis_id
+				and mod_id = @mod_id
+				and msm_situacao = 1
+			END
+			
 			--MODULO
 			UPDATE m
 			SET m.mod_nome = 'Documentos'
 			FROM [SYS_Modulo] m
 			WHERE m.sis_id = @sis_id
 			and m.mod_idPai = @mod_idPai
-			and m.mod_nome = 'Áreas'
+			and m.mod_id = @mod_id
 			and m.mod_situacao = 1
-
-			UPDATE msp
-			SET msp.msm_nome = 'Busca de documentos'
-			FROM [SYS_ModuloSiteMap] msp
-			WHERE msm_nome = 'Busca de áreas'
-			and sis_id = @sis_id
 		END
 	END
+	
+-- Fechar transação     
+SET XACT_ABORT OFF 
+COMMIT TRANSACTION

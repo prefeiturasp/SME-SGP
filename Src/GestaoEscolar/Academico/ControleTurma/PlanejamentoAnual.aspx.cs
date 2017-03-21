@@ -963,6 +963,31 @@ namespace GestaoEscolar.Academico.ControleTurma
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o planejamento.", UtilBO.TipoMensagem.Erro);
                 }
             }
+
+            if (UCPlanejamentoProjetos.abaObjAprendVisivel)
+            {
+                try
+                {
+                    UCPlanejamentoProjetos.SalvarObjetoAprendizagemTurmaDisciplina();
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
+                catch (ArgumentException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
+                catch (DuplicateNameException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                }
+            }
         }
 
         private void UCPlanejamentoProjetos_SalvarPlanoCiclo()
