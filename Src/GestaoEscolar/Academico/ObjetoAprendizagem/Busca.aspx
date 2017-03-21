@@ -25,7 +25,7 @@
                 </div>
                 <div class="right">
                     <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo objeto de aprendizagem" PostBackUrl="~/Academico/ObjetoAprendizagem/Cadastro.aspx" />
-                    <asp:Button ID="_btnCancelar" runat="server" Text="Cancelar" OnClick="_btnCancelar_Click" />
+                    <asp:Button ID="_btnCancelar" runat="server" Text="Voltar" OnClick="_btnCancelar_Click" />
                 </div>
             </fieldset>
         </ContentTemplate>
