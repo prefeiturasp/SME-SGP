@@ -69,7 +69,7 @@ SET XACT_ABORT ON
 		WHERE msm_nome = 'Documentos do gestor'
 		and sis_id = @sis_id
 
-		SET @mod_idPai = (SELECT mod_id FROM [SYS_Modulo] WHERE mod_nome = 'Cadastros' and sis_id = @sis_id and mod_situacao = 1)
+		SET @mod_idPai = (SELECT mod_id FROM [SYS_Modulo] WHERE mod_nome = 'Administração' and sis_id = @sis_id and mod_situacao = 1)
 
 		IF(@mod_idPai <> NULL)
 		BEGIN
@@ -84,7 +84,6 @@ SET XACT_ABORT ON
 				WHERE msp.msm_nome = 'Cadastro de documentos'
 				and msp.sis_id = @sis_id 
 				and msp.mod_id = @mod_id 
-				and msp.mod_situacao = 1
 				
 				UPDATE msp
 				SET msp.msm_nome = 'Cadastro de documentos'
@@ -92,7 +91,6 @@ SET XACT_ABORT ON
 				WHERE msp.msm_nome = 'Cadastro de áreas para links e documentos.'
 				and msp.sis_id = @sis_id 
 				and msp.mod_id = @mod_id 
-				and msp.mod_situacao = 1
 
 				UPDATE msp
 				SET msp.msm_nome = 'Busca de documentos'
@@ -100,7 +98,6 @@ SET XACT_ABORT ON
 				WHERE msm_nome = 'Busca de áreas'
 				and sis_id = @sis_id
 				and mod_id = @mod_id
-				and msm_situacao = 1
 			END
 			
 			--MODULO
