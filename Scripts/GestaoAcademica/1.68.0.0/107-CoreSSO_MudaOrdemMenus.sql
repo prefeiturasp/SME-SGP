@@ -58,11 +58,6 @@ SET XACT_ABORT ON
 	AND gru_id IN (SELECT gru_id FROM SYS_Grupo gru
 				   WHERE vis_id = @visaoDocente)
 
-	DELETE FROM SYS_VisaoModuloMenu
-	WHERE vis_id = @visaoDocente 
-	AND sis_id = @sis_id 
-	AND mod_id =  @mod_idPai
-
 	UPDATE vmm
 	SET vmm_ordem = 1
 	FROM SYS_VisaoModuloMenu vmm
