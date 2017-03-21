@@ -157,7 +157,7 @@
                     </div>
                 </fieldset>
                 <div class="right">
-                    <asp:Button ID="_btnGerarRelatorio2" runat="server" Text="Gerar documento" OnClick="_btnGerarRelatorio2_Click"
+                    <asp:Button ID="_btnGerarRelatorio2" runat="server" Text="Gerar relatório" OnClick="_btnGerarRelatorio2_Click"
                         ValidationGroup="Grupamento" />
                     <asp:Button ID="_btnGrupamentoFechar" runat="server" Text="Fechar" OnClientClick="$(&quot;#divGrupamento&quot;).dialog(&quot;close&quot;); return false;"
                         CausesValidation="False" />
@@ -165,7 +165,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-    <div id="divEncaminhamentoRemanejado" title="Gerar documento" class="hide">
+    <div id="divEncaminhamentoRemanejado" title="Gerar relatório" class="hide">
         <asp:UpdatePanel ID="UpdEncRemanej" runat="server">
             <ContentTemplate>
                 <asp:Label ID="lblMensagemRemanej" runat="server" EnableViewState="False"></asp:Label>
@@ -205,7 +205,7 @@
                     </div>
                 </fieldset>
                 <div class="right">
-                    <asp:Button ID="btnGerarEncaminhamentoRemanej" runat="server" Text="Gerar documento"
+                    <asp:Button ID="btnGerarEncaminhamentoRemanej" runat="server" Text="Gerar relatório"
                         OnClick="btnGerarEncaminhamentoRemanej_Click" ValidationGroup="EncaminhamentoRemanejado" />
                     <asp:Button ID="btnVoltar" runat="server" Text="Fechar" OnClientClick="$(&quot;#divEncaminhamentoRemanejado&quot;).dialog(&quot;close&quot;); return false;"
                         CausesValidation="False" />
@@ -235,7 +235,7 @@
                 </SelectParameters>
             </asp:ObjectDataSource>
             <div class="right">
-                <asp:Button ID="_btnGerarRelatorio1" runat="server" Text="Gerar documento" OnClick="_btnGerarRelatorio1_Click"
+                <asp:Button ID="_btnGerarRelatorio1" runat="server" Text="Gerar relatório" OnClick="_btnGerarRelatorio1_Click"
                     ValidationGroup="Periodo" />
                 <asp:Button ID="_btnSelecionarPeriodoFechar" runat="server" Text="Fechar" OnClientClick="$('#divSelecionarPeriodo').dialog('close'); return false;"
                     CausesValidation="False" />
@@ -275,7 +275,7 @@
                     <div id="_divPesquisa" class="divPesquisa" runat="server">
                         <asp:Label ID="lblAvisoMensagem" runat="server"></asp:Label>
                         <!-- FiltrosPadrao -->
-                        <asp:CheckBox ID="ChkEmitirAnterior" runat="server" Text="Emitir documentos de anos anteriores" AutoPostBack="true"
+                        <asp:CheckBox ID="ChkEmitirAnterior" runat="server" Text="Emitir relatórios de anos anteriores" AutoPostBack="true"
                             OnCheckedChanged="ChkEmitirAnterior_CheckedChanged" />
                         <uc3:UCComboUAEscola ID="UCComboUAEscola" runat="server" CarregarEscolaAutomatico="true"
                             MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" OnIndexChangedUA="UCComboUAEscola_IndexChangedUA"
@@ -455,17 +455,17 @@
                         </div>
                     </div>
                     <div class="right">
-                        <asp:Button ID="btnGerarRelatorioDeclaracaoSolicitacaoVaga" runat="server" Text="Gerar documento"
+                        <asp:Button ID="btnGerarRelatorioDeclaracaoSolicitacaoVaga" runat="server" Text="Gerar relatório"
                             OnClick="btnGerarRelatorioDeclaracaoSolicitacaoVaga_Click" Visible="false" />
-                        <asp:Button ID="btnGerarRelatorioConviteReuniao" runat="server" Text="Gerar documento"
+                        <asp:Button ID="btnGerarRelatorioConviteReuniao" runat="server" Text="Gerar relatório"
                             OnClick="btnGerarRelatorioConviteReuniao_Click" Visible="false" />
                         <asp:Button ID="btnGerarRelatorioDeclaracaoSolicitacaoComparecimento" runat="server"
-                            Text="Gerar documento" OnClick="btnGerarRelatorioDeclaracaoSolicitacaoComparecimento_Click"
+                            Text="Gerar relatório" OnClick="btnGerarRelatorioDeclaracaoSolicitacaoComparecimento_Click"
                             Visible="false" />
-                        <asp:Button ID="btnGerarDeclaracaoTrabalho" runat="server" Text="Gerar documento"
+                        <asp:Button ID="btnGerarDeclaracaoTrabalho" runat="server" Text="Gerar relatório"
                             Visible="false" OnClick="btnGerarDeclaracaoTrabalho_Click" />
                         <asp:Button ID="btnGerarCertidaoEscolariedadeAnterior1972" runat="server"
-                            Text="Gerar documento" Visible="False"
+                            Text="Gerar relatório" Visible="False"
                             OnClick="btnGerarCertidaoEscolariedadeAnterior1972_Click" />
                         <asp:Button ID="_btnPesquisar" runat="server" Text="Pesquisar" OnClick="_btnPesquisar_Click" />
                     </div>
@@ -483,7 +483,7 @@
             <fieldset id="fdsResultados" runat="server">
                 <legend>Resultados</legend>
                 <div class="right area-botoes-top">
-                    <asp:Button ID="btnGerarRelatorioCima" runat="server" Text="Gerar documento" OnClick="_btnGerarRelatorio_Click" />
+                    <asp:Button ID="btnGerarRelatorioCima" runat="server" Text="Gerar relatório" OnClick="_btnGerarRelatorio_Click" />
                 </div>
                 <div class="area-form">
                     <br />
@@ -576,7 +576,7 @@
                         class="clTotalReg" />
                 </div>
                 <div class="right area-botoes-bottom">
-                    <asp:Button ID="_btnGerarRelatorio" runat="server" Text="Gerar documento" OnClick="_btnGerarRelatorio_Click" />
+                    <asp:Button ID="_btnGerarRelatorio" runat="server" Text="Gerar relatório" OnClick="_btnGerarRelatorio_Click" />
                 </div>
             </fieldset>
 

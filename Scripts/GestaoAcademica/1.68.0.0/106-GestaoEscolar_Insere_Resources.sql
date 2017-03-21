@@ -179,6 +179,27 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Documento é obrigatório.'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'DocumentosDocente.Busca.btnGerar.Text' 
+        , @rcr_NomeResource = 'Documentos'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Gerar relatório'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'DocumentosDocente.Busca.btnGerarRelatorioCima.Text' 
+        , @rcr_NomeResource = 'Documentos'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Gerar relatório'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'DocumentosDocente.Busca._btnGerarRelatorio.Text' 
+        , @rcr_NomeResource = 'Documentos'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Gerar relatório'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
