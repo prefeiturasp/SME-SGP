@@ -3,7 +3,6 @@ using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace GestaoEscolar.Academico.ObjetoAprendizagem
 {
@@ -81,7 +80,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar tipos de disciplinas.", UtilBO.TipoMensagem.Erro);
+                _lblMessage.Text = UtilBO.GetErroMessage(string.Format("Erro ao carregar {0}.", GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA_PLURAL_MIN")), UtilBO.TipoMensagem.Erro);
             }
         }
 

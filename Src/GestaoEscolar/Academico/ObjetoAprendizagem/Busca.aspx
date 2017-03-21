@@ -20,7 +20,7 @@
             <fieldset id="fds" runat="server">
                 <legend>Consulta de objetos de aprendizagem</legend>
                 <div id="_divPesquisa" runat="server">
-                    <asp:Label ID="_lblDisciplina" runat="server" Text="Disciplina" AssociatedControlID="txtDisciplina"></asp:Label>
+                    <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
                     <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
                 </div>
                 <div class="right">
@@ -36,7 +36,7 @@
             <ContentTemplate>
                 <uc5:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao1_IndexChanged" />
                 <asp:GridView ID="_grvObjetoAprendizagem" runat="server" DataSourceID="_odsObjeto" AutoGenerateColumns="False"
-                    AllowPaging="True" DataKeyNames="oap_id" EmptyDataText="Não existe objeto de aprendizagem associado a esta disciplina." HorizontalAlign="Center"
+                    AllowPaging="True" DataKeyNames="oap_id" HorizontalAlign="Center"
                     OnRowCommand="_grvObjetoAprendizagem_RowCommand" OnRowDataBound="_grvObjetoAprendizagem_RowDataBound"
                     OnDataBound="_grvObjetoAprendizagem_DataBound" AllowSorting="true">
                     <Columns>
