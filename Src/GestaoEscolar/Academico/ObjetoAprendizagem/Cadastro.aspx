@@ -16,7 +16,7 @@
                 <legend>Cadastro de objeto de aprendizagem</legend>
                 <uc5:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
 
-                <asp:Label ID="_lblDisciplina" runat="server" Text="Disciplina" AssociatedControlID="txtDisciplina"></asp:Label>
+                <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
                 <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
 
                 <asp:Label ID="_lblDescricao" runat="server" Text="Descrição *" AssociatedControlID="_txtDescricao"></asp:Label>

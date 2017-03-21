@@ -1330,7 +1330,7 @@
         #region Documentos
 
         /// <summary>
-        /// Carrega os tipos de áreas documentos ativos
+        /// Carrega os documentos ativos
         /// </summary>
         private void CarregarDocumentos()
         {

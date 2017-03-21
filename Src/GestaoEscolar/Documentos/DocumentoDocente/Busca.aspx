@@ -21,7 +21,7 @@
     </asp:UpdatePanel>
     <div style="width: 40%; float: left; clear: none;" class="area-selecao-documento">
         <fieldset>
-            <legend>Documentos do docente</legend>
+            <legend>Relatórios do docente</legend>
             <div id="divRelatorio" class="divRelatorio" runat="server">
                 <asp:RadioButtonList ID="rdbRelatorios" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rdbRelatorios_OnSelectedIndexChanged"
                     CausesValidation="false">
@@ -38,7 +38,7 @@
                     <uc9:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
                     <div id="divPesquisa" class="divPesquisa area-form" runat="server">
                         <asp:Label ID="lblAvisoMensagem" runat="server"></asp:Label>
-                        <asp:CheckBox ID="ChkEmitirAnterior" runat="server" Text="Emitir documentos de anos anteriores" AutoPostBack="true"
+                        <asp:CheckBox ID="ChkEmitirAnterior" runat="server" Text="Emitir relatórios de anos anteriores" AutoPostBack="true"
                             OnCheckedChanged="ChkEmitirAnterior_CheckedChanged" Visible="false" />
                         <uc1:UCBuscaDocenteTurma runat="server" ID="UCBuscaDocenteTurma" Visible="false" />
                         <div runat="server" id="divPeriodoCalendario" visible="false">

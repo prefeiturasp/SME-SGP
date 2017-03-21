@@ -355,6 +355,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                         lblMensagem.Text = message;
 
                     UCComboUAEscola1.Inicializar();
+                    if (UCComboUAEscola1.Uad_ID != Guid.Empty)
+                    {
+                        UCComboUAEscola1_IndexChangedUA();
+                    }
 
                     if (UCComboUAEscola1.Esc_ID > 0 && UCComboUAEscola1.QuantidadeItemsComboEscolas == 2)
                     {

@@ -10,7 +10,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="_lblMessage" runat="server" EnableViewState="False"></asp:Label>
     <fieldset id="fdsEscola" runat="server">
-        <legend>Consulta de disciplinas</legend>
+        <legend><asp:Literal ID="ltrLegend" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>"></asp:Literal></legend>
         <div id="_divPesquisa" runat="server">
             <uc2:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" />
             <asp:Label ID="_lblBase" runat="server" Text="Base" AssociatedControlID="_ddlBase"></asp:Label>
@@ -35,7 +35,7 @@
                     DataKeyNames="tds_id" EmptyDataText="<%$ Resources:Configuracao, TipoDisciplina.Busca._dgvTipoDisciplina.EmptyDataText %>"
                     OnRowEditing="_grvTipoDisciplina_RowEditing" >
                     <Columns>
-                        <asp:TemplateField HeaderText="Disciplina">
+                        <asp:TemplateField HeaderText="<%$ Resources:Mensagens, MSG_DISCIPLINA %>">
                             <ItemTemplate>
                                 <asp:LinkButton ID="_btnSelecionar" runat="server" CommandName="Edit" Text='<%# Bind("tds_nome") %>'
                                     PostBackUrl="~/Academico/ObjetoAprendizagem/Busca.aspx"></asp:LinkButton>
