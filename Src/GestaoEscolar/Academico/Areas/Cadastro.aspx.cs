@@ -97,7 +97,7 @@
 
             chkCadastroEscola.Enabled = !integridade;
 
-            lblMsgInfo.Text = integridade && __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao ? UtilBO.GetErroMessage(RetornaResource("lblmsgInfo.Text"), UtilBO.TipoMensagem.Informacao) : string.Empty;
+            lblMsgInfo.Text = integridade && __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao ? UtilBO.GetErroMessage(RetornaResource("lblMsgInfo.Text"), UtilBO.TipoMensagem.Informacao) : string.Empty;
         }
 
         /// <summary>
