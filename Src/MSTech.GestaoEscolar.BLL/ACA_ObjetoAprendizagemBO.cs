@@ -88,5 +88,47 @@ namespace MSTech.GestaoEscolar.BLL
 
             return dados;
         }
+
+        /// <summary>
+        /// Exclui o objeto de aprendizagem, verifica se não está sendo usado.
+        /// </summary>
+        /// <param name="entity">Entidade do objeto de aprendizagem que será excluído</param>
+        /// <returns></returns>
+        public static bool Excluir(ACA_ObjetoAprendizagem entity)
+        {
+            ACA_ObjetoAprendizagemDAO dao = new ACA_ObjetoAprendizagemDAO();
+            dao._Banco.Open(IsolationLevel.ReadCommitted);
+
+            try
+            {
+                if (ObjetoEmUso(entity.oap_id))
+                    throw new ValidationException("Objeto de aprendizagem não pode ser excluído pois está em uso em uma turma.");
+
+                return Delete(entity);
+            }
+            catch (Exception ex)
+            {
+                dao._Banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                dao._Banco.Close();
+            }
+        }
+
+        /// <summary>
+        /// Verifica se o objeto de aprendizagem está em uso
+        /// </summary>
+        /// <param name="oap_id">ID do objeto de aprendizagem</param>
+        /// <returns>true = em uso</returns>
+        private static bool ObjetoEmUso(int oap_id, TalkDBTransaction banco = null)
+        {
+            ACA_ObjetoAprendizagemDAO dao = new ACA_ObjetoAprendizagemDAO();
+            if (banco != null)
+                dao._Banco = banco;
+
+            return dao.ObjetoEmUso(oap_id);
+        }
     }
 }
