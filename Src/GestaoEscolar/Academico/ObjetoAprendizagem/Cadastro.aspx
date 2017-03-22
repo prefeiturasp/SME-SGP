@@ -18,6 +18,9 @@
 
                 <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
                 <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
+                
+                <asp:Label ID="lblAno" runat="server" Text="Ano" AssociatedControlID="txtAno"></asp:Label>
+                <asp:TextBox ID="txtAno" runat="server" Enabled="false"></asp:TextBox>
 
                 <asp:Label ID="_lblDescricao" runat="server" Text="Descrição *" AssociatedControlID="_txtDescricao"></asp:Label>
                 <asp:TextBox ID="_txtDescricao" runat="server" Rows="4" TextMode="MultiLine" SkinID="text60C"></asp:TextBox>

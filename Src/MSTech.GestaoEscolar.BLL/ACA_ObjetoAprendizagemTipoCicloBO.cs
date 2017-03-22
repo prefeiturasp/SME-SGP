@@ -15,12 +15,12 @@ namespace MSTech.GestaoEscolar.BLL
     /// </summary>
     public class ACA_ObjetoAprendizagemTipoCicloBO : BusinessBase<ACA_ObjetoAprendizagemTipoCicloDAO, ACA_ObjetoAprendizagemTipoCiclo>
 	{
-        public static DataTable SelectBy_TipoDisciplina(int tds_id)
+        public static DataTable SelectBy_TipoDisciplina(int tds_id, int cal_ano)
         {
             totalRecords = 0;
 
             ACA_ObjetoAprendizagemTipoCicloDAO dao = new ACA_ObjetoAprendizagemTipoCicloDAO();
-            return dao.SelectBy_TipoDisciplina(tds_id, out totalRecords);
+            return dao.SelectBy_TipoDisciplina(tds_id, cal_ano, out totalRecords);
         }
 
         public static List<int> SelectBy_ObjetoAprendizagem(int oap_id)

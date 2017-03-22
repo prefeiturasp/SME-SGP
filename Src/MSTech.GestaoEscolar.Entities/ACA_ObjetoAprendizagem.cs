@@ -34,6 +34,12 @@ namespace MSTech.GestaoEscolar.Entities
         public override string oap_descricao { get; set; }
 
         /// <summary>
+        /// Propriedade cal_ano.
+        /// </summary>
+        [MSNotNullOrEmpty("Ano é obrigatório.")]
+        public override int cal_ano { get; set; }
+
+        /// <summary>
         /// Propriedade oap_situacao.
         /// </summary>
         [MSDefaultValue(1)]

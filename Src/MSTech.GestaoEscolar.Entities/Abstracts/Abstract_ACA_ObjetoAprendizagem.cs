@@ -38,10 +38,16 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual string oap_descricao { get; set; }
 
-		/// <summary>
-		/// Propriedade oap_situacao.
-		/// </summary>
-		[MSNotNullOrEmpty]
+        /// <summary>
+        /// Propriedade cal_ano.
+        /// </summary>
+        [MSNotNullOrEmpty]
+        public virtual int cal_ano { get; set; }
+
+        /// <summary>
+        /// Propriedade oap_situacao.
+        /// </summary>
+        [MSNotNullOrEmpty]
 		public virtual byte oap_situacao { get; set; }
 
 		/// <summary>

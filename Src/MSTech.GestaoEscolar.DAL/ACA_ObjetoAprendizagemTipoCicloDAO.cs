@@ -19,6 +19,7 @@ namespace MSTech.GestaoEscolar.DAL
         public DataTable SelectBy_TipoDisciplina
         (
              int tds_id
+            , int cal_ano
             , out int totalRecords
         )
         {
@@ -31,6 +32,13 @@ namespace MSTech.GestaoEscolar.DAL
             Param.ParameterName = "@tds_id";
             Param.Size = 4;
             Param.Value = tds_id;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@cal_ano";
+            Param.Size = 4;
+            Param.Value = cal_ano;
             qs.Parameters.Add(Param);
 
             #endregion

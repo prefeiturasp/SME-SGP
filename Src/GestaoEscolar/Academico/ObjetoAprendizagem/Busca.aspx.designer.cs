@@ -76,6 +76,15 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.TextBox txtDisciplina;
         
         /// <summary>
+        /// UCComboAnoLetivo1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboAnoLetivo UCComboAnoLetivo1;
+        
+        /// <summary>
         /// _btnNovo control.
         /// </summary>
         /// <remarks>

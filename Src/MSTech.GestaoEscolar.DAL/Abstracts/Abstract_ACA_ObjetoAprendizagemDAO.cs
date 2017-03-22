@@ -69,7 +69,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.oap_descricao;
 			qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@cal_ano";
+            Param.Size = 4;
+            Param.Value = entity.cal_ano;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
 			Param.DbType = DbType.Byte;
 			Param.ParameterName = "@oap_situacao";
 			Param.Size = 1;
@@ -123,6 +130,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Size = 1000;
 			Param.Value = entity.oap_descricao;
 			qs.Parameters.Add(Param);
+                
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@cal_ano";
+            Param.Size = 4;
+            Param.Value = entity.cal_ano;
+            qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Byte;

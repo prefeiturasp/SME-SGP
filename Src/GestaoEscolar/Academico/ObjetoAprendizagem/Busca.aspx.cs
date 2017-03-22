@@ -31,6 +31,14 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 return _VS_tds_id;
             }
         }
+        
+        public int cal_ano
+        {
+            get
+            {
+                return UCComboAnoLetivo1.ano;
+            }
+        }
 
         private int _VS_tds_id
         {
@@ -65,6 +73,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 if (!IsPostBack)
                 {
                     _grvObjetoAprendizagem.EmptyDataText = string.Format("Não existe objeto de aprendizagem associado a este {0}.", GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA_MIN"));
+                    UCComboAnoLetivo1.CarregarAnoAtual();
 
                     if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
                     {
@@ -79,10 +88,13 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     else
                     {
                         _odsObjeto.SelectParameters.Add("tds_id", string.Empty);
+                        _odsObjeto.SelectParameters.Add("cal_ano", "0");
                         Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/BuscaDisciplina.aspx", false);
                         HttpContext.Current.ApplicationInstance.CompleteRequest();
                     }
                 }
+
+                UCComboAnoLetivo1.IndexChanged += UCComboAnoLetivo1_IndexChanged;
             }
             catch (Exception ex)
             {
@@ -104,6 +116,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 _grvObjetoAprendizagem.PageIndex = 0;
                 _odsObjeto.SelectParameters.Clear();
                 _odsObjeto.SelectParameters.Add("tds_id", tds_id.ToString());
+                _odsObjeto.SelectParameters.Add("cal_ano", UCComboAnoLetivo1.ano.ToString());
                 _grvObjetoAprendizagem.DataBind();
             }
             catch (Exception ex)
@@ -113,7 +126,12 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
-        protected void _grvObjetoAprendizagem_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        protected void UCComboAnoLetivo1_IndexChanged()
+        {
+            LoadPage(_VS_tds_id);
+        }
+
+        protected void _grvObjetoAprendizagem_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Deletar")
             {

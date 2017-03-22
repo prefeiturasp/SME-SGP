@@ -45,6 +45,22 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
+        private int _VS_cal_ano
+        {
+            get
+            {
+                if (ViewState["_VS_cal_ano"] != null)
+                {
+                    return Convert.ToInt32(ViewState["_VS_cal_ano"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["_VS_cal_ano"] = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -53,6 +69,8 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 {
                     _VS_oap_id = PreviousPage.oap_id;
                     _VS_tds_id = PreviousPage.tds_id;
+                    _VS_cal_ano = PreviousPage.cal_ano;
+                    txtAno.Text = _VS_cal_ano.ToString();
                     LoadPage();
 
                     if(_VS_oap_id > 0)
@@ -80,6 +98,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     IsNew = _VS_oap_id <= 0,
                     oap_descricao = _txtDescricao.Text,
                     tds_id = _VS_tds_id,
+                    cal_ano = _VS_cal_ano,
                     oap_situacao = (_ckbBloqueado.Checked ? (byte)ObjetoAprendizagemSituacao.Bloqueado 
                                                           : (byte)ObjetoAprendizagemSituacao.Ativo),
                     oap_id = _VS_oap_id

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using MSTech.CoreSSO.BLL;
 using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.GestaoEscolar.BLL;
+using System.Data;
 
 public partial class WebControls_Combos_UCComboAnoLetivo : MotherUserControl
 {
@@ -151,6 +152,35 @@ public partial class WebControls_Combos_UCComboAnoLetivo : MotherUserControl
             ddlCombo.DataSource = ACA_CalendarioAnualBO.SelecionarAnosLetivos();
             _MostrarMessageSelecione = true;
             ddlCombo.DataBind();
+        }
+        catch
+        {
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Mostra os anos de momentos cadastrados dentro da entidade.
+    /// </summary>
+    /// <param name="ent_id">Entidade - obrigatório</param>
+    /// <param name="mom_ano">Ano - opcional</param>
+    /// <returns></returns>
+    public void CarregarAnoAtual()
+    {
+        try
+        {
+            DataTable dt = ACA_CalendarioAnualBO.SelecionarAnosLetivos();
+            ddlCombo.DataSource = (from DataRow ano in dt.Rows
+                                   orderby Convert.ToInt32(ano["cal_ano"]) descending
+                                   select new { cal_ano = ano["cal_ano"].ToString() }).ToList();
+            ddlCombo.DataBind();
+            if (ddlCombo.Items.Count > 0)
+            {
+                if (ddlCombo.Items.Contains(new ListItem(DateTime.Now.Year.ToString(), DateTime.Now.Year.ToString())))
+                    ddlCombo.SelectedValue = DateTime.Now.Year.ToString();
+                else
+                    ddlCombo.SelectedIndex = 0;
+            }
         }
         catch
         {

@@ -11,6 +11,8 @@
 <%@ Register Src="../../WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros"
     TagPrefix="uc1" %>
 
+<%@ Register src="../../WebControls/Combos/UCComboAnoLetivo.ascx" tagname="UCComboAnoLetivo" tagprefix="uc2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -26,6 +28,7 @@
                 <div id="_divPesquisa" runat="server">
                     <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
                     <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
+                    <uc2:UCComboAnoLetivo ID="UCComboAnoLetivo1" runat="server" Obrigatorio="true" />
                 </div>
                 <div class="right">
                     <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo objeto de aprendizagem" PostBackUrl="~/Academico/ObjetoAprendizagem/Cadastro.aspx" />
