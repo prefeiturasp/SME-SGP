@@ -126,7 +126,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     ACA_ObjetoAprendizagemBO.GetEntity(entity);
 
 
-                    if (ACA_ObjetoAprendizagemBO.Delete(entity))
+                    if (ACA_ObjetoAprendizagemBO.Excluir(entity))
                     {
                         _grvObjetoAprendizagem.PageIndex = 0;
                         _grvObjetoAprendizagem.DataBind();

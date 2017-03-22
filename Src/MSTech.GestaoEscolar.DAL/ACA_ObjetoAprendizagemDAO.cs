@@ -76,6 +76,32 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Verifica se o objeto de aprendizagem está em uso
+        /// </summary>
+        /// <param name="oap_id">ID do objeto de aprendizagem</param>
+        /// <returns>true = em uso</returns>
+        public bool ObjetoEmUso(int oap_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagem_SELECTEmUsoBy_oap_id", _Banco);
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@oap_id";
+                Param.Value = oap_id;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #region Métodos Sobrescritos
 
         /// <summary>

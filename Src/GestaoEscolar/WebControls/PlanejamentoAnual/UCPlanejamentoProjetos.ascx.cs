@@ -645,6 +645,9 @@
             {
                 lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
                 
+                if (!lstObjetosAprendizagem.Any())
+                    lblMensagemObjetos.Text = UtilBO.GetErroMessage("Não existem objetos de aprendizagem cadastrados.", UtilBO.TipoMensagem.Erro);
+
                 rptobjAprendizagem.DataSource = lstObjetosAprendizagem.Select(p => new
                 {
                     oap_id = p.oap_id,
