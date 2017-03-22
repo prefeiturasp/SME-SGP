@@ -59,9 +59,13 @@ namespace MSTech.GestaoEscolar.BLL
         Efetivacao = 8
         ,
         [Description("Boletim")]
-        Boletim = 9,
+        Boletim = 9
+        ,
         [Description("Indicadores")]
         Indicadores = 10
+        ,
+        [Description("Objetos de aprendizagem")]
+        ObjetosAprendizagem = 11
     }
 
     #endregion

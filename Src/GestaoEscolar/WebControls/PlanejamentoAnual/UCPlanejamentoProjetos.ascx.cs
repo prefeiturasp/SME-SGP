@@ -128,6 +128,22 @@
             }
         }
 
+        /// <summary>
+        /// ViewState que armazena a permissão de edição de objetos de aprendizagem.
+        /// </summary>
+        private bool VS_permiteEditarObjAprendizagem
+        {
+            get
+            {
+                return Convert.ToBoolean(ViewState["VS_permiteEditarObjAprendizagem"] ?? false);
+            }
+
+            set
+            {
+                ViewState["VS_permiteEditarObjAprendizagem"] = value;
+            }
+        }
+
         #region Plano Ciclo
 
         /// <summary>
@@ -576,7 +592,8 @@
         /// Carrega dados do planejament da turma.
         /// </summary>
         public void CarregarTurma(long tur_id, int cal_id, int esc_id, int uni_id, int cur_id, int crr_id, int crp_id,
-                                  long tud_id, int tds_id, byte tud_tipo, byte tdt_posicao, string tciIds, string tur_ids = null, int tne_id = -1)
+                                  long tud_id, int tds_id, byte tud_tipo, byte tdt_posicao, string tciIds, string tur_ids = null, 
+                                  int tne_id = -1, bool permiteEditarObjAprendizagem = false)
         {
             VS_TurmasNormais_Ids = tur_ids;
             VS_tur_id = tur_id;
@@ -590,6 +607,7 @@
             VS_tud_id = tud_id;
             VS_tud_tipo = tud_tipo;
             VS_tds_id = tds_id;
+            VS_permiteEditarObjAprendizagem = permiteEditarObjAprendizagem;
             if (!String.IsNullOrEmpty(tciIds))
             {
                 string[] vetTipoCiclo = tciIds.Split(',');
@@ -621,8 +639,11 @@
             {
                 CarregarPlanoAlunos();
             }
+
             //CarregarProjeto();
+
             CarregarDocumentos();
+
             CarregarObjetosAprendizagem();
         }
 
@@ -1657,7 +1678,7 @@
                 CheckBox ckb = (CheckBox)e.Item.FindControl("ckbCampo");
                 if (ckb != null)
                 {
-                    ckb.Enabled = PermiteEdicao;
+                    ckb.Enabled = VS_permiteEditarObjAprendizagem;
                 }
             }
         }

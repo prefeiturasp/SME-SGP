@@ -259,6 +259,23 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Lista de permissões do docente para cadastro de efetivacap.
+        /// </summary>
+        private List<sPermissaoDocente> VS_ltPermissaoObjAprendizagem
+        {
+            get
+            {
+                return (List<sPermissaoDocente>)
+                        (
+                            ViewState["VS_ltPermissaoObjAprendizagem"] ??
+                            (
+                                ViewState["VS_ltPermissaoObjAprendizagem"] = CFG_PermissaoDocenteBO.SelecionaPermissaoModulo(UCControleTurma1.VS_tdt_posicao, (byte)EnumModuloPermissao.ObjetosAprendizagem)
+                            )
+                        );
+            }
+        }
+
+        /// <summary>
         /// Retorna se o usuário logado é docente.
         /// </summary>
         private bool VS_visaoDocente
@@ -559,6 +576,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             bool visibleBotoes = false;
+            bool permiteEditarPlanejamento = false;
 
             if (UCPlanejamentoAnual.Visible)
             {
@@ -576,6 +594,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         || UCControleTurma1.VS_tur_situacao == (byte)TUR_TurmaSituacao.Extinta)
                     {
                         visibleBotoes = true;
+                        permiteEditarPlanejamento = true;
                     }
                 }
             }
@@ -587,7 +606,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                     || UCControleTurma1.VS_tur_situacao == (byte)TUR_TurmaSituacao.Extinta)
                 {
                     visibleBotoes = true;
+                    permiteEditarPlanejamento = true;
                 }
+            }
+
+            if (UCPlanejamentoProjetos.abaObjAprendVisivel && UCPlanejamentoProjetos.rptObjetosVisible &&
+                VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao))
+            {
+                visibleBotoes = true;
             }
 
             // [Carla 21/02] Regra: Docente e usuários da escola (CP e Diretor) podem editar tudo.
@@ -596,11 +622,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                 __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao)
             {
                 visibleBotoes = false;
+                permiteEditarPlanejamento = false;
             }
 
             btnSalvarPlanejamentoAnual.Visible = btnSalvarPlanejamentoAnualCima.Visible = visibleBotoes;
             btnCancelarPlanejamentoAnual.Text = btnCancelarPlanejamentoAnualCima.Text = visibleBotoes ? btnCancelarPlanejamentoAnual.Text : "Voltar";
-            UCPlanejamentoProjetos.PermiteEdicao = visibleBotoes;
+            UCPlanejamentoProjetos.PermiteEdicao = visibleBotoes && permiteEditarPlanejamento;
 
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "MensagemSairPlanejamentoAnual", "var exibeMensagemSair=" + btnSalvarPlanejamentoAnual.Visible.ToString().ToLower() + ";", true);
 
@@ -618,7 +645,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                      VS_EntitiesControleTurma.turma.uni_id, VS_EntitiesControleTurma.curso.cur_id,
                                                      VS_EntitiesControleTurma.curriculo.crr_id, VS_EntitiesControleTurma.curriculoPeriodo.crp_id,
                                                      Tud_idPlanAnual, VS_EntitiesControleTurma.disciplina.tds_id, VS_EntitiesControleTurma.turmaDisciplina.tud_tipo,
-                                                     tdt_posicao, UCControleTurma1.VS_tciIds, tur_ids, VS_EntitiesControleTurma.curso.tne_id);
+                                                     tdt_posicao, UCControleTurma1.VS_tciIds, tur_ids, VS_EntitiesControleTurma.curso.tne_id, 
+                                                     VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao));
             }
             else
             {
