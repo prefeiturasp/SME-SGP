@@ -389,7 +389,6 @@
                         </table></div>
                     </FooterTemplate>
                 </asp:Repeater>
-                <div id="divSemRegistro" class="summary" runat="server">Nenhum objeto de aprendizagem vinculado para esse componente curricular.</div>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>

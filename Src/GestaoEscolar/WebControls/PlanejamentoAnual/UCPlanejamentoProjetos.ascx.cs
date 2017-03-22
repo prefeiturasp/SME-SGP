@@ -711,8 +711,6 @@
                 else
                     lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
 
-                ExibirMensagemSemRegistroObjetoAprendizagem(lstObjetosAprendizagem);
-
                 rptobjAprendizagem.DataSource = lstObjetosAprendizagem.Select(p => new
                 {
                     oap_id = p.oap_id,
@@ -1729,22 +1727,12 @@
         {
             lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(Convert.ToInt32(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]), VS_cal_id);
 
-            ExibirMensagemSemRegistroObjetoAprendizagem(lstObjetosAprendizagem);
-
             rptobjAprendizagem.DataSource = lstObjetosAprendizagem.Select(p => new
             {
                 oap_id = p.oap_id,
                 oap_descricao = p.oap_descricao
             }).OrderBy(r => r.oap_descricao).Distinct();
             rptobjAprendizagem.DataBind();
-        }
-
-        private void ExibirMensagemSemRegistroObjetoAprendizagem(List<Struct_ObjetosAprendizagem> list)
-        {
-            if (list.Count == 0)
-                divSemRegistro.Visible = true;
-            else
-                divSemRegistro.Visible = false;
         }
     }
 }
