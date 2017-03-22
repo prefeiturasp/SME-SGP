@@ -734,7 +734,7 @@
             TUR_TurmaDisciplina entityTud = new TUR_TurmaDisciplina { tud_id = VS_tud_id };
             TUR_TurmaDisciplinaBO.GetEntity(entityTud);
 
-            abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible =
+            abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = VS_permiteEditarObjAprendizagem &&
                 ((Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem))
                 || entityTud.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia);
 
