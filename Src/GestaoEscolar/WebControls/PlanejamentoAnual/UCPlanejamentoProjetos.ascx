@@ -92,7 +92,7 @@
     }
 
     function abrirTextoPequenoComMensagem(idTitulo, idTexto, mensagem, idBotaoExpandir, idBotaoDiminuir, txtVisivel) {
-        
+
         setaTxtPequeno(idTitulo, idTexto, idBotaoExpandir, idBotaoDiminuir, txtVisivel);
 
         infoTextarea();
@@ -138,7 +138,7 @@
     </fieldset>
 </div>--%>
 <div runat="server" id="divPlanoAluno" class="hide divPlanoAluno">
-    
+
     <asp:TextBox ID="txtPlanoAlunoPopUp" runat="server" ReadOnly="True"></asp:TextBox>
     <div class="right">
         <asp:Button ID="btnFecharPlanoAluno" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.btnFecharPlanoAluno.Text %>" OnClick="btnFecharPlanoAluno_Click" />
@@ -198,7 +198,7 @@
                     <br />
                     <br />
                     <asp:Label runat="server" ID="lblMsgTodosProfessores" Text="<%$ Resources:WebControls, PlanejamentoAnual.UCPlanejamentoProjetos.lblMsgTodosProfessores.Text %>"
-                        Style="<%$ Resources:WebControls, PlanejamentoAnual.UCPlanejamentoProjetos.lblMsgTodosProfessores.Style %>"></asp:Label>
+                        Style="<%$ Resources: WebControls, PlanejamentoAnual.UCPlanejamentoProjetos.lblMsgTodosProfessores.Style %>"></asp:Label>
                     <CKEditor:CKEditorControl ID="txtPlanoCiclo" BasePath="/includes/ckeditor/" runat="server" Enabled="false"></CKEditor:CKEditorControl>
                     <asp:RequiredFieldValidator ID="rfvPlanoCiclo" runat="server" ControlToValidate="txtPlanoCiclo" Display="Dynamic" ErrorMessage="Plano do ciclo é obrigatório." ValidationGroup="vgPlanoCiclo">*</asp:RequiredFieldValidator>
                     <br />
@@ -242,7 +242,7 @@
                                 <asp:ImageButton ID="btnVoltaEstadoAnteriorTextoPlanejamentoBimestre" runat="server" SkinID="btnComprimirCampo" Style="display: none" />
                                 <div class="textareaComInfo">
                                     <asp:Label ID="lblPlanejamentoBimestreInfo" CssClass="textareaInfo" runat="server"></asp:Label>
-                                    <asp:TextBox ID="txtPlanejamentoBimestre" runat="server" TextMode="MultiLine" SkinID="text60C" 
+                                    <asp:TextBox ID="txtPlanejamentoBimestre" runat="server" TextMode="MultiLine" SkinID="text60C"
                                         Text='<%# Eval("tdp_planejamento") %>'
                                         Enabled='<%#PermiteEdicao %>'></asp:TextBox><br />
                                     <asp:HiddenField ID="hdnBimestreVisivel" runat="server" Value="true" />
@@ -264,16 +264,17 @@
                     <asp:Label ID="lblMensagemAviso" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.lblMensagemAviso.Text %>"
                         Font-Bold="true" ForeColor="#A52A2A"></asp:Label>
                     <br />
-                    <br /> 
+                    <br />
                     <asp:Label ID="lblSelecioneAluno" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.lblSelecioneAluno.Text %>"></asp:Label>
                     <uc1:UCComboGenerico ID="UCCAlunos" runat="server"
                         MostrarMensagemSelecione="true" Obrigatorio="false"
                         ValorItemVazio="-1"></uc1:UCComboGenerico>
                     <div runat="server" id="divAluno" visible="false">
-                        <asp:CheckBoxList ID="chlTurmaDiscRelacionada" runat="server" DataTextField="dis_nome" 
-                            DataValueField="tud_idRelacionado" 
+                        <asp:CheckBoxList ID="chlTurmaDiscRelacionada" runat="server" DataTextField="dis_nome"
+                            DataValueField="tud_idRelacionado"
                             Enabled='<%#PermiteEdicao %>'
-                            RepeatDirection="Horizontal"></asp:CheckBoxList>
+                            RepeatDirection="Horizontal">
+                        </asp:CheckBoxList>
                         <asp:Label ID="lblDescTurmaAluno" runat="server"></asp:Label>
                         <CKEditor:CKEditorControl ID="txtPlanoAluno" BasePath="/includes/ckeditor/" runat="server"></CKEditor:CKEditorControl>
                         <fieldset runat="server" id="fdsTurmasAluno" visible="false">
@@ -282,7 +283,7 @@
                                 MostrarMensagemSelecione="true" Obrigatorio="false"
                                 ValorItemVazio="-1"></uc1:UCComboGenerico>
                             <div id="divTurmaDisciplinaAluno" runat="server" visible="false">
-                                <asp:GridView runat="server" ID="grvTurmaDisciplinaAluno" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false" 
+                                <asp:GridView runat="server" ID="grvTurmaDisciplinaAluno" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
                                     DataKeyNames="tud_id,lancado,turma,planejamento" OnRowDataBound="grvTurmaDisciplinaAluno_RowDataBound" OnRowCommand="grvTurmaDisciplinaAluno_RowCommand">
                                     <Columns>
                                         <asp:BoundField HeaderText="<%$ Resources:UserControl, UCPlanejamentoProjetos.grvTurmaDisciplinaAluno.HeaderText.TurmaDisciplina %>"
@@ -314,15 +315,18 @@
                     <asp:Repeater ID="rptAreas" runat="server" OnItemDataBound="rptAreas_ItemDataBound">
                         <ItemTemplate>
                             <fieldset>
-                                <legend><asp:Label ID="lblArea" runat="server" Text='<%# Eval("tad_nome") %>'></asp:Label></legend>
+                                <legend>
+                                    <asp:Label ID="lblArea" runat="server" Text='<%# Eval("tad_nome") %>'></asp:Label></legend>
                                 <asp:Label ID="lblSemDocumentos" runat="server" Visible="false"></asp:Label>
                                 <table>
                                     <asp:Repeater ID="rptDocumentos" runat="server" OnItemDataBound="rptDocumentos_ItemDataBound" Visible="false">
                                         <ItemTemplate>
-                                            <tr><td>
-                                                <asp:Label ID="lblEspaco" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "></asp:Label> 
-                                                <asp:HyperLink ID="hplDocumento" runat="server" Text='<%# Eval("aar_descricao") %>'></asp:HyperLink>
-                                            </td></tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Label ID="lblEspaco" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "></asp:Label>
+                                                    <asp:HyperLink ID="hplDocumento" runat="server" Text='<%# Eval("aar_descricao") %>'></asp:HyperLink>
+                                                </td>
+                                            </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </table>
@@ -336,6 +340,10 @@
     <div id="divTabsObjetoAprendizagem" runat="server">
         <asp:UpdatePanel ID="updObjetosAprendizagem" runat="server">
             <ContentTemplate>
+                <asp:Label ID="lblComponenteAtAvaliativa" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="ddlComponenteAtAvaliativa"></asp:Label>
+                <asp:DropDownList ID="ddlComponenteAtAvaliativa" runat="server" AppendDataBoundItems="True" AutoPostBack="true" OnSelectedIndexChanged="ddlComponenteAtAvaliativa_SelectedIndexChanged"
+                    DataTextField="tur_tud_nome" DataValueField="tur_tud_id" SkinID="text20C">
+                </asp:DropDownList>
                 <asp:Label ID="lblMensagemObjetos" runat="server" EnableViewState="false"></asp:Label>
                 <asp:Repeater ID="rptobjAprendizagem" runat="server" OnItemDataBound="rptobjAprendizagem_ItemDataBound">
                     <HeaderTemplate>
@@ -361,6 +369,7 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <tr class="gridRow grid-linha">
+                            
                             <td>
                                 <asp:Label ID="lblobjetos" runat="server" Text='<%# Eval("oap_descricao") %>'></asp:Label>
                             </td>
@@ -369,18 +378,18 @@
                                     <td class="center">
                                         <asp:HiddenField ID="tpc_id" runat="server" Value='<%# Eval("tpc_id") %>' />
                                         <asp:HiddenField ID="oap_id" runat="server" Value='<%# Eval("oap_id") %>' />
-                                        <asp:CheckBox ID="ckbCampo" runat="server" Checked='<%# Eval("selecionado") %>' style="text-align: center;"/>
+                                        <asp:CheckBox ID="ckbCampo" runat="server" Checked='<%# Eval("selecionado") %>' Style="text-align: center;" />
                                     </td>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </tr>
+                        
                     </ItemTemplate>
                     <FooterTemplate>
                         </tbody>
                         </table></div>
                     </FooterTemplate>
                 </asp:Repeater>
-
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
@@ -399,7 +408,7 @@
                         <asp:BoundField HeaderText="Data de modificação" DataField="dataModificacao" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
                     </Columns>
                 </asp:GridView>
-                </ContentTemplate>
+            </ContentTemplate>
         </asp:UpdatePanel>
     </fieldset>
 </div>
