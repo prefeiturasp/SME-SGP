@@ -64,7 +64,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
                 if (!IsPostBack)
                 {
-                    _grvObjetoAprendizagem.EmptyDataText = string.Format("Não existe objeto de aprendizagem associado a este {0}.", GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA_PLURAL_MIN"));
+                    _grvObjetoAprendizagem.EmptyDataText = string.Format("Não existe objeto de aprendizagem associado a este {0}.", GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA_MIN"));
 
                     if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
                     {
