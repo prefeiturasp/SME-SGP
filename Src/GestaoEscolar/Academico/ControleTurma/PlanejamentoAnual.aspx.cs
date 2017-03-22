@@ -610,8 +610,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 }
             }
 
-            if (UCPlanejamentoProjetos.abaObjAprendVisivel && UCPlanejamentoProjetos.rptObjetosVisible &&
-                VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao))
+            if (VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao))
             {
                 visibleBotoes = true;
             }
@@ -658,6 +657,16 @@ namespace GestaoEscolar.Academico.ControleTurma
                     chkTurmas.DataSource = TUR_TurmaDocenteBO.SelecionaPorTurmaDisciplinaPosicao(UCControleTurma1.VS_tur_id, UCPlanejamentoAnual.VS_cal_id, UCPlanejamentoAnual.VS_cur_id, UCPlanejamentoAnual.VS_crr_id, UCPlanejamentoAnual.VS_crp_id, Tud_idPlanAnual, tdt_posicao);
                     chkTurmas.DataBind();
                 }
+            }
+
+            if (visibleBotoes && !permiteEditarPlanejamento &&
+                !(UCPlanejamentoProjetos.abaObjAprendVisivel && UCPlanejamentoProjetos.rptObjetosVisible &&
+                  VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao)))
+            {
+                visibleBotoes = false;
+                btnSalvarPlanejamentoAnual.Visible = btnSalvarPlanejamentoAnualCima.Visible = visibleBotoes;
+                btnCancelarPlanejamentoAnual.Text = btnCancelarPlanejamentoAnualCima.Text = visibleBotoes ? btnCancelarPlanejamentoAnual.Text : "Voltar";
+                UCPlanejamentoProjetos.PermiteEdicao = visibleBotoes && permiteEditarPlanejamento;
             }
 
             UCCPosicaoDocente1.VS_ltPermissao = VS_ltPermissaoPlanejamentoAnual;
@@ -933,7 +942,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     try
                     {
-                        if (UCPlanejamentoProjetos.rptObjetosVisible)
+                        if (UCPlanejamentoProjetos.rptObjetosVisible && VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao))
                         {
                             UCPlanejamentoProjetos.SalvarObjetoAprendizagemTurmaDisciplina();
                             VS_mensagem += UtilBO.GetErroMessage("Objetos de aprendizagem salvos com sucesso.", UtilBO.TipoMensagem.Sucesso);
