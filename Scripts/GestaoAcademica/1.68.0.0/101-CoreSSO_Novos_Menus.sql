@@ -34,7 +34,7 @@ SET XACT_ABORT ON
 		,@nomeModuloAvo = 'Administração' -- Nome do módulo avó (Opcional, apenas quando houver) 
 		,@nomeModuloPai = 'Cadastros' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Objetos de aprendizagem' -- Nome do módulo (Obrigatório)
-		,@SiteMap1Nome = 'Consulta de disciplinas'
+		,@SiteMap1Nome = 'Consulta de componentes curriculares'
 		,@SiteMap1Url = '~/Academico/ObjetoAprendizagem/BuscaDisciplina.aspx'
 		,@SiteMap2Nome = 'Consulta de objetos de aprendizagem'
 		,@SiteMap2Url = '~/Academico/ObjetoAprendizagem/Busca.aspx'

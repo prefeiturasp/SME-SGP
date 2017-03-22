@@ -145,6 +145,7 @@
             }
         }
 
+
         #region Plano Ciclo
 
         /// <summary>
@@ -368,6 +369,14 @@
             set
             {
                 ViewState["abaObjAprendVisivel"] = value;
+            }
+        }
+
+        public bool rptObjetosVisible
+        {
+            get
+            {
+                return rptobjAprendizagem.Visible;
             }
         }
 
@@ -685,9 +694,14 @@
             }
             //CarregarProjeto();
             CarregarDocumentos();
+            CarregarObjetosAprendizagem();
+        }
 
-            #region Objeto Aprendizagem
-
+        /// <summary>
+        /// Carrega os objetos de aprendizagem
+        /// </summary>
+        public void CarregarObjetosAprendizagem()
+        {
             ACA_CurriculoPeriodo crp = new ACA_CurriculoPeriodo { cur_id = VS_cur_id, crr_id = VS_crr_id, crp_id = VS_crp_id };
             ACA_CurriculoPeriodoBO.GetEntity(crp);
 
@@ -711,18 +725,33 @@
                 else
                     lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
 
-                rptobjAprendizagem.DataSource = lstObjetosAprendizagem.Select(p => new
+                CarregaRepeaterObjetoAprendizagem(lstObjetosAprendizagem);
+            }
+
+        }
+
+        private void CarregaRepeaterObjetoAprendizagem(List<Struct_ObjetosAprendizagem> list)
+        {
+            if (!list.Any())
+            {
+                rptobjAprendizagem.Visible = false;
+                lblMensagemObjetos.Text = UtilBO.GetErroMessage("Não existem objetos de aprendizagem cadastrados.", UtilBO.TipoMensagem.Alerta);
+            }
+            else
+            {
+                rptobjAprendizagem.Visible = true;
+                rptobjAprendizagem.DataSource = list.Select(p => new
                 {
                     oap_id = p.oap_id,
                     oap_descricao = p.oap_descricao
                 }).OrderBy(r => r.oap_descricao).Distinct();
                 rptobjAprendizagem.DataBind();
             }
-
-            #endregion Objeto Aprendizagem
-
-
         }
+
+        #endregion Objeto Aprendizagem
+
+
 
         /// <summary>
         /// Seta os eventos javascript da tela.
@@ -807,6 +836,7 @@
         }
 
         #endregion Métodos iniciais
+
 
         #region Plano de ciclo
 
@@ -1443,7 +1473,7 @@
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMensagemAluno.Text = UtilBO.GetErroMessage("Erro ao tentar gravar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                lblMensagemAluno.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
             }
         }
 
@@ -1451,31 +1481,34 @@
         {
             List<CLS_ObjetoAprendizagemTurmaDisciplina> lstObjTudDis = new List<CLS_ObjetoAprendizagemTurmaDisciplina>();
 
-            foreach (RepeaterItem item in rptobjAprendizagem.Items)
+            if (rptobjAprendizagem.Visible)
             {
-                if ((item.ItemType == ListItemType.Item) ||
-                (item.ItemType == ListItemType.AlternatingItem))
+                foreach (RepeaterItem item in rptobjAprendizagem.Items)
                 {
-                    Repeater rptchkBimestre = (Repeater)item.FindControl("rptchkBimestre");
-
-                    if (rptchkBimestre != null)
+                    if ((item.ItemType == ListItemType.Item) ||
+                    (item.ItemType == ListItemType.AlternatingItem))
                     {
-                        foreach (RepeaterItem chk in rptchkBimestre.Items)
-                        {
-                            CheckBox ckbCampo = (CheckBox)chk.FindControl("ckbCampo");
+                        Repeater rptchkBimestre = (Repeater)item.FindControl("rptchkBimestre");
 
-                            if (ckbCampo != null && ckbCampo.Checked)
+                        if (rptchkBimestre != null)
+                        {
+                            foreach (RepeaterItem chk in rptchkBimestre.Items)
                             {
-                                HiddenField tpc_id = (HiddenField)chk.FindControl("tpc_id");
-                                HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
-                                if (tpc_id != null && oap_id != null)
+                                CheckBox ckbCampo = (CheckBox)chk.FindControl("ckbCampo");
+
+                                if (ckbCampo != null && ckbCampo.Checked)
                                 {
-                                    lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                    HiddenField tpc_id = (HiddenField)chk.FindControl("tpc_id");
+                                    HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
+                                    if (tpc_id != null && oap_id != null)
                                     {
-                                        tud_id = VS_tud_id,
-                                        tpc_id = Convert.ToInt32(tpc_id.Value),
-                                        oap_id = Convert.ToInt32(oap_id.Value)
-                                    });
+                                        lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                        {
+                                            tud_id = VS_tud_id,
+                                            tpc_id = Convert.ToInt32(tpc_id.Value),
+                                            oap_id = Convert.ToInt32(oap_id.Value)
+                                        });
+                                    }
                                 }
                             }
                         }
@@ -1486,8 +1519,6 @@
         }
 
         #endregion Objeto de Aprendizagem
-
-        #endregion Métodos
 
         #region Eventos
 
@@ -1727,12 +1758,7 @@
         {
             lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(Convert.ToInt32(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]), VS_cal_id);
 
-            rptobjAprendizagem.DataSource = lstObjetosAprendizagem.Select(p => new
-            {
-                oap_id = p.oap_id,
-                oap_descricao = p.oap_descricao
-            }).OrderBy(r => r.oap_descricao).Distinct();
-            rptobjAprendizagem.DataBind();
+            CarregaRepeaterObjetoAprendizagem(lstObjetosAprendizagem);
         }
     }
 }

@@ -23,14 +23,14 @@ SET XACT_ABORT ON
         , @rcr_NomeResource = 'UserControl'
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
-        , @rcr_valorPadrao = 'Objetos de Aprendizagem'
+        , @rcr_valorPadrao = 'Objetos de aprendizagem'
 
 	EXEC MS_InsereResource 
         @rcr_chave = 'ControleTurma.DiarioClasse.lblLgdObjAprendizagem.Text' 
         , @rcr_NomeResource = 'Academico'
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
-        , @rcr_valorPadrao = 'Objetos de Aprendizagem'
+        , @rcr_valorPadrao = 'Objetos de aprendizagem'
 
 	EXEC MS_InsereResource 
         @rcr_chave = 'PlanejamentoDiario.Cadastro.MensagemAulasPrevistas' 
@@ -149,14 +149,14 @@ SET XACT_ABORT ON
         , @rcr_NomeResource = 'Academico'
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
-        , @rcr_valorPadrao = 'Nome do documento: *'
+        , @rcr_valorPadrao = 'Nome do documento *'
 
 	EXEC MS_InsereResource 
         @rcr_chave = 'Areas.Cadastro.lblPopUpArea.Text' 
         , @rcr_NomeResource = 'Academico'
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
-        , @rcr_valorPadrao = 'Nome da documento: *'
+        , @rcr_valorPadrao = 'Nome do documento *'
 
 	EXEC MS_InsereResource 
         @rcr_chave = 'Areas.Cadastro.pnlCadastro.GroupingText' 

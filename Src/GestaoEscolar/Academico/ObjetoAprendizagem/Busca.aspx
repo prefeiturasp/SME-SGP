@@ -14,9 +14,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:UpdatePanel ID="_updDadosBasicos" runat="server" UpdateMode="Conditional">
+    <asp:UpdatePanel ID="updMessage" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <asp:Label ID="_lblMessage" runat="server" EnableViewState="False"></asp:Label>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <asp:UpdatePanel ID="_updDadosBasicos" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
             <fieldset id="fds" runat="server">
                 <legend>Consulta de objetos de aprendizagem</legend>
                 <div id="_divPesquisa" runat="server">
@@ -25,7 +29,7 @@
                 </div>
                 <div class="right">
                     <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo objeto de aprendizagem" PostBackUrl="~/Academico/ObjetoAprendizagem/Cadastro.aspx" />
-                    <asp:Button ID="_btnCancelar" runat="server" Text="Cancelar" OnClick="_btnCancelar_Click" />
+                    <asp:Button ID="_btnCancelar" runat="server" Text="Voltar" OnClick="_btnCancelar_Click" />
                 </div>
             </fieldset>
         </ContentTemplate>

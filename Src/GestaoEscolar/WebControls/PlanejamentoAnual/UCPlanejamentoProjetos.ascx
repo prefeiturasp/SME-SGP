@@ -344,6 +344,7 @@
                 <asp:DropDownList ID="ddlComponenteAtAvaliativa" runat="server" AppendDataBoundItems="True" AutoPostBack="true" OnSelectedIndexChanged="ddlComponenteAtAvaliativa_SelectedIndexChanged"
                     DataTextField="tur_tud_nome" DataValueField="tur_tud_id" SkinID="text20C">
                 </asp:DropDownList>
+                <asp:Label ID="lblMensagemObjetos" runat="server" EnableViewState="false"></asp:Label>
                 <asp:Repeater ID="rptobjAprendizagem" runat="server" OnItemDataBound="rptobjAprendizagem_ItemDataBound">
                     <HeaderTemplate>
                         <div>
@@ -351,7 +352,7 @@
                                 <thead>
                                     <tr class="gridHeader" style="height: 30px;">
                                         <th class="center">
-                                            <asp:Label ID="_lblobjetos" runat="server" Text='Objetos de Aprendizagem'></asp:Label>
+                                            <asp:Label ID="_lblobjetos" runat="server" Text='Objetos de aprendizagem'></asp:Label>
                                         </th>
                                         <asp:Repeater ID="rptBimestre" runat="server">
                                             <ItemTemplate>

@@ -13,13 +13,13 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
     public partial class Busca {
         
         /// <summary>
-        /// _updDadosBasicos control.
+        /// updMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel _updDadosBasicos;
+        protected global::System.Web.UI.UpdatePanel updMessage;
         
         /// <summary>
         /// _lblMessage control.
@@ -29,6 +29,15 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label _lblMessage;
+        
+        /// <summary>
+        /// _updDadosBasicos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel _updDadosBasicos;
         
         /// <summary>
         /// fds control.
