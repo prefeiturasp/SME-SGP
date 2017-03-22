@@ -338,19 +338,15 @@
         {
             get
             {
-                if (ViewState["abaObjAprendVisivel"] != null)
-                {
-                    return Convert.ToBoolean(ViewState["abaObjAprendVisivel"]);
-                }
-                else
-                {
-                    return false;
-                }
+                return abaobjAprendizagem.Visible;
             }
+        }
 
-            set
+        public bool rptObjetosVisible
+        {
+            get
             {
-                ViewState["abaObjAprendVisivel"] = value;
+                return rptobjAprendizagem.Visible;
             }
         }
 
@@ -627,9 +623,14 @@
             }
             //CarregarProjeto();
             CarregarDocumentos();
+            CarregarObjetosAprendizagem();
+        }
 
-            #region Objeto Aprendizagem
-
+        /// <summary>
+        /// Carrega os objetos de aprendizagem
+        /// </summary>
+        public void CarregarObjetosAprendizagem()
+        {
             ACA_CurriculoPeriodo crp = new ACA_CurriculoPeriodo { cur_id = VS_cur_id, crr_id = VS_crr_id, crp_id = VS_crp_id };
             ACA_CurriculoPeriodoBO.GetEntity(crp);
 
@@ -639,26 +640,28 @@
             ACA_TipoCurriculoPeriodo tcp = new ACA_TipoCurriculoPeriodo { tcp_id = crp.tcp_id };
             ACA_TipoCurriculoPeriodoBO.GetEntity(tcp);
 
-            abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = (Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem));
+            abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = (Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem));
 
             if (abaobjAprendizagem.Visible)
             {
                 lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
-                
+
                 if (!lstObjetosAprendizagem.Any())
-                    lblMensagemObjetos.Text = UtilBO.GetErroMessage("Não existem objetos de aprendizagem cadastrados.", UtilBO.TipoMensagem.Erro);
-
-                rptobjAprendizagem.DataSource = lstObjetosAprendizagem.Select(p => new
                 {
-                    oap_id = p.oap_id,
-                    oap_descricao = p.oap_descricao
-                }).OrderBy(r => r.oap_descricao).Distinct();
-                rptobjAprendizagem.DataBind();
+                    rptobjAprendizagem.Visible = false;
+                    lblMensagemObjetos.Text = UtilBO.GetErroMessage("Não existem objetos de aprendizagem cadastrados.", UtilBO.TipoMensagem.Alerta);
+                }
+                else
+                {
+                    rptobjAprendizagem.Visible = true;
+                    rptobjAprendizagem.DataSource = lstObjetosAprendizagem.Select(p => new
+                    {
+                        oap_id = p.oap_id,
+                        oap_descricao = p.oap_descricao
+                    }).OrderBy(r => r.oap_descricao).Distinct();
+                    rptobjAprendizagem.DataBind();
+                }
             }
-
-            #endregion Objeto Aprendizagem
-
-
         }
 
         /// <summary>
@@ -1380,7 +1383,7 @@
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMensagemAluno.Text = UtilBO.GetErroMessage("Erro ao tentar gravar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                lblMensagemAluno.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
             }
         }
 
@@ -1388,31 +1391,34 @@
         {
             List<CLS_ObjetoAprendizagemTurmaDisciplina> lstObjTudDis = new List<CLS_ObjetoAprendizagemTurmaDisciplina>();
 
-            foreach (RepeaterItem item in rptobjAprendizagem.Items)
+            if (rptobjAprendizagem.Visible)
             {
-                if ((item.ItemType == ListItemType.Item) ||
-                (item.ItemType == ListItemType.AlternatingItem))
+                foreach (RepeaterItem item in rptobjAprendizagem.Items)
                 {
-                    Repeater rptchkBimestre = (Repeater)item.FindControl("rptchkBimestre");
-
-                    if (rptchkBimestre != null)
+                    if ((item.ItemType == ListItemType.Item) ||
+                    (item.ItemType == ListItemType.AlternatingItem))
                     {
-                        foreach (RepeaterItem chk in rptchkBimestre.Items)
-                        {
-                            CheckBox ckbCampo = (CheckBox)chk.FindControl("ckbCampo");
+                        Repeater rptchkBimestre = (Repeater)item.FindControl("rptchkBimestre");
 
-                            if (ckbCampo != null && ckbCampo.Checked)
+                        if (rptchkBimestre != null)
+                        {
+                            foreach (RepeaterItem chk in rptchkBimestre.Items)
                             {
-                                HiddenField tpc_id = (HiddenField)chk.FindControl("tpc_id");
-                                HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
-                                if (tpc_id != null && oap_id != null)
+                                CheckBox ckbCampo = (CheckBox)chk.FindControl("ckbCampo");
+
+                                if (ckbCampo != null && ckbCampo.Checked)
                                 {
-                                    lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                    HiddenField tpc_id = (HiddenField)chk.FindControl("tpc_id");
+                                    HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
+                                    if (tpc_id != null && oap_id != null)
                                     {
-                                        tud_id = VS_tud_id,
-                                        tpc_id = Convert.ToInt32(tpc_id.Value),
-                                        oap_id = Convert.ToInt32(oap_id.Value)
-                                    });
+                                        lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                        {
+                                            tud_id = VS_tud_id,
+                                            tpc_id = Convert.ToInt32(tpc_id.Value),
+                                            oap_id = Convert.ToInt32(oap_id.Value)
+                                        });
+                                    }
                                 }
                             }
                         }

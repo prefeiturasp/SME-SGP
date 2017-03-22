@@ -344,7 +344,7 @@
                                 <thead>
                                     <tr class="gridHeader" style="height: 30px;">
                                         <th class="center">
-                                            <asp:Label ID="_lblobjetos" runat="server" Text='Objetos de Aprendizagem'></asp:Label>
+                                            <asp:Label ID="_lblobjetos" runat="server" Text='Objetos de aprendizagem'></asp:Label>
                                         </th>
                                         <asp:Repeater ID="rptBimestre" runat="server">
                                             <ItemTemplate>
