@@ -625,6 +625,15 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         protected global::System.Web.UI.UpdatePanel updObjetosAprendizagem;
         
         /// <summary>
+        /// lblMensagemObjetos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensagemObjetos;
+        
+        /// <summary>
         /// rptobjAprendizagem control.
         /// </summary>
         /// <remarks>

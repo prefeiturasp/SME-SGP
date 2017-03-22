@@ -336,7 +336,7 @@
     <div id="divTabsObjetoAprendizagem" runat="server">
         <asp:UpdatePanel ID="updObjetosAprendizagem" runat="server">
             <ContentTemplate>
-
+                <asp:Label ID="lblMensagemObjetos" runat="server" EnableViewState="false"></asp:Label>
                 <asp:Repeater ID="rptobjAprendizagem" runat="server" OnItemDataBound="rptobjAprendizagem_ItemDataBound">
                     <HeaderTemplate>
                         <div>
