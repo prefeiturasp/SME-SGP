@@ -2330,7 +2330,7 @@ public partial class Documentos_DocumentoAluno_Busca : MotherPageLogado
         txtDataReuniao.Text = "";
         txtAssunto.Text = "";
         ChkEmitirAnterior.Checked = false;
-        ChkEmitirAnterior.Text = "Emitir documentos de anos anteriores"; // recarrego pq tem opção que troca o texto.
+        ChkEmitirAnterior.Text = "Emitir relatórios de anos anteriores"; // recarrego pq tem opção que troca o texto.
     }
 
 
