@@ -28,6 +28,7 @@ namespace MSTech.GestaoEscolar.BLL
     [Serializable]
     public struct Struct_ObjetosAprendizagem
     {
+        public long tud_id { get; set; }
         public int oap_id { get; set; }
         public string oap_descricao { get; set; }
         public int tpc_id { get; set; }

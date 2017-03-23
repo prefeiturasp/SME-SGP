@@ -34,10 +34,10 @@ namespace MSTech.GestaoEscolar.BLL
         /// Salva os objetos de aprendizagem da turma disciplina
         /// </summary>
         /// <param name="listObjTudDis">Lista de objetos selecionados</param>
-        /// <param name="tud_id">ID da turma disciplina</param>
+        /// <param name="tud_ids">IDs da turma disciplina</param>
         /// <param name="cal_id">ID do calendário</param>
         /// <param name="banco">Transação do banco</param>
-        public static void SalvarLista(List<CLS_ObjetoAprendizagemTurmaDisciplina> listObjTudDis, long tud_id, int cal_id, TalkDBTransaction banco = null)
+        public static void SalvarLista(List<CLS_ObjetoAprendizagemTurmaDisciplina> listObjTudDis, List<long> tud_ids, int cal_id, TalkDBTransaction banco = null)
         {
             CLS_ObjetoAprendizagemTurmaDisciplinaDAO dao = new CLS_ObjetoAprendizagemTurmaDisciplinaDAO();
             if (banco != null)
@@ -47,17 +47,21 @@ namespace MSTech.GestaoEscolar.BLL
 
             try
             {
-                DeletarObjTud(tud_id, dao._Banco);
+                foreach (long tud_id in tud_ids)
+                    DeletarObjTud(tud_id, dao._Banco);
 
                 foreach (CLS_ObjetoAprendizagemTurmaDisciplina oad in listObjTudDis)
                     Save(oad, dao._Banco);
                 
-                if (ACA_FormatoAvaliacaoBO.CarregarPorTud(tud_id, dao._Banco).fav_fechamentoAutomatico)
+                if (ACA_FormatoAvaliacaoBO.CarregarPorTud(tud_ids.First(), dao._Banco).fav_fechamentoAutomatico)
                 {
-                    List<Struct_ObjetosAprendizagem> lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(tud_id, cal_id, dao._Banco);
+                    List<int> lstTpc = ACA_TipoPeriodoCalendarioBO.CarregarPeriodosAteDataAtual(cal_id, tud_ids.First())
+                                        .AsEnumerable().Select(p => new { tpc_id = Convert.ToInt32(p["tpc_id"]) })
+                                        .GroupBy(p => p.tpc_id).Select(p => p.Key).ToList();
 
-                    foreach (int tpc_id in lstObjetosAprendizagem.GroupBy(p => p.tpc_id).Select(p => p.Key))
-                        CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(tud_id, tpc_id, dao._Banco);
+                    foreach (int tpc_id in lstTpc)
+                        foreach (long tud_id in tud_ids)
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(tud_id, tpc_id, dao._Banco);
                 }
             }
             catch (Exception ex)

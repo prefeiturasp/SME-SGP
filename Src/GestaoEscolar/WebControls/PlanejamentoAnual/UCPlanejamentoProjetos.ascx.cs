@@ -98,6 +98,22 @@
         }
 
         /// <summary>
+        /// ViewState que armazena o id da turmadisciplina.
+        /// </summary>
+        private long VS_tud_idComponenteSelecionado
+        {
+            get
+            {
+                return Convert.ToInt64(ViewState["VS_tud_idComponenteSelecionado"] ?? "-1");
+            }
+
+            set
+            {
+                ViewState["VS_tud_idComponenteSelecionado"] = value;
+            }
+        }
+
+        /// <summary>
         /// ViewState que armazena o id do tipo disciplina.
         /// </summary>
         private int VS_tds_id
@@ -365,7 +381,25 @@
 
         #region Objetos de Aprendizagem
 
-        public List<Struct_ObjetosAprendizagem> lstObjetosAprendizagem { get; set; }
+        public List<Struct_ObjetosAprendizagem> VS_lstObjetosAprendizagem
+        {
+            get
+            {
+                if (ViewState["VS_lstObjetosAprendizagem"] != null)
+                {
+                    return (List<Struct_ObjetosAprendizagem>)(ViewState["VS_lstObjetosAprendizagem"]);
+                }
+                else
+                {
+                    return new List<Struct_ObjetosAprendizagem>();
+                }
+            }
+
+            set
+            {
+                ViewState["VS_lstObjetosAprendizagem"] = value;
+            }
+        }
 
         public bool abaObjAprendVisivel
         {
@@ -639,6 +673,7 @@
             List<sComboTurmaDisciplina> turmaDisciplinaComponenteRegencia = (from dr in VS_TurmaDisciplinaDocente
                                                                              where Convert.ToByte(dr.tur_tud_id.Split(';')[3]) == Convert.ToByte(ACA_CurriculoDisciplinaTipo.ComponenteRegencia)
                                                                              && (Convert.ToInt64(dr.tur_tud_id.Split(';')[0]) == VS_tur_id)
+                                                                             orderby dr.tud_nome
                                                                              select new sComboTurmaDisciplina
                                                                              {
                                                                                  tur_tud_nome = dr.tur_tud_nome.ToString()
@@ -740,18 +775,22 @@
 
             if (abaobjAprendizagem.Visible)
             {
-                if (ddlComponenteAtAvaliativa.Items.Count > 0)
-                    lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(Convert.ToInt32(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]), VS_cal_id);
-                else
-                    lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
-
-                CarregaRepeaterObjetoAprendizagem(lstObjetosAprendizagem);
+                VS_lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
+                
+                CarregaRepeaterObjetoAprendizagem();
             }
-
         }
 
-        private void CarregaRepeaterObjetoAprendizagem(List<Struct_ObjetosAprendizagem> list)
+        private void CarregaRepeaterObjetoAprendizagem()
         {
+            List<Struct_ObjetosAprendizagem> list = VS_lstObjetosAprendizagem;
+            if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                ddlComponenteAtAvaliativa.Items.Count > 0)
+            {
+                list = VS_lstObjetosAprendizagem.Where(p => p.tud_id == Convert.ToInt64(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1])).ToList();
+                VS_tud_idComponenteSelecionado = Convert.ToInt64(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]);
+            }
+
             if (!list.Any())
             {
                 rptobjAprendizagem.Visible = false;
@@ -769,10 +808,8 @@
             }
         }
 
-        #endregion Objeto Aprendizagem
-
-
-
+        #endregion 
+        
         /// <summary>
         /// Seta os eventos javascript da tela.
         /// </summary>
@@ -1479,14 +1516,30 @@
         /// <returns></returns>
         public void SalvarObjetoAprendizagemTurmaDisciplina()
         {
-            List<CLS_ObjetoAprendizagemTurmaDisciplina> lista = CriarListaObjetoAprendizagemTurmaDisciplina();
-
             try
             {
-                if (ddlComponenteAtAvaliativa.Items.Count > 0)
-                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(lista, Convert.ToInt32(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]), VS_cal_id);
+                AtualizarListaObjetos();
+
+                List<CLS_ObjetoAprendizagemTurmaDisciplina> listObjTudDis = VS_lstObjetosAprendizagem.Where(p => p.selecionado)
+                                                                            .Select(p => new CLS_ObjetoAprendizagemTurmaDisciplina
+                                                                            {
+                                                                                tud_id = p.tud_id,
+                                                                                tpc_id = p.tpc_id,
+                                                                                oap_id = p.oap_id
+                                                                            }).ToList();
+
+                if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                    ddlComponenteAtAvaliativa.Items.Count > 0)
+                {
+                    List<long> lstTuds = (from dr in VS_TurmaDisciplinaDocente
+                                          where Convert.ToByte(dr.tur_tud_id.Split(';')[3]) == Convert.ToByte(ACA_CurriculoDisciplinaTipo.ComponenteRegencia)
+                                          && (Convert.ToInt64(dr.tur_tud_id.Split(';')[0]) == VS_tur_id)
+                                          select Convert.ToInt64(dr.tur_tud_id.Split(';')[1])).ToList();
+
+                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(listObjTudDis, lstTuds, VS_cal_id);
+                }
                 else
-                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(lista, VS_tud_id, VS_cal_id);
+                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(listObjTudDis, new List<long> { VS_tud_id }, VS_cal_id);
 
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, String.Format("Objeto Aprendizagem Turma Disciplina | tud_id: {0}; ", VS_tud_id.ToString()));
             }
@@ -1501,6 +1554,38 @@
             }
         }
 
+        /// <summary>
+        /// Atualiza a lista VS_lstObjetosAprendizagem com os objetos selecionados na tela (ou dos componentes)
+        /// </summary>
+        private void AtualizarListaObjetos()
+        {
+            List<CLS_ObjetoAprendizagemTurmaDisciplina> listSelecionados = CriarListaObjetoAprendizagemTurmaDisciplina();
+
+            List<Struct_ObjetosAprendizagem> VS_lstObjetosAprendizagemAux = new List<Struct_ObjetosAprendizagem>();
+            VS_lstObjetosAprendizagemAux = VS_lstObjetosAprendizagem.Select(item => new Struct_ObjetosAprendizagem
+            {
+                tud_id = item.tud_id,
+                oap_id = item.oap_id,
+                oap_descricao = item.oap_descricao,
+                tpc_id = item.tpc_id,
+                tpc_nome = item.tpc_nome,
+                tpc_ordem = item.tpc_ordem,
+                selecionado = (VS_tud_tipo != Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                item.tud_id == VS_tud_id &&
+                                listSelecionados.Any(p => p.tud_id == item.tud_id && p.oap_id == item.oap_id && p.tpc_id == item.tpc_id)) ||
+                                (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                ddlComponenteAtAvaliativa.Items.Count > 0 &&
+                                item.tud_id == VS_tud_idComponenteSelecionado &&
+                                listSelecionados.Any(p => p.tud_id == item.tud_id && p.oap_id == item.oap_id && p.tpc_id == item.tpc_id)) ||
+                                (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                ddlComponenteAtAvaliativa.Items.Count > 0 &&
+                                item.tud_id != VS_tud_idComponenteSelecionado &&
+                                item.selecionado)
+            }).ToList();
+
+            VS_lstObjetosAprendizagem = VS_lstObjetosAprendizagemAux;
+        }
+
         private List<CLS_ObjetoAprendizagemTurmaDisciplina> CriarListaObjetoAprendizagemTurmaDisciplina()
         {
             List<CLS_ObjetoAprendizagemTurmaDisciplina> lstObjTudDis = new List<CLS_ObjetoAprendizagemTurmaDisciplina>();
@@ -1510,7 +1595,7 @@
                 foreach (RepeaterItem item in rptobjAprendizagem.Items)
                 {
                     if ((item.ItemType == ListItemType.Item) ||
-                    (item.ItemType == ListItemType.AlternatingItem))
+                        (item.ItemType == ListItemType.AlternatingItem))
                     {
                         Repeater rptchkBimestre = (Repeater)item.FindControl("rptchkBimestre");
 
@@ -1526,12 +1611,12 @@
                                     HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
                                     if (tpc_id != null && oap_id != null)
                                     {
-
-                                        if (ddlComponenteAtAvaliativa.Items.Count > 0)
+                                        if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                            ddlComponenteAtAvaliativa.Items.Count > 0)
                                         {
                                             lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
                                             {
-                                                tud_id = Convert.ToInt32(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]),
+                                                tud_id = VS_tud_idComponenteSelecionado,
                                                 tpc_id = Convert.ToInt32(tpc_id.Value),
                                                 oap_id = Convert.ToInt32(oap_id.Value)
                                             });
@@ -1545,9 +1630,6 @@
                                                 oap_id = Convert.ToInt32(oap_id.Value)
                                             });
                                         }
-
-
-                                        
                                     }
                                 }
                             }
@@ -1758,7 +1840,7 @@
                 Repeater rptBimestre = (Repeater)e.Item.FindControl("rptBimestre");
                 if (rptBimestre != null)
                 {
-                    rptBimestre.DataSource = lstObjetosAprendizagem.OrderBy(r => r.tpc_ordem)
+                    rptBimestre.DataSource = VS_lstObjetosAprendizagem.OrderBy(r => r.tpc_ordem)
                                              .Select(p => new { tpc_id = p.tpc_id, tpc_nome = p.tpc_nome, tpc_ordem = p.tpc_ordem }).Distinct();
                     rptBimestre.DataBind();
                 }
@@ -1769,7 +1851,7 @@
                 Repeater rptchkBimestre = (Repeater)e.Item.FindControl("rptchkBimestre");
                 if (rptchkBimestre != null)
                 {
-                    var lst = lstObjetosAprendizagem.Where(p => p.oap_id == Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oap_id")))
+                    var lst = VS_lstObjetosAprendizagem.Where(p => p.oap_id == Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oap_id")))
                                                 .OrderBy(r => r.tpc_ordem).Select(p => new { tpc_id = p.tpc_id, oap_id = p.oap_id, selecionado = p.selecionado });
                     rptchkBimestre.DataSource = lst;
                     rptchkBimestre.DataBind();
@@ -1790,15 +1872,15 @@
             }
         }
 
+        protected void ddlComponenteAtAvaliativa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AtualizarListaObjetos();
+
+            CarregaRepeaterObjetoAprendizagem();
+        }
+
         #endregion Objetos Aprendizagem
 
         #endregion Eventos
-
-        protected void ddlComponenteAtAvaliativa_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(Convert.ToInt32(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]), VS_cal_id);
-
-            CarregaRepeaterObjetoAprendizagem(lstObjetosAprendizagem);
-        }
     }
 }
