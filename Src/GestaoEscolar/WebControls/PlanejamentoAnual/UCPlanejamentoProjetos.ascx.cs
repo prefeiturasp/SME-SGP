@@ -1567,6 +1567,7 @@
                 tud_id = item.tud_id,
                 oap_id = item.oap_id,
                 oap_descricao = item.oap_descricao,
+                oap_situacao = item.oap_situacao,
                 tpc_id = item.tpc_id,
                 tpc_nome = item.tpc_nome,
                 tpc_ordem = item.tpc_ordem,
