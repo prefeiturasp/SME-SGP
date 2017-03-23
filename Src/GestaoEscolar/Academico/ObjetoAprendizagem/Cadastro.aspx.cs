@@ -184,7 +184,8 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                         if (hdnId != null)
                         {
                             ckbCampo.Checked = ciclos.Any(p => p.Key == Convert.ToInt32(hdnId.Value));
-                            ckbCampo.Enabled = ciclos.Any(p => p.Key == Convert.ToInt32(hdnId.Value) && !p.Value);
+                            ckbCampo.Enabled = !ciclos.Any(p => p.Key == Convert.ToInt32(hdnId.Value)) ||
+                                               ciclos.Any(p => p.Key == Convert.ToInt32(hdnId.Value) && !p.Value);
                         }
                     }
                 }
