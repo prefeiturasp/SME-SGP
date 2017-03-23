@@ -1750,7 +1750,7 @@
                 if (rptchkBimestre != null)
                 {
                     var lst = lstObjetosAprendizagem.Where(p => p.oap_id == Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oap_id")))
-                                                .OrderBy(r => r.tpc_ordem).Select(p => new { tpc_id = p.tpc_id, oap_id = p.oap_id, selecionado = p.selecionado });
+                                                .OrderBy(r => r.tpc_ordem).Select(p => new { tpc_id = p.tpc_id, oap_id = p.oap_id, oap_situacao = p.oap_situacao, selecionado = p.selecionado });
                     rptchkBimestre.DataSource = lst;
                     rptchkBimestre.DataBind();
                 }
@@ -1763,9 +1763,13 @@
                 (e.Item.ItemType == ListItemType.AlternatingItem))
             {
                 CheckBox ckb = (CheckBox)e.Item.FindControl("ckbCampo");
+                HiddenField oap_situacao = (HiddenField)e.Item.FindControl("oap_situacao");
                 if (ckb != null)
                 {
                     ckb.Enabled = VS_permiteEditarObjAprendizagem;
+
+                    if (oap_situacao.Value == "2")
+                        ckb.Enabled = false;
                 }
             }
         }

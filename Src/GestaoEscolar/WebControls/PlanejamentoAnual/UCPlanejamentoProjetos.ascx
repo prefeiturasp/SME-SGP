@@ -378,6 +378,7 @@
                                     <td class="center">
                                         <asp:HiddenField ID="tpc_id" runat="server" Value='<%# Eval("tpc_id") %>' />
                                         <asp:HiddenField ID="oap_id" runat="server" Value='<%# Eval("oap_id") %>' />
+                                        <asp:HiddenField ID="oap_situacao" runat="server" Value='<%# Eval("oap_situacao") %>' />
                                         <asp:CheckBox ID="ckbCampo" runat="server" Checked='<%# Eval("selecionado") %>' Style="text-align: center;" />
                                     </td>
                                 </ItemTemplate>
