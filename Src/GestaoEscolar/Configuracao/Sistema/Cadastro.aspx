@@ -97,4 +97,8 @@
             </Triggers>
         </asp:UpdatePanel>
     </fieldset>
+    <fieldset>
+        <legend>Atualiza cache do menu</legend>
+        <asp:Button ID="btnAtualizaCacheMenu" runat="server" Text="Atualizar cache do menu" OnClick="btnAtualizaCacheMenu_Click" />
+    </fieldset>
 </asp:Content>

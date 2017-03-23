@@ -9,6 +9,7 @@ using MSTech.GestaoEscolar.BLL;
 using MSTech.CoreSSO.BLL;
 using MSTech.GestaoEscolar.Entities;
 using System.Data;
+using MSTech.GestaoEscolar.BLL.Caching;
 
 public partial class Configuracao_Sistema_Cadastro : MotherPageLogado
 {
@@ -224,7 +225,7 @@ public partial class Configuracao_Sistema_Cadastro : MotherPageLogado
             ImageButton imgCancelar = (ImageButton)grvConfig.Rows[index].FindControl("imgCancelarConfg");
             if (imgCancelar != null)
                 imgCancelar.Visible = true;
-                
+
             ImageButton imgExcluir = (ImageButton)grvConfig.Rows[index].FindControl("imgExcluir");
             if (imgExcluir != null)
                 imgExcluir.Visible = false;
@@ -238,5 +239,10 @@ public partial class Configuracao_Sistema_Cadastro : MotherPageLogado
         }
     }
 
-    #endregion  
+    protected void btnAtualizaCacheMenu_Click(object sender, EventArgs e)
+    {
+        CacheManager.Factory.RemoveByPattern(ModelCache.MENU_SISTEMA_GRUPO_VISAO_PATTERN_KEY);
+    }
+
+    #endregion
 }

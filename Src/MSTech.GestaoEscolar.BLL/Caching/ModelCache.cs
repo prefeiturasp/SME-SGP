@@ -909,5 +909,12 @@
         public const string TURMA_DISCIPLINA_TERRITORIO_TURMA_MODEL_KEY = "TUR_TurmaDisciplinaTerritorio_PorTurma_{0}";
 
         #endregion Territorio do saber
+
+        #region MenuCoreSSO
+
+        public const string MENU_SISTEMA_GRUPO_VISAO_MODEL_KEY = "Cache_CarregarMenuXML_{0}_{1}_{2}";
+        public const string MENU_SISTEMA_GRUPO_VISAO_PATTERN_KEY = "Cache_CarregarMenuXML";
+
+        #endregion MenuCoreSSO
     }
 }
