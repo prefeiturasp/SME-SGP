@@ -31,6 +31,7 @@ namespace MSTech.GestaoEscolar.BLL
         public long tud_id { get; set; }
         public int oap_id { get; set; }
         public string oap_descricao { get; set; }
+        public byte oap_situacao { get; set; }
         public int tpc_id { get; set; }
         public string tpc_nome { get; set; }
         public int tpc_ordem { get; set; }
