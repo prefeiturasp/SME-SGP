@@ -2175,6 +2175,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                             }
                             else if (!possuiPendencia && VS_listaPendenciaFechamento[itemTurma.ClientID].Any(item => (item.Pendente || item.PendenteParecer) && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia && item.tud_idRegencia == tud_id))
                                 possuiPendencia = true;
+
+                            if (VS_listaPendenciaFechamento[itemTurma.ClientID].Any(item => item.PendentePlanejamento && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia && item.tud_idRegencia == tud_id))
+                            {
+                                if (imgPendenciaPlanejamento != null)
+                                    imgPendenciaPlanejamento.Visible = true;
+                            }
                         }
                         else
                         {
@@ -2185,12 +2191,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                             }
                             else if (!possuiPendencia && VS_listaPendenciaFechamento[itemTurma.ClientID].Any(item => (item.Pendente || item.PendenteParecer) && item.tud_id == tud_id))
                                 possuiPendencia = true;
-                        }
 
-                        if (VS_listaPendenciaFechamento[itemTurma.ClientID].Any(item => item.PendentePlanejamento && item.tud_id == tud_id))
-                        {
-                            if (imgPendenciaPlanejamento != null)
-                                imgPendenciaPlanejamento.Visible = true;
+                            if (VS_listaPendenciaFechamento[itemTurma.ClientID].Any(item => item.PendentePlanejamento && item.tud_id == tud_id))
+                            {
+                                if (imgPendenciaPlanejamento != null)
+                                    imgPendenciaPlanejamento.Visible = true;
+                            }
                         }
                     }
 
