@@ -170,7 +170,10 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 _txtDescricao.Text = objetoAp.oap_descricao;
                 _ckbBloqueado.Checked = objetoAp.oap_situacao == (byte)ObjetoAprendizagemSituacao.Bloqueado;
 
-                List<int> ciclos = ACA_ObjetoAprendizagemTipoCicloBO.SelectBy_ObjetoAprendizagem(oap_id);
+                Dictionary<int, bool> ciclos = ACA_ObjetoAprendizagemTipoCicloBO.SelectBy_ObjetoAprendizagem(oap_id);
+
+                if (ciclos.Any(p => !p.Value))
+                    lblMessageCiclos.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ObjetoAprendizagem.Cadastro.lblMessageCiclos.Text").ToString(), UtilBO.TipoMensagem.Informacao);
 
                 foreach (RepeaterItem item in rptCampos.Items)
                 {
@@ -179,7 +182,10 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     {
                         HiddenField hdnId = (HiddenField)item.FindControl("hdnId");
                         if (hdnId != null)
-                            ckbCampo.Checked = ciclos.Any(p => p == Convert.ToInt32(hdnId.Value));
+                        {
+                            ckbCampo.Checked = ciclos.Any(p => p.Key == Convert.ToInt32(hdnId.Value));
+                            ckbCampo.Enabled = ciclos.Any(p => p.Key == Convert.ToInt32(hdnId.Value) && !p.Value);
+                        }
                     }
                 }
             }

@@ -50,12 +50,12 @@ namespace MSTech.GestaoEscolar.DAL
             return qs.Return;
         }
 
-        public List<int> SelectBy_ObjetoAprendizagem
+        public Dictionary<int, bool> SelectBy_ObjetoAprendizagem
         (
              int oap_id
         )
         {
-            List<int> listTci_ids = new List<int>();
+            Dictionary<int, bool> listTci_ids = new Dictionary<int, bool>();
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemTipoCiclo_By_Oap_Id", _Banco);
 
             #region PARAMETROS
@@ -71,9 +71,48 @@ namespace MSTech.GestaoEscolar.DAL
 
             qs.Execute();
 
-            if(qs.Return.Rows.Count > 0)
-                listTci_ids = (from DataRow dr in qs.Return.Rows
-                         select Convert.ToInt32(dr["tci_id"])).ToList();
+            if (qs.Return.Rows.Count > 0)
+                foreach (var item in (from DataRow dr in qs.Return.Rows
+                                      select new
+                                      {
+                                          tci_id = Convert.ToInt32(dr["tci_id"]),
+                                          tci_nome = Convert.ToBoolean(dr["CicloEmUso"])
+                                      }))
+                    listTci_ids.Add(item.tci_id, item.tci_nome);
+
+            return listTci_ids;
+        }
+        
+        /// <summary>
+        /// Verifica se os ciclos do objeto de aprendizagem estão em uso
+        /// </summary>
+        /// <param name="oap_id">ID do objeto de aprendizagem</param>
+        public Dictionary<int, string> CiclosEmUso(int oap_id)
+        {
+            Dictionary<int, string> listTci_ids = new Dictionary<int, string>();
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemTipoCiclo_SelectEmUsoBy_Oap_Id", _Banco);
+
+            #region PARAMETROS
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@oap_id";
+            Param.Size = 4;
+            Param.Value = oap_id;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.Execute();
+
+            if (qs.Return.Rows.Count > 0)
+                foreach (var item in (from DataRow dr in qs.Return.Rows
+                                      select new
+                                      {
+                                          tci_id = Convert.ToInt32(dr["tci_id"]),
+                                          tci_nome = dr["tci_nome"].ToString()
+                                      }))
+                    listTci_ids.Add(item.tci_id, item.tci_nome);
 
             return listTci_ids;
         }

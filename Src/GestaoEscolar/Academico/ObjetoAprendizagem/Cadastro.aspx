@@ -32,6 +32,7 @@
 
         </ContentTemplate>
     </asp:UpdatePanel>
+    <asp:Label ID="lblMessageCiclos" runat="server" EnableViewState="False"></asp:Label>
     <asp:UpdatePanel ID="updCiclos" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <fieldset>

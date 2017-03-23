@@ -121,6 +121,15 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.CheckBox _ckbBloqueado;
         
         /// <summary>
+        /// lblMessageCiclos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessageCiclos;
+        
+        /// <summary>
         /// updCiclos control.
         /// </summary>
         /// <remarks>
