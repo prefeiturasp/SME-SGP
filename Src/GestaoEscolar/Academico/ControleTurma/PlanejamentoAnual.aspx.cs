@@ -645,7 +645,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                      VS_EntitiesControleTurma.curriculo.crr_id, VS_EntitiesControleTurma.curriculoPeriodo.crp_id,
                                                      Tud_idPlanAnual, VS_EntitiesControleTurma.disciplina.tds_id, VS_EntitiesControleTurma.turmaDisciplina.tud_tipo,
                                                      tdt_posicao, UCControleTurma1.VS_tciIds, tur_ids, VS_EntitiesControleTurma.curso.tne_id, 
-                                                     VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao));
+                                                     VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao || p.pdc_permissaoConsulta));
             }
             else
             {

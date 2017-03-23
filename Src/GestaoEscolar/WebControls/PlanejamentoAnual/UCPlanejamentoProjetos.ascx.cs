@@ -734,7 +734,7 @@
             TUR_TurmaDisciplina entityTud = new TUR_TurmaDisciplina { tud_id = VS_tud_id };
             TUR_TurmaDisciplinaBO.GetEntity(entityTud);
 
-            abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible =
+            abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = VS_permiteEditarObjAprendizagem &&
                 ((Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem))
                 || entityTud.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia);
 
@@ -1483,7 +1483,11 @@
 
             try
             {
-                CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(lista, VS_tud_id, VS_cal_id);
+                if (ddlComponenteAtAvaliativa.Items.Count > 0)
+                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(lista, Convert.ToInt32(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]), VS_cal_id);
+                else
+                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(lista, VS_tud_id, VS_cal_id);
+
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, String.Format("Objeto Aprendizagem Turma Disciplina | tud_id: {0}; ", VS_tud_id.ToString()));
             }
             catch (ValidationException ex)
@@ -1522,12 +1526,28 @@
                                     HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
                                     if (tpc_id != null && oap_id != null)
                                     {
-                                        lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+
+                                        if (ddlComponenteAtAvaliativa.Items.Count > 0)
                                         {
-                                            tud_id = VS_tud_id,
-                                            tpc_id = Convert.ToInt32(tpc_id.Value),
-                                            oap_id = Convert.ToInt32(oap_id.Value)
-                                        });
+                                            lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                            {
+                                                tud_id = Convert.ToInt32(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]),
+                                                tpc_id = Convert.ToInt32(tpc_id.Value),
+                                                oap_id = Convert.ToInt32(oap_id.Value)
+                                            });
+                                        }
+                                        else
+                                        {
+                                            lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                            {
+                                                tud_id = VS_tud_id,
+                                                tpc_id = Convert.ToInt32(tpc_id.Value),
+                                                oap_id = Convert.ToInt32(oap_id.Value)
+                                            });
+                                        }
+
+
+                                        
                                     }
                                 }
                             }
