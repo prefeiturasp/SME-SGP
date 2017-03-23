@@ -51,29 +51,63 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectBy_TipoDisciplina(tds_id, cal_ano, out totalRecords);
         }
 
-        public static void Save(ACA_ObjetoAprendizagem entity, IEnumerable<int> listTci_ids)
+        /// <summary>
+        /// Salva o objeto de aprendizagem
+        /// </summary>
+        /// <param name="entity">Entidade do objeto de aprendizagem</param>
+        /// <param name="listTci_ids">Lista de ciclos</param>
+        public static void Save(ACA_ObjetoAprendizagem entity, List<int> listTci_ids)
         {
-            if (entity.Validate())
+            ACA_ObjetoAprendizagemDAO dao = new ACA_ObjetoAprendizagemDAO();
+            dao._Banco.Open(IsolationLevel.ReadCommitted);
+
+            try
             {
-                var dao = new ACA_ObjetoAprendizagemDAO();
-                dao.Salvar(entity);
-
-                var list = listTci_ids.Select(x => new ACA_ObjetoAprendizagemTipoCiclo
+                if (entity.Validate())
                 {
-                    oap_id = entity.oap_id,
-                    tci_id = x
-                }).ToList();
+                    bool isNew = entity.oap_id <= 0;
 
-                var daoTipoCiclo = new ACA_ObjetoAprendizagemTipoCicloDAO();
-                daoTipoCiclo.DeleteNew(entity.oap_id);
+                    Save(entity, dao._Banco);
 
-                foreach (var item in list)
-                {
-                    daoTipoCiclo.Salvar(item);
+                    List<ACA_ObjetoAprendizagemTipoCiclo> list = listTci_ids.Select(x => new ACA_ObjetoAprendizagemTipoCiclo
+                    {
+                        oap_id = entity.oap_id,
+                        tci_id = x
+                    }).ToList();
+
+                    if (isNew)
+                    {
+                        Dictionary<int, string> lstCiclosEmUso = ACA_ObjetoAprendizagemTipoCicloBO.CiclosEmUso(entity.oap_id, dao._Banco);
+                        if (lstCiclosEmUso.Any(c => !list.Any(p => p.tci_id == c.Key)))
+                        {
+                            if (lstCiclosEmUso.Where(c => !list.Any(p => p.tci_id == c.Key)).Count() > 1)
+                                throw new ValidationException("Ciclos " + lstCiclosEmUso.Where(c => !list.Any(p => p.tci_id == c.Key)).Select(p => p.Value).Aggregate((a, b) => a + ", " + b) +
+                                                              " estão em uso e não podem ser removidos.");
+                            else
+                                throw new ValidationException("Ciclo " + lstCiclosEmUso.Where(c => !list.Any(p => p.tci_id == c.Key)).First().Value +
+                                                              " está em uso e não pode ser removido.");
+                        }
+                    }
+
+                    ACA_ObjetoAprendizagemTipoCicloBO.DeleteNew(entity.oap_id, dao._Banco);
+
+                    foreach (ACA_ObjetoAprendizagemTipoCiclo item in list)
+                    {
+                        ACA_ObjetoAprendizagemTipoCicloBO.Save(item, dao._Banco);
+                    }
                 }
+                else
+                    throw new ValidationException(UtilBO.ErrosValidacao(entity));
             }
-            else
-                throw new ValidationException(UtilBO.ErrosValidacao(entity));
+            catch (Exception ex)
+            {
+                dao._Banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                dao._Banco.Close();
+            }
         }
 
         public static List<Struct_ObjetosAprendizagem> SelectListaBy_TurmaDisciplina(long tud_id, int cal_id, TalkDBTransaction banco = null)

@@ -207,6 +207,13 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Não há documentos cadastrados.'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'ObjetoAprendizagem.Cadastro.lblMessageCiclos.Text' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Ciclos que possuem turmas com registros ligados ao objeto de aprendizagem não podem ser removidos.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
