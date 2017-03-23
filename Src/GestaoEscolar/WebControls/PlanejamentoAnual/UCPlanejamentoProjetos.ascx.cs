@@ -1851,7 +1851,7 @@
                 Repeater rptchkBimestre = (Repeater)e.Item.FindControl("rptchkBimestre");
                 if (rptchkBimestre != null)
                 {
-                    var lst = lstObjetosAprendizagem.Where(p => p.oap_id == Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oap_id")))
+                    var lst = VS_lstObjetosAprendizagem.Where(p => p.oap_id == Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oap_id")))
                                                 .OrderBy(r => r.tpc_ordem).Select(p => new { tpc_id = p.tpc_id, oap_id = p.oap_id, oap_situacao = p.oap_situacao, selecionado = p.selecionado });
                     rptchkBimestre.DataSource = lst;
                     rptchkBimestre.DataBind();
