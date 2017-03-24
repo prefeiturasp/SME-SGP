@@ -12,6 +12,7 @@ namespace GestaoEscolar.Api.Models
         public int? aulasPrevistas { get; set; }
         public int aulasDadas { get; set; }
         public int aulasRepostas { get; set; }
+        public int aulasSugestao { get; set; }
         public bool permitirEditar { get; set; }
     }
 }

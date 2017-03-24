@@ -35,10 +35,10 @@ namespace GestaoEscolar.Api.Areas.v1
         /// <param name="periodoId">(Opcional) Id do período</param>
         /// <param name="cicloId">(Opcional) Id do ciclo</param>
         /// <param name="codigoTurma">(Opcional) Código da turma</param>
-        /// <param name="X-Order">(Opcional - Padrão = nome) Coluna que será feita a ordenação: nome, curso, turma ou tipoDocencia</param>
-        /// <param name="X-Order-Asc">(Opcional - Padrão = true) True para crescente e False para decrescente</param>
-        /// <param name="X-Pagination-Per-Page">(Opcional - Padrão = 10) Número de itens por página</param>
-        /// <param name="X-Pagination-Current-Page">(Opcional - Padrão = 1) Número da página</param>
+        /// <param name="XOrder">(Opcional - Padrão = nome) Coluna que será feita a ordenação: nome, curso, turma ou tipoDocencia</param>
+        /// <param name="XOrderAsc">(Opcional - Padrão = true) True para crescente e False para decrescente</param>
+        /// <param name="XPaginationPerPage">(Opcional - Padrão = 10) Número de itens por página</param>
+        /// <param name="XPaginationCurrentPage">(Opcional - Padrão = 1) Número da página</param>
         /// <returns>Retorna um objeto de minhas turmas</returns>
         [Route("MinhasTurmas")]
         [ResponseType(typeof(MinhasTurmas))]
@@ -297,6 +297,7 @@ namespace GestaoEscolar.Api.Areas.v1
                     aulasDadas = p.Field<int>("aulasDadas"),
                     aulasPrevistas = p.Field<int?>("aulasPrevistas"),
                     aulasRepostas = p.Field<int>("aulasRepostas"),
+                    aulasSugestao = p.Field<int>("aulasSugestao"),
                     periodo = p.Field<string>("periodo"),
                     periodoCalendario = p.Field<string>("cap_descricao"),
                     tipoPeriodoCalendarioId = p.Field<int>("tpc_id"),

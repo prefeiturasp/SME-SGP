@@ -454,10 +454,10 @@
             <param name="periodoId">(Opcional) Id do período</param>
             <param name="cicloId">(Opcional) Id do ciclo</param>
             <param name="codigoTurma">(Opcional) Código da turma</param>
-            <param name="X-Order-Order">(Opcional - Padrão = nome) Coluna que será feita a ordenação: nome, curso, turma ou tipoDocencia</param>
-            <param name="X-Order-Asc-Order-Asc">(Opcional - Padrão = true) True para crescente e False para decrescente</param>
-            <param name="X-Pagination-Per-Page-Pagination-Per-Page">(Opcional - Padrão = 10) Número de itens por página</param>
-            <param name="X-Pagination-Current-Page-Pagination-Current-Page">(Opcional - Padrão = 1) Número da página</param>
+            <param name="XOrder">(Opcional - Padrão = nome) Coluna que será feita a ordenação: nome, curso, turma ou tipoDocencia</param>
+            <param name="XOrderAsc">(Opcional - Padrão = true) True para crescente e False para decrescente</param>
+            <param name="XPaginationPerPage">(Opcional - Padrão = 10) Número de itens por página</param>
+            <param name="XPaginationCurrentPage">(Opcional - Padrão = 1) Número da página</param>
             <returns>Retorna um objeto de minhas turmas</returns>
         </member>
         <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetMinhasTurmasDocente">
