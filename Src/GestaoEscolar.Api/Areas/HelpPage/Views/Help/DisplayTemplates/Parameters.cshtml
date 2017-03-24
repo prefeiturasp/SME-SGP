@@ -1,11 +1,12 @@
 @using System.Collections.ObjectModel
 @using System.Web.Http.Description
+@using GestaoEscolar.Api.Areas.HelpPage.Attributes
 @using System.Threading
 @model Collection<ApiParameterDescription>
 
 <table class="help-page-table">
     <thead>
-    <tr><th>Nome</th><th>Descrição</th><th>Informação adicional</th></tr>
+    <tr><th>Nome</th><th>Tipo</th><th>Descrição</th><th>Informação adicional</th></tr>
     </thead>
     <tbody>
     @foreach (ApiParameterDescription parameter in Model)
@@ -15,23 +16,37 @@
             "Sem documentação.";
 
         // Don't show CancellationToken because it's a special parameter
-        if (parameter.ParameterDescriptor == null || 
+        if (parameter.ParameterDescriptor == null ||
             (parameter.ParameterDescriptor != null &&
             !typeof(CancellationToken).IsAssignableFrom(parameter.ParameterDescriptor.ParameterType)))
         {
+            var typeParameter = parameter.ParameterDescriptor.ParameterType.GenericTypeArguments.Count() > 0 ?
+                                parameter.ParameterDescriptor.ParameterType.GenericTypeArguments[0].Name :
+                                parameter.ParameterDescriptor.ParameterType.Name;
             <tr>
                 <td class="parameter-name"><b>@parameter.Name</b></td>
+                <td class="parameter-type">@typeParameter</td>
                 <td class="parameter-documentation"><pre>@parameterDocumentation</pre></td>
                 <td class="parameter-source">
                     @switch (parameter.Source)
                     {
                         case ApiParameterSource.FromBody:
-                            <p>Definir o parâmetro no <b>corpo</b> da requisição.</p>
+                            <p>Definir no <b>body</b> da requisição.</p>
                             break;
                         case ApiParameterSource.FromUri:
-                            <p>Definir o parâmetro na <b>URI</b> da requisição.</p>
+                            <p>Definir na <b>URI</b> da requisição.</p>
                             break;
                         case ApiParameterSource.Unknown:
+                            FromHeaderAttribute header = new FromHeaderAttribute();
+                            if (header.GetType().Equals(parameter.ParameterDescriptor.ParameterBinderAttribute.GetType()))
+                            {
+                                <p>Definir no <b>header</b> da requisição.</p>
+                            }
+                            else
+                            {
+                                <p>-</p>
+                            }
+                            break;
                         default:
                             <p>-</p>
                             break;

@@ -25,29 +25,32 @@ namespace GestaoEscolar.Api.Areas.v1
         /// </summary>
         /// <returns>Retorna uma lista de calendários escolares</returns>
         [Route("Anual")]
-        [ResponseType(typeof(List<jsonObject>))]
-        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.NotFound, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
+        [ResponseType(typeof(Calendarios))]
+        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
         public HttpResponseMessage GetCalendarioAnual()
         {
             try
             {
-               var lst = ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__userLogged.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo);
+                var lst = ACA_CalendarioAnualBO.SelecionaCalendarioAnual(__userLogged.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo, 
+                                                                         __userLogged.Docente.doc_id, 
+                                                                         __userLogged.Usuario.usu_id,
+                                                                         __userLogged.Grupo.gru_id);
+                string selecionado = string.Empty;
+                if (lst.Where(c => Convert.ToInt32(c.cal_ano) >= DateTime.Today.Year).Count() == 1)
+                    selecionado = lst.Where(c => Convert.ToInt32(c.cal_ano) >= DateTime.Today.Year).First().cal_id;
 
-                if (lst.Count > 0)
+                Calendarios ret = new Calendarios
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK,
-                            lst.Select(p => new jsonObject { id = p.cal_id.ToString(), text = p.cal_ano_desc })
-                            );
-                }
-                else
-                    return Request.CreateResponse(HttpStatusCode.NotFound, "");
+                    lista = lst.Select(p => new jsonObject { id = p.cal_id.ToString(), text = p.cal_ano_desc }),
+                    idSelecionado = selecionado                
+                };
+
+                return Request.CreateResponse(HttpStatusCode.OK, ret);
             }
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
-
         }
-
     }
 }

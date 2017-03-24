@@ -114,9 +114,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// Retorna a chave do cache utilizada para carregar o combo de calendário
         /// </summary>
         /// <returns></returns>
-        private static string RetornaChaveCache_SelecionaCalendarioAnual(Guid ent_id)
+        private static string RetornaChaveCache_SelecionaCalendarioAnual(Guid ent_id, long doc_id, Guid usu_id, Guid gru_id)
         {
-            return String.Format("Cache_SelecionaCalendarioAnual_{0}", ent_id);
+            return String.Format("Cache_SelecionaCalendarioAnual_{0}_{1}_{2}_{3}", ent_id, doc_id, usu_id, gru_id);
         }
 
         /// <summary>
@@ -430,15 +430,32 @@ namespace MSTech.GestaoEscolar.BLL
             int appMinutosCacheLongo = 0
         )
         {
+            return SelecionaCalendarioAnual(ent_id, appMinutosCacheLongo, 0, new Guid(), new Guid());
+        }
+
+        /// <summary>
+        /// Retorna todos os calendários não excluídos logicamente
+        /// Sem paginação
+        /// </summary>        
+        /// <param name="ent_id">Entidade do usuário logado</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sComboCalendario> SelecionaCalendarioAnual
+        (
+            Guid ent_id,
+            int appMinutosCacheLongo
+            , long doc_id
+            , Guid usu_id
+            , Guid gru_id
+        )
+        {
             List<sComboCalendario> dados = null;
             if (appMinutosCacheLongo > 0 && HttpContext.Current != null)
             {
-                string chave = RetornaChaveCache_SelecionaCalendarioAnual(ent_id);
+                string chave = RetornaChaveCache_SelecionaCalendarioAnual(ent_id, doc_id, usu_id, gru_id);
                 object cache = HttpContext.Current.Cache[chave];
-
                 if (cache == null)
                 {
-                    using (DataTable dt = new ACA_CalendarioAnualDAO().SelectBy_Entidade(ent_id))
+                    using (DataTable dt = new ACA_CalendarioAnualDAO().SelectBy_Entidade(ent_id, doc_id, usu_id, gru_id))
                     {
                         dados = (from DataRow dr in dt.Rows
                                  select new sComboCalendario
@@ -450,7 +467,6 @@ namespace MSTech.GestaoEscolar.BLL
                                      cal_ano = dr["cal_ano"].ToString()
                                  }).ToList();
                     }
-
                     HttpContext.Current.Cache.Insert(chave, dados, null, DateTime.Now.AddMinutes(appMinutosCacheLongo), System.Web.Caching.Cache.NoSlidingExpiration);
                 }
                 else
@@ -458,10 +474,9 @@ namespace MSTech.GestaoEscolar.BLL
                     dados = (List<sComboCalendario>)cache;
                 }
             }
-
             if (dados == null)
             {
-                using (DataTable dt = new ACA_CalendarioAnualDAO().SelectBy_Entidade(ent_id))
+                using (DataTable dt = new ACA_CalendarioAnualDAO().SelectBy_Entidade(ent_id, doc_id, usu_id, gru_id))
                 {
                     dados = (from DataRow dr in dt.Rows
                              select new sComboCalendario
@@ -474,7 +489,6 @@ namespace MSTech.GestaoEscolar.BLL
                              }).ToList();
                 }
             }
-
             return dados;
         }
 

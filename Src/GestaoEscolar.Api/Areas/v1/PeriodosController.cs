@@ -27,8 +27,9 @@ namespace GestaoEscolar.Api.Areas.v1
         /// <param name="curriculoId">(Obrigarório) Id do currículo</param>
         /// <param name="cicloId">(Opcional) Id do ciclo</param>
         /// <returns>Retorna uma lista de períodos</returns>
+        [Route("")]
         [ResponseType(typeof(List<jsonObject>))]
-        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.NotFound, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
+        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
         public HttpResponseMessage GetPeriodos(int cursoId, int curriculoId, int cicloId = 0)
         {
             try
@@ -39,22 +40,18 @@ namespace GestaoEscolar.Api.Areas.v1
                 else
                     lst = ACA_CurriculoPeriodoBO.GetSelect(cursoId, curriculoId, __userLogged.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo);
 
-                if (lst.Count > 0)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK,
-                            lst.Select(p => new jsonObject {
-                                    id = p.cur_id_crr_id_crp_id.Split(';')[2],
-                                    text = p.crp_descricao })
-                            );
-                }
-                else
-                    return Request.CreateResponse(HttpStatusCode.NotFound, "");
+                return Request.CreateResponse(HttpStatusCode.OK,
+                        lst.Select(p => new jsonObject
+                        {
+                            id = p.cur_id_crr_id_crp_id.Split(';')[2],
+                            text = p.crp_descricao
+                        })
+                        );
             }
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
-
         }
 
     }

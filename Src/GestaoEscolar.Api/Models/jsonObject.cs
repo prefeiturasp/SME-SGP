@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
-
-namespace GestaoEscolar.Api.Models
+﻿namespace GestaoEscolar.Api.Models
 {
     public class jsonObject
     {

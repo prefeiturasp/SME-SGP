@@ -436,6 +436,69 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TiposDocenteController.GetTiposDocente">
+            <summary>
+            Busca uma lista de tipos de docente
+            </summary>
+            <returns>Retorna uma lista de tipos de docente</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetMinhasTurmas(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Busca dados das minhas turmas de acordo com os filtros
+            </summary>
+            <param name="escolaId">(Obrigarório) Id da escola</param>
+            <param name="unidadeId">(Obrigarório) Id da unidade escolar</param>
+            <param name="calendarioId">(Obrigarório) Id do calendário escolar</param>
+            <param name="cursoId">(Obrigarório) Id do curso</param>
+            <param name="curriculoId">(Obrigarório) Id do currículo</param>
+            <param name="periodoId">(Opcional) Id do período</param>
+            <param name="cicloId">(Opcional) Id do ciclo</param>
+            <param name="codigoTurma">(Opcional) Código da turma</param>
+            <param name="X-Order-Order">(Opcional - Padrão = nome) Coluna que será feita a ordenação: nome, curso, turma ou tipoDocencia</param>
+            <param name="X-Order-Asc-Order-Asc">(Opcional - Padrão = true) True para crescente e False para decrescente</param>
+            <param name="X-Pagination-Per-Page-Pagination-Per-Page">(Opcional - Padrão = 10) Número de itens por página</param>
+            <param name="X-Pagination-Current-Page-Pagination-Current-Page">(Opcional - Padrão = 1) Número da página</param>
+            <returns>Retorna um objeto de minhas turmas</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetMinhasTurmasDocente">
+            <summary>
+            Busca dados das minhas turmas do docente
+            </summary>
+            <returns>Retorna um lista de minhas turmas por escola</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetTurmasComponenteCurricular(System.Int64,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte)">
+            <summary>
+            Busca os dados das aulas dadas de acordo com o parâmetro
+            </summary>
+            <param name="turmaDisciplinaId">(Obrigarório) Id da turma disciplina</param>
+            <param name="escolaId">(Obrigarório) Id da escola</param>
+            <param name="unidadeId">(Obrigarório) Id da unidade escolar</param>
+            <param name="calendarioId">(Opcional para docente) Id do calendário escolar</param>
+            <param name="cursoId">(Opcional para docente) Id do curso</param>
+            <param name="curriculoId">(Opcional para docente) Id do currículo</param>
+            <param name="periodoId">(Opcional para docente) Id do período</param>
+            <param name="cicloId">(Opcional para docente) Id do ciclo</param>
+            <param name="turmaId">(Opcional para docente) Id da turma</param>
+            <param name="turmaDocentePosicao">(Opcional para docente) Posição do docente</param>
+            <returns>Retorna objeto de aulas dadas</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetPeriodosAulasTurma(System.Int32,System.Int32,System.Int64,System.Byte)">
+            <summary>
+            Busca lista dos períodos e aulas de uma turma
+            </summary>
+            <param name="calendarioId">(Obrigarório) Id do calendário escolar</param>
+            <param name="turmaId">(Obrigarório) Id da turma</param>
+            <param name="turmaDisciplinaId">(Obrigarório) Id da turma disciplina</param>
+            <param name="turmaDocentePosicao">(Obrigarório) Posição do docente</param>
+            <returns>Retorna lista de períodos e aulas de uma turma</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.PutAulasDadasPrevistasTurma(GestaoEscolar.Api.Models.TurmaDisciplinaAulaPrevista)">
+            <summary>
+            Atualiza os períodos de aulas previstas
+            </summary>
+            <param name="turmaDisciplina">Objeto contendo os dados referêntes as turmas previstas que serão alteradas</param>
+            <returns>Mensagem de sucesso ou falha na alteração</returns>
+        </member>
         <member name="M:GestaoEscolar.Api.Areas.v1.PeriodosController.GetPeriodos(System.Int32,System.Int32,System.Int32)">
             <summary>
             Busca uma lista de períodos de acordo com o id do curso, do currículo e do ciclo 
@@ -468,11 +531,11 @@
             </summary>
             <returns>Retorna uma lista de calendários escolares</returns>
         </member>
-        <member name="M:GestaoEscolar.Api.Areas.v1.EscolasController.GetEscolas(System.Guid)">
+        <member name="M:GestaoEscolar.Api.Areas.v1.EscolasController.GetEscolas(System.Nullable{System.Guid})">
             <summary>
             Busca escolas de acordo com a permissão do grupo do usuário do token e o id da diretoria
             </summary>
-            <param name="diretoriaId">(Opcional) Id da diretoria(Guid)</param>
+            <param name="diretoriaId">(Opcional) Id da diretoria</param>
             <returns>Retorna uma lista de escolas</returns>
         </member>
         <member name="M:GestaoEscolar.Api.Areas.v1.UsuariosController.PostLogin(GestaoEscolar.Api.Models.Usuario)">

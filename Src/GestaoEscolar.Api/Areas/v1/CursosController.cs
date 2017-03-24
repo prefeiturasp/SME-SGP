@@ -29,7 +29,7 @@ namespace GestaoEscolar.Api.Areas.v1
         /// <returns>Retorna uma lista de cursos</returns>
         [Route("")]
         [ResponseType(typeof(List<jsonObject>))]
-        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.NotFound, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
+        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
         public HttpResponseMessage GetCursos(int escolaId, int unidadeId, int calendarioId)
         {
             try
@@ -37,24 +37,19 @@ namespace GestaoEscolar.Api.Areas.v1
                 var lst = ACA_CursoBO.SelecionaCursoCurriculoCalendarioEscola(escolaId, unidadeId, 0,
                     __userLogged.Usuario.ent_id, calendarioId, ApplicationWEB.AppMinutosCacheLongo);
 
-                if (lst.Count > 0)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK,
-                            lst.Select(p => new Curso {
-                                    id = p.cur_crr_id.Split(';')[0],
-                                    curriculoId = p.cur_crr_id.Split(';')[1],
-                                    text = p.cur_crr_nome })
-                            );
-                }
-                else
-                    return Request.CreateResponse(HttpStatusCode.NotFound, "");
+                return Request.CreateResponse(HttpStatusCode.OK,
+                        lst.Select(p => new Curso
+                        {
+                            id = p.cur_crr_id.Split(';')[0],
+                            curriculoId = p.cur_crr_id.Split(';')[1],
+                            text = p.cur_crr_nome
+                        })
+                        );
             }
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
-
         }
-
     }
 }

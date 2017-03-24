@@ -69,21 +69,27 @@ a:hover {
 }
 
 .api-name {
-    width: 40%;
+    width: 50%;
 }
-
+    .api-name div {
+        max-width: 600px;
+    }
 .api-documentation {
-    width: 60%;
+    width: 50%;
 }
 
 .parameter-name {
     width: 20%;
 }
 
+.parameter-type {
+    width: 8%;
+}
+
 .parameter-documentation {
-    width: 50%;
+    width: 52%;
 }
 
 .parameter-source {
-    width: 30%;
+    width: 20%;
 }

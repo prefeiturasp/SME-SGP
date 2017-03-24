@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
 
 namespace GestaoEscolar.Api.Models
 {
@@ -16,6 +13,7 @@ namespace GestaoEscolar.Api.Models
     {
         public string nome { get; set; }
         public string grupo { get; set; }
+        public bool docente { get; set; }
         public string token { get; set; }
     }
 }

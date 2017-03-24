@@ -54,6 +54,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>        
         /// <param name="tds_id">ID do tipo de disciplina</param>
         /// <param name="tne_id">ID do tipo de nível de ensino</param>
+        /// <param name="tds_base">Base da disciplina</param>  
         /// <param name="tds_idNaoConsiderar">Id do tipo de disciplina que não virá do banco</param>
         /// <param name="controlarOrdem">se vai ordenar por ordem ou não</param> 
         /// <param name="paginado">Indica se o datatable será paginado ou não</param> 
@@ -64,6 +65,7 @@ namespace MSTech.GestaoEscolar.DAL
         (
             int tds_id
             , int tne_id
+            , int tds_base 
             , int tds_idNaoConsiderar
             , bool controlarOrdem
             , bool paginado
@@ -93,6 +95,17 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.Size = 4;
                 if (tne_id > 0)
                     Param.Value = tne_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Byte;
+                Param.ParameterName = "@tds_base";
+
+                Param.Size = 1;
+                if (tds_base > 0)
+                    Param.Value = tds_base;
                 else
                     Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);

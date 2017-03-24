@@ -103,6 +103,10 @@
     <Reference Include="MSTech.CoreSSO.Entities">
       <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.Entities.dll</HintPath>
     </Reference>
+    <Reference Include="MSTech.CoreSSO.WebServices.Consumer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSTechLibrary\DLLS\MSTech.CoreSSO.WebServices.Consumer.dll</HintPath>
+    </Reference>
     <Reference Include="MSTech.Data.Common">
       <HintPath>..\MSTechLibrary\DLLS\MSTech.Data.Common.dll</HintPath>
     </Reference>
@@ -198,6 +202,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
+    <Compile Include="Areas\HelpPage\Attributes\FromHeaderAttribute.cs" />
     <Compile Include="Areas\HelpPage\Attributes\ResponseCodesAttribute.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
     <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
@@ -225,6 +230,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\v1\TiposDocenteController.cs" />
+    <Compile Include="Areas\v1\TurmasController.cs" />
     <Compile Include="Areas\v1\PeriodosController.cs" />
     <Compile Include="Areas\v1\CiclosController.cs" />
     <Compile Include="Areas\v1\CursosController.cs" />
@@ -238,7 +245,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AulaPrevista.cs" />
+    <Compile Include="Models\Calendarios.cs" />
+    <Compile Include="Models\MinhasTurmasDocente.cs" />
+    <Compile Include="Models\TurmaDisciplinaAulaPrevista.cs" />
+    <Compile Include="Models\TurmaCompCur.cs" />
+    <Compile Include="Models\PeriodoAula.cs" />
     <Compile Include="Models\Curso.cs" />
+    <Compile Include="Models\AulasDadas.cs" />
+    <Compile Include="Models\Turma.cs" />
+    <Compile Include="Models\MinhasTurmas.cs" />
     <Compile Include="Models\Escola.cs" />
     <Compile Include="Models\jsonObject.cs" />
     <Compile Include="Models\Diretoria.cs" />
@@ -373,6 +389,10 @@
     <ProjectReference Include="..\MSTech.GestaoEscolar.BLL\MSTech.GestaoEscolar.BLL.csproj">
       <Project>{9c22f480-d173-413a-843d-5a4799484db3}</Project>
       <Name>MSTech.GestaoEscolar.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTech.GestaoEscolar.CustomResourceProviders\MSTech.GestaoEscolar.CustomResourceProviders.csproj">
+      <Project>{1cf1e620-6b79-4958-ad24-c6c0d9f8d372}</Project>
+      <Name>MSTech.GestaoEscolar.CustomResourceProviders</Name>
     </ProjectReference>
     <ProjectReference Include="..\MSTech.GestaoEscolar.DAL\MSTech.GestaoEscolar.DAL.csproj">
       <Project>{4147a1ca-4783-4718-8a5d-79afa3cb93b5}</Project>

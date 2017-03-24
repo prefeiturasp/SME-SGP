@@ -172,7 +172,7 @@ namespace MSTech.GestaoEscolar.BLL
             bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
 
             ACA_TipoDisciplinaDAO dao = new ACA_TipoDisciplinaDAO();
-            return dao.SelectBy_Pesquisa(0, 0, 0, controlarOrdem, false, 1, 1, out totalRecords);
+            return dao.SelectBy_Pesquisa(0, 0, 0, 0, controlarOrdem, false, 1, 1, out totalRecords);
         }
 
 
@@ -196,7 +196,7 @@ namespace MSTech.GestaoEscolar.BLL
                     int tds_idNaoConsiderar = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, ent_id);
                     bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
 
-                    lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_Pesquisa(0, 0, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords).AsEnumerable()
+                    lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_Pesquisa(0, 0, 0, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords).AsEnumerable()
                              select (sTipoDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTipoDisciplina())).ToList();
 
                     HttpContext.Current.Cache.Insert(chave, lista, null, DateTime.Now.AddMinutes(AppMinutosCacheLongo), System.Web.Caching.Cache.NoSlidingExpiration);
@@ -209,7 +209,7 @@ namespace MSTech.GestaoEscolar.BLL
                 int tds_idNaoConsiderar = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, ent_id);
                 bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
 
-                lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_Pesquisa(0, 0, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords).AsEnumerable()
+                lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_Pesquisa(0, 0, 0, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords).AsEnumerable()
                          select (sTipoDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTipoDisciplina())).ToList();
             }
 
@@ -252,7 +252,7 @@ namespace MSTech.GestaoEscolar.BLL
         {
             bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
             ACA_TipoDisciplinaDAO dao = new ACA_TipoDisciplinaDAO();
-            return dao.SelectBy_Pesquisa(0, 0, 0, controlarOrdem, false, 1, 1, out totalRecords);
+            return dao.SelectBy_Pesquisa(0, 0, 0, 0, controlarOrdem, false, 1, 1, out totalRecords);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace MSTech.GestaoEscolar.BLL
             int tds_idNaoConsiderar = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, ent_id);
             bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
             ACA_TipoDisciplinaDAO dao = new ACA_TipoDisciplinaDAO();
-            return dao.SelectBy_Pesquisa(0, tne_id, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords);
+            return dao.SelectBy_Pesquisa(0, tne_id, 0, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords);
         }
 
         /// <summary>
@@ -296,7 +296,7 @@ namespace MSTech.GestaoEscolar.BLL
             if (banco != null)
                 dao._Banco = banco;
 
-            return dao.SelectBy_Pesquisa(tds_id, 0, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords);
+            return dao.SelectBy_Pesquisa(tds_id, 0, 0, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords);
         }
 
         /// <summary>

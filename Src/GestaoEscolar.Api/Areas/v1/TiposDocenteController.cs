@@ -14,33 +14,26 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.UI.WebControls;
 
 namespace GestaoEscolar.Api.Areas.v1
 {
-    [RoutePrefix("api/v1/Ciclos")]
-    public class CiclosController : BaseApiController
+    [RoutePrefix("api/v1/TiposDocente")]
+    public class TiposDocenteController : BaseApiController
     {
         /// <summary>
-        /// Busca uma lista de ciclos de acordo com o id do curso e do currículo
+        /// Busca uma lista de tipos de docente
         /// </summary>
-        /// <param name="cursoId">(Obrigarório) Id do curso</param>
-        /// <param name="curriculoId">(Obrigarório) Id do currículo</param>
-        /// <returns>Retorna uma lista de ciclos</returns>
-        [Route("Anual")]
+        /// <returns>Retorna uma lista de tipos de docente</returns>
+        [Route("")]
         [ResponseType(typeof(List<jsonObject>))]
         [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
-        public HttpResponseMessage GetCiclos(int cursoId, int curriculoId)
+        public HttpResponseMessage GetTiposDocente()
         {
             try
             {
-                var lst = ACA_TipoCicloBO.SelecionaCicloPorCursoCurriculo(cursoId, curriculoId, ApplicationWEB.AppMinutosCacheLongo);
-                return Request.CreateResponse(HttpStatusCode.OK,
-                        lst.Select(p => new Curso
-                        {
-                            id = p.tci_id,
-                            text = p.tci_nome
-                        })
-                        );
+                var ret = EnumToJsonObject<EnumTipoDocente>();
+                return Request.CreateResponse(HttpStatusCode.OK, ret);
             }
             catch (Exception ex)
             {

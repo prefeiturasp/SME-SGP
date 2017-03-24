@@ -23,12 +23,12 @@ namespace GestaoEscolar.Api.Areas.v1
         /// <summary>
         /// Busca escolas de acordo com a permissão do grupo do usuário do token e o id da diretoria
         /// </summary>
-        /// <param name="diretoriaId">(Opcional) Id da diretoria(Guid)</param>
+        /// <param name="diretoriaId">(Opcional) Id da diretoria</param>
         /// <returns>Retorna uma lista de escolas</returns>
-        [Route("Diretoria/{diretoriaId:guid}")]
+        [Route("")]
         [ResponseType(typeof(List<Escola>))]
-        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.NotFound, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
-        public HttpResponseMessage GetEscolas(Guid diretoriaId)
+        [ResponseCodes(HttpStatusCode.OK, HttpStatusCode.InternalServerError, HttpStatusCode.Unauthorized)]
+        public HttpResponseMessage GetEscolas(Guid? diretoriaId = null)
         {
             try
             {
@@ -43,9 +43,10 @@ namespace GestaoEscolar.Api.Areas.v1
                             true,
                             ApplicationWEB.AppMinutosCacheLongo);
                 }
-                else {
+                else
+                {
                     lst = ESC_UnidadeEscolaBO.SelecionaEscolasControladasPorUASuperior(
-                        diretoriaId,
+                        diretoriaId == null ? Guid.Empty : diretoriaId.Value,
                         __userLogged.Usuario.ent_id,
                         __userLogged.Grupo.gru_id,
                         __userLogged.Usuario.usu_id,
@@ -54,23 +55,19 @@ namespace GestaoEscolar.Api.Areas.v1
                         ApplicationWEB.AppMinutosCacheLongo);
                 }
 
-                if (lst.Count > 0)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK,
-                            lst.Select(p => new Escola {
-                                id = p.esc_id.ToString(),
-                                unidadeId = p.uni_id.ToString(),
-                                text = p.uni_escolaNome })
-                            );
-                }
-                else
-                    return Request.CreateResponse(HttpStatusCode.NotFound, "");
+                return Request.CreateResponse(HttpStatusCode.OK,
+                        lst.Select(p => new Escola
+                        {
+                            id = p.esc_id.ToString(),
+                            unidadeId = p.uni_id.ToString(),
+                            text = p.uni_escolaNome
+                        })
+                        );
             }
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
-
         }
 
     }
