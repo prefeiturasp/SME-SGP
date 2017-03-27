@@ -56,7 +56,7 @@ namespace AreaAluno.WebControls.BoletimCompletoAluno
                     if (infantil)
                         VS_nomeBoletim = (string)GetGlobalResourceObject("AreaAluno.MasterPageAluno", "MenuBoletimInfantil");
                     else
-                        VS_nomeBoletim = (string)GetGlobalResourceObject("AreaAluno.MasterPageAluno", "MenuBoletimOnline");
+                        VS_nomeBoletim = ((string)GetGlobalResourceObject("AreaAluno.MasterPageAluno", "MenuBoletimOnline")).Replace(" Online", "");
                 }
 
                 var textoRodape = GetGlobalResourceObject("Mensagens", "MSG_RODAPEBOLETIMCOMPLETO").ToString();
