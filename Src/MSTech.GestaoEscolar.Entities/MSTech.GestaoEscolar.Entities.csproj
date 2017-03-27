@@ -108,6 +108,7 @@
     <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoObservacao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoProjeto.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaAbonoFalta.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaFalta.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoRecursoAvaliacaoINEP.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoResponsavel.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AreaConhecimento.cs" />
@@ -377,6 +378,7 @@
     <Compile Include="ACA_AlunoHistoricoCertificado.cs" />
     <Compile Include="ACA_AlunoHistoricoProjeto.cs" />
     <Compile Include="ACA_AlunoJustificativaAbonoFalta.cs" />
+    <Compile Include="ACA_AlunoJustificativaFalta.cs" />
     <Compile Include="ACA_AreaConhecimento.cs" />
     <Compile Include="ACA_ArquivoArea.cs" />
     <Compile Include="ACA_CompromissoEstudo.cs" />
