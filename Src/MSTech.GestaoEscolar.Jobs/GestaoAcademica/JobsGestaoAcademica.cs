@@ -473,4 +473,28 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
 
         #endregion IJob Members
     }
+
+    public class MS_JOB_ProcessamentoDivergenciasAulasPrevistas : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                if (!SYS_ServicosLogExecucaoBO.VerificaServicoRodando((byte)eChaveServicos.ProcessamentoDivergenciasAulasPrevistas))
+                {
+                    Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoDivergenciasAulasPrevistas);
+                    GestaoEscolarServicosBO.MS_JOB_ProcessamentoDivergenciasAulasPrevistas();
+                    SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
 }
