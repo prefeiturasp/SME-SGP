@@ -1,6 +1,7 @@
-/*
-	Update schema GestaoPedagogicaQuadroHorarios 1.67.0.0 to 1.68.0.0
-*/
+/*------------------------------------------------------------------------------------
+   Project/Ticket#: SGP
+   Description: Atualiza o schema do banco de dados GestaoPedagogica da 1.67.0.0 para 1.68.0.0
+-------------------------------------------------------------------------------------*/
 
 SET NUMERIC_ROUNDABORT OFF
 GO

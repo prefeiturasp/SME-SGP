@@ -1,3 +1,7 @@
+/*------------------------------------------------------------------------------------
+   Project/Ticket#: SGP
+   Description: Ajusta a ordem dos itens do menu
+-------------------------------------------------------------------------------------*/
 
 	DECLARE @entId as uniqueidentifier;
 	DECLARE @sis_id INT;

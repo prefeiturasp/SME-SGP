@@ -1,3 +1,8 @@
+/*------------------------------------------------------------------------------------
+   Project/Ticket#: SGP
+   Description: Ajusta os termos do menu
+-------------------------------------------------------------------------------------*/
+
 	DECLARE @entId as uniqueidentifier;
 	DECLARE @sis_id INT;
 

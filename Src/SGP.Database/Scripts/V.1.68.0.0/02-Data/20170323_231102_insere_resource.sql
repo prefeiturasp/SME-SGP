@@ -1,3 +1,8 @@
+/*------------------------------------------------------------------------------------
+   Project/Ticket#: SGP
+   Description: Insere resources
+-------------------------------------------------------------------------------------*/
+
 	EXEC MS_InsereResource 
         @rcr_chave = 'UCPlanejamentoProjetos.litObjetoAprendizagem.Text' 
         , @rcr_NomeResource = 'UserControl'

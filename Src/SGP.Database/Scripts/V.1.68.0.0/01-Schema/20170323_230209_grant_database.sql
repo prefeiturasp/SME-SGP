@@ -1,3 +1,8 @@
+/*------------------------------------------------------------------------------------
+   Project/Ticket#: SGP
+   Description: Grant do usuario
+-------------------------------------------------------------------------------------*/
+
 DECLARE
 	@user sysname = '$SystemUser$'
 	, @database sysname = '$SystemDatabase$'

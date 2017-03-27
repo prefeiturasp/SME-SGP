@@ -1,3 +1,8 @@
+/*------------------------------------------------------------------------------------
+   Project/Ticket#: SGP
+   Description: Executa o serviço de processamento de aulas previstas
+-------------------------------------------------------------------------------------*/
+
 	IF (NOT EXISTS (SELECT TOP 1 1 FROM SYS_ServicosLogExecucao WITH(NOLOCK) WHERE ser_id = 52))
 	BEGIN
 
