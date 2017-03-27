@@ -79,6 +79,7 @@ namespace MSTech.GestaoEscolar.BLL
         private static void LimpaCache(ACA_TipoDisciplina entity)
         {
             CacheManager.Factory.Remove(RetornaChaveCache_GetEntity(entity));
+            GestaoEscolarUtilBO.LimpaCache("Cache_SelecionaTipoDisciplinaObjetosAprendizagem");
         }
 
         /// <summary>
@@ -174,8 +175,7 @@ namespace MSTech.GestaoEscolar.BLL
             ACA_TipoDisciplinaDAO dao = new ACA_TipoDisciplinaDAO();
             return dao.SelectBy_Pesquisa(0, 0, 0, 0, controlarOrdem, false, 1, 1, out totalRecords);
         }
-
-
+        
         /// <summary>
         /// Retorna todos os tipos de disciplina não excluídos logicamente
         /// Sem paginação
@@ -210,6 +210,47 @@ namespace MSTech.GestaoEscolar.BLL
                 bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
 
                 lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_Pesquisa(0, 0, 0, tds_idNaoConsiderar, controlarOrdem, false, 1, 1, out totalRecords).AsEnumerable()
+                         select (sTipoDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTipoDisciplina())).ToList();
+            }
+
+            return lista;
+        }
+
+        /// <summary>
+        /// Retorna todos os tipos de disciplina não excluídos logicamente
+        /// Sem paginação
+        /// </summary>   
+        /// <param name="cal_ano">Ano do objeto de aprendizagem</param>
+        /// <param name="ent_id">Id da entidade do usuário logado.</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sTipoDisciplina> SelecionaTipoDisciplinaObjetosAprendizagem(Guid ent_id, int cal_ano, int AppMinutosCacheLongo = 0)
+        {
+            List<sTipoDisciplina> lista = null;
+
+            if (AppMinutosCacheLongo > 0 && HttpContext.Current != null)
+            {
+                string chave = String.Format("Cache_SelecionaTipoDisciplinaObjetosAprendizagem_{0}_{1}", ent_id, cal_ano);
+                object cache = HttpContext.Current.Cache[chave];
+
+                if (cache == null)
+                {
+                    int tds_idNaoConsiderar = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, ent_id);
+                    bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
+
+                    lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_ObjetosAprendizagem(cal_ano, tds_idNaoConsiderar, controlarOrdem, out totalRecords).AsEnumerable()
+                             select (sTipoDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTipoDisciplina())).ToList();
+
+                    HttpContext.Current.Cache.Insert(chave, lista, null, DateTime.Now.AddMinutes(AppMinutosCacheLongo), System.Web.Caching.Cache.NoSlidingExpiration);
+                }
+                else
+                    lista = (List<sTipoDisciplina>)cache;
+            }
+            else
+            {
+                int tds_idNaoConsiderar = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, ent_id);
+                bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
+
+                lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_ObjetosAprendizagem(cal_ano, tds_idNaoConsiderar, controlarOrdem, out totalRecords).AsEnumerable()
                          select (sTipoDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTipoDisciplina())).ToList();
             }
 

@@ -83,6 +83,41 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Retorna os tipos de ciclo de aprendizagem ativos de cursos ligados à escola
+        /// </summary>
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="totalRecords">Total de registros da consulta</param>
+        /// <returns>Lista com os tipos</returns>
+        public DataTable SelecionarAtivosEscola(int esc_id, out int totalRecords)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoCiclo_SelecionarAtivosEscola", _Banco);
+            List<ACA_TipoCiclo> lstTpCiclo = new List<ACA_TipoCiclo>();
+
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@esc_id";
+                Param.Size = 4;
+                Param.Value = esc_id;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                totalRecords = qs.Return.Rows.Count;
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
 
         /// <summary>
         /// Retorna informações do tipo do ciclo de ensino do aluno

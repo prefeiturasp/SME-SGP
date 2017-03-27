@@ -460,6 +460,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         ObjetoAprendizagem
+        ,
+
+        RelatorioObjetoAprendizagem
     }
 
     [Serializable]
@@ -583,7 +586,8 @@ namespace MSTech.GestaoEscolar.BLL
         IndicadorFrequenciaDRE = 314,
         IndicadorFrequenciaPeriodoCurso = 315,
         AulasSemPlanoAula = 316,
-        DivergenciasRematriculas = 317
+        DivergenciasRematriculas = 317,
+        RelatorioObjetoAprendizagem = 318
     }
 
     /// <summary>
