@@ -144,6 +144,15 @@
         <asp:Button ID="btnFecharPlanoAluno" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.btnFecharPlanoAluno.Text %>" OnClick="btnFecharPlanoAluno_Click" />
     </div>
 </div>
+<div id="divMensagemObjetoAprendizagem" title="Aviso" class="hide">
+	<asp:UpdatePanel ID="updAvisoObjetosAprendizagem" runat="server" UpdateMode="Conditional">
+		<ContentTemplate>
+			<fieldset>
+				<asp:Label ID="lblAvisoObjetosAprendizagem" runat="server" EnableViewState="false"></asp:Label>
+			</fieldset>
+		</ContentTemplate>
+	</asp:UpdatePanel>
+</div>
 <div id="divReplicarPlanejamentoAnual" title="Replicar planejamento" class="hide">
     <asp:UpdatePanel ID="updReplicarPlanejamentoAnual" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
