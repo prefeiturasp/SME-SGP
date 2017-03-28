@@ -73,7 +73,9 @@ namespace DbUpdater
         public static DatabaseUpgradeResult DeployDataBase(DatabaseConfig dbConfig)
         {
             var databaseConnectionString = dbConfig.DeployConnectionString;
-            var database = new SqlConnectionStringBuilder(databaseConnectionString).InitialCatalog;
+            var connection = new SqlConnectionStringBuilder(databaseConnectionString);
+            var database = connection.InitialCatalog;
+            var timeout = TimeSpan.FromSeconds(connection.ConnectTimeout);
             var assembly = Assembly.GetExecutingAssembly();
 
             WriteConsole($"Deploying {database}...", ConsoleColor.Yellow);
@@ -90,6 +92,7 @@ namespace DbUpdater
                 .SqlDatabase(databaseConnectionString)
                 .WithScriptsEmbeddedInAssembly(assembly, x => filterSqlFiles(x))
                 .WithVariables(dbConfig.Variables)
+                .WithExecutionTimeout(timeout)
                 .JournalTo(journal)
                 .WithTransaction()
                 .LogToConsole()
