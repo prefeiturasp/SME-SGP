@@ -197,5 +197,14 @@ namespace MSTech.GestaoEscolar.DAL
 
             qs.Execute();
         }
+
+        /// <summary>
+        /// Processa as divergências entre registros de aulas dadas e aulas previstas.
+        /// </summary>
+        public void ExecJOB_ProcessamentoDivergenciasAulasPrevistas()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoDivergenciasAulasPrevistas", _Banco);
+            qs.Execute();
+        }
     }
 }
