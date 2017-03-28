@@ -101,6 +101,7 @@
     <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoObservacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoProjetoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaAbonoFaltaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaFaltaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoRecursoAvaliacaoINEPDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoResponsavelDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AreaConhecimentoDAO.cs" />
@@ -380,6 +381,7 @@
     <Compile Include="ACA_AlunoHistoricoObservacaoDAO.cs" />
     <Compile Include="ACA_AlunoHistoricoProjetoDAO.cs" />
     <Compile Include="ACA_AlunoJustificativaAbonoFaltaDAO.cs" />
+    <Compile Include="ACA_AlunoJustificativaFaltaDAO.cs" />
     <Compile Include="ACA_AlunoRecursoAvaliacaoINEPDAO.cs" />
     <Compile Include="ACA_AlunoResponsavelDAO.cs" />
     <Compile Include="ACA_AreaConhecimentoDAO.cs" />

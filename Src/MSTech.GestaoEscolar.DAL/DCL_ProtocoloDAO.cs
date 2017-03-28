@@ -504,6 +504,34 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna inf. detalhadas da Nome do Aluno/Escola/turma/Periodo de Justificativa vinculados ao protocolo (pro_id)
+        /// </summary>
+        /// <param name="pro_id">ID do protocolo</param>
+        /// <returns></returns>
+        public DataTable SelectBy_Protocolo_AlunoJustificativaFalta(Guid pro_id)
+        {
+            // *** Não sendo utilizada no momento ***
+            //  Foi retirado do Diario de Classes (Aplicativo Android), mas pedido para deixar as rotinas comentadas   
+
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_AlunoJustificativaFalta_SelectBy_DCL_Protocolo", this._Banco);
+
+            #region PARAMETROS
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Guid;
+            Param.ParameterName = "@pro_id";
+            Param.Size = 36;
+            Param.Value = pro_id;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.Execute();
+
+            return qs.Return;
+        }
+
+        /// <summary>
         /// Retorna inf. detalhadas da Nome aluno/Matricula/Escola/Turma/Grupamento de ensino vinculadas ao protocolo (pro_id)
         /// </summary>
         /// <param name="pro_id">ID do protocolo</param>

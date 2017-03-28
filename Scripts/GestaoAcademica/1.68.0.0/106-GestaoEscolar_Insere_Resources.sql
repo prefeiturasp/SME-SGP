@@ -221,6 +221,34 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = '<p>Prezado(a) professor(a),</p><br><p align="justify">A Secretaria Municipal de Educa&ccedil;&atilde;o (SME) realizar&aacute;, na segunda quinzena de junho, a primeira avalia&ccedil;&atilde;o semestral em nossa rede. Nela estar&atilde;o contempladas as disciplinas: Arte, Ci&ecirc;ncias, Educa&ccedil;&atilde;o F&iacute;sica, Geografia, Hist&oacute;ria, L&iacute;ngua Inglesa, L&iacute;ngua Portuguesa e Matem&aacute;tica.</p><br><p align="justify">A fim de proporcionar uma avalia&ccedil;&atilde;o que colabore com o trabalho docente, convidamos todos os professores para participar de uma pesquisa dispon&iacute;vel aqui no SGP que indicar&aacute; quais objetos de aprendizagem s&atilde;o trabalhados nos bimestres de cada ano de escolariza&ccedil;&atilde;o.</p><br><p align="justify">Essas informa&ccedil;&otilde;es s&atilde;o muito importantes para que sejam elaboradas avalia&ccedil;&otilde;es significativas para nossos estudantes e para voc&ecirc; professor.</p><br><p align="justify"><br /> </p><br><p align="justify">Agradecemos a sua participa&ccedil;&atilde;o.</p>'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'MenuBoletimInfantil' 
+        , @rcr_NomeResource = 'AreaAluno.MasterPageAluno'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Relatório Pedagógico'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'MenuBoletimOnline' 
+        , @rcr_NomeResource = 'AreaAluno.MasterPageAluno'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Boletim Online'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'BoletimCompletoAluno.UCBoletimAngular.MensagemSemEventoLiberadoInfantil' 
+        , @rcr_NomeResource = 'WebControls'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'O relatório pedagógico ainda não foi liberado pela escola.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'MSG_RODAPEBOLETIMCOMPLETOInfantil' 
+        , @rcr_NomeResource = 'Mensagens'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'O relatório pedagógico do aluno pode ser acessado pela internet através do endereço: <a target="_blank" href="http://infanciaonline.sme.prefeitura.sp.gov.br">http://infanciaonline.sme.prefeitura.sp.gov.br</a>. Pais/responsáveis, para entrar utilizem usuário: código EOL descrito acima e senha: data de nascimento do estudante.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
