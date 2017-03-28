@@ -30,6 +30,10 @@
       <FullPath>AulasSemPlanoAula.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>DivergenciasRematriculas.rdl</Name>
+      <FullPath>DivergenciasRematriculas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>DocDctAlunosPendenciaEfetivacao.rdl</Name>
       <FullPath>DocDctAlunosPendenciaEfetivacao.rdl</FullPath>
     </ProjectItem>
@@ -134,8 +138,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>DivergenciasRematriculas.rdl</Name>
-      <FullPath>DivergenciasRematriculas.rdl</FullPath>
+      <Name>AlunosJustificativaFalta.rdl</Name>
+      <FullPath>AlunosJustificativaFalta.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
