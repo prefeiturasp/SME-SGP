@@ -138,6 +138,10 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>RelatorioObjetoAprendizagem.rdl</Name>
+      <FullPath>RelatorioObjetoAprendizagem.rdl</FullPath>
+    </ProjectItem>
+	<ProjectItem>
       <Name>AlunosJustificativaFalta.rdl</Name>
       <FullPath>AlunosJustificativaFalta.rdl</FullPath>
     </ProjectItem>
