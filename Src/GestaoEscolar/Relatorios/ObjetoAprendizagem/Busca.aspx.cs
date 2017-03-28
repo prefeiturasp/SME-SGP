@@ -113,16 +113,22 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
         {
             try
             {
-                if (UCComboUAEscola.Esc_ID > 0 && UCComboUAEscola.Uni_ID > 0)
+                if (UCComboAnoLetivo1.ano > 0)
                 {
-                    rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscola(UCComboUAEscola.Esc_ID, true, ApplicationWEB.AppMinutosCacheLongo);
+                    rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
                     rptCampos.DataBind();
+
+                    lblMessageCiclo.Visible = false;
+                    if (rptCampos.Items.Count <= 0)
+                    {
+                        lblMessageCiclo.Visible = true;
+                        lblMessageCiclo.Text = GetGlobalResourceObject("Relatorios", "ObjetoAprendizagem.Busca.lblMessageCiclo.Text").ToString();
+                    }
+
+                    divCiclo.Visible = true;
                 }
                 else
-                {
-                    rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivos(true, ApplicationWEB.AppMinutosCacheLongo);
-                    rptCampos.DataBind();
-                }
+                    divCiclo.Visible = false;
             }
             catch (Exception ex)
             {
@@ -134,6 +140,22 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
         protected void UCComboAnoLetivo1_IndexChanged()
         {
             UCComboTipoDisciplina1.CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(UCComboAnoLetivo1.ano);
+            if (UCComboAnoLetivo1.ano > 0)
+            {
+                rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
+                rptCampos.DataBind();
+
+                lblMessageCiclo.Visible = false;
+                if (rptCampos.Items.Count <= 0)
+                {
+                    lblMessageCiclo.Visible = true;
+                    lblMessageCiclo.Text = GetGlobalResourceObject("Relatorios", "ObjetoAprendizagem.Busca.lblMessageCiclo.Text").ToString();
+                }
+
+                divCiclo.Visible = true;
+            }
+            else
+                divCiclo.Visible = false;
         }
 
         #endregion Delegates
@@ -148,8 +170,17 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
             UCComboAnoLetivo1.CarregarAnoAtual();
             UCComboUAEscola.Inicializar();
             UCComboTipoDisciplina1.CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(UCComboAnoLetivo1.ano);
-            rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivos(true, ApplicationWEB.AppMinutosCacheLongo);
+            rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
             rptCampos.DataBind();
+
+            lblMessageCiclo.Visible = false;
+            if (rptCampos.Items.Count <= 0)
+            {
+                lblMessageCiclo.Visible = true;
+                lblMessageCiclo.Text = GetGlobalResourceObject("Relatorios", "ObjetoAprendizagem.Busca.lblMessageCiclo.Text").ToString();
+            }
+
+            divCiclo.Visible = true;
 
             if (UCComboUAEscola.VisibleUA)
                 UCComboUAEscola_IndexChangedUA();
@@ -241,16 +272,27 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
         private void GerarRel()
         {
             string ciclosSelecionados = "";
+            string ciclosTexto = "";
+            bool todosCiclos = true;
             foreach (RepeaterItem item in rptCampos.Items)
             {
                 CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
-                if (ckbCampo != null && ckbCampo.Checked)
+                if (ckbCampo != null)
                 {
-                    HiddenField hdnId = (HiddenField)item.FindControl("hdnId");
-                    if (hdnId != null)
-                        ciclosSelecionados += (string.IsNullOrEmpty(ciclosSelecionados) ? "" : ",") + hdnId.Value;
+                    if (ckbCampo.Checked)
+                    {
+                        ciclosTexto += (string.IsNullOrEmpty(ciclosTexto) ? "" : ", ") + ckbCampo.Text;
+                        HiddenField hdnId = (HiddenField)item.FindControl("hdnId");
+                        if (hdnId != null)
+                            ciclosSelecionados += (string.IsNullOrEmpty(ciclosSelecionados) ? "" : ",") + hdnId.Value;
+                    }
+                    else
+                        todosCiclos = false;
                 }
             }
+
+            if (todosCiclos)
+                ciclosTexto = "Todos";
 
             if (string.IsNullOrEmpty(ciclosSelecionados))
                 throw new ValidationException(GetGlobalResourceObject("Relatorios", "ObjetoAprendizagem.Busca.cvCiclos.ErrorMessage").ToString());
@@ -263,14 +305,15 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
             parameter = "uad_idSuperior=" + UCComboUAEscola.Uad_ID.ToString()
                         + "&esc_id=" + UCComboUAEscola.Esc_ID.ToString()
                         + "&uni_id=" + UCComboUAEscola.Uni_ID.ToString()
-                        + "&ano=" + UCComboAnoLetivo1.ano.ToString()
+                        + "&cal_ano=" + UCComboAnoLetivo1.ano.ToString()
                         + "&ciclosSelecionados=" + ciclosSelecionados
+                        + "&ciclosTexto=" + ciclosTexto
                         + "&tds_id=" + UCComboTipoDisciplina1.Valor.ToString()
+                        + "&tds_nome=" + UCComboTipoDisciplina1.Texto
                         + "&tipoRel=" + ddlTipoRel.SelectedValue
-                        + "&mostraCodigoEscola=" + ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.ORDENAR_ESCOLAS_POR_CODIGO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                        + "&MostraCodigoEscola=" + ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.ORDENAR_ESCOLAS_POR_CODIGO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                         + "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
                                                 , ApplicationWEB.LogoRelatorioSSRS)
-                        + "&periodoCurso=" + GestaoEscolarUtilBO.nomePadraoPeriodo(__SessionWEB.__UsuarioWEB.Usuario.ent_id)
                         + "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio")
                         + "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria")
                         + "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString()

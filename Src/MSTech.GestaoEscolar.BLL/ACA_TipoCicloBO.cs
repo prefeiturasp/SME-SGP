@@ -39,9 +39,9 @@ namespace MSTech.GestaoEscolar.BLL
             return "Cache_SelecionaTipoCicloAtivos";
         }
 
-        public static string RetornaChaveCache_SelecionaTipoCicloAtivosEscola(int esc_id)
+        public static string RetornaChaveCache_SelecionaTipoCicloAtivosEscolaAno(int cal_ano, int esc_id, Guid uad_idSuperior)
         {
-            return String.Format("Cache_SelecionaTipoCicloAtivosEscola_{0}", esc_id);
+            return String.Format("Cache_SelecionaTipoCicloAtivosEscola_{0}_{1}_{2}", cal_ano, esc_id, uad_idSuperior);
         }
 
         public static string RetornaChaveCache_SelecionaCicloPorCursoCurriculo(int cur_id, int crr_id)
@@ -171,23 +171,25 @@ namespace MSTech.GestaoEscolar.BLL
         /// <summary>
         /// Carrega os tipos de ciclos ligados à cursos da escola informada
         /// </summary>
+        /// <param name="cal_ano">Ano do objeto de aprendizagem do ciclo</param>
         /// <param name="esc_id">ID da escola</param>
+        /// <param name="uad_idSuperior">ID da unidade superior</param>
         /// <param name="objetoAprendizagem">Informa se vai retornar apenas ciclos que permitem objetos de aprendizagem</param>
         /// <param name="appMinutosCacheLongo">Tempo do cache</param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static List<sComboTipoCiclo> SelecionaTipoCicloAtivosEscola(int esc_id, bool objetoAprendizagem, int appMinutosCacheLongo = 0)
+        public static List<sComboTipoCiclo> SelecionaTipoCicloAtivosEscolaAno(int cal_ano, int esc_id, Guid uad_idSuperior, bool objetoAprendizagem, int appMinutosCacheLongo = 0)
         {
             List<sComboTipoCiclo> dados = null;
 
             if (appMinutosCacheLongo > 0 && HttpContext.Current != null)
             {
-                string chave = RetornaChaveCache_SelecionaTipoCicloAtivosEscola(esc_id);
+                string chave = RetornaChaveCache_SelecionaTipoCicloAtivosEscolaAno(cal_ano, esc_id, uad_idSuperior);
                 object cache = HttpContext.Current.Cache[chave];
 
                 if (cache == null)
                 {
-                    using (DataTable dt = new ACA_TipoCicloDAO().SelecionarAtivosEscola(esc_id, out totalRecords))
+                    using (DataTable dt = new ACA_TipoCicloDAO().SelecionarAtivosEscolaAno(cal_ano, esc_id, uad_idSuperior, out totalRecords))
                     {
                         dados = (from DataRow dr in dt.Rows
                                  where !objetoAprendizagem || Convert.ToBoolean(dr["tci_objetoAprendizagem"])
@@ -209,7 +211,7 @@ namespace MSTech.GestaoEscolar.BLL
 
             if (dados == null)
             {
-                using (DataTable dt = new ACA_TipoCicloDAO().SelecionarAtivosEscola(esc_id, out totalRecords))
+                using (DataTable dt = new ACA_TipoCicloDAO().SelecionarAtivosEscolaAno(cal_ano, esc_id, uad_idSuperior, out totalRecords))
                 {
                     dados = (from DataRow dr in dt.Rows
                              where !objetoAprendizagem || Convert.ToBoolean(dr["tci_objetoAprendizagem"])

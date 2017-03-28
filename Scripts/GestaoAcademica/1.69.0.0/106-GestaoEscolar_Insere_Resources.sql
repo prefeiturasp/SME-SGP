@@ -75,6 +75,13 @@ SET XACT_ABORT ON
             , @rcr_valorPadrao = 'Objetos de aprendizagem'
 
 	EXEC MS_InsereResource 
+            @rcr_chave = 'ObjetoAprendizagem.Busca.lblMessageCiclo.Text' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Não há ciclos ligados à objetos de aprendizagem para os filtros selecionados.'
+
+	EXEC MS_InsereResource 
             @rcr_chave = 'ControleTurma.Busca.grvPeriodosAulas.ColunaSugestao' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
