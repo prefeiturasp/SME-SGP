@@ -74,6 +74,27 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Objetos de aprendizagem'
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleTurma.Busca.grvPeriodosAulas.ColunaSugestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sugestão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleTurma.Busca.grvPeriodosAulas.ColunaAulasCriadas' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Aulas criadas'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleTurma.Busca.imgDivergenciaAulaPrevista.ToolTip' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Existe divergência entre aulas criadas e aulas previstas'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
