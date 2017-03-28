@@ -650,7 +650,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-        <Top>5.41016cm</Top>
+        <Top>5.2396cm</Top>
         <Left>0.03175cm</Left>
         <Height>1.22556cm</Height>
         <Width>16.45821cm</Width>
@@ -667,7 +667,7 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>7.48239cm</Height>
+    <Height>6.46516cm</Height>
     <Style />
   </Body>
   <Width>27.7cm</Width>
