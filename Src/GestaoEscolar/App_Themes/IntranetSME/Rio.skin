@@ -83,6 +83,7 @@
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/icoRelatorio.png"  SkinID="btRelatorio" Width="20px" Height="20px" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico-formulario.png" SkinID="btFormulario" Width="20px" Height="20px" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excluir.png" CssClass="btExcluir" SkinID="btExcluir" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/iconeHelp.png" CssClass="btExcluir" SkinID="btAjuda" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excluir.png" CssClass="btExcluir" SkinID="btExcluirPlanejamento" style="display:inline-block;padding:0; vertical-align:bottom;" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excluir.png" CssClass="btExcluirSemMensagem" SkinID="btExcluirSemMensagem" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/excluir.png" CssClass="btExcluirTurno" SkinID="btExcluirTurno" />

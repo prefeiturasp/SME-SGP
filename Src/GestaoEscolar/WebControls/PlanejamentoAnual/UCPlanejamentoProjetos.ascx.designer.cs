@@ -193,6 +193,15 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         protected global::System.Web.UI.WebControls.Literal litObjetoAprendizagem;
         
         /// <summary>
+        /// btnAjudaObjetos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnAjudaObjetos;
+        
+        /// <summary>
         /// divTabsPlanoCiclo control.
         /// </summary>
         /// <remarks>

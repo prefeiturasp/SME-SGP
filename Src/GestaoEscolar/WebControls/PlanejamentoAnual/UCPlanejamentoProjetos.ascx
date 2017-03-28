@@ -183,7 +183,11 @@
         <li><a href="#divTabs-Documentos">
             <asp:Literal ID="litDocumentos" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.litDocumentos.Text %>"></asp:Literal></a></li>
         <li runat="server" id="abaobjAprendizagem"><a href="#<%= divTabsObjetoAprendizagem.ClientID %>">
-            <asp:Literal ID="litObjetoAprendizagem" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.litObjetoAprendizagem.Text %>"></asp:Literal></a></li>
+            <asp:Literal ID="litObjetoAprendizagem" runat="server" Text="<%$ Resources:UserControl, UCPlanejamentoProjetos.litObjetoAprendizagem.Text %>"></asp:Literal></a>
+            <asp:ImageButton ID="btnAjudaObjetos" runat="server" SkinID="btAjuda" ToolTip="<%$ Resources:UserControl, UCPlanejamentoProjetos.btnAjudaObjetos.ToolTip %>"
+                OnClientClick="$('#divMensagemObjetoAprendizagem').dialog('open'); return false;" style="height:25px; width:25px; padding-top:5px; padding-right:5px;" />
+        </li>
+            
     </ul>
     <div id="divTabsPlanoCiclo" runat="server">
         <asp:UpdatePanel ID="updCiclo" runat="server">

@@ -776,8 +776,7 @@
             {
                 lblAvisoObjetosAprendizagem.Text = (string)GetGlobalResourceObject("UserControl", "UCPlanejamentoProjetos.lblAvisoObjetosAprendizagem.Text");
                 updAvisoObjetosAprendizagem.Update();
-                if (!string.IsNullOrEmpty(lblAvisoObjetosAprendizagem.Text))
-                    ScriptManager.RegisterStartupScript(Page, typeof(Page), "AvisoObjetosAprendizagem", "$(document).ready(function() { $('#divMensagemObjetoAprendizagem').dialog('open'); });", true);
+                btnAjudaObjetos.Visible = !string.IsNullOrEmpty(lblAvisoObjetosAprendizagem.Text);
 
                 VS_lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
                 

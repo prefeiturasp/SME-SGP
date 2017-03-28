@@ -243,6 +243,13 @@ SET XACT_ABORT ON
         , @rcr_valorPadrao = 'O relatório pedagógico ainda não foi liberado pela escola.'
 
 	EXEC MS_InsereResource 
+        @rcr_chave = 'UCPlanejamentoProjetos.btnAjudaObjetos.ToolTip' 
+        , @rcr_NomeResource = 'UserControl'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Informações sobre os objetos de aprendizagem.'
+
+	EXEC MS_InsereResource 
         @rcr_chave = 'MSG_RODAPEBOLETIMCOMPLETOInfantil' 
         , @rcr_NomeResource = 'Mensagens'
         , @rcr_cultura = 'pt-BR'
