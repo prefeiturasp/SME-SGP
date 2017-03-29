@@ -145,6 +145,10 @@
       <Name>AlunosJustificativaFalta.rdl</Name>
       <FullPath>AlunosJustificativaFalta.rdl</FullPath>
     </ProjectItem>
+	<ProjectItem>
+      <Name>DivergenciasAulasPrevistas.rdl</Name>
+      <FullPath>DivergenciasAulasPrevistas.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
