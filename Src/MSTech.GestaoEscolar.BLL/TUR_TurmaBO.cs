@@ -2237,6 +2237,15 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna a chave do cache utilizada para carregar a tela de Planejamento Semanal.
+        /// </summary>
+        /// <returns></returns>
+        private static string RetornaChaveCache_SelecionaPorFiltrosPlanejamentoSemanal(int esc_id, int uni_id, int cal_id, int cur_id, int crr_id, int crp_id, Guid ent_id, string tur_codigo, int tci_id, byte tud_tipo)
+        {
+            return string.Format("Cache_SelecionaPorFiltrosPlanejamentoSemanal_{0}_{1}_{2}_{3}_{4}_{5}_{6}_{7}_{8}_{9}", esc_id, uni_id, cal_id, cur_id, crr_id, crp_id, ent_id, tur_codigo, tci_id, tud_tipo);
+        }
+
+        /// <summary>
         /// Traz as turmas que o docente pode dar aula ou é coordenador
         ///	de alguma disciplina da turma, de todos os tipos (Normal e Eletiva do aluno).
         ///	Se for conceito global, traz as turmas apenas se estiver configurado
@@ -2887,6 +2896,298 @@ namespace MSTech.GestaoEscolar.BLL
 
             totalRecords = (dados[0]).Turmas.Count;
             return ConvertToDataTable((dados[0]).Turmas);
+        }
+
+        /// <summary>
+        /// Retorna uma datatable mediante os filtros informados na tela de Busca
+        /// </summary>
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="uni_id">ID da unidade da escola</param>
+        /// <param name="cur_id">ID do curso</param>
+        /// <param name="cal_id">ID do calendário</param>
+        /// <param name="crr_id">ID do currículo do curso</param>
+        /// <param name="crp_id">ID do currículoPeríodo</param>
+        /// <param name="ent_id">ID da entidade - obrigatório</param>
+        /// <param name="tur_codigo">Código da turma</param>
+        /// <param name="appMinutosCacheCurto">Minutos configurados para guardar a consulta em cache (caso não informado, não utiliza cache)</param>
+        /// <param name="tci_id">ID do tipo de ciclo</param>
+        /// <param name="tud_tipo">Tipo da disciplina</param>
+        /// <returns>DataTable</returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaPorFiltrosPlanejamentoSemanalPaginado(
+            int esc_id
+            , int uni_id
+            , int cal_id
+            , int cur_id
+            , int crr_id
+            , int crp_id
+            , Guid ent_id
+            , string tur_codigo
+            , byte tud_tipo
+            , int appMinutosCacheCurto = 0
+            , int tci_id = 0
+        )
+        {
+            List<Struct_MinhasTurmas> dados = SelecionaPorFiltrosPlanejamentoSemanal(esc_id, uni_id, cal_id, cur_id, crr_id, crp_id, ent_id, tur_codigo, tci_id, tud_tipo, appMinutosCacheCurto);
+
+            if (dados.Count <= 0)
+            {
+                totalRecords = 0;
+                return null;
+            }
+
+            totalRecords = (dados[0]).Turmas.Count;
+            return ConvertToDataTable((dados[0]).Turmas);
+        }
+
+        /// <summary>
+        /// Retorna uma lista de planejamento semanal mediante aos filtros informados
+        /// </summary>
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="uni_id">ID da unidade da escola</param>
+        /// <param name="cal_id">ID do calendário</param>
+        /// <param name="cur_id">ID do curso</param>
+        /// <param name="crr_id">ID do currículo do curso</param>
+        /// <param name="crp_id">ID do currículoPeríodo</param>
+        /// <param name="ent_id">ID da entidade - obrigatório</param>
+        /// <param name="tur_codigo">Código da turma</param>
+        /// <param name="appMinutosCacheCurto">Minutos configurados para guardar a consulta em cache (caso não informado, não utiliza cache)</param>
+        /// <param name="tci_id">ID do tipo de ciclo</param>
+        /// <param name="tud_tipo">Tipo da disciplina</param>
+        /// <returns>Lista</returns>
+        public static List<Struct_MinhasTurmas> SelecionaPorFiltrosPlanejamentoSemanal(
+            int esc_id
+            , int uni_id
+            , int cal_id
+            , int cur_id
+            , int crr_id
+            , int crp_id
+            , Guid ent_id
+            , string tur_codigo
+            , int tci_id
+            , byte tud_tipo
+            , int appMinutosCacheCurto = 0
+            )
+        {
+            List<Struct_MinhasTurmas> dados;
+            if (appMinutosCacheCurto > 0 && HttpContext.Current != null)
+            {
+                // Chave padrão do cache - nome do método + parâmetros.
+                string chave = RetornaChaveCache_SelecionaPorFiltrosPlanejamentoSemanal(esc_id, uni_id, cal_id, cur_id, crr_id, crp_id, ent_id, tur_codigo, tci_id, tud_tipo);
+                object cache = HttpContext.Current.Cache[chave];
+
+                if (cache == null)
+                {
+                    // Se não retornou os dados do cache, carrega do banco.
+                    DataTable dt = new TUR_TurmaDAO().SelecionaPorFiltrosPlanejamentoSemanal(esc_id, uni_id, cal_id, cur_id, crr_id, crp_id, ent_id, tur_codigo, tci_id, tud_tipo);
+
+                    dados = (from DataRow dr in dt.Rows
+                             group dr by Convert.ToInt32(dr["esc_id"]) into g
+                             select new Struct_MinhasTurmas
+                             {
+                                 esc_id = g.Key
+                                 ,
+                                 uni_id = Convert.ToInt32(g.FirstOrDefault()["uni_id"])
+                                 ,
+                                 lengendTitulo = g.FirstOrDefault()["tur_escolaUnidade"].ToString()
+                                    + "<br />" + g.FirstOrDefault()["tur_calendario"].ToString()
+                                 ,
+                                 cal_ano = Convert.ToInt32(g.FirstOrDefault()["cal_ano"].ToString())
+                                 ,
+                                 turmasAnoAtual = Convert.ToBoolean(g.FirstOrDefault()["turmasAnoAtual"].ToString())
+                                 ,
+                                 Turmas = (from DataRow drTurmas in g
+                                           where Convert.ToInt32(drTurmas["esc_id"]) == g.Key
+                                           orderby drTurmas["tur_codigo"].ToString()
+                                           select new Struct_MinhasTurmas.Struct_Turmas
+                                           {
+                                               tur_codigo = drTurmas["tur_codigo"].ToString()
+                                               ,
+                                               tud_nome = drTurmas["tud_nome"].ToString()
+                                               ,
+                                               tur_curso = drTurmas["tur_curso"].ToString()
+                                               ,
+                                               tur_turno = drTurmas["tur_turno"].ToString()
+                                               ,
+                                               tur_id = Convert.ToInt64(drTurmas["tur_id"])
+                                               ,
+                                               tur_escolaUnidade = drTurmas["tur_escolaUnidade"].ToString()
+                                               ,
+                                               tud_id = Convert.ToInt64(drTurmas["tud_id"])
+                                               ,
+                                               tdt_posicao = Convert.ToInt32(drTurmas["tdt_posicao"])
+                                               ,
+                                               tdc_id = Convert.ToByte(drTurmas["tdc_id"])
+                                               ,
+                                               cal_id = Convert.ToInt32(drTurmas["cal_id"])
+                                               ,
+                                               esc_id = Convert.ToInt32(drTurmas["esc_id"])
+                                               ,
+                                               uni_id = Convert.ToInt32(drTurmas["uni_id"])
+                                               ,
+                                               mostraPosicao = false // não mostrar a posição quando for o admin
+                                               ,
+                                               tud_naoLancarNota = Convert.ToBoolean(drTurmas["tud_naoLancarNota"])
+                                               ,
+                                               tud_naoLancarFrequencia = Convert.ToBoolean(drTurmas["tud_naoLancarFrequencia"])
+                                               ,
+                                               tud_disciplinaEspecial = Convert.ToBoolean(drTurmas["tud_disciplinaEspecial"])
+                                               ,
+                                               tdt_situacao = 1
+                                               //,
+                                               //aulasPrevistasPreenchida = Convert.ToBoolean(drTurmas["AulasPrevistasPreenchida"])
+                                               ,
+                                               tur_calendario = drTurmas["tur_calendario"].ToString()
+                                               ,
+                                               tds_id = Convert.ToInt32(drTurmas["tds_id"])
+                                               ,
+                                               disciplinaAtiva = true
+                                               ,
+                                               tud_tipo = Convert.ToByte(drTurmas["tud_tipo"])
+                                               ,
+                                               tur_dataEncerramento = Convert.ToDateTime(drTurmas["tur_dataEncerramento"] == DBNull.Value ? new DateTime() : drTurmas["tur_dataEncerramento"])
+                                               ,
+                                               cal_ano = Convert.ToInt32(drTurmas["cal_ano"].ToString())
+                                               ,
+                                               turmasAnoAtual = Convert.ToBoolean(drTurmas["turmasAnoAtual"].ToString())
+                                               ,
+                                               tciIds = drTurmas["tciIds"].ToString()
+                                               ,
+                                               tur_tipo = Convert.ToByte(drTurmas["tur_tipo"])
+                                               ,
+                                               tud_idAluno = Convert.ToInt64(drTurmas["tud_idAluno"] == DBNull.Value ? "-1" : drTurmas["tud_idAluno"])
+                                               ,
+                                               tur_idNormal = Convert.ToInt64(drTurmas["tur_idNormal"] == DBNull.Value ? "-1" : drTurmas["tur_idNormal"])
+                                               ,
+                                               tur_codigoNormal = drTurmas["tur_codigoNormal"].ToString()
+                                               ,
+                                               fav_id = Convert.ToInt32(drTurmas["fav_id"])
+                                               ,
+                                               tdt_id = drTurmas["tdt_id"] != DBNull.Value ?
+                                                                          Convert.ToInt32(drTurmas["tdt_id"].ToString())
+                                                                          : 0
+                                                                      ,
+                                               tdt_vigenciaInicio = drTurmas["tdt_vigenciaInicio"] != DBNull.Value ?
+                                                                          Convert.ToDateTime(drTurmas["tdt_vigenciaInicio"].ToString())
+                                                                          : new DateTime()
+                                                                      ,
+                                               tdt_vigenciaFim =
+                                                                          drTurmas["tdt_vigenciaFim"] != DBNull.Value ?
+                                                                          Convert.ToDateTime(drTurmas["tdt_vigenciaFim"].ToString())
+                                                                          : new DateTime()
+                                                                      ,
+                                               crg_tipo = drTurmas["crg_tipo"] != DBNull.Value ?
+                                                                          Convert.ToByte(drTurmas["crg_tipo"].ToString())
+                                                                          : (byte)0
+                                           }).ToList()
+                             }).ToList();
+                    // Adiciona cache com validade do tempo informado na configuração.
+                    HttpContext.Current.Cache.Insert(chave, dados, null, DateTime.Now.AddMinutes(appMinutosCacheCurto), System.Web.Caching.Cache.NoSlidingExpiration);
+                }
+                else
+                {
+                    dados = (List<Struct_MinhasTurmas>)cache;
+                }
+            }
+            else
+            {
+                // Se não retornou os dados do cache, carrega do banco.
+                DataTable dt = new TUR_TurmaDAO().SelecionaPorFiltrosPlanejamentoSemanal(esc_id, uni_id, cal_id, cur_id, crr_id, crp_id, ent_id, tur_codigo, tci_id, tud_tipo);
+
+                dados = (from DataRow dr in dt.Rows
+                         group dr by Convert.ToInt32(dr["esc_id"]) into g
+                         select new Struct_MinhasTurmas
+                         {
+                             esc_id = g.Key
+                             ,
+                             uni_id = Convert.ToInt32(g.FirstOrDefault()["uni_id"])
+                             ,
+                             lengendTitulo = g.FirstOrDefault()["tur_escolaUnidade"].ToString()
+                                + "<br />" + g.FirstOrDefault()["tur_calendario"].ToString()
+                             ,
+                             cal_ano = Convert.ToInt32(g.FirstOrDefault()["cal_ano"].ToString())
+                             ,
+                             turmasAnoAtual = Convert.ToBoolean(g.FirstOrDefault()["turmasAnoAtual"].ToString())
+                             ,
+                             Turmas = (from DataRow drTurmas in g
+                                       where Convert.ToInt32(drTurmas["esc_id"]) == g.Key
+                                       orderby drTurmas["tur_codigo"].ToString()
+                                       select new Struct_MinhasTurmas.Struct_Turmas
+                                       {
+                                           tur_codigo = drTurmas["tur_codigo"].ToString()
+                                           ,
+                                           tud_nome = drTurmas["tud_nome"].ToString()
+                                           ,
+                                           tur_curso = drTurmas["tur_curso"].ToString()
+                                           ,
+                                           tur_turno = drTurmas["tur_turno"].ToString()
+                                           ,
+                                           tur_id = Convert.ToInt64(drTurmas["tur_id"])
+                                           ,
+                                           tur_escolaUnidade = drTurmas["tur_escolaUnidade"].ToString()
+                                           ,
+                                           tud_id = Convert.ToInt64(drTurmas["tud_id"])
+                                           ,
+                                           tdt_posicao = Convert.ToInt32(drTurmas["tdt_posicao"])
+                                           ,
+                                           tdc_id = Convert.ToByte(drTurmas["tdc_id"])
+                                           ,
+                                           cal_id = Convert.ToInt32(drTurmas["cal_id"])
+                                           ,
+                                           esc_id = Convert.ToInt32(drTurmas["esc_id"])
+                                           ,
+                                           uni_id = Convert.ToInt32(drTurmas["uni_id"])
+                                           ,
+                                           mostraPosicao = false // não mostrar a posição quando for o admin
+                                           ,
+                                           tud_naoLancarNota = Convert.ToBoolean(drTurmas["tud_naoLancarNota"])
+                                           ,
+                                           tud_naoLancarFrequencia = Convert.ToBoolean(drTurmas["tud_naoLancarFrequencia"])
+                                           ,
+                                           tud_disciplinaEspecial = Convert.ToBoolean(drTurmas["tud_disciplinaEspecial"])
+                                           ,
+                                           tdt_situacao = 1
+                                           //,
+                                           //aulasPrevistasPreenchida = Convert.ToBoolean(drTurmas["AulasPrevistasPreenchida"])
+                                           ,
+                                           tur_calendario = drTurmas["tur_calendario"].ToString()
+                                           ,
+                                           tds_id = Convert.ToInt32(drTurmas["tds_id"])
+                                           ,
+                                           disciplinaAtiva = true
+                                           ,
+                                           tud_tipo = Convert.ToByte(drTurmas["tud_tipo"])
+                                           ,
+                                           tur_dataEncerramento = Convert.ToDateTime(drTurmas["tur_dataEncerramento"] == DBNull.Value ? new DateTime() : drTurmas["tur_dataEncerramento"])
+                                           ,
+                                           cal_ano = Convert.ToInt32(drTurmas["cal_ano"].ToString())
+                                           ,
+                                           turmasAnoAtual = Convert.ToBoolean(drTurmas["turmasAnoAtual"].ToString())
+                                           ,
+                                           tciIds = drTurmas["tciIds"].ToString()
+                                           ,
+                                           tur_tipo = Convert.ToByte(drTurmas["tur_tipo"])
+                                           ,
+                                           tud_idAluno = Convert.ToInt64(drTurmas["tud_idAluno"] == DBNull.Value ? "-1" : drTurmas["tud_idAluno"])
+                                           ,
+                                           tur_idNormal = Convert.ToInt64(drTurmas["tur_idNormal"] == DBNull.Value ? "-1" : drTurmas["tur_idNormal"])
+                                           ,
+                                           tur_codigoNormal = drTurmas["tur_codigoNormal"].ToString()
+                                           ,
+                                           tdt_id = Convert.ToInt32(drTurmas["tdt_id"].ToString())
+                                                                      ,
+                                           tdt_vigenciaInicio = Convert.ToDateTime(drTurmas["tdt_vigenciaInicio"].ToString())
+                                                                      ,
+                                           tdt_vigenciaFim =
+                                                                          drTurmas["tdt_vigenciaFim"] != DBNull.Value ?
+                                                                          Convert.ToDateTime(drTurmas["tdt_vigenciaFim"].ToString())
+                                                                          : new DateTime()
+                                                                      ,
+                                           crg_tipo = Convert.ToByte(drTurmas["crg_tipo"].ToString())
+                                       }).ToList()
+                         }).ToList();
+            }
+            return dados;
         }
 
         /// <summary>

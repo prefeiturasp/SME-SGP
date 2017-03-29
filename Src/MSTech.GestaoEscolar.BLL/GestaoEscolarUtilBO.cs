@@ -460,6 +460,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         ObjetoAprendizagem
+        ,
+
+        PlanejamentoSemanal
     }
 
     [Serializable]

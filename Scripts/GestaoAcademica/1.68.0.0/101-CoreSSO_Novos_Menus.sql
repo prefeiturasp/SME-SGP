@@ -45,6 +45,22 @@ SET XACT_ABORT ON
 		,@possuiVisaoUA = 0 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Registro de classe' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Plano semanal' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Consulta de plano semanal'
+		,@SiteMap1Url = '~/Academico/ControleSemanal/Busca.aspx'
+		,@SiteMap2Nome = 'Cadastro de plano semanal' 
+		,@SiteMap2Url = '~/Academico/ControleSemanal/Cadastro.aspx'
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
+
 -- Fechar transação
 SET XACT_ABORT OFF
 COMMIT TRANSACTION	

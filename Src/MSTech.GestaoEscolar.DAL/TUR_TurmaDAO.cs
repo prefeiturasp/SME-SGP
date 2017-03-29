@@ -5095,6 +5095,137 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Seleciona minhas turmas
+        /// </summary>
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="uni_id">ID da unidade da escola</param>
+        /// <param name="cur_id">ID do curso</param>
+        /// <param name="crr_id">ID do currículo do curso</param>
+        /// <param name="crp_id">ID do currículoPeríodo</param>
+        /// <param name="ent_id">ID da entidade</param>
+        /// <param name="tur_codigo">Código da turma</param>
+        /// <param name="tci_id">ID do tipo de ciclo</param>        
+        /// <returns></returns>
+        public DataTable SelecionaPorFiltrosPlanejamentoSemanal(
+            int esc_id
+            , int uni_id
+            , int cal_id
+            , int cur_id
+            , int crr_id
+            , int crp_id
+            , Guid ent_id
+            , string tur_codigo
+            , int tci_id
+            , byte tud_tipo
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_TUR_Turma_SelectByFiltrosPlanejamentoSemanal", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@esc_id";
+                Param.Size = 4;
+                Param.Value = esc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@uni_id";
+                Param.Size = 4;
+                Param.Value = uni_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_id";
+                Param.Size = 4;
+                if (cal_id > 0)
+                    Param.Value = cal_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cur_id";
+                Param.Size = 4;
+                if (cur_id > 0)
+                    Param.Value = cur_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@crr_id";
+                Param.Size = 4;
+                if (crr_id > 0)
+                    Param.Value = crr_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@crp_id";
+                Param.Size = 4;
+                if (crp_id > 0)
+                    Param.Value = crp_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.String;
+                Param.ParameterName = "@tur_codigo";
+                Param.Size = 30;
+                if (!string.IsNullOrEmpty(tur_codigo))
+                    Param.Value = tur_codigo;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@ent_id";
+                Param.Size = 16;
+                Param.Value = ent_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tci_id";
+                Param.Size = 4;
+                if (tci_id > 0)
+                    Param.Value = tci_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int16;
+                Param.ParameterName = "@tud_tipo";
+                Param.Size = 4;
+                Param.Value = tud_tipo;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Seleciona o histórico das turmas do docente
         /// </summary>
         /// <param name="esc_id"></param>
