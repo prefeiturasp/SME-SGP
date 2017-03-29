@@ -1502,6 +1502,13 @@
     <Compile Include="Relatorios\ComponentesFinalizados\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\DivergenciasRematriculas\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3610,6 +3617,7 @@
     <Content Include="Relatorios\AtaSinteseResultadosAvaliacao\Busca.aspx" />
     <Content Include="Relatorios\AulasSemPlanoAula\Busca.aspx" />
     <Content Include="Relatorios\ComponentesFinalizados\Busca.aspx" />
+    <Content Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx" />
     <Content Include="Relatorios\DivergenciasRematriculas\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
