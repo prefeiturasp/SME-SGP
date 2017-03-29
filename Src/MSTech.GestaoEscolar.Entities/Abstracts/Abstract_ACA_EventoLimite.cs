@@ -90,5 +90,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual DateTime evl_dataAlteracao { get; set; }
 
+        public virtual Guid uad_id { get; set; }
     }
 }

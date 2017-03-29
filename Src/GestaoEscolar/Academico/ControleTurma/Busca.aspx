@@ -129,6 +129,9 @@
                                                                                         && Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.Experiencia
                                                                                         && Convert.ToBoolean(Eval("aulasPrevistasPreenchida")) %>'
                                                 ImageAlign="Top" />
+                                            <asp:Image ID="imgDivergenciaAulaPrevista" runat="server" SkinID="imgAviso" Width="16px" Height="16px"
+                                                ToolTip="<%$ Resources:Academico, ControleTurma.Busca.imgDivergenciaAulaPrevista.ToolTip %>"
+                                                Visible='<%# Convert.ToBoolean(Eval("divergenciasAulasPrevistas")) %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
@@ -292,6 +295,9 @@
                                                                                     && Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.Experiencia
                                                                                     && Convert.ToBoolean(Eval("aulasPrevistasPreenchida")) %>'
                                         ImageAlign="Top" />
+                                    <asp:Image ID="imgDivergenciaAulaPrevista" runat="server" SkinID="imgAviso" Width="16px" Height="16px"
+                                        ToolTip="<%$ Resources:Academico, ControleTurma.Busca.imgDivergenciaAulaPrevista.ToolTip %>"
+                                        Visible="false" />
                                 </ItemTemplate>
                             </asp:TemplateField>
 
@@ -424,8 +430,7 @@
                             <Columns>
                                 <asp:BoundField HeaderText="Bimestre" DataField="cap_descricao" FooterText="Total" />
                                 <asp:BoundField HeaderText="Período" DataField="periodo" />
-                                <%--<asp:BoundField HeaderText="Previstas" DataField="aulasPrevistas" />--%>
-                                <asp:TemplateField HeaderText="Sugestão">
+                                <asp:TemplateField HeaderText="<%$ Resources:Academico, ControleTurma.Busca.grvPeriodosAulas.ColunaSugestao %>">
                                     <ItemTemplate>
                                         <asp:HyperLink runat="server" ID="lnkSugestao" Text='<%# Bind("aulasSugestao") %>' style="cursor:pointer"></asp:HyperLink>
                                         <asp:Label runat="server" ID="lblSugestao" Text='<%# Bind("aulasSugestao") %>'></asp:Label>
@@ -456,7 +461,13 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                     <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <%--<asp:BoundField HeaderText="Cumpridas" DataField="aulasDadas" />--%>
+                                <asp:TemplateField HeaderText="<%$ Resources:Academico, ControleTurma.Busca.grvPeriodosAulas.ColunaAulasCriadas %>">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" ID="lblCriadas" Text='<%# Bind("aulasCriadas") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Cumpridas">
                                     <ItemTemplate>
                                         <asp:Label runat="server" ID="lblDadas" Text='<%# Bind("aulasDadas") %>'></asp:Label>
@@ -468,7 +479,6 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                     <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <%--<asp:BoundField HeaderText="Reposições" DataField="aulasRepostas" />--%>
                                 <asp:TemplateField HeaderText="Reposições">
                                     <ItemTemplate>
                                         <asp:Label runat="server" ID="lblReposicoes" Text='<%# Bind("aulasRepostas") %>'></asp:Label>

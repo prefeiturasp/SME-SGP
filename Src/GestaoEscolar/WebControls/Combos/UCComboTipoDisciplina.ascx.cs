@@ -209,6 +209,25 @@ public partial class WebControls_Combos_UCComboTipoDisciplina : MotherUserContro
     }
 
     /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist exibindo o nível de ensino
+    /// e o tipo de disciplina no combo   
+    /// </summary>
+    public void CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(int cal_ano)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("cal_ano", cal_ano.ToString());
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectParameters.Add("AppMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
+
+        ddlCombo.DataTextField = "tne_tds_nome";
+        odsDados.SelectMethod = "SelecionaTipoDisciplinaObjetosAprendizagem";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um tipo de " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " --", "-1", true));
+        ddlCombo.DataBind();
+    }
+
+    /// <summary>
     /// Mostra os dados não excluídos logicamente no dropdownlist por nível de ensino   
     /// </summary>
     public void CarregarTipoDisciplinaPorNivelEnsino(int tne_id)

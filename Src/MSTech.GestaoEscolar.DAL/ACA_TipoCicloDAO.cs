@@ -83,6 +83,63 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Retorna os tipos de ciclo de aprendizagem ativos de cursos ligados à escola
+        /// </summary>
+        /// <param name="cal_ano">Ano do objeto de aprendizagem do ciclo</param>
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="uad_idSuperior">ID da unidade superior</param>
+        /// <param name="totalRecords">Total de registros da consulta</param>
+        /// <returns>Lista com os tipos</returns>
+        public DataTable SelecionarAtivosEscolaAno(int cal_ano, int esc_id, Guid uad_idSuperior, out int totalRecords)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoCiclo_SelecionarAtivosEscolaAno", _Banco);
+            List<ACA_TipoCiclo> lstTpCiclo = new List<ACA_TipoCiclo>();
+
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                Param.Value = cal_ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@esc_id";
+                Param.Size = 4;
+                if (esc_id > 0)
+                    Param.Value = esc_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@uad_idSuperior";
+                Param.Size = 16;
+                if (uad_idSuperior != Guid.Empty)
+                    Param.Value = uad_idSuperior;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                totalRecords = qs.Return.Rows.Count;
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
 
         /// <summary>
         /// Retorna informações do tipo do ciclo de ensino do aluno

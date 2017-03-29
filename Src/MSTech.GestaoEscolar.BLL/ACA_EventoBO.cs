@@ -868,6 +868,7 @@ namespace MSTech.GestaoEscolar.BLL
             , IEnumerable<int> calendarios
             , string evt_inicio
             , string evt_fim
+            , int vis_id
             , out string msgValidacao
         )
         {
@@ -902,7 +903,7 @@ namespace MSTech.GestaoEscolar.BLL
                 foreach (int cal_id in calendarios)
                 {
                     var limitesCalendario = limites.Where(evl => evl.cal_id == cal_id);
-                    if (limitesCalendario.Count() == 0)
+                    if (!limitesCalendario.Any())
                     {
                         // Não há limites cadastrados para os campos selecionados
                         // Validação falha somente quando a liberação do tipo de evento é obrigatória
@@ -942,6 +943,18 @@ namespace MSTech.GestaoEscolar.BLL
                             temp = temp.AddDays(1);
                         }
                         while (temp <= dataFim);
+                    }
+                }
+
+                // Não permite a escola criar evento se existir limite de alcance DRE, para o mesmo tipo de evento
+                if (vis_id == SysVisaoID.UnidadeAdministrativa)
+                {
+                    var escola = new ESC_Escola { esc_id = esc_id };
+                    ESC_EscolaBO.GetEntity(escola);
+
+                    if (limites.Any(x => x.uad_id == escola.uad_idSuperiorGestao && x.tev_id == entTipoEvento.tev_id))
+                    {
+                        msgValidacao = "Entre em contato com a sua DRE para criação do evento.";
                     }
                 }
             }
@@ -1144,6 +1157,7 @@ namespace MSTech.GestaoEscolar.BLL
                        , entity.evt_padrao
                        , entity.esc_id, entity.uni_id, entity.tpc_id, lst_calIds
                        , entity.evt_dataInicio.ToString(), entity.evt_dataFim.ToString()
+                       , vis_id
                        , out msg
                        ))
                     {
