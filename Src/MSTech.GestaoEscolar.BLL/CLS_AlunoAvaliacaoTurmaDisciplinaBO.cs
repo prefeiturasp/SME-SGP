@@ -98,6 +98,7 @@ namespace MSTech.GestaoEscolar.BLL
         public int tpc_idUltimoPeriodoLancamento { get; set; }
         public int mtu_numeroChamada { get; set; }
         public string pes_nome { get; set; }
+        public string pes_nome_infoCompl { get; set; }
         public string nomeFormatado { get; set; }
         public bool inativo { get; set; }
         public bool baixaFrequencia { get; set; }
