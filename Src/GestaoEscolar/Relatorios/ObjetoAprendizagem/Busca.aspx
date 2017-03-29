@@ -33,12 +33,13 @@
                             OnIndexChangedUnidadeEscola="UCComboUAEscola_IndexChangedUnidadeEscola" ValidationGroup="Resultados" 
                             ObrigatorioEscola="false" ObrigatorioUA="false" />
                         <uc4:UCComboTipoDisciplina ID="UCComboTipoDisciplina1" runat="server" Obrigatorio="true" ValidationGroup="Resultados" _MostrarMessageSelecione="true" />
-                        <div>
+                        <div runat="server" id="divCiclo">
                             <br />
                             <asp:UpdatePanel ID="updCiclos" runat="server" UpdateMode="Always">
                                 <ContentTemplate>
                                     <fieldset>
                                         <legend>Ciclos <span class="asteriscoObrigatorio">*</span></legend>
+                                        <asp:Label ID="lblMessageCiclo" runat="server"></asp:Label>
                                         <div></div>
                                         <asp:Repeater ID="rptCampos" runat="server">
                                             <HeaderTemplate>

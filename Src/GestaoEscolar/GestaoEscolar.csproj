@@ -759,6 +759,13 @@
     <Compile Include="Classe\JustificativaAbonoFalta\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classe\JustificativaFalta\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\JustificativaFalta\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classe\LancamentoFrequenciaExterna\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1495,6 +1502,13 @@
     <Compile Include="Relatorios\ComponentesFinalizados\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\DivergenciasRematriculas\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1549,6 +1563,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Relatorios\RelatoriosCP\DadosAlunosBaixaFrequencia\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelatoriosCP\GraficoConsolidadoAtivAvaliada\Busca.aspx.cs">
@@ -2837,6 +2858,7 @@
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Cadastro.aspx" />
     <None Include="Configs\Session.txt" />
+    <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
@@ -3515,6 +3537,7 @@
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
     <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
+    <Content Include="Includes\jsCadastroJustificativaFalta.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsFilaFilaFechamento.js" />
     <Content Include="Includes\jsPopupFrequenciaExterna.js" />
@@ -3594,6 +3617,7 @@
     <Content Include="Relatorios\AtaSinteseResultadosAvaliacao\Busca.aspx" />
     <Content Include="Relatorios\AulasSemPlanoAula\Busca.aspx" />
     <Content Include="Relatorios\ComponentesFinalizados\Busca.aspx" />
+    <Content Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx" />
     <Content Include="Relatorios\DivergenciasRematriculas\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
@@ -3601,6 +3625,7 @@
     <Content Include="Relatorios\RelatorioLogTablets\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosConselhoDeClasse\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosAlunosBaixaFrequencia\Busca.aspx" />
+    <Content Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\GraficoConsolidadoAtivAvaliada\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\GraficoIndividualNotas\Busca.aspx" />
     <Content Include="Relatorios\SinteseResultadosAvaliacao\GraficoComponenteCurricularTurmas\Busca.aspx" />

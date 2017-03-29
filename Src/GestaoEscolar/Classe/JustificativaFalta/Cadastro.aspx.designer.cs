@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GestaoEscolar.Relatorios.ObjetoAprendizagem {
+namespace GestaoEscolar.Classe.JustificativaFalta {
     
     
-    public partial class Busca {
+    public partial class Cadastro {
         
         /// <summary>
-        /// updMensagem control.
+        /// updMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updMensagem;
+        protected global::System.Web.UI.UpdatePanel updMessage;
         
         /// <summary>
         /// lblMessage control.
@@ -31,6 +31,15 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
+        /// lblMessageInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessageInfo;
+        
+        /// <summary>
         /// ValidationSummary1 control.
         /// </summary>
         /// <remarks>
@@ -40,156 +49,147 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
         
         /// <summary>
-        /// uppPesquisa control.
+        /// pnlAluno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel uppPesquisa;
+        protected global::System.Web.UI.WebControls.Panel pnlAluno;
         
         /// <summary>
-        /// fdsPesquisa control.
+        /// UCCamposObrigatorios1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsPesquisa;
+        protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios1;
         
         /// <summary>
-        /// lblLegend control.
+        /// updAluno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLegend;
+        protected global::System.Web.UI.UpdatePanel updAluno;
         
         /// <summary>
-        /// UCCamposObrigatorios control.
+        /// lblInformacao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios;
+        protected global::System.Web.UI.WebControls.Label lblInformacao;
         
         /// <summary>
-        /// _divPesquisa control.
+        /// divPesquisaAluno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl _divPesquisa;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPesquisaAluno;
         
         /// <summary>
-        /// lblAvisoMensagem control.
+        /// lblNomeAluno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAvisoMensagem;
+        protected global::System.Web.UI.WebControls.Label lblNomeAluno;
         
         /// <summary>
-        /// UCComboAnoLetivo1 control.
+        /// txtNomeAluno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebControls_Combos_UCComboAnoLetivo UCComboAnoLetivo1;
+        protected global::System.Web.UI.WebControls.TextBox txtNomeAluno;
         
         /// <summary>
-        /// UCComboUAEscola control.
+        /// btnBuscaAluno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::GestaoEscolar.WebControls.Combos.UCComboUAEscola UCComboUAEscola;
+        protected global::System.Web.UI.WebControls.ImageButton btnBuscaAluno;
         
         /// <summary>
-        /// UCComboTipoDisciplina1 control.
+        /// divLimparPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebControls_Combos_UCComboTipoDisciplina UCComboTipoDisciplina1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLimparPesquisa;
         
         /// <summary>
-        /// divCiclo control.
+        /// btnVoltar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCiclo;
+        protected global::System.Web.UI.WebControls.Button btnVoltar;
         
         /// <summary>
-        /// updCiclos control.
+        /// updJustificativaFalta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updCiclos;
+        protected global::System.Web.UI.UpdatePanel updJustificativaFalta;
         
         /// <summary>
-        /// lblMessageCiclo control.
+        /// pnlJustificativaFalta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessageCiclo;
+        protected global::System.Web.UI.WebControls.Panel pnlJustificativaFalta;
         
         /// <summary>
-        /// rptCampos control.
+        /// btnNovaJustificativaFalta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCampos;
+        protected global::System.Web.UI.WebControls.Button btnNovaJustificativaFalta;
         
         /// <summary>
-        /// cvCiclos control.
+        /// grvJustificativaFalta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvCiclos;
+        protected global::System.Web.UI.WebControls.GridView grvJustificativaFalta;
         
         /// <summary>
-        /// lblTipoRel control.
+        /// updBuscaAluno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTipoRel;
+        protected global::System.Web.UI.UpdatePanel updBuscaAluno;
         
         /// <summary>
-        /// ddlTipoRel control.
+        /// UCAluno1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoRel;
-        
-        /// <summary>
-        /// btnGerarRel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGerarRel;
+        protected global::GestaoEscolar.WebControls.Busca.UCAluno UCAluno1;
     }
 }

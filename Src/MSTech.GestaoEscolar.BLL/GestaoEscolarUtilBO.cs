@@ -410,6 +410,8 @@ namespace MSTech.GestaoEscolar.BLL
 
         DadosAlunosBaixaFrequencia
         ,
+        DadosAlunosJustificativaFalta
+        ,
 
         Turmas_ComponentesFinalizados
         ,
@@ -463,6 +465,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         RelatorioObjetoAprendizagem
+        ,
+
+        DivergenciasAulasPrevistas
     }
 
     [Serializable]
@@ -587,7 +592,9 @@ namespace MSTech.GestaoEscolar.BLL
         IndicadorFrequenciaPeriodoCurso = 315,
         AulasSemPlanoAula = 316,
         DivergenciasRematriculas = 317,
-        RelatorioObjetoAprendizagem = 318
+        RelatorioObjetoAprendizagem = 318,
+        AlunosJustificativaFalta = 319,
+        DivergenciasAulasPrevistas = 320
     }
 
     /// <summary>

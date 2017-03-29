@@ -164,6 +164,7 @@
     <Compile Include="ACA_AlunoHistoricoObservacaoBO.cs" />
     <Compile Include="ACA_AlunoHistoricoProjetoBO.cs" />
     <Compile Include="ACA_AlunoJustificativaAbonoFaltaBO.cs" />
+    <Compile Include="ACA_AlunoJustificativaFaltaBO.cs" />
     <Compile Include="ACA_AlunoRecursoAvaliacaoINEPBO.cs" />
     <Compile Include="ACA_AlunoResponsavelBO.cs" />
     <Compile Include="ACA_AreaConhecimentoBO.cs" />

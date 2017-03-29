@@ -2150,8 +2150,44 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
+
+        /// <summary>
+        /// Retorna as disciplinas com divergência entre aulas criadas e aulas previstas.
+        /// </summary>
+        /// <param name="tudIds">Lista de disciplinas para verificar</param>
+        /// <returns></returns>
+        public List<long> SelecionaDisciplinasDivergenciasAulasPrevistas(string tudIds)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_TUR_TurmaDisciplina_SelecionaDisciplinasDivergenciasAulasPrevistas", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.String;
+                Param.ParameterName = "@tudIds";
+                Param.Value = tudIds;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return.Rows.Cast<DataRow>()
+                                     .Select(dr => Convert.ToInt64(dr["tud_id"]))
+                                     .ToList();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
         // FIM ALTERAÇÃO
-        
+
         ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente
         ///// </summary>

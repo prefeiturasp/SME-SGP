@@ -279,6 +279,8 @@ namespace MSTech.GestaoEscolar.BLL
             }
 
             public bool fav_fechamentoAutomatico { get; set; }
+
+            public bool divergenciasAulasPrevistas { get; set; }
         }
     }
 
@@ -3039,16 +3041,16 @@ namespace MSTech.GestaoEscolar.BLL
                                                tdt_id = drTurmas["tdt_id"] != DBNull.Value ?
                                                                           Convert.ToInt32(drTurmas["tdt_id"].ToString())
                                                                           : 0
-                                                                      ,
+                                               ,
                                                tdt_vigenciaInicio = drTurmas["tdt_vigenciaInicio"] != DBNull.Value ?
                                                                           Convert.ToDateTime(drTurmas["tdt_vigenciaInicio"].ToString())
                                                                           : new DateTime()
-                                                                      ,
+                                               ,
                                                tdt_vigenciaFim =
                                                                           drTurmas["tdt_vigenciaFim"] != DBNull.Value ?
                                                                           Convert.ToDateTime(drTurmas["tdt_vigenciaFim"].ToString())
                                                                           : new DateTime()
-                                                                      ,
+                                               ,
                                                crg_tipo = drTurmas["crg_tipo"] != DBNull.Value ?
                                                                           Convert.ToByte(drTurmas["crg_tipo"].ToString())
                                                                           : (byte)0
@@ -3148,14 +3150,14 @@ namespace MSTech.GestaoEscolar.BLL
                                            tur_codigoNormal = drTurmas["tur_codigoNormal"].ToString()
                                            ,
                                            tdt_id = Convert.ToInt32(drTurmas["tdt_id"].ToString())
-                                                                      ,
+                                           ,
                                            tdt_vigenciaInicio = Convert.ToDateTime(drTurmas["tdt_vigenciaInicio"].ToString())
-                                                                      ,
+                                           ,
                                            tdt_vigenciaFim =
                                                                           drTurmas["tdt_vigenciaFim"] != DBNull.Value ?
                                                                           Convert.ToDateTime(drTurmas["tdt_vigenciaFim"].ToString())
                                                                           : new DateTime()
-                                                                      ,
+                                           ,
                                            crg_tipo = Convert.ToByte(drTurmas["crg_tipo"].ToString())
                                        }).ToList()
                          }).ToList();

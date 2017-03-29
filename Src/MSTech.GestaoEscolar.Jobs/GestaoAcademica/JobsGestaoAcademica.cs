@@ -434,12 +434,9 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
         {
             try
             {
-                if (!SYS_ServicosLogExecucaoBO.VerificaServicoRodando((byte)eChaveServicos.ProcessamentoSugestaoAulasPrevistas))
-                {
-                    Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistas);
-                    GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas();
-                    SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
-                }
+                Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistas);
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas();
+                SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
             }
             catch (Exception ex)
             {
@@ -458,12 +455,9 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
         {
             try
             {
-                if (!SYS_ServicosLogExecucaoBO.VerificaServicoRodando((byte)eChaveServicos.ProcessamentoSugestaoAulasPrevistasTodaRede))
-                {
-                    Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistasTodaRede);
-                    GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas_TodaRede();
-                    SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
-                }
+                Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistasTodaRede);
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas_TodaRede();
+                SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
             }
             catch (Exception ex)
             {
@@ -482,12 +476,9 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
         {
             try
             {
-                if (!SYS_ServicosLogExecucaoBO.VerificaServicoRodando((byte)eChaveServicos.ProcessamentoDivergenciasAulasPrevistas))
-                {
-                    Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoDivergenciasAulasPrevistas);
-                    GestaoEscolarServicosBO.MS_JOB_ProcessamentoDivergenciasAulasPrevistas();
-                    SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
-                }
+                Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoDivergenciasAulasPrevistas);
+                GestaoEscolarServicosBO.MS_JOB_ProcessamentoDivergenciasAulasPrevistas();
+                SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
             }
             catch (Exception ex)
             {
