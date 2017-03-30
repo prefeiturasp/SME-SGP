@@ -60,6 +60,7 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
             }
 
             UCComboAnoLetivo1.IndexChanged += UCComboAnoLetivo1_IndexChanged;
+            UCComboTipoDisciplina1.IndexChanged += UCComboTipoDisciplina1_IndexChanged;
         }
 
         #endregion Page Life Cycle
@@ -113,9 +114,11 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
         {
             try
             {
-                if (UCComboAnoLetivo1.ano > 0)
+                UCComboTipoDisciplina1.CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID);
+
+                if (UCComboAnoLetivo1.ano > 0 && UCComboTipoDisciplina1.Valor > 0)
                 {
-                    rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
+                    rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboTipoDisciplina1.Valor, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
                     rptCampos.DataBind();
 
                     lblMessageCiclo.Visible = false;
@@ -139,10 +142,31 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
 
         protected void UCComboAnoLetivo1_IndexChanged()
         {
-            UCComboTipoDisciplina1.CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(UCComboAnoLetivo1.ano);
-            if (UCComboAnoLetivo1.ano > 0)
+            UCComboTipoDisciplina1.CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID);
+
+            if (UCComboAnoLetivo1.ano > 0 && UCComboTipoDisciplina1.Valor > 0)
             {
-                rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
+                rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboTipoDisciplina1.Valor, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
+                rptCampos.DataBind();
+
+                lblMessageCiclo.Visible = false;
+                if (rptCampos.Items.Count <= 0)
+                {
+                    lblMessageCiclo.Visible = true;
+                    lblMessageCiclo.Text = GetGlobalResourceObject("Relatorios", "ObjetoAprendizagem.Busca.lblMessageCiclo.Text").ToString();
+                }
+
+                divCiclo.Visible = true;
+            }
+            else
+                divCiclo.Visible = false;
+        }
+
+        protected void UCComboTipoDisciplina1_IndexChanged()
+        {
+            if (UCComboAnoLetivo1.ano > 0 && UCComboTipoDisciplina1.Valor > 0)
+            {
+                rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboTipoDisciplina1.Valor, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
                 rptCampos.DataBind();
 
                 lblMessageCiclo.Visible = false;
@@ -169,9 +193,24 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
         {
             UCComboAnoLetivo1.CarregarAnoAtual();
             UCComboUAEscola.Inicializar();
-            UCComboTipoDisciplina1.CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(UCComboAnoLetivo1.ano);
-            rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
-            rptCampos.DataBind();
+            UCComboTipoDisciplina1.CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(UCComboAnoLetivo1.ano, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID);
+
+            if (UCComboAnoLetivo1.ano > 0 && UCComboTipoDisciplina1.Valor > 0)
+            {
+                rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivosEscolaAno(UCComboAnoLetivo1.ano, UCComboTipoDisciplina1.Valor, UCComboUAEscola.Esc_ID, UCComboUAEscola.Uad_ID, true, ApplicationWEB.AppMinutosCacheLongo);
+                rptCampos.DataBind();
+
+                lblMessageCiclo.Visible = false;
+                if (rptCampos.Items.Count <= 0)
+                {
+                    lblMessageCiclo.Visible = true;
+                    lblMessageCiclo.Text = GetGlobalResourceObject("Relatorios", "ObjetoAprendizagem.Busca.lblMessageCiclo.Text").ToString();
+                }
+
+                divCiclo.Visible = true;
+            }
+            else
+                divCiclo.Visible = false;
 
             lblMessageCiclo.Visible = false;
             if (rptCampos.Items.Count <= 0)
@@ -179,8 +218,6 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
                 lblMessageCiclo.Visible = true;
                 lblMessageCiclo.Text = GetGlobalResourceObject("Relatorios", "ObjetoAprendizagem.Busca.lblMessageCiclo.Text").ToString();
             }
-
-            divCiclo.Visible = true;
 
             if (UCComboUAEscola.VisibleUA)
                 UCComboUAEscola_IndexChangedUA();

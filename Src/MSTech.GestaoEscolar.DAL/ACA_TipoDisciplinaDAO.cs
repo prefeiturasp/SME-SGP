@@ -154,12 +154,16 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="cal_ano">Ano do objeto de aprendizagem</param>
         /// <param name="tds_idNaoConsiderar">Id do tipo de disciplina que não virá do banco</param>
         /// <param name="controlarOrdem">se vai ordenar por ordem ou não</param> 
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="uad_idSuperior">ID da unidade superior</param>
         /// <param name="totalRecords">Total de registros retornado na busca</param>   
         public DataTable SelectBy_ObjetosAprendizagem
         (
             int cal_ano
             , int tds_idNaoConsiderar
             , bool controlarOrdem
+            , int esc_id
+            , Guid uad_idSuperior
             , out int totalRecords
         )
         {
@@ -183,6 +187,26 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@cal_ano";
                 Param.Size = 4;
                 Param.Value = cal_ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@esc_id";
+                Param.Size = 4;
+                if (esc_id > 0)
+                    Param.Value = esc_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@uad_idSuperior";
+                Param.Size = 16;
+                if (uad_idSuperior != Guid.Empty)
+                    Param.Value = uad_idSuperior;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

@@ -33,8 +33,8 @@
                             OnIndexChangedUnidadeEscola="UCComboUAEscola_IndexChangedUnidadeEscola" ValidationGroup="Resultados" 
                             ObrigatorioEscola="false" ObrigatorioUA="false" />
                         <uc4:UCComboTipoDisciplina ID="UCComboTipoDisciplina1" runat="server" Obrigatorio="true" ValidationGroup="Resultados" _MostrarMessageSelecione="true" />
+                        <div runat="server" id="divEspaco"><br /></div>
                         <div runat="server" id="divCiclo">
-                            <br />
                             <asp:UpdatePanel ID="updCiclos" runat="server" UpdateMode="Always">
                                 <ContentTemplate>
                                     <fieldset>

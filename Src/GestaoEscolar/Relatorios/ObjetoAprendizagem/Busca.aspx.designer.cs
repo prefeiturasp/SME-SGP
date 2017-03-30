@@ -121,6 +121,15 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem {
         protected global::WebControls_Combos_UCComboTipoDisciplina UCComboTipoDisciplina1;
         
         /// <summary>
+        /// divEspaco control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEspaco;
+        
+        /// <summary>
         /// divCiclo control.
         /// </summary>
         /// <remarks>
