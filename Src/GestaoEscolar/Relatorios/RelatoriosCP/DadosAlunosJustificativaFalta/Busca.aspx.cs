@@ -68,8 +68,9 @@ namespace GestaoEscolar.Relatorios.RelatoriosCP.DadosAlunosJustificativaFalta
 
             UCBuscaDocenteTurma.ComboEscola.FocusUA();
 
-            ddlTipoJustificativaFalta.DataSource = ACA_TipoJustificativaFaltaBO.TiposJustificativaFalta();
-            ddlTipoJustificativaFalta.DataBind();
+            UCCTipoJustificativa.Obrigatorio = false;
+            UCCTipoJustificativa.MostrarMensagemSelecione = true;
+            UCCTipoJustificativa.Carregar();
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace GestaoEscolar.Relatorios.RelatoriosCP.DadosAlunosJustificativaFalta
                                      "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
                                                 , ApplicationWEB.LogoRelatorioSSRS) +
                                      "&cal_ano=" + UCBuscaDocenteTurma.ComboCalendario.Cal_ano.ToString() +
-                                     "&tjf_id=" + ddlTipoJustificativaFalta.SelectedValue +
+                                     "&tjf_id=" + UCCTipoJustificativa.Valor +
                                      "&documentoOficial=false";
 
             CFG_RelatorioBO.CallReport("Relatorios", report, parametros, HttpContext.Current);
@@ -120,7 +121,7 @@ namespace GestaoEscolar.Relatorios.RelatoriosCP.DadosAlunosJustificativaFalta
 
             filtros.Add("tpc_id", UCCPeriodoCalendario.Valor[0].ToString());
             filtros.Add("cap_id", UCCPeriodoCalendario.Valor[1].ToString());
-            filtros.Add("tjf_id", ddlTipoJustificativaFalta.SelectedValue);
+            filtros.Add("tjf_id", UCCTipoJustificativa.Valor.ToString());
 
             __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.DadosAlunosJustificativaFalta, Filtros = filtros };
 
@@ -207,7 +208,7 @@ namespace GestaoEscolar.Relatorios.RelatoriosCP.DadosAlunosJustificativaFalta
                UCCPeriodoCalendario.Valor = new[] { Convert.ToInt32(valor), Convert.ToInt32(valor2) };
 
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tjf_id", out valor4);
-                ddlTipoJustificativaFalta.SelectedValue = valor4;
+                UCCTipoJustificativa.Valor = Convert.ToInt32(valor4);
 
 
                 updFiltros.Update();

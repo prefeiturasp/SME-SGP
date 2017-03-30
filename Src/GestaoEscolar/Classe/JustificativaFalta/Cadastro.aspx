@@ -1,9 +1,10 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     Inherits="GestaoEscolar.Classe.JustificativaFalta.Cadastro" CodeBehind="Cadastro.aspx.cs" %>
 
-<%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios"
-    TagPrefix="uc1" %>
+<%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios" TagPrefix="uc1" %>
 <%@ Register Src="~/WebControls/Busca/UCAluno.ascx" TagName="UCAluno" TagPrefix="uc2" %>
+<%@ Register Src="~/WebControls/Combos/Novos/UCCTipoJustificativa.ascx" TagPrefix="uc4" TagName="UCCTipoJustificativa" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -56,14 +57,7 @@
                                 <asp:Label ID="lblTipoJustificativaFalta" runat="server" Text='<%#Bind("tjf_nome") %>' />
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:DropDownList ID="ddlTipoJustificativaFalta" runat="server" DataValueField="tjf_id"
-                                    DataTextField="tjf_nome" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoJustificativaFalta_SelectedIndexChanged"
-                                    AutoPostBack="True">
-                                    <asp:ListItem Value="-1">-- Selecione uma justificativa --</asp:ListItem>
-                                </asp:DropDownList>
-                                <asp:CompareValidator ID="cpvTipoJustificativaFalta" runat="server" ErrorMessage="Justificativa da falta é obrigatório."
-                                    ControlToValidate="ddlTipoJustificativaFalta" Operator="NotEqual" ValueToCompare="-1"
-                                    Display="Dynamic" ValidationGroup="JustificativaFalta">*</asp:CompareValidator>
+                                <uc4:UCCTipoJustificativa ID="ddlTipoJustificativaFalta" runat="server" MostrarMensagemSelecione="true" Obrigatorio="true" PermiteEditar="true" />
                                 <asp:Label ID="lblAbonaFalta" runat="server" Font-Bold="true" Visible="false"></asp:Label>
                             </EditItemTemplate>
                         </asp:TemplateField>

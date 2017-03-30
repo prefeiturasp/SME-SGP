@@ -3,6 +3,7 @@
 <%@ Register Src="~/WebControls/BuscaDocente/UCBuscaDocenteTurma.ascx" TagPrefix="uc1" TagName="UCBuscaDocenteTurma" %>
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagPrefix="uc2" TagName="UCCamposObrigatorios" %>
 <%@ Register Src="~/WebControls/Combos/Novos/UCCPeriodoCalendario.ascx" TagPrefix="uc3" TagName="UCCPeriodoCalendario" %>
+<%@ Register Src="~/WebControls/Combos/Novos/UCCTipoJustificativa.ascx" TagPrefix="uc4" TagName="UCCTipoJustificativa" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -21,14 +22,7 @@
                 <ContentTemplate>
                     <uc1:UCBuscaDocenteTurma ID="UCBuscaDocenteTurma" runat="server" _VS_CarregarApenasTurmasNormais="true" />
                     <uc3:UCCPeriodoCalendario ID="UCCPeriodoCalendario" runat="server" MostrarMensagemSelecione="true" Obrigatorio="false" PermiteEditar="false" />
-                    
-                    <div>
-                        <asp:Label ID="lblTitulo" runat="server" Text="Tipo de Justificativa" AssociatedControlID="ddlTipoJustificativaFalta"></asp:Label>
-                        <asp:DropDownList ID="ddlTipoJustificativaFalta" runat="server" DataValueField="tjf_id" DataTextField="tjf_nome" AppendDataBoundItems="True"
-                            SkinID="text60C">
-                            <asp:ListItem Value="-1">-- Selecione um tipo de justificativa --</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
+                    <uc4:UCCTipoJustificativa ID="UCCTipoJustificativa" runat="server" MostrarMensagemSelecione="true" Obrigatorio="false" PermiteEditar="true" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

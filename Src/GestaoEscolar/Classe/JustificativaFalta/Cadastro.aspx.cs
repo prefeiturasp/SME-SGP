@@ -9,6 +9,7 @@ using MSTech.CoreSSO.BLL;
 using MSTech.GestaoEscolar.BLL;
 using System.Data;
 using MSTech.GestaoEscolar.Entities;
+using GestaoEscolar.WebControls.Combos.Novos;
 
 namespace GestaoEscolar.Classe.JustificativaFalta
 {
@@ -64,6 +65,7 @@ namespace GestaoEscolar.Classe.JustificativaFalta
                 btnNovaJustificativaFalta.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
             }
 
+            CarregaDelegatesGrid();
         }
 
         #endregion
@@ -116,6 +118,7 @@ namespace GestaoEscolar.Classe.JustificativaFalta
                 grvJustificativaFalta.DataSource = lt;
 
                 grvJustificativaFalta.DataBind();
+                CarregaDelegatesGrid();
 
                 grvJustificativaFalta.Rows[index].Focus();
             }
@@ -167,15 +170,15 @@ namespace GestaoEscolar.Classe.JustificativaFalta
                     lblObservacao.Visible = false;
                     txtObservacao.Visible = true;
                     // Tipo de justificativa
-                    DropDownList ddlTipoJustificativaFalta = (DropDownList)e.Row.FindControl("ddlTipoJustificativaFalta");
+                    UCCTipoJustificativa ddlTipoJustificativaFalta = (UCCTipoJustificativa)e.Row.FindControl("ddlTipoJustificativaFalta");
                     if (ddlTipoJustificativaFalta != null)
                     {
-                        ddlTipoJustificativaFalta.DataSource = ACA_TipoJustificativaFaltaBO.TiposJustificativaFalta();
-                        ddlTipoJustificativaFalta.DataBind();
+                        ddlTipoJustificativaFalta.Carregar();
 
                         if (Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "tjf_id")) > 0)
-                            ddlTipoJustificativaFalta.SelectedValue = DataBinder.Eval(e.Row.DataItem, "tjf_id").ToString();
+                            ddlTipoJustificativaFalta.Valor = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "tjf_id"));
                     }
+
                     // Data inicial da justificativa de falta
                     TextBox txtDataInicio = (TextBox)e.Row.FindControl("txtDataInicio");
                     if ((txtDataInicio != null) && (dataInicio != new DateTime()))
@@ -242,9 +245,9 @@ namespace GestaoEscolar.Classe.JustificativaFalta
                     afj_id = Convert.ToInt32(grv.DataKeys[e.RowIndex]["afj_id"].ToString())
                 };
 
-                DropDownList ddlTipoJustificativaFalta = (DropDownList)row.FindControl("ddlTipoJustificativaFalta");
+                UCCTipoJustificativa ddlTipoJustificativaFalta = (UCCTipoJustificativa)row.FindControl("ddlTipoJustificativaFalta");
                 if (ddlTipoJustificativaFalta != null)
-                    entityAlunoJustificativaFalta.tjf_id = Convert.ToInt32(ddlTipoJustificativaFalta.SelectedValue);
+                    entityAlunoJustificativaFalta.tjf_id = Convert.ToInt32(ddlTipoJustificativaFalta.Valor);
 
                 TextBox txtDataInicio = (TextBox)row.FindControl("txtDataInicio");
                 if (txtDataInicio != null)
@@ -383,33 +386,6 @@ namespace GestaoEscolar.Classe.JustificativaFalta
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
-        protected void ddlTipoJustificativaFalta_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            Label lblAbonaFalta = (Label)grvJustificativaFalta.Rows[grvJustificativaFalta.EditIndex].FindControl("lblAbonaFalta");
-            DropDownList ddlTipoJustificativaFalta = (DropDownList)grvJustificativaFalta.Rows[grvJustificativaFalta.EditIndex].FindControl("ddlTipoJustificativaFalta");
-            if (ddlTipoJustificativaFalta != null && lblAbonaFalta != null)
-            {
-                ACA_TipoJustificativaFalta aux = new ACA_TipoJustificativaFalta { tjf_id = Convert.ToInt32(ddlTipoJustificativaFalta.SelectedValue) };
-                ACA_TipoJustificativaFaltaBO.GetEntity(aux);
-                if (aux != null)
-                {
-                    if (ddlTipoJustificativaFalta.SelectedValue != "-1")
-                    {
-                        lblAbonaFalta.Visible = true;
-                        if (aux.tjf_abonaFalta)
-                            lblAbonaFalta.Text = "(Abona falta)";
-                        else
-                            lblAbonaFalta.Text = "(Não abona falta)";
-                    }
-                    else
-                    {
-                        lblAbonaFalta.Visible = false;
-                    }
-                }
-            }
-        }
-
         #endregion
 
         #region Métodos
@@ -424,6 +400,7 @@ namespace GestaoEscolar.Classe.JustificativaFalta
 
             grvJustificativaFalta.DataSource = ACA_AlunoJustificativaFaltaBO.SelecionaPorAluno(alu_id);
             grvJustificativaFalta.DataBind();
+            CarregaDelegatesGrid();
 
             lblInformacao.Text += "<b>Aluno: </b>" + txtNomeAluno.Text + "<br/>";
             lblInformacao.Visible = true;
@@ -431,6 +408,50 @@ namespace GestaoEscolar.Classe.JustificativaFalta
             divPesquisaAluno.Visible = false;
             pnlJustificativaFalta.Visible = true;
             updJustificativaFalta.Update();
+        }
+
+        private void CarregaDelegatesGrid()
+        {
+            foreach (GridViewRow row in grvJustificativaFalta.Rows)
+            {
+                UCCTipoJustificativa ddlTipoJustificativaFalta = (UCCTipoJustificativa)row.FindControl("ddlTipoJustificativaFalta");
+                if (ddlTipoJustificativaFalta != null)
+                {
+                    ddlTipoJustificativaFalta.IndexChanged_Sender += ddlTipoJustificativaFalta_SelectedIndexChanged;
+                    ddlTipoJustificativaFalta.Visible_Label = false;
+                    ddlTipoJustificativaFalta.ValidationGroup = "JustificativaFalta";
+                }
+            }
+        }
+
+        #endregion
+
+        #region Delegates
+
+        private void ddlTipoJustificativaFalta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Label lblAbonaFalta = (Label)grvJustificativaFalta.Rows[grvJustificativaFalta.EditIndex].FindControl("lblAbonaFalta");
+            UCCTipoJustificativa ddlTipoJustificativaFalta = (UCCTipoJustificativa)grvJustificativaFalta.Rows[grvJustificativaFalta.EditIndex].FindControl("ddlTipoJustificativaFalta");
+            if (ddlTipoJustificativaFalta != null && lblAbonaFalta != null)
+            {
+                ACA_TipoJustificativaFalta aux = new ACA_TipoJustificativaFalta { tjf_id = Convert.ToInt32(ddlTipoJustificativaFalta.Valor) };
+                ACA_TipoJustificativaFaltaBO.GetEntity(aux);
+                if (aux != null)
+                {
+                    if (ddlTipoJustificativaFalta.Valor != -1)
+                    {
+                        lblAbonaFalta.Visible = true;
+                        if (aux.tjf_abonaFalta)
+                            lblAbonaFalta.Text = "(Abona falta)";
+                        else
+                            lblAbonaFalta.Text = "(Não abona falta)";
+                    }
+                    else
+                    {
+                        lblAbonaFalta.Visible = false;
+                    }
+                }
+            }
         }
 
         #endregion
