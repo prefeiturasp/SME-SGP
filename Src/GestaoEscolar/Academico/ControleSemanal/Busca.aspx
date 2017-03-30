@@ -99,24 +99,6 @@
                                         </asp:TemplateField>
                                         <asp:BoundField HeaderText="Turno" DataField="tur_turno" />
                                         <asp:BoundField HeaderText="Tipo de docência" DataField="TipoDocencia" />
-                                        <asp:TemplateField HeaderText="<%$ Resources:Mensagens, MSG_AulasDadas %>" HeaderStyle-CssClass="center"
-                                            ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="grid-responsive-item-inline grid-responsive-center">
-                                            <ItemTemplate>
-                                                <span class="ico-font ico-aulas-dadas"><asp:ImageButton ID="btnIndicadores"
-                                                        CommandArgument='<%# Eval("esc_id") + "," + Eval("tur_id") + "," 
-                                                                + Eval("tud_id") + "," + Eval("cal_id") + "," + Eval("tdt_posicao") %>'
-                                                        runat="server" SkinID="btIndicadores" CommandName="Indicadores"
-                                                        ToolTip="Visualizar indicadores de aulas da turma"
-                                                        Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada 
-                                                                    && Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.Experiencia %>' /></span>
-                                                <asp:Image ID="imgSituacaoAulasDadas" runat="server" SkinID="imgConfirmar" ToolTip="Aulas lançadas"
-                                                    Width="16px" Height="16px" Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada
-                                                                                            && Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.Experiencia
-                                                                                            && Convert.ToBoolean(Eval("aulasPrevistasPreenchida")) %>'
-                                                    ImageAlign="Top" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
                                         <%--Planejamento semanal--%>
                                         <asp:TemplateField HeaderText="Planejamento semanal" HeaderStyle-CssClass="center"
                                             ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="grid-responsive-item-inline grid-responsive-center">
@@ -177,10 +159,9 @@
                             <asp:TemplateField HeaderText="Planejamento semanal" HeaderStyle-CssClass="center"
                                 ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="grid-responsive-item-inline grid-responsive-center">
                                 <ItemTemplate>
-                                    <span class="ico-font ico-planejamento"><asp:ImageButton ID="btnPlanejamentoSemanal"
-                                            CommandArgument='<%# Container.DataItemIndex %>'
-                                            runat="server" SkinID="btPlanejamentoGestor" CommandName="PlanejamentoSemanal"
-                                            ToolTip="Planejamento semanal" />
+                                    <span class="ico-font ico-planejamento">
+                                        <asp:ImageButton ID="btnPlanejamentoSemanal" CommandArgument='<%# Container.DataItemIndex %>'
+                                            runat="server" SkinID="btPlanejamentoGestor" CommandName="PlanejamentoSemanal" ToolTip="Planejamento semanal" />
                                     </span>
                                 </ItemTemplate>
                             </asp:TemplateField>

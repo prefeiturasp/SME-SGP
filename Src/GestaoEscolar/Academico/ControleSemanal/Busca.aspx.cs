@@ -21,19 +21,6 @@ namespace GestaoEscolar.Academico.ControleSemanal
     {
         #region Estrutura
 
-        /// <summary>
-        /// Estrutura que armazena e agrupa os grids de turma por escola e calendário.
-        /// </summary>
-        public struct sGridTurmaEscolaCalendario
-        {
-            public GridView gridTurma { get; set; }
-            public Guid uad_idSuperior { get; set; }
-            public int esc_id { get; set; }
-            public int uni_id { get; set; }
-            public int cal_id { get; set; }
-            public int cal_ano { get; set; }
-        }
-
         #endregion Estrutura
 
         #region Propriedades
@@ -51,6 +38,87 @@ namespace GestaoEscolar.Academico.ControleSemanal
             }
         }
 
+
+        private GridView Edit_grvTurma
+        {
+            get
+            {
+                return (GridView)(rptTurmas.Items[VS_rptTurmasIndice].FindControl("grvTurma"));
+            }
+        }
+
+        public int Edit_esc_id
+        {
+            get
+            {
+                return Convert.ToInt32(Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["esc_id"] ?? -1);
+            }
+        }
+
+        public int Edit_uni_id
+        {
+            get
+            {
+                return Convert.ToInt32(Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["uni_id"] ?? -1);
+            }
+        }
+
+        public long Edit_tur_id
+        {
+            get
+            {
+                return Convert.ToInt64(Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["tur_id"] ?? -1);
+            }
+        }
+
+        public string Edit_escola
+        {
+            get
+            {
+                return Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["tur_escolaUnidade"].ToString();
+            }
+        }
+
+        public string Edit_tur_codigo
+        {
+            get
+            {
+                return Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["tur_codigo"].ToString();
+            }
+        }
+
+        public string Edit_tud_nome
+        {
+            get
+            {
+                return Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["tud_nome"].ToString();
+            }
+        }
+
+        public int Edit_cal_id
+        {
+            get
+            {
+                return Convert.ToInt32(Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["cal_id"] ?? -1);
+            }
+        }
+
+        public long Edit_tud_id
+        {
+            get
+            {
+                return Convert.ToInt64(Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["tud_id"] ?? -1);
+            }
+        }
+
+        public byte Edit_tdt_posicao
+        {
+            get
+            {
+                return Convert.ToByte(Edit_grvTurma.DataKeys[Edit_grvTurma.EditIndex].Values["tdt_posicao"] ?? 0);
+            }
+        }
+        
         private bool VS_titular
         {
             get
@@ -128,58 +196,6 @@ namespace GestaoEscolar.Academico.ControleSemanal
         }
 
         /// <summary>
-        /// Lista com o histórico do docente.
-        /// </summary>
-        private List<sHistoricoDocente> VS_ltHistoricoDocente
-        {
-            get
-            {
-                return (List<sHistoricoDocente>)(ViewState["VS_ltHistoricoDocente"]);
-            }
-            set
-            {
-                ViewState["VS_ltHistoricoDocente"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Indica os ids na disciplina selecionada, e foi bloqueado o redirecionamento à
-        /// tela do diário, por faltar o lançamento das aulas previstas.
-        /// </summary>
-        private long[] VS_ChavesRedirecionaDiario
-        {
-            get
-            {
-                if (ViewState["VS_ChavesRedirecionaDiario"] == null)
-                {
-                    return new long[] { -1, -1 };
-                }
-
-                return (long[])ViewState["VS_ChavesRedirecionaDiario"];
-            }
-            set
-            {
-                ViewState["VS_ChavesRedirecionaDiario"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Verifica se o usuário logado pode salvar os dados das aulas previstas
-        /// </summary>
-        private bool VS_permiteSalvarAulasPrevistas
-        {
-            get
-            {
-                return Convert.ToBoolean(ViewState["VS_permiteSalvarAulasPrevistas"] ?? true);
-            }
-
-            set
-            {
-                ViewState["VS_permiteSalvarAulasPrevistas"] = value;
-            }
-        }
-
-        /// <summary>
         /// Guarda a tela que precisa redirecionar.
         /// </summary>
         private string VS_TelaRedirecionar
@@ -205,48 +221,6 @@ namespace GestaoEscolar.Academico.ControleSemanal
             get
             {
                 return ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.PRE_CARREGAR_CACHE_EFETIVACAO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-            }
-        }
-        
-        /// <summary>
-        /// Informa se o período já foi fechado (evento de fechamento já acabou) e não há nenhum evento de fechamento por vir.
-        /// Se o período ainda estiver ativo então não verifica o evento de fechamento
-        /// </summary>
-        /// <param name="tpc_id">ID do período do calendário</param>
-        /// <param name="cal_id">ID do calendário</param>
-        /// <param name="tur_id">ID da turma</param>
-        /// <param name="cap_dataFim">Data fim do período</param>
-        /// <returns></returns>
-        private bool VS_PeriodoEfetivado(int tpc_id, int cal_id, long tur_id, DateTime cap_dataFim)
-        {
-            bool efetivado = false;
-
-            //Se o bimestre está ativo ou nem começou então não bloqueia pelo evento de fechamento
-            if (DateTime.Today <= cap_dataFim)
-                return false;
-
-            List<ACA_Evento> lstEventos = ACA_EventoBO.GetEntity_Efetivacao_List(cal_id, tur_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo, false);
-
-            //Só permite editar o bimestre se tiver evento ativo
-            efetivado = !lstEventos.Exists(p => p.tpc_id == tpc_id && p.tev_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_NOTAS, __SessionWEB.__UsuarioWEB.Usuario.ent_id) &&
-                                                DateTime.Today >= p.evt_dataInicio && DateTime.Today <= p.evt_dataFim);
-
-            return efetivado;
-        }
-
-        /// <summary>
-        /// ViewState que armazena a lista de pendências do fechamento.
-        /// </summary>
-        private Dictionary<string, List<REL_TurmaDisciplinaSituacaoFechamento>> VS_listaPendenciaFechamento
-        {
-            get
-            {
-                return (Dictionary<string, List<REL_TurmaDisciplinaSituacaoFechamento>>)(ViewState["VS_listaPendenciaFechamento"] ?? (ViewState["VS_listaPendenciaFechamento"] = new Dictionary<string, List<REL_TurmaDisciplinaSituacaoFechamento>>()));
-            }
-
-            set
-            {
-                ViewState["VS_listaPendenciaFechamento"] = value;
             }
         }
 
@@ -481,9 +455,14 @@ namespace GestaoEscolar.Academico.ControleSemanal
                                                                       UtilBO.TipoMensagem.Alerta);
                         }
 
+                        //VS_Dados = dados;
+                        rptTurmas.DataSource = dadosEscolasAtivas;
+                        rptTurmas.DataBind();
+
                         VS_titular = dados.Exists(p => p.Turmas.Any(t => t.tdc_id == (int)EnumTipoDocente.Titular));
 
-                        divFiltros.Visible = false;
+                        pnlTurmas.Visible = false;
+                        divResultadoDocente.Visible = true;
                     }
                     else
                     {
@@ -551,68 +530,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
         #endregion Page life Cycle
 
         #region Métodos
-
-        /// <summary>
-        /// Adiciona uma classe css ao um controle da página.
-        /// </summary>
-        /// <param name="control">Controle da página</param>
-        /// <param name="cssClass">classe css</param>
-        private void AddClass(WebControl control, string cssClass)
-        {
-            List<string> classes = control.CssClass.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            classes.Add(cssClass);
-
-            control.CssClass = string.Join(" ", classes.ToArray());
-        }
-
-        /// <summary>
-        /// Remove uma classe css ao um controle da página.
-        /// </summary>
-        /// <param name="control">Controle da página</param>
-        /// <param name="cssClass">classe css</param>
-        private void RemoveClass(WebControl control, string cssClass)
-        {
-            List<string> classes = control.CssClass.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            classes.Remove(cssClass);
-
-            control.CssClass = string.Join(" ", classes.ToArray());
-        }
-
-        /// <summary>
-        /// Verifica se um controle possui uma classe css.
-        /// </summary>
-        /// <param name="control">Controle da página</param>
-        /// <param name="cssClass">classe css</param>
-        private bool HasClass(WebControl control, string cssClass)
-        {
-            List<string> classes = control.CssClass.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            return classes.Exists(p => p.Equals(cssClass));
-        }
-
-        /// <summary>
-        /// Formata string para retornar dados para o cabeçalho por escola e calendário.
-        /// </summary>
-        /// <param name="escola">Dados escola.</param>
-        /// <param name="calendario">Dados calendário.</param>
-        /// <returns></returns>
-        public string RetornaCabecalho(string escola, string calendario)
-        {
-            return String.Format("{0}<br />{1}", escola, calendario);
-        }
-
-        /// <summary>
-        /// Retorna lista de períodos de um calendário.
-        /// </summary>
-        /// <param name="cal_id">ID do calendário anual.</param>
-        /// <returns></returns>
-        public List<ACA_CalendarioPeriodo> RetornaPeriodo(int cal_id)
-        {
-            return ACA_CalendarioPeriodoBO.SelecionaPeriodoPorCalendarioEntidade(cal_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id).ToList();
-        }
-
+        
         /// <summary>
         /// Realiza a pesquisa mediante aos filtros informados.
         /// </summary>
@@ -722,41 +640,6 @@ namespace GestaoEscolar.Academico.ControleSemanal
         }
 
         /// <summary>
-        /// Retorna o id da div que possui a aba.
-        /// </summary>
-        /// <param name="tpc_id"></param>
-        /// <returns></returns>
-        public string RetornaTabID(int tpc_id)
-        {
-            return "divTabs-" + tpc_id.ToString();
-        }
-
-        /// <summary>
-        /// Redireciona pro Diário de classe, criando as variáveis de sessão necessárias.
-        /// </summary>
-        /// <param name="grid"></param>
-        private void RedirecionaDiarioClasse(GridView grid)
-        {
-            // Cria variáveis na sessão
-            Session["tud_id"] = grid.DataKeys[grid.EditIndex].Values["tud_id"].ToString();
-            Session["tdt_posicao"] = grid.DataKeys[grid.EditIndex].Values["tdt_posicao"].ToString();
-            Session["PaginaRetorno"] = "~/Academico/ControleTurma/Busca.aspx";
-
-            bool disciplinaEspecial = Convert.ToBoolean(grid.DataKeys[grid.EditIndex].Values["tud_disciplinaEspecial"].ToString());
-
-            if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0 ||
-                (__SessionWEB.__UsuarioWEB.Docente.doc_id == 0 && !disciplinaEspecial))
-            {
-                Response.Redirect("~/Academico/ControleTurma/DiarioClasse.aspx", false);
-                HttpContext.Current.ApplicationInstance.CompleteRequest();
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(Page, typeof(Page), "SelecionarTipoDocencia", "$(document).ready(function() { $('#divSelecionaTipoDocencia').dialog('open'); });", true);
-            }
-        }
-
-        /// <summary>
         /// Colocar todas as propriedades da turma na sessão.
         /// </summary>
         private void CarregaSessionPaginaRetorno(long tud_id, int esc_id, int uni_id, long tur_id, bool tud_naoLancarNota, bool tud_naoLancarFrequencia, int cal_id, string EscolaTurmaDisciplina, int tdt_posicao, DateTime tur_dataEncerramento, string tciIds, byte tur_tipo, long tud_idAluno, long tur_idNormal)
@@ -790,7 +673,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
             listaDados.Add("Edit_tur_tipo", tur_tipo.ToString());
             listaDados.Add("Edit_tud_idAluno", tud_idAluno.ToString());
             listaDados.Add("Edit_tur_idNormal", tur_idNormal.ToString());
-            listaDados.Add("PaginaRetorno", "~/Academico/ControleTurma/Busca.aspx");
+            listaDados.Add("PaginaRetorno", "~/Academico/ControleSemanal/Busca.aspx");
 
             Session["DadosPaginaRetorno"] = listaDados;
             Session["VS_DadosTurmas"] = TUR_TurmaBO.SelecionaPorGestorMinhaEscola(ent_id, UCComboUAEscola1.Esc_ID, ApplicationWEB.AppMinutosCacheCurto);
@@ -821,16 +704,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
         /// <param name="pagina">Página</param>
         private void RedirecionaTela(string pagina)
         {
-            Response.Redirect("~/Academico/ControleTurma/" + pagina + ".aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
-        }
-
-        /// <summary>
-        /// Redireciona para a tela de atribuição de docentes.
-        /// </summary>
-        private void RedirecionaTelaAtribuicaoDocente()
-        {
-            Response.Redirect("~/Academico/RecursosHumanos/AtribuicaoDocentes/Busca.aspx", false);
+            Response.Redirect("~/Academico/ControleSemanal/" + pagina + ".aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
@@ -842,7 +716,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
         /// <param name="grid"></param>
         /// <param name="indice"></param>
         /// <param name="validarDisciplinaCompartilhada"></param>
-        private void RedirecionaTelaMinhasTurmas(string nomeTela, string nomePagina, GridView grid, string indice, bool validarDisciplinaCompartilhada)
+        private void RedirecionaTela(string nomeTela, string nomePagina, GridView grid, string indice, bool validarDisciplinaCompartilhada)
         {
             try
             {
@@ -886,7 +760,20 @@ namespace GestaoEscolar.Academico.ControleSemanal
                         Int64.TryParse(grid.DataKeys[index].Values["tud_idAluno"].ToString(), out tud_idAluno);
                         Int64.TryParse(grid.DataKeys[index].Values["tur_idNormal"].ToString(), out tur_idNormal);
 
-                        CarregaSessionPaginaRetorno(tud_id, esc_id, uni_id, tur_id, tud_naoLancarNota, tud_naoLancarFrequencia, cal_id, EscolaTurmaDisciplina, posicao, tur_dataEncerramento, tciIds, tur_tipo, tud_idAluno, tur_idNormal);
+                        CarregaSessionPaginaRetorno(tud_id
+                                                    , esc_id
+                                                    , uni_id
+                                                    , tur_id
+                                                    , tud_naoLancarNota
+                                                    , tud_naoLancarFrequencia
+                                                    , cal_id
+                                                    , EscolaTurmaDisciplina
+                                                    , posicao
+                                                    , tur_dataEncerramento
+                                                    , tciIds
+                                                    , tur_tipo
+                                                    , tud_idAluno
+                                                    , tur_idNormal);
 
                         Boolean.TryParse(grid.DataKeys[index].Values["disciplinaAtiva"].ToString(), out disciplinaAtiva);
                         if (!validarDisciplinaCompartilhada || disciplinaAtiva || !VS_visaoDocente)
@@ -906,10 +793,6 @@ namespace GestaoEscolar.Academico.ControleSemanal
                                 VS_TelaRedirecionar = nomePagina;
                                 grid.EditIndex = -1;
                             }
-                        }
-                        else
-                        {
-                            RedirecionaTelaAtribuicaoDocente();
                         }
                     }
                 }
@@ -948,13 +831,6 @@ namespace GestaoEscolar.Academico.ControleSemanal
                 ACA_EscalaAvaliacao entityEscalaAvaliacaoDocente = new ACA_EscalaAvaliacao { esa_id = entityFormatoAvaliacao.esa_idDocente };
                 ACA_EscalaAvaliacaoBO.GetEntity(entityEscalaAvaliacaoDocente);
 
-                ImageButton btnFechamento = (ImageButton)e.Row.FindControl("btnFechamento");
-                if (btnFechamento != null)
-                {
-                    btnFechamento.OnClientClick = "CarregarCacheEfetivacao(this);";
-                    btnFechamento.CommandName = entityFormatoAvaliacao.fav_fechamentoAutomatico ? "FechamentoAutomatico" : "Fechamento";
-                }
-
                 double notaMinimaAprovacao = 0;
                 int ordemParecerMinimo = 0;
 
@@ -987,135 +863,6 @@ namespace GestaoEscolar.Academico.ControleSemanal
                 Struct_CalendarioPeriodos periodoCorrente = listaCalendarioPeriodo.Where(x => (x.cap_dataInicio.Date <= DateTime.Now.Date && x.cap_dataFim.Date >= DateTime.Now.Date)).FirstOrDefault();
                 int tpc_id = periodoCorrente.tpc_id;
                 int tpc_ordem = periodoCorrente.tpc_ordem;
-
-                if (tpc_id <= 0 && !incluirFinal)
-                {
-                    //Se não tem bimestre selecionado e nem bimestre corrente então seleciona o próximo corrente
-                    Struct_CalendarioPeriodos proximoPeriodo = listaCalendarioPeriodo.Where(x => (x.cap_dataInicio.Date >= DateTime.Now.Date)).FirstOrDefault();
-                    tpc_id = proximoPeriodo.tpc_id;
-                    tpc_ordem = proximoPeriodo.tpc_ordem;
-
-                    if (tpc_id <= 0)
-                    {
-                        //Se não tem bimestre selecionado então seleciona o ultimo
-                        tpc_id = tpc_idUltimoPerido;
-                        tpc_ordem = tpc_ordemUltimoPeriodo;
-                    }
-                }
-
-                if (tpc_id >= 0 && incluirFinal)
-                {
-                    if (tpc_id == tpc_idUltimoPerido)
-                    {
-                        // Se for o ultimo periodo e a avaliacao final estiver aberta,
-                        // selecionar a avaliacao final
-                        List<ACA_Evento> listaEventos = ACA_EventoBO.GetEntity_Efetivacao_List(cal_id, tur_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo);
-                        if (listaEventos.Exists(p => p.tev_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_FINAL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
-                        {
-                            tpc_id = tpc_ordem - 1;
-                        }
-                    }
-
-                    if (tpc_id == 0)
-                    {
-                        //Se não tem bimestre selecionado e nem bimestre corrente então seleciona o próximo corrente
-                        Struct_CalendarioPeriodos proximoPeriodo = listaCalendarioPeriodo.Where(x => (x.cap_dataInicio.Date >= DateTime.Now.Date)).FirstOrDefault();
-                        tpc_id = proximoPeriodo.tpc_id;
-                        tpc_ordem = proximoPeriodo.tpc_ordem;
-
-                        if (tpc_id <= 0)
-                        {
-                            //Se não tem bimestre selecionado então seleciona o final
-                            tpc_id = tpc_ordem = -1;
-                        }
-                    }
-                }
-
-                int ava_id = -1;
-                byte ava_tipo = 0;
-
-                if (tpc_id > 0)
-                {
-                    List<ACA_Avaliacao> listaAvaliacao = ACA_AvaliacaoBO.ConsultaPor_Periodo_Relacionadas(fav_id, tpc_id, ApplicationWEB.AppMinutosCacheLongo);
-                    if (listaAvaliacao.Any())
-                    {
-                        ava_id = listaAvaliacao.First().ava_id;
-                        ava_tipo = (byte)listaAvaliacao.First().ava_tipo;
-                    }
-                }
-                else
-                {
-                    List<ACA_Avaliacao> listaAvaliacao = ACA_AvaliacaoBO.SelectAvaliacaoFinal_PorFormato(fav_id, ApplicationWEB.AppMinutosCacheLongo);
-                    if (listaAvaliacao.Any(p => p.ava_tipo == (byte)AvaliacaoTipo.Final))
-                    {
-                        ava_id = listaAvaliacao.Find(p => p.ava_tipo == (byte)AvaliacaoTipo.Final).ava_id;
-                        ava_tipo = (byte)AvaliacaoTipo.Final;
-                    }
-                }
-
-                HiddenField hdn = (HiddenField)e.Row.FindControl("hdnTudId");
-                hdn.Value = tud_id.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTurId");
-                hdn.Value = tur_id.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTpcId");
-                hdn.Value = tpc_id.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnAvaId");
-                hdn.Value = ava_id.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnFavId");
-                hdn.Value = fav_id.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTipoAvaliacao");
-                hdn.Value = ava_tipo.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnEsaId");
-                hdn.Value = entityEscalaAvaliacao.esa_id.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTipoEscala");
-                hdn.Value = entityEscalaAvaliacao.esa_tipo.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTipoEscalaDocente");
-                hdn.Value = entityEscalaAvaliacaoDocente.esa_tipo.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnNotaMinima");
-                hdn.Value = notaMinimaAprovacao.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnParecerMinimo");
-                hdn.Value = ordemParecerMinimo.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTipoLancamento");
-                hdn.Value = entityFormatoAvaliacao.fav_tipoLancamentoFrequencia.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnCalculoQtAulasDadas");
-                hdn.Value = entityFormatoAvaliacao.fav_calculoQtdeAulasDadas.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTurTipo");
-                hdn.Value = tur_tipo.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnCalId");
-                hdn.Value = cal_id.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTudTipo");
-                hdn.Value = tud_tipo.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTpcOrdem");
-                hdn.Value = tpc_ordem.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnVariacao");
-                hdn.Value = entityFormatoAvaliacao.fav_variacao.ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnTipoDocente");
-                hdn.Value = (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0 ?
-                            (byte)ACA_TipoDocenteBO.SelecionaTipoDocentePorPosicao(tdt_posicao, ApplicationWEB.AppMinutosCacheLongo) : (byte)0).ToString();
-
-                hdn = (HiddenField)e.Row.FindControl("hdnDisciplinaEspecial");
-                hdn.Value = tud_disciplinaEspecial ? "true" : "false";
-
-                hdn = (HiddenField)e.Row.FindControl("hdnFechamentoAutomatico");
-                hdn.Value = entityFormatoAvaliacao.fav_fechamentoAutomatico ? "true" : "false";
             }
         }
 
@@ -1126,25 +873,18 @@ namespace GestaoEscolar.Academico.ControleSemanal
         /// <param name="e"></param>
         protected void grvMinhasTurmas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            VS_ChavesRedirecionaDiario = new long[] { -1, -1 };
-
             GridView grid = (GridView)sender;
             switch (e.CommandName)
             {
-                #region Planejamento
-
-                case "Planejamento":
-                    {
-                        RedirecionaTelaMinhasTurmas("Planejamento", "PlanejamentoAnual", grid, e.CommandArgument.ToString(), true);
-                        break;
-                    }
-
-                #endregion Planejamento
-
+                case "PlanejamentoSemanal":
+                {
+                    RedirecionaTela("Planejamento semanal", "Cadastro", grid, e.CommandArgument.ToString(), true);
+                    break;
+                }
                 default:
-                    {
-                        break;
-                    }
+                {
+                    break;
+                }
             }
         }
 
@@ -1202,15 +942,6 @@ namespace GestaoEscolar.Academico.ControleSemanal
             // Limpa busca da sessão.
             __SessionWEB.BuscaRealizada = new BuscaGestao();
             Response.Redirect("Busca.aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
-        }
-
-        protected void lkEspecial_Click(object sender, EventArgs e)
-        {
-            Session["tdt_posicao"] = (byte)EnumTipoDocente.Especial;
-            Session["PaginaRetorno"] = "~/Academico/ControleTurma/Busca.aspx";
-
-            Response.Redirect("~/Academico/ControleTurma/DiarioClasse.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
