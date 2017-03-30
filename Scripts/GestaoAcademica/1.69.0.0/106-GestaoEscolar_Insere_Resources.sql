@@ -33,6 +33,13 @@ SET XACT_ABORT ON
             , @rcr_valorPadrao = 'Gerar relatório'
 
 	EXEC MS_InsereResource 
+            @rcr_chave = 'ObjetoAprendizagem.Busca.btnLimparPesquisa.Text' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Limpar pesquisa'
+
+	EXEC MS_InsereResource 
             @rcr_chave = 'ObjetoAprendizagem.Busca.cvCiclos.ErrorMessage' 
             , @rcr_NomeResource = 'Relatorios'
             , @rcr_cultura = 'pt-BR'

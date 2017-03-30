@@ -68,6 +68,8 @@
                     <div class="right area-botoes-bottom">
                         <asp:Button ID="btnGerarRel" runat="server" Text="<%$ Resources:Relatorios, ObjetoAprendizagem.Busca.btnGerarRel.Text %>" OnClick="btnGerarRel_Click"
                             ValidationGroup="Resultados" />
+                        <asp:Button ID="btnLimparPesquisa" runat="server" Text="<%$ Resources:Relatorios, ObjetoAprendizagem.Busca.btnLimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click"
+                            CausesValidation="false" />
                     </div>
                 </fieldset>
             </div>

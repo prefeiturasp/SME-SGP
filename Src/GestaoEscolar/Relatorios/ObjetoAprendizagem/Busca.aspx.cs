@@ -98,6 +98,13 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
             }
         }
 
+        protected void btnLimparPesquisa_Click(object sender, EventArgs e)
+        {
+            __SessionWEB.BuscaRealizada = new BuscaGestao();
+            Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Relatorios/ObjetoAprendizagem/Busca.aspx", false);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+
         #endregion Eventos
 
         #region Delegates
@@ -267,6 +274,7 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
                 // Disciplina
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tds_id", out valor);
                 UCComboTipoDisciplina1.Valor = Convert.ToInt32(valor);
+                UCComboTipoDisciplina1_IndexChanged();
 
                 //Ciclos
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("ciclosSelecionados", out valor);
