@@ -79,7 +79,7 @@
                                                 <asp:HiddenField ID="hdnAluId" runat="server" Value='<%#Bind("alu_id") %>' />
                                                 <asp:HiddenField ID="hdnMtuId" runat="server" Value='<%#Bind("mtu_id") %>' />
                                                 <asp:ImageButton ID="imgStatusFechamento" runat="server" Visible="false" ToolTip='<%#Bind("DisciplinaPendencia") %>' CssClass="imagem-status-fechamento" />
-                                                <asp:LinkButton ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>' OnClick="lblNomeAluno_Click"></asp:LinkButton>
+                                                <asp:LinkButton ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome_infoCompl") %>' OnClick="lblNomeAluno_Click"></asp:LinkButton>
 
                                             </td>
                                         </tr>

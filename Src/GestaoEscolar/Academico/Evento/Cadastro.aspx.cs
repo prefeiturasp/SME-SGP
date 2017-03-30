@@ -743,6 +743,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                         , calendarios
                         , _txtInicioEvento.Text
                         , _txtFimEvento.Text
+                        , __SessionWEB.__UsuarioWEB.Grupo.vis_id
                         , out msg
                         ))
                     {
@@ -780,6 +781,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                     , calendarios
                     , _txtInicioEvento.Text
                     , _txtFimEvento.Text
+                    , __SessionWEB.__UsuarioWEB.Grupo.vis_id
                     , out msg
                     ))
                 {
@@ -812,6 +814,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                 , calendarios
                 , _txtInicioEvento.Text
                 , _txtFimEvento.Text
+                , __SessionWEB.__UsuarioWEB.Grupo.vis_id
                 , out msg
                 ))
             {
@@ -832,6 +835,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                 , calendarios
                 , _txtInicioEvento.Text
                 , _txtFimEvento.Text
+                , __SessionWEB.__UsuarioWEB.Grupo.vis_id
                 , out msg
                 ))
             {

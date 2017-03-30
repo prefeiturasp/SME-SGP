@@ -346,6 +346,20 @@
     <Compile Include="Academico\CalendarioAnual\Visualizar.aspx.designer.cs">
       <DependentUpon>Visualizar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ControleSemanal\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\ControleTurma\Alunos.aspx.cs">
       <DependentUpon>Alunos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2815,6 +2829,8 @@
     <Content Include="Academico\Areas\Cadastro.aspx" />
     <Content Include="Academico\Areas\Documentos.aspx" />
     <Content Include="Academico\CalendarioAnual\CadastroLimites.aspx" />
+    <Content Include="Academico\ControleSemanal\Busca.aspx" />
+    <Content Include="Academico\ControleSemanal\Cadastro.aspx" />
     <Content Include="Academico\ControleTurma\Alunos.aspx" />
     <Content Include="Academico\ControleTurma\Anotacoes.aspx" />
     <Content Include="Academico\ControleTurma\Busca.aspx" />
@@ -2864,6 +2880,7 @@
     <Content Include="Classe\Efetivacao\CadastroGestor.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Cadastro.aspx" />
+    <Content Include="Academico\ControleSemanal\CacheEfetivacaoHandler.ashx" />
     <None Include="Configs\Session.txt" />
     <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />

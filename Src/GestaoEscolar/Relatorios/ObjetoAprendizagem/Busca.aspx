@@ -33,8 +33,8 @@
                             OnIndexChangedUnidadeEscola="UCComboUAEscola_IndexChangedUnidadeEscola" ValidationGroup="Resultados" 
                             ObrigatorioEscola="false" ObrigatorioUA="false" />
                         <uc4:UCComboTipoDisciplina ID="UCComboTipoDisciplina1" runat="server" Obrigatorio="true" ValidationGroup="Resultados" _MostrarMessageSelecione="true" />
+                        <div runat="server" id="divEspaco"><br /></div>
                         <div runat="server" id="divCiclo">
-                            <br />
                             <asp:UpdatePanel ID="updCiclos" runat="server" UpdateMode="Always">
                                 <ContentTemplate>
                                     <fieldset>
@@ -68,6 +68,8 @@
                     <div class="right area-botoes-bottom">
                         <asp:Button ID="btnGerarRel" runat="server" Text="<%$ Resources:Relatorios, ObjetoAprendizagem.Busca.btnGerarRel.Text %>" OnClick="btnGerarRel_Click"
                             ValidationGroup="Resultados" />
+                        <asp:Button ID="btnLimparPesquisa" runat="server" Text="<%$ Resources:Relatorios, ObjetoAprendizagem.Busca.btnLimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click"
+                            CausesValidation="false" />
                     </div>
                 </fieldset>
             </div>

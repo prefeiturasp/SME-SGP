@@ -267,6 +267,19 @@ namespace GestaoEscolar.WebControls.Combos
             }
         }
 
+        public bool ExibeComboEscola
+        {
+            set
+            {
+                DdlEscola.Visible = value;
+                lblEscola.Visible = value;
+            }
+            get
+            {
+                return DdlEscola.Visible;
+            }
+        }
+
         /// <summary>
         /// Adciona e remove a mensagem "Selecione uma Escola / Unidade" do dropdownlist.
         /// Por padrão é false e a mensagem "Selecione uma Escola / Unidade" não é exibida.

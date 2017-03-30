@@ -468,6 +468,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         DivergenciasAulasPrevistas
+        ,
+
+        PlanejamentoSemanal
     }
 
     [Serializable]
