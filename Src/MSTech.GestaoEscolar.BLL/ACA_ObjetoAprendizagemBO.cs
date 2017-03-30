@@ -98,6 +98,9 @@ namespace MSTech.GestaoEscolar.BLL
                 }
                 else
                     throw new ValidationException(UtilBO.ErrosValidacao(entity));
+
+                GestaoEscolarUtilBO.LimpaCache("Cache_SelecionaTipoDisciplinaObjetosAprendizagem");
+                GestaoEscolarUtilBO.LimpaCache("Cache_SelecionaTipoCicloAtivosEscola");
             }
             catch (Exception ex)
             {
