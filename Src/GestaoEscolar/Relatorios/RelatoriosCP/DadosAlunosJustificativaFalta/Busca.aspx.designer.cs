@@ -85,22 +85,13 @@ namespace GestaoEscolar.Relatorios.RelatoriosCP.DadosAlunosJustificativaFalta {
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCCPeriodoCalendario UCCPeriodoCalendario;
         
         /// <summary>
-        /// lblTitulo control.
+        /// UCCTipoJustificativa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTitulo;
-        
-        /// <summary>
-        /// ddlTipoJustificativaFalta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoJustificativaFalta;
+        protected global::GestaoEscolar.WebControls.Combos.Novos.UCCTipoJustificativa UCCTipoJustificativa;
         
         /// <summary>
         /// btnGerar control.

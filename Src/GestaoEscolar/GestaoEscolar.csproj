@@ -1858,6 +1858,13 @@
     <Compile Include="WebControls\Combos\ComboTipoDeficiencia.ascx.designer.cs">
       <DependentUpon>ComboTipoDeficiencia.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx.cs">
+      <DependentUpon>UCCTipoJustificativa.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx.designer.cs">
+      <DependentUpon>UCCTipoJustificativa.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Combos\Novos\UCCTipoEvento.ascx.cs">
       <DependentUpon>UCCTipoEvento.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3667,6 +3674,7 @@
     <Content Include="WebControls\Calendario\UCCalendario.ascx" />
     <Content Include="WebControls\Combos\ComboNacionalidade.ascx" />
     <Content Include="WebControls\Combos\ComboTipoDeficiencia.ascx" />
+    <Content Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoEvento.ascx" />
     <Content Include="WebControls\Combos\UCComboAnoLetivo.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCEscalaAvaliacaoParecer.ascx" />

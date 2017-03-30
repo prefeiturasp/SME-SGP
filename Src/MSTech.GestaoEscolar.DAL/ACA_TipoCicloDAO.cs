@@ -87,11 +87,12 @@ namespace MSTech.GestaoEscolar.DAL
         /// Retorna os tipos de ciclo de aprendizagem ativos de cursos ligados à escola
         /// </summary>
         /// <param name="cal_ano">Ano do objeto de aprendizagem do ciclo</param>
+        /// <param name="tds_id">ID do tipo de disciplina do objeto de aprendizagem</param>
         /// <param name="esc_id">ID da escola</param>
         /// <param name="uad_idSuperior">ID da unidade superior</param>
         /// <param name="totalRecords">Total de registros da consulta</param>
         /// <returns>Lista com os tipos</returns>
-        public DataTable SelecionarAtivosEscolaAno(int cal_ano, int esc_id, Guid uad_idSuperior, out int totalRecords)
+        public DataTable SelecionarAtivosEscolaAno(int cal_ano, int tds_id, int esc_id, Guid uad_idSuperior, out int totalRecords)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoCiclo_SelecionarAtivosEscolaAno", _Banco);
             List<ACA_TipoCiclo> lstTpCiclo = new List<ACA_TipoCiclo>();
@@ -103,6 +104,13 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@cal_ano";
                 Param.Size = 4;
                 Param.Value = cal_ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Size = 4;
+                Param.Value = tds_id;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

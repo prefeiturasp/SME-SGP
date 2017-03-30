@@ -212,11 +212,13 @@ public partial class WebControls_Combos_UCComboTipoDisciplina : MotherUserContro
     /// Mostra os dados não excluídos logicamente no dropdownlist exibindo o nível de ensino
     /// e o tipo de disciplina no combo   
     /// </summary>
-    public void CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(int cal_ano)
+    public void CarregarNivelEnsinoTipoDisciplinaObjetosAprendizagem(int cal_ano, int esc_id, Guid uad_idSuperior)
     {
         ddlCombo.Items.Clear();
         odsDados.SelectParameters.Clear();
         odsDados.SelectParameters.Add("cal_ano", cal_ano.ToString());
+        odsDados.SelectParameters.Add("esc_id", esc_id.ToString());
+        odsDados.SelectParameters.Add("uad_idSuperior", uad_idSuperior.ToString());
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
         odsDados.SelectParameters.Add("AppMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
 
