@@ -116,6 +116,83 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Gerar documento'
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.PlanejamentoSalvoSucesso' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Planejamento de aulas salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.ErroSalvar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao salvar planejamento de aulas.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.lblCabecalho.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Escola: <b>{0}</b><br/>Calendário: <b>{1}</b><br/>Turma: <b>{2}</b> Componente curricular: <b>{3}</b><br/>Posição: <b>{4}</b>'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.btnCancelar.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.btnVoltar.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Voltar'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.ErroCarregar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar carregar os dados.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.NenhumaAulaPeriodo' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Nenhuma aula encontrada para o período.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.ErroCarregarAulas' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar carregar as aulas.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.ErroCarregarDatas' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar carregar as datas.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.MensagemSelecione' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Selecione uma turma para realizar o planejamento semanal.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.btnSalvar.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Salvar'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
