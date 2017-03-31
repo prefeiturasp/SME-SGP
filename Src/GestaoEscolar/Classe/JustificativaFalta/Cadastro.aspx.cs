@@ -288,13 +288,6 @@ namespace GestaoEscolar.Classe.JustificativaFalta
 
                     grv.EditIndex = -1;
                     grv.DataBind();
-
-                    // Mostra mensagem informativa, caso tenha avaliação efetivada para o aluno no período da justificativa de falta
-                    string nomeAvaliacao;
-                    if (ACA_AlunoJustificativaFaltaBO.VerificaAlunoAvaliacao(entityAlunoJustificativaFalta, out nomeAvaliacao))
-                    {
-                        lblMessageInfo.Text = UtilBO.GetErroMessage(String.Concat("O aluno já teve as frequências do (", nomeAvaliacao, ") efetivadas, pode ser necessário recalcular sua frequência na opção de efetivação de notas."), UtilBO.TipoMensagem.Alerta);
-                    }
                 }
             }
             catch (MSTech.Validation.Exceptions.ValidationException ex)
@@ -337,13 +330,6 @@ namespace GestaoEscolar.Classe.JustificativaFalta
                         lblMessage.Text = UtilBO.GetErroMessage("Justificativa de falta excluída com sucesso.", UtilBO.TipoMensagem.Sucesso);
 
                         grv.DataBind();
-
-                        // Mostra mensagem informativa, caso tenha avaliação efetivada para o aluno no período da justificativa de falta
-                        string nomeAvaliacao;
-                        if (ACA_AlunoJustificativaFaltaBO.VerificaAlunoAvaliacao(entityAlunoJustificativaFalta, out nomeAvaliacao))
-                        {
-                            lblMessageInfo.Text = UtilBO.GetErroMessage(String.Concat("O aluno já teve as frequências do (", nomeAvaliacao, ") efetivadas, pode ser necessário recalcular sua frequência na opção de efetivação de notas."), UtilBO.TipoMensagem.Alerta);
-                        }
                     }
                 }
             }

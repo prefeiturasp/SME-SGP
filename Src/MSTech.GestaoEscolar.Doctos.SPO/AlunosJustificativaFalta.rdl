@@ -657,14 +657,14 @@
                               </TablixCell>
                               <TablixCell>
                                 <CellContents>
-                                  <Textbox Name="afj_observacao">
+                                  <Textbox Name="Textbox1">
                                     <CanGrow>true</CanGrow>
                                     <KeepTogether>true</KeepTogether>
                                     <Paragraphs>
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value>=Fields!afj_observacao.Value</Value>
+                                            <Value>=Fields!tjf_nome.Value &amp; IIf(IsNothing(Fields!afj_observacao.Value), "", " - ") &amp; Fields!afj_observacao.Value</Value>
                                             <Style>
                                               <FontSize>6pt</FontSize>
                                             </Style>
@@ -673,7 +673,7 @@
                                         <Style />
                                       </Paragraph>
                                     </Paragraphs>
-                                    <rd:DefaultName>afj_observacao</rd:DefaultName>
+                                    <rd:DefaultName>Textbox1</rd:DefaultName>
                                     <Style>
                                       <Border>
                                         <Style>Solid</Style>
@@ -762,8 +762,9 @@
                                 <KeepWithGroup>After</KeepWithGroup>
                               </TablixMember>
                               <TablixMember>
-                                <Group Name="aluno">
+                                <Group Name="justificativa">
                                   <GroupExpressions>
+                                    <GroupExpression>=Fields!afj_id.Value</GroupExpression>
                                     <GroupExpression>=Fields!alu_id.Value</GroupExpression>
                                   </GroupExpressions>
                                 </Group>
@@ -980,6 +981,10 @@
           <DataField>pes_nome</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="afj_id">
+          <DataField>afj_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="afj_dataInicio">
           <DataField>afj_dataInicio</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
@@ -990,6 +995,10 @@
         </Field>
         <Field Name="afj_observacao">
           <DataField>afj_observacao</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tjf_nome">
+          <DataField>tjf_nome</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Escola">
