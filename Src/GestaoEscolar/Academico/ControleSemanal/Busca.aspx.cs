@@ -43,7 +43,10 @@ namespace GestaoEscolar.Academico.ControleSemanal
         {
             get
             {
-                return (GridView)(rptTurmas.Items[VS_rptTurmasIndice].FindControl("grvTurma"));
+                if (VS_visaoDocente)
+                    return (GridView)(rptTurmas.Items[VS_rptTurmasIndice].FindControl("grvTurma"));
+                else
+                    return grvTurmas;
             }
         }
 
@@ -160,7 +163,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
         {
             get
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.MinhasTurmas)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.PlanejamentoSemanal)
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
                     string valor;
@@ -181,7 +184,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
         {
             get
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.MinhasTurmas)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.PlanejamentoSemanal)
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
                     string valor;
@@ -567,7 +570,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                 if (UCComboUAEscola1.FiltroEscola)
                     filtros.Add("ua_superior", UCComboUAEscola1.Uad_ID.ToString());
 
-                __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.MinhasTurmas, Filtros = filtros };
+                __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.PlanejamentoSemanal, Filtros = filtros };
 
                 #endregion Salvar busca realizada com os parâmetros do ODS.
 
@@ -642,7 +645,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
         /// <summary>
         /// Colocar todas as propriedades da turma na sessão.
         /// </summary>
-        private void CarregaSessionPaginaRetorno(long tud_id, int esc_id, int uni_id, long tur_id, bool tud_naoLancarNota, bool tud_naoLancarFrequencia, int cal_id, string EscolaTurmaDisciplina, int tdt_posicao, DateTime tur_dataEncerramento, string tciIds, byte tur_tipo, long tud_idAluno, long tur_idNormal)
+        private void CarregaSessionPaginaRetorno()
         {
             Session.Remove("tud_id");
             Session.Remove("tdt_posicao");
@@ -652,27 +655,18 @@ namespace GestaoEscolar.Academico.ControleSemanal
             Guid ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id;
             byte opcaoAba = Convert.ToByte(eOpcaoAbaMinhasTurmas.DiarioClasse);
 
-            List<Struct_CalendarioPeriodos> listaCalendarioPeriodo = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(cal_id, ApplicationWEB.AppMinutosCacheLongo);
+            List<Struct_CalendarioPeriodos> listaCalendarioPeriodo = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(Edit_cal_id, ApplicationWEB.AppMinutosCacheLongo);
             Struct_CalendarioPeriodos periodo = listaCalendarioPeriodo.Where(x => (x.cap_dataInicio.Date <= DateTime.Now.Date && x.cap_dataFim.Date >= DateTime.Now.Date)).FirstOrDefault();
 
             Dictionary<string, string> listaDados = new Dictionary<string, string>();
-            listaDados.Add("Tud_idRetorno_ControleTurma", tud_id.ToString());
-            listaDados.Add("Edit_tdt_posicao", tdt_posicao.ToString());
-            listaDados.Add("Edit_esc_id", esc_id.ToString());
-            listaDados.Add("Edit_uni_id", uni_id.ToString());
-            listaDados.Add("Edit_tur_id", tur_id.ToString());
-            listaDados.Add("Edit_tud_naoLancarNota", tud_naoLancarNota.ToString());
-            listaDados.Add("Edit_tud_naoLancarFrequencia", tud_naoLancarFrequencia.ToString());
-            listaDados.Add("Edit_tur_dataEncerramento", tur_dataEncerramento.ToString());
-            listaDados.Add("Edit_tpc_id", periodo.tpc_id.ToString());
-            listaDados.Add("Edit_tpc_ordem", periodo.tpc_ordem.ToString());
-            listaDados.Add("Edit_cal_id", cal_id.ToString());
-            listaDados.Add("TextoTurmas", EscolaTurmaDisciplina);
-            listaDados.Add("OpcaoAbaAtual", opcaoAba.ToString());
-            listaDados.Add("Edit_tciIds", tciIds);
-            listaDados.Add("Edit_tur_tipo", tur_tipo.ToString());
-            listaDados.Add("Edit_tud_idAluno", tud_idAluno.ToString());
-            listaDados.Add("Edit_tur_idNormal", tur_idNormal.ToString());
+            listaDados.Add("Edit_tdt_posicao", Edit_tdt_posicao.ToString());
+            listaDados.Add("Edit_esc_id", Edit_esc_id.ToString());
+            listaDados.Add("Edit_escola", Edit_escola.ToString());
+            listaDados.Add("Edit_tur_id", Edit_tur_id.ToString());
+            listaDados.Add("Edit_tur_codigo", Edit_tur_codigo.ToString());
+            listaDados.Add("Edit_tud_id", Edit_tud_id.ToString());
+            listaDados.Add("Edit_tud_nome", Edit_tud_nome.ToString());
+            listaDados.Add("Edit_cal_id", Edit_cal_id.ToString());
             listaDados.Add("PaginaRetorno", "~/Academico/ControleSemanal/Busca.aspx");
 
             Session["DadosPaginaRetorno"] = listaDados;
@@ -727,73 +721,17 @@ namespace GestaoEscolar.Academico.ControleSemanal
                     grid.EditIndex = index;
                     if (grid != null)
                     {
-                        long tud_id = 0;
-                        long tur_id = 0;
-                        int esc_id = 0;
-                        int uni_id = 0;
-                        int cal_id = 0;
-                        bool tud_naoLancarNota = false;
-                        bool tud_naoLancarFrequencia = false;
-                        string EscolaTurmaDisciplina = string.Empty;
-                        byte posicao;
-                        byte tud_tipo = 0;
-                        byte tur_tipo = 0;
-                        DateTime tur_dataEncerramento = new DateTime();
-                        string tciIds = string.Empty;
-                        bool disciplinaAtiva = true;
-                        long tud_idAluno = 0;
-                        long tur_idNormal = 0;
-
-                        Int64.TryParse(grid.DataKeys[index].Values["tud_id"].ToString(), out tud_id);
-                        Int64.TryParse(grid.DataKeys[index].Values["tur_id"].ToString(), out tur_id);
-                        Int32.TryParse(grid.DataKeys[index].Values["esc_id"].ToString(), out esc_id);
-                        Int32.TryParse(grid.DataKeys[index].Values["uni_id"].ToString(), out uni_id);
-                        Int32.TryParse(grid.DataKeys[index].Values["cal_id"].ToString(), out cal_id);
-                        Boolean.TryParse(grid.DataKeys[index].Values["tud_naoLancarNota"].ToString(), out tud_naoLancarNota);
-                        Boolean.TryParse(grid.DataKeys[index].Values["tud_naoLancarFrequencia"].ToString(), out tud_naoLancarFrequencia);
-                        EscolaTurmaDisciplina = grid.DataKeys[index].Values["EscolaTurmaDisciplina"].ToString();
-                        byte.TryParse(grid.DataKeys[index].Values["tdt_posicao"].ToString(), out posicao);
-                        tud_tipo = Convert.ToByte(grid.DataKeys[index].Values["tud_tipo"]);
-                        DateTime.TryParse(grid.DataKeys[index].Values["tur_dataEncerramento"].ToString(), out tur_dataEncerramento);
-                        tciIds = grid.DataKeys[index].Values["tciIds"].ToString();
-                        Byte.TryParse(grid.DataKeys[index].Values["tur_tipo"].ToString(), out tur_tipo);
-                        Int64.TryParse(grid.DataKeys[index].Values["tud_idAluno"].ToString(), out tud_idAluno);
-                        Int64.TryParse(grid.DataKeys[index].Values["tur_idNormal"].ToString(), out tur_idNormal);
-
-                        CarregaSessionPaginaRetorno(tud_id
-                                                    , esc_id
-                                                    , uni_id
-                                                    , tur_id
-                                                    , tud_naoLancarNota
-                                                    , tud_naoLancarFrequencia
-                                                    , cal_id
-                                                    , EscolaTurmaDisciplina
-                                                    , posicao
-                                                    , tur_dataEncerramento
-                                                    , tciIds
-                                                    , tur_tipo
-                                                    , tud_idAluno
-                                                    , tur_idNormal);
-
-                        Boolean.TryParse(grid.DataKeys[index].Values["disciplinaAtiva"].ToString(), out disciplinaAtiva);
-                        if (!validarDisciplinaCompartilhada || disciplinaAtiva || !VS_visaoDocente)
+                        if (VS_visaoDocente)
                         {
-                            if (!validarDisciplinaCompartilhada || tud_tipo != (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada)
-                            {
-                                if (VS_visaoDocente)
-                                {
-                                    RepeaterItem itemTurma = (RepeaterItem)grid.NamingContainer;
-                                    VS_rptTurmasIndice = itemTurma.ItemIndex;
-                                }
-
-                                RedirecionaTela(nomePagina);
-                            }
-                            else
-                            {
-                                VS_TelaRedirecionar = nomePagina;
-                                grid.EditIndex = -1;
-                            }
+                            RepeaterItem itemTurma = (RepeaterItem)grid.NamingContainer;
+                            VS_rptTurmasIndice = itemTurma.ItemIndex;
                         }
+
+                        Edit_grvTurma.EditIndex = index;
+
+                        CarregaSessionPaginaRetorno();
+
+                        RedirecionaTela(nomePagina);
                     }
                 }
             }
@@ -899,7 +837,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                 // Seta propriedades necessárias para ordenação nas colunas.
                 ConfiguraColunasOrdenacao(grvTurmas);
 
-                if ((!string.IsNullOrEmpty(grvTurmas.SortExpression)) && (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.MinhasTurmas))
+                if ((!string.IsNullOrEmpty(grvTurmas.SortExpression)) && (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.PlanejamentoSemanal))
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
 
@@ -923,7 +861,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
 
                     __SessionWEB.BuscaRealizada = new BuscaGestao
                     {
-                        PaginaBusca = PaginaGestao.MinhasTurmas
+                        PaginaBusca = PaginaGestao.PlanejamentoSemanal
                         ,
                         Filtros = filtros
                     };

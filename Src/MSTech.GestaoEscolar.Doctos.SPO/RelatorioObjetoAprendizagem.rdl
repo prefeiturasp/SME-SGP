@@ -371,6 +371,7 @@
                                         <PaddingBottom>2pt</PaddingBottom>
                                       </Style>
                                     </Textbox>
+                                    <rd:Selected>true</rd:Selected>
                                   </CellContents>
                                 </TablixHeader>
                                 <TablixMembers>
@@ -582,7 +583,10 @@
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
           <TablixMembers>
-            <TablixMember />
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </TablixMember>
             <TablixMember>
               <Visibility>
                 <Hidden>=iif(RowNumber("DataSet1") &gt; 0, false, true)</Hidden>
