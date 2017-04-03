@@ -870,6 +870,7 @@ namespace MSTech.GestaoEscolar.BLL
             , string evt_fim
             , int vis_id
             , out string msgValidacao
+            , List<Guid> lstUadIdPermissao
         )
         {
             msgValidacao = string.Empty;
@@ -877,11 +878,11 @@ namespace MSTech.GestaoEscolar.BLL
             if (entTipoEvento != null && Limites != null)
             {
                 var limites = Limites;
-
+                
                 // Filtra os limites de acordo com a seleção de alcance do evento
                 if (evt_padrao)
                 {
-                    limites = limites.Where(evl => evl.esc_id <= 0).ToList();
+                    limites = limites.Where(evl => evl.esc_id <= 0 && evl.uad_id == Guid.Empty).ToList();
                 }
                 else if (esc_id > 0)
                 {
@@ -889,6 +890,12 @@ namespace MSTech.GestaoEscolar.BLL
                                                    && evl.uni_id == uni_id)
                                                    || evl.esc_id <= 0);
                 }
+
+                if (lstUadIdPermissao.Any())
+                {
+                    limites = limites.Where(evl => lstUadIdPermissao.Any(u => evl.uad_id == u));
+                }
+
 
                 // Filtra os limites de acordo com a seleção de período
                 if (entTipoEvento.tev_periodoCalendario)
@@ -1058,6 +1065,7 @@ namespace MSTech.GestaoEscolar.BLL
             , bool bValidaDataInicial
             , Guid ent_id
             , int vis_id
+            , List<Guid> lstUadIdPermissao
         )
         {
             TalkDBTransaction bancoGestao = new ACA_EventoDAO()._Banco.CopyThisInstance();
@@ -1159,6 +1167,7 @@ namespace MSTech.GestaoEscolar.BLL
                        , entity.evt_dataInicio.ToString(), entity.evt_dataFim.ToString()
                        , vis_id
                        , out msg
+                       , lstUadIdPermissao
                        ))
                     {
                         throw new ValidationException(msg);

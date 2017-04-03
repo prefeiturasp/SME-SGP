@@ -471,6 +471,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                 , bValidaDataInicial
                 , __SessionWEB.__UsuarioWEB.Usuario.ent_id
                 , __SessionWEB.__UsuarioWEB.Grupo.vis_id
+                , __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao ? __SessionWEB.__UsuarioWEB.GrupoUA.Select(p => p.uad_id).ToList() : new List<Guid>()
             ))
             {
                 if (_VS_evt_id > 0)
@@ -745,6 +746,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                         , _txtFimEvento.Text
                         , __SessionWEB.__UsuarioWEB.Grupo.vis_id
                         , out msg
+                        , __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao ? __SessionWEB.__UsuarioWEB.GrupoUA.Select(p => p.uad_id).ToList() : new List<Guid>()
                         ))
                     {
                         _lblMessage.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Alerta);
@@ -783,6 +785,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                     , _txtFimEvento.Text
                     , __SessionWEB.__UsuarioWEB.Grupo.vis_id
                     , out msg
+                    , __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao ? __SessionWEB.__UsuarioWEB.GrupoUA.Select(p => p.uad_id).ToList() : new List<Guid>()
                     ))
                 {
                     _lblMessage.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Alerta);
@@ -816,6 +819,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                 , _txtFimEvento.Text
                 , __SessionWEB.__UsuarioWEB.Grupo.vis_id
                 , out msg
+                , __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao ? __SessionWEB.__UsuarioWEB.GrupoUA.Select(p => p.uad_id).ToList() : new List<Guid>()
                 ))
             {
                 _lblMessage.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Alerta);
@@ -837,6 +841,7 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
                 , _txtFimEvento.Text
                 , __SessionWEB.__UsuarioWEB.Grupo.vis_id
                 , out msg
+                , __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao ? __SessionWEB.__UsuarioWEB.GrupoUA.Select(p => p.uad_id).ToList() : new List<Guid>()
                 ))
             {
                 _lblMessage.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Alerta);
