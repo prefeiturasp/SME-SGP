@@ -200,7 +200,11 @@ namespace GestaoEscolar.Academico.CalendarioAnual
 
         protected void ddlAlcance_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlAlcance.SelectedValue == "2")
+            if (ddlAlcance.SelectedValue == "-1" || ddlAlcance.SelectedValue == "1")
+            {
+                UCComboUAEscola.Visible = false;
+            }
+            else if (ddlAlcance.SelectedValue == "2")
             {
                 UCComboUAEscola.Visible = true;
 

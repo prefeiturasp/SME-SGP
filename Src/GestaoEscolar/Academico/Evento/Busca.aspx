@@ -3,8 +3,6 @@
 
 <%@ Register Src="~/WebControls/Combos/UCComboTipoEvento.ascx" TagName="_UCComboTipoEvento"
     TagPrefix="uc2" %>
-<%@ Register Src="../../WebControls/FiltroEscolas/UCFiltroEscolas.ascx" TagName="UCFiltroEscolas"
-    TagPrefix="uc3" %>
 <%@ Register Src="../../WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros"
     TagPrefix="uc1" %>
 <%@ Register Src="../../WebControls/Combos/UCComboCalendario.ascx" TagName="UCComboCalendario"
@@ -26,8 +24,6 @@
                     <uc6:ComboUAEscola ID="ucComboUAEscola" runat="server" CarregarEscolaAutomatico="true"
                         ObrigatorioEscola="false" ObrigatorioUA="false" MostrarMessageSelecioneEscola="true"
                         MostrarMessageSelecioneUA="true" />
-
-                    <%--<uc3:UCFiltroEscolas ID="_UCFiltroEscolas" runat="server" />--%>
                     <asp:CheckBox ID="chkPadrao" runat="server" Text="<%$ Resources:Academico, Evento.Busca.chkEventoPadrao.Text %>" 
                         AutoPostBack="True" OnCheckedChanged="chkPadrao_CheckedChanged" />
                     <uc2:_UCComboTipoEvento ID="_UCComboTipoEvento" runat="server" />
