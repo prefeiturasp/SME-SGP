@@ -874,11 +874,13 @@ namespace MSTech.GestaoEscolar.BLL
         )
         {
             msgValidacao = string.Empty;
+            ESC_Escola escola = new ESC_Escola { esc_id = esc_id };
 
             if (entTipoEvento != null && Limites != null)
             {
-                var limites = Limites;
-                
+                var limites = Limites.Where(l => l.tev_id == entTipoEvento.tev_id);
+                var limitesUad = Limites.Where(l => l.tev_id == entTipoEvento.tev_id);
+
                 // Filtra os limites de acordo com a seleção de alcance do evento
                 if (evt_padrao)
                 {
@@ -886,17 +888,21 @@ namespace MSTech.GestaoEscolar.BLL
                 }
                 else if (esc_id > 0)
                 {
-                    limites = limites.Where(evl => (evl.esc_id == esc_id
-                                                   && evl.uni_id == uni_id)
-                                                   || evl.esc_id <= 0);
-                }
+                    ESC_EscolaBO.GetEntity(escola);
 
+                    limitesUad = limitesUad.Where(evl => evl.uad_id == escola.uad_idSuperiorGestao);
+                    limites = limites.Where(evl => (evl.esc_id == esc_id && evl.uni_id == uni_id) || 
+                                                   (evl.esc_id <= 0 && evl.uad_id == Guid.Empty));
+                }
                 if (lstUadIdPermissao.Any())
                 {
-                    limites = limites.Where(evl => lstUadIdPermissao.Any(u => evl.uad_id == u));
+                    limites = Limites.Where(l => l.tev_id == entTipoEvento.tev_id)
+                                     .Where(evl => lstUadIdPermissao.Any(u => evl.uad_id == u))
+                                     .Union(Limites.Where(l => l.tev_id == entTipoEvento.tev_id)
+                                                   .Where(evl => (evl.esc_id == esc_id && evl.uni_id == uni_id) ||
+                                                                 (evl.esc_id <= 0 && evl.uad_id == Guid.Empty)));
                 }
-
-
+                
                 // Filtra os limites de acordo com a seleção de período
                 if (entTipoEvento.tev_periodoCalendario)
                 {
@@ -905,7 +911,7 @@ namespace MSTech.GestaoEscolar.BLL
                 }
                 else
                     limites = limites.Where(evl => evl.tpc_id <= 0);
-
+                
                 // Filtra os limites de acordo com a seleção de calendários
                 foreach (int cal_id in calendarios)
                 {
@@ -954,14 +960,13 @@ namespace MSTech.GestaoEscolar.BLL
                 }
 
                 // Não permite a escola criar evento se existir limite de alcance DRE, para o mesmo tipo de evento
-                if (vis_id == SysVisaoID.UnidadeAdministrativa)
+                if (!string.IsNullOrEmpty(msgValidacao) && vis_id == SysVisaoID.UnidadeAdministrativa && esc_id > 0)
                 {
-                    var escola = new ESC_Escola { esc_id = esc_id };
-                    ESC_EscolaBO.GetEntity(escola);
-
-                    if (limites.Any(x => x.uad_id == escola.uad_idSuperiorGestao && x.tev_id == entTipoEvento.tev_id))
+                    foreach (int cal_id in calendarios)
                     {
-                        msgValidacao = "Entre em contato com a sua DRE para criação do evento.";
+                        var limitesCalendario = limitesUad.Where(evl => evl.cal_id == cal_id);
+                        if (limitesCalendario.Any() && limitesCalendario.Any(evl => Convert.ToDateTime(evt_inicio) >= evl.evl_dataInicio && Convert.ToDateTime(evt_inicio) <= evl.evl_dataFim))
+                            msgValidacao = "Entre em contato com a sua DRE para criação do evento.";
                     }
                 }
             }
