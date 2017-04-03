@@ -878,7 +878,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-        <Top>6.27777cm</Top>
+        <Top>5.9718cm</Top>
         <Height>1.22556cm</Height>
         <Width>16.45821cm</Width>
         <ZIndex>1</ZIndex>
@@ -894,10 +894,10 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>3.51584in</Height>
+    <Height>2.83361in</Height>
     <Style />
   </Body>
-  <Width>6.95016in</Width>
+  <Width>6.91226in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
