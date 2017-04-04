@@ -90,6 +90,12 @@ namespace GestaoEscolar.Academico.CalendarioAnual
 
                     Pesquisar();
                 }
+                else
+                {
+                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Selecione um calendário para definir os limites para data de criação de eventos.", UtilBO.TipoMensagem.Alerta);
+                    Response.Redirect("Busca.aspx", false);
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                }
             }
         }
 
@@ -203,17 +209,17 @@ namespace GestaoEscolar.Academico.CalendarioAnual
             if (ddlAlcance.SelectedValue == "-1" || ddlAlcance.SelectedValue == "1")
             {
                 UCComboUAEscola.Visible = false;
+                UCComboUAEscola.ObrigatorioEscola = false;
+                UCComboUAEscola.ObrigatorioUA = false;
             }
             else if (ddlAlcance.SelectedValue == "2")
             {
                 UCComboUAEscola.Visible = true;
+                UCComboUAEscola.ExibeComboEscola = true;
+                UCComboUAEscola.Uad_ID = Guid.Empty;
+                UCComboUAEscola.EnableEscolas = false;
 
-                if (UCComboUAEscola.Visible)
-                {
-                    UCComboUAEscola.ExibeComboEscola = true;
-                    UCComboUAEscola.Uad_ID = Guid.Empty;
-                    UCComboUAEscola.EnableEscolas = false;
-                }
+                UCComboUAEscola.ObrigatorioEscola = true;
             }
             else if (ddlAlcance.SelectedValue == "3")
             {
@@ -221,6 +227,7 @@ namespace GestaoEscolar.Academico.CalendarioAnual
 
                 UCComboUAEscola.ExibeComboEscola = false;
                 UCComboUAEscola.ObrigatorioEscola = false;
+                UCComboUAEscola.ObrigatorioUA = true;
             }
         }
 
@@ -239,6 +246,13 @@ namespace GestaoEscolar.Academico.CalendarioAnual
             {
                 try
                 {
+                    if (ddlAlcance.SelectedValue == "-1")
+                        throw new ValidationException("Alcance é obrigatório.");
+                    else if (ddlAlcance.SelectedValue == "2" && UCComboUAEscola.Esc_ID <= 0)
+                        throw new ValidationException("Escola é obrigatória.");
+                    else if (ddlAlcance.SelectedValue == "3" && UCComboUAEscola.Uad_ID == Guid.Empty)
+                        throw new ValidationException("DRE é obrigatória.");
+
                     #region Preenche entity
 
                     var entity = new ACA_EventoLimite()
@@ -251,9 +265,7 @@ namespace GestaoEscolar.Academico.CalendarioAnual
                     };
 
                     if (UCCPeriodoCalendario.Visible)
-                    {
                         entity.tpc_id = UCCPeriodoCalendario.Valor[0];
-                    }
 
                     if (UCComboUAEscola.ExibeComboEscola)
                     {
@@ -261,9 +273,7 @@ namespace GestaoEscolar.Academico.CalendarioAnual
                         entity.uni_id = UCComboUAEscola.Uni_ID;
                     }
                     else if (UCComboUAEscola.VisibleUA)
-                    {
                         entity.uad_id = UCComboUAEscola.Uad_ID;
-                    }
 
                     #endregion
 
