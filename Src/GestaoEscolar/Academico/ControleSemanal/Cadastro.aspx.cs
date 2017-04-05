@@ -115,6 +115,23 @@ namespace GestaoEscolar.Academico.ControleSemanal
         }
 
         /// <summary>
+        /// Propriedade na qual cria variavel em ViewState armazenando valor de VS_cal_ano
+        /// </summary>
+        public int VS_cal_ano
+        {
+            get
+            {
+                if (ViewState["VS_cal_ano"] != null)
+                    return Convert.ToInt32(ViewState["VS_cal_ano"]);
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_cal_ano"] = value;
+            }
+        }
+
+        /// <summary>
         /// Propriedade na qual cria variavel em ViewState armazenando valor de tne_id
         /// </summary>
         public int VS_tne_id
@@ -581,6 +598,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                                               escola, cal.cal_descricao, tur_codigo, tud_nome, posicaoText);
             
             VS_cal_id = cal_id;
+            VS_cal_ano = cal.cal_ano;
             VS_tdt_posicao = tdt_posicao;
             VS_tud_id = tud_id;
             VS_tur_id = tur_id;
@@ -888,7 +906,13 @@ namespace GestaoEscolar.Academico.ControleSemanal
                         if (txtPlanoAula != null)
                             tau.tau_planoAula = txtPlanoAula.Text;
 
+                        tau.tau_statusPlanoAula = (byte)CLS_TurmaAulaBO.RetornaStatusPlanoAula(tau,
+                                                    ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_SINTESE_REGENCIA_AULA_TURMA, __SessionWEB.__UsuarioWEB.Usuario.ent_id),
+                                                    VS_cal_ano < 2015 || !ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.PLANEJAMENTO_ANUAL_CICLO, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
+
+                        tau.tau_dataAlteracao = DateTime.Now;
                         tau_ids += (string.IsNullOrEmpty(tau_ids) ? "" : ",") + tau.tau_id.ToString();
+                        tau.usu_idDocenteAlteracao = __SessionWEB.__UsuarioWEB.Usuario.usu_id;
 
                         lstTurmaAula.Add(tau);
                     }
@@ -906,6 +930,10 @@ namespace GestaoEscolar.Academico.ControleSemanal
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleSemanal.Cadastro.PlanejamentoSalvoSucesso").ToString(), UtilBO.TipoMensagem.Sucesso);
                     Response.Redirect("~/Academico/ControleSemanal/Busca.aspx", false);
                     HttpContext.Current.ApplicationInstance.CompleteRequest();
+                }
+                else
+                {
+                    CarregarAulasData();
                 }
             }
         }
