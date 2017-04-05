@@ -439,8 +439,10 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
-                                        <asp:Button ID="btnSugestao" runat="server" Text=" > " OnClientClick="AplicarSugestaoAulasPrevistas(this); return false;" />
-                                    </ItemTemplate>
+                                        <span class="responsive-hide">
+                                            <asp:Button ID="btnSugestao" runat="server" Text=" > " OnClientClick="AplicarSugestaoAulasPrevistas(this); return false;" />
+                                        <span>
+                                   </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Previstas *">
