@@ -1824,27 +1824,7 @@
                           <Style>Solid</Style>
                           <Width>0.5pt</Width>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </RightBorder>
-                        <BackgroundColor>=Iif(Fields!mtu_situacao.Value = 5 OR ISNOTHING(Fields!mtu_situacao.Value), "#FFE1CD", Iif(Fields!frequenciaFinalAjustadaRegencia.Value &lt; Fields!fav_percentualMinimoFrequenciaFinalAjustadaDisciplina.Value, Parameters!corAlunoFrequenciaLimite.Value, "Transparent"))</BackgroundColor>
+                        <BackgroundColor>=Iif(Fields!mtu_situacaoPeriodo.Value = 5 OR ISNOTHING(Fields!mtu_situacaoPeriodo.Value), "#FFE1CD", Iif(Fields!frequenciaFinalAjustadaRegencia.Value &lt; Fields!fav_percentualMinimoFrequenciaFinalAjustadaDisciplina.Value, Parameters!corAlunoFrequenciaLimite.Value, "Transparent"))</BackgroundColor>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -2030,27 +2010,7 @@
                           <Style>Solid</Style>
                           <Width>0.5pt</Width>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </RightBorder>
-                        <BackgroundColor>=Iif(Fields!mtu_situacao.Value = 5, "#FFE1CD", Iif(Fields!frequenciaFinalAjustadaRegencia.Value &lt; Fields!fav_percentualMinimoFrequenciaFinalAjustadaDisciplina.Value, Parameters!corAlunoFrequenciaLimite.Value, "Transparent"))</BackgroundColor>
+                        <BackgroundColor>=Iif(Fields!mtu_situacaoPeriodo.Value = 5, "#FFE1CD", Iif(Fields!frequenciaFinalAjustadaRegencia.Value &lt; Fields!fav_percentualMinimoFrequenciaFinalAjustadaDisciplina.Value, Parameters!corAlunoFrequenciaLimite.Value, "Transparent"))</BackgroundColor>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -2082,27 +2042,7 @@
                           <Style>Solid</Style>
                           <Width>0.5pt</Width>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </RightBorder>
-                        <BackgroundColor>=Iif(Fields!mtu_situacao.Value = 5, "#FFE1CD", Iif(Fields!frequenciaFinalAjustadaRegencia.Value &lt; Fields!fav_percentualMinimoFrequenciaFinalAjustadaDisciplina.Value, Parameters!corAlunoFrequenciaLimite.Value, "Transparent"))</BackgroundColor>
+                        <BackgroundColor>=Iif(Fields!mtu_situacaoPeriodo.Value = 5, "#FFE1CD", Iif(Fields!frequenciaFinalAjustadaRegencia.Value &lt; Fields!fav_percentualMinimoFrequenciaFinalAjustadaDisciplina.Value, Parameters!corAlunoFrequenciaLimite.Value, "Transparent"))</BackgroundColor>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -2287,30 +2227,11 @@
                           <Style>Solid</Style>
                           <Width>0.5pt</Width>
                         </Border>
-                        <TopBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>Black</Color>
-                          <Style>Solid</Style>
-                          <Width>0.5pt</Width>
-                        </RightBorder>
-                        <BackgroundColor>=Iif(Fields!mtu_situacao.Value = 5, "#FFE1CD", Iif(Fields!frequenciaFinalAjustadaRegencia.Value &lt; Fields!fav_percentualMinimoFrequenciaFinalAjustadaDisciplina.Value, Parameters!corAlunoFrequenciaLimite.Value, "Transparent"))</BackgroundColor>
+                        <BackgroundColor>=Iif(Fields!mtu_situacaoPeriodo.Value = 5, "#FFE1CD", Iif(Fields!frequenciaFinalAjustadaRegencia.Value &lt; Fields!fav_percentualMinimoFrequenciaFinalAjustadaDisciplina.Value, Parameters!corAlunoFrequenciaLimite.Value, "Transparent"))</BackgroundColor>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -4393,6 +4314,10 @@
           <DataField>mtu_situacao</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="mtu_situacaoPeriodo">
+          <DataField>mtu_situacaoPeriodo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="mtd_resultadoDescricao">
           <DataField>mtd_resultadoDescricao</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -4446,7 +4371,11 @@
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="PossuiFreqExterna">
-          <DataField>PossuiFreqExterna</DataField>
+          <DataField>possuiFreqExterna</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="PossuiFreqExternaAtual">
+          <DataField>PossuiFreqExternaAtual</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
       </Fields>
