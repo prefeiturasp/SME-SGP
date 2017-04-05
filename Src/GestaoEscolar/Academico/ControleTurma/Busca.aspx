@@ -437,6 +437,12 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                     <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="">
+                                    <ItemTemplate>
+                                        <asp:Button ID="btnSugestao" runat="server" Text=" > " OnClientClick="AplicarSugestaoAulasPrevistas(this); return false;" />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Previstas *">
                                     <ItemTemplate>
                                         <asp:TextBox runat="server" ID="txtPrevistas" Text='<%# Bind("aulasPrevistas") %>'
