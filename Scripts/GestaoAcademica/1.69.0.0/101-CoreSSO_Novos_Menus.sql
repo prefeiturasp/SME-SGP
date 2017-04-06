@@ -81,10 +81,10 @@ SET XACT_ABORT ON
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
 		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
 		,@nomeModuloPai = 'Registro de classe' -- Nome do módulo pai (Opcional, apenas quando houver)
-		,@nomeModulo = 'Plano semanal' -- Nome do módulo (Obrigatório)
-		,@SiteMap1Nome = 'Consulta de plano semanal'
+		,@nomeModulo = 'Planejamento semanal' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Consulta de planejamento semanal'
 		,@SiteMap1Url = '~/Academico/ControleSemanal/Busca.aspx'
-		,@SiteMap2Nome = 'Cadastro de plano semanal' 
+		,@SiteMap2Nome = 'Cadastro de planejamento semanal' 
 		,@SiteMap2Url = '~/Academico/ControleSemanal/Cadastro.aspx'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
