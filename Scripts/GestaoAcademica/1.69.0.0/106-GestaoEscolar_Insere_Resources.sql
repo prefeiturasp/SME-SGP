@@ -135,7 +135,7 @@ SET XACT_ABORT ON
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Escola: <b>{0}</b><br/>Calendário: <b>{1}</b><br/>Turma: <b>{2}</b> Componente curricular: <b>{3}</b><br/>Posição: <b>{4}</b>'
+            , @rcr_valorPadrao = 'Escola: <b>{0}</b><br/>Calendário: <b>{1}</b><br/>Turma: <b>{2}</b> Componente curricular: <b>{3}</b><br/>Tipo de docência: <b>{4}</b>'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'ControleSemanal.Cadastro.btnCancelar.Text' 
