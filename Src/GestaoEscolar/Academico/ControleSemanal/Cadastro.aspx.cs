@@ -231,6 +231,8 @@ namespace GestaoEscolar.Academico.ControleSemanal
 
         private List<CLS_TurmaAulaPlanoDisciplina> dtTurmaAulaPlanoDiscAux;
 
+        private DataTable planosPermissaoDocente;
+
         #endregion Propriedades
 
         #region Eventos
@@ -349,6 +351,31 @@ namespace GestaoEscolar.Academico.ControleSemanal
             catch (ValidationException ex)
             {
                 _lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                _lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleSemanal.Cadastro.ErroCarregar").ToString(), UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void rptDiasSemana_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                Image imgEventoSemAtividade = (Image)e.Item.FindControl("imgEventoSemAtividade");
+                Label lblDataAula = (Label)e.Item.FindControl("lblDataAula");
+
+                if (lblDataAula != null && imgEventoSemAtividade != null)
+                {
+                    DateTime data = Convert.ToDateTime(lblDataAula.Text);
+
+                    imgEventoSemAtividade.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.MensagemEventoSemAtivDiscente").ToString();
+                    imgEventoSemAtividade.Visible = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == data && Convert.ToBoolean(p["EventoSemAtividade"]));
+
+                    if (imgEventoSemAtividade.Visible)
+                        divEventoSemAtividade.Visible = true;
+                }
             }
             catch (Exception ex)
             {
@@ -774,6 +801,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
         {
             try
             {
+                divEventoSemAtividade.Visible = false;
                 divAulas.Visible = false;
                 if (string.IsNullOrEmpty(lblInicio.Text) || string.IsNullOrEmpty(lblFim.Text))
                     throw new ValidationException("Data inválida.");
@@ -786,13 +814,23 @@ namespace GestaoEscolar.Academico.ControleSemanal
                     dtPlanos = dtPlanos.AsEnumerable().Where(p => !Convert.ToBoolean(p["tau_reposicao"])).CopyToDataTable();
                 else
                     dtPlanos.Rows.Clear();
-                var planosPermissaoDocente = from DataRow dr in dtPlanos.AsEnumerable()
-                                             where VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == (byte)dr["tdt_posicao"] && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao)) &&
-                                                   Convert.ToDateTime(dr["data"]) >= Convert.ToDateTime(lblInicio.Text) &&
-                                                   Convert.ToDateTime(dr["data"]) <= Convert.ToDateTime(lblFim.Text)
-                                             select dr;
 
-                if (planosPermissaoDocente.Any())
+                planosPermissaoDocente = new DataTable();
+
+                if ((from DataRow dr in dtPlanos.AsEnumerable()
+                     where VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == (byte)dr["tdt_posicao"] && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao)) &&
+                           Convert.ToDateTime(dr["data"]) >= Convert.ToDateTime(lblInicio.Text) &&
+                           Convert.ToDateTime(dr["data"]) <= Convert.ToDateTime(lblFim.Text)
+                     select dr).Any())
+                {
+                    planosPermissaoDocente = (from DataRow dr in dtPlanos.AsEnumerable()
+                                              where VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == (byte)dr["tdt_posicao"] && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao)) &&
+                                                    Convert.ToDateTime(dr["data"]) >= Convert.ToDateTime(lblInicio.Text) &&
+                                                    Convert.ToDateTime(dr["data"]) <= Convert.ToDateTime(lblFim.Text)
+                                              select dr).CopyToDataTable();
+                }
+
+                if (planosPermissaoDocente.AsEnumerable().Any())
                     lblMessageAulas.Visible = false;
                 else
                     lblMessageAulas.Visible = true;
@@ -818,21 +856,21 @@ namespace GestaoEscolar.Academico.ControleSemanal
                 // seleciona apenas os planos que o docente tem permissao para consultar ou alterar
                 rptAulas.DataSource = diasSemana.OrderBy(p => p.Key).Select(d => new
                                                 {
-                                                    tud_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tud_id"] : "-1",
-                                                    tau_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tau_id"] : "-1",
-                                                    tud_idFilho = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tud_idFilho"] : "-1",
-                                                    data = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["data"] : d.Value,
-                                                    numeroAulas = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["numeroAulas"] : "0",
-                                                    planoAula = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["planoAula"] : "",
-                                                    conteudo = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["conteudo"] : "",
-                                                    situacao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["situacao"] : "1",
-                                                    dataCriacao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["dataCriacao"] : DateTime.Now.ToShortDateString(),
-                                                    dataAlteracao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["dataAlteracao"] : DateTime.Now.ToShortDateString(),
-                                                    sintese = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["sintese"] : "",
-                                                    tdt_posicao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tdt_posicao"] : VS_tdt_posicao.ToString(),
-                                                    usu_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["usu_id"] : Guid.Empty.ToString(),
-                                                    permissaoAlteracao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["permissaoAlteracao"] : "0",
-                                                    semPlanoAula = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["semPlanoAula"] : "false"
+                                                    tud_id = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tud_id"] : "-1",
+                                                    tau_id = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tau_id"] : "-1",
+                                                    tud_idFilho = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tud_idFilho"] : "-1",
+                                                    data = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["data"] : d.Value,
+                                                    numeroAulas = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["numeroAulas"] : "0",
+                                                    planoAula = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["planoAula"] : "",
+                                                    conteudo = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["conteudo"] : "",
+                                                    situacao = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["situacao"] : "1",
+                                                    dataCriacao = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["dataCriacao"] : DateTime.Now.ToShortDateString(),
+                                                    dataAlteracao = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["dataAlteracao"] : DateTime.Now.ToShortDateString(),
+                                                    sintese = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["sintese"] : "",
+                                                    tdt_posicao = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tdt_posicao"] : VS_tdt_posicao.ToString(),
+                                                    usu_id = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["usu_id"] : Guid.Empty.ToString(),
+                                                    permissaoAlteracao = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["permissaoAlteracao"] : "0",
+                                                    semPlanoAula = planosPermissaoDocente.AsEnumerable().Any() && planosPermissaoDocente.AsEnumerable().Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.AsEnumerable().Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["semPlanoAula"] : "false"
                                                 });
                 rptAulas.DataBind();
                     

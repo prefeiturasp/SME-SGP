@@ -92,12 +92,14 @@
                             <table cellspacing="0" class="grid grid-responsive-list">
                                 <thead>
                                     <tr class="gridHeader">
-                                        <asp:Repeater runat="server" ID="rptDiasSemana">
+                                        <asp:Repeater runat="server" ID="rptDiasSemana" OnItemDataBound="rptDiasSemana_ItemDataBound">
                                             <ItemTemplate>
                                                 <th class="center" style="border-left:1px solid; border-right:1px solid;">
                                                     <asp:Label ID="lblDataAula" runat="server" Text='<%#Bind("data") %>'></asp:Label>
                                                     <br />
                                                     <asp:Label ID="lblDiaSemana" runat="server" Text='<%#Bind("diaSemana") %>'></asp:Label>
+                                                    <asp:Image ID="imgEventoSemAtividade" runat="server" SkinID="imgStatusAlertaPendencia" Visible="false"
+                                                        ToolTip="Existe um evento cadastrado sem atividade discente para esse dia." Width="16px" Height="16px" ImageAlign="Top" />
                                                 </th>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -127,6 +129,11 @@
                                             </FooterTemplate>
                                         </asp:Repeater>
                         </div>
+                    </div>
+                    <div id="divEventoSemAtividade" runat="server" style="float: left; width: 100%;" visible="false">
+                        <asp:Image ID="imgLegendaEventoSemAtividade" runat="server" SkinID="imgStatusAlertaPendencia"
+                            ToolTip="Existe um evento cadastrado sem atividade discente para esse dia." Width="16px" Height="16px" ImageAlign="Top" />
+                        <asp:Literal ID="lit" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemEventoSemAtivDiscente %>"></asp:Literal>
                     </div>
                 </asp:Panel>
                 <div class="right divBtnCadastro area-botoes-bottom">

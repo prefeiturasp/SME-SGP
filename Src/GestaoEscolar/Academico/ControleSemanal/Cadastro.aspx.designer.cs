@@ -247,6 +247,33 @@ namespace GestaoEscolar.Academico.ControleSemanal {
         protected global::System.Web.UI.WebControls.Repeater rptAulas;
         
         /// <summary>
+        /// divEventoSemAtividade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEventoSemAtividade;
+        
+        /// <summary>
+        /// imgLegendaEventoSemAtividade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgLegendaEventoSemAtividade;
+        
+        /// <summary>
+        /// lit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lit;
+        
+        /// <summary>
         /// btnSalvar control.
         /// </summary>
         /// <remarks>
