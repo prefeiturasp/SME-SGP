@@ -121,14 +121,14 @@ SET XACT_ABORT ON
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Planejamento de aulas salvo com sucesso.'
+            , @rcr_valorPadrao = 'Planejamento semanal salvo com sucesso.'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'ControleSemanal.Cadastro.ErroSalvar' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Erro ao salvar planejamento de aulas.'
+            , @rcr_valorPadrao = 'Erro ao salvar planejamento semanal.'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'ControleSemanal.Cadastro.lblCabecalho.Text' 
@@ -192,6 +192,13 @@ SET XACT_ABORT ON
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Salvar'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Cadastro.NenhumPlanejamentoAlterado' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Nenhum planejamento de aula foi alterado.'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 

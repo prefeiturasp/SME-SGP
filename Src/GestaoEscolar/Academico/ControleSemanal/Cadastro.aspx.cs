@@ -287,6 +287,8 @@ namespace GestaoEscolar.Academico.ControleSemanal
         {
             try
             {
+                Salvar(true);
+
                 Button btnPeriodo = (Button)sender;
                 RepeaterItem itemPeriodo = (RepeaterItem)btnPeriodo.NamingContainer;
                 Repeater rptPeriodo = (Repeater)itemPeriodo.NamingContainer;
@@ -341,6 +343,8 @@ namespace GestaoEscolar.Academico.ControleSemanal
                             .ToList().ForEach(p => RemoveClass(p, "periodo_selecionado"));
 
                 AddClass(btnPeriodo, "periodo_selecionado");
+
+                CarregarAulasData();
             }
             catch (ValidationException ex)
             {
@@ -772,7 +776,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
             {
                 divAulas.Visible = false;
                 if (string.IsNullOrEmpty(lblInicio.Text) || string.IsNullOrEmpty(lblFim.Text))
-                    throw new ValidationException();
+                    throw new ValidationException("Data inválida.");
 
                 divAulas.Visible = true;
                 lblMessageAulas.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleSemanal.Cadastro.NenhumaAulaPeriodo").ToString(), UtilBO.TipoMensagem.Alerta);
@@ -794,49 +798,49 @@ namespace GestaoEscolar.Academico.ControleSemanal
                     lblMessageAulas.Visible = true;
 
                 Dictionary<int, string> diasSemana = new Dictionary<int, string>();
-                    DateTime dataInicio = Convert.ToDateTime(lblInicio.Text);
-                    while (dataInicio <= Convert.ToDateTime(lblFim.Text))
+                DateTime dataInicio = Convert.ToDateTime(lblInicio.Text);
+                while (dataInicio <= Convert.ToDateTime(lblFim.Text))
+                {
+                    diasSemana.Add((int)dataInicio.DayOfWeek, dataInicio.ToShortDateString());
+                    dataInicio = dataInicio.AddDays(1);
+                }
+                for (int i = 1; i <= 6; i++)
+                {
+                    if (!diasSemana.ContainsKey(i))
                     {
-                        diasSemana.Add((int)dataInicio.DayOfWeek, dataInicio.ToShortDateString());
-                        dataInicio = dataInicio.AddDays(1);
+                        DateTime ultimoValor = Convert.ToDateTime(diasSemana.Last().Value);
+                        DateTime primeiroValor = Convert.ToDateTime(diasSemana.First().Value);
+                        diasSemana.Add(i, (diasSemana.Last().Key < i ? ultimoValor.AddDays(i - diasSemana.Last().Key) :
+                                                                        primeiroValor.AddDays(i - diasSemana.First().Key)).ToShortDateString());
                     }
-                    for (int i = 1; i <= 6; i++)
-                    {
-                        if (!diasSemana.ContainsKey(i))
-                        {
-                            DateTime ultimoValor = Convert.ToDateTime(diasSemana.Last().Value);
-                            DateTime primeiroValor = Convert.ToDateTime(diasSemana.First().Value);
-                            diasSemana.Add(i, (diasSemana.Last().Key < i ? ultimoValor.AddDays(i - diasSemana.Last().Key) :
-                                                                           primeiroValor.AddDays(i - diasSemana.First().Key)).ToShortDateString());
-                        }
-                    }
+                }
 
-                    // seleciona apenas os planos que o docente tem permissao para consultar ou alterar
-                    rptAulas.DataSource = diasSemana.OrderBy(p => p.Key).Select(d => new
-                                                    {
-                                                        tud_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tud_id"] : "-1",
-                                                        tau_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tau_id"] : "-1",
-                                                        tud_idFilho = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tud_idFilho"] : "-1",
-                                                        data = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["data"] : d.Value,
-                                                        numeroAulas = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["numeroAulas"] : "0",
-                                                        planoAula = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["planoAula"] : "",
-                                                        conteudo = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["conteudo"] : "",
-                                                        situacao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["situacao"] : "1",
-                                                        dataCriacao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["dataCriacao"] : DateTime.Now.ToShortDateString(),
-                                                        dataAlteracao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["dataAlteracao"] : DateTime.Now.ToShortDateString(),
-                                                        sintese = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["sintese"] : "",
-                                                        tdt_posicao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tdt_posicao"] : VS_tdt_posicao.ToString(),
-                                                        usu_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["usu_id"] : Guid.Empty.ToString(),
-                                                        permissaoAlteracao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["permissaoAlteracao"] : "0",
-                                                        semPlanoAula = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["semPlanoAula"] : "false"
-                                                    });
-                    rptAulas.DataBind();
+                // seleciona apenas os planos que o docente tem permissao para consultar ou alterar
+                rptAulas.DataSource = diasSemana.OrderBy(p => p.Key).Select(d => new
+                                                {
+                                                    tud_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tud_id"] : "-1",
+                                                    tau_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tau_id"] : "-1",
+                                                    tud_idFilho = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tud_idFilho"] : "-1",
+                                                    data = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["data"] : d.Value,
+                                                    numeroAulas = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["numeroAulas"] : "0",
+                                                    planoAula = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["planoAula"] : "",
+                                                    conteudo = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["conteudo"] : "",
+                                                    situacao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["situacao"] : "1",
+                                                    dataCriacao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["dataCriacao"] : DateTime.Now.ToShortDateString(),
+                                                    dataAlteracao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["dataAlteracao"] : DateTime.Now.ToShortDateString(),
+                                                    sintese = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["sintese"] : "",
+                                                    tdt_posicao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["tdt_posicao"] : VS_tdt_posicao.ToString(),
+                                                    usu_id = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["usu_id"] : Guid.Empty.ToString(),
+                                                    permissaoAlteracao = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["permissaoAlteracao"] : "0",
+                                                    semPlanoAula = planosPermissaoDocente.Any() && planosPermissaoDocente.Any(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)) ? planosPermissaoDocente.Where(p => Convert.ToDateTime(p["data"]) == Convert.ToDateTime(d.Value)).First()["semPlanoAula"] : "false"
+                                                });
+                rptAulas.DataBind();
                     
-                    Dictionary<int, string> nomeDiasSemana = new Dictionary<int, string>();
-                    nomeDiasSemana.Add(1, "Segunda-feira"); nomeDiasSemana.Add(2, "Terça-feira"); nomeDiasSemana.Add(3, "Quarta-feira");
-                    nomeDiasSemana.Add(4, "Quinta-feira"); nomeDiasSemana.Add(5, "Sexta-feira"); nomeDiasSemana.Add(6, "Sábado");
-                    rptDiasSemana.DataSource = diasSemana.OrderBy(p => p.Key).Select(p => new { data = p.Value, diaSemana = nomeDiasSemana[p.Key] });
-                    rptDiasSemana.DataBind();
+                Dictionary<int, string> nomeDiasSemana = new Dictionary<int, string>();
+                nomeDiasSemana.Add(1, "Segunda-feira"); nomeDiasSemana.Add(2, "Terça-feira"); nomeDiasSemana.Add(3, "Quarta-feira");
+                nomeDiasSemana.Add(4, "Quinta-feira"); nomeDiasSemana.Add(5, "Sexta-feira"); nomeDiasSemana.Add(6, "Sábado");
+                rptDiasSemana.DataSource = diasSemana.OrderBy(p => p.Key).Select(p => new { data = p.Value, diaSemana = nomeDiasSemana[p.Key] });
+                rptDiasSemana.DataBind();
             }
             catch (ValidationException ex)
             {
@@ -862,6 +866,8 @@ namespace GestaoEscolar.Academico.ControleSemanal
 
             foreach (RepeaterItem item in rptAulas.Items)
             {
+                List<CLS_TurmaAulaPlanoDisciplina> lstTurmaAulaPlanoDiscAux = new List<CLS_TurmaAulaPlanoDisciplina>();
+                List<CLS_TurmaAulaPlanoDisciplina> lstTurmaAulaPlanoDiscDeletarAux = new List<CLS_TurmaAulaPlanoDisciplina>();
                 int permiteAlteracao;
                 Int32.TryParse((((HiddenField)item.FindControl("hdnPermissaoAlteracao")).Value), out permiteAlteracao);
 
@@ -880,7 +886,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                         CLS_TurmaAula tau = new CLS_TurmaAula { tud_id = VS_tud_id, tau_id = Convert.ToInt32(hdftau_id.Value) };
                         CLS_TurmaAulaBO.GetEntity(tau);
 
-                        lstTurmaAulaPlanoDiscDeletar.Add(new CLS_TurmaAulaPlanoDisciplina
+                        lstTurmaAulaPlanoDiscDeletarAux.Add(new CLS_TurmaAulaPlanoDisciplina
                         {
                             tud_id = VS_tud_id,
                             tau_id = tau.tau_id,
@@ -892,7 +898,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                             if (ckb.Selected)
                             {
                                 //existeDisciplinaPlanoRegencia = true;
-                                lstTurmaAulaPlanoDisc.Add(new CLS_TurmaAulaPlanoDisciplina
+                                lstTurmaAulaPlanoDiscAux.Add(new CLS_TurmaAulaPlanoDisciplina
                                 {
                                     tud_id = VS_tud_id,
                                     tau_id = tau.tau_id,
@@ -901,10 +907,24 @@ namespace GestaoEscolar.Academico.ControleSemanal
                             }
                         }
 
+                        List<CLS_TurmaAulaPlanoDisciplina> lstBanco = CLS_TurmaAulaPlanoDisciplinaBO.SelectBy_aulaDisciplina(VS_tud_id, tau.tau_id);
+
                         TextBox txtPlanoAula = (TextBox)item.FindControl("txtPlanoAula");
 
                         if (txtPlanoAula != null)
+                        {
+                            //Se não houve alteração dos dados então não precisa salvar
+                            if (((!lstBanco.Any() && !lstTurmaAulaPlanoDiscAux.Any()) ||
+                                 (!lstBanco.Any(b => !lstTurmaAulaPlanoDiscAux.Any(p => p.tud_idPlano == b.tud_idPlano)) &&
+                                  !lstTurmaAulaPlanoDiscAux.Any(b => !lstBanco.Any(p => p.tud_idPlano == b.tud_idPlano)))) &&
+                                ((string.IsNullOrEmpty(txtPlanoAula.Text) && (tau.IsNew || tau.tau_planoAula == null || string.IsNullOrEmpty(tau.tau_planoAula))) ||
+                                 txtPlanoAula.Text.Equals(tau.tau_planoAula)))
+                                continue;
+
                             tau.tau_planoAula = txtPlanoAula.Text;
+                            lstTurmaAulaPlanoDisc.AddRange(lstTurmaAulaPlanoDiscAux);
+                            lstTurmaAulaPlanoDiscDeletar.AddRange(lstTurmaAulaPlanoDiscDeletarAux);
+                        }
 
                         tau.tau_statusPlanoAula = (byte)CLS_TurmaAulaBO.RetornaStatusPlanoAula(tau,
                                                     ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_SINTESE_REGENCIA_AULA_TURMA, __SessionWEB.__UsuarioWEB.Usuario.ent_id),
@@ -935,6 +955,10 @@ namespace GestaoEscolar.Academico.ControleSemanal
                 {
                     CarregarAulasData();
                 }
+            }
+            else if (!navegacao)
+            {
+                _lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleSemanal.Cadastro.NenhumPlanejamentoAlterado").ToString(), UtilBO.TipoMensagem.Informacao);
             }
         }
 
