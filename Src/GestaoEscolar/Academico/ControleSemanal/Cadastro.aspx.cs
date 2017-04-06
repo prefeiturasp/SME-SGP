@@ -310,7 +310,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                         lblFim.Text = dataInicio.AddDays(6 - ((int)dataInicio.DayOfWeek)).ToShortDateString();
                     else
                         lblFim.Text = VS_CalendarioPeriodo.Where(p => p.tpc_id == VS_tpc_id).First().cap_dataFim.ToShortDateString();
-                    lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 - ((int)dataInicio.DayOfWeek)));
+                    lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 + ((int)dataInicio.DayOfWeek)));
 
                     if (VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && (p.cap_dataFim <= DateTime.Today || p.cap_dataInicio <= DateTime.Today)) &&
                         Convert.ToDateTime(lblFim.Text) < DateTime.Today)
@@ -331,7 +331,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                                     lblFim.Text = VS_CalendarioPeriodo.Where(p => p.tpc_id == VS_tpc_id).First().cap_dataFim.ToShortDateString();
                                     desiste = true;
                                 }
-                                lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 - ((int)dataInicio.DayOfWeek)));
+                                lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 + ((int)dataInicio.DayOfWeek)));
                                 lkbAnterior.Visible = true;
                             }
                             else
@@ -449,7 +449,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                         lblFim.Text = dataInicio.AddDays(6 - ((int)dataInicio.DayOfWeek)).ToShortDateString();
                     else
                         lblFim.Text = VS_CalendarioPeriodo.Where(p => p.tpc_id == VS_tpc_id).First().cap_dataFim.ToShortDateString();
-                    lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 - ((int)dataInicio.DayOfWeek)));
+                    lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 + ((int)dataInicio.DayOfWeek)));
                     lkbAnterior.Visible = true;
                 }
 
@@ -721,7 +721,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                         lblFim.Text = dataInicio.AddDays(6 - ((int)dataInicio.DayOfWeek)).ToShortDateString();
                     else
                         lblFim.Text = VS_CalendarioPeriodo.Where(p => p.tpc_id == VS_tpc_id).First().cap_dataFim.ToShortDateString();
-                    lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 - ((int)dataInicio.DayOfWeek)));
+                    lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 + ((int)dataInicio.DayOfWeek)));
 
                     if (VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && (p.cap_dataFim <= DateTime.Today || p.cap_dataInicio <= DateTime.Today)) &&
                         Convert.ToDateTime(lblFim.Text) < DateTime.Today)
@@ -742,7 +742,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                                     lblFim.Text = VS_CalendarioPeriodo.Where(p => p.tpc_id == VS_tpc_id).First().cap_dataFim.ToShortDateString();
                                     desiste = true;
                                 }
-                                lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 - ((int)dataInicio.DayOfWeek)));
+                                lkbProximo.Visible = VS_CalendarioPeriodo.Any(p => p.tpc_id == VS_tpc_id && p.cap_dataFim > dataInicio.AddDays(6 + ((int)dataInicio.DayOfWeek)));
                                 lkbAnterior.Visible = true;
                             }
                             else
