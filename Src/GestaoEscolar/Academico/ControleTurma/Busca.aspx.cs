@@ -2758,6 +2758,14 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 if (DataBinder.Eval(e.Row.DataItem, "aulasCriadas") != DBNull.Value)
                     possuiAulasCriadas = true;
+                else
+                {
+                    label = (Label)e.Row.FindControl("lblCriadas");
+                    if (label != null)
+                    {
+                        label.Text = "-";
+                    }
+                }
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
