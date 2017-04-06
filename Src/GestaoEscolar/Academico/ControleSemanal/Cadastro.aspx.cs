@@ -615,11 +615,9 @@ namespace GestaoEscolar.Academico.ControleSemanal
             if (atributos.Length > 0)
             {
                 if (atributos[0].Description != null)
-                {
                     posicaoText = atributos[0].Description;
-                }
-
-                posicaoText = "Titular";
+                else
+                    posicaoText = "Titular";
             }
 
             ACA_Curso cur = new ACA_Curso { cur_id = TUR_TurmaCurriculoBO.GetSelectBy_Turma(tur_id, ApplicationWEB.AppMinutosCacheLongo).First().cur_id };
@@ -820,13 +818,15 @@ namespace GestaoEscolar.Academico.ControleSemanal
                 if ((from DataRow dr in dtPlanos.AsEnumerable()
                      where VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == (byte)dr["tdt_posicao"] && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao)) &&
                            Convert.ToDateTime(dr["data"]) >= Convert.ToDateTime(lblInicio.Text) &&
-                           Convert.ToDateTime(dr["data"]) <= Convert.ToDateTime(lblFim.Text)
+                           Convert.ToDateTime(dr["data"]) <= Convert.ToDateTime(lblFim.Text) &&
+                           (byte)dr["tdt_posicao"] == VS_tdt_posicao
                      select dr).Any())
                 {
                     planosPermissaoDocente = (from DataRow dr in dtPlanos.AsEnumerable()
                                               where VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == (byte)dr["tdt_posicao"] && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao)) &&
                                                     Convert.ToDateTime(dr["data"]) >= Convert.ToDateTime(lblInicio.Text) &&
-                                                    Convert.ToDateTime(dr["data"]) <= Convert.ToDateTime(lblFim.Text)
+                                                    Convert.ToDateTime(dr["data"]) <= Convert.ToDateTime(lblFim.Text) &&
+                                                    (byte)dr["tdt_posicao"] == VS_tdt_posicao
                                               select dr).CopyToDataTable();
                 }
 
