@@ -449,7 +449,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                         List<Struct_MinhasTurmas> dados = TUR_TurmaBO.SelecionaPorDocenteControleTurma(ent_id, doc_id, ApplicationWEB.AppMinutosCacheCurto);
 
                         // Guarda em uma variável as escolas que possuem alguma turma ativa
-                        var dadosEscolasAtivas = dados.Where(p => p.Turmas.Any(t => t.tur_situacao == (byte)TUR_TurmaSituacao.Ativo)).ToList();
+                        var dadosEscolasAtivas = dados.Where(p => p.Turmas.Any(t => t.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && t.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia)).ToList();
 
                         if (dadosEscolasAtivas.Count == 0)
                         {  // se o docente não possuir nenhuma turma - exibir a mensagem informativa
@@ -462,7 +462,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                         rptTurmas.DataSource = dadosEscolasAtivas;
                         rptTurmas.DataBind();
 
-                        VS_titular = dados.Exists(p => p.Turmas.Any(t => t.tdc_id == (int)EnumTipoDocente.Titular));
+                        VS_titular = dados.Exists(p => p.Turmas.Any(t => t.tdc_id == (int)EnumTipoDocente.Titular && t.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia));
 
                         pnlTurmas.Visible = false;
                         divResultadoDocente.Visible = true;
@@ -918,7 +918,7 @@ namespace GestaoEscolar.Academico.ControleSemanal
                 List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, cal_id, true, false);
 
                 GridView grdVw = e.Item.FindControl("grvTurma") as GridView;
-                grdVw.DataSource = dadosTurmasAtivas;
+                grdVw.DataSource = dadosTurmasAtivas.Where(t => t.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia).ToList();
                 grdVw.DataBind();
             }
             catch (Exception ex)
