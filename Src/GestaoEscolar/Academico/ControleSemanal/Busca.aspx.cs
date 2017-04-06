@@ -453,8 +453,9 @@ namespace GestaoEscolar.Academico.ControleSemanal
 
                         if (dadosEscolasAtivas.Count == 0)
                         {  // se o docente não possuir nenhuma turma - exibir a mensagem informativa
-                            lblMensagem.Text = UtilBO.GetErroMessage((String)GetGlobalResourceObject("Mensagens", "MSG_ATRIBUICAODOCENTES"), UtilBO.TipoMensagem.Informacao);
-                            lblMensagem1.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleTurma.Busca.DocenteSemTurma").ToString(),
+                            lblMensagem.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleSemanal.Busca.DocenteSemTurmaRegencia").ToString(),
+                                                                      UtilBO.TipoMensagem.Alerta);
+                            lblMensagem1.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleSemanal.Busca.DocenteSemTurmaRegencia").ToString(),
                                                                       UtilBO.TipoMensagem.Alerta);
                         }
 

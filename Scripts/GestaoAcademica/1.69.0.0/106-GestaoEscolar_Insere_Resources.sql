@@ -200,6 +200,13 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Nenhum planejamento de aula foi alterado.'
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'ControleSemanal.Busca.DocenteSemTurmaRegencia' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'O docente não possui nenhuma turma atribuída para lançamento do planejamento semanal.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
