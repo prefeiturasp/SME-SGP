@@ -471,6 +471,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         PlanejamentoSemanal
+        ,
+
+        Sondagem
     }
 
     [Serializable]

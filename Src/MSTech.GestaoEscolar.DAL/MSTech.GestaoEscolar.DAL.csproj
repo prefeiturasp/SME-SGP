@@ -150,6 +150,7 @@
     <Compile Include="Abstracts\Abstract_ACA_RecomendacaoAlunoResponsavelDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_RecursosAulaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ReligiaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_SondagemDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TerritorioExperienciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoAnotacaoAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoAreaDocumentoDAO.cs" />
@@ -430,6 +431,7 @@
     <Compile Include="ACA_RecomendacaoAlunoResponsavelDAO.cs" />
     <Compile Include="ACA_RecursosAulaDAO.cs" />
     <Compile Include="ACA_ReligiaoDAO.cs" />
+    <Compile Include="ACA_SondagemDAO.cs" />
     <Compile Include="ACA_TerritorioExperienciaDAO.cs" />
     <Compile Include="ACA_TipoAnotacaoAlunoDAO.cs" />
     <Compile Include="ACA_TipoAreaDocumentoDAO.cs" />

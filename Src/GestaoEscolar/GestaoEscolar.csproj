@@ -752,6 +752,27 @@
     <Compile Include="Academico\ReuniaoResponsavel\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\Sondagem\Agendamento.aspx.cs">
+      <DependentUpon>Agendamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Agendamento.aspx.designer.cs">
+      <DependentUpon>Agendamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classe\Efetivacao\CadastroGestor.aspx.cs">
       <DependentUpon>CadastroGestor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2864,6 +2885,9 @@
     <Content Include="Academico\RecursosHumanos\AtribuicaoEsporadica\Cadastro.aspx" />
     <Content Include="Academico\RecursosHumanos\CargaHoraria\Busca.aspx" />
     <Content Include="Academico\RecursosHumanos\CargaHoraria\Cadastro.aspx" />
+    <Content Include="Academico\Sondagem\Agendamento.aspx" />
+    <Content Include="Academico\Sondagem\Busca.aspx" />
+    <Content Include="Academico\Sondagem\Cadastro.aspx" />
     <Content Include="App_Themes\IntranetSME\fonts\materialicons\MaterialIcons-Regular.svg" />
     <Content Include="App_Themes\IntranetSME\images\arrow.gif" />
     <Content Include="App_Themes\IntranetSME\images\cross.gif" />
