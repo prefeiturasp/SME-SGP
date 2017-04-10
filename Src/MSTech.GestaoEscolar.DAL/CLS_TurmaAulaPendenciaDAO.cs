@@ -7,7 +7,7 @@ namespace MSTech.GestaoEscolar.DAL
     using Data.Common;
     using MSTech.GestaoEscolar.DAL.Abstracts;
     using System.Data;
-
+    using System.Data.SqlClient;
     /// <summary>
     /// Description: .
     /// </summary>
@@ -50,6 +50,38 @@ namespace MSTech.GestaoEscolar.DAL
 
             qs.Execute();
             qs.Parameters.Clear();
+        }
+
+        /// <summary>
+        /// Seleciona as pendências de plano de aula das disciplinas.
+        /// </summary>
+        /// <param name="dtTurmaDisciplina">Tabela de turmas disciplinas</param>
+        /// <returns></returns>
+        public DataTable SelecionaPendencias(DataTable dtTurmaDisciplina)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_TurmaAulaPendencia_SelecionaPendencias", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                SqlParameter sqlParam = new SqlParameter();
+                sqlParam.SqlDbType = SqlDbType.Structured;
+                sqlParam.ParameterName = "@tabelaTurmaDisciplina";
+                sqlParam.TypeName = "TipoTabela_TurmaDisciplina";
+                sqlParam.Value = dtTurmaDisciplina;
+                qs.Parameters.Add(sqlParam);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
         }
     }
 }

@@ -139,12 +139,13 @@
                                     <asp:TemplateField HeaderText="Planejamento" HeaderStyle-CssClass="center"
                                         ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="grid-responsive-item-inline grid-responsive-center">
                                         <ItemTemplate>
-                                            <span class="ico-font ico-planejamento"><asp:ImageButton ID="btnPlanejamento"
+                                            <span class="ico-font ico-planejamento">
+                                                <asp:ImageButton ID="btnPlanejamento"
                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                     runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                                     ToolTip="Planejamento" />
-                                                    <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                        Visible="false" /></span>
+                                                <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                            </span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <%--Diário de Classe--%>
@@ -161,10 +162,13 @@
                                     <asp:TemplateField HeaderText="<%$ Resources:Mensagens, MSG_Listao %>" HeaderStyle-CssClass="center"
                                         ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="grid-responsive-item-inline grid-responsive-center">
                                         <ItemTemplate>
-                                            <span class="ico-font ico-listao"><asp:ImageButton ID="btnListao"
+                                            <span class="ico-font ico-listao">
+                                                <asp:ImageButton ID="btnListao"
                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                     runat="server" SkinID="btListaoGestor" CommandName="Listao"
                                                     ToolTip="<%$ Resources:Mensagens, MSG_Listao %>" /></span>
+                                                <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                            </span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <%--Frequência --%>
@@ -212,13 +216,14 @@
                                             <asp:HiddenField ID="hdnTipoDocente" runat="server" />
                                             <asp:HiddenField ID="hdnDisciplinaEspecial" runat="server" />
                                             <asp:HiddenField ID="hdnFechamentoAutomatico" runat="server" />
-                                            <span class="ico-font ico-fechamento"><asp:ImageButton ID="btnFechamento"
+                                            <span class="ico-font ico-fechamento">
+                                                <asp:ImageButton ID="btnFechamento"
                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                     runat="server" SkinID="btFechamentoGestor" CommandName="Fechamento"
                                                     ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
                                                     Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' />
-                                                    <asp:Image ID="imgPendenciaFechamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                        Visible="false" /></span>
+                                                <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                            </span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
@@ -305,12 +310,13 @@
                             <asp:TemplateField HeaderText="Planejamento" HeaderStyle-CssClass="center"
                                 ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="grid-responsive-item-inline grid-responsive-center">
                                 <ItemTemplate>
-                                    <span class="ico-font ico-planejamento"><asp:ImageButton ID="btnPlanejamento"
+                                    <span class="ico-font ico-planejamento">
+                                        <asp:ImageButton ID="btnPlanejamento"
                                             CommandArgument='<%# Container.DataItemIndex %>'
                                             runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
-                                            ToolTip="Planejamento" /></span>
-                                    <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                        Visible="false" />
+                                            ToolTip="Planejamento" />
+                                    </span>
+                                    <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <%--Diário de Classe--%>
@@ -327,10 +333,13 @@
                             <asp:TemplateField HeaderText="<%$ Resources:Mensagens, MSG_Listao %>" HeaderStyle-CssClass="center"
                                 ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="grid-responsive-item-inline grid-responsive-center">
                                 <ItemTemplate>
-                                    <span class="ico-font ico-listao"><asp:ImageButton ID="btnListao"
+                                    <span class="ico-font ico-listao">
+                                        <asp:ImageButton ID="btnListao"
                                             CommandArgument='<%# Container.DataItemIndex %>'
                                             runat="server" SkinID="btListaoGestor" CommandName="Listao"
-                                            ToolTip="<%$ Resources:Mensagens, MSG_Listao %>" /></span>
+                                            ToolTip="<%$ Resources:Mensagens, MSG_Listao %>" />
+                                    </span>
+                                    <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <%--Frequência --%>
@@ -378,13 +387,14 @@
                                     <asp:HiddenField ID="hdnTipoDocente" runat="server" />
                                     <asp:HiddenField ID="hdnDisciplinaEspecial" runat="server" />
                                     <asp:HiddenField ID="hdnFechamentoAutomatico" runat="server" />
-                                    <span class="ico-font ico-fechamento"><asp:ImageButton ID="btnFechamento"
-                                        CommandArgument='<%# Container.DataItemIndex %>'
-                                        runat="server" SkinID="btFechamentoGestor" CommandName="Fechamento"
-                                        ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
-                                        Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' /></span>
-                                    <asp:Image ID="imgPendenciaFechamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                        Visible="false" />
+                                    <span class="ico-font ico-fechamento">
+                                        <asp:ImageButton ID="btnFechamento"
+                                            CommandArgument='<%# Container.DataItemIndex %>'
+                                            runat="server" SkinID="btFechamentoGestor" CommandName="Fechamento"
+                                            ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
+                                            Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' />
+                                    </span>
+                                    <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
                                 </ItemTemplate>
                             </asp:TemplateField>
 
