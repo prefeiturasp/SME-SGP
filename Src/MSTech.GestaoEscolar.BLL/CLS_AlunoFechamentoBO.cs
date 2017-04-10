@@ -185,6 +185,25 @@ namespace MSTech.GestaoEscolar.BLL
             dr["caf_efetivado"] = entity.caf_efetivado;
             dr["caf_dataAlteracao"] = DateTime.Now;
 
+            if (entity.caf_qtFaltasExterna >= 0)
+            {
+                dr["caf_qtFaltasExterna"] = entity.caf_qtFaltasExterna;
+            }
+            else
+            {
+                dr["caf_qtFaltasExterna"] = DBNull.Value;
+
+            }
+
+            if (entity.caf_qtAulasExterna > 0)
+            {
+                dr["caf_qtAulasExterna"] = entity.caf_qtAulasExterna;
+            }
+            else
+            {
+                dr["caf_qtAulasExterna"] = DBNull.Value;
+            }
+
             return dr;
         }
 	}

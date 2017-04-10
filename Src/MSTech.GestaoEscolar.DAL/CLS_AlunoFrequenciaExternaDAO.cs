@@ -9,18 +9,99 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using System;
     using System.Data;
+    using System.Data.SqlClient;
 
     /// <summary>
     /// Description: .
     /// </summary>
     public class CLS_AlunoFrequenciaExternaDAO : Abstract_CLS_AlunoFrequenciaExternaDAO
 	{
+        #region Consultas
+
+        public DataTable SelecionaPor_MatriculasDisciplinaPeriodo(DataTable tbMatriculaTurmaDisciplina, int tpc_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_AlunoFrequenciaExterna_SelectBy_MatriculasDisciplinaPeriodo", _Banco);
+
+            #region PARAMETROS
+
+            SqlParameter sqlParam = new SqlParameter();
+            sqlParam.ParameterName = "@tbMatriculaTurmaDisciplina";
+            sqlParam.SqlDbType = SqlDbType.Structured;
+            sqlParam.TypeName = "TipoTabela_AlunoMatriculaTurmaDisciplina";
+            sqlParam.Value = tbMatriculaTurmaDisciplina;
+            qs.Parameters.Add(sqlParam);
+            
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@tpc_id";
+            Param.Size = 4;
+            Param.Value = tpc_id;
+            qs.Parameters.Add(Param);
+
+            #endregion PARAMETROS
+
+            qs.Execute();
+
+            return qs.Return;
+        }
+
+        /// <summary>
+        /// Seleciona os dados para lançamento de frequencia externa do aluno
+        /// </summary>
+        /// <param name="alu_id">ID do aluno</param>
+        /// <param name="mtu_id">ID da matrícula turma do aluno</param>
+        /// <returns></returns>
+        public DataTable SelecionaDadosAlunoLancamentoFrequenciaExterna(long alu_id, int mtu_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_AlunoFrequenciaExterna_DadosAlunoLancamentoFrequenciaExterna", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@alu_id";
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@mtu_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = mtu_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        #endregion
+
         #region Métodos sobrescritos
 
         protected override void ParamInserir(QuerySelectStoredProcedure qs, CLS_AlunoFrequenciaExterna entity)
         {
             entity.afx_dataCriacao = entity.afx_dataAlteracao = DateTime.Now;
             base.ParamInserir(qs, entity);
+
+            if (entity.afx_qtdFaltas > -1)
+            {
+                qs.Parameters["@afx_qtdFaltas"].Value = entity.afx_qtdFaltas;
+            }
+            else
+            {
+                qs.Parameters["@afx_qtdFaltas"].Value = DBNull.Value;
+            }
         }
 
         protected override void ParamAlterar(QueryStoredProcedure qs, CLS_AlunoFrequenciaExterna entity)
@@ -28,6 +109,15 @@ namespace MSTech.GestaoEscolar.DAL
             entity.afx_dataAlteracao = DateTime.Now;
             base.ParamAlterar(qs, entity);
             qs.Parameters.RemoveAt("@afx_dataCriacao");
+
+            if (entity.afx_qtdFaltas > -1)
+            {
+                qs.Parameters["@afx_qtdFaltas"].Value = entity.afx_qtdFaltas;
+            }
+            else
+            {
+                qs.Parameters["@afx_qtdFaltas"].Value = DBNull.Value;
+            }
         }
 
         protected override bool Alterar(CLS_AlunoFrequenciaExterna entity)

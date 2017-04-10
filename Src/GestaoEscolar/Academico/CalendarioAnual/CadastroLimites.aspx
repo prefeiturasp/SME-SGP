@@ -60,6 +60,7 @@
                         OnSelectedIndexChanged="ddlAlcance_SelectedIndexChanged">
                         <asp:ListItem Value="-1">-- Selecione um alcance --</asp:ListItem>
                         <asp:ListItem Value="1">Toda a rede</asp:ListItem>
+                        <asp:ListItem Value="3">DRE</asp:ListItem>
                         <asp:ListItem Value="2">Escola</asp:ListItem>
                     </asp:DropDownList>
                     <asp:CompareValidator ID="cvAlcance" runat="server" ErrorMessage="Alcance é obrigatório."

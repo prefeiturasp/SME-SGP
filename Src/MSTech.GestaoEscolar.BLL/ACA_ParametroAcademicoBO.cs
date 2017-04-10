@@ -1013,47 +1013,69 @@ namespace MSTech.GestaoEscolar.BLL
         [parametroAcademicoAttributes("Serviço que realizará o processamento da fila e atualização de dados na tela de fechamento.", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         PROCESSAR_FILA_FECHAMENTO_TELA_SERVICO
         ,
+
         [parametroAcademicoAttributes("Nome padrão da designação da escola", "", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.text)]
         DESIGNACAO
         ,
+
         [parametroAcademicoAttributes("Determina se o número de matrícula será exibido.", "", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXIBE_NUMERO_MATRICULA
         ,
+
         [parametroAcademicoAttributes("Define se a opção para limitar docentes será exibida no cadastro de evento.", "", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXIBIR_LIMITAR_DOCENTES_EVENTO
         ,
+
         [parametroAcademicoAttributes("Exibir número do arquivo passivo.", "", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXIBIR_NUMERO_ARQUIVO_PASSIVO
         ,
+
         [parametroAcademicoAttributes("Executar pré-processamento dos relatórios de pendências.", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXECUTAR_PREPROCESSAMENTO_RELATORIO_PENDENCIAS
         ,
+
         [parametroAcademicoAttributes("Quantidade de threads que serão executadas a cada execução do serviço de processamento do fechamento de bimestre.", "", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.integer)]
         QUANTIDADE_THREADS_FILA_FECHAMENTO
         ,
+
         [parametroAcademicoAttributes("Exibir mensagem de 'Aguarde' ao acessar o fechamento(automatico) com FuraFila desativado e processamento pendente.", "", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         PROCESSAR_FILA_FECHAMENTO_VERIFICAR_PENDENCIAS
         ,
+
         [parametroAcademicoAttributes("Área de conhecimento para disciplinas de fora da rede.", "Área de conhecimento para disciplinas de fora da rede é obrigatória.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         EXIBE_DISCIPLINA_FORA_GRADE_HISTORICO
         ,
+
         [parametroAcademicoAttributes("Tipo de período do calendário de recesso", "", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         TIPO_PERIODO_CALENDARIO_RECESSO
         ,
+
         [parametroAcademicoAttributes("Preencher login e senha automaticamente no cadastro de colaboradores e docentes.", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         PREENCHER_LOGIN_SENHA_AUTOMATICAMENTE_COLABORADORES_DOCENTES
         ,
+
         [parametroAcademicoAttributes("Exibir alerta de aula criada sem plano, para o ensino infantil na visão gestão", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL
         ,
+
         [parametroAcademicoAttributes("Exibir no planejamento a aba plano do ciclo/série para o ensino infantil", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXIBIR_ABA_PLANEJAMENTO_PLANO_CICLO_ENSINO_INFANTIL
         ,
+
         [parametroAcademicoAttributes("Exibir no planejamento a aba plano anual para o ensino infantil", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXIBIR_ABA_PLANEJAMENTO_PLANO_ANUAL_ENSINO_INFANTIL
         ,
+
         [parametroAcademicoAttributes("Exibir no planejamento a aba plano para o aluno para o ensino infantil", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         EXIBIR_ABA_PLANEJAMENTO_PLANO_ALUNO_ENSINO_INFANTIL
+        ,
+
+        [parametroAcademicoAttributes("Mensagem de aviso para alunos com frequência externa", "É obrigatório informar uma mensagem.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.text)]
+        MENSAGEM_FREQUENCIA_EXTERNA
+        ,
+
+        [parametroAcademicoAttributes("Nível de ensino que se refere ao curso do ensino médio", "Nível de ensino que se refere ao curso do ensino médio é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
+        TIPO_NIVEL_ENSINO_MEDIO
     }   
 
     #endregion Enumerador

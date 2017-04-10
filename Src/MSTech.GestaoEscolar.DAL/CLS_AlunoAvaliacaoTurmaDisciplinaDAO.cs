@@ -889,6 +889,11 @@ namespace MSTech.GestaoEscolar.DAL
             else
                 qs.Parameters["@atd_numeroFaltasReposicao"].Value = DBNull.Value;
 
+            if (entity.atd_numeroFaltasExterna > -1)
+                qs.Parameters["@atd_numeroFaltasExterna"].Value = entity.atd_numeroFaltasExterna;
+            else
+                qs.Parameters["@atd_numeroFaltasExterna"].Value = DBNull.Value;
+
             qs.Parameters["@atd_relatorio"].DbType = DbType.String;
             qs.Parameters["@atd_relatorio"].Size = Int32.MaxValue;
 
@@ -921,6 +926,11 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters["@atd_numeroFaltasReposicao"].Value = entity.atd_numeroFaltasReposicao;
             else
                 qs.Parameters["@atd_numeroFaltasReposicao"].Value = DBNull.Value;
+
+            if (entity.atd_numeroFaltasExterna > -1)
+                qs.Parameters["@atd_numeroFaltasExterna"].Value = entity.atd_numeroFaltasExterna;
+            else
+                qs.Parameters["@atd_numeroFaltasExterna"].Value = DBNull.Value;
 
             qs.Parameters["@atd_relatorio"].DbType = DbType.String;
             qs.Parameters["@atd_relatorio"].Size = Int32.MaxValue;
@@ -976,8 +986,6 @@ namespace MSTech.GestaoEscolar.DAL
             __STP_DELETE = "NEW_CLS_AlunoAvaliacaoTurmaDisciplina_Update_Situacao";
             return base.Delete(entity);
         }
-
-
 
         #endregion
     }

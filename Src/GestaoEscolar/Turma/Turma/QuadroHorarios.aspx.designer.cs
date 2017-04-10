@@ -85,15 +85,6 @@ namespace GestaoEscolar.Turma.Turma {
         protected global::System.Web.UI.WebControls.HiddenField hdnDiasSemana;
         
         /// <summary>
-        /// btnSalvar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalvar;
-        
-        /// <summary>
         /// btnCancelar control.
         /// </summary>
         /// <remarks>
@@ -209,15 +200,6 @@ namespace GestaoEscolar.Turma.Turma {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCCTurmaDisciplina UCCTurmaDisciplina;
-        
-        /// <summary>
-        /// btnAtribuiDisciplina control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAtribuiDisciplina;
         
         /// <summary>
         /// btnCancelarAtribuicao control.

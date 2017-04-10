@@ -96,6 +96,31 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Salva item na fila de processamento com a flag frequência externa marcada (caso o item já exista, apenas atualiza).
+        /// </summary>
+        /// <param name="listFila">Lista com tpc_ids e tud_ids.</param>
+        /// <returns>True em caso de sucesso.</returns>
+        public bool SalvarFilaFrequenciaExterna(DataTable dtAlunoFechamentoPendencia)
+        {
+            QueryStoredProcedure qs = new QueryStoredProcedure("NEW_CLS_AlunoFechamentoPendencia_SalvarFila", _Banco);
+
+            #region PARAMETROS
+
+            SqlParameter sqlParam = new SqlParameter();
+            sqlParam.ParameterName = "@tbDadosAlunoFechamentoPendencia";
+            sqlParam.SqlDbType = SqlDbType.Structured;
+            sqlParam.TypeName = "TipoTabela_AlunoFechamentoPendencia";
+            sqlParam.Value = dtAlunoFechamentoPendencia;
+            qs.Parameters.Add(sqlParam);
+
+            #endregion PARAMETROS
+
+            qs.Execute();
+
+            return (qs.Return > 0);
+        }
+
+        /// <summary>
         /// Salva item na fila de processamento com a flag nota marcada.
         /// </summary>
         /// <param name="tud_id">Id da disciplina na turma.</param>
@@ -302,38 +327,6 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Execute();
 
                 return qs.Return > 0;
-            }
-            finally
-            {
-                qs.Parameters.Clear();
-            }
-        }
-
-
-        /// <summary>
-        /// Seleciona os dados para realizar a atualização de faltas do fechamento
-        /// </summary>
-        /// <param name="dtAlunoFechamentoPendencia">Pendências de fechamento.</param>
-        /// <returns></returns>
-        public DataSet BuscaDadosAtualizacaoFaltasFechamento(DataTable dtAlunoFechamentoPendencia)
-        {
-            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_AlunoFechamentoPendencia_BuscaDadosAtualizacaoFaltasFechamento", _Banco);
-            qs.TimeOut = 0;
-
-            try
-            {
-                #region Parâmetro
-
-                SqlParameter sqlParam = new SqlParameter();
-                sqlParam.ParameterName = "@AlunoFechamentoPendencia";
-                sqlParam.SqlDbType = SqlDbType.Structured;
-                sqlParam.TypeName = "TipoTabela_AlunoFechamentoPendencia";
-                sqlParam.Value = dtAlunoFechamentoPendencia;
-                qs.Parameters.Add(sqlParam);
-
-                #endregion Parâmetro
-
-                return qs.Execute_DataSet();
             }
             finally
             {

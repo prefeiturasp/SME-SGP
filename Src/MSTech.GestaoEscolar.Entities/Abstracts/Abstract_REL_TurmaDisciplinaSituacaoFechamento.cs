@@ -45,6 +45,12 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		public virtual bool Pendente { get; set; }
 
         /// <summary>
+        /// Indica se há pendência para a disciplina.
+        /// </summary>
+        [MSNotNullOrEmpty]
+        public virtual bool PendentePlanejamento { get; set; }
+
+        /// <summary>
         /// Indica se há pendência de parecer conclusivo.
         /// </summary>
         [MSNotNullOrEmpty]

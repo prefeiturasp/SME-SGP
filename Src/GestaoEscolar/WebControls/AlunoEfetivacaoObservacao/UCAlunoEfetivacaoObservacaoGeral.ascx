@@ -98,6 +98,8 @@
                         </div>
 
                         <div id="divBoletim" runat="server">
+                            <asp:Label ID="lblMensagemFrequenciaExterna" runat="server" Visible="false" ></asp:Label>
+
                             <div class="div-gestor-scroll" id="divDisciplinas" runat="server">
                                 <table class="table-boletim">
                                     <thead>
@@ -117,6 +119,9 @@
                                             </asp:Repeater>
                                             <th rowspan="2" class="th-ca" id="thTotalComp" runat="server" visible="false">
                                                 <asp:Label runat="server" ID="lblCompAusencia" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblCompAusencia.Text %>"></asp:Label>
+                                            </th>
+                                            <th rowspan="2" class="th-faltas-externas" id="thFaltasExternas" runat="server" visible="false">
+                                                <asp:Label runat="server" ID="lblFaltasExternas" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblFaltasExternas.Text %>"></asp:Label>
                                             </th>
                                             <th rowspan="2" class="th-frequencia" id="thFreqFinal" runat="server" visible="false">
                                                 <asp:Label runat="server" ID="lblPorcentagemFreq" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblPorcentagemFreq.Text %>"></asp:Label>
@@ -187,6 +192,9 @@
                                                     <td class="td-notas" id="tdTotAusenciasCompensadas" runat="server" visible="false">
                                                         <asp:Literal runat="server" ID="litAusenciasCompensadas" Text='<%#Eval("ausenciasCompensadas")%>'></asp:Literal>
                                                     </td>
+                                                    <td class="td-notas" id="tdTotFaltasExternas" runat="server" visible="false">
+                                                        <asp:Literal runat="server" ID="litFaltasExternas" Text='<%#Eval("faltasExternas")%>'></asp:Literal>
+                                                    </td>
                                                     <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server" visible="false">
                                                         <asp:Literal runat="server" ID="litFrequenciaAjustada"
                                                             Text='<%# Eval("FrequenciaFinalAjustada") %>'></asp:Literal>
@@ -255,6 +263,9 @@
                                                     <td class="td-notas" id="tdTotAusenciasCompensadas" runat="server" visible="false">
                                                         <asp:Literal runat="server" ID="litAusenciasCompensadas" Text='<%#Eval("ausenciasCompensadas")%>'></asp:Literal>
                                                     </td>
+                                                    <td class="td-notas" id="tdTotFaltasExternas" runat="server" visible="false">
+                                                        <asp:Literal runat="server" ID="litFaltasExternas" Text='<%#Eval("faltasExternas")%>'></asp:Literal>
+                                                    </td>
                                                     <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server" visible="false">
                                                         <asp:Literal runat="server" ID="litFrequenciaAjustada"
                                                             Text='<%# Eval("FrequenciaFinalAjustada") %>'></asp:Literal>
@@ -305,6 +316,9 @@
                                                         </th>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
+                                                <th rowspan="2" class="th-faltas-externas" id="thFaltasExternasEnriquecimento" runat="server" visible="false">
+                                                    <asp:Label runat="server" ID="lblFaltasExternasEnriquecimento" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblFaltasExternas.Text %>"></asp:Label>
+                                                </th>
                                                 <th rowspan="2" class="th-frequencia" id="thFreqFinalEnriquecimento" runat="server" visible="false">
                                                     <asp:Label runat="server" ID="lblPorcentagemFreqEnriquecimento" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblPorcentagemFreqEnriquecimento.Text %>"></asp:Label>
                                                 </th>
@@ -336,6 +350,9 @@
                                                                 </td>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
+                                                        <td class="td-notas" id="tdTotFaltasExternas" runat="server" visible="false">
+                                                            <asp:Literal runat="server" ID="litFaltasExternas" Text='<%#Eval("faltasExternas")%>'></asp:Literal>
+                                                        </td>
                                                         <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server">
                                                             <asp:Literal runat="server" ID="litFrequenciaAjustadaEnriquec" Text='<%#Eval("FrequenciaFinalAjustada")%>'></asp:Literal>
                                                         </td>
@@ -363,6 +380,9 @@
                                                                 </td>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
+                                                        <td class="td-notas" id="tdTotFaltasExternas" runat="server" visible="false">
+                                                            <asp:Literal runat="server" ID="litFaltasExternas" Text='<%#Eval("faltasExternas")%>'></asp:Literal>
+                                                        </td>
                                                         <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server">
                                                             <asp:Literal runat="server" ID="litFrequenciaAjustadaEnriquec" Text='<%#Eval("FrequenciaFinalAjustada")%>'></asp:Literal>
                                                         </td>
@@ -393,6 +413,9 @@
                                                                 </td>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
+                                                        <td class="td-notas" id="tdTotFaltasExternas" runat="server" visible="false">
+                                                            <asp:Literal runat="server" ID="litFaltasExternas" Text='<%#Eval("faltasExternas")%>'></asp:Literal>
+                                                        </td>
                                                         <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server">
                                                             <asp:Literal runat="server" ID="litFrequenciaAjustadaEnriquec" Text='<%#Eval("FrequenciaFinalAjustada")%>'></asp:Literal>
                                                         </td>
@@ -420,6 +443,9 @@
                                                                 </td>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
+                                                        <td class="td-notas" id="tdTotFaltasExternas" runat="server" visible="false">
+                                                            <asp:Literal runat="server" ID="litFaltasExternas" Text='<%#Eval("faltasExternas")%>'></asp:Literal>
+                                                        </td>
                                                         <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server">
                                                             <asp:Literal runat="server" ID="litFrequenciaAjustadaEnriquec" Text='<%#Eval("FrequenciaFinalAjustada")%>'></asp:Literal>
                                                         </td>
@@ -459,6 +485,9 @@
                                                         </th>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
+                                                <th rowspan="2" class="th-faltas-externas" id="thFaltasExternasEI" runat="server" visible="false">
+                                                    <asp:Label runat="server" ID="lblFaltasExternasEI" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblFaltasExternas.Text %>"></asp:Label>
+                                                </th>
                                                 <th rowspan="2" class="th-frequencia" id="thFreqFinalEI" runat="server" visible="false">
                                                     <asp:Label runat="server" ID="lblPorcentagemFreqEI" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblPorcentagemFreqEI.Text %>"></asp:Label>
                                                 </th>
@@ -490,6 +519,9 @@
                                                                 </td>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
+                                                         <td class="td-notas" id="tdTotFaltasExternas" runat="server" visible="false">
+                                                            <asp:Literal runat="server" ID="litFaltasExternasEI" Text='<%#Eval("faltasExternas")%>'></asp:Literal>
+                                                        </td>
                                                         <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server">
                                                             <asp:Literal runat="server" ID="litFrequenciaAjustadaEI" Text='<%#Eval("FrequenciaFinalAjustada")%>'></asp:Literal>
                                                         </td>
@@ -517,6 +549,9 @@
                                                                 </td>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
+                                                         <td class="td-notas" id="tdTotFaltasExternas" runat="server" visible="false">
+                                                            <asp:Literal runat="server" ID="litFaltasExternasEI" Text='<%#Eval("faltasExternas")%>'></asp:Literal>
+                                                        </td>
                                                         <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server">
                                                             <asp:Literal runat="server" ID="litFrequenciaAjustadaEI" Text='<%#Eval("FrequenciaFinalAjustada")%>'></asp:Literal>
                                                         </td>
@@ -559,7 +594,6 @@
                                                 <th rowspan="2" class="th-frequencia">
                                                     <asp:Label runat="server" ID="lblPorcentagemFreqRecuperacao" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblPorcentagemFreqRecuperacao.Text %>"></asp:Label>
                                                 </th>
-
                                                 <th rowspan="2" class="th-parecer-final" id="thFreqFinalRecuperacao" runat="server" visible="false">
                                                     <asp:Label runat="server" ID="lblParecerFinalRecuperacao" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblParecerFinalRecuperacao.Text %>"></asp:Label>
                                                 </th>
@@ -640,6 +674,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div id="divLegenda" runat="server" visible="false" class="legenda">
                             <hr />
                             <b>

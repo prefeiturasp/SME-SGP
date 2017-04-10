@@ -65,7 +65,7 @@ namespace MSTech.GestaoEscolar.BLL
                                                 cargaHorarioSemanal = tud.tud_cargaHorariaSemanal
                                             };
 
-                if (validacaoCargaSemanal.Any(p => p.quantidadeAulas > p.cargaHorarioSemanal && p.tud_tipo != (byte)TurmaDisciplinaTipo.DisciplinaPrincipal))
+                if (validacaoCargaSemanal.Any(p => p.quantidadeAulas > p.cargaHorarioSemanal && p.tud_tipo != (byte)TurmaDisciplinaTipo.DisciplinaPrincipal && p.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia))
                 {
                     string mensagem;
 

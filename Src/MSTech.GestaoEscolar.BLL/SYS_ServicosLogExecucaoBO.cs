@@ -46,6 +46,12 @@ namespace MSTech.GestaoEscolar.BLL
             return Save(log);
         }
 
+        public static bool VerificaServicoRodando(byte ser_id)
+        {
+            SYS_ServicosLogExecucaoDAO dao = new SYS_ServicosLogExecucaoDAO();
+            return dao.VerificaServicoRodando(ser_id);
+        }
+
         #endregion Métodos de inclusão/alteração
 
     }

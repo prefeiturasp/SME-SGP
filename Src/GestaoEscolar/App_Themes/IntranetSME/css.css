@@ -5056,7 +5056,8 @@ textarea {
         .fieldset-fechamento-gestor .table-boletim th.th-pos-conselho,
         .fieldset-fechamento-gestor .table-boletim th.th-faltas,
         .fieldset-fechamento-gestor .table-boletim th.th-aula-dada,
-        .fieldset-fechamento-gestor .table-boletim th.th-aula-prevista {
+        .fieldset-fechamento-gestor .table-boletim th.th-aula-prevista,
+        .fieldset-fechamento-gestor .table-boletim th.th-aulas {
             background-color: #f1f1f1;
             font-size: .95em;
         }
@@ -5077,7 +5078,8 @@ textarea {
 
             .fieldset-fechamento-gestor .table-boletim td.td-notas,
             .fieldset-fechamento-gestor .table-boletim td.td-faltas,
-            .fieldset-fechamento-gestor .table-boletim td.td-aulas {
+            .fieldset-fechamento-gestor .table-boletim td.td-aulas,
+            .fieldset-fechamento-gestor .table-boletim td.td-aulasPrevistas {
                 text-align: center;
             }
 

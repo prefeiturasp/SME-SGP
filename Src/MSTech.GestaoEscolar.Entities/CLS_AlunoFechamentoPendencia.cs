@@ -27,6 +27,7 @@ namespace MSTech.GestaoEscolar.Entities
             dtAlunoFechamentoPendencia.Columns.Add("tpc_id", typeof(Int32));
             dtAlunoFechamentoPendencia.Columns.Add("afp_frequencia", typeof(Boolean));
             dtAlunoFechamentoPendencia.Columns.Add("afp_nota", typeof(Boolean));
+            dtAlunoFechamentoPendencia.Columns.Add("afp_frequenciaExterna", typeof(Boolean));
             dtAlunoFechamentoPendencia.Columns.Add("afp_processado", typeof(Byte));
             dtAlunoFechamentoPendencia.Columns.Add("afp_processoServico", typeof(Guid));            
             return dtAlunoFechamentoPendencia;

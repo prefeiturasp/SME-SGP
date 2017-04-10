@@ -940,7 +940,8 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
                                          "&numeroDiasUteis=" + numeroDiasUteis +
                                          "&visaoGestor=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) +
                                          "&cal_ano=" + UCBuscaDocenteTurma.ComboCalendario.Cal_ano.ToString() +
-                                         "&documentoOficial=true";
+                                         "&documentoOficial=true" +
+                                         "&mensagemFrequenciaExterna=" + ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MENSAGEM_FREQUENCIA_EXTERNA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
                             break;
                         case DocDctRelSinteseEnriquecimentoCurricular:
                             report = ((int)ReportNameGestaoAcademicaDocumentosDocente.DocDctRelSinteseEnriquecimentoCurricular).ToString();
@@ -1179,7 +1180,7 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
-                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar emitir o documento.", UtilBO.TipoMensagem.Erro);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar emitir o relatório.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }
@@ -1221,7 +1222,7 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
 
                     _grvDocumentoAluno.Columns[cellCurso].HeaderText = GestaoEscolarUtilBO.nomePadraoCurso(__SessionWEB.__UsuarioWEB.Usuario.ent_id);
 
-                    lblAvisoMensagem.Text = UtilBO.GetMessage("É necessário selecionar um tipo de documento.", UtilBO.TipoMensagem.Informacao);
+                    lblAvisoMensagem.Text = UtilBO.GetMessage("É necessário selecionar um tipo de relatório.", UtilBO.TipoMensagem.Informacao);
                     UCCamposObrigatorios.Visible = false;
                     btnGerar.Visible = false;
 

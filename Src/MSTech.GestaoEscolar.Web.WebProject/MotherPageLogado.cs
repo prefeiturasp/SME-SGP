@@ -76,15 +76,7 @@ namespace MSTech.GestaoEscolar.Web.WebProject
             // Registra o GATC para a página. Código implementado na MotherPageLogado
             // para que apenas as páginas da área restrita resgistrem o acompanhamento. (Com exceção das paginas abaixo)
 
-            if (!Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/visualizaconteudo.aspx")
-                && !Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/visualizaconteudonovo.aspx")
-                && !Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/visualizaservico.aspx")
-                && !Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/visualizacache.aspx")
-                && !Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/visualizaservice.aspx")
-                && !Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/correcaofrequenciaacumulada/")
-                && !Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/controletarefa/controle.aspx")
-                && !Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/visualizamovimentacao.aspx")
-                && !Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/VisualizaModulo.aspx"))
+            if (!Request.CurrentExecutionFilePath.ToLower().Contains("configuracao/conteudo/visualizacache.aspx"))
                 CoreSSO.BLL.UtilBO.RegistraGATC(Page);
         }
 

@@ -90,7 +90,7 @@
 </div>
 
 <!-- Cadastro de observacao geral para o aluno -->
-<div id="divCadastroObservacaoGeral" title="Observação">
+<div id="divCadastroObservacaoGeral" title="Observação" class="hide">
     <fieldset class="fieldset-fechamento-gestor">
         <asp:UpdatePanel ID="updObservacaoGeral" runat="server" UpdateMode="Conditional">
             <ContentTemplate>

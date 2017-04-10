@@ -3,6 +3,9 @@ using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Web.UI;
 using System.Linq;
+using System.Collections.Generic;
+using MSTech.GestaoEscolar.Entities;
+using System.Web;
 
 namespace AreaAluno.WebControls.BoletimCompletoAluno
 {
@@ -18,6 +21,16 @@ namespace AreaAluno.WebControls.BoletimCompletoAluno
             get { return ViewState["mtu_ids"] as string ?? string.Empty; }
             set { ViewState["mtu_ids"] = value; }
         }
+        public string VS_nomeBoletim
+        {
+            get { return ViewState["VS_nomeBoletim"] as string ?? string.Empty; }
+            set { ViewState["VS_nomeBoletim"] = value; }
+        }
+        protected bool infantil
+        {
+            get { return ViewState["infantil"] == null ? false : (bool)ViewState["infantil"]; }
+            set { ViewState["infantil"] = value; }
+        }
         protected int tpc_id { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -32,6 +45,20 @@ namespace AreaAluno.WebControls.BoletimCompletoAluno
 
             if (!IsPostBack)
             {
+                IDictionary<string, ICFG_Configuracao> configuracao;
+                CFG_ConfiguracaoBO.Consultar(eConfig.Academico, out configuracao);
+                if (configuracao.ContainsKey("AppURLAreaAlunoInfantil") && configuracao["AppURLAreaAlunoInfantil"].cfg_valor != null)
+                {
+                    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+                    string configInfantil = configuracao["AppURLAreaAlunoInfantil"].cfg_valor;
+
+                    infantil = url.Contains(configInfantil);
+                    if (infantil)
+                        VS_nomeBoletim = (string)GetGlobalResourceObject("AreaAluno.MasterPageAluno", "MenuBoletimInfantil");
+                    else
+                        VS_nomeBoletim = ((string)GetGlobalResourceObject("AreaAluno.MasterPageAluno", "MenuBoletimOnline")).Replace(" Online", "");
+                }
+
                 var textoRodape = GetGlobalResourceObject("Mensagens", "MSG_RODAPEBOLETIMCOMPLETO").ToString();
                 divRodape.Visible = !string.IsNullOrWhiteSpace(textoRodape);
                 lblRodape.Text = textoRodape;
@@ -39,6 +66,10 @@ namespace AreaAluno.WebControls.BoletimCompletoAluno
                 var textoRodapeInfantil = GetGlobalResourceObject("Mensagens", "MSG_RODAPEBOLETIMCOMPLETOInfantil").ToString();
                 divRodapeInfantil.Visible = !string.IsNullOrWhiteSpace(textoRodapeInfantil);
                 lblRodapeInfantil.Text = textoRodapeInfantil;
+
+                var textoRodapeFreqExterna = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MENSAGEM_FREQUENCIA_EXTERNA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                lblFreqExterna.Text = !string.IsNullOrEmpty(textoRodapeFreqExterna) ? "* " + textoRodapeFreqExterna : textoRodapeFreqExterna;
+                lblFreqExternaInfantil.Text = !string.IsNullOrEmpty(textoRodapeFreqExterna) ? "* " + textoRodapeFreqExterna : textoRodapeFreqExterna;
             }
         }
 

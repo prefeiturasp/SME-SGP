@@ -40,6 +40,24 @@ namespace GestaoEscolar.WebControls.BoletimCompletoAluno {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRodape;
         
         /// <summary>
+        /// divFreqExterna control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFreqExterna;
+        
+        /// <summary>
+        /// lblFreqExterna control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lblFreqExterna;
+        
+        /// <summary>
         /// lblRodape control.
         /// </summary>
         /// <remarks>
@@ -56,6 +74,24 @@ namespace GestaoEscolar.WebControls.BoletimCompletoAluno {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRodapeInfantil;
+        
+        /// <summary>
+        /// divFreqExternaInfantil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFreqExternaInfantil;
+        
+        /// <summary>
+        /// lblFreqExternaInfantil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lblFreqExternaInfantil;
         
         /// <summary>
         /// lblRodapeInfantil control.

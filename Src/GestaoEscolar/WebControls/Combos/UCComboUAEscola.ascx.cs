@@ -84,7 +84,7 @@ namespace GestaoEscolar.WebControls.Combos
                     return Convert.ToBoolean(ViewState["_VS_FiltroEscolasControladas"]);
                 }
 
-                return true;
+                return null;
             }
             set
             {
@@ -264,6 +264,19 @@ namespace GestaoEscolar.WebControls.Combos
             {
                 lblEscola.Text = value;
                 cpvEscola.ErrorMessage = value.Replace('*', ' ') + " é obrigatório.";
+            }
+        }
+
+        public bool ExibeComboEscola
+        {
+            set
+            {
+                DdlEscola.Visible = value;
+                lblEscola.Visible = value;
+            }
+            get
+            {
+                return DdlEscola.Visible;
             }
         }
 
@@ -630,6 +643,14 @@ namespace GestaoEscolar.WebControls.Combos
         {
             ddlUA.AutoPostBack |= (IndexChangedUA != null);
             ddlUnidadeEscola.AutoPostBack = (IndexChangedUnidadeEscola != null);
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                FiltroEscolasControladas = true;
+            }
         }
 
         #endregion Page Lyfe Cycle

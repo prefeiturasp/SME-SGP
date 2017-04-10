@@ -49,6 +49,7 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida
         public int QtComponenteRegencia { get; set; }
         public int QtComponentes { get; set; }
         public string parecerConclusivo { get; set; }
+        public bool possuiFreqExterna { get; set; }
 
         public string displayPerfilAluno { get; set; }
         public string displayRecomendacoes { get; set; }

@@ -161,7 +161,7 @@ namespace GestaoEscolar.Classe.CompensacaoAusencia
                     {
                         ddlTurma.Enabled = true;
 
-                        UCComboCalendario.CarregarCalendarioAnual();
+                        UCComboCalendario.CarregarPorEscola(UCComboUAEscola.Esc_ID);
 
                         UCComboCalendario.SetarFoco();
                         UCComboCalendario.PermiteEditar = true;
@@ -188,7 +188,7 @@ namespace GestaoEscolar.Classe.CompensacaoAusencia
 
                     if (UCComboUAEscola.Esc_ID > 0 && UCComboUAEscola.Uni_ID > 0)
                     {
-                        UCComboCalendario.CarregarCalendarioAnual();
+                        UCComboCalendario.CarregarPorEscola(UCComboUAEscola.Esc_ID);
 
                         UCComboCalendario.SetarFoco();
                         UCComboCalendario.PermiteEditar = true;

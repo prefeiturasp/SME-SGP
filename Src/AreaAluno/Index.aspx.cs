@@ -189,6 +189,17 @@ namespace AreaAluno
                     menuXml = menuXml.Remove(indiceBoletim, menuXml.IndexOf("/>", indiceBoletim) - indiceBoletim + 2);
                 }
 
+                IDictionary<string, ICFG_Configuracao> configuracao;
+                MSTech.GestaoEscolar.BLL.CFG_ConfiguracaoBO.Consultar(eConfig.Academico, out configuracao);
+                if (configuracao.ContainsKey("AppURLAreaAlunoInfantil") && configuracao["AppURLAreaAlunoInfantil"].cfg_valor != null)
+                {
+                    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+                    string configInfantil = configuracao["AppURLAreaAlunoInfantil"].cfg_valor;
+
+                    if (url.Contains(configInfantil))
+                        menuXml = menuXml.Replace("menu id=\"Boletim Online\"", "menu id=\"" + (string)GetGlobalResourceObject("AreaAluno.MasterPageAluno", "MenuBoletimInfantil") + "\"");
+                }
+
                 // Verifica se o aluno está com o compromisso estudo bloqueado. Se estiver, retiro do menu.
                 int indiceCompromissoEstudo = menuXml.IndexOf("<menu id=\"Compromisso de Estudo");
                 if (compromissoEstudoBloqueado && indiceCompromissoEstudo >= 0)

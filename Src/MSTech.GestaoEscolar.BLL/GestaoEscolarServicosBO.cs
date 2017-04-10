@@ -176,7 +176,28 @@ namespace MSTech.GestaoEscolar.BLL
 
             DCL_LogBO.ProcessaProtocoloLog(ltProtocolo, TENTATIVAS_PROCESSAMENTO_PROTOCOLO);
         }
-        
+
+        /// <summary>
+        /// Executa a sincronização dos dados alterados no diário de classe. (Justificativa de faltas)
+        /// </summary>
+        public static void ExecJobAtualizaJustificativaDiarioClasse()
+        {
+            List<DCL_Protocolo> ltProtocolo = DCL_ProtocoloBO.SelecionaNaoProcessadosPorTipo
+                (DCL_ProtocoloBO.eTipo.JustificativaFaltaAluno,
+                 ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.QUANTIDADE_MAXIMA_BUSCA_PROTOCOLO_JUSTIFICATIVA, new Guid()));
+
+            ltProtocolo.ForEach(protocolo =>
+            {
+                // Marca o protocolo como "Em processamento".
+                protocolo.pro_status = (byte)DCL_ProtocoloBO.eStatus.EmProcessamento;
+                protocolo.pro_tentativa++;
+            });
+
+            DCL_ProtocoloBO.AtualizaListaProtocolos(ltProtocolo);
+
+            ACA_AlunoJustificativaFaltaBO.ProcessaProtocoloJustificativaFalta(ltProtocolo, TENTATIVAS_PROCESSAMENTO_PROTOCOLO);
+        }
+
         /// <summary>
         /// Executa a sincronização dos dados alterados no diário de classe. (Fotos)
         /// </summary>
@@ -416,5 +437,29 @@ namespace MSTech.GestaoEscolar.BLL
             new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoDivergenciasRematriculas(sle_id);
         }
 
+        /// <summary>
+        /// Processa os dados para a sugestão das aulas previstas.
+        /// </summary>
+        public static void ExecJOB_ProcessamentoSugestaoAulasPrevistas()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas(false);
+        }
+
+        /// <summary>
+        /// Processa os dados para a sugestão das aulas previstas,
+        /// para eventos cadastrados para toda a rede.
+        /// </summary>
+        public static void ExecJOB_ProcessamentoSugestaoAulasPrevistas_TodaRede()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas(true);
+        }
+
+        /// <summary>
+        /// Processa as divergências entre registros de aulas dadas e aulas previstas.
+        /// </summary>
+        public static void MS_JOB_ProcessamentoDivergenciasAulasPrevistas()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoDivergenciasAulasPrevistas();
+        }
     }
 }

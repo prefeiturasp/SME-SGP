@@ -1242,6 +1242,9 @@ namespace GestaoEscolar.WebControls.EfetivacaoNotas
                     //recarrega sempre pare pegar os campos que antes estavam invisiveis na tela
                     sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroEfetivacao.js"));
 
+                    sm.Scripts.Add(new ScriptReference("~/Includes/jsPopupFrequenciaExterna.js"));
+                    
+
                     if (ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.BOTAO_SALVAR_PERMANECE_TELA, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                     {
                         if (!Convert.ToString(_btnCancelar.CssClass).Contains("btnMensagemUnload"))

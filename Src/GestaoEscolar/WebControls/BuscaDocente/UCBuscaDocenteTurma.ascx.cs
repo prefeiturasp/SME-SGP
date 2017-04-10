@@ -433,7 +433,7 @@ namespace GestaoEscolar.WebControls.BuscaDocente
                 {
                     if (!_VS_AnosAnteriores)
                     {
-                        UCCCalendario.CarregarCalendarioAnualAnoAtual();
+                        UCCCalendario.CarregarCalendarioAnualAnoAtualEscola(UCComboUAEscola.Esc_ID);
                     }
                     else
                     {

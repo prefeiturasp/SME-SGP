@@ -177,5 +177,36 @@ namespace MSTech.GestaoEscolar.DAL
             qs.Execute();
         }
 
+        /// <summary>
+        /// Processa os dados para a sugestão das aulas previstas.
+        /// </summary>
+        public void ExecJOB_ProcessamentoSugestaoAulasPrevistas(bool todaRede)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoSugestaoAulasPrevistas", _Banco);
+
+            #region Parâmetros
+
+            DbParameter Param = qs.NewParameter();
+            Param.DbType = DbType.Boolean;
+            Param.ParameterName = "@todaRede";
+            Param.Size = 1;
+            Param.Value = todaRede;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
+
+        /// <summary>
+        /// Processa as divergências entre registros de aulas dadas e aulas previstas.
+        /// </summary>
+        public void ExecJOB_ProcessamentoDivergenciasAulasPrevistas()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoDivergenciasAulasPrevistas", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
     }
 }

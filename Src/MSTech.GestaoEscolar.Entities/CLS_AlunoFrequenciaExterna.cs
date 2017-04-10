@@ -62,5 +62,7 @@ namespace MSTech.GestaoEscolar.Entities
         /// Data de criação do registro.
         /// </summary>
         public override DateTime afx_dataCriacao { get; set; }
+
+        public long tud_id { get; set; }
     }
 }

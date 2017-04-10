@@ -1,0 +1,22 @@
+﻿{
+  "SystemId": 102,
+  "DbSettings": [
+    {
+      "ProjectDatabase": "CoreSSO.Database",
+      "DeployConnectionString": "Server=localhost\\MSSQLSERVER2014;Database=CoreSSO;Integrated Security=SSPI;Connection Timeout=30;",
+      "Variables": {
+        "SystemName": " SGP"
+      }
+    },
+    {
+      "ProjectDatabase": "SGP.Database",
+      "DeployConnectionString": "Server=localhost\\MSSQLSERVER2014;Database=GestaoPedagogica_1.67.0;Integrated Security=SSPI;Connection Timeout=30;",
+      "Variables": {
+        "SystemUser": "user_gestaoescolar",
+        "SystemDatabase": "GestaoPedagogica",
+        "CoreSSO": "[CoreSSO]",
+        "CoreSSO_Log": "[CoreSSO_Log]"
+      }
+    }
+  ]
+}

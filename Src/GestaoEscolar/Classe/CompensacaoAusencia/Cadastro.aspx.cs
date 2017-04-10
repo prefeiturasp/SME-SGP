@@ -872,7 +872,10 @@ namespace GestaoEscolar.Classe.CompensacaoAusencia
                     TUR_Turma entTurma = new TUR_Turma { tur_id = tur_id };
                     TUR_TurmaBO.GetEntity(entTurma);
 
-                    VS_FechamentoAutomatico = entTurma.fav_fechamentoAutomatico;
+                    ACA_FormatoAvaliacao entFormatoAvaliacao = new ACA_FormatoAvaliacao { fav_id = entTurma.fav_id };
+                    ACA_FormatoAvaliacaoBO.GetEntity(entFormatoAvaliacao);
+
+                    VS_FechamentoAutomatico = entFormatoAvaliacao.fav_fechamentoAutomatico;
 
                     TUR_TurmaDisciplina entityTurmaDisciplina = new TUR_TurmaDisciplina { tud_id = UCCTurmaDisciplina1.Valor };
                     TUR_TurmaDisciplinaBO.GetEntity(entityTurmaDisciplina);

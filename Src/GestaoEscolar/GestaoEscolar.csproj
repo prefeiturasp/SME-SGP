@@ -346,6 +346,20 @@
     <Compile Include="Academico\CalendarioAnual\Visualizar.aspx.designer.cs">
       <DependentUpon>Visualizar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ControleSemanal\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\ControleTurma\Alunos.aspx.cs">
       <DependentUpon>Alunos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -577,6 +591,27 @@
     <Compile Include="Academico\NivelAprendizado\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx.cs">
+      <DependentUpon>BuscaDisciplina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx.designer.cs">
+      <DependentUpon>BuscaDisciplina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\OrientacaoCurricular\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -717,6 +752,27 @@
     <Compile Include="Academico\ReuniaoResponsavel\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\Sondagem\Agendamento.aspx.cs">
+      <DependentUpon>Agendamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Agendamento.aspx.designer.cs">
+      <DependentUpon>Agendamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Sondagem\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classe\Efetivacao\CadastroGestor.aspx.cs">
       <DependentUpon>CadastroGestor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -736,6 +792,27 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Classe\JustificativaAbonoFalta\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\JustificativaFalta\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\JustificativaFalta\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx.cs">
@@ -1460,6 +1537,13 @@
     <Compile Include="Relatorios\ComponentesFinalizados\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\DivergenciasRematriculas\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1472,6 +1556,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Relatorios\IndicadorFrequencia\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\ObjetoAprendizagem\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\ObjetoAprendizagem\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\Relatorio.aspx.cs">
@@ -1507,6 +1598,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Relatorios\RelatoriosCP\DadosAlunosBaixaFrequencia\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelatoriosCP\GraficoConsolidadoAtivAvaliada\Busca.aspx.cs">
@@ -1780,6 +1878,13 @@
     </Compile>
     <Compile Include="WebControls\Combos\ComboTipoDeficiencia.ascx.designer.cs">
       <DependentUpon>ComboTipoDeficiencia.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx.cs">
+      <DependentUpon>UCCTipoJustificativa.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx.designer.cs">
+      <DependentUpon>UCCTipoJustificativa.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Combos\Novos\UCCTipoEvento.ascx.cs">
       <DependentUpon>UCCTipoEvento.ascx</DependentUpon>
@@ -2745,6 +2850,8 @@
     <Content Include="Academico\Areas\Cadastro.aspx" />
     <Content Include="Academico\Areas\Documentos.aspx" />
     <Content Include="Academico\CalendarioAnual\CadastroLimites.aspx" />
+    <Content Include="Academico\ControleSemanal\Busca.aspx" />
+    <Content Include="Academico\ControleSemanal\Cadastro.aspx" />
     <Content Include="Academico\ControleTurma\Alunos.aspx" />
     <Content Include="Academico\ControleTurma\Anotacoes.aspx" />
     <Content Include="Academico\ControleTurma\Busca.aspx" />
@@ -2767,6 +2874,9 @@
     <Content Include="Academico\MatrizHabilidades\Cadastro.aspx" />
     <Content Include="Academico\NivelAprendizado\Busca.aspx" />
     <Content Include="Academico\NivelAprendizado\Cadastro.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\Busca.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\Cadastro.aspx" />
     <Content Include="Academico\OrientacaoCurricular\Busca.aspx" />
     <Content Include="Academico\OrientacaoCurricular\CadastroHabilidade.aspx" />
     <Content Include="Academico\ParametrizacaoDisciplinas\Busca.aspx" />
@@ -2775,6 +2885,9 @@
     <Content Include="Academico\RecursosHumanos\AtribuicaoEsporadica\Cadastro.aspx" />
     <Content Include="Academico\RecursosHumanos\CargaHoraria\Busca.aspx" />
     <Content Include="Academico\RecursosHumanos\CargaHoraria\Cadastro.aspx" />
+    <Content Include="Academico\Sondagem\Agendamento.aspx" />
+    <Content Include="Academico\Sondagem\Busca.aspx" />
+    <Content Include="Academico\Sondagem\Cadastro.aspx" />
     <Content Include="App_Themes\IntranetSME\fonts\materialicons\MaterialIcons-Regular.svg" />
     <Content Include="App_Themes\IntranetSME\images\arrow.gif" />
     <Content Include="App_Themes\IntranetSME\images\cross.gif" />
@@ -2791,7 +2904,11 @@
     <Content Include="Classe\Efetivacao\CadastroGestor.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Cadastro.aspx" />
+    <Content Include="Academico\ControleSemanal\CacheEfetivacaoHandler.ashx" />
     <None Include="Configs\Session.txt" />
+    <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
+    <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
+    <Content Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
     <Content Include="Configuracao\FilaFechamento\Busca.aspx" />
     <Content Include="Configuracao\FilaFechamento\Fila.aspx" />
@@ -3467,8 +3584,12 @@
     <Content Include="Includes\jsAlunoJustificativaAbonoFalta.js" />
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
+    <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
+    <Content Include="Includes\jsCadastroJustificativaFalta.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsFilaFilaFechamento.js" />
+    <Content Include="Includes\jsPopupFrequenciaExterna.js" />
+    <Content Include="Includes\jsQuadroHorarios.js" />
     <Content Include="Includes\jsResponsividadeTabelas.js" />
     <Content Include="Includes\jsAtribuicaoDocente.js" />
     <Content Include="Includes\jsCadastroEventoLimite.js" />
@@ -3517,6 +3638,7 @@
     <Content Include="Includes\jsUCAlunoAnotacoes.js" />
     <Content Include="Includes\jsUCAlunoEfetivacaoObservacao.js" />
     <Content Include="Includes\jsUCAlunoEfetivacaoObservacaoGeral.js" />
+    <Content Include="Includes\jsUCCalendario.js" />
     <Content Include="Includes\jsUCInformacoesComplementares.js" />
     <Content Include="Includes\jsUCPlanejamentoProjetos.js" />
     <Content Include="Includes\jsUCSelecaoDisciplinaCompartilhada.js" />
@@ -3543,12 +3665,15 @@
     <Content Include="Relatorios\AtaSinteseResultadosAvaliacao\Busca.aspx" />
     <Content Include="Relatorios\AulasSemPlanoAula\Busca.aspx" />
     <Content Include="Relatorios\ComponentesFinalizados\Busca.aspx" />
+    <Content Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx" />
     <Content Include="Relatorios\DivergenciasRematriculas\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
+    <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />
     <Content Include="Relatorios\RelatorioLogTablets\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosConselhoDeClasse\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosAlunosBaixaFrequencia\Busca.aspx" />
+    <Content Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\GraficoConsolidadoAtivAvaliada\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\GraficoIndividualNotas\Busca.aspx" />
     <Content Include="Relatorios\SinteseResultadosAvaliacao\GraficoComponenteCurricularTurmas\Busca.aspx" />
@@ -3573,6 +3698,7 @@
     <Content Include="WebControls\Calendario\UCCalendario.ascx" />
     <Content Include="WebControls\Combos\ComboNacionalidade.ascx" />
     <Content Include="WebControls\Combos\ComboTipoDeficiencia.ascx" />
+    <Content Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoEvento.ascx" />
     <Content Include="WebControls\Combos\UCComboAnoLetivo.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCEscalaAvaliacaoParecer.ascx" />
@@ -3740,6 +3866,75 @@
     <Content Include="Includes\Excluidos\jquery.meio.mask.js" />
     <Content Include="Includes\Excluidos\jquery.validate.additional-methods.js" />
     <Content Include="Includes\Excluidos\jquery.validation.js" />
+    <Content Include="Includes\fullcalendar\fullcalendar.css" />
+    <Content Include="Includes\fullcalendar\fullcalendar.js" />
+    <Content Include="Includes\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Includes\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Includes\fullcalendar\gcal.js" />
+    <Content Include="Includes\fullcalendar\lang-all.js" />
+    <Content Include="Includes\fullcalendar\lang\ar-ma.js" />
+    <Content Include="Includes\fullcalendar\lang\ar-sa.js" />
+    <Content Include="Includes\fullcalendar\lang\ar.js" />
+    <Content Include="Includes\fullcalendar\lang\bg.js" />
+    <Content Include="Includes\fullcalendar\lang\ca.js" />
+    <Content Include="Includes\fullcalendar\lang\cs.js" />
+    <Content Include="Includes\fullcalendar\lang\da.js" />
+    <Content Include="Includes\fullcalendar\lang\de-at.js" />
+    <Content Include="Includes\fullcalendar\lang\de.js" />
+    <Content Include="Includes\fullcalendar\lang\el.js" />
+    <Content Include="Includes\fullcalendar\lang\en-au.js" />
+    <Content Include="Includes\fullcalendar\lang\en-ca.js" />
+    <Content Include="Includes\fullcalendar\lang\en-gb.js" />
+    <Content Include="Includes\fullcalendar\lang\es.js" />
+    <Content Include="Includes\fullcalendar\lang\fa.js" />
+    <Content Include="Includes\fullcalendar\lang\fi.js" />
+    <Content Include="Includes\fullcalendar\lang\fr-ca.js" />
+    <Content Include="Includes\fullcalendar\lang\fr.js" />
+    <Content Include="Includes\fullcalendar\lang\hi.js" />
+    <Content Include="Includes\fullcalendar\lang\hr.js" />
+    <Content Include="Includes\fullcalendar\lang\hu.js" />
+    <Content Include="Includes\fullcalendar\lang\id.js" />
+    <Content Include="Includes\fullcalendar\lang\is.js" />
+    <Content Include="Includes\fullcalendar\lang\it.js" />
+    <Content Include="Includes\fullcalendar\lang\ja.js" />
+    <Content Include="Includes\fullcalendar\lang\ko.js" />
+    <Content Include="Includes\fullcalendar\lang\lt.js" />
+    <Content Include="Includes\fullcalendar\lang\lv.js" />
+    <Content Include="Includes\fullcalendar\lang\nl.js" />
+    <Content Include="Includes\fullcalendar\lang\pl.js" />
+    <Content Include="Includes\fullcalendar\lang\pt-br.js" />
+    <Content Include="Includes\fullcalendar\lang\pt.js" />
+    <Content Include="Includes\fullcalendar\lang\ro.js" />
+    <Content Include="Includes\fullcalendar\lang\ru.js" />
+    <Content Include="Includes\fullcalendar\lang\sk.js" />
+    <Content Include="Includes\fullcalendar\lang\sl.js" />
+    <Content Include="Includes\fullcalendar\lang\sr-cyr.js" />
+    <Content Include="Includes\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="Includes\fullcalendar\lang\sr.js" />
+    <Content Include="Includes\fullcalendar\lang\sv.js" />
+    <Content Include="Includes\fullcalendar\lang\th.js" />
+    <Content Include="Includes\fullcalendar\lang\tr.js" />
+    <Content Include="Includes\fullcalendar\lang\uk.js" />
+    <Content Include="Includes\fullcalendar\lang\vi.js" />
+    <Content Include="Includes\fullcalendar\lang\zh-cn.js" />
+    <Content Include="Includes\fullcalendar\lang\zh-tw.js" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Includes\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Includes\fullcalendar\lib\moment.min.js" />
     <Content Include="Includes\JS-ModuloAcademico.js" />
     <Content Include="Includes\jsAlunosTurma.js" />
     <Content Include="Includes\jsBuscaAlunos.js" />

@@ -1,0 +1,22 @@
+﻿{
+  "SystemId": 102,
+  "Databases": [
+    {
+      "ProjectDatabase": "CoreSSO.Database",
+      "DeployConnectionString": "$DeployConnectionStringCoreSSO__",
+      "Variables": {
+        "SystemName": "$SystemName$"
+      }
+    },
+    {
+      "ProjectDatabase": "SGP.Database",
+      "DeployConnectionString": "$DeployConnectionStringSGP$",
+      "Variables": {
+        "SystemUser": "$SystemUser$",
+        "SystemDatabase": "$SystemDatabase$",
+        "CoreSSO": "$CoreSSO$",
+        "CoreSSO_Log": "$CoreSSO_Log$"
+      }
+    }
+  ]
+}

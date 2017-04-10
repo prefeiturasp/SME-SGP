@@ -1404,6 +1404,40 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Busca justificativas faltas de alunos
+        /// </summary>
+        /// <returns>DataTable contendo as justificativas</returns>
+        public static BuscaJustificativasFaltaAlunoSaidaDTO BuscaJustificativasFaltasAlunos(BuscaJustificativasFaltaAlunoEntradaDTO buscaJustificativasFaltaAlunoEntradaDTO)
+        {
+            BuscaJustificativasFaltaAlunoSaidaDTO buscaJustificativasFaltaAlunoSaidaDTO;
+            DataTable justificativas;
+            try
+            {
+                buscaJustificativasFaltaAlunoSaidaDTO = new BuscaJustificativasFaltaAlunoSaidaDTO();
+                ApiDAO dao = new ApiDAO();
+
+                DateTime syncDate = String.IsNullOrEmpty(buscaJustificativasFaltaAlunoEntradaDTO.SyncDate) ? new DateTime() : Convert.ToDateTime(buscaJustificativasFaltaAlunoEntradaDTO.SyncDate);
+
+                justificativas = dao.BuscaJustificativasFaltasAlunos(buscaJustificativasFaltaAlunoEntradaDTO.esc_id, syncDate);
+                if (justificativas.Rows.Count == 0)
+                {
+                    return buscaJustificativasFaltaAlunoSaidaDTO;
+                }
+
+                buscaJustificativasFaltaAlunoSaidaDTO.JustificativasFaltasAlunos = (from dr in justificativas.AsEnumerable() select (JustificativaFaltaAluno)GestaoEscolarUtilBO.DataRowToEntity(dr, new JustificativaFaltaAluno())).ToList();
+            }
+            catch (Exception exp)
+            {
+                //_GravarErro(exp, buscaEscolaEntradaDTO.GetProperties());
+
+                buscaJustificativasFaltaAlunoSaidaDTO = new BuscaJustificativasFaltaAlunoSaidaDTO();
+                buscaJustificativasFaltaAlunoSaidaDTO.Status = 1;
+                buscaJustificativasFaltaAlunoSaidaDTO.StatusDescription = exp.Message;
+            }
+            return buscaJustificativasFaltaAlunoSaidaDTO;
+        }
+
+        /// <summary>
         /// Metodo que busca os recursos aula
         /// </summary>
         public static BuscaRecursosAulaSaidaDTO BuscaRecursosAula()
@@ -5912,6 +5946,7 @@ namespace MSTech.GestaoEscolar.BLL
                         mostraConceitoGlobal = BoletimDados.Count(p => p.tud_global && p.mtu_id > 0) > 0,
                         exibeCompensacaoAusencia = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_COMPENSACAO_AUSENCIA_CADASTRADA, ent_id),
                         nomeNota = (BoletimDados.Any(p => p.esa_tipo == 1) ? "Nota" : "Conceito"),
+                        possuiFreqExterna = boletimAluno.possuiFreqExterna,
                         periodos = (from BoletimAluno item in BoletimDados
                                     orderby item.tpc_ordem
                                     group item by item.tpc_id into g
@@ -5961,7 +5996,7 @@ namespace MSTech.GestaoEscolar.BLL
                             ,
                             FrequenciaFinalAjustada = g.Any(p => p.naoExibirFrequencia) ? "-" :
                                                         g.Any(p => p.NotaID > 0 && p.tpc_id == tpc_id) ? ((FrequenciaFinalAjustadaRegencia > 0) ? FrequenciaFinalAjustadaRegencia :
-                                                        g.LastOrDefault(p => p.FrequenciaFinalAjustada > 0 && p.tpc_id == tpc_id).FrequenciaFinalAjustada).ToString(formatacaoPorcentagemFrequencia) : "-"
+                                                        g.LastOrDefault(p => p.FrequenciaFinalAjustada > 0 && p.tpc_id == tpc_id).FrequenciaFinalAjustada).ToString(formatacaoPorcentagemFrequencia) + (boletimAluno.possuiFreqExterna ? "*" : "") : "-"
                             ,
                             tud_Tipo = g.First().tud_tipo
                             ,
@@ -6050,13 +6085,13 @@ namespace MSTech.GestaoEscolar.BLL
 
                                                                                             ((((bNota.cur_id == boletimAluno.cur_id && bNota.crr_id == boletimAluno.crr_id && bNota.crp_id == boletimAluno.crp_id) || lstCurriculoPeriodo.Any(p => p.cur_id == bNota.cur_id && p.crr_id == bNota.crr_id && p.crp_id == bNota.crp_id))
                                                                                                 && bNota.mostraFrequencia && !bNota.naoExibirFrequencia && bNota.tpc_id <= tpc_id && (bNota.NotaID > 0 || bNota.numeroAulas > 0))
-                                                                                                    ? (g.Sum(p => (p.tpc_id == bNota.tpc_id) ? p.numeroAulas : 0)).ToString() : "-")
+                                                                                                    ? (g.Sum(p => (p.tpc_id == bNota.tpc_id) ? p.numeroAulas : 0)).ToString() + (g.First().possuiFreqExterna ? "*" : "") : "-")
 
                                                                                                     :
 
                                                                                             // Caso contrário, mantem a contagem atual                                                                                                
                                                                                             ((((bNota.cur_id == boletimAluno.cur_id && bNota.crr_id == boletimAluno.crr_id && bNota.crp_id == boletimAluno.crp_id) || lstCurriculoPeriodo.Any(p => p.cur_id == bNota.cur_id && p.crr_id == bNota.crr_id && p.crp_id == bNota.crp_id))
-                                                                                                && bNota.mostraFrequencia && !bNota.naoExibirFrequencia && bNota.tpc_id <= tpc_id && (bNota.NotaID > 0 || bNota.numeroAulas > 0)) ? bNota.numeroAulas.ToString() : "-")
+                                                                                                && bNota.mostraFrequencia && !bNota.naoExibirFrequencia && bNota.tpc_id <= tpc_id && (bNota.NotaID > 0 || bNota.numeroAulas > 0)) ? bNota.numeroAulas.ToString() + (g.First().possuiFreqExterna ? "*" : "") : "-")
                                                             ,
                                                             numeroFaltas = bNota.tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada ? "-" :
 
@@ -6065,18 +6100,23 @@ namespace MSTech.GestaoEscolar.BLL
 
                                                                                             ((((bNota.cur_id == boletimAluno.cur_id && bNota.crr_id == boletimAluno.crr_id && bNota.crp_id == boletimAluno.crp_id) || lstCurriculoPeriodo.Any(p => p.cur_id == bNota.cur_id && p.crr_id == bNota.crr_id && p.crp_id == bNota.crp_id))
                                                                                                 && bNota.mostraFrequencia && !bNota.naoExibirFrequencia && bNota.tpc_id <= tpc_id && (bNota.NotaID > 0 || bNota.numeroFaltas > 0))
-                                                                                                    ? (g.Sum(p => (p.tpc_id == bNota.tpc_id) ? p.numeroFaltas : 0)).ToString() : "-")
+                                                                                                    ? (g.Sum(p => (p.tpc_id == bNota.tpc_id) ? p.numeroFaltas : 0)).ToString() + (g.First().possuiFreqExterna ? "*" : "") : "-")
 
                                                                                                     :
 
                                                                                             // Caso contrário, mantem a contagem atual                                                                                                
                                                                                             ((((bNota.cur_id == boletimAluno.cur_id && bNota.crr_id == boletimAluno.crr_id && bNota.crp_id == boletimAluno.crp_id) || lstCurriculoPeriodo.Any(p => p.cur_id == bNota.cur_id && p.crr_id == bNota.crr_id && p.crp_id == bNota.crp_id))
-                                                                                                && bNota.mostraFrequencia && !bNota.naoExibirFrequencia && bNota.tpc_id <= tpc_id && (bNota.NotaID > 0 || bNota.numeroFaltas > 0)) ? bNota.numeroFaltas.ToString() : "-")
+                                                                                                && bNota.mostraFrequencia && !bNota.naoExibirFrequencia && bNota.tpc_id <= tpc_id && (bNota.NotaID > 0 || bNota.numeroFaltas > 0)) ? bNota.numeroFaltas.ToString() + (g.First().possuiFreqExterna ? "*" : "") : "-")
                                                             ,
                                                             tud_Tipo = g.First().tud_tipo
+                                                            ,
+                                                            possuiFreqExterna = g.First().possuiFreqExterna
                                                         }).FirstOrDefault()
                                         }).ToList()
                         }).ToList();
+
+                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalAulas = d.totalAulas + (d.notas.Any(n => n.nota.possuiFreqExterna) ? "*" : ""));
+                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalFaltas = d.totalFaltas + (d.notas.Any(n => n.nota.possuiFreqExterna) ? "*" : ""));
 
                     if (controleOrdemDisciplinas)
                     {
@@ -6240,6 +6280,46 @@ namespace MSTech.GestaoEscolar.BLL
                                                 }).ToList();
             return lst;
         }
+
+        #endregion
+
+        #region TurmaHorario
+
+        /// <summary>
+        /// Salva os dados informados no arquivo.
+        /// </summary>
+        /// <param name="dados">Lista TUR_TurmaHorario(conteúdo JSon enviado no post)</param>
+        /// <returns></returns>
+        public static List<TUR_TurmaHorarioDTO> SalvarTurmaHorario(string Json)
+        {
+            List<TUR_TurmaHorarioDTO> lista = new List<TUR_TurmaHorarioDTO>();
+            TalkDBTransaction banco = new TUR_TurmaHorarioDAO()._Banco;
+
+            try
+            {
+                JArray listaDados = (JArray.Parse(Json) ?? new JArray());
+
+                lista = (from item in listaDados.AsEnumerable()
+                         select (TUR_TurmaHorarioDTO)JsonConvert.DeserializeObject<TUR_TurmaHorarioDTO>(item.ToString()))
+                        .Where(t => t.tud_id > 0 && t.trh_id > 0 && t.trn_id > 0).ToList();
+
+                banco.Open();
+
+                TUR_TurmaHorarioBO.SalvarTurmaHorarioAPI(lista, banco);
+            }
+            catch (Exception ex)
+            {
+                banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                banco.Close();
+            }
+
+            return lista;
+        }
+
 
         #endregion
 

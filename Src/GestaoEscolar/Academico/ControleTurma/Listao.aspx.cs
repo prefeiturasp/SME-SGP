@@ -2138,6 +2138,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                             UCControleTurma1.VS_tciIds = VS_EntitiesControleTurma.tciIds;
                             if (Session["VS_TpcId"] != null)
                                 UCNavegacaoTelaPeriodo.VS_tpc_id = Convert.ToInt32(Session["VS_TpcId"]);
+                            if (Session["VS_TpcOrdem"] != null)
+                                UCNavegacaoTelaPeriodo.VS_tpc_ordem = Convert.ToInt32(Session["VS_TpcOrdem"]);
                         }
                         else if (PreviousPage != null && PreviousPage.IsCrossPagePostBack)
                         {
@@ -2498,6 +2500,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         Session["tdt_posicao"] = valor[3].ToString();
                         Session["PaginaRetorno"] = UCNavegacaoTelaPeriodo.VS_paginaRetorno;
                         Session["VS_TpcId"] = UCNavegacaoTelaPeriodo.VS_tpc_id;
+                        Session["VS_TpcOrdem"] = UCNavegacaoTelaPeriodo.VS_tpc_ordem;
 
                         if (valor.Length > 7)
                         {
@@ -2554,6 +2557,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     Session["tdt_posicao"] = valor[3].ToString();
                     Session["PaginaRetorno"] = UCNavegacaoTelaPeriodo.VS_paginaRetorno;
                     Session["VS_TpcId"] = UCNavegacaoTelaPeriodo.VS_tpc_id;
+                    Session["VS_TpcOrdem"] = UCNavegacaoTelaPeriodo.VS_tpc_ordem;
                     Session["TudIdCompartilhada"] = tud_id.ToString();
                     Session["Historico"] = VS_historico;
 
@@ -3176,6 +3180,19 @@ namespace GestaoEscolar.Academico.ControleTurma
                 ImageButton btnRelatorio = (ImageButton)e.Item.FindControl("btnRelatorio");
                 CheckBox chkParticipante = (CheckBox)e.Item.FindControl("chkParticipante");
                 CheckBox chkDesconsiderar = (CheckBox)e.Item.FindControl("chkDesconsiderar");
+                
+                // Setar relatórios.
+                RepeaterItem itemAtividade = e.Item;
+                Repeater rptAtividades = (Repeater)itemAtividade.NamingContainer;
+                RepeaterItem itemAluno = (RepeaterItem)rptAtividades.NamingContainer;
+                long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
+                int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
+                DateTime tnt_data = Convert.ToDateTime(DataBinder.Eval(e.Item.DataItem, "tnt_data"));
+
+                MTR_MatriculaTurma mtu = new MTR_MatriculaTurma { alu_id = alu_id, mtu_id = mtu_id };
+                MTR_MatriculaTurmaBO.GetEntity(mtu);
+
+                bool exibeCampo = tnt_data >= mtu.mtu_dataMatricula && (mtu.mtu_dataSaida == new DateTime() || tnt_data <= mtu.mtu_dataSaida);
 
                 // Habilita os controles de acordo com a posição do docente.
                 // Pinta célula que possui aluno ausente.
@@ -3199,16 +3216,16 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 EscalaAvaliacaoTipo tipo = (EscalaAvaliacaoTipo)VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo;
 
-                txtNota.Visible = tipo == EscalaAvaliacaoTipo.Numerica;
+                txtNota.Visible = tipo == EscalaAvaliacaoTipo.Numerica && exibeCampo;
 
-                chkDesconsiderar.Visible = (tipo == EscalaAvaliacaoTipo.Numerica)
+                chkDesconsiderar.Visible = (tipo == EscalaAvaliacaoTipo.Numerica) && exibeCampo
                                             && (ltAtividadeIndicacaoNota.Any(p => p.tud_id == tud_id && p.tnt_id == tnt_id && p.PossuiNota))
                                             && VS_EntitiesControleTurma.formatoAvaliacao.fav_exibirBotaoSomaMedia;
                 if (!chkDesconsiderar.Visible)
                     chkDesconsiderar.Checked = false;
 
-                ddlPareceres.Visible = tipo == EscalaAvaliacaoTipo.Pareceres;
-                btnRelatorio.Visible = tipo == EscalaAvaliacaoTipo.Relatorios;
+                ddlPareceres.Visible = tipo == EscalaAvaliacaoTipo.Pareceres && exibeCampo;
+                btnRelatorio.Visible = tipo == EscalaAvaliacaoTipo.Relatorios && exibeCampo;
 
                 if (tipo == EscalaAvaliacaoTipo.Pareceres)
                 {
@@ -3261,14 +3278,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                 }
                 else
                     chkParticipante.Visible = false;
-
-                // Setar relatórios.
-                RepeaterItem itemAtividade = e.Item;
-                Repeater rptAtividades = (Repeater)itemAtividade.NamingContainer;
-                RepeaterItem itemAluno = (RepeaterItem)rptAtividades.NamingContainer;
-
-                long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
-                int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
 
                 if (tipo == EscalaAvaliacaoTipo.Relatorios)
                 {

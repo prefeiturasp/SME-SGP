@@ -9,6 +9,7 @@ using MSTech.Data.Common;
 using MSTech.GestaoEscolar.DAL.Abstracts;
 using MSTech.GestaoEscolar.Entities;
 using System.Collections.Generic;
+using System.Data.Common;
 
 namespace MSTech.GestaoEscolar.DAL
 {
@@ -1892,6 +1893,97 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@crp_id";
                 Param.Size = 4;
                 Param.Value = crp_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Retorna os alunos que foram transferidos de outra rede.
+        /// </summary>
+        /// <param name="tur_id">ID da turma de destino.</param>
+        /// <param name="totalRecords"></param>
+        /// <returns></returns>
+        public DataTable SelecionaAlunosEntradaOutrasRedes(long tur_id, out int totalRecords)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_MTR_MatriculaTurma_PesquisaAlunosEntradaOutrasRedes", _Banco);
+
+            try
+            {
+                #region Parâmetro
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@tur_id";
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                Param.Value = tur_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetro
+
+                qs.Execute();
+
+                totalRecords = qs.Return.Rows.Count;
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Seleciona os dados de aluno que esteve fora da rede.
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <param name="tev_idFechamento"></param>
+        /// <param name="documentoOficial"></param>
+        /// <returns></returns>
+        public DataTable SelecionarDadosAlunoEntradaRede(long alu_id, int mtu_id, int tev_idFechamento, bool documentoOficial)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_MTR_MatriculaTurma_SelecionarDadosAlunoEntradaRede", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@alu_id";
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@mtu_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = mtu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@tev_idFechamento";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = tev_idFechamento;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@documentoOficial";
+                Param.DbType = DbType.Boolean;
+                Param.Size = 1;
+                Param.Value = documentoOficial;
                 qs.Parameters.Add(Param);
 
                 #endregion Parâmetros

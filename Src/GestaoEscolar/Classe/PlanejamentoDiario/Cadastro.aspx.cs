@@ -426,15 +426,6 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
                                                                                                 .Append(msg));
                         }
 
-                        if (semAulasPrevistas.Any())
-                        {
-                            alerta.Append(alerta.Length == 0 ? string.Empty : "<br />")
-                                  .Append(GetGlobalResourceObject("Classe", "PlanejamentoDiario.Cadastro.MensagemAulasPrevistas"));
-
-                            semAulasPrevistas.Values.ToList().ForEach(msg => alerta.Append("<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ")
-                                                                                                .Append(msg));
-                        }
-
                         if (outrosErros.Any())
                         {
                             alerta.Append(alerta.Length == 0 ? string.Empty : "<br /><br />")

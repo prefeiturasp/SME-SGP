@@ -40,7 +40,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <returns></returns>
         public static string NomeFormatado(this PES_Pessoa entity, eExibicaoNomePessoa exibicaoNome)
         {
-            switch(exibicaoNome)
+            switch (exibicaoNome)
             {
                 case eExibicaoNomePessoa.NomeRegistro | eExibicaoNomePessoa.NomeSocial:
                     return entity.pes_nome + (string.IsNullOrEmpty(entity.pes_nomeSocial) ? string.Empty : string.Format(" ({0})", entity.pes_nomeSocial));
@@ -410,6 +410,8 @@ namespace MSTech.GestaoEscolar.BLL
 
         DadosAlunosBaixaFrequencia
         ,
+        DadosAlunosJustificativaFalta
+        ,
 
         Turmas_ComponentesFinalizados
         ,
@@ -454,6 +456,24 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         DivergenciasRematriculas
+        ,
+
+        LancamentoFrequenciaExterna
+        ,
+
+        ObjetoAprendizagem
+        ,
+
+        RelatorioObjetoAprendizagem
+        ,
+
+        DivergenciasAulasPrevistas
+        ,
+
+        PlanejamentoSemanal
+        ,
+
+        Sondagem
     }
 
     [Serializable]
@@ -536,7 +556,7 @@ namespace MSTech.GestaoEscolar.BLL
         DocAluDeclaracaoComparecimento = 293,
         DocAluFichaMatricula = 303
     }
-    
+
     /// <summary>
     /// Enum com Ids e nomes dos relatórios do sistema de gestão acadêmica.
     /// </summary>
@@ -577,7 +597,10 @@ namespace MSTech.GestaoEscolar.BLL
         IndicadorFrequenciaDRE = 314,
         IndicadorFrequenciaPeriodoCurso = 315,
         AulasSemPlanoAula = 316,
-        DivergenciasRematriculas = 317
+        DivergenciasRematriculas = 317,
+        RelatorioObjetoAprendizagem = 318,
+        AlunosJustificativaFalta = 319,
+        DivergenciasAulasPrevistas = 320
     }
 
     /// <summary>
@@ -684,7 +707,7 @@ namespace MSTech.GestaoEscolar.BLL
     /// Estrutura utilizada para armazenar os dados da permissão em cache.
     /// </summary>
     [Serializable]
-    public struct sSYS_Grupo 
+    public struct sSYS_Grupo
     {
         public SYS_GrupoPermissao grupoPermissao { get; set; }
 
@@ -894,7 +917,7 @@ namespace MSTech.GestaoEscolar.BLL
                 if (chaveCache.Contains(chave))
                 {
                     string[] valoresChave = chaveCache.Split('_');
-                    foreach(string valorChave in valoresChave)
+                    foreach (string valorChave in valoresChave)
                     {
                         if (valorChave == valor)
                         {
@@ -978,7 +1001,7 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 PropertyInfo propClone;
                 if (tpClone.BaseType == tp)
-                   propClone = tpClone.BaseType.GetProperty(prop.Name);
+                    propClone = tpClone.BaseType.GetProperty(prop.Name);
                 else
                     propClone = tpClone.GetProperty(prop.Name);
 
@@ -1011,6 +1034,50 @@ namespace MSTech.GestaoEscolar.BLL
             return objectClone;
         }
 
+
+        /// <summary>
+        /// Retorna a linha da tabela com as propriedades carregadas.
+        /// </summary>
+        /// <param name="dr">Linha do dataTable</param>
+        /// <param name="entity">Entidade utilizada para carregar os valores</param>
+        /// <returns>Uma entidade carregada com os valores</returns>
+        public static DataRow EntityToDataRow(DataTable dt, object entity)
+        {
+            try
+            {
+                DataRow drRetorno = dt.NewRow();
+
+                DataColumnCollection columnList = dt.Columns;
+                Type tp = entity.GetType();
+                // Preenche propriedades.
+                PropertyInfo[] properties = tp.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                // Preenche variáveis.
+                FieldInfo[] fields = tp.GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+                foreach (DataColumn coluna in columnList)
+                {
+                    PropertyInfo prop = properties.ToList().Find(p => p.Name == coluna.ColumnName);
+                    if (prop != null)
+                    {
+                        drRetorno[coluna] = prop.GetValue(entity);
+                    }
+
+                    FieldInfo field = fields.ToList().Find(p => p.Name == coluna.ColumnName);
+                    if (field != null)
+                    {
+                        drRetorno[coluna] = field.GetValue(entity);
+                    }
+                }
+
+
+                return drRetorno;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// Retorna um objeto carregado de acordo com os valores do dataTable.
         /// </summary>
@@ -1021,51 +1088,51 @@ namespace MSTech.GestaoEscolar.BLL
         {
             try
             {
-            Type tp = entity.GetType();
+                Type tp = entity.GetType();
 
-            // Preenche propriedades.
-            PropertyInfo[] properties = tp.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            foreach (PropertyInfo prop in properties)
-            {
-                if (dr.Table.Columns.Contains(prop.Name))
+                // Preenche propriedades.
+                PropertyInfo[] properties = tp.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (PropertyInfo prop in properties)
                 {
-                    if (dr[prop.Name] != DBNull.Value)
+                    if (dr.Table.Columns.Contains(prop.Name))
                     {
-                        var value = dr[prop.Name];
-
-                        if (prop.PropertyType == typeof(string))
+                        if (dr[prop.Name] != DBNull.Value)
                         {
-                            if (value.GetType() == typeof(DateTime))
+                            var value = dr[prop.Name];
+
+                            if (prop.PropertyType == typeof(string))
                             {
-                                DateTime date = Convert.ToDateTime(value);
-                                prop.SetValue(entity, date.ToString(DateUtil.DATA_HORA_SEGUNDOS_MILIS), null);
+                                if (value.GetType() == typeof(DateTime))
+                                {
+                                    DateTime date = Convert.ToDateTime(value);
+                                    prop.SetValue(entity, date.ToString(DateUtil.DATA_HORA_SEGUNDOS_MILIS), null);
+                                }
+                                else
+                                {
+                                    prop.SetValue(entity, value.ToString(), null);
+                                }
                             }
                             else
                             {
-                                prop.SetValue(entity, value.ToString(), null);
+                                prop.SetValue(entity, value, null);
                             }
-                        }
-                        else
-                        {
-                            prop.SetValue(entity, value, null);
                         }
                     }
                 }
-            }
 
-            // Preenche variáveis.
-            FieldInfo[] fields = tp.GetFields(BindingFlags.Public | BindingFlags.Instance);
-            foreach (FieldInfo field in fields)
-            {
-                if (dr.Table.Columns.Contains(field.Name))
+                // Preenche variáveis.
+                FieldInfo[] fields = tp.GetFields(BindingFlags.Public | BindingFlags.Instance);
+                foreach (FieldInfo field in fields)
                 {
-                    if (dr[field.Name] != DBNull.Value)
-                        field.SetValue(entity, dr[field.Name]);
+                    if (dr.Table.Columns.Contains(field.Name))
+                    {
+                        if (dr[field.Name] != DBNull.Value)
+                            field.SetValue(entity, dr[field.Name]);
+                    }
                 }
-            }
 
-            return entity;
-        }
+                return entity;
+            }
             catch
             {
                 throw;
@@ -1322,7 +1389,7 @@ namespace MSTech.GestaoEscolar.BLL
                         break;
                 }
             }
-            
+
             if (anos <= 0 && meses <= 0 && dias <= 0)
                 return "";
 
@@ -1550,7 +1617,7 @@ namespace MSTech.GestaoEscolar.BLL
 
             return nomeCurso;
         }
-                
+
         /// <summary>
         /// Armazena o nome padrao do período para o sistema
         /// </summary>
@@ -2272,6 +2339,20 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna uma Lista da entidade informada, alimentada pelo DataTable.
+        /// </summary>
+        public static List<T> DataTableToListEntity<T>(DataTable table) where T : class, new()
+        {
+            List<T> list = new List<T>();
+            foreach (DataRow dr in table.Rows)
+            {
+                list.Add((T)DataRowToEntity(dr, new T()));
+            }
+
+            return list;
+        }
+
+        /// <summary>
         /// Retorna o numero de casas decimais de um numero decimal
         /// </summary>
         /// <param name="numero">Numero</param>
@@ -2450,7 +2531,7 @@ namespace MSTech.GestaoEscolar.BLL
             dias++;
 
             List<ACA_EventoBO.EventoPeriodoCalendario> eventos = ACA_EventoBO.SelecionaPorCalendarioEscolaTipoEvento(cal_id.ToString(), esc_id, uni_id, -1, null, false);
-            
+
             // Setar a cidade pelo endereço da Entidade do usuário logado.
             Guid ene_id = SYS_EntidadeEnderecoBO.Select_ene_idBy_ent_id(ent_id);
             SYS_EntidadeEndereco entEndereco = new SYS_EntidadeEndereco
@@ -2468,7 +2549,7 @@ namespace MSTech.GestaoEscolar.BLL
             };
             END_EnderecoBO.GetEntity(endereco);
             END_Cidade cidade = END_CidadeBO.GetEntity(new END_Cidade { cid_id = endereco.cid_id });
-            
+
             List<SYS_DiaNaoUtil> diasNaoUteis = SYS_DiaNaoUtilBO.GetSelect().Where(p => p.dnu_situacao != 3).ToList();
 
             for (int i = 1; i <= dias; i++)
@@ -2561,6 +2642,38 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         #endregion Dias uteis calendario
+
+
+        public static string CarregarMenu(int sis_id, Guid gru_id, int vis_id, int appMinutosCache = 60)
+        {
+
+            string menuXML = "";
+
+            Func<string> retorno = delegate ()
+            {
+                menuXML = SYS_ModuloBO.CarregarMenuXML(gru_id, sis_id, vis_id, 0);
+
+                return menuXML;
+            };
+
+            if (appMinutosCache > 0)
+            {
+                string chave = String.Format(ModelCache.MENU_SISTEMA_GRUPO_VISAO_MODEL_KEY, sis_id, gru_id, vis_id);
+
+                menuXML = CacheManager.Factory.Get
+                            (
+                                chave,
+                                retorno,
+                                appMinutosCache
+                            );
+            }
+            else
+            {
+                menuXML = retorno();
+            }
+
+            return menuXML;
+        }
     }
 
     /// <summary>

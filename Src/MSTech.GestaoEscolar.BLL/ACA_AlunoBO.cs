@@ -964,6 +964,8 @@ namespace MSTech.GestaoEscolar.BLL
             public string ParecerConclusivo { get; set; }
 
             public string justificativaAbonoFalta { get; set; }
+
+            public bool possuiFreqExterna { get; set; }
         }
 
         /// <summary>
@@ -4199,6 +4201,7 @@ namespace MSTech.GestaoEscolar.BLL
                 BoletimDadosAluno boletim = new BoletimDadosAluno();
                 boletim = (BoletimDadosAluno)GestaoEscolarUtilBO.DataRowToEntity(dt.Rows[i], boletim);
                 boletim.listaNotasEFaltas = listaBoletimAlunos.FindAll(p => p.alu_id == boletim.alu_id);
+                boletim.possuiFreqExterna = boletim.listaNotasEFaltas.Any(b => b.possuiFreqExterna);
 
                 if (boletim.listaNotasEFaltas.Any(b => !string.IsNullOrEmpty(b.ParecerConclusivo)))
                 {

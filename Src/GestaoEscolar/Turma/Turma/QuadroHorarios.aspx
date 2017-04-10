@@ -12,9 +12,6 @@
         <ContentTemplate>
             <asp:Label ID="lblMensagem" runat="server" EnableViewState="false"></asp:Label>
         </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="btnSalvar" />
-        </Triggers>
     </asp:UpdatePanel>
     <fieldset>
         <legend>
@@ -26,7 +23,6 @@
         <asp:HiddenField ID="hdnMaxTime" runat="server" Value="" />
         <asp:HiddenField ID="hdnDiasSemana" runat="server" ClientIDMode="Static" EnableViewState="true" />
         <div class="right">
-            <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Turma, Turma.QuadroHorarios.btnSalvar.Text %>" OnClick="btnSalvar_Click" CausesValidation="false" />
             <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Turma, Turma.QuadroHorarios.btnCancelar.Text %>" OnClick="btnCancelar_Click" CausesValidation="false" />
             <asp:Button ID="btnVoltar" runat="server" Text="<%$ Resources:Turma, Turma.QuadroHorarios.btnVoltar.Text %>" OnClick="btnCancelar_Click" CausesValidation="false" />
         </div>
@@ -56,10 +52,9 @@
                         <uc2:UCComboTipoHorario ID="UCComboTipoHorario" runat="server" PermiteEditar="false" />
                     </div>
                     <div class="ddlTurmaDisciplina">
-                        <uc3:UCCTurmaDisciplina ID="UCCTurmaDisciplina" runat="server" MostrarMensagemSelecione="true"  />
+                        <uc3:UCCTurmaDisciplina ID="UCCTurmaDisciplina" runat="server" MostrarMensagemSelecione="true"  PermiteEditar="false" />
                     </div>
                     <div class="right">
-                        <asp:Button ID="btnAtribuiDisciplina" runat="server" Text="<%$ Resources:Turma, Turma.QuadroHorarios.btnAtribuiDisciplina.Text %>" OnClick="btnAtribuiDisciplina_Click" ClientIDMode="Static" />
                         <asp:Button ID="btnCancelarAtribuicao" runat="server" Text="<%$ Resources:Turma, Turma.QuadroHorarios.btnCancelarAtribuicao.Text %>" OnClientClick='$(".divAtribuirDisciplina").dialog("close"); return false;' ClientIDMode="Static" />
                         <asp:Button ID="btnFecharAtribuicao" runat="server" Text="<%$ Resources:Turma, Turma.QuadroHorarios.btnFecharAtribuicao.Text %>" OnClientClick='$(".divAtribuirDisciplina").dialog("close"); return false;' ClientIDMode="Static" />
                     </div>

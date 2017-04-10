@@ -25,7 +25,12 @@ namespace MSTech.GestaoEscolar.Entities
         [MSValidRange(100, "Tipo de ciclo pode conter até 100 caracteres.")]
         [MSNotNullOrEmpty("Tipo de ciclo é obrigatório.")]
         public override string tci_nome { get; set; }
-        
+
+        /// <summary>
+        /// Campo que define se o tipo de ciclo pode possuir objeto de aprendizagem
+        /// </summary>
+        public override bool tci_objetoAprendizagem { get; set; }
+
         [MSDefaultValue(1)]
         public override byte tci_situacao { get; set; }
         

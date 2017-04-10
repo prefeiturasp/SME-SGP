@@ -31,7 +31,8 @@
         var api = '<%= MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB.UrlGestaoAcademicaWebApi %>';
         var msgDocenciaCompartilhada = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCDadosBoletimAluno.MensagemCompartilhada") %>';
         var msgAlunoSemDadosPeriodo = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemAlunoSemDadosPeriodo") %>';
-        var msgSemEventoLiberado = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemSemEventoLiberado") %>';
+        var msgSemEventoLiberado = '<%= infantil ? GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemSemEventoLiberadoInfantil") :
+                                        GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemSemEventoLiberado") %>';
    
     </script>
 
@@ -76,7 +77,7 @@
                                 </div>
 
                                 <span class="nomeBoletim">
-                                    <h1>BOLETIM - {{boletim.ava_nome}} - {{boletim.cal_ano}}</h1>
+                                    <h1><%= VS_nomeBoletim %> - {{boletim.ava_nome}} - {{boletim.cal_ano}}</h1>
                                     <h3><%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimCompletoAluno.lblLegend.Titulo").ToString().ToUpper() %><br />
                                         {{boletim.uad_nome}}</h3>
                                     <h2>{{boletim.esc_nome}}</h2>
@@ -452,12 +453,24 @@
                                     </span>
                                 </div>
                                 <div ng-if="!boletim.ensinoInfantil" id="divRodape" runat="server" class="rodapeBoletim">
+                                    <div ng-if="boletim.possuiFreqExterna" id="divFreqExterna" runat="server" style="text-align:left;">
+                                        <span>
+                                            <span>
+                                                <asp:Literal ID="lblFreqExterna" runat="server"></asp:Literal></span>
+                                        </span>
+                                    </div>
                                     <span>
                                         <span>
                                             <asp:Literal ID="lblRodape" runat="server" /></span>
                                     </span>
                                 </div>
                                 <div ng-if="boletim.ensinoInfantil" id="divRodapeInfantil" runat="server" class="rodapeBoletim">
+                                    <div ng-if="boletim.possuiFreqExterna" id="divFreqExternaInfantil" runat="server" style="text-align:left;">
+                                        <span>
+                                            <span>
+                                                <asp:Literal ID="lblFreqExternaInfantil" runat="server"></asp:Literal></span>
+                                        </span>
+                                    </div>
                                     <span>
                                         <span>
                                             <asp:Literal ID="lblRodapeInfantil" runat="server" /></span>

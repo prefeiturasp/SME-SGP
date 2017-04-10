@@ -16,6 +16,23 @@
     {
         #region Propriedades
 
+        private List<sComboTurmaDisciplina> VS_TurmaDisciplinaDocente
+        {
+            get
+            {
+                if (ViewState["VS_TurmaDisciplinaDocente"] == null)
+                    ViewState["VS_TurmaDisciplinaDocente"] = __SessionWEB.__UsuarioWEB.Docente.doc_id > 0 ?
+                            TUR_TurmaDisciplinaBO.SelecionaDisciplinaPorTurmaDocente_SemVigencia(0, __SessionWEB.__UsuarioWEB.Docente.doc_id, 0, 0, false, ApplicationWEB.AppMinutosCacheMedio)
+                            : TUR_TurmaDisciplinaBO.SelecionaDisciplinaPorTurmaDocente_SemVigencia(VS_tur_id, 0, 0, 0, false, ApplicationWEB.AppMinutosCacheMedio);
+
+                return (List<sComboTurmaDisciplina>)(ViewState["VS_TurmaDisciplinaDocente"]);
+            }
+            set
+            {
+                ViewState["VS_TurmaDisciplinaDocente"] = value;
+            }
+        }
+
         /// <summary>
         /// ViewState que armazena o id da turma.
         /// </summary>
@@ -81,6 +98,22 @@
         }
 
         /// <summary>
+        /// ViewState que armazena o id da turmadisciplina.
+        /// </summary>
+        private long VS_tud_idComponenteSelecionado
+        {
+            get
+            {
+                return Convert.ToInt64(ViewState["VS_tud_idComponenteSelecionado"] ?? "-1");
+            }
+
+            set
+            {
+                ViewState["VS_tud_idComponenteSelecionado"] = value;
+            }
+        }
+
+        /// <summary>
         /// ViewState que armazena o id do tipo disciplina.
         /// </summary>
         private int VS_tds_id
@@ -125,6 +158,22 @@
             set
             {
                 ViewState["VS_tdt_posicao"] = value;
+            }
+        }
+
+        /// <summary>
+        /// ViewState que armazena a permissão de edição de objetos de aprendizagem.
+        /// </summary>
+        private bool VS_permiteEditarObjAprendizagem
+        {
+            get
+            {
+                return Convert.ToBoolean(ViewState["VS_permiteEditarObjAprendizagem"] ?? false);
+            }
+
+            set
+            {
+                ViewState["VS_permiteEditarObjAprendizagem"] = value;
             }
         }
 
@@ -330,6 +379,58 @@
 
         #endregion Plano Aluno
 
+        #region Objetos de Aprendizagem
+
+        public List<Struct_ObjetosAprendizagem> VS_lstObjetosAprendizagem
+        {
+            get
+            {
+                if (ViewState["VS_lstObjetosAprendizagem"] != null)
+                {
+                    return (List<Struct_ObjetosAprendizagem>)(ViewState["VS_lstObjetosAprendizagem"]);
+                }
+                else
+                {
+                    return new List<Struct_ObjetosAprendizagem>();
+                }
+            }
+
+            set
+            {
+                ViewState["VS_lstObjetosAprendizagem"] = value;
+            }
+        }
+
+        public bool abaObjAprendVisivel
+        {
+            get
+            {
+                if (ViewState["abaObjAprendVisivel"] != null)
+                {
+                    return Convert.ToBoolean(ViewState["abaObjAprendVisivel"]);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            set
+            {
+                ViewState["abaObjAprendVisivel"] = value;
+            }
+        }
+
+        public bool rptObjetosVisible
+        {
+            get
+            {
+                return rptobjAprendizagem.Visible;
+            }
+        }
+
+        #endregion Objetos de Aprendizagem
+
         /// <summary>
         /// Retorna se o usuário logado é docente.
         /// </summary>
@@ -348,7 +449,7 @@
             get
             {
                 return (VS_turmaDisciplinaCompartilhada != null || ACA_TipoDocenteBO.SelecionaPosicaoPorTipoDocenteCache(EnumTipoDocente.Compartilhado, ApplicationWEB.AppMinutosCacheLongo) == VS_tdt_posicao)
-                       || ACA_TipoDocenteBO.SelecionaPosicaoPorTipoDocenteCache(EnumTipoDocente.SegundoTitular, ApplicationWEB.AppMinutosCacheLongo) == VS_tdt_posicao 
+                       || ACA_TipoDocenteBO.SelecionaPosicaoPorTipoDocenteCache(EnumTipoDocente.SegundoTitular, ApplicationWEB.AppMinutosCacheLongo) == VS_tdt_posicao
                        ? ACA_TipoDocenteBO.SelecionaPosicaoPorTipoDocenteCache(EnumTipoDocente.Titular, ApplicationWEB.AppMinutosCacheLongo) : VS_tdt_posicao;
             }
         }
@@ -446,7 +547,7 @@
                                             new object[]
                                                 {
                                                     "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "CreateDiv",
-	                                                "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ,"-", "BidiLtr", "BidiRtl"
+                                                    "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ,"-", "BidiLtr", "BidiRtl"
                                                 },
                                             new object[]
                                                 {
@@ -491,7 +592,7 @@
                                             new object[]
                                                 {
                                                     "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "CreateDiv",
-	                                                "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ,"-", "BidiLtr", "BidiRtl"
+                                                    "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ,"-", "BidiLtr", "BidiRtl"
                                                 },
                                             new object[]
                                                 {
@@ -550,11 +651,51 @@
 
         #region Métodos iniciais
 
+        public void LoadDdlComponenteRegencia()
+        {
+            //// Só carrega componentes da regência se o tipo da disciplina for de REGENCIA.
+            if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia))
+            {
+                lblComponenteAtAvaliativa.Visible = ddlComponenteAtAvaliativa.Visible = true;
+                CarregaComponenteRegenciaDocente(ddlComponenteAtAvaliativa);
+            }
+            else
+                lblComponenteAtAvaliativa.Visible = ddlComponenteAtAvaliativa.Visible = false;
+        }
+
+        /// <summary>
+        /// Carrega disciplina(s componente(s) da regencia somente da turma selecionada.
+        /// </summary>
+        /// <param name="tur_id">Id da turma</param>
+        /// <param name="ddlDisciplinaComponentes">Combo que será carregado</param>
+        private void CarregaComponenteRegenciaDocente(DropDownList ddlDisciplinaComponentes)
+        {
+            List<sComboTurmaDisciplina> turmaDisciplinaComponenteRegencia = (from dr in VS_TurmaDisciplinaDocente
+                                                                             where Convert.ToByte(dr.tur_tud_id.Split(';')[3]) == Convert.ToByte(ACA_CurriculoDisciplinaTipo.ComponenteRegencia)
+                                                                             && (Convert.ToInt64(dr.tur_tud_id.Split(';')[0]) == VS_tur_id)
+                                                                             orderby dr.tud_nome
+                                                                             select new sComboTurmaDisciplina
+                                                                             {
+                                                                                 tur_tud_nome = dr.tur_tud_nome.ToString()
+                                                                                 ,
+                                                                                 tur_tud_id = dr.tur_tud_id.ToString()
+                                                                                 ,
+                                                                                 tud_nome = dr.tud_nome.ToString()
+                                                                             }).ToList();
+
+            if (ddlDisciplinaComponentes.Items.Count == 0)
+            {
+                ddlDisciplinaComponentes.DataSource = turmaDisciplinaComponenteRegencia;
+                ddlDisciplinaComponentes.DataBind();
+            }
+        }
+
         /// <summary>
         /// Carrega dados do planejament da turma.
         /// </summary>
         public void CarregarTurma(long tur_id, int cal_id, int esc_id, int uni_id, int cur_id, int crr_id, int crp_id,
-                                  long tud_id, int tds_id, byte tud_tipo, byte tdt_posicao, string tciIds, string tur_ids = null, int tne_id = -1)
+                                  long tud_id, int tds_id, byte tud_tipo, byte tdt_posicao, string tciIds, string tur_ids = null, 
+                                  int tne_id = -1, bool permiteEditarObjAprendizagem = false)
         {
             VS_TurmasNormais_Ids = tur_ids;
             VS_tur_id = tur_id;
@@ -568,11 +709,15 @@
             VS_tud_id = tud_id;
             VS_tud_tipo = tud_tipo;
             VS_tds_id = tds_id;
+            VS_permiteEditarObjAprendizagem = permiteEditarObjAprendizagem;
+
+            LoadDdlComponenteRegencia();
+
             if (!String.IsNullOrEmpty(tciIds))
             {
                 string[] vetTipoCiclo = tciIds.Split(',');
                 var elements = from element in vetTipoCiclo
-                                select Convert.ToInt32(element);
+                               select Convert.ToInt32(element);
                 VS_tciIdsTurma = elements.ToList();
             }
             else
@@ -599,10 +744,75 @@
             {
                 CarregarPlanoAlunos();
             }
+
             //CarregarProjeto();
+
             CarregarDocumentos();
+
+            CarregarObjetosAprendizagem();
         }
 
+        /// <summary>
+        /// Carrega os objetos de aprendizagem
+        /// </summary>
+        public void CarregarObjetosAprendizagem()
+        {
+            ACA_CurriculoPeriodo crp = new ACA_CurriculoPeriodo { cur_id = VS_cur_id, crr_id = VS_crr_id, crp_id = VS_crp_id };
+            ACA_CurriculoPeriodoBO.GetEntity(crp);
+
+            ACA_TipoCiclo tci = new ACA_TipoCiclo { tci_id = crp.tci_id };
+            ACA_TipoCicloBO.GetEntity(tci);
+
+            ACA_TipoCurriculoPeriodo tcp = new ACA_TipoCurriculoPeriodo { tcp_id = crp.tcp_id };
+            ACA_TipoCurriculoPeriodoBO.GetEntity(tcp);
+
+            TUR_TurmaDisciplina entityTud = new TUR_TurmaDisciplina { tud_id = VS_tud_id };
+            TUR_TurmaDisciplinaBO.GetEntity(entityTud);
+
+            abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = VS_permiteEditarObjAprendizagem &&
+                                Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem);
+
+            if (abaobjAprendizagem.Visible)
+            {
+                lblAvisoObjetosAprendizagem.Text = (string)GetGlobalResourceObject("UserControl", "UCPlanejamentoProjetos.lblAvisoObjetosAprendizagem.Text");
+                updAvisoObjetosAprendizagem.Update();
+                btnAjudaObjetos.Visible = !string.IsNullOrEmpty(lblAvisoObjetosAprendizagem.Text);
+
+                VS_lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
+                
+                CarregaRepeaterObjetoAprendizagem();
+            }
+        }
+
+        private void CarregaRepeaterObjetoAprendizagem()
+        {
+            List<Struct_ObjetosAprendizagem> list = VS_lstObjetosAprendizagem;
+            if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                ddlComponenteAtAvaliativa.Items.Count > 0)
+            {
+                list = VS_lstObjetosAprendizagem.Where(p => p.tud_id == Convert.ToInt64(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1])).ToList();
+                VS_tud_idComponenteSelecionado = Convert.ToInt64(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]);
+            }
+
+            if (!list.Any())
+            {
+                rptobjAprendizagem.Visible = false;
+                lblMensagemObjetos.Text = UtilBO.GetErroMessage("Não existem objetos de aprendizagem cadastrados.", UtilBO.TipoMensagem.Alerta);
+            }
+            else
+            {
+                rptobjAprendizagem.Visible = true;
+                rptobjAprendizagem.DataSource = list.Select(p => new
+                {
+                    oap_id = p.oap_id,
+                    oap_descricao = p.oap_descricao
+                }).OrderBy(r => r.oap_descricao).Distinct();
+                rptobjAprendizagem.DataBind();
+            }
+        }
+
+        #endregion 
+        
         /// <summary>
         /// Seta os eventos javascript da tela.
         /// </summary>
@@ -686,6 +896,7 @@
         }
 
         #endregion Métodos iniciais
+
 
         #region Plano de ciclo
 
@@ -868,10 +1079,10 @@
                 rptPlanejamentoBimestre.DataBind();
 
                 if (VS_visaoDocente &&
-                    // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                         (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                    // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                    // nao permite lancar o planejamento em conjunto com o titular
+                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                        // nao permite lancar o planejamento em conjunto com o titular
                         || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     txtDiagnosticoInicial.ReadOnly = txtProposta.ReadOnly = true;
             }
@@ -908,11 +1119,11 @@
                         VS_tdp_id = Convert.ToInt32(dtPlanejamentoAnual.Rows[0]["tdp_id"]);
 
                     CLS_TurmaDisciplinaPlanejamento planejamento = new CLS_TurmaDisciplinaPlanejamento
-                                                                        {
-                                                                            tud_id = tud_id,
-                                                                            tdp_id = tdp_id,
-                                                                            tpc_id = -1
-                                                                        };
+                    {
+                        tud_id = tud_id,
+                        tdp_id = tdp_id,
+                        tpc_id = -1
+                    };
 
                     CLS_TurmaDisciplinaPlanejamentoBO.GetEntity(planejamento);
 
@@ -945,11 +1156,11 @@
                                                  .FirstOrDefault().Field<object>("tdp_id"));
 
                         planejamento = new CLS_TurmaDisciplinaPlanejamento
-                                            {
-                                                tud_id = tud_id,
-                                                tdp_id = tdp_id,
-                                                tpc_id = Convert.ToInt32(hdnTpcId.Value)
-                                            };
+                        {
+                            tud_id = tud_id,
+                            tdp_id = tdp_id,
+                            tpc_id = Convert.ToInt32(hdnTpcId.Value)
+                        };
 
                         CLS_TurmaDisciplinaPlanejamentoBO.GetEntity(planejamento);
 
@@ -1001,21 +1212,21 @@
             try
             {
                 if (VS_visaoDocente &&
-                    // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                         (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                    // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                    // nao permite lancar o planejamento em conjunto com o titular
+                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                        // nao permite lancar o planejamento em conjunto com o titular
                         || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     return false;
 
                 List<CLS_TurmaDisciplinaPlanejamento> lstPlanejamento = new List<CLS_TurmaDisciplinaPlanejamento>();
 
                 CLS_TurmaDisciplinaPlanejamento planejamento = new CLS_TurmaDisciplinaPlanejamento
-                                                                    {
-                                                                        tud_id = VS_tud_id,
-                                                                        tdp_id = VS_tdp_id,
-                                                                        tpc_id = -1
-                                                                    };
+                {
+                    tud_id = VS_tud_id,
+                    tdp_id = VS_tdp_id,
+                    tpc_id = -1
+                };
                 CLS_TurmaDisciplinaPlanejamentoBO.GetEntity(planejamento);
 
                 planejamento.tdp_diagnostico = txtDiagnosticoInicial.Text;
@@ -1035,11 +1246,11 @@
                     TextBox txtPlanejamentoBimestre = (TextBox)item.FindControl("txtPlanejamentoBimestre");
 
                     planejamento = new CLS_TurmaDisciplinaPlanejamento
-                                        {
-                                            tud_id = VS_tud_id,
-                                            tdp_id = string.IsNullOrEmpty(hdnTdpId.Value) ? -1 : Convert.ToInt32(hdnTdpId.Value),
-                                            tpc_id = Convert.ToInt32(hdnTpcId.Value)
-                                        };
+                    {
+                        tud_id = VS_tud_id,
+                        tdp_id = string.IsNullOrEmpty(hdnTdpId.Value) ? -1 : Convert.ToInt32(hdnTdpId.Value),
+                        tpc_id = Convert.ToInt32(hdnTpcId.Value)
+                    };
                     CLS_TurmaDisciplinaPlanejamentoBO.GetEntity(planejamento);
 
                     planejamento.tdp_planejamento = txtPlanejamentoBimestre.Text;
@@ -1206,10 +1417,10 @@
                     divAluno.Visible = true;
 
                     if (VS_visaoDocente &&
-                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                            // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                             (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                        // nao permite lancar o planejamento em conjunto com o titular
+                            // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                            // nao permite lancar o planejamento em conjunto com o titular
                             || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     {
                         txtPlanoAluno.ReadOnly = true;
@@ -1240,10 +1451,10 @@
                 SalvaPlanoAluno(alu_id);
 
                 if (VS_visaoDocente &&
-                    // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                         (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                    // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                    // nao permite lancar o planejamento em conjunto com o titular
+                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                        // nao permite lancar o planejamento em conjunto com o titular
                         || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     return false;
 
@@ -1275,7 +1486,7 @@
         #region Documentos
 
         /// <summary>
-        /// Carrega os tipos de áreas documentos ativos
+        /// Carrega os documentos ativos
         /// </summary>
         private void CarregarDocumentos()
         {
@@ -1300,7 +1511,140 @@
 
         #endregion Documentos
 
-        #endregion Métodos
+        #region Objeto de Aprendizagem
+
+        /// <summary>
+        /// Salva no banco, todas as alterações dos objetos de aprendizagem
+        /// </summary>
+        /// <returns></returns>
+        public void SalvarObjetoAprendizagemTurmaDisciplina()
+        {
+            try
+            {
+                AtualizarListaObjetos();
+
+                List<CLS_ObjetoAprendizagemTurmaDisciplina> listObjTudDis = VS_lstObjetosAprendizagem.Where(p => p.selecionado)
+                                                                            .Select(p => new CLS_ObjetoAprendizagemTurmaDisciplina
+                                                                            {
+                                                                                tud_id = p.tud_id,
+                                                                                tpc_id = p.tpc_id,
+                                                                                oap_id = p.oap_id
+                                                                            }).ToList();
+
+                if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                    ddlComponenteAtAvaliativa.Items.Count > 0)
+                {
+                    List<long> lstTuds = (from dr in VS_TurmaDisciplinaDocente
+                                          where Convert.ToByte(dr.tur_tud_id.Split(';')[3]) == Convert.ToByte(ACA_CurriculoDisciplinaTipo.ComponenteRegencia)
+                                          && (Convert.ToInt64(dr.tur_tud_id.Split(';')[0]) == VS_tur_id)
+                                          select Convert.ToInt64(dr.tur_tud_id.Split(';')[1])).ToList();
+
+                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(listObjTudDis, lstTuds, VS_cal_id);
+                }
+                else
+                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(listObjTudDis, new List<long> { VS_tud_id }, VS_cal_id);
+
+                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, String.Format("Objeto Aprendizagem Turma Disciplina | tud_id: {0}; ", VS_tud_id.ToString()));
+            }
+            catch (ValidationException ex)
+            {
+                lblMensagemAluno.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMensagemAluno.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        /// <summary>
+        /// Atualiza a lista VS_lstObjetosAprendizagem com os objetos selecionados na tela (ou dos componentes)
+        /// </summary>
+        private void AtualizarListaObjetos()
+        {
+            List<CLS_ObjetoAprendizagemTurmaDisciplina> listSelecionados = CriarListaObjetoAprendizagemTurmaDisciplina();
+
+            List<Struct_ObjetosAprendizagem> VS_lstObjetosAprendizagemAux = new List<Struct_ObjetosAprendizagem>();
+            VS_lstObjetosAprendizagemAux = VS_lstObjetosAprendizagem.Select(item => new Struct_ObjetosAprendizagem
+            {
+                tud_id = item.tud_id,
+                oap_id = item.oap_id,
+                oap_descricao = item.oap_descricao,
+                oap_situacao = item.oap_situacao,
+                tpc_id = item.tpc_id,
+                tpc_nome = item.tpc_nome,
+                tpc_ordem = item.tpc_ordem,
+                selecionado = (VS_tud_tipo != Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                item.tud_id == VS_tud_id &&
+                                listSelecionados.Any(p => p.tud_id == item.tud_id && p.oap_id == item.oap_id && p.tpc_id == item.tpc_id)) ||
+                                (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                ddlComponenteAtAvaliativa.Items.Count > 0 &&
+                                item.tud_id == VS_tud_idComponenteSelecionado &&
+                                listSelecionados.Any(p => p.tud_id == item.tud_id && p.oap_id == item.oap_id && p.tpc_id == item.tpc_id)) ||
+                                (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                ddlComponenteAtAvaliativa.Items.Count > 0 &&
+                                item.tud_id != VS_tud_idComponenteSelecionado &&
+                                item.selecionado)
+            }).ToList();
+
+            VS_lstObjetosAprendizagem = VS_lstObjetosAprendizagemAux;
+        }
+
+        private List<CLS_ObjetoAprendizagemTurmaDisciplina> CriarListaObjetoAprendizagemTurmaDisciplina()
+        {
+            List<CLS_ObjetoAprendizagemTurmaDisciplina> lstObjTudDis = new List<CLS_ObjetoAprendizagemTurmaDisciplina>();
+
+            if (rptobjAprendizagem.Visible)
+            {
+                foreach (RepeaterItem item in rptobjAprendizagem.Items)
+                {
+                    if ((item.ItemType == ListItemType.Item) ||
+                        (item.ItemType == ListItemType.AlternatingItem))
+                    {
+                        Repeater rptchkBimestre = (Repeater)item.FindControl("rptchkBimestre");
+
+                        if (rptchkBimestre != null)
+                        {
+                            foreach (RepeaterItem chk in rptchkBimestre.Items)
+                            {
+                                CheckBox ckbCampo = (CheckBox)chk.FindControl("ckbCampo");
+
+                                if (ckbCampo != null && ckbCampo.Checked)
+                                {
+                                    HiddenField tpc_id = (HiddenField)chk.FindControl("tpc_id");
+                                    HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
+                                    if (tpc_id != null && oap_id != null)
+                                    {
+                                        if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                            ddlComponenteAtAvaliativa.Items.Count > 0)
+                                        {
+                                            lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                            {
+                                                tud_id = VS_tud_idComponenteSelecionado,
+                                                tpc_id = Convert.ToInt32(tpc_id.Value),
+                                                oap_id = Convert.ToInt32(oap_id.Value)
+                                            });
+                                        }
+                                        else
+                                        {
+                                            lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                            {
+                                                tud_id = VS_tud_id,
+                                                tpc_id = Convert.ToInt32(tpc_id.Value),
+                                                oap_id = Convert.ToInt32(oap_id.Value)
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return lstObjTudDis;
+        }
+
+        #endregion Objeto de Aprendizagem
 
         #region Eventos
 
@@ -1386,10 +1730,10 @@
                 btnVoltaEstadoAnteriorTextoPlanejamentoBimestre.OnClientClick = "abrirTextoPequeno('" + lblPlanejamentoBimestre.ClientID + "', '" + txtPlanejamentoBimestre.ClientID + "', '" + btnTextoGrandePlanejamentoBimestre.ClientID + "', '" + btnVoltaEstadoAnteriorTextoPlanejamentoBimestre.ClientID + "', '" + hdnBimestreVisivel.Value + "'); return false;";
 
                 if (VS_visaoDocente &&
-                    // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
+                        // se nao for um docente da disciplina com docencia compartilhada, eu verifico pela posicao
                         (VS_turmaDisciplinaCompartilhada == null && PosicaoDocente != PosicaoTitular)
-                    // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
-                    // nao permite lancar o planejamento em conjunto com o titular
+                        // se for um docente da disciplina com docencia compartilhada, eu verifico pela configuracao da disciplina se 
+                        // nao permite lancar o planejamento em conjunto com o titular
                         || (VS_turmaDisciplinaCompartilhada != null && VS_turmaDisciplinaCompartilhada.tud_naoLancarPlanejamento))
                     txtPlanejamentoBimestre.ReadOnly = true;
             }
@@ -1490,6 +1834,60 @@
         }
 
         #endregion Documentos
+
+        #region Objetos Aprendizagem
+
+        protected void rptobjAprendizagem_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Header)
+            {
+                Repeater rptBimestre = (Repeater)e.Item.FindControl("rptBimestre");
+                if (rptBimestre != null)
+                {
+                    rptBimestre.DataSource = VS_lstObjetosAprendizagem.OrderBy(r => r.tpc_ordem)
+                                             .Select(p => new { tpc_id = p.tpc_id, tpc_nome = p.tpc_nome, tpc_ordem = p.tpc_ordem }).Distinct();
+                    rptBimestre.DataBind();
+                }
+            }
+            else if ((e.Item.ItemType == ListItemType.Item) ||
+                (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                Repeater rptchkBimestre = (Repeater)e.Item.FindControl("rptchkBimestre");
+                if (rptchkBimestre != null)
+                {
+                    var lst = VS_lstObjetosAprendizagem.Where(p => p.oap_id == Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oap_id")))
+                                                .OrderBy(r => r.tpc_ordem).Select(p => new { tpc_id = p.tpc_id, oap_id = p.oap_id, oap_situacao = p.oap_situacao, selecionado = p.selecionado });
+                    rptchkBimestre.DataSource = lst;
+                    rptchkBimestre.DataBind();
+                }
+            }
+        }
+
+        protected void rptchkBimestre_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if ((e.Item.ItemType == ListItemType.Item) ||
+                (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                CheckBox ckb = (CheckBox)e.Item.FindControl("ckbCampo");
+                HiddenField oap_situacao = (HiddenField)e.Item.FindControl("oap_situacao");
+                if (ckb != null)
+                {
+                    ckb.Enabled = VS_permiteEditarObjAprendizagem;
+
+                    if (oap_situacao.Value == "2")
+                        ckb.Enabled = false;
+                }
+            }
+        }
+
+        protected void ddlComponenteAtAvaliativa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AtualizarListaObjetos();
+
+            CarregaRepeaterObjetoAprendizagem();
+        }
+
+        #endregion Objetos Aprendizagem
 
         #endregion Eventos
     }
