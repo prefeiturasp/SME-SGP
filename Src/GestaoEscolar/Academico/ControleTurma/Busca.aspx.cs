@@ -50,7 +50,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         private const int grvTurma_ColunaAlunos = 11;
         private const int grvPeriodosAulas_ColunaSugestao = 2;
         private const int grvPeriodosAulas_ColunaAplicarSugestao = 3;
-        private const int grvPeriodosAulas_ColunaAulasCriadas = 4;
+        private const int grvPeriodosAulas_ColunaAulasCriadas = 5;
 
         #endregion Constantes
 
