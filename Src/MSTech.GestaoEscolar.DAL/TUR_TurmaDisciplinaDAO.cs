@@ -1144,6 +1144,103 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        public DataTable SelectBy_EscolaCalendarioTurma
+        (
+            long tur_id
+            , int esc_id
+            , int cal_id
+            , bool paginado
+            , int currentPage
+            , int pageSize
+            , bool mostraFilhosRegencia
+            , bool mostraRegencia
+            , bool mostraExperiencia
+            , bool mostraTerritorio
+            , out int totalRecords
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_TUR_TurmaDisciplina_SelectBy_EscolaCalendarioTurma", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@tur_id";
+                Param.Size = 8;
+                if (tur_id > 0)
+                    Param.Value = tur_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@esc_id";
+                Param.Size = 8;
+                Param.Value = esc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_id";
+                Param.Size = 8;
+                Param.Value = cal_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int16;
+                Param.ParameterName = "@mostraFilhosRegencia";
+                Param.Size = 4;
+                if (mostraFilhosRegencia)
+                    Param.Value = 1;
+                else
+                    Param.Value = 0;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@mostraRegencia";
+                Param.Size = 1;
+                Param.Value = mostraRegencia;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@mostraExperiencia";
+                Param.Size = 1;
+                Param.Value = mostraExperiencia;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@mostraTerritorio";
+                Param.Size = 1;
+                Param.Value = mostraTerritorio;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                if (paginado)
+                    totalRecords = qs.Execute(currentPage, pageSize);
+                else
+                {
+                    qs.Execute();
+                    totalRecords = qs.Return.Rows.Count;
+                }
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         public DataTable SelectBy_tur_id
         (
             long tur_id

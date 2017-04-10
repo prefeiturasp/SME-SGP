@@ -401,7 +401,7 @@ namespace GestaoEscolar.WebControls.Combos.Novos
                 CarregarOpcaoFinal();
                 SelecionaPrimeiroItem();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 lblMessage.Text = "Erro ao tentar carregar " + lblTitulo.Text.Replace('*', ' ').ToLower() + ".";
                 lblMessage.Visible = true;

@@ -27,11 +27,11 @@
             <asp:Label ID="lblAvisoMensagem" runat="server"></asp:Label>
             <uc1:UCComboUAEscola runat="server" ID="UCComboUAEscola" AsteriscoObg="true" ObrigatorioEscola="true" ObrigatorioUA="true"
                 CarregarEscolaAutomatico="true" MostraApenasAtivas="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" />
-            <uc1:UCCCursoCurriculo runat="server" ID="UCCCursoCurriculo" Obrigatorio="true" MostrarMensagemSelecione="true" PermiteEditar="false" />
-            <uc1:UCComboCurriculoPeriodo runat="server" ID="UCComboCurriculoPeriodo" Obrigatorio="true" _MostrarMessageSelecione="true" PermiteEditar="false" />
             <uc1:UCCCalendario runat="server" ID="UCCCalendario" Obrigatorio="true" MostrarMensagemSelecione="true" PermiteEditar="false" />
             <uc1:UCCPeriodoCalendario runat="server" ID="UCCPeriodoCalendario" MostrarMensagemSelecione="true" Obrigatorio="true" PermiteEditar="false" />
-            <uc1:UCComboTurma runat="server" ID="UCComboTurma" Obrigatorio="true" _MostrarMessageSelecione="true" PermiteEditar="false" />
+            <uc1:UCCCursoCurriculo runat="server" ID="UCCCursoCurriculo" Obrigatorio="false" MostrarMensagemSelecione="true" PermiteEditar="false" />
+            <uc1:UCComboCurriculoPeriodo runat="server" ID="UCComboCurriculoPeriodo" Obrigatorio="false" _MostrarMessageSelecione="true" PermiteEditar="false" />
+            <uc1:UCComboTurma runat="server" ID="UCComboTurma" Obrigatorio="false" _MostrarMessageSelecione="true" PermiteEditar="false" />
             </div>
         <div class="right area-botoes-bottom">
             <asp:Button ID="btnPesquisar" runat="server" Text="<%$ Resources:Padrao, Padrao.Pesquisar.Text %>" OnClick="btnPesquisar_Click"
@@ -71,7 +71,7 @@
         </asp:GridView>
         <uc7:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvFilaFechamento" />
         <asp:ObjectDataSource ID="odsFilaFechamento" runat="server" TypeName="MSTech.GestaoEscolar.BLL.TUR_TurmaDisciplinaBO"
-            SelectMethod="GetSelectBy_TurmaTipos" MaximumRowsParameterName="pageSize" SelectCountMethod="GetTotalRecords"
+            SelectMethod="GetSelectBy_EscolaCalendarioTurma" MaximumRowsParameterName="pageSize" SelectCountMethod="GetTotalRecords"
             StartRowIndexParameterName="currentPage" EnablePaging="true" OnSelecting="odsFilaFechamento_Selecting"></asp:ObjectDataSource>
     </fieldset>
 </asp:Content>

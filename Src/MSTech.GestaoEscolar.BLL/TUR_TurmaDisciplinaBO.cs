@@ -1365,6 +1365,33 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Busca as turmas/disciplinas que não foram excluídas logicamente filtrado por escola, calendário e turma.
+        /// </summary>
+        /// <param name="esc_id">Id da escola</param>
+        /// <param name="cal_id">Id do calendário</param>
+        /// <param name="tur_id">Id da turma</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sTurmaDisciplina> GetSelectBy_EscolaCalendarioTurma
+        (
+            long tur_id
+            , int esc_id
+            , int cal_id
+            , bool paginado
+            , int currentPage
+            , int pageSize
+            , bool mostraFilhosRegencia
+            , bool mostraRegencia
+            , bool mostraExperiencia
+            , bool mostraTerritorio
+        )
+        {
+            TUR_TurmaDisciplinaDAO dao = new TUR_TurmaDisciplinaDAO();
+            return (from dr in dao.SelectBy_EscolaCalendarioTurma(tur_id, esc_id, cal_id, paginado, currentPage, pageSize, mostraFilhosRegencia, mostraRegencia, mostraExperiencia, mostraTerritorio, out totalRecords).AsEnumerable()
+                    select (sTurmaDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTurmaDisciplina())).ToList();
+        }
+
+        /// <summary>
         /// Retorna todas as disciplinas da turma em que o professor for docente e  que não foram excluídas logicamente.
         /// </summary>
         /// <param name="tur_id">Turma</param>
