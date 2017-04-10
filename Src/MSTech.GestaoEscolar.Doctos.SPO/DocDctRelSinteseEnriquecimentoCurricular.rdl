@@ -460,6 +460,9 @@
                         <Parameter Name="documentoOficial">
                           <Value>=Parameters!documentoOficial.Value</Value>
                         </Parameter>
+                        <Parameter Name="mensagemFrequenciaExterna">
+                          <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
+                        </Parameter>
                       </Parameters>
                       <Visibility>
                         <Hidden>=Fields!qtRegencia.Value &lt;= 0 or Fields!docenciaCompartilhada.Value = True</Hidden>
@@ -500,6 +503,9 @@
                         <Parameter Name="documentoOficial">
                           <Value>=Parameters!documentoOficial.Value</Value>
                         </Parameter>
+                        <Parameter Name="mensagemFrequenciaExterna">
+                          <Value>=Parameters!mensagemFrequenciaExterna.Value</Value>
+                        </Parameter>
                       </Parameters>
                       <Visibility>
                         <Hidden>=Fields!qtRegencia.Value &gt; 0 or Fields!docenciaCompartilhada.Value = True</Hidden>
@@ -511,6 +517,7 @@
                       </Style>
                     </Subreport>
                     <ColSpan>3</ColSpan>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -1749,6 +1756,12 @@
     <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documentoOficial</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="mensagemFrequenciaExterna">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>mensagemFrequenciaExterna</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
