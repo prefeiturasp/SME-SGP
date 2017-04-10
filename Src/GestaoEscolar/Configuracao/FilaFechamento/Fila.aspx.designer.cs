@@ -76,24 +76,6 @@ namespace GestaoEscolar.Configuracao.FilaFechamento {
         protected global::GestaoEscolar.WebControls.Combos.UCComboUAEscola UCComboUAEscola;
         
         /// <summary>
-        /// UCCCursoCurriculo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::GestaoEscolar.WebControls.Combos.Novos.UCCCursoCurriculo UCCCursoCurriculo;
-        
-        /// <summary>
-        /// UCComboCurriculoPeriodo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebControls_Combos_UCComboCurriculoPeriodo UCComboCurriculoPeriodo;
-        
-        /// <summary>
         /// UCCCalendario control.
         /// </summary>
         /// <remarks>
@@ -110,6 +92,24 @@ namespace GestaoEscolar.Configuracao.FilaFechamento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCCPeriodoCalendario UCCPeriodoCalendario;
+        
+        /// <summary>
+        /// UCCCursoCurriculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.Novos.UCCCursoCurriculo UCCCursoCurriculo;
+        
+        /// <summary>
+        /// UCComboCurriculoPeriodo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboCurriculoPeriodo UCComboCurriculoPeriodo;
         
         /// <summary>
         /// UCComboTurma control.
