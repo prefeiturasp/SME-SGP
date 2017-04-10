@@ -442,6 +442,14 @@
                                     <ItemStyle HorizontalAlign="Center" />
                                     <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="">
+                                    <ItemTemplate>
+                                        <span class="responsive-hide">
+                                            <asp:Button ID="btnSugestao" runat="server" Text=" > " OnClientClick="AplicarSugestaoAulasPrevistas(this); return false;" />
+                                        <span>
+                                   </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Previstas *">
                                     <ItemTemplate>
                                         <asp:TextBox runat="server" ID="txtPrevistas" Text='<%# Bind("aulasPrevistas") %>'

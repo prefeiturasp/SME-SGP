@@ -241,7 +241,15 @@ public partial class Configuracao_Sistema_Cadastro : MotherPageLogado
 
     protected void btnAtualizaCacheMenu_Click(object sender, EventArgs e)
     {
-        CacheManager.Factory.RemoveByPattern(ModelCache.MENU_SISTEMA_GRUPO_VISAO_PATTERN_KEY);
+        try
+        {
+            CacheManager.Factory.RemoveByPattern(ModelCache.MENU_SISTEMA_GRUPO_VISAO_PATTERN_KEY);
+            lblMessage.Text = UtilBO.GetErroMessage("Cache do menu atualizado com sucesso.", UtilBO.TipoMensagem.Sucesso);
+        }
+        catch
+        {
+            lblMessage.Text = UtilBO.GetErroMessage("Não foi possível atualizar o cache do menu.", UtilBO.TipoMensagem.Erro);
+        }
     }
 
     #endregion

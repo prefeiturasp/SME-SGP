@@ -882,6 +882,41 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Busca justificativas faltas de alunos
+        /// </summary>
+        /// <returns>DataTable contendo as justificativas</returns>
+        public DataTable BuscaJustificativasFaltasAlunos(int esc_id, DateTime syncDate)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("DCL_BuscaJustificativasFaltasAlunos", this._Banco);
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@esc_id";
+                Param.Size = 4;
+                Param.Value = esc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.DateTime;
+                Param.ParameterName = "@syncDate";
+                Param.Size = 16;
+                if (syncDate != new DateTime())
+                    Param.Value = syncDate;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+                return (qs.Return);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Sistema SIG

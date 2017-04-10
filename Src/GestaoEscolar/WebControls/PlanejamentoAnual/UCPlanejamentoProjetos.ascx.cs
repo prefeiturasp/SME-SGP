@@ -770,11 +770,14 @@
             TUR_TurmaDisciplinaBO.GetEntity(entityTud);
 
             abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = VS_permiteEditarObjAprendizagem &&
-                ((Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem))
-                || entityTud.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia);
+                                Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem);
 
             if (abaobjAprendizagem.Visible)
             {
+                lblAvisoObjetosAprendizagem.Text = (string)GetGlobalResourceObject("UserControl", "UCPlanejamentoProjetos.lblAvisoObjetosAprendizagem.Text");
+                updAvisoObjetosAprendizagem.Update();
+                btnAjudaObjetos.Visible = !string.IsNullOrEmpty(lblAvisoObjetosAprendizagem.Text);
+
                 VS_lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
                 
                 CarregaRepeaterObjetoAprendizagem();

@@ -24,6 +24,11 @@ function jsBuscaControleTurma() {
     });
 }
 
+function AplicarSugestaoAulasPrevistas(btn) {
+    var linha = $(btn).parents('tr');
+    linha.find('.txtPrevistas').val(linha.find("a[id$='lnkSugestao'").text());
+}
+
 function CarregarCacheEfetivacao(btn) {
     var item = $(btn).parent();
 

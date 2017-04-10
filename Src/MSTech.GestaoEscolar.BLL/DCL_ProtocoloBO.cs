@@ -321,6 +321,24 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna inf. detalhadas da Nome do Aluno/Escola/turma/Periodo de Justificativa vinculados ao protocolo (pro_id)
+        /// </summary>
+        /// <param name="pro_id">ID do Protocolo</param>
+        /// <returns></returns>
+        public static DataTable SelectBy_Protocolo_AlunoJustificativaFalta(Guid pro_id)
+        {
+            // *** Não sendo utilizada no momento ***
+            //  Foi retirado do Diario de Classes (Aplicativo Android), mas pedido para deixar as rotinas comentadas   
+
+            DCL_ProtocoloDAO dao = new DCL_ProtocoloDAO();
+            DataTable dt = dao.SelectBy_Protocolo_AlunoJustificativaFalta(pro_id);
+
+            totalRecords = dt.Rows.Count;
+
+            return dt;
+        }
+
+        /// <summary>
         /// Retorna inf. detalhadas da Nome aluno/Matricula/Escola/Turma/Grupamento de ensino vinculadas ao protocolo (pro_id)
         /// </summary>
         /// <param name="pro_id">ID do Protocolo</param>

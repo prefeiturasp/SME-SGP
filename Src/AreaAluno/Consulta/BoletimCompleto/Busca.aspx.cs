@@ -67,6 +67,11 @@ namespace AreaAluno.Consulta.BoletimCompleto
             }
         }
 
+        public string VS_nomeBoletim
+        {
+            get { return ViewState["VS_nomeBoletim"] as string ?? string.Empty; }
+            set { ViewState["VS_nomeBoletim"] = value; }
+        }
         #endregion Propriedades
 
         #region Eventos
@@ -91,6 +96,19 @@ namespace AreaAluno.Consulta.BoletimCompleto
                     if ((__SessionWEB.__UsuarioWEB ?? new UsuarioWEB()).alu_id <= 0)
                     {
                         throw new ValidationException("Usuário não autorizado a exibir a Área do Aluno.");
+                    }
+
+                    IDictionary<string, ICFG_Configuracao> configuracao;
+                    MSTech.GestaoEscolar.BLL.CFG_ConfiguracaoBO.Consultar(eConfig.Academico, out configuracao);
+                    if (configuracao.ContainsKey("AppURLAreaAlunoInfantil") && configuracao["AppURLAreaAlunoInfantil"].cfg_valor != null)
+                    {
+                        string url = HttpContext.Current.Request.Url.AbsoluteUri;
+                        string configInfantil = configuracao["AppURLAreaAlunoInfantil"].cfg_valor;
+
+                        if (url.Contains(configInfantil))
+                            VS_nomeBoletim = (string)GetGlobalResourceObject("AreaAluno.MasterPageAluno", "MenuBoletimInfantil");
+                        else
+                            VS_nomeBoletim = (string)GetGlobalResourceObject("AreaAluno.MasterPageAluno", "MenuBoletimOnline");
                     }
 
                     ACA_Aluno entityAluno = ACA_AlunoBO.GetEntity(new ACA_Aluno { alu_id = __SessionWEB.__UsuarioWEB.alu_id });
@@ -141,7 +159,7 @@ namespace AreaAluno.Consulta.BoletimCompleto
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao exibir o Boletim Online do aluno.", UtilBO.TipoMensagem.Erro);
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao exibir o " + VS_nomeBoletim + " do aluno.", UtilBO.TipoMensagem.Erro);
             }
 
             UCComboAnosLetivos.IndexChanged += AnosLetivos_SelectedIndexChanged;
@@ -157,7 +175,7 @@ namespace AreaAluno.Consulta.BoletimCompleto
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao exibir o Boletim Online do aluno.", UtilBO.TipoMensagem.Erro);
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao exibir o " + VS_nomeBoletim + " do aluno.", UtilBO.TipoMensagem.Erro);
             }
         }
 

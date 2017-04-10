@@ -49,6 +49,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         private const int grvTurma_ColunaEfetivacao = 10;
         private const int grvTurma_ColunaAlunos = 11;
         private const int grvPeriodosAulas_ColunaSugestao = 2;
+        private const int grvPeriodosAulas_ColunaAplicarSugestao = 3;
         private const int grvPeriodosAulas_ColunaAulasCriadas = 4;
 
         #endregion Constantes
@@ -616,6 +617,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                         grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = totalSugestao > 0;
                         grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaAulasCriadas].Visible = possuiAulasCriadas;
+                        grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaAplicarSugestao].Visible = totalSugestao > 0;
                     }
                 }
             }
@@ -684,6 +686,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                         grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = totalSugestao > 0;
                         grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaAulasCriadas].Visible = possuiAulasCriadas;
+                        grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaAplicarSugestao].Visible = totalSugestao > 0;
                     }
                 }
             }
@@ -2736,15 +2739,24 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     HyperLink lnkSugestao = (HyperLink)e.Row.FindControl("lnkSugestao");
                     Label lblSugestao = (Label)e.Row.FindControl("lblSugestao");
+                    Button btnSugestao = (Button)e.Row.FindControl("btnSugestao");
 
                     if (lblSugestao != null)
                     {
                         int sugestao = int.Parse(lblSugestao.Text);
                         totalSugestao += sugestao;
 
-                        lblSugestao.Visible = sugestao > 0 && !text.Enabled;
+                        lblSugestao.Visible = !text.Enabled || sugestao <= 0;
+                        if (sugestao <= 0)
+                        {
+                            lblSugestao.Text = "-";
+                        }
+
                         if (lnkSugestao != null)
                             lnkSugestao.Visible = sugestao > 0 && text.Enabled;
+
+                        if (btnSugestao != null)
+                            btnSugestao.Visible = sugestao > 0 && text.Enabled;
                     }
                 }
 
