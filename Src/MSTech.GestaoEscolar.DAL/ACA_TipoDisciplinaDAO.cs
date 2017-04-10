@@ -54,6 +54,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>        
         /// <param name="tds_id">ID do tipo de disciplina</param>
         /// <param name="tne_id">ID do tipo de nível de ensino</param>
+        /// <param name="tds_base">Base da disciplina</param>  
         /// <param name="tds_idNaoConsiderar">Id do tipo de disciplina que não virá do banco</param>
         /// <param name="controlarOrdem">se vai ordenar por ordem ou não</param> 
         /// <param name="paginado">Indica se o datatable será paginado ou não</param> 
@@ -64,6 +65,7 @@ namespace MSTech.GestaoEscolar.DAL
         (
             int tds_id
             , int tne_id
+            , int tds_base
             , int tds_idNaoConsiderar
             , bool controlarOrdem
             , bool paginado
@@ -93,6 +95,115 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.Size = 4;
                 if (tne_id > 0)
                     Param.Value = tne_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Byte;
+                Param.ParameterName = "@tds_base";
+                Param.Size = 1;
+                if (tds_base > 0)
+                    Param.Value = tds_base;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_idNaoConsiderar";
+                Param.Size = 4;
+                if (tds_idNaoConsiderar > 0)
+                    Param.Value = tds_idNaoConsiderar;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@controlarOrdem";
+                Param.Size = 1;
+                Param.Value = controlarOrdem;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                if (paginado)
+                    totalRecords = qs.Execute(currentPage, pageSize);
+                else
+                {
+                    qs.Execute();
+                    totalRecords = qs.Return.Rows.Count;
+                }
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Retorna todos os tipos de disciplina sem regência não excluídos logicamente
+        /// </summary>        
+        /// <param name="tds_id">ID do tipo de disciplina</param>
+        /// <param name="tne_id">ID do tipo de nível de ensino</param>
+        /// <param name="tds_base">Base da disciplina</param>  
+        /// <param name="tds_idNaoConsiderar">Id do tipo de disciplina que não virá do banco</param>
+        /// <param name="controlarOrdem">se vai ordenar por ordem ou não</param> 
+        /// <param name="paginado">Indica se o datatable será paginado ou não</param> 
+        /// <param name="currentPage">Página atual do grid</param>
+        /// <param name="pageSize">Total de registros por página do grid</param>
+        /// <param name="totalRecords">Total de registros retornado na busca</param>   
+        public DataTable SelectBy_Pesquisa_SemRegencia
+        (
+            int tds_id
+            , int tne_id
+            , int tds_base
+            , int tds_idNaoConsiderar
+            , bool controlarOrdem
+            , bool paginado
+            , int currentPage
+            , int pageSize
+            , out int totalRecords
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoDisciplina_SelectBy_Pesquisa_SemRegencia", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Size = 4;
+                if (tds_id > 0)
+                    Param.Value = tds_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tne_id";
+                Param.Size = 4;
+                if (tne_id > 0)
+                    Param.Value = tne_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Byte;
+                Param.ParameterName = "@tds_base";
+                Param.Size = 1;
+                if (tds_base > 0)
+                    Param.Value = tds_base;
                 else
                     Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);

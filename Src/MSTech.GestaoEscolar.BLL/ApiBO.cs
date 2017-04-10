@@ -1404,6 +1404,40 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Busca justificativas faltas de alunos
+        /// </summary>
+        /// <returns>DataTable contendo as justificativas</returns>
+        public static BuscaJustificativasFaltaAlunoSaidaDTO BuscaJustificativasFaltasAlunos(BuscaJustificativasFaltaAlunoEntradaDTO buscaJustificativasFaltaAlunoEntradaDTO)
+        {
+            BuscaJustificativasFaltaAlunoSaidaDTO buscaJustificativasFaltaAlunoSaidaDTO;
+            DataTable justificativas;
+            try
+            {
+                buscaJustificativasFaltaAlunoSaidaDTO = new BuscaJustificativasFaltaAlunoSaidaDTO();
+                ApiDAO dao = new ApiDAO();
+
+                DateTime syncDate = String.IsNullOrEmpty(buscaJustificativasFaltaAlunoEntradaDTO.SyncDate) ? new DateTime() : Convert.ToDateTime(buscaJustificativasFaltaAlunoEntradaDTO.SyncDate);
+
+                justificativas = dao.BuscaJustificativasFaltasAlunos(buscaJustificativasFaltaAlunoEntradaDTO.esc_id, syncDate);
+                if (justificativas.Rows.Count == 0)
+                {
+                    return buscaJustificativasFaltaAlunoSaidaDTO;
+                }
+
+                buscaJustificativasFaltaAlunoSaidaDTO.JustificativasFaltasAlunos = (from dr in justificativas.AsEnumerable() select (JustificativaFaltaAluno)GestaoEscolarUtilBO.DataRowToEntity(dr, new JustificativaFaltaAluno())).ToList();
+            }
+            catch (Exception exp)
+            {
+                //_GravarErro(exp, buscaEscolaEntradaDTO.GetProperties());
+
+                buscaJustificativasFaltaAlunoSaidaDTO = new BuscaJustificativasFaltaAlunoSaidaDTO();
+                buscaJustificativasFaltaAlunoSaidaDTO.Status = 1;
+                buscaJustificativasFaltaAlunoSaidaDTO.StatusDescription = exp.Message;
+            }
+            return buscaJustificativasFaltaAlunoSaidaDTO;
+        }
+
+        /// <summary>
         /// Metodo que busca os recursos aula
         /// </summary>
         public static BuscaRecursosAulaSaidaDTO BuscaRecursosAula()

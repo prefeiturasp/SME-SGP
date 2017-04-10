@@ -1516,6 +1516,42 @@ namespace GestaoEscolar.Academico.ControleTurma {
         protected global::System.Web.UI.WebControls.TextBox txtAtividadeCasa;
         
         /// <summary>
+        /// divObjetosAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divObjetosAprendizagem;
+        
+        /// <summary>
+        /// updCalendario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updCalendario;
+        
+        /// <summary>
+        /// lblLgdObjAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLgdObjAprendizagem;
+        
+        /// <summary>
+        /// rptCampos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptCampos;
+        
+        /// <summary>
         /// fsRecursosUtilizados control.
         /// </summary>
         /// <remarks>

@@ -8,14 +8,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="updResultado" runat="server" UpdateMode="Conditional">
         <contenttemplate>
             <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Qualidade" />
-        </contenttemplate>
-    </asp:UpdatePanel>
-    <asp:UpdatePanel ID="updResultado" runat="server" UpdateMode="Conditional">
-        <contenttemplate>
             <fieldset id="fdsResultados" runat="server" visible="false">
                 <legend>Listagem de tipos de ciclo</legend>
                 <div id="divResultado" runat="server">
@@ -31,6 +27,12 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="tci_exibirBoletim" HeaderText="Exibir compromisso do aluno no boletim"/>  
+                            <asp:TemplateField HeaderText="Possui objeto de aprendizagem" >
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="chkObjetoAprendizagem" OnCheckedChanged="chkObjetoAprendizagem_CheckedChanged" AutoPostBack="true" runat="server"/>
+                                    <asp:HiddenField ID="hdfObjetoAprendizagem" runat="server" Value='<%#Eval("tci_objetoAprendizagem")%>'/>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Ordem" SortExpression="tpc_ordem">
                                 <EditItemTemplate>
                                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("tci_ordem") %>'></asp:TextBox>

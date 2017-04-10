@@ -3595,6 +3595,7 @@ namespace MSTech.GestaoEscolar.BLL
             , Guid usu_id = new Guid()
             , byte origemLogAula = 0
             , byte tipoLogAula = 0
+            , List<CLS_ObjetoAprendizagemTurmaAula> listObjTudTau = null
         )
         {
             CLS_TurmaAulaDAO dao = new CLS_TurmaAulaDAO();
@@ -3602,6 +3603,9 @@ namespace MSTech.GestaoEscolar.BLL
 
             try
             {
+                if (listObjTudTau != null)
+                    CLS_ObjetoAprendizagemTurmaAulaBO.SalvarLista(listObjTudTau, dao._Banco);
+
                 if (listOriCurTurAula != null)
                     CLS_TurmaAulaOrientacaoCurricularBO.Salvar(listOriCurTurAula, dao._Banco);
 

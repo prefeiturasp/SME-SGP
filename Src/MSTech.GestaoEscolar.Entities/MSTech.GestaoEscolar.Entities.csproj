@@ -108,6 +108,7 @@
     <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoObservacao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoProjeto.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaAbonoFalta.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaFalta.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoRecursoAvaliacaoINEP.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoResponsavel.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AreaConhecimento.cs" />
@@ -148,6 +149,8 @@
     <Compile Include="Abstracts\Abstract_ACA_FormatoAvaliacao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_HistoricoObservacaoPadrao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_MotivoBaixaFrequencia.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagem.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagemTipoCiclo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroAcademico.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroBuscaAluno.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroIntegracao.cs" />
@@ -229,6 +232,8 @@
     <Compile Include="Abstracts\Abstract_CLS_FechamentoJustificativaPendencia.cs" />
     <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniao.cs" />
     <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoResponsaveis.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ObjetoAprendizagemTurmaAula.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ObjetoAprendizagemTurmaDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoCiclo.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricular.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnostico.cs" />
@@ -373,11 +378,14 @@
     <Compile Include="ACA_AlunoHistoricoCertificado.cs" />
     <Compile Include="ACA_AlunoHistoricoProjeto.cs" />
     <Compile Include="ACA_AlunoJustificativaAbonoFalta.cs" />
+    <Compile Include="ACA_AlunoJustificativaFalta.cs" />
     <Compile Include="ACA_AreaConhecimento.cs" />
     <Compile Include="ACA_ArquivoArea.cs" />
     <Compile Include="ACA_CompromissoEstudo.cs" />
     <Compile Include="ACA_EventoLimite.cs" />
     <Compile Include="ACA_MotivoBaixaFrequencia.cs" />
+    <Compile Include="ACA_ObjetoAprendizagem.cs" />
+    <Compile Include="ACA_ObjetoAprendizagemTipoCiclo.cs" />
     <Compile Include="ACA_TerritorioExperiencia.cs" />
     <Compile Include="ACA_TipoAnotacaoAluno.cs" />
     <Compile Include="ACA_TipoAreaDocumento.cs" />
@@ -504,6 +512,8 @@
     <Compile Include="CLS_FechamentoJustificativaPendencia.cs" />
     <Compile Include="CLS_FrequenciaReuniao.cs" />
     <Compile Include="CLS_FrequenciaReuniaoResponsaveis.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaAula.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaDisciplina.cs" />
     <Compile Include="CLS_PlanejamentoCiclo.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricular.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricularDiagnostico.cs" />

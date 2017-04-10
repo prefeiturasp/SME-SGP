@@ -21,6 +21,40 @@ namespace MSTech.GestaoEscolar.DAL
     {
         #region Métodos
 
+        public bool AtualizaObjetoAprendizagem(int tci_id, bool tci_objetoAprendizagem)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoCiclo_AtualizaObjetoAprendizagem", _Banco);
+
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tci_id";
+                Param.Size = 4;
+                Param.Value = tci_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@tci_objetoAprendizagem";
+                Param.Size = 1;
+                Param.Value = tci_objetoAprendizagem;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                return true;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         /// <summary>
         /// Retorna os tipos de ciclo de aprendizagem ativos
         /// </summary>

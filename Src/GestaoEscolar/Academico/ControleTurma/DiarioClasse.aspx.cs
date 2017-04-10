@@ -2653,6 +2653,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                 divAtividadeCasa.Visible = true;
                 SetaDisplayCss(divAtividadeCasa, true);
             }
+
+            //Não vai exibir o lançamento de objetos de aprendizagem ainda
+            DataTable dtCampos = new DataTable();// CLS_ObjetoAprendizagemTurmaDisciplinaBO.SelecionaObjTudTpc(VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id);
+            divObjetosAprendizagem.Visible = dtCampos.Rows.Count > 0;
+            if (divObjetosAprendizagem.Visible)
+            {
+                CarregarObjetosAprendizagem(dtCampos);
+            }
         }
 
         /// <summary>
@@ -3050,6 +3058,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             for (int i = 0; i < chkRecursos.Items.Count; i++)
                 chkRecursos.Items[i].Selected = false;
             txtOutroRecurso.Text = string.Empty;
+            divObjetosAprendizagem.Visible = false;
         }
 
         /// <summary>
@@ -3267,6 +3276,26 @@ namespace GestaoEscolar.Academico.ControleTurma
                 }
 
                 SetaDisplayCss(txtOutroRecurso, chkRecursos.Items[chkRecursos.Items.Count - 1].Selected);
+            }
+        }
+
+        private void CarregarObjetosAprendizagem(DataTable dtCampos)
+        {
+            DataTable dtAssociados = CLS_ObjetoAprendizagemTurmaAulaBO.SelecionaObjTudTau(VS_tud_id_Aula, VS_tau_id);
+
+            rptCampos.DataSource = dtCampos.AsEnumerable().OrderBy(r => r["oap_descricao"])
+                                   .Select(p => new { oap_id = p["oap_id"], oap_descricao = p["oap_descricao"] });
+            rptCampos.DataBind();
+
+            foreach (RepeaterItem item in rptCampos.Items)
+            {
+                CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
+                HiddenField hdnId = (HiddenField)item.FindControl("hdnId");
+
+                if (ckbCampo != null && hdnId != null)
+                {
+                    ckbCampo.Checked = dtAssociados.AsEnumerable().Any(r => Convert.ToInt32(r["oap_id"]) == Convert.ToInt32(hdnId.Value));
+                }
             }
         }
 
@@ -4666,11 +4695,16 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             List<CLS_TurmaAulaOrientacaoCurricular> listOriCurTurAula = CriarListaHabilidadesTurmaAula();
 
+            List<CLS_ObjetoAprendizagemTurmaAula> listObjTudTau = null;
+            if (divObjetosAprendizagem.Visible)
+                listObjTudTau = CriarListaObjetoAprendizagemAula();
+
             if (CLS_TurmaAulaBO.SalvarAulaAnotacoesRecursos(entity, new List<CLS_TurmaAulaAluno>(), listTurmaAulaRecurso, null,
                                                             lstComponentesRegencia, true, listOriCurTurAula,
                                                             __SessionWEB.__UsuarioWEB.Usuario.usu_id,
                                                             (byte)LOG_TurmaAula_Alteracao_Origem.WebDiarioClasse,
-                                                            (byte)LOG_TurmaAula_Alteracao_Tipo.AlteracaoPlanoAula))
+                                                            (byte)LOG_TurmaAula_Alteracao_Tipo.AlteracaoPlanoAula,
+                                                            listObjTudTau))
             {
                 if (isNew)
                 {
@@ -4995,6 +5029,30 @@ namespace GestaoEscolar.Academico.ControleTurma
                 });
             }
             return lista;
+        }
+
+        private List<CLS_ObjetoAprendizagemTurmaAula> CriarListaObjetoAprendizagemAula()
+        {
+            List<CLS_ObjetoAprendizagemTurmaAula> lstObjTudTau = new List<CLS_ObjetoAprendizagemTurmaAula>();
+            foreach (RepeaterItem item in rptCampos.Items)
+            {
+                CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
+
+                if (ckbCampo != null && ckbCampo.Checked)
+                {
+                    HiddenField hdnId = (HiddenField)item.FindControl("hdnId");
+                    if (hdnId != null)
+                    {
+                        lstObjTudTau.Add(new CLS_ObjetoAprendizagemTurmaAula
+                                            {
+                                                tud_id = VS_tud_id_Aula,
+                                                tau_id = VS_tau_id,
+                                                oap_id = Convert.ToInt32(hdnId.Value)
+                                            });
+                    }
+                }
+            }
+            return lstObjTudTau;
         }
 
         /// <summary>

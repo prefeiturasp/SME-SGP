@@ -174,7 +174,8 @@ public partial class MasterPage : MotherMasterPage
 
         #endregion
 
-        if(TemaAtual == "IntranetSME") {
+        if (TemaAtual == "IntranetSME")
+        {
             divBarraSP.Visible = true;
         }
 
@@ -192,17 +193,17 @@ public partial class MasterPage : MotherMasterPage
 
             try
             {
-                
+
                 //Exibe o contato do help desk do cliente
                 spnHelpDesk.InnerHtml = __SessionWEB.HelpDeskContato;
 
                 if (__SessionWEB.__UsuarioWEB.Grupo != null)
                 {
-                    string menuXml = SYS_ModuloBO.CarregarMenuXML(
-                        __SessionWEB.__UsuarioWEB.Grupo.gru_id
-                        , __SessionWEB.__UsuarioWEB.Grupo.sis_id
+                    string menuXml = GestaoEscolarUtilBO.CarregarMenu(
+                        __SessionWEB.__UsuarioWEB.Grupo.sis_id
+                        , __SessionWEB.__UsuarioWEB.Grupo.gru_id
                         , __SessionWEB.__UsuarioWEB.Grupo.vis_id
-                        );
+                        , 30);
                     if (String.IsNullOrEmpty(menuXml))
                         menuXml = "<menus/>";
                     XmlDataSource1.Data = menuXml;
@@ -260,6 +261,8 @@ public partial class MasterPage : MotherMasterPage
                                                                        ApplicationWEB.SistemaID);
                     if (!string.IsNullOrEmpty(urlHelp))
                     {
+                        if (!urlHelp.StartsWith("~") && !urlHelp.StartsWith("http://") && !urlHelp.StartsWith("https://"))
+                            urlHelp = "http://" + urlHelp;
                         hplHelp.Visible = true;
                         hplHelp.NavigateUrl = urlHelp;
                         hplHelp.ToolTip = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.MENSAGEM_ICONE_HELP);

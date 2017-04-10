@@ -259,6 +259,23 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Lista de permissões do docente para cadastro de efetivacap.
+        /// </summary>
+        private List<sPermissaoDocente> VS_ltPermissaoObjAprendizagem
+        {
+            get
+            {
+                return (List<sPermissaoDocente>)
+                        (
+                            ViewState["VS_ltPermissaoObjAprendizagem"] ??
+                            (
+                                ViewState["VS_ltPermissaoObjAprendizagem"] = CFG_PermissaoDocenteBO.SelecionaPermissaoModulo(UCControleTurma1.VS_tdt_posicao, (byte)EnumModuloPermissao.ObjetosAprendizagem)
+                            )
+                        );
+            }
+        }
+
+        /// <summary>
         /// Retorna se o usuário logado é docente.
         /// </summary>
         private bool VS_visaoDocente
@@ -559,6 +576,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             bool visibleBotoes = false;
+            bool permiteEditarPlanejamento = false;
 
             if (UCPlanejamentoAnual.Visible)
             {
@@ -576,6 +594,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         || UCControleTurma1.VS_tur_situacao == (byte)TUR_TurmaSituacao.Extinta)
                     {
                         visibleBotoes = true;
+                        permiteEditarPlanejamento = true;
                     }
                 }
             }
@@ -587,7 +606,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                     || UCControleTurma1.VS_tur_situacao == (byte)TUR_TurmaSituacao.Extinta)
                 {
                     visibleBotoes = true;
+                    permiteEditarPlanejamento = true;
                 }
+            }
+
+            if (VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao))
+            {
+                visibleBotoes = true;
             }
 
             // [Carla 21/02] Regra: Docente e usuários da escola (CP e Diretor) podem editar tudo.
@@ -596,11 +621,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                 __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao)
             {
                 visibleBotoes = false;
+                permiteEditarPlanejamento = false;
             }
 
             btnSalvarPlanejamentoAnual.Visible = btnSalvarPlanejamentoAnualCima.Visible = visibleBotoes;
             btnCancelarPlanejamentoAnual.Text = btnCancelarPlanejamentoAnualCima.Text = visibleBotoes ? btnCancelarPlanejamentoAnual.Text : "Voltar";
-            UCPlanejamentoProjetos.PermiteEdicao = visibleBotoes;
+            UCPlanejamentoProjetos.PermiteEdicao = visibleBotoes && permiteEditarPlanejamento;
 
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "MensagemSairPlanejamentoAnual", "var exibeMensagemSair=" + btnSalvarPlanejamentoAnual.Visible.ToString().ToLower() + ";", true);
 
@@ -618,7 +644,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                      VS_EntitiesControleTurma.turma.uni_id, VS_EntitiesControleTurma.curso.cur_id,
                                                      VS_EntitiesControleTurma.curriculo.crr_id, VS_EntitiesControleTurma.curriculoPeriodo.crp_id,
                                                      Tud_idPlanAnual, VS_EntitiesControleTurma.disciplina.tds_id, VS_EntitiesControleTurma.turmaDisciplina.tud_tipo,
-                                                     tdt_posicao, UCControleTurma1.VS_tciIds, tur_ids, VS_EntitiesControleTurma.curso.tne_id);
+                                                     tdt_posicao, UCControleTurma1.VS_tciIds, tur_ids, VS_EntitiesControleTurma.curso.tne_id, 
+                                                     VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao || p.pdc_permissaoConsulta));
             }
             else
             {
@@ -630,6 +657,16 @@ namespace GestaoEscolar.Academico.ControleTurma
                     chkTurmas.DataSource = TUR_TurmaDocenteBO.SelecionaPorTurmaDisciplinaPosicao(UCControleTurma1.VS_tur_id, UCPlanejamentoAnual.VS_cal_id, UCPlanejamentoAnual.VS_cur_id, UCPlanejamentoAnual.VS_crr_id, UCPlanejamentoAnual.VS_crp_id, Tud_idPlanAnual, tdt_posicao);
                     chkTurmas.DataBind();
                 }
+            }
+
+            if (visibleBotoes && !permiteEditarPlanejamento &&
+                !(UCPlanejamentoProjetos.abaObjAprendVisivel && UCPlanejamentoProjetos.rptObjetosVisible &&
+                  VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao)))
+            {
+                visibleBotoes = false;
+                btnSalvarPlanejamentoAnual.Visible = btnSalvarPlanejamentoAnualCima.Visible = visibleBotoes;
+                btnCancelarPlanejamentoAnual.Text = btnCancelarPlanejamentoAnualCima.Text = visibleBotoes ? btnCancelarPlanejamentoAnual.Text : "Voltar";
+                UCPlanejamentoProjetos.PermiteEdicao = visibleBotoes && permiteEditarPlanejamento;
             }
 
             UCCPosicaoDocente1.VS_ltPermissao = VS_ltPermissaoPlanejamentoAnual;
@@ -899,14 +936,47 @@ namespace GestaoEscolar.Academico.ControleTurma
                             VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar o planejamento de aluno.", UtilBO.TipoMensagem.Erro);
                         }
                     }
-
-                    lblMessage.Text = VS_mensagem;
                 }
+
+                if (UCPlanejamentoProjetos.abaObjAprendVisivel)
+                {
+                    try
+                    {
+                        if (UCPlanejamentoProjetos.rptObjetosVisible && VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao))
+                        {
+                            UCPlanejamentoProjetos.SalvarObjetoAprendizagemTurmaDisciplina();
+                            VS_mensagem += UtilBO.GetErroMessage("Objetos de aprendizagem salvos com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                        }
+                        if (PermaneceTela)
+                            UCPlanejamentoProjetos.CarregarObjetosAprendizagem();
+                    }
+                    catch (ValidationException ex)
+                    {
+                        VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                    }
+                    catch (DuplicateNameException ex)
+                    {
+                        VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                    }
+                    catch (Exception ex)
+                    {
+                        ApplicationWEB._GravaErro(ex);
+                        VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                    }
+                }
+
+                lblMessage.Text = VS_mensagem;
             }
             else
             {
                 try
                 {
+                    VS_mensagem = "";
+
                     if ((VS_EntitiesControleTurma.turma.tur_situacao == (byte)TUR_TurmaSituacao.Encerrada
                             || VS_EntitiesControleTurma.turma.tur_situacao == (byte)TUR_TurmaSituacao.Extinta) &&
                         UCControleTurma1.VS_tur_dataEncerramento != new DateTime() &&
@@ -929,38 +999,71 @@ namespace GestaoEscolar.Academico.ControleTurma
                         ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "Planejamento anual | " + "tur_id: " + UCControleTurma1.VS_tur_id + ";tud_id: " + UCControleTurma1.VS_tud_id);
 
                         if (PermaneceTela)
-                        {
                             CarregarPlanejamentoAnual();
-                            lblMessage.Text = UtilBO.GetErroMessage("Planejamento salvo com sucesso.", UtilBO.TipoMensagem.Sucesso);
-                        }
-                        else
-                        {
-                            __SessionWEB.PostMessages = UtilBO.GetErroMessage("Planejamento salvo com sucesso.", UtilBO.TipoMensagem.Sucesso);
-                            Response.Redirect(UCNavegacaoTelaPeriodo.VS_paginaRetorno, false);
-                            HttpContext.Current.ApplicationInstance.CompleteRequest();
-                        }
+
+                        VS_mensagem += UtilBO.GetErroMessage("Planejamento salvo com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
                     else
                     {
-                        lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o planejamento.", UtilBO.TipoMensagem.Erro);
+                        VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar o planejamento.", UtilBO.TipoMensagem.Erro);
+                    }
+
+                    if (UCPlanejamentoProjetos.abaObjAprendVisivel)
+                    {
+                        try
+                        {
+                            if (UCPlanejamentoProjetos.rptObjetosVisible)
+                            {
+                                UCPlanejamentoProjetos.SalvarObjetoAprendizagemTurmaDisciplina();
+                                VS_mensagem += UtilBO.GetErroMessage("Objetos de aprendizagem salvos com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                            }
+                            if (PermaneceTela)
+                                UCPlanejamentoProjetos.CarregarObjetosAprendizagem();
+                        }
+                        catch (ValidationException ex)
+                        {
+                            VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                        }
+                        catch (DuplicateNameException ex)
+                        {
+                            VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                        }
+                        catch (Exception ex)
+                        {
+                            ApplicationWEB._GravaErro(ex);
+                            VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                        }
                     }
                 }
                 catch (ValidationException ex)
                 {
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                    VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (ArgumentException ex)
                 {
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                    VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (DuplicateNameException ex)
                 {
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                    VS_mensagem += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
-                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o planejamento.", UtilBO.TipoMensagem.Erro);
+                    VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar o planejamento.", UtilBO.TipoMensagem.Erro);
+                }
+
+                if (PermaneceTela)
+                    lblMessage.Text = VS_mensagem;
+                else
+                {
+                    __SessionWEB.PostMessages = VS_mensagem;
+                    Response.Redirect(UCNavegacaoTelaPeriodo.VS_paginaRetorno, false);
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
             }
         }

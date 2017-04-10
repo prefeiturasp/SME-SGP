@@ -139,7 +139,9 @@
                                             <span class="ico-font ico-planejamento"><asp:ImageButton ID="btnPlanejamento"
                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                     runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
-                                                    ToolTip="Planejamento" /></span>
+                                                    ToolTip="Planejamento" />
+                                                    <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
+                                                        Visible="false" /></span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <%--Diário de Classe--%>
@@ -301,6 +303,8 @@
                                             CommandArgument='<%# Container.DataItemIndex %>'
                                             runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                             ToolTip="Planejamento" /></span>
+                                    <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
+                                        Visible="false" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <%--Diário de Classe--%>
@@ -421,6 +425,26 @@
                                 <asp:BoundField HeaderText="Bimestre" DataField="cap_descricao" FooterText="Total" />
                                 <asp:BoundField HeaderText="Período" DataField="periodo" />
                                 <%--<asp:BoundField HeaderText="Previstas" DataField="aulasPrevistas" />--%>
+                                <asp:TemplateField HeaderText="Sugestão">
+                                    <ItemTemplate>
+                                        <asp:HyperLink runat="server" ID="lnkSugestao" Text='<%# Bind("aulasSugestao") %>' style="cursor:pointer"></asp:HyperLink>
+                                        <asp:Label runat="server" ID="lblSugestao" Text='<%# Bind("aulasSugestao") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Label runat="server" ID="lblTotalSugestao" ></asp:Label>
+                                    </FooterTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <FooterStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="">
+                                    <ItemTemplate>
+                                        <span class="responsive-hide">
+                                            <asp:Button ID="btnSugestao" runat="server" Text=" > " OnClientClick="AplicarSugestaoAulasPrevistas(this); return false;" />
+                                        <span>
+                                   </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Previstas *">
                                     <ItemTemplate>
                                         <asp:TextBox runat="server" ID="txtPrevistas" Text='<%# Bind("aulasPrevistas") %>'
@@ -434,8 +458,11 @@
                                             ValueToCompare="0" Display="Dynamic" ValidationGroup="AulasPrevistas">*</asp:CompareValidator>
                                     </ItemTemplate>
                                     <FooterTemplate>
-                                        <asp:Label runat="server" ID="lblTotalPrevistas" CssClass="lblPrevistas" Text="sdadas"></asp:Label>
+                                        <asp:Label runat="server" ID="lblTotalPrevistas" CssClass="lblPrevistas" Text=""></asp:Label>
                                     </FooterTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <%--<asp:BoundField HeaderText="Cumpridas" DataField="aulasDadas" />--%>
                                 <asp:TemplateField HeaderText="Cumpridas">
@@ -445,6 +472,9 @@
                                     <FooterTemplate>
                                         <asp:Label runat="server" ID="lblTotalDadas"></asp:Label>
                                     </FooterTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <%--<asp:BoundField HeaderText="Reposições" DataField="aulasRepostas" />--%>
                                 <asp:TemplateField HeaderText="Reposições">
@@ -454,6 +484,9 @@
                                     <FooterTemplate>
                                         <asp:Label runat="server" ID="lblTotalReposicoes"></asp:Label>
                                     </FooterTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <FooterStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>

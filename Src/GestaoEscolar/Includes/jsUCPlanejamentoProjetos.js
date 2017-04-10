@@ -4,6 +4,7 @@
     createDialog('.divPlanoAluno', 555, 0);
     createDialog('.divPlanoProjeto', 700, 0);
     createDialog("#divReplicarPlanejamentoAnual", 555, 0);
+    createDialog("#divMensagemObjetoAprendizagem", 555, 0);
     createDialog("#divTextoGrande", 700, 400);
     createDialog("#divHistoricoAlteracoesCiclo", 700, 0);
 

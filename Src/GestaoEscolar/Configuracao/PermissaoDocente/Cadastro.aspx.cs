@@ -111,7 +111,7 @@ namespace GestaoEscolar.Configuracao.PermissaoDocente
                 //Carrega repeater rptSelecionarConsultaEdicao
                 List<CFG_PermissaoDocente> lst = lstPermDoc.Where(p => p.pdc_modulo != Convert.ToByte(EnumModuloPermissao.Compensacoes) &&
                 p.pdc_modulo != Convert.ToByte(EnumModuloPermissao.Efetivacao) && p.pdc_modulo != Convert.ToByte(EnumModuloPermissao.Boletim) &&
-                p.pdc_modulo != Convert.ToByte(EnumModuloPermissao.Indicadores)).ToList();
+                p.pdc_modulo != Convert.ToByte(EnumModuloPermissao.Indicadores) && p.pdc_modulo != Convert.ToByte(EnumModuloPermissao.ObjetosAprendizagem)).ToList();
 
                 List<EnumModuloPermissao> lstEnum = new List<EnumModuloPermissao>();
                 lstEnum.Add(EnumModuloPermissao.Aula);
@@ -120,17 +120,19 @@ namespace GestaoEscolar.Configuracao.PermissaoDocente
                 lstEnum.Add(EnumModuloPermissao.PlanejamentoAnual);
                 lstEnum.Add(EnumModuloPermissao.Frequencia);
                 lstEnum.Add(EnumModuloPermissao.Avaliacoes);
-                
+
                 dicPermissoesDocentesConsEdic = CarregarPermissoesDocenteModulo(lst, lstEnum);
 
                 //Carrega repeater rptSelecionarPermissaoConsEdic
                 lst.Clear();
                 lst.AddRange(lstPermDoc.Where(p => p.pdc_modulo == Convert.ToByte(EnumModuloPermissao.Compensacoes)).ToList());
                 lst.AddRange(lstPermDoc.Where(p => p.pdc_modulo == Convert.ToByte(EnumModuloPermissao.Efetivacao)).ToList());
+                lst.AddRange(lstPermDoc.Where(p => p.pdc_modulo == Convert.ToByte(EnumModuloPermissao.ObjetosAprendizagem)).ToList());
 
                 lstEnum.Clear();
                 lstEnum.Add(EnumModuloPermissao.Compensacoes);
                 lstEnum.Add(EnumModuloPermissao.Efetivacao);
+                lstEnum.Add(EnumModuloPermissao.ObjetosAprendizagem);
 
                 dicPermissoesDocentesPermConsEdic = CarregarPermissoesDocenteModulo(lst, lstEnum);
                 

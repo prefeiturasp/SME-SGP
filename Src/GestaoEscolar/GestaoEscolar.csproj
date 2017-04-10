@@ -577,6 +577,27 @@
     <Compile Include="Academico\NivelAprendizado\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx.cs">
+      <DependentUpon>BuscaDisciplina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx.designer.cs">
+      <DependentUpon>BuscaDisciplina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\OrientacaoCurricular\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -736,6 +757,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Classe\JustificativaAbonoFalta\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\JustificativaFalta\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\JustificativaFalta\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classe\LancamentoFrequenciaExterna\Busca.aspx.cs">
@@ -2781,6 +2809,9 @@
     <Content Include="Academico\MatrizHabilidades\Cadastro.aspx" />
     <Content Include="Academico\NivelAprendizado\Busca.aspx" />
     <Content Include="Academico\NivelAprendizado\Cadastro.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\Busca.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\Cadastro.aspx" />
     <Content Include="Academico\OrientacaoCurricular\Busca.aspx" />
     <Content Include="Academico\OrientacaoCurricular\CadastroHabilidade.aspx" />
     <Content Include="Academico\ParametrizacaoDisciplinas\Busca.aspx" />
@@ -2806,6 +2837,7 @@
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Cadastro.aspx" />
     <None Include="Configs\Session.txt" />
+    <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
@@ -3484,6 +3516,7 @@
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
     <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
+    <Content Include="Includes\jsCadastroJustificativaFalta.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsFilaFilaFechamento.js" />
     <Content Include="Includes\jsPopupFrequenciaExterna.js" />
@@ -3760,7 +3793,7 @@
     <Content Include="Includes\Excluidos\jquery.meio.mask.js" />
     <Content Include="Includes\Excluidos\jquery.validate.additional-methods.js" />
     <Content Include="Includes\Excluidos\jquery.validation.js" />
-	<Content Include="Includes\fullcalendar\fullcalendar.css" />
+    <Content Include="Includes\fullcalendar\fullcalendar.css" />
     <Content Include="Includes\fullcalendar\fullcalendar.js" />
     <Content Include="Includes\fullcalendar\fullcalendar.min.js" />
     <Content Include="Includes\fullcalendar\fullcalendar.print.css" />

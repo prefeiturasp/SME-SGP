@@ -34,6 +34,11 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         public virtual string tci_nome { get; set; }
 
         /// <summary>
+        /// Campo que define se o tipo de ciclo pode possuir objeto de aprendizagem
+        /// </summary>
+        public virtual bool tci_objetoAprendizagem { get; set; }
+
+        /// <summary>
         /// Situação do tipo de ciclo (1-Ativo/3-Excluído)
         /// </summary>
         [MSNotNullOrEmpty()]

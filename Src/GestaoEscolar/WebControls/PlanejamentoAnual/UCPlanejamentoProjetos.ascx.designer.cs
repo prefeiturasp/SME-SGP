@@ -40,6 +40,24 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         protected global::System.Web.UI.WebControls.Button btnFecharPlanoAluno;
         
         /// <summary>
+        /// updAvisoObjetosAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updAvisoObjetosAprendizagem;
+        
+        /// <summary>
+        /// lblAvisoObjetosAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAvisoObjetosAprendizagem;
+        
+        /// <summary>
         /// updReplicarPlanejamentoAnual control.
         /// </summary>
         /// <remarks>
@@ -155,6 +173,33 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litDocumentos;
+        
+        /// <summary>
+        /// abaobjAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl abaobjAprendizagem;
+        
+        /// <summary>
+        /// litObjetoAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litObjetoAprendizagem;
+        
+        /// <summary>
+        /// btnAjudaObjetos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnAjudaObjetos;
         
         /// <summary>
         /// divTabsPlanoCiclo control.
@@ -587,6 +632,60 @@ namespace GestaoEscolar.WebControls.PlanejamentoAnual {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptAreas;
+        
+        /// <summary>
+        /// divTabsObjetoAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTabsObjetoAprendizagem;
+        
+        /// <summary>
+        /// updObjetosAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updObjetosAprendizagem;
+        
+        /// <summary>
+        /// lblComponenteAtAvaliativa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblComponenteAtAvaliativa;
+        
+        /// <summary>
+        /// ddlComponenteAtAvaliativa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlComponenteAtAvaliativa;
+        
+        /// <summary>
+        /// lblMensagemObjetos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensagemObjetos;
+        
+        /// <summary>
+        /// rptobjAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptobjAprendizagem;
         
         /// <summary>
         /// selected_tab control.

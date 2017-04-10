@@ -132,6 +132,8 @@
                                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                                     runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                                                     ToolTip="Planejamento" /></span>
+                                                            <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
+                                                                Visible="false" />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <%--Diário de Classe--%>
@@ -252,6 +254,8 @@
                                                                 CommandArgument='<%# Container.DataItemIndex %>'
                                                                 runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                                                 ToolTip="Planejamento" /></span>
+                                                        <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
+                                                            Visible="false" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Diário de Classe--%>
@@ -369,6 +373,8 @@
                                                                 CommandArgument='<%# Container.DataItemIndex %>'
                                                                 runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                                                 ToolTip="Planejamento" /></span>
+                                                        <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
+                                                            Visible="false" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Diário de Classe--%>
@@ -421,8 +427,8 @@
                                                             runat="server" SkinID="btFechamentoGestor" CommandName="Fechamento"
                                                             ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
                                                             Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' /></span>
-                                                       <asp:Image ID="imgPendenciaFechamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                        Visible="false" />
+                                                        <asp:Image ID="imgPendenciaFechamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
+                                                            Visible="false" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Alunos--%>

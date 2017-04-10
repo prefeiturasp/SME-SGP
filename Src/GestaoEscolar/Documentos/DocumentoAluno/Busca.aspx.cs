@@ -286,7 +286,7 @@ public partial class Documentos_DocumentoAluno_Busca : MotherPageLogado
 
                 _grvDocumentoAluno.Columns[columnCurso].HeaderText = GestaoEscolarUtilBO.nomePadraoCurso(__SessionWEB.__UsuarioWEB.Usuario.ent_id);
 
-                lblAvisoMensagem.Text = UtilBO.GetMessage("É necessário selecionar um tipo de documento.", UtilBO.TipoMensagem.Informacao);
+                lblAvisoMensagem.Text = UtilBO.GetMessage("É necessário selecionar um tipo de relatório.", UtilBO.TipoMensagem.Informacao);
 
                 //fdsResultados.Style.Add("display", "none");
                 fdsResultados.Visible = false;
@@ -2330,7 +2330,7 @@ public partial class Documentos_DocumentoAluno_Busca : MotherPageLogado
         txtDataReuniao.Text = "";
         txtAssunto.Text = "";
         ChkEmitirAnterior.Checked = false;
-        ChkEmitirAnterior.Text = "Emitir documentos de anos anteriores"; // recarrego pq tem opção que troca o texto.
+        ChkEmitirAnterior.Text = "Emitir relatórios de anos anteriores"; // recarrego pq tem opção que troca o texto.
     }
 
 

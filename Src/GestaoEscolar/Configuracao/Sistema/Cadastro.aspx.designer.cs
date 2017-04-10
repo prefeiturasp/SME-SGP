@@ -82,4 +82,13 @@ public partial class Configuracao_Sistema_Cadastro {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.GridView grvConfig;
+    
+    /// <summary>
+    /// btnAtualizaCacheMenu control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnAtualizaCacheMenu;
 }

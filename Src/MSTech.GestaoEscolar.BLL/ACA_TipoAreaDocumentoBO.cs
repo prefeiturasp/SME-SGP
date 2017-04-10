@@ -43,7 +43,7 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
-        /// Retorna os tipos de área documento ativos por permissão de usuário.
+        /// Retorna os documentos ativos por permissão de usuário.
         /// </summary>
         /// <param name="admin">Indica se é um usuário administrador.</param>
         /// <returns></returns>
@@ -108,7 +108,7 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
-        /// Inclui ou altera o tipo de área documento 
+        /// Inclui ou altera o documento 
         /// </summary>
         /// <param name="entity">Entidade ACA_TipoAreaDocumento</param>
         [DataObjectMethod(DataObjectMethodType.Update, false)]
@@ -127,7 +127,7 @@ namespace MSTech.GestaoEscolar.BLL
 
                 if (VerificaTipoAreaDocumentoExistente(entity.tad_id, entity.tad_nome, banco))
                 {
-                    throw new DuplicateNameException("Já existe um tipo de área cadastrado com este nome.");
+                    throw new DuplicateNameException("Já existe um documento cadastrado com este nome.");
                 }
 
                 return Save(entity, banco);
@@ -147,7 +147,7 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
-        /// Verifica o maior número de ordem cadastado de tipo de área.
+        /// Verifica o maior número de ordem cadastado de documento.
         /// </summary>  
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public static byte SelecionaMaiorOrdem(TalkDBTransaction banco = null)
@@ -174,7 +174,7 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
-        /// Verifica se já existe um tipo de área cadastrado com o mesmo nome
+        /// Verifica se já existe um documento cadastrado com o mesmo nome
         /// </summary>
         /// <param name="tad_id">ID do tipo de área documento</param> 
         /// <param name="tad_nome">Nome do tipo de área documento</param> 

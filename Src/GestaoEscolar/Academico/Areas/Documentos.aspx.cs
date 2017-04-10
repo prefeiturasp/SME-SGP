@@ -38,7 +38,7 @@
         }
 
         /// <summary>
-        /// ViewState que armazena a flag que indica se o tipo de área permite cadastro por escola.
+        /// ViewState que armazena a flag que indica se o documento permite cadastro por escola.
         /// </summary>
         private bool VS_permiteCadastroEscola
         {
@@ -54,7 +54,7 @@
         }
 
         /// <summary>
-        /// Lista inicial de arquivos da área.
+        /// Lista inicial de arquivos do documento.
         /// </summary>
         private List<ACA_ArquivoArea> VS_listaArquivoArea
         {
@@ -457,7 +457,7 @@
         }
 
         /// <summary>
-        /// Retorna a lista de arquivos da área aprensentados no repeater.
+        /// Retorna a lista de arquivos do documento aprensentados no repeater.
         /// </summary>
         /// <returns></returns>
         private List<ACA_ArquivoArea> RetornaListaDocumentos()

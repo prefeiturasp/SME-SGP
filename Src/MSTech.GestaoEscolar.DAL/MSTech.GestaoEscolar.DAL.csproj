@@ -101,6 +101,7 @@
     <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoObservacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoHistoricoProjetoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaAbonoFaltaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_AlunoJustificativaFaltaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoRecursoAvaliacaoINEPDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AlunoResponsavelDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_AreaConhecimentoDAO.cs" />
@@ -141,6 +142,8 @@
     <Compile Include="Abstracts\Abstract_ACA_FormatoAvaliacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_HistoricoObservacaoPadraoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_MotivoBaixaFrequenciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagemDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagemTipoCicloDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroAcademicoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroBuscaAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroIntegracaoDAO.cs" />
@@ -222,6 +225,8 @@
     <Compile Include="Abstracts\Abstract_CLS_FechamentoJustificativaPendenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_FrequenciaReuniaoResponsaveisDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ObjetoAprendizagemTurmaAulaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_ObjetoAprendizagemTurmaDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoCicloDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnosticoDAO.cs" />
@@ -376,6 +381,7 @@
     <Compile Include="ACA_AlunoHistoricoObservacaoDAO.cs" />
     <Compile Include="ACA_AlunoHistoricoProjetoDAO.cs" />
     <Compile Include="ACA_AlunoJustificativaAbonoFaltaDAO.cs" />
+    <Compile Include="ACA_AlunoJustificativaFaltaDAO.cs" />
     <Compile Include="ACA_AlunoRecursoAvaliacaoINEPDAO.cs" />
     <Compile Include="ACA_AlunoResponsavelDAO.cs" />
     <Compile Include="ACA_AreaConhecimentoDAO.cs" />
@@ -416,6 +422,8 @@
     <Compile Include="ACA_FormatoAvaliacaoDAO.cs" />
     <Compile Include="ACA_HistoricoObservacaoPadraoDAO.cs" />
     <Compile Include="ACA_MotivoBaixaFrequenciaDAO.cs" />
+    <Compile Include="ACA_ObjetoAprendizagemDAO.cs" />
+    <Compile Include="ACA_ObjetoAprendizagemTipoCicloDAO.cs" />
     <Compile Include="ACA_ParametroAcademicoDAO.cs" />
     <Compile Include="ACA_ParametroBuscaAlunoDAO.cs" />
     <Compile Include="ACA_ParametroIntegracaoDAO.cs" />
@@ -498,6 +506,8 @@
     <Compile Include="CLS_FechamentoJustificativaPendenciaDAO.cs" />
     <Compile Include="CLS_FrequenciaReuniaoDAO.cs" />
     <Compile Include="CLS_FrequenciaReuniaoResponsaveisDAO.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaAulaDAO.cs" />
+    <Compile Include="CLS_ObjetoAprendizagemTurmaDisciplinaDAO.cs" />
     <Compile Include="CLS_PlanejamentoCicloDAO.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricularDAO.cs" />
     <Compile Include="CLS_PlanejamentoOrientacaoCurricularDiagnosticoDAO.cs" />
