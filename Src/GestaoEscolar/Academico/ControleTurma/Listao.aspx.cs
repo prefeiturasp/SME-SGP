@@ -2183,6 +2183,22 @@ namespace GestaoEscolar.Academico.ControleTurma
                             UCControleTurma1.LabelTurmas = listaDados["TextoTurmas"];
                         }
 
+                        byte tipoPendencia = 0;
+                        int tpcIdPendencia = -1;
+                        long tudIdPendencia = -1;
+                        if (Session["tipoPendencia"] != null)
+                        {
+                            tipoPendencia = Convert.ToByte(Session["tipoPendencia"]);
+                        }
+                        if (Session["tpcIdPendencia"] != null)
+                        {
+                            tpcIdPendencia = Convert.ToInt32(Session["tpcIdPendencia"]);
+                        }
+                        if (Session["tudIdPendencia"] != null)
+                        {
+                            tudIdPendencia = Convert.ToInt64(Session["tudIdPendencia"]);
+                        }
+
                         // Remove os dados que possam estar na sessao
                         Session.Remove("tud_id");
                         Session.Remove("tdt_posicao");
@@ -2194,6 +2210,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                         Session.Remove("tur_idNormal");
                         Session.Remove("tud_idAluno");
                         Session.Remove("tur_tud_ids");
+                        Session.Remove("tipoPendencia");
+                        Session.Remove("tpcIdPendencia");
+                        Session.Remove("tudIdPendencia");
                         //
 
                         List<Struct_MinhasTurmas.Struct_Turmas> dadosTurma = new List<Struct_MinhasTurmas.Struct_Turmas>();
@@ -2244,6 +2263,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                         VS_turmasAnoAtual = dadosTurma.FirstOrDefault().turmasAnoAtual;
 
                         hdnListaoSelecionado.Value = "0";
+                        if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemNota)
+                        {
+                            hdnListaoSelecionado.Value = "1";
+                        }
+                        else if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula)
+                        {
+                            hdnListaoSelecionado.Value = "2";
+                        }
 
                         UCNavegacaoTelaPeriodo.VS_opcaoAbaAtual = eOpcaoAbaMinhasTurmas.Listao;
 
@@ -2321,7 +2348,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         UCNavegacaoTelaPeriodo.CarregarPeriodos(VS_ltPermissaoFrequencia, VS_ltPermissaoEfetivacao,
                                         VS_ltPermissaoPlanejamentoAnual, VS_ltPermissaoAvaliacao,
                                         entDisciplinaRelacionada, UCControleTurma1.VS_esc_id,
-                                        VS_EntitiesControleTurma.turmaDisciplina.tud_tipo, UCControleTurma1.VS_tdt_posicao, UCControleTurma1.VS_tur_id, VS_EntitiesControleTurma.turmaDisciplina.tud_id, true);
+                                        VS_EntitiesControleTurma.turmaDisciplina.tud_tipo, UCControleTurma1.VS_tdt_posicao, UCControleTurma1.VS_tur_id, VS_EntitiesControleTurma.turmaDisciplina.tud_id, true, tpcIdPendencia);
 
                         if (UCNavegacaoTelaPeriodo.VS_tpc_id <= 0)
                         {
@@ -2331,7 +2358,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                         VS_tipoDocente = ACA_TipoDocenteBO.SelecionaTipoDocentePorPosicao(UCControleTurma1.VS_tdt_posicao, ApplicationWEB.AppMinutosCacheLongo);
 
-                        CarregarDisciplinasComboListao(UCControleTurma1.VS_tur_id, VS_EntitiesControleTurma.turmaDisciplina.tud_id);
+                        CarregarDisciplinasComboListao(UCControleTurma1.VS_tur_id, tudIdPendencia > 0 ? tudIdPendencia : VS_EntitiesControleTurma.turmaDisciplina.tud_id);
                         CarregarTela();
 
                         //bloquear botoes -> se o docente nao possuir mais essa turma e se nao for turma extinta

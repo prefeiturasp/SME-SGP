@@ -2268,7 +2268,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         REL_TurmaDisciplinaSituacaoFechamento_Pendencia pendencia;
                         if (tud_tipo != (byte)TurmaDisciplinaTipo.Regencia)
                         {
-                            pendencia = VS_listaPendencias[grvTurmas.ClientID].FindAll
+                            pendencia = VS_listaPendencias[grid.ClientID].FindAll
                             (
                                 p =>
                                 (
@@ -2292,7 +2292,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                             if (controleOrdemDisciplinas)
                             {
-                                pendencia = VS_listaPendencias[grvTurmas.ClientID].FindAll
+                                pendencia = VS_listaPendencias[grid.ClientID].FindAll
                                 (
                                     p =>
                                     (
@@ -2311,7 +2311,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             }
                             else
                             {
-                                pendencia = VS_listaPendencias[grvTurmas.ClientID].FindAll
+                                pendencia = VS_listaPendencias[grid.ClientID].FindAll
                                 (
                                     p =>
                                     (
@@ -2369,7 +2369,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         REL_TurmaDisciplinaSituacaoFechamento_Pendencia pendencia;
                         if (tud_tipo != (byte)TurmaDisciplinaTipo.Regencia)
                         {
-                            pendencia = VS_listaPendencias[grvTurmas.ClientID].FindAll
+                            pendencia = VS_listaPendencias[grid.ClientID].FindAll
                             (
                                 p =>
                                 (
@@ -2386,7 +2386,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                             if (controleOrdemDisciplinas)
                             {
-                                pendencia = VS_listaPendencias[grvTurmas.ClientID].FindAll
+                                pendencia = VS_listaPendencias[grid.ClientID].FindAll
                                 (
                                     p =>
                                     (
@@ -2398,7 +2398,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             }
                             else
                             {
-                                pendencia = VS_listaPendencias[grvTurmas.ClientID].FindAll
+                                pendencia = VS_listaPendencias[grid.ClientID].FindAll
                                 (
                                     p =>
                                     (
@@ -2431,7 +2431,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         Int64.TryParse(grid.DataKeys[index].Values["tud_id"].ToString(), out tud_id);
 
                         REL_TurmaDisciplinaSituacaoFechamento_Pendencia pendencia;
-                        pendencia = VS_listaPendencias[grvTurmas.ClientID].FindAll
+                        pendencia = VS_listaPendencias[grid.ClientID].FindAll
                         (
                             p =>
                             (

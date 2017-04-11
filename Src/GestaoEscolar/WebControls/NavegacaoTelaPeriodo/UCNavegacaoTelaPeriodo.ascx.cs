@@ -535,6 +535,7 @@ namespace GestaoEscolar.WebControls.NavegacaoTelaPeriodo
             , Int64 tur_id = -1
             , Int64 tud_id = -1
             , bool incluirPeriodoRecesso = false
+            , int tpcIdPendencia = -1
         )
         {
             // Habilita a visibilidade dos botões alunos e voltar
@@ -684,6 +685,14 @@ namespace GestaoEscolar.WebControls.NavegacaoTelaPeriodo
             List<Struct_CalendarioPeriodos> tabelaPeriodos = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(VS_cal_id, ApplicationWEB.AppMinutosCacheLongo);
             int tpc_idUltimoPeriodo = tabelaPeriodos.Count > 0 ? tabelaPeriodos.Last().tpc_id : -1;
             int tpc_ordemUltimoPeriodo = tabelaPeriodos.Count > 0 ? tabelaPeriodos.Last().tpc_ordem : 0;
+
+            if (tpcIdPendencia > 0)
+            {
+                //Busca o bimestre pendente
+                Struct_CalendarioPeriodos periodo = VS_CalendarioPeriodo.Where(x => x.tpc_id == tpcIdPendencia).FirstOrDefault();
+                VS_tpc_id = periodo.tpc_id;
+                VS_tpc_ordem = periodo.tpc_ordem;
+            }
 
             if (VS_tpc_id <= 0 && !VS_IncluirPeriodoFinal)
             {
