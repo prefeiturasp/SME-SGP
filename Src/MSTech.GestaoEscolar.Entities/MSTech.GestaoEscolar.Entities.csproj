@@ -158,6 +158,8 @@
     <Compile Include="Abstracts\Abstract_ACA_RecursosAula.cs" />
     <Compile Include="Abstracts\Abstract_ACA_Religiao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_Sondagem.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_SondagemQuestao.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_SondagemResposta.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TerritorioExperiencia.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoAnotacaoAluno.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoAreaDocumento.cs" />
@@ -388,6 +390,8 @@
     <Compile Include="ACA_ObjetoAprendizagem.cs" />
     <Compile Include="ACA_ObjetoAprendizagemTipoCiclo.cs" />
     <Compile Include="ACA_Sondagem.cs" />
+    <Compile Include="ACA_SondagemQuestao.cs" />
+    <Compile Include="ACA_SondagemResposta.cs" />
     <Compile Include="ACA_TerritorioExperiencia.cs" />
     <Compile Include="ACA_TipoAnotacaoAluno.cs" />
     <Compile Include="ACA_TipoAreaDocumento.cs" />

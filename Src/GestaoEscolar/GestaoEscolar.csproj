@@ -3587,6 +3587,7 @@
     <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
     <Content Include="Includes\jsCadastroJustificativaFalta.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
+    <Content Include="Includes\jsCadastroSondagem.js" />
     <Content Include="Includes\jsFilaFilaFechamento.js" />
     <Content Include="Includes\jsPopupFrequenciaExterna.js" />
     <Content Include="Includes\jsQuadroHorarios.js" />

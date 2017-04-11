@@ -211,6 +211,8 @@
     <Compile Include="ACA_RecursosAulaBO.cs" />
     <Compile Include="ACA_ReligiaoBO.cs" />
     <Compile Include="ACA_SondagemBO.cs" />
+    <Compile Include="ACA_SondagemQuestaoBO.cs" />
+    <Compile Include="ACA_SondagemRespostaBO.cs" />
     <Compile Include="ACA_TerritorioExperienciaBO.cs" />
     <Compile Include="ACA_TipoAnotacaoAlunoBO.cs" />
     <Compile Include="ACA_TipoAreaDocumentoBO.cs" />
