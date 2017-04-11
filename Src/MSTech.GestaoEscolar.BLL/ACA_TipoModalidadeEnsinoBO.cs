@@ -44,7 +44,19 @@ namespace MSTech.GestaoEscolar.BLL
             totalRecords = 0;
             return dao.SelectAtivos(out totalRecords);
         }
-        
+
+        /// <summary>
+        /// Retorna todos os tipos de modalidade de ensino não excluídos logicamente
+        /// Sem paginação
+        /// </summary>        
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoModalidadeEnsinoFilhos()
+        {
+            ACA_TipoModalidadeEnsinoDAO dao = new ACA_TipoModalidadeEnsinoDAO();
+            totalRecords = 0;
+            return dao.SelectFilhosAtivos(out totalRecords);
+        }
+
         /// <summary>
         /// Retorna todos os tipos de modalidade de ensino não excluídos logicamente
         /// Vinculados a escola informada.

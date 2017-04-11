@@ -174,6 +174,26 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Retorna todos os tipos de modalidade de ensino não excluídos logicamente
+        /// </summary>                
+        public DataTable SelectFilhosAtivos(out int totalRecords)
+        {
+            DataTable dt = new DataTable();
+
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoModalidadeEnsino_SelectFilhosAtivos", _Banco);
+            try
+            {
+                qs.Execute();
+                totalRecords = qs.Return.Rows.Count;
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente
         ///// </summary>
