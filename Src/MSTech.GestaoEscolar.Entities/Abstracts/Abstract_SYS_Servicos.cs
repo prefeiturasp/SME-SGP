@@ -49,5 +49,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// </summary>
 		public virtual DateTime ser_dataUltimaExecucao { get; set; }
 
+        /// <summary>
+		/// Detalhes referente ao serviço.
+		/// </summary>
+        public virtual string ser_descricao { get; set; }
+
     }
 }

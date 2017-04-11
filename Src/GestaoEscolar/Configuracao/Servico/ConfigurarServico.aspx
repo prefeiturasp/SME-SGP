@@ -20,6 +20,10 @@
                 <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios1" runat="server" 
                     EnableViewState="False" />
                 <uc2:UCComboServico ID="UCComboServico1" runat="server" />
+                <div id="divDetalhes" runat="server" visible="false">
+                    <br />
+                    <asp:Label ID="_lblMensagem" runat="server" />
+                </div>
                 <div id="divServico" runat="server" visible="false">
                     <asp:CheckBox ID="chkDesativar" runat="server" Text="Desativar serviço" AutoPostBack="true" OnCheckedChanged="chkDesativar_CheckedChanged"/>
                     <div id="divCampos" runat="server">
