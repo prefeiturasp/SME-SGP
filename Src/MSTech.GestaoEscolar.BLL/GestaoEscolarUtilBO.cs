@@ -474,6 +474,10 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         Sondagem
+        ,
+
+        RelatorioSondagem
+
     }
 
     [Serializable]
@@ -621,7 +625,8 @@ namespace MSTech.GestaoEscolar.BLL
         DocDctRelSinteseEnriquecimentoCurricular = 264,
         DocDctPlanoAnual = 281,
         DocDctPlanoCicloSerie = 282,
-        DocDctAlunosPendenciaEfetivacao = 283
+        DocDctAlunosPendenciaEfetivacao = 283,
+        DocDctAnaliseSondagem = 321
     }
 
     /// <summary>
