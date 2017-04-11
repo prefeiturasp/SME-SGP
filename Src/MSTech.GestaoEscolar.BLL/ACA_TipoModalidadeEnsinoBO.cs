@@ -21,6 +21,7 @@ namespace MSTech.GestaoEscolar.BLL
         (
             int currentPage
             , int pageSize
+            , int tme_idSuperior
         )
         {
             totalRecords = 0;
@@ -29,7 +30,7 @@ namespace MSTech.GestaoEscolar.BLL
                 pageSize = 1;
 
             ACA_TipoModalidadeEnsinoDAO dao = new ACA_TipoModalidadeEnsinoDAO();
-            return dao.SelectBy_Pesquisa(true, currentPage/pageSize, pageSize, out totalRecords);
+            return dao.SelectBy_Pesquisa(true, currentPage/pageSize, pageSize, tme_idSuperior, out totalRecords);
         }
 
         /// <summary>
@@ -40,7 +41,8 @@ namespace MSTech.GestaoEscolar.BLL
         public static DataTable SelecionaTipoModalidadeEnsino()
         {
             ACA_TipoModalidadeEnsinoDAO dao = new ACA_TipoModalidadeEnsinoDAO();
-            return dao.SelectBy_Pesquisa(false, 1, 1, out totalRecords);
+            totalRecords = 0;
+            return dao.SelectAtivos(out totalRecords);
         }
         
         /// <summary>

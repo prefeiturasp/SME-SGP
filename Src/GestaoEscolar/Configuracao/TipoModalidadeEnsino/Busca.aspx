@@ -16,6 +16,13 @@
                 AllowPaging="True">
                 <Columns>
                     <asp:BoundField DataField="tme_nome" HeaderText="Tipo de modalidade de ensino" SortExpression="tme_nome" />
+                    <asp:TemplateField HeaderText="Visualizar modalidades filhas">
+                        <ItemTemplate>
+                            <asp:ImageButton ID="btnDetalhar" runat="server" SkinID="btDetalhar" OnClick="btnDetalhar_Click" ToolTip="Visualizar modalidades de ensino filhas" Visible='<%#Eval("PossuiFilho") %>'/>
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="center" HorizontalAlign="Center" />
+                        <ItemStyle CssClass="center" HorizontalAlign="Center" />
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
             <asp:ObjectDataSource ID="_odsTipoModalidadeEnsino" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.ACA_TipoModalidadeEnsino"
@@ -23,6 +30,9 @@
                 SelectMethod="SelecionaTipoModalidadeEnsinoPaginado" StartRowIndexParameterName="currentPage"
                 TypeName="MSTech.GestaoEscolar.BLL.ACA_TipoModalidadeEnsinoBO" OnSelecting="_odsTipoModalidadeEnsino_Selecting">
             </asp:ObjectDataSource>
+        </div>
+        <div class="right">
+            <asp:Button ID="btnVoltar" runat="server" Text="Voltar" OnClick="btnVoltar_Click" />
         </div>
     </fieldset>
 </asp:Content>

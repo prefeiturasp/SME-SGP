@@ -28,6 +28,7 @@ namespace MSTech.GestaoEscolar.DAL
           bool paginado
           , int currentPage
           , int pageSize
+          , int tme_idSuperior
           , out int totalRecords
         )
         {
@@ -36,6 +37,24 @@ namespace MSTech.GestaoEscolar.DAL
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoModalidadeEnsino_SelectBy_Pesquisa", _Banco);
             try
             {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_idSuperior";
+                Param.Size = 4;
+                if (tme_idSuperior > 0)
+                {
+                    Param.Value = tme_idSuperior;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
                 if (paginado)
                     totalRecords = qs.Execute(currentPage, pageSize);
                 else
@@ -134,8 +153,28 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
-        
-		///// <summary>
+
+        /// <summary>
+        /// Retorna todos os tipos de modalidade de ensino não excluídos logicamente
+        /// </summary>                
+        public DataTable SelectAtivos(out int totalRecords)
+        {
+            DataTable dt = new DataTable();
+
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoModalidadeEnsino_SelectAtivos", _Banco);
+            try
+            {
+                qs.Execute();
+                totalRecords = qs.Return.Rows.Count;
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem modificados</param>
