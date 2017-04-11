@@ -681,6 +681,39 @@
 
         #endregion Pendência de Fechamento
 
+        #region Pendências disciplina
+
+        /// <summary>
+        /// Key para carregar pendências de fechamento
+        /// {0} : ID da escola.
+        /// {1} : ID da unidade de escola.
+        /// {2} : ID do calendario.
+        /// {3} : ID da turma disciplina.
+        /// </summary>
+        /// <remarks>
+        /// {0} : ID da escola.
+        /// {1} : ID da unidade de escola.
+        /// {2} : ID do calendario.
+        /// {3} : ID da turma disciplina.
+        /// </remarks>
+        public const string PENDENCIAS_DISCIPLINA_MODEL_KEY = "Cache_SelecionaPendencias_{0}_{1}_{2}_{3}";
+
+        /// <summary>
+        /// Key para carregar pendências de fechamento
+        /// {0} : ID da escola.
+        /// {1} : ID da unidade de escola.
+        /// {2} : ID do calendario.
+
+        /// </summary>
+        /// <remarks>
+        /// {0} : ID da escola.
+        /// {1} : ID da unidade de escola.
+        /// {2} : ID do calendario.        
+        /// </remarks>
+        public const string PENDENCIAS_DISCIPLINAS_ESCOLA_PATTERN_KEY = "Cache_SelecionaPendencias_{0}_{1}_{2}";
+
+        #endregion Pendências disciplina
+
         #region Calendario anual
 
         /// <summary>

@@ -93,13 +93,13 @@ namespace GestaoEscolar.Configuracao.FilaFechamento
             {
                 odsFilaFechamento.SelectParameters.Clear();
                 odsFilaFechamento.SelectParameters.Add("tur_id", UCComboTurma.Valor[0].ToString());
-                odsFilaFechamento.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
                 odsFilaFechamento.SelectParameters.Add("mostraFilhosRegencia", "false");
                 odsFilaFechamento.SelectParameters.Add("mostraRegencia", "true");
                 odsFilaFechamento.SelectParameters.Add("mostraExperiencia", "true");
                 odsFilaFechamento.SelectParameters.Add("mostraTerritorio", "false");
-                odsFilaFechamento.SelectParameters.Add("cap_id", "-1");
                 odsFilaFechamento.SelectParameters.Add("paginado", "true");
+                odsFilaFechamento.SelectParameters.Add("cal_id", UCCCalendario.Valor.ToString());
+                odsFilaFechamento.SelectParameters.Add("esc_id", UCComboUAEscola.Esc_ID.ToString());
 
 
                 grvFilaFechamento.PageIndex = 0;
@@ -171,7 +171,6 @@ namespace GestaoEscolar.Configuracao.FilaFechamento
             UCCCursoCurriculo.IndexChanged += UCCCursoCurriculo_IndexChanged;
             UCCCalendario.IndexChanged += UCCCalendario_IndexChanged;
             UCComboCurriculoPeriodo._OnSelectedIndexChange += UCComboCurriculoPeriodo__OnSelectedIndexChange;
-            UCCPeriodoCalendario.IndexChanged += UCCPeriodoCalendario_IndexChanged;
         }
                 
         protected void grvFilaFechamento_DataBound(object sender, EventArgs e)
@@ -249,30 +248,68 @@ namespace GestaoEscolar.Configuracao.FilaFechamento
         public event SelectedIndexChangedCurriculoPeriodo IndexChanged_CurriculoPeriodo;
 
         /// <summary>
-        /// Verifica alteracao do index do combo Escola e trata o combo curso
+        /// Verifica alteracao do index do combo Escola e trata o combo calendario
         /// </summary>
         public void UCComboUAEscola_IndexChangedUnidadeEscola()
         {
             try
             {
-                UCCCursoCurriculo.Valor = new[] { -1, -1 };
-                UCCCursoCurriculo.PermiteEditar = false;
+                UCCCalendario.Valor = -1;
+                UCCCalendario.PermiteEditar = false;
 
                 if (UCComboUAEscola.Esc_ID > 0 && UCComboUAEscola.Uni_ID > 0)
                 {
-                    UCCCursoCurriculo.CarregarPorEscola(UCComboUAEscola.Esc_ID, UCComboUAEscola.Uni_ID);
-                    UCCCursoCurriculo.SetarFoco();
-                    UCCCursoCurriculo.PermiteEditar = true;
+                    UCCCalendario.CarregarPorEscola(UCComboUAEscola.Esc_ID);
+                    UCCCalendario.SetarFoco();
+                    UCCCalendario.PermiteEditar = true;
                 }
 
-                if (UCCCursoCurriculo.PermiteEditar)
+                if (UCCCalendario.PermiteEditar)
+                {
                     UCCCursoCurriculo_IndexChanged();
+                }                    
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
+        }
+
+        /// <summary>
+        /// Verifica alteracao do index do combo calendario e trata o combo períodocurrículo
+        /// </summary>
+        public void UCCCalendario_IndexChanged()
+        {
+            try
+            {
+                UCCPeriodoCalendario.Valor = new int[] { -1, -1 };
+                UCCPeriodoCalendario.PermiteEditar = false;
+
+                UCCCursoCurriculo.Valor = new[] { -1, -1 };
+                UCCCursoCurriculo.PermiteEditar = false;
+
+                if (UCCCalendario.Valor > 0)
+                {
+                    UCCPeriodoCalendario.CarregarPorCalendario(UCCCalendario.Valor);
+                    UCCPeriodoCalendario.SetarFoco();
+                    UCCPeriodoCalendario.PermiteEditar = true;
+
+                    UCCCursoCurriculo.CarregarPorEscolaCalendarioSituacaoCurso(UCComboUAEscola.Esc_ID, UCComboUAEscola.Uni_ID, UCCCalendario.Valor, 0);
+                    UCCCursoCurriculo.SetarFoco();
+                    UCCCursoCurriculo.PermiteEditar = true;
+
+                }
+                if (UCCPeriodoCalendario.PermiteEditar)
+                    UCComboCurriculoPeriodo__OnSelectedIndexChange();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
+            }
+
+
         }
 
         /// <summary>
@@ -291,10 +328,7 @@ namespace GestaoEscolar.Configuracao.FilaFechamento
                     UCComboCurriculoPeriodo.FocaCombo();
                     UCComboCurriculoPeriodo.PermiteEditar = true;
                     UCComboCurriculoPeriodo__OnSelectedIndexChange();
-                }
-                if (UCComboCurriculoPeriodo.PermiteEditar)
-                    UCComboCurriculoPeriodo__OnSelectedIndexChange();
-
+                }   
             }
             catch (Exception ex)
             {
@@ -304,82 +338,26 @@ namespace GestaoEscolar.Configuracao.FilaFechamento
         }
 
         /// <summary>
-        /// Verifica alteracao do index do combo curriculoperiodo e trata o combo calendário
+        /// Verifica alteracao do index do combo curriculoperiodo e trata o combo períodocalendário
         /// </summary>
         public void UCComboCurriculoPeriodo__OnSelectedIndexChange()
         {
             try
             {
-                UCCCalendario.Valor = -1;
-                UCCCalendario.PermiteEditar = false;
+                UCComboTurma.Valor = new long[] { -1, -1, -1 };
+
                 if (UCComboCurriculoPeriodo.Valor[0] > 0)
                 {
-                    UCCCalendario.CarregarPorCurso(UCCCursoCurriculo.Valor[0]);
-                    UCCCalendario.SetarFoco();
-                    UCCCalendario.PermiteEditar = true;
-                }
-                if (UCCCalendario.PermiteEditar)
-                    UCCCalendario_IndexChanged();
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
-            }
-        }
-
-        /// <summary>
-        /// Verifica alteracao do index do combo calendario e trata o combo periodocalendario
-        /// </summary>
-        public void UCCCalendario_IndexChanged()
-        {
-            try
-            {
-                UCCPeriodoCalendario.Valor = new int[] { -1, -1 };
-                UCCPeriodoCalendario.PermiteEditar = false;
-
-                if (UCCCalendario.Valor > 0)
-                {
-                    UCCPeriodoCalendario.CarregarPorCalendario(UCCCalendario.Valor);
-
-                    UCCPeriodoCalendario.SetarFoco();
-                    UCCPeriodoCalendario.PermiteEditar = true;
-                }
-                if (UCCPeriodoCalendario.PermiteEditar)
-                    UCCPeriodoCalendario_IndexChanged();
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
-            }
-
-
-        }
-
-        /// <summary>
-        /// Verifica alteracao do index do combo periodocalendario e trata o combo turma
-        /// </summary>
-        private void UCCPeriodoCalendario_IndexChanged()
-        {
-
-            try
-            {
-                UCComboTurma.Valor = new long[] { -1, -1, -1 };
-                if (UCCPeriodoCalendario.Valor[1] > 0)
-                {
                     UCComboTurma.CarregaPorEscolaCurriculoPeriodoCalendario(UCComboUAEscola.Esc_ID, UCComboUAEscola.Uni_ID, UCCCursoCurriculo.Valor[0], UCCCursoCurriculo.Valor[1], UCComboCurriculoPeriodo.Valor[2], UCCCalendario.Valor);
+                    UCComboTurma.SetarFoco();
                     UCComboTurma.PermiteEditar = true;
                 }
-
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
-
-
         }
 
         /// <summary>

@@ -106,6 +106,7 @@
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico-planejamento.png"  SkinID="btPlanejamento" Width="24px" Height="24px" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico-aulas.png"  SkinID="btAulas" Width="24px" Height="24px" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/atualizar.png" SkinID="btAtualizar" Width="24px" Height="24px" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/statusAlertaPendencia.png" SkinID="btStatusAlertaPendencia" ToolTip="Foram encontradas pendências para esse item." Width="16px" Height="16px" ImageAlign="Top" />
 
 <asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/tempo-real.png" SkinID="imgTempoReal" Width="20px" Height="20px" />
 <asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/confirmar.png"  SkinID="imgConfirmar" />
