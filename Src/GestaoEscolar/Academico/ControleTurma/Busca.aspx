@@ -144,7 +144,9 @@
                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                     runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                                     ToolTip="Planejamento" />
-                                                <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                                <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                    CommandArgument='<%# Container.DataItemIndex %>' 
+                                                    CommandName="PendenciaPlanejamento" />
                                             </span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -167,7 +169,9 @@
                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                     runat="server" SkinID="btListaoGestor" CommandName="Listao"
                                                     ToolTip="<%$ Resources:Mensagens, MSG_Listao %>" /></span>
-                                                <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                                <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" 
+                                                    CommandArgument='<%# Container.DataItemIndex %>' 
+                                                    CommandName="PendenciaPlanoAula" />
                                             </span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -222,7 +226,9 @@
                                                     runat="server" SkinID="btFechamentoGestor" CommandName="Fechamento"
                                                     ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
                                                     Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' />
-                                                <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                                <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                    CommandArgument='<%# Container.DataItemIndex %>' 
+                                                    CommandName="PendenciaFechamento" />
                                             </span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -316,7 +322,9 @@
                                             runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                             ToolTip="Planejamento" />
                                     </span>
-                                    <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                    <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                        CommandArgument='<%# Container.DataItemIndex %>' 
+                                        CommandName="PendenciaPlanejamento" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <%--Diário de Classe--%>
@@ -339,7 +347,9 @@
                                             runat="server" SkinID="btListaoGestor" CommandName="Listao"
                                             ToolTip="<%$ Resources:Mensagens, MSG_Listao %>" />
                                     </span>
-                                    <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                    <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                        CommandArgument='<%# Container.DataItemIndex %>' 
+                                        CommandName="PendenciaPlanoAula" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <%--Frequência --%>
@@ -394,7 +404,9 @@
                                             ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
                                             Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' />
                                     </span>
-                                    <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" />
+                                    <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                        CommandArgument='<%# Container.DataItemIndex %>' 
+                                        CommandName="PendenciaFechamento" />
                                 </ItemTemplate>
                             </asp:TemplateField>
 

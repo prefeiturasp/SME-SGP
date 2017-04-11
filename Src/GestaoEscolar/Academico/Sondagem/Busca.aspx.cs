@@ -16,10 +16,10 @@ namespace GestaoEscolar.Academico.Sondagem
         #region Constantes
 
         /// <summary>Posição da coluna de Agendamento no grid view da Sondagem.</summary>
-        private const int PosicaoAgendamento = 1;
+        private const int PosicaoAgendamento = 2;
 
         /// <summary>Posição da coluna Excluir no grid view da Sondagem.</summary>
-        private const int PosicaoExcluir = 2;
+        private const int PosicaoExcluir = 3;
 
         #endregion
 
@@ -296,6 +296,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 ImageButton _btnExcluir = e.Row.FindControl("_btnExcluir") as ImageButton;
                 if (_btnExcluir != null)
                 {
+                    //TODO: verificar se pode remover item
                     _btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
                     _btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
                 }

@@ -45,6 +45,10 @@ namespace MSTech.GestaoEscolar.BLL
         public byte tipoPendencia { get; set; }
         public int tpc_id { get; set; }
         public DateTime DataProcessamento { get; set; }
+        public int tpc_ordem { get; set; }
+        public int tipo_ordem { get; set; }
+        public string tud_nome { get; set; }
+        public int tds_ordem { get; set; }
     }
 
     #endregion Estruturas
@@ -228,22 +232,32 @@ namespace MSTech.GestaoEscolar.BLL
                         DataTable dtPendencias = new REL_TurmaDisciplinaSituacaoFechamentoDAO().SelecionaPendencias(dt, ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_NOTAS, ent_id)); 
                         dados = dtPendencias.Rows.Cast<DataRow>().Select(p => (REL_TurmaDisciplinaSituacaoFechamento_Pendencia)GestaoEscolarUtilBO.DataRowToEntity(p, new REL_TurmaDisciplinaSituacaoFechamento_Pendencia())).ToList();
 
-                        dados.Where(p => p.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia).ToList()
-                                 .ForEach
-                                 (
-                                    p =>
-                                    {
-                                        sTurmaDisciplinaEscolaCalendario turmaDisciplina = listaTurmaDisciplina.FirstOrDefault(t => t.tud_id == p.tud_id);
-                                        CacheManager.Factory.Set
-                                        (
-                                             String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, turmaDisciplina.esc_id, turmaDisciplina.uni_id, turmaDisciplina.cal_id, turmaDisciplina.tud_id)
-                                             ,
-                                             p
-                                             ,
-                                             appMinutosCacheLongo
-                                        );
-                                    }
-                                 );
+                        var dadosDisciplina = from REL_TurmaDisciplinaSituacaoFechamento_Pendencia pend in dados
+                                                where pend.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia
+                                                group pend by pend.tud_id into grupo
+                                                select new
+                                                {
+                                                    tud_id = grupo.Key
+                                                    ,
+                                                    listaPendencias = grupo.ToList()
+                                                };
+
+                        dadosDisciplina.ToList()
+                                         .ForEach
+                                         (
+                                            p =>
+                                            {
+                                                sTurmaDisciplinaEscolaCalendario turmaDisciplina = listaTurmaDisciplina.FirstOrDefault(t => t.tud_id == p.tud_id);
+                                                CacheManager.Factory.Set
+                                                (
+                                                    String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, turmaDisciplina.esc_id, turmaDisciplina.uni_id, turmaDisciplina.cal_id, turmaDisciplina.tud_id)
+                                                    ,
+                                                    p.listaPendencias
+                                                    ,
+                                                    appMinutosCacheLongo
+                                                );
+                                            }
+                                         );
 
                         var dadosRegencia = from REL_TurmaDisciplinaSituacaoFechamento_Pendencia pend in dados
                                             where pend.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia
@@ -275,12 +289,7 @@ namespace MSTech.GestaoEscolar.BLL
 
                     dados.AddRange
                     (
-                        listaCache.Where(p => p.cacheIsSet && p.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia).Select(p => CacheManager.Factory.Get<REL_TurmaDisciplinaSituacaoFechamento_Pendencia>(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, p.esc_id, p.uni_id, p.cal_id, p.tud_id)))
-                    );
-
-                    dados.AddRange
-                    (
-                        listaCache.Where(p => p.cacheIsSet && p.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia).SelectMany(p => CacheManager.Factory.Get<List<REL_TurmaDisciplinaSituacaoFechamento_Pendencia>>(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, p.esc_id, p.uni_id, p.cal_id, p.tud_id)))
+                        listaCache.Where(p => p.cacheIsSet).SelectMany(p => CacheManager.Factory.Get<List<REL_TurmaDisciplinaSituacaoFechamento_Pendencia>>(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, p.esc_id, p.uni_id, p.cal_id, p.tud_id)))
                     );
                 }
                 else
