@@ -9,6 +9,7 @@ using MSTech.CoreSSO.BLL;
 using MSTech.GestaoEscolar.BLL;
 using Quartz;
 using MSTech.GestaoEscolar.Entities;
+using System.Data;
 
 namespace GestaoEscolar.Configuracao.Servico
 {
@@ -79,7 +80,7 @@ namespace GestaoEscolar.Configuracao.Servico
 
         private void UCComboServico1_IndexChanged()
         {
-            divServico.Visible = UCComboServico1.Valor > 0;
+            divDetalhes.Visible = divServico.Visible = UCComboServico1.Valor > 0;
 
             try
             {
@@ -87,8 +88,22 @@ namespace GestaoEscolar.Configuracao.Servico
                 {
                     LimparCampos();
                     string expressao;
-                    string trigger = String.Format("Trigger_{0}", SYS_ServicosBO.SelecionaProcedimentoPorNome(UCComboServico1.Texto));
 
+                    DataTable dt = SYS_ServicosBO.SelecionaProcedimentoPorNome(UCComboServico1.Texto);
+                    string trigger = String.Format("Trigger_{0}", dt.Rows[0]["ser_nomeProcedimento"].ToString());
+
+                    if (!string.IsNullOrEmpty(dt.Rows[0]["ser_descricao"].ToString()))
+                    {
+                        _lblMensagem.Text = dt.Rows[0]["ser_descricao"].ToString();
+                        _lblMensagem.Font.Bold = true;
+                        divDetalhes.Visible = true;
+                    }
+                    else
+                    {
+                        _lblMensagem.Text = string.Empty;
+                        divDetalhes.Visible = false;
+                    }
+                    
                     if (GestaoEscolarServicosBO.SelecionaExpressaoPorTrigger(trigger, out expressao))
                     {
                         ConfigurarFrequencia(expressao);
@@ -301,7 +316,7 @@ namespace GestaoEscolar.Configuracao.Servico
         private void SalvarTriggerQuartz(string ser_nome, byte ser_ativo)
         {
             const string groupName = "DEFAULT";
-            string jobName = SYS_ServicosBO.SelecionaProcedimentoPorNome(ser_nome);
+            string jobName = SYS_ServicosBO.SelecionaProcedimentoPorNome(ser_nome).Rows[0]["ser_nomeProcedimento"].ToString();
             string cronExpression = UCFrequenciaServico1.GeraCronExpression();
             string triggerName = "Trigger_" + jobName;
 

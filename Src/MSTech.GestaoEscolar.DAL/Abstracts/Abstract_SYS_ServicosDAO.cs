@@ -35,14 +35,12 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int16;
-			Param.ParameterName = "@ser_id";
-			Param.Size = 2;
-			Param.Value = entity.ser_id;
-			qs.Parameters.Add(Param);
-
-
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.Int16;
+			    Param.ParameterName = "@ser_id";
+			    Param.Size = 2;
+			    Param.Value = entity.ser_id;
+			    qs.Parameters.Add(Param);
 			}
 		}
 		
@@ -55,38 +53,38 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-							Param = qs.NewParameter();
-			Param.DbType = DbType.Int16;
-			Param.ParameterName = "@ser_id";
-			Param.Size = 2;
-			Param.Value = entity.ser_id;
-			qs.Parameters.Add(Param);
+				Param = qs.NewParameter();
+			    Param.DbType = DbType.Int16;
+			    Param.ParameterName = "@ser_id";
+			    Param.Size = 2;
+			    Param.Value = entity.ser_id;
+			    qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
-			Param.ParameterName = "@ser_nome";
-			Param.Size = 200;
-			Param.Value = entity.ser_nome;
-			qs.Parameters.Add(Param);
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.AnsiString;
+			    Param.ParameterName = "@ser_nome";
+			    Param.Size = 200;
+			    Param.Value = entity.ser_nome;
+			    qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
-			Param.ParameterName = "@ser_nomeProcedimento";
-			Param.Size = 200;
-			Param.Value = entity.ser_nomeProcedimento;
-			qs.Parameters.Add(Param);
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.AnsiString;
+			    Param.ParameterName = "@ser_nomeProcedimento";
+			    Param.Size = 200;
+			    Param.Value = entity.ser_nomeProcedimento;
+			    qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Boolean;
-			Param.ParameterName = "@ser_ativo";
-			Param.Size = 1;
-			Param.Value = entity.ser_ativo;
-			qs.Parameters.Add(Param);
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.Boolean;
+			    Param.ParameterName = "@ser_ativo";
+			    Param.Size = 1;
+			    Param.Value = entity.ser_ativo;
+			    qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
-			Param.DbType = DbType.DateTime;
-			Param.ParameterName = "@ser_dataUltimaExecucao";
-			Param.Size = 16;
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.DateTime;
+			    Param.ParameterName = "@ser_dataUltimaExecucao";
+			    Param.Size = 16;
 				if(entity.ser_dataUltimaExecucao!= new DateTime())
 				{
 					Param.Value = entity.ser_dataUltimaExecucao;
@@ -95,10 +93,16 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 				{
 					Param.Value = DBNull.Value;
 				}
-			qs.Parameters.Add(Param);
+			    qs.Parameters.Add(Param);
 
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.ParameterName = "@ser_descricao";
+                Param.Size = 500;
+                Param.Value = entity.ser_descricao;
+                qs.Parameters.Add(Param);
 
-			}
+            }
 		}
 		
 		/// <summary>
@@ -110,38 +114,38 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int16;
-			Param.ParameterName = "@ser_id";
-			Param.Size = 2;
-			Param.Value = entity.ser_id;
-			qs.Parameters.Add(Param);
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.Int16;
+			    Param.ParameterName = "@ser_id";
+			    Param.Size = 2;
+			    Param.Value = entity.ser_id;
+			    qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
-			Param.ParameterName = "@ser_nome";
-			Param.Size = 200;
-			Param.Value = entity.ser_nome;
-			qs.Parameters.Add(Param);
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.AnsiString;
+			    Param.ParameterName = "@ser_nome";
+			    Param.Size = 200;
+			    Param.Value = entity.ser_nome;
+			    qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
-			Param.ParameterName = "@ser_nomeProcedimento";
-			Param.Size = 200;
-			Param.Value = entity.ser_nomeProcedimento;
-			qs.Parameters.Add(Param);
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.AnsiString;
+			    Param.ParameterName = "@ser_nomeProcedimento";
+			    Param.Size = 200;
+			    Param.Value = entity.ser_nomeProcedimento;
+			    qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Boolean;
-			Param.ParameterName = "@ser_ativo";
-			Param.Size = 1;
-			Param.Value = entity.ser_ativo;
-			qs.Parameters.Add(Param);
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.Boolean;
+			    Param.ParameterName = "@ser_ativo";
+			    Param.Size = 1;
+			    Param.Value = entity.ser_ativo;
+			    qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
-			Param.DbType = DbType.DateTime;
-			Param.ParameterName = "@ser_dataUltimaExecucao";
-			Param.Size = 16;
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.DateTime;
+			    Param.ParameterName = "@ser_dataUltimaExecucao";
+			    Param.Size = 16;
 				if(entity.ser_dataUltimaExecucao!= new DateTime())
 				{
 					Param.Value = entity.ser_dataUltimaExecucao;
@@ -150,10 +154,15 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 				{
 					Param.Value = DBNull.Value;
 				}
-			qs.Parameters.Add(Param);
+			    qs.Parameters.Add(Param);
 
-
-			}
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.ParameterName = "@ser_descricao";
+                Param.Size = 500;
+                Param.Value = entity.ser_descricao;
+                qs.Parameters.Add(Param);
+            }
 		}
 
 		/// <summary>
@@ -165,14 +174,12 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int16;
-			Param.ParameterName = "@ser_id";
-			Param.Size = 2;
-			Param.Value = entity.ser_id;
-			qs.Parameters.Add(Param);
-
-
+			    Param = qs.NewParameter();
+			    Param.DbType = DbType.Int16;
+			    Param.ParameterName = "@ser_id";
+			    Param.Size = 2;
+			    Param.Value = entity.ser_id;
+			    qs.Parameters.Add(Param);
 			}
 		}
 		
@@ -186,7 +193,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-return true;
+                return true;
 			}
 
 			return false;

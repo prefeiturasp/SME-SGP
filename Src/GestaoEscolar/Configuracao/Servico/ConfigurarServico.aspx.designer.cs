@@ -76,6 +76,24 @@ namespace GestaoEscolar.Configuracao.Servico {
         protected global::GestaoEscolar.WebControls.Combos.UCComboServico UCComboServico1;
         
         /// <summary>
+        /// divDetalhes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDetalhes;
+        
+        /// <summary>
+        /// _lblMensagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _lblMensagem;
+        
+        /// <summary>
         /// divServico control.
         /// </summary>
         /// <remarks>
