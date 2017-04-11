@@ -40,6 +40,7 @@
                             <asp:Label ID="_lblAlterar" runat="server" Text='<%# Bind("snd_titulo") %>' CssClass="wrap600px"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:BoundField DataField="snd_situacaoText" HeaderText="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.HeaderSituacao %>" SortExpression="snd_situacaoText" />
                     <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.HeaderAgendamento %>" Visible="false">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnCadastrarAgendamento" runat="server" SkinID="btDetalhar" 

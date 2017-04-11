@@ -79,7 +79,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>
         /// <param name="ser_nome">Nome do serviço</param>
         /// <returns></returns>
-        public string SelectProcedimentoPorNome(string ser_nome)
+        public DataTable SelectProcedimentoPorNome(string ser_nome)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_SYS_Servicos_SelectBy_Nome", _Banco);
 
@@ -105,7 +105,7 @@ namespace MSTech.GestaoEscolar.DAL
 
                 qs.Execute();
 
-                return qs.Return.Rows.Count > 0 ? qs.Return.Rows[0]["ser_nomeProcedimento"].ToString() : String.Empty;
+                return qs.Return;
             }
             catch
             {

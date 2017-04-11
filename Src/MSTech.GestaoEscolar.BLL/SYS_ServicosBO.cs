@@ -208,7 +208,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="ser_nome">Nome do serviço</param>
         /// <returns></returns>
-        public static string SelecionaProcedimentoPorNome(string ser_nome)
+        public static DataTable SelecionaProcedimentoPorNome(string ser_nome)
         {
             SYS_ServicosDAO dao = new SYS_ServicosDAO();
             return dao.SelectProcedimentoPorNome(ser_nome);
