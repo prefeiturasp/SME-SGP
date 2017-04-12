@@ -1652,6 +1652,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
+                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
                             )
                             && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia
                             && item.tud_idRegencia == tud_id))
@@ -1659,23 +1660,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                             if (imgPendenciaFechamento != null)
                                 imgPendenciaFechamento.Visible = possuiPendencia = true;
                         }
-                        else if (!possuiPendencia
-                            && VS_listaPendencias[grid.ClientID].Any(item =>
-                            (
-                                item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemNota
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
-                            )
-                            && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia && item.tud_idRegencia == tud_id))
-                        {
-                            possuiPendencia = true;
-                        }
 
                         if (VS_listaPendencias[grid.ClientID].Any(item => 
                             item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendentePlanejamento 
-                            && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia && item.tud_idRegencia == tud_id))
+                            && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia 
+                            && item.tud_idRegencia == tud_id))
                         {
                             if (imgPendenciaPlanejamento != null)
                                 imgPendenciaPlanejamento.Visible = true;
@@ -1689,24 +1678,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
+                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
                             )
                             && item.tud_id == tud_id))
                         {
                             if (imgPendenciaFechamento != null)
                                 imgPendenciaFechamento.Visible = possuiPendencia = true;
-                        }
-                        else if (!possuiPendencia
-                            && VS_listaPendencias[grid.ClientID].Any(item =>
-                            (
-                                item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemNota
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
-                            )
-                            && item.tud_id == tud_id))
-                        {
-                            possuiPendencia = true;
                         }
 
                         if (VS_listaPendencias[grid.ClientID].Any(item =>
@@ -2347,7 +2324,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             || pendencia.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer)
                         {
                             // Redireciona para o Fechamento final
-                            RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_EFETIVACAO").ToString(), e.CommandName == "PendenciaFechamentoAutomatico" ? "Efetivacao" : "Fechamento", grid, e.CommandArgument.ToString(), false, pendencia.tipoPendencia);
+                            RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_EFETIVACAO").ToString(), e.CommandName == "PendenciaFechamentoAutomatico" ? "Fechamento" : "Efetivacao", grid, e.CommandArgument.ToString(), false, pendencia.tipoPendencia);
                         }
 
                         break;
