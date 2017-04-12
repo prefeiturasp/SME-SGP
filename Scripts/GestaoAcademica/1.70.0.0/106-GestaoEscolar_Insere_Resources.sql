@@ -103,7 +103,7 @@ SET XACT_ABORT ON
 		, @rcr_valorPadrao = 'Excluir'
 
 	EXEC MS_InsereResource 
-		@rcr_chave = 'Sondagem.Busca.dgvSondagem.btExcluir.ToolTip' 
+		@rcr_chave = 'Sondagem.Busca.dgvSondagem.btnExcluir.ToolTip' 
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
@@ -362,7 +362,7 @@ SET XACT_ABORT ON
 		, @rcr_valorPadrao = 'Excluir'
 
 	EXEC MS_InsereResource 
-		@rcr_chave = 'Sondagem.Cadastro.grvRespostas.btExcluir.ToolTip' 
+		@rcr_chave = 'Sondagem.Cadastro.grvRespostas.btnExcluir.ToolTip' 
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
@@ -376,7 +376,7 @@ SET XACT_ABORT ON
 		, @rcr_valorPadrao = 'Excluir'
 
 	EXEC MS_InsereResource 
-		@rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.btExcluir.ToolTip' 
+		@rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.btnExcluir.ToolTip' 
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
@@ -390,7 +390,7 @@ SET XACT_ABORT ON
 		, @rcr_valorPadrao = 'Excluir'
 
 	EXEC MS_InsereResource 
-		@rcr_chave = 'Sondagem.Cadastro.grvRespostas.btExcluir.ToolTip' 
+		@rcr_chave = 'Sondagem.Cadastro.grvRespostas.btnExcluir.ToolTip' 
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
@@ -409,6 +409,13 @@ SET XACT_ABORT ON
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Adicionar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Cadastro.bntAlterar.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alterar'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.ErroAdicionar' 
@@ -528,6 +535,328 @@ SET XACT_ABORT ON
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Não é permitido adicionar itens pois a sondagem já está em uso.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.AgendamentoIncluidoSucesso' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Agendamentos da sondagem incluídos com sucesso.'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.ErroSalvarAgendamento' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar salvar os agendamentos da sondagem.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.ErroAbrirPopUp' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar abrir o cadastro de agendamento.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.btnCancelar.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.btnVoltar.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Voltar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.DataInicioInvalida' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.DataFimInvalida' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.DataFimMenorInicio' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim do período deve ser maior ou igual à data início.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.PeriodoJaAdicionado' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Período já adicionado.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.ErroAdicionar' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar adicionar período.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.lblSondagem.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Sondagem'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.lblDescricao.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Descrição'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.lblLegendDatas.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Datas do agendamento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.btnAdicionarAgendamento.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Adicionar agendamento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.EmptyDataText' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nenhum agendamento cadastrado.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.HeaderDataInicio' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.HeaderDataFim' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.HeaderPeriodos' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Períodos selecionados'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.HeaderAlterar' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alterar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.HeaderExcluir' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Excluir'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.btnAlterar.ToolTip' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Altera o agendamento.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.btnExcluir.ToolTip' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Exclui o agendamento (exclui também os períodos de retificação desse agendamento).'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.bntSalvar.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Salvar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.lblTituloPopUp.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Adicionar agendamento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.lblDataInicio.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início *'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento._rfvInicio.ErrorMessage' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início é obrigatória.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.cvDataInicio.ErrorMessage' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.lblDataFim.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim *'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento._rfvFim.ErrorMessage' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim é obrigatória.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.cvDataFim.ErrorMessage' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.cpvDataFim2.ErrorMessage' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim do período deve ser maior ou igual à data início.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.bntAdicionar.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Adicionar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.btnCancelar.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.bntAlterar.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alterar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.lblLegendPeriodos.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Períodos do curso'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.SemPeriodosSelecionados' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Selecione pelo menos um período do curso para o agendamento.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Cadastro.RespostaObrigatoria' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Informe pelo menos uma resposta/avaliação para a sondagem.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.HeaderRetificar' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Retificar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.btnRetificar.ToolTip' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Retificar o agendamento para uma escola.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.lblRetificado.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Retificado'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.HeaderCancelarAgendamento' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.btnCancelarAgendamento.ToolTip' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar o período do agendamento (cancela também os períodos de retificação desse agendamento).'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.EscolaObrigatorio' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Escola é obrigatória para um agendamento de retificação.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.lblPeriodoRetificar.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Retificar agendamento: {0} - {1}'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.btnReativar.ToolTip' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Reativa o período do agendamento (reativa também os períodos de retificação desse agendamento).'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.lblCancelado.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelado'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 

@@ -22,7 +22,7 @@
                 <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo"
                     Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.rfvTitulo.ErrorMessage %>" Text="*" />
                 <asp:Label ID="lblDescricao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblDescricao.Text %>" AssociatedControlID="txtDescricao" />
-                <asp:TextBox ID="txtDescricao" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
+                <asp:TextBox ID="txtDescricao" runat="server" TextMode="MultiLine" SkinID="limite4000" MaxLength="4000"></asp:TextBox>
                 <div><br /></div>
                 <fieldset>
                     <legend><asp:Label runat="server" ID="lblLegendQuestoes" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegendQuestoes.Text %>" /></legend>
@@ -55,7 +55,7 @@
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.HeaderExcluir %>">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"
-                                        ToolTip="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.btExcluir.ToolTip %>" />
+                                        ToolTip="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.btnExcluir.ToolTip %>" />
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="center"></HeaderStyle>
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -94,7 +94,7 @@
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Cadastro.grvSubQuestoes.HeaderExcluir %>">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"
-                                        ToolTip="<%$ Resources:Academico, Sondagem.Cadastro.grvSubQuestoes.btExcluir.ToolTip %>" />
+                                        ToolTip="<%$ Resources:Academico, Sondagem.Cadastro.grvSubQuestoes.btnExcluir.ToolTip %>" />
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="center"></HeaderStyle>
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -134,7 +134,7 @@
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Cadastro.grvRespostas.HeaderExcluir %>">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"
-                                        ToolTip="<%$ Resources:Academico, Sondagem.Cadastro.grvRespostas.btExcluir.ToolTip %>" />
+                                        ToolTip="<%$ Resources:Academico, Sondagem.Cadastro.grvRespostas.btnExcluir.ToolTip %>" />
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="center"></HeaderStyle>
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>

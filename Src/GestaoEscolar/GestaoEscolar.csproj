@@ -3592,6 +3592,7 @@
     <Content Include="Includes\jsAlunoJustificativaAbonoFalta.js" />
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
+    <Content Include="Includes\jsCadastroAgendamento.js" />
     <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
     <Content Include="Includes\jsCadastroJustificativaFalta.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />

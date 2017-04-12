@@ -223,8 +223,10 @@ namespace GestaoEscolar.Academico.Sondagem
                 ckbBloqueado.Enabled = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 ckbBloqueado.Visible = true;
 
-                //TODO: verificar se pode remover item
-                VS_permiteEditar = snd.snd_situacao.Equals(1);
+                //TODO: verificar se tem dados lançados
+                List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(snd_id);
+                VS_permiteEditar = !lstAgendamentos.Any(a => a.sda_dataFim >= DateTime.Today && a.sda_dataInicio <= DateTime.Today &&
+                                                             a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado);
 
                 List<ACA_SondagemQuestao> lstAux = ACA_SondagemQuestaoBO.SelectQuestoesBy_Sondagem(snd_id);
 
@@ -283,6 +285,9 @@ namespace GestaoEscolar.Academico.Sondagem
         {
             try
             {
+                if (!VS_ListaResposta.Any(r => r.sdr_situacao != (byte)ACA_SondagemRespostaSituacao.Excluido))
+                    throw new ValidationException(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.RespostaObrigatoria").ToString());
+
                 ACA_Sondagem snd = new ACA_Sondagem
                 {
                     snd_id = VS_snd_id
@@ -379,6 +384,9 @@ namespace GestaoEscolar.Academico.Sondagem
                     txtItem.Focus();
                 updPopUp.Update();
 
+                btnAdicionar.Text = VS_sdq_id > 0 || VS_sdr_id > 0 ? GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAdicionar.Text").ToString() :
+                                    GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAlterar.Text").ToString();
+
                 ScriptManager.RegisterStartupScript(Page, typeof(Page), "EditarAulas", "$('#divInserir').dialog('open');", true);
             }
             catch (ValidationException ex)
@@ -403,6 +411,8 @@ namespace GestaoEscolar.Academico.Sondagem
             {
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroSondagem.js"));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
             }
 
             if (!IsPostBack)
@@ -652,6 +662,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvQuestoes.Rows[grvQuestoes.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
                 }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
@@ -682,6 +696,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvQuestoes.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
                         ((ImageButton)grvQuestoes.Rows[grvQuestoes.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
@@ -727,6 +745,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvQuestoes.Rows[grvQuestoes.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
                 }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
@@ -744,6 +766,10 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_sdq_id = idAlterar;
                     AbrirPopUp(btnAdicionarQuestao.Text, GetGlobalResourceObject("Academico", "Sondagem.Cadastro.grvQuestoes.HeaderNome").ToString(), 1, textoAlterar);
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
@@ -780,6 +806,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvSubQuestoes.Rows[grvSubQuestoes.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
                 }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
@@ -810,6 +840,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvSubQuestoes.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
                         ((ImageButton)grvSubQuestoes.Rows[grvSubQuestoes.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
@@ -856,6 +890,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvSubQuestoes.Rows[grvSubQuestoes.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
                 }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
@@ -873,6 +911,10 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_sdq_id = idAlterar;
                     AbrirPopUp(btnAdicionarSubQuestao.Text, GetGlobalResourceObject("Academico", "Sondagem.Cadastro.grvSubQuestoes.HeaderNome").ToString(), 2, textoAlterar);
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
@@ -909,6 +951,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvRespostas.Rows[grvRespostas.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
                 }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
@@ -939,6 +985,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvRespostas.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
                         ((ImageButton)grvRespostas.Rows[grvRespostas.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
@@ -985,6 +1035,10 @@ namespace GestaoEscolar.Academico.Sondagem
                         ((ImageButton)grvRespostas.Rows[grvRespostas.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                     }
                 }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
@@ -1003,6 +1057,10 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_sdr_id = idAlterar;
                     AbrirPopUp(btnAdicionarResposta.Text, GetGlobalResourceObject("Academico", "Sondagem.Cadastro.grvRespostas.HeaderNome").ToString(), 3, textoAlterar, siglaAlterar);
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {

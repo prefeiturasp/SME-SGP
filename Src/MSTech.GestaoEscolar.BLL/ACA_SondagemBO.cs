@@ -63,8 +63,10 @@ namespace MSTech.GestaoEscolar.BLL
                 List<ACA_SondagemResposta> lstRespostaBanco = entity.IsNew ? new List<ACA_SondagemResposta>() :
                                                               ACA_SondagemRespostaBO.SelectRespostasBy_Sondagem(entity.snd_id, dao._Banco);
 
-                //TODO: verificar se pode remover item
-                bool permiteRemover = true;
+                //TODO: verificar se tem dados lançados
+                List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(entity.snd_id, dao._Banco);
+                bool permiteRemover = !lstAgendamentos.Any(a => a.sda_dataFim >= DateTime.Today && a.sda_dataInicio <= DateTime.Today &&
+                                                                a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado);
 
                 //Salva a sondagem
                 if (!dao.Salvar(entity))
