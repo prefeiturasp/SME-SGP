@@ -284,6 +284,7 @@
     <Compile Include="CLS_AlunoPlanejamentoBO.cs" />
     <Compile Include="CLS_AlunoPlanejamentoRelacionadaBO.cs" />
     <Compile Include="CLS_AlunoProjetoBO.cs" />
+    <Compile Include="CLS_AlunoSondagemBO.cs" />
     <Compile Include="CLS_AlunoTurmaDisciplinaOrientacaoCurricularBO.cs" />
     <Compile Include="CLS_ArquivoEfetivacaoBO.cs" />
     <Compile Include="CLS_CompensacaoAusenciaAlunoBO.cs" />
