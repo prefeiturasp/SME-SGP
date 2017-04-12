@@ -261,7 +261,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Sub-Questões'
+		, @rcr_valorPadrao = 'Subquestões'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.lblLegendRespostas.Text' 
