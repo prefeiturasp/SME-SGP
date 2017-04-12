@@ -156,7 +156,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Título da sondagem é obrigatório'
+		, @rcr_valorPadrao = 'Título da sondagem é obrigatório.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.lblDescricao.Text' 
