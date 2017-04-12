@@ -282,7 +282,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Adicionar sub-questão'
+		, @rcr_valorPadrao = 'Adicionar subquestão'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.btnAdicionarResposta.Text' 
@@ -317,14 +317,14 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Nenhuma sub-questão cadastrada.'
+		, @rcr_valorPadrao = 'Nenhuma subquestão cadastrada.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.HeaderNome' 
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Sub-Questão'
+		, @rcr_valorPadrao = 'Subquestão'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.HeaderOrdem' 
@@ -380,7 +380,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Excluir sub-questão.'
+		, @rcr_valorPadrao = 'Excluir subquestão.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.grvRespostas.HeaderExcluir' 
