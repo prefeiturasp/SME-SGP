@@ -158,6 +158,8 @@
     <Compile Include="Abstracts\Abstract_ACA_RecursosAula.cs" />
     <Compile Include="Abstracts\Abstract_ACA_Religiao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_Sondagem.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_SondagemAgendamento.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_SondagemAgendamentoPeriodo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_SondagemQuestao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_SondagemResposta.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TerritorioExperiencia.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamento.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoPlanejamentoRelacionada.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoProjeto.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoSondagem.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoTurmaDisciplinaOrientacaoCurricular.cs" />
     <Compile Include="Abstracts\Abstract_CLS_ArquivoEfetivacao.cs" />
     <Compile Include="Abstracts\Abstract_CLS_CompensacaoAusencia.cs" />
@@ -390,6 +393,8 @@
     <Compile Include="ACA_ObjetoAprendizagem.cs" />
     <Compile Include="ACA_ObjetoAprendizagemTipoCiclo.cs" />
     <Compile Include="ACA_Sondagem.cs" />
+    <Compile Include="ACA_SondagemAgendamento.cs" />
+    <Compile Include="ACA_SondagemAgendamentoPeriodo.cs" />
     <Compile Include="ACA_SondagemQuestao.cs" />
     <Compile Include="ACA_SondagemResposta.cs" />
     <Compile Include="ACA_TerritorioExperiencia.cs" />
@@ -508,6 +513,7 @@
     <Compile Include="CLS_AlunoPlanejamento.cs" />
     <Compile Include="CLS_AlunoPlanejamentoRelacionada.cs" />
     <Compile Include="CLS_AlunoProjeto.cs" />
+    <Compile Include="CLS_AlunoSondagem.cs" />
     <Compile Include="CLS_AlunoTurmaDisciplinaOrientacaoCurricular.cs" />
     <Compile Include="CLS_ArquivoEfetivacao.cs" />
     <Compile Include="CLS_CompensacaoAusencia.cs" />

@@ -32,7 +32,7 @@ namespace GestaoEscolar.Academico.Sondagem
         {
             get
             {
-                return Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex].Value);
+                return Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex]["snd_id"]);
             }
         }
 
@@ -43,7 +43,7 @@ namespace GestaoEscolar.Academico.Sondagem
         {
             get
             {
-                return Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex].Value);
+                return Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex]["snd_id"]);
             }
         }
 
@@ -300,17 +300,13 @@ namespace GestaoEscolar.Academico.Sondagem
                     _btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
                     _btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
                 }
-
-                ImageButton _btnVisualizar = e.Row.FindControl("_btnVisualizar") as ImageButton;
-                if (_btnVisualizar != null)
+                
+                ImageButton btnCadastrarAgendamento = e.Row.FindControl("btnCadastrarAgendamento") as ImageButton;
+                if (btnCadastrarAgendamento != null)
                 {
-                    _btnVisualizar.CommandArgument = e.Row.RowIndex.ToString();
-                }
-
-                ImageButton _btnCadastrarLimites = e.Row.FindControl("_btnCadastrarLimites") as ImageButton;
-                if (_btnCadastrarLimites != null)
-                {
-                    _btnCadastrarLimites.CommandArgument = e.Row.RowIndex.ToString();
+                    bool bloqueado = Convert.ToByte(dgvSondagem.DataKeys[e.Row.RowIndex]["snd_situacao"]) == (byte)ACA_SondagemSituacao.Bloqueado;
+                    btnCadastrarAgendamento.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && !bloqueado;
+                    btnCadastrarAgendamento.CommandArgument = e.Row.RowIndex.ToString();
                 }
             }
         }
@@ -322,7 +318,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 try
                 {
                     int index = int.Parse(e.CommandArgument.ToString());
-                    int snd_id = Convert.ToInt32(dgvSondagem.DataKeys[index].Value);
+                    int snd_id = Convert.ToInt32(dgvSondagem.DataKeys[index]["snd_id"]);
 
                     ACA_Sondagem entity = new ACA_Sondagem { snd_id = snd_id };
                     ACA_SondagemBO.GetEntity(entity);

@@ -28,7 +28,7 @@
         <fieldset id="fdsResultados" runat="server">
             <legend><asp:Label runat="server" ID="lblLegendResultados" Text="<%$ Resources:Academico, Sondagem.Busca.lblLegendResultados.Text %>" /></legend>
             <uc2:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged" />
-            <asp:GridView ID="dgvSondagem" runat="server" DataKeyNames="snd_id" AutoGenerateColumns="False"
+            <asp:GridView ID="dgvSondagem" runat="server" DataKeyNames="snd_id, snd_situacao" AutoGenerateColumns="False"
                 DataSourceID="odsSondagem" AllowPaging="True" OnRowDataBound="dgvSondagem_RowDataBound"
                 EmptyDataText="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.EmptyDataText %>" OnRowCommand="dgvSondagem_RowCommand"
                 OnDataBound="dgvSondagem_DataBound" AllowSorting="true" SkinID="GridResponsive">
@@ -41,7 +41,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="snd_situacaoText" HeaderText="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.HeaderSituacao %>" SortExpression="snd_situacaoText" />
-                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.HeaderAgendamento %>" Visible="false">
+                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.HeaderAgendamento %>">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnCadastrarAgendamento" runat="server" SkinID="btDetalhar" 
                                 PostBackUrl="~/Academico/Sondagem/Agendamento.aspx" CommandName="Select" 
@@ -53,7 +53,7 @@
                     <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.HeaderExcluir %>">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Deletar"
-                                ToolTip="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.btExcluir.ToolTip %>" />
+                                ToolTip="<%$ Resources:Academico, Sondagem.Busca.dgvSondagem.btnExcluir.ToolTip %>" />
                         </ItemTemplate>
                         <HeaderStyle CssClass="center"></HeaderStyle>
                         <ItemStyle HorizontalAlign="Center"></ItemStyle>
