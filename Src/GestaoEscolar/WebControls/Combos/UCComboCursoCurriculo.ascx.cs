@@ -347,18 +347,18 @@ public partial class WebControls_Combos_UCComboCursoCurriculo : MotherUserContro
     /// <summary>
     /// Carrega todos os cursos/currículos não excluídos logicamente no combo
     /// </summary>
-    public void CarregarCursoCurriculo()
+    public void CarregarCursoCurriculo(bool mostraEJAModalidades = false)
     {
-        CarregarCursoCurriculoPorEscola(-1, -1, 0);
+        CarregarCursoCurriculoPorEscola(-1, -1, 0, mostraEJAModalidades);
     }
 
     /// <summary>
     /// Carrega cursos/currículos não excluídos logicamente no combo
     /// com a situação informada
     /// </summary>
-    public void CarregarCursoCurriculoSituacao(byte cur_situacao)
+    public void CarregarCursoCurriculoSituacao(byte cur_situacao, bool mostraEJAModalidades = false)
     {
-        CarregarCursoCurriculoPorEscola(-1, -1, cur_situacao);
+        CarregarCursoCurriculoPorEscola(-1, -1, cur_situacao, mostraEJAModalidades);
     }
 
     /// <summary>
@@ -373,6 +373,7 @@ public partial class WebControls_Combos_UCComboCursoCurriculo : MotherUserContro
         int esc_id
         , int uni_id
         , byte cur_situacao
+        , bool mostraEJAModalidades = false
     )
     {
         odsDados.SelectParameters.Clear();
@@ -385,6 +386,7 @@ public partial class WebControls_Combos_UCComboCursoCurriculo : MotherUserContro
         odsDados.SelectParameters.Add("uni_id", uni_id.ToString());
         odsDados.SelectParameters.Add("cur_situacao", cur_situacao.ToString());
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectParameters.Add("mostraEJAModalidades", mostraEJAModalidades.ToString());
         odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um(a) " + GestaoEscolarUtilBO.nomePadraoCurso(__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower() + " --", "-1;-1", true));
