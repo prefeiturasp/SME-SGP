@@ -339,6 +339,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        private long tudIdPendencia = -1;
+
         #endregion Propriedades
 
         #region Métodos
@@ -645,7 +647,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                      VS_EntitiesControleTurma.curriculo.crr_id, VS_EntitiesControleTurma.curriculoPeriodo.crp_id,
                                                      Tud_idPlanAnual, VS_EntitiesControleTurma.disciplina.tds_id, VS_EntitiesControleTurma.turmaDisciplina.tud_tipo,
                                                      tdt_posicao, UCControleTurma1.VS_tciIds, tur_ids, VS_EntitiesControleTurma.curso.tne_id, 
-                                                     VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao || p.pdc_permissaoConsulta));
+                                                     VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao || p.pdc_permissaoConsulta), tudIdPendencia);
             }
             else
             {
@@ -1371,6 +1373,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                             UCControleTurma1.LabelTurmas = listaDados["TextoTurmas"];
                         }
 
+                        if (Session["tudIdPendencia"] != null)
+                        {
+                            tudIdPendencia = Convert.ToInt64(Session["tudIdPendencia"]);
+                        }
+
                         // Remove os dados que possam estar na sessao
                         Session.Remove("tud_id");
                         Session.Remove("tdt_posicao");
@@ -1382,6 +1389,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                         Session.Remove("tur_idNormal");
                         Session.Remove("tud_idAluno");
                         Session.Remove("tur_tud_ids");
+                        Session.Remove("tipoPendencia");
+                        Session.Remove("tpcIdPendencia");
+                        Session.Remove("tudIdPendencia");
                         //
 
                         UCControleTurma1.VS_tur_situacao = VS_EntitiesControleTurma.turma.tur_situacao;

@@ -1697,7 +1697,14 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     if (VS_listaPendencias[grid.ClientID].Any(item =>
                             item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
-                            && item.tud_id == tud_id))
+                            && item.tud_id == tud_id)
+                        &&
+                        (
+                            // Mesma regra para exibir o ícone no Listão e no Diário de Classe.
+                            __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
+                            || Convert.ToInt32(grid.DataKeys[row.RowIndex].Values["tne_id"]) != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                            || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                        ))
                     {
                         if (imgPendenciaPlanoAula != null)
                             imgPendenciaPlanoAula.Visible = true;

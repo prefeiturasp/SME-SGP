@@ -281,6 +281,8 @@ namespace MSTech.GestaoEscolar.BLL
             public bool fav_fechamentoAutomatico { get; set; }
 
             public bool divergenciasAulasPrevistas { get; set; }
+
+            public int tne_id { get; set; }
         }
     }
 
@@ -2084,6 +2086,8 @@ namespace MSTech.GestaoEscolar.BLL
                                                  tdt_vigenciaFim = drTurmas.tdt_vigenciaFim
                                                  ,
                                                  crg_tipo = drTurmas.crg_tipo
+                                                 ,
+                                                 tne_id = drTurmas.tne_id
                                              }).ToList()
                                }).ToList();
 
@@ -2373,6 +2377,10 @@ namespace MSTech.GestaoEscolar.BLL
                                                                           : new DateTime()
                                                                       ,
                                                                       crg_tipo = Convert.ToByte(drTurmas["crg_tipo"].ToString())
+                                                                      ,
+                                                                      tne_id = drTurmas["tne_id"] != DBNull.Value ?
+                                                                          Convert.ToInt32(drTurmas["tne_id"].ToString())
+                                                                          : -1
                                                                   }).ToList()
                                                     }).ToList();
                                 },
@@ -2481,6 +2489,10 @@ namespace MSTech.GestaoEscolar.BLL
                                                                           : new DateTime()
                                            ,
                                            crg_tipo = Convert.ToByte(drTurmas["crg_tipo"].ToString())
+                                           ,
+                                           tne_id = drTurmas["tne_id"] != DBNull.Value ?
+                                                                          Convert.ToInt32(drTurmas["tne_id"].ToString())
+                                                                          : -1
                                        }).ToList()
                          }).ToList();
             }
@@ -3355,6 +3367,10 @@ namespace MSTech.GestaoEscolar.BLL
                                                crg_tipo = drTurmas["crg_tipo"] != DBNull.Value ?
                                                                           Convert.ToByte(drTurmas["crg_tipo"].ToString())
                                                                           : (byte)0
+                                                ,
+                                                tne_id = drTurmas["tne_id"] != DBNull.Value ?
+                                                                          Convert.ToInt32(drTurmas["tne_id"].ToString())
+                                                                          : -1
                                            }).ToList()
                              }).ToList();
                     // Adiciona cache com validade do tempo informado na configuração.
@@ -3460,6 +3476,10 @@ namespace MSTech.GestaoEscolar.BLL
                                                                           : new DateTime()
                                            ,
                                            crg_tipo = Convert.ToByte(drTurmas["crg_tipo"].ToString())
+                                           ,
+                                           tne_id = drTurmas["tne_id"] != DBNull.Value ?
+                                                                          Convert.ToInt32(drTurmas["tne_id"].ToString())
+                                                                          : -1
                                        }).ToList()
                          }).ToList();
             }

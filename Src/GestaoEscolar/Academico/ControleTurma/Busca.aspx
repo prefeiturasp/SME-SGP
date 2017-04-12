@@ -99,7 +99,7 @@
                                 </div>
                             <asp:GridView ID="grvTurma" runat="server" AutoGenerateColumns="false" AllowSorting="true" AllowPaging="true" PageSize="10"
                                 OnRowCommand="grvMinhasTurmas_RowCommand"
-                                DataKeyNames="tur_id,tur_escolaUnidade,tur_codigo,tud_nome,tud_id,tdt_posicao,cal_id,esc_id,uni_id,tud_naoLancarNota,tud_naoLancarFrequencia,tud_disciplinaEspecial,EscolaTurmaDisciplina,tud_tipo,tur_dataEncerramento,tciIds,disciplinaAtiva,tur_tipo,tud_idAluno,tur_idNormal,fav_id"
+                                DataKeyNames="tur_id,tur_escolaUnidade,tur_codigo,tud_nome,tud_id,tdt_posicao,cal_id,esc_id,uni_id,tud_naoLancarNota,tud_naoLancarFrequencia,tud_disciplinaEspecial,EscolaTurmaDisciplina,tud_tipo,tur_dataEncerramento,tciIds,disciplinaAtiva,tur_tipo,tud_idAluno,tur_idNormal,fav_id,tne_id"
                                 OnPageIndexChanging="grvTurma_PageIndexChanging" OnRowDataBound="grvTurmas_RowDataBound" OnDataBound="grvTurmas_DataBound" SkinID="GridResponsive">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Turma">
@@ -270,7 +270,7 @@
                     <asp:GridView ID="grvTurmas" runat="server" AutoGenerateColumns="false" AllowSorting="true" AllowPaging="true"
                         OnRowCommand="grvMinhasTurmas_RowCommand" DataSourceID='odsMinhasTurmas' OnRowDataBound="grvTurmas_RowDataBound"
                         EmptyDataText="A pesquisa não encontrou resultados." OnDataBound="grvTurmas_DataBound" SkinID="GridResponsive"
-                        DataKeyNames="tur_id,tur_escolaUnidade,tur_codigo,tud_nome,tud_id,tdt_posicao,cal_id,esc_id,uni_id,tud_naoLancarNota,tud_naoLancarFrequencia,tud_disciplinaEspecial,EscolaTurmaDisciplina,tud_tipo,tur_dataEncerramento,tciIds,disciplinaAtiva,tur_tipo,tud_idAluno,tur_idNormal,fav_id">
+                        DataKeyNames="tur_id,tur_escolaUnidade,tur_codigo,tud_nome,tud_id,tdt_posicao,cal_id,esc_id,uni_id,tud_naoLancarNota,tud_naoLancarFrequencia,tud_disciplinaEspecial,EscolaTurmaDisciplina,tud_tipo,tur_dataEncerramento,tciIds,disciplinaAtiva,tur_tipo,tud_idAluno,tur_idNormal,fav_id,tne_id">
                         <Columns>
                             <asp:TemplateField HeaderText="Turma" SortExpression="tur_codigo">
                                 <ItemTemplate>

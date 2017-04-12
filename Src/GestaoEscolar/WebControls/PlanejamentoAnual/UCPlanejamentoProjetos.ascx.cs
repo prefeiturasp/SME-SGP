@@ -651,13 +651,24 @@
 
         #region Métodos iniciais
 
-        public void LoadDdlComponenteRegencia()
+        public void LoadDdlComponenteRegencia(long tudIdPendencia)
         {
             //// Só carrega componentes da regência se o tipo da disciplina for de REGENCIA.
             if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia))
             {
                 lblComponenteAtAvaliativa.Visible = ddlComponenteAtAvaliativa.Visible = true;
                 CarregaComponenteRegenciaDocente(ddlComponenteAtAvaliativa);
+                if (tudIdPendencia > 0)
+                {
+                    foreach (ListItem item in ddlComponenteAtAvaliativa.Items)
+                    {
+                        if (item.Value.StartsWith(string.Format("{0};{1};", VS_tur_id, tudIdPendencia)))
+                        {
+                            ddlComponenteAtAvaliativa.SelectedValue = item.Value;
+                            break;
+                        }
+                    }
+                }
             }
             else
                 lblComponenteAtAvaliativa.Visible = ddlComponenteAtAvaliativa.Visible = false;
@@ -695,7 +706,7 @@
         /// </summary>
         public void CarregarTurma(long tur_id, int cal_id, int esc_id, int uni_id, int cur_id, int crr_id, int crp_id,
                                   long tud_id, int tds_id, byte tud_tipo, byte tdt_posicao, string tciIds, string tur_ids = null, 
-                                  int tne_id = -1, bool permiteEditarObjAprendizagem = false)
+                                  int tne_id = -1, bool permiteEditarObjAprendizagem = false, long tudIdPendencia = -1)
         {
             VS_TurmasNormais_Ids = tur_ids;
             VS_tur_id = tur_id;
@@ -711,7 +722,7 @@
             VS_tds_id = tds_id;
             VS_permiteEditarObjAprendizagem = permiteEditarObjAprendizagem;
 
-            LoadDdlComponenteRegencia();
+            LoadDdlComponenteRegencia(tudIdPendencia);
 
             if (!String.IsNullOrEmpty(tciIds))
             {
@@ -750,6 +761,24 @@
             CarregarDocumentos();
 
             CarregarObjetosAprendizagem();
+
+            if (tudIdPendencia > 0)
+            {
+                int indiceAba = 4;
+                if (!abaPlanoCiclo.Visible)
+                {
+                    indiceAba--;
+                }
+                if (!abaPlanoAnual.Visible)
+                {
+                    indiceAba--;
+                }
+                if (!abaPlanoAluno.Visible)
+                {
+                    indiceAba--;
+                }
+                selected_tab.Value = indiceAba.ToString();
+            }
         }
 
         /// <summary>

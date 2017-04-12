@@ -2263,14 +2263,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                         VS_turmasAnoAtual = dadosTurma.FirstOrDefault().turmasAnoAtual;
 
                         hdnListaoSelecionado.Value = "0";
-                        if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemNota)
-                        {
-                            hdnListaoSelecionado.Value = "1";
-                        }
-                        else if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula)
-                        {
-                            hdnListaoSelecionado.Value = "2";
-                        }
 
                         UCNavegacaoTelaPeriodo.VS_opcaoAbaAtual = eOpcaoAbaMinhasTurmas.Listao;
 
@@ -2360,6 +2352,29 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                         CarregarDisciplinasComboListao(UCControleTurma1.VS_tur_id, tudIdPendencia > 0 ? tudIdPendencia : VS_EntitiesControleTurma.turmaDisciplina.tud_id);
                         CarregarTela();
+
+                        if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemNota)
+                        {
+                            int indiceAba = 1;
+                            if (!aFrequencia.Visible)
+                            {
+                                indiceAba--;
+                            }
+                            hdnListaoSelecionado.Value = indiceAba.ToString();
+                        }
+                        else if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula)
+                        {
+                            int indiceAba = 2;
+                            if (!aFrequencia.Visible)
+                            {
+                                indiceAba--;
+                            }
+                            if (!aAvaliacao.Visible)
+                            {
+                                indiceAba--;
+                            }
+                            hdnListaoSelecionado.Value = indiceAba.ToString();
+                        }
 
                         //bloquear botoes -> se o docente nao possuir mais essa turma e se nao for turma extinta
                         if (VS_situacaoTurmaDisciplina != 1
