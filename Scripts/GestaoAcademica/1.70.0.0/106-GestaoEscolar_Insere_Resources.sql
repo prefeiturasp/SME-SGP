@@ -1,4 +1,4 @@
-USE [GestaoPedagogica]
+--USE [GestaoPedagogica]
 GO
 
 BEGIN TRANSACTION 
@@ -24,6 +24,13 @@ SET XACT_ABORT ON
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Listagem de sondagens'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Cadastro.grvQuestoes.btnExcluir.ToolTip' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Excluir questão.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Busca.lblTitulo.Text' 
