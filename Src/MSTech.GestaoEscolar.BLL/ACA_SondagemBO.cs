@@ -203,7 +203,7 @@ namespace MSTech.GestaoEscolar.BLL
             else
                 dao._Banco = banco;
 
-            string tabelasNaoVerificarIntegridade = "ACA_Sondagem,ACA_SondagemAgendamento,ACA_SondagemQuestao,ACA_SondagemResposta,CLS_AlunoSondagem";
+            string tabelasNaoVerificarIntegridade = "ACA_Sondagem,ACA_SondagemAgendamento,ACA_SondagemAgendamentoPeriodo,ACA_SondagemQuestao,ACA_SondagemResposta,CLS_AlunoSondagem";
 
             try
             {
