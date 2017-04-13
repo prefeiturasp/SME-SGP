@@ -600,8 +600,8 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     if (VS_sdr_id > 0 && VS_ListaResposta.Any(l => l.sdr_id == VS_sdr_id))
                     {
-                        VS_ListaResposta[VS_ListaResposta.IndexOf(VS_ListaResposta.Where(l => l.sdr_id == VS_sdq_id).First())].sdr_descricao = txtItem.Text;
-                        VS_ListaResposta[VS_ListaResposta.IndexOf(VS_ListaResposta.Where(l => l.sdr_id == VS_sdq_id).First())].sdr_sigla = txtSigla.Text;
+                        VS_ListaResposta[VS_ListaResposta.IndexOf(VS_ListaResposta.Where(l => l.sdr_id == VS_sdr_id).First())].sdr_descricao = txtItem.Text;
+                        VS_ListaResposta[VS_ListaResposta.IndexOf(VS_ListaResposta.Where(l => l.sdr_id == VS_sdr_id).First())].sdr_sigla = txtSigla.Text;
                     }
                     else
                     {
