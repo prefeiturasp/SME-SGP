@@ -1,4 +1,4 @@
---USE [GestaoPedagogica]
+USE [GestaoPedagogica]
 GO
 
 BEGIN TRANSACTION 

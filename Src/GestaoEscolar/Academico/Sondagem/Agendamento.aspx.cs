@@ -208,7 +208,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 VS_ListaAgendamento = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(snd_id);
                 VS_ListaAgendamentoPeriodo = ACA_SondagemAgendamentoPeriodoBO.SelectPeriodosBy_Agendamento(VS_snd_id, 0);
 
-                VS_ListaAgendamento = VS_ListaAgendamento.OrderBy(a => a.sda_dataInicio).ThenBy(a => a.sda_dataFim).ToList();
+                VS_ListaAgendamento = VS_ListaAgendamento.OrderByDescending(a => a.sda_dataInicio).ThenByDescending(a => a.sda_dataFim).ToList();
 
                 grvAgendamentos.DataSource = VS_ListaAgendamento;
                 grvAgendamentos.DataBind();
@@ -591,7 +591,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaAgendamento[ind].sda_situacao = (byte)ACA_SondagemAgendamentoSituacao.Cancelado;
 
-                    VS_ListaAgendamento = VS_ListaAgendamento.OrderBy(a => a.sda_dataInicio).ThenBy(a => a.sda_dataFim).ToList();
+                    VS_ListaAgendamento = VS_ListaAgendamento.OrderByDescending(a => a.sda_dataInicio).ThenByDescending(a => a.sda_dataFim).ToList();
 
                     grvAgendamentos.DataSource = VS_ListaAgendamento;
                     grvAgendamentos.DataBind();
@@ -622,7 +622,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaAgendamento[ind].sda_situacao = (byte)ACA_SondagemAgendamentoSituacao.Ativo;
 
-                    VS_ListaAgendamento = VS_ListaAgendamento.OrderBy(a => a.sda_dataInicio).ThenBy(a => a.sda_dataFim).ToList();
+                    VS_ListaAgendamento = VS_ListaAgendamento.OrderByDescending(a => a.sda_dataInicio).ThenByDescending(a => a.sda_dataFim).ToList();
 
                     grvAgendamentos.DataSource = VS_ListaAgendamento;
                     grvAgendamentos.DataBind();
@@ -651,7 +651,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     //Exclui as retificações do agendamento
                     VS_ListaAgendamento.RemoveAll(a => a.sda_idRetificada == idExcluir);
 
-                    VS_ListaAgendamento = VS_ListaAgendamento.OrderBy(a => a.sda_dataInicio).ThenBy(a => a.sda_dataFim).ToList();
+                    VS_ListaAgendamento = VS_ListaAgendamento.OrderByDescending(a => a.sda_dataInicio).ThenByDescending(a => a.sda_dataFim).ToList();
 
                     grvAgendamentos.DataSource = VS_ListaAgendamento;
                     grvAgendamentos.DataBind();
@@ -810,7 +810,7 @@ namespace GestaoEscolar.Academico.Sondagem
                                                             .ThenBy(p => p.tcp_ordem).ThenBy(p => p.tcp_descricao)
                                                             .Select(p => p.tcp_descricao).Aggregate((a, b) => a + ", " + b);
                 VS_ListaAgendamento[VS_ListaAgendamento.IndexOf(VS_ListaAgendamento.Where(l => l.sda_id == sda_idAux).First())].periodos = periodos;
-                VS_ListaAgendamento = VS_ListaAgendamento.OrderBy(a => a.sda_dataInicio).ThenBy(a => a.sda_dataFim).ToList();
+                VS_ListaAgendamento = VS_ListaAgendamento.OrderByDescending(a => a.sda_dataInicio).ThenByDescending(a => a.sda_dataFim).ToList();
 
                 grvAgendamentos.DataSource = VS_ListaAgendamento;
                 grvAgendamentos.DataBind();
