@@ -406,7 +406,39 @@ namespace MSTech.GestaoEscolar.BLL
 
             return dados;
         }
-        
+
+        /// <summary>
+        /// Retorna todos os calendários não excluídos logicamente
+        /// Com paginação
+        /// </summary>   
+        /// <param name="cal_ano">Ano do calendário escolar</param>
+        /// <param name="cal_descricao">Descrição do calendário escolar</param>
+        /// <param name="ent_id">Entidade do usuário logado</param>
+        /// <param name="currentPage">Página atual do grid</param>
+        /// <param name="pageSize">Total de registros por página do grid</param>  
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaCalendarioAnualPaginado
+        (
+            int cal_ano
+            , string cal_descricao
+            , Guid ent_id
+            , bool adm
+            , Guid usu_id
+            , Guid gru_id
+            , long doc_id
+            , int currentPage
+            , int pageSize
+        )
+        {
+            totalRecords = 0;
+
+            if (pageSize == 0)
+                pageSize = 1;
+
+            ACA_CalendarioAnualDAO dao = new ACA_CalendarioAnualDAO();
+            return dao.SelectBy_Pesquisa(cal_ano, cal_descricao, ent_id, true, currentPage / pageSize, pageSize, out totalRecords);
+        }
+
         /// <summary>
         /// Retorna todos os calendários não excluídos logicamente
         /// Com paginação

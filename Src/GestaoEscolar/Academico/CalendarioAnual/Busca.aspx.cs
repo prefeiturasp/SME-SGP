@@ -116,6 +116,9 @@ public partial class Academico_Calendario_Anual_Busca : MotherPageLogado
             _dgvCalendarioAnual.PageIndex = 0;
             _odsCalendarioAnual.SelectParameters.Clear();
             _odsCalendarioAnual.SelectParameters.Add("cal_ano", _txtAno.Text);
+            _odsCalendarioAnual.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.Administracao ? __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString() : Guid.Empty.ToString());
+            _odsCalendarioAnual.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.Administracao ? __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString() : Guid.Empty.ToString());
+            _odsCalendarioAnual.SelectParameters.Add("doc_id", __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual ? __SessionWEB.__UsuarioWEB.Docente.doc_id.ToString() : "0");
             _odsCalendarioAnual.SelectParameters.Add("cal_descricao", _txtDescricao.Text);
             _odsCalendarioAnual.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
 

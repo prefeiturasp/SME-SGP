@@ -1457,6 +1457,7 @@ div#divSelectGrupo input.btn {
     border: 1px solid #E8B909;
     color: #222;
     font-weight: bold;
+    -webkit-border-radius: 3px;
     border-radius: 2px 2px 2px 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     background-color: #F9EDBE !important;
@@ -1472,16 +1473,18 @@ fieldset .summary {
 /* Mensagem de alerta amarelo, os outros sobrescreve atraves do utilBO */
 .summaryMensagem {
     display: block;
-    background: #fff url(images/warning.png) no-repeat 15px 50%;
-    padding: 10px;
-    padding-left: 50px;
-    margin-bottom: 20px;
+    background: #fff url(images/warning.png) no-repeat 10px 50%;
+    padding: 8px 35px 8px 50px;
+    margin-bottom: 18px;
     border: 1px solid #E8B909;
     background-color: #F9EDBE !important;
     color: #363636 !important;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     font-weight: bold;
+    height: auto;
     width: auto;
     clear: both;
     font-size: 1.2em;
