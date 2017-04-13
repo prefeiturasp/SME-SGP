@@ -391,8 +391,8 @@ namespace GestaoEscolar.Academico.Sondagem
                     txtItem.Focus();
                 updPopUp.Update();
 
-                btnAdicionar.Text = VS_sdq_id > 0 || VS_sdr_id > 0 ? GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAdicionar.Text").ToString() :
-                                    GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAlterar.Text").ToString();
+                btnAdicionar.Text = VS_sdq_id > 0 || VS_sdr_id > 0 ? GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAlterar.Text").ToString() :
+                                    GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAdicionar.Text").ToString();
 
                 ScriptManager.RegisterStartupScript(Page, typeof(Page), "EditarAulas", "$('#divInserir').dialog('open');", true);
             }
