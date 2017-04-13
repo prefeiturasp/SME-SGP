@@ -665,8 +665,10 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     int ind = VS_ListaAgendamento.IndexOf(VS_ListaAgendamento.Where(a => a.sda_id == idExcluir).First());
                     VS_ListaAgendamento.RemoveAt(ind);
+                    VS_ListaAgendamentoPeriodo.RemoveAll(p => p.sda_id == idExcluir);
 
                     //Exclui as retificações do agendamento
+                    VS_ListaAgendamentoPeriodo.RemoveAll(p => VS_ListaAgendamento.Any(a => a.sda_idRetificada == idExcluir && a.sda_id == p.sda_id));
                     VS_ListaAgendamento.RemoveAll(a => a.sda_idRetificada == idExcluir);
 
                     VS_ListaAgendamento = VS_ListaAgendamento.OrderByDescending(a => a.sda_dataInicio).ThenByDescending(a => a.sda_dataFim).ToList();
