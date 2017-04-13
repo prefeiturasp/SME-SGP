@@ -3834,6 +3834,8 @@ namespace MSTech.GestaoEscolar.BLL
                                        tur_idNormal = Convert.ToInt64(drTurmas["tur_idNormal"] == DBNull.Value ? "-1" : drTurmas["tur_idNormal"])
                                        ,
                                        fav_fechamentoAutomatico = Convert.ToBoolean(drTurmas["fav_fechamentoAutomatico"])
+                                       ,
+                                       tne_id = drTurmas["tne_id"] != DBNull.Value ? Convert.ToInt32(drTurmas["tne_id"].ToString()) : -1
                                    }).ToList()
                      }).ToList();
 
