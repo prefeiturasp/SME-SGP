@@ -37,6 +37,7 @@ namespace MSTech.GestaoEscolar.Web.WebProject.HttpHandlers
                 ltChaves.Add(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, esc_ids[i], uni_ids[i], cal_ids[i], tud_ids[i]));
                 ltChaves.Add(String.Format(ModelCache.FECHAMENTO_AUTO_FINAL_MODEL_KEY, tud_ids[i]));
                 ltChaves.Add(String.Format(ModelCache.FECHAMENTO_AUTO_FINAL_FILTRO_DEFICIENCIA_MODEL_KEY, tud_ids[i]));
+                ltChaves.Add(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, esc_ids[i], uni_ids[i], cal_ids[i], tud_ids[i]));
             }
 
             return ltChaves;
