@@ -1853,6 +1853,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     , (byte)LOG_AvaliacaoMedia_Alteracao_Origem.Web
                     , (byte)LOG_TurmaNota_Alteracao_Origem.WebListao
                     , (byte)LOG_TurmaNota_Alteracao_Tipo.LancamentoNotas
+                    , visibilidadeRegencia ? EntTurmaDisciplina.tud_id : -1
                 );
 
             try
