@@ -394,6 +394,9 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="cal_ano">Ano do calendário escolar</param>
         /// <param name="cal_descricao">Descrição do calendário escolar</param>
         /// <param name="ent_id">Entidade do usuário logado</param>
+        /// <param name="usu_id">ID do usuário</param>
+        /// <param name="gru_id">ID do grupo do usuário</param>
+        /// <param name="doc_id">ID do docente</param>
         /// <param name="paginado">Indica se o datatable será paginado ou não</param> 
         /// <param name="currentPage">Página atual do grid</param>
         /// <param name="pageSize">Total de registros por página do grid</param>

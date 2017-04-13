@@ -321,8 +321,11 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>
         /// <param name="ent_id">Entidade da visao do usuario (obrigatório)</param>
         /// <param name="evt_id">Id do evento para filtro (qdo 0 retorna todos os eventos)</param>
+        /// <param name="usu_id">ID do usuário</param>
+        /// <param name="gru_id">ID do grupo do usuário</param>
+        /// <param name="doc_id">ID do docente</param>
         /// <returns>Datatable com cal_id e cal_descricao dos calendários selecionados</returns>
-        public DataTable Select_naoAssociados(Guid ent_id, long evt_id, int tpc_id)
+        public DataTable Select_naoAssociados(Guid ent_id, long evt_id, int tpc_id, Guid usu_id, Guid gru_id, long doc_id)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CalendarioEvento_naoAssociados", this._Banco);
 
@@ -351,6 +354,36 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@tpc_id";
                 if (tpc_id > 0)
                     Param.Value = tpc_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@doc_id";
+                Param.Size = 8;
+                if (doc_id > 0)
+                    Param.Value = doc_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@usu_id";
+                Param.Size = 16;
+                if (usu_id != new Guid())
+                    Param.Value = usu_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@gru_id";
+                Param.Size = 16;
+                if (gru_id != new Guid())
+                    Param.Value = gru_id;
                 else
                     Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);

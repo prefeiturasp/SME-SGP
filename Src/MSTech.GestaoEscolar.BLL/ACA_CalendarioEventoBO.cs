@@ -103,12 +103,15 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="ent_id">Entidade da visao do usuario (obrigatório)</param>
         /// <param name="evt_id">Id do evento para filtro (qdo 0 retorna todos os eventos)</param>
+        /// <param name="usu_id">ID do usuário</param>
+        /// <param name="gru_id">ID do grupo do usuário</param>
+        /// <param name="doc_id">ID do docente</param>
         /// <returns>Datatable com cal_id e cal_descricao dos calendários selecionados</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static DataTable Select_naoAssociados(Guid ent_id, long evt_id, int tpc_id)
+        public static DataTable Select_naoAssociados(Guid ent_id, long evt_id, int tpc_id, Guid usu_id, Guid gru_id, long doc_id)
         {
             ACA_CalendarioEventoDAO daoEvento = new ACA_CalendarioEventoDAO();
-            return daoEvento.Select_naoAssociados(ent_id, evt_id, tpc_id);
+            return daoEvento.Select_naoAssociados(ent_id, evt_id, tpc_id, usu_id, gru_id, doc_id);
         }
 
         public static DataTable Select_Load(ACA_CalendarioEvento entity)

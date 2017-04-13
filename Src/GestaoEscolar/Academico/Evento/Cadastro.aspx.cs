@@ -577,7 +577,10 @@ public partial class Academico_Eventos_Cadastro : MotherPageLogado
     private void CarregaCalendarios(int tpc_id)
     {
         // carrega as listas para selecao de calendários
-        DataTable dtCampos = ACA_CalendarioEventoBO.Select_naoAssociados(__SessionWEB.__UsuarioWEB.Usuario.ent_id, _VS_evt_id, tpc_id);
+        DataTable dtCampos = ACA_CalendarioEventoBO.Select_naoAssociados(__SessionWEB.__UsuarioWEB.Usuario.ent_id, _VS_evt_id, tpc_id,
+                                                                         __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa ? __SessionWEB.__UsuarioWEB.Usuario.usu_id : Guid.Empty,
+                                                                         __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa ? __SessionWEB.__UsuarioWEB.Grupo.gru_id : Guid.Empty,
+                                                                         __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null ? __SessionWEB.__UsuarioWEB.Docente.doc_id : 0);
         DataTable dtAssociados = ACA_CalendarioEventoBO.Select_Associados(__SessionWEB.__UsuarioWEB.Usuario.ent_id, _VS_evt_id);
         dtCampos.Merge(dtAssociados);
 
