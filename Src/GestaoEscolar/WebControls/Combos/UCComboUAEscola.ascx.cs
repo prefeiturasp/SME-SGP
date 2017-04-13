@@ -84,7 +84,7 @@ namespace GestaoEscolar.WebControls.Combos
                     return Convert.ToBoolean(ViewState["_VS_FiltroEscolasControladas"]);
                 }
 
-                return null;
+                return true;
             }
             set
             {
