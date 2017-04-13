@@ -37,7 +37,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tud_ids">IDs da turma disciplina</param>
         /// <param name="cal_id">ID do calendário</param>
         /// <param name="banco">Transação do banco</param>
-        public static void SalvarLista(List<CLS_ObjetoAprendizagemTurmaDisciplina> listObjTudDis, List<long> tud_ids, int cal_id, TalkDBTransaction banco = null)
+        public static void SalvarLista(List<CLS_ObjetoAprendizagemTurmaDisciplina> listObjTudDis, List<long> tud_ids, int cal_id, TalkDBTransaction banco = null, long tud_idRegencia = -1)
         {
             CLS_ObjetoAprendizagemTurmaDisciplinaDAO dao = new CLS_ObjetoAprendizagemTurmaDisciplinaDAO();
             if (banco != null)
@@ -62,8 +62,15 @@ namespace MSTech.GestaoEscolar.BLL
                                         .GroupBy(p => p.tpc_id).Select(p => p.Key).ToList();
 
                     foreach (int tpc_id in lstTpc)
+                    {
                         foreach (long tud_id in tud_ids)
                             CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(tud_id, tpc_id, dao._Banco);
+
+                        if (tud_idRegencia > 0)
+                        {
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(tud_idRegencia, tpc_id, dao._Banco);
+                        }
+                    }
                 }
             }
             catch (Exception ex)

@@ -1568,7 +1568,7 @@
                                           && (Convert.ToInt64(dr.tur_tud_id.Split(';')[0]) == VS_tur_id)
                                           select Convert.ToInt64(dr.tur_tud_id.Split(';')[1])).ToList();
 
-                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(listObjTudDis, lstTuds, VS_cal_id);
+                    CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(listObjTudDis, lstTuds, VS_cal_id, null, VS_tud_id);
                 }
                 else
                     CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(listObjTudDis, new List<long> { VS_tud_id }, VS_cal_id);
