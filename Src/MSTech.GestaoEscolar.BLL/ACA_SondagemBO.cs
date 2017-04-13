@@ -203,7 +203,7 @@ namespace MSTech.GestaoEscolar.BLL
             else
                 dao._Banco = banco;
 
-            string tabelasNaoVerificarIntegridade = "ACA_Sondagem,ACA_SondagemAgendamento,ACA_SondagemAvaliacoes,ACA_SondagemRespostas,CLS_AlunoSondagem";
+            string tabelasNaoVerificarIntegridade = "ACA_Sondagem,ACA_SondagemAgendamento,ACA_SondagemAgendamentoPeriodo,ACA_SondagemQuestao,ACA_SondagemResposta,CLS_AlunoSondagem";
 
             try
             {
@@ -212,10 +212,10 @@ namespace MSTech.GestaoEscolar.BLL
                     throw new ValidationException("Não é possível excluir a sondagem " + entity.snd_titulo + ", pois possui outros registros ligados a ela.");
 
                 //Verifica se existe agendamento vigente ou se possui sondagem lançada para alunos em agendamento não cancelados
-                List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(entity.snd_id, dao._Banco);
+                //List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(entity.snd_id, dao._Banco);
                 List<CLS_AlunoSondagem> lstAlunoSondagem = CLS_AlunoSondagemBO.SelectAgendamentosBy_Sondagem(entity.snd_id, 0, dao._Banco);
-                bool permiteRemover = !lstAgendamentos.Any(a => a.sda_dataFim >= DateTime.Today && a.sda_dataInicio <= DateTime.Today &&
-                                                                a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado) &&
+                bool permiteRemover = //!lstAgendamentos.Any(a => a.sda_dataFim >= DateTime.Today && a.sda_dataInicio <= DateTime.Today &&
+                                      //                          a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado) &&
                                       !lstAlunoSondagem.Any(a => a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado);
 
                 if (!permiteRemover)

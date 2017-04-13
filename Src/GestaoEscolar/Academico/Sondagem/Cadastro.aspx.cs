@@ -223,10 +223,11 @@ namespace GestaoEscolar.Academico.Sondagem
                 ckbBloqueado.Enabled = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 ckbBloqueado.Visible = true;
 
-                //TODO: verificar se tem dados lançados
+                List<CLS_AlunoSondagem> lstAlunoSondagem = CLS_AlunoSondagemBO.SelectAgendamentosBy_Sondagem(snd_id, 0);
                 List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(snd_id);
                 VS_permiteEditar = !lstAgendamentos.Any(a => a.sda_dataFim >= DateTime.Today && a.sda_dataInicio <= DateTime.Today &&
-                                                             a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado);
+                                                             a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado) &&
+                                   !lstAlunoSondagem.Any(a => a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado);
 
                 List<ACA_SondagemQuestao> lstAux = ACA_SondagemQuestaoBO.SelectQuestoesBy_Sondagem(snd_id);
 
