@@ -3361,7 +3361,10 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_id in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
+                    {
                         CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
+                    }
 
                     string tud_ids = string.Join(",", turmadisciplina.GroupBy(p => p.ToString()).Select(p => p.Key.ToString()).ToArray());
 
@@ -3377,7 +3380,10 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_idRegencia in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
+                    {
                         CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
+                    }
 
                     report = ((int)ReportNameGestaoAcademicaDocumentosDocente.DocDctAlunosPendenciaEfetivacao).ToString();
                     parametros = "uad_idSuperiorGestao=" + grid.uad_idSuperior +
