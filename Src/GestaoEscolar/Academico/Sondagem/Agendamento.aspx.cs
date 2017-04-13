@@ -698,7 +698,8 @@ namespace GestaoEscolar.Academico.Sondagem
                 if (dataInicio > dataFim)
                     throw new ValidationException(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.DataFimMenorInicio").ToString());
 
-                if (VS_ListaAgendamento.Any(a => a.sda_id != VS_sda_id && dataInicio <= a.sda_dataFim && dataFim >= a.sda_dataInicio && a.esc_id == esc_id && a.uni_id == uni_id))
+                if (VS_ListaAgendamento.Any(a => a.sda_id != VS_sda_id && dataInicio <= a.sda_dataFim && dataFim >= a.sda_dataInicio && 
+                                                 ((a.esc_id == esc_id && a.uni_id == uni_id) || a.sda_id == VS_sda_idRetificando || a.sda_idRetificada == VS_sda_id)))
                     throw new ValidationException(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.PeriodoJaAdicionado").ToString());
 
                 if (VS_sda_idRetificando > 0 && UCComboUAEscola.Esc_ID <= 0)
