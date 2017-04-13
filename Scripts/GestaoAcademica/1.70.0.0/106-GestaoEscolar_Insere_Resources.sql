@@ -114,7 +114,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Excluir sondagem.'
+		, @rcr_valorPadrao = 'Excluir a sondagem.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Busca.ErroCarregarSondagens' 
@@ -373,7 +373,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Excluir questão.'
+		, @rcr_valorPadrao = 'Excluir a questão.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.HeaderExcluir' 
@@ -387,7 +387,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Excluir subquestão.'
+		, @rcr_valorPadrao = 'Excluir a subquestão.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.grvRespostas.HeaderExcluir' 
@@ -401,7 +401,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Excluir resposta/avaliação.'
+		, @rcr_valorPadrao = 'Excluir a resposta/avaliação.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Cadastro.ErroAbrirPopUp' 
@@ -688,14 +688,14 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Altera o agendamento.'
+		, @rcr_valorPadrao = 'Alterar o agendamento.'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.btnExcluir.ToolTip' 
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Exclui o agendamento (exclui também os períodos de retificação desse agendamento).'
+		, @rcr_valorPadrao = 'Excluir o agendamento (exclui também os períodos de retificação desse agendamento).'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Agendamento.bntSalvar.Text' 
@@ -856,7 +856,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'Academico'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Reativa o período do agendamento (reativa também os períodos de retificação desse agendamento).'
+		, @rcr_valorPadrao = 'Reativar o período do agendamento (reativa também os períodos de retificação desse agendamento).'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'Sondagem.Agendamento.grvAgendamentos.lblCancelado.Text' 
