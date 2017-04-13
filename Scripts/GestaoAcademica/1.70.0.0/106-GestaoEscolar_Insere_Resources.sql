@@ -865,6 +865,13 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Cancelado'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Sondagem.Agendamento.DataInicioMenorHoje' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início do agendamento não pode ser anterior à data atual.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

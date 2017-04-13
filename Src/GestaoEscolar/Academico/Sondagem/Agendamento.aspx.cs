@@ -692,6 +692,9 @@ namespace GestaoEscolar.Academico.Sondagem
                 if (string.IsNullOrEmpty(txtDataInicio.Text) || !DateTime.TryParse(txtDataInicio.Text, out dataInicio))
                     throw new ValidationException(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.DataInicioInvalida").ToString());
 
+                if (dataInicio < DateTime.Today)
+                    throw new ValidationException(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.DataInicioMenorHoje").ToString());
+
                 if (string.IsNullOrEmpty(txtDataFim.Text) || !DateTime.TryParse(txtDataFim.Text, out dataFim))
                     throw new ValidationException(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.DataFimInvalida").ToString());
 
