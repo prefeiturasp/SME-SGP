@@ -403,6 +403,9 @@ namespace MSTech.GestaoEscolar.DAL
             int cal_ano
             , string cal_descricao
             , Guid ent_id
+            , Guid usu_id
+            , Guid gru_id
+            , long doc_id
             , bool paginado
             , int currentPage
             , int pageSize
@@ -439,6 +442,36 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@ent_id";
                 Param.Size = 16;
                 Param.Value = ent_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@doc_id";
+                Param.Size = 8;
+                if (doc_id > 0)
+                    Param.Value = doc_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@usu_id";
+                Param.Size = 16;
+                if (usu_id != new Guid())
+                    Param.Value = usu_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@gru_id";
+                Param.Size = 16;
+                if (gru_id != new Guid())
+                    Param.Value = gru_id;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 #endregion

@@ -422,7 +422,6 @@ namespace MSTech.GestaoEscolar.BLL
             int cal_ano
             , string cal_descricao
             , Guid ent_id
-            , bool adm
             , Guid usu_id
             , Guid gru_id
             , long doc_id
@@ -436,7 +435,7 @@ namespace MSTech.GestaoEscolar.BLL
                 pageSize = 1;
 
             ACA_CalendarioAnualDAO dao = new ACA_CalendarioAnualDAO();
-            return dao.SelectBy_Pesquisa(cal_ano, cal_descricao, ent_id, true, currentPage / pageSize, pageSize, out totalRecords);
+            return dao.SelectBy_Pesquisa(cal_ano, cal_descricao, ent_id, usu_id, gru_id, doc_id, true, currentPage / pageSize, pageSize, out totalRecords);
         }
 
         /// <summary>
@@ -464,7 +463,7 @@ namespace MSTech.GestaoEscolar.BLL
                 pageSize = 1;
 
             ACA_CalendarioAnualDAO dao = new ACA_CalendarioAnualDAO();
-            return dao.SelectBy_Pesquisa(cal_ano, cal_descricao, ent_id, true, currentPage / pageSize, pageSize, out totalRecords);
+            return dao.SelectBy_Pesquisa(cal_ano, cal_descricao, ent_id, Guid.Empty, Guid.Empty, 0, true, currentPage / pageSize, pageSize, out totalRecords);
         }
 
         /// <summary>
