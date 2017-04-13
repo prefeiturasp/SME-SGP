@@ -1652,13 +1652,21 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                                //|| item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
                             )
                             && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia
                             && item.tud_idRegencia == tud_id))
                         {
                             if (imgPendenciaFechamento != null)
                                 imgPendenciaFechamento.Visible = possuiPendencia = true;
+                        }
+                        if (!possuiPendencia && VS_listaPendencias[grid.ClientID].Any(item => 
+                            item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                            && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia
+                            && item.tud_idRegencia == tud_id))
+                        {
+                            // Não vai exibir o ícone de pendência, mas vai exibir o link para o relatório
+                            possuiPendencia = true;
                         }
 
                         if (VS_listaPendencias[grid.ClientID].Any(item => 
@@ -1678,12 +1686,19 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
-                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                                //|| item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
                             )
                             && item.tud_id == tud_id))
                         {
                             if (imgPendenciaFechamento != null)
                                 imgPendenciaFechamento.Visible = possuiPendencia = true;
+                        }
+                        if (!possuiPendencia && VS_listaPendencias[grid.ClientID].Any(item =>
+                            item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                            && item.tud_id == tud_id))
+                        {
+                            // Não vai exibir o ícone de pendência, mas vai exibir o link para o relatório
+                            possuiPendencia = true;
                         }
 
                         if (VS_listaPendencias[grid.ClientID].Any(item =>
