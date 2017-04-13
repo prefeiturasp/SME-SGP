@@ -295,12 +295,11 @@ namespace GestaoEscolar.Academico.Sondagem
                     _btnAlterar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
 
-                ImageButton _btnExcluir = e.Row.FindControl("_btnExcluir") as ImageButton;
-                if (_btnExcluir != null)
+                ImageButton btnExcluir = e.Row.FindControl("btnExcluir") as ImageButton;
+                if (btnExcluir != null)
                 {
-                    //TODO: verificar se pode remover item
-                    _btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
-                    _btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
+                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
+                    btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
                 }
                 
                 ImageButton btnCadastrarAgendamento = e.Row.FindControl("btnCadastrarAgendamento") as ImageButton;
