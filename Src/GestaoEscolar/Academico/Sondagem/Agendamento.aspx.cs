@@ -302,7 +302,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 //Marca os períodos já selecionados no agendamento
                 if (VS_sda_id > 0)
                 {
-                    List<ACA_SondagemAgendamentoPeriodo> lstPeriodos = VS_ListaAgendamentoPeriodo;
+                    List<ACA_SondagemAgendamentoPeriodo> lstPeriodos = VS_ListaAgendamentoPeriodo.Where(p => p.sda_id == VS_sda_id).ToList();
                     foreach(RepeaterItem itemN in rptNivelEnsino.Items)
                     {
                         Repeater rptCampos = (Repeater)itemN.FindControl("rptCampos");
