@@ -635,13 +635,11 @@ namespace GestaoEscolar.Academico.Sondagem
             }
             catch (ValidationException ex)
             {
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divInserir\\').scrollTo(0,0);', 0);", true);
                 lblMessagePopUp.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divInserir\\').scrollTo(0,0);', 0);", true);
                 lblMessagePopUp.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.ErroAdicionar").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
