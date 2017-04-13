@@ -65,11 +65,12 @@ namespace MSTech.GestaoEscolar.BLL
             try
             {
                 List<ACA_SondagemAgendamento> lstAgendamentoBanco = SelectAgendamentosBy_Sondagem(snd_id, dao._Banco);
-                
+
+                int idAux = 0;
                 //Salva agendamentos
                 foreach (ACA_SondagemAgendamento sda in lstAgendamento)
                 {
-                    int idAux = sda.sda_id;
+                    idAux = sda.sda_id;
                     if (!Save(sda, dao._Banco))
                         return false;
                     
@@ -78,9 +79,13 @@ namespace MSTech.GestaoEscolar.BLL
 
                     foreach (ACA_SondagemAgendamentoPeriodo sap in lstAgendamentoPeriodo.Where(p => p.sda_id == idAux))
                     {
-                        sap.sda_id = sda.sda_id;
-                        sap.IsNew = true;
-                        if (!ACA_SondagemAgendamentoPeriodoBO.Save(sap, dao._Banco))
+                        if (!ACA_SondagemAgendamentoPeriodoBO.Save(new ACA_SondagemAgendamentoPeriodo
+                                                                        {
+                                                                            snd_id = snd_id,
+                                                                            sda_id = sda.sda_id,
+                                                                            tcp_id = sap.tcp_id,
+                                                                            IsNew = true
+                                                                        }, dao._Banco))
                             return false;
                     }
                 }
