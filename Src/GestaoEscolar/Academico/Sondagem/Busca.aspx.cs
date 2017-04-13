@@ -155,6 +155,7 @@ namespace GestaoEscolar.Academico.Sondagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Busca.ErroCarregarSondagens").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -219,6 +220,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Busca.ErroCarregarDados").ToString(), UtilBO.TipoMensagem.Erro);
                 }
 
@@ -328,16 +330,19 @@ namespace GestaoEscolar.Academico.Sondagem
                         dgvSondagem.PageIndex = 0;
                         dgvSondagem.DataBind();
                         ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "snd_id: " + snd_id);
+                        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                         lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Busca.SondagemExcluidaSucesso").ToString(), UtilBO.TipoMensagem.Sucesso);
                     }
                 }
                 catch (ValidationException ex)
                 {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Busca.ErroExcluirSondagem").ToString(), UtilBO.TipoMensagem.Erro);
                 }
             }

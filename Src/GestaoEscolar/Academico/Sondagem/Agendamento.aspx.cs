@@ -221,6 +221,7 @@ namespace GestaoEscolar.Academico.Sondagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.ErroCarregarSondagem").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -240,6 +241,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     
                     if (ParametroPermanecerTela)
                     {
+                        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                         lblMessage.Text = message;
                         _LoadFromEntity(VS_snd_id);
                     }
@@ -252,24 +254,29 @@ namespace GestaoEscolar.Academico.Sondagem
                 }
                 else
                 {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.ErroSalvarAgendamento").ToString(), UtilBO.TipoMensagem.Erro);
                 }
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (DuplicateNameException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (ArgumentException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.ErroSalvarAgendamento").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -383,11 +390,13 @@ namespace GestaoEscolar.Academico.Sondagem
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.ErroAbrirPopUp").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -436,6 +445,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.ErroCarregarSistema").ToString(), UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -539,11 +549,13 @@ namespace GestaoEscolar.Academico.Sondagem
                 }
                 catch (ValidationException ex)
                 {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -567,11 +579,13 @@ namespace GestaoEscolar.Academico.Sondagem
                 }
                 catch (ValidationException ex)
                 {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -598,11 +612,13 @@ namespace GestaoEscolar.Academico.Sondagem
                 }
                 catch (ValidationException ex)
                 {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -629,11 +645,13 @@ namespace GestaoEscolar.Academico.Sondagem
                 }
                 catch (ValidationException ex)
                 {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -658,11 +676,13 @@ namespace GestaoEscolar.Academico.Sondagem
                 }
                 catch (ValidationException ex)
                 {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
                 }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -823,11 +843,13 @@ namespace GestaoEscolar.Academico.Sondagem
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessagePopUp.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessagePopUp.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.ErroAdicionar").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
