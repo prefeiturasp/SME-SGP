@@ -96,8 +96,9 @@
                                             <div id="mensagemSemPendenciaFechamento" class="mensagemSemPendenciaFechamento" runat="server" visible="false">
                                                 <asp:Literal ID="litMensagemSemPendenciaFechamento" runat="server" Text="<%$ Resources:Academico, ControleTurma.MinhaEscolaGestor.litMensagemSemPendenciaFechamento.Text %>"></asp:Literal>
                                             </div>
+                                            <asp:HiddenField ID="hdnIndiceRptTurmas" runat="server" Value="-1" />
                                             <asp:GridView ID="grvTurma" runat="server" AutoGenerateColumns="false"
-                                                DataKeyNames="tud_id,esc_id,uni_id,tur_id,tud_naoLancarNota,tud_naoLancarFrequencia,cal_id,EscolaTurmaDisciplina,tur_dataEncerramento,tciIds,tud_tipo,tur_tipo,tud_idAluno,tur_idNormal,fav_id"
+                                                DataKeyNames="tud_id,esc_id,uni_id,tur_id,tud_naoLancarNota,tud_naoLancarFrequencia,cal_id,EscolaTurmaDisciplina,tur_dataEncerramento,tciIds,tud_tipo,tur_tipo,tud_idAluno,tur_idNormal,fav_id,tne_id"
                                                 OnRowCommand="grvMinhasTurmas_RowCommand" EmptyDataText="A pesquisa não encontrou resultados." OnDataBound="grvTurmas_DataBound" OnRowDataBound="grvTurma_RowDataBound" SkinID="GridResponsive">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Turma">
@@ -132,8 +133,9 @@
                                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                                     runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                                                     ToolTip="Planejamento" /></span>
-                                                            <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                                Visible="false" />
+                                                            <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                                    CommandArgument='<%# Container.DataItemIndex %>' 
+                                                                    CommandName="PendenciaPlanejamento" />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <%--Diário de Classe--%>
@@ -154,6 +156,9 @@
                                                                     CommandArgument='<%# Container.DataItemIndex %>'
                                                                     runat="server" SkinID="btListaoGestor" CommandName="Listao"
                                                                     ToolTip="<%$ Resources:Mensagens, MSG_Listao %>" /></span>
+                                                            <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                                    CommandArgument='<%# Container.DataItemIndex %>' 
+                                                                    CommandName="PendenciaPlanoAula" />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <%--Frequência --%>
@@ -186,8 +191,9 @@
                                                                     runat="server" SkinID="btFechamentoGestor" CommandName="Fechamento"
                                                                     ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
                                                                     Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' /></span> 
-                                                           <asp:Image ID="imgPendenciaFechamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                                Visible="false" />
+                                                           <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                                    CommandArgument='<%# Container.DataItemIndex %>' 
+                                                                    CommandName="PendenciaFechamento" />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <%--Alunos--%>
@@ -219,8 +225,9 @@
                                         <div id="mensagemSemPendenciaFechamentoExtintas" class="mensagemSemPendenciaFechamento" runat="server" visible="false">
                                             <asp:Literal ID="litMensagemSemPendenciaFechamentoExtintas" runat="server" Text="<%$ Resources:Academico, ControleTurma.MinhaEscolaGestor.litMensagemSemPendenciaFechamento.Text %>"></asp:Literal>
                                         </div>
+                                        <asp:HiddenField ID="hdnIndiceRptTurmas" runat="server" Value="-1" />
                                         <asp:GridView ID="grvTurmasExtintas" runat="server" AutoGenerateColumns="false"
-                                            DataKeyNames="tud_id,esc_id,uni_id,tur_id,tud_naoLancarNota,tud_naoLancarFrequencia,cal_id,EscolaTurmaDisciplina,tur_dataEncerramento,tciIds,tud_tipo,tur_tipo,tud_idAluno,tur_idNormal,fav_id"
+                                            DataKeyNames="tud_id,esc_id,uni_id,tur_id,tud_naoLancarNota,tud_naoLancarFrequencia,cal_id,EscolaTurmaDisciplina,tur_dataEncerramento,tciIds,tud_tipo,tur_tipo,tud_idAluno,tur_idNormal,fav_id,tne_id"
                                             OnRowCommand="grvTurmasExtintas_RowCommand" OnDataBound="grvTurmas_DataBound" OnRowDataBound="grvTurma_RowDataBound" SkinID="GridResponsive">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Turma" HeaderStyle-HorizontalAlign="Left">
@@ -254,8 +261,9 @@
                                                                 CommandArgument='<%# Container.DataItemIndex %>'
                                                                 runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                                                 ToolTip="Planejamento" /></span>
-                                                        <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                            Visible="false" />
+                                                        <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                                CommandArgument='<%# Container.DataItemIndex %>' 
+                                                                CommandName="PendenciaPlanejamento" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Diário de Classe--%>
@@ -276,6 +284,9 @@
                                                                 CommandArgument='<%# Container.DataItemIndex %>'
                                                                 runat="server" SkinID="btListaoGestor" CommandName="Listao"
                                                                 ToolTip="<%$ Resources:Mensagens, MSG_Listao %>" /></span>
+                                                        <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false" 
+                                                                CommandArgument='<%# Container.DataItemIndex %>' 
+                                                                CommandName="PendenciaPlanoAula" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Frequência --%>
@@ -308,8 +319,9 @@
                                                                 runat="server" SkinID="btFechamentoGestor" CommandName="Fechamento"
                                                                 ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
                                                                 Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' /></span>
-                                                        <asp:Image ID="imgPendenciaFechamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                            Visible="false" />
+                                                        <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                                CommandArgument='<%# Container.DataItemIndex %>' 
+                                                                CommandName="PendenciaFechamento" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Alunos--%>
@@ -340,8 +352,9 @@
                                         <div id="mensagemSemPendenciaFechamentoProjeto" class="mensagemSemPendenciaFechamento" runat="server" visible="false">
                                             <asp:Literal ID="litMensagemSemPendenciaFechamentoProjeto" runat="server" Text="<%$ Resources:Academico, ControleTurma.MinhaEscolaGestor.litMensagemSemPendenciaFechamento.Text %>"></asp:Literal>
                                         </div>
+                                        <asp:HiddenField ID="hdnIndiceRptTurmasRec" runat="server" Value="-1" />
                                         <asp:GridView ID="grvProjetosRecParalela" runat="server" AutoGenerateColumns="false"
-                                            DataKeyNames="tud_id,esc_id,uni_id,tur_id,tud_naoLancarNota,tud_naoLancarFrequencia,cal_id,EscolaTurmaDisciplina,tur_dataEncerramento,tciIds,tud_tipo,tur_tipo,tud_idAluno,tur_idNormal,fav_id"
+                                            DataKeyNames="tud_id,esc_id,uni_id,tur_id,tud_naoLancarNota,tud_naoLancarFrequencia,cal_id,EscolaTurmaDisciplina,tur_dataEncerramento,tciIds,tud_tipo,tur_tipo,tud_idAluno,tur_idNormal,fav_id,tne_id"
                                             OnRowCommand="grvProjetosRecParalela_RowCommand" OnDataBound="grvTurmas_DataBound" OnRowDataBound="grvTurma_RowDataBound" SkinID="GridResponsive">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="Turma" HeaderStyle-HorizontalAlign="Left">
@@ -373,8 +386,9 @@
                                                                 CommandArgument='<%# Container.DataItemIndex %>'
                                                                 runat="server" SkinID="btPlanejamentoGestor" CommandName="Planejamento"
                                                                 ToolTip="Planejamento" /></span>
-                                                        <asp:Image ID="imgPendenciaPlanejamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                            Visible="false" />
+                                                        <asp:ImageButton ID="imgPendenciaPlanejamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                                CommandArgument='<%# Container.DataItemIndex %>' 
+                                                                CommandName="PendenciaPlanejamento" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Diário de Classe--%>
@@ -395,6 +409,9 @@
                                                                 CommandArgument='<%# Container.DataItemIndex %>'
                                                                 runat="server" SkinID="btListaoGestor" CommandName="Listao"
                                                                 ToolTip="<%$ Resources:Mensagens, MSG_Listao %>" /></span>
+                                                        <asp:ImageButton ID="imgPendenciaPlanoAula" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                                CommandArgument='<%# Container.DataItemIndex %>' 
+                                                                CommandName="PendenciaPlanoAula" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Frequência --%>
@@ -427,8 +444,9 @@
                                                             runat="server" SkinID="btFechamentoGestor" CommandName="Fechamento"
                                                             ToolTip="<%$ Resources:Mensagens, MSG_EFETIVACAO %>"
                                                             Visible='<%# Convert.ToByte(Eval("tud_tipo")) != (byte)MSTech.GestaoEscolar.BLL.ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada %>' /></span>
-                                                        <asp:Image ID="imgPendenciaFechamento" runat="server" SkinID="imgStatusAlertaPendencia" Width="16px" Height="16px" ImageAlign="Top"
-                                                            Visible="false" />
+                                                        <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia" Visible="false"
+                                                            CommandArgument='<%# Container.DataItemIndex %>' 
+                                                            CommandName="PendenciaFechamento" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <%--Alunos--%>
