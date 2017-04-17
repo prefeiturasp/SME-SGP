@@ -275,7 +275,19 @@ namespace MSTech.GestaoEscolar.BLL
                     var tagsByTud = tagsSalvar.Where(t => t.tud_id == tud_id).ToList();
 
                     var tud_tipo = tagsByTud.First().tud_tipo;
-                    if (tud_tipo == (byte)TurmaDisciplinaTipo.Regencia || tud_tipo == (byte)TurmaDisciplinaTipo.DisciplinaPrincipal)
+
+                    var fav_tipoApuracaoFrequencia = tagsByTud.First().fav_tipoApuracaoFrequencia;
+
+                    if (tud_tipo == (byte)TurmaDisciplinaTipo.Regencia && fav_tipoApuracaoFrequencia == (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.TemposAula)
+                    {
+                        //TODO: [ANA] 5??????
+                        if (tagsByTud.Any(tag => tag.tag_numeroAulas > 5))
+                        {
+                            throw new ValidationException(string.Format("A carga horária diária do componente {0} não deve ser maior que 5.", dicTurmasDisciplinas[tud_id]));
+                        }
+                    }
+
+                    else if (tud_tipo == (byte)TurmaDisciplinaTipo.Regencia || tud_tipo == (byte)TurmaDisciplinaTipo.DisciplinaPrincipal)
                     {
                         if (tagsByTud.Any(tag => tag.tag_numeroAulas > 1))
                         {
