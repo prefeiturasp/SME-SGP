@@ -185,6 +185,42 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna as sondagens não excluídas logicamente, de acordo com a pesquisa para lançamento,
+        /// com paginação.
+        /// </summary>   
+        /// <param name="snd_titulo">Título da sondagem</param>
+        /// <param name="snd_dataInicio">Data de início do agendamento da sondagem</param>
+        /// <param name="snd_dataFim">Data de fim do agendamento da sondagem</param>
+        /// <param name="situacao">Situação da sondagem: 1 - Vigente; 2 - Vigente com lançamento; 3 - Vigente sem lançamento; 4 - Vigência encerrada</param>
+        /// <param name="currentPage">Página atual do grid</param>
+        /// <param name="pageSize">Total de registros por página do grid</param>  
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaSondagensLancamentoPaginado
+        (
+            string snd_titulo
+            , DateTime sda_dataInicio
+            , DateTime sda_dataFim
+            , byte situacao
+            , long doc_id
+            , Guid gru_id
+            , Guid usu_id
+            , bool gestao
+            , bool adm
+            , Guid ent_id
+            , int currentPage
+            , int pageSize
+        )
+        {
+            totalRecords = 0;
+
+            if (pageSize == 0)
+                pageSize = 1;
+
+            ACA_SondagemDAO dao = new ACA_SondagemDAO();
+            return dao.SelectBy_PesquisaLancamento(snd_titulo, sda_dataInicio, sda_dataFim, situacao, doc_id, gru_id, usu_id, gestao, adm, ent_id, true, currentPage / pageSize, pageSize, out totalRecords);
+        }
+
+        /// <summary>
         /// Deleta logicamente uma sondagem
         /// </summary>
         /// <param name="entity">Entidade ACA_Sondagem</param>        

@@ -477,7 +477,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         RelatorioAnaliseSondagem
+        ,
 
+        LancamentoSondagem
     }
 
     [Serializable]

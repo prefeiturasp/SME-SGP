@@ -66,6 +66,146 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna as sondagens não excluídas logicamente, de acordo com a pesquisa para lançamento,
+        /// com paginação.
+        /// </summary>   
+        /// <param name="snd_titulo">Título da sondagem</param>
+        /// <param name="snd_dataInicio">Data de início do agendamento da sondagem</param>
+        /// <param name="snd_dataFim">Data de fim do agendamento da sondagem</param>
+        /// <param name="situacao">Situação da sondagem: 1 - Vigente; 2 - Vigente com lançamento; 3 - Vigente sem lançamento; 4 - Vigência encerrada</param>
+        /// <param name="currentPage">Página atual do grid</param>
+        /// <param name="pageSize">Total de registros por página do grid</param>   
+        public DataTable SelectBy_PesquisaLancamento
+        (
+            string snd_titulo
+            , DateTime sda_dataInicio
+            , DateTime sda_dataFim
+            , byte situacao
+            , long doc_id
+            , Guid gru_id
+            , Guid usu_id
+            , bool gestao
+            , bool adm
+            , Guid ent_id
+            , bool paginado
+            , int currentPage
+            , int pageSize
+            , out int totalRecords
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_Sondagem_SelectBy_PesquisaLancamento", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.ParameterName = "@snd_titulo";
+                Param.Size = 200;
+                if (!string.IsNullOrEmpty(snd_titulo))
+                    Param.Value = snd_titulo;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.DateTime;
+                Param.ParameterName = "@sda_dataInicio";
+                Param.Size = 16;
+                if (sda_dataInicio != new DateTime())
+                    Param.Value = sda_dataInicio;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.DateTime;
+                Param.ParameterName = "@sda_dataFim";
+                Param.Size = 16;
+                if (sda_dataInicio != new DateTime())
+                    Param.Value = sda_dataFim;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Byte;
+                Param.ParameterName = "@situacao";
+                Param.Size = 1;
+                if (situacao > 0)
+                    Param.Value = situacao;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@doc_id";
+                Param.Size = 16;
+                if (doc_id > 0)
+                    Param.Value = doc_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@gru_id";
+                Param.Size = 16;
+                Param.Value = gru_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@usu_id";
+                Param.Size = 16;
+                Param.Value = usu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@gestao";
+                Param.Size = 1;
+                Param.Value = gestao;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@adm";
+                Param.Size = 1;
+                Param.Value = adm;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@ent_id";
+                Param.Size = 16;
+                Param.Value = ent_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                if (paginado)
+                    totalRecords = qs.Execute(currentPage, pageSize);
+                else
+                {
+                    qs.Execute();
+                    totalRecords = qs.Return.Rows.Count;
+                }
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Parâmetros para efetuar a inclusão preservando a data de criação
         /// </summary>
         /// <param name="qs"></param>

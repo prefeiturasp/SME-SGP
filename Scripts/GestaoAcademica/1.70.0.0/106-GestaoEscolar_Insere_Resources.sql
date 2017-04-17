@@ -872,7 +872,175 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Data início do agendamento não pode ser anterior à data atual.'
 
--- Fechar transação     
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.lblLegend.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Consulta de sondagens'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.lblTitulo.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Título'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.btnPesquisar.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Pesquisar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.btnLimparPesquisa.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Limpar pesquisa'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.lblLegendResultados.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Resultados'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.dgvSondagem.EmptyDataText' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nenhuma sondagem encontrada para os filtros informados.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.lblDataInicio.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.cvDataInicio.ErrorMessage' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.lblDataFim.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.cvDataFim.ErrorMessage' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.lblSituacao.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Situação'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.ddlSituacao.Selecione' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '-- Selecione uma situação --'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.ddlSituacao.Vigente' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Vigente'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.ddlSituacao.VigenteComLançamento' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Vigente com lançamento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.ddlSituacao.VigenteSemLançamento' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Vigente sem lançamento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.ddlSituacao.VigenciaEncerrada' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Vigência encerrada'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.lblCodigoTurma.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Código da turma'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.dgvSondagem.HeaderTitulo' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Título'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.dgvSondagem.HeaderSituacao' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Situação'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.dgvSondagem.HeaderDataInicio' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data início'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.dgvSondagem.HeaderDataFim' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data fim'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.dgvSondagem.HeaderResponder' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Responder'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.dgvSondagem.btnResponder.ToolTip' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Responder sondagem'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Busca.MsgPreencherFiltro' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'É necessário preencher pelo menos um filtro para realizar a pesquisa.'
+
+-- Fechar transação
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
 
