@@ -320,10 +320,19 @@ namespace GestaoEscolar.Academico.Sondagem
                         ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "snd_id: " + snd.snd_id);
                         message = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.SondagemAlteradaSucesso").ToString(), UtilBO.TipoMensagem.Sucesso);
                     }
-
-                    __SessionWEB.PostMessages = message;
-                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/Sondagem/Busca.aspx", false);
-                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    if (ParametroPermanecerTela)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                        lblMessage.Text = message;
+                        VS_snd_id = snd.snd_id;
+                        _LoadFromEntity(VS_snd_id);
+                    }
+                    else
+                    {
+                        __SessionWEB.PostMessages = message;
+                        Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/Sondagem/Busca.aspx", false);
+                        HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    }
                 }
                 else
                 {
