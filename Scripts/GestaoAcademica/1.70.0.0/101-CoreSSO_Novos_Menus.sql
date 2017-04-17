@@ -61,6 +61,22 @@ SET XACT_ABORT ON
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Registro de Classe' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Sondagem' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Consulta de sondagens'
+		,@SiteMap1Url = '~/Classe/LancamentoSondagem/Busca.aspx'
+		,@SiteMap2Nome = 'Lançamento de sondagem'
+		,@SiteMap2Url = '~/Classe/LancamentoSondagem/Cadastro.aspx'
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
 		
 -- Fechar transação
 SET XACT_ABORT OFF
