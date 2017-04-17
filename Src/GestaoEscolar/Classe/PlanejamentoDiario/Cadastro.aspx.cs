@@ -215,7 +215,6 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //TODO: [ANA] preencher os campos dos dias da semana
                 if (VS_PeriodoEfetivado(Convert.ToInt32(rbtPeriodo.SelectedValue), UCCCalendario1.Valor,
                                         Convert.ToInt64(gdvAulas.DataKeys[e.Row.RowIndex]["tur_id"]),
                                         Convert.ToDateTime(gdvAulas.DataKeys[e.Row.RowIndex]["cap_dataFim"])))
