@@ -472,13 +472,6 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
             }
         }
 
-        public delegate void SelectedIndexChangedTurma();
-        public event SelectedIndexChangedTurma IndexChanged_Turma;
-        public delegate void SelectedIndexChangedCalendario();
-        public event SelectedIndexChangedCalendario IndexChanged_Calendario;
-        public delegate void SelectedIndexChangedCurriculoPeriodo();
-        public event SelectedIndexChangedCurriculoPeriodo IndexChanged_CurriculoPeriodo;
-
         #endregion Delegates
 
         #region Page Life Cycle
@@ -660,20 +653,20 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                              "&crp_id=" + UCComboCurriculoPeriodo.Valor[2] +
                              "&tur_id=" + UCComboTurma.Valor[0] +
                              "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
-                             "&doc_id=" + __SessionWEB.__UsuarioWEB.Docente.doc_id +
                              "&snd_descricao=" + txtTituloSondagem.Text +
                              "&dataInicio=" + txtDataInicio.Text +
                              "&dataFim=" + txtDataFim.Text +
                              "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) +
                              "&usu_id=" + __SessionWEB.__UsuarioWEB.Usuario.usu_id +
                              "&gru_id=" + __SessionWEB.__UsuarioWEB.Grupo.gru_id +
-                             "&TipoRel=" +
+                             "&suprimirPercentual=" + chkSuprimirPercentual.Checked +
                              "&dre=" + UCComboUAEscola.TextoComboUA +
                              "&escola=" + UCComboUAEscola.TextoComboEscola +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
                                                    , ApplicationWEB.LogoRelatorioSSRS) +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
-                             "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria");
+                             "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria") +
+                             "&documentoOficial=false";
 
                 CFG_RelatorioBO.CallReport("Relatorios", report, parametros, HttpContext.Current);
             }
