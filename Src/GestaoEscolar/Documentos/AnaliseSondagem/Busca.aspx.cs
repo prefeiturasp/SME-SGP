@@ -9,6 +9,7 @@ using ReportNameGestaoAcademicaDocumentosDocente = MSTech.GestaoEscolar.BLL.Repo
 using CFG_RelatorioBO = MSTech.GestaoEscolar.BLL.CFG_RelatorioBO;
 using System.Collections.Generic;
 using System.Linq;
+using MSTech.Validation.Exceptions;
 
 namespace GestaoEscolar.Documentos.AnaliseSondagem
 {
@@ -505,7 +506,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                 if (!IsPostBack)
                 {
                     InicializarTela();
-                    CarregarBusca();
+                    VerificaBusca();
                 }
             }
             catch (Exception error)
@@ -632,25 +633,59 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
         /// </summary>
         private void GerarRelatorio()
         {
-            string report, parametros;
+            try
+            {
+                string report, parametros;
 
-            report = ((int)ReportNameGestaoAcademicaDocumentosDocente.DocDctAnaliseSondagem).ToString();
-            parametros = "uad_idSuperiorGestao=" + UCComboUAEscola.Uad_ID +
-                         "&esc_id=" + UCComboUAEscola.Esc_ID +
-                         "&uni_id=" + UCComboUAEscola.Uni_ID +
-                         "&cal_id=" + UCCCalendario.Valor +
-                         "&cal_ano=" + UCCCalendario.Cal_ano.ToString() +
-                         "&cur_id=" + UCCCursoCurriculo.Valor[0] +
-                         "&crr_id=" + UCCCursoCurriculo.Valor[1] +
-                         "&crp_id=" + UCComboCurriculoPeriodo.Valor[2] +
-                         "&tur_id=" + UCComboTurma.Valor[0] +
-                         "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
-                         "&doc_id=" + __SessionWEB.__UsuarioWEB.Docente.doc_id +
-                         "&snd_descricao" + txtTituloSondagem.Text +
-                         "&dataInicio" + txtDataInicio.Text +
-                         "&dataFim" + txtDataFim.Text;
+                DateTime dataInicio = new DateTime();
+                DateTime dataFim = new DateTime();
 
-            CFG_RelatorioBO.CallReport("Relatorios", report, parametros, HttpContext.Current);
+                if (string.IsNullOrEmpty(txtDataInicio.Text) || !DateTime.TryParse(txtDataInicio.Text, out dataInicio))
+                    throw new ValidationException("Data início deve estar no formato DD/MM/AAAA.");
+
+                if (string.IsNullOrEmpty(txtDataFim.Text) || !DateTime.TryParse(txtDataFim.Text, out dataFim))
+                    throw new ValidationException("Data fim deve estar no formato DD/MM/AAAA.");
+
+                if (dataInicio > dataFim)
+                    throw new ValidationException("Data fim da análise deve ser maior ou igual à data início.");
+
+                report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.AnaliseSondagem).ToString();
+                parametros = "uad_idSuperiorGestao=" + UCComboUAEscola.Uad_ID +
+                             "&esc_id=" + UCComboUAEscola.Esc_ID +
+                             "&uni_id=" + UCComboUAEscola.Uni_ID +
+                             "&cal_id=" + UCCCalendario.Valor +
+                             "&cal_ano=" + UCCCalendario.Cal_ano.ToString() +
+                             "&cur_id=" + UCCCursoCurriculo.Valor[0] +
+                             "&crr_id=" + UCCCursoCurriculo.Valor[1] +
+                             "&crp_id=" + UCComboCurriculoPeriodo.Valor[2] +
+                             "&tur_id=" + UCComboTurma.Valor[0] +
+                             "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
+                             "&doc_id=" + __SessionWEB.__UsuarioWEB.Docente.doc_id +
+                             "&snd_descricao=" + txtTituloSondagem.Text +
+                             "&dataInicio=" + txtDataInicio.Text +
+                             "&dataFim=" + txtDataFim.Text +
+                             "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) +
+                             "&usu_id=" + __SessionWEB.__UsuarioWEB.Usuario.usu_id +
+                             "&gru_id=" + __SessionWEB.__UsuarioWEB.Grupo.gru_id +
+                             "&TipoRel=" +
+                             "&dre=" + UCComboUAEscola.TextoComboUA +
+                             "&escola=" + UCComboUAEscola.TextoComboEscola +
+                             "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
+                                                   , ApplicationWEB.LogoRelatorioSSRS) +
+                             "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
+                             "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria");
+
+                CFG_RelatorioBO.CallReport("Relatorios", report, parametros, HttpContext.Current);
+            }
+            catch (ValidationException ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar gerar o relatório.", UtilBO.TipoMensagem.Erro);
+            }
         }
 
         /// <summary>
@@ -673,51 +708,30 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
             filtros.Add("snd_dataIncio", Convert.ToDateTime(txtDataInicio.Text).ToString());
             filtros.Add("snd_dataFim", Convert.ToDateTime(txtDataFim.Text).ToString());
 
-            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioSondagem, Filtros = filtros };
+            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAnaliseSondagem, Filtros = filtros };
 
         }
 
         /// <summary>
         /// Método carrega os filtros última busca realizada
         /// </summary>
-        protected void CarregarBusca()
+        protected void VerificaBusca()
         {
-            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioSondagem)
+            try
             {
-                // Recuperar busca realizada e pesquisar automaticamente
-                string valor, valor2, valor3;
-                
-                long doc_id = -1;
-                UCComboUAEscola.Inicializar();
-
-                if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAnaliseSondagem)
                 {
-                    doc_id = __SessionWEB.__UsuarioWEB.Docente.doc_id;
-                    UCComboUAEscola.InicializarVisaoIndividual(doc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                    // Recuperar busca realizada e pesquisar automaticamente
+                    string valor, valor2, valor3;
 
-                    string esc_id;
-                    string uni_id;
+                    long doc_id = -1;
+                    UCComboUAEscola.Inicializar();
 
-                    if ((__SessionWEB.BuscaRealizada.Filtros.TryGetValue("esc_id", out esc_id)) &&
-                        (__SessionWEB.BuscaRealizada.Filtros.TryGetValue("uni_id", out uni_id)))
+                    if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual)
                     {
-                        UCComboUAEscola.SelectedValueEscolas = new[] { Convert.ToInt32(esc_id), Convert.ToInt32(uni_id) };
-                        UCComboUAEscola_IndexChangedUnidadeEscola();
-                    }
-                }
-                else
-                {
-                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("uad_idSuperior", out valor);
-                    if (!string.IsNullOrEmpty(valor))
-                    {
-                        UCComboUAEscola.Uad_ID = new Guid(valor);
-                        UCComboUAEscola.CarregaEscolaPorUASuperiorSelecionada();
+                        doc_id = __SessionWEB.__UsuarioWEB.Docente.doc_id;
+                        UCComboUAEscola.InicializarVisaoIndividual(doc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
 
-                        if (UCComboUAEscola.Uad_ID != Guid.Empty)
-                        {
-                            UCComboUAEscola.FocoEscolas = true;
-                            UCComboUAEscola.PermiteAlterarCombos = true;
-                        }
                         string esc_id;
                         string uni_id;
 
@@ -728,37 +742,66 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                             UCComboUAEscola_IndexChangedUnidadeEscola();
                         }
                     }
+                    else
+                    {
+                        __SessionWEB.BuscaRealizada.Filtros.TryGetValue("uad_idSuperior", out valor);
+                        if (!string.IsNullOrEmpty(valor))
+                        {
+                            UCComboUAEscola.Uad_ID = new Guid(valor);
+                            UCComboUAEscola.CarregaEscolaPorUASuperiorSelecionada();
+
+                            if (UCComboUAEscola.Uad_ID != Guid.Empty)
+                            {
+                                UCComboUAEscola.FocoEscolas = true;
+                                UCComboUAEscola.PermiteAlterarCombos = true;
+                            }
+                            string esc_id;
+                            string uni_id;
+
+                            if ((__SessionWEB.BuscaRealizada.Filtros.TryGetValue("esc_id", out esc_id)) &&
+                                (__SessionWEB.BuscaRealizada.Filtros.TryGetValue("uni_id", out uni_id)))
+                            {
+                                UCComboUAEscola.SelectedValueEscolas = new[] { Convert.ToInt32(esc_id), Convert.ToInt32(uni_id) };
+                                UCComboUAEscola_IndexChangedUnidadeEscola();
+                            }
+                        }
+                    }
+
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("cal_id", out valor);
+                    UCCCalendario.Valor = Convert.ToInt32(valor);
+                    UCCCalendario_IndexChanged();
+
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("cur_id", out valor2);
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("crr_id", out valor);
+                    UCCCursoCurriculo.Valor = new[] { Convert.ToInt32(valor2), Convert.ToInt32(valor) };
+                    UCCCursoCurriculo_IndexChanged();
+
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("crp_id", out valor);
+                    if (doc_id <= 0)
+                        UCComboCurriculoPeriodo.Valor = new[] { UCCCursoCurriculo.Valor[0], UCCCursoCurriculo.Valor[1], Convert.ToInt32(valor) };
+                    else
+                        _VS_doc_id = doc_id;
+                    UCComboCurriculoPeriodo__OnSelectedIndexChange();
+
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tur_id", out valor);
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("ttn_id", out valor2);
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("crp_idTurma", out valor3);
+                    UCComboTurma.Valor = new[] { Convert.ToInt64(valor), Convert.ToInt64(valor3), Convert.ToInt64(valor2) };
+
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_descricao", out valor);
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataIncio", out valor2);
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataFim", out valor3);
+                    txtTituloSondagem.Text = valor;
+                    txtDataInicio.Text = valor2;
+                    txtDataFim.Text = valor3;
+
+                    updFiltros.Update();
                 }
-
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("cal_id", out valor);
-                UCCCalendario.Valor = Convert.ToInt32(valor);
-                UCCCalendario_IndexChanged();
-
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("cur_id", out valor2);
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("crr_id", out valor);
-                UCCCursoCurriculo.Valor = new[] { Convert.ToInt32(valor2), Convert.ToInt32(valor) };
-                UCCCursoCurriculo_IndexChanged();
-
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("crp_id", out valor);
-                if (doc_id <= 0)
-                    UCComboCurriculoPeriodo.Valor = new[] { UCCCursoCurriculo.Valor[0], UCCCursoCurriculo.Valor[1], Convert.ToInt32(valor) };
-                else
-                    _VS_doc_id = doc_id;
-                UCComboCurriculoPeriodo__OnSelectedIndexChange();
-
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tur_id", out valor);
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("ttn_id", out valor2);
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("crp_idTurma", out valor3);
-                UCComboTurma.Valor = new[] { Convert.ToInt64(valor), Convert.ToInt64(valor3), Convert.ToInt64(valor2) };
-
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_descricao", out valor);
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataIncio", out valor2);
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataFim", out valor3);
-                txtTituloSondagem.Text = valor;
-                txtDataInicio.Text = valor2;
-                txtDataFim.Text = valor3;
-
-                updFiltros.Update();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
             }
         }
 
@@ -775,7 +818,13 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
             }
         }
 
-        #endregion Eventos
+        protected void btnLimparPesquisa_Click(object sender, EventArgs e)
+        {
+            // Limpa busca da sessão.
+            __SessionWEB.BuscaRealizada = new BuscaGestao();
+            Response.Redirect("Busca.aspx", false);
+        }
 
+        #endregion Eventos
     }
 }

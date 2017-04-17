@@ -36,7 +36,7 @@
                         <asp:RequiredFieldValidator ID="rfvDataInicio" runat="server" ErrorMessage="Data inicial da análise é obrigatória."
                             Display="Dynamic" ControlToValidate="txtDataInicio" ValidationGroup="Relatorio">*</asp:RequiredFieldValidator>
                         <asp:CustomValidator ID="cvDataInicio" runat="server" ControlToValidate="txtDataInicio"
-                            Display="Dynamic" ErrorMessage="" OnServerValidate="ValidarData_ServerValidate">*</asp:CustomValidator>
+                            Display="Dynamic" ErrorMessage="Data início deve estar no formato DD/MM/AAAA." OnServerValidate="ValidarData_ServerValidate">*</asp:CustomValidator>
                     </div>
                     &nbsp;
                     <div style="display: inline-block">
@@ -45,10 +45,10 @@
                         <asp:RequiredFieldValidator ID="rfvDataFim" runat="server" ErrorMessage="Data final da análise é obrigatória."
                             Display="Dynamic" ControlToValidate="txtDataFim" ValidationGroup="Relatorio">*</asp:RequiredFieldValidator>
                         <asp:CustomValidator ID="cvDataFim" runat="server" ControlToValidate="txtDataFim"
-                            ValidationGroup="Relatorio" Display="Dynamic" ErrorMessage="" OnServerValidate="ValidarData_ServerValidate">*</asp:CustomValidator>
+                            ValidationGroup="Relatorio" Display="Dynamic" ErrorMessage="Data fim deve estar no formato DD/MM/AAAA." OnServerValidate="ValidarData_ServerValidate">*</asp:CustomValidator>
                         <asp:CompareValidator ID="cpvDataFim" runat="server" ControlToValidate="txtDataFim"
                             ValidationGroup="Relatorio" Display="Dynamic" Type="Date" Operator="GreaterThanEqual"
-                            ControlToCompare="txtDataInicio" ErrorMessage="Data da análise deve ser maior ou igual a data inicial da análise.">*</asp:CompareValidator>
+                            ControlToCompare="txtDataInicio" ErrorMessage="Data fim da análise deve ser maior ou igual à data início.">*</asp:CompareValidator>
                     </div>
                 </div>
 
@@ -65,8 +65,11 @@
                 
                 <uc1:UCComboTurma runat="server" ID="UCComboTurma" Obrigatorio="true" _MostrarMessageSelecione="true" PermiteEditar="false" ValidationGroup="Relatorio" />
 
+                <asp:CheckBox runat="server" ID="chkSuprimirPercentual" Text="Suprimir percentual das respostas" />
+
                 <div class="right area-botoes-bottom">
                     <asp:Button ID="btnGerar" runat="server" Text="Gerar documento" OnClick="btnGerar_Click" ValidationGroup="Relatorio" />
+                    <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click" />
                 </div>
             </fieldset>
         </ContentTemplate>

@@ -476,7 +476,7 @@ namespace MSTech.GestaoEscolar.BLL
         Sondagem
         ,
 
-        RelatorioSondagem
+        RelatorioAnaliseSondagem
 
     }
 
@@ -604,7 +604,8 @@ namespace MSTech.GestaoEscolar.BLL
         DivergenciasRematriculas = 317,
         RelatorioObjetoAprendizagem = 318,
         AlunosJustificativaFalta = 319,
-        DivergenciasAulasPrevistas = 320
+        DivergenciasAulasPrevistas = 320,
+        AnaliseSondagem = 321
     }
 
     /// <summary>
@@ -625,8 +626,7 @@ namespace MSTech.GestaoEscolar.BLL
         DocDctRelSinteseEnriquecimentoCurricular = 264,
         DocDctPlanoAnual = 281,
         DocDctPlanoCicloSerie = 282,
-        DocDctAlunosPendenciaEfetivacao = 283,
-        DocDctAnaliseSondagem = 321
+        DocDctAlunosPendenciaEfetivacao = 283
     }
 
     /// <summary>

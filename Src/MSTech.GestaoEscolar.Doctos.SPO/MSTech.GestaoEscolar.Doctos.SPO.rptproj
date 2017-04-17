@@ -18,6 +18,10 @@
       <FullPath>AlunosBaixaFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>AlunosJustificativaFalta.rdl</Name>
+      <FullPath>AlunosJustificativaFalta.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>AtaEnriquecimentoCurricular.rdl</Name>
       <FullPath>AtaEnriquecimentoCurricular.rdl</FullPath>
     </ProjectItem>
@@ -28,6 +32,10 @@
     <ProjectItem>
       <Name>AulasSemPlanoAula.rdl</Name>
       <FullPath>AulasSemPlanoAula.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DivergenciasAulasPrevistas.rdl</Name>
+      <FullPath>DivergenciasAulasPrevistas.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>DivergenciasRematriculas.rdl</Name>
@@ -110,6 +118,10 @@
       <FullPath>IndicadorFrequenciaPeriodoCurso.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>RelatorioObjetoAprendizagem.rdl</Name>
+      <FullPath>RelatorioObjetoAprendizagem.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>SubAtaEnriquecimentoCurricular.rdl</Name>
       <FullPath>SubAtaEnriquecimentoCurricular.rdl</FullPath>
     </ProjectItem>
@@ -138,16 +150,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>RelatorioObjetoAprendizagem.rdl</Name>
-      <FullPath>RelatorioObjetoAprendizagem.rdl</FullPath>
-    </ProjectItem>
-	<ProjectItem>
-      <Name>AlunosJustificativaFalta.rdl</Name>
-      <FullPath>AlunosJustificativaFalta.rdl</FullPath>
-    </ProjectItem>
-	<ProjectItem>
-      <Name>DivergenciasAulasPrevistas.rdl</Name>
-      <FullPath>DivergenciasAulasPrevistas.rdl</FullPath>
+      <Name>AnaliseSondagem.rdl</Name>
+      <FullPath>AnaliseSondagem.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

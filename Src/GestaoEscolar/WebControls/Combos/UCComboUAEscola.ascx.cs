@@ -596,6 +596,17 @@ namespace GestaoEscolar.WebControls.Combos
         }
 
         /// <summary>
+        /// Propriedade que retorna o valor selecionado no combo escola.
+        /// </summary>
+        public string TextoComboEscola
+        {
+            get
+            {
+                return ddlUnidadeEscola.SelectedItem.Text;
+            }
+        }
+
+        /// <summary>
         /// Propriedade que retorna o valor em inteiro selecionado no combo escola.
         /// </summary>
         public string ValorComboEscolaSelectedValue
@@ -614,6 +625,17 @@ namespace GestaoEscolar.WebControls.Combos
             get
             {
                 return ddlUA.SelectedItem.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Propriedade que retorna o valor selecionado no combo UA.
+        /// </summary>
+        public string TextoComboUA
+        {
+            get
+            {
+                return ddlUA.SelectedItem.Text;
             }
         }
 

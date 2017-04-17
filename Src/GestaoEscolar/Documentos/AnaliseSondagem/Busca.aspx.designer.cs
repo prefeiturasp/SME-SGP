@@ -247,6 +247,15 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem {
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCCTurma UCComboTurma;
         
         /// <summary>
+        /// chkSuprimirPercentual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkSuprimirPercentual;
+        
+        /// <summary>
         /// btnGerar control.
         /// </summary>
         /// <remarks>
@@ -254,5 +263,14 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGerar;
+        
+        /// <summary>
+        /// btnLimparPesquisa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimparPesquisa;
     }
 }

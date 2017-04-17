@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Análise de Sondagem</Value>
+                <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox10</rd:DefaultName>
+        <Left>0.03175cm</Left>
+        <Height>0.66287cm</Height>
+        <Width>27.66825cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <Height>6.59939cm</Height>
+    <Style />
+  </Body>
+  <Width>27.7cm</Width>
+  <Page>
+    <PageHeader>
+      <Height>2.64829cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Rectangle Name="Rectangle3">
+          <ReportItems>
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!nomeMunicipio.Value</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>0.1905cm</Top>
+              <Left>7.06502cm</Left>
+              <Height>0.4cm</Height>
+              <Width>13.06996cm</Width>
+              <Style>
+                <Border />
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!nomeSecretaria.Value</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>0.73427cm</Top>
+              <Left>7.06502cm</Left>
+              <Height>0.4cm</Height>
+              <Width>13.06996cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border />
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox5">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=IIF(Parameters!dre.Value &lt;&gt; "", Parameters!dre.Value, IIF(Parameters!escola.Value &lt;&gt; "", Parameters!escola.Value, ""))</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>1.27185cm</Top>
+              <Left>7.06502cm</Left>
+              <Height>0.4cm</Height>
+              <Width>13.06996cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border />
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox6">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=IIF(Parameters!escola.Value &lt;&gt; "" AND Parameters!dre.Value &lt;&gt; "" AND Parameters!escola.Value &lt;&gt; Parameters!dre.Value, Parameters!escola.Value, "")</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>1.8219cm</Top>
+              <Left>7.06502cm</Left>
+              <Height>0.4cm</Height>
+              <Width>13.06996cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border />
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Image Name="Image3">
+              <Source>External</Source>
+              <Value>=Parameters!logo.Value</Value>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.19314cm</Top>
+              <Left>0.03175cm</Left>
+              <Height>2.12cm</Height>
+              <Width>2.12cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+          </ReportItems>
+          <KeepTogether>true</KeepTogether>
+          <Height>2.64829cm</Height>
+          <Width>27.7cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Rectangle>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageFooter>
+      <Height>0.67056cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!PageNumber</Value>
+                  <Style>
+                    <FontSize>10.5pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.07056cm</Top>
+          <Left>24.80312cm</Left>
+          <Height>0.6cm</Height>
+          <Width>2.89688cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
+    <LeftMargin>1cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DSGestaoEscolar">
+      <DataSourceReference>DSGestaoEscolar</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>3148546a-ae34-4a9e-b7ec-640b7cba6b76</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DSGestaoEscolar</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@uad_idSuperiorGestao">
+            <Value>=Parameters!uad_idSuperiorGestao.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@esc_id">
+            <Value>=Parameters!esc_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@uni_id">
+            <Value>=Parameters!uni_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@cal_id">
+            <Value>=Parameters!cal_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@cal_ano">
+            <Value>=Parameters!cal_ano.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@cur_id">
+            <Value>=Parameters!cur_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@crr_id">
+            <Value>=Parameters!crr_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@crp_id">
+            <Value>=Parameters!crp_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@tur_id">
+            <Value>=Parameters!tur_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ent_id">
+            <Value>=Parameters!ent_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@doc_id">
+            <Value>=Parameters!doc_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@snd_descricao">
+            <Value>=Parameters!snd_descricao.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@dataInicio">
+            <Value>=Parameters!dataInicio.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@dataFim">
+            <Value>=Parameters!dataFim.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@suprimirPercentual">
+            <Value>=Parameters!suprimirPercentual.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@adm">
+            <Value>=Parameters!adm.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@usu_id">
+            <Value>=Parameters!usu_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@gru_id">
+            <Value>=Parameters!gru_id.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>NEW_Relatorio_0005_AnaliseSondagem</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="uad_idSuperiorGestao">
+      <DataType>String</DataType>
+      <Prompt>uad id Superior Gestao</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="esc_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>esc id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="uni_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>uni id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cal_id">
+      <DataType>Integer</DataType>
+      <Prompt>cal id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cal_ano">
+      <DataType>Integer</DataType>
+      <Prompt>cal ano</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cur_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>cur id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="crr_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>crr id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="crp_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>crp id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tur_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>tur id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ent_id">
+      <DataType>String</DataType>
+      <Prompt>ent id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="snd_descricao">
+      <DataType>String</DataType>
+      <Prompt>snd descricao</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="dataInicio">
+      <DataType>DateTime</DataType>
+      <Prompt>data Inicio</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="dataFim">
+      <DataType>DateTime</DataType>
+      <Prompt>data Fim</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="adm">
+      <DataType>Boolean</DataType>
+      <Prompt>adm</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="usu_id">
+      <DataType>String</DataType>
+      <Prompt>usu id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="gru_id">
+      <DataType>String</DataType>
+      <Prompt>gru id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="dre">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>dre</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="escola">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>escola</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="logo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>logo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nomeMunicipio">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>nomeMunicipio</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nomeSecretaria">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>nomeSecretaria</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="suprimirPercentual">
+      <DataType>Boolean</DataType>
+      <Prompt>suprimir Percentual</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>35c468fc-db1d-4a4e-a483-483816964bc5</rd:ReportID>
+</Report>
