@@ -263,6 +263,7 @@ namespace MSTech.GestaoEscolar.BLL
             , byte origemLogMedia = 0
             , byte origemLogNota = 0
             , byte tipoLogNota = 0
+            , long tud_idRegencia = -1
         )
         {
             TalkDBTransaction banco = new CLS_TurmaNotaAlunoDAO()._Banco.CopyThisInstance();
@@ -270,7 +271,7 @@ namespace MSTech.GestaoEscolar.BLL
 
             try
             {
-                return Save(listTurmaNotaAluno, listTurmaNota, listAlunoAvaliacaoTurmaDisciplinaMedia, tur_id, tud_id, tpc_id, fav_id, tdt_posicao, banco, ent_id, fechamentoAutomatico, usu_id, origemLogMedia, origemLogNota, tipoLogNota);
+                return Save(listTurmaNotaAluno, listTurmaNota, listAlunoAvaliacaoTurmaDisciplinaMedia, tur_id, tud_id, tpc_id, fav_id, tdt_posicao, banco, ent_id, fechamentoAutomatico, usu_id, origemLogMedia, origemLogNota, tipoLogNota, tud_idRegencia);
             }
             catch (Exception err)
             {
@@ -306,6 +307,7 @@ namespace MSTech.GestaoEscolar.BLL
             , byte origemLogMedia = 0
             , byte origemLogNota = 0
             , byte tipoLogNota = 0
+            , long tud_idRegencia = -1
         )
         {
             TalkDBTransaction banco = new CLS_TurmaNotaAlunoDAO()._Banco.CopyThisInstance();
@@ -318,7 +320,7 @@ namespace MSTech.GestaoEscolar.BLL
                     throw new ValidationException("Erro ao salvar as notas.");
                 }
 
-                return Save(listTurmaNotaAluno, listTurmaNota, listAlunoAvaliacaoTurmaDisciplinaMedia, tur_id, tud_id, tpc_id, fav_id, tdt_posicao, banco, ent_id, fechamentoAutomatico, usu_id, origemLogMedia, origemLogNota, tipoLogNota);
+                return Save(listTurmaNotaAluno, listTurmaNota, listAlunoAvaliacaoTurmaDisciplinaMedia, tur_id, tud_id, tpc_id, fav_id, tdt_posicao, banco, ent_id, fechamentoAutomatico, usu_id, origemLogMedia, origemLogNota, tipoLogNota, tud_idRegencia);
             }
             catch (Exception err)
             {
@@ -368,6 +370,7 @@ namespace MSTech.GestaoEscolar.BLL
             , byte origemLogMedia = 0
             , byte origemLogNota = 0
             , byte tipoLogNota = 0
+            , long tud_idRegencia = -1
         )
         {
             string errorMSG = string.Empty;
@@ -475,6 +478,10 @@ namespace MSTech.GestaoEscolar.BLL
                     if (fechamentoAutomatico && tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, ent_id))
                     {
                         CLS_AlunoFechamentoPendenciaBO.SalvarFilaNota(tud_id, tpc_id, banco);
+                        if (tud_idRegencia > 0)
+                        {
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaNota(tud_idRegencia, tpc_id, banco);
+                        }
                     }
 
                     if (origemLogMedia > 0)

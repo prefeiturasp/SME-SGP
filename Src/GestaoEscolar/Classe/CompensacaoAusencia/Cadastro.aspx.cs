@@ -910,10 +910,10 @@ namespace GestaoEscolar.Classe.CompensacaoAusencia
                                     CacheManager.Factory.RemoveByPattern(pattern);
                                     pattern = String.Format("{0}_{1}", ModelCache.FECHAMENTO_AUTO_FINAL_COMPONENTES_REGENCIA_PATTERN_KEY, tur_id);
                                     CacheManager.Factory.RemoveByPattern(pattern);
-
                                     pattern = String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, entTurma.esc_id, entTurma.uni_id, entTurma.cal_id, entityTurmaDisciplina.tud_id);
                                     CacheManager.Factory.Remove(pattern);
-
+                                    pattern = String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, entTurma.esc_id, entTurma.uni_id, entTurma.cal_id, entityTurmaDisciplina.tud_id);
+                                    CacheManager.Factory.Remove(pattern);
                                     CLS_AlunoFechamentoPendenciaBO.Processar(entityTurmaDisciplina.tud_id, (byte)AvaliacaoTipo.Final, pendencias);
                                 }
                                 catch (Exception ex)
