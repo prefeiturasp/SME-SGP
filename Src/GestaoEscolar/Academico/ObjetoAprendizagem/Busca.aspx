@@ -24,14 +24,14 @@
     <asp:UpdatePanel ID="_updDadosBasicos" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <fieldset id="fds" runat="server">
-                <legend>Consulta de objetos de aprendizagem</legend>
+                <legend>Consulta de objetos de conhecimento</legend>
                 <div id="_divPesquisa" runat="server">
                     <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
                     <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
                     <uc2:UCComboAnoLetivo ID="UCComboAnoLetivo1" runat="server" Obrigatorio="true" />
                 </div>
                 <div class="right">
-                    <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo objeto de aprendizagem" PostBackUrl="~/Academico/ObjetoAprendizagem/Cadastro.aspx" />
+                    <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo objeto de conhecimento" PostBackUrl="~/Academico/ObjetoAprendizagem/Cadastro.aspx" />
                     <asp:Button ID="_btnCancelar" runat="server" Text="Voltar" OnClick="_btnCancelar_Click" />
                 </div>
             </fieldset>

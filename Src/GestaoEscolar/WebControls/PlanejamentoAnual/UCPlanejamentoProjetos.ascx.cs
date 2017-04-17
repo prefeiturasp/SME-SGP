@@ -826,7 +826,7 @@
             if (!list.Any())
             {
                 rptobjAprendizagem.Visible = false;
-                lblMensagemObjetos.Text = UtilBO.GetErroMessage("Não existem objetos de aprendizagem cadastrados.", UtilBO.TipoMensagem.Alerta);
+                lblMensagemObjetos.Text = UtilBO.GetErroMessage("Não existem objetos de conhecimento cadastrados.", UtilBO.TipoMensagem.Alerta);
             }
             else
             {
@@ -1573,7 +1573,7 @@
                 else
                     CLS_ObjetoAprendizagemTurmaDisciplinaBO.SalvarLista(listObjTudDis, new List<long> { VS_tud_id }, VS_cal_id);
 
-                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, String.Format("Objeto Aprendizagem Turma Disciplina | tud_id: {0}; ", VS_tud_id.ToString()));
+                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, String.Format("Objeto Conhecimento Turma Disciplina | tud_id: {0}; ", VS_tud_id.ToString()));
             }
             catch (ValidationException ex)
             {
@@ -1582,7 +1582,7 @@
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMensagemAluno.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                lblMensagemAluno.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetos de conhecimento.", UtilBO.TipoMensagem.Erro);
             }
         }
 

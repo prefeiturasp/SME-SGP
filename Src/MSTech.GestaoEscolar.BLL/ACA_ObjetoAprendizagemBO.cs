@@ -141,7 +141,7 @@ namespace MSTech.GestaoEscolar.BLL
             try
             {
                 if (ObjetoEmUso(entity.oap_id))
-                    throw new ValidationException("Não foi possível excluir o objeto de aprendizagem pois existem outros registros ligados a ele.");
+                    throw new ValidationException("Não foi possível excluir o objeto de conhecimento pois existem outros registros ligados a ele.");
 
                 return Delete(entity);
             }
