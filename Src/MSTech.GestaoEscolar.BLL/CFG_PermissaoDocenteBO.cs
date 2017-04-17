@@ -64,7 +64,7 @@ namespace MSTech.GestaoEscolar.BLL
         [Description("Indicadores")]
         Indicadores = 10
         ,
-        [Description("Objetos de aprendizagem")]
+        [Description("Objetos de conhecimento")]
         ObjetosAprendizagem = 11
     }
 

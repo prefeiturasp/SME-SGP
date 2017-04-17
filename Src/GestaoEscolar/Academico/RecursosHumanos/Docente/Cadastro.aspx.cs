@@ -236,6 +236,7 @@ public partial class Academico_RecursosHumanos_Docente_Cadastro : MotherPageLoga
             sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroDocente.js"));
             sm.Scripts.Add(new ScriptReference("~/Includes/jsUCCadastroEndereco.js"));
             sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroCertidaoCivil.js"));
+            sm.Scripts.Add(new ScriptReference("~/Includes/jsConfirmaFormacaoDocente.js"));
             sm.Services.Add(new ServiceReference("~/WSServicos.asmx"));
         }
 

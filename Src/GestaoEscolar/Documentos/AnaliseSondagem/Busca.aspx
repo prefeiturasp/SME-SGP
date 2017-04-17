@@ -55,9 +55,9 @@
                 <uc1:UCComboUAEscola runat="server" ID="UCComboUAEscola" AsteriscoObg="true" ObrigatorioEscola="true" ObrigatorioUA="true" ValidationGroup="Relatorio"
                     CarregarEscolaAutomatico="true" MostraApenasAtivas="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" />
 
-                <uc1:UCCCalendario runat="server" ID="UCCCalendario" Obrigatorio="true" MostrarMensagemSelecione="true" PermiteEditar="false" ValidationGroup="Relatorio" />
+                <uc1:UCCCalendario runat="server" ID="UCCCalendario" Obrigatorio="false" MostrarMensagemSelecione="true" PermiteEditar="false" ValidationGroup="Relatorio" />
 
-                <uc1:UCCCursoCurriculo runat="server" ID="UCCCursoCurriculo" Obrigatorio="true" MostrarMensagemSelecione="true" PermiteEditar="false" ValidationGroup="Relatorio" />
+                <uc1:UCCCursoCurriculo runat="server" ID="UCCCursoCurriculo" Obrigatorio="false" MostrarMensagemSelecione="true" PermiteEditar="false" ValidationGroup="Relatorio" />
                 
                 <uc1:UCComboTipoCiclo runat="server" ID="UCComboTipoCiclo" Obrigatorio="false" Titulo="Ciclo" Enabled="false" Visible="false" ValidationGroup="Relatorio" />
                 

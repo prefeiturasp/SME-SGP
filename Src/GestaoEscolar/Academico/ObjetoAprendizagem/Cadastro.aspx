@@ -13,7 +13,7 @@
             <asp:Label ID="_lblMessage" runat="server" EnableViewState="False"></asp:Label>
             <asp:ValidationSummary ID="ValidationSummary" runat="server" ValidationGroup="objetoAprendizagem" />
             <fieldset>
-                <legend>Cadastro de objeto de aprendizagem</legend>
+                <legend>Cadastro de objeto de conhecimento</legend>
                 <uc5:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
 
                 <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
