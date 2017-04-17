@@ -72,7 +72,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
                 if (!IsPostBack)
                 {
-                    _grvObjetoAprendizagem.EmptyDataText = string.Format("Não existe objeto de aprendizagem associado a este {0}.", GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA_MIN"));
+                    _grvObjetoAprendizagem.EmptyDataText = string.Format("Não existe objeto de conhecimento associado a este {0}.", GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA_MIN"));
                     UCComboAnoLetivo1.CarregarAnoAtual();
 
                     if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
@@ -149,7 +149,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                         _grvObjetoAprendizagem.PageIndex = 0;
                         _grvObjetoAprendizagem.DataBind();
                         ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "oap_id: " + id);
-                        _lblMessage.Text = UtilBO.GetErroMessage("Objeto de aprendizagem excluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                        _lblMessage.Text = UtilBO.GetErroMessage("Objeto de conhecimento excluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
                         _updDadosBasicos.Update();
                     }
                 }
@@ -160,7 +160,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
-                    _lblMessage.Text = UtilBO.GetErroMessage("Erro ao excluir o objeto de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                    _lblMessage.Text = UtilBO.GetErroMessage("Erro ao excluir o objeto de conhecimento.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }

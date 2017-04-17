@@ -947,7 +947,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         if (UCPlanejamentoProjetos.rptObjetosVisible && VS_ltPermissaoObjAprendizagem.Any(p => p.pdc_permissaoEdicao))
                         {
                             UCPlanejamentoProjetos.SalvarObjetoAprendizagemTurmaDisciplina();
-                            VS_mensagem += UtilBO.GetErroMessage("Objetos de aprendizagem salvos com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                            VS_mensagem += UtilBO.GetErroMessage("Objetos de conhecimento salvos com sucesso.", UtilBO.TipoMensagem.Sucesso);
                         }
                         if (PermaneceTela)
                             UCPlanejamentoProjetos.CarregarObjetosAprendizagem();
@@ -967,7 +967,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     catch (Exception ex)
                     {
                         ApplicationWEB._GravaErro(ex);
-                        VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                        VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar objetos de conhecimento.", UtilBO.TipoMensagem.Erro);
                     }
                 }
 
@@ -1017,7 +1017,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             if (UCPlanejamentoProjetos.rptObjetosVisible)
                             {
                                 UCPlanejamentoProjetos.SalvarObjetoAprendizagemTurmaDisciplina();
-                                VS_mensagem += UtilBO.GetErroMessage("Objetos de aprendizagem salvos com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                                VS_mensagem += UtilBO.GetErroMessage("Objetos de conhecimento salvos com sucesso.", UtilBO.TipoMensagem.Sucesso);
                             }
                             if (PermaneceTela)
                                 UCPlanejamentoProjetos.CarregarObjetosAprendizagem();
@@ -1037,7 +1037,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         catch (Exception ex)
                         {
                             ApplicationWEB._GravaErro(ex);
-                            VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar objetos de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                            VS_mensagem += UtilBO.GetErroMessage("Erro ao tentar salvar objetos de conhecimento.", UtilBO.TipoMensagem.Erro);
                         }
                     }
                 }

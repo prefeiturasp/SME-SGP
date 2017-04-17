@@ -109,12 +109,12 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 if (_VS_oap_id > 0)
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "oap_id: " + obj.oap_id);
-                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Objeto de aprendizagem alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Objeto de conhecimento alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
                 }
                 else
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "oap_id: " + obj.oap_id);
-                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Objeto de aprendizagem incluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Objeto de conhecimento incluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
                 }
 
                 Session["tds_id_oap"] = _VS_tds_id;
@@ -132,7 +132,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o objeto de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o objeto de conhecimento.", UtilBO.TipoMensagem.Erro);
             }
         }
 
@@ -193,7 +193,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar o objeto de aprendizagem.", UtilBO.TipoMensagem.Erro);
+                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar o objeto de conhecimento.", UtilBO.TipoMensagem.Erro);
             }
         }
 
