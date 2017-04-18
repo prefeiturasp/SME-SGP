@@ -24,7 +24,7 @@
             <div id="divFiltros" runat="server">
                 <fieldset>
                     <legend>Minha escola</legend>
-                    <uc4:UCComboUAEscola ID="UCComboUAEscola1" runat="server"
+                    <uc4:UCComboUAEscola ID="UCComboUAEscola1" runat="server" FiltroEscolasControladas="true"
                         ValidationGroup="vsMinhasTurmas" ObrigatorioUA="true" ObrigatorioEscola="true"
                         MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" />
                     <div class="right">

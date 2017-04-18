@@ -142,6 +142,38 @@ public partial class WebControls_Combos_UCComboTurmaDisciplina : MotherUserContr
     }
 
     /// <summary>
+    /// Mostra experiência dos territórios do saber.
+    /// </summary>
+    public bool VS_MostraExperiencia
+    {
+        get
+        {
+            return Convert.ToBoolean(ViewState["VS_MostraExperiencia"] ?? (ViewState["VS_MostraExperiencia"] = true));
+        }
+
+        set
+        {
+            ViewState["VS_MostraExperiencia"] = value;
+        }
+    }
+
+    /// <summary>
+    /// Mostra os territórios do saber.
+    /// </summary>
+    public bool VS_MostraTerritorio
+    {
+        get
+        {
+            return Convert.ToBoolean(ViewState["VS_MostraTerritorio"] ?? (ViewState["VS_MostraTerritorio"] = false));
+        }
+
+        set
+        {
+            ViewState["VS_MostraTerritorio"] = value;
+        }
+    }
+
+    /// <summary>
     /// Coloca na primeira linha a mensagem de selecione um item.
     /// </summary>
     public bool MostrarMensagemSelecione
@@ -179,6 +211,9 @@ public partial class WebControls_Combos_UCComboTurmaDisciplina : MotherUserContr
         odsDados.SelectParameters.Add("tur_id", tur_id.ToString());
         odsDados.SelectParameters.Add("mostraFilhosRegencia", VS_MostraFilhosRegencia.ToString());
         odsDados.SelectParameters.Add("mostraRegencia", VS_MostraRegencia.ToString());
+        odsDados.SelectParameters.Add("mostraExperiencia", VS_MostraExperiencia.ToString());
+        odsDados.SelectParameters.Add("mostraTerritorio", VS_MostraTerritorio.ToString());
+        odsDados.SelectParameters.Add("cap_id", "0");
         odsDados.SelectParameters.Add("AppMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um(a) " + GetGlobalResourceObject("Mensagens","MSG_DISCIPLINA") + " --", "-1", true));
         ddlCombo.DataBind();
