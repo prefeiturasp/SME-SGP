@@ -50,8 +50,16 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             get
             {
                 int[] retorno = new int[2];
-                retorno[0] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex]["snd_id"]);
-                retorno[1] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex]["sda_id"]);
+                if (dgvSondagem.EditIndex >= 0)
+                {
+                    retorno[0] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex]["snd_id"]);
+                    retorno[1] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex]["sda_id"]);
+                }
+                else
+                {
+                    retorno[0] = -1;
+                    retorno[1] = -1;
+                }
                 return retorno;
             }
         }
@@ -64,8 +72,16 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             get
             {
                 int[] retorno = new int[2];
-                retorno[0] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex]["snd_id"]);
-                retorno[1] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex]["sda_id"]);
+                if (dgvSondagem.SelectedIndex >= 0)
+                {
+                    retorno[0] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex]["snd_id"]);
+                    retorno[1] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex]["sda_id"]);
+                }
+                else
+                {
+                    retorno[0] = -1;
+                    retorno[1] = -1;
+                }
                 return retorno;
             }
         }
@@ -112,12 +128,15 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             }
         }
 
+        private bool existeResponder = false;
+
         #endregion
 
         #region Delegates
 
         protected void UCComboQtdePaginacao_IndexChanged()
         {
+            existeResponder = false;
             // atribui nova quantidade itens por página para o grid
             dgvSondagem.PageSize = UCComboQtdePaginacao1.Valor;
             dgvSondagem.PageIndex = 0;
@@ -141,15 +160,14 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 dgvSondagem.PageIndex = 0;
                 odsSondagem.SelectParameters.Clear();
                 odsSondagem.SelectParameters.Add("snd_titulo", txtTitulo.Text);
-                odsSondagem.SelectParameters.Add("sda_dataInicio", txtDataInicio.Text);
-                odsSondagem.SelectParameters.Add("sda_dataFim", txtDataFim.Text);
+                odsSondagem.SelectParameters.Add("sda_dataInicio", string.IsNullOrEmpty(txtDataInicio.Text) ? string.Empty : Convert.ToDateTime(txtDataInicio.Text).ToString("yyyy/MM/dd"));
+                odsSondagem.SelectParameters.Add("sda_dataFim", string.IsNullOrEmpty(txtDataFim.Text) ? string.Empty : Convert.ToDateTime(txtDataFim.Text).ToString("yyyy/MM/dd"));
                 odsSondagem.SelectParameters.Add("situacao", ddlSituacao.SelectedValue);
                 odsSondagem.SelectParameters.Add("doc_id", __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual && __SessionWEB.__UsuarioWEB.Docente != null && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0 ?
                                                                 __SessionWEB.__UsuarioWEB.Docente.doc_id.ToString()
                                                                 : "-1");
                 odsSondagem.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
                 odsSondagem.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString());
-                odsSondagem.SelectParameters.Add("gestao", (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao).ToString());
                 odsSondagem.SelectParameters.Add("adm", (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao).ToString());
                 odsSondagem.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
 
@@ -175,6 +193,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
 
                 #endregion
 
+                existeResponder = false;
                 // mostra essa quantidade no combobox
                 UCComboQtdePaginacao1.Valor = itensPagina;
                 // atribui essa quantidade para o grid
@@ -202,10 +221,10 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_titulo", out valor);
                 txtTitulo.Text = valor;
 
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataInicio", out valor);
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("sda_dataInicio", out valor);
                 txtDataInicio.Text = valor;
 
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataFim", out valor);
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("sda_dataFim", out valor);
                 txtDataFim.Text = valor;
 
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("situacao", out valor);
@@ -310,6 +329,8 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     Filtros = filtros
                 };
             }
+
+            dgvSondagem.Columns[PosicaoResponder].Visible = existeResponder;
         }
 
         protected void dgvSondagem_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -353,6 +374,11 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                                                 || situacao == (byte)SituacaoSondagemLancamento.VigenteSemLançamento
                                             )
                                             && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+
+                    if (btnResponder.Visible)
+                    {
+                        existeResponder = true;
+                    }
                 }
             }
         }

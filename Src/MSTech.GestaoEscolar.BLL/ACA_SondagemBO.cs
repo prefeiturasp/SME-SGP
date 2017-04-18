@@ -204,7 +204,6 @@ namespace MSTech.GestaoEscolar.BLL
             , long doc_id
             , Guid gru_id
             , Guid usu_id
-            , bool gestao
             , bool adm
             , Guid ent_id
             , int currentPage
@@ -217,7 +216,7 @@ namespace MSTech.GestaoEscolar.BLL
                 pageSize = 1;
 
             ACA_SondagemDAO dao = new ACA_SondagemDAO();
-            return dao.SelectBy_PesquisaLancamento(snd_titulo, sda_dataInicio, sda_dataFim, situacao, doc_id, gru_id, usu_id, gestao, adm, ent_id, true, currentPage / pageSize, pageSize, out totalRecords);
+            return dao.SelectBy_PesquisaLancamento(snd_titulo, sda_dataInicio, sda_dataFim, situacao, doc_id, gru_id, usu_id, adm, ent_id, true, currentPage / pageSize, pageSize, out totalRecords);
         }
 
         /// <summary>

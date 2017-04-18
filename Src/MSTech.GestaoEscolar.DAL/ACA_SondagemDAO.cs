@@ -84,7 +84,6 @@ namespace MSTech.GestaoEscolar.DAL
             , long doc_id
             , Guid gru_id
             , Guid usu_id
-            , bool gestao
             , bool adm
             , Guid ent_id
             , bool paginado
@@ -122,7 +121,7 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.DbType = DbType.DateTime;
                 Param.ParameterName = "@sda_dataFim";
                 Param.Size = 16;
-                if (sda_dataInicio != new DateTime())
+                if (sda_dataFim != new DateTime())
                     Param.Value = sda_dataFim;
                 else
                     Param.Value = DBNull.Value;
@@ -160,13 +159,6 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@usu_id";
                 Param.Size = 16;
                 Param.Value = usu_id;
-                qs.Parameters.Add(Param);
-
-                Param = qs.NewParameter();
-                Param.DbType = DbType.Boolean;
-                Param.ParameterName = "@gestao";
-                Param.Size = 1;
-                Param.Value = gestao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
