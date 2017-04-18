@@ -84,6 +84,19 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        private bool VS_semDados
+        {
+            get
+            {
+                return Convert.ToBoolean(ViewState["VS_semDados"] ?? false);
+            }
+
+            set
+            {
+                ViewState["VS_semDados"] = value;
+            }
+        }
+
         /// <summary>
         /// Retorna se o usuário logado é docente.
         /// </summary>
@@ -791,6 +804,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 try
                 {
+                    VS_semDados = false;
                     string message = __SessionWEB.PostMessages;
 
                     if (!String.IsNullOrEmpty(message))
@@ -812,6 +826,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             lblMensagem.Text = UtilBO.GetErroMessage((String)GetGlobalResourceObject("Mensagens", "MSG_ATRIBUICAODOCENTES"), UtilBO.TipoMensagem.Informacao);
                             lblMensagem1.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleTurma.Busca.DocenteSemTurma").ToString(),
                                                                       UtilBO.TipoMensagem.Alerta);
+                            VS_semDados = true;
                         }
 
                         VS_listaDivergenciasAulasPrevistas = new List<long>();
@@ -866,6 +881,20 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     ApplicationWEB._GravaErro(ex);
                     lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (VS_semDados && VS_visaoDocente)
+            {
+                List<Struct_MinhasTurmas> dados = TUR_TurmaBO.SelecionaPorDocenteControleTurma(__SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, ApplicationWEB.AppMinutosCacheCurto);
+
+                // Guarda em uma variável as escolas que possuem alguma turma ativa
+                var dadosEscolasAtivas = dados.Where(p => p.Turmas.Any(t => t.tur_situacao == (byte)TUR_TurmaSituacao.Ativo)).ToList();
+
+                if (dadosEscolasAtivas.Count == 0)
+                {  // se o docente não possuir nenhuma turma - exibir a mensagem informativa
+                    lblMensagem.Text = UtilBO.GetErroMessage((String)GetGlobalResourceObject("Mensagens", "MSG_ATRIBUICAODOCENTES"), UtilBO.TipoMensagem.Informacao);
+                    lblMensagem1.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleTurma.Busca.DocenteSemTurma").ToString(),
+                                                                UtilBO.TipoMensagem.Alerta);
                 }
             }
 
