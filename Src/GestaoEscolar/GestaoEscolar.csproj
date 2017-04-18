@@ -1445,13 +1445,6 @@
     <Compile Include="Documentos\DocumentoAluno\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Documentos\Efetivacao\Busca.aspx.cs">
-      <DependentUpon>Busca.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Documentos\Efetivacao\Busca.aspx.designer.cs">
-      <DependentUpon>Busca.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Documentos\Relatorio.aspx.cs">
       <DependentUpon>Relatorio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3875,7 +3868,6 @@
     <Content Include="Configuracao\TipoTurno\Busca.aspx" />
     <Content Include="Configuracao\TipoTurno\Cadastro.aspx" />
     <Content Include="Documentos\DocumentoAluno\Busca.aspx" />
-    <Content Include="Documentos\Efetivacao\Busca.aspx" />
     <Content Include="Documentos\Relatorio.aspx" />
     <Content Include="Imagens\alterar.png" />
     <Content Include="Imagens\error.png" />

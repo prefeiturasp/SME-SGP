@@ -219,9 +219,6 @@ namespace MSTech.GestaoEscolar.BLL
         Duplicados
         ,
 
-        ComprovanteEfetivacao
-        ,
-
         AcaoRetroativa
         ,
 
@@ -539,7 +536,6 @@ namespace MSTech.GestaoEscolar.BLL
         AutorizacaoPasseio = 49,
         ControleRecebimentoAPM = 50,
         TermoCompromisso = 51,
-        ComprovanteEfetivacao = 52,
         DeclaracaoSolicitacaoVaga = 53,
         DeclaracaoSolicitacaoComparecimento = 54,
         DeclaracaoEscolaridade = 55,

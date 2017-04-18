@@ -594,12 +594,6 @@ public partial class Documentos_DocumentoAluno_Busca : MotherPageLogado
                                      "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString(), ApplicationWEB.LogoRelatorioSSRS) +
                                      "&atg_tipo=" + Convert.ToInt32(ACA_AvisoTextoGeralBO.eTiposAvisosTextosGerais.CabecalhoRelatorio).ToString();
                     }
-                    else if (selectedValue.Equals((int)ReportNameDocumentos.ComprovanteEfetivacao))
-                    {
-                        sDeclaracaoHMTL = CFG_ParametroDocumentoAlunoBO.ParametroValor(ChaveParametroDocumentoAluno.DECLARACAO_HTML, __SessionWEB.__UsuarioWEB.Usuario.ent_id, selectedValue);
-                        report = ((int)ReportNameDocumentos.ComprovanteEfetivacao).ToString();
-                        parametros = String.Empty;
-                    }
                     else if (selectedValue.Equals((int)ReportNameDocumentos.HistoricoEscolar))
                     {
                         sDeclaracaoHMTL = CFG_ParametroDocumentoAlunoBO.ParametroValor(ChaveParametroDocumentoAluno.DECLARACAO_HTML, __SessionWEB.__UsuarioWEB.Usuario.ent_id, selectedValue);
