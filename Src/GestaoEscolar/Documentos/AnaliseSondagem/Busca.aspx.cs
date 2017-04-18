@@ -634,13 +634,21 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                 DateTime dataFim = new DateTime();
 
                 if (string.IsNullOrEmpty(txtDataInicio.Text) || !DateTime.TryParse(txtDataInicio.Text, out dataInicio))
-                    throw new ValidationException("Data início deve estar no formato DD/MM/AAAA.");
+                    throw new ValidationException(GetGlobalResourceObject("Documentos", "AnaliseSondagem.Busca.DataInicioInvalida").ToString());
+
+                if (dataInicio > DateTime.Today)
+                    throw new ValidationException(GetGlobalResourceObject("Documentos", "AnaliseSondagem.Busca.DataInicioMaiorHoje").ToString());
 
                 if (string.IsNullOrEmpty(txtDataFim.Text) || !DateTime.TryParse(txtDataFim.Text, out dataFim))
-                    throw new ValidationException("Data fim deve estar no formato DD/MM/AAAA.");
+                    throw new ValidationException(GetGlobalResourceObject("Documentos", "AnaliseSondagem.Busca.DataFimInvalida").ToString());
+
+                if (dataFim > DateTime.Today)
+                    throw new ValidationException(GetGlobalResourceObject("Documentos", "AnaliseSondagem.Busca.DataFimMaiorHoje").ToString());
 
                 if (dataInicio > dataFim)
-                    throw new ValidationException("Data fim da análise deve ser maior ou igual à data início.");
+                    throw new ValidationException(GetGlobalResourceObject("Documentos", "AnaliseSondagem.Busca.DataFimMenorInicio").ToString());
+                
+                SalvaBusca();
 
                 report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.AnaliseSondagem).ToString();
                 parametros = "uad_idSuperiorGestao=" + UCComboUAEscola.Uad_ID +
@@ -672,7 +680,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
             }
             catch (ValidationException ex)
             {
-                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
@@ -700,6 +708,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
             filtros.Add("snd_descricao", txtTituloSondagem.Text);
             filtros.Add("snd_dataIncio", Convert.ToDateTime(txtDataInicio.Text).ToString());
             filtros.Add("snd_dataFim", Convert.ToDateTime(txtDataFim.Text).ToString());
+            filtros.Add("suprimirPercentual", chkSuprimirPercentual.Checked.ToString());
 
             __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAnaliseSondagem, Filtros = filtros };
 
@@ -788,6 +797,9 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                     txtDataInicio.Text = valor2;
                     txtDataFim.Text = valor3;
 
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("suprimirPercentual", out valor);
+                    chkSuprimirPercentual.Checked = Convert.ToBoolean(valor);
+
                     updFiltros.Update();
                 }
             }
@@ -806,7 +818,6 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
         {
             if (Page.IsValid)
             {
-                SalvaBusca();
                 GerarRelatorio();
             }
         }

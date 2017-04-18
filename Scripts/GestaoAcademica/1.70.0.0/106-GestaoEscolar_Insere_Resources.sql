@@ -1040,6 +1040,41 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'É necessário preencher pelo menos um filtro para realizar a pesquisa.'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'AnaliseSondagem.Busca.DataInicioInvalida' 
+		, @rcr_NomeResource = 'Documentos'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data inicial deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'AnaliseSondagem.Busca.DataFimInvalida' 
+		, @rcr_NomeResource = 'Documentos'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data final deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'AnaliseSondagem.Busca.DataFimMenorInicio' 
+		, @rcr_NomeResource = 'Documentos'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data final do período deve ser maior ou igual à data inicial.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'AnaliseSondagem.Busca.DataInicioMaiorHoje' 
+		, @rcr_NomeResource = 'Documentos'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data inicial do período não pode ser posterior à data atual.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'AnaliseSondagem.Busca.DataFimMaiorHoje' 
+		, @rcr_NomeResource = 'Documentos'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data final do período não pode ser posterior à data atual.'
+
 -- Fechar transação
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
