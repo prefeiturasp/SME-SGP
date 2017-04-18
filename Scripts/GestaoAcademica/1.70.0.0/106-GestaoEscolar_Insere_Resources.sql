@@ -1138,6 +1138,34 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Turma *'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.lblResultadoVazio.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nenhum aluno encontrado para a turma selecionada.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.ddlTurma.MsgSelecione' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '-- Selecione uma turma --'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.btnFiltrar.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Filtrar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.cpvTurma.ErrorMessage' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turma é obrigatório.'
+
 -- Fechar transação
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

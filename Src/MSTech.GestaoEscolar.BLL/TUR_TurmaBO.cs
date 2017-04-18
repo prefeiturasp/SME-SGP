@@ -3985,6 +3985,36 @@ namespace MSTech.GestaoEscolar.BLL
             }
         }
 
+        /// <summary>
+        /// Retorna as turmas ativas de acordo com a permissão do usuário e as configurações da sondagem.
+        /// </summary>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sComboTurmas> GetSelectBy_SondagemAgendamento
+        (
+            int snd_id
+            , int sda_id
+            , int esc_id
+            , int cal_id
+            , int cur_id
+            , int crr_id
+            , long doc_id
+            , Guid gru_id
+            , Guid usu_id
+            , bool adm
+            , Guid ent_id
+        )
+        {
+            using (DataTable dt = new TUR_TurmaDAO().SelectBy_SondagemAgendamento(snd_id, sda_id, esc_id, cal_id, cur_id, crr_id, doc_id, gru_id, usu_id, adm, ent_id))
+            {
+                return (from DataRow dr in dt.Rows
+                        select new sComboTurmas
+                        {
+                            tur_id = dr["tur_id"].ToString(),
+                            tur_codigo = dr["tur_codigo"].ToString(),
+                        }).ToList();
+            }
+        }
+
         #endregion Selects
 
         #region Saves

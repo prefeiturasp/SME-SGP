@@ -5604,6 +5604,120 @@ namespace MSTech.GestaoEscolar.DAL
             return qs.Return;
         }
 
+        /// <summary>
+        /// Retorna as turmas ativas de acordo com a permissão do usuário e as configurações da sondagem.
+        /// </summary>
+        public DataTable SelectBy_SondagemAgendamento(
+            int snd_id
+            , int sda_id
+            , int esc_id
+            , int cal_id
+            , int cur_id
+            , int crr_id
+            , long doc_id
+            , Guid gru_id
+            , Guid usu_id
+            , bool adm
+            , Guid ent_id
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_TUR_Turma_SelectBy_SondagemAgendamento", _Banco);
+
+            #region Parâmetros
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@snd_id";
+            Param.DbType = DbType.Int32;
+            Param.Size = 4;
+            Param.Value = snd_id;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@sda_id";
+            Param.DbType = DbType.Int32;
+            Param.Size = 4;
+            Param.Value = sda_id;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@esc_id";
+            Param.DbType = DbType.Int32;
+            Param.Size = 4;
+            Param.Value = esc_id;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@cal_id";
+            Param.DbType = DbType.Int32;
+            Param.Size = 4;
+            Param.Value = cal_id;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@cur_id";
+            Param.DbType = DbType.Int32;
+            Param.Size = 4;
+            if (cur_id > 0)
+                Param.Value = cur_id;
+            else
+                Param.Value = DBNull.Value;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@crr_id";
+            Param.DbType = DbType.Int32;
+            Param.Size = 4;
+            if (crr_id > 0)
+                Param.Value = crr_id;
+            else
+                Param.Value = DBNull.Value;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int64;
+            Param.ParameterName = "@doc_id";
+            Param.Size = 16;
+            if (doc_id > 0)
+                Param.Value = doc_id;
+            else
+                Param.Value = DBNull.Value;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Guid;
+            Param.ParameterName = "@gru_id";
+            Param.Size = 16;
+            Param.Value = gru_id;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Guid;
+            Param.ParameterName = "@usu_id";
+            Param.Size = 16;
+            Param.Value = usu_id;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Boolean;
+            Param.ParameterName = "@adm";
+            Param.Size = 1;
+            Param.Value = adm;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Guid;
+            Param.ParameterName = "@ent_id";
+            Param.Size = 16;
+            Param.Value = ent_id;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.Execute();
+
+            return qs.Return;
+        }
+
         #endregion Métodos
 
         #region Métodos RS
