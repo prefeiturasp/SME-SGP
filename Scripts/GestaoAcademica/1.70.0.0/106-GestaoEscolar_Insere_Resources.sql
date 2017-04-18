@@ -1075,6 +1075,69 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Data final do período não pode ser posterior à data atual.'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.bntSalvar.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Salvar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.btnCancelar.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.btnVoltar.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Voltar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.litFiltroTurma.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Filtro de turma'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.SelecioneSondagem' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Selecione uma sondagem para o lançamento.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.lblDadosSondagem.Titulo' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<b>Título:</b> {0}'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.lblDadosSondagem.Descricao' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<br><b>Descrição:</b> {0}'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.lblLegend.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Lançamento de sondagem'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.lblTurma.Text' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turma *'
+
 -- Fechar transação
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

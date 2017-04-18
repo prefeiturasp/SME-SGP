@@ -43,7 +43,7 @@
         <fieldset id="fdsResultados" runat="server">
             <legend><asp:Label runat="server" ID="lblLegendResultados" Text="<%$ Resources:Classe, LancamentoSondagem.Busca.lblLegendResultados.Text %>" /></legend>
             <uc2:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged" />
-            <asp:GridView ID="dgvSondagem" runat="server" DataKeyNames="snd_id,sda_id,snd_situacao" AutoGenerateColumns="False"
+            <asp:GridView ID="dgvSondagem" runat="server" DataKeyNames="snd_id,sda_id,situacao" AutoGenerateColumns="False"
                 DataSourceID="odsSondagem" AllowPaging="True" OnRowDataBound="dgvSondagem_RowDataBound"
                 EmptyDataText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.EmptyDataText %>"
                 OnDataBound="dgvSondagem_DataBound" AllowSorting="true" SkinID="GridResponsive">
@@ -55,9 +55,21 @@
                             <asp:Label ID="lblRespostas" runat="server" Text='<%# Bind("snd_titulo") %>' CssClass="wrap600px"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="situacaoText" HeaderText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.HeaderSituacao %>" SortExpression="snd_situacaoText" />
-                    <asp:BoundField DataField="snd_dataInicio" HeaderText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.HeaderDataInicio %>" SortExpression="snd_dataInicio" />
-                    <asp:BoundField DataField="snd_dataFim" HeaderText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.HeaderDataFim %>" SortExpression="snd_dataFim" />
+                    <asp:BoundField DataField="situacaoText" HeaderText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.HeaderSituacao %>" SortExpression="situacaoText" />
+                    <asp:TemplateField HeaderText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.HeaderDataInicio %>" SortExpression="sda_dataInicio">
+                        <ItemTemplate>
+                            <asp:Label ID="lblDataInicio" runat="server" Text='<%# Convert.ToDateTime(Eval("sda_dataInicio")).ToString("dd/MM/yyyy") %>' CssClass="wrap600px"></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.HeaderDataFim %>" SortExpression="sda_dataFim">
+                        <ItemTemplate>
+                            <asp:Label ID="lblDataFim" runat="server" Text='<%# Convert.ToDateTime(Eval("sda_dataFim")).ToString("dd/MM/yyyy") %>' CssClass="wrap600px"></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.HeaderResponder %>">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnResponder" runat="server" SkinID="btFormulario" 
