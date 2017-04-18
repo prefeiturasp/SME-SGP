@@ -487,6 +487,18 @@ namespace MSTech.GestaoEscolar.BLL
                 });
                 //
 
+                //Adiciona tuds para processamento de pendência de notas (quando salva o parecer final
+                foreach (long tud in tud_ids.Where(t => !FilaProcessamento.Any(f => f.tud_id == t)))
+                    FilaProcessamento.Add(new AlunoFechamentoPendencia
+                    {
+                        tud_id = tud,
+                        tpc_id = tpc_idUltimoPeriodo,
+                        afp_frequencia = false,
+                        afp_frequenciaExterna = false,
+                        afp_nota = true,
+                        afp_processado = (byte)2
+                    });
+
                 if (entFormatoAvaliacao.fav_fechamentoAutomatico && FilaProcessamento.Any(a => a.tpc_id > 0))
                     CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(
                         FilaProcessamento
