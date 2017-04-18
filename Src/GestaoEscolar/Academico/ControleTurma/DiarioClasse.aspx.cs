@@ -389,6 +389,22 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Armazena o tipo de apuração de frequência do formato de avaliação da turma disciplina da aula.
+        /// </summary>
+        private byte VS_fav_tipoApuracaoFrequencia
+        {
+            get
+            {
+                return Convert.ToByte(ViewState["VS_fav_tipoApuracaoFrequencia"] ?? 0);
+            }
+
+            set
+            {
+                ViewState["VS_fav_tipoApuracaoFrequencia"] = value;
+            }
+        }
+
+        /// <summary>
         /// Armazena o nome da turma disciplina da aula.
         /// </summary>
         private string VS_tud_nome_Aula
@@ -1029,6 +1045,17 @@ namespace GestaoEscolar.Academico.ControleTurma
             get
             {
                 return (VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia && VS_tipoDocente != EnumTipoDocente.Projeto);
+            }
+        }
+
+        /// <summary>
+        /// Retorna um booleano informando se é regência E o tipo de apuração de frequencia do formato de avaliação é por tempos de aula
+        /// </summary>
+        public bool RegenciaETemposAula
+        {
+            get
+            {
+                return (VS_fav_tipoApuracaoFrequencia == (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.TemposAula && VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia);
             }
         }
 
@@ -3331,9 +3358,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                     chkReposicao.Checked = entity.tau_reposicao;
                     hdfIsNewAula.Value = "false";
 
+                    //Se for regência e o tipo de apuração de frequência for por tempos de aula, exibe o campo de quantidade de aulas.
+
                     // Se o professor que criou a aula for de projeto, exibe o campo de quantidade de aulas.
-                    if ((VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia) && // Verifica se é regencia.
-                        (entity.tdt_posicao == (byte)EnumTipoDocente.Projeto))
+                    if (((VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia) && // Verifica se é regencia.
+                            (entity.tdt_posicao == (byte)EnumTipoDocente.Projeto)) || RegenciaETemposAula)
                     {
                         txtQtdeAulas.Visible = lblQtdeAulas.Visible = true;
                     }
@@ -5384,7 +5413,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         /// </summary>
         protected void ExibeQuantidadeAulas()
         {
-            lblQtdeAulas.Visible = txtQtdeAulas.Visible = !(DisciplinaPrincipal || DisciplinaRegencia);
+            lblQtdeAulas.Visible = txtQtdeAulas.Visible = (!(DisciplinaPrincipal || DisciplinaRegencia)) || RegenciaETemposAula;
         }
 
         #endregion Métodos
@@ -6138,6 +6167,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 VS_grvRow = linha;
                 VS_tud_id_Aula = Convert.ToInt32(grvAulas.DataKeys[linha].Values["tud_id"]);
                 VS_tud_tipo_Aula = Convert.ToByte(grvAulas.DataKeys[linha].Values["tud_tipo"]);
+                VS_fav_tipoApuracaoFrequencia = Convert.ToByte(grvAulas.DataKeys[linha].Values["fav_tipoApuracaoFrequencia"]);
                 VS_tau_id = Convert.ToInt32(grvAulas.DataKeys[linha].Values["tau_id"]);
                 VS_tau_data = Convert.ToDateTime(grvAulas.DataKeys[linha].Values["tau_data"]);
                 VS_tdt_posicaoEdicao = Convert.ToByte(grvAulas.DataKeys[linha].Values["tdt_posicao"]);
