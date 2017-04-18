@@ -54,7 +54,7 @@ SET XACT_ABORT ON
 		,@SiteMap1Nome = 'Análise de sondagem'
 		,@SiteMap1Url = '~/Documentos/AnaliseSondagem/Busca.aspx'
 		,@SiteMap2Nome = 'Análise de sondagem'
-		,@SiteMap2Url = '~/Documentos/Relatorio.aspx?dummy=%27QZ3yyOWkxQU%3d%27'
+		,@SiteMap2Url = '~/Relatorios/Relatorio.aspx?dummy=%27QZ3yyOWkxQU%3d%27'
 		,@SiteMap3Nome = NULL
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
