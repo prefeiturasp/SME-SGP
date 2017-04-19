@@ -1,6 +1,7 @@
 ﻿function jsBuscaMinhaEscolaGestor() {
     createDialog('.divIndicadores', 800, 500);
     createDialog('#divDisciplinasCompartilhadas', 400, 0);
+    createDialog('.divPendencias', 500, "auto");
 
     $($(".fdsTurmas").get().reverse()).each(function (index, element) {
         var fdsTurmas = $(element);

@@ -3,6 +3,7 @@ function jsBuscaControleTurma() {
     createDialog('.divIndicadores', 800, 500);
     createDialog('#divSelecionaTipoDocencia', 400, 170);
     createDialog('#divHistorico', 800, 410);
+    createDialog('.divPendencias', 500, "auto");
 
     //$("#divTabs").tabs({
     //    selected: $("#hdnTabSelecionado")

@@ -1076,7 +1076,7 @@ SET XACT_ABORT ON
 		, @rcr_valorPadrao = 'Data final do período não pode ser posterior à data atual.'
 
 	EXEC MS_InsereResource 
-		@rcr_chave = 'LancamentoSondagem.Cadastro.bntSalvar.Text' 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.btnSalvar.Text' 
 		, @rcr_NomeResource = 'Classe'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
@@ -1165,6 +1165,76 @@ SET XACT_ABORT ON
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Turma é obrigatório.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.divPendencias.title' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Pendências'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.EmptyDataText' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Não existem pendências para a turma selecionada.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.ColunaPendencia' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Pendência'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.ColunaBimestre' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Bimestre'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.btnFecharPendencias.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Fechar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.lblPendencia.Fechamento' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Fechamento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.lblPendencia.Planejamento' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.lblPendencia.PlanoAula' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Plano de aula'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.lblBimestre.SemSintese' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Síntese final'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.lblBimestre.SemResultadoFinal' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Parecer final'
 
 -- Fechar transação
 SET XACT_ABORT OFF 

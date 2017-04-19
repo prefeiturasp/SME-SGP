@@ -650,5 +650,68 @@ namespace GestaoEscolar.Academico.ControleTurma {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::GestaoEscolar.WebControls.ControleTurma.UCSelecaoDisciplinaCompartilhada UCSelecaoDisciplinaCompartilhada1;
+        
+        /// <summary>
+        /// divPendencias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPendencias;
+        
+        /// <summary>
+        /// upnPendencias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upnPendencias;
+        
+        /// <summary>
+        /// grvPendencias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvPendencias;
+        
+        /// <summary>
+        /// btnFecharPendencias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFecharPendencias;
+        
+        /// <summary>
+        /// hdnIdGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdGrid;
+        
+        /// <summary>
+        /// hdnIndexTurma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIndexTurma;
+        
+        /// <summary>
+        /// hdnComandoTurma control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnComandoTurma;
     }
 }

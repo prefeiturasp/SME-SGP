@@ -538,4 +538,47 @@
     </div>
     <%-- Disciplinas compartilhadas --%>
     <uc10:UCSelecaoDisciplinaCompartilhada ID="UCSelecaoDisciplinaCompartilhada1" runat="server"></uc10:UCSelecaoDisciplinaCompartilhada>
+    <%-- Pendências --%>
+    <div id="divPendencias" runat="server" title="<%$ Resources:Academico, ControleTurma.Busca.divPendencias.title %>" class="hide divPendencias">
+        <asp:UpdatePanel ID="upnPendencias" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:GridView ID="grvPendencias" runat="server" AutoGenerateColumns="false" DataKeyNames="tipoPendencia,tpc_id,tud_id"
+                    EmptyDataText="<%$ Resources:Academico, ControleTurma.Busca.grvPendencias.EmptyDataText %>" 
+                    OnRowCommand="grvPendencias_RowCommand" OnRowDataBound="grvPendencias_RowDataBound" SkinID="GridResponsive" >
+                    <Columns>
+                        <asp:TemplateField HeaderText="<%$ Resources:Academico, ControleTurma.Busca.grvPendencias.ColunaPendencia %>">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="lblPendencia" Text=""></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="<%$ Resources:Academico, ControleTurma.Busca.grvPendencias.ColunaBimestre %>">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="lblBimestre" Text=""></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="<%$ Resources:Mensagens, MSG_DISCIPLINA %>">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="lblDisciplina" Text=""></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="imgPendenciaFechamento" runat="server" SkinID="btStatusAlertaPendencia"
+                                    CommandArgument='<%# Container.DataItemIndex %>' 
+                                    CommandName="Pendencia" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+                <div class="right">
+                    <asp:Button ID="btnFecharPendencias" runat="server" Text="<%$ Resources:Academico, ControleTurma.Busca.btnFecharPendencias.Text %>" CausesValidation="false"
+                        OnClientClick="$('.divPendencias').dialog('close');return false;" />
+                </div>
+                <asp:HiddenField ID="hdnIdGrid" runat="server" />
+                <asp:HiddenField ID="hdnIndexTurma" runat="server" />
+                <asp:HiddenField ID="hdnComandoTurma" runat="server" />
+                <asp:HiddenField ID="hdnChavePendencia" runat="server" />
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
 </asp:Content>
