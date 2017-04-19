@@ -39,7 +39,7 @@
             <asp:UpdatePanel ID="upnFiltros" runat="server" UpdateMode="Always">
                 <ContentTemplate>
                     <uc2:UCComboUAEscola ID="UCComboUAEscola1" runat="server" CarregarEscolaAutomatico="true"
-                        MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true"
+                        MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" FiltroEscolasControladas="true"
                         ValidationGroup="vsMinhasTurmas" ObrigatorioUA="true" ObrigatorioEscola="true" />
                     <uc9:UCCCalendario ID="UCCCalendario1" runat="server" MostrarMensagemSelecione="true"
                         Obrigatorio="true" ValidationGroup="vsMinhasTurmas" PermiteEditar="false" />
