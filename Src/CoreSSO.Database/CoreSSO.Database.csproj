@@ -43,9 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\V1.68.0.0\20170323_225209_ajustaOrdem_menu.sql" />
-    <EmbeddedResource Include="Scripts\V1.68.0.0\20170323_225243_ajusteNome_menu.sql" />
-    <EmbeddedResource Include="Scripts\V1.68.0.0\20170323_225026_insere_menu.sql" />
+    <EmbeddedResource Include="Scripts\**\*.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

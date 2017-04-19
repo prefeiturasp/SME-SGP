@@ -144,7 +144,7 @@
             lblProgresso.Text = "Instalando o serviço...";
             progressBar.Style = ProgressBarStyle.Marquee;
             progressBar.MarqueeAnimationSpeed = 10;
-            
+
             string mensagem;
             if (ValidarDados(out mensagem))
             {
@@ -316,9 +316,7 @@
                 .Where(p => extensions.Any(e => e.Equals(Path.GetExtension(p)))).ToList());
 
             // Busca o arquivo de versão também.
-            // files.AddRange(Directory.GetFiles(binPath, "version.xml", SearchOption.AllDirectories));
-            files.AddRange(Directory.GetFiles(binPath, "Versao.wxi", SearchOption.AllDirectories));
-
+            files.AddRange(Directory.GetFiles(binPath, "version.xml", SearchOption.AllDirectories));
 
             foreach (string file in files)
             {
@@ -369,34 +367,30 @@
         /// <returns></returns>
         private string GetVersaoSistema()
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            String strRet = String.Empty;
-
-            string binPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Arquivos");
-
-            xmlDoc.Load(binPath + "\\Versao.wxi");
-
-            XmlNode xmlNd = xmlDoc.SelectSingleNode("//Include");
-
-            var ltNodes = from XmlNode nd in xmlNd.ChildNodes
-                          where nd is XmlProcessingInstruction
-                          let pi = (XmlProcessingInstruction)nd
-                          let noXml = pi.Value.Split('=')
-                          let dummyPi = (XmlElement)pi.OwnerDocument.ReadNode(XmlReader.Create(new StringReader("<" + noXml[0] + " Valor=" + noXml[1] + "/>")))
-                          select dummyPi;
-
-            if (ltNodes != null && ltNodes.Any())
+            try
             {
-                string major = ltNodes.Where(p => p.Name == "Major").FirstOrDefault().Attributes["Valor"].Value;
-                string minor = ltNodes.Where(p => p.Name == "Minor").FirstOrDefault().Attributes["Valor"].Value;
-                string revision = ltNodes.Where(p => p.Name == "Revision").FirstOrDefault().Attributes["Valor"].Value;
-                string build = ltNodes.Where(p => p.Name == "Build").FirstOrDefault().Attributes["Valor"].Value;
+                XmlDocument xmlDoc = new XmlDocument();
+                String strRet = String.Empty;
 
-                strRet = String.Format("Versão: {0}.{1}.{2}.{3}", major, minor, revision, build);
+                string binPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Arquivos");
+
+                xmlDoc.Load(binPath + "\\version.xml");
+
+                XmlNode xmlNd = xmlDoc.SelectSingleNode("//versionNumber");
+
+                if (xmlNd != null)
+                    strRet = String.Format("Versão: {0}.{1}.{2}.{3}", xmlNd.ChildNodes[0].Attributes["value"].Value,
+                        xmlNd.ChildNodes[1].Attributes["value"].Value,
+                        xmlNd.ChildNodes[2].Attributes["value"].Value,
+                        xmlNd.ChildNodes[3].Attributes["value"].Value
+                        );
+
+                return strRet;
             }
-
-
-            return strRet;
+            catch
+            {
+                return String.Empty;
+            }
         }
 
         /// <summary>

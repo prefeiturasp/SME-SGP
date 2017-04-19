@@ -3,7 +3,7 @@
   "Databases": [
     {
       "ProjectDatabase": "CoreSSO.Database",
-      "DeployConnectionString": "$DeployConnectionStringCoreSSO__",
+      "DeployConnectionString": "$DeployConnectionStringCoreSSO$",
       "Variables": {
         "SystemName": "$SystemName$"
       }
@@ -12,6 +12,7 @@
       "ProjectDatabase": "SGP.Database",
       "DeployConnectionString": "$DeployConnectionStringSGP$",
       "Variables": {
+        "SystemName": "$SystemName$",
         "SystemUser": "$SystemUser$",
         "SystemDatabase": "$SystemDatabase$",
         "CoreSSO": "$CoreSSO$",
