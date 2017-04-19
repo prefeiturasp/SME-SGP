@@ -966,7 +966,6 @@ namespace MSTech.GestaoEscolar.BLL
                     prop.SetValue(entity, propCarregada.GetValue(entityCarregada), null);
                 }
             }
-            entity.IsNew = false;
             return entity;
         }
 
