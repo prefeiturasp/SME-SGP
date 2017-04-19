@@ -198,6 +198,58 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna as questões da sondagem para lançamento por turma.
+        /// </summary>   
+        public DataTable SelectBy_LancamentoTurma
+        (
+            int snd_id
+            , int sda_id
+            , long tur_id
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_Sondagem_SelectBy_LancamentoTurma", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@snd_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = snd_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@sda_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = sda_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@tur_id";
+                Param.Size = 8;
+                Param.Value = tur_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Parâmetros para efetuar a inclusão preservando a data de criação
         /// </summary>
         /// <param name="qs"></param>

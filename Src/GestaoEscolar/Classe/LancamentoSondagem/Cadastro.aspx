@@ -30,8 +30,7 @@
                     <uc3:UCCCursoCurriculo runat="server" ID="UCCCursoCurriculo" Obrigatorio="true" MostrarMensagemSelecione="true" PermiteEditar="false" />
                     <asp:Label ID="lblTurma" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.lblTurma.Text %>" runat="server" AssociatedControlID="ddlTurma"></asp:Label>
                     <asp:DropDownList ID="ddlTurma" runat="server" AppendDataBoundItems="True"
-                        AutoPostBack="true" DataTextField="tur_codigo" DataValueField="tur_id"
-                        SkinID="text60C" OnSelectedIndexChanged="ddlTurma_SelectedIndexChanged">
+                        AutoPostBack="true" DataTextField="tur_codigo" DataValueField="tur_id" SkinID="text60C">
                     </asp:DropDownList>
                     <asp:CompareValidator ID="cpvTurma" runat="server" ErrorMessage="<%$ Resources:Classe, LancamentoSondagem.Cadastro.cpvTurma.ErrorMessage %>"
                         ControlToValidate="ddlTurma" Operator="NotEqual" ValueToCompare="-1" Display="Dynamic" ValidationGroup="FiltroTurma"
@@ -40,92 +39,94 @@
                         <asp:Button ID="btnFiltrar" runat="server" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.btnFiltrar.Text %>" OnClick="btnFiltrar_Click" ValidationGroup="FiltroTurma" CausesValidation="true" />
                     </div>
                 </fieldset>
-                <asp:Label ID="lblResultadoVazio" runat="server" Visible="false"></asp:Label>
-                <asp:Repeater ID="rptLancamento" runat="server">
-                    <HeaderTemplate>
-                        <table class="grid sortableFrequencia grid-responsive-list" cellspacing="0">
-                            <thead>
-                                <tr class="gridHeader">
-                                    <th></th>
-                                    <th runat="server" id="thBotoes">
-                                        <div style="float:left">
-                                            <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbAnterior" Text="|<" runat="server"
-                                                CssClass="ui-icon ui-icon-circle-triangle-w"></asp:LinkButton>
-                                        </div>
-                                        <div style="float:right">
-                                            <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbProximo" Text=">|" runat="server"
-                                                CssClass="ui-icon ui-icon-circle-triangle-e"/>
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <asp:Repeater ID="rptQuestoes" runat="server">
-                                        <ItemTemplate>
-                                            <th class="center {sorter :false} .sorterFalse" id="thQuestao" runat="server">
-                                                <asp:Label ID="lblQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
-                                            </th>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <asp:Repeater ID="rptSubQuestoes" runat="server">
-                                        <ItemTemplate>
-                                            <th class="center {sorter :false} .sorterFalse" id="thSubQuestao" runat="server">
-                                                <asp:Label ID="lblSubQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
-                                            </th>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <asp:Repeater ID="rptRespostas" runat="server">
-                                        <ItemTemplate>
-                                            <th class="center {sorter :false} .sorterFalse">
-                                                <asp:Label ID="lblResposta" runat="server" Text='<%# Bind("sdr_sigla") %>' ToolTip='<%# Bind("sdr_descricao") %>'></asp:Label>
-                                            </th>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </tr>
-                            </thead>
-                            <tbody>
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <tr class="gridRow">
-                            <td>
-                                <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
-                            </td>
-                            <asp:Repeater ID="rptRespostasAluno" runat="server">
-                                <ItemTemplate>
-                                    <td class="center">
-                                        <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName='<%# Bind("sdq_id") %>' />
-                                    </td>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </tr>
-                    </ItemTemplate>
-                    <AlternatingItemTemplate>
-                        <tr class="gridAlternatingRow">
-                            <td>
-                                <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
-                            </td>
-                            <asp:Repeater ID="rptRespostasAluno" runat="server">
-                                <ItemTemplate>
-                                    <td class="center">
-                                        <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName='<%# Bind("sdq_id") %>' />
-                                    </td>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </tr>
-                    </AlternatingItemTemplate>
-                    <FooterTemplate>
-                            </tbody>
-                        </table>
-                    </FooterTemplate>
-                </asp:Repeater>
+                <div>
+                    <asp:Label ID="lblResultadoVazio" runat="server" Visible="false"></asp:Label>
+                    <asp:Repeater ID="rptLancamento" runat="server" OnItemDataBound="rptLancamento_ItemDataBound">
+                        <HeaderTemplate>
+                            <table class="grid sortableFrequencia grid-responsive-list" cellspacing="0">
+                                <thead>
+                                    <tr class="gridHeader">
+                                        <th></th>
+                                        <th runat="server" id="thBotoes">
+                                            <div style="float:left">
+                                                <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbAnterior" Text="|<" runat="server"
+                                                    CssClass="ui-icon ui-icon-circle-triangle-w"></asp:LinkButton>
+                                            </div>
+                                            <div style="float:right">
+                                                <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbProximo" Text=">|" runat="server"
+                                                    CssClass="ui-icon ui-icon-circle-triangle-e"/>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <asp:Repeater ID="rptQuestoes" runat="server" OnItemDataBound="rptQuestoes_ItemDataBound">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false} .sorterFalse" id="thQuestao" runat="server">
+                                                    <asp:Label ID="lblQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <asp:Repeater ID="rptSubQuestoes" runat="server" OnItemDataBound="rptSubQuestoes_ItemDataBound">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false} .sorterFalse" id="thSubQuestao" runat="server">
+                                                    <asp:Label ID="lblSubQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <asp:Repeater ID="rptRespostas" runat="server">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false} .sorterFalse">
+                                                    <asp:Label ID="lblResposta" runat="server" Text='<%# Bind("sdr_sigla") %>' ToolTip='<%# Bind("sdr_descricao") %>'></asp:Label>
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr class="gridRow">
+                                <td>
+                                    <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
+                                </td>
+                                <asp:Repeater ID="rptRespostasAluno" runat="server">
+                                    <ItemTemplate>
+                                        <td class="center">
+                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName='<%# Bind("sdq_id") %>' />
+                                        </td>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tr>
+                        </ItemTemplate>
+                        <AlternatingItemTemplate>
+                            <tr class="gridAlternatingRow">
+                                <td>
+                                    <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
+                                </td>
+                                <asp:Repeater ID="rptRespostasAluno" runat="server">
+                                    <ItemTemplate>
+                                        <td class="center">
+                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName='<%# Bind("sdq_id") %>' />
+                                        </td>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tr>
+                        </AlternatingItemTemplate>
+                        <FooterTemplate>
+                                </tbody>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </div>
                 <div class="right">
-                    <asp:Button ID="bntSalvar" runat="server" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.bntSalvar.Text %>" OnClick="bntSalvar_Click" />
+                    <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.btnSalvar.Text %>" OnClick="btnSalvar_Click" />
                     <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                         OnClick="btnCancelar_Click" />
                 </div>

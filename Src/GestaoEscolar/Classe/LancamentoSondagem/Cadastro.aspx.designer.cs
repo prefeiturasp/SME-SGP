@@ -175,13 +175,13 @@ namespace GestaoEscolar.Classe.LancamentoSondagem {
         protected global::System.Web.UI.WebControls.Repeater rptLancamento;
         
         /// <summary>
-        /// bntSalvar control.
+        /// btnSalvar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bntSalvar;
+        protected global::System.Web.UI.WebControls.Button btnSalvar;
         
         /// <summary>
         /// btnCancelar control.

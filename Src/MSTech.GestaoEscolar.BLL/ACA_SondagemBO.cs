@@ -16,6 +16,7 @@ namespace MSTech.GestaoEscolar.BLL
     using Validation.Exceptions;
     using System.Collections.Generic;
     using CustomResourceProviders;
+    
     #region Enumeradores
 
     /// <summary>
@@ -31,8 +32,34 @@ namespace MSTech.GestaoEscolar.BLL
 
         Excluido = 3
     }
-    
+
     #endregion Enumeradores
+
+    #region Estruturas
+
+    /// <summary>
+    /// Estrutura que armazena o lançamento da sondagem.
+    /// </summary>
+    [Serializable]
+    public struct ACA_Sondagem_Lancamento
+    {
+        public long alu_id { get; set; }
+        public string pes_nome { get; set; }
+        public int mtu_numeroChamada { get; set; }
+        public int sdr_id { get; set; }
+        public string sdr_sigla { get; set; }
+        public string sdr_descricao { get; set; }
+        public int sdr_ordem { get; set; }
+        public int sdq_idSub { get; set; }
+        public string sdq_descricaoSub { get; set; }
+        public int sdq_ordemSub { get; set; }
+        public int sdq_id { get; set; }
+        public string sdq_descricao { get; set; }
+        public int sdq_ordem { get; set; }
+        public bool respAluno { get; set; }
+    }
+
+    #endregion Estruturas
 
     public class ACA_SondagemBO : BusinessBase<ACA_SondagemDAO, ACA_Sondagem>
 	{
@@ -217,6 +244,26 @@ namespace MSTech.GestaoEscolar.BLL
 
             ACA_SondagemDAO dao = new ACA_SondagemDAO();
             return dao.SelectBy_PesquisaLancamento(snd_titulo, sda_dataInicio, sda_dataFim, situacao, doc_id, gru_id, usu_id, adm, ent_id, true, currentPage / pageSize, pageSize, out totalRecords);
+        }
+
+        /// <summary>
+        /// Retorna as questões da sondagem para lançamento por turma.
+        /// </summary>   
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<ACA_Sondagem_Lancamento> SelecionaSondagemLancamentoTurma
+        (
+            int snd_id
+            , int sda_id
+            , long tur_id
+        )
+        {
+            List<ACA_Sondagem_Lancamento> retorno = new List<ACA_Sondagem_Lancamento>();
+            DataTable dtLancamento = new ACA_SondagemDAO().SelectBy_LancamentoTurma(snd_id, sda_id, tur_id);
+            if (dtLancamento.Rows.Count > 0)
+            {
+                retorno = dtLancamento.Rows.Cast<DataRow>().Select(p => (ACA_Sondagem_Lancamento)GestaoEscolarUtilBO.DataRowToEntity(p, new ACA_Sondagem_Lancamento())).ToList();
+            }
+            return retorno;
         }
 
         /// <summary>
