@@ -14,6 +14,12 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
 {
     public partial class Cadastro : MotherPageLogado
     {
+        #region Constantes
+
+        private const int maxRespostasPagina = 15; 
+
+        #endregion
+
         #region Propriedades
 
         /// <summary>
@@ -92,9 +98,106 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             }
         }
 
+        /// <summary>
+        /// Propriedade em ViewState que armazena a quantidade de questões por página.
+        /// </summary>
+        private int VS_QtdQuestoesPagina
+        {
+            get
+            {
+                if (ViewState["VS_QtdQuestoesPagina"] != null)
+                {
+                    return Convert.ToInt32(ViewState["VS_QtdQuestoesPagina"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_QtdQuestoesPagina"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Propriedade em ViewState que armazena a quantidade de subquestões por página.
+        /// </summary>
+        private int VS_QtdSubQuestoesPagina
+        {
+            get
+            {
+                if (ViewState["VS_QtdSubQuestoesPagina"] != null)
+                {
+                    return Convert.ToInt32(ViewState["VS_QtdSubQuestoesPagina"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_QtdSubQuestoesPagina"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Propriedade em ViewState que armazena a quantidade de respostas por página.
+        /// </summary>
+        private int VS_QtdRespostasPagina
+        {
+            get
+            {
+                if (ViewState["VS_QtdRespostasPagina"] != null)
+                {
+                    return Convert.ToInt32(ViewState["VS_QtdRespostasPagina"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_QtdRespostasPagina"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Propriedade em ViewState que armazena valor da página atual.
+        /// </summary>
+        private int VS_NumPagina
+        {
+            get
+            {
+                if (ViewState["VS_NumPagina"] != null)
+                {
+                    return Convert.ToInt32(ViewState["VS_NumPagina"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_NumPagina"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Propriedade em ViewState que armazena o total de páginas.
+        /// </summary>
+        private int VS_TotalPaginas
+        {
+            get
+            {
+                if (ViewState["VS_TotalPaginas"] != null)
+                {
+                    return Convert.ToInt32(ViewState["VS_TotalPaginas"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_TotalPaginas"] = value;
+            }
+        }
+
         private List<Questao> lstQuestoes = new List<Questao>();
         private List<Questao> lstSubQuestoes = new List<Questao>();
         private List<Resposta> lstRespostas = new List<Resposta>();
+
+        string ultimoGrupo = string.Empty;
 
         #endregion
 
@@ -129,6 +232,12 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroLancamentoSondagem.js"));
+            }
+
             // Seta o metodo criado no delegate ao evento do componente
             UCComboUAEscola.IndexChangedUnidadeEscola += UCComboUAEscola_IndexChangedUnidadeEscola;
             UCComboUAEscola.IndexChangedUA += UCComboUAEscola_IndexChangedUA;
@@ -216,6 +325,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -229,9 +339,21 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            //if (Page.IsValid)
-                //Salvar();
-        }
+            try
+            {
+                if (Page.IsValid)
+                {
+                    GuardarRespostasAlunos();
+                    Salvar();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.ErroSalvar").ToString(), UtilBO.TipoMensagem.Erro);
+            }
+}
 
         #endregion
 
@@ -275,6 +397,110 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 , __SessionWEB.__UsuarioWEB.Usuario.ent_id);
 
             ddlTurma.DataBind();
+        }
+
+        private void RecarregarGrid()
+        {
+            rptLancamento.DataSource = (
+                from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma
+                group dr by dr.alu_id into g
+                select new
+                {
+                    alu_id = g.Key
+                    ,
+                    pes_nome = g.First().pes_nome
+                    ,
+                    mtu_numeroChamada = g.First().mtu_numeroChamada
+                }
+            ).ToList().OrderBy(p => p.pes_nome);
+            rptLancamento.DataBind();
+        }
+
+        private void CarregarListasAuxiliares()
+        {
+            if (VS_lstLancamentoTurma.Any(p => p.sdq_id > 0))
+            {
+                lstQuestoes = (
+                    from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma.Where(p => p.sdq_id > 0)
+                    group dr by dr.sdq_id into g
+                    select new Questao
+                    {
+                        sdq_id = g.Key
+                        ,
+                        sdq_descricao = g.First().sdq_descricao
+                        ,
+                        sdq_ordem = g.First().sdq_ordem
+                    }
+                ).OrderBy(p => p.sdq_ordem).ToList();
+            }
+
+            if (VS_lstLancamentoTurma.Any(p => p.sdq_idSub > 0))
+            {
+                lstSubQuestoes = (
+                    from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma.Where(p => p.sdq_idSub > 0)
+                    group dr by dr.sdq_idSub into g
+                    select new Questao
+                    {
+                        sdq_id = g.Key
+                        ,
+                        sdq_descricao = g.First().sdq_descricaoSub
+                        ,
+                        sdq_ordem = g.First().sdq_ordemSub
+                    }
+                ).OrderBy(p => p.sdq_ordem).ToList();
+            }
+
+            if (VS_lstLancamentoTurma.Any(p => p.sdr_id > 0))
+            {
+                lstRespostas = (
+                    from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma.Where(p => p.sdr_id > 0)
+                    group dr by dr.sdr_id into g
+                    select new Resposta
+                    {
+                        sdr_id = g.Key
+                        ,
+                        sdr_sigla = g.First().sdr_sigla
+                        ,
+                        sdr_descricao = g.First().sdr_descricao
+                        ,
+                        sdr_ordem = g.First().sdr_ordem
+                    }
+                ).OrderBy(p => p.sdr_ordem).ToList();
+            }
+        }
+
+        private void GuardarRespostasAlunos()
+        {
+            foreach (RepeaterItem itemAluno in rptLancamento.Items)
+            {
+                long alu_id = Convert.ToInt64(((HiddenField)itemAluno.FindControl("hdnAluId")).Value);
+                Repeater rptRespostasAluno = (Repeater)itemAluno.FindControl("rptRespostasAluno");
+                foreach (RepeaterItem itemResposta in rptRespostasAluno.Items)
+                {
+                    RadioButton rbResposta = (RadioButton)itemResposta.FindControl("rbResposta");
+                    HiddenField hdnRespId = (HiddenField)itemResposta.FindControl("hdnRespId");
+                    string[] respId = hdnRespId.Value.Split(';');
+                    int sdq_id = Convert.ToInt32(respId[0]);
+                    int sdq_idSub = Convert.ToInt32(respId[1]);
+                    int sdr_id = Convert.ToInt32(respId[2]);
+                    for (int i = 0; i < VS_lstLancamentoTurma.Count; i++)
+                    {
+                        ACA_Sondagem_Lancamento lancamento = VS_lstLancamentoTurma[i];
+                        if (lancamento.alu_id == alu_id && lancamento.sdq_id == sdq_id && lancamento.sdq_idSub == sdq_idSub && lancamento.sdr_id == sdr_id)
+                        {
+                            VS_lstLancamentoTurma[i].respAluno = rbResposta.Checked;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Salvar()
+        {
+            CLS_AlunoSondagemBO.SalvarEmLote(VS_lstLancamentoTurma, VS_snd_id, VS_sda_id);
+            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.SucessoSalvar").ToString(), UtilBO.TipoMensagem.Sucesso);
         }
 
         #endregion
@@ -341,6 +567,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -386,6 +613,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -428,6 +656,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -436,77 +665,95 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
         {
             try
             {
+                if (btnSalvar.Visible && VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar)
+                {
+                    GuardarRespostasAlunos();
+                    Salvar();
+                }
+
                 long tur_id = Convert.ToInt64(ddlTurma.SelectedValue);
                 if (tur_id > 0)
                 {
-                    btnSalvar.Visible = VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
-
                     VS_lstLancamentoTurma = ACA_SondagemBO.SelecionaSondagemLancamentoTurma(VS_snd_id, VS_sda_id, tur_id);
                     if (VS_lstLancamentoTurma.Any())
                     {
-                        rptLancamento.DataSource = (
-                                from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma
-                                group dr by dr.alu_id into g
-                                select new
-                                {
-                                    alu_id = g.Key
-                                    ,
-                                    pes_nome = g.First().pes_nome
-                                    ,
-                                    mtu_numeroChamada = g.First().mtu_numeroChamada
-                                }
-                            ).ToList().OrderBy(p => p.pes_nome);
+                        CarregarListasAuxiliares();
 
-                        if (VS_lstLancamentoTurma.Any(p => p.sdq_id > 0))
+                        // Calcula a quantidade de respostas que deve permanecer junta
+                        int qtdRespostasPorQuestao = 0;
+                        if (lstSubQuestoes.Any())
                         {
-                            lstQuestoes = (
-                                from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma.Where(p => p.sdq_id > 0)
-                                group dr by dr.sdq_id into g
-                                select new Questao
-                                {
-                                    sdq_id = g.Key
-                                    ,
-                                    sdq_descricao = g.First().sdq_descricao
-                                    , 
-                                    sdq_ordem = g.First().sdq_ordem
-                                }
-                            ).OrderBy(p => p.sdq_ordem).ToList();
+                            qtdRespostasPorQuestao = lstSubQuestoes.Count() * lstRespostas.Count();
+                        }
+                        else
+                        {
+                            qtdRespostasPorQuestao = lstRespostas.Count();
                         }
 
-                        if (VS_lstLancamentoTurma.Any(p => p.sdq_idSub > 0))
+                        VS_NumPagina = 1;
+                        if (qtdRespostasPorQuestao < maxRespostasPagina)
                         {
-                            lstSubQuestoes = (
-                                from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma.Where(p => p.sdq_idSub > 0)
-                                group dr by dr.sdq_idSub into g
-                                select new Questao
+                            int qtdRepetir = maxRespostasPagina / qtdRespostasPorQuestao;
+                            VS_QtdRespostasPagina = qtdRepetir * qtdRespostasPorQuestao;
+
+                            if (lstQuestoes.Any())
+                            {
+                                VS_QtdQuestoesPagina = qtdRepetir;
+                            }
+                            else
+                            {
+                                VS_QtdQuestoesPagina = 0;
+                            }
+
+                            if (lstSubQuestoes.Any())
+                            {
+                                if (lstQuestoes.Any())
                                 {
-                                    sdq_id = g.Key
-                                    ,
-                                    sdq_descricao = g.First().sdq_descricaoSub
-                                    ,
-                                    sdq_ordem = g.First().sdq_ordemSub
+                                    VS_QtdSubQuestoesPagina = qtdRepetir * lstSubQuestoes.Count;
                                 }
-                            ).OrderBy(p => p.sdq_ordem).ToList();
+                                else
+                                {
+                                    VS_QtdSubQuestoesPagina = qtdRepetir;
+                                }
+                            }
+                            else
+                            {
+                                VS_QtdSubQuestoesPagina = 0;
+                            }
+                        }
+                        else
+                        {
+                            VS_QtdRespostasPagina = qtdRespostasPorQuestao;
+
+                            if (lstQuestoes.Any())
+                            {
+                                VS_QtdQuestoesPagina = 1;
+                            }
+                            else
+                            {
+                                VS_QtdQuestoesPagina = 0;
+                            }
+
+                            if (lstSubQuestoes.Any())
+                            {
+                                if (lstQuestoes.Any())
+                                {
+                                    VS_QtdSubQuestoesPagina = lstSubQuestoes.Count;
+                                }
+                                else
+                                {
+                                    VS_QtdSubQuestoesPagina = 1;
+                                }
+                            }
+                            else
+                            {
+                                VS_QtdSubQuestoesPagina = 0;
+                            }
                         }
 
-                        if (VS_lstLancamentoTurma.Any(p => p.sdr_id > 0))
-                        {
-                            lstRespostas = (
-                                from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma.Where(p => p.sdr_id > 0)
-                                group dr by dr.sdr_id into g
-                                select new Resposta
-                                {
-                                    sdr_id = g.Key
-                                    ,
-                                    sdr_sigla = g.First().sdr_sigla
-                                    ,
-                                    sdr_descricao = g.First().sdr_descricao
-                                    ,
-                                    sdr_ordem = g.First().sdr_ordem
-                                }
-                            ).OrderBy(p => p.sdr_ordem).ToList();
-                        }
+                        VS_TotalPaginas = (lstQuestoes.Count > 0 ? lstQuestoes.Count : 1) * (lstSubQuestoes.Count > 0 ? lstSubQuestoes.Count : 1) * lstRespostas.Count / VS_QtdRespostasPagina;
 
+                        RecarregarGrid();
                         lblResultadoVazio.Visible = false;
                         rptLancamento.Visible = true;
                     }
@@ -515,13 +762,15 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                         rptLancamento.DataSource = new List<ACA_Sondagem_Lancamento>();
                         lblResultadoVazio.Visible = true;
                         rptLancamento.Visible = false;
+                        rptLancamento.DataBind();
                     }
-                    rptLancamento.DataBind();
+                    btnSalvar.Visible = VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && VS_lstLancamentoTurma.Any();
                 }
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -535,8 +784,16 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     Repeater rptQuestoes = (Repeater)e.Item.FindControl("rptQuestoes");
                     if (rptQuestoes != null)
                     {
-                        rptQuestoes.DataSource = lstQuestoes;
+                        rptQuestoes.DataSource = lstQuestoes.Skip((VS_NumPagina - 1) * VS_QtdQuestoesPagina).Take(VS_QtdQuestoesPagina);
                         rptQuestoes.DataBind();
+                    }
+                }
+                else
+                {
+                    HtmlTableCell trQuestoes = (HtmlTableCell)e.Item.FindControl("trQuestoes");
+                    if (trQuestoes != null)
+                    {
+                        trQuestoes.Visible = false;
                     }
                 }
 
@@ -555,8 +812,16 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     Repeater rptSubQuestoes = (Repeater)e.Item.FindControl("rptSubQuestoes");
                     if (rptSubQuestoes != null)
                     {
-                        rptSubQuestoes.DataSource = lstSubQuestoesQuestao;
+                        rptSubQuestoes.DataSource = lstSubQuestoesQuestao.Skip((VS_NumPagina - 1) * VS_QtdSubQuestoesPagina).Take(VS_QtdSubQuestoesPagina);
                         rptSubQuestoes.DataBind();
+                    }
+                }
+                else
+                {
+                    HtmlTableCell trSubQuestoes = (HtmlTableCell)e.Item.FindControl("trSubQuestoes");
+                    if (trSubQuestoes != null)
+                    {
+                        trSubQuestoes.Visible = false;
                     }
                 }
 
@@ -573,9 +838,60 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     Repeater rptRespostas = (Repeater)e.Item.FindControl("rptRespostas");
                     if (rptRespostas != null)
                     {
-                        rptRespostas.DataSource = lstRespostasQuestao;
+                        rptRespostas.DataSource = lstRespostasQuestao.Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina);
                         rptRespostas.DataBind();
                     }
+                }
+
+                HtmlTableCell thBotoes = (HtmlTableCell)e.Item.FindControl("thBotoes");
+                if (thBotoes != null)
+                {
+                    thBotoes.Visible = VS_TotalPaginas > 1;
+                    if (thBotoes.Visible)
+                    {
+                        thBotoes.Attributes.Add("colspan", VS_QtdRespostasPagina.ToString());
+                    }
+                }
+
+                LinkButton lkbAnterior = (LinkButton)e.Item.FindControl("lkbAnterior");
+                if (lkbAnterior != null)
+                {
+                    lkbAnterior.Visible = VS_NumPagina > 1;
+                }
+
+                LinkButton lkbProximo = (LinkButton)e.Item.FindControl("lkbProximo");
+                if (lkbProximo != null)
+                {
+                    lkbProximo.Visible = VS_NumPagina < VS_TotalPaginas;
+                }
+            }
+            else if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                long alu_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "alu_id"));
+
+                HiddenField hdnAluId = (HiddenField)e.Item.FindControl("hdnAluId");
+                hdnAluId.Value = alu_id.ToString();
+
+                Repeater rptRespostasAluno = (Repeater)e.Item.FindControl("rptRespostasAluno");
+                if (rptRespostasAluno != null)
+                {
+                    rptRespostasAluno.DataSource = (
+                        from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma
+                        where dr.alu_id == alu_id
+                        select new
+                        {
+                            alu_id = dr.alu_id
+                            , sdr_id = dr.sdr_id
+                            , sdr_descricao = dr.sdr_descricao
+                            , sdr_ordem = dr.sdr_ordem
+                            , sdq_idSub = dr.sdq_idSub
+                            , sdq_ordemSub = dr.sdq_ordemSub
+                            , sdq_id = dr.sdq_id
+                            , sdq_ordem = dr.sdq_ordem
+                            , respAluno = dr.respAluno
+                        }
+                    ).ToList().OrderBy(p => p.sdq_ordem).ThenBy(p => p.sdq_ordemSub).ThenBy(p => p.sdr_ordem).Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina);
+                    rptRespostasAluno.DataBind();
                 }
             }
         }
@@ -603,6 +919,60 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     thSubQuestao.Attributes.Add("colspan", lstRespostas.Count().ToString());
                 }
             }
+        }
+
+        protected void rptRespostasAluno_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                long alu_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "alu_id"));
+                int sdr_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "sdr_id"));
+                int sdq_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "sdq_id"));
+                int sdq_idSub = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "sdq_idSub"));
+                string estiloBorda = "1px solid #eee";
+
+                RadioButton rbResposta = (RadioButton)e.Item.FindControl("rbResposta");
+                if (rbResposta != null)
+                {
+                    rbResposta.GroupName = string.Format("{0}_{1}_{2}", alu_id, sdq_id, sdq_idSub);
+
+                    if (string.IsNullOrEmpty(ultimoGrupo) || rbResposta.GroupName != ultimoGrupo)
+                    {
+                        estiloBorda = "1px solid #ccc";
+                        ultimoGrupo = rbResposta.GroupName;
+                    }
+
+                    rbResposta.Enabled = VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                }
+
+                HiddenField hdnRespId = (HiddenField)e.Item.FindControl("hdnRespId");
+                if (hdnRespId != null)
+                {
+                    hdnRespId.Value = string.Format("{0};{1};{2}", sdq_id, sdq_idSub, sdr_id);
+                }
+
+                HtmlTableCell tdResposta = (HtmlTableCell)e.Item.FindControl("tdResposta");
+                if (tdResposta != null)
+                {
+                    tdResposta.Style.Add("border-left", estiloBorda);
+                }
+            }
+        }
+
+        protected void lkbAnterior_Click(object sender, EventArgs e)
+        {
+            VS_NumPagina--;
+            CarregarListasAuxiliares();
+            GuardarRespostasAlunos();
+            RecarregarGrid();
+        }
+
+        protected void lkbProximo_Click(object sender, EventArgs e)
+        {
+            VS_NumPagina++;
+            CarregarListasAuxiliares();
+            GuardarRespostasAlunos();
+            RecarregarGrid();
         }
 
         #endregion

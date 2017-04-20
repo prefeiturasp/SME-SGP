@@ -6,6 +6,7 @@ namespace MSTech.GestaoEscolar.Entities
 {
     using MSTech.GestaoEscolar.Entities.Abstracts;
     using System;
+    using System.Data;
     using Validation;
     /// <summary>
     /// Description: .
@@ -50,5 +51,16 @@ namespace MSTech.GestaoEscolar.Entities
         /// Variável auxiliar para a situação do agendamento
         /// </summary>
         public byte sda_situacao { get; set; }
+
+        public static DataTable TipoTabela_AlunoSondagem()
+        {
+            DataTable dtAlunoSondagem = new DataTable();
+            dtAlunoSondagem.Columns.Add("alu_id", typeof(long));
+            dtAlunoSondagem.Columns.Add("sdq_id", typeof(int));
+            dtAlunoSondagem.Columns.Add("sdq_idSub", typeof(int));
+            dtAlunoSondagem.Columns.Add("sdr_id", typeof(int));
+            dtAlunoSondagem.Columns.Add("respAluno", typeof(bool));
+            return dtAlunoSondagem;
+        }
     }
 }

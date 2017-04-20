@@ -1236,6 +1236,20 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Parecer final'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.ErroSalvar' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar salvar o lançamento de sondagem.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.SucessoSalvar' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Lançamento de sondagem salvo com sucesso.'
+
 -- Fechar transação
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

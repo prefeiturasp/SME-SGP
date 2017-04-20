@@ -52,10 +52,15 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// </summary>
 		public virtual int sdq_id { get; set; }
 
-		/// <summary>
-		/// ID da tabela ACA_SondagemResposta.
+        /// <summary>
+		/// ID da tabela ACA_SondagemQuestao.
 		/// </summary>
-		public virtual int sdr_id { get; set; }
+		public virtual int sdq_idSub { get; set; }
+
+        /// <summary>
+        /// ID da tabela ACA_SondagemResposta.
+        /// </summary>
+        public virtual int sdr_id { get; set; }
 
 		/// <summary>
 		/// Situação do registro (1-Ativo, 3-Excluido).

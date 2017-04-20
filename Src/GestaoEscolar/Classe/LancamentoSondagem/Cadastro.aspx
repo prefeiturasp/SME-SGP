@@ -45,44 +45,44 @@
                         <HeaderTemplate>
                             <table class="grid sortableFrequencia grid-responsive-list" cellspacing="0">
                                 <thead>
-                                    <tr class="gridHeader">
+                                    <tr class="gridHeader" id="headerBotoes">
                                         <th></th>
                                         <th runat="server" id="thBotoes">
                                             <div style="float:left">
                                                 <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbAnterior" Text="|<" runat="server"
-                                                    CssClass="ui-icon ui-icon-circle-triangle-w"></asp:LinkButton>
+                                                    CssClass="ui-icon ui-icon-circle-triangle-w" OnClick="lkbAnterior_Click"></asp:LinkButton>
                                             </div>
                                             <div style="float:right">
                                                 <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbProximo" Text=">|" runat="server"
-                                                    CssClass="ui-icon ui-icon-circle-triangle-e"/>
+                                                    CssClass="ui-icon ui-icon-circle-triangle-e" OnClick="lkbProximo_Click"/>
                                             </div>
                                         </th>
                                     </tr>
-                                    <tr>
+                                    <tr class="gridHeader" id="headerQuestoes">
                                         <th></th>
                                         <asp:Repeater ID="rptQuestoes" runat="server" OnItemDataBound="rptQuestoes_ItemDataBound">
                                             <ItemTemplate>
-                                                <th class="center {sorter :false} .sorterFalse" id="thQuestao" runat="server">
+                                                <th class="center {sorter :false} .sorterFalse" id="thQuestao" runat="server" style="border-left:1px solid #ccc">
                                                     <asp:Label ID="lblQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
                                                 </th>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </tr>
-                                    <tr>
+                                    <tr class="gridHeader" id="headerSubQuestoes">
                                         <th></th>
                                         <asp:Repeater ID="rptSubQuestoes" runat="server" OnItemDataBound="rptSubQuestoes_ItemDataBound">
                                             <ItemTemplate>
-                                                <th class="center {sorter :false} .sorterFalse" id="thSubQuestao" runat="server">
+                                                <th class="center {sorter :false} .sorterFalse" id="thSubQuestao" runat="server" style="border-left:1px solid #ccc">
                                                     <asp:Label ID="lblSubQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
                                                 </th>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </tr>
-                                    <tr>
+                                    <tr class="gridHeader">
                                         <th></th>
                                         <asp:Repeater ID="rptRespostas" runat="server">
                                             <ItemTemplate>
-                                                <th class="center {sorter :false} .sorterFalse">
+                                                <th class="center {sorter :false} .sorterFalse" style="border-left:1px solid #ccc">
                                                     <asp:Label ID="lblResposta" runat="server" Text='<%# Bind("sdr_sigla") %>' ToolTip='<%# Bind("sdr_descricao") %>'></asp:Label>
                                                 </th>
                                             </ItemTemplate>
@@ -95,11 +95,13 @@
                             <tr class="gridRow">
                                 <td>
                                     <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
+                                    <asp:HiddenField ID="hdnAluId" runat="server" />
                                 </td>
-                                <asp:Repeater ID="rptRespostasAluno" runat="server">
+                                <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
                                     <ItemTemplate>
-                                        <td class="center">
-                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName='<%# Bind("sdq_id") %>' />
+                                        <td class="center" style="text-align:center;" id="tdResposta" runat="server">
+                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
+                                            <asp:HiddenField ID="hdnRespId" runat="server" />
                                         </td>
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -109,11 +111,13 @@
                             <tr class="gridAlternatingRow">
                                 <td>
                                     <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
+                                    <asp:HiddenField ID="hdnAluId" runat="server" />
                                 </td>
-                                <asp:Repeater ID="rptRespostasAluno" runat="server">
+                                <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
                                     <ItemTemplate>
-                                        <td class="center">
-                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName='<%# Bind("sdq_id") %>' />
+                                        <td class="center" style="text-align:center;" id="tdResposta" runat="server">
+                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
+                                            <asp:HiddenField ID="hdnRespId" runat="server" />
                                         </td>
                                     </ItemTemplate>
                                 </asp:Repeater>

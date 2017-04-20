@@ -41,7 +41,7 @@ namespace MSTech.GestaoEscolar.BLL
     /// Estrutura que armazena o lançamento da sondagem.
     /// </summary>
     [Serializable]
-    public struct ACA_Sondagem_Lancamento
+    public class ACA_Sondagem_Lancamento
     {
         public long alu_id { get; set; }
         public string pes_nome { get; set; }
