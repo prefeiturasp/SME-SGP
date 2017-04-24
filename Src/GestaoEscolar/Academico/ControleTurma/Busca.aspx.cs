@@ -2485,7 +2485,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                                         p.tud_id == tud_id
                                         && p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendentePlanejamento
                                     )
-                                )
+                                ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
+                                {
+                                    tipo_ordem = p.tipo_ordem,
+                                    tpc_id = p.tpc_id,
+                                    tpc_ordem = p.tpc_ordem,
+                                    tud_id = p.tud_id,
+                                    tud_nome = p.tud_nome,
+                                    tds_ordem = p.tds_ordem,
+                                    tipoPendencia = p.tipoPendencia,
+                                    tud_idRegencia = p.tud_idRegencia,
+                                    tud_tipo = p.tud_tipo
+                                }).Select(p => p.Key)
                                 .OrderBy(p => p.tpc_ordem).ToList();
                             }
                             else
@@ -2502,7 +2513,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                                             p.tud_idRegencia == tud_id
                                             && p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendentePlanejamento
                                         )
-                                    )
+                                    ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
+                                    {
+                                        tipo_ordem = p.tipo_ordem,
+                                        tpc_id = p.tpc_id,
+                                        tpc_ordem = p.tpc_ordem,
+                                        tud_id = p.tud_id,
+                                        tud_nome = p.tud_nome,
+                                        tds_ordem = p.tds_ordem,
+                                        tipoPendencia = p.tipoPendencia,
+                                        tud_idRegencia = p.tud_idRegencia,
+                                        tud_tipo = p.tud_tipo
+                                    }).Select(p => p.Key)
                                     .OrderBy(p => p.tpc_ordem).ThenBy(p => p.tds_ordem).ToList();
                                 }
                                 else
@@ -2514,7 +2536,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                                             p.tud_idRegencia == tud_id
                                             && p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendentePlanejamento
                                         )
-                                    )
+                                    ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
+                                    {
+                                        tipo_ordem = p.tipo_ordem,
+                                        tpc_id = p.tpc_id,
+                                        tpc_ordem = p.tpc_ordem,
+                                        tud_id = p.tud_id,
+                                        tud_nome = p.tud_nome,
+                                        tds_ordem = p.tds_ordem,
+                                        tipoPendencia = p.tipoPendencia,
+                                        tud_idRegencia = p.tud_idRegencia,
+                                        tud_tipo = p.tud_tipo
+                                    }).Select(p => p.Key)
                                     .OrderBy(p => p.tpc_ordem).ThenBy(p => p.tud_nome).ToList();
                                 }
                             }
@@ -2562,7 +2595,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                                     p.tud_id == tud_id
                                     && p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
                                 )
-                            )
+                            ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
+                            {
+                                tipo_ordem = p.tipo_ordem,
+                                tpc_id = p.tpc_id,
+                                tpc_ordem = p.tpc_ordem,
+                                tud_id = p.tud_id,
+                                tud_nome = p.tud_nome,
+                                tds_ordem = p.tds_ordem,
+                                tipoPendencia = p.tipoPendencia,
+                                tud_idRegencia = p.tud_idRegencia,
+                                tud_tipo = p.tud_tipo
+                            }).Select(p => p.Key)
                             .OrderBy(p => p.tpc_ordem).ToList();
 
                             if (pendencias.Count > 1)
