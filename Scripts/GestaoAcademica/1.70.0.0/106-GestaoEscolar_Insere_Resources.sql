@@ -1125,6 +1125,13 @@ SET XACT_ABORT ON
 		, @rcr_valorPadrao = '<br><b>Descrição:</b> {0}'
 
 	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.lblDadosSondagem.DataInicioFim' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<br><b>Data início:</b> {0}<br><b>Data fim:</b> {1}'
+
+	EXEC MS_InsereResource 
 		@rcr_chave = 'LancamentoSondagem.Cadastro.lblLegend.Text' 
 		, @rcr_NomeResource = 'Classe'
 		, @rcr_cultura = 'pt-BR'
@@ -1151,13 +1158,6 @@ SET XACT_ABORT ON
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = '-- Selecione uma turma --'
-
-	EXEC MS_InsereResource 
-		@rcr_chave = 'LancamentoSondagem.Cadastro.btnFiltrar.Text' 
-		, @rcr_NomeResource = 'Classe'
-		, @rcr_cultura = 'pt-BR'
-		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Filtrar'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'LancamentoSondagem.Cadastro.cpvTurma.ErrorMessage' 

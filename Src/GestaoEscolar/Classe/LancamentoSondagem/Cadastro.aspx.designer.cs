@@ -139,24 +139,6 @@ namespace GestaoEscolar.Classe.LancamentoSondagem {
         protected global::System.Web.UI.WebControls.DropDownList ddlTurma;
         
         /// <summary>
-        /// cpvTurma control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator cpvTurma;
-        
-        /// <summary>
-        /// btnFiltrar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFiltrar;
-        
-        /// <summary>
         /// lblResultadoVazio control.
         /// </summary>
         /// <remarks>

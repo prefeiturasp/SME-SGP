@@ -10,7 +10,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <uc1:UCLoader ID="UCLoader1" runat="server" AssociatedUpdatePanelID="updLancamento" />
-    <asp:UpdatePanel ID="updMensagem" runat="server">
+    <asp:UpdatePanel ID="updMensagem" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
             <asp:ValidationSummary ID="ValidationSummary" runat="server" ValidationGroup="FiltroTurma" />
@@ -30,14 +30,9 @@
                     <uc3:UCCCursoCurriculo runat="server" ID="UCCCursoCurriculo" Obrigatorio="true" MostrarMensagemSelecione="true" PermiteEditar="false" />
                     <asp:Label ID="lblTurma" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.lblTurma.Text %>" runat="server" AssociatedControlID="ddlTurma"></asp:Label>
                     <asp:DropDownList ID="ddlTurma" runat="server" AppendDataBoundItems="True"
-                        AutoPostBack="true" DataTextField="tur_codigo" DataValueField="tur_id" SkinID="text60C">
+                        AutoPostBack="true" DataTextField="tur_codigo" DataValueField="tur_id" SkinID="text60C"
+                        OnSelectedIndexChanged="ddlTurma_SelectedIndexChanged">
                     </asp:DropDownList>
-                    <asp:CompareValidator ID="cpvTurma" runat="server" ErrorMessage="<%$ Resources:Classe, LancamentoSondagem.Cadastro.cpvTurma.ErrorMessage %>"
-                        ControlToValidate="ddlTurma" Operator="NotEqual" ValueToCompare="-1" Display="Dynamic" ValidationGroup="FiltroTurma"
-                        Visible="true">*</asp:CompareValidator>
-                    <div class="right">
-                        <asp:Button ID="btnFiltrar" runat="server" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.btnFiltrar.Text %>" OnClick="btnFiltrar_Click" ValidationGroup="FiltroTurma" CausesValidation="true" />
-                    </div>
                 </fieldset>
                 <div>
                     <asp:Label ID="lblResultadoVazio" runat="server" Visible="false"></asp:Label>

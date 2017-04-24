@@ -275,6 +275,9 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                             lblDadosSondagem.Text += string.Format(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.lblDadosSondagem.Descricao").ToString(), entity.snd_descricao);
                         }
 
+                        ACA_SondagemAgendamento entityAgendamento = ACA_SondagemAgendamentoBO.GetEntity(new ACA_SondagemAgendamento { snd_id = VS_snd_id, sda_id = VS_sda_id });
+                        lblDadosSondagem.Text += string.Format(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.lblDadosSondagem.DataInicioFim").ToString(), entityAgendamento.sda_dataInicio.ToString("dd/MM/yyyy"), entityAgendamento.sda_dataFim.ToString("dd/MM/yyyy"));
+
                         lblResultadoVazio.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.lblResultadoVazio.Text").ToString(), UtilBO.TipoMensagem.Nenhuma);
                         ddlTurma.Items.Insert(0, new ListItem(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.ddlTurma.MsgSelecione").ToString(), "-1", true));
 
@@ -592,6 +595,8 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                         ddlTurma.SelectedIndex = 0;
                         ddlTurma.Enabled = false;
                     }
+
+                    ddlTurma_SelectedIndexChanged(null, null);
                 }
                 else
                 {
@@ -629,8 +634,6 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 {
                     ddlTurma.Items.Clear();
 
-                    ddlTurma.Items.Clear();
-
                     ddlTurma.Items.Insert(0, new ListItem(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.ddlTurma.MsgSelecione").ToString(), "-1", true));
 
                     ddlTurma.DataSource = TUR_TurmaBO.GetSelectBy_SondagemAgendamento(
@@ -652,6 +655,8 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     ddlTurma.Focus();
                     ddlTurma.Enabled = true;
                 }
+
+                ddlTurma_SelectedIndexChanged(null, null);
             }
             catch (Exception ex)
             {
@@ -661,7 +666,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             }
         }
 
-        protected void btnFiltrar_Click(object sender, EventArgs e)
+        protected void ddlTurma_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -753,9 +758,9 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
 
                         VS_TotalPaginas = (lstQuestoes.Count > 0 ? lstQuestoes.Count : 1) * (lstSubQuestoes.Count > 0 ? lstSubQuestoes.Count : 1) * lstRespostas.Count / VS_QtdRespostasPagina;
 
-                        RecarregarGrid();
                         lblResultadoVazio.Visible = false;
                         rptLancamento.Visible = true;
+                        RecarregarGrid();
                     }
                     else
                     {
@@ -766,6 +771,15 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     }
                     btnSalvar.Visible = VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && VS_lstLancamentoTurma.Any();
                 }
+                else
+                {
+                    rptLancamento.DataSource = new List<ACA_Sondagem_Lancamento>();
+                    lblResultadoVazio.Visible = false;
+                    rptLancamento.Visible = false;
+                    rptLancamento.DataBind();
+                    btnSalvar.Visible = false;
+                }
+                updLancamento.Update();
             }
             catch (Exception ex)
             {
