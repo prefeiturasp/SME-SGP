@@ -34,7 +34,7 @@
                         OnSelectedIndexChanged="ddlTurma_SelectedIndexChanged">
                     </asp:DropDownList>
                 </fieldset>
-                <div>
+                <div class="responsive-scroll area-form">
                     <asp:Label ID="lblResultadoVazio" runat="server" Visible="false"></asp:Label>
                     <asp:Repeater ID="rptLancamento" runat="server" OnItemDataBound="rptLancamento_ItemDataBound">
                         <HeaderTemplate>
@@ -124,7 +124,7 @@
                         </FooterTemplate>
                     </asp:Repeater>
                 </div>
-                <div class="right">
+                <div class="right area-botoes-bottom">
                     <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.btnSalvar.Text %>" OnClick="btnSalvar_Click" />
                     <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                         OnClick="btnCancelar_Click" />

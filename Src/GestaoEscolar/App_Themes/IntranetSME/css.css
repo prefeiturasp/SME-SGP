@@ -5231,3 +5231,11 @@ table.radio td {
 .grid-linha-destaque{
   background:#eee;
 }
+
+@media screen and (max-width: 960px) {
+    .responsive-scroll{
+        overflow: auto;
+        width: calc(100vw - 40px) !important;
+    }
+}
+
