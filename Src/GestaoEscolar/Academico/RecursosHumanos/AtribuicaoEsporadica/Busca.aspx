@@ -15,7 +15,7 @@
         <asp:UpdatePanel ID="upnEscola" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <uc1:UCComboUAEscola ID="UCComboUAEscola1" runat="server" ObrigatorioUA="true" ObrigatorioEscola="true"
-                    CarregarEscolaAutomatico="true" ValidationGroup="Atribuicao"
+                    CarregarEscolaAutomatico="true" ValidationGroup="Atribuicao" FiltroEscolasControladas="true"
                     MostrarMessageSelecioneUA="true" MostrarMessageSelecioneEscola="true" />
             </ContentTemplate>
         </asp:UpdatePanel>
