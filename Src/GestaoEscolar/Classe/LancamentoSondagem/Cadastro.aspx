@@ -38,7 +38,7 @@
                     <asp:Label ID="lblResultadoVazio" runat="server" Visible="false"></asp:Label>
                     <asp:Repeater ID="rptLancamento" runat="server" OnItemDataBound="rptLancamento_ItemDataBound">
                         <HeaderTemplate>
-                            <table class="grid sortableFrequencia grid-responsive-list" cellspacing="0">
+                            <table class="grid sortableFrequencia" cellspacing="0">
                                 <thead>
                                     <tr class="gridHeader" id="headerBotoes">
                                         <th></th>
