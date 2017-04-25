@@ -219,8 +219,7 @@ public partial class Documentos_DocumentoAluno_Busca : MotherPageLogado
 
         UCComboCursoCurriculo1.IndexChanged += UCComboCursoCurriculo1_IndexChanged;
         UCComboCurriculoPeriodo1.IndexChanged += UCComboCurriculoPeriodo1__OnSelectedIndexChange;
-        if (string.IsNullOrEmpty(_rdbRelatorios.SelectedValue))
-            UCComboCalendario1.IndexChanged += UCComboCalendario1_IndexChanged;
+        UCComboCalendario1.IndexChanged += UCComboCalendario1_IndexChanged;
 
         //    _btnGerarRelatorio.Attributes.Add("onclick", String.Format("javascript: return ExtensaoDosFiltros('{0}');", __SessionWEB.__UsuarioWEB.Usuario.ent_id));
         //    btnGerarRelatorioCima.Attributes.Add("onclick", String.Format("javascript: return ExtensaoDosFiltros('{0}');", __SessionWEB.__UsuarioWEB.Usuario.ent_id));
