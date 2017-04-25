@@ -13,8 +13,8 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Collections.Generic;
     using Validation.Exceptions;
     using CoreSSO.BLL;
-    using System.Linq;
     using Data.Common;
+
     public enum ObjetoAprendizagemSituacao
     {
         Ativo = 1,
@@ -36,6 +36,12 @@ namespace MSTech.GestaoEscolar.BLL
         public string tpc_nome { get; set; }
         public int tpc_ordem { get; set; }
         public bool selecionado { get; set; }
+        public int oae_id { get; set; }
+        public string oae_descricao { get; set; }
+        public int oae_ordem { get; set; }
+        public int oae_idSub { get; set; }
+        public string oae_descricaoSub { get; set; }
+        public int oae_ordemSub { get; set; }
     }
 
     /// <summary>

@@ -24,6 +24,23 @@
         });
     });
 
+    // Fechar items dos objetos de conhecimento
+    $(".accordion-list li,.accordion-list-sub li").addClass("accordion-closed");
+    $(".accordion-head").unbind('click').click(function () {
+        var item = $(this).parent("li");
+        if ($(item).hasClass("accordion-closed"))
+        {
+            $(item).removeClass("accordion-closed");
+            $(item).addClass("accordion-opened");
+        }
+        else if ($(item).hasClass("accordion-opened"))
+        {
+            $(item).removeClass("accordion-opened");
+            $(item).addClass("accordion-closed");
+        }
+    });
+    //
+
     //Adiciona página de confirmação caso o usuário tente sair da tela
     SetExitPageConfirmer();
 }
