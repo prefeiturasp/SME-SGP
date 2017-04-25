@@ -837,19 +837,23 @@ namespace GestaoEscolar.Academico.RecursosHumanos.AtribuicaoDocentes
                     if (tud_tipo == (int)TurmaDisciplinaTipo.TerritorioSaber)
                     {
                         long tud_idTerritorio = Convert.ToInt64(_dgvTurma.DataKeys[row.RowIndex].Values["tud_id"]);
-                        long tud_idExperiencia = lstTurmaDisciplinaTerritorio.Where(p => p.tud_idTerritorio == tud_idTerritorio).First().tud_idExperiencia;
+                        if (lstTurmaDisciplinaTerritorio.Any(p => p.tud_idTerritorio == tud_idTerritorio) &&
+                            lstTurmaDisciplinaTerritorio.Where(p => p.tud_idTerritorio == tud_idTerritorio).First() != null)
+                        {
+                            long tud_idExperiencia = lstTurmaDisciplinaTerritorio.Where(p => p.tud_idTerritorio == tud_idTerritorio).First().tud_idExperiencia;
 
-                        posicao = posicaoExperiencia[tud_idExperiencia];
-                        posicao2 = posicaoExperiencia2[tud_idExperiencia];
+                            posicao = posicaoExperiencia.ContainsKey(tud_idExperiencia) ? posicaoExperiencia[tud_idExperiencia] : 0;
+                            posicao2 = posicaoExperiencia2.ContainsKey(tud_idExperiencia) ? posicaoExperiencia2[tud_idExperiencia] : 0;
 
-                        chkTitular.Checked = chkTitularExperienciaChecked[tud_idExperiencia];
-                        chkSegundoTitular.Checked = chkSegundoTitularExperienciaChecked[tud_idExperiencia];
+                            chkTitular.Checked = chkTitularExperienciaChecked.ContainsKey(tud_idExperiencia) ? chkTitularExperienciaChecked[tud_idExperiencia] : false;
+                            chkSegundoTitular.Checked = chkSegundoTitularExperienciaChecked.ContainsKey(tud_idExperiencia) ? chkSegundoTitularExperienciaChecked[tud_idExperiencia] : false;
 
-                        _chkSubstituto.Checked = chkSubstitutoExperienciaChecked[tud_idExperiencia];
-                        _chkProjeto.Checked = chkProjetoExperienciaChecked[tud_idExperiencia];
+                            _chkSubstituto.Checked = chkSubstitutoExperienciaChecked.ContainsKey(tud_idExperiencia) ? chkSubstitutoExperienciaChecked[tud_idExperiencia] : false;
+                            _chkProjeto.Checked = chkProjetoExperienciaChecked.ContainsKey(tud_idExperiencia) ? chkProjetoExperienciaChecked[tud_idExperiencia] : false;
 
-                        txtVigenciaInicio.Text = inicioSubstitutoExperiencia[tud_idExperiencia];
-                        txtVigenciaFim.Text = fimSubstitutoExperiencia[tud_idExperiencia];
+                            txtVigenciaInicio.Text = inicioSubstitutoExperiencia.ContainsKey(tud_idExperiencia) ? inicioSubstitutoExperiencia[tud_idExperiencia] : "";
+                            txtVigenciaFim.Text = fimSubstitutoExperiencia.ContainsKey(tud_idExperiencia) ? fimSubstitutoExperiencia[tud_idExperiencia] : "";
+                        }
                     }
 
                     // Verifico se a vigencia de inicio para o substituto foi preenchida
