@@ -7874,6 +7874,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         {
             VS_tau_id = -1;
             VS_tud_tipo_Aula = VS_EntitiesControleTurma.turmaDisciplina.tud_tipo;
+            VS_fav_tipoApuracaoFrequencia = VS_EntitiesControleTurma.formatoAvaliacao.fav_tipoApuracaoFrequencia;
             VS_tud_global_Aula = VS_EntitiesControleTurma.turmaDisciplina.tud_global;
             VS_tud_id_Aula = VS_EntitiesControleTurma.turmaDisciplina.tud_id;
             SetaDisplayCss(btnSalvarAula, true);
