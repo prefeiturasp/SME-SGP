@@ -528,7 +528,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=IIf(Fields!qtde_bimestre.Value&gt;4,Fields!dis_nome.Value,Fields!dis_nomeAbreviado.Value)</Value>
+                            <Value>=IIf(Fields!qtde_bimestre.Value&gt;=4,Fields!dis_nomeAbreviado.Value,Fields!dis_nome.Value)</Value>
                             <Style>
                               <FontSize>7pt</FontSize>
                               <FontWeight>Bold</FontWeight>
