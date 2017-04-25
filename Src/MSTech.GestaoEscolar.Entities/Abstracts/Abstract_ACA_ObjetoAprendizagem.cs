@@ -45,6 +45,11 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         public virtual int cal_ano { get; set; }
 
         /// <summary>
+        /// Propriedade id do eixo.
+        /// </summary>
+        public virtual int oae_id { get; set; }
+
+        /// <summary>
         /// Propriedade oap_situacao.
         /// </summary>
         [MSNotNullOrEmpty]

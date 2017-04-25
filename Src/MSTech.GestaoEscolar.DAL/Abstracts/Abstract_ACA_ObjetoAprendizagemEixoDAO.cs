@@ -4,16 +4,16 @@
 
 namespace MSTech.GestaoEscolar.DAL.Abstracts
 {
-    using System;
-    using System.Data;
-    using MSTech.Data.Common;
-    using MSTech.Data.Common.Abstracts;
-    using MSTech.GestaoEscolar.Entities;
+	using System;
+	using System.Data;
+	using MSTech.Data.Common;
+	using MSTech.Data.Common.Abstracts;
+	using MSTech.GestaoEscolar.Entities;
 
     /// <summary>
-    /// Classe abstrata de ACA_ObjetoAprendizagem.
+    /// Classe abstrata de ACA_ObjetoAprendizagemEixo.
     /// </summary>
-    public abstract class Abstract_ACA_ObjetoAprendizagemDAO : Abstract_DAL<ACA_ObjetoAprendizagem>
+    public abstract class Abstract_ACA_ObjetoAprendizagemEixoDAO : Abstract_DAL<ACA_ObjetoAprendizagemEixo>
     {
         /// <summary>
 		/// ConnectionString.
@@ -31,15 +31,15 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// </summary>
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        protected override void ParamCarregar(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagem entity)
+        protected override void ParamCarregar(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemEixo entity)
         {
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
-                Param.ParameterName = "@oap_id";
+                Param.ParameterName = "@oae_id";
                 Param.Size = 4;
-                Param.Value = entity.oap_id;
+                Param.Value = entity.oae_id;
                 qs.Parameters.Add(Param);
 
 
@@ -51,38 +51,31 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// </summary>
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        protected override void ParamInserir(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagem entity)
+        protected override void ParamInserir(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemEixo entity)
         {
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_id";
-                Param.Size = 4;
-                Param.Value = entity.tds_id;
-                qs.Parameters.Add(Param);
-
-                Param = qs.NewParameter();
                 Param.DbType = DbType.String;
-                Param.ParameterName = "@oap_descricao";
-                Param.Size = 1000;
-                Param.Value = entity.oap_descricao;
+                Param.ParameterName = "@oae_descricao";
+                Param.Size = 500;
+                Param.Value = entity.oae_descricao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
-                Param.ParameterName = "@cal_ano";
+                Param.ParameterName = "@oae_ordem";
                 Param.Size = 4;
-                Param.Value = entity.cal_ano;
+                Param.Value = entity.oae_ordem;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
-                Param.ParameterName = "@oae_id";
+                Param.ParameterName = "@oae_idPai";
                 Param.Size = 4;
-                if (entity.oae_id > 0)
+                if (entity.oae_idPai > 0)
                 {
-                    Param.Value = entity.oae_id;
+                    Param.Value = entity.oae_idPai;
                 }
                 else
                 {
@@ -92,23 +85,23 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Byte;
-                Param.ParameterName = "@oap_situacao";
+                Param.ParameterName = "@oae_situacao";
                 Param.Size = 1;
-                Param.Value = entity.oap_situacao;
+                Param.Value = entity.oae_situacao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.DateTime;
-                Param.ParameterName = "@oap_dataCriacao";
+                Param.ParameterName = "@oae_dataCriacao";
                 Param.Size = 16;
-                Param.Value = entity.oap_dataCriacao;
+                Param.Value = entity.oae_dataCriacao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.DateTime;
-                Param.ParameterName = "@oap_dataAlteracao";
+                Param.ParameterName = "@oae_dataAlteracao";
                 Param.Size = 16;
-                Param.Value = entity.oap_dataAlteracao;
+                Param.Value = entity.oae_dataAlteracao;
                 qs.Parameters.Add(Param);
 
 
@@ -120,45 +113,38 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// </summary>
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        protected override void ParamAlterar(QueryStoredProcedure qs, ACA_ObjetoAprendizagem entity)
+        protected override void ParamAlterar(QueryStoredProcedure qs, ACA_ObjetoAprendizagemEixo entity)
         {
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
-                Param.ParameterName = "@oap_id";
+                Param.ParameterName = "@oae_id";
                 Param.Size = 4;
-                Param.Value = entity.oap_id;
-                qs.Parameters.Add(Param);
-
-                Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_id";
-                Param.Size = 4;
-                Param.Value = entity.tds_id;
+                Param.Value = entity.oae_id;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
-                Param.ParameterName = "@oap_descricao";
-                Param.Size = 1000;
-                Param.Value = entity.oap_descricao;
+                Param.ParameterName = "@oae_descricao";
+                Param.Size = 500;
+                Param.Value = entity.oae_descricao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
-                Param.ParameterName = "@cal_ano";
+                Param.ParameterName = "@oae_ordem";
                 Param.Size = 4;
-                Param.Value = entity.cal_ano;
+                Param.Value = entity.oae_ordem;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
-                Param.ParameterName = "@oae_id";
+                Param.ParameterName = "@oae_idPai";
                 Param.Size = 4;
-                if (entity.oae_id > 0)
+                if (entity.oae_idPai > 0)
                 {
-                    Param.Value = entity.oae_id;
+                    Param.Value = entity.oae_idPai;
                 }
                 else
                 {
@@ -168,23 +154,23 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Byte;
-                Param.ParameterName = "@oap_situacao";
+                Param.ParameterName = "@oae_situacao";
                 Param.Size = 1;
-                Param.Value = entity.oap_situacao;
+                Param.Value = entity.oae_situacao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.DateTime;
-                Param.ParameterName = "@oap_dataCriacao";
+                Param.ParameterName = "@oae_dataCriacao";
                 Param.Size = 16;
-                Param.Value = entity.oap_dataCriacao;
+                Param.Value = entity.oae_dataCriacao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.DateTime;
-                Param.ParameterName = "@oap_dataAlteracao";
+                Param.ParameterName = "@oae_dataAlteracao";
                 Param.Size = 16;
-                Param.Value = entity.oap_dataAlteracao;
+                Param.Value = entity.oae_dataAlteracao;
                 qs.Parameters.Add(Param);
 
 
@@ -196,15 +182,15 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// </summary>
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        protected override void ParamDeletar(QueryStoredProcedure qs, ACA_ObjetoAprendizagem entity)
+        protected override void ParamDeletar(QueryStoredProcedure qs, ACA_ObjetoAprendizagemEixo entity)
         {
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
-                Param.ParameterName = "@oap_id";
+                Param.ParameterName = "@oae_id";
                 Param.Size = 4;
-                Param.Value = entity.oap_id;
+                Param.Value = entity.oae_id;
                 qs.Parameters.Add(Param);
 
 
@@ -217,12 +203,12 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
         /// <returns>TRUE - Se entity.ParametroId > 0</returns>
-        protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagem entity)
+        protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, ACA_ObjetoAprendizagemEixo entity)
         {
             if (entity != null & qs != null)
             {
-                entity.oap_id = Convert.ToInt32(qs.Return.Rows[0][0]);
-                return (entity.oap_id > 0);
+                entity.oae_id = Convert.ToInt32(qs.Return.Rows[0][0]);
+                return (entity.oae_id > 0);
             }
 
             return false;

@@ -150,6 +150,7 @@
     <Compile Include="Abstracts\Abstract_ACA_HistoricoObservacaoPadrao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_MotivoBaixaFrequencia.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagem.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagemEixo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ObjetoAprendizagemTipoCiclo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroAcademico.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ParametroBuscaAluno.cs" />
@@ -391,6 +392,7 @@
     <Compile Include="ACA_EventoLimite.cs" />
     <Compile Include="ACA_MotivoBaixaFrequencia.cs" />
     <Compile Include="ACA_ObjetoAprendizagem.cs" />
+    <Compile Include="ACA_ObjetoAprendizagemEixo.cs" />
     <Compile Include="ACA_ObjetoAprendizagemTipoCiclo.cs" />
     <Compile Include="ACA_Sondagem.cs" />
     <Compile Include="ACA_SondagemAgendamento.cs" />
