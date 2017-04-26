@@ -18,7 +18,7 @@ SET XACT_ABORT ON
 
 	IF (NOT EXISTS(SELECT TOP 1 1 
 				   FROM ACA_TipoModalidadeEnsino WITH(NOLOCK) 
-				   WHERE tme_nome = 'EJA Regular'
+				   WHERE tme_nome = 'EJA - Regular'
 				   AND tme_situacao <> 3))
 	BEGIN
 		INSERT INTO ACA_TipoModalidadeEnsino
@@ -41,7 +41,7 @@ SET XACT_ABORT ON
 
 	IF (NOT EXISTS(SELECT TOP 1 1 
 				   FROM ACA_TipoModalidadeEnsino WITH(NOLOCK) 
-				   WHERE tme_nome = 'EJA Modular'
+				   WHERE tme_nome = 'EJA - Modular'
 				   AND tme_situacao <> 3))
 	BEGIN
 		INSERT INTO ACA_TipoModalidadeEnsino
