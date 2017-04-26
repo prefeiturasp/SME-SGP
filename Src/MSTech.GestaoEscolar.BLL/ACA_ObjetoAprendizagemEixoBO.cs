@@ -96,5 +96,56 @@ namespace MSTech.GestaoEscolar.BLL
 
             return dao.ObjetoEmUso(oae_id);
         }
+
+        /// <summary>
+        /// Verifica se já existe um eixo cadastrado com o mesmo nome e salva
+        /// </summary>
+        /// <param name="oae">Objeto de eixo que está sendo salvo</param>
+        /// <returns></returns>
+        public static bool Salvar(ACA_ObjetoAprendizagemEixo oae, TalkDBTransaction banco = null)
+        {
+            ACA_ObjetoAprendizagemEixoDAO dao = new ACA_ObjetoAprendizagemEixoDAO();
+            if (banco == null)
+                dao._Banco.Open(IsolationLevel.ReadCommitted);
+            else
+                dao._Banco = banco;
+            try
+            {
+                if (VerificaEixoMesmoNome(oae.oae_id, oae.tds_id, oae.cal_ano, oae.oae_idPai, oae.oae_descricao, dao._Banco))
+                    throw new ValidationException("Já existe um " + (oae.oae_idPai > 0 ? "sub " : "") +
+                                                  "eixo de objeto de conhecimento cadastrado com a mesma descrição.");
+
+                return dao.Salvar(oae);
+            }
+            catch (Exception ex)
+            {
+                if (banco == null)
+                    dao._Banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                if (banco == null)
+                    dao._Banco.Close();
+            }
+        }
+
+        /// <summary>
+        /// Verifica se existe um eixo cadastrado com o mesmo nome (se for sub eixo verifica apenas os sub eixos do eixo pai)
+        /// </summary>
+        /// <param name="oae_id">ID do eixo que está sendo salvo</param>
+        /// <param name="tds_id">ID da disciplina</param>
+        /// <param name="cal_ano">Ano letivo</param>
+        /// <param name="oae_idPai">ID do eixo pai</param>
+        /// <param name="oae_descricao">Descrição do eixo</param>
+        /// <param name="banco">Transação do banco</param>
+        /// <returns></returns>
+        private static bool VerificaEixoMesmoNome(int oae_id, int tds_id, int cal_ano, int oae_idPai, string oae_descricao, TalkDBTransaction banco = null)
+        {
+            ACA_ObjetoAprendizagemEixoDAO dao = new ACA_ObjetoAprendizagemEixoDAO();
+            if (banco != null)
+                dao._Banco = banco;
+            return dao.VerificaEixoMesmoNome(oae_id, tds_id, cal_ano, oae_idPai, oae_descricao);
+        }
     }
 }

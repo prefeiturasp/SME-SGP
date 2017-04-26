@@ -85,6 +85,51 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.TextBox txtAno;
         
         /// <summary>
+        /// divEixoPai control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEixoPai;
+        
+        /// <summary>
+        /// lblEixoPai control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEixoPai;
+        
+        /// <summary>
+        /// txtEixoPai control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEixoPai;
+        
+        /// <summary>
+        /// lblEixo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEixo;
+        
+        /// <summary>
+        /// txtEixo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEixo;
+        
+        /// <summary>
         /// _lblDescricao control.
         /// </summary>
         /// <remarks>

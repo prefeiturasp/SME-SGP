@@ -190,6 +190,61 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Verifica se existe um objeto de aprendizagem cadastrado com o mesmo nome (verifica apenas no eixo)
+        /// </summary>
+        /// <param name="oap_id">ID do objeto que está sendo salvo</param>
+        /// <param name="tds_id">ID da disciplina</param>
+        /// <param name="cal_ano">Ano letivo</param>
+        /// <param name="oae_id">ID do eixo</param>
+        /// <param name="oap_descricao">Descrição do eixo</param>
+        /// <returns></returns>
+        public bool VerificaEixoMesmoNome(int oap_id, int tds_id, int cal_ano, int oae_id, string oap_descricao)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagem_SELECTMesmoNome", _Banco);
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@oap_id";
+                Param.Value = oap_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Value = tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Value = cal_ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@oae_id";
+                Param.Value = oae_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.Size = 500;
+                Param.ParameterName = "@oap_descricao";
+                Param.Value = oap_descricao;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Método alterado para que o update não faça a alteração da data de criação
         /// </summary>
         /// <param name="entity">Entidade ACA_AreaConhecimento</param>

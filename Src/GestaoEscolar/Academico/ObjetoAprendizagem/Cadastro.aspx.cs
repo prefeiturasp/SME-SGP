@@ -13,6 +13,8 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 {
     public partial class Cadastro : MotherPageLogado
     {
+        #region PROPRIEDADES
+
         private int _VS_oap_id
         {
             get
@@ -93,6 +95,10 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
+        #endregion
+
+        #region EVENTOS
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -108,10 +114,21 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     _VS_cal_ano = PreviousPage.cal_ano;
                     _VS_oae_id = PreviousPage.oae_id;
                     _VS_oae_idPai = PreviousPage.oae_idPai;
-                    txtAno.Text = _VS_cal_ano.ToString();
                     LoadPage();
 
                     if(_VS_oap_id > 0)
+                        LoadEdit(_VS_oap_id);
+                }
+                else if (Session["tds_id_oae"] != null && Session["cal_ano_oae"] != null && Session["oae_id"] != null)
+                {
+                    _VS_oap_id = -1;
+                    _VS_tds_id = Convert.ToInt32(Session["tds_id_oae"]);
+                    _VS_cal_ano = Convert.ToInt32(Session["cal_ano_oae"]);
+                    _VS_oae_id = Convert.ToInt32(Session["oae_id"]);
+                    _VS_oae_idPai = Session["oae_idPai"] != null ? Convert.ToInt32(Session["oae_idPai"]) : -1;
+                    LoadPage();
+
+                    if (_VS_oap_id > 0)
                         LoadEdit(_VS_oap_id);
                 }
                 else
@@ -179,6 +196,33 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
+        protected void _btnCancelar_Click(object sender, EventArgs e)
+        {
+            Session["tds_id_oae"] = _VS_tds_id;
+            Session["cal_ano_oae"] = _VS_cal_ano;
+            Session["oae_id"] = _VS_oae_id;
+            Session["oae_idPai"] = _VS_oae_idPai;
+            Response.Redirect("~/Academico/ObjetoAprendizagem/CadastroEixo.aspx", false);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+
+        protected void cvCiclos_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            foreach (RepeaterItem item in rptCampos.Items)
+            {
+                CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
+                if (ckbCampo != null && ckbCampo.Checked)
+                {
+                    args.IsValid = true;
+                    break;
+                }
+            }
+        }
+
+        #endregion
+
+        #region MÉTODOS
+
         private List<int> CriarListaTipoCiclo()
         {
             List<int> list = new List<int>();
@@ -194,16 +238,6 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
 
             return list;
-        }
-
-        protected void _btnCancelar_Click(object sender, EventArgs e)
-        {
-            Session["tds_id_oae"] = _VS_tds_id;
-            Session["cal_ano_oae"] = _VS_cal_ano;
-            Session["oae_id"] = _VS_oae_id;
-            Session["oae_idPai"] = _VS_oae_idPai;
-            Response.Redirect("~/Academico/ObjetoAprendizagem/CadastroEixo.aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
         private void LoadEdit(int oap_id)
@@ -247,10 +281,26 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
         {
             try
             {
-                var tds = new ACA_TipoDisciplina { tds_id = _VS_tds_id };
+                txtAno.Text = _VS_cal_ano.ToString();
+                ACA_TipoDisciplina tds = new ACA_TipoDisciplina { tds_id = _VS_tds_id };
                 ACA_TipoDisciplinaBO.GetEntity(tds);
 
                 txtDisciplina.Text = tds.tds_nome;
+
+                ACA_ObjetoAprendizagemEixo oae = new ACA_ObjetoAprendizagemEixo { oae_id = _VS_oae_id };
+                ACA_ObjetoAprendizagemEixoBO.GetEntity(oae);
+
+                txtEixo.Text = oae.oae_descricao;
+
+                if (_VS_oae_idPai > 0)
+                {
+                    divEixoPai.Visible = true;
+
+                    ACA_ObjetoAprendizagemEixo oaePai = new ACA_ObjetoAprendizagemEixo { oae_id = _VS_oae_idPai };
+                    ACA_ObjetoAprendizagemEixoBO.GetEntity(oaePai);
+
+                    txtEixoPai.Text = oaePai.oae_descricao;
+                }
 
                 rptCampos.DataSource = ACA_TipoCicloBO.SelecionaTipoCicloAtivos(true, ApplicationWEB.AppMinutosCacheLongo);
                 rptCampos.DataBind();
@@ -262,17 +312,6 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
-        protected void cvCiclos_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
-        {
-            foreach (RepeaterItem item in rptCampos.Items)
-            {
-                CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
-                if (ckbCampo != null && ckbCampo.Checked)
-                {
-                    args.IsValid = true;
-                    break;
-                }
-            }
-        }
+        #endregion
     }
 }

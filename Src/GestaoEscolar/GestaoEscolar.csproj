@@ -591,13 +591,6 @@
     <Compile Include="Academico\NivelAprendizado\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Academico\ObjetoAprendizagem\Busca.aspx.cs">
-      <DependentUpon>Busca.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Academico\ObjetoAprendizagem\Busca.aspx.designer.cs">
-      <DependentUpon>Busca.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx.cs">
       <DependentUpon>BuscaDisciplina.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2902,7 +2895,6 @@
     <Content Include="Academico\MatrizHabilidades\Cadastro.aspx" />
     <Content Include="Academico\NivelAprendizado\Busca.aspx" />
     <Content Include="Academico\NivelAprendizado\Cadastro.aspx" />
-    <Content Include="Academico\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx" />
     <Content Include="Academico\ObjetoAprendizagem\BuscaEixo.aspx" />
     <Content Include="Academico\ObjetoAprendizagem\Cadastro.aspx" />

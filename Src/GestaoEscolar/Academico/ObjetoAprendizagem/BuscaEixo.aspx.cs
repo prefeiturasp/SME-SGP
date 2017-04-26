@@ -14,6 +14,8 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 {
     public partial class BuscaEixo : MotherPageLogado
     {
+        #region PROPRIEDADES
+
         /// <summary>
         /// Propriedade em ViewState que armazena a lista de questões
         /// </summary>
@@ -74,6 +76,10 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
+        #endregion
+
+        #region EVENTOS
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -91,6 +97,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
                 if (!IsPostBack)
                 {
+                    _btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
                     _grvEixoObjetoAprendizagem.EmptyDataText = string.Format("Não existe eixo objeto de conhecimento associado a este {0}.", GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA_MIN"));
                     UCComboAnoLetivo1.CarregarAnoAtual();
 
@@ -118,32 +125,6 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 ApplicationWEB._GravaErro(ex);
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
-            }
-        }
-
-        private void LoadPage(int tds_id)
-        {
-            try
-            {
-                _VS_tds_id = tds_id;
-                var tds = new ACA_TipoDisciplina { tds_id = tds_id };
-                ACA_TipoDisciplinaBO.GetEntity(tds);
-
-                txtDisciplina.Text = tds.tds_nome;
-
-                _grvEixoObjetoAprendizagem.PageIndex = 0;
-
-                VS_ListaEixo = ACA_ObjetoAprendizagemEixoBO.SelectByDiscAno(_VS_tds_id, UCComboAnoLetivo1.ano, -1);
-                VS_ListaEixo = VS_ListaEixo.OrderBy(q => q.oae_ordem).ThenBy(q => q.oae_descricao).ToList();
-
-                _grvEixoObjetoAprendizagem.DataSource = VS_ListaEixo;
-                _grvEixoObjetoAprendizagem.DataBind();
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar página.", UtilBO.TipoMensagem.Erro);
             }
         }
 
@@ -395,7 +376,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     oae_descricao = txtDescricao.Text
                 };
 
-                if (!ACA_ObjetoAprendizagemEixoBO.Save(oae))
+                if (!ACA_ObjetoAprendizagemEixoBO.Salvar(oae))
                     throw new ValidationException("Erro ao tentar salvar eixo de objeto de conhecimento.");
 
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "oae_id: " + oae.oae_id);
@@ -418,5 +399,37 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 lblMessagePopUp.Text = UtilBO.GetErroMessage("Erro ao excluir o objeto de conhecimento.", UtilBO.TipoMensagem.Erro);
             }
         }
+
+        #endregion
+
+        #region MÉTODOS
+
+        private void LoadPage(int tds_id)
+        {
+            try
+            {
+                _VS_tds_id = tds_id;
+                var tds = new ACA_TipoDisciplina { tds_id = tds_id };
+                ACA_TipoDisciplinaBO.GetEntity(tds);
+
+                txtDisciplina.Text = tds.tds_nome;
+
+                _grvEixoObjetoAprendizagem.PageIndex = 0;
+
+                VS_ListaEixo = ACA_ObjetoAprendizagemEixoBO.SelectByDiscAno(_VS_tds_id, UCComboAnoLetivo1.ano, -1);
+                VS_ListaEixo = VS_ListaEixo.OrderBy(q => q.oae_ordem).ThenBy(q => q.oae_descricao).ToList();
+
+                _grvEixoObjetoAprendizagem.DataSource = VS_ListaEixo;
+                _grvEixoObjetoAprendizagem.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar página.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        #endregion
     }
 }

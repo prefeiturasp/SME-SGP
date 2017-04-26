@@ -22,8 +22,10 @@
                     <uc2:UCComboAnoLetivo ID="UCComboAnoLetivo1" runat="server" Obrigatorio="true" />
                 </div>
                 <div class="right">
-                    <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo eixo de objeto de conhecimento" OnClick="_btnNovo_Click" />
-                    <asp:Button ID="_btnCancelar" runat="server" Text="Voltar" OnClick="_btnCancelar_Click" />
+                    <asp:Button ID="_btnNovo" runat="server" Text="Incluir novo eixo de objeto de conhecimento" OnClick="_btnNovo_Click"
+                        CausesValidation="false" />
+                    <asp:Button ID="_btnCancelar" runat="server" Text="Voltar" OnClick="_btnCancelar_Click"
+                        CausesValidation="false" />
                 </div>
             </fieldset>
         </ContentTemplate>
@@ -39,7 +41,8 @@
                     <Columns>
                         <asp:TemplateField HeaderText="Descrição">
                             <ItemTemplate>
-                                <asp:LinkButton ID="_btnSelecionar" runat="server" CommandName="Alterar" Text='<%# Bind("oae_descricao") %>'></asp:LinkButton>
+                                <asp:LinkButton ID="_btnSelecionar" runat="server" CommandName="Alterar" Text='<%# Bind("oae_descricao") %>'
+                                    CausesValidation="false"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="oae_situacaoText" HeaderText="Situação" />
@@ -58,7 +61,8 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Excluir">
                             <ItemTemplate>
-                                <asp:ImageButton ID="_btnExcluir" SkinID="btExcluir" runat="server" CommandName="Deletar" />
+                                <asp:ImageButton ID="_btnExcluir" SkinID="btExcluir" runat="server" CommandName="Deletar"
+                                    CausesValidation="false" />
                             </ItemTemplate>
                             <HeaderStyle CssClass="center" />
                             <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -77,14 +81,15 @@
         </asp:UpdatePanel>
         <asp:UpdatePanel runat="server" ID="updPopUp" UpdateMode="Conditional">
             <ContentTemplate>
+                <asp:ValidationSummary ID="vsPopUp" runat="server" ValidationGroup="vgPopUp" />
                 <fieldset>
                     <legend>Novo eixo de objeto de conhecimento</legend>
                     <asp:Label runat="server" ID="lblDescricao" Text="Descrição *" AssociatedControlID="txtDescricao" />
                     <asp:TextBox runat="server" ID="txtDescricao" SkinID="text60C" MaxLength="500" />
-                    <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtDescricao"
+                    <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtDescricao" ValidationGroup="vgPopUp"
                         Display="Dynamic" ErrorMessage="Descrição do eixo de objeto de conhecimento é obrigatória." Text="*" />
                     <div class="right">
-                        <asp:Button ID="btnAdicionar" runat="server" Text="Adicionar" CausesValidation="false" 
+                        <asp:Button ID="btnAdicionar" runat="server" Text="Adicionar" ValidationGroup="vgPopUp" 
                             OnClick="btnAdicionar_Click" />
                         <asp:Button ID="btnCancelarItem" runat="server" Text="Cancelar" CausesValidation="false"
                             OnClientClick="$('#divInserir').dialog('close');" />

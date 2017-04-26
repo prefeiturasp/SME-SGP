@@ -86,6 +86,9 @@ namespace MSTech.GestaoEscolar.BLL
                 {
                     bool isNew = entity.oap_id <= 0;
 
+                    if (VerificaObjetoMesmoNome(entity.oap_id, entity.tds_id, entity.cal_ano, entity.oae_id, entity.oap_descricao, dao._Banco))
+                        throw new ValidationException("Já existe um objeto de conhecimento cadastrado com a mesma descrição no eixo.");
+
                     Save(entity, dao._Banco);
 
                     List<ACA_ObjetoAprendizagemTipoCiclo> list = listTci_ids.Select(x => new ACA_ObjetoAprendizagemTipoCiclo
@@ -132,6 +135,31 @@ namespace MSTech.GestaoEscolar.BLL
             }
         }
 
+        /// <summary>
+        /// Verifica se existe um objeto de aprendizagem cadastrado com o mesmo nome (verifica apenas no eixo)
+        /// </summary>
+        /// <param name="oap_id">ID do objeto que está sendo salvo</param>
+        /// <param name="tds_id">ID da disciplina</param>
+        /// <param name="cal_ano">Ano letivo</param>
+        /// <param name="oae_id">ID do eixo</param>
+        /// <param name="oap_descricao">Descrição do eixo</param>
+        /// <param name="banco">Transação do banco</param>
+        /// <returns></returns>
+        private static bool VerificaObjetoMesmoNome(int oap_id, int tds_id, int cal_ano, int oae_id, string oap_descricao, TalkDBTransaction banco)
+        {
+            ACA_ObjetoAprendizagemDAO dao = new ACA_ObjetoAprendizagemDAO();
+            if (banco != null)
+                dao._Banco = banco;
+            return dao.VerificaEixoMesmoNome(oap_id, tds_id, cal_ano, oae_id, oap_descricao);
+        }
+
+        /// <summary>
+        /// Seleciona a lista de objetos por turma disciplina
+        /// </summary>
+        /// <param name="tud_id">ID da turma disciplina</param>
+        /// <param name="cal_id">Ano letivo</param>
+        /// <param name="banco">Transação de banco</param>
+        /// <returns></returns>
         public static List<Struct_ObjetosAprendizagem> SelectListaBy_TurmaDisciplina(long tud_id, int cal_id, TalkDBTransaction banco = null)
         {
             ACA_ObjetoAprendizagemDAO dao = new ACA_ObjetoAprendizagemDAO();

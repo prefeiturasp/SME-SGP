@@ -83,6 +83,63 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Verifica se existe um eixo cadastrado com o mesmo nome (se for sub eixo verifica apenas os sub eixos do eixo pai)
+        /// </summary>
+        /// <param name="oae_id">ID do eixo que está sendo salvo</param>
+        /// <param name="oae_idPai">ID do eixo pai</param>
+        /// <param name="oae_descricao">Descrição do eixo</param>
+        /// <param name="banco">Transação do banco</param>
+        /// <returns></returns>
+        public bool VerificaEixoMesmoNome(int oae_id, int tds_id, int cal_ano, int oae_idPai, string oae_descricao)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemEixo_SELECTMesmoNome", _Banco);
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Value = tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Value = cal_ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@oae_id";
+                Param.Value = oae_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@oae_idPai";
+                if (oae_idPai > 0)
+                    Param.Value = oae_idPai;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.Size = 500;
+                Param.ParameterName = "@oae_descricao";
+                Param.Value = oae_descricao;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #region Métodos sobrescritos
 
         /// <summary>

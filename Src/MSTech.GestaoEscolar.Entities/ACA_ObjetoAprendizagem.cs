@@ -12,6 +12,7 @@ namespace MSTech.GestaoEscolar.Entities
     /// <summary>
     /// Description: .
     /// </summary>
+    [Serializable]
     public class ACA_ObjetoAprendizagem : Abstract_ACA_ObjetoAprendizagem
 	{
         /// <summary>

@@ -31,13 +31,13 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.Label _lblMessage;
         
         /// <summary>
-        /// _updDadosBasicos control.
+        /// vsEixo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel _updDadosBasicos;
+        protected global::System.Web.UI.WebControls.ValidationSummary vsEixo;
         
         /// <summary>
         /// fds control.
@@ -139,31 +139,13 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.TextBox txtEixo;
         
         /// <summary>
-        /// _btnNovoSub control.
+        /// rfvEixo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _btnNovoSub;
-        
-        /// <summary>
-        /// btnNovoObjeto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNovoObjeto;
-        
-        /// <summary>
-        /// _btnCancelar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _btnCancelar;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEixo;
         
         /// <summary>
         /// fdsSubEixos control.
@@ -193,6 +175,24 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.GridView _grvEixoObjetoAprendizagem;
         
         /// <summary>
+        /// divBotoesSub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBotoesSub;
+        
+        /// <summary>
+        /// _btnNovoSub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button _btnNovoSub;
+        
+        /// <summary>
         /// fdsObjetos control.
         /// </summary>
         /// <remarks>
@@ -220,6 +220,33 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.GridView _grvObjetoAprendizagem;
         
         /// <summary>
+        /// btnNovoObjeto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNovoObjeto;
+        
+        /// <summary>
+        /// btnSalvar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        
+        /// <summary>
+        /// _btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button _btnCancelar;
+        
+        /// <summary>
         /// updMessagePopUp control.
         /// </summary>
         /// <remarks>
@@ -245,6 +272,15 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updPopUp;
+        
+        /// <summary>
+        /// vsPopUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsPopUp;
         
         /// <summary>
         /// lblDescricao control.
