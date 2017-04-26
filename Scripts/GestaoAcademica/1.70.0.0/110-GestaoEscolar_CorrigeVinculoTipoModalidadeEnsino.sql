@@ -20,7 +20,7 @@ SET XACT_ABORT ON
 	FROM
 		ACA_TipoModalidadeEnsino WITH(NOLOCK)
 	WHERE
-		tme_nome = 'EJA Regular'
+		tme_nome = 'EJA - Regular'
 		AND tme_idSuperior = @tme_idEJA
 		AND tme_situacao <> 3
 
@@ -30,7 +30,7 @@ SET XACT_ABORT ON
 	FROM
 		ACA_TipoModalidadeEnsino WITH(NOLOCK)
 	WHERE
-		tme_nome = 'EJA Modular'
+		tme_nome = 'EJA - Modular'
 		AND tme_idSuperior = @tme_idEJA
 		AND tme_situacao <> 3
 
