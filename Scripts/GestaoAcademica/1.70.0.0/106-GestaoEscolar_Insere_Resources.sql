@@ -1250,6 +1250,20 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Lançamento de sondagem salvo com sucesso.'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.lkbAnterior.ToolTip' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Questão anterior'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'LancamentoSondagem.Cadastro.lkbProximo.ToolTip' 
+		, @rcr_NomeResource = 'Classe'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Próxima questão'
+
 -- Fechar transação
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
