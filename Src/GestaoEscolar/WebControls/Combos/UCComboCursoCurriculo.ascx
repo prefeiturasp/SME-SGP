@@ -18,6 +18,7 @@
         <asp:Parameter Name="uni_id" DbType="Int32" />
         <asp:Parameter Name="cur_situacao" DbType="Byte" />
         <asp:Parameter Name="ent_id" DbType="Guid" />
+        <asp:Parameter Name="mostraEJAModalidades" DbType="Boolean"/>
         <asp:Parameter Name="appMinutosCacheLongo" DbType="Int32" />
     </SelectParameters>
 </asp:ObjectDataSource>
