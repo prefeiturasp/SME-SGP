@@ -18,7 +18,7 @@
                 <legend>Consulta de eixos de objetos de conhecimento</legend>
                 <div id="_divPesquisa" runat="server">
                     <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
-                    <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
+                    <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false" SkinID="text60C"></asp:TextBox>
                     <uc2:UCComboAnoLetivo ID="UCComboAnoLetivo1" runat="server" Obrigatorio="true" />
                 </div>
                 <div class="right">

@@ -15,15 +15,15 @@
         <legend>Cadastro de eixos de objetos de conhecimento</legend>
         <div id="_divPesquisa" runat="server">
             <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
-            <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
+            <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false" SkinID="text60C"></asp:TextBox>
             <asp:Label ID="lblAnoLetivo" runat="server" Text="Ano letivo" AssociatedControlID="txtAnoletivo" />
-            <asp:TextBox ID="txtAnoletivo" runat="server" Enabled="false" />
+            <asp:TextBox ID="txtAnoletivo" runat="server" Enabled="false" SkinID="text10C" />
             <div id="divEixoPai" runat="server" visible="false">
                 <asp:Label runat="server" ID="lblEixoPai" Text="Eixo pai" AssociatedControlID="txtEixoPai" />
-                <asp:TextBox ID="txtEixoPai" runat="server" Enabled="false" />
+                <asp:TextBox ID="txtEixoPai" runat="server" Enabled="false" SkinID="text60C" />
             </div>
             <asp:Label runat="server" ID="lblEixo" Text="Eixo *" AssociatedControlID="txtEixo" />
-            <asp:TextBox ID="txtEixo" runat="server" MaxLength="500" />
+            <asp:TextBox ID="txtEixo" runat="server" MaxLength="500" SkinID="text60C" />
             <asp:RequiredFieldValidator ID="rfvEixo" runat="server" ControlToValidate="txtEixo" ValidationGroup="vgEixo"
                 Display="Dynamic" ErrorMessage="Descrição do eixo de objeto de conhecimento é obrigatória." Text="*" />
         </div>

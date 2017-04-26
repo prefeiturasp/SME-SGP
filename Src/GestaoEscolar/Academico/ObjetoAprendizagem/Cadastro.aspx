@@ -18,13 +18,13 @@
                 <asp:Label ID="_lblDisciplina" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA %>" AssociatedControlID="txtDisciplina"></asp:Label>
                 <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false"></asp:TextBox>
                 <asp:Label ID="lblAno" runat="server" Text="Ano" AssociatedControlID="txtAno"></asp:Label>
-                <asp:TextBox ID="txtAno" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtAno" runat="server" Enabled="false" SkinID="text10C"></asp:TextBox>
                 <div id="divEixoPai" runat="server" visible="false">
                     <asp:Label runat="server" ID="lblEixoPai" Text="Eixo pai" AssociatedControlID="txtEixoPai" />
-                    <asp:TextBox ID="txtEixoPai" runat="server" Enabled="false" />
+                    <asp:TextBox ID="txtEixoPai" runat="server" Enabled="false" SkinID="text60C" />
                 </div>
                 <asp:Label runat="server" ID="lblEixo" Text="Eixo" AssociatedControlID="txtEixo" />
-                <asp:TextBox ID="txtEixo" runat="server" Enabled="false" />
+                <asp:TextBox ID="txtEixo" runat="server" Enabled="false" SkinID="text60C" />
                 <asp:Label ID="_lblDescricao" runat="server" Text="Descrição *" AssociatedControlID="_txtDescricao"></asp:Label>
                 <asp:TextBox ID="_txtDescricao" runat="server" Rows="4" TextMode="MultiLine" SkinID="text60C"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Descrição é obrigatório."
