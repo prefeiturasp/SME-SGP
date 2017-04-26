@@ -55,7 +55,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Agendamento.grvAgendamentos.HeaderCancelarAgendamento %>">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="btnCancelarAgendamento" SkinID="btCancelar" runat="server" CommandName="Cancelar" CausesValidation="false"
+                                    <asp:ImageButton ID="btnCancelarAgendamento" SkinID="btCancelarAgendamento" runat="server" CommandName="Cancelar" CausesValidation="false"
                                         ToolTip="<%$ Resources:Academico, Sondagem.Agendamento.grvAgendamentos.btnCancelarAgendamento.ToolTip %>" />
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="center"></HeaderStyle>

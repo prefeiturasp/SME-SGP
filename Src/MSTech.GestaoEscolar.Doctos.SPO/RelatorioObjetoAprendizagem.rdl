@@ -173,7 +173,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>5.04216cm</Height>
+              <Height>5.89023cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -246,13 +246,12 @@
                                           <PaddingBottom>2pt</PaddingBottom>
                                         </Style>
                                       </Textbox>
-                                      <rd:Selected>true</rd:Selected>
                                     </CellContents>
                                   </TablixCell>
                                 </TablixCells>
                               </TablixRow>
                               <TablixRow>
-                                <Height>2.49884cm</Height>
+                                <Height>3.45884cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -272,12 +271,183 @@
                                               <TablixCells>
                                                 <TablixCell>
                                                   <CellContents>
+                                                    <Textbox Name="oap_descricao3">
+                                                      <CanGrow>true</CanGrow>
+                                                      <KeepTogether>true</KeepTogether>
+                                                      <Paragraphs>
+                                                        <Paragraph>
+                                                          <TextRuns>
+                                                            <TextRun>
+                                                              <Value>=Fields!oae_eixo.Value</Value>
+                                                              <Style>
+                                                                <FontSize>8pt</FontSize>
+                                                                <FontWeight>Bold</FontWeight>
+                                                              </Style>
+                                                            </TextRun>
+                                                          </TextRuns>
+                                                          <Style />
+                                                        </Paragraph>
+                                                      </Paragraphs>
+                                                      <rd:DefaultName>oap_descricao</rd:DefaultName>
+                                                      <Style>
+                                                        <Border>
+                                                          <Style>Solid</Style>
+                                                        </Border>
+                                                        <BottomBorder>
+                                                          <Style>None</Style>
+                                                        </BottomBorder>
+                                                        <PaddingLeft>2pt</PaddingLeft>
+                                                        <PaddingRight>2pt</PaddingRight>
+                                                        <PaddingTop>2pt</PaddingTop>
+                                                        <PaddingBottom>2pt</PaddingBottom>
+                                                      </Style>
+                                                    </Textbox>
+                                                  </CellContents>
+                                                </TablixCell>
+                                                <TablixCell>
+                                                  <CellContents>
+                                                    <Textbox Name="Textbox68">
+                                                      <CanGrow>true</CanGrow>
+                                                      <KeepTogether>true</KeepTogether>
+                                                      <Paragraphs>
+                                                        <Paragraph>
+                                                          <TextRuns>
+                                                            <TextRun>
+                                                              <Value />
+                                                              <Style>
+                                                                <FontSize>8pt</FontSize>
+                                                              </Style>
+                                                            </TextRun>
+                                                          </TextRuns>
+                                                          <Style>
+                                                            <TextAlign>Center</TextAlign>
+                                                          </Style>
+                                                        </Paragraph>
+                                                      </Paragraphs>
+                                                      <rd:DefaultName>Textbox68</rd:DefaultName>
+                                                      <Style>
+                                                        <Border>
+                                                          <Style>Solid</Style>
+                                                        </Border>
+                                                        <BottomBorder>
+                                                          <Style>None</Style>
+                                                        </BottomBorder>
+                                                        <LeftBorder>
+                                                          <Style>None</Style>
+                                                        </LeftBorder>
+                                                        <PaddingLeft>2pt</PaddingLeft>
+                                                        <PaddingRight>2pt</PaddingRight>
+                                                        <PaddingTop>2pt</PaddingTop>
+                                                        <PaddingBottom>2pt</PaddingBottom>
+                                                      </Style>
+                                                    </Textbox>
+                                                  </CellContents>
+                                                </TablixCell>
+                                              </TablixCells>
+                                            </TablixRow>
+                                            <TablixRow>
+                                              <Height>0.48cm</Height>
+                                              <TablixCells>
+                                                <TablixCell>
+                                                  <CellContents>
+                                                    <Textbox Name="oap_descricao2">
+                                                      <CanGrow>true</CanGrow>
+                                                      <KeepTogether>true</KeepTogether>
+                                                      <Paragraphs>
+                                                        <Paragraph>
+                                                          <TextRuns>
+                                                            <TextRun>
+                                                              <Value> - </Value>
+                                                              <Style>
+                                                                <FontSize>8pt</FontSize>
+                                                                <FontWeight>Bold</FontWeight>
+                                                              </Style>
+                                                            </TextRun>
+                                                            <TextRun>
+                                                              <Value>=Fields!oae_subEixo.Value</Value>
+                                                              <Style>
+                                                                <FontSize>8pt</FontSize>
+                                                                <FontWeight>Bold</FontWeight>
+                                                              </Style>
+                                                            </TextRun>
+                                                          </TextRuns>
+                                                          <Style />
+                                                        </Paragraph>
+                                                      </Paragraphs>
+                                                      <rd:DefaultName>oap_descricao</rd:DefaultName>
+                                                      <Style>
+                                                        <Border>
+                                                          <Style>Solid</Style>
+                                                        </Border>
+                                                        <BottomBorder>
+                                                          <Style>None</Style>
+                                                        </BottomBorder>
+                                                        <PaddingLeft>2pt</PaddingLeft>
+                                                        <PaddingRight>2pt</PaddingRight>
+                                                        <PaddingTop>2pt</PaddingTop>
+                                                        <PaddingBottom>2pt</PaddingBottom>
+                                                      </Style>
+                                                    </Textbox>
+                                                  </CellContents>
+                                                </TablixCell>
+                                                <TablixCell>
+                                                  <CellContents>
+                                                    <Textbox Name="Textbox59">
+                                                      <CanGrow>true</CanGrow>
+                                                      <KeepTogether>true</KeepTogether>
+                                                      <Paragraphs>
+                                                        <Paragraph>
+                                                          <TextRuns>
+                                                            <TextRun>
+                                                              <Value />
+                                                              <Style>
+                                                                <FontSize>8pt</FontSize>
+                                                              </Style>
+                                                            </TextRun>
+                                                          </TextRuns>
+                                                          <Style>
+                                                            <TextAlign>Center</TextAlign>
+                                                          </Style>
+                                                        </Paragraph>
+                                                      </Paragraphs>
+                                                      <rd:DefaultName>Textbox59</rd:DefaultName>
+                                                      <Style>
+                                                        <Border>
+                                                          <Style>Solid</Style>
+                                                        </Border>
+                                                        <BottomBorder>
+                                                          <Style>None</Style>
+                                                        </BottomBorder>
+                                                        <LeftBorder>
+                                                          <Style>None</Style>
+                                                        </LeftBorder>
+                                                        <PaddingLeft>2pt</PaddingLeft>
+                                                        <PaddingRight>2pt</PaddingRight>
+                                                        <PaddingTop>2pt</PaddingTop>
+                                                        <PaddingBottom>2pt</PaddingBottom>
+                                                      </Style>
+                                                    </Textbox>
+                                                  </CellContents>
+                                                </TablixCell>
+                                              </TablixCells>
+                                            </TablixRow>
+                                            <TablixRow>
+                                              <Height>0.48cm</Height>
+                                              <TablixCells>
+                                                <TablixCell>
+                                                  <CellContents>
                                                     <Textbox Name="oap_descricao">
                                                       <CanGrow>true</CanGrow>
                                                       <KeepTogether>true</KeepTogether>
                                                       <Paragraphs>
                                                         <Paragraph>
                                                           <TextRuns>
+                                                            <TextRun>
+                                                              <Value>=IIF(Fields!oae_id.Value &gt; 0, " ", "") + IIF(Fields!oae_idSub.Value &gt; 0, "  ", "") + "- "</Value>
+                                                              <Style>
+                                                                <FontSize>8pt</FontSize>
+                                                              </Style>
+                                                            </TextRun>
                                                             <TextRun>
                                                               <Value>=Fields!oap_descricao.Value</Value>
                                                               <Style>
@@ -302,6 +472,7 @@
                                                         <PaddingBottom>2pt</PaddingBottom>
                                                       </Style>
                                                     </Textbox>
+                                                    <rd:Selected>true</rd:Selected>
                                                   </CellContents>
                                                 </TablixCell>
                                                 <TablixCell>
@@ -436,7 +607,7 @@
                                                       <Paragraph>
                                                         <TextRuns>
                                                           <TextRun>
-                                                            <Value>Objeto de aprendizagem</Value>
+                                                            <Value>Objeto de conhecimento</Value>
                                                             <Style>
                                                               <FontSize>9pt</FontSize>
                                                               <FontWeight>Bold</FontWeight>
@@ -649,20 +820,64 @@
                                         <TablixRowHierarchy>
                                           <TablixMembers>
                                             <TablixMember>
-                                              <Group Name="Details">
+                                              <Group Name="oae_eixo">
                                                 <GroupExpressions>
-                                                  <GroupExpression>=Fields!oap_id.Value</GroupExpression>
+                                                  <GroupExpression>=Fields!oae_id.Value</GroupExpression>
                                                 </GroupExpressions>
                                               </Group>
                                               <SortExpressions>
                                                 <SortExpression>
-                                                  <Value>=Fields!oap_descricao.Value</Value>
+                                                  <Value>=Fields!oae_ordem.Value</Value>
+                                                </SortExpression>
+                                                <SortExpression>
+                                                  <Value>=Fields!oae_eixo.Value</Value>
                                                 </SortExpression>
                                               </SortExpressions>
+                                              <TablixMembers>
+                                                <TablixMember>
+                                                  <Visibility>
+                                                    <Hidden>=Fields!oae_eixo.Value = ""</Hidden>
+                                                  </Visibility>
+                                                  <KeepWithGroup>After</KeepWithGroup>
+                                                </TablixMember>
+                                                <TablixMember>
+                                                  <Group Name="oae_subEixo">
+                                                    <GroupExpressions>
+                                                      <GroupExpression>=Fields!oae_idSub.Value</GroupExpression>
+                                                    </GroupExpressions>
+                                                  </Group>
+                                                  <SortExpressions>
+                                                    <SortExpression>
+                                                      <Value>=Fields!oae_ordemSub.Value</Value>
+                                                    </SortExpression>
+                                                    <SortExpression>
+                                                      <Value>=Fields!oae_subEixo.Value</Value>
+                                                    </SortExpression>
+                                                  </SortExpressions>
+                                                  <TablixMembers>
+                                                    <TablixMember>
+                                                      <Visibility>
+                                                        <Hidden>=Fields!oae_subEixo.Value = ""</Hidden>
+                                                      </Visibility>
+                                                      <KeepWithGroup>After</KeepWithGroup>
+                                                    </TablixMember>
+                                                    <TablixMember>
+                                                      <Group Name="Details">
+                                                        <GroupExpressions>
+                                                          <GroupExpression>=Fields!oap_id.Value</GroupExpression>
+                                                        </GroupExpressions>
+                                                      </Group>
+                                                      <SortExpressions>
+                                                        <SortExpression>
+                                                          <Value>=Fields!oap_descricao.Value</Value>
+                                                        </SortExpression>
+                                                      </SortExpressions>
+                                                    </TablixMember>
+                                                  </TablixMembers>
+                                                </TablixMember>
+                                              </TablixMembers>
                                             </TablixMember>
-                                            <TablixMember>
-                                              <KeepWithGroup>Before</KeepWithGroup>
-                                            </TablixMember>
+                                            <TablixMember />
                                           </TablixMembers>
                                         </TablixRowHierarchy>
                                         <DataSetName>DataSet1</DataSetName>
@@ -744,7 +959,7 @@
                           <DataSetName>DataSet1</DataSetName>
                           <Top>0.10583cm</Top>
                           <Left>0.03175cm</Left>
-                          <Height>3.59884cm</Height>
+                          <Height>4.55884cm</Height>
                           <Width>7.98334cm</Width>
                           <Style>
                             <Border>
@@ -803,8 +1018,7 @@
                           </ReportItems>
                           <KeepTogether>true</KeepTogether>
                           <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-                          <Top>3.8166cm</Top>
-                          <Left>0.03175cm</Left>
+                          <Top>4.66467cm</Top>
                           <Height>1.22556cm</Height>
                           <Width>16.45821cm</Width>
                           <ZIndex>1</ZIndex>
@@ -851,7 +1065,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Height>7.3553cm</Height>
+        <Height>8.20337cm</Height>
         <Width>27.7cm</Width>
         <Style>
           <Border>
@@ -860,7 +1074,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>7.3553cm</Height>
+    <Height>8.20337cm</Height>
     <Style />
   </Body>
   <Width>27.7cm</Width>
@@ -926,21 +1140,41 @@
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
+        <Field Name="oae_id">
+          <DataField>oae_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="oap_id">
           <DataField>oap_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="oae_ordem">
+          <DataField>oae_ordem</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="oap_descricao">
           <DataField>oap_descricao</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="oae_eixo">
+          <DataField>oae_eixo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="tci_id">
           <DataField>tci_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="oae_idSub">
+          <DataField>oae_idSub</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="tci_nome">
           <DataField>tci_nome</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="oae_ordemSub">
+          <DataField>oae_ordemSub</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="tci_ordem">
           <DataField>tci_ordem</DataField>
@@ -949,6 +1183,10 @@
         <Field Name="tcp_id">
           <DataField>tcp_id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="oae_subEixo">
+          <DataField>oae_subEixo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="tcp_descricao">
           <DataField>tcp_descricao</DataField>

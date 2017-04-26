@@ -416,6 +416,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroAgendamento.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsMsgConfirmCancelamentoAgendamento.js"));
             }
 
             if (!IsPostBack)

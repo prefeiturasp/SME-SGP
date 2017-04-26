@@ -95,6 +95,7 @@
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/novo.png"  SkinID="btNovo" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/alterar.png"  SkinID="btEditar" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/cancelar.gif"  SkinID="btCancelar" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/cancelar.gif"  SkinID="btCancelarAgendamento" CssClass="btCancelarAgendamento" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/detalhar.gif"  SkinID="btDetalhar" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/convocar.png"  SkinID="btConvocar" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/confirmar.png"  SkinID="btConfirmar" />
