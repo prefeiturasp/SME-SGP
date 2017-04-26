@@ -57,8 +57,6 @@
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnCancelarAgendamento" SkinID="btCancelar" runat="server" CommandName="Cancelar" CausesValidation="false"
                                         ToolTip="<%$ Resources:Academico, Sondagem.Agendamento.grvAgendamentos.btnCancelarAgendamento.ToolTip %>" />
-                                    <asp:ImageButton ID="btnReativar" SkinID="btConvocar" runat="server" CommandName="Reativar" CausesValidation="false"
-                                        ToolTip="<%$ Resources:Academico, Sondagem.Agendamento.grvAgendamentos.btnReativar.ToolTip %>" />
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="center"></HeaderStyle>
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>

@@ -511,15 +511,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     btnCancelarAgendamento.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar &&
                                            sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado;
                 }
-
-                ImageButton btnReativar = (ImageButton)e.Row.FindControl("btnReativar");
-                if (btnReativar != null)
-                {
-                    btnReativar.CommandArgument = e.Row.RowIndex.ToString();
-                    btnReativar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar &&
-                                           sda_situacao == (byte)ACA_SondagemAgendamentoSituacao.Cancelado;
-                }
-
+                
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
                 {
@@ -604,39 +596,6 @@ namespace GestaoEscolar.Academico.Sondagem
                     int ind = VS_ListaAgendamento.IndexOf(VS_ListaAgendamento.Where(a => a.sda_id == idCancelar).First());
 
                     VS_ListaAgendamento[ind].sda_situacao = (byte)ACA_SondagemAgendamentoSituacao.Cancelado;
-
-                    VS_ListaAgendamento = VS_ListaAgendamento.OrderByDescending(a => a.sda_dataInicio).ThenByDescending(a => a.sda_dataFim).ToList();
-
-                    grvAgendamentos.DataSource = VS_ListaAgendamento;
-                    grvAgendamentos.DataBind();
-                }
-                catch (ValidationException ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-                }
-                catch (Exception ex)
-                {
-                    ApplicationWEB._GravaErro(ex);
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
-                }
-            }
-            else if (e.CommandName == "Reativar")
-            {
-                try
-                {
-                    int index = int.Parse(e.CommandArgument.ToString());
-
-                    int idReativar = Convert.ToInt32(grvAgendamentos.DataKeys[index]["sda_id"]);
-
-                    //Reativa as retificações do agendamento
-                    foreach (ACA_SondagemAgendamento sda in VS_ListaAgendamento.Where(a => a.sda_idRetificada == idReativar))
-                        VS_ListaAgendamento[VS_ListaAgendamento.IndexOf(sda)].sda_situacao = (byte)ACA_SondagemAgendamentoSituacao.Ativo;
-
-                    int ind = VS_ListaAgendamento.IndexOf(VS_ListaAgendamento.Where(a => a.sda_id == idReativar).First());
-
-                    VS_ListaAgendamento[ind].sda_situacao = (byte)ACA_SondagemAgendamentoSituacao.Ativo;
 
                     VS_ListaAgendamento = VS_ListaAgendamento.OrderByDescending(a => a.sda_dataInicio).ThenByDescending(a => a.sda_dataFim).ToList();
 
