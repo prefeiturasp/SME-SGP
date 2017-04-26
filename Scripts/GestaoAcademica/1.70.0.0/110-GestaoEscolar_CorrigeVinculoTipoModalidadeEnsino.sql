@@ -62,5 +62,13 @@ SET XACT_ABORT ON
 	AND cur_nome_abreviado = 'CIEJA'
 	AND cur_situacao <> 3
 
+	UPDATE tcp
+		SET tcp.tme_id = cur.tme_id	
+	FROM ACA_Curso cur
+	INNER JOIN ACA_CurriculoPeriodo crp
+		ON cur.cur_id = crp.cur_id
+	INNER JOIN ACA_TipoCurriculoPeriodo tcp
+		ON crp.tcp_id = tcp.tcp_id
+
 SET XACT_ABORT OFF
 COMMIT TRANSACTION

@@ -3435,9 +3435,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                         tud_id = VS_tud_id_Aula,
                         tpc_id = UCNavegacaoTelaPeriodo.VS_tpc_id,
                         tau_data = string.IsNullOrEmpty(txtDataAula.Text) ? new DateTime() : Convert.ToDateTime(txtDataAula.Text),
-                        tau_numeroAulas = (DisciplinaPrincipal || DisciplinaRegencia) ? 1 :
+
+                        tau_numeroAulas = 
+                        
+                        (DisciplinaPrincipal || DisciplinaRegencia) && !RegenciaETemposAula ? 1 :
                             (string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 :
                                 Convert.ToInt32(txtQtdeAulas.Text)),
+
+
                         tdt_posicao = UCControleTurma1.VS_tdt_posicao,
                         tau_reposicao = chkReposicao.Visible && chkReposicao.Checked,
                         tau_dataAlteracao = VS_DataAlteracaoAula_Validacao,
@@ -3480,7 +3485,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                                          VS_EntitiesControleTurma.calendarioAnual, UCNavegacaoTelaPeriodo.cap_dataInicio,
                                          UCNavegacaoTelaPeriodo.cap_dataFim, VS_turmaDisciplinaRelacionada,
                                          __SessionWEB.__UsuarioWEB.Usuario.usu_id, (byte)LOG_TurmaAula_Alteracao_Origem.WebDiarioClasse,
-                                         (byte)LOG_TurmaAula_Alteracao_Tipo.AlteracaoAula))
+                                         (byte)LOG_TurmaAula_Alteracao_Tipo.AlteracaoAula
+                                         , VS_EntitiesControleTurma.formatoAvaliacao.fav_tipoApuracaoFrequencia))
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "Aula | " +
                                                                             "cal_id: " + UCNavegacaoTelaPeriodo.VS_cal_id + " | tpc_id: " + UCNavegacaoTelaPeriodo.VS_tpc_id +
@@ -7874,6 +7880,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         {
             VS_tau_id = -1;
             VS_tud_tipo_Aula = VS_EntitiesControleTurma.turmaDisciplina.tud_tipo;
+            VS_fav_tipoApuracaoFrequencia = VS_EntitiesControleTurma.formatoAvaliacao.fav_tipoApuracaoFrequencia;
             VS_tud_global_Aula = VS_EntitiesControleTurma.turmaDisciplina.tud_global;
             VS_tud_id_Aula = VS_EntitiesControleTurma.turmaDisciplina.tud_id;
             SetaDisplayCss(btnSalvarAula, true);
