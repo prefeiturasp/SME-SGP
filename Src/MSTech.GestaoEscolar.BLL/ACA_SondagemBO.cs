@@ -139,7 +139,8 @@ namespace MSTech.GestaoEscolar.BLL
 
                 //Remove logicamente no banco as questões e sub-questões que foram removidas da sondagem
                 foreach (ACA_SondagemQuestao sdqB in lstQuestaoBanco)
-                    if (!lstQuestao.Any(q => q.sdq_id == sdqB.sdq_id) && !lstSubQuestao.Any(q => q.sdq_id == sdqB.sdq_id))
+                    if (!lstQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido) && 
+                        !lstSubQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido))
                     {
                         if (!permiteRemover)
                             throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteExcluirItem"));
@@ -164,7 +165,7 @@ namespace MSTech.GestaoEscolar.BLL
 
                 //Remove logicamente no banco as respostas que foram removidas da sondagem
                 foreach (ACA_SondagemResposta sdrB in lstRespostaBanco)
-                    if (!lstResposta.Any(r => r.sdr_id == sdrB.sdr_id))
+                    if (!lstResposta.Any(r => r.sdr_id == sdrB.sdr_id && r.sdr_situacao != (byte)ACA_SondagemRespostaSituacao.Excluido))
                     {
                         if (!permiteRemover)
                             throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteExcluirItem"));

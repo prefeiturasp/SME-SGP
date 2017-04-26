@@ -101,7 +101,7 @@ namespace MSTech.GestaoEscolar.DAL
             Param.DbType = DbType.Int32;
             Param.ParameterName = "@sdr_id";
             Param.Size = 4;
-            Param.Value = entity.snd_id;
+            Param.Value = entity.sdr_id;
             qs.Parameters.Add(Param);
 
             Param = qs.NewParameter();

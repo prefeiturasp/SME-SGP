@@ -239,7 +239,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                 VS_ListaQuestao = VS_ListaQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                grvQuestoes.DataSource = VS_ListaQuestao;
+                grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                 grvQuestoes.DataBind();
 
                 if (grvQuestoes.Rows.Count > 0)
@@ -250,7 +250,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                 VS_ListaSubQuestao = VS_ListaSubQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                grvSubQuestoes.DataSource = VS_ListaSubQuestao;
+                grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                 grvSubQuestoes.DataBind();
 
                 if (grvSubQuestoes.Rows.Count > 0)
@@ -261,7 +261,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                 VS_ListaResposta = VS_ListaResposta.OrderBy(r => r.sdr_ordem).ThenBy(r => r.sdr_sigla).ThenBy(r => r.sdr_descricao).ToList();
 
-                grvRespostas.DataSource = VS_ListaResposta;
+                grvRespostas.DataSource = VS_ListaResposta.Where(r => r.sdr_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                 grvRespostas.DataBind();
 
                 if (grvRespostas.Rows.Count > 0)
@@ -445,13 +445,13 @@ namespace GestaoEscolar.Academico.Sondagem
                                            GetGlobalResourceObject("Academico", "Sondagem.Cadastro.btnVoltar.Text").ToString();
                         ckbBloqueado.Visible = false;
 
-                        grvQuestoes.DataSource = VS_ListaQuestao;
+                        grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                         grvQuestoes.DataBind();
 
-                        grvSubQuestoes.DataSource = VS_ListaSubQuestao;
+                        grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                         grvSubQuestoes.DataBind();
 
-                        grvRespostas.DataSource = VS_ListaResposta;
+                        grvRespostas.DataSource = VS_ListaResposta.Where(r => r.sdr_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                         grvRespostas.DataBind();
                     }
 
@@ -541,7 +541,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaQuestao = VS_ListaQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                    grvQuestoes.DataSource = VS_ListaQuestao;
+                    grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvQuestoes.DataBind();
 
                     if (grvQuestoes.Rows.Count > 0)
@@ -576,7 +576,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaSubQuestao = VS_ListaSubQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                    grvSubQuestoes.DataSource = VS_ListaSubQuestao;
+                    grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvSubQuestoes.DataBind();
 
                     if (grvSubQuestoes.Rows.Count > 0)
@@ -622,7 +622,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaResposta = VS_ListaResposta.OrderBy(r => r.sdr_ordem).ThenBy(r => r.sdr_sigla).ThenBy(r => r.sdr_descricao).ToList();
 
-                    grvRespostas.DataSource = VS_ListaResposta;
+                    grvRespostas.DataSource = VS_ListaResposta.Where(r => r.sdr_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvRespostas.DataBind();
 
                     if (grvRespostas.Rows.Count > 0)
@@ -665,7 +665,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaQuestao = VS_ListaQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                    grvQuestoes.DataSource = VS_ListaQuestao;
+                    grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvQuestoes.DataBind();
 
                     if (grvQuestoes.Rows.Count > 0)
@@ -702,7 +702,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaQuestao = VS_ListaQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                    grvQuestoes.DataSource = VS_ListaQuestao;
+                    grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvQuestoes.DataBind();
 
                     if (grvQuestoes.Rows.Count > 0)
@@ -752,7 +752,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     }
                     VS_ListaQuestao = VS_ListaQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                    grvQuestoes.DataSource = VS_ListaQuestao;
+                    grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvQuestoes.DataBind();
 
                     if (grvQuestoes.Rows.Count > 0)
@@ -817,7 +817,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaSubQuestao = VS_ListaSubQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                    grvSubQuestoes.DataSource = VS_ListaSubQuestao;
+                    grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvSubQuestoes.DataBind();
 
                     if (grvSubQuestoes.Rows.Count > 0)
@@ -854,7 +854,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     
                     VS_ListaSubQuestao = VS_ListaSubQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                    grvSubQuestoes.DataSource = VS_ListaSubQuestao;
+                    grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvSubQuestoes.DataBind();
 
                     if (grvSubQuestoes.Rows.Count > 0)
@@ -905,7 +905,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaSubQuestao = VS_ListaSubQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
-                    grvSubQuestoes.DataSource = VS_ListaSubQuestao;
+                    grvSubQuestoes.DataSource = VS_ListaSubQuestao.Where(q => q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvSubQuestoes.DataBind();
 
                     if (grvSubQuestoes.Rows.Count > 0)
@@ -970,7 +970,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaResposta = VS_ListaResposta.OrderBy(r => r.sdr_ordem).ThenBy(r => r.sdr_sigla).ThenBy(r => r.sdr_descricao).ToList();
 
-                    grvRespostas.DataSource = VS_ListaResposta;
+                    grvRespostas.DataSource = VS_ListaResposta.Where(r => r.sdr_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvRespostas.DataBind();
 
                     if (grvRespostas.Rows.Count > 0)
@@ -1007,7 +1007,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaResposta = VS_ListaResposta.OrderBy(r => r.sdr_ordem).ThenBy(r => r.sdr_sigla).ThenBy(r => r.sdr_descricao).ToList();
 
-                    grvRespostas.DataSource = VS_ListaResposta;
+                    grvRespostas.DataSource = VS_ListaResposta.Where(r => r.sdr_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvRespostas.DataBind();
 
                     if (grvRespostas.Rows.Count > 0)
@@ -1058,7 +1058,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     VS_ListaResposta = VS_ListaResposta.OrderBy(r => r.sdr_ordem).ThenBy(r => r.sdr_sigla).ThenBy(r => r.sdr_descricao).ToList();
 
-                    grvRespostas.DataSource = VS_ListaResposta;
+                    grvRespostas.DataSource = VS_ListaResposta.Where(r => r.sdr_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido);
                     grvRespostas.DataBind();
 
                     if (grvRespostas.Rows.Count > 0)
