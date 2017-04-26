@@ -2797,6 +2797,30 @@ tr.trDisciplina.global td {
     border-color: #9D8DCB;
 }
 
+
+/* EJA Regular */
+.cicloEja .divPerfil > div > div:first-child, .cicloEja .divProposta > div > div:first-child,
+.cicloEja .divRecomendacoes > div:first-child, .cicloEja .divResultados > div:first-child,
+.cicloEja .tblBoletim th.nomePeriodo {
+    background-color: #494949;
+    color: #fff;
+    padding-top: 5px;
+}
+
+.cicloEja .tblBoletim th.nomePeriodoColunas {
+    background-color: #606060;
+}
+
+.cicloEja .divPerfil .boxAvaliacao th, .cicloEja .divProposta .boxAvaliacao > span:first-child {
+    color: #494949;
+}
+
+.cicloEja .divPerfil .boxAvaliacao th, .cicloEja .divProposta .boxAvaliacao > span:first-child,
+.cicloEja .divPerfil, .cicloEja .divProposta, .cicloTres .divRecomendacoes, .cicloEja .divResultados,
+.cicloEja .divPerfil .boxAvaliacao, .cicloEja .divProposta .boxAvaliacao {
+    border-color: #494949;
+}
+
 /* Ciclo Layout Padrao */
 .cicloLayoutPadrao .divPerfil > div > div:first-child, .cicloLayoutPadrao .divProposta > div > div:first-child,
 .cicloLayoutPadrao .divRecomendacoes > div:first-child, .cicloLayoutPadrao .divResultados > div:first-child {
@@ -2836,6 +2860,11 @@ tr.trDisciplina.global td {
 /* Ciclo Layout Padrao sem caixa proposta */
 .cicloLayoutPadrao .divPerfil {
     width: 100%;
+}
+
+/* Ciclo EJA sem caixa proposta */
+.cicloEja .divPerfil {
+     width: 100%;
 }
 
 .divPerfil .boxAvaliacao, .divProposta .boxAvaliacao {
