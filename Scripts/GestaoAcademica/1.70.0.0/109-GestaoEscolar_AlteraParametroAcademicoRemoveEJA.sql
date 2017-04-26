@@ -34,7 +34,7 @@ SET XACT_ABORT ON
 											',' + CAST(tme.tme_id AS VARCHAR)
 										FROM ACA_TipoModalidadeEnsino tme WITH(NOLOCK)
 										WHERE
-											tme.tme_nome IN ('EJA Especial', 'EJA Modular', 'CIEJA')
+											tme.tme_nome IN ('EJA - Especial', 'EJA - Modular', 'CIEJA')
 											AND tme.tme_idSuperior IS NOT NULL
 											AND tme.tme_situacao <> 3
 										FOR XML PATH(''))
