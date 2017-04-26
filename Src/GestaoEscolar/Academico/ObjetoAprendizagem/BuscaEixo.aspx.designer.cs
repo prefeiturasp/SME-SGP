@@ -10,16 +10,16 @@
 namespace GestaoEscolar.Academico.ObjetoAprendizagem {
     
     
-    public partial class Cadastro {
+    public partial class BuscaEixo {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// updMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel updMessage;
         
         /// <summary>
         /// _lblMessage control.
@@ -31,22 +31,31 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.Label _lblMessage;
         
         /// <summary>
-        /// ValidationSummary control.
+        /// _updDadosBasicos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
+        protected global::System.Web.UI.UpdatePanel _updDadosBasicos;
         
         /// <summary>
-        /// UCCamposObrigatorios3 control.
+        /// fds control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios3;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fds;
+        
+        /// <summary>
+        /// _divPesquisa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl _divPesquisa;
         
         /// <summary>
         /// _lblDisciplina control.
@@ -67,103 +76,22 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.TextBox txtDisciplina;
         
         /// <summary>
-        /// lblAno control.
+        /// UCComboAnoLetivo1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAno;
+        protected global::WebControls_Combos_UCComboAnoLetivo UCComboAnoLetivo1;
         
         /// <summary>
-        /// txtAno control.
+        /// _btnNovo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAno;
-        
-        /// <summary>
-        /// _lblDescricao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label _lblDescricao;
-        
-        /// <summary>
-        /// _txtDescricao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox _txtDescricao;
-        
-        /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
-        /// <summary>
-        /// _ckbBloqueado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox _ckbBloqueado;
-        
-        /// <summary>
-        /// lblMessageCiclos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessageCiclos;
-        
-        /// <summary>
-        /// updCiclos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updCiclos;
-        
-        /// <summary>
-        /// rptCampos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCampos;
-        
-        /// <summary>
-        /// cvCiclos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvCiclos;
-        
-        /// <summary>
-        /// _btnSalvar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _btnSalvar;
+        protected global::System.Web.UI.WebControls.Button _btnNovo;
         
         /// <summary>
         /// _btnCancelar control.
@@ -175,14 +103,113 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem {
         protected global::System.Web.UI.WebControls.Button _btnCancelar;
         
         /// <summary>
+        /// fdsResultados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsResultados;
+        
+        /// <summary>
+        /// upd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upd;
+        
+        /// <summary>
+        /// _grvEixoObjetoAprendizagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView _grvEixoObjetoAprendizagem;
+        
+        /// <summary>
+        /// updMessagePopUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updMessagePopUp;
+        
+        /// <summary>
+        /// lblMessagePopUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessagePopUp;
+        
+        /// <summary>
+        /// updPopUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPopUp;
+        
+        /// <summary>
+        /// lblDescricao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescricao;
+        
+        /// <summary>
+        /// txtDescricao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescricao;
+        
+        /// <summary>
+        /// rfvTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTitulo;
+        
+        /// <summary>
+        /// btnAdicionar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdicionar;
+        
+        /// <summary>
+        /// btnCancelarItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarItem;
+        
+        /// <summary>
         /// PreviousPage property.
         /// </summary>
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new GestaoEscolar.Academico.ObjetoAprendizagem.CadastroEixo PreviousPage {
+        public new GestaoEscolar.Academico.ObjetoAprendizagem.BuscaDisciplina PreviousPage {
             get {
-                return ((GestaoEscolar.Academico.ObjetoAprendizagem.CadastroEixo)(base.PreviousPage));
+                return ((GestaoEscolar.Academico.ObjetoAprendizagem.BuscaDisciplina)(base.PreviousPage));
             }
         }
     }

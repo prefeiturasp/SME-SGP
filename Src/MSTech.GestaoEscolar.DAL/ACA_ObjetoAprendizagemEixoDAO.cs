@@ -8,11 +8,80 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using MSTech.GestaoEscolar.DAL.Abstracts;
     using System;
-    using System.Data;    /// <summary>
-                          /// Description: .
-                          /// </summary>
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Data;
+
     public class ACA_ObjetoAprendizagemEixoDAO : Abstract_ACA_ObjetoAprendizagemEixoDAO
-	{
+    {
+        /// <summary>
+        /// Retorna os eixos por disciplina e ano letivo.
+        /// </summary>
+        /// <param name="tds_id">ID da disciplina</param>
+        /// <param name="cal_ano">Ano letivo</param>
+        /// <param name="oae_idPai">ID do eixo pai</param>
+        /// <returns></returns>
+        public List<ACA_ObjetoAprendizagemEixo> SelectBy_TipoDisciplina(int tds_id, int cal_ano, int oae_idPai)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemEixo_SELECT_ByTipoDisciplina", _Banco);
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Value = tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Value = cal_ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@oae_idPai";
+                if (oae_idPai > 0)
+                    Param.Value = oae_idPai;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+                
+                return (from DataRow dr in qs.Return.Rows select DataRowToEntity(dr, new ACA_ObjetoAprendizagemEixo())).ToList();
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Verifica se o objeto de aprendizagem está em uso
+        /// </summary>
+        /// <param name="oap_id">ID do objeto de aprendizagem</param>
+        /// <returns>true = em uso</returns>
+        public bool ObjetoEmUso(int oae_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagemEixo_SELECTEmUsoBy_oae_id", _Banco);
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@oae_id";
+                Param.Value = oae_id;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
 
         #region Métodos sobrescritos
 

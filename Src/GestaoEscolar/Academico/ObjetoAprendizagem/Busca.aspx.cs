@@ -56,6 +56,22 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
+        private int _VS_oae_id
+        {
+            get
+            {
+                if (ViewState["_VS_oae_id"] != null)
+                {
+                    return Convert.ToInt32(ViewState["_VS_oae_id"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["_VS_oae_id"] = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -118,6 +134,9 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 _odsObjeto.SelectParameters.Add("tds_id", tds_id.ToString());
                 _odsObjeto.SelectParameters.Add("cal_ano", UCComboAnoLetivo1.ano.ToString());
                 _grvObjetoAprendizagem.DataBind();
+
+                Session["tds_id_oae"] = _VS_tds_id;
+                Session["oae_id"] = _VS_oae_id;
             }
             catch (Exception ex)
             {

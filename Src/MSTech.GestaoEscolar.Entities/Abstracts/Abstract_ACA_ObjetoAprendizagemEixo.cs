@@ -26,10 +26,22 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[DataObjectField(true, true, false)]
 		public virtual int oae_id { get; set; }
 
-		/// <summary>
-		/// Descrição do eixo.
-		/// </summary>
-		[MSValidRange(500)]
+        /// <summary>
+        /// Propriedade tds_id.
+        /// </summary>
+        [MSNotNullOrEmpty]
+        public virtual int tds_id { get; set; }
+
+        /// <summary>
+        /// Propriedade cal_ano.
+        /// </summary>
+        [MSNotNullOrEmpty]
+        public virtual int cal_ano { get; set; }
+
+        /// <summary>
+        /// Descrição do eixo.
+        /// </summary>
+        [MSValidRange(500)]
 		[MSNotNullOrEmpty]
 		public virtual string oae_descricao { get; set; }
 

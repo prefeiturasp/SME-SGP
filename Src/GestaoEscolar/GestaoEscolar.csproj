@@ -605,12 +605,26 @@
     <Compile Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx.designer.cs">
       <DependentUpon>BuscaDisciplina.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\BuscaEixo.aspx.cs">
+      <DependentUpon>BuscaEixo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\BuscaEixo.aspx.designer.cs">
+      <DependentUpon>BuscaEixo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\ObjetoAprendizagem\Cadastro.aspx.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Academico\ObjetoAprendizagem\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\CadastroEixo.aspx.cs">
+      <DependentUpon>CadastroEixo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ObjetoAprendizagem\CadastroEixo.aspx.designer.cs">
+      <DependentUpon>CadastroEixo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Academico\OrientacaoCurricular\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
@@ -2890,7 +2904,9 @@
     <Content Include="Academico\NivelAprendizado\Cadastro.aspx" />
     <Content Include="Academico\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Academico\ObjetoAprendizagem\BuscaDisciplina.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\BuscaEixo.aspx" />
     <Content Include="Academico\ObjetoAprendizagem\Cadastro.aspx" />
+    <Content Include="Academico\ObjetoAprendizagem\CadastroEixo.aspx" />
     <Content Include="Academico\OrientacaoCurricular\Busca.aspx" />
     <Content Include="Academico\OrientacaoCurricular\CadastroHabilidade.aspx" />
     <Content Include="Academico\ParametrizacaoDisciplinas\Busca.aspx" />
@@ -3602,6 +3618,7 @@
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
     <Content Include="Includes\jsCadastroAgendamento.js" />
+    <Content Include="Includes\jsCadastroEixoObjConhecimento.js" />
     <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
     <Content Include="Includes\jsCadastroJustificativaFalta.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />

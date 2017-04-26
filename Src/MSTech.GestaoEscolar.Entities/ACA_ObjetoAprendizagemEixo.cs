@@ -12,6 +12,7 @@ namespace MSTech.GestaoEscolar.Entities
     /// <summary>
     /// Description: .
     /// </summary>
+    [Serializable]
     public class ACA_ObjetoAprendizagemEixo : Abstract_ACA_ObjetoAprendizagemEixo
 	{
         /// <summary>
@@ -19,6 +20,18 @@ namespace MSTech.GestaoEscolar.Entities
 		/// </summary>
         [DataObjectField(true, true, false)]
         public override int oae_id { get; set; }
+
+        /// <summary>
+        /// Propriedade tds_id.
+        /// </summary>
+        [MSNotNullOrEmpty("Tipo de disciplina é obrigatório.")]
+        public override int tds_id { get; set; }
+
+        /// <summary>
+        /// Propriedade cal_ano.
+        /// </summary>
+        [MSNotNullOrEmpty("Ano é obrigatório.")]
+        public override int cal_ano { get; set; }
 
         /// <summary>
 		/// Descrição do eixo.
@@ -48,5 +61,7 @@ namespace MSTech.GestaoEscolar.Entities
         /// Data de alteração do registro.
         /// </summary>
         public override DateTime oae_dataAlteracao { get; set; }
+
+        public string oae_situacaoText { get; set; }
     }
 }

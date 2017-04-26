@@ -38,7 +38,7 @@
                         <asp:TemplateField HeaderText="<%$ Resources:Mensagens, MSG_DISCIPLINA %>">
                             <ItemTemplate>
                                 <asp:LinkButton ID="_btnSelecionar" runat="server" CommandName="Edit" Text='<%# Bind("tds_nome") %>'
-                                    PostBackUrl="~/Academico/ObjetoAprendizagem/Busca.aspx"></asp:LinkButton>
+                                    PostBackUrl="~/Academico/ObjetoAprendizagem/BuscaEixo.aspx"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="tne_nome" HeaderText="Tipo de nível de ensino" />

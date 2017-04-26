@@ -52,6 +52,19 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Busca os objetos cadastrados para a disciplina no ano e eixo informados
+        /// </summary>
+        /// <param name="tds_id">ID da disciplina</param>
+        /// <param name="cal_ano">Ano letivo</param>
+        /// <param name="oae_id">ID do eixo (ou sub eixo)</param>
+        /// <returns></returns>
+        public static List<ACA_ObjetoAprendizagem> SelectBy_TipoDisciplinaEixo(int tds_id, int cal_ano, int oae_id)
+        {
+            ACA_ObjetoAprendizagemDAO dao = new ACA_ObjetoAprendizagemDAO();
+            return dao.SelectBy_TipoDisciplinaEixo(tds_id, cal_ano, oae_id);
+        }
+
+        /// <summary>
         /// Salva o objeto de aprendizagem
         /// </summary>
         /// <param name="entity">Entidade do objeto de aprendizagem</param>
@@ -140,7 +153,7 @@ namespace MSTech.GestaoEscolar.BLL
 
             try
             {
-                if (ObjetoEmUso(entity.oap_id))
+                if (ObjetoEmUso(entity.oap_id, dao._Banco))
                     throw new ValidationException("Não foi possível excluir o objeto de conhecimento pois existem outros registros ligados a ele.");
 
                 return Delete(entity);

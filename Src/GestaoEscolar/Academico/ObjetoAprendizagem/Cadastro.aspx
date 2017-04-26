@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Cadastro.aspx.cs" Inherits="GestaoEscolar.Academico.ObjetoAprendizagem.Cadastro" %>
 
-<%@ PreviousPageType VirtualPath="~/Academico/ObjetoAprendizagem/Busca.aspx" %>
+<%@ PreviousPageType VirtualPath="~/Academico/ObjetoAprendizagem/CadastroEixo.aspx" %>
 
-<%@ Register Src="../../WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios"
+<%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios"
     TagPrefix="uc5" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

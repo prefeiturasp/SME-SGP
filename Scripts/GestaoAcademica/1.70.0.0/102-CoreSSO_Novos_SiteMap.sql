@@ -19,6 +19,18 @@ SET XACT_ABORT ON
 		,@SiteMapUrl = '~/Configuracao/TipoEvento/Busca.aspx' -- Url da SiteMap (Obrigatório)
 	*/
 
+	EXEC MS_InsereSiteMap
+		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
+		,@nomeModulo = 'Objetos de conhecimento' -- Nome do módulo (Obrigatório)
+		,@SiteMapNome = 'Consulta de eixos de objetos de conhecimento' -- Nome do SiteMap (Obrigatório)
+		,@SiteMapUrl = '~/Academico/ObjetoAprendizagem/BuscaEixo.aspx' -- Url da SiteMap (Obrigatório)
+		
+	EXEC MS_InsereSiteMap
+		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
+		,@nomeModulo = 'Objetos de conhecimento' -- Nome do módulo (Obrigatório)
+		,@SiteMapNome = 'Cadastro de eixos de objetos de conhecimento' -- Nome do SiteMap (Obrigatório)
+		,@SiteMapUrl = '~/Academico/ObjetoAprendizagem/CadastroEixo.aspx' -- Url da SiteMap (Obrigatório)
+		
 -- Fechar transação
 SET XACT_ABORT OFF
 COMMIT TRANSACTION

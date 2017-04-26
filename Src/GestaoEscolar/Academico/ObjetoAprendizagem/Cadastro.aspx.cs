@@ -61,15 +61,53 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             }
         }
 
+        private int _VS_oae_id
+        {
+            get
+            {
+                if (ViewState["_VS_oae_id"] != null)
+                {
+                    return Convert.ToInt32(ViewState["_VS_oae_id"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["_VS_oae_id"] = value;
+            }
+        }
+
+        private int _VS_oae_idPai
+        {
+            get
+            {
+                if (ViewState["_VS_oae_idPai"] != null)
+                {
+                    return Convert.ToInt32(ViewState["_VS_oae_idPai"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["_VS_oae_idPai"] = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                string message = __SessionWEB.PostMessages;
+                if (!string.IsNullOrEmpty(message))
+                    _lblMessage.Text = message;
+
                 if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
                 {
                     _VS_oap_id = PreviousPage.oap_id;
                     _VS_tds_id = PreviousPage.tds_id;
                     _VS_cal_ano = PreviousPage.cal_ano;
+                    _VS_oae_id = PreviousPage.oae_id;
+                    _VS_oae_idPai = PreviousPage.oae_idPai;
                     txtAno.Text = _VS_cal_ano.ToString();
                     LoadPage();
 
@@ -78,7 +116,8 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 }
                 else
                 {
-                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/Busca.aspx", false);
+                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Selecione um eixo de objeto de conhecimento para adicionar objeto de conhecimento.", UtilBO.TipoMensagem.Alerta);
+                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/BuscaDisciplina.aspx", false);
                     HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
             }
@@ -98,6 +137,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     IsNew = _VS_oap_id <= 0,
                     oap_descricao = _txtDescricao.Text,
                     tds_id = _VS_tds_id,
+                    oae_id = _VS_oae_id,
                     cal_ano = _VS_cal_ano,
                     oap_situacao = (_ckbBloqueado.Checked ? (byte)ObjetoAprendizagemSituacao.Bloqueado 
                                                           : (byte)ObjetoAprendizagemSituacao.Ativo),
@@ -117,8 +157,11 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage("Objeto de conhecimento incluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
                 }
 
-                Session["tds_id_oap"] = _VS_tds_id;
-                Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/Busca.aspx", false);
+                Session["tds_id_oae"] = _VS_tds_id;
+                Session["cal_ano_oae"] = _VS_cal_ano;
+                Session["oae_id"] = _VS_oae_id;
+                Session["oae_idPai"] = _VS_oae_idPai;
+                Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ObjetoAprendizagem/CadastroEixo.aspx", false);
                 HttpContext.Current.ApplicationInstance.CompleteRequest();
             }
             catch (ValidationException ex)
@@ -155,8 +198,11 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
         protected void _btnCancelar_Click(object sender, EventArgs e)
         {
-            Session["tds_id_oap"] = _VS_tds_id;
-            Response.Redirect("~/Academico/ObjetoAprendizagem/Busca.aspx", false);
+            Session["tds_id_oae"] = _VS_tds_id;
+            Session["cal_ano_oae"] = _VS_cal_ano;
+            Session["oae_id"] = _VS_oae_id;
+            Session["oae_idPai"] = _VS_oae_idPai;
+            Response.Redirect("~/Academico/ObjetoAprendizagem/CadastroEixo.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 

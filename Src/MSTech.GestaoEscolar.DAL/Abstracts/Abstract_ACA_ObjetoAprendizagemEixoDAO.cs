@@ -56,6 +56,20 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Size = 4;
+                Param.Value = entity.tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                Param.Value = entity.cal_ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
                 Param.DbType = DbType.String;
                 Param.ParameterName = "@oae_descricao";
                 Param.Size = 500;
@@ -122,6 +136,20 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param.ParameterName = "@oae_id";
                 Param.Size = 4;
                 Param.Value = entity.oae_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Size = 4;
+                Param.Value = entity.tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                Param.Value = entity.cal_ano;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

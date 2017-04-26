@@ -8,6 +8,8 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using MSTech.GestaoEscolar.DAL.Abstracts;
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.Data;
 
     /// <summary>
@@ -41,6 +43,46 @@ namespace MSTech.GestaoEscolar.DAL
                 totalRecords = qs.Return.Rows.Count;
 
                 return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Busca os objetos cadastrados para a disciplina no ano e eixo informados
+        /// </summary>
+        /// <param name="tds_id">ID da disciplina</param>
+        /// <param name="cal_ano">Ano letivo</param>
+        /// <param name="oae_id">ID do eixo (ou sub eixo)</param>
+        /// <returns></returns>
+        public List<ACA_ObjetoAprendizagem> SelectBy_TipoDisciplinaEixo(int tds_id, int cal_ano, int oae_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ObjetoAprendizagem_SELECT_ByTipoDisciplinaEixo", _Banco);
+            try
+            {
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Value = tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Value = cal_ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@oae_id";
+                Param.Value = oae_id;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                return (from DataRow dr in qs.Return.Rows select DataRowToEntity(dr, new ACA_ObjetoAprendizagem())).ToList();
             }
             finally
             {

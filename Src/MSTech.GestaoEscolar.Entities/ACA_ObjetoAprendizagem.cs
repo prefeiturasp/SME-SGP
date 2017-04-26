@@ -54,5 +54,7 @@ namespace MSTech.GestaoEscolar.Entities
         /// Propriedade oap_dataAlteracao.
         /// </summary>
         public override DateTime oap_dataAlteracao { get; set; }
+
+        public string oap_situacaoText { get; set; }
     }
 }
