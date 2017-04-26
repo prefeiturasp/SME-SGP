@@ -2376,7 +2376,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=IIF(Fields!totalAlunosTurma.Value &lt;= 0, "-", CStr(Floor(Fields!totalAlunos.Value * 100 / Fields!totalAlunosTurma.Value)) + "%")</Value>
+                                                <Value>=IIF(Fields!totalAlunosTurma.Value &lt;= 0, "-", CStr(Round(Fields!totalAlunos.Value * 100 / Fields!totalAlunosTurma.Value)) + "%")</Value>
                                                 <Style>
                                                   <FontSize>8pt</FontSize>
                                                 </Style>
@@ -2483,7 +2483,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=IIF(First(Fields!totalAlunosGeral.Value) &lt;= 0, "-", CStr(Floor(Sum(Fields!totalAlunos.Value) * 100 / First(Fields!totalAlunosGeral.Value))) + "%")</Value>
+                                                <Value>=IIF(First(Fields!totalAlunosGeral.Value) &lt;= 0, "-", CStr(Round(Sum(Fields!totalAlunos.Value) * 100 / First(Fields!totalAlunosGeral.Value))) + "%")</Value>
                                                 <Style>
                                                   <FontSize>9pt</FontSize>
                                                 </Style>
@@ -2964,7 +2964,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=IIF(Fields!totalAlunosTurma.Value &lt;= 0, "-", CStr(Floor(Fields!totalAlunos.Value * 100 / Fields!totalAlunosTurma.Value)) + "%")</Value>
+                                                <Value>=IIF(Fields!totalAlunosTurma.Value &lt;= 0, "-", CStr(Round(Fields!totalAlunos.Value * 100 / Fields!totalAlunosTurma.Value)) + "%")</Value>
                                                 <Style>
                                                   <FontSize>8pt</FontSize>
                                                 </Style>
@@ -3071,7 +3071,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=IIF(First(Fields!totalAlunosGeral.Value) &lt;= 0, "-", CStr(Floor(Sum(Fields!totalAlunos.Value) * 100 / First(Fields!totalAlunosGeral.Value))) + "%")</Value>
+                                                <Value>=IIF(First(Fields!totalAlunosGeral.Value) &lt;= 0, "-", CStr(Round(Sum(Fields!totalAlunos.Value) * 100 / First(Fields!totalAlunosGeral.Value))) + "%")</Value>
                                                 <Style>
                                                   <FontSize>9pt</FontSize>
                                                 </Style>
@@ -3707,7 +3707,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=IIF(First(Fields!totalAlunosGeral.Value) &lt;= 0, "-", CStr(Floor(Sum(Fields!asn_id.Value) * 100 / First(Fields!totalAlunosGeral.Value))) + "%")</Value>
+                                                <Value>=IIF(First(Fields!totalAlunosGeral.Value) &lt;= 0, "-", CStr(Round(Sum(Fields!asn_id.Value) * 100 / First(Fields!totalAlunosGeral.Value))) + "%")</Value>
                                                 <Style>
                                                   <FontSize>9pt</FontSize>
                                                 </Style>
@@ -4163,7 +4163,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=IIF(First(Fields!totalAlunosGeral.Value) &lt;= 0, "-", CStr(Floor(Sum(Fields!asn_id.Value) * 100 / First(Fields!totalAlunosGeral.Value))) + "%")</Value>
+                                                <Value>=IIF(First(Fields!totalAlunosGeral.Value) &lt;= 0, "-", CStr(Round(Sum(Fields!asn_id.Value) * 100 / First(Fields!totalAlunosGeral.Value))) + "%")</Value>
                                                 <Style>
                                                   <FontSize>9pt</FontSize>
                                                 </Style>
