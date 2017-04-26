@@ -425,7 +425,7 @@
         {
             get
             {
-                return rptobjAprendizagem.Visible;
+                return rptEixo.Visible;
             }
         }
 
@@ -808,7 +808,7 @@
                 btnAjudaObjetos.Visible = !string.IsNullOrEmpty(lblAvisoObjetosAprendizagem.Text);
 
                 VS_lstObjetosAprendizagem = ACA_ObjetoAprendizagemBO.SelectListaBy_TurmaDisciplina(VS_tud_id, VS_cal_id);
-                
+
                 CarregaRepeaterObjetoAprendizagem();
             }
         }
@@ -816,8 +816,7 @@
         private void CarregaRepeaterObjetoAprendizagem()
         {
             List<Struct_ObjetosAprendizagem> list = VS_lstObjetosAprendizagem;
-            if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
-                ddlComponenteAtAvaliativa.Items.Count > 0)
+            if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) && ddlComponenteAtAvaliativa.Items.Count > 0)
             {
                 list = VS_lstObjetosAprendizagem.Where(p => p.tud_id == Convert.ToInt64(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1])).ToList();
                 VS_tud_idComponenteSelecionado = Convert.ToInt64(ddlComponenteAtAvaliativa.SelectedValue.Split(';')[1]);
@@ -825,18 +824,25 @@
 
             if (!list.Any())
             {
-                rptobjAprendizagem.Visible = false;
+                rptEixo.Visible = false;
                 lblMensagemObjetos.Text = UtilBO.GetErroMessage("Não existem objetos de conhecimento cadastrados.", UtilBO.TipoMensagem.Alerta);
             }
             else
             {
-                rptobjAprendizagem.Visible = true;
-                rptobjAprendizagem.DataSource = list.Select(p => new
-                {
-                    oap_id = p.oap_id,
-                    oap_descricao = p.oap_descricao
-                }).OrderBy(r => r.oap_descricao).Distinct();
-                rptobjAprendizagem.DataBind();
+                rptEixo.Visible = true;
+                rptEixo.DataSource = (
+                    from Struct_ObjetosAprendizagem dr in VS_lstObjetosAprendizagem.Where(p => p.oae_id > 0)
+                    group dr by dr.oae_id into g
+                    select new
+                    {
+                        oae_id = g.Key
+                        ,
+                        oae_descricao = g.First().oae_descricao
+                        ,
+                        oae_ordem = g.First().oae_ordem
+                    }
+                ).OrderBy(p => p.oae_ordem).ToList();
+                rptEixo.DataBind();
             }
         }
 
@@ -925,7 +931,6 @@
         }
 
         #endregion Métodos iniciais
-
 
         #region Plano de ciclo
 
@@ -1613,7 +1618,13 @@
                                 (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
                                 ddlComponenteAtAvaliativa.Items.Count > 0 &&
                                 item.tud_id != VS_tud_idComponenteSelecionado &&
-                                item.selecionado)
+                                item.selecionado),
+                oae_id = item.oae_id,
+                oae_descricao = item.oae_descricao,
+                oae_ordem = item.oae_ordem,
+                oae_idSub = item.oae_idSub,
+                oae_descricaoSub = item.oae_descricaoSub,
+                oae_ordemSub = item.oae_ordemSub
             }).ToList();
 
             VS_lstObjetosAprendizagem = VS_lstObjetosAprendizagemAux;
@@ -1622,55 +1633,80 @@
         private List<CLS_ObjetoAprendizagemTurmaDisciplina> CriarListaObjetoAprendizagemTurmaDisciplina()
         {
             List<CLS_ObjetoAprendizagemTurmaDisciplina> lstObjTudDis = new List<CLS_ObjetoAprendizagemTurmaDisciplina>();
-
-            if (rptobjAprendizagem.Visible)
+            if (rptEixo.Visible)
             {
-                foreach (RepeaterItem item in rptobjAprendizagem.Items)
+                foreach (RepeaterItem itemEixo in rptEixo.Items)
                 {
-                    if ((item.ItemType == ListItemType.Item) ||
-                        (item.ItemType == ListItemType.AlternatingItem))
+                    if (itemEixo.ItemType == ListItemType.Item || itemEixo.ItemType == ListItemType.AlternatingItem)
                     {
-                        Repeater rptchkBimestre = (Repeater)item.FindControl("rptchkBimestre");
-
-                        if (rptchkBimestre != null)
+                        Repeater rptSubEixo = (Repeater)itemEixo.FindControl("rptSubEixo");
+                        if (rptSubEixo != null)
                         {
-                            foreach (RepeaterItem chk in rptchkBimestre.Items)
+                            foreach (RepeaterItem itemSubEixo in rptSubEixo.Items)
                             {
-                                CheckBox ckbCampo = (CheckBox)chk.FindControl("ckbCampo");
-
-                                if (ckbCampo != null && ckbCampo.Checked)
+                                if (itemSubEixo.ItemType == ListItemType.Item || itemSubEixo.ItemType == ListItemType.AlternatingItem)
                                 {
-                                    HiddenField tpc_id = (HiddenField)chk.FindControl("tpc_id");
-                                    HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
-                                    if (tpc_id != null && oap_id != null)
+                                    Repeater rptobjAprendizagemSub = (Repeater)itemSubEixo.FindControl("rptobjAprendizagem");
+                                    if (rptobjAprendizagemSub != null)
                                     {
-                                        if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
-                                            ddlComponenteAtAvaliativa.Items.Count > 0)
-                                        {
-                                            lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
-                                            {
-                                                tud_id = VS_tud_idComponenteSelecionado,
-                                                tpc_id = Convert.ToInt32(tpc_id.Value),
-                                                oap_id = Convert.ToInt32(oap_id.Value)
-                                            });
-                                        }
-                                        else
-                                        {
-                                            lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
-                                            {
-                                                tud_id = VS_tud_id,
-                                                tpc_id = Convert.ToInt32(tpc_id.Value),
-                                                oap_id = Convert.ToInt32(oap_id.Value)
-                                            });
-                                        }
+                                        CriarListaRepeater(ref lstObjTudDis, rptobjAprendizagemSub);
                                     }
+                                }
+                            }
+                        }
+
+                        Repeater rptobjAprendizagem = (Repeater)itemEixo.FindControl("rptobjAprendizagem");
+                        if (rptobjAprendizagem != null)
+                        {
+                            CriarListaRepeater(ref lstObjTudDis, rptobjAprendizagem);
+                        }
+                    }
+                }
+            }
+            return lstObjTudDis;
+        }
+
+        private void CriarListaRepeater(ref List<CLS_ObjetoAprendizagemTurmaDisciplina> lstObjTudDis, Repeater rptobjAprendizagem)
+        {
+            foreach (RepeaterItem itemObj in rptobjAprendizagem.Items)
+            {
+                Repeater rptchkBimestre = (Repeater)itemObj.FindControl("rptchkBimestre");
+                if (rptchkBimestre != null)
+                {
+                    foreach (RepeaterItem chk in rptchkBimestre.Items)
+                    {
+                        CheckBox ckbCampo = (CheckBox)chk.FindControl("ckbCampo");
+
+                        if (ckbCampo != null && ckbCampo.Checked)
+                        {
+                            HiddenField tpc_id = (HiddenField)chk.FindControl("tpc_id");
+                            HiddenField oap_id = (HiddenField)chk.FindControl("oap_id");
+                            if (tpc_id != null && oap_id != null)
+                            {
+                                if (VS_tud_tipo == Convert.ToByte(ACA_CurriculoDisciplinaTipo.Regencia) &&
+                                    ddlComponenteAtAvaliativa.Items.Count > 0)
+                                {
+                                    lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                    {
+                                        tud_id = VS_tud_idComponenteSelecionado,
+                                        tpc_id = Convert.ToInt32(tpc_id.Value),
+                                        oap_id = Convert.ToInt32(oap_id.Value)
+                                    });
+                                }
+                                else
+                                {
+                                    lstObjTudDis.Add(new CLS_ObjetoAprendizagemTurmaDisciplina
+                                    {
+                                        tud_id = VS_tud_id,
+                                        tpc_id = Convert.ToInt32(tpc_id.Value),
+                                        oap_id = Convert.ToInt32(oap_id.Value)
+                                    });
                                 }
                             }
                         }
                     }
                 }
             }
-            return lstObjTudDis;
         }
 
         #endregion Objeto de Aprendizagem
@@ -1866,6 +1902,78 @@
 
         #region Objetos Aprendizagem
 
+        protected void rptEixo_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                int oae_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oae_id"));
+
+                if (VS_lstObjetosAprendizagem.Any(p => p.oae_id == oae_id && p.oae_idSub > 0))
+                {
+                    Repeater rptSubEixo = (Repeater)e.Item.FindControl("rptSubEixo");
+                    if (rptSubEixo != null)
+                    {
+                        rptSubEixo.DataSource = (
+                            from Struct_ObjetosAprendizagem dr in VS_lstObjetosAprendizagem.Where(p => p.oae_id == oae_id && p.oae_idSub > 0)
+                            group dr by dr.oae_idSub into g
+                            select new
+                            {
+                                oae_id = g.Key
+                                ,
+                                oae_descricao = g.First().oae_descricaoSub
+                                ,
+                                oae_ordem = g.First().oae_ordemSub
+                            }
+                        ).OrderBy(p => p.oae_ordem).ToList();
+                        rptSubEixo.DataBind();
+                    }
+                }
+
+                if (VS_lstObjetosAprendizagem.Any(p => p.oae_id == oae_id && p.oae_idSub <= 0))
+                {
+                    Repeater rptobjAprendizagem = (Repeater)e.Item.FindControl("rptobjAprendizagem");
+                    if (rptobjAprendizagem != null)
+                    {
+                        rptobjAprendizagem.DataSource = (
+                            from Struct_ObjetosAprendizagem dr in VS_lstObjetosAprendizagem.Where(p => p.oae_id == oae_id && p.oae_idSub <= 0)
+                            group dr by dr.oap_id into g
+                            select new
+                            {
+                                oap_id = g.Key
+                                ,
+                                oap_descricao = g.First().oap_descricao
+                            }
+                        ).OrderBy(p => p.oap_descricao).ToList();
+                        rptobjAprendizagem.DataBind();
+                    }
+                }
+            }
+        }
+
+        protected void rptSubEixo_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                int oae_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "oae_id"));
+
+                Repeater rptobjAprendizagem = (Repeater)e.Item.FindControl("rptobjAprendizagem");
+                if (rptobjAprendizagem != null)
+                {
+                    rptobjAprendizagem.DataSource = (
+                        from Struct_ObjetosAprendizagem dr in VS_lstObjetosAprendizagem.Where(p => p.oae_idSub == oae_id)
+                        group dr by dr.oap_id into g
+                        select new
+                        {
+                            oap_id = g.Key
+                            ,
+                            oap_descricao = g.First().oap_descricao
+                        }
+                    ).OrderBy(p => p.oap_descricao).ToList();
+                    rptobjAprendizagem.DataBind();
+                }
+            }
+        }
+
         protected void rptobjAprendizagem_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Header)
@@ -1878,8 +1986,7 @@
                     rptBimestre.DataBind();
                 }
             }
-            else if ((e.Item.ItemType == ListItemType.Item) ||
-                (e.Item.ItemType == ListItemType.AlternatingItem))
+            else if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 Repeater rptchkBimestre = (Repeater)e.Item.FindControl("rptchkBimestre");
                 if (rptchkBimestre != null)
@@ -1894,8 +2001,7 @@
 
         protected void rptchkBimestre_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if ((e.Item.ItemType == ListItemType.Item) ||
-                (e.Item.ItemType == ListItemType.AlternatingItem))
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 CheckBox ckb = (CheckBox)e.Item.FindControl("ckbCampo");
                 HiddenField oap_situacao = (HiddenField)e.Item.FindControl("oap_situacao");

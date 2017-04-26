@@ -358,50 +358,120 @@
                     DataTextField="tur_tud_nome" DataValueField="tur_tud_id" SkinID="text20C">
                 </asp:DropDownList>
                 <asp:Label ID="lblMensagemObjetos" runat="server" EnableViewState="false"></asp:Label>
-                <asp:Repeater ID="rptobjAprendizagem" runat="server" OnItemDataBound="rptobjAprendizagem_ItemDataBound">
+                <asp:Repeater ID="rptEixo" runat="server" OnItemDataBound="rptEixo_ItemDataBound">
                     <HeaderTemplate>
-                        <div>
-                            <table id="tblObjetosAprendizagem" class="grid sortableAvaliacoes grid-responsive-list">
-                                <thead>
-                                    <tr class="gridHeader" style="height: 30px;">
-                                        <th class="center">
-                                            <asp:Label ID="_lblobjetos" runat="server" Text='Objetos de conhecimento'></asp:Label>
-                                        </th>
-                                        <asp:Repeater ID="rptBimestre" runat="server">
-                                            <ItemTemplate>
-                                                <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px;">
-                                                    <asp:Label ID="lblNomeAbreviado" runat="server" Text='<%# Eval("tpc_nome") %>' CssClass="abbr-periodo" />
-                                                    <asp:HiddenField ID="hdnPeriodoOrdem" runat="server" Value='<%# Eval("tpc_ordem") %>' />
-                                                </th>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
+                        <ul class="accordion-list">
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <tr class="gridRow grid-linha">
-                            
-                            <td>
-                                <asp:Label ID="lblobjetos" runat="server" Text='<%# Eval("oap_descricao") %>'></asp:Label>
-                            </td>
-                            <asp:Repeater ID="rptchkBimestre" runat="server" OnItemDataBound="rptchkBimestre_ItemDataBound">
-                                <ItemTemplate>
-                                    <td class="center">
-                                        <asp:HiddenField ID="tpc_id" runat="server" Value='<%# Eval("tpc_id") %>' />
-                                        <asp:HiddenField ID="oap_id" runat="server" Value='<%# Eval("oap_id") %>' />
-                                        <asp:HiddenField ID="oap_situacao" runat="server" Value='<%# Eval("oap_situacao") %>' />
-                                        <asp:CheckBox ID="ckbCampo" runat="server" Checked='<%# Eval("selecionado") %>' Style="text-align: center;" />
-                                    </td>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </tr>
-                        
+                        <li>
+                            <div class="accordion-head">
+                                <asp:Label ID="lblEixo" runat="server" Text='<%# Eval("oae_descricao") %>'></asp:Label>
+                            </div>
+                            <div class="accordion-body">
+                                <asp:Repeater ID="rptSubEixo" runat="server" OnItemDataBound="rptSubEixo_ItemDataBound">
+                                    <HeaderTemplate>
+                                        <ul class="accordion-list-sub">
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <li>
+                                            <div class="accordion-head">
+                                                <asp:Label ID="lblEixo" runat="server" Text='<%# Eval("oae_descricao") %>'></asp:Label>
+                                            </div>
+                                            <div class="accordion-body">
+                                                <asp:Repeater ID="rptobjAprendizagem" runat="server" OnItemDataBound="rptobjAprendizagem_ItemDataBound">
+                                                    <HeaderTemplate>
+                                                        <table id="tblObjetosAprendizagem" class="grid sortableAvaliacoes grid-responsive-list">
+                                                            <thead>
+                                                                <tr class="gridHeader" style="height: 30px;">
+                                                                    <th>
+                                                                    </th>
+                                                                    <asp:Repeater ID="rptBimestre" runat="server">
+                                                                        <ItemTemplate>
+                                                                            <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px; width:100px;">
+                                                                                <asp:Label ID="lblNomeAbreviado" runat="server" Text='<%# Eval("tpc_nome") %>' CssClass="abbr-periodo" />
+                                                                                <asp:HiddenField ID="hdnPeriodoOrdem" runat="server" Value='<%# Eval("tpc_ordem") %>' />
+                                                                            </th>
+                                                                        </ItemTemplate>
+                                                                    </asp:Repeater>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <tr class="gridRow grid-linha">
+                                                            <td>
+                                                                <asp:Label ID="lblobjetos" runat="server" Text='<%# Eval("oap_descricao") %>'></asp:Label>
+                                                            </td>
+                                                            <asp:Repeater ID="rptchkBimestre" runat="server" OnItemDataBound="rptchkBimestre_ItemDataBound">
+                                                                <ItemTemplate>
+                                                                    <td class="center">
+                                                                        <asp:HiddenField ID="tpc_id" runat="server" Value='<%# Eval("tpc_id") %>' />
+                                                                        <asp:HiddenField ID="oap_id" runat="server" Value='<%# Eval("oap_id") %>' />
+                                                                        <asp:HiddenField ID="oap_situacao" runat="server" Value='<%# Eval("oap_situacao") %>' />
+                                                                        <asp:CheckBox ID="ckbCampo" runat="server" Checked='<%# Eval("selecionado") %>' Style="text-align: center;" />
+                                                                    </td>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                    <FooterTemplate>
+                                                        </tbody>
+                                                        </table>
+                                                    </FooterTemplate>
+                                                </asp:Repeater>
+                                            </div>
+                                        </li>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        </ul>
+                                    </FooterTemplate>
+                                </asp:Repeater>
+                                <asp:Repeater ID="rptobjAprendizagem" runat="server" OnItemDataBound="rptobjAprendizagem_ItemDataBound">
+                                    <HeaderTemplate>
+                                        <table id="tblObjetosAprendizagem" class="grid sortableAvaliacoes grid-responsive-list">
+                                            <thead>
+                                                <tr class="gridHeader" style="height: 30px;">
+                                                    <th>
+                                                    </th>
+                                                    <asp:Repeater ID="rptBimestre" runat="server">
+                                                        <ItemTemplate>
+                                                            <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px; width:100px;">
+                                                                <asp:Label ID="lblNomeAbreviado" runat="server" Text='<%# Eval("tpc_nome") %>' CssClass="abbr-periodo" />
+                                                                <asp:HiddenField ID="hdnPeriodoOrdem" runat="server" Value='<%# Eval("tpc_ordem") %>' />
+                                                            </th>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <tr class="gridRow grid-linha">
+                                            <td>
+                                                <asp:Label ID="lblobjetos" runat="server" Text='<%# Eval("oap_descricao") %>'></asp:Label>
+                                            </td>
+                                            <asp:Repeater ID="rptchkBimestre" runat="server" OnItemDataBound="rptchkBimestre_ItemDataBound">
+                                                <ItemTemplate>
+                                                    <td class="center">
+                                                        <asp:HiddenField ID="tpc_id" runat="server" Value='<%# Eval("tpc_id") %>' />
+                                                        <asp:HiddenField ID="oap_id" runat="server" Value='<%# Eval("oap_id") %>' />
+                                                        <asp:HiddenField ID="oap_situacao" runat="server" Value='<%# Eval("oap_situacao") %>' />
+                                                        <asp:CheckBox ID="ckbCampo" runat="server" Checked='<%# Eval("selecionado") %>' Style="text-align: center;" />
+                                                    </td>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </tr>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        </tbody>
+                                        </table>
+                                    </FooterTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </li>
                     </ItemTemplate>
                     <FooterTemplate>
-                        </tbody>
-                        </table></div>
+                        </ul>
                     </FooterTemplate>
                 </asp:Repeater>
             </ContentTemplate>

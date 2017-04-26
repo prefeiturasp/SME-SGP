@@ -5239,3 +5239,48 @@ table.radio td {
     }
 }
 
+.accordion-list, .accordion-list-sub {
+    list-style:none;
+}
+
+.accordion-list .accordion-head, .accordion-list-sub .accordion-head {
+    color: #444;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    cursor:pointer;
+    border-bottom: 1px solid #2995D9;
+}
+
+.accordion-list .accordion-head {
+    padding-left: 30px;
+}
+
+.accordion-list-sub .accordion-head {
+    padding-left: 60px;
+}
+
+.accordion-list .accordion-opened .accordion-head {
+    background: url(images/cima.png) no-repeat #eee;
+}
+
+.accordion-list-sub .accordion-opened .accordion-head {
+    background: url(images/cima.png) no-repeat #76b6fd;
+}
+
+.accordion-list .accordion-closed .accordion-head {
+    background: url(images/baixo.png) no-repeat #eee;
+}
+
+.accordion-list-sub .accordion-closed .accordion-head {
+    background: url(images/baixo.png) no-repeat #76b6fd;
+}
+
+.accordion-list .accordion-opened .accordion-body,  .accordion-list-sub .accordion-opened .accordion-body {
+    display: block;
+}
+
+.accordion-list .accordion-closed .accordion-body,  .accordion-list-sub .accordion-closed .accordion-body {
+    display:none;
+}
+
