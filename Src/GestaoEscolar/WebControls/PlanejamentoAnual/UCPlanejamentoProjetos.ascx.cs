@@ -2007,7 +2007,7 @@
                 HiddenField oap_situacao = (HiddenField)e.Item.FindControl("oap_situacao");
                 if (ckb != null)
                 {
-                    ckb.Enabled = VS_permiteEditarObjAprendizagem;
+                    ckb.Enabled = VS_permiteEditarObjAprendizagem && PermiteEdicao;
 
                     if (oap_situacao.Value == "2")
                         ckb.Enabled = false;
