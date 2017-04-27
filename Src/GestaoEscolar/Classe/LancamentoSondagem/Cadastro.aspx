@@ -45,11 +45,11 @@
                                         <th runat="server" id="thBotoes">
                                             <div style="float:left">
                                                 <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbAnterior" Text="|<" runat="server"
-                                                    CssClass="ui-icon ui-icon-circle-triangle-w" OnClick="lkbAnterior_Click"></asp:LinkButton>
+                                                    CssClass="ui-icon ui-icon-circle-triangle-w" OnClick="lkbAnterior_Click" ToolTip="<%$ Resources:Classe, LancamentoSondagem.Cadastro.lkbAnterior.ToolTip %>"></asp:LinkButton>
                                             </div>
                                             <div style="float:right">
                                                 <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbProximo" Text=">|" runat="server"
-                                                    CssClass="ui-icon ui-icon-circle-triangle-e" OnClick="lkbProximo_Click"/>
+                                                    CssClass="ui-icon ui-icon-circle-triangle-e" OnClick="lkbProximo_Click" ToolTip="<%$ Resources:Classe, LancamentoSondagem.Cadastro.lkbProximo.ToolTip %>"/>
                                             </div>
                                         </th>
                                     </tr>

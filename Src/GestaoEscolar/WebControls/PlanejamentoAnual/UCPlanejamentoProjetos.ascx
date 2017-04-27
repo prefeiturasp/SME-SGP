@@ -404,7 +404,7 @@
                                                             </td>
                                                             <asp:Repeater ID="rptchkBimestre" runat="server" OnItemDataBound="rptchkBimestre_ItemDataBound">
                                                                 <ItemTemplate>
-                                                                    <td class="center">
+                                                                    <td class="center grid-responsive-item-inline">
                                                                         <asp:HiddenField ID="tpc_id" runat="server" Value='<%# Eval("tpc_id") %>' />
                                                                         <asp:HiddenField ID="oap_id" runat="server" Value='<%# Eval("oap_id") %>' />
                                                                         <asp:HiddenField ID="oap_situacao" runat="server" Value='<%# Eval("oap_situacao") %>' />
@@ -452,7 +452,7 @@
                                             </td>
                                             <asp:Repeater ID="rptchkBimestre" runat="server" OnItemDataBound="rptchkBimestre_ItemDataBound">
                                                 <ItemTemplate>
-                                                    <td class="center">
+                                                    <td class="center grid-responsive-item-inline">
                                                         <asp:HiddenField ID="tpc_id" runat="server" Value='<%# Eval("tpc_id") %>' />
                                                         <asp:HiddenField ID="oap_id" runat="server" Value='<%# Eval("oap_id") %>' />
                                                         <asp:HiddenField ID="oap_situacao" runat="server" Value='<%# Eval("oap_situacao") %>' />
