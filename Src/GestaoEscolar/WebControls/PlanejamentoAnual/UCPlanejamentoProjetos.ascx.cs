@@ -831,7 +831,7 @@
             {
                 rptEixo.Visible = true;
                 rptEixo.DataSource = (
-                    from Struct_ObjetosAprendizagem dr in VS_lstObjetosAprendizagem.Where(p => p.oae_id > 0)
+                    from Struct_ObjetosAprendizagem dr in list.Where(p => p.oae_id > 0)
                     group dr by dr.oae_id into g
                     select new
                     {
