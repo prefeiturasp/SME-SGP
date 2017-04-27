@@ -2027,7 +2027,7 @@ tr.trDisciplina.global td {
 }
 
 .cicloEja .divPerfil .boxAvaliacao th, .cicloEja .divProposta .boxAvaliacao > span:first-child,
-.cicloEja .divPerfil, .cicloEja .divProposta, .cicloTres .divRecomendacoes, .cicloEja .divResultados,
+.cicloEja .divPerfil, .cicloEja .divProposta, .cicloEja .divRecomendacoes, .cicloEja .divResultados,
 .cicloEja .divPerfil .boxAvaliacao, .cicloEja .divProposta .boxAvaliacao {
     border-color: #494949;
 }
