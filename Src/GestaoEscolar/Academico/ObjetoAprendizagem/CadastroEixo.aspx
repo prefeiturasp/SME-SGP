@@ -92,7 +92,7 @@
                                         PostBackUrl="~/Academico/ObjetoAprendizagem/Cadastro.aspx" CausesValidation="false"></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="oap_situacao" HeaderText="Situação" />
+                            <asp:BoundField DataField="oap_situacaoText" HeaderText="Situação" />
                             <asp:TemplateField HeaderText="Excluir">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="_btnExcluir" SkinID="btExcluir" runat="server" CommandName="Deletar"
