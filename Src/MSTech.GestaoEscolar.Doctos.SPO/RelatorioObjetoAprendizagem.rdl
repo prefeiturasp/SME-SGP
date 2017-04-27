@@ -87,7 +87,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIF(First(Fields!nomeEscola.Value) &lt;&gt; "", First(Fields!nomeEscola.Value), IIF(First(Fields!nomeDRE.Value) &lt;&gt; "", First(Fields!nomeDRE.Value), "DRE: Todas"))</Value>
+                                  <Value>=IIF(Parameters!nomeEscola.Value &lt;&gt; "", Parameters!nomeEscola.Value, IIF(Parameters!nomeDRE.Value &lt;&gt; "", Parameters!nomeDRE.Value, "DRE: Todas"))</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -173,7 +173,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>5.89023cm</Height>
+              <Height>4.66467cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -472,7 +472,6 @@
                                                         <PaddingBottom>2pt</PaddingBottom>
                                                       </Style>
                                                     </Textbox>
-                                                    <rd:Selected>true</rd:Selected>
                                                   </CellContents>
                                                 </TablixCell>
                                                 <TablixCell>
@@ -967,72 +966,6 @@
                             </Border>
                           </Style>
                         </Tablix>
-                        <Rectangle Name="Rectangle4">
-                          <ReportItems>
-                            <Image Name="warning2">
-                              <Source>Embedded</Source>
-                              <Value>icoInformacoes</Value>
-                              <Sizing>FitProportional</Sizing>
-                              <Top>0.26458cm</Top>
-                              <Left>0.26978cm</Left>
-                              <Height>0.64348cm</Height>
-                              <Width>0.68775cm</Width>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                              </Style>
-                            </Image>
-                            <Textbox Name="Textbox71">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Não existe resultado para a pesquisa selecionada.</Value>
-                                      <Style>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox6</rd:DefaultName>
-                              <Top>0.26458cm</Top>
-                              <Left>1.29751cm</Left>
-                              <Height>0.6cm</Height>
-                              <Width>11.91365cm</Width>
-                              <ZIndex>1</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </ReportItems>
-                          <KeepTogether>true</KeepTogether>
-                          <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-                          <Top>4.66467cm</Top>
-                          <Height>1.22556cm</Height>
-                          <Width>16.45821cm</Width>
-                          <ZIndex>1</ZIndex>
-                          <Visibility>
-                            <Hidden>=iif(RowNumber("DataSet1") &gt; 0, true, false)</Hidden>
-                          </Visibility>
-                          <Style>
-                            <Border>
-                              <Color>#e8b909</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>#fffcdf</BackgroundColor>
-                          </Style>
-                        </Rectangle>
                       </ReportItems>
                       <Style>
                         <Border>
@@ -1065,7 +998,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Height>8.20337cm</Height>
+        <Height>6.97781cm</Height>
         <Width>27.7cm</Width>
         <Style>
           <Border>
@@ -1073,6 +1006,72 @@
           </Border>
         </Style>
       </Tablix>
+      <Rectangle Name="Rectangle4">
+        <ReportItems>
+          <Image Name="warning2">
+            <Source>Embedded</Source>
+            <Value>icoInformacoes</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.26458cm</Top>
+            <Left>0.26978cm</Left>
+            <Height>0.64348cm</Height>
+            <Width>0.68775cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox71">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Não existe resultado para a pesquisa selecionada.</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>0.26458cm</Top>
+            <Left>1.29751cm</Left>
+            <Height>0.6cm</Height>
+            <Width>11.91365cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
+        <Top>6.97781cm</Top>
+        <Height>1.22556cm</Height>
+        <Width>16.45821cm</Width>
+        <ZIndex>1</ZIndex>
+        <Visibility>
+          <Hidden>=iif(RowNumber("DataSet1") &gt; 0, true, false)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Color>#e8b909</Color>
+            <Style>Solid</Style>
+          </Border>
+          <BackgroundColor>#fffcdf</BackgroundColor>
+        </Style>
+      </Rectangle>
     </ReportItems>
     <Height>8.20337cm</Height>
     <Style />
@@ -1321,6 +1320,18 @@
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>nomeSecretaria</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nomeEscola">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>nomeEscola</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="nomeDRE">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>nomeDRE</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>

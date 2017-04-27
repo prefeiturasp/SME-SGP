@@ -361,6 +361,8 @@ namespace GestaoEscolar.Relatorios.ObjetoAprendizagem
                                                 , ApplicationWEB.LogoRelatorioSSRS)
                         + "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio")
                         + "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria")
+                        + "&nomeEscola=" + (UCComboUAEscola.Esc_ID > 0 ? UCComboUAEscola.TextoComboEscola : "")
+                        + "&nomeDRE=" + (UCComboUAEscola.Uad_ID != Guid.Empty ? UCComboUAEscola.TextoComboUA : "")
                         + "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString()
                         + "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao)
                         + "&usu_id=" + __SessionWEB.__UsuarioWEB.Usuario.usu_id
