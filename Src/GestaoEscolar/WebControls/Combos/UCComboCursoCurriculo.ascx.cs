@@ -430,6 +430,7 @@ public partial class WebControls_Combos_UCComboCursoCurriculo : MotherUserContro
         int esc_id
         , int uni_id
         , int cur_situacao = 0
+        , bool mostraEJAModalidades = false
     )
     {
         odsDados.SelectParameters.Clear();
@@ -444,6 +445,7 @@ public partial class WebControls_Combos_UCComboCursoCurriculo : MotherUserContro
             , __SessionWEB.__UsuarioWEB.Usuario.ent_id));
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
         odsDados.SelectParameters.Add("cur_situacao", cur_situacao.ToString());
+        odsDados.SelectParameters.Add("mostraEJAModalidades", mostraEJAModalidades.ToString());
         odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um(a) " + GestaoEscolarUtilBO.nomePadraoCurso(__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower() + " --", "-1;-1", true));
@@ -547,6 +549,7 @@ public partial class WebControls_Combos_UCComboCursoCurriculo : MotherUserContro
         , int uni_id
         , byte cur_situacao
         , int cal_id
+        , bool mostraEJAModalidades = false
     )
     {
         odsDados.SelectParameters.Clear();
@@ -560,6 +563,7 @@ public partial class WebControls_Combos_UCComboCursoCurriculo : MotherUserContro
         odsDados.SelectParameters.Add("cur_situacao", cur_situacao.ToString());
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
         odsDados.SelectParameters.Add("cal_id", cal_id.ToString());
+        odsDados.SelectParameters.Add("mostraEJAModalidades", mostraEJAModalidades.ToString());
         odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um(a) " + GestaoEscolarUtilBO.nomePadraoCurso(__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower() + " --", "-1;-1", true));
