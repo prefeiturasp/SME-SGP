@@ -366,7 +366,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             try
             {
                 if (string.IsNullOrEmpty(txtDescricao.Text))
-                    throw new ValidationException("Descrição do sub eixo de objeto de conhecimento é obrigatória.");
+                    throw new ValidationException("Descrição do subeixo de objeto de conhecimento é obrigatória.");
 
                 ACA_ObjetoAprendizagemEixo oae = new ACA_ObjetoAprendizagemEixo
                 {

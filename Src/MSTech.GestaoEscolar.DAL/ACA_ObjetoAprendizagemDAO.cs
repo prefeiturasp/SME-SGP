@@ -55,7 +55,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>
         /// <param name="tds_id">ID da disciplina</param>
         /// <param name="cal_ano">Ano letivo</param>
-        /// <param name="oae_id">ID do eixo (ou sub eixo)</param>
+        /// <param name="oae_id">ID do eixo (ou subeixo)</param>
         /// <returns></returns>
         public List<ACA_ObjetoAprendizagem> SelectBy_TipoDisciplinaEixo(int tds_id, int cal_ano, int oae_id)
         {

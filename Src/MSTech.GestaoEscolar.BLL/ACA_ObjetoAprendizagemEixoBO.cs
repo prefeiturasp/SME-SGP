@@ -112,7 +112,7 @@ namespace MSTech.GestaoEscolar.BLL
             try
             {
                 if (VerificaEixoMesmoNome(oae.oae_id, oae.tds_id, oae.cal_ano, oae.oae_idPai, oae.oae_descricao, dao._Banco))
-                    throw new ValidationException("Já existe um " + (oae.oae_idPai > 0 ? "sub " : "") +
+                    throw new ValidationException("Já existe um " + (oae.oae_idPai > 0 ? "sub" : "") +
                                                   "eixo de objeto de conhecimento cadastrado com a mesma descrição.");
 
                 return dao.Salvar(oae);
@@ -131,7 +131,7 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
-        /// Verifica se existe um eixo cadastrado com o mesmo nome (se for sub eixo verifica apenas os sub eixos do eixo pai)
+        /// Verifica se existe um eixo cadastrado com o mesmo nome (se for subeixo verifica apenas os subeixos do eixo pai)
         /// </summary>
         /// <param name="oae_id">ID do eixo que está sendo salvo</param>
         /// <param name="tds_id">ID da disciplina</param>

@@ -84,7 +84,7 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
-        /// Verifica se existe um eixo cadastrado com o mesmo nome (se for sub eixo verifica apenas os sub eixos do eixo pai)
+        /// Verifica se existe um eixo cadastrado com o mesmo nome (se for subeixo verifica apenas os subeixos do eixo pai)
         /// </summary>
         /// <param name="oae_id">ID do eixo que está sendo salvo</param>
         /// <param name="oae_idPai">ID do eixo pai</param>

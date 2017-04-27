@@ -29,12 +29,12 @@
         </div>
         <div><br /></div>
         <fieldset id="fdsSubEixos" runat="server">
-            <legend>Sub eixos</legend>
+            <legend>Subeixos</legend>
             <asp:UpdatePanel ID="updSubEixo" runat="server" UpdateMode="Always">
                 <ContentTemplate>
                     <asp:GridView ID="_grvEixoObjetoAprendizagem" runat="server" AutoGenerateColumns="False"
                         AllowPaging="False" DataKeyNames="oae_id" HorizontalAlign="Center"
-                        EmptyDataText="Nenhum sub eixo cadastrado para o eixo."
+                        EmptyDataText="Nenhum subeixo cadastrado para o eixo."
                         OnRowCommand="_grvEixoObjetoAprendizagem_RowCommand" OnRowDataBound="_grvEixoObjetoAprendizagem_RowDataBound"
                         AllowSorting="False" OnRowEditing="_grvEixoObjetoAprendizagem_RowEditing" OnDataBound="_grvEixoObjetoAprendizagem_DataBound">
                         <Columns>
@@ -70,7 +70,7 @@
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:GridView>
                     <div class="right" runat="server" id="divBotoesSub">
-                        <asp:Button ID="_btnNovoSub" runat="server" Text="Incluir novo sub eixo de objeto de conhecimento" OnClick="_btnNovoSub_Click"
+                        <asp:Button ID="_btnNovoSub" runat="server" Text="Incluir novo subeixo de objeto de conhecimento" OnClick="_btnNovoSub_Click"
                             CausesValidation="false" />
                     </div>
                 </ContentTemplate>
@@ -127,11 +127,11 @@
             <ContentTemplate>
                 <asp:ValidationSummary ID="vsPopUp" runat="server" ValidationGroup="vgPopUp" />
                 <fieldset>
-                    <legend>Novo sub eixo de objeto de conhecimento</legend>
+                    <legend>Novo subeixo de objeto de conhecimento</legend>
                     <asp:Label runat="server" ID="lblDescricao" Text="Descrição *" AssociatedControlID="txtDescricao" />
                     <asp:TextBox runat="server" ID="txtDescricao" SkinID="text60C" MaxLength="500" />
                     <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtDescricao" ValidationGroup="vgPopUp"
-                        Display="Dynamic" ErrorMessage="Descrição do sub eixo de objeto de conhecimento é obrigatória." Text="*" />
+                        Display="Dynamic" ErrorMessage="Descrição do subeixo de objeto de conhecimento é obrigatória." Text="*" />
                     <div class="right">
                         <asp:Button ID="btnAdicionar" runat="server" Text="Adicionar" ValidationGroup="vgPopUp"
                             OnClick="btnAdicionar_Click" />

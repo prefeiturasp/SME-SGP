@@ -485,7 +485,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
         protected void _btnCancelar_Click(object sender, EventArgs e)
         {
-            //Se está editando um sub eixo então volta para a edição do eixo pai
+            //Se está editando um subeixo então volta para a edição do eixo pai
             if (_VS_oae_idPai > 0)
             {
                 Session["tds_id_oae"] = _VS_tds_id;
@@ -514,7 +514,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             try
             {
                 if (string.IsNullOrEmpty(txtDescricao.Text))
-                    throw new ValidationException("Descrição do sub eixo de objeto de conhecimento é obrigatória.");
+                    throw new ValidationException("Descrição do subeixo de objeto de conhecimento é obrigatória.");
 
                 ACA_ObjetoAprendizagemEixo oae = new ACA_ObjetoAprendizagemEixo
                 {
@@ -526,7 +526,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 };
 
                 if (!ACA_ObjetoAprendizagemEixoBO.Salvar(oae))
-                    throw new ValidationException("Erro ao tentar salvar sub eixo de objeto de conhecimento.");
+                    throw new ValidationException("Erro ao tentar salvar subeixo de objeto de conhecimento.");
 
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "oae_id: " + oae.oae_id);
 
@@ -545,7 +545,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessagePopUp.Text = UtilBO.GetErroMessage("Erro ao tentar adicionar o sub eixo de objeto de conhecimento.", UtilBO.TipoMensagem.Erro);
+                lblMessagePopUp.Text = UtilBO.GetErroMessage("Erro ao tentar adicionar o subeixo de objeto de conhecimento.", UtilBO.TipoMensagem.Erro);
             }
         }
 
@@ -564,7 +564,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
             try
             {
                 if (string.IsNullOrEmpty(txtEixo.Text))
-                    throw new ValidationException("Descrição do " + (_VS_oae_idPai > 0 ? "sub " : "") + "eixo de objeto de conhecimento é obrigatória.");
+                    throw new ValidationException("Descrição do " + (_VS_oae_idPai > 0 ? "sub" : "") + "eixo de objeto de conhecimento é obrigatória.");
 
                 ACA_ObjetoAprendizagemEixo oae = new ACA_ObjetoAprendizagemEixo { oae_id = _VS_oae_id };
                 ACA_ObjetoAprendizagemEixoBO.GetEntity(oae);
@@ -572,7 +572,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                 oae.oae_descricao = txtEixo.Text;
 
                 if (!ACA_ObjetoAprendizagemEixoBO.Salvar(oae))
-                    throw new ValidationException("Erro ao tentar salvar " + (_VS_oae_idPai > 0 ? "sub " : "") + "eixo de objeto de conhecimento.");
+                    throw new ValidationException("Erro ao tentar salvar " + (_VS_oae_idPai > 0 ? "sub" : "") + "eixo de objeto de conhecimento.");
                 
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "oae_id: " + oae.oae_id);
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
@@ -624,7 +624,7 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
                     txtEixoPai.Text = oaePai.oae_descricao;
 
-                    rfvEixo.ErrorMessage = "Descrição do sub eixo de objeto de conhecimento é obrigatória.";
+                    rfvEixo.ErrorMessage = "Descrição do subeixo de objeto de conhecimento é obrigatória.";
                 }
                 else
                 {
