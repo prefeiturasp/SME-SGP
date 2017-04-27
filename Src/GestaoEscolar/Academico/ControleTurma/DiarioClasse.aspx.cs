@@ -1906,6 +1906,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 updAnotacoes.Update();
 
+                btnSalvarAnotacoes.Visible = permiteEditar;
+
                 // Se for visão de Gestor (Coordenador Pedagógico etc) não permite salvar dados
                 if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa || !permiteEditar)
                 {
