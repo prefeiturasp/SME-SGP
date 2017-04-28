@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <versionNumber>
+    <Major value="1" />
+    <Minor value="69" />
+    <Revision value="0" />
+    <Build value="RC1" />
+  </versionNumber>
+</configuration>

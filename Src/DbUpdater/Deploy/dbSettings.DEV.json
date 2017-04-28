@@ -12,6 +12,7 @@
       "ProjectDatabase": "SGP.Database",
       "DeployConnectionString": "Server=localhost\\MSSQLSERVER2014;Database=GestaoPedagogica_1.67.0;Integrated Security=SSPI;Connection Timeout=30;",
       "Variables": {
+        "SystemName": " SGP",
         "SystemUser": "user_gestaoescolar",
         "SystemDatabase": "GestaoPedagogica",
         "CoreSSO": "[CoreSSO]",

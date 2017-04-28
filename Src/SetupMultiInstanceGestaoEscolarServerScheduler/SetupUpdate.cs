@@ -411,34 +411,30 @@
         /// <returns></returns>
         private string GetVersaoSistema()
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            String strRet = String.Empty;
-
-            string binPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Arquivos");
-
-            xmlDoc.Load(binPath + "\\Versao.wxi");
-
-            XmlNode xmlNd = xmlDoc.SelectSingleNode("//Include");
-
-            var ltNodes = from XmlNode nd in xmlNd.ChildNodes
-                          where nd is XmlProcessingInstruction
-                          let pi = (XmlProcessingInstruction)nd
-                          let teste = pi.Value.Split('=')
-                          let dummyPi = (XmlElement)pi.OwnerDocument.ReadNode(XmlReader.Create(new StringReader("<" + teste[0] + " Valor=" + teste[1] + "/>")))
-                          select dummyPi;
-
-            if (ltNodes != null && ltNodes.Any())
+            try
             {
-                string major = ltNodes.Where(p => p.Name == "Major").FirstOrDefault().Attributes["Valor"].Value;
-                string minor = ltNodes.Where(p => p.Name == "Minor").FirstOrDefault().Attributes["Valor"].Value;
-                string revision = ltNodes.Where(p => p.Name == "Revision").FirstOrDefault().Attributes["Valor"].Value;
-                string build = ltNodes.Where(p => p.Name == "Build").FirstOrDefault().Attributes["Valor"].Value;
+                XmlDocument xmlDoc = new XmlDocument();
+                String strRet = String.Empty;
 
-                strRet = String.Format("Versão: {0}.{1}.{2}.{3}", major, minor, revision, build);
+                string binPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Arquivos");
+
+                xmlDoc.Load(binPath + "\\version.xml");
+
+                XmlNode xmlNd = xmlDoc.SelectSingleNode("//versionNumber");
+
+                if (xmlNd != null)
+                    strRet = String.Format("Versão: {0}.{1}.{2}.{3}", xmlNd.ChildNodes[0].Attributes["value"].Value,
+                        xmlNd.ChildNodes[1].Attributes["value"].Value,
+                        xmlNd.ChildNodes[2].Attributes["value"].Value,
+                        xmlNd.ChildNodes[3].Attributes["value"].Value
+                        );
+
+                return strRet;
             }
-
-
-            return strRet;
+            catch
+            {
+                return String.Empty;
+            }
         }
 
         /// <summary>

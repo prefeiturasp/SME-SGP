@@ -101,7 +101,7 @@
     <Compile Include="SetupUpdate.Designer.cs">
       <DependentUpon>SetupUpdate.cs</DependentUpon>
     </Compile>
-    <Content Include="Arquivos\Versao.wxi">
+    <Content Include="Arquivos\version.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="FinishSetup.resx">
