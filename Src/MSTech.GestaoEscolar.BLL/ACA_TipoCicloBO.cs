@@ -39,6 +39,11 @@ namespace MSTech.GestaoEscolar.BLL
             return "Cache_SelecionaTipoCicloAtivos";
         }
 
+        public static string RetornaChaveCache_SelecionaTipoCicloAtivosEscolaAno(int cal_ano, int tds_id, int esc_id, Guid uad_idSuperior)
+        {
+            return String.Format("Cache_SelecionaTipoCicloAtivosEscola_{0}_{1}_{2}_{3}", cal_ano, tds_id, esc_id, uad_idSuperior);
+        }
+
         public static string RetornaChaveCache_SelecionaCicloPorCursoCurriculo(int cur_id, int crr_id)
         {
             return String.Format("Cache_SelecionaCicloPorCursoCurriculo_{0}_{1}", cur_id, crr_id);
@@ -61,6 +66,7 @@ namespace MSTech.GestaoEscolar.BLL
         {
             ACA_TipoCicloDAO dao = new ACA_TipoCicloDAO();
             GestaoEscolarUtilBO.LimpaCache(RetornaChaveCache_SelecionaTipoCicloAtivos());
+            GestaoEscolarUtilBO.LimpaCache("Cache_SelecionaTipoCicloAtivosEscola_");
             return dao.AtualizaObjetoAprendizagem(tci_id, tci_objetoAprendizagem);
         }
 
@@ -149,6 +155,67 @@ namespace MSTech.GestaoEscolar.BLL
                 using (DataTable dt = new ACA_TipoCicloDAO().SelecionarAtivos(out totalRecords))
                 {
                     dados = (from DataRow dr in dt.Rows
+                             where !objetoAprendizagem || Convert.ToBoolean(dr["tci_objetoAprendizagem"])
+                             select new sComboTipoCiclo
+                             {
+                                 tci_id = dr["tci_id"].ToString()
+                                 ,
+                                 tci_nome = dr["tci_nome"].ToString()
+                             }).ToList();
+                }
+            }
+
+            return dados;
+        }
+
+        /// <summary>
+        /// Carrega os tipos de ciclos ligados à cursos da escola informada
+        /// </summary>
+        /// <param name="cal_ano">Ano do objeto de aprendizagem do ciclo</param>
+        /// <param name="tds_id">ID do tipo de disciplina do objeto de aprendizagem</param>
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="uad_idSuperior">ID da unidade superior</param>
+        /// <param name="objetoAprendizagem">Informa se vai retornar apenas ciclos que permitem objetos de aprendizagem</param>
+        /// <param name="appMinutosCacheLongo">Tempo do cache</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sComboTipoCiclo> SelecionaTipoCicloAtivosEscolaAno(int cal_ano, int tds_id, int esc_id, Guid uad_idSuperior, bool objetoAprendizagem, int appMinutosCacheLongo = 0)
+        {
+            List<sComboTipoCiclo> dados = null;
+
+            if (appMinutosCacheLongo > 0 && HttpContext.Current != null)
+            {
+                string chave = RetornaChaveCache_SelecionaTipoCicloAtivosEscolaAno(cal_ano, tds_id, esc_id, uad_idSuperior);
+                object cache = HttpContext.Current.Cache[chave];
+
+                if (cache == null)
+                {
+                    using (DataTable dt = new ACA_TipoCicloDAO().SelecionarAtivosEscolaAno(cal_ano, tds_id, esc_id, uad_idSuperior, out totalRecords))
+                    {
+                        dados = (from DataRow dr in dt.Rows
+                                 where !objetoAprendizagem || Convert.ToBoolean(dr["tci_objetoAprendizagem"])
+                                 select new sComboTipoCiclo
+                                 {
+                                     tci_id = dr["tci_id"].ToString()
+                                     ,
+                                     tci_nome = dr["tci_nome"].ToString()
+                                 }).ToList();
+                    }
+
+                    HttpContext.Current.Cache.Insert(chave, dados, null, DateTime.Now.AddMinutes(appMinutosCacheLongo), System.Web.Caching.Cache.NoSlidingExpiration);
+                }
+                else
+                {
+                    dados = (List<sComboTipoCiclo>)cache;
+                }
+            }
+
+            if (dados == null)
+            {
+                using (DataTable dt = new ACA_TipoCicloDAO().SelecionarAtivosEscolaAno(cal_ano, tds_id, esc_id, uad_idSuperior, out totalRecords))
+                {
+                    dados = (from DataRow dr in dt.Rows
+                             where !objetoAprendizagem || Convert.ToBoolean(dr["tci_objetoAprendizagem"])
                              select new sComboTipoCiclo
                              {
                                  tci_id = dr["tci_id"].ToString()

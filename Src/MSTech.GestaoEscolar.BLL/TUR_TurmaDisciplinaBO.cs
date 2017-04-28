@@ -1792,5 +1792,16 @@ namespace MSTech.GestaoEscolar.BLL
             return (from dr in dao.SelectEletivaAlunoBy_EscolaCalendario(esc_id, cal_id).AsEnumerable()
                          select (sTurmaDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTurmaDisciplina())).ToList();
         }
+
+        /// <summary>
+        /// Retorna as disciplinas com divergência entre aulas criadas e aulas previstas.
+        /// </summary>
+        /// <param name="tudIds">Lista de disciplinas para verificar</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<long> SelecionaDisciplinasDivergenciasAulasPrevistas(string tudIds)
+        {
+            return new TUR_TurmaDisciplinaDAO().SelecionaDisciplinasDivergenciasAulasPrevistas(tudIds);
+        }
     }
 }

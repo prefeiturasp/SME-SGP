@@ -50,6 +50,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         private const int grvTurma_ColunaAlunos = 11;
         private const int grvPeriodosAulas_ColunaSugestao = 2;
         private const int grvPeriodosAulas_ColunaAplicarSugestao = 3;
+        private const int grvPeriodosAulas_ColunaAulasCriadas = 5;
 
         #endregion Constantes
 
@@ -319,6 +320,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         private int totalPrevistas = 0, totalDadas = 0, totalRepostas = 0, totalSugestao = 0;
+        private bool possuiAulasCriadas = false;
 
         private byte tdt_posicao;
 
@@ -396,6 +398,28 @@ namespace GestaoEscolar.Academico.ControleTurma
                 ViewState["VS_listaPendenciaFechamento"] = value;
             }
         }
+
+        /// <summary>
+        /// ViewState que armazena a lista de disciplinas com divergência entre aulas criadas e aulas previstas.
+        /// </summary>
+        private List<long> VS_listaDivergenciasAulasPrevistas
+        {
+            get
+            {
+                if (ViewState["VS_listaDivergenciasAulasPrevistas"] == null)
+                {
+                    ViewState["VS_listaDivergenciasAulasPrevistas"] = new List<long>();
+                }
+                return (List<long>)ViewState["VS_listaDivergenciasAulasPrevistas"];
+            }
+
+            set
+            {
+                ViewState["VS_listaDivergenciasAulasPrevistas"] = value;
+            }
+        }
+
+        private string tudIds;
 
         #endregion Propriedades
 
@@ -576,6 +600,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         cal_idAula = cal_id;
 
                         totalPrevistas = totalDadas = totalRepostas = totalSugestao = 0;
+                        possuiAulasCriadas = false;
 
                         mostraSalvar = false;
                         periodosEfetivados = "";
@@ -590,6 +615,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                                              UtilBO.TipoMensagem.Informacao);
                         }
 
+                        grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = totalSugestao > 0;
+                        grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaAulasCriadas].Visible = possuiAulasCriadas;
                         grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaAplicarSugestao].Visible = totalSugestao > 0;
                     }
                 }
@@ -636,6 +663,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         cal_idAula = cal_id;
 
                         totalPrevistas = totalDadas = totalRepostas = totalSugestao = 0;
+                        possuiAulasCriadas = false;
                         mostraSalvar = false;
                         grvPeriodosAulas.DataSource = ACA_CalendarioPeriodoBO.Seleciona_QtdeAulas_TurmaDiscplina(tur_id, tud_id, cal_id, tdt_posicaoLocal, __SessionWEB.__UsuarioWEB.Docente.doc_id);
                         tdt_posicao = tdt_posicao == 0 ? tdt_posicaoLocal : tdt_posicao;
@@ -656,6 +684,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                             VS_ChavesRedirecionaDiario = new long[] { tud_id, tdt_posicaoLocal };
                         }
 
+                        grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = totalSugestao > 0;
+                        grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaAulasCriadas].Visible = possuiAulasCriadas;
                         grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaSugestao].Visible = grvPeriodosAulas.Columns[grvPeriodosAulas_ColunaAplicarSugestao].Visible = totalSugestao > 0;
                     }
                 }
@@ -783,6 +813,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                             lblMensagem1.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ControleTurma.Busca.DocenteSemTurma").ToString(),
                                                                       UtilBO.TipoMensagem.Alerta);
                         }
+
+                        VS_listaDivergenciasAulasPrevistas = new List<long>();
 
                         //VS_Dados = dados;
                         rptTurmas.DataSource = dadosEscolasAtivas;
@@ -988,6 +1020,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                 __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.MinhasTurmas, Filtros = filtros };
 
                 #endregion Salvar busca realizada com os parâmetros do ODS.
+
+                VS_listaDivergenciasAulasPrevistas = new List<long>();
+                tudIds = string.Empty;
 
                 // Atualiza o grid
                 grvTurmas.DataBind();
@@ -1965,6 +2000,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 hdn = (HiddenField)e.Row.FindControl("hdnFechamentoAutomatico");
                 hdn.Value = entityFormatoAvaliacao.fav_fechamentoAutomatico ? "true" : "false";
+
+                tudIds += string.IsNullOrEmpty(tudIds) ? tud_id.ToString() : string.Format(",{0}", tud_id);
             }
         }
 
@@ -2197,9 +2234,20 @@ namespace GestaoEscolar.Academico.ControleTurma
                     };
                 }
             }
-
             if (grid.Rows.Count > 0)
+            {
                 CarregarPendencias(grid, true);
+
+                VS_listaDivergenciasAulasPrevistas = TUR_TurmaDisciplinaBO.SelecionaDisciplinasDivergenciasAulasPrevistas(tudIds);
+                foreach (GridViewRow row in grid.Rows)
+                {
+                    Image imgDivergenciaAulaPrevista = (Image)row.FindControl("imgDivergenciaAulaPrevista");
+                    if (imgDivergenciaAulaPrevista != null)
+                    {
+                        imgDivergenciaAulaPrevista.Visible = VS_listaDivergenciasAulasPrevistas.Any(p => p == Convert.ToInt64(grid.DataKeys[row.RowIndex].Values["tud_id"]));
+                    }
+                }
+            }
         }
 
         protected void btnGerarAula_Click(object sender, EventArgs e)
@@ -2306,6 +2354,11 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 List<Struct_MinhasTurmas> dados = TUR_TurmaBO.SelecionaPorDocenteControleTurma(ent_id, doc_id, ApplicationWEB.AppMinutosCacheCurto);
                 List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, cal_id, true, false);
+                if (dadosTurmasAtivas.Any())
+                {
+                    VS_listaDivergenciasAulasPrevistas.AddRange(TUR_TurmaDisciplinaBO.SelecionaDisciplinasDivergenciasAulasPrevistas(string.Join(",", dadosTurmasAtivas.Select(p => p.tud_id.ToString()))));
+                    dadosTurmasAtivas.ForEach(p => p.divergenciasAulasPrevistas = VS_listaDivergenciasAulasPrevistas.Any(t => t == p.tud_id));
+                }
 
                 GridView grdVw = e.Item.FindControl("grvTurma") as GridView;
                 grdVw.DataSource = dadosTurmasAtivas;
@@ -2351,6 +2404,10 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     List<Struct_MinhasTurmas> dados = TUR_TurmaBO.SelecionaPorDocenteControleTurma(ent_id, doc_id, ApplicationWEB.AppMinutosCacheCurto);
                     List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, cal_id, true, false);
+                    if (dadosTurmasAtivas.Any())
+                    {
+                        dadosTurmasAtivas.ForEach(p => p.divergenciasAulasPrevistas = VS_listaDivergenciasAulasPrevistas.Any(t => t == p.tud_id));
+                    }
 
                     grid.DataSource = dadosTurmasAtivas;
                     grid.DataBind();
@@ -2568,6 +2625,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                             }
 
                             List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, cal_id, true, false);
+                            if (dadosTurmasAtivas.Any())
+                            {
+                                dadosTurmasAtivas.ForEach(p => p.divergenciasAulasPrevistas = VS_listaDivergenciasAulasPrevistas.Any(t => t == p.tud_id));
+                            }
 
                             GridView grdVw = item.FindControl("grvTurma") as GridView;
                             grdVw.DataSource = dadosTurmasAtivas;
@@ -2706,6 +2767,17 @@ namespace GestaoEscolar.Academico.ControleTurma
                 label = (Label)e.Row.FindControl("lblReposicoes");
                 if (label != null)
                     totalRepostas += int.Parse(label.Text);
+
+                if (DataBinder.Eval(e.Row.DataItem, "aulasCriadas") != DBNull.Value)
+                    possuiAulasCriadas = true;
+                else
+                {
+                    label = (Label)e.Row.FindControl("lblCriadas");
+                    if (label != null)
+                    {
+                        label.Text = "-";
+                    }
+                }
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {

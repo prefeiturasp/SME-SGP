@@ -87,6 +87,7 @@ public partial class Academico_Eventos_Busca : MotherPageLogado
     {
         try
         {
+            ucComboUAEscola.FiltroEscolasControladas = null;
             ucComboUAEscola.CarregaEscolaPorUASuperiorSelecionada();
 
             if (ucComboUAEscola.Uad_ID != Guid.Empty)

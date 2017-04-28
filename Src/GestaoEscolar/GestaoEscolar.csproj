@@ -346,6 +346,20 @@
     <Compile Include="Academico\CalendarioAnual\Visualizar.aspx.designer.cs">
       <DependentUpon>Visualizar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ControleSemanal\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ControleSemanal\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\ControleTurma\Alunos.aspx.cs">
       <DependentUpon>Alunos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1502,6 +1516,13 @@
     <Compile Include="Relatorios\ComponentesFinalizados\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\DivergenciasRematriculas\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1514,6 +1535,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Relatorios\IndicadorFrequencia\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\ObjetoAprendizagem\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\ObjetoAprendizagem\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\Relatorio.aspx.cs">
@@ -1549,6 +1577,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Relatorios\RelatoriosCP\DadosAlunosBaixaFrequencia\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelatoriosCP\GraficoConsolidadoAtivAvaliada\Busca.aspx.cs">
@@ -1822,6 +1857,13 @@
     </Compile>
     <Compile Include="WebControls\Combos\ComboTipoDeficiencia.ascx.designer.cs">
       <DependentUpon>ComboTipoDeficiencia.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx.cs">
+      <DependentUpon>UCCTipoJustificativa.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx.designer.cs">
+      <DependentUpon>UCCTipoJustificativa.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Combos\Novos\UCCTipoEvento.ascx.cs">
       <DependentUpon>UCCTipoEvento.ascx</DependentUpon>
@@ -2787,6 +2829,8 @@
     <Content Include="Academico\Areas\Cadastro.aspx" />
     <Content Include="Academico\Areas\Documentos.aspx" />
     <Content Include="Academico\CalendarioAnual\CadastroLimites.aspx" />
+    <Content Include="Academico\ControleSemanal\Busca.aspx" />
+    <Content Include="Academico\ControleSemanal\Cadastro.aspx" />
     <Content Include="Academico\ControleTurma\Alunos.aspx" />
     <Content Include="Academico\ControleTurma\Anotacoes.aspx" />
     <Content Include="Academico\ControleTurma\Busca.aspx" />
@@ -2836,6 +2880,7 @@
     <Content Include="Classe\Efetivacao\CadastroGestor.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Cadastro.aspx" />
+    <Content Include="Academico\ControleSemanal\CacheEfetivacaoHandler.ashx" />
     <None Include="Configs\Session.txt" />
     <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
@@ -3596,12 +3641,15 @@
     <Content Include="Relatorios\AtaSinteseResultadosAvaliacao\Busca.aspx" />
     <Content Include="Relatorios\AulasSemPlanoAula\Busca.aspx" />
     <Content Include="Relatorios\ComponentesFinalizados\Busca.aspx" />
+    <Content Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx" />
     <Content Include="Relatorios\DivergenciasRematriculas\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
+    <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />
     <Content Include="Relatorios\RelatorioLogTablets\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosConselhoDeClasse\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosAlunosBaixaFrequencia\Busca.aspx" />
+    <Content Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\GraficoConsolidadoAtivAvaliada\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\GraficoIndividualNotas\Busca.aspx" />
     <Content Include="Relatorios\SinteseResultadosAvaliacao\GraficoComponenteCurricularTurmas\Busca.aspx" />
@@ -3626,6 +3674,7 @@
     <Content Include="WebControls\Calendario\UCCalendario.ascx" />
     <Content Include="WebControls\Combos\ComboNacionalidade.ascx" />
     <Content Include="WebControls\Combos\ComboTipoDeficiencia.ascx" />
+    <Content Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoEvento.ascx" />
     <Content Include="WebControls\Combos\UCComboAnoLetivo.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCEscalaAvaliacaoParecer.ascx" />

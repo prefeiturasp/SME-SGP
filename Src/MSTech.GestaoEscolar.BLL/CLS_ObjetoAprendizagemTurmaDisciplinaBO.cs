@@ -52,7 +52,9 @@ namespace MSTech.GestaoEscolar.BLL
 
                 foreach (CLS_ObjetoAprendizagemTurmaDisciplina oad in listObjTudDis)
                     Save(oad, dao._Banco);
-                
+
+                GestaoEscolarUtilBO.LimpaCache("Cache_SelecionaTipoDisciplinaObjetosAprendizagem");
+
                 if (ACA_FormatoAvaliacaoBO.CarregarPorTud(tud_ids.First(), dao._Banco).fav_fechamentoAutomatico)
                 {
                     List<int> lstTpc = ACA_TipoPeriodoCalendarioBO.CarregarPeriodosAteDataAtual(cal_id, tud_ids.First())
@@ -84,6 +86,8 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="banco">Transação do banco</param>
         public static void DeletarObjTud(long tud_id, TalkDBTransaction banco = null)
         {
+            GestaoEscolarUtilBO.LimpaCache("Cache_SelecionaTipoDisciplinaObjetosAprendizagem");
+
             CLS_ObjetoAprendizagemTurmaDisciplinaDAO dao = new CLS_ObjetoAprendizagemTurmaDisciplinaDAO();
             if (banco != null)
                 dao._Banco = banco;

@@ -453,5 +453,13 @@ namespace MSTech.GestaoEscolar.BLL
         {
             new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoSugestaoAulasPrevistas(true);
         }
+
+        /// <summary>
+        /// Processa as divergências entre registros de aulas dadas e aulas previstas.
+        /// </summary>
+        public static void MS_JOB_ProcessamentoDivergenciasAulasPrevistas()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoDivergenciasAulasPrevistas();
+        }
     }
 }

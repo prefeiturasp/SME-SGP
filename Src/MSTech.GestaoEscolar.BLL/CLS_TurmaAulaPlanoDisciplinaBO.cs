@@ -11,11 +11,12 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Collections.Generic;
     using MSTech.Data.Common;
     using System;
-	
-	/// <summary>
-	/// Description: CLS_TurmaAulaPlanoDisciplina Business Object. 
-	/// </summary>
-	public class CLS_TurmaAulaPlanoDisciplinaBO : BusinessBase<CLS_TurmaAulaPlanoDisciplinaDAO, CLS_TurmaAulaPlanoDisciplina>
+    using System.Linq;
+
+    /// <summary>
+    /// Description: CLS_TurmaAulaPlanoDisciplina Business Object. 
+    /// </summary>
+    public class CLS_TurmaAulaPlanoDisciplinaBO : BusinessBase<CLS_TurmaAulaPlanoDisciplinaDAO, CLS_TurmaAulaPlanoDisciplina>
 	{
         /// <summary>
         /// Deleta os relacionamentos do tud_id e tau_id informados
@@ -146,6 +147,13 @@ namespace MSTech.GestaoEscolar.BLL
             }
         }
 
+        /// <summary>
+        /// Salva o plano de aula
+        /// </summary>
+        /// <param name="lstTurmaAula"></param>
+        /// <param name="lstTurmaAulaPlanoDisc"></param>
+        /// <param name="lstTurmaAulaPlanoDiscDeletar"></param>
+        /// <returns></returns>
         public static bool SalvarEmLote(List<CLS_TurmaAula> lstTurmaAula
                                           , List<CLS_TurmaAulaPlanoDisciplina> lstTurmaAulaPlanoDisc
                                           , List<CLS_TurmaAulaPlanoDisciplina> lstTurmaAulaPlanoDiscDeletar)
@@ -178,7 +186,9 @@ namespace MSTech.GestaoEscolar.BLL
                     });
                 }
 
-                return dao.SalvarEmLote(dtTurmaAula, dtTurmaAulaPlanoDeletar, dtTurmaAulaPlanoSalvar);
+                bool retorno = dao.SalvarEmLote(dtTurmaAula, dtTurmaAulaPlanoDeletar, dtTurmaAulaPlanoSalvar);
+                
+                return retorno;
             }
             catch (Exception err)
             {

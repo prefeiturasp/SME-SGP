@@ -434,12 +434,9 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
         {
             try
             {
-                if (!SYS_ServicosLogExecucaoBO.VerificaServicoRodando((byte)eChaveServicos.ProcessamentoSugestaoAulasPrevistas))
-                {
-                    Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistas);
-                    GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas();
-                    SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
-                }
+                Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistas);
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas();
+                SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
             }
             catch (Exception ex)
             {
@@ -458,12 +455,30 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
         {
             try
             {
-                if (!SYS_ServicosLogExecucaoBO.VerificaServicoRodando((byte)eChaveServicos.ProcessamentoSugestaoAulasPrevistasTodaRede))
-                {
-                    Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistasTodaRede);
-                    GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas_TodaRede();
-                    SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
-                }
+                Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoSugestaoAulasPrevistasTodaRede);
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoSugestaoAulasPrevistas_TodaRede();
+                SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
+
+    public class MS_JOB_ProcessamentoDivergenciasAulasPrevistas : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoDivergenciasAulasPrevistas);
+                GestaoEscolarServicosBO.MS_JOB_ProcessamentoDivergenciasAulasPrevistas();
+                SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
             }
             catch (Exception ex)
             {

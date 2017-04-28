@@ -124,6 +124,10 @@
           <DataField>mtu_resultado</DataField>
           <rd:TypeName>System.Byte</rd:TypeName>
         </Field>
+        <Field Name="mtu_situacaoPeriodo">
+          <DataField>mtu_situacaoPeriodo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="fav_percentualMinimoFrequenciaFinalAjustadaDisciplina">
           <DataField>fav_percentualMinimoFrequenciaFinalAjustadaDisciplina</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
@@ -413,10 +417,11 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>=Iif(Fields!mtu_situacao.Value = 5 OR ISNOTHING(Fields!mtu_situacao.Value), "#FFE1CD", "Transparent")</BackgroundColor>
+                            <BackgroundColor>=Iif(Fields!mtu_situacaoPeriodo.Value = 5 OR ISNOTHING(Fields!mtu_situacaoPeriodo.Value), "#FFE1CD", "Transparent")</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1053,7 +1058,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

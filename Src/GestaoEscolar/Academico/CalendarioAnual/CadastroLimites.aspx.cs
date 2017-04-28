@@ -90,6 +90,12 @@ namespace GestaoEscolar.Academico.CalendarioAnual
 
                     Pesquisar();
                 }
+                else
+                {
+                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Selecione um calendário para definir os limites para data de criação de eventos.", UtilBO.TipoMensagem.Alerta);
+                    Response.Redirect("Busca.aspx", false);
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                }
             }
         }
 
@@ -108,6 +114,13 @@ namespace GestaoEscolar.Academico.CalendarioAnual
                         ESC_EscolaBO.GetEntity(escola);
 
                         ltlAlcance.Text = escola.esc_nome;
+                    }
+                    else if(data.evl.uad_id != Guid.Empty)
+                    {
+                        var dre = new SYS_UnidadeAdministrativa { uad_id = data.evl.uad_id, ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id };
+                        SYS_UnidadeAdministrativaBO.GetEntity(dre);
+
+                        ltlAlcance.Text = dre.uad_nome;
                     }
                     else
                         ltlAlcance.Text = "Toda a rede";
@@ -177,10 +190,10 @@ namespace GestaoEscolar.Academico.CalendarioAnual
         protected void UCCTipoEvento_IndexChanged()
         {
             var entityTipoEvento = new ACA_TipoEvento()
-                                    {
-                                        tev_id = UCCTipoEvento.Valor,
-                                        tev_periodoCalendario = false
-                                    };
+            {
+                tev_id = UCCTipoEvento.Valor,
+                tev_periodoCalendario = false
+            };
 
             if (UCCTipoEvento.Valor > 0)
             {
@@ -193,12 +206,28 @@ namespace GestaoEscolar.Academico.CalendarioAnual
 
         protected void ddlAlcance_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UCComboUAEscola.Visible = (ddlAlcance.SelectedValue == "2");
-
-            if (UCComboUAEscola.Visible)
+            if (ddlAlcance.SelectedValue == "-1" || ddlAlcance.SelectedValue == "1")
             {
+                UCComboUAEscola.Visible = false;
+                UCComboUAEscola.ObrigatorioEscola = false;
+                UCComboUAEscola.ObrigatorioUA = false;
+            }
+            else if (ddlAlcance.SelectedValue == "2")
+            {
+                UCComboUAEscola.Visible = true;
+                UCComboUAEscola.ExibeComboEscola = true;
                 UCComboUAEscola.Uad_ID = Guid.Empty;
                 UCComboUAEscola.EnableEscolas = false;
+
+                UCComboUAEscola.ObrigatorioEscola = true;
+            }
+            else if (ddlAlcance.SelectedValue == "3")
+            {
+                UCComboUAEscola.Visible = true;
+
+                UCComboUAEscola.ExibeComboEscola = false;
+                UCComboUAEscola.ObrigatorioEscola = false;
+                UCComboUAEscola.ObrigatorioUA = true;
             }
         }
 
@@ -217,27 +246,34 @@ namespace GestaoEscolar.Academico.CalendarioAnual
             {
                 try
                 {
+                    if (ddlAlcance.SelectedValue == "-1")
+                        throw new ValidationException("Alcance é obrigatório.");
+                    else if (ddlAlcance.SelectedValue == "2" && UCComboUAEscola.Esc_ID <= 0)
+                        throw new ValidationException("Escola é obrigatória.");
+                    else if (ddlAlcance.SelectedValue == "3" && UCComboUAEscola.Uad_ID == Guid.Empty)
+                        throw new ValidationException("DRE é obrigatória.");
+
                     #region Preenche entity
 
                     var entity = new ACA_EventoLimite()
-                                    {
-                                        cal_id = VS_cal_id,
-                                        tev_id = UCCTipoEvento.Valor,
-                                        evl_dataInicio = Convert.ToDateTime(txtDataInicio.Text),
-                                        evl_dataFim = Convert.ToDateTime(txtDataFim.Text),
-                                        usu_id = __SessionWEB.__UsuarioWEB.Usuario.usu_id
-                                    };
+                    {
+                        cal_id = VS_cal_id,
+                        tev_id = UCCTipoEvento.Valor,
+                        evl_dataInicio = Convert.ToDateTime(txtDataInicio.Text),
+                        evl_dataFim = Convert.ToDateTime(txtDataFim.Text),
+                        usu_id = __SessionWEB.__UsuarioWEB.Usuario.usu_id
+                    };
 
                     if (UCCPeriodoCalendario.Visible)
-                    {
                         entity.tpc_id = UCCPeriodoCalendario.Valor[0];
-                    }
 
-                    if (UCComboUAEscola.Visible)
+                    if (UCComboUAEscola.ExibeComboEscola)
                     {
                         entity.esc_id = UCComboUAEscola.Esc_ID;
                         entity.uni_id = UCComboUAEscola.Uni_ID;
                     }
+                    else if (UCComboUAEscola.VisibleUA)
+                        entity.uad_id = UCComboUAEscola.Uad_ID;
 
                     #endregion
 
@@ -254,6 +290,8 @@ namespace GestaoEscolar.Academico.CalendarioAnual
                     txtDataFim.Text = string.Empty;
                     ddlAlcance.SelectedIndex = 0;
                     ddlAlcance_SelectedIndexChanged(null, null);
+                    UCComboUAEscola.DdlUA.SelectedIndex = 0;
+                    UCComboUAEscola.Visible = false;
 
                     #endregion
                 }
@@ -302,24 +340,24 @@ namespace GestaoEscolar.Academico.CalendarioAnual
                                         evl => evl.tev_id,
                                         tev => Convert.ToInt32(tev["tev_id"]),
                                         (evl, tev) => new sLimite()
-                                                        {
-                                                            tev_nome = tev["tev_nome"].ToString(),
-                                                            tpc_nome = (evl.tpc_id > 0
+                                        {
+                                            tev_nome = tev["tev_nome"].ToString(),
+                                            tpc_nome = (evl.tpc_id > 0
                                                                         ? (evl.tpc_id == tpc_idRecesso ? tcp_nomeRecesso : lstTipoPeriodo.First(tpc => tpc.tpc_id == evl.tpc_id).tpc_nome)
                                                                         : string.Empty),
-                                                            tev_id = evl.tev_id,
-                                                            evl_id = evl.evl_id,
-                                                            evl = evl
-                                                        })
+                                            tev_id = evl.tev_id,
+                                            evl_id = evl.evl_id,
+                                            evl = evl
+                                        })
                                   .GroupBy(evl => string.Format("{0}{1}{2}",
                                                                 evl.tev_nome,
                                                                 (string.IsNullOrEmpty(evl.tpc_nome) ? string.Empty : " - "),
                                                                 evl.tpc_nome))
                                   .Select(grp => new
-                                                        {
-                                                            TipoEventoBimestre = grp.Key,
-                                                            Limites = grp.ToList()
-                                                        })
+                                  {
+                                      TipoEventoBimestre = grp.Key,
+                                      Limites = grp.ToList()
+                                  })
                                   .OrderBy(grp => grp.TipoEventoBimestre);
             rptLimitesCalendario.DataSource = source;
             rptLimitesCalendario.DataBind();

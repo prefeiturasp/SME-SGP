@@ -152,5 +152,40 @@ namespace MSTech.GestaoEscolar.DAL
                 throw;
             }
         }
+
+        public ACA_EventoLimite LoadByTipoEventoAndDre(int tev_id, Guid dre_id)
+        {
+            var qs = new QuerySelectStoredProcedure("NEW_ACA_EventoLimite_LoadByTipoEvento_and_Dre", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tev_id";
+                Param.Value = tev_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@uad_id";
+                Param.Size = 16;
+                Param.Value = dre_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                if(qs.Return.Rows.Count > 0)
+                    return DataRowToEntity(qs.Return.Rows[0], new ACA_EventoLimite(), true);
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
