@@ -16,7 +16,7 @@
     <asp:Panel ID="pnlBusca" runat="server" GroupingText="">
         <div class="area-form">
             <uc2:UCComboUAEscola runat="server" ID="UCComboUAEscola" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true"
-                CarregarEscolaAutomatico="true" ValidationGroup="ValidarTurmasComponentesFinalizados" />
+                CarregarEscolaAutomatico="true" ValidationGroup="ValidarTurmasComponentesFinalizados" FiltroEscolasControladas="true"/>
             <uc2:UCCCalendario ID="UCCCalendario1" runat="server" MostrarMensagemSelecione="true" SelecionarAnoCorrente="true" PermiteEditar="false" Obrigatorio="true"
                 ValidationGroup="ValidarTurmasComponentesFinalizados" />
             <uc3:UCCPeriodoCalendario ID="UCCPeriodoCalendario1" runat="server" MostrarMensagemSelecione="true" TrazerComboCarregado="true" PermiteEditar="false"

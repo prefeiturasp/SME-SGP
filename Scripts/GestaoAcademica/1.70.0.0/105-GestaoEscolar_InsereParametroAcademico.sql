@@ -27,7 +27,7 @@ SET XACT_ABORT ON
 		,@ent_id = @entId
 
 	*/
-
+	
 -- Fechar transação	
 SET XACT_ABORT OFF
 COMMIT TRANSACTION

@@ -275,7 +275,11 @@ namespace MSTech.GestaoEscolar.BLL
                     var tagsByTud = tagsSalvar.Where(t => t.tud_id == tud_id).ToList();
 
                     var tud_tipo = tagsByTud.First().tud_tipo;
-                    if (tud_tipo == (byte)TurmaDisciplinaTipo.Regencia || tud_tipo == (byte)TurmaDisciplinaTipo.DisciplinaPrincipal)
+
+                    var fav_tipoApuracaoFrequencia = tagsByTud.First().fav_tipoApuracaoFrequencia;
+
+                    if ((tud_tipo == (byte)TurmaDisciplinaTipo.Regencia || tud_tipo == (byte)TurmaDisciplinaTipo.DisciplinaPrincipal)
+                            && fav_tipoApuracaoFrequencia != (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.TemposAula)
                     {
                         if (tagsByTud.Any(tag => tag.tag_numeroAulas > 1))
                         {

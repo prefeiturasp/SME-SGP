@@ -910,6 +910,7 @@ namespace MSTech.GestaoEscolar.BLL
             , int uni_id
             , byte cur_situacao
             , Guid ent_id
+            , bool mostraEJAModalidades
             , int appMinutosCacheLongo = 0
         )
         {
@@ -925,7 +926,7 @@ namespace MSTech.GestaoEscolar.BLL
                     if (cache == null)
                     {
                         ACA_CursoDAO dao = new ACA_CursoDAO();
-                        DataTable dtDados = dao.SelectCursoCurriculo(esc_id, uni_id, cur_situacao, ent_id, false, 1, 1, out totalRecords);
+                        DataTable dtDados = dao.SelectCursoCurriculo(esc_id, uni_id, cur_situacao, ent_id, false, 1, 1, out totalRecords, mostraEJAModalidades);
                         dados = (from DataRow dr in dtDados.Rows
                                  select new sComboCurso
                                  {
@@ -947,7 +948,7 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 // Se não carregou pelo cache, seleciona os dados do banco.
                 ACA_CursoDAO dao = new ACA_CursoDAO();
-                DataTable dtDados = dao.SelectCursoCurriculo(esc_id, uni_id, cur_situacao, ent_id, false, 1, 1, out totalRecords);
+                DataTable dtDados = dao.SelectCursoCurriculo(esc_id, uni_id, cur_situacao, ent_id, false, 1, 1, out totalRecords, mostraEJAModalidades);
                 dados = (from DataRow dr in dtDados.Rows
                          select new sComboCurso
                          {
@@ -1509,6 +1510,7 @@ namespace MSTech.GestaoEscolar.BLL
             , int tds_id
             , Guid ent_id
             , int cur_situacao
+            , bool mostraEJAModalidades
             , int appMinutosCacheLongo = 0
         )
         {
@@ -1524,7 +1526,7 @@ namespace MSTech.GestaoEscolar.BLL
                     if (cache == null)
                     {
                         ACA_CursoDAO dao = new ACA_CursoDAO();
-                        DataTable dtDados = dao.SelectCursoComDisciplinaEletiva(esc_id, uni_id, tds_id, ent_id, cur_situacao);
+                        DataTable dtDados = dao.SelectCursoComDisciplinaEletiva(esc_id, uni_id, tds_id, ent_id, cur_situacao, mostraEJAModalidades);
                         dados = (from DataRow dr in dtDados.Rows
                                  select new sComboCurso
                                  {
@@ -1546,7 +1548,7 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 // Se não carregou pelo cache, seleciona os dados do banco.
                 ACA_CursoDAO dao = new ACA_CursoDAO();
-                DataTable dtDados = dao.SelectCursoComDisciplinaEletiva(esc_id, uni_id, tds_id, ent_id, cur_situacao);
+                DataTable dtDados = dao.SelectCursoComDisciplinaEletiva(esc_id, uni_id, tds_id, ent_id, cur_situacao, mostraEJAModalidades);
                 dados = (from DataRow dr in dtDados.Rows
                          select new sComboCurso
                          {
@@ -1576,7 +1578,8 @@ namespace MSTech.GestaoEscolar.BLL
             , byte cur_situacao
             , Guid ent_id
             , int cal_id
-            , int appMinutosCacheLongo = 0
+            , bool mostraEJAModalidades
+            , int appMinutosCacheLongo = 0            
         )
         {
             List<sComboCurso> dados = null;
@@ -1591,7 +1594,7 @@ namespace MSTech.GestaoEscolar.BLL
                     if (cache == null)
                     {
                         ACA_CursoDAO dao = new ACA_CursoDAO();
-                        DataTable dtDados = dao.SelectCursoCurriculoCalendarioEscola(esc_id, uni_id, cur_situacao, ent_id, cal_id);
+                        DataTable dtDados = dao.SelectCursoCurriculoCalendarioEscola(esc_id, uni_id, cur_situacao, ent_id, cal_id, mostraEJAModalidades);
                         dados = (from DataRow dr in dtDados.Rows
                                  select new sComboCurso
                                  {
@@ -1614,7 +1617,7 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 // Se não carregou pelo cache, seleciona os dados do banco.
                 ACA_CursoDAO dao = new ACA_CursoDAO();
-                DataTable dtDados = dao.SelectCursoCurriculoCalendarioEscola(esc_id, uni_id, cur_situacao, ent_id, cal_id);
+                DataTable dtDados = dao.SelectCursoCurriculoCalendarioEscola(esc_id, uni_id, cur_situacao, ent_id, cal_id, mostraEJAModalidades);
                 dados = (from DataRow dr in dtDados.Rows
                          select new sComboCurso
                          {

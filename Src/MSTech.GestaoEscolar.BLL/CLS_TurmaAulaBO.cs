@@ -4435,6 +4435,7 @@ namespace MSTech.GestaoEscolar.BLL
             , Guid usu_id = new Guid()
             , byte origemLogAula = 0
             , byte tipoLogAula = 0
+            , byte fav_tipoApuracaoFrequencia = 0
         )
         {
             CLS_TurmaAulaDAO dao = new CLS_TurmaAulaDAO();
@@ -4625,8 +4626,8 @@ namespace MSTech.GestaoEscolar.BLL
                         aulasTerritorios = CLS_TurmaAulaTerritorioBO.SelecionaAulasTerritorioPorExperiencia
                             (entity.tud_id, dataInicioSemana, dataFimSemana, dao._Banco);
 
-                        dicTerritorios = (from TUR_TurmaDisciplinaTerritorio item in 
-                                          territoriosVigentes.Where(t => !aulasTerritorios.Any(a => a.tud_idTerritorio == t.tud_idTerritorio && 
+                        dicTerritorios = (from TUR_TurmaDisciplinaTerritorio item in
+                                          territoriosVigentes.Where(t => !aulasTerritorios.Any(a => a.tud_idTerritorio == t.tud_idTerritorio &&
                                                                                                     a.tau_idExperiencia != entity.tau_id))
                                           select new
                                           {
@@ -4731,6 +4732,14 @@ namespace MSTech.GestaoEscolar.BLL
                                     {
                                         throw new ArgumentException("Já existem duas aulas cadastradas para o dia " + entity.tau_data.ToString("dd/MM/yyyy") + ".");
                                     }
+                                }
+                                else if (fav_tipoApuracaoFrequencia == (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.TemposAula)
+                                {
+                                    if (quantidadeAulas > tud.tud_cargaHorariaSemanal)
+                                    {
+                                        throw new ArgumentException("A quantidade de aulas da semana foi excedida.");
+                                    }
+
                                 }
                                 else if (quantidadeAulasDia > 1)
                                 {
@@ -4900,7 +4909,7 @@ namespace MSTech.GestaoEscolar.BLL
             , TalkDBTransaction banco
             , byte lta_origem
             , byte lta_tipo
-            , Guid usu_id            
+            , Guid usu_id
         )
         {
             bool retorno = Delete(entity, banco);
@@ -5016,13 +5025,13 @@ namespace MSTech.GestaoEscolar.BLL
             , bool permissaoExcluirDiretor
             , int tje_id
             , string lte_observacao
-            , Guid usu_id = new Guid()   
+            , Guid usu_id = new Guid()
             , byte origemLogAula = 0
             , byte tipoLogAula = 0
             , byte tud_tipo = 0
             , int fav_id = 0
             , long tur_id = 0
-            , Guid ent_id = new Guid()            
+            , Guid ent_id = new Guid()
         )
         {
             CLS_TurmaAulaDAO dao = new CLS_TurmaAulaDAO();
@@ -5089,7 +5098,7 @@ namespace MSTech.GestaoEscolar.BLL
                         lte_id = Guid.NewGuid(),
                         tud_id = entity.tud_id,
                         tau_id = entity.tau_id,
-                        tje_id = tje_id,                        
+                        tje_id = tje_id,
                         lte_observacao = lte_observacao,
                         usu_id = usu_id,
                         lte_data = DateTime.Now
@@ -5303,7 +5312,7 @@ namespace MSTech.GestaoEscolar.BLL
                             (from TurmaAulaTerritorioDados iAula in aulasTerritorios
                              where iAula.tud_idExperiencia == tauExperiencia.tud_id
                              && iAula.tau_idExperiencia == tauExperiencia.tau_id
-                             && dicTerritorios.ContainsKey(iAula.tud_idTerritorio) 
+                             && dicTerritorios.ContainsKey(iAula.tud_idTerritorio)
                              && dicTerritorios[iAula.tud_idTerritorio] > 0
                              select iAula).OrderByDescending(p => p.tud_nomeTerritorio).FirstOrDefault();
 
