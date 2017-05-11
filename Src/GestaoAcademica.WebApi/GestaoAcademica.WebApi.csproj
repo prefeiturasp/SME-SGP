@@ -232,6 +232,7 @@
     <Compile Include="Controllers\movimentacoesController.cs" />
     <Compile Include="Controllers\protocolosController.cs" />
     <Compile Include="Controllers\recursos_aulaController.cs" />
+    <Compile Include="Controllers\sondagemController.cs" />
     <Compile Include="Controllers\SyncDiarioClasse\ApiListagemEventosController.cs" />
     <Compile Include="Controllers\SyncDiarioClasse\ApiPlanejamentoController.cs" />
     <Compile Include="Controllers\tipos_anotacoes_alunoController.cs" />

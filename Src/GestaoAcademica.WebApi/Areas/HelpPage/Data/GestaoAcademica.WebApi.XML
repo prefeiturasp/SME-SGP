@@ -287,6 +287,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.sondagemController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados das sondagens que o aluno participou.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+            <returns>Objeto com os dados das sondagens.</returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemEventosController.GetByEscola(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEventosEntradaDTO)">
             <summary>
             Retornas todos os eventos do tipo fechamento para a escola
