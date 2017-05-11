@@ -2,7 +2,7 @@
 <RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DSGestaoEscolar">
   <ConnectionProperties>
     <Extension>SQL</Extension>
-    <ConnectString>Data Source=DEV-SQL14CLI;Initial Catalog=DES_SPO_GestaoPedagogica</ConnectString>
+    <ConnectString>Data Source=DEV-SQL16;Initial Catalog=PUB_DEV_SPO_GestaoPedagogica</ConnectString>
   </ConnectionProperties>
   <DataSourceID>8c9c49ff-f793-44e7-9bdb-7018f561d59e</DataSourceID>
 </RptDataSource>
