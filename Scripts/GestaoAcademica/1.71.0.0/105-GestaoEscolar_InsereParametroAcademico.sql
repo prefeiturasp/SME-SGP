@@ -1,4 +1,4 @@
-USE [GestaoPedagogica]
+USE [PUB_DEV_SPO_GestaoPedagogica]
 GO
 
 --Iniciar transação
@@ -27,13 +27,6 @@ SET XACT_ABORT ON
 		,@ent_id = @entId
 
 	*/
-
-	EXEC MS_InsereParametroAcademico
-		@pac_chave = 'EXIBIR_IMPORTACAO_FECHAMENTO_CADASTRO_ESCOLA' -- Chave do parâmetro. (Obrigatório)
-		,@pac_valor = 'False' -- Valor do parâmetro. (Obrigatório)
-		,@pac_descricao = 'Permitir a exibição de Importação do Fechamento no cadastro de escola.' -- Descrição do parâmetro. (Obrigatório)
-		,@pac_obrigatorio = 1 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
-		,@ent_id = @entId
 
 -- Fechar transação	
 SET XACT_ABORT OFF
