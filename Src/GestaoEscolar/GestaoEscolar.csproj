@@ -2243,6 +2243,13 @@
     <Compile Include="WebControls\Combos\UCComboTipoMovimentacaoMatriculaCombo.ascx.designer.cs">
       <DependentUpon>UCComboTipoMovimentacaoMatriculaCombo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Combos\UCComboTipoTurma.ascx.cs">
+      <DependentUpon>UCComboTipoTurma.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboTipoTurma.ascx.designer.cs">
+      <DependentUpon>UCComboTipoTurma.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Combos\UCComboTurmaDisciplinaRelacionada.ascx.cs">
       <DependentUpon>UCComboTurmaDisciplinaRelacionada.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3767,6 +3774,7 @@
     <Content Include="WebControls\Combos\UCComboTipoDocente.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoHorario.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoMovimentacaoMatriculaCombo.ascx" />
+    <Content Include="WebControls\Combos\UCComboTipoTurma.ascx" />
     <Content Include="WebControls\Combos\UCComboTurmaDisciplinaRelacionada.ascx" />
     <Content Include="WebControls\Combos\UCTipoMovimentacao_MatriculaAntesFechamento.ascx" />
     <Content Include="WebControls\Combos\UCComboMes.ascx" />
