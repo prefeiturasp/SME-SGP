@@ -218,6 +218,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\BasicAuthenticationAttribute.cs" />
     <Compile Include="Controllers\aluno_fechamento_pendenciaController.cs" />
     <Compile Include="Controllers\ApiListagemBoletimEscolarAlunoController.cs" />
     <Compile Include="Controllers\ApiQuantidadeAlunosResultadosController.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Controllers\orientacoes_curricularController.cs" />
     <Compile Include="Controllers\escolasController.cs" />
     <Compile Include="Controllers\movimentacoesController.cs" />
+    <Compile Include="Controllers\parecerConclusivoController.cs" />
     <Compile Include="Controllers\protocolosController.cs" />
     <Compile Include="Controllers\recursos_aulaController.cs" />
     <Compile Include="Controllers\SyncDiarioClasse\ApiListagemEventosController.cs" />

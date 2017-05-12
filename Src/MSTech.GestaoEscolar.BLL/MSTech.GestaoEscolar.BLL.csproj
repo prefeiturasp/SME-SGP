@@ -393,6 +393,7 @@
     <Compile Include="SYS_EquipamentoUnidadeAdministrativaBO.cs" />
     <Compile Include="SYS_ServicosBO.cs" />
     <Compile Include="SYS_ServicosLogExecucaoBO.cs" />
+    <Compile Include="SYS_UsuarioAPIBO.cs" />
     <Compile Include="TUR_TurmaAberturaAnosAnterioresBO.cs" />
     <Compile Include="TUR_TurmaCurriculoAvaliacaoBO.cs" />
     <Compile Include="TUR_TurmaCurriculoBO.cs" />

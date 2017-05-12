@@ -352,6 +352,7 @@
     <Compile Include="Abstracts\Abstract_SYS_EquipamentoUnidadeAdministrativaDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_ServicosDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_ServicosLogExecucaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_UsuarioAPIDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_ItemAvaliacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_MetodoAvaliacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TipoAtendimentoTurmaDAO.cs" />
@@ -644,6 +645,7 @@
     <Compile Include="SYS_EquipamentoUnidadeAdministrativaDAO.cs" />
     <Compile Include="SYS_ServicosDAO.cs" />
     <Compile Include="SYS_ServicosLogExecucaoDAO.cs" />
+    <Compile Include="SYS_UsuarioAPIDAO.cs" />
     <Compile Include="TUR_ItemAvaliacaoDAO.cs" />
     <Compile Include="TUR_MetodoAvaliacaoDAO.cs" />
     <Compile Include="TUR_TipoAtendimentoTurmaDAO.cs" />
