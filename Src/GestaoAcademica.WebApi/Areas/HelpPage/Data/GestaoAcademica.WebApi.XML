@@ -22,6 +22,20 @@
             </summary>
             <param name="actionContext"></param>
         </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.alunoAnotacaoController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoTurmaEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
+            <returns>Objeto com os dados das anotações.</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.alunoAnotacaoController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+            <returns>Objeto com os dados das anotações.</returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.aluno_fechamento_pendenciaController.GetFila">
             <summary>
             Seleciona a fila de alunoFechamentoPendencia do serviço

@@ -102,5 +102,5 @@
         </div>
     </fieldset>
     <asp:ObjectDataSource ID="odsConfiguracaoServicoPendencia" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.ACA_ConfiguracaoServicoPendencia"
-        DeleteMethod="Delete" SelectMethod="SelectBy_tne_id_tme_id_tur_tipo" TypeName="MSTech.GestaoEscolar.BLL.ACA_ConfiguracaoServicoPendencia"></asp:ObjectDataSource>
+        DeleteMethod="Delete" SelectMethod="SelectBy_tne_id_tme_id_tur_tipo" TypeName="MSTech.GestaoEscolar.BLL.ACA_ConfiguracaoServicoPendenciaBO"></asp:ObjectDataSource>
 </asp:Content>
