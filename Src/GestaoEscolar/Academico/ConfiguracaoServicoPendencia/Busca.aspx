@@ -60,41 +60,45 @@
                     <HeaderStyle CssClass="center"></HeaderStyle>
                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                     <ItemTemplate>
-                        <asp:Label ID="lblSemNota" runat="server" CssClass="wrap150px"></asp:Label>
+                        <asp:CheckBox ID="chkSemNota" runat="server" CssClass="wrap150px"></asp:CheckBox>
                     </ItemTemplate>
                 </asp:TemplateField>       
                 <asp:TemplateField HeaderText="Sem parecer">
                     <HeaderStyle CssClass="center"></HeaderStyle>
                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                     <ItemTemplate>
-                        <asp:Label ID="lblSemParecer" runat="server" CssClass="wrap150px"></asp:Label>
+                        <asp:CheckBox ID="chkSemParecer" runat="server" CssClass="wrap150px"></asp:CheckBox>
                     </ItemTemplate>
                 </asp:TemplateField>       
                 <asp:TemplateField HeaderText="Disciplina sem aula">
                     <HeaderStyle CssClass="center"></HeaderStyle>
                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                     <ItemTemplate>
-                        <asp:Label ID="lblDisciplinaSemAula" runat="server" CssClass="wrap150px"></asp:Label>
+                        <asp:CheckBox ID="chkDisciplinaSemAula" runat="server" CssClass="wrap150px"></asp:CheckBox>
                     </ItemTemplate>
                 </asp:TemplateField>       
                 <asp:TemplateField HeaderText="Sem resultado final">
                     <HeaderStyle CssClass="center"></HeaderStyle>
                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                     <ItemTemplate>
-                        <asp:Label ID="lblSemResultadoFinal" runat="server" CssClass="wrap150px"></asp:Label>
+                        <asp:CheckBox ID="chkSemResultadoFinal" runat="server" CssClass="wrap150px"></asp:CheckBox>
                     </ItemTemplate>
                 </asp:TemplateField>       
                 <asp:TemplateField HeaderText="Sem planejamento">
                     <HeaderStyle CssClass="center"></HeaderStyle>
                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                     <ItemTemplate>
-                        <asp:Label ID="lblSemPlanejamento" runat="server" CssClass="wrap150px"></asp:Label>
+                        <asp:CheckBox ID="chkSemPlanejamento" runat="server" CssClass="wrap150px"></asp:CheckBox>
                     </ItemTemplate>
                 </asp:TemplateField> 
             </Columns>
             <HeaderStyle HorizontalAlign="Center" />
         </asp:GridView>
         <uc4:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="dgv" />
+        <div class="right">
+            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" 
+                ToolTip="Salvar"/>
+        </div>
     </fieldset>
     <asp:ObjectDataSource ID="ods" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.ACA_TabelaNova"
         DeleteMethod="Delete" SelectMethod="Seleciona" TypeName="MSTech.GestaoEscolar.BLL.ACA_"></asp:ObjectDataSource>

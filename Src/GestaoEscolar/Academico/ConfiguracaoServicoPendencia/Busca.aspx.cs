@@ -224,23 +224,25 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                     btnAlterar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
 
-                string nao = "Não";
-                string sim = "Sim";
+                CheckBox chkSemNota = (CheckBox)e.Row.FindControl("chkSemNota");
+                chkSemNota.Checked = String.IsNullOrEmpty(dgv.DataKeys[e.Row.RowIndex].Values["SemNota"].ToString()) ? false
+                    : Convert.ToBoolean(dgv.DataKeys[e.Row.RowIndex].Values["SemNota"].ToString());
 
-                Label lblSemNota = (Label)e.Row.FindControl("lblSemNota");
-                lblSemNota.Text = dgv.DataKeys[e.Row.RowIndex].Values["SemNota"].ToString() == "0" ? nao : sim;
+                CheckBox chkSemParecer = (CheckBox)e.Row.FindControl("chkSemParecer");
+                chkSemParecer.Checked = String.IsNullOrEmpty(dgv.DataKeys[e.Row.RowIndex].Values["SemParecer"].ToString()) ? false
+                    : Convert.ToBoolean(dgv.DataKeys[e.Row.RowIndex].Values["SemParecer"].ToString());
 
-                Label lblSemParecer = (Label)e.Row.FindControl("lblSemParecer");
-                lblSemParecer.Text = dgv.DataKeys[e.Row.RowIndex].Values["SemParecer"].ToString() == "0" ? nao : sim;
+                CheckBox chkDisciplinaSemAula = (CheckBox)e.Row.FindControl("chkDisciplinaSemAula");
+                chkDisciplinaSemAula.Checked = String.IsNullOrEmpty(dgv.DataKeys[e.Row.RowIndex].Values["DisciplinaSemAula"].ToString()) ? false
+                    : Convert.ToBoolean(dgv.DataKeys[e.Row.RowIndex].Values["DisciplinaSemAula"].ToString());
 
-                Label lblDisciplinaSemAula = (Label)e.Row.FindControl("lblDisciplinaSemAula");
-                lblDisciplinaSemAula.Text = dgv.DataKeys[e.Row.RowIndex].Values["DisciplinaSemAula"].ToString() == "0" ? nao : sim;
+                CheckBox chkSemResultadoFinal = (CheckBox)e.Row.FindControl("chkSemResultadoFinal");
+                chkSemResultadoFinal.Checked = String.IsNullOrEmpty(dgv.DataKeys[e.Row.RowIndex].Values["SemResultadoFinal"].ToString()) ? false
+                    : Convert.ToBoolean(dgv.DataKeys[e.Row.RowIndex].Values["SemResultadoFinal"].ToString());
 
-                Label lblSemResultadoFinal = (Label)e.Row.FindControl("lblSemResultadoFinal");
-                lblSemResultadoFinal.Text = dgv.DataKeys[e.Row.RowIndex].Values["SemResultadoFinal"].ToString() == "0" ? nao : sim;
-
-                Label lblSemPlanejamento = (Label)e.Row.FindControl("lblSemPlanejamento");
-                lblSemPlanejamento.Text = dgv.DataKeys[e.Row.RowIndex].Values["SemPlanejamento"].ToString() == "0" ? nao : sim;
+                CheckBox chkSemPlanejamento = (CheckBox)e.Row.FindControl("chkSemPlanejamento");
+                chkSemPlanejamento.Checked = String.IsNullOrEmpty(dgv.DataKeys[e.Row.RowIndex].Values["SemPlanejamento"].ToString()) ? false
+                    : Convert.ToBoolean(dgv.DataKeys[e.Row.RowIndex].Values["SemPlanejamento"].ToString());
             }
         }
 
@@ -281,6 +283,10 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 };
             }
         }
-        
+
+        protected void btnSalvar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
