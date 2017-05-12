@@ -227,7 +227,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!frequencia.Value</Value>
+                              <Value>=IIF(CBool(Fields!alunoMariculado.Value), CStr(Fields!frequencia.Value), "-")</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -249,6 +249,7 @@
                         <PaddingBottom>1pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -892,6 +893,10 @@
         <Field Name="tau_data">
           <DataField>tau_data</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="alunoMariculado">
+          <DataField>alunoMariculado</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="dia">
           <DataField>dia</DataField>
