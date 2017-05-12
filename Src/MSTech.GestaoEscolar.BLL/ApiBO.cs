@@ -7477,7 +7477,21 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 DataTable dt = ACA_AlunoJustificativaFaltaBO.SelecionaJustificativasPorAluno(filtros.ano, filtros.alu_id);
 
-                
+                List<JustificativaDTO> lista = (from dr in dt.AsEnumerable()
+                                                orderby Convert.ToDateTime(dr["afj_dataInicio"])
+                                                select new JustificativaDTO
+                                                {
+                                                    tipo = dr["tjf_nome"].ToString()
+                                                    ,
+                                                    dataInicio = Convert.ToDateTime(dr["afj_dataInicio"]).ToString("dd/MM/yyyy")
+                                                    ,
+                                                    dataFim = dr["afj_dataFim"] == DBNull.Value ? "" : Convert.ToDateTime(dr["afj_dataFim"]).ToString("dd/MM/yyyy")
+                                                    ,
+                                                    observacao = dr["afj_observacao"].ToString()
+                                                }
+                                                ).ToList();
+
+                retorno.justificativas = lista;
             }
             catch (Exception ex)
             {
