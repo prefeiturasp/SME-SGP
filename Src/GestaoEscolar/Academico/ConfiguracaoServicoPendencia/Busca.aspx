@@ -4,6 +4,12 @@
     TagPrefix="uc1" %>
 <%@ Register Src="~/WebControls/Combos/UCComboTipoModalidadeEnsino.ascx" TagName="UCComboTipoModalidadeEnsino"
     TagPrefix="uc2" %>
+<%@ Register Src="~/WebControls/Combos/UCComboTipoTurma.ascx" TagName="UCComboTipoTurma"
+    TagPrefix="uc3" %>
+<%@ Register Src="../../WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros"
+    TagPrefix="uc4" %>
+<%@ Register Src="~/WebControls/Combos/UCComboQtdePaginacao.ascx" TagName="UCComboQtdePaginacao"
+    TagPrefix="uc5" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -14,12 +20,86 @@
         <div id="divPesquisa" runat="server">
             <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino" runat="server" />
             <uc2:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino" runat="server" />
+            <uc3:UCComboTipoTurma ID="UCComboTipoTurma" runat="server"/>
         </div>
         <div class="right">
-            <asp:Button ID="_btnPesquisar" runat="server" Text="Pesquisar" OnClick="_btnPesquisar_Click"
+            <asp:Button ID="btnPesquisar" runat="server" Text="Pesquisar" OnClick="btnPesquisar_Click"
                 CausesValidation="False" />
-            <asp:Button ID="_btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="_btnLimparPesquisa_Click"
+            <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click"
                 CausesValidation="False" />
         </div>
     </fieldset>
+    <fieldset id="fdsResultados" runat="server">
+        <legend>Resultados</legend>
+        <uc5:UCComboQtdePaginacao ID="UCComboQtdePaginacao" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged" />
+        <asp:GridView ID="dgv" runat="server" AllowPaging="True" DataKeyNames="SemNota, SemParecer, DisciplinaSemAula, SemResultadoFinal, SemPlanejamento"
+            AutoGenerateColumns="False" DataSourceID="ods" EmptyDataText="A pesquisa não encontrou resultados."
+            HeaderStyle-HorizontalAlign="Center" OnRowDataBound="dgv_RowDataBound"
+            OnDataBound="dgv_DataBound" AllowSorting="true">
+            <Columns>
+                <%--<asp:TemplateField HeaderText="Nome" SortExpression="nome">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnAlterar" runat="server" CommandName="Edit" Text='<%# Bind("nome") %>'
+                            PostBackUrl="../EscalaAvaliacao/Cadastro.aspx"></asp:LinkButton>
+                        <asp:Label ID="lblAlterar" runat="server" Text='<%# Bind("nome") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>--%>
+                <asp:BoundField DataField="tne_descricao" HeaderText="Tipo de nível de ensino" SortExpression="tne_descricao">
+                    <HeaderStyle CssClass="center"></HeaderStyle>
+                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                </asp:BoundField>     
+                <asp:BoundField DataField="tme_descricao" HeaderText="Tipo de modalidade de ensino" SortExpression="tme_descricao">
+                    <HeaderStyle CssClass="center"></HeaderStyle>
+                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                </asp:BoundField>  
+                <asp:BoundField DataField="tur_tipoDescricao" HeaderText="Tipo de turma" SortExpression="tur_tipoDescricao">
+                    <HeaderStyle CssClass="center"></HeaderStyle>
+                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                </asp:BoundField>  
+                <asp:TemplateField HeaderText="Sem nota">
+                    <HeaderStyle CssClass="center"></HeaderStyle>
+                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkSemNota" runat="server" CssClass="wrap150px"></asp:CheckBox>
+                    </ItemTemplate>
+                </asp:TemplateField>       
+                <asp:TemplateField HeaderText="Sem parecer">
+                    <HeaderStyle CssClass="center"></HeaderStyle>
+                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkSemParecer" runat="server" CssClass="wrap150px"></asp:CheckBox>
+                    </ItemTemplate>
+                </asp:TemplateField>       
+                <asp:TemplateField HeaderText="Disciplina sem aula">
+                    <HeaderStyle CssClass="center"></HeaderStyle>
+                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkDisciplinaSemAula" runat="server" CssClass="wrap150px"></asp:CheckBox>
+                    </ItemTemplate>
+                </asp:TemplateField>       
+                <asp:TemplateField HeaderText="Sem resultado final">
+                    <HeaderStyle CssClass="center"></HeaderStyle>
+                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkSemResultadoFinal" runat="server" CssClass="wrap150px"></asp:CheckBox>
+                    </ItemTemplate>
+                </asp:TemplateField>       
+                <asp:TemplateField HeaderText="Sem planejamento">
+                    <HeaderStyle CssClass="center"></HeaderStyle>
+                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkSemPlanejamento" runat="server" CssClass="wrap150px"></asp:CheckBox>
+                    </ItemTemplate>
+                </asp:TemplateField> 
+            </Columns>
+            <HeaderStyle HorizontalAlign="Center" />
+        </asp:GridView>
+        <uc4:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="dgv" />
+        <div class="right">
+            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" 
+                ToolTip="Salvar"/>
+        </div>
+    </fieldset>
+    <asp:ObjectDataSource ID="ods" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.ACA_TabelaNova"
+        DeleteMethod="Delete" SelectMethod="Seleciona" TypeName="MSTech.GestaoEscolar.BLL.ACA_"></asp:ObjectDataSource>
 </asp:Content>

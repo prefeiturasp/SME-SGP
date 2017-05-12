@@ -58,21 +58,84 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia {
         protected global::WebControls_Combos_UCComboModalidadeEnsino UCComboTipoModalidadeEnsino;
         
         /// <summary>
-        /// _btnPesquisar control.
+        /// UCComboTipoTurma control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _btnPesquisar;
+        protected global::WebControls_Combos_UCComboTipoTurma UCComboTipoTurma;
         
         /// <summary>
-        /// _btnLimparPesquisa control.
+        /// btnPesquisar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button _btnLimparPesquisa;
+        protected global::System.Web.UI.WebControls.Button btnPesquisar;
+        
+        /// <summary>
+        /// btnLimparPesquisa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimparPesquisa;
+        
+        /// <summary>
+        /// fdsResultados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsResultados;
+        
+        /// <summary>
+        /// UCComboQtdePaginacao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboQtdePaginacao UCComboQtdePaginacao;
+        
+        /// <summary>
+        /// dgv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgv;
+        
+        /// <summary>
+        /// UCTotalRegistros control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Mensagens_UCTotalRegistros UCTotalRegistros;
+        
+        /// <summary>
+        /// btnSalvar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        
+        /// <summary>
+        /// ods control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ods;
     }
 }
