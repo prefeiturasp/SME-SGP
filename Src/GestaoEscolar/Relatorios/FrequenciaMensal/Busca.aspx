@@ -47,9 +47,6 @@
                             Display="Dynamic" ControlToValidate="txtDataFim" ValidationGroup="Relatorio">*</asp:RequiredFieldValidator>
                         <asp:CustomValidator ID="cvDataFim" runat="server" ControlToValidate="txtDataFim"
                             ValidationGroup="Relatorio" Display="Dynamic" ErrorMessage="Data fim deve estar no formato DD/MM/AAAA." OnServerValidate="ValidarData_ServerValidate">*</asp:CustomValidator>
-                        <asp:CompareValidator ID="cpvDataFim" runat="server" ControlToValidate="txtDataFim"
-                            ValidationGroup="Relatorio" Display="Dynamic" Type="Date" Operator="GreaterThanEqual"
-                            ControlToCompare="txtDataInicio" ErrorMessage="Data fim da análise deve ser maior ou igual à data início.">*</asp:CompareValidator>
                     </div>
                 </div>
                 <div class="right area-botoes-bottom">
