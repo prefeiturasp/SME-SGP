@@ -22,7 +22,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="tne_id">Id do tipo de nível de ensino</param>
         /// <param name="tme_id">Id do tipo de modalidade de ensino</param>
         /// <param name="tur_tipo">Enum do tipo de turma</param>
-        public DataTable SelectBy_tne_id_tme_id_tur_tipo(int tne_id, int tme_id, int tur_tipo)
+        public ACA_ConfiguracaoServicoPendencia SelectBy_tne_id_tme_id_tur_tipo(int tne_id, int tme_id, int tur_tipo)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ConfiguracaoServicoPendencia_SelectBy_tne_id_tme_id_tur_tipo", _Banco);
             try
@@ -53,8 +53,8 @@ namespace MSTech.GestaoEscolar.DAL
                 #endregion
 
                 qs.Execute();
-
-                return qs.Return;
+                
+                return qs.Return.Rows.Count > 0 ? DataRowToEntity(qs.Return.Rows[0], new ACA_ConfiguracaoServicoPendencia()) : new ACA_ConfiguracaoServicoPendencia();
             }
             catch
             {

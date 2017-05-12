@@ -19,6 +19,7 @@ SET XACT_ABORT ON
 		,@SiteMapUrl = '~/Configuracao/TipoEvento/Busca.aspx' -- Url da SiteMap (Obrigatório)
 	*/
 
+	
 -- Fechar transação
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
