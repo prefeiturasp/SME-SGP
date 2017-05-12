@@ -7296,7 +7296,88 @@ namespace MSTech.GestaoEscolar.BLL
             try
             {
                 DataTable dt = ACA_SondagemBO.SelecionaSondagemPorAluno(filtros.ano, filtros.alu_id);
-                //
+
+                List<SondagemDTO> lista =
+                    (from dr in dt.AsEnumerable()
+                     group dr by dr.Field<int>("snd_id") into snd
+                     orderby snd.Key
+                     select new SondagemDTO
+                     {
+                         id = snd.Key
+                         ,
+                         titulo = snd.FirstOrDefault()["snd_titulo"].ToString()
+                         ,
+                         descricao = snd.FirstOrDefault()["snd_descricao"].ToString()
+                         ,
+                         questoes = (from dr in dt.AsEnumerable()
+                                     group dr by new { snd_id = dr.Field<int>("snd_id"), sdq_id = dr.Field<int>("sdq_id") } into sdq
+                                     orderby Convert.ToInt32(sdq.FirstOrDefault()["sdq_ordem"])
+                                     where sdq.Key.snd_id == snd.Key && sdq.Key.sdq_id > 0
+                                     select new QuestaoDTO
+                                     {
+                                         id = sdq.Key.sdq_id
+                                            ,
+                                         descricao = sdq.FirstOrDefault()["sdq_descricao"].ToString()
+                                            ,
+                                         ordem = Convert.ToInt32(sdq.FirstOrDefault()["sdq_ordem"])
+                                     }).ToList()
+                         ,
+                         subQuestoes = (from dr in dt.AsEnumerable()
+                                        group dr by new { snd_id = dr.Field<int>("snd_id"), sdq_idSub = dr.Field<int>("sdq_idSub") } into sdqSub
+                                        orderby Convert.ToInt32(sdqSub.FirstOrDefault()["sdq_ordemSub"])
+                                        where sdqSub.Key.snd_id == snd.Key && sdqSub.Key.sdq_idSub > 0
+                                        select new QuestaoDTO
+                                        {
+                                            id = sdqSub.Key.sdq_idSub
+                                               ,
+                                            descricao = sdqSub.FirstOrDefault()["sdq_descricaoSub"].ToString()
+                                               ,
+                                            ordem = Convert.ToInt32(sdqSub.FirstOrDefault()["sdq_ordemSub"])
+                                        }).ToList()
+                        ,
+                         respostas = (from dr in dt.AsEnumerable()
+                                      group dr by new { snd_id = dr.Field<int>("snd_id"), sdr_id = dr.Field<int>("sdr_id") } into sdr
+                                      orderby Convert.ToInt32(sdr.FirstOrDefault()["sdr_ordem"])
+                                      where sdr.Key.snd_id == snd.Key
+                                      select new RespostaDTO
+                                      {
+                                          id = sdr.Key.sdr_id
+                                              ,
+                                          sigla = sdr.FirstOrDefault()["sdr_sigla"].ToString()
+                                              ,
+                                          descricao = sdr.FirstOrDefault()["sdr_descricao"].ToString()
+                                              ,
+                                          ordem = Convert.ToInt32(sdr.FirstOrDefault()["sdr_ordem"])
+                                      }).ToList()
+                         ,
+                         agendamentos = (from dr in dt.AsEnumerable()
+                                         group dr by new { snd_id = dr.Field<int>("snd_id"), sda_id = dr.Field<int>("sda_id") } into sda
+                                         orderby Convert.ToDateTime(sda.FirstOrDefault()["sda_dataInicio"])
+                                         where sda.Key.snd_id == snd.Key
+                                         select new AgendamentoDTO
+                                         {
+                                             id = sda.Key.sda_id
+                                             ,
+                                             dataInicio = Convert.ToDateTime(sda.FirstOrDefault()["sda_dataInicio"]).ToString("dd/MM/yyyy")
+                                             ,
+                                             dataFim = Convert.ToDateTime(sda.FirstOrDefault()["sda_dataFim"]).ToString("dd/MM/yyyy")
+                                              ,
+                                             respostasAluno = (from dr in dt.AsEnumerable()
+                                                               group dr by new { snd_id = dr.Field<int>("snd_id"), sda_id = dr.Field<int>("sda_id"), sdq_id = dr.Field<int>("sdq_id"), sdq_idSub = dr.Field<int>("sdq_idSub") } into asn
+                                                               where asn.Key.snd_id == sda.Key.snd_id && asn.Key.sda_id == sda.Key.sda_id
+                                                               select new RespostaAlunoDTO
+                                                               {
+                                                                   idQuestao = asn.Key.sdq_id
+                                                                   ,
+                                                                   idSubQuestao = asn.Key.sdq_idSub
+                                                                   ,
+                                                                   idResposta = Convert.ToInt32(asn.FirstOrDefault()["sdr_id"])
+                                                               }).ToList()
+                                         }).ToList()
+                     }
+                    ).ToList();
+
+                retorno.sondagens = lista;
             }
             catch (Exception ex)
             {

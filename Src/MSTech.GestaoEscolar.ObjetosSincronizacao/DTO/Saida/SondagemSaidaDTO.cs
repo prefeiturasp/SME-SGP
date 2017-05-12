@@ -6,7 +6,6 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida
     {
         public int Status { get; set; }
         public string StatusDescription { get; set; }
-        public string Date { get; set; }
 
         public List<SondagemDTO> sondagens { get; set; }
     }
@@ -34,7 +33,7 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida
         public int id { get; set; }
         public string sigla { get; set; }
         public string descricao { get; set; }
-        public int orderm { get; set; }
+        public int ordem { get; set; }
     }
 
     public class AgendamentoDTO
@@ -42,7 +41,7 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida
         public int id { get; set; }
         public string dataInicio { get; set; }
         public string dataFim { get; set; }
-        List<RespostaAlunoDTO> respostasAluno { get; set; }
+        public List<RespostaAlunoDTO> respostasAluno { get; set; }
     }
 
     public class RespostaAlunoDTO
