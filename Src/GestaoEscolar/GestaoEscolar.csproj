@@ -346,6 +346,13 @@
     <Compile Include="Academico\CalendarioAnual\Visualizar.aspx.designer.cs">
       <DependentUpon>Visualizar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\ControleSemanal\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2871,6 +2878,7 @@
     <Content Include="Academico\Areas\Cadastro.aspx" />
     <Content Include="Academico\Areas\Documentos.aspx" />
     <Content Include="Academico\CalendarioAnual\CadastroLimites.aspx" />
+    <Content Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx" />
     <Content Include="Academico\ControleSemanal\Busca.aspx" />
     <Content Include="Academico\ControleSemanal\Cadastro.aspx" />
     <Content Include="Academico\ControleTurma\Alunos.aspx" />
