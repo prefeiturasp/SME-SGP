@@ -32,10 +32,11 @@
     <fieldset id="fdsResultados" runat="server">
         <legend>Resultados</legend>
         <uc5:UCComboQtdePaginacao ID="UCComboQtdePaginacao" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged" />
-        <asp:GridView ID="dgv" runat="server" AllowPaging="True" DataKeyNames="SemNota, SemParecer, DisciplinaSemAula, SemResultadoFinal, SemPlanejamento"
-            AutoGenerateColumns="False" DataSourceID="ods" EmptyDataText="A pesquisa não encontrou resultados."
-            HeaderStyle-HorizontalAlign="Center" OnRowDataBound="dgv_RowDataBound"
-            OnDataBound="dgv_DataBound" AllowSorting="true">
+        <asp:GridView ID="dgvConfiguracaoServicoPendencia" runat="server" AllowPaging="True" 
+            DataKeyNames="csp_semNota, csp_semParecer, csp_disciplinaSemAula, csp_semResultadoFinal, csp_semPlanejamento"
+            AutoGenerateColumns="False" DataSourceID="odsConfiguracaoServicoPendencia" EmptyDataText="A pesquisa não encontrou resultados."
+            HeaderStyle-HorizontalAlign="Center" OnRowDataBound="dgvConfiguracaoServicoPendencia_RowDataBound"
+            OnDataBound="dgvConfiguracaoServicoPendencia_DataBound" AllowSorting="true">
             <Columns>
                 <%--<asp:TemplateField HeaderText="Nome" SortExpression="nome">
                     <ItemTemplate>
@@ -100,6 +101,6 @@
                 ToolTip="Salvar"/>
         </div>
     </fieldset>
-    <asp:ObjectDataSource ID="ods" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.ACA_TabelaNova"
-        DeleteMethod="Delete" SelectMethod="Seleciona" TypeName="MSTech.GestaoEscolar.BLL.ACA_"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="odsConfiguracaoServicoPendencia" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.ACA_ConfiguracaoServicoPendencia"
+        DeleteMethod="Delete" SelectMethod="SelectBy_tne_id_tme_id_tur_tipo" TypeName="MSTech.GestaoEscolar.BLL.ACA_ConfiguracaoServicoPendencia"></asp:ObjectDataSource>
 </asp:Content>

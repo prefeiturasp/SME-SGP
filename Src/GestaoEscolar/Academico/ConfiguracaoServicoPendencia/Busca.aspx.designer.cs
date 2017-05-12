@@ -103,13 +103,13 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia {
         protected global::WebControls_Combos_UCComboQtdePaginacao UCComboQtdePaginacao;
         
         /// <summary>
-        /// dgv control.
+        /// dgvConfiguracaoServicoPendencia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgv;
+        protected global::System.Web.UI.WebControls.GridView dgvConfiguracaoServicoPendencia;
         
         /// <summary>
         /// UCTotalRegistros control.
@@ -130,12 +130,12 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia {
         protected global::System.Web.UI.WebControls.Button btnSalvar;
         
         /// <summary>
-        /// ods control.
+        /// odsConfiguracaoServicoPendencia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ods;
+        protected global::System.Web.UI.WebControls.ObjectDataSource odsConfiguracaoServicoPendencia;
     }
 }
