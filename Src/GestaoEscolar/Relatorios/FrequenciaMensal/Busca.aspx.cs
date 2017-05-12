@@ -9,6 +9,8 @@ using CFG_RelatorioBO = MSTech.GestaoEscolar.BLL.CFG_RelatorioBO;
 using System.Collections.Generic;
 using System.Linq;
 using MSTech.Validation.Exceptions;
+using MSTech.GestaoEscolar.Entities;
+using MSTech.CoreSSO.Entities;
 
 namespace GestaoEscolar.Relatorios.FrequenciaMensal
 {
@@ -609,6 +611,24 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
 
                 SalvaBusca();
 
+                string dre = (UCComboUAEscola.Uad_ID.Equals(Guid.Empty) ? "" : UCComboUAEscola.TextoComboUA);
+                if (UCComboUAEscola.Uad_ID.Equals(Guid.Empty))
+                {
+                    ESC_Escola esc = new ESC_Escola
+                    {
+                        esc_id = UCComboUAEscola.Esc_ID,
+                        ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id
+                    };
+                    ESC_EscolaBO.GetEntity(esc);
+                    SYS_UnidadeAdministrativa uadSup = new SYS_UnidadeAdministrativa
+                    {
+                        uad_id = esc.uad_idSuperiorGestao,
+                        ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id
+                    };
+                    SYS_UnidadeAdministrativaBO.GetEntity(uadSup);
+                    dre = uadSup.uad_nome;
+                }
+
                 report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.FrequenciaMensal).ToString();
                 parametros = "tur_id=" + UCComboTurma.Valor[0] +
                              "&tur_codigo=" + UCComboTurma.Texto +
@@ -616,8 +636,8 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
                              "&tud_id=" + UCComboTurmaDisciplina.Valor +
                              "&dataInicio=" + txtDataInicio.Text +
                              "&dataFim=" + txtDataFim.Text +
-                             "&dre=" + (UCComboUAEscola.Uad_ID.Equals(Guid.Empty) ? UCComboUAEscola.TextoComboEscola : UCComboUAEscola.TextoComboUA) +
-                             "&escola=" + (UCComboUAEscola.Uad_ID.Equals(Guid.Empty) ? "" : UCComboUAEscola.TextoComboEscola) +
+                             "&dre=" + dre +
+                             "&escola=" + UCComboUAEscola.TextoComboEscola +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
                                                    , ApplicationWEB.LogoRelatorioSSRS) +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
