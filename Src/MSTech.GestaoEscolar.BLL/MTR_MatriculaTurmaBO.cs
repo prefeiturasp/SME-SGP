@@ -1193,6 +1193,17 @@ namespace MSTech.GestaoEscolar.BLL
                                               .ToList();
         }
 
+        /// <summary>
+        /// Seleciona o parecer conclusivo do aluno pelo seu código EOL e pelo código EOL da turma
+        /// </summary>
+        /// <param name="CodigoEOLTurma">Código EOL da turma</param>
+        /// <param name="CodigoEOLAluno">Código EOL do aluno.</param>
+        /// <returns></returns>
+        public static DataTable SelecionaResultadoPorAlunoTurmaEOL(int CodigoEOLTurma, string CodigoEOLAluno)
+        {
+            return new MTR_MatriculaTurmaDAO().SelecionaResultadoPorAlunoTurmaEOL(CodigoEOLTurma, CodigoEOLAluno);
+        }
+
         #endregion Consultas
 
         #region Saves

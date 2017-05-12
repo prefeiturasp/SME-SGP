@@ -6323,6 +6323,32 @@ namespace MSTech.GestaoEscolar.BLL
 
         #endregion
 
+        #region MTR_MatriculaTurma
+
+        /// <summary>
+        /// Seleciona o parecer conclusivo do aluno pelo seu código EOL e pelo código EOL da turma
+        /// </summary>
+        /// <param name="CodigoEOLTurma">Código EOL da turma</param>
+        /// <param name="CodigoEOLAluno">Código EOL do aluno.</param>
+        /// <returns></returns>
+        public static ParecerConclusivo SelecionaResultadoPorAlunoTurmaEOL(int CodigoEOLTurma, string CodigoEOLAluno)
+        {
+            using (DataTable dt = MTR_MatriculaTurmaBO.SelecionaResultadoPorAlunoTurmaEOL(CodigoEOLTurma, CodigoEOLAluno))
+            {
+                return dt.Rows.Count > 0 ?
+                    new ParecerConclusivo
+                    {
+                        CodigoEOLTurma = CodigoEOLTurma.ToString()
+                        ,
+                        CodigoEOLAluno = CodigoEOLAluno
+                        ,
+                        Resultado = dt.Rows[0]["tpr_nomenclatura"].ToString().ToUpper()
+                    } : null;
+            }
+        }
+
+        #endregion MTR_MatriculaTurma
+
         #endregion Geral - Sistema Gestão Escolar
 
         #region Plataforma de Itens e Avaliações

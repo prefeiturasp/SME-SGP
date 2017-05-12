@@ -1998,6 +1998,39 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Seleciona o parecer conclusivo do aluno pelo seu código EOL e pelo código EOL da turma
+        /// </summary>
+        /// <param name="CodigoEOLTurma">Código EOL da turma</param>
+        /// <param name="CodigoEOLAluno">Código EOL do aluno.</param>
+        /// <returns></returns>
+        public DataTable SelecionaResultadoPorAlunoTurmaEOL(int CodigoEOLTurma, string CodigoEOLAluno)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_MTR_MatriculaTurma_SelecionaResultadoPorAlunoTurmaEOL", _Banco);
+
+            #region Parâmetros
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@CodigoEOLTurma";
+            Param.DbType = DbType.Int32;
+            Param.Size = 4;
+            Param.Value = CodigoEOLTurma;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@CodigoEOLAluno";
+            Param.DbType = DbType.String;
+            Param.Size = 50;
+            Param.Value = CodigoEOLAluno;
+            qs.Parameters.Add(Param);
+
+            #endregion Parâmetros
+
+            qs.Execute();
+
+            return qs.Return;
+        }
+
         #endregion Métodos
 
         #region Métodos Sobrescritos

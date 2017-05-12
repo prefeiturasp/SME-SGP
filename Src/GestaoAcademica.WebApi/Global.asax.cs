@@ -29,11 +29,11 @@ namespace GestaoAcademica.WebApi
             MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB.Config = MSTech.GestaoEscolar.BLL.eConfig.Academico;
 
             // seta a autenticação
-            GlobalConfiguration.Configuration.MessageHandlers.
-                Add(new BasicAuthMessageHandler()
-                {
-                    PrincipalProvider = new PrincipalProvider()
-                });
+            //GlobalConfiguration.Configuration.MessageHandlers.
+            //    Add(new BasicAuthMessageHandler()
+            //    {
+            //        PrincipalProvider = new PrincipalProvider()
+            //    });
 
             // removendo o retorno padrao em XML, força retorno em Json
             var appXmlType = GlobalConfiguration.Configuration.Formatters.XmlFormatter.
