@@ -63,6 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\Entrada\AnoAlunoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\AnoAlunoTurmaEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\AssociaEscolaEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\BuscaAlunosDetalhadoEscolaEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\BuscaAlunosMatriculadosTurmaEntradaDTO.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="DTO\Saida\ProtocoloSaidaDTO.cs" />
     <Compile Include="DTO\Saida\RetornaEscolaSaidaDTO.cs" />
     <Compile Include="DTO\Saida\SincronizacaoDiarioClasseSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\SondagemSaidaDTO.cs" />
     <Compile Include="DTO\Saida\StatusServicosDTO.cs" />
     <Compile Include="Entities\ACA_AlunoCurriculoDTO.cs" />
     <Compile Include="Entities\ACA_AlunoDTO.cs" />

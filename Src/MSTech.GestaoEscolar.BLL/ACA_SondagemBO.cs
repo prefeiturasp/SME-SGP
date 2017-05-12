@@ -268,6 +268,18 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna os dados das sondagens que o aluno participou.
+        /// </summary>
+        /// <param name="ano">Ano das sondagens</param>
+        /// <param name="alu_id">Id do aluno</param>
+        /// <returns></returns>
+        public static DataTable SelecionaSondagemPorAluno(int ano, long alu_id)
+        {
+            ACA_SondagemDAO dao = new ACA_SondagemDAO();
+            return dao.SelectBy_Aluno(ano, alu_id);
+        }
+
+        /// <summary>
         /// Deleta logicamente uma sondagem
         /// </summary>
         /// <param name="entity">Entidade ACA_Sondagem</param>        

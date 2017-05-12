@@ -7283,6 +7283,30 @@ namespace MSTech.GestaoEscolar.BLL
 
         #endregion Plataforma de Itens e Avaliações
 
+        #region Sondagem
+
+        /// <summary>
+        /// Retorna os dados das sondagens que o aluno participou.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+        /// <returns>Objeto com os dados das sondagens.</returns>
+        public static SondagemSaidaDTO BuscaSondagemAluno(AnoAlunoEntradaDTO filtros)
+        {
+            SondagemSaidaDTO retorno = new SondagemSaidaDTO();
+            try
+            {
+                DataTable dt = ACA_SondagemBO.SelecionaSondagemPorAluno(filtros.ano, filtros.alu_id);
+                //
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        #endregion Sondagem
+
         #endregion Métodos
     }
 }
