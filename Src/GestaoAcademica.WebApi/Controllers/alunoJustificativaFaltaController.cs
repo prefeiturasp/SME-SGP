@@ -9,30 +9,29 @@ using System.Web.Http.Cors;
 
 namespace GestaoAcademica.WebApi.Controllers
 {
-    public class alunoAnotacaoController : ApiController
+    public class alunoJustificativaFaltaController : ApiController
     {
         /// <summary>
-        /// Descrição: retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+        /// Descrição: retorna os dados das justificativas do aluno.
         /// </summary>
-        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
-        /// <returns>Objeto com os dados das anotações.</returns>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+        /// <returns>Objeto com os dados das justificativas.</returns>
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "get")]
-        public AlunoAnotacaoSaidaDTO Get([FromUri] AnoAlunoTurmaEntradaDTO filtros)
+        public AlunoJustificativaFaltaSaidaDTO Get([FromUri] AnoAlunoEntradaDTO filtros)
         {
             try
             {
-                return ApiBO.BuscaAnotacoesAluno(filtros);
+                return ApiBO.BuscaJustificativasAluno(filtros);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
 
-                AlunoAnotacaoSaidaDTO saidaDTO = new AlunoAnotacaoSaidaDTO();
+                AlunoJustificativaFaltaSaidaDTO saidaDTO = new AlunoJustificativaFaltaSaidaDTO();
                 saidaDTO.Status = 1;
                 saidaDTO.StatusDescription = "Ocorreu um erro ao carregar dados.";
-                saidaDTO.anotacoesDocente = new List<AnotacaoDocenteDTO>();
-                saidaDTO.anotacoesGestor = new List<AnotacaoGestorDTO>();
+                saidaDTO.justificativas = new List<JustificativaDTO>();
                 return saidaDTO;
             }
         }

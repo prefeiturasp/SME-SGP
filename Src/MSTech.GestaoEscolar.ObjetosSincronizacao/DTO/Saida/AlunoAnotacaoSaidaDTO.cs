@@ -21,6 +21,8 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida
         public string data { get; set; }
         public string anotacao { get; set; }
         public string nomeDocente { get; set; }
+        public string nomeEscola { get; set; }
+        public string codigoTurma { get; set; }
         public string nomeDisciplina { get; set; }
     }
 
@@ -28,5 +30,6 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida
     {
         public string data { get; set; }
         public string anotacao { get; set; }
+        public string funcaoGestor { get; set; }
     }
 }

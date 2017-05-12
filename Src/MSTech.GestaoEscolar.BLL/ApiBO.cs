@@ -7360,7 +7360,7 @@ namespace MSTech.GestaoEscolar.BLL
                                                ,
                                             ordem = Convert.ToInt32(sdqSub.FirstOrDefault()["sdq_ordemSub"])
                                         }).ToList()
-                        ,
+                         ,
                          respostas = (from dr in dt.AsEnumerable()
                                       group dr by new { snd_id = dr.Field<int>("snd_id"), sdr_id = dr.Field<int>("sdr_id") } into sdr
                                       orderby Convert.ToInt32(sdr.FirstOrDefault()["sdr_ordem"])
@@ -7423,6 +7423,40 @@ namespace MSTech.GestaoEscolar.BLL
             try
             {
                 DataTable dt = CLS_TurmaAulaAlunoBO.SelecionaAnotacoesPorAluno(filtros.ano, filtros.alu_id, filtros.mtu_id);
+
+                List<AnotacaoDocenteDTO> lista = (from dr in dt.AsEnumerable()
+                                                  orderby Convert.ToDateTime(dr["tau_data"])
+                                                  select new AnotacaoDocenteDTO
+                                                  {
+                                                      data = Convert.ToDateTime(dr["tau_data"]).ToString("dd/MM/yyyy")
+                                                      ,
+                                                      anotacao = dr["taa_anotacao"].ToString()
+                                                      ,
+                                                      nomeDocente = dr["pes_nome"].ToString()
+                                                      ,
+                                                      nomeEscola = dr["esc_nome"].ToString()
+                                                      ,
+                                                      codigoTurma = dr["tur_codigo"].ToString()
+                                                      ,
+                                                      nomeDisciplina = dr["dis_nome"].ToString()
+                                                  }
+                    ).ToList();
+
+                retorno.anotacoesDocente = lista;
+
+                List<ACA_AlunoAnotacao> listaGestor = ACA_AlunoAnotacaoBO.SelecionaAnotacoesAluno(filtros.alu_id, filtros.ano);
+
+                retorno.anotacoesGestor = (from dr in listaGestor
+                                           orderby dr.ano_dataAnotacao
+                                           select new AnotacaoGestorDTO
+                                           {
+                                               data = dr.ano_dataAnotacao.ToString("dd/MM/yyyy")
+                                               ,
+                                               anotacao = dr.ano_anotacao
+                                               ,
+                                               funcaoGestor = dr.gru_nome
+                                           }
+                                           ).ToList();
             }
             catch (Exception ex)
             {
@@ -7432,16 +7466,53 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
-        /// Retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+        /// Retorna os dados das justificativas do aluno.
         /// </summary>
-        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
-        /// <returns>Objeto com os dados das anotações.</returns>
-        public static AlunoAnotacaoSaidaDTO BuscaAnotacoesAluno(AnoAlunoEntradaDTO filtros)
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+        /// <returns>Objeto com os dados das justificativas.</returns>
+        public static AlunoJustificativaFaltaSaidaDTO BuscaJustificativasAluno(AnoAlunoEntradaDTO filtros)
         {
-            AlunoAnotacaoSaidaDTO retorno = new AlunoAnotacaoSaidaDTO();
+            AlunoJustificativaFaltaSaidaDTO retorno = new AlunoJustificativaFaltaSaidaDTO();
             try
             {
-                DataTable dt = CLS_TurmaAulaAlunoBO.SelecionaAnotacoesPorAluno(filtros.ano, filtros.alu_id, -1);
+                DataTable dt = ACA_AlunoJustificativaFaltaBO.SelecionaJustificativasPorAluno(filtros.ano, filtros.alu_id);
+
+                List<JustificativaDTO> lista = (from dr in dt.AsEnumerable()
+                                                orderby Convert.ToDateTime(dr["afj_dataInicio"])
+                                                select new JustificativaDTO
+                                                {
+                                                    tipo = dr["tjf_nome"].ToString()
+                                                    ,
+                                                    dataInicio = Convert.ToDateTime(dr["afj_dataInicio"]).ToString("dd/MM/yyyy")
+                                                    ,
+                                                    dataFim = dr["afj_dataFim"] == DBNull.Value ? "" : Convert.ToDateTime(dr["afj_dataFim"]).ToString("dd/MM/yyyy")
+                                                    ,
+                                                    observacao = dr["afj_observacao"].ToString()
+                                                }
+                                                ).ToList();
+
+                retorno.justificativas = lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        /// <summary>
+        /// Retorna os dados de algumas movimentações específicas do aluno.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma..</param>
+        /// <returns>Objeto com os dados das movimentações.</returns>
+        public static AlunoMovimentacaoSaidaDTO BuscaMovimentacoesEspecificasAluno(AnoAlunoTurmaEntradaDTO filtros)
+        {
+            AlunoMovimentacaoSaidaDTO retorno = new AlunoMovimentacaoSaidaDTO();
+            try
+            {
+                DataTable dt = MTR_MovimentacaoBO.SelecionaMovimentacoesEspecificasPorAluno(filtros.ano, filtros.alu_id, filtros.mtu_id);
+
+                
             }
             catch (Exception ex)
             {

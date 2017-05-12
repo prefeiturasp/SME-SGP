@@ -1,11 +1,14 @@
 ﻿using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada;
+using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.Entities;
+using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GestaoAcademica.WebApi.Controllers
 {
@@ -95,6 +98,31 @@ namespace GestaoAcademica.WebApi.Controllers
             }
 
             throw new HttpResponseException(HttpStatusCode.NotFound);
+        }
+
+        /// <summary>
+        /// Descrição: retorna os dados de algumas movimentações específicas do aluno.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma..</param>
+        /// <returns>Objeto com os dados das movimentações.</returns>
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "get")]
+        public AlunoMovimentacaoSaidaDTO Get([FromUri] AnoAlunoTurmaEntradaDTO filtros)
+        {
+            try
+            {
+                return ApiBO.BuscaMovimentacoesEspecificasAluno(filtros);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+
+                AlunoMovimentacaoSaidaDTO saidaDTO = new AlunoMovimentacaoSaidaDTO();
+                saidaDTO.Status = 1;
+                saidaDTO.StatusDescription = "Ocorreu um erro ao carregar dados.";
+                saidaDTO.movimentacoes = new List<MovimentacaoDTO>();
+                return saidaDTO;
+            }
         }
     }
 }
