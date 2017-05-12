@@ -616,8 +616,8 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
                              "&tud_id=" + UCComboTurmaDisciplina.Valor +
                              "&dataInicio=" + txtDataInicio.Text +
                              "&dataFim=" + txtDataFim.Text +
-                             "&dre=" + UCComboUAEscola.TextoComboUA +
-                             "&escola=" + UCComboUAEscola.TextoComboEscola +
+                             "&dre=" + (UCComboUAEscola.Uad_ID.Equals(Guid.Empty) ? UCComboUAEscola.TextoComboEscola : UCComboUAEscola.TextoComboUA) +
+                             "&escola=" + (UCComboUAEscola.Uad_ID.Equals(Guid.Empty) ? "" : UCComboUAEscola.TextoComboEscola) +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
                                                    , ApplicationWEB.LogoRelatorioSSRS) +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +

@@ -147,6 +147,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -249,7 +250,6 @@
                         <PaddingBottom>1pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -406,7 +406,7 @@
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!dia.Value</Value>
+                  <Value>=Fields!tau_data.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixMembers>
