@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCComboTipoTurma.ascx.cs" Inherits="GestaoEscolar.WebControls.Combos.UCComboTipoTurma" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCComboTipoTurma.ascx.cs" Inherits="WebControls_Combos_UCComboTipoTurma" %>
 <asp:Label ID="lblTitulo" runat="server" Text="Tipo de turma *" AssociatedControlID="ddlCombo"></asp:Label>
 <asp:DropDownList ID="ddlCombo" runat="server" AppendDataBoundItems="True" SkinID="text30C">
     <asp:ListItem Value="-1">-- Selecione um tipo de turma --</asp:ListItem>

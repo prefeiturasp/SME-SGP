@@ -1,17 +1,60 @@
-﻿using System;
+﻿using MSTech.GestaoEscolar.Web.WebProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace GestaoEscolar.WebControls.Combos
-{
-    public partial class UCComboTipoTurma : System.Web.UI.UserControl
+    public partial class WebControls_Combos_UCComboTipoTurma : MotherUserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        #region PROPRIEDADADES
 
+        /// <summary>
+        /// Retorna e seta o valor selecionado no combo
+        /// </summary>
+        public int Valor
+        {
+            get
+            {
+                return Convert.ToInt32(ddlCombo.SelectedValue);
+            }
+            set
+            {
+                ddlCombo.SelectedValue = value.ToString();
+            }
         }
+
+        /// <summary>
+        /// Propriedade que seta a label e a validação do combo
+        /// </summary>
+        public bool Obrigatorio
+        {
+            set
+            {
+                if (value)
+                {
+                    AdicionaAsteriscoObrigatorio(lblTitulo);
+                }
+                else
+                {
+                    RemoveAsteriscoObrigatorio(lblTitulo);
+                }
+
+                cpvCombo.Visible = value;
+            }
+        }
+
+        /// <summary>
+        /// Seta o validationGroup do combo.
+        /// </summary>
+        public string ValidationGroup
+        {
+            set
+            {
+                cpvCombo.ValidationGroup = value;
+            }
+        }
+
+        #endregion
     }
-}
