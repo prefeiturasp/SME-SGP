@@ -29,6 +29,13 @@
             <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
             <returns>Objeto com os dados das anotações.</returns>
         </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.alunoJustificativaFaltaController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados das justificativas do aluno.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+            <returns>Objeto com os dados das justificativas.</returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.aluno_fechamento_pendenciaController.GetFila">
             <summary>
             Seleciona a fila de alunoFechamentoPendencia do serviço

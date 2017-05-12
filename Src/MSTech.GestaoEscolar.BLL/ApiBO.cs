@@ -7465,6 +7465,27 @@ namespace MSTech.GestaoEscolar.BLL
             return retorno;
         }
 
+        /// <summary>
+        /// Retorna os dados das justificativas do aluno.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+        /// <returns>Objeto com os dados das justificativas.</returns>
+        public static AlunoJustificativaFaltaSaidaDTO BuscaJustificativasAluno(AnoAlunoEntradaDTO filtros)
+        {
+            AlunoJustificativaFaltaSaidaDTO retorno = new AlunoJustificativaFaltaSaidaDTO();
+            try
+            {
+                DataTable dt = ACA_AlunoJustificativaFaltaBO.SelecionaJustificativasPorAluno(filtros.ano, filtros.alu_id);
+
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
         #endregion Relatório pedagógico
 
         #endregion Métodos
