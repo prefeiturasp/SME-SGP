@@ -68,7 +68,7 @@
             }
             else
             {
-                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, new { message = "Credenciais inválidas" });
             }
         }
     }
