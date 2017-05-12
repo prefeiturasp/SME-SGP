@@ -7500,6 +7500,27 @@ namespace MSTech.GestaoEscolar.BLL
             return retorno;
         }
 
+        /// <summary>
+        /// Retorna os dados de algumas movimentações específicas do aluno.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma..</param>
+        /// <returns>Objeto com os dados das movimentações.</returns>
+        public static AlunoMovimentacaoSaidaDTO BuscaMovimentacoesEspecificasAluno(AnoAlunoTurmaEntradaDTO filtros)
+        {
+            AlunoMovimentacaoSaidaDTO retorno = new AlunoMovimentacaoSaidaDTO();
+            try
+            {
+                DataTable dt = MTR_MovimentacaoBO.SelecionaMovimentacoesEspecificasPorAluno(filtros.ano, filtros.alu_id, filtros.mtu_id);
+
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
         #endregion Relatório pedagógico
 
         #endregion Métodos

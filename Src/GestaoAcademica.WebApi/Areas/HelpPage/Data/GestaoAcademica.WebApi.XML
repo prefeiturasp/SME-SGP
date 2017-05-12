@@ -285,6 +285,13 @@
             <returns>HttpResponseMessage</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.movimentacoesController.Get(System.Int64,System.Int32)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.movimentacoesController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoTurmaEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados de algumas movimentações específicas do aluno.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma..</param>
+            <returns>Objeto com os dados das movimentações.</returns>
+        </member>
         <member name="T:GestaoAcademica.WebApi.Controllers.parecerConclusivoController">
             <summary>
             Recurso parecer conclusivo.

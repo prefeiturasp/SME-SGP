@@ -340,6 +340,19 @@ namespace MSTech.GestaoEscolar.BLL
             return new MTR_MovimentacaoDAO().VerificaAlunoPossuiMovimentacaoSaidaEscola(alu_id, mtu_id);
         }
 
+        /// <summary>
+        /// Retorna os dados de algumas movimentações específicas do aluno.
+        /// </summary>
+        /// <param name="ano">Ano das movimentações</param>
+        /// <param name="alu_id">Id do aluno</param>
+        /// <param name="mtu_id">Id da matrícula do aluno na turma</param>
+        /// <returns></returns>
+        public static DataTable SelecionaMovimentacoesEspecificasPorAluno(int ano, long alu_id, int mtu_id)
+        {
+            MTR_MovimentacaoDAO dao = new MTR_MovimentacaoDAO();
+            return dao.SelectMovimentacoesEspecificasBy_Aluno(ano, alu_id, mtu_id);
+        }
+
         #endregion Consultas
 
         #region Validações

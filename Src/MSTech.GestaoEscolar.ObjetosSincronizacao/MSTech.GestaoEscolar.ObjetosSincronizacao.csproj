@@ -110,6 +110,7 @@
     <Compile Include="DTO\Entrada\UsuarioEntradaDTO.cs" />
     <Compile Include="DTO\Saida\AlunoAnotacaoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\AlunoJustificativaFaltaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\AlunoMovimentacaoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaAlunosDetalhadoEscolaSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaBoletimEscolarAlunoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaBoletimEscolarDosAlunosSaidaDTO.cs" />
