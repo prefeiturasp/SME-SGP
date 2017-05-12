@@ -4,9 +4,6 @@ using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
 using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
