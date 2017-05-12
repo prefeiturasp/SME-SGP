@@ -7309,7 +7309,7 @@ namespace MSTech.GestaoEscolar.BLL
 
         #endregion Plataforma de Itens e Avaliações
 
-        #region Sondagem
+        #region Relatório pedagógico
 
         /// <summary>
         /// Retorna os dados das sondagens que o aluno participou.
@@ -7412,7 +7412,45 @@ namespace MSTech.GestaoEscolar.BLL
             return retorno;
         }
 
-        #endregion Sondagem
+        /// <summary>
+        /// Retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
+        /// <returns>Objeto com os dados das anotações.</returns>
+        public static AlunoAnotacaoSaidaDTO BuscaAnotacoesAluno(AnoAlunoTurmaEntradaDTO filtros)
+        {
+            AlunoAnotacaoSaidaDTO retorno = new AlunoAnotacaoSaidaDTO();
+            try
+            {
+                DataTable dt = CLS_TurmaAulaAlunoBO.SelecionaAnotacoesPorAluno(filtros.ano, filtros.alu_id, filtros.mtu_id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        /// <summary>
+        /// Retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
+        /// <returns>Objeto com os dados das anotações.</returns>
+        public static AlunoAnotacaoSaidaDTO BuscaAnotacoesAluno(AnoAlunoEntradaDTO filtros)
+        {
+            AlunoAnotacaoSaidaDTO retorno = new AlunoAnotacaoSaidaDTO();
+            try
+            {
+                DataTable dt = CLS_TurmaAulaAlunoBO.SelecionaAnotacoesPorAluno(filtros.ano, filtros.alu_id, -1);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        #endregion Relatório pedagógico
 
         #endregion Métodos
     }

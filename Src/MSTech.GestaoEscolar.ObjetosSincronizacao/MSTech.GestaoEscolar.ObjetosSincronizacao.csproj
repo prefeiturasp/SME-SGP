@@ -108,6 +108,7 @@
     <Compile Include="DTO\Entrada\RetornaEscolaEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\SincronizacaoDiarioClasseEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\UsuarioEntradaDTO.cs" />
+    <Compile Include="DTO\Saida\AlunoAnotacaoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaAlunosDetalhadoEscolaSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaBoletimEscolarAlunoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaBoletimEscolarDosAlunosSaidaDTO.cs" />
