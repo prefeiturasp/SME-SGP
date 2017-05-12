@@ -4,6 +4,24 @@
         <name>GestaoAcademica.WebApi</name>
     </assembly>
     <members>
+        <member name="T:GestaoAcademica.WebApi.Authentication.BasicAuthenticationAttribute">
+            <summary>
+            Atributo para indicar se será realizada a autenticação básica da API.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Authentication.BasicAuthenticationAttribute.Autenticar(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Realiza a autenticação do usuário.
+            </summary>
+            <param name="actionContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Authentication.BasicAuthenticationAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Chamada feita antes da ação do controller.
+            </summary>
+            <param name="actionContext"></param>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.aluno_fechamento_pendenciaController.GetFila">
             <summary>
             Seleciona a fila de alunoFechamentoPendencia do serviço
@@ -253,6 +271,12 @@
             <returns>HttpResponseMessage</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.movimentacoesController.Get(System.Int64,System.Int32)" -->
+        <member name="T:GestaoAcademica.WebApi.Controllers.parecerConclusivoController">
+            <summary>
+            Recurso parecer conclusivo.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.parecerConclusivoController.GetResultadoAluno(System.Int32,System.String)" -->
         <member name="M:GestaoAcademica.WebApi.Controllers.protocolosController.Get(System.String)">
             <summary>
             Descrição: retorna um registro de protocolo pelo id (Guid)

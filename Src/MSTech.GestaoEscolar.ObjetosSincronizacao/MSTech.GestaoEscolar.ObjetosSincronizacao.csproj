@@ -231,6 +231,7 @@
     <Compile Include="Entities\ACA_CursoRelacionadoDTO.cs" />
     <Compile Include="Entities\MTR_MovimentacaoDTO.cs" />
     <Compile Include="Entities\MTR_TipoMovimentacaoDTO.cs" />
+    <Compile Include="Entities\ParecerConclusivo.cs" />
     <Compile Include="Entities\RHU_CargaHorariaDTO.cs" />
     <Compile Include="Entities\RHU_CargoDTO.cs" />
     <Compile Include="Entities\RHU_ColaboradorDTO.cs" />

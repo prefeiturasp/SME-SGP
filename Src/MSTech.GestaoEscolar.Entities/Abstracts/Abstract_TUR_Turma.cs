@@ -127,5 +127,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         /// Propriedade tur_dataEncerramento.
         /// </summary>
         public virtual DateTime tur_dataEncerramento { get; set; }
+
+        /// <summary>
+        /// Código da turma no EOL.
+        /// </summary>
+        public virtual int tur_codigoEOL { get; set; }
     }
 }
