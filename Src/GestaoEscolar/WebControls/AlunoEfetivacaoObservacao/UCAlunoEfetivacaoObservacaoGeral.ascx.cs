@@ -4,12 +4,17 @@ using MSTech.CoreSSO.BLL;
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.CustomResourceProviders;
 using MSTech.GestaoEscolar.Entities;
+using MSTech.GestaoEscolar.ObjetosSincronizacao.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -774,6 +779,11 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     if (!string.IsNullOrEmpty(ddlResultado.SelectedValue))
                     {
                         resultado = Convert.ToByte(ddlResultado.SelectedValue == "-1" ? "0" : ddlResultado.SelectedValue);
+                    }
+
+                    if (!VerificarIntegridadeParecerEOL(hdnCodigoEOLTurma.Value, hdnCodigoEOLAluno.Value, ddlResultado.SelectedItem.Text))
+                    {
+                        throw new ValidationException("O parecer conclusivo selecionado está divergente com o cadastrado no EOL.");
                     }
                 }
 
@@ -2000,6 +2010,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     lblNumeroChamada.Text = "-";
                 }
                 lblCodigoEol.Text = dados.alc_matricula;
+
+                hdnCodigoEOLAluno.Value = dados.alc_matricula;
+                hdnCodigoEOLTurma.Value = dados.tur_codigoEOL;
+
+                lblMensagemResultadoInvalido.Text = UtilBO.GetErroMessage("O parecer conclusivo selecionado está divergente com o cadastrado no EOL.", UtilBO.TipoMensagem.Alerta);
+
                 lblSituacaoMatriculaEntrada.Text = string.Format("{0} {1:dd/MM/yyyy}", RetornaValorResource("MatriculadoEm"), dados.mtu_dataMatricula);
                 if (dados.mtu_dataSaida != DateTime.MinValue)
                 {
@@ -3997,6 +4013,52 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             liRecomendacaoAluno.Visible = fdsRecomendacoesAluno.Visible = possuiPermissaoVisualizacaoAbaRecomendacaoAluno;
             liRecomendacaoResponsavel.Visible = fdsRecomendacoesPais.Visible = possuiPermissaoVisualizacaoAbaRecomendacaoResponsavel;
             liAnotacoesAluno.Visible = fdsAnotacoes.Visible = possuiPermissaoVisualizacaoAbaAnotacoesAluno;
+        }
+
+        /// <summary>
+        /// Verifica integridade do resultado do aluno com o EOL.
+        /// </summary>
+        /// <param name="CodigoEOLTurma"></param>
+        /// <param name="CodigoEOLAluno"></param>
+        /// <param name="resultado"></param>
+        /// <returns></returns>
+        public static bool VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado)
+        {
+            bool retorno = false;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    SYS_RecursoAPI recurso = new SYS_RecursoAPI { rap_id = (int)eRecursoAPI.ParecerConclusivoEOL };
+                    SYS_RecursoAPIBO.GetEntity(recurso);
+
+                    client.BaseAddress = new Uri(recurso.rap_url);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    List<SYS_UsuarioAPI> lstUsuario = SYS_RecursoUsuarioAPIBO.SelecionaUsuarioPorRecurso(eRecursoAPI.ParecerConclusivoEOL);
+
+                    if (lstUsuario.Any())
+                    {
+                        var auth = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", lstUsuario.First().uap_usuario, lstUsuario.First().uap_senha));
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(auth));
+                    }
+
+                    HttpResponseMessage response = client.GetAsync(string.Format("GetResultadoAluno?CodigoEOLTurma={0}&CodigoEOLAluno={1}", CodigoEOLTurma, CodigoEOLAluno)).Result;
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        ParecerConclusivo parecerEOL = response.Content.ReadAsAsync<ParecerConclusivo>().Result;
+                        retorno = string.IsNullOrEmpty(parecerEOL.Resultado) || parecerEOL.Resultado.ToString().Equals(resultado, StringComparison.OrdinalIgnoreCase);
+                    }
+                }
+
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                return false;
+            }
         }
 
         #endregion Métodos

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -374,6 +375,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                 ApplicationWEB._GravaErro(ex);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
+        }
+
+        [WebMethod]
+        public static bool VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado)
+        {
+            return WebControls.AlunoEfetivacaoObservacao.UCAlunoEfetivacaoObservacaoGeral.VerificarIntegridadeParecerEOL(CodigoEOLTurma, CodigoEOLAluno, resultado);
         }
 
         #endregion Métodos

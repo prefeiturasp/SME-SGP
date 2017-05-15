@@ -16,6 +16,8 @@
             <div class="dados-aluno clearfix">
                 <div class="div-inline">
                     <asp:HiddenField ID="hdnTipoFechamento" runat="server" />
+                    <asp:HiddenField ID="hdnCodigoEOLTurma" runat="server" />
+                    <asp:HiddenField ID="hdnCodigoEOLAluno" runat="server" />
                     <asp:Image runat="server" ID="imgFotoAluno" />
                 </div>
                 <div class="div-inline">
@@ -79,6 +81,7 @@
                 <div id="divTabs-0">
                     <fieldset id="fdsBoletim" runat="server">
                         <asp:Label ID="lblMensagemSemDados" runat="server" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.Cadastro.lblMensagemSemDados.Text %>"></asp:Label>
+                        <asp:Label ID="lblMensagemResultadoInvalido" runat="server" CssClass="hide"></asp:Label>
                         <br />
                         <div id="divFrequenciaGlobal" class="div-inline align-middle" runat="server">
                             <asp:Label ID="lblFrequenciaGlobalTitulo" runat="server" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblFrequenciaGlobalTitulo.Text %>" CssClass="lbl-negrito"></asp:Label>
@@ -88,8 +91,7 @@
                             <asp:HiddenField ID="hfDataUltimaAlteracaoParecerConclusivo" runat="server" />
                             <asp:Label ID="lblParecerConclusivo" runat="server" Text="<%$ Resources:Mensagens, MSG_RESULTADOEFETIVACAO %>" Font-Bold="true" AssociatedControlID="ddlResultado"></asp:Label>
                             <asp:DropDownList ID="ddlResultado" runat="server"></asp:DropDownList>
-                        </div>
-                        <br />
+                        </div><br />
                         <br />
                         <div id="divInseridoPor" runat="server">
                             <asp:Label ID="lblHistoricoParecer" runat="server" Text=""></asp:Label>

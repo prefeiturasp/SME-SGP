@@ -19,6 +19,24 @@
         $(this).val(valorArredondado);
     });
 
+    $()
+
+    $('select[id$="ddlResultado"]').unbind('change').bind('change', function () {
+        var lbl = $('span[id$="lblMensagemResultadoInvalido"]');
+        if ($('select[id$="ddlResultado"] option:selected').val() != "-1") {
+            VerificarIntegridadeParecerEOL(function (retorno) {
+                if (!retorno) {
+                    lbl.removeClass('hide');
+                    $('select[id$="ddlResultado"]').val("-1");
+                } else {
+                    lbl.addClass('hide');
+                }
+            });
+        } else {
+            lbl.addClass('hide');
+        }
+    });
+
     function AplicaVariacaoFrequencia(result) {
         var variacao = parseFloat($("input[id$=hdnVariacaoFrequencia]").val().replace(",", "."));
         variacao = isNaN(variacao) || variacao <= 0 ? 0.01 : variacao;
@@ -81,6 +99,31 @@ function LimitarCaracter(idCampo, idContador, TamMax) {
 
     var Caracteres = (idCampo).value.length;
     $(idCampo).next($(idContador)).html(Caracteres + "/" + TamMax);
+}
+
+function VerificarIntegridadeParecerEOL(onComplete) {
+    var codigoEOLTurma = $('input[id$="hdnCodigoEOLTurma"]').val();
+    var codigoEOLAluno = $('input[id$="hdnCodigoEOLAluno"]').val();
+    var resultado = $('select[id$="ddlResultado"] option:selected').text();
+
+    var retorno = false;
+
+    $.ajax({
+        type: "POST",
+        url: pageName + "/VerificarIntegridadeParecerEOL",
+        data: '{ "CodigoEOLTurma": "' + codigoEOLTurma + '", "CodigoEOLAluno": "' + codigoEOLAluno + '", "resultado": "' + resultado + '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            retorno = data.d;
+        },
+        error: function (data, success, error) {
+            retorno = false;
+        },
+        complete: function (data) {
+            onComplete(retorno);
+        }
+    });
 }
 
 // Insere as funções na lista de funcões - será chamado no Init.js.
