@@ -14,6 +14,77 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 {
     public partial class Busca : MotherPageLogado
     {
+        /// <summary>
+        /// Retorna o valor do parâmetro "Permanecer na tela após gravações"
+        /// </summary>
+        private bool ParametroPermanecerTela
+        {
+            get
+            {
+                return ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.BOTAO_SALVAR_PERMANECE_TELA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+            }
+        }
+
+        /// <summary>
+        /// Propriedade em ViewState que armazena valor de tne_id
+        /// no caso de atualização de um registro ja existente.
+        /// </summary>
+        private int VS_tne_id
+        {
+            get
+            {
+                if (ViewState["VS_tne_id"] != null)
+                {
+                    return Convert.ToInt32(ViewState["VS_tne_id"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_tne_id"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Propriedade em ViewState que armazena valor de tme_id
+        /// no caso de atualização de um registro ja existente.
+        /// </summary>
+        private int VS_tme_id
+        {
+            get
+            {
+                if (ViewState["VS_tme_id"] != null)
+                {
+                    return Convert.ToInt32(ViewState["VS_tme_id"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_tme_id"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Propriedade em ViewState que armazena valor de tur_tipo
+        /// no caso de atualização de um registro ja existente.
+        /// </summary>
+        private byte VS_tur_tipo
+        {
+            get
+            {
+                if (ViewState["VS_tur_tipo"] != null)
+                {
+                    return Convert.ToByte(ViewState["VS_tur_tipo"]);
+                }
+                return 0;
+            }
+            set
+            {
+                ViewState["VS_tur_tipo"] = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -34,60 +105,43 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 
                 try
                 {
-                    //VerificaBusca();
+                    Inicializa();
+                    Page.Form.DefaultFocus = UCComboTipoNivelEnsino.ClientID;
                 }
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
                 }
-
-                
-                
-                Page.Form.DefaultFocus = UCComboTipoNivelEnsino.ClientID;
-
-                divPesquisa.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
-                btnSalvar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
-                btnCancelar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
-
-                UCComboTipoModalidadeEnsino.CarregarTipoModalidadeEnsino();
-                UCComboTipoNivelEnsino.CarregarTipoNivelEnsino();
             }
         }
 
-        /// <summary>
-        /// Verifica se tem busca salva na sessão e realiza automaticamente, caso positivo.
-        /// </summary>
-        private void VerificaBusca()
+        private void Inicializa()
         {
-            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.ConfiguracaoServicoPendencia)
-            {
-                // Recuperar busca realizada e pesquisar automaticamente
-                string valor;
+            divPesquisa.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
+            btnSalvar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
+            btnCancelar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
 
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tne_id", out valor);
-                UCComboTipoNivelEnsino.Valor = Convert.ToInt32(valor);
+            UCComboTipoModalidadeEnsino.CarregarTipoModalidadeEnsino();
+            UCComboTipoNivelEnsino.CarregarTipoNivelEnsino();
 
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tme_id", out valor);
-                UCComboTipoModalidadeEnsino.Valor = Convert.ToInt32(valor);
-
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tur_tipo", out valor);
-                UCComboTipoTurma.Valor = Convert.ToByte(valor);                
-            }
-            else
-            {
-                fdsConfiguracao.Visible = false;
-            }
+            setValorCombos(-1, -1, 0);
         }
 
+        private void setValorCombos(int tne_id, int tme_id, byte tur_tipo)
+        {
+            UCComboTipoNivelEnsino.Valor = tne_id <= 0 ? -1 : tne_id;
+            UCComboTipoModalidadeEnsino.Valor = tme_id <= 0 ? -1 : tme_id;
+            UCComboTipoTurma.Valor = tur_tipo <= 0 ? Convert.ToByte(0) : tur_tipo;
+        }
+        
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            __SessionWEB.BuscaRealizada = new BuscaGestao();
             Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ConfiguracaoServicoPendencia/Busca.aspx", false);
+            Inicializa();
         }        
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            //TODO:[ANA] 
             ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(UCComboTipoNivelEnsino.Valor, UCComboTipoModalidadeEnsino.Valor,UCComboTipoTurma.Valor);
             
             entity.tne_id = UCComboTipoNivelEnsino.Valor;
@@ -104,44 +158,64 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             if (ACA_ConfiguracaoServicoPendenciaBO.Save(entity))
             {
                 ApplicationWEB._GravaLogSistema(entity.IsNew ? LOG_SistemaTipo.Insert : LOG_SistemaTipo.Update, "Cadastro de configuração de serviço de pendência. csp_id" + entity.csp_id);
-                lblMessage.Text = UtilBO.GetErroMessage("Configuração de servico de pendência gravada com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                string message = UtilBO.GetErroMessage("Configuração de servico de pendência gravada com sucesso.", UtilBO.TipoMensagem.Sucesso);
+
+                if (ParametroPermanecerTela)
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                    lblMessage.Text = message;
+                    VerificaCadastro();
+                    setValorCombos(VS_tne_id, VS_tme_id, VS_tur_tipo);
+                }
+                else
+                {
+                    __SessionWEB.PostMessages = message;
+                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ConfiguracaoServicoPendencia/Busca.aspx", false);
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    Inicializa();
+                }                
             }
-
-            VerificaCadastro();
-
         }
 
-        void VerificaCadastro()
+        private void VerificaCadastro()
         {
-            fdsConfiguracao.Visible = UCComboTipoNivelEnsino.Valor > 0 && UCComboTipoModalidadeEnsino.Valor > 0 && UCComboTipoTurma.Valor > 0;
+            fdsConfiguracao.Visible = VS_tne_id > 0 && VS_tme_id > 0 && VS_tur_tipo > 0;
             UCComboTipoNivelEnsino.PermiteEditar = UCComboTipoModalidadeEnsino.PermiteEditar = UCComboTipoTurma.PermiteEditar = !fdsConfiguracao.Visible;            
             if (fdsConfiguracao.Visible)
             {
-                ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(UCComboTipoNivelEnsino.Valor, UCComboTipoModalidadeEnsino.Valor, UCComboTipoTurma.Valor);
-                if (entity.csp_id > 0)
-                {
-                    chkDisciplinaSemAula.Checked = entity.csp_disciplinaSemAula;
-                    chkSemNota.Checked = entity.csp_semNota;
-                    chkSemParecer.Checked = entity.csp_semParecer;
-                    chkSemPlanejamento.Checked = entity.csp_semPlanejamento;
-                    chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
-                    chkSemSintese.Checked = entity.csp_semSintese;
-                }
+                LoadByEntity(VS_tne_id, VS_tme_id, VS_tur_tipo);
+            }
+        }
+
+        private void LoadByEntity(int tne_id, int tme_id, byte tur_tipo)
+        {            
+            ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo);
+            if (entity.csp_id > 0)
+            {
+                chkDisciplinaSemAula.Checked = entity.csp_disciplinaSemAula;
+                chkSemNota.Checked = entity.csp_semNota;
+                chkSemParecer.Checked = entity.csp_semParecer;
+                chkSemPlanejamento.Checked = entity.csp_semPlanejamento;
+                chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
+                chkSemSintese.Checked = entity.csp_semSintese;
             }
         }
 
         protected void UCComboTipoNivelEnsino_IndexChanged()
         {
+            VS_tne_id = UCComboTipoNivelEnsino.Valor;
             VerificaCadastro();
         }
 
         protected void UCComboTipoModalidadeEnsino_IndexChanged()
         {
+            VS_tme_id = UCComboTipoModalidadeEnsino.Valor;
             VerificaCadastro();
         }
 
         protected void UCComboTipoTurma_IndexChanged()
         {
+            VS_tur_tipo = UCComboTipoTurma.Valor;
             VerificaCadastro();
         }
     }
