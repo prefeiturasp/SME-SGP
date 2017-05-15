@@ -1,4 +1,4 @@
-USE [DES_SPO_CoreSSO]
+USE [CoreSSO]
 GO
 
 UPDATE MSM 
