@@ -7512,7 +7512,20 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 DataTable dt = MTR_MovimentacaoBO.SelecionaMovimentacoesEspecificasPorAluno(filtros.ano, filtros.alu_id, filtros.mtu_id);
 
-                
+                List<MovimentacaoDTO> lista = (from dr in dt.AsEnumerable()
+                                               orderby Convert.ToDateTime(dr["mov_dataRealizacao"]) descending
+                                               select new MovimentacaoDTO
+                                               {
+                                                    dataRealizacao = Convert.ToDateTime(dr["mov_dataRealizacao"]).ToString("dd/MM/yyyy")
+                                                    , tipo = dr["tmo_nome"].ToString()
+                                                    , escolaAnterior = dr["escolaAnterior"].ToString()
+                                                    , escolaAtual = dr["escolaAtual"].ToString()
+                                                    , turmaAnterior = dr["turmaAnterior"].ToString()
+                                                    , turmaAtual = dr["turmaAtual"].ToString()
+                                               }
+                                               ).ToList();
+
+                retorno.movimentacoes = lista;
             }
             catch (Exception ex)
             {

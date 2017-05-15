@@ -98,6 +98,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
+			Param.DbType = DbType.Int32;
+			Param.ParameterName = "@csp_id";
+			Param.Size = 4;
+			Param.Value = entity.csp_id;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
 			Param.DbType = DbType.Boolean;
 			Param.ParameterName = "@csp_semNota";
 			Param.Size = 1;
@@ -130,6 +137,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.ParameterName = "@csp_semPlanejamento";
 			Param.Size = 1;
 			Param.Value = entity.csp_semPlanejamento;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Boolean;
+			Param.ParameterName = "@csp_semSintese";
+			Param.Size = 1;
+			Param.Value = entity.csp_semSintese;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
@@ -230,6 +244,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
+			Param.DbType = DbType.Boolean;
+			Param.ParameterName = "@csp_semSintese";
+			Param.Size = 1;
+			Param.Value = entity.csp_semSintese;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@csp_situacao";
 			Param.Size = 4;
@@ -305,11 +326,11 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-			entity.csp_id = Convert.ToInt32(qs.Return.Rows[0][0]);
-			return (entity.csp_id > 0);
-			}
+                entity.csp_id = Convert.ToInt32(qs.Return.Rows[0][0]);
+                return (entity.csp_id > 0);
+            }
 
-			return false;
+            return false;
 		}		
 	}
 }
