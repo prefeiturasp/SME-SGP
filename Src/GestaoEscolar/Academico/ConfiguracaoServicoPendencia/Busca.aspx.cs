@@ -14,6 +14,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 {
     public partial class Busca : MotherPageLogado
     {
+        #region Propriedades
         /// <summary>
         /// Retorna o valor do parâmetro "Permanecer na tela após gravações"
         /// </summary>
@@ -85,37 +86,9 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             }
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            ScriptManager sm = ScriptManager.GetCurrent(this);
-            if (sm != null)
-            {
-                sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
-            }
+        #endregion       
 
-            UCComboTipoNivelEnsino.IndexChanged += UCComboTipoNivelEnsino_IndexChanged;
-            UCComboTipoModalidadeEnsino.IndexChanged += UCComboTipoModalidadeEnsino_IndexChanged;
-            UCComboTipoTurma.IndexChanged += UCComboTipoTurma_IndexChanged;
-
-            if (!IsPostBack)
-            {
-                string message = __SessionWEB.PostMessages;
-                if (!String.IsNullOrEmpty(message))
-                    lblMessage.Text = message;
-                
-                try
-                {
-                    Inicializa();
-                    Page.Form.DefaultFocus = UCComboTipoNivelEnsino.ClientID;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationWEB._GravaErro(ex);
-                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
-                }
-            }
-        }
-
+        #region Métodos
         private void Inicializa()
         {
             divPesquisa.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
@@ -134,16 +107,74 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             UCComboTipoModalidadeEnsino.Valor = tme_id <= 0 ? -1 : tme_id;
             UCComboTipoTurma.Valor = tur_tipo <= 0 ? Convert.ToByte(0) : tur_tipo;
         }
-        
+
+        private void VerificaCadastro()
+        {
+            fdsConfiguracao.Visible = VS_tne_id > 0 && VS_tme_id > 0 && VS_tur_tipo > 0;
+            UCComboTipoNivelEnsino.PermiteEditar = UCComboTipoModalidadeEnsino.PermiteEditar = UCComboTipoTurma.PermiteEditar = !fdsConfiguracao.Visible;
+            if (fdsConfiguracao.Visible)
+            {
+                LoadByEntity(VS_tne_id, VS_tme_id, VS_tur_tipo);
+            }
+        }
+
+        private void LoadByEntity(int tne_id, int tme_id, byte tur_tipo)
+        {
+            ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo);
+            if (entity.csp_id > 0)
+            {
+                chkDisciplinaSemAula.Checked = entity.csp_disciplinaSemAula;
+                chkSemNota.Checked = entity.csp_semNota;
+                chkSemParecer.Checked = entity.csp_semParecer;
+                chkSemPlanejamento.Checked = entity.csp_semPlanejamento;
+                chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
+                chkSemSintese.Checked = entity.csp_semSintese;
+            }
+        }
+        #endregion
+
+        #region Eventos
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
+            }
+
+            UCComboTipoNivelEnsino.IndexChanged += UCComboTipoNivelEnsino_IndexChanged;
+            UCComboTipoModalidadeEnsino.IndexChanged += UCComboTipoModalidadeEnsino_IndexChanged;
+            UCComboTipoTurma.IndexChanged += UCComboTipoTurma_IndexChanged;
+
+            if (!IsPostBack)
+            {
+                string message = __SessionWEB.PostMessages;
+                if (!String.IsNullOrEmpty(message))
+                    lblMessage.Text = message;
+
+                try
+                {
+                    Inicializa();
+                    Page.Form.DefaultFocus = UCComboTipoNivelEnsino.ClientID;
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+        }
+
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ConfiguracaoServicoPendencia/Busca.aspx", false);
             Inicializa();
-        }        
+        }
+
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(UCComboTipoNivelEnsino.Valor, UCComboTipoModalidadeEnsino.Valor,UCComboTipoTurma.Valor);
-            
+            ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(UCComboTipoNivelEnsino.Valor, UCComboTipoModalidadeEnsino.Valor, UCComboTipoTurma.Valor);
+
             entity.tne_id = UCComboTipoNivelEnsino.Valor;
             entity.tme_id = UCComboTipoModalidadeEnsino.Valor;
             entity.tur_tipo = UCComboTipoTurma.Valor;
@@ -173,31 +204,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                     Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ConfiguracaoServicoPendencia/Busca.aspx", false);
                     HttpContext.Current.ApplicationInstance.CompleteRequest();
                     Inicializa();
-                }                
-            }
-        }
-
-        private void VerificaCadastro()
-        {
-            fdsConfiguracao.Visible = VS_tne_id > 0 && VS_tme_id > 0 && VS_tur_tipo > 0;
-            UCComboTipoNivelEnsino.PermiteEditar = UCComboTipoModalidadeEnsino.PermiteEditar = UCComboTipoTurma.PermiteEditar = !fdsConfiguracao.Visible;            
-            if (fdsConfiguracao.Visible)
-            {
-                LoadByEntity(VS_tne_id, VS_tme_id, VS_tur_tipo);
-            }
-        }
-
-        private void LoadByEntity(int tne_id, int tme_id, byte tur_tipo)
-        {            
-            ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo);
-            if (entity.csp_id > 0)
-            {
-                chkDisciplinaSemAula.Checked = entity.csp_disciplinaSemAula;
-                chkSemNota.Checked = entity.csp_semNota;
-                chkSemParecer.Checked = entity.csp_semParecer;
-                chkSemPlanejamento.Checked = entity.csp_semPlanejamento;
-                chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
-                chkSemSintese.Checked = entity.csp_semSintese;
+                }
             }
         }
 
@@ -218,5 +225,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             VS_tur_tipo = UCComboTipoTurma.Valor;
             VerificaCadastro();
         }
+
+        #endregion
     }
 }
