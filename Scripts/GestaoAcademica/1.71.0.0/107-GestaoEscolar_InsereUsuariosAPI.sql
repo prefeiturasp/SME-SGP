@@ -27,7 +27,7 @@ SET XACT_ABORT ON
 		(
 			@usuario,
 			@senha,
-			1,
+			4,
 			@dataAtual,
 			@dataAtual
 		)
