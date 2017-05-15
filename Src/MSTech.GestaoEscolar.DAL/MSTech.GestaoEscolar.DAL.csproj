@@ -351,6 +351,8 @@
     <Compile Include="Abstracts\Abstract_SYS_ArquivoDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_EquipamentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_EquipamentoUnidadeAdministrativaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_RecursoAPIDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_RecursoUsuarioAPIDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_ServicosDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_ServicosLogExecucaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_UsuarioAPIDAO.cs" />
@@ -645,6 +647,8 @@
     <Compile Include="SYS_ArquivoDAO.cs" />
     <Compile Include="SYS_EquipamentoDAO.cs" />
     <Compile Include="SYS_EquipamentoUnidadeAdministrativaDAO.cs" />
+    <Compile Include="SYS_RecursoAPIDAO.cs" />
+    <Compile Include="SYS_RecursoUsuarioAPIDAO.cs" />
     <Compile Include="SYS_ServicosDAO.cs" />
     <Compile Include="SYS_ServicosLogExecucaoDAO.cs" />
     <Compile Include="SYS_UsuarioAPIDAO.cs" />
