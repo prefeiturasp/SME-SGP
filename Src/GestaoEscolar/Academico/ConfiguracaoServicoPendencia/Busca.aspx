@@ -32,6 +32,8 @@
 
         <asp:CheckBox ID="chkSemPlanejamento" runat="server" Text="Sem planejamento" CssClass="wrap150px"></asp:CheckBox>
 
+        <asp:CheckBox ID="chkSemSintese" runat="server" Text="Sem síntese" CssClass="wrap150px"></asp:CheckBox>
+
         <div class="right">
             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click"
                 ToolTip="Salvar" />

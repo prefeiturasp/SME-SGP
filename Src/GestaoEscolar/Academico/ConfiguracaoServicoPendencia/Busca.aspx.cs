@@ -98,7 +98,8 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             entity.csp_semParecer = chkSemParecer.Checked;
             entity.csp_semPlanejamento = chkSemPlanejamento.Checked;
             entity.csp_semResultadoFinal = chkSemResultadoFinal.Checked;
-            entity.IsNew = entity.csp_id < 0;
+            entity.csp_semSintese = chkSemSintese.Checked;
+            entity.IsNew = entity.csp_id <= 0;
 
             if (ACA_ConfiguracaoServicoPendenciaBO.Save(entity))
             {
@@ -106,28 +107,42 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 lblMessage.Text = UtilBO.GetErroMessage("Configuração de servico de pendência gravada com sucesso.", UtilBO.TipoMensagem.Sucesso);
             }
 
+            VerificaCadastro();
 
         }
 
-        void VerificaAbrirCadastro()
+        void VerificaCadastro()
         {
             fdsConfiguracao.Visible = UCComboTipoNivelEnsino.Valor > 0 && UCComboTipoModalidadeEnsino.Valor > 0 && UCComboTipoTurma.Valor > 0;
             UCComboTipoNivelEnsino.PermiteEditar = UCComboTipoModalidadeEnsino.PermiteEditar = UCComboTipoTurma.PermiteEditar = !fdsConfiguracao.Visible;            
+            if (fdsConfiguracao.Visible)
+            {
+                ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(UCComboTipoNivelEnsino.Valor, UCComboTipoModalidadeEnsino.Valor, UCComboTipoTurma.Valor);
+                if (entity.csp_id > 0)
+                {
+                    chkDisciplinaSemAula.Checked = entity.csp_disciplinaSemAula;
+                    chkSemNota.Checked = entity.csp_semNota;
+                    chkSemParecer.Checked = entity.csp_semParecer;
+                    chkSemPlanejamento.Checked = entity.csp_semPlanejamento;
+                    chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
+                    chkSemSintese.Checked = entity.csp_semSintese;
+                }
+            }
         }
 
         protected void UCComboTipoNivelEnsino_IndexChanged()
         {
-            VerificaAbrirCadastro();
+            VerificaCadastro();
         }
 
         protected void UCComboTipoModalidadeEnsino_IndexChanged()
         {
-            VerificaAbrirCadastro();
+            VerificaCadastro();
         }
 
         protected void UCComboTipoTurma_IndexChanged()
         {
-            VerificaAbrirCadastro();
+            VerificaCadastro();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// Id do registro..
 		/// </summary>
 		[MSNotNullOrEmpty("[csp_id] é obrigatório.")]
-		[DataObjectField(true, true, false)]
+		[DataObjectField(true, false, false)]
 		public virtual int csp_id { get; set; }
 
 		/// <summary>
@@ -76,6 +76,12 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// </summary>
 		[MSNotNullOrEmpty("[csp_semPlanejamento] é obrigatório.")]
 		public virtual bool csp_semPlanejamento { get; set; }
+
+		/// <summary>
+		/// Sem síntese..
+		/// </summary>
+		[MSNotNullOrEmpty("[csp_semSintese] é obrigatório.")]
+		public virtual bool csp_semSintese { get; set; }
 
 		/// <summary>
 		/// Situação do registro..

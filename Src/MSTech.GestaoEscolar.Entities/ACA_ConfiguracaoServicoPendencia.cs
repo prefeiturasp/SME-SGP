@@ -27,8 +27,6 @@ namespace MSTech.GestaoEscolar.Entities
         /// <summary>
 		/// Id do registro..
 		/// </summary>
-        [DataObjectField(true, true, false)]
-        [MSDefaultValue(-1)]
         public override int csp_id { get; set; }
 
         /// <summary>
