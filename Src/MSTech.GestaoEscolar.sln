@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevExpress", "DevExpress", 
 		_External_Dependencies\DevExpress\DevExpress.Charts.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.Charts.v16.1.Core.dll
 		_External_Dependencies\DevExpress\DevExpress.Data.v16.1.dll = _External_Dependencies\DevExpress\DevExpress.Data.v16.1.dll
 		_External_Dependencies\DevExpress\DevExpress.Office.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.Office.v16.1.Core.dll
+		_External_Dependencies\DevExpress\DevExpress.Pdf.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.Pdf.v16.1.Core.dll
 		_External_Dependencies\DevExpress\DevExpress.Printing.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.Printing.v16.1.Core.dll
 		_External_Dependencies\DevExpress\DevExpress.RichEdit.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.RichEdit.v16.1.Core.dll
 		_External_Dependencies\DevExpress\DevExpress.Utils.v16.1.dll = _External_Dependencies\DevExpress\DevExpress.Utils.v16.1.dll
