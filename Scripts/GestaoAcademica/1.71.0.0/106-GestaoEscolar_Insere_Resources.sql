@@ -18,6 +18,13 @@ SET XACT_ABORT ON
 
 	*/
 
+        EXEC MS_InsereResource 
+            @rcr_chave = 'CompensacaoAusencia.Busca.SemCompensacaoAusencia' 
+            , @rcr_NomeResource = 'Classe'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'A pesquisa não encontrou resultados.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
