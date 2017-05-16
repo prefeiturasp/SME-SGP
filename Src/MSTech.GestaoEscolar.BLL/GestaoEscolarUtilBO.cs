@@ -216,6 +216,9 @@ namespace MSTech.GestaoEscolar.BLL
         CorrecaoGeral
         ,
 
+        ConfiguracaoServicoPendencia
+        ,
+
         Duplicados
         ,
 
