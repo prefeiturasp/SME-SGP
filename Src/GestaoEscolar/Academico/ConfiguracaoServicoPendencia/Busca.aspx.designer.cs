@@ -40,6 +40,15 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPesquisa;
         
         /// <summary>
+        /// UCCamposObrigatorios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios;
+        
+        /// <summary>
         /// UCComboTipoNivelEnsino control.
         /// </summary>
         /// <remarks>
@@ -67,93 +76,66 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia {
         protected global::WebControls_Combos_UCComboTipoTurma UCComboTipoTurma;
         
         /// <summary>
-        /// fdsConfiguracao control.
+        /// btnPesquisar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsConfiguracao;
+        protected global::System.Web.UI.WebControls.Button btnPesquisar;
         
         /// <summary>
-        /// chkSemNota control.
+        /// btnLimparPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkSemNota;
+        protected global::System.Web.UI.WebControls.Button btnLimparPesquisa;
         
         /// <summary>
-        /// chkSemParecer control.
+        /// fdsResultado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkSemParecer;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsResultado;
         
         /// <summary>
-        /// chkDisciplinaSemAula control.
+        /// UCComboQtdePaginacao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkDisciplinaSemAula;
+        protected global::WebControls_Combos_UCComboQtdePaginacao UCComboQtdePaginacao;
         
         /// <summary>
-        /// chkSemResultadoFinal control.
+        /// grvConfigServPendencia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkSemResultadoFinal;
+        protected global::System.Web.UI.WebControls.GridView grvConfigServPendencia;
         
         /// <summary>
-        /// chkSemPlanejamento control.
+        /// UCTotalRegistros control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkSemPlanejamento;
+        protected global::WebControls_Mensagens_UCTotalRegistros UCTotalRegistros;
         
         /// <summary>
-        /// chkSemSintese control.
+        /// odsConfigServPendencia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkSemSintese;
-        
-        /// <summary>
-        /// chkSemPlanoAula control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkSemPlanoAula;
-        
-        /// <summary>
-        /// btnSalvar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalvar;
-        
-        /// <summary>
-        /// btnCancelar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.ObjectDataSource odsConfigServPendencia;
     }
 }
