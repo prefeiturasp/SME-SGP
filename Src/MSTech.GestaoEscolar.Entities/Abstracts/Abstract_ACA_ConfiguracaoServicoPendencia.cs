@@ -54,7 +54,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		public virtual bool csp_semNota { get; set; }
 
 		/// <summary>
-		/// Sem parecer..
+		/// Sem parecer conclusivo..
 		/// </summary>
 		[MSNotNullOrEmpty("[csp_semParecer] é obrigatório.")]
 		public virtual bool csp_semParecer { get; set; }
@@ -78,10 +78,16 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		public virtual bool csp_semPlanejamento { get; set; }
 
 		/// <summary>
-		/// Sem síntese..
+		/// Sem síntese final..
 		/// </summary>
 		[MSNotNullOrEmpty("[csp_semSintese] é obrigatório.")]
 		public virtual bool csp_semSintese { get; set; }
+
+		/// <summary>
+		/// Aula sem plano de aula..
+		/// </summary>
+		[MSNotNullOrEmpty("[csp_semPlanoAula] é obrigatório.")]
+		public virtual bool csp_semPlanoAula { get; set; }
 
 		/// <summary>
 		/// Situação do registro..

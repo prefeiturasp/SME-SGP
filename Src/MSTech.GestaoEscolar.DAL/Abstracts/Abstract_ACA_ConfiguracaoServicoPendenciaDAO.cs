@@ -147,6 +147,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
+			Param.DbType = DbType.Boolean;
+			Param.ParameterName = "@csp_semPlanoAula";
+			Param.Size = 1;
+			Param.Value = entity.csp_semPlanoAula;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@csp_situacao";
 			Param.Size = 4;
@@ -251,6 +258,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
+			Param.DbType = DbType.Boolean;
+			Param.ParameterName = "@csp_semPlanoAula";
+			Param.Size = 1;
+			Param.Value = entity.csp_semPlanoAula;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@csp_situacao";
 			Param.Size = 4;
@@ -326,11 +340,10 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-                entity.csp_id = Convert.ToInt32(qs.Return.Rows[0][0]);
-                return (entity.csp_id > 0);
-            }
+				throw new NotImplementedException("Método 'ReceberAutoIncremento' não implementado.");
+			}
 
-            return false;
+			return false;
 		}		
 	}
 }

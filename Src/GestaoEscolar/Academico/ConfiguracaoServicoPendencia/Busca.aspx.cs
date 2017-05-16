@@ -129,6 +129,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 chkSemPlanejamento.Checked = entity.csp_semPlanejamento;
                 chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
                 chkSemSintese.Checked = entity.csp_semSintese;
+                chkSemPlanoAula.Checked = entity.csp_semPlanoAula;
             }
         }
         #endregion
@@ -184,12 +185,13 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             entity.csp_semPlanejamento = chkSemPlanejamento.Checked;
             entity.csp_semResultadoFinal = chkSemResultadoFinal.Checked;
             entity.csp_semSintese = chkSemSintese.Checked;
+            entity.csp_semPlanoAula = chkSemPlanoAula.Checked;
             entity.IsNew = entity.csp_id <= 0;
 
             if (ACA_ConfiguracaoServicoPendenciaBO.Save(entity))
             {
-                ApplicationWEB._GravaLogSistema(entity.IsNew ? LOG_SistemaTipo.Insert : LOG_SistemaTipo.Update, "Cadastro de configuração de serviço de pendência. csp_id" + entity.csp_id);
-                string message = UtilBO.GetErroMessage("Configuração de servico de pendência gravada com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                ApplicationWEB._GravaLogSistema(entity.IsNew ? LOG_SistemaTipo.Insert : LOG_SistemaTipo.Update, "Cadastro de configuração do serviço de pendência. csp_id" + entity.csp_id);
+                string message = UtilBO.GetErroMessage("Configuração do serviço de pendência cadastrada com sucesso.", UtilBO.TipoMensagem.Sucesso);
 
                 if (ParametroPermanecerTela)
                 {
