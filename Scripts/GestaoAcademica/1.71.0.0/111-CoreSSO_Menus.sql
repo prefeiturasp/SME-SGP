@@ -131,6 +131,33 @@ SET XACT_ABORT ON
 	SET mod_situacao = 3
 	WHERE sis_id = @sis_id AND mod_nome = 'Cadastros'
 	
+	INSERT INTO SYS_GrupoPermissao 
+	SELECT gru_id, mdl.sis_id, @mod_idPai, 1, 0, 0, 0
+	FROM SYS_Modulo mdl WITH(NOLOCK)
+	INNER JOIN SYS_GrupoPermissao gpm WITH(NOLOCK)
+		ON mdl.sis_id = gpm.sis_id
+		AND mdl.mod_id = gpm.mod_id
+	WHERE
+		mdl.mod_idPai = @mod_idPai
+		AND mdl.sis_id = @sis_id
+		AND grp_consultar = 1
+		AND NOT EXISTS(SELECT TOP 1 g.gru_id FROM SYS_GrupoPermissao g WITH(NOLOCK)
+					   WHERE g.gru_id = gpm.gru_id AND g.sis_id = mdl.sis_id AND g.mod_id = @mod_idPai)
+		AND mdl.mod_situacao <> 3
+	GROUP BY
+		gru_id, mdl.sis_id
+	
+	UPDATE gpm 
+	SET grp_consultar = 1
+	FROM SYS_GrupoPermissao gpm WITH(NOLOCK)
+	INNER JOIN SYS_Modulo mdl WITH(NOLOCK)
+		ON mdl.sis_id = gpm.sis_id
+		AND mdl.mod_idPai = gpm.mod_id
+		AND mdl.mod_situacao <> 3
+	WHERE
+		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
+		(grp_consultar = 1 OR grp_alterar = 1 OR grp_excluir = 1 OR grp_inserir = 1)
+		
 	-- Mudando módulos de Calendário para o mod_idPai novo
 
 	SET @mod_idPai = (SELECT mod_id FROM SYS_Modulo WHERE mod_nome = 'Calendário escolar' AND sis_id = @sis_id AND mod_situacao = 1)
@@ -167,6 +194,33 @@ SET XACT_ABORT ON
 	AND vis_id = @visaoUnidade
 	AND mod_id = @mod_idPai
 	
+	INSERT INTO SYS_GrupoPermissao 
+	SELECT gru_id, mdl.sis_id, @mod_idPai, 1, 0, 0, 0
+	FROM SYS_Modulo mdl WITH(NOLOCK)
+	INNER JOIN SYS_GrupoPermissao gpm WITH(NOLOCK)
+		ON mdl.sis_id = gpm.sis_id
+		AND mdl.mod_id = gpm.mod_id
+	WHERE
+		mdl.mod_idPai = @mod_idPai
+		AND mdl.sis_id = @sis_id
+		AND grp_consultar = 1
+		AND NOT EXISTS(SELECT TOP 1 g.gru_id FROM SYS_GrupoPermissao g WITH(NOLOCK)
+					   WHERE g.gru_id = gpm.gru_id AND g.sis_id = mdl.sis_id AND g.mod_id = @mod_idPai)
+		AND mdl.mod_situacao <> 3
+	GROUP BY
+		gru_id, mdl.sis_id
+	
+	UPDATE gpm 
+	SET grp_consultar = 1
+	FROM SYS_GrupoPermissao gpm WITH(NOLOCK)
+	INNER JOIN SYS_Modulo mdl WITH(NOLOCK)
+		ON mdl.sis_id = gpm.sis_id
+		AND mdl.mod_idPai = gpm.mod_id
+		AND mdl.mod_situacao <> 3
+	WHERE
+		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
+		(grp_consultar = 1 OR grp_alterar = 1 OR grp_excluir = 1 OR grp_inserir = 1)
+		
 	-- Mudando módulos de Manutenção de turmas para o mod_idPai novo
 
 	SET @mod_idPai = (SELECT mod_id FROM SYS_Modulo WHERE mod_nome = 'Manutenção de turmas' AND sis_id = @sis_id AND mod_situacao = 1)
@@ -241,6 +295,33 @@ SET XACT_ABORT ON
 	AND vis_id = @visaoUnidade
 	AND mod_id = @mod_idPai
 	
+	INSERT INTO SYS_GrupoPermissao 
+	SELECT gru_id, mdl.sis_id, @mod_idPai, 1, 0, 0, 0
+	FROM SYS_Modulo mdl WITH(NOLOCK)
+	INNER JOIN SYS_GrupoPermissao gpm WITH(NOLOCK)
+		ON mdl.sis_id = gpm.sis_id
+		AND mdl.mod_id = gpm.mod_id
+	WHERE
+		mdl.mod_idPai = @mod_idPai
+		AND mdl.sis_id = @sis_id
+		AND grp_consultar = 1
+		AND NOT EXISTS(SELECT TOP 1 g.gru_id FROM SYS_GrupoPermissao g WITH(NOLOCK)
+					   WHERE g.gru_id = gpm.gru_id AND g.sis_id = mdl.sis_id AND g.mod_id = @mod_idPai)
+		AND mdl.mod_situacao <> 3
+	GROUP BY
+		gru_id, mdl.sis_id
+	
+	UPDATE gpm 
+	SET grp_consultar = 1
+	FROM SYS_GrupoPermissao gpm WITH(NOLOCK)
+	INNER JOIN SYS_Modulo mdl WITH(NOLOCK)
+		ON mdl.sis_id = gpm.sis_id
+		AND mdl.mod_idPai = gpm.mod_id
+		AND mdl.mod_situacao <> 3
+	WHERE
+		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
+		(grp_consultar = 1 OR grp_alterar = 1 OR grp_excluir = 1 OR grp_inserir = 1)
+		
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
