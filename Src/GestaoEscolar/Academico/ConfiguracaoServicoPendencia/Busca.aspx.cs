@@ -129,6 +129,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 chkSemPlanejamento.Checked = entity.csp_semPlanejamento;
                 chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
                 chkSemSintese.Checked = entity.csp_semSintese;
+                chkSemPlanoAula.Checked = entity.csp_semPlanoAula;
             }
         }
         #endregion
@@ -184,6 +185,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             entity.csp_semPlanejamento = chkSemPlanejamento.Checked;
             entity.csp_semResultadoFinal = chkSemResultadoFinal.Checked;
             entity.csp_semSintese = chkSemSintese.Checked;
+            entity.csp_semPlanoAula = chkSemPlanoAula.Checked;
             entity.IsNew = entity.csp_id <= 0;
 
             if (ACA_ConfiguracaoServicoPendenciaBO.Save(entity))
