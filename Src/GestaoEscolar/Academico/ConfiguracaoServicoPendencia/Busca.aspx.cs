@@ -190,8 +190,8 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
             if (ACA_ConfiguracaoServicoPendenciaBO.Save(entity))
             {
-                ApplicationWEB._GravaLogSistema(entity.IsNew ? LOG_SistemaTipo.Insert : LOG_SistemaTipo.Update, "Cadastro de configuração de serviço de pendência. csp_id" + entity.csp_id);
-                string message = UtilBO.GetErroMessage("Configuração de servico de pendência gravada com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                ApplicationWEB._GravaLogSistema(entity.IsNew ? LOG_SistemaTipo.Insert : LOG_SistemaTipo.Update, "Cadastro de configuração do serviço de pendência. csp_id" + entity.csp_id);
+                string message = UtilBO.GetErroMessage("Configuração do serviço de pendência cadastrada com sucesso.", UtilBO.TipoMensagem.Sucesso);
 
                 if (ParametroPermanecerTela)
                 {
