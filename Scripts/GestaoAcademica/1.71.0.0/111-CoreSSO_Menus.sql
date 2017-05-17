@@ -157,6 +157,7 @@ SET XACT_ABORT ON
 	INNER JOIN SYS_GrupoPermissao gpmF WITH(NOLOCK)
 		ON mdl.sis_id = gpmF.sis_id
 		AND mdl.mod_id = gpmF.mod_id
+		AND gpm.gru_id = gpmF.gru_id
 	WHERE
 		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
 		(gpmF.grp_consultar = 1 OR gpmF.grp_alterar = 1 OR gpmF.grp_excluir = 1 OR gpmF.grp_inserir = 1)
@@ -223,6 +224,7 @@ SET XACT_ABORT ON
 	INNER JOIN SYS_GrupoPermissao gpmF WITH(NOLOCK)
 		ON mdl.sis_id = gpmF.sis_id
 		AND mdl.mod_id = gpmF.mod_id
+		AND gpm.gru_id = gpmF.gru_id
 	WHERE
 		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
 		(gpmF.grp_consultar = 1 OR gpmF.grp_alterar = 1 OR gpmF.grp_excluir = 1 OR gpmF.grp_inserir = 1)
@@ -327,6 +329,7 @@ SET XACT_ABORT ON
 	INNER JOIN SYS_GrupoPermissao gpmF WITH(NOLOCK)
 		ON mdl.sis_id = gpmF.sis_id
 		AND mdl.mod_id = gpmF.mod_id
+		AND gpm.gru_id = gpmF.gru_id
 	WHERE
 		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
 		(gpmF.grp_consultar = 1 OR gpmF.grp_alterar = 1 OR gpmF.grp_excluir = 1 OR gpmF.grp_inserir = 1)
