@@ -18,7 +18,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
     <fieldset id="fdsPesquisa" runat="server">
-        <legend>Consulta de configuração do serviço de pendência</legend>
+        <legend><asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.lblLegend.Text %>" /></legend>
         <div id="divPesquisa" runat="server">
             <uc6:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
             <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino" runat="server" />
@@ -28,6 +28,8 @@
         <div class="right">
             <asp:Button ID="btnPesquisar" runat="server" Text="Pesquisar" OnClick="btnPesquisar_Click" />
             <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click" />
+             <asp:Button ID="btnNovo" runat="server" Text="Incluir novo" OnClick="btnNovo_Click" />
+       
         </div>
     </fieldset>
     <fieldset id="fdsResultado" runat="server" visible="false">
@@ -35,13 +37,13 @@
         <uc4:UCComboQtdePaginacao ID="UCComboQtdePaginacao" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged"
             ComboDefaultValue="true" />
         <asp:GridView ID="grvConfigServPendencia" runat="server" AutoGenerateColumns="False" DataSourceID="odsConfigServPendencia"
-            DataKeyNames="tne_id, tme_id, tur_tipo" AllowPaging="True"
-            EmptyDataText="A pesquisa não encontrou resultados." AllowSorting="True" OnDataBound="grvConfigServPendencia_DataBound"
-            OnRowDataBound="grvConfigServPendencia_RowDataBound">
+            DataKeyNames="csp_id, tne_id, tme_id, tur_tipo, csp_semNota, csp_semParecer, csp_disciplinaSemAula, csp_semResultadoFinal, csp_semPlanejamento, csp_semSintese, csp_semPlanoAula" 
+            AllowPaging="True" EmptyDataText="A pesquisa não encontrou resultados." AllowSorting="True" 
+            OnDataBound="grvConfigServPendencia_DataBound" OnRowDataBound="grvConfigServPendencia_RowDataBound">
             <Columns>
-                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tne_nome" SortExpression="tne_descricao" />
-                <asp:BoundField HeaderText="Tipo de modalidade de ensino" DataField="tme_nome" SortExpression="tme_descricao" />
-                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tur_tipoNome" SortExpression="tur_tipoDescricao" />
+                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tne_nome" SortExpression="tne_nome" />
+                <asp:BoundField HeaderText="Tipo de modalidade de ensino" DataField="tme_nome" SortExpression="tme_nome" />
+                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tur_tipoNome" SortExpression="tur_tipoNome" />
                 <asp:TemplateField>
                     <HeaderTemplate>
                         <asp:Label runat="server" Text="Pendências"></asp:Label>
@@ -51,17 +53,21 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField>
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="Editar"></asp:Label>
+                    </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnEditar" runat="server" ToolTip="Editar"
-                            SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" OnClick="btnEditar_Click" Visible="false" />
+                        <asp:ImageButton ID="btnEditar" runat="server" ToolTip="Editar" CommandName="Edit"
+                            SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" Visible="false" 
+                            PostBackUrl="~/Academico/ConfiguracaoServicoPendencia/Cadastro.aspx"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
             <HeaderStyle HorizontalAlign="Center" />
         </asp:GridView>
         <uc5:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvConfigServPendencia" />
-        <asp:ObjectDataSource ID="odsConfigServPendencia" runat="server" TypeName="MSTech.GestaoEscolar.BLL.ACA_CondiguracaoServicoPendencia"
+        <asp:ObjectDataSource ID="odsConfigServPendencia" runat="server" TypeName="MSTech.GestaoEscolar.BLL.ACA_ConfiguracaoServicoPendenciaBO"
             SelectMethod="SelectBy_tne_id_tme_id_tur_tipo" MaximumRowsParameterName="pageSize" SelectCountMethod="GetTotalRecords"
-            StartRowIndexParameterName="currentPage" EnablePaging="true" OnSelecting="odsConfigServPendencia_Selecting1"></asp:ObjectDataSource>
+            StartRowIndexParameterName="currentPage" EnablePaging="true" OnSelecting="odsConfigServPendencia_Selecting"></asp:ObjectDataSource>
     </fieldset>
 </asp:Content>

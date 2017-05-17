@@ -31,6 +31,15 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsPesquisa;
         
         /// <summary>
+        /// lblLegend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLegend;
+        
+        /// <summary>
         /// divPesquisa control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLimparPesquisa;
+        
+        /// <summary>
+        /// btnNovo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNovo;
         
         /// <summary>
         /// fdsResultado control.
