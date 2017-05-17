@@ -28,6 +28,8 @@
         <div class="right">
             <asp:Button ID="btnPesquisar" runat="server" Text="Pesquisar" OnClick="btnPesquisar_Click" />
             <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click" />
+             <asp:Button ID="btnNovo" runat="server" Text="Incluir novo" OnClick="btnNovo_Click" />
+       
         </div>
     </fieldset>
     <fieldset id="fdsResultado" runat="server" visible="false">
@@ -61,8 +63,8 @@
             <HeaderStyle HorizontalAlign="Center" />
         </asp:GridView>
         <uc5:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvConfigServPendencia" />
-        <asp:ObjectDataSource ID="odsConfigServPendencia" runat="server" TypeName="MSTech.GestaoEscolar.BLL.ACA_CondiguracaoServicoPendencia"
+        <asp:ObjectDataSource ID="odsConfigServPendencia" runat="server" TypeName="MSTech.GestaoEscolar.BLL.ACA_ConfiguracaoServicoPendenciaBO"
             SelectMethod="SelectBy_tne_id_tme_id_tur_tipo" MaximumRowsParameterName="pageSize" SelectCountMethod="GetTotalRecords"
-            StartRowIndexParameterName="currentPage" EnablePaging="true" OnSelecting="odsConfigServPendencia_Selecting1"></asp:ObjectDataSource>
+            StartRowIndexParameterName="currentPage" EnablePaging="true" OnSelecting="odsConfigServPendencia_Selecting"></asp:ObjectDataSource>
     </fieldset>
 </asp:Content>

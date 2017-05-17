@@ -21,22 +21,13 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro {
     protected global::System.Web.UI.WebControls.Label lblMessage;
     
     /// <summary>
-    /// fdsPesquisa control.
+    /// fdsCadastro control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsPesquisa;
-    
-    /// <summary>
-    /// divPesquisa control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPesquisa;
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsCadastro;
     
     /// <summary>
     /// UCComboTipoNivelEnsino control.
@@ -64,15 +55,6 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::WebControls_Combos_UCComboTipoTurma UCComboTipoTurma;
-    
-    /// <summary>
-    /// fdsConfiguracao control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsConfiguracao;
     
     /// <summary>
     /// chkSemNota control.

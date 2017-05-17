@@ -28,10 +28,13 @@ namespace MSTech.GestaoEscolar.BLL
             int tne_id
             , int tme_id
             , int tur_tipo
+            , bool paginado
+            , int currentPage
+            , int pageSize
         )
         {
             ACA_ConfiguracaoServicoPendenciaDAO dao = new ACA_ConfiguracaoServicoPendenciaDAO();
-            return dao.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo);
+            return dao.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo, paginado, currentPage / pageSize, pageSize, out totalRecords);
         }
 
     }

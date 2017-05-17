@@ -283,11 +283,6 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             }
         }
 
-        protected void odsConfigServPendencia_Selecting1(object sender, ObjectDataSourceSelectingEventArgs e)
-        {
-
-        }
-
         protected void UCComboQtdePaginacao_IndexChanged()
         {
             // atribui nova quantidade itens por página para o grid
@@ -335,5 +330,11 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
         }
 
         #endregion
+
+        protected void btnNovo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ConfiguracaoServicoPendencia/Cadastro.aspx", false);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
     }
 }

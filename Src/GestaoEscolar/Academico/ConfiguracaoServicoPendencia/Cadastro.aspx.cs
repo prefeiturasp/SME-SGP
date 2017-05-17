@@ -104,7 +104,13 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
 
     protected void btnSalvar_Click(object sender, EventArgs e)
     {
-        Salvar();
+        if (UCComboTipoNivelEnsino.Valor>0 || UCComboTipoModalidadeEnsino.Valor>0 || UCComboTipoTurma.Valor>0)
+            Salvar();
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+            lblMessage.Text = UtilBO.GetErroMessage("Selecione o tipo de nível de ensino, o tipo de modalidade de ensino ou o tipo de turma.", UtilBO.TipoMensagem.Erro);
+        }
     }
 
     protected void btnCancelar_Click(object sender, EventArgs e)
