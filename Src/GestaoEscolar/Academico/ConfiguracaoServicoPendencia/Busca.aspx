@@ -18,7 +18,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
     <fieldset id="fdsPesquisa" runat="server">
-        <legend>Consulta de configuração do serviço de pendência</legend>
+        <legend>Listagem de configuração do serviço de pendência</legend>
         <div id="divPesquisa" runat="server">
             <uc6:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
             <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino" runat="server" />
@@ -41,9 +41,9 @@
             AllowPaging="True" EmptyDataText="A pesquisa não encontrou resultados." AllowSorting="True" 
             OnDataBound="grvConfigServPendencia_DataBound" OnRowDataBound="grvConfigServPendencia_RowDataBound">
             <Columns>
-                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tne_nome" SortExpression="tne_descricao" />
-                <asp:BoundField HeaderText="Tipo de modalidade de ensino" DataField="tme_nome" SortExpression="tme_descricao" />
-                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tur_tipoNome" SortExpression="tur_tipoDescricao" />
+                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tne_nome" SortExpression="tne_nome" />
+                <asp:BoundField HeaderText="Tipo de modalidade de ensino" DataField="tme_nome" SortExpression="tme_nome" />
+                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tur_tipoNome" SortExpression="tur_tipoNome" />
                 <asp:TemplateField>
                     <HeaderTemplate>
                         <asp:Label runat="server" Text="Pendências"></asp:Label>
