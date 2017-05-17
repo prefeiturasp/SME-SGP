@@ -18,7 +18,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
     <fieldset id="fdsPesquisa" runat="server">
-        <legend>Listagem de configuração do serviço de pendência</legend>
+        <legend><asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.lblLegend.Text %>" /></legend>
         <div id="divPesquisa" runat="server">
             <uc6:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
             <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino" runat="server" />

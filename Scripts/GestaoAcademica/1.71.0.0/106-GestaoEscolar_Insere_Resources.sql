@@ -101,6 +101,76 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Erro ao tentar carregar o sistema.'
 
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.lblLegend.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Listagem de configuração do serviço de pendência'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.btnPesquisar.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Pesquisar'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ColunaEditar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Editar'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ColunaPendencias' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Pendências'
+			
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ColunaTipoModalidadeEnsino' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Tipo de modalidade de ensino'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ColunaTipoNivelEnsino' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Tipo de nível de ensino'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.grvConfigServPendencia.EmptyDataText' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'A pesquisa não encontrou resultados.'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.btnLimparPesquisa.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Limpar pesquisa'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.btnIncluirNovo.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Incluir novo'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.btnEditar.Tooltip' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Editar'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
