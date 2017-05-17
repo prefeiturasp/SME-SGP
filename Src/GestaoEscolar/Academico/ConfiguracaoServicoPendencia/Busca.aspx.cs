@@ -14,18 +14,6 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 {
     public partial class Busca : MotherPageLogado
     {
-        #region Propriedades
-        /// <summary>
-        /// Retorna o valor do parâmetro "Permanecer na tela após gravações"
-        /// </summary>
-        private bool ParametroPermanecerTela
-        {
-            get
-            {
-                return ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.BOTAO_SALVAR_PERMANECE_TELA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-            }
-        }
-
         public int Edit_csp_id
         {
             get
@@ -46,10 +34,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 ViewState["VS_csp_id"] = value;
             }
         }
-
-        /// <summary>
-        /// Guarda o sortExpression da coluna ordenada.
-        /// </summary>
+        
         private string VS_Ordenacao
         {
             get
@@ -67,10 +52,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 return string.Empty;
             }
         }
-
-        /// <summary>
-        /// Guarda o sortExpression da coluna ordenada.
-        /// </summary>
+        
         private SortDirection VS_SortDirection
         {
             get
@@ -88,15 +70,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 return SortDirection.Ascending;
             }
         }
-
-
-        #endregion       
-
-        #region Métodos
-
-        /// <summary>
-        /// Realiza a consulta com os filtros informados, e salva a busca realizada na sessão.
-        /// </summary>
+ 
         public void Pesquisar()
         {
             try
@@ -141,11 +115,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as configurações do serviço de pendência.", UtilBO.TipoMensagem.Erro);
             }
         }
-
-        /// <summary>
-        /// Verifica se tem busca salva na sessão, e se tiver, recupera e realiza a consulta,
-        /// colocando os filtros nos campos da tela.
-        /// </summary>
+        
         private void VerificaBusca()
         {
             if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.ConfiguracaoServicoPendencia)
@@ -162,10 +132,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 Pesquisar();
             }
         }
-
-        /// <summary>
-        /// Verifica se usuário tem permissão de acesso à página.
-        /// </summary>
+        
         private void VerificaPermissaoUsuario()
         {
             if (!__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
@@ -175,9 +142,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 HttpContext.Current.ApplicationInstance.CompleteRequest();
             }
         }
-        /// <summary>
-        /// Inicializa os combos.
-        /// </summary>
+
         private void Inicializar()
         {
             try
@@ -196,10 +161,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             }
 
         }
-             
-        #endregion
-
-        #region Eventos
+                     
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -306,31 +268,26 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 Label lblPendencias = (Label)e.Row.FindControl("lblPendencias");
                 if (lblPendencias != null)
                 {
-                    String pendencias = String.Empty;
+                    string pendencias = string.Empty;
 
-                    pendencias +=
-                        grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semNota"].ToString() == false.ToString() ? "" : "Sem nota/"
-                        + grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semParecer"].ToString() == false.ToString() ? "" : "Sem parecer/"
-                        + grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_disciplinaSemAula"].ToString() == false.ToString() ? "" : "Disciplina sem aula/"
-                        + grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semResultadoFinal"].ToString() == false.ToString() ? "" : "Sem resultado final/"
-                        + grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : "Sem planejamento/"
-                        + grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : "Sem síntese/"
-                        + grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : "Aula sem plano de aula/";
-
-                    pendencias.Remove(pendencias.Length - 1);
-
-                    lblPendencias.Text = pendencias;
+                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semNota"].ToString() == false.ToString() ? "" : "Sem nota/";
+                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semParecer"].ToString() == false.ToString() ? "" : "Sem parecer/";
+                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_disciplinaSemAula"].ToString() == false.ToString() ? "" : "Disciplina sem aula/";
+                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semResultadoFinal"].ToString() == false.ToString() ? "" : "Sem resultado final/";
+                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : "Sem planejamento/";
+                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : "Sem síntese/";
+                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : "Aula sem plano de aula/"; 
+                    
+                    lblPendencias.Text = pendencias.Substring(0, pendencias.Length - 1);
                 }
             }
         }
 
         protected void btnEditar_Click(object sender, ImageClickEventArgs e)
         {
-
+            //TODO:[ANA]
         }
-
-        #endregion
-
+        
         protected void btnNovo_Click(object sender, EventArgs e)
         {
             Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ConfiguracaoServicoPendencia/Cadastro.aspx", false);

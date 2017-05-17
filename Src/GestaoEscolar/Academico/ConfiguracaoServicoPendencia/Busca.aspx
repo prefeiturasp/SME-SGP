@@ -37,9 +37,9 @@
         <uc4:UCComboQtdePaginacao ID="UCComboQtdePaginacao" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged"
             ComboDefaultValue="true" />
         <asp:GridView ID="grvConfigServPendencia" runat="server" AutoGenerateColumns="False" DataSourceID="odsConfigServPendencia"
-            DataKeyNames="tne_id, tme_id, tur_tipo" AllowPaging="True"
-            EmptyDataText="A pesquisa não encontrou resultados." AllowSorting="True" OnDataBound="grvConfigServPendencia_DataBound"
-            OnRowDataBound="grvConfigServPendencia_RowDataBound">
+            DataKeyNames="csp_id, tne_id, tme_id, tur_tipo, csp_semNota, csp_semParecer, csp_disciplinaSemAula, csp_semResultadoFinal, csp_semPlanejamento, csp_semSintese, csp_semPlanoAula" 
+            AllowPaging="True" EmptyDataText="A pesquisa não encontrou resultados." AllowSorting="True" 
+            OnDataBound="grvConfigServPendencia_DataBound" OnRowDataBound="grvConfigServPendencia_RowDataBound">
             <Columns>
                 <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tne_nome" SortExpression="tne_descricao" />
                 <asp:BoundField HeaderText="Tipo de modalidade de ensino" DataField="tme_nome" SortExpression="tme_descricao" />
@@ -53,8 +53,11 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField>
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="Editar"></asp:Label>
+                    </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnEditar" runat="server" ToolTip="Editar" CommandName="Edit" CausesValidation="False"
+                        <asp:ImageButton ID="btnEditar" runat="server" ToolTip="Editar" CommandName="Edit"
                             SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" Visible="false" 
                             PostBackUrl="~/Academico/ConfiguracaoServicoPendencia/Cadastro.aspx"/>
                     </ItemTemplate>
