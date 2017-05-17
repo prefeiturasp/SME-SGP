@@ -19,12 +19,6 @@ SET XACT_ABORT ON
 		,@SiteMapUrl = '~/Configuracao/TipoEvento/Busca.aspx' -- Url da SiteMap (Obrigatório)
 	*/
 
-	EXEC MS_InsereSiteMap
-		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
-		,@nomeModulo = 'Configuração do serviço de pendência' -- Nome do módulo (Obrigatório)
-		,@SiteMapNome = 'Cadastro de configuração do serviço de pendência' -- Nome do SiteMap (Obrigatório)
-		,@SiteMapUrl = '~/Academico/ConfiguracaoServicoPendencia/Cadastro.aspx' -- Url da SiteMap (Obrigatório)
-
 	
 -- Fechar transação
 SET XACT_ABORT OFF

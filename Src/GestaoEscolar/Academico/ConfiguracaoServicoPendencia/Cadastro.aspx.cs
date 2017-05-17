@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 
 public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPageLogado
 {
+    #region Propriedades
     private bool ParametroPermanecerTela
     {
         get
@@ -30,7 +31,9 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             ViewState["VS_csp_id"] = value;
         }
     }
+    #endregion
 
+    #region Métodos
     private void Carregar()
     {
         try
@@ -64,7 +67,7 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
         catch (Exception ex)
         {
             ApplicationWEB._GravaErro(ex);
-            lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar a configuração do serviço de pendência.", UtilBO.TipoMensagem.Erro);
+            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroCarregar").ToString(), UtilBO.TipoMensagem.Erro);
         }
     }
 
@@ -94,12 +97,12 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
                 if (VS_csp_id <= 0)
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "csp_id: " + entity.csp_id);
-                    message = UtilBO.GetErroMessage("Configuração do serviço de pendência cadastrada com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    message = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.SucessoCadastrar").ToString(), UtilBO.TipoMensagem.Sucesso);
                 }
                 else
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "csp_id: " + entity.csp_id);
-                    message = UtilBO.GetErroMessage("Configuração do serviço de pendência alterada com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    message = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.SucessoAlterar").ToString(), UtilBO.TipoMensagem.Sucesso);
                 }
                 if (ParametroPermanecerTela)
                 {
@@ -119,16 +122,18 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             else
             {
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar a configuração do serviço de pendência.", UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroSalvar").ToString(), UtilBO.TipoMensagem.Erro);
             }           
         }
         catch (Exception ex)
         {
             ApplicationWEB._GravaErro(ex);
-            lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar a configuração do serviço de pendência.", UtilBO.TipoMensagem.Erro);
+            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroSalvar").ToString(), UtilBO.TipoMensagem.Erro);
         }
     }
+    #endregion
 
+    #region Eventos
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -148,7 +153,7 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroSistema").ToString(), UtilBO.TipoMensagem.Erro);
             }
             Page.Form.DefaultFocus = UCComboTipoNivelEnsino.ClientID;
         }
@@ -161,7 +166,7 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
         else
         {
             ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-            lblMessage.Text = UtilBO.GetErroMessage("Selecione o tipo de nível de ensino, o tipo de modalidade de ensino ou o tipo de turma.", UtilBO.TipoMensagem.Alerta);
+            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroSelecione").ToString(), UtilBO.TipoMensagem.Alerta);
         }
     }
 
@@ -170,5 +175,5 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
         Response.Redirect("Busca.aspx", false);
         HttpContext.Current.ApplicationInstance.CompleteRequest();
     }
-    
+    #endregion
 }

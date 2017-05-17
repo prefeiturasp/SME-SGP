@@ -25,6 +25,82 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'A pesquisa não encontrou resultados.'
 
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ErroPesquisar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar carregar as configurações do serviço de pendência.'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ErroPermissao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ErroInicializar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar carregar os dados.'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ErroSistema' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar carregar o sistema.'
+
+
+
+
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Configuracao.ErroCarregar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar carregar a configuração do serviço de pendência.'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Configuracao.SucessoCadastrar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Configuração do serviço de pendência cadastrada com sucesso.'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Configuracao.SucessoAlterar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Configuração do serviço de pendência alterada com sucesso.'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Configuracao.ErroSalvar' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar salvar a configuração do serviço de pendência.'
+
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Configuracao.ErroSelecione' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Selecione o tipo de nível de ensino, o tipo de modalidade de ensino ou o tipo de turma.'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Configuracao.ErroSistema' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Erro ao tentar carregar o sistema.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

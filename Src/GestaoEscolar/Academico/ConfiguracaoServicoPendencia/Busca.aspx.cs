@@ -14,6 +14,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 {
     public partial class Busca : MotherPageLogado
     {
+        #region Propriedades
         public int Edit_csp_id
         {
             get
@@ -34,7 +35,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 ViewState["VS_csp_id"] = value;
             }
         }
-        
+
         private string VS_Ordenacao
         {
             get
@@ -52,7 +53,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 return string.Empty;
             }
         }
-        
+
         private SortDirection VS_SortDirection
         {
             get
@@ -70,7 +71,9 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 return SortDirection.Ascending;
             }
         }
- 
+        #endregion
+
+        #region Métodos
         public void Pesquisar()
         {
             try
@@ -88,7 +91,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
                 string qtItensPagina = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.QT_ITENS_PAGINACAO);
                 int itensPagina = string.IsNullOrEmpty(qtItensPagina) ? ApplicationWEB._Paginacao : Convert.ToInt32(qtItensPagina);
-                
+
                 // Limpar a ordenação realizada.
                 grvConfigServPendencia.Sort(VS_Ordenacao, VS_SortDirection);
 
@@ -104,7 +107,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 UCComboQtdePaginacao.Valor = itensPagina;
                 // atribui essa quantidade para o grid
                 grvConfigServPendencia.PageSize = itensPagina;
-                
+
                 // Atualiza o grid
                 grvConfigServPendencia.DataBind();
 
@@ -112,10 +115,10 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as configurações do serviço de pendência.", UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.ErroPesquisar").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
-        
+
         private void VerificaBusca()
         {
             if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.ConfiguracaoServicoPendencia)
@@ -132,12 +135,12 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 Pesquisar();
             }
         }
-        
+
         private void VerificaPermissaoUsuario()
         {
             if (!__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
             {
-                __SessionWEB.PostMessages = UtilBO.GetErroMessage("Você não possui permissão para acessar a página solicitada.", UtilBO.TipoMensagem.Alerta);
+                __SessionWEB.PostMessages = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.ErroPermissao").ToString(), UtilBO.TipoMensagem.Alerta);
                 Response.Redirect("~/Index.aspx", false);
                 HttpContext.Current.ApplicationInstance.CompleteRequest();
             }
@@ -157,11 +160,13 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.ErroInicializar").ToString(), UtilBO.TipoMensagem.Erro);
             }
 
         }
-                     
+        #endregion
+
+        #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -179,14 +184,14 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
-                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
+                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.ErroSistema").ToString(), UtilBO.TipoMensagem.Erro);
                 }
             }
 
             Page.Form.DefaultButton = btnPesquisar.UniqueID;
             Page.Form.DefaultFocus = UCComboTipoNivelEnsino.ClientID;
 
-        }   
+        }
 
         protected void odsConfigServPendencia_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
         {
@@ -254,7 +259,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             // atualiza o grid
             grvConfigServPendencia.DataBind();
         }
-        
+
         protected void grvConfigServPendencia_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -276,16 +281,11 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                     pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semResultadoFinal"].ToString() == false.ToString() ? "" : "Sem resultado final/";
                     pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : "Sem planejamento/";
                     pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : "Sem síntese/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : "Aula sem plano de aula/"; 
-                    
+                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : "Aula sem plano de aula/";
+
                     lblPendencias.Text = pendencias.Substring(0, pendencias.Length - 1);
                 }
             }
-        }
-
-        protected void btnEditar_Click(object sender, ImageClickEventArgs e)
-        {
-            //TODO:[ANA]
         }
         
         protected void btnNovo_Click(object sender, EventArgs e)
@@ -293,5 +293,6 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ConfiguracaoServicoPendencia/Cadastro.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
+        #endregion
     }
 }

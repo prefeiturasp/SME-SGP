@@ -1,4 +1,4 @@
-USE [CoreSSO]
+USE [PUB_DEV_SPO_CoreSSO]
 GO
 
 --Iniciar transação
@@ -31,13 +31,13 @@ SET XACT_ABORT ON
 
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
-		,@nomeModuloAvo = 'Administração' -- Nome do módulo avó (Opcional, apenas quando houver) 
-		,@nomeModuloPai = 'Cadastros' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModuloAvo = '' -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Configurações' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Configuração do serviço de pendência' -- Nome do módulo (Obrigatório)
-		,@SiteMap1Nome = 'Cadastro de configuração do serviço de pendência'
+		,@SiteMap1Nome = 'Listagem de configuração do serviço de pendência'
 		,@SiteMap1Url = '~/Academico/ConfiguracaoServicoPendencia/Busca.aspx'
-		,@SiteMap2Nome = ''
-		,@SiteMap2Url = ''
+		,@SiteMap2Nome = 'Cadastro de configuração do serviço de pendência'
+		,@SiteMap2Url = '~/Academico/ConfiguracaoServicoPendencia/Configuracao.aspx'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
