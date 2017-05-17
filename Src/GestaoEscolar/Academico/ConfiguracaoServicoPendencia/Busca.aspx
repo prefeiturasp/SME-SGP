@@ -52,8 +52,9 @@
                 </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnEditar" runat="server" ToolTip="Editar"
-                            SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" OnClick="btnEditar_Click" Visible="false" />
+                        <asp:ImageButton ID="btnEditar" runat="server" ToolTip="Editar" CommandName="Edit" CausesValidation="False"
+                            SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" Visible="false" 
+                            PostBackUrl="~/Academico/ConfiguracaoServicoPendencia/Cadastro.aspx"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

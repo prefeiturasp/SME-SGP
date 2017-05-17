@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Cadastro.aspx.cs" Inherits="GestaoEscolar.Academico.ConfiguracaoServicoPendencia.Cadastro" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Cadastro.aspx.cs" Inherits="Academico_ConfiguracaoServicoPendencia_Cadastro" %>
+
+<%@ PreviousPageType VirtualPath="~/Academico/ConfiguracaoServicoPendencia/Busca.aspx" %>
 
 <%@ Register Src="~/WebControls/Combos/UCComboTipoNivelEnsino.ascx" TagName="UCComboTipoNivelEnsino"
     TagPrefix="uc1" %>

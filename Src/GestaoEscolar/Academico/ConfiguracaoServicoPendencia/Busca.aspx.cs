@@ -26,63 +26,24 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             }
         }
 
-        /// <summary>
-        /// Propriedade em ViewState que armazena valor de tne_id
-        /// no caso de atualização de um registro ja existente.
-        /// </summary>
-        private int VS_tne_id
+        public int Edit_csp_id
         {
             get
             {
-                if (ViewState["VS_tne_id"] != null)
-                {
-                    return Convert.ToInt32(ViewState["VS_tne_id"]);
-                }
-                return -1;
-            }
-            set
-            {
-                ViewState["VS_tne_id"] = value;
+                return Convert.ToInt32(grvConfigServPendencia.DataKeys[grvConfigServPendencia.EditIndex].Values["csp_id"] ?? 0);
             }
         }
 
-        /// <summary>
-        /// Propriedade em ViewState que armazena valor de tme_id
-        /// no caso de atualização de um registro ja existente.
-        /// </summary>
-        private int VS_tme_id
+        private int VS_csp_id
         {
             get
             {
-                if (ViewState["VS_tme_id"] != null)
-                {
-                    return Convert.ToInt32(ViewState["VS_tme_id"]);
-                }
-                return -1;
+                return Convert.ToInt32(ViewState["VS_csp_id"] ?? -1);
             }
-            set
-            {
-                ViewState["VS_tme_id"] = value;
-            }
-        }
 
-        /// <summary>
-        /// Propriedade em ViewState que armazena valor de tur_tipo
-        /// no caso de atualização de um registro ja existente.
-        /// </summary>
-        private byte VS_tur_tipo
-        {
-            get
-            {
-                if (ViewState["VS_tur_tipo"] != null)
-                {
-                    return Convert.ToByte(ViewState["VS_tur_tipo"]);
-                }
-                return 0;
-            }
             set
             {
-                ViewState["VS_tur_tipo"] = value;
+                ViewState["VS_csp_id"] = value;
             }
         }
 
@@ -151,6 +112,9 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
                 fdsResultado.Visible = true;
 
+                string qtItensPagina = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.QT_ITENS_PAGINACAO);
+                int itensPagina = string.IsNullOrEmpty(qtItensPagina) ? ApplicationWEB._Paginacao : Convert.ToInt32(qtItensPagina);
+                
                 // Limpar a ordenação realizada.
                 grvConfigServPendencia.Sort(VS_Ordenacao, VS_SortDirection);
 
@@ -162,6 +126,11 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
                 #endregion Salvar busca realizada com os parâmetros do ODS.
 
+                // mostra essa quantidade no combobox
+                UCComboQtdePaginacao.Valor = itensPagina;
+                // atribui essa quantidade para o grid
+                grvConfigServPendencia.PageSize = itensPagina;
+                
                 // Atualiza o grid
                 grvConfigServPendencia.DataBind();
 
@@ -182,21 +151,15 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.ConfiguracaoServicoPendencia)
             {
                 string valor;
-                string valor2;
-                string valor3;
 
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tne_id", out valor);
                 UCComboTipoNivelEnsino.Valor = Convert.ToInt32(valor);
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tme_id", out valor2);
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tme_id", out valor);
                 UCComboTipoModalidadeEnsino.Valor = Convert.ToInt32(valor);
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tur_tipo", out valor2);
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tur_tipo", out valor);
                 UCComboTipoTurma.Valor = Convert.ToByte(valor);
 
                 Pesquisar();
-            }
-            else
-            {
-                setValorCombos(-1, -1, 0);
             }
         }
 
@@ -233,38 +196,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             }
 
         }
-
-        private void setValorCombos(int tne_id, int tme_id, byte tur_tipo)
-        {
-            UCComboTipoNivelEnsino.Valor = tne_id <= 0 ? -1 : tne_id;
-            UCComboTipoModalidadeEnsino.Valor = tme_id <= 0 ? -1 : tme_id;
-            UCComboTipoTurma.Valor = tur_tipo <= 0 ? Convert.ToByte(0) : tur_tipo;
-        }
-
-        private void VerificaCadastro()
-        {
-            fdsConfiguracao.Visible = VS_tne_id > 0 && VS_tme_id > 0 && VS_tur_tipo > 0;
-            UCComboTipoNivelEnsino.PermiteEditar = UCComboTipoModalidadeEnsino.PermiteEditar = UCComboTipoTurma.PermiteEditar = !fdsConfiguracao.Visible;
-            if (fdsConfiguracao.Visible)
-            {
-                LoadByEntity(VS_tne_id, VS_tme_id, VS_tur_tipo);
-            }
-        }
-
-        private void LoadByEntity(int tne_id, int tme_id, byte tur_tipo)
-        {
-            ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo);
-            if (entity.csp_id > 0)
-            {
-                chkDisciplinaSemAula.Checked = entity.csp_disciplinaSemAula;
-                chkSemNota.Checked = entity.csp_semNota;
-                chkSemParecer.Checked = entity.csp_semParecer;
-                chkSemPlanejamento.Checked = entity.csp_semPlanejamento;
-                chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
-                chkSemSintese.Checked = entity.csp_semSintese;
-                chkSemPlanoAula.Checked = entity.csp_semPlanoAula;
-            }
-        }
+             
         #endregion
 
         #region Eventos
@@ -292,66 +224,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             Page.Form.DefaultButton = btnPesquisar.UniqueID;
             Page.Form.DefaultFocus = UCComboTipoNivelEnsino.ClientID;
 
-            UCComboTipoNivelEnsino.IndexChanged += UCComboTipoNivelEnsino_IndexChanged;
-            UCComboTipoModalidadeEnsino.IndexChanged += UCComboTipoModalidadeEnsino_IndexChanged;
-            UCComboTipoTurma.IndexChanged += UCComboTipoTurma_IndexChanged;
-
-        }
-
-        protected void btnSalvar_Click(object sender, EventArgs e)
-        {
-            ACA_ConfiguracaoServicoPendencia entity = ACA_ConfiguracaoServicoPendenciaBO.SelectBy_tne_id_tme_id_tur_tipo(UCComboTipoNivelEnsino.Valor, UCComboTipoModalidadeEnsino.Valor, UCComboTipoTurma.Valor);
-
-            entity.tne_id = UCComboTipoNivelEnsino.Valor;
-            entity.tme_id = UCComboTipoModalidadeEnsino.Valor;
-            entity.tur_tipo = UCComboTipoTurma.Valor;
-            entity.csp_disciplinaSemAula = chkDisciplinaSemAula.Checked;
-            entity.csp_semNota = chkSemNota.Checked;
-            entity.csp_semParecer = chkSemParecer.Checked;
-            entity.csp_semPlanejamento = chkSemPlanejamento.Checked;
-            entity.csp_semResultadoFinal = chkSemResultadoFinal.Checked;
-            entity.csp_semSintese = chkSemSintese.Checked;
-            entity.csp_semPlanoAula = chkSemPlanoAula.Checked;
-            entity.IsNew = entity.csp_id <= 0;
-
-            if (ACA_ConfiguracaoServicoPendenciaBO.Save(entity))
-            {
-                ApplicationWEB._GravaLogSistema(entity.IsNew ? LOG_SistemaTipo.Insert : LOG_SistemaTipo.Update, "Cadastro de configuração do serviço de pendência. csp_id" + entity.csp_id);
-                string message = UtilBO.GetErroMessage("Configuração do serviço de pendência cadastrada com sucesso.", UtilBO.TipoMensagem.Sucesso);
-
-                if (ParametroPermanecerTela)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = message;
-                    VerificaCadastro();
-                    setValorCombos(VS_tne_id, VS_tme_id, VS_tur_tipo);
-                }
-                else
-                {
-                    __SessionWEB.PostMessages = message;
-                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/ConfiguracaoServicoPendencia/Busca.aspx", false);
-                    HttpContext.Current.ApplicationInstance.CompleteRequest();
-                    Inicializa();
-                }
-            }
-        }
-
-        protected void UCComboTipoNivelEnsino_IndexChanged()
-        {
-            VS_tne_id = UCComboTipoNivelEnsino.Valor;
-        }
-
-        protected void UCComboTipoModalidadeEnsino_IndexChanged()
-        {
-            VS_tme_id = UCComboTipoModalidadeEnsino.Valor;
-        }
-
-        protected void UCComboTipoTurma_IndexChanged()
-        {
-            VS_tur_tipo = UCComboTipoTurma.Valor;
-        }
-
-
+        }   
 
         protected void odsConfigServPendencia_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
         {
@@ -374,7 +247,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
         protected void grvConfigServPendencia_DataBound(object sender, EventArgs e)
         {
-            UCTotalRegistros.Total = ACA_ConfiguracaoServicoPendencia.GetTotalRecords();
+            UCTotalRegistros.Total = ACA_ConfiguracaoServicoPendenciaBO.GetTotalRecords();
 
             // Seta propriedades necessárias para ordenação nas colunas.
             ConfiguraColunasOrdenacao(grvConfigServPendencia);
@@ -417,11 +290,14 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
         protected void UCComboQtdePaginacao_IndexChanged()
         {
-
+            // atribui nova quantidade itens por página para o grid
+            grvConfigServPendencia.PageSize = UCComboQtdePaginacao.Valor;
+            grvConfigServPendencia.PageIndex = 0;
+            grvConfigServPendencia.Sort("", SortDirection.Ascending);
+            // atualiza o grid
+            grvConfigServPendencia.DataBind();
         }
-
-        #endregion
-
+        
         protected void grvConfigServPendencia_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -457,6 +333,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
         {
 
         }
+
+        #endregion
     }
-}
 }
