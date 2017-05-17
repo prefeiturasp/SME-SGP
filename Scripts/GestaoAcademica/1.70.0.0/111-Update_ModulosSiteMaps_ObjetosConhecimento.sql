@@ -1,4 +1,5 @@
-
+USE [CoreSSO]
+GO
 
 --Iniciar transação
 BEGIN TRANSACTION

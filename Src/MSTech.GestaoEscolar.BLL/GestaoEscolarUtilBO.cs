@@ -480,6 +480,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         LancamentoSondagem
+        ,
+
+        FrequenciaMensal
     }
 
     [Serializable]
@@ -606,7 +609,8 @@ namespace MSTech.GestaoEscolar.BLL
         RelatorioObjetoAprendizagem = 318,
         AlunosJustificativaFalta = 319,
         DivergenciasAulasPrevistas = 320,
-        AnaliseSondagem = 321
+        AnaliseSondagem = 321,
+        FrequenciaMensal = 322
     }
 
     /// <summary>
