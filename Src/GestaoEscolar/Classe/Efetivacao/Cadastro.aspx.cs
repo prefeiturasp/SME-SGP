@@ -124,9 +124,9 @@ public partial class Classe_Efetivacao_Cadastro : MotherPageLogado
     #region Métodos
 
     [WebMethod]
-    public static bool VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado)
+    public static string VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado, bool chamadaJavaScript)
     {
-        return GestaoEscolar.WebControls.AlunoEfetivacaoObservacao.UCAlunoEfetivacaoObservacaoGeral.VerificarIntegridadeParecerEOL(CodigoEOLTurma, CodigoEOLAluno, resultado);
+        return GestaoEscolar.WebControls.AlunoEfetivacaoObservacao.UCAlunoEfetivacaoObservacaoGeral.VerificarIntegridadeParecerEOL(CodigoEOLTurma, CodigoEOLAluno, resultado, chamadaJavaScript);
     }
 
     #endregion

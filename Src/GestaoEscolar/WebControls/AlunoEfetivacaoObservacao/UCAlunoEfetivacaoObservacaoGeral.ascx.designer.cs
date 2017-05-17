@@ -31,6 +31,24 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao {
         protected global::System.Web.UI.WebControls.Label lblMensagem;
         
         /// <summary>
+        /// lblMensagemResultadoInvalido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensagemResultadoInvalido;
+        
+        /// <summary>
+        /// lblMensagemResultadoErro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensagemResultadoErro;
+        
+        /// <summary>
         /// pnlObservacao control.
         /// </summary>
         /// <remarks>
@@ -362,15 +380,6 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensagemSemDados;
-        
-        /// <summary>
-        /// lblMensagemResultadoInvalido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensagemResultadoInvalido;
         
         /// <summary>
         /// divFrequenciaGlobal control.

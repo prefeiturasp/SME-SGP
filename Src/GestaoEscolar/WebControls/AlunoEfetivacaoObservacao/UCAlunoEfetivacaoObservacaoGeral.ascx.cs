@@ -781,7 +781,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                         resultado = Convert.ToByte(ddlResultado.SelectedValue == "-1" ? "0" : ddlResultado.SelectedValue);
                     }
 
-                    if (!VerificarIntegridadeParecerEOL(hdnCodigoEOLTurma.Value, hdnCodigoEOLAluno.Value, ddlResultado.SelectedItem.Text))
+                    if (resultado > 0 && 
+                        !Convert.ToBoolean(VerificarIntegridadeParecerEOL(hdnCodigoEOLTurma.Value, hdnCodigoEOLAluno.Value, ddlResultado.SelectedItem.Text, false)))
                     {
                         throw new ValidationException("O parecer conclusivo selecionado está divergente com o cadastrado no EOL.");
                     }
@@ -1043,11 +1044,13 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divCadastroObservacaoGeral\\').scrollTo(0,0);', 0);", true);
                 lblMensagem.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divCadastroObservacaoGeral\\').scrollTo(0,0);', 0);", true);
                 lblMensagem.Text = UtilBO.GetErroMessage(RetornaValorResource("ErroSalvar"), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2015,6 +2018,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                 hdnCodigoEOLTurma.Value = dados.tur_codigoEOL;
 
                 lblMensagemResultadoInvalido.Text = UtilBO.GetErroMessage("O parecer conclusivo selecionado está divergente com o cadastrado no EOL.", UtilBO.TipoMensagem.Alerta);
+
+                lblMensagemResultadoErro.Text = UtilBO.GetErroMessage("Erro ao tentar buscar os dados cadastrados no EOL.", UtilBO.TipoMensagem.Erro);
 
                 lblSituacaoMatriculaEntrada.Text = string.Format("{0} {1:dd/MM/yyyy}", RetornaValorResource("MatriculadoEm"), dados.mtu_dataMatricula);
                 if (dados.mtu_dataSaida != DateTime.MinValue)
@@ -4022,15 +4027,18 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
         /// <param name="CodigoEOLAluno"></param>
         /// <param name="resultado"></param>
         /// <returns></returns>
-        public static bool VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado)
+        public static string VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado, bool chamadaJavaScript)
         {
-            bool retorno = false;
+            string retorno = "";
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
                     SYS_RecursoAPI recurso = new SYS_RecursoAPI { rap_id = (int)eRecursoAPI.ParecerConclusivoEOL };
                     SYS_RecursoAPIBO.GetEntity(recurso);
+
+                    if (recurso.IsNew || string.IsNullOrEmpty(recurso.rap_url) || recurso.rap_situacao == (byte)RecursoAPISituacao.Excluido)
+                        return "true";
 
                     client.BaseAddress = new Uri(recurso.rap_url);
                     client.DefaultRequestHeaders.Accept.Clear();
@@ -4048,16 +4056,28 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     if (response.StatusCode == HttpStatusCode.OK)
                     {
                         ParecerConclusivo parecerEOL = response.Content.ReadAsAsync<ParecerConclusivo>().Result;
-                        retorno = string.IsNullOrEmpty(parecerEOL.Resultado) || parecerEOL.Resultado.ToString().Equals(resultado, StringComparison.OrdinalIgnoreCase);
+                        retorno = (string.IsNullOrEmpty(parecerEOL.Resultado) || parecerEOL.Resultado.ToString().Equals(resultado, StringComparison.OrdinalIgnoreCase)).ToString();
                     }
+                    else
+                        throw new ValidationException("Erro ao tentar buscar os dados cadastrados no EOL.");
                 }
 
                 return retorno;
             }
+            catch (ValidationException ex)
+            {
+                if (!chamadaJavaScript)
+                    throw ex;
+                else
+                    return "";
+            }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                return false;
+                if (!chamadaJavaScript)
+                    throw new ValidationException("Erro ao tentar buscar os dados cadastrados no EOL.");
+                else
+                    return "";
             }
         }
 

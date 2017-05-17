@@ -13,6 +13,12 @@ namespace MSTech.GestaoEscolar.BLL
         ParecerConclusivoEOL = 1
     }
 
+    public enum RecursoAPISituacao
+    {
+        Ativo = 1,
+        Excluido = 3
+    }
+
     /// <summary>
     /// Description: SYS_RecursoAPI Business Object. 
     /// </summary>
