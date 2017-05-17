@@ -154,9 +154,12 @@ SET XACT_ABORT ON
 		ON mdl.sis_id = gpm.sis_id
 		AND mdl.mod_idPai = gpm.mod_id
 		AND mdl.mod_situacao <> 3
+	INNER JOIN SYS_GrupoPermissao gpmF WITH(NOLOCK)
+		ON mdl.sis_id = gpmF.sis_id
+		AND mdl.mod_id = gpmF.mod_id
 	WHERE
 		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
-		(grp_consultar = 1 OR grp_alterar = 1 OR grp_excluir = 1 OR grp_inserir = 1)
+		(gpmF.grp_consultar = 1 OR gpmF.grp_alterar = 1 OR gpmF.grp_excluir = 1 OR gpmF.grp_inserir = 1)
 		
 	-- Mudando módulos de Calendário para o mod_idPai novo
 
@@ -217,9 +220,12 @@ SET XACT_ABORT ON
 		ON mdl.sis_id = gpm.sis_id
 		AND mdl.mod_idPai = gpm.mod_id
 		AND mdl.mod_situacao <> 3
+	INNER JOIN SYS_GrupoPermissao gpmF WITH(NOLOCK)
+		ON mdl.sis_id = gpmF.sis_id
+		AND mdl.mod_id = gpmF.mod_id
 	WHERE
 		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
-		(grp_consultar = 1 OR grp_alterar = 1 OR grp_excluir = 1 OR grp_inserir = 1)
+		(gpmF.grp_consultar = 1 OR gpmF.grp_alterar = 1 OR gpmF.grp_excluir = 1 OR gpmF.grp_inserir = 1)
 		
 	-- Mudando módulos de Manutenção de turmas para o mod_idPai novo
 
@@ -318,9 +324,12 @@ SET XACT_ABORT ON
 		ON mdl.sis_id = gpm.sis_id
 		AND mdl.mod_idPai = gpm.mod_id
 		AND mdl.mod_situacao <> 3
+	INNER JOIN SYS_GrupoPermissao gpmF WITH(NOLOCK)
+		ON mdl.sis_id = gpmF.sis_id
+		AND mdl.mod_id = gpmF.mod_id
 	WHERE
 		gpm.mod_id = @mod_idPai AND gpm.sis_id = @sis_id AND
-		(grp_consultar = 1 OR grp_alterar = 1 OR grp_excluir = 1 OR grp_inserir = 1)
+		(gpmF.grp_consultar = 1 OR gpmF.grp_alterar = 1 OR gpmF.grp_excluir = 1 OR gpmF.grp_inserir = 1)
 		
 -- Fechar transação     
 SET XACT_ABORT OFF 
