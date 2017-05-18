@@ -262,29 +262,37 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
         protected void grvConfigServPendencia_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            try
             {
-                ImageButton btnEditar = (ImageButton)e.Row.FindControl("btnEditar");
-                if (btnEditar != null)
+                if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    btnEditar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    ImageButton btnEditar = (ImageButton)e.Row.FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    }
+
+                    Label lblPendencias = (Label)e.Row.FindControl("lblPendencias");
+                    if (lblPendencias != null)
+                    {
+                        string pendencias = string.Empty;
+
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semNota"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemNota.Text").ToString() + "/";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semParecer"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemParecerConclusivo.Text").ToString() + "/";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_disciplinaSemAula"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkDisciplinaSemAula.Text").ToString() + "/";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semResultadoFinal"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemResultadoFinal.Text").ToString() + "/";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanejamento.Text").ToString() + "/";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemSinteseFinal.Text").ToString() + "/";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanoAula.Text").ToString() + "/";
+
+                        lblPendencias.Text = pendencias.Length > 0 ? pendencias.Substring(0, pendencias.Length - 1) : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.lblPendencias.Text.Nenhuma").ToString();
+                    }
                 }
-
-                Label lblPendencias = (Label)e.Row.FindControl("lblPendencias");
-                if (lblPendencias != null)
-                {
-                    string pendencias = string.Empty;
-
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semNota"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemNota.Text").ToString()+"/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semParecer"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemParecerConclusivo.Text").ToString() + "/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_disciplinaSemAula"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkDisciplinaSemAula.Text").ToString() + "/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semResultadoFinal"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemResultadoFinal.Text").ToString() + "/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanejamento.Text").ToString() + "/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemSinteseFinal.Text").ToString() + "/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanoAula.Text").ToString() + "/";
-
-                    lblPendencias.Text = pendencias.Substring(0, pendencias.Length - 1);
-                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.ErroPesquisar").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
         
