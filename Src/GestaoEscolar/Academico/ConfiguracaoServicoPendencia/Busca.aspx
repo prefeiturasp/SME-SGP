@@ -54,6 +54,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemStyle CssClass="center" HorizontalAlign="Center" />
+                    <HeaderStyle CssClass="center" HorizontalAlign="Center" />
                     <HeaderTemplate>
                         <asp:Label runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnEditar.Tooltip %>"></asp:Label>
                     </HeaderTemplate>
