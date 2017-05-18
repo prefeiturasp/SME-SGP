@@ -1,0 +1,84 @@
+.panel-default{
+	@include box-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
+	@include transition(all 0.2s ease-out);
+
+	&:hover{
+		@include box-shadow(0 1px 5px rgba(0, 0, 0, 0.15));
+
+		> .panel-heading{
+			background:#f4f4f4;
+		}
+	}
+
+	> .panel-heading{
+		background:none;
+		color:$brand-primary;
+		position:relative;
+
+		a{
+			&:hover, &:focus{
+				text-decoration:none;
+			}
+		}
+	}
+
+	.panel-body{
+		border-top:2px solid $brand-secondary !important;
+	}
+}
+
+.accordion{
+	.panel-heading{
+		padding:0;
+
+		a{
+			padding:10px 15px 10px 36px;
+			display:block;
+			overflow:hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap;
+
+			i {
+				float: left;
+				margin-right: 8px;
+
+				+ span {
+					margin-top: 5px;
+					display: inline-block;
+				}
+			}
+		}
+
+		&:before{
+			position:absolute;
+			content:'\E313';
+			font-family: 'Material Icons';
+			font-size:20px;
+			left:10px;
+			top: 10px;
+			line-height: 1;
+		}
+	}
+
+	.panel-collapse{
+		.list-group{
+			margin-bottom:0;
+		}
+	}
+}
+
+// Accordion mais limpo
+.panel-topic{
+	.panel{
+		@include border-radius(0);
+		border:none;
+
+		.panel-body{
+			padding:0;
+
+			table{
+				margin-bottom:0;
+			}
+		}
+	}
+}
