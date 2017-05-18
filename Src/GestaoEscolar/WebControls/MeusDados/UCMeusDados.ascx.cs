@@ -411,7 +411,7 @@ public partial class WebControls_MeusDados_UCMeusDados : MotherUserControl
 
         entityUsuario.usu_email = email;
 
-        return !SYS_UsuarioBO.VerificaEmailExistente(entityUsuario);
+        return string.IsNullOrEmpty(entityUsuario.usu_email) || !SYS_UsuarioBO.VerificaEmailExistente(entityUsuario);
     }
 
     /// <summary>

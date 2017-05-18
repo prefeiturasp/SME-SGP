@@ -2,6 +2,7 @@
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
+using MSTech.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -169,6 +170,12 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
+            }
+
             if (!IsPostBack)
             {
                 string message = __SessionWEB.PostMessages;
@@ -262,29 +269,43 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
         protected void grvConfigServPendencia_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            try
             {
-                ImageButton btnEditar = (ImageButton)e.Row.FindControl("btnEditar");
-                if (btnEditar != null)
+                if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    btnEditar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    ImageButton btnEditar = (ImageButton)e.Row.FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    }
+
+                    Label lblPendencias = (Label)e.Row.FindControl("lblPendencias");
+                    if (lblPendencias != null)
+                    {
+                        string pendencias = string.Empty;
+
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semNota"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemNota.Text").ToString() + " / ";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semParecer"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemParecerConclusivo.Text").ToString() + " / ";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_disciplinaSemAula"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkDisciplinaSemAula.Text").ToString() + " / ";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semResultadoFinal"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemResultadoFinal.Text").ToString() + " / ";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanejamento.Text").ToString() + " / ";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemSinteseFinal.Text").ToString() + " / ";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanoAula.Text").ToString() + " / ";
+
+                        lblPendencias.Text = pendencias.Length > 0 ? pendencias.Substring(0, pendencias.Length - 3) : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.lblPendencias.Text.Nenhuma").ToString();
+                    }
+                    ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
+                    if (btnExcluir != null)
+                    {                        
+                        btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
+                        btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
+                    }
                 }
-
-                Label lblPendencias = (Label)e.Row.FindControl("lblPendencias");
-                if (lblPendencias != null)
-                {
-                    string pendencias = string.Empty;
-
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semNota"].ToString() == false.ToString() ? "" : "Sem nota/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semParecer"].ToString() == false.ToString() ? "" : "Sem parecer/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_disciplinaSemAula"].ToString() == false.ToString() ? "" : "Disciplina sem aula/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semResultadoFinal"].ToString() == false.ToString() ? "" : "Sem resultado final/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : "Sem planejamento/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : "Sem síntese/";
-                    pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : "Aula sem plano de aula/";
-
-                    lblPendencias.Text = pendencias.Substring(0, pendencias.Length - 1);
-                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.ErroPesquisar").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
         
@@ -294,5 +315,38 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
         #endregion
+        
+        protected void grvConfigServPendencia_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Deletar")
+            {
+                try
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+                    int csp_id = Convert.ToInt32(grvConfigServPendencia.DataKeys[index].Values["csp_id"].ToString());
+
+                    ACA_ConfiguracaoServicoPendencia entity = new ACA_ConfiguracaoServicoPendencia { csp_id = csp_id };
+                    ACA_ConfiguracaoServicoPendenciaBO.GetEntity(entity);
+
+                    if (ACA_ConfiguracaoServicoPendenciaBO.Delete(entity))
+                    {
+                        grvConfigServPendencia.PageIndex = 0;
+                        grvConfigServPendencia.DataBind();
+                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "csp_id: " + csp_id);
+                        lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.Mensagem.ExcluidoSucesso").ToString(), UtilBO.TipoMensagem.Sucesso);
+                    }
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.Mensagem.ErroExcluir").ToString(), UtilBO.TipoMensagem.Erro);
+                }
+            }
+        }
+        
     }
 }
