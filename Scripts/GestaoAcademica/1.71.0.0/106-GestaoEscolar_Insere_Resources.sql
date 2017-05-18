@@ -248,6 +248,13 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Nenhuma'
 
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Configuracao.ErroDuplicacao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Já existe uma configuração do serviço de pendência cadastrada com os mesmos dados.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
