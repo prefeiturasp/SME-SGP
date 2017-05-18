@@ -54,7 +54,7 @@
                     }
                     else {
                         try {
-                            $scope.listSondagens = response.data.sondagens;
+                            modelSondagens(response.data.sondagens);
                         }
                         catch (e) {
                             console.log(e);
@@ -71,6 +71,48 @@
                 });
             }
         };
+
+        function modelSondagens(list) {
+            for (var s = 0; s < list.length; s++) {
+                var respostas = []
+
+                for (var a = 0; a < list[s].agendamentos.length; a++) {
+                    for (var r = 0; r < list[s].agendamentos[a].respostasAluno.length; r++) {
+
+                        var questao = $filter('filter')(list[s].questoes, { id: list[s].agendamentos[a].respostasAluno[r].idQuestao }, true);
+
+                        if (questao.length) {
+
+                            var subQuestao = $filter('filter')(list[s].subQuestoes, { id: list[s].agendamentos[a].respostasAluno[r].idSubQuestao }, true);
+                            var resposta = $filter('filter')(list[s].respostas, { id: list[s].agendamentos[a].respostasAluno[r].idResposta }, true);
+
+                            if (subQuestao.length) {
+                                if (resposta.length) {
+                                    respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: resposta[0].descricao })
+                                }
+                                else {
+                                    respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: "" })
+                                }
+                            }
+                            else {
+                                if (resposta.length) {
+                                    respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
+                                }
+                                else {
+                                    respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: "" })
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (var q = 0; q < list[s].questoes.length; q++) {
+                    list[s].questoes[q]["respostas"] = $filter('filter')(respostas, { id: list[s].questoes[q].id }, true);
+                }
+            }
+
+            $scope.listSondagens = list;
+        }
 
         $scope.safeApply = function __safeApply() {
             var $scope, fn, force = false;

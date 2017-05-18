@@ -31,6 +31,42 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             ViewState["VS_csp_id"] = value;
         }
     }
+
+    private int VS_tne_id
+    {
+        get
+        {
+            return Convert.ToInt32(ViewState["VS_tne_id"] ?? -1);
+        }
+        set
+        {
+            ViewState["VS_tne_id"] = value;
+        }
+    }
+
+    private int VS_tme_id
+    {
+        get
+        {
+            return Convert.ToInt32(ViewState["VS_tme_id"] ?? -1);
+        }
+        set
+        {
+            ViewState["VS_tme_id"] = value;
+        }
+    }
+
+    private byte VS_tur_tipo
+    {
+        get
+        {
+            return Convert.ToByte(ViewState["VS_tur_tipo"] ?? 0);
+        }
+        set
+        {
+            ViewState["VS_tur_tipo"] = value;
+        }
+    }
     #endregion
 
     #region Métodos
@@ -41,6 +77,9 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             ACA_ConfiguracaoServicoPendencia entity = new ACA_ConfiguracaoServicoPendencia
             {
                 csp_id = VS_csp_id
+                ,tne_id = VS_tne_id
+                ,tme_id = VS_tme_id
+                ,tur_tipo = VS_tur_tipo
             };
             ACA_ConfiguracaoServicoPendenciaBO.GetEntity(entity);
 
@@ -63,6 +102,9 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             UCComboTipoTurma.PermiteEditar = false;
             
             VS_csp_id = entity.csp_id;
+            VS_tne_id = entity.tne_id;
+            VS_tme_id = entity.tme_id;
+            VS_tur_tipo = entity.tur_tipo;
         }
         catch (Exception ex)
         {
@@ -78,19 +120,26 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             ACA_ConfiguracaoServicoPendencia entity = new ACA_ConfiguracaoServicoPendencia
             {
                 csp_id = VS_csp_id,
-                tne_id = UCComboTipoNivelEnsino.Valor,
-                tme_id = UCComboTipoModalidadeEnsino.Valor,
-                tur_tipo = UCComboTipoTurma.Valor,
-                csp_disciplinaSemAula = chkDisciplinaSemAula.Checked,
-                csp_semNota = chkSemNota.Checked,
-                csp_semParecer = chkSemParecer.Checked,
-                csp_semPlanejamento = chkSemPlanejamento.Checked,
-                csp_semResultadoFinal = chkSemResultadoFinal.Checked,
-                csp_semSintese = chkSemSintese.Checked,
-                csp_semPlanoAula = chkSemPlanoAula.Checked,
-                IsNew = (VS_csp_id > 0) ? false : true
             };
 
+            ACA_ConfiguracaoServicoPendenciaBO.GetEntity(entity);
+
+            entity.tne_id = UCComboTipoNivelEnsino.Valor;
+            entity.tme_id = UCComboTipoModalidadeEnsino.Valor;
+            entity.tur_tipo = UCComboTipoTurma.Valor;
+            entity.csp_disciplinaSemAula = chkDisciplinaSemAula.Checked;
+            entity.csp_semNota = chkSemNota.Checked;
+            entity.csp_semParecer = chkSemParecer.Checked;
+            entity.csp_semPlanejamento = chkSemPlanejamento.Checked;
+            entity.csp_semResultadoFinal = chkSemResultadoFinal.Checked;
+            entity.csp_semSintese = chkSemSintese.Checked;
+            entity.csp_semPlanoAula = chkSemPlanoAula.Checked;
+            entity.IsNew = (VS_csp_id > 0) ? false : true;
+            
+
+            if (ACA_ConfiguracaoServicoPendenciaBO.SelectBy_VerificaConfiguracaoServicoPendencia(entity, null))
+                    throw new ACA_ConfiguracaoServicoPendenciaDuplicateException(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroDuplicacao").ToString());
+            
             if (ACA_ConfiguracaoServicoPendenciaBO.Save(entity))
             {
                 string message = "";
@@ -109,6 +158,9 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = message;
                     VS_csp_id = entity.csp_id;
+                    VS_tne_id = entity.tne_id;
+                    VS_tme_id = entity.tme_id;
+                    VS_tur_tipo = entity.tur_tipo;
                     if (VS_csp_id > 0)
                         Carregar();
                 }
@@ -124,6 +176,10 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroSalvar").ToString(), UtilBO.TipoMensagem.Erro);
             }           
+        }
+        catch (ACA_ConfiguracaoServicoPendenciaDuplicateException ex)
+        {
+            lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
         }
         catch (Exception ex)
         {
@@ -161,13 +217,26 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
     
     protected void btnSalvar_Click(object sender, EventArgs e)
     {
-        if (UCComboTipoNivelEnsino.Valor>0 || UCComboTipoModalidadeEnsino.Valor>0 || UCComboTipoTurma.Valor>0)
-            Salvar();
-        else
+        bool peloMenosUmChecado = chkDisciplinaSemAula.Checked ||
+                        chkSemNota.Checked ||
+                        chkSemParecer.Checked ||
+                        chkSemPlanejamento.Checked ||
+                        chkSemPlanoAula.Checked ||
+                        chkSemResultadoFinal.Checked ||
+                        chkSemSintese.Checked;
+
+        if (!(UCComboTipoNivelEnsino.Valor > 0 || UCComboTipoModalidadeEnsino.Valor > 0 || UCComboTipoTurma.Valor > 0))
         {
             ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
             lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroSelecione").ToString(), UtilBO.TipoMensagem.Alerta);
         }
+        else if (!peloMenosUmChecado)
+        {
+            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.ErroChecar").ToString(), UtilBO.TipoMensagem.Alerta);
+        }
+        else
+            Salvar();
     }
 
     protected void btnCancelar_Click(object sender, EventArgs e)

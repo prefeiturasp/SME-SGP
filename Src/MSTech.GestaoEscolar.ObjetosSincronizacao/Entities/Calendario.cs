@@ -18,5 +18,6 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.Entities
         public int cal_id { get; set; }
         public int cal_ano { get; set; }
         public int mtu_id { get; set; }
+        public int tpc_id { get; set; }
     }
 }

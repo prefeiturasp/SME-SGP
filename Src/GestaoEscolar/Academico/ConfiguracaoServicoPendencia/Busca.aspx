@@ -39,7 +39,7 @@
         <asp:GridView ID="grvConfigServPendencia" runat="server" AutoGenerateColumns="False" DataSourceID="odsConfigServPendencia"
             DataKeyNames="csp_id, tne_id, tme_id, tur_tipo, csp_semNota, csp_semParecer, csp_disciplinaSemAula, csp_semResultadoFinal, csp_semPlanejamento, csp_semSintese, csp_semPlanoAula"
             AllowPaging="True" EmptyDataText="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.grvConfigServPendencia.EmptyDataText %>" AllowSorting="True"
-            OnDataBound="grvConfigServPendencia_DataBound" OnRowDataBound="grvConfigServPendencia_RowDataBound">
+            OnDataBound="grvConfigServPendencia_DataBound" OnRowDataBound="grvConfigServPendencia_RowDataBound" OnRowCommand="grvConfigServPendencia_RowCommand">
             <Columns>
                 <asp:BoundField HeaderText="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.ColunaTipoNivelEnsino %>" DataField="tne_nome" SortExpression="tne_nome" />
                 <asp:BoundField HeaderText="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.ColunaTipoModalidadeEnsino %>" DataField="tme_nome" SortExpression="tme_nome" />
@@ -53,14 +53,26 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField>
-                    <ItemStyle CssClass="center" HorizontalAlign="Center"/>
+                    <ItemStyle CssClass="center" HorizontalAlign="Center" />
+                    <HeaderStyle CssClass="center" HorizontalAlign="Center" />
                     <HeaderTemplate>
                         <asp:Label runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnEditar.Tooltip %>"></asp:Label>
                     </HeaderTemplate>
                     <ItemTemplate>
                         <asp:ImageButton ID="btnEditar" runat="server" ToolTip="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnEditar.Tooltip %>"
-                                CommandName="Edit" SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" Visible="false"
-                                PostBackUrl="~/Academico/ConfiguracaoServicoPendencia/Cadastro.aspx" />
+                            CommandName="Edit" SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" Visible="false"
+                            PostBackUrl="~/Academico/ConfiguracaoServicoPendencia/Cadastro.aspx" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemStyle CssClass="center" HorizontalAlign="Center" />
+                    <HeaderTemplate>
+                        <asp:Label runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnExcluir.Text %>"></asp:Label>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:ImageButton ID="btnExcluir" runat="server" ToolTip="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnExcluir.Text %>"
+                            SkinID="btExcluir" Style="display: inline-block; vertical-align: middle;" Visible="false"
+                            CommandName="Deletar"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -71,4 +83,5 @@
             SelectMethod="SelectBy_tne_id_tme_id_tur_tipo" MaximumRowsParameterName="pageSize" SelectCountMethod="GetTotalRecords"
             StartRowIndexParameterName="currentPage" EnablePaging="true" OnSelecting="odsConfigServPendencia_Selecting"></asp:ObjectDataSource>
     </fieldset>
+
 </asp:Content>
