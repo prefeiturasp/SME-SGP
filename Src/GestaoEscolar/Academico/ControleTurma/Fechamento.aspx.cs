@@ -378,9 +378,9 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         [WebMethod]
-        public static bool VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado)
+        public static string VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado, bool chamadaJavaScript)
         {
-            return WebControls.AlunoEfetivacaoObservacao.UCAlunoEfetivacaoObservacaoGeral.VerificarIntegridadeParecerEOL(CodigoEOLTurma, CodigoEOLAluno, resultado);
+            return WebControls.AlunoEfetivacaoObservacao.UCAlunoEfetivacaoObservacaoGeral.VerificarIntegridadeParecerEOL(CodigoEOLTurma, CodigoEOLAluno, resultado, chamadaJavaScript);
         }
 
         #endregion Métodos

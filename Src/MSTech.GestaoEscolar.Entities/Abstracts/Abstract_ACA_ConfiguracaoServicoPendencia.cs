@@ -22,29 +22,23 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Id do tipo de nível de ensino..
 		/// </summary>
-		[MSNotNullOrEmpty("[tne_id] é obrigatório.")]
-		[DataObjectField(true, false, false)]
 		public virtual int tne_id { get; set; }
 
 		/// <summary>
 		/// Id do tipo de modalidade de ensino..
 		/// </summary>
-		[MSNotNullOrEmpty("[tme_id] é obrigatório.")]
-		[DataObjectField(true, false, false)]
 		public virtual int tme_id { get; set; }
 
 		/// <summary>
 		/// Id do tipo de turma..
 		/// </summary>
-		[MSNotNullOrEmpty("[tur_tipo] é obrigatório.")]
-		[DataObjectField(true, false, false)]
 		public virtual byte tur_tipo { get; set; }
 
 		/// <summary>
 		/// Id do registro..
 		/// </summary>
 		[MSNotNullOrEmpty("[csp_id] é obrigatório.")]
-		[DataObjectField(true, false, false)]
+		[DataObjectField(true, true, false)]
 		public virtual int csp_id { get; set; }
 
 		/// <summary>
@@ -54,7 +48,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		public virtual bool csp_semNota { get; set; }
 
 		/// <summary>
-		/// Sem parecer..
+		/// Sem parecer conclusivo..
 		/// </summary>
 		[MSNotNullOrEmpty("[csp_semParecer] é obrigatório.")]
 		public virtual bool csp_semParecer { get; set; }
@@ -78,10 +72,16 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		public virtual bool csp_semPlanejamento { get; set; }
 
 		/// <summary>
-		/// Sem síntese..
+		/// Sem síntese final..
 		/// </summary>
 		[MSNotNullOrEmpty("[csp_semSintese] é obrigatório.")]
 		public virtual bool csp_semSintese { get; set; }
+
+		/// <summary>
+		/// Aula sem plano de aula..
+		/// </summary>
+		[MSNotNullOrEmpty("[csp_semPlanoAula] é obrigatório.")]
+		public virtual bool csp_semPlanoAula { get; set; }
 
 		/// <summary>
 		/// Situação do registro..

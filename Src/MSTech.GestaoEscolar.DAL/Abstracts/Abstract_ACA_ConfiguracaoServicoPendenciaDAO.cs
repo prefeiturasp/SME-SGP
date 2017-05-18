@@ -37,27 +37,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             {
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@tne_id";
-			Param.Size = 4;
-			Param.Value = entity.tne_id;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@tme_id";
-			Param.Size = 4;
-			Param.Value = entity.tme_id;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Byte;
-			Param.ParameterName = "@tur_tipo";
-			Param.Size = 1;
-			Param.Value = entity.tur_tipo;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@csp_id";
 			Param.Size = 4;
 			Param.Value = entity.csp_id;
@@ -80,28 +59,42 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@tne_id";
 			Param.Size = 4;
-			Param.Value = entity.tne_id;
+				if(entity.tne_id > 0 )
+				{
+					Param.Value = entity.tne_id;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@tme_id";
 			Param.Size = 4;
-			Param.Value = entity.tme_id;
+				if(entity.tme_id > 0 )
+				{
+					Param.Value = entity.tme_id;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Byte;
 			Param.ParameterName = "@tur_tipo";
 			Param.Size = 1;
-			Param.Value = entity.tur_tipo;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@csp_id";
-			Param.Size = 4;
-			Param.Value = entity.csp_id;
+				if(entity.tur_tipo > 0 )
+				{
+					Param.Value = entity.tur_tipo;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
@@ -144,6 +137,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.ParameterName = "@csp_semSintese";
 			Param.Size = 1;
 			Param.Value = entity.csp_semSintese;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Boolean;
+			Param.ParameterName = "@csp_semPlanoAula";
+			Param.Size = 1;
+			Param.Value = entity.csp_semPlanoAula;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
@@ -184,21 +184,42 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@tne_id";
 			Param.Size = 4;
-			Param.Value = entity.tne_id;
+				if(entity.tne_id > 0 )
+				{
+					Param.Value = entity.tne_id;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@tme_id";
 			Param.Size = 4;
-			Param.Value = entity.tme_id;
+				if(entity.tme_id > 0 )
+				{
+					Param.Value = entity.tme_id;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Byte;
 			Param.ParameterName = "@tur_tipo";
 			Param.Size = 1;
-			Param.Value = entity.tur_tipo;
+				if(entity.tur_tipo > 0 )
+				{
+					Param.Value = entity.tur_tipo;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
@@ -251,6 +272,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
+			Param.DbType = DbType.Boolean;
+			Param.ParameterName = "@csp_semPlanoAula";
+			Param.Size = 1;
+			Param.Value = entity.csp_semPlanoAula;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@csp_situacao";
 			Param.Size = 4;
@@ -286,27 +314,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             {
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@tne_id";
-			Param.Size = 4;
-			Param.Value = entity.tne_id;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@tme_id";
-			Param.Size = 4;
-			Param.Value = entity.tme_id;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Byte;
-			Param.ParameterName = "@tur_tipo";
-			Param.Size = 1;
-			Param.Value = entity.tur_tipo;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@csp_id";
 			Param.Size = 4;
 			Param.Value = entity.csp_id;
@@ -326,11 +333,11 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-                entity.csp_id = Convert.ToInt32(qs.Return.Rows[0][0]);
-                return (entity.csp_id > 0);
-            }
+			entity.csp_id = Convert.ToInt32(qs.Return.Rows[0][0]);
+			return (entity.csp_id > 0);
+			}
 
-            return false;
+			return false;
 		}		
 	}
 }

@@ -1,4 +1,7 @@
-﻿function jsUCAlunoEfetivacaoObservacaoGeral() {
+﻿
+var erroAPIEOL = false;
+
+function jsUCAlunoEfetivacaoObservacaoGeral() {
 
     $(document).ready(function () {
         createTabs("#divTabs", "input[id$='txtSelectedTab']");
@@ -23,17 +26,44 @@
 
     $('select[id$="ddlResultado"]').unbind('change').bind('change', function () {
         var lbl = $('span[id$="lblMensagemResultadoInvalido"]');
+        var lblErro = $('span[id$="lblMensagemResultadoErro"]');
         if ($('select[id$="ddlResultado"] option:selected').val() != "-1") {
-            VerificarIntegridadeParecerEOL(function (retorno) {
-                if (!retorno) {
-                    lbl.removeClass('hide');
-                    $('select[id$="ddlResultado"]').val("-1");
-                } else {
-                    lbl.addClass('hide');
-                }
-            });
+            try
+            {
+                VerificarIntegridadeParecerEOL(function (retorno) {
+                    if (retorno == "") {
+                        lbl.addClass('hide');
+                        lblErro.removeClass('hide');
+                        $('select[id$="ddlResultado"]').val("-1");
+                        setTimeout('$(\'#divCadastroObservacaoGeral\').scrollTo(0,0);', 0);
+                    }
+                    else if (retorno == "true" || retorno == "True" || retorno == "TRUE") {
+                        lbl.addClass('hide');
+                        lblErro.addClass('hide');
+                    }
+                    else {
+                        if (erroAPIEOL) {
+                            lblErro.removeClass('hide');
+                            lbl.addClass('hide');
+                        }
+                        else {
+                            lbl.removeClass('hide');
+                            lblErro.addClass('hide');
+                        }
+                        $('select[id$="ddlResultado"]').val("-1");
+                        setTimeout('$(\'#divCadastroObservacaoGeral\').scrollTo(0,0);', 0);
+                    }
+                });
+            }
+            catch (e)
+            {
+                lbl.addClass('hide');
+                lblErro.removeClass('hide');
+                $('select[id$="ddlResultado"]').val("-1");
+            }
         } else {
             lbl.addClass('hide');
+            lblErro.addClass('hide');
         }
     });
 
@@ -106,19 +136,20 @@ function VerificarIntegridadeParecerEOL(onComplete) {
     var codigoEOLAluno = $('input[id$="hdnCodigoEOLAluno"]').val();
     var resultado = $('select[id$="ddlResultado"] option:selected').text();
 
-    var retorno = false;
+    var retorno = "false";
+    erroAPIEOL = false;
 
     $.ajax({
         type: "POST",
         url: pageName + "/VerificarIntegridadeParecerEOL",
-        data: '{ "CodigoEOLTurma": "' + codigoEOLTurma + '", "CodigoEOLAluno": "' + codigoEOLAluno + '", "resultado": "' + resultado + '"}',
+        data: '{ "CodigoEOLTurma": "' + codigoEOLTurma + '", "CodigoEOLAluno": "' + codigoEOLAluno + '", "resultado": "' + resultado + '", "chamadaJavaScript": "true"}',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             retorno = data.d;
         },
         error: function (data, success, error) {
-            retorno = false;
+            erroAPIEOL = true;
         },
         complete: function (data) {
             onComplete(retorno);

@@ -14,7 +14,7 @@ namespace MSTech.GestaoEscolar.DAL
     /// Description: .
     /// </summary>
     public class ACA_ConfiguracaoServicoPendenciaDAO : Abstract_ACA_ConfiguracaoServicoPendenciaDAO
-	{
+    {
         /// <summary>
         /// Retorna as configurações de serviço de pendência não excluídas logicamente, de acordo com tipo de nível de ensino,
         /// tipo de modalidade de ensino e tipo de turma.
@@ -22,7 +22,15 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="tne_id">Id do tipo de nível de ensino</param>
         /// <param name="tme_id">Id do tipo de modalidade de ensino</param>
         /// <param name="tur_tipo">Enum do tipo de turma</param>
-        public ACA_ConfiguracaoServicoPendencia SelectBy_tne_id_tme_id_tur_tipo(int tne_id, int tme_id, int tur_tipo)
+        public DataTable SelectBy_tne_id_tme_id_tur_tipo(
+            int tne_id
+            , int tme_id
+            , int tur_tipo
+            , bool paginado
+            , int currentPage
+            , int pageSize
+            , out int totalRecords
+        )
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ConfiguracaoServicoPendencia_SelectBy_tne_id_tme_id_tur_tipo", _Banco);
             try
@@ -33,28 +41,43 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.DbType = DbType.Int32;
                 Param.ParameterName = "@tne_id";
                 Param.Size = 4;
-                Param.Value = tne_id;
+                if (tne_id > 0)                
+                    Param.Value = tne_id;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
                 Param.ParameterName = "@tme_id";
                 Param.Size = 4;
-                Param.Value = tme_id;
+                if (tme_id > 0)
+                    Param.Value = tme_id;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int64;
                 Param.ParameterName = "@tur_tipo";
                 Param.Size = 4;
-                Param.Value = tur_tipo;
+                if (tur_tipo > 0)
+                    Param.Value = tur_tipo;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 #endregion
 
-                qs.Execute();
-                
-                return qs.Return.Rows.Count > 0 ? DataRowToEntity(qs.Return.Rows[0], new ACA_ConfiguracaoServicoPendencia()) : new ACA_ConfiguracaoServicoPendencia();
+                if (paginado)
+                    totalRecords = qs.Execute(currentPage, pageSize);
+                else
+                {
+                    qs.Execute();
+                    totalRecords = qs.Return.Rows.Count;
+                }
+
+                return qs.Return;
             }
             catch
             {

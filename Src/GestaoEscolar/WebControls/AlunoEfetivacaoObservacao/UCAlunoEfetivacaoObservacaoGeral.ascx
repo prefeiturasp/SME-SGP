@@ -12,6 +12,8 @@
 <asp:UpdatePanel ID="updObservacao" runat="server" UpdateMode="Always">
     <ContentTemplate>
         <asp:Label ID="lblMensagem" runat="server"></asp:Label>
+        <asp:Label ID="lblMensagemResultadoInvalido" runat="server" CssClass="hide"></asp:Label>
+        <asp:Label ID="lblMensagemResultadoErro" runat="server" CssClass="hide"></asp:Label>
         <asp:Panel ID="pnlObservacao" runat="server">
             <div class="dados-aluno clearfix">
                 <div class="div-inline">
@@ -81,7 +83,6 @@
                 <div id="divTabs-0">
                     <fieldset id="fdsBoletim" runat="server">
                         <asp:Label ID="lblMensagemSemDados" runat="server" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.Cadastro.lblMensagemSemDados.Text %>"></asp:Label>
-                        <asp:Label ID="lblMensagemResultadoInvalido" runat="server" CssClass="hide"></asp:Label>
                         <br />
                         <div id="divFrequenciaGlobal" class="div-inline align-middle" runat="server">
                             <asp:Label ID="lblFrequenciaGlobalTitulo" runat="server" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblFrequenciaGlobalTitulo.Text %>" CssClass="lbl-negrito"></asp:Label>

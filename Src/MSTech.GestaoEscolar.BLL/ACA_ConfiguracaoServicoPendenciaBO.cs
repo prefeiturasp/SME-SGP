@@ -23,15 +23,18 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tme_id">Id do tipo de modalidade de ensino</param>
         /// <param name="tur_tipo">Enum do tipo de turma</param>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static ACA_ConfiguracaoServicoPendencia SelectBy_tne_id_tme_id_tur_tipo
+        public static DataTable SelectBy_tne_id_tme_id_tur_tipo
         (
             int tne_id
             , int tme_id
             , int tur_tipo
+            , bool paginado
+            , int currentPage
+            , int pageSize
         )
         {
             ACA_ConfiguracaoServicoPendenciaDAO dao = new ACA_ConfiguracaoServicoPendenciaDAO();
-            return dao.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo);
+            return dao.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo, paginado, currentPage / pageSize, pageSize, out totalRecords);
         }
 
     }

@@ -374,6 +374,13 @@
     <Compile Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\ConfiguracaoServicoPendencia\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\ConfiguracaoServicoPendencia\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\ControleSemanal\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1605,6 +1612,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Relatorios\DivergenciasRematriculas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\FrequenciaMensal\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\FrequenciaMensal\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\IndicadorFrequencia\Busca.aspx.cs">
@@ -2931,6 +2945,7 @@
     <Content Include="Academico\Areas\Documentos.aspx" />
     <Content Include="Academico\CalendarioAnual\CadastroLimites.aspx" />
     <Content Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx" />
+    <Content Include="Academico\ConfiguracaoServicoPendencia\Cadastro.aspx" />
     <Content Include="Academico\ControleSemanal\Busca.aspx" />
     <Content Include="Academico\ControleSemanal\Cadastro.aspx" />
     <Content Include="Academico\ControleTurma\Alunos.aspx" />
@@ -3885,6 +3900,7 @@
     <Content Include="Relatorios\ComponentesFinalizados\Busca.aspx" />
     <Content Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx" />
     <Content Include="Relatorios\DivergenciasRematriculas\Busca.aspx" />
+    <Content Include="Relatorios\FrequenciaMensal\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />

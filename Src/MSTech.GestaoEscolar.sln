@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GestaoEscolar", "GestaoEscolar", "{2074C2EA-162E-45D5-8610-8C74A1CF4EE3}"
 EndProject
@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevExpress", "DevExpress", 
 	ProjectSection(SolutionItems) = preProject
 		_External_Dependencies\DevExpress\DevExpress.Charts.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.Charts.v16.1.Core.dll
 		_External_Dependencies\DevExpress\DevExpress.Data.v16.1.dll = _External_Dependencies\DevExpress\DevExpress.Data.v16.1.dll
+		_External_Dependencies\DevExpress\DevExpress.Office.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.Office.v16.1.Core.dll
+		_External_Dependencies\DevExpress\DevExpress.Pdf.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.Pdf.v16.1.Core.dll
 		_External_Dependencies\DevExpress\DevExpress.Printing.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.Printing.v16.1.Core.dll
 		_External_Dependencies\DevExpress\DevExpress.RichEdit.v16.1.Core.dll = _External_Dependencies\DevExpress\DevExpress.RichEdit.v16.1.Core.dll
 		_External_Dependencies\DevExpress\DevExpress.Utils.v16.1.dll = _External_Dependencies\DevExpress\DevExpress.Utils.v16.1.dll
@@ -101,6 +103,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbUpdater", "DbUpdater\DbUpdater.csproj", "{556E9FB5-CD7A-4ED6-8E58-4CB456CEB8BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGP.Database", "SGP.Database\SGP.Database.csproj", "{EADF70C0-7FF0-4292-BE9E-632369BB053A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console Application", "Console Application", "{7AAFE3D9-D408-4158-81A0-5F3F1D0CC319}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpiraSenhaPadrao", "ExpiraSenhaPadrao\ExpiraSenhaPadrao.csproj", "{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -724,6 +730,42 @@ Global
 		{EADF70C0-7FF0-4292-BE9E-632369BB053A}.ReleaseAlunos|Mixed Platforms.Build.0 = Release|Any CPU
 		{EADF70C0-7FF0-4292-BE9E-632369BB053A}.ReleaseAlunos|x86.ActiveCfg = Release|Any CPU
 		{EADF70C0-7FF0-4292-BE9E-632369BB053A}.ReleaseAlunos|x86.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Debug|x86.Build.0 = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.DebugLocal|x86.Build.0 = Debug|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.GestaoEscolar|Any CPU.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.GestaoEscolar|Any CPU.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.GestaoEscolar|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.GestaoEscolar|Mixed Platforms.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.GestaoEscolar|x86.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.GestaoEscolar|x86.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release Serviços|Any CPU.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release Serviços|Any CPU.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release Serviços|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release Serviços|Mixed Platforms.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release Serviços|x86.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release Serviços|x86.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.Release|x86.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.ReleaseAlunos|Any CPU.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.ReleaseAlunos|Any CPU.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.ReleaseAlunos|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.ReleaseAlunos|Mixed Platforms.Build.0 = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.ReleaseAlunos|x86.ActiveCfg = Release|Any CPU
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5}.ReleaseAlunos|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -756,5 +798,7 @@ Global
 		{75471803-1DEC-44AE-8699-DAFE1334BFBF} = {CD0D5A5D-5F68-47D0-8189-0D0926C71293}
 		{556E9FB5-CD7A-4ED6-8E58-4CB456CEB8BB} = {CD0D5A5D-5F68-47D0-8189-0D0926C71293}
 		{EADF70C0-7FF0-4292-BE9E-632369BB053A} = {CD0D5A5D-5F68-47D0-8189-0D0926C71293}
+		{7AAFE3D9-D408-4158-81A0-5F3F1D0CC319} = {2074C2EA-162E-45D5-8610-8C74A1CF4EE3}
+		{4541695D-07B4-4C4E-B073-4D2A7C4D00A5} = {7AAFE3D9-D408-4158-81A0-5F3F1D0CC319}
 	EndGlobalSection
 EndGlobal
