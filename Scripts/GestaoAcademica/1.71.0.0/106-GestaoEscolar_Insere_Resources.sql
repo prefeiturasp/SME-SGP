@@ -276,6 +276,13 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Erro ao tentar excluir a configuração do serviço de pendência.'
 
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.Mensagem.ConfirmaExclusao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Confirma a exclusão?'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
