@@ -217,13 +217,26 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
     
     protected void btnSalvar_Click(object sender, EventArgs e)
     {
-        if (UCComboTipoNivelEnsino.Valor>0 || UCComboTipoModalidadeEnsino.Valor>0 || UCComboTipoTurma.Valor>0)
-            Salvar();
-        else
+        bool peloMenosUmChecado = chkDisciplinaSemAula.Checked ||
+                        chkSemNota.Checked ||
+                        chkSemParecer.Checked ||
+                        chkSemPlanejamento.Checked ||
+                        chkSemPlanoAula.Checked ||
+                        chkSemResultadoFinal.Checked ||
+                        chkSemSintese.Checked;
+
+        if (!(UCComboTipoNivelEnsino.Valor > 0 || UCComboTipoModalidadeEnsino.Valor > 0 || UCComboTipoTurma.Valor > 0))
         {
             ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
             lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroSelecione").ToString(), UtilBO.TipoMensagem.Alerta);
         }
+        else if (!peloMenosUmChecado)
+        {
+            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.ErroChecar").ToString(), UtilBO.TipoMensagem.Alerta);
+        }
+        else
+            Salvar();
     }
 
     protected void btnCancelar_Click(object sender, EventArgs e)
