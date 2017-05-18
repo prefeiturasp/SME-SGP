@@ -116,13 +116,6 @@ SET XACT_ABORT ON
             , @rcr_valorPadrao = 'Pesquisar'
 
 		EXEC MS_InsereResource 
-            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ColunaEditar' 
-            , @rcr_NomeResource = 'Academico'
-            , @rcr_cultura = 'pt-BR'
-            , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Editar'
-
-		EXEC MS_InsereResource 
             @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ColunaPendencias' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
@@ -142,6 +135,13 @@ SET XACT_ABORT ON
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Tipo de nível de ensino'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.ColunaTipoTurma' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Tipo de turma'
 
 		EXEC MS_InsereResource 
             @rcr_chave = 'ConfiguracaoServicoPendencia.Busca.grvConfigServPendencia.EmptyDataText' 
@@ -170,6 +170,76 @@ SET XACT_ABORT ON
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Editar'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.lblLegend.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Cadastro de configuração do serviço de pendência'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.btnCancelar.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Cancelar'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.btnSalvar.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Salvar'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.chkSemPlanoAula.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Aula sem plano de aula'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.chkSemSinteseFinal.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sem síntese final'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.chkSemPlanejamento.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sem planejamento'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.chkSemResultadoFinal.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sem resultado final'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.chkDisciplinaSemAula.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Disciplina sem aula'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.chkSemParecerConclusivo.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sem parecer conclusivo'
+
+		EXEC MS_InsereResource 
+            @rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.chkSemNota.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sem nota'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 

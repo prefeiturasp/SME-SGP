@@ -14,22 +14,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
     <fieldset id="fdsCadastro" runat="server">
-        <legend>Cadastro de configuração do serviço de pendência</legend>
+        <legend><asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.lblLegend.Text %>" /></legend>
         <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino" runat="server" />
         <uc2:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino" runat="server" />
         <uc3:UCComboTipoTurma ID="UCComboTipoTurma" runat="server" />
-        <asp:CheckBox ID="chkSemNota" runat="server" Text="Sem nota" CssClass="wrap150px"></asp:CheckBox>
-        <asp:CheckBox ID="chkSemParecer" runat="server" Text="Sem parecer conclusivo" CssClass="wrap150px"></asp:CheckBox>
-        <asp:CheckBox ID="chkDisciplinaSemAula" runat="server" Text="Disciplina sem aula" CssClass="wrap150px"></asp:CheckBox>
-        <asp:CheckBox ID="chkSemResultadoFinal" runat="server" Text="Sem resultado final" CssClass="wrap150px"></asp:CheckBox>
-        <asp:CheckBox ID="chkSemPlanejamento" runat="server" Text="Sem planejamento" CssClass="wrap150px"></asp:CheckBox>
-        <asp:CheckBox ID="chkSemSintese" runat="server" Text="Sem síntese final" CssClass="wrap150px"></asp:CheckBox>
-        <asp:CheckBox ID="chkSemPlanoAula" runat="server" Text="Aula sem plano de aula" CssClass="wrap150px"></asp:CheckBox>
+        <asp:CheckBox ID="chkSemNota" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemNota.Text %>" CssClass="wrap150px"></asp:CheckBox>
+        <asp:CheckBox ID="chkSemParecer" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemParecerConclusivo.Text %>" CssClass="wrap150px"></asp:CheckBox>
+        <asp:CheckBox ID="chkDisciplinaSemAula" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkDisciplinaSemAula.Text %>" CssClass="wrap150px"></asp:CheckBox>
+        <asp:CheckBox ID="chkSemResultadoFinal" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemResultadoFinal.Text %>" CssClass="wrap150px"></asp:CheckBox>
+        <asp:CheckBox ID="chkSemPlanejamento" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemPlanejamento.Text %>" CssClass="wrap150px"></asp:CheckBox>
+        <asp:CheckBox ID="chkSemSintese" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemSinteseFinal.Text %>" CssClass="wrap150px"></asp:CheckBox>
+        <asp:CheckBox ID="chkSemPlanoAula" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemPlanoAula.Text %>" CssClass="wrap150px"></asp:CheckBox>
         <div class="right">
-            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click"
-                ToolTip="Salvar" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click"
-                ToolTip="Cancelar" />
+            <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.btnSalvar.Text %>" OnClick="btnSalvar_Click"
+                ToolTip="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.btnSalvar.Text %>" />
+            <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.btnCancelar.Text %>" OnClick="btnCancelar_Click"
+                ToolTip="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.btnCancelar.Text %>" />
         </div>
     </fieldset>
 </asp:Content>

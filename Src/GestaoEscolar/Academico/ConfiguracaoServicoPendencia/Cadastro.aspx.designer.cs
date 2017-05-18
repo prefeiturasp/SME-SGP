@@ -30,6 +30,15 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro {
     protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsCadastro;
     
     /// <summary>
+    /// lblLegend control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblLegend;
+    
+    /// <summary>
     /// UCComboTipoNivelEnsino control.
     /// </summary>
     /// <remarks>

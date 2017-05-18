@@ -26,9 +26,9 @@
             <uc3:UCComboTipoTurma ID="UCComboTipoTurma" runat="server" />
         </div>
         <div class="right">
-            <asp:Button ID="btnPesquisar" runat="server" Text="Pesquisar" OnClick="btnPesquisar_Click" />
-            <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click" />
-             <asp:Button ID="btnNovo" runat="server" Text="Incluir novo" OnClick="btnNovo_Click" />
+            <asp:Button ID="btnPesquisar" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnPesquisar.Text %>" OnClick="btnPesquisar_Click" />
+            <asp:Button ID="btnLimparPesquisa" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnLimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click" />
+             <asp:Button ID="btnNovo" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnIncluirNovo.Text %>" OnClick="btnNovo_Click" />
        
         </div>
     </fieldset>
@@ -38,15 +38,15 @@
             ComboDefaultValue="true" />
         <asp:GridView ID="grvConfigServPendencia" runat="server" AutoGenerateColumns="False" DataSourceID="odsConfigServPendencia"
             DataKeyNames="csp_id, tne_id, tme_id, tur_tipo, csp_semNota, csp_semParecer, csp_disciplinaSemAula, csp_semResultadoFinal, csp_semPlanejamento, csp_semSintese, csp_semPlanoAula" 
-            AllowPaging="True" EmptyDataText="A pesquisa não encontrou resultados." AllowSorting="True" 
+            AllowPaging="True" EmptyDataText="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.grvConfigServPendencia.EmptyDataText %>" AllowSorting="True" 
             OnDataBound="grvConfigServPendencia_DataBound" OnRowDataBound="grvConfigServPendencia_RowDataBound">
             <Columns>
-                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tne_nome" SortExpression="tne_nome" />
-                <asp:BoundField HeaderText="Tipo de modalidade de ensino" DataField="tme_nome" SortExpression="tme_nome" />
-                <asp:BoundField HeaderText="Tipo de nível de ensino" DataField="tur_tipoNome" SortExpression="tur_tipoNome" />
+                <asp:BoundField HeaderText="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.ColunaTipoNivelEnsino %>" DataField="tne_nome" SortExpression="tne_nome" />
+                <asp:BoundField HeaderText="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.ColunaTipoModalidadeEnsino %>" DataField="tme_nome" SortExpression="tme_nome" />
+                <asp:BoundField HeaderText="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.ColunaTipoTurma %>" DataField="tur_tipoNome" SortExpression="tur_tipoNome" />
                 <asp:TemplateField>
                     <HeaderTemplate>
-                        <asp:Label runat="server" Text="Pendências"></asp:Label>
+                        <asp:Label runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.ColunaPendencias %>"></asp:Label>
                     </HeaderTemplate>
                     <ItemTemplate>
                         <asp:Label ID="lblPendencias" runat="server" Text=""></asp:Label>
@@ -54,10 +54,10 @@
                 </asp:TemplateField>
                 <asp:TemplateField>
                     <HeaderTemplate>
-                        <asp:Label runat="server" Text="Editar"></asp:Label>
+                        <asp:Label runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnEditar.Tooltip %>"></asp:Label>
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnEditar" runat="server" ToolTip="Editar" CommandName="Edit"
+                        <asp:ImageButton ID="btnEditar" runat="server" ToolTip="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.btnEditar.Tooltip %>" CommandName="Edit"
                             SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" Visible="false" 
                             PostBackUrl="~/Academico/ConfiguracaoServicoPendencia/Cadastro.aspx"/>
                     </ItemTemplate>
