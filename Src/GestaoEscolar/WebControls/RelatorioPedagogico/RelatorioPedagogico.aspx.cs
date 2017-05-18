@@ -5,6 +5,7 @@
     using MSTech.GestaoEscolar.Web.WebProject;
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
     using System.Web;
     using System.Web.UI;
@@ -22,6 +23,18 @@
         {
             get { return Convert.ToInt32(ViewState["ano"] ?? "-1"); }
             set { ViewState["ano"] = value; }
+        }
+
+        public int mtu_id
+        {
+            get { return Convert.ToInt32(ViewState["mtu_id"] ?? "-1"); }
+            set { ViewState["mtu_id"] = value; }
+        }
+
+        public int tpc_id
+        {
+            get { return Convert.ToInt32(ViewState["tpc_id"] ?? "-1"); }
+            set { ViewState["tpc_id"] = value; }
         }
 
         protected override void Page_PreInit(object sender, EventArgs e)
@@ -48,8 +61,13 @@
 
             if (!IsPostBack)
             {
-                alu_id = 1148257;
-                ano = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id).Select().Select(p => Convert.ToInt32(p["cal_ano"])).Max();
+                alu_id = 1405469;
+                using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
+                {
+                    ano = dt.Select().Select(p => Convert.ToInt32(p["cal_ano"])).Max();
+                    mtu_id = dt.Select(string.Format("cal_ano = {0}", ano)).Select(p => Convert.ToInt32(p["mtu_id"])).First();
+                    tpc_id = dt.Select(string.Format("cal_ano = {0}", ano)).Select(p => Convert.ToInt32(p["tpc_id"])).First();
+                }
             }
         }
     }

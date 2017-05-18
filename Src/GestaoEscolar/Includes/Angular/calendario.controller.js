@@ -52,13 +52,14 @@
             $scope.logos = core;
             $scope.api = api;
 
-            $scope.trocarAno = function (ano, mtu_id) {
+            $scope.trocarAno = function (ano, mtu_id, tpc_id) {
                 initVars();
-                $scope.params.ano = ano;
-                $scope.params.mtu_id = mtu_id;
+                params.ano = ano;
                 params.ano = ano;
                 params.mtu_id = mtu_id;
                 params.MtuIds = mtu_id;
+                params.TpcId = tpc_id;
+                $scope.params = params;
                 getCalendarios();
                 trocarAnoService.reload();
             }
