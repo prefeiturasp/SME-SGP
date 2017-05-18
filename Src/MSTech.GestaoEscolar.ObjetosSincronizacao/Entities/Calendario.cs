@@ -12,4 +12,11 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.Entities
         public List<ACA_CalendarioPeriodoDTO> Periodos { get; set; }
         public List<Nivel> Niveis { get; set; }
     }
+
+    public class CalendarioAluno
+    {
+        public int cal_id { get; set; }
+        public int cal_ano { get; set; }
+        public int mtu_id { get; set; }
+    }
 }

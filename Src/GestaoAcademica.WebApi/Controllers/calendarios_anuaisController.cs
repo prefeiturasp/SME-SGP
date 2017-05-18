@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GestaoAcademica.WebApi.Controllers
 {
@@ -107,6 +108,35 @@ namespace GestaoAcademica.WebApi.Controllers
             }
 
             throw new HttpResponseException(HttpStatusCode.NotFound);
+        }
+
+        /// <summary>
+        /// Seleciona os dados do calendario anual por id do aluno.
+        /// -- Utilização: URL_API/calendario_anual?alu_id=1
+        /// -- Parâmetros: id do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "get")]
+        public HttpResponseMessage GetCalendarioPorAluno(long alu_id)
+        {
+            try
+            {
+                List<CalendarioAluno> retorno = ApiBO.SelecionaCalendarioPorAluno(alu_id);
+
+                if (retorno != null && retorno.Any())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, retorno);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new StringContent("Erro: " + ex.Message));
+                throw;
+            }
         }
 
         /// <summary>

@@ -1501,6 +1501,13 @@
     <Compile Include="Documentos\RelatorioDev.aspx.designer.cs">
       <DependentUpon>RelatorioDev.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Documentos\RelatorioPedagogico\RelatorioPedagogico.aspx.cs">
+      <DependentUpon>RelatorioPedagogico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RelatorioPedagogico\RelatorioPedagogico.aspx.designer.cs">
+      <DependentUpon>RelatorioPedagogico.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2866,6 +2873,23 @@
     <Compile Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx.designer.cs">
       <DependentUpon>UCPlanejamentoProjetos.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\RelatorioPedagogico\imagem.ashx.cs">
+      <DependentUpon>imagem.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx.cs">
+      <DependentUpon>RelatorioPedagogico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx.designer.cs">
+      <DependentUpon>RelatorioPedagogico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx.cs">
+      <DependentUpon>UCRelatorioPedagogico.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx.designer.cs">
+      <DependentUpon>UCRelatorioPedagogico.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Relatorio\UCDevReportView.ascx.cs">
       <DependentUpon>UCDevReportView.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2961,6 +2985,18 @@
     <Content Include="Academico\Sondagem\Agendamento.aspx" />
     <Content Include="Academico\Sondagem\Busca.aspx" />
     <Content Include="Academico\Sondagem\Cadastro.aspx" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap.css" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\css.css" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\custom.css" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_bold\Roboto-Bold-webfont.svg" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_bold\stylesheet.css" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_medium\Roboto-Medium-webfont.svg" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_medium\stylesheet.css" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_regular\Roboto-Regular-webfont.svg" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_regular\stylesheet.css" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\GestaoEscolar.css" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\responsividade.css" />
     <Content Include="App_Themes\IntranetSME\fonts\materialicons\MaterialIcons-Regular.svg" />
     <Content Include="App_Themes\IntranetSME\images\arrow.gif" />
     <Content Include="App_Themes\IntranetSME\images\cross.gif" />
@@ -2978,6 +3014,114 @@
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Cadastro.aspx" />
     <Content Include="Academico\ControleSemanal\CacheEfetivacaoHandler.ashx" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_alerts.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_buttons.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_center-block.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_forms.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_gradients.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_grid.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_hide-text.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_image.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_labels.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_list-group.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_nav-vertical-align.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_opacity.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_pagination.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_panels.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_progress-bar.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_reset-filter.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_resize.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_responsive-visibility.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_size.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_tab-focus.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_table-row.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_text-overflow.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\mixins\_vendor-prefixes.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_alerts.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_badges.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_breadcrumbs.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_button-groups.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_buttons.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_carousel.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_close.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_code.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_component-animations.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_dropdowns.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_forms.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_glyphicons.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_grid.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_input-groups.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_jumbotron.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_labels.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_list-group.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_media.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_mixins.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_modals.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_navbar.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_navs.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_normalize.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_pager.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_pagination.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_panels.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_popovers.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_print.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_progress-bars.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_responsive-embed.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_responsive-utilities.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_scaffolding.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_tables.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_theme.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_thumbnails.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_tooltip.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_type.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_utilities.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_variables.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap\_wells.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\GestaoEscolar.skin" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\IntranetSME.skin" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\responsividade.css.map" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\responsividade.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\Rio.skin" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\_fonts.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\_variaveis.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\material-icons\Material-Icons-Regular.eot" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\material-icons\Material-Icons-Regular.ijmap" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\material-icons\Material-Icons-Regular.ttf" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\material-icons\Material-Icons-Regular.woff" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\material-icons\Material-Icons-Regular.woff2" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_bold\Roboto-Bold-webfont.eot" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_bold\Roboto-Bold-webfont.ttf" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_bold\Roboto-Bold-webfont.woff" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_medium\Roboto-Medium-webfont.eot" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_medium\Roboto-Medium-webfont.ttf" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_medium\Roboto-Medium-webfont.woff" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_regular\Roboto-Regular-webfont.eot" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_regular\Roboto-Regular-webfont.ttf" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\fonts\roboto_regular\Roboto-Regular-webfont.woff" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_custom-accordion.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_custom-list-group.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_custom-navbar.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_custom-tables.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_custom-tabs.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_custom-variables.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_layout-geral.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_materialicons-fonts.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_roboto-fonts.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap.css.map" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\custom.css.map" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\custom.scss" />
     <None Include="Configs\Session.txt" />
     <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
@@ -3288,10 +3432,16 @@
     <Content Include="App_Themes\IntranetSME\fonts\materialicons\MaterialIcons-Regular.woff" />
     <Content Include="App_Themes\IntranetSME\fonts\materialicons\MaterialIcons-Regular.woff2" />
     <Content Include="Documentos\RelatorioDev.aspx" />
+    <Content Include="Documentos\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Includes\Angular\angular.js" />
+    <Content Include="Includes\Angular\anotacao.controller.js" />
     <Content Include="Includes\Angular\boletim.controller.js" />
+    <Content Include="Includes\Angular\calendario.controller.js" />
     <Content Include="Includes\Angular\module.js" />
+    <Content Include="Includes\Angular\sondagem.controller.js" />
+    <Content Include="Includes\bootstrap\bootstrap.js" />
+    <Content Include="Includes\bootstrap\bootstrap.min.js" />
     <Content Include="Includes\ckeditor\adapters\jquery.js" />
     <Content Include="Includes\ckeditor\build-config.js" />
     <Content Include="Includes\ckeditor\ckeditor.js" />
@@ -3735,6 +3885,7 @@
     <Content Include="Includes\redactor\redactor.js" />
     <Content Include="Includes\redactor\redactor.min.js" />
     <Content Include="Includes\jsSetExitPageConfirmer.js" />
+    <Content Include="Includes\scrolling.js" />
     <Content Include="Index.aspx" />
     <Content Include="Manutencao.aspx" />
     <Content Include="manutencao.htm" />
@@ -3840,6 +3991,8 @@
     <Content Include="WebControls\OrientacaoCurricular\UCNivelOrientacao.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoAnual.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx" />
+    <Content Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx" />
+    <Content Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx" />
     <Content Include="WebControls\Relatorio\UCDevReportView.ascx" />
     <Content Include="WebControls\TurmaDisciplina\UCGridDisciplinaRegencia.ascx" />
     <Content Include="WSServicos.asmx" />
@@ -3875,6 +4028,7 @@
     <None Include="web.ReleaseAlunos.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+    <Content Include="WebControls\RelatorioPedagogico\imagem.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Academico\Aluno\Anotacoes.aspx" />
@@ -4224,6 +4378,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_Themes\IntranetSMEBootStrap\images\" />
     <Folder Include="WebControls\FormularioSocioeconomico\" />
   </ItemGroup>
   <ItemGroup>

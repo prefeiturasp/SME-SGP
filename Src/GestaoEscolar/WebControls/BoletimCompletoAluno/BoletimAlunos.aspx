@@ -352,7 +352,7 @@
 
                                                                             </tbody>
                                                                             <!--tbody-->
-                                                                        </table>
+                                                                        </ta
                                                                         <!--table-->
                                                                     </div>
 

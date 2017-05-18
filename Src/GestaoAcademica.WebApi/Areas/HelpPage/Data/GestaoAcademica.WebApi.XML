@@ -43,13 +43,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemBoletimEscolarAlunoController.GetAll(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaBoletimEscolarAlunoEntradaDTO)">
-            <summary>
-            Retorna o boletim escolar do aluno
-            </summary>
-            <param name="filtros">Objeto com parâmetros de entrada</param>
-            <returns></returns>
-        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemBoletimEscolarAlunoController.GetBoletimEscolarDosAlunos(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaBoletimEscolarDosAlunosEntradaDTO)">
             <summary>
             Retorna o boletim escolar dos alunos
@@ -116,6 +109,15 @@
             <param name="id">Id do calendário anual.</param>
             <param name="dataBase">Id do calendário anual.</param>
             <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.GetCalendarioPorAluno(System.Int64)">
+            <summary>
+            Seleciona os dados do calendario anual por id do aluno.
+            -- Utilização: URL_API/calendario_anual?alu_id=1
+            -- Parâmetros: id do aluno
+            </summary>
+            <param name="alu_id"></param>
+            <returns></returns>
         </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.Post">
             <summary>
