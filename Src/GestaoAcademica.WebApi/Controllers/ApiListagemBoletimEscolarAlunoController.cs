@@ -13,30 +13,30 @@ namespace GestaoAcademica.WebApi.Controllers
     
     public class ApiListagemBoletimEscolarAlunoController : ApiController
     {
-        /// <summary>
-        /// Retorna o boletim escolar do aluno
-        /// </summary>
-        /// <param name="filtros">Objeto com parâmetros de entrada</param>
-        /// <returns></returns>
-        [HttpGet]
-        [EnableCors(origins: "*", headers: "*", methods: "get")]
-        public List<BuscaBoletimEscolarAlunoSaidaDTO> GetAll([FromUri] BuscaBoletimEscolarAlunoEntradaDTO filtros)
-        {
-            try
-            {
-                return ApiBO.BuscaBoletimEscolarAluno(filtros);
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
+        ///// <summary>
+        ///// Retorna o boletim escolar do aluno
+        ///// </summary>
+        ///// <param name="filtros">Objeto com parâmetros de entrada</param>
+        ///// <returns></returns>
+        //[HttpGet]
+        //[EnableCors(origins: "*", headers: "*", methods: "get")]
+        //public List<BuscaBoletimEscolarAlunoSaidaDTO> GetAll([FromUri] BuscaBoletimEscolarAlunoEntradaDTO filtros)
+        //{
+        //    try
+        //    {
+        //        return ApiBO.BuscaBoletimEscolarAluno(filtros);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ApplicationWEB._GravaErro(ex);
 
-                List<BuscaBoletimEscolarAlunoSaidaDTO> list = new List<BuscaBoletimEscolarAlunoSaidaDTO>();
-                BuscaBoletimEscolarAlunoSaidaDTO buscaBoletimEscolarAlunoSaidaDTO = new BuscaBoletimEscolarAlunoSaidaDTO();
-                buscaBoletimEscolarAlunoSaidaDTO.Status = 1;
-                buscaBoletimEscolarAlunoSaidaDTO.StatusDescription = "Ocorreu um erro ao carregar dados.";
-                return list;
-            }
-        }
+        //        List<BuscaBoletimEscolarAlunoSaidaDTO> list = new List<BuscaBoletimEscolarAlunoSaidaDTO>();
+        //        BuscaBoletimEscolarAlunoSaidaDTO buscaBoletimEscolarAlunoSaidaDTO = new BuscaBoletimEscolarAlunoSaidaDTO();
+        //        buscaBoletimEscolarAlunoSaidaDTO.Status = 1;
+        //        buscaBoletimEscolarAlunoSaidaDTO.StatusDescription = "Ocorreu um erro ao carregar dados.";
+        //        return list;
+        //    }
+        //}
 
         /// <summary>
         /// Retorna o boletim escolar dos alunos

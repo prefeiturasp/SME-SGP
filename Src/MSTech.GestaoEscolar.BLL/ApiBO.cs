@@ -3178,6 +3178,19 @@ namespace MSTech.GestaoEscolar.BLL
         #region ACA_CalendarioAnual
 
         /// <summary>
+        /// Seleciona todos os calendários pelos quais o aluno passou
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <returns></returns>
+        public static List<CalendarioAluno> SelecionaCalendarioPorAluno(long alu_id)
+        {
+            using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
+            {
+                return GestaoEscolarUtilBO.MapToEnumerable<CalendarioAluno>(dt).ToList();
+            }
+        }
+
+        /// <summary>
         /// Seleciona todos os calendários anuais ativos.
         /// </summary>
         /// <returns>List<ACA_CalendarioAnualDTO></returns>

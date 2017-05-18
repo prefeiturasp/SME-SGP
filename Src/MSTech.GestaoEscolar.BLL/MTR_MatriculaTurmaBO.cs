@@ -411,7 +411,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <returns>DataTable com os anos</returns>
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public DataTable GetSelectAnoMatricula
+        public static DataTable GetSelectAnoMatricula
         (
            long alu_id
         )

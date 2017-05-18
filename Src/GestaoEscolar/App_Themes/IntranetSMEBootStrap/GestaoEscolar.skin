@@ -1,0 +1,10 @@
+﻿<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/estenderCampo.png"  SkinID="btEstenderCampo" ToolTip="Expandir o campo de digitação" Width="24px" Height="24px"/>
+
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/estenderCampo.png"  SkinID="btnExpandirCampo" ToolTip="Expandir o campo de digitação" Width="24px" Height="24px"/>
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/estenderCampo.png"  SkinID="btnComprimirCampo" ToolTip="Comprimir o campo de digitação" Width="24px" Height="24px"/>
+
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/webcam.png"  SkinID="btWebCam" ToolTip="Captura de foto do aluno" Width="24px" Height="24px"/>
+<asp:CheckBox runat="server" CssClass="checkbox chkPrincipal" SkinID="chkPrincipal" />
+
+
+<asp:TextBox   runat="server" CSSClass="text2C numeric" SkinID="Numerico2c"/>

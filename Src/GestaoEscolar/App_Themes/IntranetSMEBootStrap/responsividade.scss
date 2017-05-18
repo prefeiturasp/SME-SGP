@@ -1,0 +1,1310 @@
+@import "variaveis";
+@import "fonts";
+
+.divResultadosDocente{
+  .divScrollResponsivo{
+    overflow-x:auto !important;
+  }
+}
+
+@media screen and (max-width:960px){
+  body {
+    form#aspnetForm {
+      margin: 0;
+      padding:0;
+      @include box-shadow(none);
+    }
+
+    > h2:first-child{
+      display:none;
+    }
+
+    .divScrollResponsivo{
+      overflow-x:auto !important;
+      width:auto !important;
+
+      &.area-relatorio{
+        width:100% !important;
+      }
+    }
+
+    .responsive-float-left{
+      float:left !important;
+      display: block;
+      width: 100%;
+      text-align:left;
+    }
+
+    .responsive-hide{
+      display:none;
+    }
+
+    .responsive-block{
+      display:block;
+      width:100%;
+    }
+
+    .responsive-width-auto{
+      width:auto !important;
+    }
+
+    .responsive-clear{
+      overflow:hidden;
+    }
+
+    #SiteMap{
+      width: 95%;
+      margin: 50px auto 0 auto;
+
+      .listaMenu{
+        margin:0;
+      }
+    }
+
+    // TOPO
+    div#hd{
+      background:$corPrincipal !important;
+      padding:8px;
+      margin:0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      width: 100%;
+
+      h1.logo{
+        margin:0 0 0 46px;
+
+        img{
+          height:40px;
+        }
+      }
+
+      h2.logoSistemaAtual a, h2.logoSistemaAtual img{
+        height:40px;
+      }
+
+      #acessibilidade{ display:none;}
+    }
+  }
+
+  .msgInformacao{
+    display:none !important;
+  }
+
+  input.btn{
+    @include border-radius(0);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  // BARRA USUÁRIO
+  #aspnetForm div#hd .user{
+    background: $corSecundaria;
+    border-bottom:2px solid $corSecundariaDarker;
+    top:56px;
+    display: block;
+    @include box-shadow(none);
+    text-align: left;
+    padding:20px;
+    opacity:0;
+    @include transform(translateX(-100vw));
+    @include transition(opacity 0.2s ease-out);
+
+    > a[id*="Sair"]{
+      position:absolute;
+      right:20px;
+      margin-right:0;
+    }
+
+    > div[id*="MeusDados"]{
+      float:right;
+      margin-right: 35px;
+    }
+
+    .user-divider{ color: $corSecundariaDarker !important;}
+    > .user-divider{ display: none;}
+
+    .menuSistemas{ display: none;}
+  }
+
+  // NOME BANCO
+  .spnHelpDesk{
+    top:0;
+    right:0;
+
+    > div{
+      font-size:1rem !important;
+    }
+  }
+
+  // MENU
+  .m {
+    height: auto;
+    overflow: hidden;
+    background: $corBkgMenu;
+    position:static;
+    @include border-radius(0);
+    @include box-shadow(none);
+    @include transition(opacity 0.2s ease-out);
+
+    > .i {
+      float: none;
+      display: none;
+
+      &:not(.menu-icon) {
+        opacity: 0;
+        @include transition(opacity 0.2s ease-out);
+      }
+    }
+
+    &.active{
+      height:calc(100vh - 112px);
+      margin-top:112px;
+      overflow:auto;
+
+      > .i{
+        display: block;
+        opacity:1;
+      }
+    }
+
+    .i.menu-icon {
+      display: block !important;
+      position: fixed;
+      top:8px;
+      left:8px;
+      z-index: 101;
+
+      i::before {
+        display: inline-block;
+        font-family: 'Material Icons';
+        color:$corSecundaria;
+        vertical-align: middle;
+        content:'\e5d2';
+        font-style: normal;
+        font-size:24px;
+
+        pointer-events: none;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a{
+        &:hover, &:active, &:focus{ background:none !important;}
+      }
+    }
+
+    .i a {
+      text-align: left;
+      padding:8px;
+      height:auto;
+      line-height: 1;
+    }
+
+    .i:not(.menu-icon) a{
+      padding:16px 20px 16px 46px;
+      border-bottom:1px solid $corSecundariaDarker;
+
+      &:hover, &:active, &:focus{ background:$corSecundariaSuperDarker !important;}
+    }
+
+    .i:hover > a{
+      background:initial !important;
+    }
+
+    .dDA {
+      float: left;
+      margin-right: inherit;
+      margin-left: 0;
+      color:transparent;
+      position:relative;
+      font-size:0;
+
+      &::before{
+        content:'\e5cc';
+        font-family: 'Material Icons';
+        font-size:24px;
+        color:$corTextoMenu;
+        position: absolute;
+        top: -7px;
+        left: -30px;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+      }
+    }
+
+    .i.active{
+      > a > .dDA::before {
+        @include rotate90();
+      }
+    }
+
+    .s {
+      position: relative;
+      display: none;
+
+      .dDA{
+        float:left;
+        margin-right:0;
+      }
+
+      .i .s {
+        position: relative;
+        margin: 0 !important;
+        display: none;
+      }
+
+      .i a {
+        width: 100% !important;
+        text-align: left;
+        padding: 16px 20px 16px 70px;
+        line-height: initial;
+        background:$corSecundariaDarker;
+        border-bottom:1px solid rgba(0,0,0,.2);
+        @include border-radius(0 !important);
+      }
+
+      .i .s .i a{
+        padding: 16px 20px 16px 105px;
+      }
+
+      .i .s .i .s .i a{
+        padding: 16px 20px 16px 140px;
+      }
+
+      a {
+        padding-left: 40px;
+      }
+    }
+  }
+
+  .m .s .u a, .m .s .i .s .u a{ border-bottom:1px solid rgba(0,0,0,.2)}
+
+  .m .i:hover .s,
+  .m .i .s .i:hover .s,
+  .m .i .s .i .s .i:hover .s {
+    display: none;
+  }
+
+  .m .i.active > .s,
+  .m .i .s .i.active > .s,
+  .m .i .s .i .s .i.active > .s {
+    display: block !important;
+  }
+
+  .responsive-menu-active{
+    overflow:hidden;
+
+    #aspnetForm div#hd .user{
+      display: block;
+      opacity:1;
+      @include transform(translateX(0));
+    }
+
+    .area-botoes-bottom{
+      display:none;
+    }
+  }
+
+  // BREADCRUMB
+  div.breadCrumb{
+    margin:0;
+    background:$corBkgBreadcrumb;
+    padding: 66px 10px 10px 10px;
+
+    &, a{
+      color:$corTextoBreadcrumb;
+    }
+  }
+
+  // RODAPE
+  #ft{
+    display:none;
+  }
+
+  // FIELDEST
+  fieldset{
+    &, legend{
+      @include box-shadow(none);
+      @include border-radius(0);
+      border:none;
+      margin-bottom:0;
+    }
+
+    legend{
+      padding-left:12px !important;
+      width:calc(100% + 8px);
+      position:relative;
+      z-index:1;
+      margin-bottom:10px;
+
+      span{ color:$corTexto !important;}
+
+      #spTituloTurma{
+        color:$corTexto !important;
+
+        a{
+          color:$corAcao !important;
+          font-weight:normal;
+          font-size:0.75rem;
+        }
+      }
+    }
+
+    fieldset{
+      padding:0 !important;
+      margin-top: 30px;
+
+      legend{
+        background:#ddd;
+      }
+    }
+  }
+
+  label{
+    max-width:100%;
+    width:auto !important;
+  }
+
+  // BARRA OPCOES DA TURMA
+  .planEscopo{
+    padding:0;
+    position:relative;
+
+    .opcoes.mapDireita{
+      background:$corSecundaria;
+      margin:0;
+      position:relative;
+      text-align:center;
+      @include flex();
+      width: 100%;
+      margin-bottom: 10px;
+
+      > span{
+        &[class^="btn"]:not(:empty){
+          @include flexGeral();
+          position:relative;
+          @include transition(background 0.2s eas-out);
+
+          &::before{
+            display: inline-block;
+            font-family: 'Material Icons';
+            color:$corTextoMenu;
+            vertical-align: middle;
+            content:'e5d2';
+            font-size:24px;
+            padding:12px;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+          }
+        }
+
+        &.selecionado{
+          &::before{
+            color:$corPrincipal !important;
+          }
+        }
+
+        &:hover{
+          background:$corSecundariaDarker;
+        }
+
+        &.btnPlanejamentoAnual{
+          @include order(2);
+
+          &:not(:empty)::before{
+            content:'\e616';
+          }
+        }
+
+        &.btnDiarioClasse{
+          @include order(3);
+
+          &:not(:empty)::before{
+            content:'\e865';
+          }
+        }
+
+        &.btnListao{
+          @include order(4);
+
+          &:not(:empty)::before{
+            content:'\e3ec';
+          }
+        }
+
+        &.btnFrequencia{
+          @include order(5);
+
+          &:not(:empty)::before{
+            content:'\e85c';
+          }
+        }
+
+        &.btnAvaliacao{
+          @include order(6);
+
+          &:not(:empty)::before{
+            content:'\e14f';
+          }
+        }
+
+        &.btnEfetivacao{
+          @include order(7);
+
+          &:not(:empty)::before{
+            content:'\e52d';
+          }
+        }
+
+        &.btnAlunos{
+          @include order(8);
+
+          &:not(:empty)::before{
+            content:'\e7fb';
+          }
+        }
+
+        &.btnVoltar{
+          max-width: 48px;
+          background: rgba(255,255,255,.1);
+          @include order(1);
+          display:inline-block;
+          height:100%;
+
+          &:not(:empty)::before {
+            content: '\e5c4';
+          }
+        }
+
+        > .btn{
+          border:none;
+          @include border-radius(0);
+          background:none;
+          @include box-shadow(none);
+
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom:0;
+          right:0;
+          width:100% !important;
+          opacity: 0;
+          padding:12px;
+          color: $corTexto;
+          font-weight: bold;
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .opcoes-titulo{
+      display:block !important;
+      font-size:1.1rem;
+      font-weight:bold;
+      color:$corTexto;
+      text-align: left;
+      padding: 12px;
+      padding-right:0;
+      width: calc(100% - 280px);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .opcoes-bimestre{
+      width:280px;
+      position:absolute;
+      right:0;
+      bottom:0;
+
+      > span.botao-periodo{
+        width:32px;
+        height:32px;
+        @include border-radius(50px);
+        overflow: hidden;
+        display:inline-block;
+        position: relative;
+
+        input.btn{
+          position:absolute;
+          top:0;
+          left:0;
+          opacity: 0;
+          z-index:1;
+          max-width: 100%;
+
+          &[value="Final"] ~ .abbr-periodo{
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            padding-top: 10px;
+          }
+
+          &.periodo_selecionado{
+            ~ .abbr-periodo{
+              background:$corAcaoDarker;
+            }
+          }
+        }
+
+        .abbr-periodo:not(:empty){
+          display: block !important;
+          width:100%;
+          height:100%;
+          position: absolute;
+          background:$corAcao;
+          color:#fff;
+          text-align:center;
+          padding-top:8px;
+          font-size:0.9rem;
+        }
+      }
+    }
+  }
+
+  // AREA BOTOES SALVAR/CANCELAR
+  .area-botoes-top{
+    display:none;
+  }
+
+  .area-botoes-bottom{
+    position: fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:0 !important;
+    @include box-shadow(0 -1px 8px rgba(0,0,0,.2));
+    z-index:20;
+    background:$corBotaoBottomHover;
+    margin:0 !important;
+
+    &.right,
+    .right:only-child{
+      margin:0;
+      padding:0;
+      border:none;
+    }
+
+    input.btn{
+      margin: 0;
+      width: 50% !important;
+      float: left;
+      border: none;
+      padding: 16px 10px;
+      @include border-radius(0);
+      text-transform: uppercase;
+      background: $corBotaoBottom;
+      text-shadow: none;
+      color: $corTextoBotaoBottom !important;
+      border:none;
+      border-right: 1px solid $corTextoBotaoBottom;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      &:last-child{
+        border-right:0;
+      }
+
+      &:only-child{
+        width:100% !important;
+      }
+
+      &:hover, &:focus{
+        background:$corBotaoBottomHover;
+      }
+    }
+
+    input[type="hidden"] + input[style*="none"] + input.btn[type="submit"]:last-child,
+    input[type="hidden"]:first-child + input.btn[type="submit"]:last-child{
+      width:100% !important;
+    }
+  }
+
+  .area-form, .right.area-form{
+    margin-bottom:60px;
+
+    div.right{
+      background:none;
+    }
+  }
+
+  // GERAL BOTOES
+  input.btn{
+    text-transform:uppercase;
+    padding:8px 12px;
+  }
+
+  // AJUTES MENSAGENS ALERTA
+  .summary{
+    @include border-radius(0);
+    @include box-shadow(none);
+    margin: 5px 0;
+  }
+
+  // TABS
+  .ui-tabs{
+    .ui-tabs-nav{
+      border-bottom:1px solid #ddd;
+      margin-bottom: 20px;
+
+      li{
+        &.ui-state-default, &.ui-state-active, &.ui-state-active.ui-state-hover{
+          background:none !important;
+          border:none;
+          overflow:hidden;
+          margin-bottom:0 !important;
+          margin-right:0 !important;
+          padding-bottom:0 !important;
+          @include border-radius(0 !important);
+
+          &:only-child{
+            width:100%;
+          }
+
+          &:empty{
+            display:none;
+          }
+
+          &:first-child:nth-last-child(2),
+          &:first-child:nth-last-child(2) ~ li {
+            width: 50%;
+          }
+
+          &:first-child:nth-last-child(3),
+          &:first-child:nth-last-child(3) ~ li {
+            width: 33.3333%;
+          }
+
+          &:first-child:nth-last-child(4),
+          &:first-child:nth-last-child(4) ~ li {
+            width: 25%;
+          }
+
+          &:first-child:nth-last-child(5),
+          &:first-child:nth-last-child(5) ~ li {
+            width: 20%;
+          }
+
+          &:first-child:nth-last-child(6),
+          &:first-child:nth-last-child(6) ~ li {
+            width: 16.6666%;
+          }
+
+          a{
+            &, &:hover{
+              color:$corTexto !important;
+              text-transform:uppercase;
+              background:none;
+              font-size: 0.73rem;
+              padding:8px 1px;
+              display:block;
+              width:100%;
+              text-align:center;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+            }
+
+            &:hover, &:focus{
+              background:#eee;
+            }
+          }
+        }
+
+        &.ui-state-active{
+          a{
+            color:$corAcao !important;
+            font-weight:bold;
+            border-bottom:3px solid $corAcao;
+          }
+        }
+      }
+    }
+  }
+
+  // CLASSE ESPECIAL PARA TABELAS VIRAREM LISTAS EM TELAS MENORES
+  .grid-responsive-list {
+    border-bottom:0;
+    margin-bottom:8px !important;
+    margin-bottom:8px !important;
+    width: 100% !important;
+
+    .gridHeader {
+      display: none;
+    }
+
+    .grid-responsive-list{
+      width:100%;
+    }
+
+    .gridRow, .gridAlternatingRow{
+      border-bottom:2px solid #bbb;
+      display: block;
+      background:transparent;
+      padding:12px 0;
+
+      &.grid-linha-destaque{
+        background:#eee;
+        padding:0;
+      }
+
+      td {
+        display: block;
+        width: 100% !important;
+        padding:3px 6px;
+        border:none;
+        text-align:left !important;
+
+        &.grid-responsive-item-inline {
+          display: inline-block;
+          width: auto !important;
+
+          &.grid-responsive-col3{
+            width:33.3333% !important;
+            box-sizing:border-box;
+            float:left;
+          }
+
+          &.grid-responsive-col4{
+            width:24% !important;
+            box-sizing:border-box;
+            float:left;
+          }
+        }
+
+        &:not(.grid-responsive-no-header)::before{
+          content:attr(data-header);
+          font-weight: bold;
+        }
+
+        span[class^="wrap"], a[class^="wrap"]{
+          max-width:none;
+          display:inline-block;
+        }
+
+        &.grid-responsive-center{
+          text-align:center !important;
+          margin-bottom:6px;
+          vertical-align: top;
+
+          &:not(.grid-responsive-no-header)::before {
+            display:block;
+          }
+
+          + .grid-responsive-center{
+            border-left: 1px solid #ddd;
+          }
+        }
+
+        &.grid-responsive-header-block{
+          &:not(.grid-responsive-no-header)::before{
+            display:block;
+          }
+        }
+      }
+
+      &:hover{
+        td{
+          background: none;
+        }
+      }
+    }
+
+    .checkBoxList{
+      td::before{
+        display:none;
+      }
+    }
+
+    .radio{
+      td{
+        display: inline-block;
+        width:initial !important;
+      }
+    }
+
+    .divExpandeLinha{
+      border-top:0;
+      border-bottom:2px solid #bbb;
+      top:-3px;
+    }
+
+    .grid-responsive-item-bottom{
+      position:absolute;
+      bottom:10px;
+
+      .ui-icon{
+        display:inline-block !important;
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  .grid-collapse{
+    .collapsibleContainer{
+      position:relative;
+      padding-bottom: 40px;
+    }
+  }
+
+  // CLASSES ICONES
+  .ico-font{
+    position:relative;
+    display:inline-block;
+
+    input[type="image"]{
+      opacity:0;
+      width:24px !important;
+      height:24px !important;
+      position: relative;
+      z-index: 1;
+    }
+
+    &::before{
+      font-family: 'Material Icons';
+      color:$corIconesGrid;
+      vertical-align: middle;
+      font-style: normal;
+      font-size:24px;
+      position:absolute;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+      display:inline-block;
+    }
+
+    &.ico-aulas-dadas::before{
+      content:'\e02f';
+    }
+
+    &.ico-planejamento::before{
+      content:'\e616';
+    }
+
+    &.ico-diario-classe::before{
+      content:'\e865';
+    }
+
+    &.ico-listao::before{
+      content:'\e3ec';
+    }
+
+    &.ico-fechamento::before{
+      content:'\e52d';
+    }
+
+    &.ico-alunos::before{
+      content:'\e7fb';
+    }
+
+    &.ico-frequencia::before{
+      content:'\e85c';
+    }
+
+    &.ico-avaliacao::before{
+      content:'\e14f';
+    }
+
+    &:empty::before{
+      opacity:0.5;
+      color: #888;
+    }
+  }
+
+  // CLASSE GERAL PARA RELATORIOS EXTERNOS
+  .rel-responsive{
+    max-width:calc(100vw - 40px);
+    min-width:0 !important;
+    max-height:calc(100vh - 335px);
+
+    &.dxm-horizontal{
+      height:auto !important;
+      overflow:hidden;
+    }
+  }
+
+  .rel-fieldset{
+    height:auto !important;
+    margin-bottom: 56px;
+  }
+
+  .overflowx-auto{
+    overflow-x:auto;
+  }
+
+  // ESPECIFICO TELAS PLANEJAMENTO
+  #spTituloCiclo{
+    a{ font-size:0.85rem; color:$corAcao; font-weight: normal;}
+  }
+
+  table.checkBoxList td{
+    display: inline-block;
+    width:50%;
+    float:left;
+  }
+
+  #divTabs-Documentos{
+    line-height: 1.5;
+
+    fieldset + fieldset{
+      margin-top:35px;
+    }
+  }
+
+  // ESPECIFICO TELAS DIARIO CLASSE
+  #divTabsPlanejamento{
+    > br{ display: none;}
+
+    .textareaInfo{
+      max-height:90px;
+      overflow:auto;
+    }
+  }
+
+  // ESPECIFICO TELAS LISTAO
+  .divListaoLancamentoFrequencia{
+    .checkBoxList{ margin:0;}
+  }
+
+  #divTabsListao-2{
+    .grid-responsive-list{
+      .btn{
+        display:none;
+      }
+
+      tr:not(.tdSemBordaInferior){
+        border-bottom:0;
+        padding:0;
+
+        td{
+          padding:0;
+        }
+      }
+    }
+
+    div[id*="Aviso"]{
+      float:none !important;
+    }
+  }
+
+  // ESPECIFICO FECHAMENTO
+  .fieldset-fechamento-gestor {
+    .dados-aluno, .table-boletim, .button-bar, .div-gestor-scroll, .ui-tabs .ui-tabs-nav, .ui-tabs-panel, .ui-tabs-panel > fieldset {
+      min-width: 0;
+    }
+
+    .dados-aluno > .div-inline:first-child{
+      max-width:20%;
+
+      img{
+        max-width: 100%;
+      }
+    }
+
+    .ui-tabs .ui-tabs-nav{
+      white-space: normal;
+      height:auto;
+
+      .ui-state-default, .ui-state-active{
+        width:30% !important;
+      }
+
+      .ui-state-default a{
+        white-space: nowrap;
+        width: 100%;
+      }
+    }
+
+    fieldset[id*="fdsBoletim"]{
+      overflow:auto;
+      width:100% !important;
+    }
+  }
+
+  .ui-dialog .fieldset-fechamento-gestor{
+    #divTabs{
+      width: calc(100vw - 80px);
+    }
+
+    .dados-aluno > .div-inline:first-child{
+      display:none;
+    }
+  }
+
+  .ui-dialog-content#divCadastroObservacaoGeral{
+    overflow:hidden;
+    padding:0;
+  }
+
+  // ESPECIFICO TELAS ALUNOS
+  .lista-alunos{
+    fieldset legend{
+      display:none;
+    }
+  }
+
+  #divInformacao, .divInformacao{
+    line-height: 1.5;
+    width:100% !important;
+  }
+
+  .form-captura{
+    .area-form > table{
+      table-layout:fixed;
+      width:100%;
+    }
+
+    object, #imgCapturada{
+      width:100% !important;
+      overflow:auto;
+    }
+
+    td{
+      width:50%;
+    }
+
+    .area-camera{
+      z-index:0 !important;
+      background: #eee !important;
+    }
+
+    input[type="file"]{
+      max-width:100%;
+      width: auto !important;
+    }
+
+    img[alt="Imagem cadastrada"]{
+      max-width:100%;
+    }
+  }
+
+  // ESPECIFICO TELA BOLETIM
+  .ui-dialog[aria-labelledby="ui-dialog-title-divBoletimCompleto"]{
+    bottom:5%;
+
+    #divBoletimCompleto{
+      padding:0;
+
+      &, & > div, & > div > fieldset, & > div > fieldset > iframe{
+        height: calc(100% - 8px) !important;
+      }
+    }
+  }
+
+  // ESPECIFICO TELA AGENDA
+  fieldset.form-agenda{
+    &, fieldset{
+      margin-bottom:24px;
+      margin-top:10px;
+      width:100% !important;
+    }
+  }
+
+  // ESPECIFICO TELAS CALENDARIO ESCOLAR
+  .area-calendario{
+    .divScrollResponsivo > table{
+      width:100% !important;
+
+      > tbody > tr > td{
+        display:inline-block;
+        width:50%;
+        margin-bottom:10px;
+
+        table{
+          width:100%;
+          max-width:300px;
+
+          td{
+            padding:5px 8px;
+          }
+        }
+
+        div[style*="width"]{
+          width:auto !important;
+        }
+      }
+    }
+  }
+
+  // ESPECIFICO TELAS DOCUMENTOS
+  .area-selecao-documento{
+    width:100% !important;
+  }
+
+  .area-parametros-documento{
+    width:100% !important;
+
+    fieldset{
+      margin-left:0 !important;
+    }
+  }
+
+  // ESPECIFICO TELA GESTOR > REGISTRO CLASSE > FECHAMENTO
+  .area-gestor-fechamento{
+    .medium-3{
+      width: calc(100% - 20px) !important;
+      overflow: auto;
+      height: 150px;
+      margin: 10px;
+    }
+
+    .medium-9{
+      width: calc(100% - 20px) !important;
+      margin: 10px;
+    }
+
+    .div-gestor-content{
+      padding:0;
+
+      .mensagem-informativa{
+        display:none;
+      }
+    }
+  }
+
+  .fieldset-fechamento-gestor .area-gestor-fechamento #divTabs{
+   width:calc(100vw - 40px);
+  }
+
+  .fieldset-fechamento-gestor#divDadosTurma{
+    max-width:100%;
+    overflow: auto;
+  }
+
+  // ESPECIFICO TELA GESTOR DE DOCUMENTOS DO ALUNO
+  .area-selecao-documento-aluno, .area-filtro-documento-aluno{
+    width:calc(100vw - 40px) !important;
+    margin:10px;
+
+    fieldset{
+      margin:0 !important;
+    }
+  }
+
+  .area-selecao-documento-aluno{
+    height:150px;
+    overflow:auto;
+  }
+
+  // ESPECIFICO TELA GESTOR DOCUMENTOS
+  fieldset[id*="fdsDocumentosEscola"],
+  fieldset[id*="fdsPesquisa"]{
+    margin-left:0 !important;
+  }
+
+  // TELA SELECAO DE GRUPO
+  .area-selecao-grupo{
+    margin-top:56px;
+  }
+
+  // ANTIGOS
+  .btnImprimir {
+    display: none;
+  }
+
+  input[type="text"], select, textarea {
+    &:not(.text4C):not(.text2C):not(.text10C){
+      width: 100% !important;
+
+      &.input-search{
+        width: calc(100% - 30px) !important;
+      }
+    }
+  }
+
+  input[type="text"].hasDatepicker{
+    width:100px !important;
+  }
+
+  select {
+    width: 100% !important;
+  }
+
+  .ui-dialog {
+    left: 20px !important;
+    top: 5% !important;
+    width: calc(100% - 40px) !important;
+
+    .ui-dialog-content {
+      height: auto !important;
+      max-height: none;
+
+      div.right{
+        margin-top:0;
+        margin-bottom:0;
+      }
+    }
+  }
+
+  input.text2C, select.text2C {
+    width: 30px !important;
+  }
+
+  // AJUSTES PARA DISPOSITIVOS/BROWSERS QUE NAO SUPORTAM CALC CSS
+  .no-csscalc, .no-cssvhunit, .no-cssvwunit{
+    .m.active {
+      height: auto;
+      position: absolute;
+      right: 0;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      top: 0;
+      margin-top: 112px;
+      overflow: auto;
+    }
+
+    .area-gestor-fechamento .medium-3{
+      width:97% !important;
+    }
+
+    .area-gestor-fechamento .medium-9{
+      width: 94% !important;
+      margin: 10px;
+      float: left !important;
+    }
+
+    .ui-dialog[aria-labelledby="ui-dialog-title-divBoletimCompleto"] #divBoletimCompleto,
+    .ui-dialog[aria-labelledby="ui-dialog-title-divBoletimCompleto"] #divBoletimCompleto > div,
+    .ui-dialog[aria-labelledby="ui-dialog-title-divBoletimCompleto"] #divBoletimCompleto > div > fieldset,
+    .ui-dialog[aria-labelledby="ui-dialog-title-divBoletimCompleto"] #divBoletimCompleto > div > fieldset > iframe{
+      height: 98.5% !important;
+    }
+
+    .area-selecao-documento-aluno, .area-filtro-documento-aluno{
+      width: 97% !important;
+    }
+
+    .ui-dialog{
+      left: 3% !important;
+      width: 94% !important;
+    }
+  }
+}
+
+@media screen and (max-width:680px){
+  // ESPECIFICO TELAS CALENDARIO ESCOLAR
+  .area-calendario{
+    .divScrollResponsivo > table{
+      > tbody > tr > td{
+        width:100%;
+
+        table{
+          max-width: none;
+        }
+      }
+    }
+  }
+}
+
+
+

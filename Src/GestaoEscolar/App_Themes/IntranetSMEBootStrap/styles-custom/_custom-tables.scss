@@ -1,0 +1,138 @@
+// TRATAMENTO TABELAS RESPONSIVAS
+.table{
+	> tbody, > tfoot{
+		> tr{
+			border-bottom:1px solid $corBordaPadrao;
+
+			> td{
+				border-top:0;
+				vertical-align: middle;
+
+				&.cel-destaque{
+					background:#f4f4f4;
+				}
+
+				a:hover{
+					text-decoration: none;
+				}
+
+				.form-group{
+					margin-bottom:0;
+
+					&.text-center{
+						.form-control{
+							margin:auto;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	> thead{
+		th{
+			opacity:0.65;
+
+			&.cel-destaque{
+				background:#f4f4f4;
+			}
+		}
+	}
+
+	> tfoot{
+		background:$table-bg-accent;
+	}
+}
+
+@media screen and (max-width:767px){
+	#acontent{
+		padding-left:12px;
+		padding-right:12px;
+
+		> .row{
+			margin-left:0;
+			margin-right:0;
+		}
+	}
+
+	.table-responsive-custom{
+		> tbody > tr, > tfoot > tr{
+			td{
+				display:inline-block;
+				font-size:0.95rem;
+				vertical-align: top;
+
+				&:before{
+					content:attr(data-header);
+					font-size:0.85rem;
+					font-weight:bold;
+					display:block;
+					opacity: 0.6;
+				}
+
+				&.td-responsive-block{
+					display:block;
+					padding-bottom:0;
+				}
+
+				&.td-responsive-no-header{
+					&:before{
+						display:none;
+					}
+				}
+
+				&.td-bold{
+					font-weight: bold;
+					font-size:1.1rem;
+				}
+
+				&:empty{
+					display:none;
+				}
+			}
+		}
+	}
+
+	.sm-text-left{
+		text-align:left;
+	}
+
+	.sm-dropdown-menu-left{
+		left:0;
+		right:auto;
+	}
+
+	.table > tbody > tr > td{
+		.form-group{
+			&.text-center.sm-text-left{
+				.form-control{
+					margin:0;
+				}
+			}
+		}
+	}
+
+	.table-responsive-list{
+		th{display:none;}
+
+		td{
+			display: block;
+			text-align: left !important;
+
+			&:before{
+				content:attr(data-header)": ";
+				font-weight: bold;
+				font-size: 0.85rem;
+				opacity: 0.8;
+			}
+
+			strong{
+				font-size: 1.2rem;
+			}
+		}
+
+		tr{
+			border-bottom:2px solid $brand-secondary !important;
+		}
+	}
+}
