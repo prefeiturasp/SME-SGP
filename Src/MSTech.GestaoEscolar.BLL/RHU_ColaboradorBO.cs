@@ -1132,6 +1132,16 @@ namespace MSTech.GestaoEscolar.BLL
                 Guid pes_idFiliacaoMae;
                 SalvarPaiMae(entityPessoa, ref PaiAntigo, ref MaeAntigo, Salvar_Sempre_Maiusculo, out pes_idFiliacaoPai, out pes_idFiliacaoMae, pesDao._Banco);
 
+                if (!dtEndereco.Columns.Contains("enderecoprincipal"))
+                {
+                    dtEndereco.Columns.Add("enderecoprincipal");
+                    foreach (DataRow row in dtEndereco.Rows)
+                    {
+                        if (row.RowState != DataRowState.Deleted)
+                            row["enderecoprincipal"] = row["principal"];
+                    }
+                }
+
                 foreach (DataRow row in dtEndereco.Rows)
                 {
                     if (Convert.ToBoolean(row["excluido"]))
