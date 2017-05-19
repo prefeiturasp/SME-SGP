@@ -137,7 +137,7 @@
                                             Width="16px" Height="16px" Visible="false" ImageAlign="Top" />
                                         <asp:Image ID="imgPlanoAulaSituacaoIncompleta" runat="server" SkinID="imgConfirmarAmarelo" Visible="false"
                                             ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.imgPlanoAulaSituacaoIncompleta %>" Width="16px" Height="16px" ImageAlign="Top" />
-                                        <asp:Image ID="imgSemPlanoAula" runat="server" SkinID="imgStatusAlertaAulaSemPlano" Visible="false" ImageAlign="Top" Width="20px" Height="20px" />
+                                        <asp:Image ID="imgSemPlanoAula" runat="server" SkinID="imgAviso" Visible="false" ImageAlign="Top" Width="20px" Height="20px" />
                                     </ItemTemplate>
                                     <HeaderStyle CssClass="center" HorizontalAlign="Center" />
                                     <ItemStyle CssClass="center grid-responsive-item-inline grid-responsive-center" HorizontalAlign="Center" />
@@ -181,7 +181,7 @@
                             <asp:Literal ID="lit2" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemSubstitutoRegencia %>"></asp:Literal>
                         </div>
                         <div id="divAvisoAulaSemPlano" runat="server" style="float: left; width: 100%;" visible="false">
-                            <asp:Image ID="imgLegendaAvisoAulaSemPlano" runat="server" SkinID="imgStatusAlertaAulaSemPlano"
+                            <asp:Image ID="imgLegendaAvisoAulaSemPlano" runat="server" SkinID="imgAviso"
                                 ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>" Width="18px" Height="18px" ImageAlign="AbsMiddle" />
                             <asp:Literal ID="lit3" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>"></asp:Literal>
                         </div>

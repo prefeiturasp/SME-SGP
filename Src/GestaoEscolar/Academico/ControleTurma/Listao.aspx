@@ -443,7 +443,7 @@
                                                             </td>
                                                             <td class="center" style="text-align: center;">
                                                                 <asp:HiddenField ID="hdfSemPlanoAula" runat="server" Value='<%#Bind("semPlanoAula") %>' />
-                                                                <asp:Image ID="imgSemPlanoAula" runat="server" Visible="false" SkinID="imgStatusAlertaAulaSemPlano" Width="16px" Height="16px" ImageAlign="Top" />
+                                                                <asp:Image ID="imgSemPlanoAula" runat="server" Visible="false" SkinID="imgAviso" Width="16px" Height="16px" ImageAlign="Top" />
                                                                 <asp:TextBox ID="txtPlanoAula" runat="server" Text='<%#Bind("planoAula") %>' TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
                                                             </td>
                                                             <td class="center grid-responsive-no-header" style="text-align: center;">
@@ -463,7 +463,7 @@
                                                 </asp:Repeater>
                                                 <div id="divAvisoAulaSemPlano" runat="server" style="float: left; width: 100%;" visible="false">
                                                     <br />
-                                                    <asp:Image ID="imgLegendaAvisoAulaSemPlano" runat="server" SkinID="imgStatusAlertaAulaSemPlano"
+                                                    <asp:Image ID="imgLegendaAvisoAulaSemPlano" runat="server" SkinID="imgAviso"
                                                         ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>" Width="18px" Height="18px" ImageAlign="AbsMiddle" />
                                                     <asp:Literal ID="lit3" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>"></asp:Literal>
                                                     <br />
