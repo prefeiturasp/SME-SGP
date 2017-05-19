@@ -216,6 +216,27 @@ namespace GestaoEscolar.WebControls.Fechamento
         }
 
         /// <summary>
+        /// Guarda as notas de relatório.
+        /// </summary>
+        private List<ACA_ConfiguracaoServicoPendencia> VS_ListConfiguracaoServicoPendencia
+        {
+            get
+            {
+                if (ViewState["VS_ListConfiguracaoServicoPendencia"] != null)
+                {
+                    return (List<ACA_ConfiguracaoServicoPendencia>)ViewState["VS_ListConfiguracaoServicoPendencia"];
+                }
+
+                return new List<ACA_ConfiguracaoServicoPendencia>();
+            }
+
+            set
+            {
+                ViewState["VS_ListConfiguracaoServicoPendencia"] = value;
+            }
+        }
+
+        /// <summary>
         /// Guarda os eventos cadastrados para a turma e calendário.
         /// </summary>
         private List<ACA_Evento> VS_ListaEventos
@@ -685,10 +706,10 @@ namespace GestaoEscolar.WebControls.Fechamento
             if (!tud_naoLancarNota && EntTurmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.DisciplinaEletivaAluno)
             {
                 var filtroPendentes = listaVerificacao.Where(dadosGeral =>
-                    // existe aluno sem fechamento
-                                        dadosGeral.AvaliacaoID <= 0
-                                            // ou a nota do aluno no fechamento esta vazia
-                                        || string.IsNullOrEmpty(dadosGeral.Avaliacao)
+                                        // existe aluno sem fechamento
+                                        ((dadosGeral.AvaliacaoID <= 0
+                                          // ou a nota do aluno no fechamento esta vazia
+                                          || string.IsNullOrEmpty(dadosGeral.Avaliacao)) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semParecer))
                                             // ou nota incompativel com o tipo de escala de avaliacao
                                         || ((EscalaAvaliacaoTipo)VS_EscalaAvaliacao.esa_tipo == EscalaAvaliacaoTipo.Numerica
                                             &&
@@ -727,11 +748,11 @@ namespace GestaoEscolar.WebControls.Fechamento
                 {
                     var filtroPendentes = listaVerificacao.Where(dadosGeral =>
                     // existe aluno sem fechamento
-                                        dadosGeral.AvaliacaoID <= 0
+                                        (dadosGeral.AvaliacaoID <= 0 && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semParecer))
                                         // ou nao possui parecer final selecionado
                                         || (
                                                 ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EFETIVACAO_PERMITIR_ALTERAR_RESULTADO_FINAL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                                                && dadosGeral.AvaliacaoResultado <= 0
+                                                && dadosGeral.AvaliacaoResultado <= 0 && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semParecer)
                                             )
                                         );
 
@@ -974,6 +995,17 @@ namespace GestaoEscolar.WebControls.Fechamento
                 {
                     tud_naoLancarNota = EntTurmaDisciplina.tud_naoLancarNota;
                 }
+
+                VS_ListConfiguracaoServicoPendencia = new List<ACA_ConfiguracaoServicoPendencia>();
+
+                foreach (int cur_id in TUR_TurmaCurriculoBO.GetSelectBy_Turma(VS_tur_id, ApplicationWEB.AppMinutosCacheLongo)
+                                                           .GroupBy(t => t.cur_id).Select(t => t.Key))
+                {
+                    ACA_Curso cur = new ACA_Curso { cur_id = cur_id };
+                    ACA_CursoBO.GetEntity(cur);
+                    VS_ListConfiguracaoServicoPendencia.AddRange(ACA_ConfiguracaoServicoPendenciaBO.SelectTodasBy_tne_id_tme_id_tur_tipo(cur.tne_id, cur.tme_id, VS_Turma.tur_tipo));
+                }
+
                 if (EntTurmaDisciplina.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia && !tud_naoLancarNota)
                 {
                     if (listaAvaliacaoFinalRegencia != null
