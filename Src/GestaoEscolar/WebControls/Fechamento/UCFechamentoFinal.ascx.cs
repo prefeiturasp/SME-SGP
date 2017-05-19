@@ -709,7 +709,7 @@ namespace GestaoEscolar.WebControls.Fechamento
                                         // existe aluno sem fechamento
                                         ((dadosGeral.AvaliacaoID <= 0
                                           // ou a nota do aluno no fechamento esta vazia
-                                          || string.IsNullOrEmpty(dadosGeral.Avaliacao)) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semParecer))
+                                          || string.IsNullOrEmpty(dadosGeral.Avaliacao)) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semResultadoFinal))
                                             // ou nota incompativel com o tipo de escala de avaliacao
                                         || ((EscalaAvaliacaoTipo)VS_EscalaAvaliacao.esa_tipo == EscalaAvaliacaoTipo.Numerica
                                             &&
@@ -748,11 +748,11 @@ namespace GestaoEscolar.WebControls.Fechamento
                 {
                     var filtroPendentes = listaVerificacao.Where(dadosGeral =>
                     // existe aluno sem fechamento
-                                        (dadosGeral.AvaliacaoID <= 0 && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semParecer))
+                                        (dadosGeral.AvaliacaoID <= 0 && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semResultadoFinal))
                                         // ou nao possui parecer final selecionado
                                         || (
                                                 ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EFETIVACAO_PERMITIR_ALTERAR_RESULTADO_FINAL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                                                && dadosGeral.AvaliacaoResultado <= 0 && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semParecer)
+                                                && dadosGeral.AvaliacaoResultado <= 0 && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semResultadoFinal)
                                             )
                                         );
 
