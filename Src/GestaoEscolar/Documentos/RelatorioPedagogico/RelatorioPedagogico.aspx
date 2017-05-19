@@ -9,7 +9,4 @@
         <asp:Label ID="lblMessage" runat="server" EnableViewState="false" />
         <uc:UCRelatorioPedagogico ID="UCRelatorioPedagogico" runat="server" />
     </div>
-    <div class="right">
-        <asp:Button ID="btnVoltar" runat="server" Text="Voltar" />
-    </div>
 </asp:Content>

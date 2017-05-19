@@ -161,6 +161,13 @@
             <returns>HttpResponseMessage</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.curriculos_periodoController.GetCurriculoPeriodoPorEscola(System.Int32)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.matriculaTurmaController.Get(System.Int64,System.Int32)">
+            <summary>
+            Seleciona dados da matrícula do aluno
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: id da matricula e id do aluno.</param>
+            <returns>Objeto com os dados da matrícula do aluno.</returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.Get(System.Int64)">
             <summary>
             Descrição: Retorna o registro de escola pelo id

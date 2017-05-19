@@ -55,7 +55,6 @@
             $scope.trocarAno = function (ano, mtu_id, tpc_id) {
                 initVars();
                 params.ano = ano;
-                params.ano = ano;
                 params.mtu_id = mtu_id;
                 params.MtuIds = mtu_id;
                 params.TpcId = tpc_id;
@@ -98,17 +97,17 @@
                     if (response.data == null) {
                         $scope.mensagemErro = "Falha inesperada ao carregar o anos.";
                     }
-                    else if (response.data[0] && response.data[0].Status && response.data[0].Status == 1) {
-                        $scope.mensagemErro = response.data[0].StatusDescription;
+                    else if (response.data && response.data.Status && response.data.Status == 1) {
+                        $scope.mensagemErro = response.data.StatusDescription;
                     }
                     else {
                         try {
 
-                            if (response.data.length > 0) {
+                            if (response.data.calendarios.length > 0) {
 
-                                $scope.listCalendario = $filter('orderBy')(response.data, '-cal_ano');
+                                $scope.listCalendario = $filter('orderBy')(response.data.calendarios, '-cal_ano');
                                 if (!$scope.params.ano) {
-                                    $scope.params.ano = $scope.listCalendario[0].cal_ano;
+                                    $scope.params.ano = $scope.listCalendario.cal_ano;
                                 }
 
                                 if (!$scope.params.mtu_id) {

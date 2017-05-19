@@ -57,11 +57,14 @@
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/calendario.controller.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/sondagem.controller.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/anotacao.controller.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/Angular/justificativaFalta.controller.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/Angular/movimentacao.controller.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/Angular/matriculaTurma.controller.js"));
             }
 
             if (!IsPostBack)
             {
-                alu_id = 1405469;
+                alu_id = 1405459;
                 using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
                 {
                     ano = dt.Select().Select(p => Convert.ToInt32(p["cal_ano"])).Max();

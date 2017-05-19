@@ -51,8 +51,8 @@
                     if (response.data == null) {
                         $scope.mensagemErro = "Falha inesperada ao carregar as anotações.";
                     }
-                    else if (response.data[0] && response.data[0].Status && response.data[0].Status == 1) {
-                        $scope.mensagemErro = response.data[0].StatusDescription;
+                    else if (response.data && response.data.Status && response.data.Status == 1) {
+                        $scope.mensagemErro = response.data.StatusDescription;
                     }
                     else {
                         try {

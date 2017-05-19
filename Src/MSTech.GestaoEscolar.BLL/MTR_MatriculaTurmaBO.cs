@@ -1204,6 +1204,17 @@ namespace MSTech.GestaoEscolar.BLL
             return new MTR_MatriculaTurmaDAO().SelecionaResultadoPorAlunoTurmaEOL(CodigoEOLTurma, CodigoEOLAluno);
         }
 
+        /// <summary>
+        /// Seleciona dados da matrícula do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public static DataTable SelecionaDadosMatriculaAluno(long alu_id, int mtu_id)
+        {
+            return new MTR_MatriculaTurmaDAO().SelecionaDadosMatriculaAluno(alu_id, mtu_id);
+        }
+
         #endregion Consultas
 
         #region Saves

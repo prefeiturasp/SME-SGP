@@ -5,14 +5,14 @@
 
     angular
         .module('app')
-        .controller('MovimentacaoController', MovimentacaoController);
+        .controller('matriculaTurmaController', matriculaTurmaController);
 
-    MovimentacaoController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
+    matriculaTurmaController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
 
-    function MovimentacaoController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
+    function matriculaTurmaController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
         this.reload = function () {
             initVars();
-            getMovimentacoes();
+            getMatricula();
         };
         trocarAnoService.addSubscriber(this);
 
@@ -27,39 +27,39 @@
             $scope.api = api;
 
             initVars();
-            getMovimentacoes();
+            getMatricula();
         };
 
         function initVars() {
-            $scope.listMovimentacoes = [];
+            $scope.matricula = {};
             $scope.params = params;
             $scope.mensagemErro = "";
             $scope.mensagemAlerta = "";
         };
 
-        function getMovimentacoes() {
-            if (!$scope.params || !$scope.params.alu_id || !$scope.params.ano) {
+        function getMatricula() {
+            if (!$scope.params || !$scope.params.alu_id || !$scope.params.mtu_id) {
                 $scope.mensagemErro = "Parâmetros inválidos";
             } else {
-                var url = $scope.api + "/movimentacoes?alu_id=" + $scope.params.alu_id + "&ano=" + $scope.params.ano;
+                var url = $scope.api + "/matriculaTurma?alu_id=" + $scope.params.alu_id + "&mtu_id=" + $scope.params.mtu_id;
 
                 $http({
                     method: 'GET',
                     url: url
                 }).then(function successCallback(response) {
                     if (response.data == null) {
-                        $scope.mensagemErro = "Falha inesperada ao carregar as movimentações.";
+                        $scope.mensagemErro = "Falha inesperada ao carregar dados da matrícula.";
                     }
                     else if (response.data && response.data.Status && response.data.Status == 1) {
                         $scope.mensagemErro = response.data.StatusDescription;
                     }
                     else {
                         try {
-                            $scope.listMovimentacoes = response.data.movimentacoes;
+                            $scope.matricula = response.data;
                         }
                         catch (e) {
                             console.log(e);
-                            $scope.mensagemErro = "Ocorreu um erro ao carregar as movimentações.";
+                            $scope.mensagemErro = "Ocorreu um erro ao carregar dados da matrícula.";
                         }
                     }
                 }, function errorCallback(response) {
@@ -68,9 +68,14 @@
                     else if (response.status == 500)
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
-                        $scope.mensagemErro = "Falha inesperada ao carregar as movimentações.";
+                        $scope.mensagemErro = "Falha inesperada ao carregar dados da matrícula.";
                 });
             }
+        };
+
+        $scope.getPhotoStudent = function __getPhotoStudent(id) {
+            if (!id) return "../../App_Themes/IntranetSMEBootStrap/images/imgsAreaAluno/fotoAluno.png"
+            else return $scope.site + "/WebControls/RelatorioPedagogico/imagem.ashx?idfoto=" + id;
         };
 
         $scope.safeApply = function __safeApply() {
