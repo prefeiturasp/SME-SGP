@@ -7,6 +7,22 @@
     <title></title>
     <link href="../../App_Themes/IntranetSMEBootStrap/bootstrap.css" rel="stylesheet" media="screen">
     <link href="../../App_Themes/IntranetSMEBootStrap/custom.css" rel="stylesheet" media="screen">
+
+    <style>
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px; /* remove scrollbar space */
+            background: transparent; /* optional: just make scrollbar invisible */
+        }
+        /* optional: show position indicator in red */
+        ::-webkit-scrollbar-thumb {
+            background: #FF0000;
+        }
+    </style>
 </head>
 <body>
 
@@ -19,14 +35,16 @@
     <script src="../../Includes/Angular/calendario.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/sondagem.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/anotacao.controller.js" type="text/javascript"></script>
+    <script src="../../Includes/Angular/justificativaFalta.controller.js" type="text/javascript"></script>
+    <script src="../../Includes/Angular/movimentacao.controller.js" type="text/javascript"></script>
     <script src="../../Includes/scrolling.js" type="text/javascript"></script>
     <script type="text/javascript">
         var params =
             {
                 alu_id : <%= alu_id %>,
                 AluIds: '<%= alu_id %>',
-                MtuIds: '5',
-                TpcId: 4,
+                MtuIds: '<%= mtu_id %>',
+                TpcId: <%= tpc_id %>,
                 ano: <%= ano %>,
                 exibicaoNome: <%= (int)MSTech.GestaoEscolar.BLL.eExibicaoNomePessoa.NomeSocial %>
                 };
@@ -53,7 +71,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="listCalendario.length > 1">
                             <li ng-repeat="calendario in listCalendario" ng-if="calendario.cal_ano!=params.ano">
-                                <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id)">{{calendario.cal_ano}}</a>
+                                <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id, calendario.tpc_id)">{{calendario.cal_ano}}</a>
                             </li>
                         </ul>
                     </div>
@@ -309,11 +327,11 @@
                                             <div id="{{'collapseSondagem-' + sondagem.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{'headingSondagem-' + sondagem.id}}">
                                                 <div class="panel-body">
                                                     <ul class="list">
-                                                        <li>
-                                                            <span class="list-header" ng-repeat="questao in sondagem.questoes">{{questao.decricao}}</span>
+                                                        <li ng-repeat="questao in sondagem.questoes">
+                                                            <span class="list-header">{{questao.descricao}}</span>
                                                             <ul class="list sub">
-                                                                <li ng-repeat="subquestao in sondagem.subQuestoes">
-                                                                    <span class="list-item" ng-repeat="resposta in sondagem.respostas"><strong>{{subquestao.descricao}}</strong>{{resposta.descricao}}</span>
+                                                                <li ng-repeat="resposta in questao.respostas">
+                                                                    <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
                                                                 </li>
                                                             </ul>
                                                         </li>
@@ -344,6 +362,42 @@
                                    {{anotacao.anotacao}}
                                 </p>
                                 <p class="text-autor">Observação do(a) <strong>{{anotacao.funcaoGestor}}</strong></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div ng-controller="JustificativaFaltaController" ng-cloak>
+                    <!-- Justificativa de falta -->
+                    <section id="area-just-faltas" class="section-area">
+                        <h3><i class="material-icons pull-left">&#xE5CC;</i>Justificativa de faltas</h3>
+                        <div class="conteudo">
+                            <div class="obs-block" ng-repeat="justificativa in listJustificativa">
+                                <p>
+                                    <strong>{{justificativa.tipo}}</strong><span ng-if="justificativa.observacao"> - {{justificativa.observacao}}</span>
+                                </p>
+                                <p class="text-autor">Período: <strong>{{justificativa.dataInicio}} - {{justificativa.dataFim ? justificativa.dataFim : "*"}}</strong></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div ng-controller="MovimentacaoController" ng-cloak>
+                    <!-- Movimentações -->
+                    <section id="area-cons-mov" class="section-area">
+                        <h3><i class="material-icons pull-left">&#xE5CC;</i>Remanejamento e Reclassificacao</h3>
+                        <div class="conteudo">
+                            <div class="obs-block" ng-repeat="movimentacao in listMovimentacoes">
+                                <h4>
+                                    <strong>{{movimentacao.tipo}}</strong>
+                                </h4>
+                                <p ng-if="movimentacao.turmaAnterior">
+                                    <strong>Origem: </strong>{{movimentacao.escolaAnterior + " | " + movimentacao.turmaAnterior}}
+                                </p>
+                                <p ng-if="movimentacao.turmaAtual">
+                                    <strong>Destino: </strong>{{movimentacao.escolaAtual + " | " + movimentacao.turmaAtual}}
+                                </p>
+                                <p class="text-autor">Data de movimentação: <strong>{{movimentacao.dataRealizacao}}</strong></p>
                             </div>
                         </div>
                     </section>

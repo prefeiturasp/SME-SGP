@@ -5,11 +5,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="area-form">
+    <div>
         <asp:Label ID="lblMessage" runat="server" EnableViewState="false" />
         <uc:UCRelatorioPedagogico ID="UCRelatorioPedagogico" runat="server" />
     </div>
-    <div style="text-align: right; margin: 5px;" class="area-botoes-bottom">
+    <div class="right">
         <asp:Button ID="btnVoltar" runat="server" Text="Voltar" />
     </div>
 </asp:Content>

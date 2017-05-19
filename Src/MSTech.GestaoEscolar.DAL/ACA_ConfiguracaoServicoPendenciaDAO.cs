@@ -16,6 +16,130 @@ namespace MSTech.GestaoEscolar.DAL
     public class ACA_ConfiguracaoServicoPendenciaDAO : Abstract_ACA_ConfiguracaoServicoPendenciaDAO
     {
         /// <summary>
+        /// Verifica se já existe uma Configuração do serviço de pendência cadastrada com os mesmos dados
+        /// e com a situação "Ativo"
+        /// </summary>
+        /// <param name="entity">Entidade configuração do serviço de pendência</param>
+        /// <returns>True/False</returns>
+        public bool SelectBy_VerificaConfiguracaoServicoPendencia
+        (
+            ACA_ConfiguracaoServicoPendencia entity
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_ConfiguracaoServicoPendencia_SelectBy_VerificaConfiguracaoServicoPendencia", _Banco);
+            try
+            {
+                #region PARAMETROS
+                
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Int32;
+                    Param.ParameterName = "@tne_id";
+                    Param.Size = 4;
+                    if (entity.tne_id > 0)
+                    {
+                        Param.Value = entity.tne_id;
+                    }
+                    else
+                    {
+                        Param.Value = DBNull.Value;
+                    }
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Int32;
+                    Param.ParameterName = "@tme_id";
+                    Param.Size = 4;
+                    if (entity.tme_id > 0)
+                    {
+                        Param.Value = entity.tme_id;
+                    }
+                    else
+                    {
+                        Param.Value = DBNull.Value;
+                    }
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Byte;
+                    Param.ParameterName = "@tur_tipo";
+                    Param.Size = 1;
+                    if (entity.tur_tipo > 0)
+                    {
+                        Param.Value = entity.tur_tipo;
+                    }
+                    else
+                    {
+                        Param.Value = DBNull.Value;
+                    }
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Boolean;
+                    Param.ParameterName = "@csp_semNota";
+                    Param.Size = 1;
+                    Param.Value = entity.csp_semNota;
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Boolean;
+                    Param.ParameterName = "@csp_semParecer";
+                    Param.Size = 1;
+                    Param.Value = entity.csp_semParecer;
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Boolean;
+                    Param.ParameterName = "@csp_disciplinaSemAula";
+                    Param.Size = 1;
+                    Param.Value = entity.csp_disciplinaSemAula;
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Boolean;
+                    Param.ParameterName = "@csp_semResultadoFinal";
+                    Param.Size = 1;
+                    Param.Value = entity.csp_semResultadoFinal;
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Boolean;
+                    Param.ParameterName = "@csp_semPlanejamento";
+                    Param.Size = 1;
+                    Param.Value = entity.csp_semPlanejamento;
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Boolean;
+                    Param.ParameterName = "@csp_semSintese";
+                    Param.Size = 1;
+                    Param.Value = entity.csp_semSintese;
+                    qs.Parameters.Add(Param);
+
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Boolean;
+                    Param.ParameterName = "@csp_semPlanoAula";
+                    Param.Size = 1;
+                    Param.Value = entity.csp_semPlanoAula;
+                    qs.Parameters.Add(Param);
+                
+                    #endregion
+
+                    qs.Execute();
+
+                return qs.Return.Rows.Count > 0;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+
+        /// <summary>
         /// Retorna as configurações de serviço de pendência não excluídas logicamente, de acordo com tipo de nível de ensino,
         /// tipo de modalidade de ensino e tipo de turma.
         /// </summary>   

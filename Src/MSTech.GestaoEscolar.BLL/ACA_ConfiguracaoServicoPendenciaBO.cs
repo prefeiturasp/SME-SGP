@@ -11,11 +11,47 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Data;
     using System.Linq;
     using System.Collections.Generic;
+    using Data.Common;
+    using Validation.Exceptions;
+
+    /// <summary>
+    /// Classe de excessão referente à entidade ACA_ConfiguracaoServicoPendencia
+    /// Utilizada nas telas de cadastro, para identificar se houve erro de validação
+    /// na entidade do ACA_ConfiguracaoServicoPendencia.
+    /// </summary>
+    public class ACA_ConfiguracaoServicoPendenciaDuplicateException : ValidationException
+    {
+        public ACA_ConfiguracaoServicoPendenciaDuplicateException(string message) : base(message) { }
+    }
+
     /// <summary>
     /// Description: ACA_ConfiguracaoServicoPendencia Business Object. 
     /// </summary>
     public class ACA_ConfiguracaoServicoPendenciaBO : BusinessBase<ACA_ConfiguracaoServicoPendenciaDAO, ACA_ConfiguracaoServicoPendencia>
 	{
+        /// <summary>
+        /// Verifica se já existe uma Configuração do serviço de pendência cadastrada com os mesmos dados
+        /// e com a situação "Ativo"
+        /// </summary>
+        /// <param name="entity">Entidade configuração do serviço de pendência</param>
+        /// <returns>True/False</returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static bool SelectBy_VerificaConfiguracaoServicoPendencia
+        (
+            ACA_ConfiguracaoServicoPendencia entity
+            , TalkDBTransaction banco
+        )
+        {
+            ACA_ConfiguracaoServicoPendenciaDAO dao = new ACA_ConfiguracaoServicoPendenciaDAO();
+            if (banco == null)
+                dao._Banco.Open(IsolationLevel.ReadCommitted);
+            else
+                dao._Banco = banco;
+
+            return dao.SelectBy_VerificaConfiguracaoServicoPendencia(entity);
+        }
+
+
         /// <summary>
         /// Retorna as configurações de serviço de pendência não excluídas logicamente, de acordo com tipo de nível de ensino,
         /// tipo de modalidade de ensino e tipo de turma.
