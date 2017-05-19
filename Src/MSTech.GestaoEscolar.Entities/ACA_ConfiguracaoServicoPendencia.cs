@@ -12,6 +12,7 @@ namespace MSTech.GestaoEscolar.Entities
     /// <summary>
     /// Description: .
     /// </summary>
+    [Serializable]
     public class ACA_ConfiguracaoServicoPendencia : Abstract_ACA_ConfiguracaoServicoPendencia
 	{
         /// <summary>

@@ -270,6 +270,10 @@ namespace MSTech.GestaoEscolar.BLL
         public bool lancaParecerFinal;
         public int faltasExternas;
         public bool possuiFrequenciaExterna;
+
+        public int tne_id;
+        public int tme_id;
+        public byte tur_tipo;
     }
 
     /// <summary>
