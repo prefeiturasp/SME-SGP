@@ -1,6 +1,7 @@
 ﻿using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.Entities;
+using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,9 +124,9 @@ namespace GestaoAcademica.WebApi.Controllers
         {
             try
             {
-                List<CalendarioAluno> retorno = ApiBO.SelecionaCalendarioPorAluno(alu_id);
+                CalendarioAlunoSaidaDTO retorno = ApiBO.SelecionaCalendarioPorAluno(alu_id);
 
-                if (retorno != null && retorno.Any())
+                if (retorno != null && retorno.calendarios != null && retorno.calendarios.Any())
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, retorno);
                 }
@@ -134,8 +135,12 @@ namespace GestaoAcademica.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, new StringContent("Erro: " + ex.Message));
-                throw;
+                ApplicationWEB._GravaErro(ex);
+                CalendarioAlunoSaidaDTO saidaDTO = new CalendarioAlunoSaidaDTO();
+                saidaDTO.Status = 1;
+                saidaDTO.StatusDescription = "Ocorreu um erro ao carregar dados.";
+                saidaDTO.calendarios = new List<CalendarioAlunoDTO>();
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, saidaDTO);
             }
         }
 

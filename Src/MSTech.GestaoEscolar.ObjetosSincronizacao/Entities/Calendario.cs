@@ -13,7 +13,15 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.Entities
         public List<Nivel> Niveis { get; set; }
     }
 
-    public class CalendarioAluno
+    public class CalendarioAlunoSaidaDTO
+    {
+        public int Status { get; set; }
+        public string StatusDescription { get; set; }
+
+        public List<CalendarioAlunoDTO> calendarios { get; set; }
+    }
+
+    public class CalendarioAlunoDTO
     {
         public int cal_id { get; set; }
         public int cal_ano { get; set; }

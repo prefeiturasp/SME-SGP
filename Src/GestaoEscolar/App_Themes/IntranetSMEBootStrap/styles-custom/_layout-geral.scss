@@ -625,6 +625,7 @@ button.btn-primary{
 	border:none;
 }
 
+
 .btn-float{
 	position: fixed;
 	right: 15px;
@@ -643,7 +644,16 @@ button.btn-primary{
 	}
 
 	&.btn-float-2{
-		bottom:calc(48px + 15px + 10px);
+		bottom:calc(-18px + 15px + 10px);
+		background:$brand-primary;
+
+		&:hover, &:focus{
+			background: darken($brand-primary, 20%);
+		}
+	}
+
+    &.btn-float-3{
+		bottom:calc(98px + 15px + 10px);
 		background:$brand-primary;
 
 		&:hover, &:focus{

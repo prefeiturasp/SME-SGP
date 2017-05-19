@@ -37,11 +37,13 @@
     <script src="../../Includes/Angular/anotacao.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/justificativaFalta.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/movimentacao.controller.js" type="text/javascript"></script>
+    <script src="../../Includes/Angular/matriculaTurma.controller.js" type="text/javascript"></script>
     <script src="../../Includes/scrolling.js" type="text/javascript"></script>
     <script type="text/javascript">
         var params =
             {
                 alu_id : <%= alu_id %>,
+                mtu_id : <%= mtu_id %>,
                 AluIds: '<%= alu_id %>',
                 MtuIds: '<%= mtu_id %>',
                 TpcId: <%= tpc_id %>,
@@ -78,21 +80,21 @@
                 </aside>
             </div>
 
-            <div ng-controller="BoletimRelPedagogicoController" ng-cloak>
+            <div ng-controller="matriculaTurmaController" ng-cloak>
 
-                <aside class="nav-aside" style="top: 60px; z-index: 0;" ng-repeat="boletim in listBoletins">
+                <aside class="nav-aside" style="top: 60px; z-index: 0;">
 
                     <!-- Header relatorio -->
                     <header class="info-header">
                         <div class="foto-aluno">
-                            <img class="imgFoto" src="{{getPhotoStudent(boletim.arq_idFoto)}}" alt="Foto do aluno" />
+                            <img class="imgFoto" src="{{getPhotoStudent(matricula.arq_idFoto)}}" alt="Foto do aluno" />
                         </div>
                         <div class="info-aluno">
-                            <h2 class="info-nome">{{boletim.pes_nome}} <small>{{boletim.alc_matricula}}</small>
+                            <h2 class="info-nome">{{matricula.pes_nome}} <small>{{matricula.alc_matricula}}</small>
                             </h2>
-                            <span class="info-turma">{{boletim.tci_nome}} / {{boletim.tur_codigo}}
+                            <span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}
                             </span>
-                            <h2 class="info-escola">{{boletim.esc_nome}} -  {{boletim.uad_nome}}
+                            <h2 class="info-escola">{{matricula.esc_nome}} -  {{matricula.uad_nome}}
                             </h2>
                         </div>
                     </header>
@@ -129,12 +131,13 @@
 
             <!--Conteúdo-->
             <div role="main" id="acontent">
-                <button title="Ir para o topo" class="btn btn-primary btn-float btn-float-2" id="btn-top"><i class="material-icons">&#xE5D8;</i></button>
+                <button title="Ir para o topo" class="btn btn-primary btn-float btn-float-3" id="btn-top"><i class="material-icons">&#xE5D8;</i></button>
+                <button title="Voltar" class="btn btn-primary btn-float btn-float-2"><i class="material-icons">&#xE166;</i></button>
                 <button title="Imprimir" class="btn btn-primary btn-float"><i class="material-icons">&#xE8AD;</i></button>
 
                 <!-- Boletim -->
                 <div ng-controller="BoletimRelPedagogicoController" ng-cloak>
-                    <section id="area-notas-faltas" class="section-area" ng-repeat="boletim in listBoletins">
+                    <section id="area-notas-faltas" class="section-area" ng-repeat="boletim in listBoletins | limitTo : 1">
                         <h3 ng-if="!boletim.ensinoInfantil"><i class="material-icons pull-left">&#xE5CC;</i>{{boletim.nomeNota}}s e faltas</h3>
                         <div class="conteudo">
 

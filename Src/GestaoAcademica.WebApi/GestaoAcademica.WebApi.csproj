@@ -230,6 +230,7 @@
     <Compile Include="Controllers\cargosController.cs" />
     <Compile Include="Controllers\colaboradoresController.cs" />
     <Compile Include="Controllers\curriculos_periodoController.cs" />
+    <Compile Include="Controllers\matriculaTurmaController.cs" />
     <Compile Include="Controllers\orientacoes_curricularController.cs" />
     <Compile Include="Controllers\escolasController.cs" />
     <Compile Include="Controllers\movimentacoesController.cs" />

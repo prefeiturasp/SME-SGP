@@ -611,7 +611,7 @@ button.btn-primary {
 .btn-float {
   position: fixed;
   right: 15px;
-  bottom: 15px;
+  bottom: 65px;
   width: 48px;
   height: 48px;
   -webkit-border-radius: 50%;
@@ -631,7 +631,10 @@ button.btn-primary {
     -moz-transform: scale(1.1);
     transform: scale(1.1); }
   .btn-float.btn-float-2 {
-    bottom: calc(48px + 15px + 10px);
+    bottom: calc(-18px + 15px + 10px);
+    background: #0962c6; }
+  .btn-float.btn-float-3 {
+    bottom: calc(98px + 15px + 10px);
     background: #0962c6; }
     .btn-float.btn-float-2:hover, .btn-float.btn-float-2:focus {
       background: #053264; }

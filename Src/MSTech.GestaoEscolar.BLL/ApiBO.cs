@@ -3182,11 +3182,13 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="alu_id"></param>
         /// <returns></returns>
-        public static List<CalendarioAluno> SelecionaCalendarioPorAluno(long alu_id)
+        public static CalendarioAlunoSaidaDTO SelecionaCalendarioPorAluno(long alu_id)
         {
+            CalendarioAlunoSaidaDTO retorno = new CalendarioAlunoSaidaDTO();
             using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
             {
-                return GestaoEscolarUtilBO.MapToEnumerable<CalendarioAluno>(dt).ToList();
+                retorno.calendarios = GestaoEscolarUtilBO.MapToEnumerable<CalendarioAlunoDTO>(dt).ToList();
+                return retorno;
             }
         }
 
@@ -7323,6 +7325,7 @@ namespace MSTech.GestaoEscolar.BLL
         #endregion Plataforma de Itens e Avaliações
 
         #region Relatório pedagógico
+        
 
         /// <summary>
         /// Retorna os dados das sondagens que o aluno participou.
@@ -7544,6 +7547,26 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 throw ex;
             }
+            return retorno;
+        }
+
+        /// <summary>
+        /// Seleciona dados da matrícula do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public static MatriculaTurmaSaidaDTO BuscaMatriculaTurma(long alu_id, int mtu_id)
+        {
+            MatriculaTurmaSaidaDTO retorno = new MatriculaTurmaSaidaDTO();
+            using (DataTable dt = MTR_MatriculaTurmaBO.SelecionaDadosMatriculaAluno(alu_id, mtu_id))
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    retorno = (MatriculaTurmaSaidaDTO)GestaoEscolarUtilBO.DataRowToEntity(dt.Rows[0], new MatriculaTurmaSaidaDTO());
+                }
+            }
+
             return retorno;
         }
 
