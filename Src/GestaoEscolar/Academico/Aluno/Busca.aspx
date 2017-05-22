@@ -181,6 +181,17 @@
                     <HeaderStyle CssClass="center" />
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Relatório pedagógico">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="textBoxRelPedagogico" runat="server"></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:ImageButton ID="btnRelatórioPedagogico" runat="server" CausesValidation="False" CommandName="RelatorioPedagogico"
+                            ToolTip="Relatório pedagógico do aluno" SkinID="btFormulario" />
+                    </ItemTemplate>
+                    <HeaderStyle CssClass="center" />
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemTemplate>
                         <tr class="trExpandir" style="display: none;">

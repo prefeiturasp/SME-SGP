@@ -1,7 +1,6 @@
 $(document).ready(function () {
     //Pega todos os 'a' que tenham o simbolo '#' em seu atributo href
     $('a[href*="#area"]').click(function () {
-        console.log('teste');
         //Assegura que o nome do caminho da pagina corrente (location.pathname) é o mesmo do link clicado (this.pathname)
         if (location.pathname == this.pathname && location.host == this.host) {
             //Armazena o nome com o hash, 'achando' a div com esse id '#' e nome, e anima com scrollTop. O nro indica velocidade.
@@ -24,6 +23,11 @@ $(document).ready(function () {
     $('#btn-print').click(function (e) {
         e.preventDefault();
         window.print();
+    });
+
+    $('#btn-voltar').click(function (e) {
+        e.preventDefault();
+        window.top.location = urlRetorno;
     });
 });
 

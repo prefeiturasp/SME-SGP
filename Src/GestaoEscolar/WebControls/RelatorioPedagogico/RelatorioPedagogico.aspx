@@ -25,12 +25,13 @@
     </style>
 </head>
 <body>
-
+    <script src="../../Includes/Charts/Chart.min.js"></script>
     <script src="../../Includes/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="../../Includes/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-
     <script src="../../Includes/Angular/angular.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/module.js" type="text/javascript"></script>
+    <script src="../../Includes/Angular/angular-charts/angular-chart.min.js"></script>
+    <script src="../../Includes/Angular/angular-filter/angular-filter.min.js"></script>
     <script src="../../Includes/Angular/boletim.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/calendario.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/sondagem.controller.js" type="text/javascript"></script>
@@ -54,9 +55,10 @@
 
         var site = '';
         var core = '<%= MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB.UrlCoreSSO %>';
-            var api = '<%= MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB.UrlGestaoAcademicaWebApi %>';
+        var api = '<%= MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB.UrlGestaoAcademicaWebApi %>';
         var msgDocenciaCompartilhada = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCDadosBoletimAluno.MensagemCompartilhada") %>';
         var msgAlunoSemDadosPeriodo = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemAlunoSemDadosPeriodo") %>';
+        var urlRetorno = '<%= URLRetorno %>';
     </script>
 
     <form id="form1" runat="server">
@@ -133,7 +135,7 @@
             <!--Conteúdo-->
             <div role="main" id="acontent">
                 <button title="Ir para o topo" class="btn btn-primary btn-float btn-float-3" id="btn-top"><i class="material-icons">&#xE5D8;</i></button>
-                <button title="Voltar" class="btn btn-primary btn-float btn-float-2"><i class="material-icons">&#xE166;</i></button>
+                <button title="Voltar" class="btn btn-primary btn-float btn-float-2" id="btn-voltar"><i class="material-icons">&#xE166;</i></button>
                 <button title="Imprimir" class="btn btn-primary btn-float" id="btn-print"><i class="material-icons">&#xE8AD;</i></button>
 
                 <!-- Boletim -->
@@ -159,7 +161,7 @@
                                     <tr ng-repeat="(indexMat, materia) in boletim.matter" ng-class="checkParImpar(indexMat)" ng-if="!materia.enriquecimentoCurricular||!materia.recuperacao">
                                         <td data-header="Disciplina"><strong>{{materia.Disciplina}}</strong></td>
                                         <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.avaliacao"
-                                            ng-if="indexAval%2 == 0"
+                                            ng-if="indexAval%2 == 0" data-header="{{avaliacao.tpc_nome + ' - ' + boletim.nomeNota}}"
                                             rowspan="{{ indexAval%2 == 0 || !materia.tipoComponenteRegencia ? 1 : boletim.QtComponenteRegencia }}">{{avaliacao.conceito}}
                                         </td>
                                         <td class="text-center cel-destaque" data-header="Final - Nota"><strong>{{materia.MediaFinal}}</strong></td>
@@ -213,15 +215,15 @@
                             <div class="sr-only">Conteúdo dividido por Accordion</div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel-group accordion" id="accordionConselho" role="tablist" aria-multiselectable="true">
                                         <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
-                                            <div class="panel-heading" role="tab" id="{{'heading-' + conselho.tpc_id}}">
+                                            <div class="panel-heading" role="tab" id="{{'headingConselho-' + conselho.tpc_id}}">
                                                 <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapse-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordionConselho" href="{{'#collapseConselho-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapseConselho-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="{{'collapse-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'heading-' + conselho.tpc_id}}">
+                                            <div id="{{'collapseConselho-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingConselho-' + conselho.tpc_id}}">
                                                 <div class="panel-body">
                                                     <ul class="list">
                                                         <li>
@@ -250,15 +252,15 @@
                             <div class="sr-only">Conteúdo dividido por Accordion</div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel-group accordion" id="accordionCompromisso" role="tablist" aria-multiselectable="true">
                                         <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
-                                            <div class="panel-heading" role="tab" id="{{'heading-' + conselho.tpc_id}}">
+                                            <div class="panel-heading" role="tab" id="{{'headingCompromisso-' + conselho.tpc_id}}">
                                                 <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapse-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordionCompromisso" href="{{'#collapseCompromisso-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapseCompromisso-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="{{'collapse-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'heading-' + conselho.tpc_id}}">
+                                            <div id="{{'collapseCompromisso-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingCompromisso-' + conselho.tpc_id}}">
                                                 <div class="panel-body">
                                                     <ul class="list">
                                                         <li>
@@ -280,17 +282,17 @@
 
                 <!-- SONDAGEM -->
                 <div ng-controller="SondagemController" ng-cloak>
-                    <section id="area-sondagem" class="section-area" ng-show="listSondagens.length > 0">
+                    <section id="area-sondagem" class="section-area">
                         <h3><i class="material-icons pull-left">&#xE5CC;</i>Resultados de sondagem</h3>
                         <div class="conteudo">
                             <div class="sr-only">Conteúdo dividido por Accordion</div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="panel-group accordion" id="accordion3" role="tablist" aria-multiselectable="true">
+                                    <div class="panel-group accordion" id="accordionSondagem" role="tablist" aria-multiselectable="true">
                                         <div class="panel panel-default" ng-repeat="sondagem in listSondagens">
                                             <div class="panel-heading" role="tab" id="{{'headingSondagem-' + sondagem.id}}">
                                                 <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion3" href="{{'#collapseSondagem-' + sondagem.id}}" aria-expanded="true" aria-controls="{{'collapseSondagem-' + sondagem.id}}" class="collapsed">{{sondagem.titulo}}
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordionSondagem" href="{{'#collapseSondagem-' + sondagem.id}}" aria-expanded="true" aria-controls="{{'collapseSondagem-' + sondagem.id}}" class="collapsed">{{sondagem.titulo}}
                                                     </a>
                                                 </h4>
                                             </div>
@@ -306,6 +308,10 @@
                                                             </ul>
                                                         </li>
                                                     </ul>
+                                                    <canvas id="line" class="chart chart-line" chart-data="sondagem.graphData"
+                                                        chart-labels="sondagem.graphLabels" chart-series="sondagem.graphSeries" chart-options="sondagem.graphOptions"
+                                                        chart-dataset-override="sondagem.graphDatasetOverride" width="90" height="33">
+                                                    </canvas>
                                                 </div>
                                             </div>
                                         </div>

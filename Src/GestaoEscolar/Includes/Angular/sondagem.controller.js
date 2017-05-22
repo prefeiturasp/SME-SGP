@@ -2,13 +2,23 @@
 
 (function (angular) {
 
+
+    angular
+        .module('app')
+        .requires.push('chart.js');
+
+    angular
+        .module('app')
+        .requires.push('angular.filter');
+
     angular
         .module('app')
         .controller('SondagemController', SondagemController);
 
-    SondagemController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
+    SondagemController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService', 'groupByFilter'];
 
-    function SondagemController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
+    function SondagemController($scope, $timeout, $http, $location, $filter, trocarAnoService, groupByFilter) {
+
         this.reload = function () {
             initVars();
             getSondagens();
@@ -32,6 +42,7 @@
         function initVars() {
             $scope.listSondagens = [];
             $scope.params = params;
+            $scope.graph = {}
             $scope.mensagemErro = "";
             $scope.mensagemAlerta = "";
         };
@@ -73,33 +84,66 @@
         };
 
         function modelSondagens(list) {
+            var respDic = {};
+            var sondRespDic = {};
+            var aux = 1;
+            for (var s = 0; s < list.length; s++) {
+                respDic[0] = "";
+                sondRespDic[{ sondId: list[s].id, respId: 0 }] = 0;
+                for (var r = 0; r < list[s].respostas.length; r++) {
+                    respDic[aux] = list[s].respostas[r].descricao;
+                    sondRespDic[parseInt(list[s].id.toString() + "0" + list[s].respostas[r].id.toString())] = aux;
+                    aux++;
+                }
+            }
+
             for (var s = 0; s < list.length; s++) {
                 var respostas = []
-
+                var graphLabels = [];
+                var graphSeries = [];
+                var graphData = [];
                 for (var a = 0; a < list[s].agendamentos.length; a++) {
+
+                    if (graphLabels.indexOf(list[s].agendamentos[a].dataInicio) == -1) {
+                        graphLabels.push(list[s].agendamentos[a].dataInicio);
+                    }
+
                     for (var r = 0; r < list[s].agendamentos[a].respostasAluno.length; r++) {
 
                         var questao = $filter('filter')(list[s].questoes, { id: list[s].agendamentos[a].respostasAluno[r].idQuestao }, true);
 
                         if (questao.length) {
-
                             var subQuestao = $filter('filter')(list[s].subQuestoes, { id: list[s].agendamentos[a].respostasAluno[r].idSubQuestao }, true);
                             var resposta = $filter('filter')(list[s].respostas, { id: list[s].agendamentos[a].respostasAluno[r].idResposta }, true);
 
                             if (subQuestao.length) {
+
+                                if (graphSeries.indexOf("Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao) == -1) {
+                                    graphSeries.push("Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao);
+                                }
+
                                 if (resposta.length) {
                                     respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: resposta[0].descricao })
+                                    graphData.push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
                                     respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: "" })
+                                    graphData.push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
                             else {
+
+                                if (graphSeries.indexOf("Questão: " + questao[0].descricao) == -1) {
+                                    graphSeries.push("Questão: " + questao[0].descricao);
+                                }
+
                                 if (resposta.length) {
                                     respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
+                                    graphData.push({ questao: "Questão: " + questao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
                                     respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: "" })
+                                    graphData.push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
                         }
@@ -109,6 +153,77 @@
                 for (var q = 0; q < list[s].questoes.length; q++) {
                     list[s].questoes[q]["respostas"] = $filter('filter')(respostas, { id: list[s].questoes[q].id }, true);
                 }
+
+                var dadosAgrup = $filter('toArray')($filter('groupBy')(graphData, 'questao'), true);
+                var graphDataAgroup = [];
+                for (var d = 0; d < dadosAgrup.length; d++) {
+                    var resp = [];
+                    for (var v = 0; v < dadosAgrup[d].length; v++) {
+                        resp.push(parseInt(sondRespDic[list[s].id.toString() + "0" + dadosAgrup[d][v].idResposta.toString()]));
+                    }
+                    graphDataAgroup.push(resp);
+                }
+
+                list[s]["graphLabels"] = graphLabels;
+                list[s]["graphSeries"] = graphSeries;
+                list[s]["graphData"] = graphDataAgroup;
+                list[s]["graphDatasetOverride"] = [{ yAxisID: 'yaxes' }];
+                list[s]["graphOptions"] = {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Data de agendamento'
+                            },
+                            gridLines: {
+                                offsetGridLines: true
+                            }
+                        }],
+                        yAxes: [
+                            {
+                                id: 'yaxes',
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Respostas'
+                                },
+                                ticks: {
+                                    userCallback: function (value, index, values) {
+                                        if (respDic[value]) {
+                                            return respDic[value];
+                                        }
+                                        else {
+                                            return "";
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                console.log(data.datasets[tooltipItem.datasetIndex]);
+                                var resp = {};
+                                if (respDic[data.datasets[tooltipItem.datasetIndex].data[0]]) {
+                                    resp = " -> " + respDic[data.datasets[tooltipItem.datasetIndex].data[0]];
+                                }
+                                else {
+                                    resp = "";
+                                }
+                                return data.datasets[tooltipItem.datasetIndex].label + resp;
+                            }
+                        }
+                    }
+                };
             }
 
             $scope.listSondagens = list;

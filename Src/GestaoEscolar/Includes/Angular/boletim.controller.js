@@ -153,12 +153,12 @@
                     k = 0
                     for (k; k < maxK; k++) {
                         if (listaK[k].nota != undefined && listaK[k].nota != null) {
-                            notas.push({ conceito: listaK[k].nota.Nota });
-                            notas.push({ faltas: listaK[k].nota.numeroFaltas });
+                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome,  conceito: listaK[k].nota.Nota });
+                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: listaK[k].nota.numeroFaltas });
                         }
                         else {
-                            notas.push({ conceito: "-" });
-                            notas.push({ faltas: "-" });
+                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, conceito: "-" });
+                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: "-" });
                         }
                     }//for K
                     listaJ[j]["avaliacao"] = notas;
@@ -417,12 +417,12 @@
                     k = 0
                     for (k; k < maxK; k++) {
                         if (listaK[k].nota != undefined && listaK[k].nota != null) {
-                            notas.push({ conceito: listaK[k].nota.Nota });
-                            notas.push({ faltas: listaK[k].nota.numeroFaltas });
+                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, conceito: listaK[k].nota.Nota });
+                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: listaK[k].nota.numeroFaltas });
                         }
                         else {
-                            notas.push({ conceito: "-" });
-                            notas.push({ faltas: "-" });
+                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, conceito: "-" });
+                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: "-" });
                         }
                     }//for K
                     listaJ[j]["avaliacao"] = notas;

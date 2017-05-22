@@ -6,6 +6,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.UI;
@@ -37,11 +38,18 @@
             set { ViewState["tpc_id"] = value; }
         }
 
+        public string URLRetorno
+        {
+            get { return ViewState["URLRetorno"].ToString(); }
+            set { ViewState["URLRetorno"] = value; }
+        }
+
         protected override void Page_PreInit(object sender, EventArgs e)
         {
             base.Page_PreInit(sender, e);
             Page.Theme = "IntranetSMEBootStrap";
         }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -51,6 +59,9 @@
                 sm.Scripts.Add(new ScriptReference("~/Includes/jquery-2.0.3.min.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/bootstrap/bootstrap.min.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/scrolling.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/Charts/Chart.min.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/Angular/angular-charts/angular-chart.min.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/Angular/angular-filter/angular-filter.min.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/angular.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/module.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/Boletim.controller.js"));
@@ -65,12 +76,26 @@
 
             if (!IsPostBack)
             {
-                alu_id = 1316208;
-                using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
+                if (Session["alu_id"] != null)
                 {
-                    ano = dt.Select().Select(p => Convert.ToInt32(p["cal_ano"])).Max();
-                    mtu_id = dt.Select(string.Format("cal_ano = {0}", ano)).Select(p => Convert.ToInt32(p["mtu_id"])).First();
-                    tpc_id = dt.Select(string.Format("cal_ano = {0}", ano)).Select(p => Convert.ToInt32(p["tpc_id"])).First();
+                    alu_id = Convert.ToInt32(Session["alu_id"]);
+                    Session["alu_id"] = null;
+                    if (Session["URLRetorno"] != null)
+                    {
+                        URLRetorno = Session["URLRetorno"].ToString();
+                        Session["URLRetorno"] = null;
+                    }
+                    else
+                    {
+                        URLRetorno = Path.GetFullPath("~/Academico/Aluno/Busca.aspx");
+                    }
+
+                    using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
+                    {
+                        ano = dt.Select().Select(p => Convert.ToInt32(p["cal_ano"])).Max();
+                        mtu_id = dt.Select(string.Format("cal_ano = {0}", ano)).Select(p => Convert.ToInt32(p["mtu_id"])).First();
+                        tpc_id = dt.Select(string.Format("cal_ano = {0}", ano)).Select(p => Convert.ToInt32(p["tpc_id"])).First();
+                    }
                 }
             }
         }
