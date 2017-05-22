@@ -7559,12 +7559,47 @@ namespace MSTech.GestaoEscolar.BLL
         public static MatriculaTurmaSaidaDTO BuscaMatriculaTurma(long alu_id, int mtu_id)
         {
             MatriculaTurmaSaidaDTO retorno = new MatriculaTurmaSaidaDTO();
-            using (DataTable dt = MTR_MatriculaTurmaBO.SelecionaDadosMatriculaAluno(alu_id, mtu_id))
+            try
             {
-                if (dt.Rows.Count > 0)
+                using (DataTable dt = MTR_MatriculaTurmaBO.SelecionaDadosMatriculaAluno(alu_id, mtu_id))
                 {
-                    retorno = (MatriculaTurmaSaidaDTO)GestaoEscolarUtilBO.DataRowToEntity(dt.Rows[0], new MatriculaTurmaSaidaDTO());
+                    if (dt.Rows.Count > 0)
+                    {
+                        retorno = (MatriculaTurmaSaidaDTO)GestaoEscolarUtilBO.DataRowToEntity(dt.Rows[0], new MatriculaTurmaSaidaDTO());
+                    }
                 }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Busca os dados de conselho de classe do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public static ConselhoClasseSaidaDTO BuscaDadosConselhoClasse(long alu_id, int mtu_id)
+        {
+            ConselhoClasseSaidaDTO retorno = new ConselhoClasseSaidaDTO();
+            try
+            {
+                using (DataTable dt = CLS_AlunoAvaliacaoTurmaBO.BuscaDadosConselhoClasseAlunos(alu_id, mtu_id))
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        retorno.dadosConselho = GestaoEscolarUtilBO.MapToEnumerable<ConselhoClasseDTO>(dt).ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return retorno;

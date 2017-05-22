@@ -43,7 +43,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemBoletimEscolarAlunoController.GetBoletimEscolarDosAlunos(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaBoletimEscolarDosAlunosEntradaDTO)">
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemBoletimEscolarAlunoController.GetAll(System.Int64,System.Int32)">
+            <summary>
+            Retorna o boletim escolar do aluno
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.ApiListagemBoletimEscolarAlunoController.GetBoletimEscolarDosAlunos(System.String,System.String,System.Int32)">
             <summary>
             Retorna o boletim escolar dos alunos
             </summary>
@@ -159,6 +166,14 @@
                              e/ou colaboradorFuncao, pois é realizado uma série de validações na camada de negócios.
             </summary>
             <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.conselhoClasseController.GetPorMatricula(System.Int64,System.Int32)">
+            <summary>
+            Retorna dados de conselho de classe da matrícula do aluno
+            </summary>
+            <param name="alu_id"></param>
+            <param name="mtu_id"></param>
+            <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.curriculos_periodoController.GetCurriculoPeriodoPorEscola(System.Int32)" -->
         <member name="M:GestaoAcademica.WebApi.Controllers.matriculaTurmaController.Get(System.Int64,System.Int32)">
