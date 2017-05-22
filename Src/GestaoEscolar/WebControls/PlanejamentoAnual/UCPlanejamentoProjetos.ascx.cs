@@ -798,8 +798,12 @@
             TUR_TurmaDisciplina entityTud = new TUR_TurmaDisciplina { tud_id = VS_tud_id };
             TUR_TurmaDisciplinaBO.GetEntity(entityTud);
 
+            TUR_Turma entityTurma = new TUR_Turma { tur_id = VS_tur_id };
+            TUR_TurmaBO.GetEntity(entityTurma);
+
             abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = VS_permiteEditarObjAprendizagem &&
-                                Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem);
+                                Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem) &&
+                                entityTurma.tur_tipo == (byte)TUR_TurmaTipo.Normal;
 
             if (abaobjAprendizagem.Visible)
             {
