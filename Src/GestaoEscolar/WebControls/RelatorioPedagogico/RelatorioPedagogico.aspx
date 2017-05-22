@@ -38,6 +38,7 @@
     <script src="../../Includes/Angular/justificativaFalta.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/movimentacao.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/matriculaTurma.controller.js" type="text/javascript"></script>
+    <script src="../../Includes/Angular/conselhoClasse.controller.js" type="text/javascript"></script>
     <script src="../../Includes/scrolling.js" type="text/javascript"></script>
     <script type="text/javascript">
         var params =
@@ -133,7 +134,7 @@
             <div role="main" id="acontent">
                 <button title="Ir para o topo" class="btn btn-primary btn-float btn-float-3" id="btn-top"><i class="material-icons">&#xE5D8;</i></button>
                 <button title="Voltar" class="btn btn-primary btn-float btn-float-2"><i class="material-icons">&#xE166;</i></button>
-                <button title="Imprimir" class="btn btn-primary btn-float"><i class="material-icons">&#xE8AD;</i></button>
+                <button title="Imprimir" class="btn btn-primary btn-float" id="btn-print"><i class="material-icons">&#xE8AD;</i></button>
 
                 <!-- Boletim -->
                 <div ng-controller="BoletimRelPedagogicoController" ng-cloak>
@@ -202,64 +203,37 @@
 
                         </div>
                     </section>
+                </div>
 
+                <div ng-controller="ConselhoClasseController" ng-cloak>
                     <!-- OBSERVACOES CONSELHO -->
                     <section id="area-obs-conselho" class="section-area">
                         <h3><i class="material-icons pull-left">&#xE5CC;</i>Observações do conselho de classe</h3>
-                        <div class="conteudo">
+                         <div class="conteudo">
                             <div class="sr-only">Conteúdo dividido por Accordion</div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingOne">
+                                        <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
+                                            <div class="panel-heading" role="tab" id="{{'heading-' + conselho.tpc_id}}">
                                                 <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">1º Bimestre
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapse-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div id="{{'collapse-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'heading-' + conselho.tpc_id}}">
                                                 <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingTwo">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">2º Bimestre
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingThree">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">3º Bimestre
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingFour">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">4º Bimestre
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                    <ul class="list">
+                                                        <li>
+                                                            <span class="list-item"><strong>Desempenho e aprendizagem</strong>{{conselho.desempenho}}</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="list-item"><strong>Recomendações ao Aluno</strong>{{conselho.recomendacaoAluno}}</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="list-item"><strong>Recomendações aos Pais/Responsáveis</strong>{{conselho.recomendacaoResponsavel}}</span>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -269,38 +243,31 @@
                         </div>
                     </section>
 
-
                     <!-- Compromisso de estudo -->
-                    <section id="area-com-estudos" class="section-area" ng-if="!boletim.fechamentoPorImportacao && boletim.tci_exibirBoletim && !boletim.ensinoInfantil" style="display: {{boletim.displayPerfilAluno}}">
+                    <section id="area-com-estudos" class="section-area">
                         <h3><i class="material-icons pull-left">&#xE5CC;</i>Compromisso de estudo</h3>
                         <div class="conteudo">
                             <div class="sr-only">Conteúdo dividido por Accordion</div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="panel-group accordion" id="accordionComEst" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingAtividadeFeita">
+                                    <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
+                                            <div class="panel-heading" role="tab" id="{{'heading-' + conselho.tpc_id}}">
                                                 <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordionComEst" href="#collapseAtividadeFeita" aria-expanded="true" aria-controls="collapseAtividadeFeita">O que tenho feito?
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="{{'#collapse-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapse-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="collapseAtividadeFeita" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingAtividadeFeita">
+                                            <div id="{{'collapse-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'heading-' + conselho.tpc_id}}">
                                                 <div class="panel-body">
-                                                    {{boletim.cpe_atividadeFeita}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingAtividadeFazer">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordionComEst" href="#collapseAtividadeFazer" aria-expanded="true" aria-controls="collapseAtividadeFazer">O que pretendo fazer?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseAtividadeFazer" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingAtividadeFazer">
-                                                <div class="panel-body">
-                                                    {{boletim.cpe_atividadePretendeFazer}}
+                                                    <ul class="list">
+                                                        <li>
+                                                            <span class="list-item"><strong>O que tenho feito?</strong>{{conselho.cpe_atividadeFeita}}</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="list-item"><strong>O que pretendo fazer?</strong>{{conselho.cpe_atividadePretendeFazer}}</span>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -323,11 +290,11 @@
                                         <div class="panel panel-default" ng-repeat="sondagem in listSondagens">
                                             <div class="panel-heading" role="tab" id="{{'headingSondagem-' + sondagem.id}}">
                                                 <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion3" href="{{'#collapseSondagem-' + sondagem.id}}" aria-expanded="true" aria-controls="{{'collapseSondagem-' + sondagem.id}}">{{sondagem.titulo}}
+                                                    <a role="button" data-toggle="collapse" data-parent="#accordion3" href="{{'#collapseSondagem-' + sondagem.id}}" aria-expanded="true" aria-controls="{{'collapseSondagem-' + sondagem.id}}" class="collapsed">{{sondagem.titulo}}
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="{{'collapseSondagem-' + sondagem.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{'headingSondagem-' + sondagem.id}}">
+                                            <div id="{{'collapseSondagem-' + sondagem.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingSondagem-' + sondagem.id}}">
                                                 <div class="panel-body">
                                                     <ul class="list">
                                                         <li ng-repeat="questao in sondagem.questoes">

@@ -3647,6 +3647,9 @@
     <Content Include="Includes\Angular\anotacao.controller.js" />
     <Content Include="Includes\Angular\boletim.controller.js" />
     <Content Include="Includes\Angular\calendario.controller.js" />
+    <Content Include="Includes\Angular\Charts\angular-chart.js" />
+    <Content Include="Includes\Angular\Charts\angular-chart.min.js" />
+    <Content Include="Includes\Angular\conselhoClasse.controller.js" />
     <Content Include="Includes\Angular\justificativaFalta.controller.js" />
     <Content Include="Includes\Angular\matriculaTurma.controller.js" />
     <Content Include="Includes\Angular\module.js" />
@@ -4221,6 +4224,7 @@
     <Content Include="Includes\ckeditor\samples\sample_posteddata.php" />
     <Content Include="Includes\ckeditor\skins\kama\readme.md" />
     <Content Include="Includes\ckeditor\skins\moono\readme.md" />
+    <Content Include="Includes\Angular\Charts\angular-chart.min.js.map" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>

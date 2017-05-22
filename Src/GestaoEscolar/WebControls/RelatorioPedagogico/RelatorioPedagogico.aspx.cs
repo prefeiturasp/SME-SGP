@@ -60,11 +60,12 @@
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/justificativaFalta.controller.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/movimentacao.controller.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/matriculaTurma.controller.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/Angular/conselhoClasse.controller.js"));
             }
 
             if (!IsPostBack)
             {
-                alu_id = 1405459;
+                alu_id = 1316208;
                 using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
                 {
                     ano = dt.Select().Select(p => Convert.ToInt32(p["cal_ano"])).Max();

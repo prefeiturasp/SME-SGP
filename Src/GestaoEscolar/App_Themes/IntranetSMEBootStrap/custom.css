@@ -314,7 +314,7 @@ footer {
     margin-left: -5px; }
 
 #acontent {
-  padding: 24px 24px 24px 325px;
+  padding: 24px 44px 24px 300px;
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
@@ -610,7 +610,7 @@ button.btn-primary {
 
 .btn-float {
   position: fixed;
-  right: 15px;
+  right: 5px;
   bottom: 65px;
   width: 48px;
   height: 48px;

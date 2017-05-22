@@ -20,6 +20,46 @@ namespace MSTech.GestaoEscolar.DAL
         #region Métodos
 
         /// <summary>
+        /// Busca os dados de conselho de classe do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public DataTable BuscaDadosConselhoClasseAlunos(long alu_id, int mtu_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_AlunoAvaliacaoTurma_BuscaDadosConselhoClasseAlunos", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@alu_id";
+                Param.Size = 8;
+                Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@mtu_id";
+                Param.Size = 4;
+                Param.Value = mtu_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Retorna a frequência acumulada calculada no registro.
         /// </summary>
         /// <param name="tur_id">Id da turma.</param>
