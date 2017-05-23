@@ -76,14 +76,14 @@
 
             if (!IsPostBack)
             {
-                if (Session["alu_id_RelatorioPedagogico"] != null)
+                if (Session["alu_id"] != null)
                 {
-                    alu_id = Convert.ToInt32(Session["alu_id_RelatorioPedagogico"]);
-                    Session.Remove("alu_id_RelatorioPedagogico");
-                    if (Session["PaginaRetorno_RelatorioPedagogico"] != null)
+                    alu_id = Convert.ToInt32(Session["alu_id"]);
+                    Session.Remove("alu_id");
+                    if (Session["URLRetorno"] != null)
                     {
-                        URLRetorno = Session["PaginaRetorno_RelatorioPedagogico"].ToString();
-                        Session.Remove("PaginaRetorno_RelatorioPedagogico");
+                        URLRetorno = Session["URLRetorno"].ToString();
+                        Session.Remove("URLRetorno");
                     }
                     else
                     {
