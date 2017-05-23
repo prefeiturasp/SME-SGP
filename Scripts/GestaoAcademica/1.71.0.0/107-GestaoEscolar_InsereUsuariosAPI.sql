@@ -4,8 +4,8 @@ GO
 BEGIN TRANSACTION 
 SET XACT_ABORT ON   
 
-	DECLARE @usuario VARCHAR(100) = 'admin_services';
-	DECLARE @senha VARCHAR(256) = 'KhI2eKxCvpSDXf34wRDuKQ=='
+	DECLARE @usuario VARCHAR(100) = 'usuarioGestaoPedagogicaAPI';
+	DECLARE @senha VARCHAR(256) = '0lGzDU+IVMg='
 
 	IF (NOT EXISTS (SELECT TOP 1 1
 					FROM SYS_UsuarioAPI WITH(NOLOCK)
