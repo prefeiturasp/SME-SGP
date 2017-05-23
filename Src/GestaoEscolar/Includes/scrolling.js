@@ -42,3 +42,9 @@ $(window).scroll(function () {
         }
     });
 });
+
+$(document).on("keydown", function (e) {
+    if ((e.which || e.keyCode) == 116) {
+        e.preventDefault();
+    }
+});
