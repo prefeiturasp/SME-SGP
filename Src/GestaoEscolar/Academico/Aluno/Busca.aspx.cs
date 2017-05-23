@@ -725,10 +725,10 @@ public partial class Academico_Aluno_Busca : MotherPageLogado
                 _btnBoletim.CommandArgument = e.Row.RowIndex.ToString();
             }
 
-            ImageButton btnRelatórioPedagogico = (ImageButton)e.Row.FindControl("btnRelatórioPedagogico");
-            if (btnRelatórioPedagogico != null)
+            ImageButton btnRelatorioPedagogico = (ImageButton)e.Row.FindControl("btnRelatorioPedagogico");
+            if (btnRelatorioPedagogico != null)
             {
-                btnRelatórioPedagogico.CommandArgument = e.Row.RowIndex.ToString();
+                btnRelatorioPedagogico.CommandArgument = e.Row.RowIndex.ToString();
             }
         }
     }
@@ -762,8 +762,12 @@ public partial class Academico_Aluno_Busca : MotherPageLogado
             try
             {
                 int index = int.Parse(e.CommandArgument.ToString());
-                Session["alu_id"] = Convert.ToInt64(_grvAluno.DataKeys[index].Value);
-                Session["URLRetorno"] = Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/Aluno/Busca.aspx");
+
+                Session.Remove("alu_id_RelatorioPedagogico");
+                Session.Remove("PaginaRetorno_RelatorioPedagogico");
+
+                Session.Add("alu_id_RelatorioPedagogico", Convert.ToInt64(_grvAluno.DataKeys[index].Value));
+                Session.Add("PaginaRetorno_RelatorioPedagogico", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/Aluno/Busca.aspx"));
                 RedirecionarPagina("~/Documentos/RelatorioPedagogico/RelatorioPedagogico.aspx");
             }
             catch (ValidationException ex)

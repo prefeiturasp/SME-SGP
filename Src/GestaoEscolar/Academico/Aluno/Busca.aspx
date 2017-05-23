@@ -186,7 +186,7 @@
                         <asp:TextBox ID="textBoxRelPedagogico" runat="server"></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnRelatórioPedagogico" runat="server" CausesValidation="False" CommandName="RelatorioPedagogico"
+                        <asp:ImageButton ID="btnRelatorioPedagogico" runat="server" CausesValidation="False" CommandName="RelatorioPedagogico"
                             ToolTip="Relatório pedagógico do aluno" SkinID="btFormulario" />
                     </ItemTemplate>
                     <HeaderStyle CssClass="center" />

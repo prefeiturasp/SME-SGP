@@ -76,18 +76,18 @@
 
             if (!IsPostBack)
             {
-                if (Session["alu_id"] != null)
+                if (Session["alu_id_RelatorioPedagogico"] != null)
                 {
-                    alu_id = Convert.ToInt32(Session["alu_id"]);
-                    Session["alu_id"] = null;
-                    if (Session["URLRetorno"] != null)
+                    alu_id = Convert.ToInt32(Session["alu_id_RelatorioPedagogico"]);
+                    Session.Remove("alu_id_RelatorioPedagogico");
+                    if (Session["PaginaRetorno_RelatorioPedagogico"] != null)
                     {
-                        URLRetorno = Session["URLRetorno"].ToString();
-                        Session["URLRetorno"] = null;
+                        URLRetorno = Session["PaginaRetorno_RelatorioPedagogico"].ToString();
+                        Session.Remove("PaginaRetorno_RelatorioPedagogico");
                     }
                     else
                     {
-                        URLRetorno = Path.GetFullPath("~/Academico/Aluno/Busca.aspx");
+                        URLRetorno = Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/Aluno/Busca.aspx");
                     }
 
                     using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
