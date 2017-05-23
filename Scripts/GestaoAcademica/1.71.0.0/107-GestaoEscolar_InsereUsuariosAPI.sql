@@ -5,7 +5,6 @@ BEGIN TRANSACTION
 SET XACT_ABORT ON   
 
 	DECLARE @usuario VARCHAR(100) = 'usuarioGestaoPedagogicaAPI';
-	-- Alterar senha -- Criptografada
 	DECLARE @senha VARCHAR(256) = '0lGzDU+IVMg='
 
 	IF (NOT EXISTS (SELECT TOP 1 1

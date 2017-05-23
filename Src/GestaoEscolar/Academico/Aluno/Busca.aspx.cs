@@ -21,6 +21,7 @@ public partial class Academico_Aluno_Busca : MotherPageLogado
     private const int indiceColunaAnotacoes = 8;
     private const int indiceColunaCapturarFoto = 9;
     private const int indiceColunaBoletim = 10;
+    private const int indiceColunaRelatorioPedagogico = 11;
 
     #endregion Constantes
 
@@ -542,6 +543,8 @@ public partial class Academico_Aluno_Busca : MotherPageLogado
                 bool mostraBoletim = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_COLUNA_BOLETIM_MANUTENCAO_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
 
                 _grvAluno.Columns[indiceColunaBoletim].Visible = mostraBoletim;
+
+                _grvAluno.Columns[indiceColunaRelatorioPedagogico].Visible = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_COLUNA_RELATORIOPEDAGOGICO_MANUTENCAO_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
 
                 chkApenasGemeos.Visible = PermiteAlunoGemeo;
 

@@ -2,17 +2,17 @@
 {
     using MSTech.GestaoEscolar.Web.WebProject;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
 
     public partial class UCRelatorioPedagogico : MotherUserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        #region Métodos
 
+        public void Carregar(long alu_id, string urlRetorno)
+        {
+            Session["alu_id"] = alu_id;
+            Session["URLRetorno"] = urlRetorno;
         }
+
+        #endregion Métodos
     }
 }

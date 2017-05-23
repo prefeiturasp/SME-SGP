@@ -10,6 +10,7 @@
     MovimentacaoController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
 
     function MovimentacaoController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
+
         this.reload = function () {
             initVars();
             getMovimentacoes();
@@ -21,6 +22,7 @@
         };
 
         function configVariables() {
+            $scope.movimentacaoLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
             $scope.site = $scope.baseUrl[0] + "//" + $scope.baseUrl[2]; // site;
             $scope.logos = core;
@@ -31,6 +33,7 @@
         };
 
         function initVars() {
+            $scope.movimentacaoLoaded = false;
             $scope.listMovimentacoes = [];
             $scope.params = params;
             $scope.mensagemErro = "";
@@ -69,6 +72,8 @@
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
                         $scope.mensagemErro = "Falha inesperada ao carregar as movimentações.";
+                }).finally(function () {
+                    $scope.movimentacaoLoaded = true;
                 });
             }
         };

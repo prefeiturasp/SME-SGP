@@ -20,6 +20,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
         private const int grvAluno_ColunaAnotacoes = 6;
         private const int grvAluno_ColunaBoletim = 7;
+        private const int grvAluno_ColunaRelatorioPedagogico = 8;
 
         #endregion
 
@@ -346,7 +347,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 grvAluno.Columns[grvAluno_ColunaAnotacoes].Visible = VS_ltPermissaoAnotacoes.Any(p => p.pdc_permissaoConsulta) && possuiPermissaoVisualizacao;
                 grvAluno.Columns[grvAluno_ColunaBoletim].Visible = VS_ltPermissaoBoletim.Any(p => p.pdc_permissaoConsulta) &&
                                                                    ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_COLUNA_BOLETIM_MANUTENCAO_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-
+                grvAluno.Columns[grvAluno_ColunaRelatorioPedagogico].Visible = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_COLUNA_RELATORIOPEDAGOGICO_MANUTENCAO_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
                 UpdAlunos.Update();
             }
             catch (Exception ex)

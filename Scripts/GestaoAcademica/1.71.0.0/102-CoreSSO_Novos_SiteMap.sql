@@ -21,7 +21,8 @@ SET XACT_ABORT ON
 
 	EXEC MS_InsereSiteMap
 		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
-		,@nomeModulo = 'Relatórios' -- Nome do módulo (Obrigatório)
+		,@nomeModuloPai = 'Relatórios'
+		,@nomeModulo = 'Alunos' -- Nome do módulo (Obrigatório)
 		,@SiteMapNome = 'Relatório pedagógico do aluno' -- Nome do SiteMap (Obrigatório)
 		,@SiteMapUrl = '~/Documentos/RelatorioPedagogico/RelatorioPedagogico.aspx' -- Url da SiteMap (Obrigatório)
 	

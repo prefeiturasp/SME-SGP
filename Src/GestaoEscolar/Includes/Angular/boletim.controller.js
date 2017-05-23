@@ -280,7 +280,6 @@
     }
 
     function BoletimRelPedagogicoController($scope, $timeout, $http, $location, trocarAnoService) {
-
         this.reload = function () {
             initVars();
             getBoletins();
@@ -301,7 +300,7 @@
 		 * @return
 		 */
         function configVariables() {
-
+            $scope.boletimLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
             $scope.site = $scope.baseUrl[0] + "//" + $scope.baseUrl[2]; // site;
             $scope.logos = core;
@@ -322,6 +321,7 @@
         };
 
         function initVars() {
+            $scope.boletimLoaded = false;
             $scope.listBoletins = [];
             $scope.matter = [];
             $scope.recovery = [];
@@ -359,8 +359,7 @@
                     if (response.data == null) {
                         $scope.mensagemErro = "Falha inesperada ao carregar o boletim.";
                     }
-                    else if (response.data.length == 0) 
-                    {
+                    else if (response.data.length == 0) {
                         $scope.mensagemAlerta = msgAlunoSemDadosPeriodo;
                     }
                     else if (response.data[0] && response.data[0].Status && response.data[0].Status == 1) {
@@ -382,6 +381,8 @@
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
                         $scope.mensagemErro = "Falha inesperada ao carregar o boletim.";
+                }).finally(function () {
+                    $scope.boletimLoaded = true;
                 });
             }
         };

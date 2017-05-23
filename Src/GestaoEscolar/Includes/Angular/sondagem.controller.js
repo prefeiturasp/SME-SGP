@@ -30,6 +30,7 @@
         };
 
         function configVariables() {
+            $scope.sondagemLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
             $scope.site = $scope.baseUrl[0] + "//" + $scope.baseUrl[2]; // site;
             $scope.logos = core;
@@ -40,6 +41,7 @@
         };
 
         function initVars() {
+            $scope.sondagemLoaded = false;
             $scope.listSondagens = [];
             $scope.params = params;
             $scope.graph = {}
@@ -79,6 +81,8 @@
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
                         $scope.mensagemErro = "Falha inesperada ao carregar as sondagens.";
+                }).finally(function () {
+                    $scope.sondagemLoaded = true;
                 });
             }
         };
