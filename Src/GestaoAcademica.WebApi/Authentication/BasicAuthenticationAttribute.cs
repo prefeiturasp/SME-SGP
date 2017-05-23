@@ -16,6 +16,17 @@
     {
         private const string SCHEME = "Basic";
 
+        bool Active = true;
+
+        public BasicAuthenticationAttribute()
+        {
+        }
+
+        public BasicAuthenticationAttribute(bool active)
+        {
+            Active = active;
+        }
+
         /// <summary>
         /// Realiza a autenticação do usuário.
         /// </summary>
@@ -62,13 +73,20 @@
         /// <param name="actionContext"></param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (Autenticar(actionContext))
+            if (Active)
             {
-                base.OnActionExecuting(actionContext);
+                if (Autenticar(actionContext))
+                {
+                    base.OnActionExecuting(actionContext);
+                }
+                else
+                {
+                    actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, new { message = "Credenciais inválidas" });
+                }
             }
             else
             {
-                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, new { message = "Credenciais inválidas" });
+                base.OnActionExecuting(actionContext);
             }
         }
     }

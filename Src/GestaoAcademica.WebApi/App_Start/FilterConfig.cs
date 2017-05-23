@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using GestaoAcademica.WebApi.Authentication;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GestaoAcademica.WebApi
@@ -8,6 +9,7 @@ namespace GestaoAcademica.WebApi
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new BasicAuthenticationAttribute());
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using MSTech.GestaoEscolar.BLL;
+﻿using GestaoAcademica.WebApi.Authentication;
+using GestaoAcademica.WebApi.Controllers.Base;
+using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
 using MSTech.GestaoEscolar.Web.WebProject;
@@ -11,7 +13,7 @@ using System.Web.Http.Cors;
 namespace GestaoAcademica.WebApi.Controllers
 {
     
-    public class ApiListagemBoletimEscolarAlunoController : ApiController
+    public class ApiListagemBoletimEscolarAlunoController : BaseApiController
     {
         /// <summary>
         /// Retorna o boletim escolar do aluno
@@ -44,6 +46,8 @@ namespace GestaoAcademica.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "get")]
+        [BasicAuthentication(false)]
+        [JWTAuthenticationFilter]
         public List<BuscaBoletimEscolarDosAlunosSaidaDTO> GetBoletimEscolarDosAlunos([FromUri] BuscaBoletimEscolarDosAlunosEntradaDTO filtros)
         {
             try
