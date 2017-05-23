@@ -32,7 +32,7 @@
     CalendarioController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
 
     function CalendarioController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
-       
+
         function init() {
             configVariables();
         };
@@ -47,6 +47,7 @@
         * @return
         */
         function configVariables() {
+            $scope.calendarioLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
             $scope.site = $scope.baseUrl[0] + "//" + $scope.baseUrl[2]; // site;
             $scope.logos = core;
@@ -69,6 +70,7 @@
         };
 
         function initVars() {
+            $scope.calendarioLoaded = false;
             $scope.listCalendario = [];
             $scope.mensagemAlerta = "";
             $scope.params = params;
@@ -129,6 +131,8 @@
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
                         $scope.mensagemErro = "Falha inesperada ao carregar os ano.";
+                }).finally(function () {
+                    $scope.calendarioLoaded = true;
                 });
             }
         };

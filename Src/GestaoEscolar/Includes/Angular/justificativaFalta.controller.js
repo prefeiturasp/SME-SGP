@@ -9,7 +9,8 @@
 
     JustificativaFaltaController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
 
-    function JustificativaFaltaController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
+    function JustificativaFaltaController($scope, $timeout, $http, $location, $filter, trocarAnoService) {;
+
         this.reload = function () {
             initVars();
             getJustificativas();
@@ -21,6 +22,7 @@
         };
 
         function configVariables() {
+            $scope.justificativaLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
             $scope.site = $scope.baseUrl[0] + "//" + $scope.baseUrl[2]; // site;
             $scope.logos = core;
@@ -31,6 +33,7 @@
         };
 
         function initVars() {
+            $scope.justificativaLoaded = false;
             $scope.listJustificativa = [];
             $scope.params = params;
             $scope.mensagemErro = "";
@@ -69,6 +72,8 @@
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
                         $scope.mensagemErro = "Falha inesperada ao carregar as justificativas de falta.";
+                }).finally(function () {
+                    $scope.justificativaLoaded = true;
                 });
             }
         };

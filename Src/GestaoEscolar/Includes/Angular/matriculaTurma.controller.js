@@ -10,6 +10,7 @@
     matriculaTurmaController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
 
     function matriculaTurmaController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
+
         this.reload = function () {
             initVars();
             getMatricula();
@@ -21,6 +22,7 @@
         };
 
         function configVariables() {
+            $scope.matriculaLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
             $scope.site = $scope.baseUrl[0] + "//" + $scope.baseUrl[2]; // site;
             $scope.logos = core;
@@ -31,6 +33,7 @@
         };
 
         function initVars() {
+            $scope.matriculaLoaded = false;
             $scope.matricula = {};
             $scope.params = params;
             $scope.mensagemErro = "";
@@ -69,6 +72,8 @@
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
                         $scope.mensagemErro = "Falha inesperada ao carregar dados da matrícula.";
+                }).finally(function () {
+                    $scope.matriculaLoaded = true;
                 });
             }
         };

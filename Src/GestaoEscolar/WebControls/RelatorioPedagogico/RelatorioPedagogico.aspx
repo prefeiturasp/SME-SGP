@@ -64,72 +64,89 @@
     <form id="form1" runat="server">
         <div ng-app="app">
             <div ng-controller="CalendarioController" ng-cloak>
-                <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && listCalendario.length == 0">
-                    <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
-                </div>
-                <aside class="nav-aside" style="top: 5px; z-index: 1">
-                    <div class="dropdown pull-left">
-                        <button class="btn btn-default dropdown-toggle dropdown-ico" type="button" id="dropdownMenu1"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-disabled="listCalendario.length <= 1">
-                            <i class="material-icons md-color md-18">&#xE878;</i><span>{{params.ano}}</span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="listCalendario.length > 1">
-                            <li ng-repeat="calendario in listCalendario" ng-if="calendario.cal_ano!=params.ano">
-                                <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id, calendario.tpc_id)">{{calendario.cal_ano}}</a>
-                            </li>
-                        </ul>
+                <div ng-view>
+                    <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !calendarioLoaded">
+                        <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
                     </div>
-                </aside>
+                    <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                        {{mensagemErro}}
+                    </div>
+                    <div ng-if="mensagemAlerta" class="summary">
+                            {{mensagemAlerta}}
+                        </div>
+                    <aside class="nav-aside" style="top: 5px; z-index: 1" ng-if="calendarioLoaded">
+                        <div class="dropdown pull-left">
+                            <button class="btn btn-default dropdown-toggle dropdown-ico" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-disabled="listCalendario.length <= 1">
+                                <i class="material-icons md-color md-18">&#xE878;</i><span>{{params.ano}}</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="listCalendario.length > 1">
+                                <li ng-repeat="calendario in listCalendario" ng-if="calendario.cal_ano!=params.ano">
+                                    <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id, calendario.tpc_id)">{{calendario.cal_ano}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
             </div>
 
             <div ng-controller="matriculaTurmaController" ng-cloak>
-
-                <aside class="nav-aside" style="top: 60px; z-index: 0;">
-
-                    <!-- Header relatorio -->
-                    <header class="info-header">
-                        <div class="foto-aluno">
-                            <img class="imgFoto" src="{{getPhotoStudent(matricula.arq_idFoto)}}" alt="Foto do aluno" />
-                        </div>
-                        <div class="info-aluno">
-                            <h2 class="info-nome">{{matricula.pes_nome}} <small>{{matricula.alc_matricula}}</small>
-                            </h2>
-                            <span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}
-                            </span>
-                            <h2 class="info-escola">{{matricula.esc_nome}} -  {{matricula.uad_nome}}
-                            </h2>
-                        </div>
-                    </header>
-
-                    <a href="#nav-list-collapse" class="btn btn-primary btn-nav-toggle" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="nav-list-collapse"><i class="material-icons">&#xE5D2;</i></a>
-                    <div class="collapse" id="nav-list-collapse">
-                        <ul class="nav-list" id="nav-list">
-                            <li>
-                                <a href="#area-notas-faltas">Notas e faltas</a>
-                            </li>
-                            <li>
-                                <a href="#area-obs-conselho">Observações do conselho de classe</a>
-                            </li>
-                            <li>
-                                <a href="#area-com-estudos">Compromisso de estudo</a>
-                            </li>
-                            <li>
-                                <a href="#area-sondagem">Resultados de sondagem</a>
-                            </li>
-                            <li>
-                                <a href="#area-obs-individuais">Observações individuais</a>
-                            </li>
-                            <li>
-                                <a href="#area-just-faltas">Justificativa de faltas</a>
-                            </li>
-                            <li>
-                                <a href="#area-cons-mov">Remanejamento e Reclassificacao</a>
-                            </li>
-                        </ul>
+                <div ng-view>
+                    <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !matriculaLoaded">
+                        <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
                     </div>
-                </aside>
+                    <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                        {{mensagemErro}}
+                    </div>
+                    <div ng-if="mensagemAlerta" class="summary">
+                            {{mensagemAlerta}}
+                        </div>
+                    <aside class="nav-aside" style="top: 60px; z-index: 0;" ng-if="matriculaLoaded">
 
+                        <!-- Header relatorio -->
+                        <header class="info-header">
+                            <div class="foto-aluno">
+                                <img class="imgFoto" src="{{getPhotoStudent(matricula.arq_idFoto)}}" alt="Foto do aluno" />
+                            </div>
+                            <div class="info-aluno">
+                                <h2 class="info-nome">{{matricula.pes_nome}} <small>{{matricula.alc_matricula}}</small>
+                                </h2>
+                                <span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}
+                                </span>
+                                <h2 class="info-escola">{{matricula.esc_nome}} -  {{matricula.uad_nome}}
+                                </h2>
+                            </div>
+                        </header>
+
+                        <a href="#nav-list-collapse" class="btn btn-primary btn-nav-toggle" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="nav-list-collapse"><i class="material-icons">&#xE5D2;</i></a>
+                        <div class="collapse" id="nav-list-collapse">
+                            <ul class="nav-list" id="nav-list">
+                                <li>
+                                    <a href="#area-notas-faltas" onclick="menuClick(this)">Notas e faltas</a>
+                                </li>
+                                <li>
+                                    <a href="#area-obs-conselho" onclick="menuClick(this)">Observações do conselho de classe</a>
+                                </li>
+                                <li>
+                                    <a href="#area-com-estudos" onclick="menuClick(this)">Compromisso de estudo</a>
+                                </li>
+                                <li>
+                                    <a href="#area-sondagem" onclick="menuClick(this)">Resultados de sondagem</a>
+                                </li>
+                                <li>
+                                    <a href="#area-obs-individuais" onclick="menuClick(this)">Observações individuais</a>
+                                </li>
+                                <li>
+                                    <a href="#area-just-faltas" onclick="menuClick(this)">Justificativa de faltas</a>
+                                </li>
+                                <li>
+                                    <a href="#area-cons-mov" onclick="menuClick(this)">Remanejamento e Reclassificacao</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
             </div>
 
             <!--Conteúdo-->
@@ -140,243 +157,308 @@
 
                 <!-- Boletim -->
                 <div ng-controller="BoletimRelPedagogicoController" ng-cloak>
-                    <section id="area-notas-faltas" class="section-area" ng-repeat="boletim in listBoletins | limitTo : 1">
-                        <h3 ng-if="!boletim.ensinoInfantil"><i class="material-icons pull-left">&#xE5CC;</i>{{boletim.nomeNota}}s e faltas</h3>
-                        <div class="conteudo">
-
-                            <table class="table table-responsive-list" ng-if="!boletim.ensinoInfantil">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2" style="vertical-align: middle">Disciplina</th>
-                                        <th class="text-center" ng-repeat="periodo in boletim.periodos">{{periodo.tpc_nome}}</th>
-                                        <th rowspan="2" class="text-center" style="vertical-align: middle">Síntese Final</th>
-                                        <th rowspan="2" class="text-center" style="vertical-align: middle">Total de Ausências</th>
-                                        <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final(%)</th>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center" ng-repeat="periodo in boletim.periodos">{{boletim.nomeNota}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="(indexMat, materia) in boletim.matter" ng-class="checkParImpar(indexMat)" ng-if="!materia.enriquecimentoCurricular||!materia.recuperacao">
-                                        <td data-header="Disciplina"><strong>{{materia.Disciplina}}</strong></td>
-                                        <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.avaliacao"
-                                            ng-if="indexAval%2 == 0" data-header="{{avaliacao.tpc_nome + ' - ' + boletim.nomeNota}}"
-                                            rowspan="{{ indexAval%2 == 0 || !materia.tipoComponenteRegencia ? 1 : boletim.QtComponenteRegencia }}">{{avaliacao.conceito}}
-                                        </td>
-                                        <td class="text-center cel-destaque" data-header="Final - Nota"><strong>{{materia.MediaFinal}}</strong></td>
-                                        <td class="text-center cel-destaque" data-header="Final - Faltas" ng-if="indexMat == 0 || !materia.tipoComponenteRegencia" rowspan="{{ materia.tipoComponenteRegencia ? boletim.QtComponenteRegencia : 1 }}"><strong>{{materia.totalFaltas}}</strong></td>
-                                        <td class="text-center cel-destaque" data-header="Final - Frequencia" ng-if="boletim.exibeCompensacaoAusencia && (indexMat == 0 || boletim.QtComponenteRegencia == 0)" rowspan="{{ boletim.QtComponenteRegencia > 0 ? boletim.QtComponentes : 1 }}"><strong>{{materia.FrequenciaFinalAjustada}}</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
-                            <table class="table table-responsive-list" ng-if="(boletim.showCurricularEnrichment || boletim.showRecuperacao) && !boletim.ensinoInfantil">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2" style="vertical-align: middle">Enriq. curricular / Projetos / Ativ. compl.</th>
-                                        <th class="text-center" ng-repeat="periodo in boletim.periodos">{{periodo.tpc_nome}}</th>
-                                        <th rowspan="2" class="text-center" style="vertical-align: middle">Parecer Final</th>
-                                        <th rowspan="2" class="text-center" style="vertical-align: middle">Total de Ausências</th>
-                                        <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final(%)</th>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center" ng-repeat="periodo in boletim.periodos">Faltas</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="(indexMat, materia) in boletim.enrichment" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
-                                        <td data-header="Disciplina">{{materia.Disciplina}}</td>
-                                        <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
-                                        <td class="text-center" data-header="Parecer Final">{{materia.parecerFinal}}</td>
-                                        <td class="text-center" data-header="Final - Faltas">{{materia.totalFaltas}}</td>
-                                        <td class="text-center" data-header="Final - Frequencia">{{materia.FrequenciaFinalAjustada}}</td>
-                                    </tr>
-                                    <tr ng-repeat="(indexMat, materia) in boletim.recovery" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
-                                        <td data-header="Disciplina">{{materia.Disciplina}}</td>
-                                        <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
-                                        <td class="text-center" data-header="Parecer Final">{{materia.parecerFinal}}</td>
-                                        <td class="text-center" data-header="Final - Faltas">{{materia.totalFaltas}}</td>
-                                        <td class="text-center" data-header="Final - Frequencia">{{materia.FrequenciaFinalAjustada}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
+                    <div ng-view>
+                        <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !boletimLoaded">
+                            <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
                         </div>
-                    </section>
+                        <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                            {{mensagemErro}}
+                        </div>
+                        <div ng-if="mensagemAlerta" class="summary">
+                            {{mensagemAlerta}}
+                        </div>
+                        <section id="area-notas-faltas" class="section-area" ng-repeat="boletim in listBoletins | limitTo : 1" ng-ig="boletimLoaded">
+                            <h3 ng-if="!boletim.ensinoInfantil"><i class="material-icons pull-left">&#xE5CC;</i>{{boletim.nomeNota}}s e faltas</h3>
+                            <div class="conteudo">
+
+                                <table class="table table-responsive-list" ng-if="!boletim.ensinoInfantil">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" style="vertical-align: middle">Disciplina</th>
+                                            <th class="text-center" ng-repeat="periodo in boletim.periodos">{{periodo.tpc_nome}}</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Síntese Final</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Total de Ausências</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final(%)</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center" ng-repeat="periodo in boletim.periodos">{{boletim.nomeNota}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="(indexMat, materia) in boletim.matter" ng-class="checkParImpar(indexMat)" ng-if="!materia.enriquecimentoCurricular||!materia.recuperacao">
+                                            <td data-header="Disciplina"><strong>{{materia.Disciplina}}</strong></td>
+                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.avaliacao"
+                                                ng-if="indexAval%2 == 0" data-header="{{avaliacao.tpc_nome + ' - ' + boletim.nomeNota}}"
+                                                rowspan="{{ indexAval%2 == 0 || !materia.tipoComponenteRegencia ? 1 : boletim.QtComponenteRegencia }}">{{avaliacao.conceito}}
+                                            </td>
+                                            <td class="text-center cel-destaque" data-header="Final - Nota"><strong>{{materia.MediaFinal}}</strong></td>
+                                            <td class="text-center cel-destaque" data-header="Final - Faltas" ng-if="indexMat == 0 || !materia.tipoComponenteRegencia" rowspan="{{ materia.tipoComponenteRegencia ? boletim.QtComponenteRegencia : 1 }}"><strong>{{materia.totalFaltas}}</strong></td>
+                                            <td class="text-center cel-destaque" data-header="Final - Frequencia" ng-if="boletim.exibeCompensacaoAusencia && (indexMat == 0 || boletim.QtComponenteRegencia == 0)" rowspan="{{ boletim.QtComponenteRegencia > 0 ? boletim.QtComponentes : 1 }}"><strong>{{materia.FrequenciaFinalAjustada}}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <table class="table table-responsive-list" ng-if="(boletim.showCurricularEnrichment || boletim.showRecuperacao) && !boletim.ensinoInfantil">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" style="vertical-align: middle">Enriq. curricular / Projetos / Ativ. compl.</th>
+                                            <th class="text-center" ng-repeat="periodo in boletim.periodos">{{periodo.tpc_nome}}</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Parecer Final</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Total de Ausências</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final(%)</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center" ng-repeat="periodo in boletim.periodos">Faltas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="(indexMat, materia) in boletim.enrichment" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
+                                            <td data-header="Disciplina">{{materia.Disciplina}}</td>
+                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
+                                            <td class="text-center" data-header="Parecer Final">{{materia.parecerFinal}}</td>
+                                            <td class="text-center" data-header="Final - Faltas">{{materia.totalFaltas}}</td>
+                                            <td class="text-center" data-header="Final - Frequencia">{{materia.FrequenciaFinalAjustada}}</td>
+                                        </tr>
+                                        <tr ng-repeat="(indexMat, materia) in boletim.recovery" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
+                                            <td data-header="Disciplina">{{materia.Disciplina}}</td>
+                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
+                                            <td class="text-center" data-header="Parecer Final">{{materia.parecerFinal}}</td>
+                                            <td class="text-center" data-header="Final - Faltas">{{materia.totalFaltas}}</td>
+                                            <td class="text-center" data-header="Final - Frequencia">{{materia.FrequenciaFinalAjustada}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </section>
+                    </div>
                 </div>
 
                 <div ng-controller="ConselhoClasseController" ng-cloak>
-                    <!-- OBSERVACOES CONSELHO -->
-                    <section id="area-obs-conselho" class="section-area">
-                        <h3><i class="material-icons pull-left">&#xE5CC;</i>Observações do conselho de classe</h3>
-                         <div class="conteudo">
-                            <div class="sr-only">Conteúdo dividido por Accordion</div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="panel-group accordion" id="accordionConselho" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
-                                            <div class="panel-heading" role="tab" id="{{'headingConselho-' + conselho.tpc_id}}">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordionConselho" href="{{'#collapseConselho-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapseConselho-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="{{'collapseConselho-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingConselho-' + conselho.tpc_id}}">
-                                                <div class="panel-body">
-                                                    <ul class="list">
-                                                        <li>
-                                                            <span class="list-item"><strong>Desempenho e aprendizagem</strong>{{conselho.desempenho}}</span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="list-item"><strong>Recomendações ao Aluno</strong>{{conselho.recomendacaoAluno}}</span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="list-item"><strong>Recomendações aos Pais/Responsáveis</strong>{{conselho.recomendacaoResponsavel}}</span>
-                                                        </li>
-                                                    </ul>
+                    <div ng-view>
+                        <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !conselhoLoaded">
+                            <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
+                        </div>
+                        <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                            {{mensagemErro}}
+                        </div>
+                        <div ng-if="mensagemAlerta" class="summary">
+                            {{mensagemAlerta}}
+                        </div>
+                        <!-- OBSERVACOES CONSELHO -->
+                        <section id="area-obs-conselho" class="section-area" ng-if="conselhoLoaded">
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Observações do conselho de classe</h3>
+                            <div class="conteudo">
+                                <div class="sr-only">Conteúdo dividido por Accordion</div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel-group accordion" id="accordionConselho" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
+                                                <div class="panel-heading" role="tab" id="{{'headingConselho-' + conselho.tpc_id}}">
+                                                    <h4 class="panel-title">
+                                                        <a role="button" data-toggle="collapse" data-parent="#accordionConselho" href="{{'#collapseConselho-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapseConselho-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="{{'collapseConselho-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingConselho-' + conselho.tpc_id}}">
+                                                    <div class="panel-body">
+                                                        <ul class="list">
+                                                            <li>
+                                                                <span class="list-item"><strong>Desempenho e aprendizagem</strong>{{conselho.desempenho}}</span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="list-item"><strong>Recomendações ao Aluno</strong>{{conselho.recomendacaoAluno}}</span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="list-item"><strong>Recomendações aos Pais/Responsáveis</strong>{{conselho.recomendacaoResponsavel}}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    <!-- Compromisso de estudo -->
-                    <section id="area-com-estudos" class="section-area">
-                        <h3><i class="material-icons pull-left">&#xE5CC;</i>Compromisso de estudo</h3>
-                        <div class="conteudo">
-                            <div class="sr-only">Conteúdo dividido por Accordion</div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="panel-group accordion" id="accordionCompromisso" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
-                                            <div class="panel-heading" role="tab" id="{{'headingCompromisso-' + conselho.tpc_id}}">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordionCompromisso" href="{{'#collapseCompromisso-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapseCompromisso-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="{{'collapseCompromisso-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingCompromisso-' + conselho.tpc_id}}">
-                                                <div class="panel-body">
-                                                    <ul class="list">
-                                                        <li>
-                                                            <span class="list-item"><strong>O que tenho feito?</strong>{{conselho.cpe_atividadeFeita}}</span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="list-item"><strong>O que pretendo fazer?</strong>{{conselho.cpe_atividadePretendeFazer}}</span>
-                                                        </li>
-                                                    </ul>
+                        <!-- Compromisso de estudo -->
+                        <section id="area-com-estudos" class="section-area" ng-if="conselhoLoaded">
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Compromisso de estudo</h3>
+                            <div class="conteudo">
+                                <div class="sr-only">Conteúdo dividido por Accordion</div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel-group accordion" id="accordionCompromisso" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
+                                                <div class="panel-heading" role="tab" id="{{'headingCompromisso-' + conselho.tpc_id}}">
+                                                    <h4 class="panel-title">
+                                                        <a role="button" data-toggle="collapse" data-parent="#accordionCompromisso" href="{{'#collapseCompromisso-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapseCompromisso-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="{{'collapseCompromisso-' + conselho.tpc_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingCompromisso-' + conselho.tpc_id}}">
+                                                    <div class="panel-body">
+                                                        <ul class="list">
+                                                            <li>
+                                                                <span class="list-item"><strong>O que tenho feito?</strong>{{conselho.cpe_atividadeFeita}}</span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="list-item"><strong>O que pretendo fazer?</strong>{{conselho.cpe_atividadePretendeFazer}}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
 
                 <!-- SONDAGEM -->
                 <div ng-controller="SondagemController" ng-cloak>
-                    <section id="area-sondagem" class="section-area">
-                        <h3><i class="material-icons pull-left">&#xE5CC;</i>Resultados de sondagem</h3>
-                        <div class="conteudo">
-                            <div class="sr-only">Conteúdo dividido por Accordion</div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="panel-group accordion" id="accordionSondagem" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default" ng-repeat="sondagem in listSondagens">
-                                            <div class="panel-heading" role="tab" id="{{'headingSondagem-' + sondagem.id}}">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordionSondagem" href="{{'#collapseSondagem-' + sondagem.id}}" aria-expanded="true" aria-controls="{{'collapseSondagem-' + sondagem.id}}" class="collapsed">{{sondagem.titulo}}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="{{'collapseSondagem-' + sondagem.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingSondagem-' + sondagem.id}}">
-                                                <div class="panel-body">
-                                                    <ul class="list">
-                                                        <li ng-repeat="questao in sondagem.questoes">
-                                                            <span class="list-header">{{questao.descricao}}</span>
-                                                            <ul class="list sub">
-                                                                <li ng-repeat="resposta in questao.respostas">
-                                                                    <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                    <canvas id="line" class="chart chart-line" chart-data="sondagem.graphData"
-                                                        chart-labels="sondagem.graphLabels" chart-series="sondagem.graphSeries" chart-options="sondagem.graphOptions"
-                                                        chart-dataset-override="sondagem.graphDatasetOverride" width="90" height="33">
-                                                    </canvas>
+                    <div ng-view>
+                        <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !sondagemLoaded">
+                            <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
+                        </div>
+                        <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                            {{mensagemErro}}
+                        </div>
+                        <div ng-if="mensagemAlerta" class="summary">
+                            {{mensagemAlerta}}
+                        </div>
+                        <section id="area-sondagem" class="section-area" ng-if="sondagemLoaded">
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Resultados de sondagem</h3>
+                            <div class="conteudo">
+                                <div class="sr-only">Conteúdo dividido por Accordion</div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel-group accordion" id="accordionSondagem" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default" ng-repeat="sondagem in listSondagens">
+                                                <div class="panel-heading" role="tab" id="{{'headingSondagem-' + sondagem.id}}">
+                                                    <h4 class="panel-title">
+                                                        <a role="button" data-toggle="collapse" data-parent="#accordionSondagem" href="{{'#collapseSondagem-' + sondagem.id}}" aria-expanded="true" aria-controls="{{'collapseSondagem-' + sondagem.id}}" class="collapsed">{{sondagem.titulo}}
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="{{'collapseSondagem-' + sondagem.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingSondagem-' + sondagem.id}}">
+                                                    <div class="panel-body">
+                                                        <ul class="list">
+                                                            <li ng-repeat="questao in sondagem.questoes">
+                                                                <span class="list-header">{{questao.descricao}}</span>
+                                                                <ul class="list sub">
+                                                                    <li ng-repeat="resposta in questao.respostas">
+                                                                        <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <canvas id="line" class="chart chart-line" chart-data="sondagem.graphData"
+                                                            chart-labels="sondagem.graphLabels" chart-series="sondagem.graphSeries" chart-options="sondagem.graphOptions"
+                                                            chart-dataset-override="sondagem.graphDatasetOverride" width="90" height="33"></canvas>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
 
                 <div ng-controller="AnotacaoController" ng-cloak>
-                    <!-- OBSERVACOES INDIVIDUAIS -->
-                    <section id="area-obs-individuais" class="section-area">
-                        <h3><i class="material-icons pull-left">&#xE5CC;</i>Observações individuais</h3>
-                        <div class="conteudo">
-                            <div class="obs-block" ng-repeat="anotacao in listAnotacoesDocente">
-                                <p>
-                                   {{anotacao.anotacao}}
-                                </p>
-                                <p class="text-autor">Observação do(a) professor(a) <strong>{{anotacao.nomeDocente}} | {{anotacao.nomeDisciplina}}</strong></p>
-                            </div>
-                            <div class="obs-block" ng-repeat="anotacao in listAnotacoesGestor">
-                                <p>
-                                   {{anotacao.anotacao}}
-                                </p>
-                                <p class="text-autor">Observação do(a) <strong>{{anotacao.funcaoGestor}}</strong></p>
-                            </div>
+                    <div ng-view>
+                        <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !anotacaoLoaded">
+                            <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
                         </div>
-                    </section>
+                        <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                            {{mensagemErro}}
+                        </div>
+                        <div ng-if="mensagemAlerta" class="summary">
+                            {{mensagemAlerta}}
+                        </div>
+                        <!-- OBSERVACOES INDIVIDUAIS -->
+                        <section id="area-obs-individuais" class="section-area" ng-if="anotacaoLoaded">
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Observações individuais</h3>
+                            <div class="conteudo">
+                                <div class="obs-block" ng-repeat="anotacao in listAnotacoesDocente">
+                                    <p>
+                                        {{anotacao.anotacao}}
+                                    </p>
+                                    <p class="text-autor">Observação do(a) professor(a) <strong>{{anotacao.nomeDocente}} | {{anotacao.nomeDisciplina}}</strong></p>
+                                </div>
+                                <div class="obs-block" ng-repeat="anotacao in listAnotacoesGestor">
+                                    <p>
+                                        {{anotacao.anotacao}}
+                                    </p>
+                                    <p class="text-autor">Observação do(a) <strong>{{anotacao.funcaoGestor}}</strong></p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
 
                 <div ng-controller="JustificativaFaltaController" ng-cloak>
-                    <!-- Justificativa de falta -->
-                    <section id="area-just-faltas" class="section-area">
-                        <h3><i class="material-icons pull-left">&#xE5CC;</i>Justificativa de faltas</h3>
-                        <div class="conteudo">
-                            <div class="obs-block" ng-repeat="justificativa in listJustificativa">
-                                <p>
-                                    <strong>{{justificativa.tipo}}</strong><span ng-if="justificativa.observacao"> - {{justificativa.observacao}}</span>
-                                </p>
-                                <p class="text-autor">Período: <strong>{{justificativa.dataInicio}} - {{justificativa.dataFim ? justificativa.dataFim : "*"}}</strong></p>
-                            </div>
+                    <div ng-view>
+                        <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !justificativaLoaded">
+                            <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
                         </div>
-                    </section>
+                        <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                            {{mensagemErro}}
+                        </div>
+                        <div ng-if="mensagemAlerta" class="summary">
+                            {{mensagemAlerta}}
+                        </div>
+                        <!-- Justificativa de falta -->
+                        <section id="area-just-faltas" class="section-area" ng-if="justificativaLoaded">
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Justificativa de faltas</h3>
+                            <div class="conteudo">
+                                <div class="obs-block" ng-repeat="justificativa in listJustificativa">
+                                    <p>
+                                        <strong>{{justificativa.tipo}}</strong><span ng-if="justificativa.observacao"> - {{justificativa.observacao}}</span>
+                                    </p>
+                                    <p class="text-autor">Período: <strong>{{justificativa.dataInicio}} - {{justificativa.dataFim ? justificativa.dataFim : "*"}}</strong></p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
 
                 <div ng-controller="MovimentacaoController" ng-cloak>
-                    <!-- Movimentações -->
-                    <section id="area-cons-mov" class="section-area">
-                        <h3><i class="material-icons pull-left">&#xE5CC;</i>Remanejamento e Reclassificacao</h3>
-                        <div class="conteudo">
-                            <div class="obs-block" ng-repeat="movimentacao in listMovimentacoes">
-                                <h4>
-                                    <strong>{{movimentacao.tipo}}</strong>
-                                </h4>
-                                <p ng-if="movimentacao.turmaAnterior">
-                                    <strong>Origem: </strong>{{movimentacao.escolaAnterior + " | " + movimentacao.turmaAnterior}}
-                                </p>
-                                <p ng-if="movimentacao.turmaAtual">
-                                    <strong>Destino: </strong>{{movimentacao.escolaAtual + " | " + movimentacao.turmaAtual}}
-                                </p>
-                                <p class="text-autor">Data de movimentação: <strong>{{movimentacao.dataRealizacao}}</strong></p>
-                            </div>
+                    <div ng-view>
+                        <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !movimentacaoLoaded">
+                            <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
                         </div>
-                    </section>
+                        <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                            {{mensagemErro}}
+                        </div>
+                        <div ng-if="mensagemAlerta" class="summary">
+                            {{mensagemAlerta}}
+                        </div>
+                        <!-- Movimentações -->
+                        <section id="area-cons-mov" class="section-area" ng-if="movimentacaoLoaded">
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Remanejamento e Reclassificacao</h3>
+                            <div class="conteudo">
+                                <div class="obs-block" ng-repeat="movimentacao in listMovimentacoes">
+                                    <h4>
+                                        <strong>{{movimentacao.tipo}}</strong>
+                                    </h4>
+                                    <p ng-if="movimentacao.turmaAnterior">
+                                        <strong>Origem: </strong>{{movimentacao.escolaAnterior + " | " + movimentacao.turmaAnterior}}
+                                    </p>
+                                    <p ng-if="movimentacao.turmaAtual">
+                                        <strong>Destino: </strong>{{movimentacao.escolaAtual + " | " + movimentacao.turmaAtual}}
+                                    </p>
+                                    <p class="text-autor">Data de movimentação: <strong>{{movimentacao.dataRealizacao}}</strong></p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>

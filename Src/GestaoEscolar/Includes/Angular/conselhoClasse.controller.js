@@ -10,6 +10,7 @@
     ConselhoClasseController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
 
     function ConselhoClasseController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
+
         this.reload = function () {
             initVars();
             getConselho();
@@ -21,6 +22,7 @@
         };
 
         function configVariables() {
+            $scope.conselhoLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
             $scope.site = $scope.baseUrl[0] + "//" + $scope.baseUrl[2]; // site;
             $scope.logos = core;
@@ -31,6 +33,7 @@
         };
 
         function initVars() {
+            $scope.conselhoLoaded = false;
             $scope.listDadosConselho = [];
             $scope.params = params;
             $scope.mensagemErro = "";
@@ -69,6 +72,8 @@
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
                         $scope.mensagemErro = "Falha inesperada ao carregar dados de conselho de classe.";
+                }).finally(function () {
+                    $scope.conselhoLoaded = true;
                 });
             }
         };
