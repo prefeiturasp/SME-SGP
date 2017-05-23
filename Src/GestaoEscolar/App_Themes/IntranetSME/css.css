@@ -5355,3 +5355,12 @@ table.radio td {
     min-height:0;
     opacity:0;   
 }
+
+/* iframe relatorio pedagogico */
+#iframe-rel-pedagogico{
+    border: none;
+    width: 100%;
+    height: calc(100vh - 255px);
+    min-height:555px;
+    margin:15px 0 20px;
+}

@@ -1,20 +1,21 @@
+@charset "UTF-8";
 /* Scss Document */
 @font-face {
   font-family: 'Roboto';
-  src: url("fonts/roboto_regular/Roboto-Regular-webfont.eot");
-  src: url("fonts/roboto_regular/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto_regular/Roboto-Regular-webfont.woff") format("woff"), url("fonts/roboto_regular/Roboto-Regular-webfont.ttf") format("truetype"), url("fonts/roboto_regular/Roboto-Regular-webfont.svg#robotoregular") format("svg");
+  src: url("../fonts/roboto_regular/Roboto-Regular-webfont.eot");
+  src: url("../fonts/roboto_regular/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto_regular/Roboto-Regular-webfont.woff") format("woff"), url("../fonts/roboto_regular/Roboto-Regular-webfont.ttf") format("truetype"), url("../fonts/roboto_regular/Roboto-Regular-webfont.svg#robotoregular") format("svg");
   font-weight: 400;
   font-style: normal; }
 @font-face {
   font-family: 'Roboto';
-  src: url("fonts/roboto_medium/Roboto-Medium-webfont.eot");
-  src: url("fonts/roboto_medium/Roboto-Medium-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto_medium/Roboto-Medium-webfont.woff") format("woff"), url("fonts/roboto_medium/Roboto-Medium-webfont.ttf") format("truetype"), url("fonts/roboto_medium/Roboto-Medium-webfont.svg#robotomedium") format("svg");
+  src: url("../fonts/roboto_medium/Roboto-Medium-webfont.eot");
+  src: url("../fonts/roboto_medium/Roboto-Medium-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto_medium/Roboto-Medium-webfont.woff") format("woff"), url("../fonts/roboto_medium/Roboto-Medium-webfont.ttf") format("truetype"), url("../fonts/roboto_medium/Roboto-Medium-webfont.svg#robotomedium") format("svg");
   font-weight: 500;
   font-style: normal; }
 @font-face {
   font-family: 'Roboto';
-  src: url("fonts/roboto_bold/Roboto-Bold-webfont.eot");
-  src: url("fonts/roboto_bold/Roboto-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/roboto_bold/Roboto-Bold-webfont.woff") format("woff"), url("fonts/roboto_bold/Roboto-Bold-webfont.ttf") format("truetype"), url("fonts/roboto_bold/Roboto-Bold-webfont.svg#robotobold") format("svg");
+  src: url("../fonts/roboto_bold/Roboto-Bold-webfont.eot");
+  src: url("../fonts/roboto_bold/Roboto-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto_bold/Roboto-Bold-webfont.woff") format("woff"), url("../fonts/roboto_bold/Roboto-Bold-webfont.ttf") format("truetype"), url("../fonts/roboto_bold/Roboto-Bold-webfont.svg#robotobold") format("svg");
   font-weight: 700;
   font-style: normal; }
 /* CSS Document */
@@ -22,9 +23,9 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("fonts/material-icons/material-icons-Regular.eot");
+  src: url("../fonts/material-icons/material-icons-Regular.eot");
   /* For IE6-8 */
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("fonts/material-icons/material-icons-Regular.woff2") format("woff2"), url("fonts/material-icons/material-icons-Regular.woff") format("woff"), url("fonts/material-icons/material-icons-Regular.ttf") format("truetype"); }
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("../fonts/material-icons/material-icons-Regular.woff2") format("woff2"), url("../fonts/material-icons/material-icons-Regular.woff") format("woff"), url("../fonts/material-icons/material-icons-Regular.ttf") format("truetype"); }
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -88,7 +89,10 @@
 /* Scss Document */
 html {
   font-size: 14px;
-  background: #fff; }
+  background: #fff;
+  height: auto;
+  overflow: auto;
+  max-height: none; }
 
 body {
   background: #fff;
@@ -313,8 +317,12 @@ footer {
     width: 24px;
     margin-left: -5px; }
 
+.area-rel-pedagogico .row {
+  margin-left: -15px;
+  margin-right: -15px; }
+
 #acontent {
-  padding: 24px 44px 24px 300px;
+  padding: 0 24px 24px 345px;
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
@@ -507,8 +515,7 @@ input[type="number"].form-control {
 .nav-aside {
   position: fixed;
   left: 20px;
-  width: 260px;
-  top: 90px; }
+  width: 300px; }
 
 .btn-nav-toggle {
   display: none;
@@ -559,7 +566,7 @@ input[type="number"].form-control {
   color: #fff;
   width: 100%;
   text-align: center;
-  padding: 16px 12px;
+  padding: 16px;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
   border-radius: 3px 3px 0 0; }
@@ -576,12 +583,14 @@ input[type="number"].form-control {
       width: 105%;
       position: absolute;
       left: -2.5%;
-      top: -2.5%; }
+      top: -10%;
+      height: auto; }
   .info-header .info-escola {
     font-size: 0.95rem;
     opacity: 0.7;
     margin: 0;
-    line-height: 1.3; }
+    line-height: 1.3;
+    margin-bottom: 5px; }
   .info-header .info-nome {
     font-size: 1.25rem;
     margin-bottom: 2px;
@@ -595,10 +604,32 @@ input[type="number"].form-control {
     font-size: 0.95rem;
     opacity: 0.7;
     margin-top: 5px; }
+  .info-header .btn.dropdown-toggle {
+    width: 100%;
+    display: block;
+    background: none;
+    border: none;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    text-align: center;
+    padding: 3px 0;
+    -webkit-transition: border 0.2s ease-out;
+    -moz-transition: border 0.2s ease-out;
+    transition: border 0.2s ease-out; }
+    .info-header .btn.dropdown-toggle:hover, .info-header .btn.dropdown-toggle:focus {
+      border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+      background: none;
+      color: #fff; }
+    .info-header .btn.dropdown-toggle .info-turma {
+      opacity: 1; }
+  .info-header .dropdown-menu {
+    width: 100%; }
 
 .section-area {
   min-height: calc(100vh + 65px);
-  float: left;
   width: 100%; }
   .section-area .conteudo {
     margin-left: 25px;
@@ -611,7 +642,7 @@ button.btn-primary {
 .btn-float {
   position: fixed;
   right: 5px;
-  bottom: 65px;
+  bottom: 20px;
   width: 48px;
   height: 48px;
   -webkit-border-radius: 50%;
@@ -630,14 +661,13 @@ button.btn-primary {
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     transform: scale(1.1); }
-  .btn-float.btn-float-2 {
-    bottom: calc(-18px + 15px + 10px);
+  .btn-float#btn-print {
+    bottom: calc(20px + 58px);
     background: #0962c6; }
-  .btn-float.btn-float-3 {
-    bottom: calc(98px + 15px + 10px);
-    background: #0962c6; }
-    .btn-float.btn-float-2:hover, .btn-float.btn-float-2:focus {
+    .btn-float#btn-print:hover, .btn-float#btn-print:focus {
       background: #053264; }
+  .btn-float#btn-top {
+    bottom: calc(20px + 58px + 58px); }
 
 .obs-block {
   border: 1px solid #ddd;
@@ -915,7 +945,9 @@ button.btn-primary {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; }
+    white-space: nowrap;
+    position: relative;
+    z-index: 1; }
     .accordion .panel-heading a i {
       float: left;
       margin-right: 8px; }
@@ -1051,5 +1083,51 @@ button.btn-primary {
       font-size: 1.2rem; }
   .table-responsive-list tr {
     border-bottom: 2px solid #149fd9 !important; } }
+@page {
+  margin: 15mm 15mm 15mm 15mm;
+  size: portrait; }
+/*CSS para impress├úo*/
+@media print {
+  body * {
+    color: #000; }
+
+  .nav-aside {
+    width: 100%;
+    position: static; }
+    .nav-aside .nav-list {
+      display: none; }
+
+  .info-header {
+    text-align: left;
+    padding: 0 0 12px 20px; }
+    .info-header .foto-aluno {
+      position: absolute; }
+      .info-header .foto-aluno .imgFoto {
+        margin-top: 0;
+        margin-left: 0;
+        height: auto;
+        right: auto;
+        max-width: none !important; }
+    .info-header .info-aluno {
+      margin-left: 90px;
+      min-height: 100px; }
+    .info-header .btn.dropdown-toggle {
+      display: inline-block !important;
+      text-align: left; }
+      .info-header .btn.dropdown-toggle .caret {
+        display: none; }
+
+  .area-rel-pedagogico #acontent {
+    padding: 0;
+    margin-left: 13px; }
+  .area-rel-pedagogico .collapse, .area-rel-pedagogico .collapsed {
+    display: block;
+    height: auto !important; }
+  .area-rel-pedagogico .section-area {
+    min-height: 0; }
+  .area-rel-pedagogico .panel-default {
+    page-break-inside: avoid; }
+    .area-rel-pedagogico .panel-default .panel-body {
+      border-top-color: #000 !important; } }
 
 /*# sourceMappingURL=custom.css.map */

@@ -7,22 +7,6 @@
     <title></title>
     <link href="../../App_Themes/IntranetSMEBootStrap/bootstrap.css" rel="stylesheet" media="screen">
     <link href="../../App_Themes/IntranetSMEBootStrap/custom.css" rel="stylesheet" media="screen">
-
-    <style>
-        html {
-            overflow: scroll;
-            overflow-x: hidden;
-        }
-
-        ::-webkit-scrollbar {
-            width: 0px; /* remove scrollbar space */
-            background: transparent; /* optional: just make scrollbar invisible */
-        }
-        /* optional: show position indicator in red */
-        ::-webkit-scrollbar-thumb {
-            background: #FF0000;
-        }
-    </style>
 </head>
 <body>
     <script src="../../Includes/Charts/Chart.min.js"></script>
@@ -62,80 +46,76 @@
     </script>
 
     <form id="form1" runat="server">
-        <div ng-app="app">
-            <div ng-controller="CalendarioController" ng-cloak>
-                <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && listCalendario.length == 0">
-                    <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
+        <div ng-app="app" class="area-rel-pedagogico">           
+
+            <aside class="nav-aside">
+                <div ng-controller="matriculaTurmaController" ng-cloak> 
+                        <!-- Header relatorio -->
+                        <header class="info-header">
+                            <div class="foto-aluno">
+                                <img class="imgFoto" src="{{getPhotoStudent(matricula.arq_idFoto)}}" alt="Foto do aluno" />
+                            </div>
+                            <div class="info-aluno">
+                                <h2 class="info-nome">{{matricula.pes_nome}} <small>{{matricula.alc_matricula}}</small>
+                                </h2>
+                                <%--<span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}
+                                </span>--%>
+                                <h2 class="info-escola">{{matricula.esc_nome}} -  {{matricula.uad_nome}}
+                                </h2>
+
+                                <div ng-controller="CalendarioController" ng-cloak>
+                                    <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && listCalendario.length == 0">
+                                        <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle dropdown-ico" type="button" id="dropdownMenu1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-disabled="listCalendario.length <= 1">
+                                            <span>{{params.ano}}</span> - <span class="info-turma">{{matricula.tur_codigo}} / {{matricula.tci_nome}}</span>                                            
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="listCalendario.length > 1">
+                                            <li ng-repeat="calendario in listCalendario" ng-if="calendario.cal_ano!=params.ano">
+                                                <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id, calendario.tpc_id)">{{calendario.cal_ano}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+
+                        <a href="#nav-list-collapse" class="btn btn-primary btn-nav-toggle" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="nav-list-collapse"><i class="material-icons">&#xE5D2;</i></a>
+                        <div class="collapse" id="nav-list-collapse">
+                            <ul class="nav-list" id="nav-list">
+                                <li>
+                                    <a href="#area-notas-faltas">Notas e faltas</a>
+                                </li>
+                                <li>
+                                    <a href="#area-obs-conselho">Observações do conselho de classe</a>
+                                </li>
+                                <li>
+                                    <a href="#area-com-estudos">Compromisso de estudo</a>
+                                </li>
+                                <li>
+                                    <a href="#area-sondagem">Resultados de sondagem</a>
+                                </li>
+                                <li>
+                                    <a href="#area-obs-individuais">Observações individuais</a>
+                                </li>
+                                <li>
+                                    <a href="#area-just-faltas">Justificativa de faltas</a>
+                                </li>
+                                <li>
+                                    <a href="#area-cons-mov">Remanejamento e Reclassificacao</a>
+                                </li>
+                            </ul>
+                        </div>     
                 </div>
-                <aside class="nav-aside" style="top: 5px; z-index: 1">
-                    <div class="dropdown pull-left">
-                        <button class="btn btn-default dropdown-toggle dropdown-ico" type="button" id="dropdownMenu1"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-disabled="listCalendario.length <= 1">
-                            <i class="material-icons md-color md-18">&#xE878;</i><span>{{params.ano}}</span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="listCalendario.length > 1">
-                            <li ng-repeat="calendario in listCalendario" ng-if="calendario.cal_ano!=params.ano">
-                                <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id, calendario.tpc_id)">{{calendario.cal_ano}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
-            </div>
-
-            <div ng-controller="matriculaTurmaController" ng-cloak>
-
-                <aside class="nav-aside" style="top: 60px; z-index: 0;">
-
-                    <!-- Header relatorio -->
-                    <header class="info-header">
-                        <div class="foto-aluno">
-                            <img class="imgFoto" src="{{getPhotoStudent(matricula.arq_idFoto)}}" alt="Foto do aluno" />
-                        </div>
-                        <div class="info-aluno">
-                            <h2 class="info-nome">{{matricula.pes_nome}} <small>{{matricula.alc_matricula}}</small>
-                            </h2>
-                            <span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}
-                            </span>
-                            <h2 class="info-escola">{{matricula.esc_nome}} -  {{matricula.uad_nome}}
-                            </h2>
-                        </div>
-                    </header>
-
-                    <a href="#nav-list-collapse" class="btn btn-primary btn-nav-toggle" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="nav-list-collapse"><i class="material-icons">&#xE5D2;</i></a>
-                    <div class="collapse" id="nav-list-collapse">
-                        <ul class="nav-list" id="nav-list">
-                            <li>
-                                <a href="#area-notas-faltas">Notas e faltas</a>
-                            </li>
-                            <li>
-                                <a href="#area-obs-conselho">Observações do conselho de classe</a>
-                            </li>
-                            <li>
-                                <a href="#area-com-estudos">Compromisso de estudo</a>
-                            </li>
-                            <li>
-                                <a href="#area-sondagem">Resultados de sondagem</a>
-                            </li>
-                            <li>
-                                <a href="#area-obs-individuais">Observações individuais</a>
-                            </li>
-                            <li>
-                                <a href="#area-just-faltas">Justificativa de faltas</a>
-                            </li>
-                            <li>
-                                <a href="#area-cons-mov">Remanejamento e Reclassificacao</a>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
-
-            </div>
+            </aside>
 
             <!--Conteúdo-->
             <div role="main" id="acontent">
-                <button title="Ir para o topo" class="btn btn-primary btn-float btn-float-3" id="btn-top"><i class="material-icons">&#xE5D8;</i></button>
-                <button title="Voltar" class="btn btn-primary btn-float btn-float-2" id="btn-voltar"><i class="material-icons">&#xE166;</i></button>
+                <button title="Ir para o topo" class="btn btn-primary btn-float" id="btn-top"><i class="material-icons">&#xE5D8;</i></button>
+                <button title="Voltar" class="btn btn-primary btn-float" id="btn-voltar"><i class="material-icons">&#xE166;</i></button>
                 <button title="Imprimir" class="btn btn-primary btn-float" id="btn-print"><i class="material-icons">&#xE8AD;</i></button>
 
                 <!-- Boletim -->

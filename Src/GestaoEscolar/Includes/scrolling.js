@@ -7,7 +7,7 @@ $(document).ready(function () {
             var target = $(this.hash);
             target = target.size() && target || $("[name=" + this.hash.slice(1) + ']');
             $('html, body').animate({
-                scrollTop: ($(target).offset().top) - 100
+                scrollTop: ($(target).offset().top) - 10
             }, 500);
             return false;
         };

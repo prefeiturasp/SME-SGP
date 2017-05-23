@@ -37,6 +37,8 @@
 			overflow:hidden;
 			text-overflow:ellipsis;
 			white-space: nowrap;
+			position:relative;
+			z-index:1;
 
 			i {
 				float: left;
