@@ -218,6 +218,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\BasicAuthenticationAttribute.cs" />
     <Compile Include="Controllers\aluno_fechamento_pendenciaController.cs" />
     <Compile Include="Controllers\ApiListagemBoletimEscolarAlunoController.cs" />
     <Compile Include="Controllers\ApiQuantidadeAlunosResultadosController.cs" />
