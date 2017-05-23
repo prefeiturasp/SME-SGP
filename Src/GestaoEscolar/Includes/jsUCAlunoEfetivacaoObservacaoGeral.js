@@ -24,17 +24,17 @@ function jsUCAlunoEfetivacaoObservacaoGeral() {
 
     $()
 
-    $('select[id$="ddlResultado"]').unbind('change').bind('change', function () {
+    $('.ddlResultadoParecerConclusivo').unbind('change').bind('change', function () {
         var lbl = $('span[id$="lblMensagemResultadoInvalido"]');
         var lblErro = $('span[id$="lblMensagemResultadoErro"]');
-        if ($('select[id$="ddlResultado"] option:selected').val() != "-1") {
+        if ($('.ddlResultadoParecerConclusivo').children("option").filter(":selected").val() != "-1") {
             try
             {
                 VerificarIntegridadeParecerEOL(function (retorno) {
                     if (retorno == "") {
                         lbl.addClass('hide');
                         lblErro.removeClass('hide');
-                        $('select[id$="ddlResultado"]').val("-1");
+                        $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
                         setTimeout('$(\'#divCadastroObservacaoGeral\').scrollTo(0,0);', 0);
                     }
                     else if (retorno == "true" || retorno == "True" || retorno == "TRUE") {
@@ -50,7 +50,7 @@ function jsUCAlunoEfetivacaoObservacaoGeral() {
                             lbl.removeClass('hide');
                             lblErro.addClass('hide');
                         }
-                        $('select[id$="ddlResultado"]').val("-1");
+                        $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
                         setTimeout('$(\'#divCadastroObservacaoGeral\').scrollTo(0,0);', 0);
                     }
                 });
@@ -59,7 +59,7 @@ function jsUCAlunoEfetivacaoObservacaoGeral() {
             {
                 lbl.addClass('hide');
                 lblErro.removeClass('hide');
-                $('select[id$="ddlResultado"]').val("-1");
+                $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
             }
         } else {
             lbl.addClass('hide');
@@ -134,7 +134,7 @@ function LimitarCaracter(idCampo, idContador, TamMax) {
 function VerificarIntegridadeParecerEOL(onComplete) {
     var codigoEOLTurma = $('input[id$="hdnCodigoEOLTurma"]').val();
     var codigoEOLAluno = $('input[id$="hdnCodigoEOLAluno"]').val();
-    var resultado = $('select[id$="ddlResultado"] option:selected').text();
+    var resultado = $('.ddlResultadoParecerConclusivo').children("option").filter(":selected").text();
 
     var retorno = "false";
     erroAPIEOL = false;

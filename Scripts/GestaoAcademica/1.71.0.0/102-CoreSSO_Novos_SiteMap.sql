@@ -19,6 +19,11 @@ SET XACT_ABORT ON
 		,@SiteMapUrl = '~/Configuracao/TipoEvento/Busca.aspx' -- Url da SiteMap (Obrigatório)
 	*/
 
+	EXEC MS_InsereSiteMap
+		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
+		,@nomeModulo = 'Relatórios' -- Nome do módulo (Obrigatório)
+		,@SiteMapNome = 'Relatório pedagógico do aluno' -- Nome do SiteMap (Obrigatório)
+		,@SiteMapUrl = '~/Documentos/RelatorioPedagogico/RelatorioPedagogico.aspx' -- Url da SiteMap (Obrigatório)
 	
 -- Fechar transação
 SET XACT_ABORT OFF

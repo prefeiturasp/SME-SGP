@@ -3643,12 +3643,14 @@
     <Content Include="Documentos\RelatorioDev.aspx" />
     <Content Include="Documentos\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Includes\Angular\angular-filter\angular-filter.js" />
+    <Content Include="Includes\Angular\angular-filter\angular-filter.min.js" />
     <Content Include="Includes\Angular\angular.js" />
     <Content Include="Includes\Angular\anotacao.controller.js" />
     <Content Include="Includes\Angular\boletim.controller.js" />
     <Content Include="Includes\Angular\calendario.controller.js" />
-    <Content Include="Includes\Angular\Charts\angular-chart.js" />
-    <Content Include="Includes\Angular\Charts\angular-chart.min.js" />
+    <Content Include="Includes\Angular\angular-charts\angular-chart.js" />
+    <Content Include="Includes\Angular\angular-charts\angular-chart.min.js" />
     <Content Include="Includes\Angular\conselhoClasse.controller.js" />
     <Content Include="Includes\Angular\justificativaFalta.controller.js" />
     <Content Include="Includes\Angular\matriculaTurma.controller.js" />
@@ -3657,6 +3659,10 @@
     <Content Include="Includes\Angular\sondagem.controller.js" />
     <Content Include="Includes\bootstrap\bootstrap.js" />
     <Content Include="Includes\bootstrap\bootstrap.min.js" />
+    <Content Include="Includes\Charts\Chart.bundle.js" />
+    <Content Include="Includes\Charts\Chart.bundle.min.js" />
+    <Content Include="Includes\Charts\Chart.js" />
+    <Content Include="Includes\Charts\Chart.min.js" />
     <Content Include="Includes\ckeditor\adapters\jquery.js" />
     <Content Include="Includes\ckeditor\build-config.js" />
     <Content Include="Includes\ckeditor\ckeditor.js" />
@@ -4224,7 +4230,8 @@
     <Content Include="Includes\ckeditor\samples\sample_posteddata.php" />
     <Content Include="Includes\ckeditor\skins\kama\readme.md" />
     <Content Include="Includes\ckeditor\skins\moono\readme.md" />
-    <Content Include="Includes\Angular\Charts\angular-chart.min.js.map" />
+    <Content Include="Includes\Angular\angular-charts\angular-chart.min.js.map" />
+    <Content Include="Includes\Charts\LICENSE.md" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -6091,6 +6091,8 @@ namespace MSTech.GestaoEscolar.BLL
                                                             ,
                                                             tpc_id = bNota.tpc_id
                                                             ,
+                                                            tpc_nome = bNota.tpc_nome
+                                                            ,
                                                             NotaRP = bNota.NotaRP
                                                             ,
                                                             numeroAulas = bNota.tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada ? "-" :

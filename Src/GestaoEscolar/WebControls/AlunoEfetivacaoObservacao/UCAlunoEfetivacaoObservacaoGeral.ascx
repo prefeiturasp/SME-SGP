@@ -91,7 +91,7 @@
                         <div id="divParecerConclusivo" class="div-inline align-middle div-parecer-conclusivo" runat="server">
                             <asp:HiddenField ID="hfDataUltimaAlteracaoParecerConclusivo" runat="server" />
                             <asp:Label ID="lblParecerConclusivo" runat="server" Text="<%$ Resources:Mensagens, MSG_RESULTADOEFETIVACAO %>" Font-Bold="true" AssociatedControlID="ddlResultado"></asp:Label>
-                            <asp:DropDownList ID="ddlResultado" runat="server"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlResultado" runat="server" CssClass="ddlResultadoParecerConclusivo"></asp:DropDownList>
                         </div><br />
                         <br />
                         <div id="divInseridoPor" runat="server">

@@ -10,6 +10,7 @@ using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.Validation.Exceptions;
 using MSTech.GestaoEscolar.Entities;
+using System.IO;
 
 namespace GestaoEscolar.Academico.ControleTurma
 {
@@ -833,6 +834,32 @@ namespace GestaoEscolar.Academico.ControleTurma
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações do aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
+            else if (e.CommandName == "RelatorioPedagogico")
+            {
+                try
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+
+                    Session.Remove("alu_id_RelatorioPedagogico");
+                    Session.Remove("PaginaRetorno_RelatorioPedagogico");
+
+
+                    Session.Add("alu_id_RelatorioPedagogico", Convert.ToInt64(grvAluno.DataKeys[index].Values["alu_id"]));
+                    Session.Add("PaginaRetorno_RelatorioPedagogico", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
+
+                    CarregaSessionPaginaRetorno();
+                    RedirecionarPagina("~/Documentos/RelatorioPedagogico/RelatorioPedagogico.aspx");
+                }
+                catch (ValidationException ex)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar gerar o relatório pedagógico do aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
 
         }
 
@@ -856,6 +883,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (_btnBoletim != null)
                 {
                     _btnBoletim.CommandArgument = e.Row.RowIndex.ToString();
+                }
+
+                ImageButton btnRelatorioPedagogico = (ImageButton)e.Row.FindControl("btnRelatorioPedagogico");
+                if (btnRelatorioPedagogico != null)
+                {
+                    btnRelatorioPedagogico.CommandArgument = e.Row.RowIndex.ToString();
                 }
 
                 ImageButton btnCapturarFoto = (ImageButton)e.Row.FindControl("btnCapturarFoto");

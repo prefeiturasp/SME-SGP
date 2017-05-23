@@ -10,6 +10,7 @@
     AnotacaoController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
 
     function AnotacaoController($scope, $timeout, $http, $location, $filter, trocarAnoService) {
+
         this.reload = function () {
             initVars();
             getAnotacoes();
@@ -21,6 +22,7 @@
         };
 
         function configVariables() {
+            $scope.anotacaoLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
             $scope.site = $scope.baseUrl[0] + "//" + $scope.baseUrl[2]; // site;
             $scope.logos = core;
@@ -36,6 +38,7 @@
             $scope.params = params;
             $scope.mensagemErro = "";
             $scope.mensagemAlerta = "";
+            $scope.anotacaoLoaded = false;
         };
 
         function getAnotacoes() {
@@ -71,6 +74,8 @@
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
                     else
                         $scope.mensagemErro = "Falha inesperada ao carregar as anotações.";
+                }).finally(function () {
+                    $scope.anotacaoLoaded = true;
                 });
             }
         };
