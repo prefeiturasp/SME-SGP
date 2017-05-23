@@ -28,6 +28,13 @@ SET XACT_ABORT ON
 
 	*/
 
+	EXEC MS_InsereParametroAcademico
+		@pac_chave = 'MOSTRAR_COLUNA_RELATORIOPEDAGOGICO_MANUTENCAO_ALUNO' -- Chave do parâmetro. (Obrigatório)
+		,@pac_valor = 'True' -- Valor do parâmetro. (Obrigatório)
+		,@pac_descricao = 'Mostrar coluna de relatório pedagógico na consulta de manutenção de aluno' -- Descrição do parâmetro. (Obrigatório)
+		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
+		,@ent_id = @entId
+
 -- Fechar transação	
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
