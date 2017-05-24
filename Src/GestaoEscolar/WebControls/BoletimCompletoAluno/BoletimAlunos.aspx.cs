@@ -1,6 +1,9 @@
 ﻿using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Web.WebProject;
+using MSTech.Security.Cryptography;
 using System;
+using System.Collections.Generic;
+using System.Web.Services;
 using System.Web.UI;
 
 namespace GestaoEscolar.WebControls.BoletimCompletoAluno
@@ -17,7 +20,54 @@ namespace GestaoEscolar.WebControls.BoletimCompletoAluno
             get { return ViewState["mtu_ids"] as string ?? string.Empty; }
             set { ViewState["mtu_ids"] = value; }
         }
+
+        protected string Usuario
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Usuario.usu_login;
+            }
+        }
+
+        protected string Entidade
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString();
+            }
+        }
+
+        protected string Grupo
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString();
+            }
+        }
+
+        protected string Token
+        {
+            get { return ViewState["Token"] as string ?? string.Empty; }
+            set { ViewState["Token"] = value; }
+        }
+
         protected int tpc_id { get; set; }
+
+        [WebMethod]
+        public static string CreateToken(string usuario, string entidade, string grupo)
+        {
+            var jwtKey = System.Configuration.ConfigurationManager.AppSettings["jwtKey"];
+            SymmetricAlgorithm sa = new SymmetricAlgorithm(SymmetricAlgorithm.Tipo.TripleDES);
+            var currentTime = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            var expTime = DateTime.UtcNow.AddMinutes(30).ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("Login", usuario);
+            dic.Add("Entity", entidade);
+            dic.Add("Group", grupo);
+            dic.Add("iat", currentTime);
+            dic.Add("exp", expTime);
+            return JWT.JsonWebToken.Encode(dic, sa.Decrypt(jwtKey), JWT.JwtHashAlgorithm.HS256);
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,6 +87,8 @@ namespace GestaoEscolar.WebControls.BoletimCompletoAluno
 
                 alu_ids = Session["alu_ids"] as string;
                 mtu_ids = Session["mtu_ids"] as string;
+
+                Token = CreateToken(Usuario, Entidade, Grupo);
 
                 bool visible = true;
                 if (Session["mostrarPeriodos"] != null)

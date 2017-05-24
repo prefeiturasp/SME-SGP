@@ -18,14 +18,15 @@
     using System.Web;
     using System.Web.Http.Controllers;
     using System.Web.Http.Filters;
-
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
+    
     public class JWTAuthenticationFilter : AuthorizationFilterAttribute
     {
-        bool Active = true;
+        bool Active;
 
         public JWTAuthenticationFilter()
-        { }
+        {
+            Active = true;
+        }
 
         /// <summary>
         /// Overriden constructor to allow explicit disabling of this
@@ -44,7 +45,9 @@
         /// <param name="actionContext"></param>
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            if (Active)
+            bool autenticar = actionContext.ActionDescriptor.GetCustomAttributes<JWTAuthenticationFilter>().Any() ?
+               actionContext.ActionDescriptor.GetCustomAttributes<JWTAuthenticationFilter>()[0].Active : Active;
+            if (autenticar)
             {
                 var user = AuthHeader(actionContext);
                 if (user == null)
@@ -121,9 +124,18 @@
                 return null;
 
             var jwtKey = System.Configuration.ConfigurationManager.AppSettings["jwtKey"];
+
             SymmetricAlgorithm sa = new SymmetricAlgorithm(SymmetricAlgorithm.Tipo.TripleDES);
-            authHeader = JWT.JsonWebToken.Decode(authHeader, sa.Decrypt(jwtKey));
-            var user = JsonConvert.DeserializeObject<AuthenticationIdentity>(authHeader);
+            AuthenticationIdentity user = null;
+            try
+            {
+                authHeader = JWT.JsonWebToken.Decode(authHeader, sa.Decrypt(jwtKey));
+                user = JsonConvert.DeserializeObject<AuthenticationIdentity>(authHeader);
+            }
+            catch
+            {
+
+            }
 
             return user;
         }
@@ -150,5 +162,7 @@
         public string Login { get; set; }
         public Guid Entity { get; set; }
         public Guid Group { get; set; }
+        public string iat { get; set; }
+        public string exp { get; set; }
     }
 }
