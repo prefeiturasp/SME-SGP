@@ -12,6 +12,7 @@ using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.CoreSSO.Entities;
 using System.IO;
 using System.Web;
+using System.Web.Services;
 
 namespace AreaAluno.Consulta.BoletimCompleto
 {
@@ -182,6 +183,12 @@ namespace AreaAluno.Consulta.BoletimCompleto
         #endregion Eventos
 
         #region Métodos
+
+        [WebMethod]
+        public static string CreateToken(string usuario, string entidade, string grupo)
+        {
+            return WebControls.BoletimCompletoAluno.UCBoletimAngular.CreateToken(usuario, entidade, grupo);
+        }
 
         /// <summary>
         /// Carrega o boletim pelo valor selecionado no combo de ano letivo (mtu_id).
