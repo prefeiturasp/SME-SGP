@@ -777,6 +777,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
         {
             try
             {
+                lblMensagemResultadoErro.Attributes.Add("class", "hide");
                 byte resultado = 0;
                 string justificativaResultado = string.Empty;
 
