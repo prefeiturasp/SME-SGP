@@ -521,15 +521,24 @@ input[type="number"].form-control{
 	border:none;
 }
 
-#nav-list-collapse.collapse{
-	display:block;
+#nav-list-collapse{
+	padding:8px 18px 12px;
+	border:1px solid $brand-primary;
+	@include border-radius(0 0 3px 3px);
+
+	&.collapse {
+		display: block;
+	}
+}
+
+.nav-list-scroll{
+	max-height: calc(100vh - 265px);
+	overflow: auto;
 }
 
 .nav-list{
 	list-style:none;
-	padding:8px 18px 12px;
-	border:1px solid $brand-primary;
-	@include border-radius(0 0 3px 3px);
+	padding:0;
 
 	a{
 		display: block;
@@ -639,8 +648,8 @@ input[type="number"].form-control{
 		}
 	}
 
-	.dropdown-menu{
-		width:100%;
+	.dropdown-menu {
+		width: 100%;
 	}
 }
 
@@ -718,8 +727,11 @@ button.btn-primary{
 		width:100%;
 	}
 
-	#acontent{
-		padding-left:24px;
+	form[action*="RelatorioPedagogico"]{
+		#acontent{
+			padding-left:24px;
+			padding-right:0;
+		}
 	}
 
 	.section-area{
@@ -737,4 +749,13 @@ button.btn-primary{
 	#nav-list-collapse.collapse:not(.in){
 		display:none;
 	}
+
+	.area-rel-pedagogico .row{
+		margin:0;
+	}
+}
+
+// CUSTOM SCROLL
+.mCSB_inside > .mCSB_container{
+	margin-right:20px;
 }

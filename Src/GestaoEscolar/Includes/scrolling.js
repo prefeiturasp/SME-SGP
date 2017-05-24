@@ -28,7 +28,7 @@ $(document).ready(function () {
     $('#btn-voltar').click(function (e) {
         e.preventDefault();
         window.top.location = urlRetorno;
-    });
+    });    
 });
 
 function menuClick(a) {
@@ -37,7 +37,7 @@ function menuClick(a) {
         var target = $(a.hash);
         target = target.size() && target || $("[name=" + a.hash.slice(1) + ']');
         $('html, body').animate({
-            scrollTop: ($(target).offset().top) - 100
+            scrollTop: ($(target).offset().top) - 10
         }, 500);
         return false;
     };

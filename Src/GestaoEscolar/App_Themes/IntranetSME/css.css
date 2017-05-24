@@ -5360,7 +5360,17 @@ table.radio td {
 #iframe-rel-pedagogico{
     border: none;
     width: 100%;
-    height: calc(100vh - 255px);
-    min-height:555px;
-    margin:15px 0 20px;
+    height: calc(100vh - 230px);
+    margin:0 0 20px;
+}
+
+form[action*="RelatorioPedagogico"] #ft{
+    display:none;
+}
+
+@media screen and (max-width:960px){
+    #iframe-rel-pedagogico{
+        height: calc(100vh - 100px);
+        margin-bottom:0;
+    }
 }

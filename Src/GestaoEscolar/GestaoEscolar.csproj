@@ -4029,6 +4029,8 @@
     <Content Include="Includes\ckeditor\skins\moono\images\lock.png" />
     <Content Include="Includes\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="Includes\ckeditor\styles.js" />
+    <Content Include="Includes\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Includes\jquery.mCustomScrollbar.css" />
     <Content Include="Includes\jsAlunoJustificativaAbonoFalta.js" />
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />

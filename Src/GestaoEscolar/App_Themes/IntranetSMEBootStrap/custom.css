@@ -525,16 +525,22 @@ input[type="number"].form-control {
   border-radius: 0;
   border: none; }
 
-#nav-list-collapse.collapse {
-  display: block; }
-
-.nav-list {
-  list-style: none;
+#nav-list-collapse {
   padding: 8px 18px 12px;
   border: 1px solid #0962c6;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px; }
+  #nav-list-collapse.collapse {
+    display: block; }
+
+.nav-list-scroll {
+  max-height: calc(100vh - 265px);
+  overflow: auto; }
+
+.nav-list {
+  list-style: none;
+  padding: 0; }
   .nav-list a {
     display: block;
     border-bottom: 1px dotted #ddd;
@@ -693,8 +699,9 @@ button.btn-primary {
     position: static;
     width: 100%; }
 
-  #acontent {
-    padding-left: 24px; }
+  form[action*="RelatorioPedagogico"] #acontent {
+    padding-left: 24px;
+    padding-right: 0; }
 
   .section-area {
     min-height: 0; }
@@ -706,7 +713,13 @@ button.btn-primary {
     display: inline-block; }
 
   #nav-list-collapse.collapse:not(.in) {
-    display: none; } }
+    display: none; }
+
+  .area-rel-pedagogico .row {
+    margin: 0; } }
+.mCSB_inside > .mCSB_container {
+  margin-right: 20px; }
+
 .navbar-custom-header {
   background: #fff; }
 
@@ -1094,7 +1107,7 @@ button.btn-primary {
   .nav-aside {
     width: 100%;
     position: static; }
-    .nav-aside .nav-list {
+    .nav-aside #nav-list-collapse {
       display: none; }
 
   .info-header {
