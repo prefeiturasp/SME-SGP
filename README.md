@@ -41,7 +41,7 @@
 * script sgp\scripts\install\UserPermission\GestaoPedagogica_Grant.sql (remover EXEC dos bancos não utilizados) 
 
 **Baixar aplicativo gerenciador de conexões dos bancos de dados MSTech.Config.exe**
-Fazer download em http://downloads.mstech.com.br/temp/Package-SME.zip copiar o executável para as pastas:
+Abrir a pasta sgp\scripts\install\configs, copiar os arquivos para as pastas:
 * sgp\Src\GestaoEscolar\bin
 * sgp\Src\GestaoAcademica.WebApi\bin
 * sgp\Src\AreaAluno\bin
@@ -69,12 +69,8 @@ Abrir o executável MSTech.Config.exe das pastas "bin" acima e configurar os cam
 	<td>user_coresso</td>
 </tr>
 <tr>
-	<td>GestaoFinanceira</td>
-	<td>user_gestaofinanceira</td>
-</tr>
-<tr>
-	<td>GestaoFinanceiraJob</td>
-	<td>user_gestaofinanceira</td>
+	<td>GestaoPedagogica</td>
+	<td>user_gestaoescolar</td>
 </tr>
 </table>
 
