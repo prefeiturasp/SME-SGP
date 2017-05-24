@@ -77,3 +77,13 @@ Abrir o executável MSTech.Config.exe das pastas "bin" acima e configurar os cam
 Clicar em testar conexão e salvar
 
 
+# Acesso aos servidores
+
+### Homologação
+
+h-ptrf.sme.prefeitura.sp.gov.br
+
+### Produção
+
+ptrf.sme.prefeitura.sp.gov.br
+
