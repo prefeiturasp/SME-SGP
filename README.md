@@ -33,12 +33,12 @@
 * Clicar com o direito na solução e selecionar Restore NuGet Packages
 * Verificar se o build está executando com sucesso
 
-**Criar a base de dados GestaoPedagogica e usuários através dos scripts da pasta \ptrf\Src\scripts\install\GestaoPedagogica**
+**Criar a base de dados GestaoPedagogica e usuários através dos scripts da pasta \sgp\scripts\install\GestaoPedagogica**
 * 01-GestaoPedagogica_Cria_Database.sql
 * 02-GestaoPedagogica_Cria_usuários_SQL.sql
 
 **Dar permissão para os usuários**
-* script sgp\Src\scripts\install\UserPermission\Grant_Permission.sql (remover EXEC dos bancos não utilizados) 
+* script sgp\scripts\install\UserPermission\GestaoPedagogica_Grant.sql (remover EXEC dos bancos não utilizados) 
 
 **Baixar aplicativo gerenciador de conexões dos bancos de dados MSTech.Config.exe**
 Fazer download em http://downloads.mstech.com.br/temp/Package-SME.zip copiar o executável para as pastas:
