@@ -3331,6 +3331,7 @@
     <Content Include="App_Themes\IntranetSMEBootStrap\bootstrap.scss" />
     <Content Include="App_Themes\IntranetSMEBootStrap\custom.css.map" />
     <Content Include="App_Themes\IntranetSMEBootStrap\custom.scss" />
+    <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_layout-impressao.scss" />
     <None Include="Configs\Session.txt" />
     <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
