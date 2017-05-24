@@ -81,9 +81,9 @@ Clicar em testar conexão e salvar
 
 ### Homologação
 
-h-ptrf.sme.prefeitura.sp.gov.br
+h-sgp.sme.prefeitura.sp.gov.br
 
 ### Produção
 
-ptrf.sme.prefeitura.sp.gov.br
+sgp.sme.prefeitura.sp.gov.br
 
