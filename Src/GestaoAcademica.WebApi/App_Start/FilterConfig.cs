@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using GestaoAcademica.WebApi.Authentication;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GestaoAcademica.WebApi
