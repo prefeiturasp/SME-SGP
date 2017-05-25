@@ -2,7 +2,7 @@
 
 Uma ferramenta que permite acompanhar, aula a aula, os processos de ensino e aprendizagem e gestão pedagógica, de forma ampla e individualizada.
 
-# FUNCIONALIDADES
+# Funcionalidades
 
 * Planejamento anual ou bimestral das aulas, com registro de objetivos e atividades desenvolvidas.
 * Registro facilitado de notas, frequências e anotações sobre a aula.
