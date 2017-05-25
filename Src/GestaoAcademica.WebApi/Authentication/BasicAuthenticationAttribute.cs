@@ -3,6 +3,7 @@
     using MSTech.GestaoEscolar.BLL;
     using MSTech.GestaoEscolar.Entities;
     using System;
+    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Text;
@@ -15,6 +16,18 @@
     public class BasicAuthenticationAttribute : ActionFilterAttribute
     {
         private const string SCHEME = "Basic";
+
+        bool Active;
+
+        public BasicAuthenticationAttribute()
+        {
+            Active = true;
+        }
+
+        public BasicAuthenticationAttribute(bool active)
+        {
+            Active = active;
+        }
 
         /// <summary>
         /// Realiza a autenticação do usuário.
@@ -62,13 +75,22 @@
         /// <param name="actionContext"></param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            if (Autenticar(actionContext))
+            bool autenticar = actionContext.ActionDescriptor.GetCustomAttributes<BasicAuthenticationAttribute>().Any() ?
+                actionContext.ActionDescriptor.GetCustomAttributes<BasicAuthenticationAttribute>()[0].Active : Active;
+            if (autenticar)
             {
-                base.OnActionExecuting(actionContext);
+                if (Autenticar(actionContext))
+                {
+                    base.OnActionExecuting(actionContext);
+                }
+                else
+                {
+                    actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, new { message = "Credenciais inválidas" });
+                }
             }
             else
             {
-                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, new { message = "Credenciais inválidas" });
+                base.OnActionExecuting(actionContext);
             }
         }
     }

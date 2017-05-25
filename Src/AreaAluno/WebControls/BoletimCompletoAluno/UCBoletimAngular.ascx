@@ -33,6 +33,11 @@
         var msgAlunoSemDadosPeriodo = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemAlunoSemDadosPeriodo") %>';
         var msgSemEventoLiberado = '<%= infantil ? GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemSemEventoLiberadoInfantil") :
                                         GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemSemEventoLiberado") %>';
+
+        var Usuario = '<%= Usuario %>';
+        var Entidade = '<%= Entidade %>';
+        var Grupo = '<%= Grupo %>';
+        var Token = '<%= Token %>';
    
     </script>
 

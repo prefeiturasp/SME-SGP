@@ -93,6 +93,8 @@ namespace GestaoAcademica.WebApi
             //compressão
             //GlobalConfiguration.Configuration.MessageHandlers.Add(new CompressHandler());
 
+            GlobalConfiguration.Configuration.EnableCors();
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

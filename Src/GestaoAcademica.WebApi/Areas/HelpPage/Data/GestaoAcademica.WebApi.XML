@@ -22,19 +22,25 @@
             </summary>
             <param name="actionContext"></param>
         </member>
-        <member name="M:GestaoAcademica.WebApi.Controllers.alunoAnotacaoController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoTurmaEntradaDTO)">
+        <member name="M:GestaoAcademica.WebApi.Authentication.JWTAuthenticationFilter.#ctor(System.Boolean)">
             <summary>
-            Descrição: retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+            Overriden constructor to allow explicit disabling of this
+            filter's behavior. Pass false to disable (same as no filter
+            but declarative)
             </summary>
-            <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
-            <returns>Objeto com os dados das anotações.</returns>
+            <param name="active"></param>
         </member>
-        <member name="M:GestaoAcademica.WebApi.Controllers.alunoJustificativaFaltaController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoEntradaDTO)">
+        <member name="M:GestaoAcademica.WebApi.Authentication.JWTAuthenticationFilter.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
             <summary>
-            Descrição: retorna os dados das justificativas do aluno.
+            Override to Web API filter method to handle Basic Auth check
             </summary>
-            <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
-            <returns>Objeto com os dados das justificativas.</returns>
+            <param name="actionContext"></param>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Authentication.JWTAuthenticationFilter.AuthHeader(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Parses the Authorization header and creates user credentials
+            </summary>
+            <param name="actionContext"></param>
         </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.aluno_fechamento_pendenciaController.GetFila">
             <summary>

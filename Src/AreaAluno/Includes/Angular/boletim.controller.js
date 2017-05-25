@@ -15,9 +15,9 @@
 		.controller("BoletimController", BoletimController);
 
 
-	BoletimController.$inject = ['$scope', '$timeout', '$http', '$location'];
+	BoletimController.$inject = ['$scope', '$timeout', '$http', '$location', '$q'];
 
-	function BoletimController($scope, $timeout, $http, $location) {
+	function BoletimController($scope, $timeout, $http, $location, $q) {
 
 		function init() {
 			configVariables();
@@ -82,7 +82,10 @@
 				$scope.mensagemErro = "Parâmetros inválidos";
 			}
 			else {
-				var url = $scope.api + "/ApiListagemBoletimEscolarAluno/GetBoletimEscolarDosAlunos/?alu_ids=" + $scope.params.AluIds + "&mtu_ids=" + $scope.params.MtuIds + "&tpc_id=" + $scope.params.TpcId;
+			    var url = $scope.api + "/ApiListagemBoletimEscolarAluno/GetBoletimEscolarDosAlunos/?alu_ids=" + $scope.params.AluIds + "&mtu_ids=" + $scope.params.MtuIds + "&tpc_id=" + $scope.params.TpcId;
+
+			    $http.defaults.headers.common.Authorization = 'Bearer ' + Token;
+
 				$http({
 					method: 'GET',
 					url: url
@@ -113,7 +116,9 @@
 					    }
 					}
 				}, function errorCallback(response) {
-					if (response.status == 404)
+				    if (response.status == 401) {
+				        RefreshToken();
+				    }else if (response.status == 404)
 						$scope.mensagemErro = "Falha ao recuperar os dados - API indisponível";
 					else if (response.status == 500)
 						$scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
@@ -196,6 +201,32 @@
 				$scope.matter.push(item);
 			};
 		};
+
+		function getToken() {
+		    var deferred = $q.defer();
+		    $http({
+		        method: "POST",
+		        url: "Busca.aspx/CreateToken",
+		        dataType: 'json',
+		        data: '{ "usuario":  "' + Usuario + '", "entidade": "' + Entidade + '", "grupo": "' + Grupo + '" }',
+		        headers: {
+		            "Content-Type": "application/json"
+		        }
+		    }).success(function (data) {
+		        deferred.resolve(data);
+		    });
+
+		    return deferred.promise;
+		}
+
+		function RefreshToken() {
+		    var promise = getToken();
+		    promise.then(function (data) {
+		        Token = data.d;
+		        initVars();
+		        getBoletins();
+		    });
+		}
 
 		/**
 		 * @function 
