@@ -1,9 +1,27 @@
-# Repositório de Histórico no GitLab:
+# Sobre o SGP
+
+Uma ferramenta que permite acompanhar, aula a aula, os processos de ensino e aprendizagem e gestão pedagógica, de forma ampla e individualizada.
+
+# FUNCIONALIDADES
+
+* Planejamento anual ou bimestral das aulas, com registro de objetivos e atividades desenvolvidas.
+* Registro facilitado de notas, frequências e anotações sobre a aula.
+* Registro de ocorrências individuais sobre os alunos e histórico para consulta.
+* Reúne documentos e conteúdos para utilização durante a aula.
+* Cadastro dos calendários escolares, períodos dos bimestres e feriados.
+* Gera lista de presença para reuniões.
+* Informações sobre avaliação, faixa de alunos por conceito, média e desempenho de alunos.
+* Mapa cognitivo com dados sobre atividades e avaliações formativas com percurso de aprendizagem.
+* Boletim on-line para acesso de alunos, pais e responsáveis.
+* Apresenta quadros totalizadores com diversos tipos de relatórios.
+
+# Repositório base no GitLab:
+
 * https://gitlab.com/smecotic/sgp
 
 # Utilização
 
-* [Roteiro de uso](https://gitlab.com/smecotic/sgp/wikis/roteiro-de-uso)
+* [Roteiro de uso](https://github.com/prefeiturasp/SME-SGP/wiki/Roteiro-de-uso)
 
 # Configuração
 
@@ -25,7 +43,7 @@
 
 
 **Clonar o projeto através do repositório do github.com e dar checkout no branch develop**
-* git clone https://gitlab.com/smecotic/sgp.git
+* git clone https://github.com/prefeiturasp/SME-SGP.git
 * cd sgp
 * git pull
 
@@ -59,13 +77,14 @@ Abrir o executável MSTech.Config.exe das pastas "bin" acima e configurar os cam
 Clicar em testar conexão e salvar
 
 
-# Acesso aos servidores
+# Acesso aos sistemas
 
 ### Homologação
 
-h-sgp.sme.prefeitura.sp.gov.br
+[h-sgp.sme.prefeitura.sp.gov.br](http://h-sgp.sme.prefeitura.sp.gov.br)
+[h-boletimonline](http://h-boletimonline.sme.prefeitura.sp.gov.br/Login.aspx)
 
 ### Produção
 
-sgp.sme.prefeitura.sp.gov.br
-
+[sgp.sme.prefeitura.sp.gov.br](http://sgp.sme.prefeitura.sp.gov.br)
+[boletimonline](http://boletimonline.sme.prefeitura.sp.gov.br/Login.aspx)
