@@ -1,4 +1,5 @@
-﻿using MSTech.GestaoEscolar.BLL;
+﻿using GestaoAcademica.WebApi.Authentication;
+using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
 using MSTech.GestaoEscolar.Web.WebProject;
 using System;
@@ -19,7 +20,9 @@ namespace GestaoAcademica.WebApi.Controllers
         /// <param name="filtros">Objeto com parâmetros de entrada: id da matricula e id do aluno.</param>
         /// <returns>Objeto com os dados da matrícula do aluno.</returns>
         [HttpGet]
-        [EnableCors(origins: "*", headers: "*", methods: "get")]
+        [BasicAuthentication(false)]
+        [JWTAuthenticationFilter()]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public HttpResponseMessage Get(long alu_id, int mtu_id)
         {
             try

@@ -3,12 +3,14 @@
     using MSTech.CoreSSO.BLL;
     using MSTech.GestaoEscolar.BLL;
     using MSTech.GestaoEscolar.Web.WebProject;
+    using MSTech.Security.Cryptography;
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.IO;
     using System.Linq;
     using System.Web;
+    using System.Web.Services;
     using System.Web.UI;
     using System.Web.UI.WebControls;
 
@@ -50,6 +52,51 @@
             Page.Theme = "IntranetSMEBootStrap";
         }
 
+        protected string Usuario
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Usuario.usu_login;
+            }
+        }
+
+        protected string Entidade
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString();
+            }
+        }
+
+        protected string Grupo
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString();
+            }
+        }
+
+        protected string Token
+        {
+            get { return ViewState["Token"] as string ?? string.Empty; }
+            set { ViewState["Token"] = value; }
+        }
+
+        [WebMethod]
+        public static string CreateToken(string usuario, string entidade, string grupo)
+        {
+            var jwtKey = System.Configuration.ConfigurationManager.AppSettings["jwtKey"];
+            SymmetricAlgorithm sa = new SymmetricAlgorithm(SymmetricAlgorithm.Tipo.TripleDES);
+            var currentTime = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            var expTime = DateTime.UtcNow.AddMinutes(30).ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("Login", usuario);
+            dic.Add("Entity", entidade);
+            dic.Add("Group", grupo);
+            dic.Add("iat", currentTime);
+            dic.Add("exp", expTime);
+            return JWT.JsonWebToken.Encode(dic, sa.Decrypt(jwtKey), JWT.JwtHashAlgorithm.HS256);
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -96,6 +143,8 @@
                         mtu_id = dt.Select(string.Format("cal_ano = {0}", ano)).Select(p => Convert.ToInt32(p["mtu_id"])).First();
                         tpc_id = dt.Select(string.Format("cal_ano = {0}", ano)).Select(p => Convert.ToInt32(p["tpc_id"])).First();
                     }
+
+                    Token = CreateToken(Usuario, Entidade, Grupo);
                 }
             }
         }

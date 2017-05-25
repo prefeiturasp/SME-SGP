@@ -1,4 +1,5 @@
-﻿using MSTech.GestaoEscolar.BLL;
+﻿using GestaoAcademica.WebApi.Authentication;
+using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
@@ -119,7 +120,9 @@ namespace GestaoAcademica.WebApi.Controllers
         /// <param name="alu_id"></param>
         /// <returns></returns>
         [HttpGet]
-        [EnableCors(origins: "*", headers: "*", methods: "get")]
+        [BasicAuthentication(false)]
+        [JWTAuthenticationFilter()]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public HttpResponseMessage GetCalendarioPorAluno(long alu_id)
         {
             try

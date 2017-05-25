@@ -1,4 +1,5 @@
-﻿using MSTech.GestaoEscolar.BLL;
+﻿using GestaoAcademica.WebApi.Authentication;
+using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
 using MSTech.GestaoEscolar.Web.WebProject;
@@ -17,7 +18,9 @@ namespace GestaoAcademica.WebApi.Controllers
         /// <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
         /// <returns>Objeto com os dados das justificativas.</returns>
         [HttpGet]
-        [EnableCors(origins: "*", headers: "*", methods: "get")]
+        [BasicAuthentication(false)]
+        [JWTAuthenticationFilter()]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public AlunoJustificativaFaltaSaidaDTO Get([FromUri] AnoAlunoEntradaDTO filtros)
         {
             try

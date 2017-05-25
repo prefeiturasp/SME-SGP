@@ -7,9 +7,9 @@
         .module('app')
         .controller('JustificativaFaltaController', JustificativaFaltaController);
 
-    JustificativaFaltaController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService'];
+    JustificativaFaltaController.$inject = ['$scope', '$timeout', '$http', '$location', '$filter', 'trocarAnoService', '$q'];
 
-    function JustificativaFaltaController($scope, $timeout, $http, $location, $filter, trocarAnoService) {;
+    function JustificativaFaltaController($scope, $timeout, $http, $location, $filter, trocarAnoService, $q) {;
 
         this.reload = function () {
             initVars();
@@ -46,6 +46,8 @@
             } else {
                 var url = $scope.api + "/alunoJustificativaFalta?alu_id=" + $scope.params.alu_id + "&ano=" + $scope.params.ano;
 
+                $http.defaults.headers.common.Authorization = 'Bearer ' + Token;
+
                 $http({
                     method: 'GET',
                     url: url
@@ -66,7 +68,9 @@
                         }
                     }
                 }, function errorCallback(response) {
-                    if (response.status == 404)
+                    if (response.status == 401) {
+                        RefreshToken();
+                    } if (response.status == 404)
                         $scope.mensagemErro = "Falha ao recuperar os dados - API indisponível";
                     else if (response.status == 500)
                         $scope.mensagemErro = "Falha ao recuperar os dados - erro na API";
@@ -77,6 +81,32 @@
                 });
             }
         };
+
+        function getToken() {
+            var deferred = $q.defer();
+            $http({
+                method: "POST",
+                url: "RelatorioPedagogico.aspx/CreateToken",
+                dataType: 'json',
+                data: '{ "usuario":  "' + Usuario + '", "entidade": "' + Entidade + '", "grupo": "' + Grupo + '" }',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).success(function (data) {
+                deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        }
+
+        function RefreshToken() {
+            var promise = getToken();
+            promise.then(function (data) {
+                Token = data.d;
+                initVars();
+                getJustificativas();
+            });
+        }
 
         $scope.safeApply = function __safeApply() {
             var $scope, fn, force = false;
