@@ -82,6 +82,7 @@ SET XACT_ABORT ON
 	-- Mudando módulos de Configurações para o mod_idPai novo
 
 	DECLARE @mod_idPai INT = (SELECT mod_id FROM SYS_Modulo WHERE mod_nome = 'Configurações' AND sis_id = @sis_id AND mod_situacao = 1)
+	DECLARE @mod_idCadastros INT = (SELECT mod_id FROM SYS_Modulo WHERE mod_nome = 'Cadastros' AND sis_id = @sis_id AND mod_situacao = 1)
 
 	UPDATE SYS_Modulo 
 	SET mod_idPai = @mod_idPai
@@ -121,7 +122,7 @@ SET XACT_ABORT ON
 	
 	UPDATE SYS_Modulo 
 	SET mod_idPai = @mod_idPai
-	WHERE sis_id = @sis_id AND mod_nome = 'Sondagem'
+	WHERE sis_id = @sis_id AND mod_nome = 'Sondagem' AND mod_idPai = @mod_idCadastros
 	
 	UPDATE SYS_Modulo 
 	SET mod_idPai = @mod_idPai
