@@ -212,14 +212,14 @@
                                     <tbody>
                                         <tr ng-repeat="(indexMat, materia) in boletim.enrichment" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
                                             <td data-header="Disciplina">{{materia.Disciplina}}</td>
-                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
+                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas" data-header="{{avaliacao.tpc_nome}}">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
                                             <td class="text-center" data-header="Parecer Final">{{materia.parecerFinal}}</td>
                                             <td class="text-center" data-header="Final - Faltas">{{materia.totalFaltas}}</td>
                                             <td class="text-center" data-header="Final - Frequencia">{{materia.FrequenciaFinalAjustada}}</td>
                                         </tr>
                                         <tr ng-repeat="(indexMat, materia) in boletim.recovery" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
                                             <td data-header="Disciplina">{{materia.Disciplina}}</td>
-                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
+                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas" data-header="{{avaliacao.tpc_nome}}">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
                                             <td class="text-center" data-header="Parecer Final">{{materia.parecerFinal}}</td>
                                             <td class="text-center" data-header="Final - Faltas">{{materia.totalFaltas}}</td>
                                             <td class="text-center" data-header="Final - Frequencia">{{materia.FrequenciaFinalAjustada}}</td>
@@ -227,6 +227,70 @@
                                     </tbody>
                                 </table>
 
+                                <table class="table table-responsive-list" ng-if="boletim.ensinoInfantil">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" style="vertical-align: middle"></th>
+
+                                            <th class="text-center" ng-repeat="periodo in boletim.periodos" title="{{periodo.MatriculaPeriodo}}">
+                                                <span>{{periodo.tpc_nome}}</span>
+                                            </th>
+
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Total de Aulas</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Total de Ausências</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final (%)</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center" style="vertical-align: middle" ng-repeat="periodo in boletim.periodos">Faltas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr ng-repeat="(indexMat, materia) in boletim.matter" ng-class="checkParImpar(indexMat)">
+                                            <td>{{boletim.tur_codigo}}</td>
+                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas" data-header="{{avaliacao.tpc_nome}}">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
+                                            <td class="text-center" data-header="Total de Aulas">{{materia.totalAulas}}</td>
+                                            <td class="text-center" data-header="Total de Ausências">{{materia.totalFaltas}}</td>
+                                            <td class="text-center" data-header="Frequência Final (%)">{{materia.FrequenciaFinalAjustada}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                    <!--tbody-->
+                                </table>
+
+                                <table class="table table-responsive-list" ng-if="boletim.showRecuperacao">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" style="vertical-align: middle">
+                                                <span>
+                                                    <asp:Literal runat="server" Text="<%$ Resources:UserControl, UCDadosBoletim.lblRecuperacaoTitulo.Text %>" /></span>
+                                            </th>
+
+                                            <th class="text-center" ng-repeat="periodo in boletim.periodos" title="{{periodo.MatriculaPeriodo}}">
+                                                <span>{{periodo.tpc_nome}}</span>
+                                            </th>
+
+                                            <th rowspan="2" class="text-center">Total de Ausências</th>
+                                            <th rowspan="2" class="text-center" ng-if="boletim.exibeCompensacaoAusencia">Parecer Final</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center" ng-repeat="periodo in boletim.periodos">Faltas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr ng-repeat="(indexRec, materia) in boletim.recovery" ng-class="checkParImpar(indexRec)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
+                                            <td data-header="Disciplina">{{materia.Disciplina}}</td>
+                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas" data-header="{{avaliacao.tpc_nome}}>{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
+                                            <td class="text-center" data-header="Total de Ausências">{{materia.totalFaltas}}</td>
+                                            <td class="text-center" data-header="Parecer Final" ng-if="boletim.exibeCompensacaoAusencia">{{materia.parecerFinal}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                    <!--tbody-->
+                                </table>
                             </div>
                         </section>
                     </div>
