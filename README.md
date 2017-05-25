@@ -14,7 +14,7 @@
 * Microsoft SQL Server Reporting Services 2008R2, 2012 ou 2014
 * Microsoft Visual Studio 2013 ou superior
  
-**Bibliotecass utlizadas**
+**Bibliotecas utlizadas**
 * .NET 4.5
 * AspNet MVC 4.0
 * AspNet WebApi
@@ -55,24 +55,6 @@ Abrir o executável MSTech.Config.exe das pastas "bin" acima e configurar os cam
 	User name (usuário do banco de dados)
 	Password (senha do usuário do banco de dados)
 
-<table>
-<tr>
-	<th>Connection Names</th>
-	<th>Usuário do banco de dados</th>
-</tr>
-<tr>
-	<td>CoreSSO</td>
-	<td>user_coresso</td>
-</tr>
-<tr>
-	<td>MSTech.Log</td>
-	<td>user_coresso</td>
-</tr>
-<tr>
-	<td>GestaoPedagogica</td>
-	<td>user_gestaoescolar</td>
-</tr>
-</table>
 
 Clicar em testar conexão e salvar
 
