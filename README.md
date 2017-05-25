@@ -79,7 +79,7 @@ Clicar em testar conexão e salvar
 
 # Acesso aos sistemas
 
-### Homologação
+### Homologação (Acesso restrito pela Intranet da SME)
 
 [h-sgp.sme.prefeitura.sp.gov.br](http://h-sgp.sme.prefeitura.sp.gov.br)
 
