@@ -66,7 +66,7 @@ namespace GestaoEscolar.WebControls.BoletimCompletoAluno
             dic.Add("Group", grupo);
             dic.Add("iat", currentTime);
             dic.Add("exp", expTime);
-            return JWT.JsonWebToken.Encode(dic, sa.Decrypt(jwtKey), JWT.JwtHashAlgorithm.HS256);
+            return "";// JWT.JsonWebToken.Encode(dic, sa.Decrypt(jwtKey), JWT.JwtHashAlgorithm.HS256);
         }
 
         protected void Page_Load(object sender, EventArgs e)

@@ -755,6 +755,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMensagem.Attributes.Remove("hide");
             try
             {
                 ScriptManager sm = ScriptManager.GetCurrent(this.Page);
@@ -778,6 +779,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             try
             {
                 lblMensagemResultadoErro.Attributes.Add("class", "hide");
+                lblMensagemResultadoInvalido.Attributes.Add("class", "hide");
                 byte resultado = 0;
                 string justificativaResultado = string.Empty;
 
@@ -2063,7 +2065,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
                 lblMensagemResultadoInvalido.Text = UtilBO.GetErroMessage("O parecer conclusivo selecionado está divergente com o cadastrado no EOL.", UtilBO.TipoMensagem.Alerta);
 
-                lblMensagemResultadoErro.Text = UtilBO.GetErroMessage("Erro ao tentar buscar os dados cadastrados no EOL.", UtilBO.TipoMensagem.Erro);
+                lblMensagemResultadoErro.Text = UtilBO.GetErroMessage("Erro ao tentar buscar os dados cadastrados no EOL.", UtilBO.TipoMensagem.Alerta);
 
                 lblSituacaoMatriculaEntrada.Text = string.Format("{0} {1:dd/MM/yyyy}", RetornaValorResource("MatriculadoEm"), dados.mtu_dataMatricula);
                 if (dados.mtu_dataSaida != DateTime.MinValue)

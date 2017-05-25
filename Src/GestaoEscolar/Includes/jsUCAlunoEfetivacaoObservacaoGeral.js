@@ -26,6 +26,7 @@ function jsUCAlunoEfetivacaoObservacaoGeral() {
 
     $('.ddlResultadoParecerConclusivo').unbind('change').bind('change', function () {
         var lbl = $('span[id$="lblMensagemResultadoInvalido"]');
+        var lblMensagem = $('span[id$="lblMensagem"]');
         var lblErro = $('span[id$="lblMensagemResultadoErro"]');
         if ($('.ddlResultadoParecerConclusivo').children("option").filter(":selected").val() != "-1") {
             try
@@ -33,21 +34,25 @@ function jsUCAlunoEfetivacaoObservacaoGeral() {
                 VerificarIntegridadeParecerEOL(function (retorno) {
                     if (retorno == "") {
                         lbl.addClass('hide');
+                        lblMensagem.addClass('hide');
                         lblErro.removeClass('hide');
                         $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
                         setTimeout('$(\'#divCadastroObservacaoGeral\').scrollTo(0,0);', 0);
                     }
                     else if (retorno == "true" || retorno == "True" || retorno == "TRUE") {
                         lbl.addClass('hide');
+                        lblMensagem.addClass('hide');
                         lblErro.addClass('hide');
                     }
                     else {
                         if (erroAPIEOL) {
-                            lblErro.removeClass('hide');
                             lbl.addClass('hide');
+                            lblMensagem.addClass('hide');
+                            lblErro.removeClass('hide');
                         }
                         else {
                             lbl.removeClass('hide');
+                            lblMensagem.addClass('hide');
                             lblErro.addClass('hide');
                         }
                         $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
@@ -58,11 +63,13 @@ function jsUCAlunoEfetivacaoObservacaoGeral() {
             catch (e)
             {
                 lbl.addClass('hide');
+                lblMensagem.addClass('hide');
                 lblErro.removeClass('hide');
                 $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
             }
         } else {
             lbl.addClass('hide');
+            lblMensagem.addClass('hide');
             lblErro.addClass('hide');
         }
     });
