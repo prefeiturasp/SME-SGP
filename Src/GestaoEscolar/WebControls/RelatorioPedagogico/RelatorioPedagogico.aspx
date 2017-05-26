@@ -451,13 +451,13 @@
                                     <p>
                                         {{anotacao.anotacao}}
                                     </p>
-                                    <p class="text-autor">Observação do(a) professor(a) <strong>{{anotacao.nomeDocente}} | {{anotacao.nomeDisciplina}}</strong></p>
+                                    <p class="text-autor">Observação do(a) professor(a) <strong>{{anotacao.nomeDocente}} | {{anotacao.nomeDisciplina}} | {{anotacao.data}}</strong></p>
                                 </div>
                                 <div class="obs-block" ng-repeat="anotacao in listAnotacoesGestor">
                                     <p>
                                         {{anotacao.anotacao}}
                                     </p>
-                                    <p class="text-autor">Observação do(a) <strong>{{anotacao.funcaoGestor}}</strong></p>
+                                    <p class="text-autor">Observação do(a) <strong>{{anotacao.funcaoGestor}} | {{anotacao.data}}</strong></p>
                                 </div>
                             </div>
                         </section>
