@@ -102,6 +102,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbUpdater", "DbUpdater\DbUp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGP.Database", "SGP.Database\SGP.Database.csproj", "{EADF70C0-7FF0-4292-BE9E-632369BB053A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoEscolar.Api", "GestaoEscolar.Api\GestaoEscolar.Api.csproj", "{6376EB97-0276-4C31-BA63-62B2D8FA6A72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -724,6 +726,42 @@ Global
 		{EADF70C0-7FF0-4292-BE9E-632369BB053A}.ReleaseAlunos|Mixed Platforms.Build.0 = Release|Any CPU
 		{EADF70C0-7FF0-4292-BE9E-632369BB053A}.ReleaseAlunos|x86.ActiveCfg = Release|Any CPU
 		{EADF70C0-7FF0-4292-BE9E-632369BB053A}.ReleaseAlunos|x86.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Debug|x86.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.DebugLocal|x86.Build.0 = Debug|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|Any CPU.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|Any CPU.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|Mixed Platforms.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.GestaoEscolar|x86.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|Any CPU.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|Any CPU.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|Mixed Platforms.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release Serviços|x86.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.Release|x86.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|Any CPU.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|Any CPU.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|Mixed Platforms.Build.0 = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|x86.ActiveCfg = Release|Any CPU
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72}.ReleaseAlunos|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -756,5 +794,6 @@ Global
 		{75471803-1DEC-44AE-8699-DAFE1334BFBF} = {CD0D5A5D-5F68-47D0-8189-0D0926C71293}
 		{556E9FB5-CD7A-4ED6-8E58-4CB456CEB8BB} = {CD0D5A5D-5F68-47D0-8189-0D0926C71293}
 		{EADF70C0-7FF0-4292-BE9E-632369BB053A} = {CD0D5A5D-5F68-47D0-8189-0D0926C71293}
+		{6376EB97-0276-4C31-BA63-62B2D8FA6A72} = {9D9FCAB2-B05C-483E-8AAE-636E5F8E8849}
 	EndGlobalSection
 EndGlobal

@@ -88,7 +88,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="appMinutosCacheLongo">tempo do cache</param>
         /// <returns>DataTable com as unidade escola</returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static List<sComboUAEscola> SelecionaEscolasControladas(Guid ent_id, Guid gru_id, Guid usu_id, bool esc_controleSistema, int appMinutosCacheLongo = 0)
+        public static List<sComboUAEscola> SelecionaEscolasControladas(Guid ent_id, Guid gru_id, Guid usu_id, bool? esc_controleSistema, int appMinutosCacheLongo = 0)
         {
             List<sComboUAEscola> dados = null;
             if (appMinutosCacheLongo > 0)
@@ -148,7 +148,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// Retorna a chave do cache utilizada para carregar o combo de escolas
         /// </summary>
         /// <returns></returns>
-        private static string RetornaChaveCache_EscolasControladas(Guid ent_id, Guid gru_id, Guid usu_id, bool esc_controleSistema)
+        private static string RetornaChaveCache_EscolasControladas(Guid ent_id, Guid gru_id, Guid usu_id, bool? esc_controleSistema)
         {
             return string.Format("Cache_SelecionaEscolasControladas_{0}_{1}_{2}_{3}", ent_id, gru_id, usu_id, esc_controleSistema);
         }

@@ -1,0 +1,22 @@
+@using System.Web.Http
+@using GestaoEscolar.Api.Areas.HelpPage.Models
+@model HelpPageApiModel
+
+@{
+    var description = Model.ApiDescription;
+}
+
+<div id="body">
+    <section class="content-wrapper main-content clear-fix">
+        <div style="max-width: 90%; word-wrap:break-word;">
+            @Html.DisplayFor(m => Model)
+        </div>
+    </section>
+</div>
+
+@Html.DisplayForModel("TestClientDialogs")
+
+@section Scripts {
+    @Html.DisplayForModel("TestClientReferences")
+    <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+}
