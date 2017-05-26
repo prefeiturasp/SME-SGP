@@ -412,11 +412,17 @@
                                                         <ul class="list">
                                                             <li ng-repeat="questao in sondagem.questoes">
                                                                 <span class="list-header">{{questao.descricao}}</span>
-                                                                <ul class="list sub">
-                                                                    <li ng-repeat="resposta in questao.respostas">
+                                                                <div class="obs-block" ng-repeat="agendamento in questao.agendamentos">
+                                                                    <%--<ul class="list sub">
+                                                                        <li ng-repeat="resposta in agendamento.respostas">
+                                                                            <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
+                                                                        </li>
+                                                                    </ul>--%>
+                                                                    <p ng-repeat="resposta in agendamento.respostas">
                                                                         <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
-                                                                    </li>
-                                                                </ul>
+                                                                    </p>
+                                                                    <p class="text-autor">Data de agendamento: <strong>{{agendamento.data}}</strong></p>
+                                                                </div>
                                                             </li>
                                                         </ul>
                                                         <canvas id="line" class="chart chart-line" chart-data="sondagem.graphData"

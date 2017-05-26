@@ -106,11 +106,14 @@
             }
 
             for (var s = 0; s < list.length; s++) {
-                var respostas = []
+
                 var graphLabels = [];
                 var graphSeries = [];
                 var graphData = [];
+                var agendamentos = [];
                 for (var a = 0; a < list[s].agendamentos.length; a++) {
+
+                    var agendamento = { idQuestao: -1, data: list[s].agendamentos[a].dataInicio, respostas: [] }
 
                     if (graphLabels.indexOf(list[s].agendamentos[a].dataInicio) == -1) {
                         graphLabels.push(list[s].agendamentos[a].dataInicio);
@@ -121,6 +124,9 @@
                         var questao = $filter('filter')(list[s].questoes, { id: list[s].agendamentos[a].respostasAluno[r].idQuestao }, true);
 
                         if (questao.length) {
+
+                            agendamento.idQuestao = questao[0].id;
+
                             var subQuestao = $filter('filter')(list[s].subQuestoes, { id: list[s].agendamentos[a].respostasAluno[r].idSubQuestao }, true);
                             var resposta = $filter('filter')(list[s].respostas, { id: list[s].agendamentos[a].respostasAluno[r].idResposta }, true);
 
@@ -131,11 +137,11 @@
                                 }
 
                                 if (resposta.length) {
-                                    respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: resposta[0].descricao })
+                                    agendamento.respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: resposta[0].descricao })
                                     graphData.push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
-                                    respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: "" })
+                                    agendamento.respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: "" })
                                     graphData.push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
@@ -146,20 +152,23 @@
                                 }
 
                                 if (resposta.length) {
-                                    respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
+                                    agendamento.respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
                                     graphData.push({ questao: "Questão: " + questao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
-                                    respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: "" })
+                                    agendamento.respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: "" })
                                     graphData.push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
                         }
                     }
+
+                    agendamentos.push(agendamento);
                 }
 
                 for (var q = 0; q < list[s].questoes.length; q++) {
-                    list[s].questoes[q]["respostas"] = $filter('filter')(respostas, { id: list[s].questoes[q].id }, true);
+
+                    list[s].questoes[q]["agendamentos"] = $filter('filter')(agendamentos, { idQuestao: list[s].questoes[q].id }, true);
                 }
 
                 var dadosAgrup = $filter('toArray')($filter('groupBy')(graphData, 'questao'), true);
@@ -184,9 +193,12 @@
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Data de agendamento'
-                            },
-                            gridLines: {
-                                offsetGridLines: true
+                            }
+                            ,
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                beginAtZero: true
                             }
                         }],
                         yAxes: [
@@ -202,12 +214,14 @@
                                 ticks: {
                                     userCallback: function (value, index, values) {
                                         if (respDic[value]) {
-                                            return respDic[value];
+                                            return stringToArray(respDic[value], 30);
                                         }
                                         else {
                                             return "";
                                         }
                                     }
+                                    ,
+                                    beginAtZero: true
                                 }
                             }
                         ]
@@ -219,15 +233,18 @@
                     tooltips: {
                         callbacks: {
                             label: function (tooltipItem, data) {
-                                console.log(data.datasets[tooltipItem.datasetIndex]);
-                                var resp = {};
+                                var resp = []
+                                if (data.datasets[tooltipItem.datasetIndex].label && data.datasets[tooltipItem.datasetIndex].label != "") {
+                                    resp.push(data.datasets[tooltipItem.datasetIndex].label);
+                                }
+
                                 if (respDic[data.datasets[tooltipItem.datasetIndex].data[0]]) {
-                                    resp = " -> " + respDic[data.datasets[tooltipItem.datasetIndex].data[0]];
+                                    resp.push("Resposta: " + respDic[data.datasets[tooltipItem.datasetIndex].data[0]]);
                                 }
                                 else {
-                                    resp = "";
+                                    resp.push("Sem resposta");
                                 }
-                                return data.datasets[tooltipItem.datasetIndex].label + resp;
+                                return resp;
                             }
                         }
                     }
@@ -235,6 +252,19 @@
             }
 
             $scope.listSondagens = list;
+        }
+
+        function stringToArray(string, arraySize) {
+            var array = [];
+            while (string.length > 0) {
+                var end = arraySize;
+                if (end > string.length) {
+                    end = string.length
+                }
+                array.push(string.slice(0, end));
+                string = string.slice(end, string.length);
+            }
+            return array;
         }
 
         function getToken() {
