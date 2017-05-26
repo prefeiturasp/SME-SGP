@@ -124,7 +124,7 @@
                                             <a href="#area-obs-conselho" onclick="menuClick(this)">Observações do conselho de classe</a>
                                         </li>
                                         <li>
-                                            <a href="#area-com-estudos" onclick="menuClick(this)">Compromisso de estudo</a>
+                                            <a href="#area-com-estudos" onclick="menuClick(this)">Compromissos de estudo</a>
                                         </li>
                                         <li>
                                             <a href="#area-sondagem" onclick="menuClick(this)">Resultados de sondagem</a>
@@ -133,10 +133,10 @@
                                             <a href="#area-obs-individuais" onclick="menuClick(this)">Observações individuais</a>
                                         </li>
                                         <li>
-                                            <a href="#area-just-faltas" onclick="menuClick(this)">Justificativa de faltas</a>
+                                            <a href="#area-just-faltas" onclick="menuClick(this)">Justificativas de faltas</a>
                                         </li>
                                         <li>
-                                            <a href="#area-cons-mov" onclick="menuClick(this)">Remanejamento e Reclassificacao</a>
+                                            <a href="#area-cons-mov" onclick="menuClick(this)">Remanejamentos e reclassificações</a>
                                         </li>
                                     </ul>
                                 </div>                                
@@ -346,7 +346,7 @@
 
                         <!-- Compromisso de estudo -->
                         <section id="area-com-estudos" class="section-area" ng-if="conselhoLoaded">
-                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Compromisso de estudo</h3>
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Compromissos de estudo</h3>
                             <div class="conteudo">
                                 <div class="sr-only">Conteúdo dividido por Accordion</div>
                                 <div class="row">
@@ -477,7 +477,7 @@
                         </div>
                         <!-- Justificativa de falta -->
                         <section id="area-just-faltas" class="section-area" ng-if="justificativaLoaded">
-                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Justificativa de faltas</h3>
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Justificativas de faltas</h3>
                             <div class="conteudo">
                                 <div class="obs-block" ng-repeat="justificativa in listJustificativa">
                                     <p>
@@ -503,7 +503,7 @@
                         </div>
                         <!-- Movimentações -->
                         <section id="area-cons-mov" class="section-area" ng-if="movimentacaoLoaded">
-                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Remanejamento e Reclassificacao</h3>
+                            <h3><i class="material-icons pull-left">&#xE5CC;</i>Remanejamentos e reclassificações</h3>
                             <div class="conteudo">
                                 <div class="obs-block" ng-repeat="movimentacao in listMovimentacoes">
                                     <h4>
