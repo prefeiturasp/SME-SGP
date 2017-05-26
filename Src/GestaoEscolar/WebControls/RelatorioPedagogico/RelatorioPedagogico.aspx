@@ -175,7 +175,7 @@
                                             <th class="text-center" ng-repeat="periodo in boletim.periodos">{{periodo.tpc_nome}}</th>
                                             <th rowspan="2" class="text-center" style="vertical-align: middle">Síntese Final</th>
                                             <th rowspan="2" class="text-center" style="vertical-align: middle">Total de Ausências</th>
-                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final(%)</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final (%)</th>
                                         </tr>
                                         <tr>
                                             <th class="text-center" ng-repeat="periodo in boletim.periodos">{{boletim.nomeNota}}</th>
@@ -199,11 +199,11 @@
                                 <table class="table table-responsive-list" ng-if="(boletim.showCurricularEnrichment || boletim.showRecuperacao) && !boletim.ensinoInfantil">
                                     <thead>
                                         <tr>
-                                            <th rowspan="2" style="vertical-align: middle">Enriq. curricular / Projetos / Ativ. compl.</th>
+                                            <th rowspan="2" style="vertical-align: middle; width: 130px;">Enriq. curricular / Projetos / Ativ. compl.</th>
                                             <th class="text-center" ng-repeat="periodo in boletim.periodos">{{periodo.tpc_nome}}</th>
                                             <th rowspan="2" class="text-center" style="vertical-align: middle">Parecer Final</th>
                                             <th rowspan="2" class="text-center" style="vertical-align: middle">Total de Ausências</th>
-                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final(%)</th>
+                                            <th rowspan="2" class="text-center" style="vertical-align: middle">Frequência Final (%)</th>
                                         </tr>
                                         <tr>
                                             <th class="text-center" ng-repeat="periodo in boletim.periodos">Faltas</th>
