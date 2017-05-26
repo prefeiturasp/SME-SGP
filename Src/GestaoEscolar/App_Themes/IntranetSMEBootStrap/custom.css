@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* Scss Document */
 @font-face {
   font-family: 'Roboto';
@@ -545,7 +545,8 @@ input[type="number"].form-control {
     display: block;
     border-bottom: 1px dotted #ddd;
     padding: 8px 0 8px 17px;
-    position: relative;
+    position: relative;height: 110%;
+    width: 110%;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
@@ -587,10 +588,14 @@ input[type="number"].form-control {
     position: relative; }
     .info-header .foto-aluno img {
       width: 105%;
-      position: absolute;
+      position: relative;
       left: -2.5%;
       top: -3px;
-      height: auto; }
+      height: 110%;
+      width: auto;
+      margin-right: -50%;
+      margin-left: -50%;
+    }
   .info-header .info-escola {
     font-size: 0.95rem;
     opacity: 0.7;
