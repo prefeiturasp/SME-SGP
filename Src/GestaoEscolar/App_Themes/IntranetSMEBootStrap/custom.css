@@ -586,13 +586,17 @@ input[type="number"].form-control {
     -moz-border-radius: 50%;
     border-radius: 50%;
     overflow: hidden;
-    position: relative; }
+    position: relative;
+    /*background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;*/ }
     .info-header .foto-aluno img {
-      width: 105%;
       position: absolute;
       left: -2.5%;
-      top: -3px;
-      height: auto; }
+      top: 0;
+      object-fit: cover;
+      width: 72px;
+      height: 72px; }
   .info-header .info-escola {
     font-size: 0.95rem;
     opacity: 0.7;
@@ -1120,7 +1124,6 @@ button.btn-primary {
       .info-header .foto-aluno .imgFoto {
         margin-top: 0;
         margin-left: 0;
-        height: auto;
         right: auto;
         max-width: none !important; }
     .info-header .info-aluno {
