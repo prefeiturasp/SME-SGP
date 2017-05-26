@@ -1,0 +1,75 @@
+@page {
+	margin: 15mm 15mm 15mm 15mm;
+	size:portrait;
+}
+
+/*CSS para impressão*/
+@media print {
+	body *{
+		color:#000;
+	}
+
+	.nav-aside{
+		width:100%;
+		position:static;
+
+		#nav-list-collapse{
+			display:none;
+		}
+	}
+
+	.info-header{
+		text-align:left;
+		padding:0 0 12px 20px;
+
+		.foto-aluno{
+			position:absolute;
+
+			.imgFoto{
+				margin-top:0;
+				margin-left:0;
+				height:auto;
+				right:auto;
+				max-width:none !important;
+			}
+		}
+
+		.info-aluno{
+			margin-left:90px;
+			min-height:100px;
+		}
+
+		.btn.dropdown-toggle{
+			display:inline-block !important;
+			text-align:left;
+
+			.caret{
+				display:none;
+			}
+		}
+	}
+
+	.area-rel-pedagogico{
+		#acontent{
+			padding:0;
+			margin-left:13px;
+		}
+
+		.collapse, .collapsed{
+			display:block;
+			height:auto !important;
+		}
+
+		.section-area{
+			min-height:0;
+		}
+
+		.panel-default{
+			page-break-inside: avoid;
+
+			.panel-body{
+				border-top-color:#000 !important;
+			}
+		}
+	}
+}

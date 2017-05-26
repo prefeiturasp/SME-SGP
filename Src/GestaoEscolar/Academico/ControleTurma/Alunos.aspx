@@ -90,6 +90,17 @@
                                     <HeaderStyle CssClass="center" />
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Relatório pedagógico">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="textBoxRelPedagogico" runat="server"></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="btnRelatorioPedagogico" runat="server" CausesValidation="False" CommandName="RelatorioPedagogico"
+                                            ToolTip="Relatório pedagógico do aluno" SkinID="btFormulario" />
+                                    </ItemTemplate>
+                                    <HeaderStyle CssClass="center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Inserir/Alterar foto" ItemStyle-VerticalAlign="Middle">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="btnCapturarFoto" runat="server" CommandName="Editar" CausesValidation="False"

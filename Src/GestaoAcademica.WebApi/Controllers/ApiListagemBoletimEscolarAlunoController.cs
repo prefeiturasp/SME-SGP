@@ -1,4 +1,6 @@
-﻿using MSTech.GestaoEscolar.BLL;
+﻿using GestaoAcademica.WebApi.Authentication;
+using GestaoAcademica.WebApi.Controllers.Base;
+using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
 using MSTech.GestaoEscolar.Web.WebProject;
@@ -10,8 +12,7 @@ using System.Web.Http.Cors;
 
 namespace GestaoAcademica.WebApi.Controllers
 {
-    
-    public class ApiListagemBoletimEscolarAlunoController : ApiController
+    public class ApiListagemBoletimEscolarAlunoController : BaseApiController
     {
         /// <summary>
         /// Retorna o boletim escolar do aluno
@@ -19,11 +20,12 @@ namespace GestaoAcademica.WebApi.Controllers
         /// <param name="filtros">Objeto com parâmetros de entrada</param>
         /// <returns></returns>
         [HttpGet]
-        [EnableCors(origins: "*", headers: "*", methods: "get")]
-        public List<BuscaBoletimEscolarAlunoSaidaDTO> GetAll([FromUri] BuscaBoletimEscolarAlunoEntradaDTO filtros)
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public List<BuscaBoletimEscolarAlunoSaidaDTO> GetAll(long alu_id, int mtu_id)
         {
             try
             {
+                BuscaBoletimEscolarAlunoEntradaDTO filtros = new BuscaBoletimEscolarAlunoEntradaDTO { alu_id = alu_id, mtu_id = mtu_id };
                 return ApiBO.BuscaBoletimEscolarAluno(filtros);
             }
             catch (Exception ex)
@@ -43,11 +45,14 @@ namespace GestaoAcademica.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [EnableCors(origins: "*", headers: "*", methods: "get")]
-        public List<BuscaBoletimEscolarDosAlunosSaidaDTO> GetBoletimEscolarDosAlunos([FromUri] BuscaBoletimEscolarDosAlunosEntradaDTO filtros)
+        [BasicAuthentication(false)]
+        [JWTAuthenticationFilter()]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public List<BuscaBoletimEscolarDosAlunosSaidaDTO> GetBoletimEscolarDosAlunos(string alu_ids, string mtu_ids, int tpc_id)
         {
             try
             {
+                BuscaBoletimEscolarDosAlunosEntradaDTO filtros = new BuscaBoletimEscolarDosAlunosEntradaDTO { alu_ids = alu_ids, mtu_ids = mtu_ids, tpc_id = tpc_id };
                 return ApiBO.BuscaBoletimEscolarDosAlunos(filtros);
             }
             catch (Exception ex)

@@ -1,12 +1,15 @@
-﻿using MSTech.GestaoEscolar.BLL;
+﻿using GestaoAcademica.WebApi.Authentication;
+using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada;
 using MSTech.GestaoEscolar.ObjetosSincronizacao.Entities;
+using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GestaoAcademica.WebApi.Controllers
 {
@@ -107,6 +110,41 @@ namespace GestaoAcademica.WebApi.Controllers
             }
 
             throw new HttpResponseException(HttpStatusCode.NotFound);
+        }
+
+        /// <summary>
+        /// Seleciona os dados do calendario anual por id do aluno.
+        /// -- Utilização: URL_API/calendario_anual?alu_id=1
+        /// -- Parâmetros: id do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [BasicAuthentication(false)]
+        [JWTAuthenticationFilter()]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public HttpResponseMessage GetCalendarioPorAluno(long alu_id)
+        {
+            try
+            {
+                CalendarioAlunoSaidaDTO retorno = ApiBO.SelecionaCalendarioPorAluno(alu_id);
+
+                if (retorno != null && retorno.calendarios != null && retorno.calendarios.Any())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, retorno);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                CalendarioAlunoSaidaDTO saidaDTO = new CalendarioAlunoSaidaDTO();
+                saidaDTO.Status = 1;
+                saidaDTO.StatusDescription = "Ocorreu um erro ao carregar dados.";
+                saidaDTO.calendarios = new List<CalendarioAlunoDTO>();
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, saidaDTO);
+            }
         }
 
         /// <summary>

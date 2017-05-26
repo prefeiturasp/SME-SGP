@@ -63,6 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\Entrada\AnoAlunoEntradaDTO.cs" />
+    <Compile Include="DTO\Entrada\AnoAlunoTurmaEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\AssociaEscolaEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\BuscaAlunosDetalhadoEscolaEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\BuscaAlunosMatriculadosTurmaEntradaDTO.cs" />
@@ -106,6 +108,9 @@
     <Compile Include="DTO\Entrada\RetornaEscolaEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\SincronizacaoDiarioClasseEntradaDTO.cs" />
     <Compile Include="DTO\Entrada\UsuarioEntradaDTO.cs" />
+    <Compile Include="DTO\Saida\AlunoAnotacaoSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\AlunoJustificativaFaltaSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\AlunoMovimentacaoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaAlunosDetalhadoEscolaSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaBoletimEscolarAlunoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaBoletimEscolarDosAlunosSaidaDTO.cs" />
@@ -114,7 +119,9 @@
     <Compile Include="DTO\Saida\BuscaBoletimEscolarDosAlunosSaidaTodasDisciplinasDTO.cs" />
     <Compile Include="DTO\Saida\BuscaEventosSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaTipoCicloSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\ConselhoClasseSaidaDTO.cs" />
     <Compile Include="DTO\Saida\FilaAlunoFechamentoPendenciaDTO.cs" />
+    <Compile Include="DTO\Saida\MatriculaTurmaSaidaDTO.cs" />
     <Compile Include="DTO\Saida\PlanejamentoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\ListagemTurmaSaidaDTO.cs" />
     <Compile Include="DTO\Saida\BuscaDadosCursosEntidadeSaidaDTO.cs" />
@@ -159,6 +166,7 @@
     <Compile Include="DTO\Saida\ProtocoloSaidaDTO.cs" />
     <Compile Include="DTO\Saida\RetornaEscolaSaidaDTO.cs" />
     <Compile Include="DTO\Saida\SincronizacaoDiarioClasseSaidaDTO.cs" />
+    <Compile Include="DTO\Saida\SondagemSaidaDTO.cs" />
     <Compile Include="DTO\Saida\StatusServicosDTO.cs" />
     <Compile Include="Entities\ACA_AlunoCurriculoDTO.cs" />
     <Compile Include="Entities\ACA_AlunoDTO.cs" />
@@ -228,6 +236,7 @@
     <Compile Include="Entities\ACA_CursoRelacionadoDTO.cs" />
     <Compile Include="Entities\MTR_MovimentacaoDTO.cs" />
     <Compile Include="Entities\MTR_TipoMovimentacaoDTO.cs" />
+    <Compile Include="Entities\ParecerConclusivo.cs" />
     <Compile Include="Entities\RHU_CargaHorariaDTO.cs" />
     <Compile Include="Entities\RHU_CargoDTO.cs" />
     <Compile Include="Entities\RHU_ColaboradorDTO.cs" />

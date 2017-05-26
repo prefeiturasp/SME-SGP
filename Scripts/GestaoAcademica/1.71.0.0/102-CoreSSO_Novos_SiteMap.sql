@@ -1,0 +1,31 @@
+USE [CoreSSO]
+GO
+
+--Iniciar transação
+BEGIN TRANSACTION
+SET XACT_ABORT ON
+
+	DECLARE @nomeSistema VARCHAR(100) = ' SGP'
+
+	/***************
+		Copiar do exemplo abaixo.
+	****************
+		
+	-- Insere o SiteMap da pagina no CoreSSO
+	EXEC MS_InsereSiteMap
+		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
+		,@nomeModulo = 'Tipo de evento' -- Nome do módulo (Obrigatório)
+		,@SiteMapNome = 'Listagem de tipos de evento' -- Nome do SiteMap (Obrigatório)
+		,@SiteMapUrl = '~/Configuracao/TipoEvento/Busca.aspx' -- Url da SiteMap (Obrigatório)
+	*/
+
+	EXEC MS_InsereSiteMap
+		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
+		,@nomeModuloPai = 'Relatórios'
+		,@nomeModulo = 'Alunos' -- Nome do módulo (Obrigatório)
+		,@SiteMapNome = 'Relatório pedagógico do aluno' -- Nome do SiteMap (Obrigatório)
+		,@SiteMapUrl = '~/Documentos/RelatorioPedagogico/RelatorioPedagogico.aspx' -- Url da SiteMap (Obrigatório)
+	
+-- Fechar transação
+SET XACT_ABORT OFF
+COMMIT TRANSACTION

@@ -39,7 +39,7 @@ namespace MSTech.GestaoEscolar.Entities
         // Campo auxiliar para replicar o planejamento anual para outras turmas
         // ID do tipo de disciplina.
         public int tds_id { get; set; }
-
+        
         public override int tud_vagas { get; set; }
         public override int tud_minimoMatriculados { get; set; }
         public override byte tud_duracao { get; set; }

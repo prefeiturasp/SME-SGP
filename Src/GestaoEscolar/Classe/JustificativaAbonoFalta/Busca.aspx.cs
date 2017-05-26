@@ -303,7 +303,7 @@ namespace GestaoEscolar.Classe.JustificativaAbonoFalta
 
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tud_id", out valor);
                 UCComboTurmaDisciplina.Valor = Convert.ToInt64(valor);
-                
+
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tipoBusca", out valor);
                 UCCamposBuscaAluno1.TipoBuscaNomeAluno = valor;
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("pes_nome", out valor);
@@ -518,9 +518,15 @@ namespace GestaoEscolar.Classe.JustificativaAbonoFalta
                     else
                         UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0], UCBuscaDocenteTurma._VS_doc_id, 0, true);
 
+                    if (UCComboTurmaDisciplina.Combo.Items.Count <= 2)
+                    {
+                        UCComboTurmaDisciplina.SelectedIndex = UCComboTurmaDisciplina.MostrarMensagemSelecione ? UCComboTurmaDisciplina.Combo.Items.Count - 1 : 0;
+                    }
+
+
                     UCComboTurmaDisciplina.SetarFoco();
                     UCComboTurmaDisciplina.PermiteEditar = UCBuscaDocenteTurma.ComboTurma.Combo.SelectedIndex > 0;
-                }                
+                }
             }
             catch (Exception ex)
             {

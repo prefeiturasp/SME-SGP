@@ -927,5 +927,18 @@ namespace MSTech.GestaoEscolar.BLL
                     throw new ValidationException("A frequência deve estar entre 0 e " + aula.tau_numeroAulas);
             }
         }
+
+        /// <summary>
+        /// Retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+        /// </summary>
+        /// <param name="ano">Ano das anotações</param>
+        /// <param name="alu_id">Id do aluno</param>
+        /// <param name="mtu_id">Id da matrícula do aluno na turma</param>
+        /// <returns></returns>
+        public static DataTable SelecionaAnotacoesPorAluno(int ano, long alu_id, int mtu_id)
+        {
+            CLS_TurmaAulaAlunoDAO dao = new CLS_TurmaAulaAlunoDAO();
+            return dao.SelectAnotacoesBy_Aluno(ano, alu_id, mtu_id);
+        }
     }
 }

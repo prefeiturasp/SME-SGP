@@ -250,6 +250,49 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna os dados das sondagens que o aluno participou.
+        /// </summary>
+        /// <param name="ano">Ano das sondagens</param>
+        /// <param name="alu_id">Id do aluno</param>
+        /// <returns></returns>
+        public DataTable SelectBy_Aluno(int ano, long alu_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_Sondagem_SelectBy_Aluno", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@ano";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@alu_id";
+                Param.Size = 8;
+                Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Parâmetros para efetuar a inclusão preservando a data de criação
         /// </summary>
         /// <param name="qs"></param>

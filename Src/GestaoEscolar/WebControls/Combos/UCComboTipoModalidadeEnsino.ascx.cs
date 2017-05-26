@@ -144,7 +144,7 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
     public void CarregarTipoModalidadeEnsino()
     {
         ddlCombo.Items.Clear();
-        ddlCombo.DataSource = ACA_TipoModalidadeEnsinoBO.SelecionaTipoModalidadeEnsino();
+        ddlCombo.DataSource = ACA_TipoModalidadeEnsinoBO.SelecionaTipoModalidadeEnsinoFilhos();
       
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione uma modalidade de ensino --", "-1", true));
         ddlCombo.DataBind();

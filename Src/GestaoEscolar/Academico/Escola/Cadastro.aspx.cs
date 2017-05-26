@@ -1422,7 +1422,7 @@ public partial class Academico_Escola_Cadastro : MotherPageLogado
         {
             _VS_esc_id = Convert.ToInt32(Session["EscolaImportacaoFechamento"]);
             Session["EscolaImportacaoFechamento"] = null;
-            _VS_esc_id_importacao = true;
+            _VS_esc_id_importacao = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.PERMITIR_IMPORTACAO_DADOS_EFETIVACAO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
         }
 
         if (!_VS_esc_id_importacao)

@@ -115,6 +115,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEventoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioPeriodoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
@@ -350,8 +351,11 @@
     <Compile Include="Abstracts\Abstract_SYS_ArquivoDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_EquipamentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_EquipamentoUnidadeAdministrativaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_RecursoAPIDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_RecursoUsuarioAPIDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_ServicosDAO.cs" />
     <Compile Include="Abstracts\Abstract_SYS_ServicosLogExecucaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_UsuarioAPIDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_ItemAvaliacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_MetodoAvaliacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TipoAtendimentoTurmaDAO.cs" />
@@ -402,6 +406,7 @@
     <Compile Include="ACA_CalendarioEventoDAO.cs" />
     <Compile Include="ACA_CalendarioPeriodoDAO.cs" />
     <Compile Include="ACA_CompromissoEstudoDAO.cs" />
+    <Compile Include="ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
@@ -642,8 +647,11 @@
     <Compile Include="SYS_ArquivoDAO.cs" />
     <Compile Include="SYS_EquipamentoDAO.cs" />
     <Compile Include="SYS_EquipamentoUnidadeAdministrativaDAO.cs" />
+    <Compile Include="SYS_RecursoAPIDAO.cs" />
+    <Compile Include="SYS_RecursoUsuarioAPIDAO.cs" />
     <Compile Include="SYS_ServicosDAO.cs" />
     <Compile Include="SYS_ServicosLogExecucaoDAO.cs" />
+    <Compile Include="SYS_UsuarioAPIDAO.cs" />
     <Compile Include="TUR_ItemAvaliacaoDAO.cs" />
     <Compile Include="TUR_MetodoAvaliacaoDAO.cs" />
     <Compile Include="TUR_TipoAtendimentoTurmaDAO.cs" />

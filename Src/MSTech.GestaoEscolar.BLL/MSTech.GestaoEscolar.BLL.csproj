@@ -176,6 +176,7 @@
     <Compile Include="ACA_CalendarioEventoBO.cs" />
     <Compile Include="ACA_CalendarioPeriodoBO.cs" />
     <Compile Include="ACA_CompromissoEstudoBO.cs" />
+    <Compile Include="ACA_ConfiguracaoServicoPendenciaBO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaBO.cs" />
     <Compile Include="ACA_CurriculoBO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaBO.cs" />
@@ -391,8 +392,11 @@
     <Compile Include="SYS_ArquivoBO.cs" />
     <Compile Include="SYS_EquipamentoBO.cs" />
     <Compile Include="SYS_EquipamentoUnidadeAdministrativaBO.cs" />
+    <Compile Include="SYS_RecursoAPIBO.cs" />
+    <Compile Include="SYS_RecursoUsuarioAPIBO.cs" />
     <Compile Include="SYS_ServicosBO.cs" />
     <Compile Include="SYS_ServicosLogExecucaoBO.cs" />
+    <Compile Include="SYS_UsuarioAPIBO.cs" />
     <Compile Include="TUR_TurmaAberturaAnosAnterioresBO.cs" />
     <Compile Include="TUR_TurmaCurriculoAvaliacaoBO.cs" />
     <Compile Include="TUR_TurmaCurriculoBO.cs" />

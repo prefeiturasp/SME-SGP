@@ -270,6 +270,10 @@ namespace MSTech.GestaoEscolar.BLL
         public bool lancaParecerFinal;
         public int faltasExternas;
         public bool possuiFrequenciaExterna;
+
+        public int tne_id;
+        public int tme_id;
+        public byte tur_tipo;
     }
 
     /// <summary>
@@ -389,6 +393,17 @@ namespace MSTech.GestaoEscolar.BLL
     public class CLS_AlunoAvaliacaoTurmaBO : BusinessBase<CLS_AlunoAvaliacaoTurmaDAO, CLS_AlunoAvaliacaoTurma>
     {
         #region Consultas
+
+        /// <summary>
+        /// Busca os dados de conselho de classe do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public static DataTable BuscaDadosConselhoClasseAlunos(long alu_id, int mtu_id)
+        {
+            return new CLS_AlunoAvaliacaoTurmaDAO().BuscaDadosConselhoClasseAlunos(alu_id, mtu_id);
+        }
 
         /// <summary>
         /// Retorna a frequência acumulada calculada na entidade informada.

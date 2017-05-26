@@ -21,7 +21,7 @@ public partial class Academico_Escola_Busca : MotherPageLogado
     #endregion
 
     #region Propriedades
-
+    public const int _grvEscolas_colunaImportacao = 5;
     public int EditItem_esc_id
     {
         get
@@ -119,7 +119,7 @@ public partial class Academico_Escola_Busca : MotherPageLogado
             odsEscola.SelectParameters.Add("uad_idSuperior", UCFiltroEscolas1._ComboUnidadeAdministrativa.SelectedValue);
             odsEscola.SelectParameters.Add("tua_id", UCComboTipoUAEscola1.Valor.ToString());
             odsEscola.SelectParameters.Add("tce_id", uccTipoClassificacaoEscola.uccTipoClassificacaoVisible ? uccTipoClassificacaoEscola.Valor.ToString() : "0");
-            
+
             // Filtra pela visão do usuário.
             odsEscola.SelectParameters.Add("gru_id", __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
             odsEscola.SelectParameters.Add("usu_id", __SessionWEB.__UsuarioWEB.Usuario.usu_id.ToString());
@@ -180,9 +180,9 @@ public partial class Academico_Escola_Busca : MotherPageLogado
             //concatena o cur_crr_id, que é retornado do combo
             string cur_id;
             string crr_id;
-            if ((__SessionWEB.BuscaRealizada.Filtros.TryGetValue("cur_id", out cur_id)) && (__SessionWEB.BuscaRealizada.Filtros.TryGetValue("crr_id", out crr_id)))            
-                UCComboCursoCurriculo.Valor = new[] {Convert.ToInt32(cur_id), Convert.ToInt32(crr_id)};            
-          
+            if ((__SessionWEB.BuscaRealizada.Filtros.TryGetValue("cur_id", out cur_id)) && (__SessionWEB.BuscaRealizada.Filtros.TryGetValue("crr_id", out crr_id)))
+                UCComboCursoCurriculo.Valor = new[] { Convert.ToInt32(cur_id), Convert.ToInt32(crr_id) };
+
             if (UCFiltroEscolas1._VS_FiltroEscola)
             {
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("uad_idSuperior", out valor);
@@ -243,7 +243,7 @@ public partial class Academico_Escola_Busca : MotherPageLogado
 
                 // Carrega combo de classificações da escola somente se existir tipo cadastrado.
                 uccTipoClassificacaoEscola.Carregar();
-                
+
                 VerificaBusca();
 
                 if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
@@ -260,7 +260,7 @@ public partial class Academico_Escola_Busca : MotherPageLogado
             Page.Form.DefaultButton = _btnPesquisar.UniqueID;
             Page.Form.DefaultFocus = UCComboTipoUAEscola1.Combo_ClientID;
 
-            UCFiltroEscolas1.Visible = (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao 
+            UCFiltroEscolas1.Visible = (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao
                                             || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao);
             _divPesquisa.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
             _btnPesquisar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
@@ -322,7 +322,7 @@ public partial class Academico_Escola_Busca : MotherPageLogado
             }
         }
     }
-    
+
     protected void _grvEscolas_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "ImportacaoFechamento")

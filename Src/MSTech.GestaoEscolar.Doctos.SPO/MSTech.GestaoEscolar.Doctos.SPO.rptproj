@@ -22,6 +22,10 @@
       <FullPath>AlunosJustificativaFalta.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>AnaliseSondagem.rdl</Name>
+      <FullPath>AnaliseSondagem.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>AtaEnriquecimentoCurricular.rdl</Name>
       <FullPath>AtaEnriquecimentoCurricular.rdl</FullPath>
     </ProjectItem>
@@ -150,8 +154,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>AnaliseSondagem.rdl</Name>
-      <FullPath>AnaliseSondagem.rdl</FullPath>
+      <Name>FrequenciaMensal.rdl</Name>
+      <FullPath>FrequenciaMensal.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

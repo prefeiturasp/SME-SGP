@@ -23,7 +23,7 @@
                 <div id="_divPesquisa" runat="server">
                     <uc6:ComboUAEscola ID="ucComboUAEscola" runat="server" CarregarEscolaAutomatico="true"
                         ObrigatorioEscola="false" ObrigatorioUA="false" MostrarMessageSelecioneEscola="true"
-                        MostrarMessageSelecioneUA="true" />
+                        MostrarMessageSelecioneUA="true" FiltroEscolasControladas="true"/>
                     <asp:CheckBox ID="chkPadrao" runat="server" Text="<%$ Resources:Academico, Evento.Busca.chkEventoPadrao.Text %>" 
                         AutoPostBack="True" OnCheckedChanged="chkPadrao_CheckedChanged" />
                     <uc2:_UCComboTipoEvento ID="_UCComboTipoEvento" runat="server" />

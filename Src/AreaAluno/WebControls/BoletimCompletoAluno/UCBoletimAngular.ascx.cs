@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using MSTech.GestaoEscolar.Entities;
 using System.Web;
+using MSTech.Security.Cryptography;
 
 namespace AreaAluno.WebControls.BoletimCompletoAluno
 {
@@ -32,6 +33,36 @@ namespace AreaAluno.WebControls.BoletimCompletoAluno
             set { ViewState["infantil"] = value; }
         }
         protected int tpc_id { get; set; }
+
+        protected string Usuario
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Usuario.usu_login;
+            }
+        }
+
+        protected string Entidade
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString();
+            }
+        }
+
+        protected string Grupo
+        {
+            get
+            {
+                return __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString();
+            }
+        }
+
+        protected string Token
+        {
+            get { return ViewState["Token"] as string ?? string.Empty; }
+            set { ViewState["Token"] = value; }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -80,6 +111,8 @@ namespace AreaAluno.WebControls.BoletimCompletoAluno
             alu_ids = aluId.ToString();
             mtu_ids = mtuId.ToString();
 
+            Token = CreateToken(Usuario, Entidade, Grupo);
+
             if (aluId > 0)
             {
                 var matriculas = ACA_AlunoBO.BuscarMatriculasPeriodos(new long[] { aluId }, new int[] { mtuId });
@@ -94,6 +127,21 @@ namespace AreaAluno.WebControls.BoletimCompletoAluno
                 rptPeriodos.DataBind();
 
             }
+        }
+
+        public static string CreateToken(string usuario, string entidade, string grupo)
+        {
+            var jwtKey = System.Configuration.ConfigurationManager.AppSettings["jwtKey"];
+            SymmetricAlgorithm sa = new SymmetricAlgorithm(SymmetricAlgorithm.Tipo.TripleDES);
+            var currentTime = DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            var expTime = DateTime.UtcNow.AddMinutes(30).ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("Login", usuario);
+            dic.Add("Entity", entidade);
+            dic.Add("Group", grupo);
+            dic.Add("iat", currentTime);
+            dic.Add("exp", expTime);
+            return JWT.JsonWebToken.Encode(dic, sa.Decrypt(jwtKey), JWT.JwtHashAlgorithm.HS256);
         }
     }
 }

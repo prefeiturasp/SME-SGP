@@ -39,6 +39,36 @@ namespace AreaAluno.WebControls.Combos
             }
         }
 
+        public int mtu_id
+        {
+            get
+            {
+                string[] mtu_id_cal_id = ddlAnosLetivos.SelectedValue.Split(',');
+
+                int valor = -1;
+                if (mtu_id_cal_id.Length > 0)
+                {
+                    int.TryParse(mtu_id_cal_id[0], out valor);
+                }
+
+                return valor;
+            }
+
+            set
+            {
+                var valores = (from ListItem item in ddlAnosLetivos.Items
+                               let mtu_id_cal_id = item.Value.Split(',')
+                               where mtu_id_cal_id.Length > 0
+                                     && mtu_id_cal_id[0] == value.ToString()
+                               select item.Value);
+
+                if (valores.Any())
+                {
+                    ddlAnosLetivos.SelectedValue = valores.First();
+                }
+            }
+        }
+
         /// <summary>
         /// Retorna e seta o valor selecionado no combo.
         /// Referente ao campo Ano.
@@ -47,13 +77,26 @@ namespace AreaAluno.WebControls.Combos
         {
             get
             {
-                return Convert.ToInt32(ddlAnosLetivos.SelectedItem.Text);
+                return Convert.ToInt32(ddlAnosLetivos.SelectedItem.Text.Split('-').First().Trim());
             }
             set
             {
-                if (ddlAnosLetivos.Items.Cast<ListItem>().Any(p => p.Text == value.ToString()))
+                var valores = (from ListItem item in ddlAnosLetivos.Items
+                               let texto = item.Text.Split(',')
+                               where texto.Length > 0
+                                     && texto[0] == value.ToString()
+                               select item.Text);
+
+                if (valores.Any())
                 {
-                    ddlAnosLetivos.SelectedValue = ddlAnosLetivos.Items.FindByText(value.ToString()).Value;
+                    if (ddlAnosLetivos.Items.Cast<ListItem>().Any(p => p.Text == valores.First()))
+                    {
+                        ddlAnosLetivos.SelectedValue = ddlAnosLetivos.Items.FindByText(valores.First()).Value;
+                    }
+                    else
+                    {
+                        ddlAnosLetivos.SelectedValue = ddlAnosLetivos.Items.Cast<ListItem>().Last().Value;
+                    }
                 }
                 else
                 {
@@ -91,10 +134,16 @@ namespace AreaAluno.WebControls.Combos
             // Exibe o combo quando tem mais de 1 item.
             divAnosLetivos.Visible = ddlAnosLetivos.Items.Count > 0;
 
+            var valores = (from ListItem item in ddlAnosLetivos.Items
+                           let mtu_id_cal_id = item.Value.Split(',')
+                           where mtu_id_cal_id.Length > 0
+                                 && mtu_id_cal_id[0] == mtu_id.ToString()
+                           select item.Value);
+
             // Selecionar o mtu_id que está na sessão do aluno.
-            if (ddlAnosLetivos.Items.FindByValue(mtu_id.ToString()) != null)
+            if (valores.Any())
             {
-                ddlAnosLetivos.SelectedValue = mtu_id.ToString();
+                ddlAnosLetivos.SelectedValue = valores.First();
             }
         }
         #endregion Métodos

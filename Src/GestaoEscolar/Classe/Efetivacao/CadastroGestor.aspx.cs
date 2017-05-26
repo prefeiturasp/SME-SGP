@@ -10,6 +10,8 @@
     using System.Data;
     using System.Linq;
     using System.Web;
+    using System.Web.Script.Services;
+    using System.Web.Services;
     using System.Web.UI;
     using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
@@ -728,6 +730,12 @@
             rptAlunos.DataBind();
 
             updDadosAluno.Update();
+        }
+
+        [WebMethod]
+        public static string VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado, bool chamadaJavaScript)
+        {
+            return WebControls.AlunoEfetivacaoObservacao.UCAlunoEfetivacaoObservacaoGeral.VerificarIntegridadeParecerEOL(CodigoEOLTurma, CodigoEOLAluno, resultado, chamadaJavaScript);
         }
 
         #endregion

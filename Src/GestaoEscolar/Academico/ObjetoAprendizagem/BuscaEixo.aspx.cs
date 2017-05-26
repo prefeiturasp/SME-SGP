@@ -108,8 +108,10 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
                     }
                     else if (Session["tds_id_oae"] != null)
                     {
-                        LoadPage(Convert.ToInt32(Session["tds_id_oae"]));
+                        int cal_ano = Session["cal_ano_oae"] != null ? Convert.ToInt32(Session["cal_ano_oae"]) : 0;
+                        LoadPage(Convert.ToInt32(Session["tds_id_oae"]), cal_ano);
                         Session["tds_id_oae"] = null;
+                        Session["cal_ano_oae"] = null;
                     }
                     else
                     {
@@ -404,10 +406,13 @@ namespace GestaoEscolar.Academico.ObjetoAprendizagem
 
         #region MÉTODOS
 
-        private void LoadPage(int tds_id)
+        private void LoadPage(int tds_id, int cal_ano = 0)
         {
             try
             {
+                if (cal_ano > 0)
+                    UCComboAnoLetivo1.ano = cal_ano;
+
                 _VS_tds_id = tds_id;
                 var tds = new ACA_TipoDisciplina { tds_id = tds_id };
                 ACA_TipoDisciplinaBO.GetEntity(tds);

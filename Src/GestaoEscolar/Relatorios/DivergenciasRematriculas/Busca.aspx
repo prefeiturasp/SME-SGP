@@ -35,7 +35,7 @@
                     <div id="_divPesquisa" class="divPesquisa area-form" runat="server">
                         <asp:Label ID="lblAvisoMensagem" runat="server"></asp:Label>
                         <!-- FiltrosPadrao -->
-                        <uc3:UCComboUAEscola ID="UCComboUAEscola" runat="server" CarregarEscolaAutomatico="true"
+                        <uc3:UCComboUAEscola ID="UCComboUAEscola" runat="server" CarregarEscolaAutomatico="true" FiltroEscolasControladas="true"
                             MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" OnIndexChangedUA="UCComboUAEscola_IndexChangedUA"
                             OnIndexChangedUnidadeEscola="UCComboUAEscola_IndexChangedUnidadeEscola" ValidationGroup="Resultados" 
                             ObrigatorioEscola="false" ObrigatorioUA="true" />

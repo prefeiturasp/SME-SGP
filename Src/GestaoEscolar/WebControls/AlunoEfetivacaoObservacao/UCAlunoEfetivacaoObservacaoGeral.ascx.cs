@@ -4,12 +4,17 @@ using MSTech.CoreSSO.BLL;
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.CustomResourceProviders;
 using MSTech.GestaoEscolar.Entities;
+using MSTech.GestaoEscolar.ObjetosSincronizacao.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -273,6 +278,26 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             set
             {
                 ViewState["VS_tud_ids"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Lista com as configurações do serviço de pendência.
+        /// </summary>
+        public List<ACA_ConfiguracaoServicoPendencia> VS_ConfiguracaoServicoPendencia
+        {
+            get
+            {
+                if (ViewState["VS_ConfiguracaoServicoPendencia"] != null)
+                {
+                    return (List<ACA_ConfiguracaoServicoPendencia>)ViewState["VS_ConfiguracaoServicoPendencia"];
+                }
+
+                return new List<ACA_ConfiguracaoServicoPendencia>();
+            }
+            set
+            {
+                ViewState["VS_ConfiguracaoServicoPendencia"] = value;
             }
         }
 
@@ -730,6 +755,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMensagem.Attributes.Remove("hide");
             try
             {
                 ScriptManager sm = ScriptManager.GetCurrent(this.Page);
@@ -752,6 +778,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
         {
             try
             {
+                lblMensagemResultadoErro.Attributes.Add("class", "hide");
+                lblMensagemResultadoInvalido.Attributes.Add("class", "hide");
                 byte resultado = 0;
                 string justificativaResultado = string.Empty;
 
@@ -774,6 +802,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     if (!string.IsNullOrEmpty(ddlResultado.SelectedValue))
                     {
                         resultado = Convert.ToByte(ddlResultado.SelectedValue == "-1" ? "0" : ddlResultado.SelectedValue);
+                    }
+
+                    if (resultado > 0 && 
+                        !Convert.ToBoolean(VerificarIntegridadeParecerEOL(hdnCodigoEOLTurma.Value, hdnCodigoEOLAluno.Value, ddlResultado.SelectedItem.Text, false)))
+                    {
+                        throw new ValidationException("O parecer conclusivo selecionado está divergente com o cadastrado no EOL.");
                     }
                 }
 
@@ -1033,11 +1067,13 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divCadastroObservacaoGeral\\').scrollTo(0,0);', 0);", true);
                 lblMensagem.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divCadastroObservacaoGeral\\').scrollTo(0,0);', 0);", true);
                 lblMensagem.Text = UtilBO.GetErroMessage(RetornaValorResource("ErroSalvar"), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1060,6 +1096,9 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
                     //Mescla as linhas de falta, total de ausencias, %freq e total comp. para os componentes da regencia
                     byte tud_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tud_Tipo"));
+                    int tne_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tne_id"));
+                    int tme_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tme_id"));
+                    byte tur_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tur_tipo"));
 
                     if (tipoComponenteRegencia(tud_tipo))
                     {
@@ -1132,10 +1171,11 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     SetaCamposAvaliacao((EscalaAvaliacaoTipo)EntEscalaAvaliacao.esa_tipo, txtNotaFinal, DataBinder.Eval(e.Item.DataItem, "MediaFinal").ToString(),
                                         ddlParecerFinal, lblNotaFinal, VS_tpc_idUltimoPeriodo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "UltimoBimestre").ToString()),
                                         Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()), fechamentoFinalAberto, true);
-
+                    
                     HtmlTableCell tdNotaFinal = (HtmlTableCell)e.Item.FindControl("tdNotaFinal");
                     AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdNotaFinal, true, DataBinder.Eval(e.Item.DataItem, "MediaFinal").ToString(), false, false,
-                                    eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()));
+                                    eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()), -1, -1,
+                                    VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semSintese));
 
                     HtmlTableCell tdFrequenciaAjustada = (HtmlTableCell)e.Item.FindControl("tdTotFrequenciaAjustada");
                     AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false,
@@ -1189,6 +1229,9 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     DropDownList ddlParecerFinal = (DropDownList)e.Item.FindControl("ddlParecerFinal");
 
                     byte tud_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tud_Tipo"));
+                    int tne_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tne_id"));
+                    int tme_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tme_id"));
+                    byte tur_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tur_tipo"));
 
                     if (ddlParecerFinal != null)
                     {
@@ -1201,7 +1244,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
                         HtmlTableCell tdParecerFinal = (HtmlTableCell)e.Item.FindControl("tdParecerFinal");
                         AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, lancaParecerFinal, valor, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
-                                        Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()));
+                                        Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()), -1, -1,
+                                        VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semResultadoFinal));
                         ddlParecerFinal.Enabled = permiteEditar && TipoFechamento <= 0 && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "UltimoBimestre"));
                         ddlParecerFinal.Visible = permiteEditar && TipoFechamento <= 0 && bimestreAtivo && lancaParecerFinal;
 
@@ -1286,6 +1330,9 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     DropDownList ddlParecerFinal = (DropDownList)e.Item.FindControl("ddlParecerFinal");
 
                     byte tud_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tud_Tipo"));
+                    int tne_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tne_id"));
+                    int tme_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tme_id"));
+                    byte tur_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tur_tipo"));
 
                     if (ddlParecerFinal != null)
                     {
@@ -1298,7 +1345,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
                         HtmlTableCell tdParecerFinal = (HtmlTableCell)e.Item.FindControl("tdParecerFinal");
                         AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, lancaParecerFinal, valor, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
-                                        Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()));
+                                        Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()), -1, -1,
+                                        VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semResultadoFinal));
                         ddlParecerFinal.Enabled = permiteEditar && TipoFechamento <= 0 && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "UltimoBimestre"));
                         ddlParecerFinal.Visible = permiteEditar && TipoFechamento <= 0 && bimestreAtivo && lancaParecerFinal;
 
@@ -1400,6 +1448,9 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     }
 
                     int tpc_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tpc_id"));
+                    int tne_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tne_id"));
+                    int tme_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tme_id"));
+                    byte tur_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tur_tipo"));
                     string nota = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.Nota"));
                     if (string.IsNullOrEmpty(nota) || nota == "-")
                     {
@@ -1422,13 +1473,16 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
 
                     HtmlTableCell tdConceito = (HtmlTableCell)e.Item.FindControl("tdConceito");
-                    AlterarCorFundo(tpc_id, tdConceito, false, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia);
+                    AlterarCorFundo(tpc_id, tdConceito, false, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, -1, -1,
+                                    VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semNota));
 
                     HtmlTableCell tdNota = (HtmlTableCell)e.Item.FindControl("tdNota");
-                    AlterarCorFundo(tpc_id, tdNota, true, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia);
+                    AlterarCorFundo(tpc_id, tdNota, true, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, -1, -1,
+                                    VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semNota));
 
                     HtmlTableCell tdNotaPosConselho = (HtmlTableCell)e.Item.FindControl("tdNotaPosConselho");
-                    AlterarCorFundo(tpc_id, tdNotaPosConselho, true, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia);
+                    AlterarCorFundo(tpc_id, tdNotaPosConselho, true, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, -1, -1,
+                                    VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semNota));
 
                     bool recuperacao = false;
                     bool enriquecimentoCurricular = false;
@@ -1443,11 +1497,13 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     {
                         long tud_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "nota.tud_id"));
                         int cal_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "nota.cal_id"));
-                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, validarQtdAulas, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, tud_id, cal_id);
+                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, validarQtdAulas, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, tud_id, cal_id,
+                                        VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_disciplinaSemAula));
                     }
                     else
                     {
-                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, validarQtdAulas, existeAulaBimestre, SituacaoDisciplina, esconderPendencia);
+                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, validarQtdAulas, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, -1, -1,
+                                        VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_disciplinaSemAula));
                     }
                 }
             }
@@ -1468,6 +1524,9 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     bool bimestreAtivo = BimestreAtivo(VS_tpc_idUltimoPeriodo);
                     long tud_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "tud_id"));
                     int cal_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "cal_id"));
+                    int tne_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tne_id"));
+                    int tme_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tme_id"));
+                    byte tur_tipo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "tur_tipo"));
 
                     DropDownList ddlParecerFinal = (DropDownList)e.Item.FindControl("ddlParecerFinal");
                     if (ddlParecerFinal != null)
@@ -1480,7 +1539,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                         HtmlTableCell tdParecerFinal = (HtmlTableCell)e.Item.FindControl("tdParecerFinal");
                         AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, true, valor, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
                                         Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto
-                                        , tud_id, cal_id);
+                                        , tud_id, cal_id, VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semResultadoFinal));
                         ddlParecerFinal.Enabled = permiteEditar && TipoFechamento <= 0 && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "UltimoBimestre"));
                         ddlParecerFinal.Visible = permiteEditar && TipoFechamento <= 0 && bimestreAtivo;
 
@@ -2000,6 +2059,14 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     lblNumeroChamada.Text = "-";
                 }
                 lblCodigoEol.Text = dados.alc_matricula;
+
+                hdnCodigoEOLAluno.Value = dados.alc_matricula;
+                hdnCodigoEOLTurma.Value = dados.tur_codigoEOL;
+
+                lblMensagemResultadoInvalido.Text = UtilBO.GetErroMessage("O parecer conclusivo selecionado está divergente com o cadastrado no EOL.", UtilBO.TipoMensagem.Alerta);
+
+                lblMensagemResultadoErro.Text = UtilBO.GetErroMessage("Erro ao tentar buscar os dados cadastrados no EOL.", UtilBO.TipoMensagem.Alerta);
+
                 lblSituacaoMatriculaEntrada.Text = string.Format("{0} {1:dd/MM/yyyy}", RetornaValorResource("MatriculadoEm"), dados.mtu_dataMatricula);
                 if (dados.mtu_dataSaida != DateTime.MinValue)
                 {
@@ -2162,6 +2229,11 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                 VS_crr_id = dadosAluno.crr_id;
                 VS_crp_id = dadosAluno.crp_id;
 
+                VS_ConfiguracaoServicoPendencia = new List<ACA_ConfiguracaoServicoPendencia>();
+
+                foreach (var dado in dadosAluno.listaNotasEFaltas.GroupBy(d => new { tne_id = d.tne_id, tme_id = d.tme_id, tur_tipo = d.tur_tipo }))
+                    VS_ConfiguracaoServicoPendencia.AddRange(ACA_ConfiguracaoServicoPendenciaBO.SelectTodasBy_tne_id_tme_id_tur_tipo(dado.Key.tne_id, dado.Key.tme_id, dado.Key.tur_tipo));
+                
                 // Seta o valor do parecer conclusivo do aluno.
                 if (dadosAluno.listaNotasEFaltas.Count > 0)
                 {
@@ -2214,7 +2286,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     if (!periodo.inativoBimestre && PermiteEditar(VS_tpc_idUltimoPeriodo) && (TpcIdFechamento == -1 || TpcIdFechamento == VS_tpc_idUltimoPeriodo))
                     {
                         ddlResultado.Enabled = true;
-                        if (ddlResultado.SelectedValue == "-1")
+                        if (ddlResultado.SelectedValue == "-1" && !VS_ConfiguracaoServicoPendencia.Any(p => (p.tur_tipo == 1 || p.tur_tipo <= 0) && p.csp_semParecer))
                         {
                             divParecerConclusivo.Style["background-color"] = ApplicationWEB.CorPendenciaDisciplina;
                         }
@@ -2904,6 +2976,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                                            ,
                                                                            bNota.cal_id
                                                                        }).FirstOrDefault()
+                                                            ,
+                                                            tur_tipo = g.First().tur_tipo
+                                                            ,
+                                                            tne_id = g.First().tne_id
+                                                            ,
+                                                            tme_id = g.First().tme_id
                                                         })
                                                         ,
                                             cal_id = g.First().cal_id
@@ -2918,6 +2996,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                             possuiFrequenciaExterna = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? false :
                                                                         g.First().tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada || g.Any(p => p.naoExibirFrequencia) ? false :
                                                                         ParecerConclusivoDados.Any(b => b.Disciplina == g.Key && b.possuiFrequenciaExterna)
+                                            ,
+                                            tur_tipo = g.First().tur_tipo
+                                            ,
+                                            tne_id = g.First().tne_id
+                                            ,
+                                            tme_id = g.First().tme_id
                                         }).ToList();
 
             var experiencias = (from DadosFechamento item in ParecerConclusivoDados
@@ -3080,6 +3164,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                                        ,
                                                                        bNota.cal_id
                                                                    }).FirstOrDefault()
+                                                        ,
+                                                        tur_tipo = g.First().tur_tipo
+                                                        ,
+                                                        tne_id = g.First().tne_id
+                                                        ,
+                                                        tme_id = g.First().tme_id
                                                     })
                                                     ,
                                         cal_id = g.First().cal_id
@@ -3093,6 +3183,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                         ,
                                         possuiFrequenciaExterna = (g.ToList().TrueForAll(b => !BimestreAtivo(b.tpc_id)) || g.ToList().TrueForAll(b => NaoVisualizarDados(b.tpc_id))) ? false :
                                                                     ParecerConclusivoDados.Any(b => b.tud_id == g.Key && b.possuiFrequenciaExterna)
+                                        ,
+                                        tur_tipo = g.First().tur_tipo
+                                        ,
+                                        tne_id = g.First().tne_id
+                                        ,
+                                        tme_id = g.First().tme_id
                                     }).ToList();
 
             List<ACA_Evento> eventos = ACA_EventoBO.GetEntity_Efetivacao_List(ParecerConclusivoDados.OrderByDescending(i => i.tpc_ordem).FirstOrDefault().cal_id,
@@ -3249,7 +3345,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
         /// <param name="validarFreq">Indica se deve validar frequência</param>
         /// <param name="existeAulaBimestre">Indica se existe aula no bimestre.</param>
         private void AlterarCorFundo(int tpc_id, HtmlTableCell td, bool validarNota, string nota, bool validarFreq, bool existeAulaBimestre
-            , eSituacaoMatriculaTurmaDisicplina SituacaoDisciplina, bool esconderPendencia, long tud_id = -1, int cal_id = -1)
+            , eSituacaoMatriculaTurmaDisicplina SituacaoDisciplina, bool esconderPendencia, long tud_id = -1, int cal_id = -1, bool configServPendencia = false)
         {
             if (td != null)
             {
@@ -3272,7 +3368,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                 {
                     case eSituacaoMatriculaTurmaDisicplina.Dispensado:
                         {
-                            if (!esconderPendencia)
+                            if (!esconderPendencia && !configServPendencia)
                                 td.Style.Add("background-color", ApplicationWEB.CorPendenciaDisciplina);
                             break;
                         }
@@ -3300,7 +3396,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                     {
                                         if (string.IsNullOrEmpty(nota) || nota == "-")
                                         {
-                                            if (!esconderPendencia)
+                                            if (!esconderPendencia && !configServPendencia)
                                                 td.Style.Add("background-color", ApplicationWEB.CorPendenciaDisciplina);
                                         }
                                     }
@@ -3309,7 +3405,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                     {
                                         if (!existeAulaBimestre)
                                         {
-                                            if (!esconderPendencia)
+                                            if (!esconderPendencia && !configServPendencia)
                                                 td.Style.Add("background-color", ApplicationWEB.CorPendenciaDisciplina);
                                         }
                                     }
@@ -3321,7 +3417,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                 {
                                     if (string.IsNullOrEmpty(nota) || nota == "-")
                                     {
-                                        if (!esconderPendencia)
+                                        if (!esconderPendencia && !configServPendencia)
                                             td.Style.Add("background-color", ApplicationWEB.CorPendenciaDisciplina);
                                     }
                                 }
@@ -3330,7 +3426,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                 {
                                     if (!existeAulaBimestre)
                                     {
-                                        if (!esconderPendencia)
+                                        if (!esconderPendencia && !configServPendencia)
                                             td.Style.Add("background-color", ApplicationWEB.CorPendenciaDisciplina);
                                     }
                                 }
@@ -3997,6 +4093,67 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             liRecomendacaoAluno.Visible = fdsRecomendacoesAluno.Visible = possuiPermissaoVisualizacaoAbaRecomendacaoAluno;
             liRecomendacaoResponsavel.Visible = fdsRecomendacoesPais.Visible = possuiPermissaoVisualizacaoAbaRecomendacaoResponsavel;
             liAnotacoesAluno.Visible = fdsAnotacoes.Visible = possuiPermissaoVisualizacaoAbaAnotacoesAluno;
+        }
+
+        /// <summary>
+        /// Verifica integridade do resultado do aluno com o EOL.
+        /// </summary>
+        /// <param name="CodigoEOLTurma"></param>
+        /// <param name="CodigoEOLAluno"></param>
+        /// <param name="resultado"></param>
+        /// <returns></returns>
+        public static string VerificarIntegridadeParecerEOL(string CodigoEOLTurma, string CodigoEOLAluno, string resultado, bool chamadaJavaScript)
+        {
+            string retorno = "";
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    SYS_RecursoAPI recurso = new SYS_RecursoAPI { rap_id = (int)eRecursoAPI.ParecerConclusivoEOL };
+                    SYS_RecursoAPIBO.GetEntity(recurso);
+
+                    if (recurso.IsNew || string.IsNullOrEmpty(recurso.rap_url) || recurso.rap_situacao == (byte)RecursoAPISituacao.Excluido)
+                        return "true";
+
+                    client.BaseAddress = new Uri(recurso.rap_url);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    List<SYS_UsuarioAPI> lstUsuario = SYS_RecursoUsuarioAPIBO.SelecionaUsuarioPorRecurso(eRecursoAPI.ParecerConclusivoEOL);
+
+                    if (lstUsuario.Any())
+                    {
+                        var auth = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", lstUsuario.First().uap_usuario, lstUsuario.First().uap_senha));
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(auth));
+                    }
+
+                    HttpResponseMessage response = client.GetAsync(string.Format("GetResultadoAluno?CodigoEOLTurma={0}&CodigoEOLAluno={1}", CodigoEOLTurma, CodigoEOLAluno)).Result;
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        ParecerConclusivo parecerEOL = response.Content.ReadAsAsync<ParecerConclusivo>().Result;
+                        retorno = (string.IsNullOrEmpty(parecerEOL.Resultado) || parecerEOL.Resultado.ToString().Equals(resultado, StringComparison.OrdinalIgnoreCase)).ToString();
+                    }
+                    else
+                        throw new ValidationException("Erro ao tentar buscar os dados cadastrados no EOL.");
+                }
+
+                return retorno;
+            }
+            catch (ValidationException ex)
+            {
+                if (!chamadaJavaScript)
+                    throw ex;
+                else
+                    return "";
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                if (!chamadaJavaScript)
+                    throw new ValidationException("Erro ao tentar buscar os dados cadastrados no EOL.");
+                else
+                    return "";
+            }
         }
 
         #endregion Métodos

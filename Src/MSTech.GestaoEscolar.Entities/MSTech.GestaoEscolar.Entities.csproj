@@ -122,6 +122,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEvento.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioPeriodo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ConfiguracaoServicoPendencia.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_ACA_Curriculo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplina.cs" />
@@ -357,8 +358,11 @@
     <Compile Include="Abstracts\Abstract_SYS_Arquivo.cs" />
     <Compile Include="Abstracts\Abstract_SYS_Equipamento.cs" />
     <Compile Include="Abstracts\Abstract_SYS_EquipamentoUnidadeAdministrativa.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_RecursoAPI.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_RecursoUsuarioAPI.cs" />
     <Compile Include="Abstracts\Abstract_SYS_Servicos.cs" />
     <Compile Include="Abstracts\Abstract_SYS_ServicosLogExecucao.cs" />
+    <Compile Include="Abstracts\Abstract_SYS_UsuarioAPI.cs" />
     <Compile Include="Abstracts\Abstract_TUR_ItemAvaliacao.cs" />
     <Compile Include="Abstracts\Abstract_TUR_MetodoAvaliacao.cs" />
     <Compile Include="Abstracts\Abstract_TUR_TipoAtendimentoTurma.cs" />
@@ -389,6 +393,7 @@
     <Compile Include="ACA_AreaConhecimento.cs" />
     <Compile Include="ACA_ArquivoArea.cs" />
     <Compile Include="ACA_CompromissoEstudo.cs" />
+    <Compile Include="ACA_ConfiguracaoServicoPendencia.cs" />
     <Compile Include="ACA_EventoLimite.cs" />
     <Compile Include="ACA_MotivoBaixaFrequencia.cs" />
     <Compile Include="ACA_ObjetoAprendizagem.cs" />
@@ -648,8 +653,11 @@
     <Compile Include="SYS_Arquivo.cs" />
     <Compile Include="SYS_Equipamento.cs" />
     <Compile Include="SYS_EquipamentoUnidadeAdministrativa.cs" />
+    <Compile Include="SYS_RecursoAPI.cs" />
+    <Compile Include="SYS_RecursoUsuarioAPI.cs" />
     <Compile Include="SYS_Servicos.cs" />
     <Compile Include="SYS_ServicosLogExecucao.cs" />
+    <Compile Include="SYS_UsuarioAPI.cs" />
     <Compile Include="TUR_ItemAvaliacao.cs" />
     <Compile Include="TUR_MetodoAvaliacao.cs" />
     <Compile Include="TUR_TipoAtendimentoTurma.cs" />

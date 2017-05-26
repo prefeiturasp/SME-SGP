@@ -53,5 +53,7 @@ namespace MSTech.GestaoEscolar.Entities
 		public byte tud_tipo { get; set; }
 		public int tud_cargaHorariaSemanal { get; set; }
         public bool fav_fechamentoAutomatico { get; set; }
-	}
+        public byte fav_tipoApuracaoFrequencia { get; set; }
+
+    }
 }

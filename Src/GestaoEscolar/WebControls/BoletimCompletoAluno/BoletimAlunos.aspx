@@ -32,6 +32,11 @@
         var api = '<%= MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB.UrlGestaoAcademicaWebApi %>';
         var msgDocenciaCompartilhada = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCDadosBoletimAluno.MensagemCompartilhada") %>';
         var msgAlunoSemDadosPeriodo = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemAlunoSemDadosPeriodo") %>';
+
+        var Usuario = '<%= Usuario %>';
+        var Entidade = '<%= Entidade %>';
+        var Grupo = '<%= Grupo %>';
+        var Token = '<%= Token %>';
     </script>
 
     <form id="form1" runat="server">

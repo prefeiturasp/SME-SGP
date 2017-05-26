@@ -33,6 +33,11 @@
         var msgAlunoSemDadosPeriodo = '<%= GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemAlunoSemDadosPeriodo") %>';
         var msgSemEventoLiberado = '<%= infantil ? GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemSemEventoLiberadoInfantil") :
                                         GetGlobalResourceObject("WebControls", "BoletimCompletoAluno.UCBoletimAngular.MensagemSemEventoLiberado") %>';
+
+        var Usuario = '<%= Usuario %>';
+        var Entidade = '<%= Entidade %>';
+        var Grupo = '<%= Grupo %>';
+        var Token = '<%= Token %>';
    
     </script>
 
@@ -266,7 +271,7 @@
                                                             <div ng-class="boletim.cicloClass">
                                                                 <div class="divResultados">
                                                                     <div>
-                                                                        <span class="itemBoletim"><span ng-if="!boletim.ensinoInfantil">{{boletim.nomeNota}}s e </span>Faltas</span>
+                                                                        <span class="itemBoletim"><span ng-if="!boletim.ensinoInfantil" class="span-uppercase">{{boletim.nomeNota}}s e </span> Faltas</span>
                                                                     </div>
                                                                     <table class="tblBoletim" rules="none" ng-if="!boletim.ensinoInfantil">
                                                                         <thead>

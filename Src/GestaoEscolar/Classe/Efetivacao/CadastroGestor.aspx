@@ -6,6 +6,9 @@
 <%@ Register Src="~/WebControls/AlunoEfetivacaoObservacao/UCAlunoEfetivacaoObservacaoGeral.ascx" TagName="UCAlunoEfetivacaoObservacaoGeral" TagPrefix="uc4" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        var pageName = "CadastroGestor.aspx";
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdatePanel ID="upnMensagem" runat="server" UpdateMode="Always">

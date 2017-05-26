@@ -339,9 +339,9 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         /// <param name="esc_id">ID da escola</param>
         /// <param name="uni_id">ID da unidade</param>
         /// <param name="cur_situacao">Situação do curso</param>
-        public void CarregarPorEscolaSituacaoCurso(int esc_id, int uni_id, byte cur_situacao)
+        public void CarregarPorEscolaSituacaoCurso(int esc_id, int uni_id, byte cur_situacao, bool mostraEJAModalidades = false)
         {
-            CarregarCombo(ACA_CursoBO.SelecionaCursoCurriculo(esc_id, uni_id, cur_situacao, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
+            CarregarCombo(ACA_CursoBO.SelecionaCursoCurriculo(esc_id, uni_id, cur_situacao, __SessionWEB.__UsuarioWEB.Usuario.ent_id, mostraEJAModalidades, ApplicationWEB.AppMinutosCacheLongo));
         }
 
         /// <summary>
@@ -422,9 +422,9 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         /// <param name="esc_id">ID da escola</param>
         /// <param name="uni_id">ID da unidade</param>
         /// <param name="cur_situacao">Situação do curso</param>
-        public void CarregarComDisciplinaEletiva(int esc_id, int uni_id, int cur_situacao)
+        public void CarregarComDisciplinaEletiva(int esc_id, int uni_id, int cur_situacao, bool mostraEJAModalidades = false)
         {
-            CarregarCombo(ACA_CursoBO.SelectCursoComDisciplinaEletiva(esc_id, uni_id, ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id), __SessionWEB.__UsuarioWEB.Usuario.ent_id, cur_situacao, ApplicationWEB.AppMinutosCacheLongo));
+            CarregarCombo(ACA_CursoBO.SelectCursoComDisciplinaEletiva(esc_id, uni_id, ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id), __SessionWEB.__UsuarioWEB.Usuario.ent_id, cur_situacao, mostraEJAModalidades, ApplicationWEB.AppMinutosCacheLongo));
         }
 
         /// <summary>
@@ -450,9 +450,9 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         /// <param name="uni_id">ID da unidade</param>
         /// <param name="cal_id">ID do calendário</param>
         /// <param name="cur_situacao">Situação do curso</param>
-        public void CarregarPorEscolaCalendarioSituacaoCurso(int esc_id, int uni_id, int cal_id, byte cur_situacao)
+        public void CarregarPorEscolaCalendarioSituacaoCurso(int esc_id, int uni_id, int cal_id, byte cur_situacao, bool mostraEJAModalidades = false)
         {
-            CarregarCombo(ACA_CursoBO.SelecionaCursoCurriculoCalendarioEscola(esc_id, uni_id, cur_situacao, __SessionWEB.__UsuarioWEB.Usuario.ent_id, cal_id, ApplicationWEB.AppMinutosCacheLongo));
+            CarregarCombo(ACA_CursoBO.SelecionaCursoCurriculoCalendarioEscola(esc_id, uni_id, cur_situacao, __SessionWEB.__UsuarioWEB.Usuario.ent_id, cal_id, mostraEJAModalidades, ApplicationWEB.AppMinutosCacheLongo));
         }
 
         /// <summary>
@@ -464,9 +464,9 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         /// <param name="cal_id">ID do calendário</param>
         /// <param name="cur_situacao">Situação do curso</param>
         /// <param name="tne_ids">Arrays de ids de nível de ensino</param>
-        public void CarregarPorEscolaCalendarioSituacaoCursoNivelEnsino(int esc_id, int uni_id, int cal_id, byte cur_situacao, int[] tne_ids)
+        public void CarregarPorEscolaCalendarioSituacaoCursoNivelEnsino(int esc_id, int uni_id, int cal_id, byte cur_situacao, int[] tne_ids, bool mostraEJAModalidades = false)
         {
-            List<sComboCurso> lstCurso = ACA_CursoBO.SelecionaCursoCurriculoCalendarioEscola(esc_id, uni_id, cur_situacao, __SessionWEB.__UsuarioWEB.Usuario.ent_id, cal_id, ApplicationWEB.AppMinutosCacheLongo);
+            List<sComboCurso> lstCurso = ACA_CursoBO.SelecionaCursoCurriculoCalendarioEscola(esc_id, uni_id, cur_situacao, __SessionWEB.__UsuarioWEB.Usuario.ent_id, cal_id, mostraEJAModalidades, ApplicationWEB.AppMinutosCacheLongo);
             lstCurso = lstCurso.Where(p => tne_ids.Contains(p.tne_id)).ToList();
             CarregarCombo(lstCurso);
         }

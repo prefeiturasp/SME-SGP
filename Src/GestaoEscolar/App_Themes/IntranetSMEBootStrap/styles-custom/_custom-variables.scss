@@ -1,0 +1,76 @@
+/* Scss Document */
+$paddingLimite: 24px;
+
+$corBordaPadrao: #ddd;
+
+// HEADER / NAVBAR
+$larguraMenuPrincipal: 100px;
+$alturaHeader: 64px;
+
+$larguraMenuPrincipalResponsivo: 56px;
+
+// CONTRASTE ACESSIBILIDADE
+$corFundoContraste: #000;
+$corBordaContraste: #fff;
+$corTextoContraste: #fff;
+$corLinkContraste: #fff200;
+
+// MENU OBJETOS
+$corFundoMenuObjetos: #fff;
+
+// LOGIN
+$corFundoLogin: $brand-primary;
+$corTextoLogin: #fff;
+$corInputErroLogin:#ff8b8d;
+
+// BARRA TITULO TURMA
+$corFundoTituloTurma: $brand-primary;
+$corTextoTituloTurma: #fff;
+
+// GERAL
+@mixin display-flex(){
+	display:-webkit-flex;
+	display:flex;
+}
+
+@mixin box-shadow($sombra){
+	-webkit-box-shadow:$sombra;
+	-moz-box-shadow:$sombra;
+	box-shadow:$sombra;
+}
+
+@mixin border-radius($radius){
+	-webkit-border-radius:$radius;
+	-moz-border-radius:$radius;
+	border-radius:$radius;
+}
+
+@mixin box-sizing($box-sizing: border-box){
+	-webkit-box-sizing:$box-sizing;
+	-moz-box-sizing:$box-sizing;
+	box-sizing:$box-sizing;
+}
+
+@mixin transform($transform){
+	-webkit-transform:$transform;
+	-moz-transform:$transform;
+	transform:$transform;
+}
+
+@mixin transition($transition){
+	-webkit-transition:$transition;
+	-moz-transition:$transition;
+	transition:$transition;
+}
+
+@mixin transition2($transition, $transition2){
+	-webkit-transition:$transition, $transition2;
+	-moz-transition:$transition, $transition2;
+	transition:$transition, $transition2;
+}
+
+@mixin flex($flex){
+	flex:$flex;
+	-webkit-flex:$flex;
+	-moz-flex:$flex;
+}

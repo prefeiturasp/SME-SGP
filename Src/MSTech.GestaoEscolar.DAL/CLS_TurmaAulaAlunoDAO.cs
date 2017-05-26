@@ -968,6 +968,64 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+        /// </summary>
+        /// <param name="ano">Ano das sondagens</param>
+        /// <param name="alu_id">Id do aluno</param>
+        /// <param name="mtu_id">Id da matrícula do aluno na turma</param>
+        /// <returns></returns>
+        public DataTable SelectAnotacoesBy_Aluno(int ano, long alu_id, int mtu_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_TurmaAulaAluno_SelectAnotacoesBy_Aluno", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@ano";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = ano;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@alu_id";
+                Param.Size = 8;
+                Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@mtu_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                if (mtu_id > 0)
+                {
+                    Param.Value = mtu_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Parâmetros para efetuar a inclusão preservando a data de criação
         /// </summary>
         /// <param name="qs"></param>
