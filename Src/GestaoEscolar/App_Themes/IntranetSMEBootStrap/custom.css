@@ -587,7 +587,6 @@ input[type="number"].form-control {
     overflow: hidden;
     position: relative; }
     .info-header .foto-aluno img {
-      width: 105%;
       position: relative;
       left: -2.5%;
       top: -3px;
@@ -1123,9 +1122,10 @@ button.btn-primary {
       .info-header .foto-aluno .imgFoto {
         margin-top: 0;
         margin-left: 0;
-        height: auto;
-        right: auto;
-        max-width: none !important; }
+        min-width: 110%;
+        position: relative;
+        height: 110%;
+      }
     .info-header .info-aluno {
       margin-left: 90px;
       min-height: 100px; }
