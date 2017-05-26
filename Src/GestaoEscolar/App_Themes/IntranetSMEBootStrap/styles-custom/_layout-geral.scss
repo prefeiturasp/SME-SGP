@@ -266,6 +266,10 @@ footer{
 		margin-left: -15px;
 		margin-right: -15px;
 	}
+
+	.summary{
+		font-size:0.9rem;
+	}
 }
 
 #acontent{
@@ -532,8 +536,8 @@ input[type="number"].form-control{
 }
 
 .nav-list-scroll{
-	max-height: calc(100vh - 265px);
-	overflow: auto;
+	max-height: calc(100vh - 350px);
+	overflow:auto;
 }
 
 .nav-list{

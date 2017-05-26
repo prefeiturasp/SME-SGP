@@ -24,9 +24,10 @@
     <script src="../../Includes/Angular/justificativaFalta.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/movimentacao.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/matriculaTurma.controller.js" type="text/javascript"></script>
-    <script src="../../Includes/Angular/conselhoClasse.controller.js" type="text/javascript"></script>    
+    <script src="../../Includes/Angular/conselhoClasse.controller.js" type="text/javascript"></script>
+    <script src="../../Includes/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>   
     <script src="../../Includes/scrolling.js" type="text/javascript"></script>
-    <script src="../../Includes/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+    
 
     <script type="text/javascript">
         var params =
@@ -115,7 +116,7 @@
 
                             <a href="#nav-list-collapse" class="btn btn-primary btn-nav-toggle" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="nav-list-collapse"><i class="material-icons">&#xE5D2;</i></a>
                             <div class="collapse" id="nav-list-collapse">
-                                <div class="nav-list-scroll scrollCustom">
+                                <div class="nav-list-scroll mCustomScrollbar" data-mcs-theme="dark">
                                     <ul class="nav-list" id="nav-list">
                                         <li>
                                             <a href="#area-notas-faltas" onclick="menuClick(this)">{{matricula.nomeNota}}s e faltas</a>
@@ -523,13 +524,6 @@
                 </div>
             </div>
         </div>
-    </form>
-
-    <script>
-        $(".scrollCustom").mCustomScrollbar({
-            scrollButtons: { enable: false }, // horizontal scrollbar
-            theme: "dark-3"
-        });
-    </script>
+    </form>    
 </body>
 </html>
