@@ -118,7 +118,7 @@
                                 <div class="nav-list-scroll scrollCustom">
                                     <ul class="nav-list" id="nav-list">
                                         <li>
-                                            <a href="#area-notas-faltas" onclick="menuClick(this)">Notas e faltas</a>
+                                            <a href="#area-notas-faltas" onclick="menuClick(this)">{{matricula.nomeNota}}s e faltas</a>
                                         </li>
                                         <li>
                                             <a href="#area-obs-conselho" onclick="menuClick(this)">Observações do conselho de classe</a>

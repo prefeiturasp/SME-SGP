@@ -21,6 +21,7 @@
         public string tur_codigo { get; set; }
         public string tci_nome { get; set; }
         public long arq_idFoto { get; set; }
+        public string nomeNota { get; set; }
     }
     
 }
