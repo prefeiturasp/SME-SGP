@@ -413,11 +413,6 @@
                                                             <li ng-repeat="questao in sondagem.questoes">
                                                                 <span class="list-header">{{questao.descricao}}</span>
                                                                 <div class="obs-block" ng-repeat="agendamento in questao.agendamentos">
-                                                                    <%--<ul class="list sub">
-                                                                        <li ng-repeat="resposta in agendamento.respostas">
-                                                                            <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
-                                                                        </li>
-                                                                    </ul>--%>
                                                                     <p ng-repeat="resposta in agendamento.respostas">
                                                                         <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
                                                                     </p>

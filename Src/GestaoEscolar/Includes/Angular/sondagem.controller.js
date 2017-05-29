@@ -111,6 +111,9 @@
                 var graphSeries = [];
                 var graphData = [];
                 var agendamentos = [];
+
+                //graphLabels.push("");
+
                 for (var a = 0; a < list[s].agendamentos.length; a++) {
 
                     var agendamento = { idQuestao: -1, data: list[s].agendamentos[a].dataInicio, respostas: [] }
@@ -160,15 +163,39 @@
                                     graphData.push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
+                        } else {
+                            var resposta = $filter('filter')(list[s].respostas, { id: list[s].agendamentos[a].respostasAluno[r].idResposta }, true);
+
+                            if (graphSeries.indexOf("Sondagem: " + list[s].titulo) == -1) {
+                                graphSeries.push("Sondagem: " + list[s].titulo);
+                            }
+
+                            if (resposta.length) {
+                                agendamento.respostas.push({ id: -1, subQuestao: "", resposta: resposta[0].descricao })
+                                graphData.push({ questao: "Sondagem: " + list[s].titulo, resposta: resposta[0].descricao, idResposta: resposta[0].id });
+                            }
+                            else {
+                                agendamento.respostas.push({ id: -1, subQuestao: "", resposta: "" })
+                                graphData.push({ questao: "Sondagem: " + list[s].titulo, resposta: "", idResposta: 0 });
+                            }
                         }
                     }
 
                     agendamentos.push(agendamento);
                 }
 
-                for (var q = 0; q < list[s].questoes.length; q++) {
+                //graphLabels.push("");
 
-                    list[s].questoes[q]["agendamentos"] = $filter('filter')(agendamentos, { idQuestao: list[s].questoes[q].id }, true);
+                if (!list[s].questoes.length) {
+                    list[s].questoes = [];
+                    list[s].questoes.push({ descricao: "" });
+                    list[s].questoes[0]["agendamentos"] = agendamentos;
+                }
+                else {
+                    for (var q = 0; q < list[s].questoes.length; q++) {
+
+                        list[s].questoes[q]["agendamentos"] = $filter('filter')(agendamentos, { idQuestao: list[s].questoes[q].id }, true);
+                    }
                 }
 
                 var dadosAgrup = $filter('toArray')($filter('groupBy')(graphData, 'questao'), true);
@@ -179,6 +206,10 @@
                         resp.push(parseInt(sondRespDic[list[s].id.toString() + "0" + dadosAgrup[d][v].idResposta.toString()]));
                     }
                     graphDataAgroup.push(resp);
+                }
+
+                if (graphLabels.length == 1) {
+                    graphLabels.push("");
                 }
 
                 list[s]["graphLabels"] = graphLabels;
@@ -197,8 +228,7 @@
                             ,
                             ticks: {
                                 maxRotation: 45,
-                                minRotation: 45,
-                                beginAtZero: true
+                                minRotation: 45
                             }
                         }],
                         yAxes: [
