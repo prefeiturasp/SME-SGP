@@ -29,6 +29,84 @@
             configVariables();
         };
 
+        $scope.getGraphLabels = function (id) {
+            return $scope.graphLabels[id];
+        }
+
+        $scope.getGraphSeries = function (id) {
+            return $scope.graphSeries[id];
+        }
+
+        $scope.getGraphData = function (id) {
+            return $scope.graphData[id];
+        }
+
+        $scope.getGraphOptions = function (id) {
+            return {
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Data de agendamento'
+                        }
+                        ,
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }],
+                    yAxes: [
+                        {
+                            id: 'yaxes',
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Respostas'
+                            },
+                            ticks: {
+                                userCallback: function (value, index, values) {
+                                    if ($scope.respDic[id][value]) {
+                                        return stringToArray($scope.respDic[id][value], 30);
+                                    }
+                                    else {
+                                        return "";
+                                    }
+                                }
+                                ,
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var resp = []
+                            if (data.datasets[tooltipItem.datasetIndex].label && data.datasets[tooltipItem.datasetIndex].label != "") {
+                                resp.push(data.datasets[tooltipItem.datasetIndex].label);
+                            }
+
+                            if ($scope.respDic[id][data.datasets[tooltipItem.datasetIndex].data[0]]) {
+                                resp.push("Resposta: " + $scope.respDic[id][data.datasets[tooltipItem.datasetIndex].data[0]]);
+                            }
+                            else {
+                                resp.push("Sem resposta");
+                            }
+                            return resp;
+                        }
+                    }
+                }
+            };
+        }
+
         function configVariables() {
             $scope.sondagemLoaded = false;
             $scope.baseUrl = $location.absUrl().split("/");
@@ -47,6 +125,13 @@
             $scope.graph = {}
             $scope.mensagemErro = "";
             $scope.mensagemAlerta = "";
+            $scope.graphLabels = {};
+            $scope.graphSeries = {};
+            $scope.graphData = {};
+            $scope.graphDatasetOverride = []
+            $scope.graphOptions = {};
+            $scope.respDic = {};
+            $scope.sondRespDic = {};
         };
 
         function getSondagens() {
@@ -92,34 +177,38 @@
         };
 
         function modelSondagens(list) {
-            var respDic = {};
-            var sondRespDic = {};
-            var aux = 1;
             for (var s = 0; s < list.length; s++) {
-                respDic[0] = "";
-                sondRespDic[{ sondId: list[s].id, respId: 0 }] = 0;
+                $scope.respDic[list[s].id] = [];
+                $scope.respDic[list[s].id][0] = "";
+                $scope.sondRespDic[list[s].id] = []
+                $scope.sondRespDic[list[s].id][0] = 0;
+                var aux = 1;
                 for (var r = 0; r < list[s].respostas.length; r++) {
-                    respDic[aux] = list[s].respostas[r].descricao;
-                    sondRespDic[parseInt(list[s].id.toString() + "0" + list[s].respostas[r].id.toString())] = aux;
+                    $scope.respDic[list[s].id][aux] = list[s].respostas[r].descricao;
+                    $scope.sondRespDic[list[s].id][list[s].respostas[r].id] = aux;
                     aux++;
                 }
             }
 
-            for (var s = 0; s < list.length; s++) {
+            var graphLabels = {};
+            var graphSeries = {};
+            var graphData = {};
 
-                var graphLabels = [];
-                var graphSeries = [];
-                var graphData = [];
+            for (var s = 0; s < list.length; s++) {
                 var agendamentos = [];
 
                 //graphLabels.push("");
+
+                graphLabels[list[s].id] = [];
+                graphSeries[list[s].id] = [];
+                graphData[list[s].id] = [];
 
                 for (var a = 0; a < list[s].agendamentos.length; a++) {
 
                     var agendamento = { idQuestao: -1, dataInicio: list[s].agendamentos[a].dataInicio, dataFim: list[s].agendamentos[a].dataFim, respostas: [] }
 
-                    if (graphLabels.indexOf(list[s].agendamentos[a].dataInicio) == -1) {
-                        graphLabels.push(list[s].agendamentos[a].dataInicio);
+                    if (graphLabels[list[s].id].indexOf(list[s].agendamentos[a].dataInicio) == -1) {
+                        graphLabels[list[s].id].push(list[s].agendamentos[a].dataInicio);
                     }
 
                     for (var r = 0; r < list[s].agendamentos[a].respostasAluno.length; r++) {
@@ -135,48 +224,48 @@
 
                             if (subQuestao.length) {
 
-                                if (graphSeries.indexOf("Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao) == -1) {
-                                    graphSeries.push("Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao);
+                                if (graphSeries[list[s].id].indexOf("Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao) == -1) {
+                                    graphSeries[list[s].id].push("Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao);
                                 }
 
                                 if (resposta.length) {
                                     agendamento.respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: resposta[0].descricao })
-                                    graphData.push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
+                                    graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
                                     agendamento.respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: "" })
-                                    graphData.push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: "", idResposta: 0 });
+                                    graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
                             else {
 
-                                if (graphSeries.indexOf("Questão: " + questao[0].descricao) == -1) {
-                                    graphSeries.push("Questão: " + questao[0].descricao);
+                                if (graphSeries[list[s].id].indexOf("Questão: " + questao[0].descricao) == -1) {
+                                    graphSeries[list[s].id].push("Questão: " + questao[0].descricao);
                                 }
 
                                 if (resposta.length) {
                                     agendamento.respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
-                                    graphData.push({ questao: "Questão: " + questao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
+                                    graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
                                     agendamento.respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: "" })
-                                    graphData.push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
+                                    graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
                         } else {
                             var resposta = $filter('filter')(list[s].respostas, { id: list[s].agendamentos[a].respostasAluno[r].idResposta }, true);
 
-                            if (graphSeries.indexOf("Sondagem: " + list[s].titulo) == -1) {
-                                graphSeries.push("Sondagem: " + list[s].titulo);
+                            if (graphSeries[list[s].id].indexOf("Sondagem: " + list[s].titulo) == -1) {
+                                graphSeries[list[s].id].push("Sondagem: " + list[s].titulo);
                             }
 
                             if (resposta.length) {
                                 agendamento.respostas.push({ id: -1, subQuestao: "", resposta: resposta[0].descricao })
-                                graphData.push({ questao: "Sondagem: " + list[s].titulo, resposta: resposta[0].descricao, idResposta: resposta[0].id });
+                                graphData[list[s].id].push({ questao: "Sondagem: " + list[s].titulo, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                             }
                             else {
                                 agendamento.respostas.push({ id: -1, subQuestao: "", resposta: "" })
-                                graphData.push({ questao: "Sondagem: " + list[s].titulo, resposta: "", idResposta: 0 });
+                                graphData[list[s].id].push({ questao: "Sondagem: " + list[s].titulo, resposta: "", idResposta: 0 });
                             }
                         }
                     }
@@ -198,89 +287,28 @@
                     }
                 }
 
-                var dadosAgrup = $filter('toArray')($filter('groupBy')(graphData, 'questao'), true);
+                var dadosAgrup = $filter('toArray')($filter('groupBy')(graphData[list[s].id], 'questao'), true);
                 var graphDataAgroup = [];
                 for (var d = 0; d < dadosAgrup.length; d++) {
                     var resp = [];
                     for (var v = 0; v < dadosAgrup[d].length; v++) {
-                        resp.push(parseInt(sondRespDic[list[s].id.toString() + "0" + dadosAgrup[d][v].idResposta.toString()]));
+                        resp.push($scope.sondRespDic[list[s].id][dadosAgrup[d][v].idResposta]);
                     }
                     graphDataAgroup.push(resp);
                 }
 
-                if (graphLabels.length == 1) {
-                    graphLabels.push("");
+                graphData[list[s].id] = graphDataAgroup;
+
+                if (graphLabels[list[s].id].length == 1) {
+                    graphLabels[list[s].id].push("");
                 }
-
-                list[s]["graphLabels"] = graphLabels;
-                list[s]["graphSeries"] = graphSeries;
-                list[s]["graphData"] = graphDataAgroup;
-                list[s]["graphDatasetOverride"] = [{ yAxisID: 'yaxes' }];
-                list[s]["graphOptions"] = {
-                    responsive: true,
-                    scales: {
-                        xAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Data de agendamento'
-                            }
-                            ,
-                            ticks: {
-                                maxRotation: 45,
-                                minRotation: 45
-                            }
-                        }],
-                        yAxes: [
-                            {
-                                id: 'yaxes',
-                                type: 'linear',
-                                display: true,
-                                position: 'left',
-                                scaleLabel: {
-                                    display: true,
-                                    labelString: 'Respostas'
-                                },
-                                ticks: {
-                                    userCallback: function (value, index, values) {
-                                        if (respDic[value]) {
-                                            return stringToArray(respDic[value], 30);
-                                        }
-                                        else {
-                                            return "";
-                                        }
-                                    }
-                                    ,
-                                    beginAtZero: true
-                                }
-                            }
-                        ]
-                    },
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function (tooltipItem, data) {
-                                var resp = []
-                                if (data.datasets[tooltipItem.datasetIndex].label && data.datasets[tooltipItem.datasetIndex].label != "") {
-                                    resp.push(data.datasets[tooltipItem.datasetIndex].label);
-                                }
-
-                                if (respDic[data.datasets[tooltipItem.datasetIndex].data[0]]) {
-                                    resp.push("Resposta: " + respDic[data.datasets[tooltipItem.datasetIndex].data[0]]);
-                                }
-                                else {
-                                    resp.push("Sem resposta");
-                                }
-                                return resp;
-                            }
-                        }
-                    }
-                };
             }
 
+            $scope.graphLabels = graphLabels;
+            $scope.graphSeries = graphSeries;
+            $scope.graphData = graphData;
+            $scope.graphDatasetOverride = [{ yAxisID: 'yaxes' }];
+         
             $scope.listSondagens = list;
         }
 
