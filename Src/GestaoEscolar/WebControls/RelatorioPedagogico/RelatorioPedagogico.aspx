@@ -416,7 +416,7 @@
                                                                     <p ng-repeat="resposta in agendamento.respostas">
                                                                         <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
                                                                     </p>
-                                                                    <p class="text-autor">Data de agendamento: <strong>{{agendamento.data}}</strong></p>
+                                                                    <p class="text-autor">Período de agendamento: <strong>{{agendamento.dataInicio}} - {{agendamento.dataFim ? agendamento.dataFim : "*"}}</strong></p>
                                                                 </div>
                                                             </li>
                                                         </ul>

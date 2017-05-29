@@ -116,7 +116,7 @@
 
                 for (var a = 0; a < list[s].agendamentos.length; a++) {
 
-                    var agendamento = { idQuestao: -1, data: list[s].agendamentos[a].dataInicio, respostas: [] }
+                    var agendamento = { idQuestao: -1, dataInicio: list[s].agendamentos[a].dataInicio, dataFim: list[s].agendamentos[a].dataFim, respostas: [] }
 
                     if (graphLabels.indexOf(list[s].agendamentos[a].dataInicio) == -1) {
                         graphLabels.push(list[s].agendamentos[a].dataInicio);
