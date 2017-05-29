@@ -244,11 +244,11 @@
                                 }
 
                                 if (resposta.length) {
-                                    agendamento.respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
+                                    agendamento.respostas.push({ id: questao[0].id, subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
                                     graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
-                                    agendamento.respostas.push({ id: questao.id[0], subQuestao: questao[0].descricao, resposta: "" })
+                                    agendamento.respostas.push({ id: questao[0].id, subQuestao: questao[0].descricao, resposta: "" })
                                     graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
