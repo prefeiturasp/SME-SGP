@@ -362,6 +362,8 @@ namespace GestaoEscolar.WebControls.BuscaDocente
                             UCComboTurma.CarregarPorDocente(_VS_doc_id, 0, _VS_AnosAnteriores ? UCCCalendario.Valor : 0, false, _VS_CarregarApenasTurmasNormais, _VS_MostraTurmasEletivas);
                             UCComboTurma.PermiteEditar = true;
                             UCComboTurma.Obrigatorio = true;
+                            if (UCComboTurma.Visible)
+                                UCComboTurma_IndexChanged();
                         }
                     }
 
