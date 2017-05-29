@@ -197,7 +197,7 @@
                                 </table>
 
 
-                                <table class="table table-responsive-list" ng-if="(boletim.showCurricularEnrichment || boletim.showRecuperacao) && !boletim.ensinoInfantil">
+                                <table class="table table-responsive-list" ng-if="boletim.showCurricularEnrichment && !boletim.ensinoInfantil">
                                     <thead>
                                         <tr>
                                             <th rowspan="2" style="vertical-align: middle; width: 130px;">Enriq. curricular / Projetos / Ativ. compl.</th>
@@ -211,14 +211,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="(indexMat, materia) in boletim.enrichment" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
-                                            <td data-header="Disciplina">{{materia.Disciplina}}</td>
-                                            <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas" data-header="{{avaliacao.tpc_nome}}">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
-                                            <td class="text-center" data-header="Parecer Final">{{materia.parecerFinal}}</td>
-                                            <td class="text-center" data-header="Final - Faltas">{{materia.totalFaltas}}</td>
-                                            <td class="text-center" data-header="Final - Frequencia">{{materia.FrequenciaFinalAjustada}}</td>
-                                        </tr>
-                                        <tr ng-repeat="(indexMat, materia) in boletim.recovery" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
+                                        <tr ng-repeat="(indexMat, materia) in boletim.enrichment" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular">
                                             <td data-header="Disciplina">{{materia.Disciplina}}</td>
                                             <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas" data-header="{{avaliacao.tpc_nome}}">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
                                             <td class="text-center" data-header="Parecer Final">{{materia.parecerFinal}}</td>
@@ -263,7 +256,7 @@
                                 <table class="table table-responsive-list" ng-if="boletim.showRecuperacao">
                                     <thead>
                                         <tr>
-                                            <th rowspan="2" style="vertical-align: middle">
+                                            <th rowspan="2" style="vertical-align: middle; width: 130px;">
                                                 <span>
                                                     <asp:Literal runat="server" Text="<%$ Resources:UserControl, UCDadosBoletim.lblRecuperacaoTitulo.Text %>" /></span>
                                             </th>
@@ -282,7 +275,7 @@
                                     </thead>
                                     <tbody>
 
-                                        <tr ng-repeat="(indexRec, materia) in boletim.recovery" ng-class="checkParImpar(indexRec)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
+                                        <tr ng-repeat="(indexRec, materia) in boletim.recovery" ng-class="checkParImpar(indexRec)" ng-if="materia.recuperacao">
                                             <td data-header="Disciplina">{{materia.Disciplina}}</td>
                                             <td class="text-center" ng-repeat="(indexAval, avaliacao) in materia.notas" data-header="{{avaliacao.tpc_nome}}>{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
                                             <td class="text-center" data-header="Total de Ausências">{{materia.totalFaltas}}</td>
