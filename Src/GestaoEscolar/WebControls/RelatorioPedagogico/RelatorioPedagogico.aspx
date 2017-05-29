@@ -12,12 +12,14 @@
 <body>
     <script src="../../Includes/Charts/Chart.min.js"></script>
     <script src="../../Includes/jquery-2.0.3.min.js" type="text/javascript"></script>
+    <script src="../../Includes/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>   
     <script src="../../Includes/bootstrap/bootstrap.min.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/angular.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/module.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/angular-charts/angular-chart.min.js"></script>
     <script src="../../Includes/Angular/angular-filter/angular-filter.min.js"></script>
     <script src="../../Includes/Angular/boletim.controller.js" type="text/javascript"></script>
+    <script src="../../Includes/Angular/angular-directives/JQmCustomScrollbar.js"></script>
     <script src="../../Includes/Angular/calendario.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/sondagem.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/anotacao.controller.js" type="text/javascript"></script>
@@ -25,7 +27,6 @@
     <script src="../../Includes/Angular/movimentacao.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/matriculaTurma.controller.js" type="text/javascript"></script>
     <script src="../../Includes/Angular/conselhoClasse.controller.js" type="text/javascript"></script>
-    <script src="../../Includes/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>   
     <script src="../../Includes/scrolling.js" type="text/javascript"></script>
     
 
@@ -67,85 +68,83 @@
                             {{mensagemErro}}
                         </div>
                         <div ng-if="mensagemAlerta" class="summary">
-                                {{mensagemAlerta}}
+                            {{mensagemAlerta}}
+                        </div>
+
+                        <!-- Header relatorio -->
+                        <header class="info-header">
+                            <div class="foto-aluno">
+                                <img class="imgFoto" src="{{getPhotoStudent(matricula.arq_idFoto)}}" alt="Foto do aluno" />
                             </div>
-                        <div ng-if="matriculaLoaded">
-
-                            <!-- Header relatorio -->
-                            <header class="info-header">
-                                <div class="foto-aluno">
-                                    <img class="imgFoto" src="{{getPhotoStudent(matricula.arq_idFoto)}}" alt="Foto do aluno" />
-                                </div>
-                                <div class="info-aluno">
-                                    <h2 class="info-nome">{{matricula.pes_nome}} <small>{{matricula.alc_matricula}}</small>
-                                    </h2>
-                                    <%--<span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}
+                            <div class="info-aluno">
+                                <h2 class="info-nome">{{matricula.pes_nome}} <small>{{matricula.alc_matricula}}</small>
+                                </h2>
+                                <%--<span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}
                                     </span>--%>
-                                    <h2 class="info-escola">{{matricula.esc_nome}} -  {{matricula.uad_nome}}
-                                    </h2>
+                                <h2 class="info-escola">{{matricula.esc_nome}} -  {{matricula.uad_nome}}
+                                </h2>
 
-                                    <div ng-controller="CalendarioController" ng-cloak>
-                                        <div ng-view>
-                                            <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !calendarioLoaded">
-                                                <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
-                                            </div>
-                                            <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
-                                                {{mensagemErro}}
-                                            </div>
-                                            <div ng-if="mensagemAlerta" class="summary">
-                                                    {{mensagemAlerta}}
-                                                </div>
-                                            <div ng-if="calendarioLoaded">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-default dropdown-toggle dropdown-ico" type="button" id="dropdownMenu1"
-                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-disabled="listCalendario.length <= 1">
-                                                        <span>{{params.ano}}</span> - <span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}</span>                                    
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="listCalendario.length > 1">
-                                                        <li ng-repeat="calendario in listCalendario" ng-if="calendario.cal_ano!=params.ano">
-                                                            <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id, calendario.tpc_id)">{{calendario.cal_ano}}</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                <div ng-controller="CalendarioController" ng-cloak>
+                                    <div ng-view>
+                                        <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !calendarioLoaded">
+                                            <img class="imgLoader" src="../../App_Themes/IntranetSMEBootStrap/images/ajax-loader.gif" style="border-width: 0px;">
+                                        </div>
+                                        <div ng-if="mensagemErro" class="summary" style="background: #fff url(/App_Themes/IntranetSMEBootStrap/images/error.png) no-repeat 45px 50%;">
+                                            {{mensagemErro}}
+                                        </div>
+                                        <div ng-if="mensagemAlerta" class="summary">
+                                            {{mensagemAlerta}}
+                                        </div>
+                                        <div ng-if="calendarioLoaded">
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle dropdown-ico" type="button" id="dropdownMenu1"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-disabled="listCalendario.length <= 1">
+                                                    <span>{{params.ano}}</span> - <span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}</span>
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="listCalendario.length > 1">
+                                                    <li ng-repeat="calendario in listCalendario" ng-if="calendario.cal_ano!=params.ano">
+                                                        <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id, calendario.tpc_id)">{{calendario.cal_ano}}</a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </header>
+                            </div>
+                        </header>
 
-                            <a href="#nav-list-collapse" class="btn btn-primary btn-nav-toggle" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="nav-list-collapse"><i class="material-icons">&#xE5D2;</i></a>
-                            <div class="collapse" id="nav-list-collapse">
-                                <div class="nav-list-scroll mCustomScrollbar" data-mcs-theme="dark">
-                                    <ul class="nav-list" id="nav-list">
-                                        <li>
-                                            <a href="#area-notas-faltas" onclick="menuClick(this)">{{matricula.nomeNota}}s e faltas</a>
-                                        </li>
-                                        <li>
-                                            <a href="#area-obs-conselho" onclick="menuClick(this)">Observações do conselho de classe</a>
-                                        </li>
-                                        <li>
-                                            <a href="#area-com-estudos" onclick="menuClick(this)">Compromissos de estudo</a>
-                                        </li>
-                                        <li>
-                                            <a href="#area-sondagem" onclick="menuClick(this)">Resultados de sondagem</a>
-                                        </li>
-                                        <li>
-                                            <a href="#area-obs-individuais" onclick="menuClick(this)">Observações individuais</a>
-                                        </li>
-                                        <li>
-                                            <a href="#area-just-faltas" onclick="menuClick(this)">Justificativas de faltas</a>
-                                        </li>
-                                        <li>
-                                            <a href="#area-cons-mov" onclick="menuClick(this)">Remanejamentos e reclassificações</a>
-                                        </li>
-                                    </ul>
-                                </div>                                
+                        <a href="#nav-list-collapse" class="btn btn-primary btn-nav-toggle" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="nav-list-collapse"><i class="material-icons">&#xE5D2;</i></a>
+                        <div class="collapse" id="nav-list-collapse">
+                            <div class="nav-list-scroll mCustomScrollbar" data-mcs-theme="dark" jqmcustomscrollbar>
+                                <ul class="nav-list" id="nav-list">
+                                    <li>
+                                        <a href="#area-notas-faltas" onclick="menuClick(this)">{{matricula.nomeNota}}s e faltas</a>
+                                    </li>
+                                    <li>
+                                        <a href="#area-obs-conselho" onclick="menuClick(this)">Observações do conselho de classe</a>
+                                    </li>
+                                    <li>
+                                        <a href="#area-com-estudos" onclick="menuClick(this)">Compromissos de estudo</a>
+                                    </li>
+                                    <li>
+                                        <a href="#area-sondagem" onclick="menuClick(this)">Resultados de sondagem</a>
+                                    </li>
+                                    <li>
+                                        <a href="#area-obs-individuais" onclick="menuClick(this)">Observações individuais</a>
+                                    </li>
+                                    <li>
+                                        <a href="#area-just-faltas" onclick="menuClick(this)">Justificativas de faltas</a>
+                                    </li>
+                                    <li>
+                                        <a href="#area-cons-mov" onclick="menuClick(this)">Remanejamentos e reclassificações</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </aside>            
+            </aside>
 
             <!--Conteúdo-->
             <div role="main" id="acontent">

@@ -3648,6 +3648,7 @@
     <Content Include="Documentos\RelatorioDev.aspx" />
     <Content Include="Documentos\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Includes\Angular\angular-directives\JQmCustomScrollbar.js" />
     <Content Include="Includes\Angular\angular-filter\angular-filter.js" />
     <Content Include="Includes\Angular\angular-filter\angular-filter.min.js" />
     <Content Include="Includes\Angular\angular.js" />

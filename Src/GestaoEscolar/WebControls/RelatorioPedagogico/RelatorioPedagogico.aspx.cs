@@ -119,6 +119,8 @@
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/movimentacao.controller.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/matriculaTurma.controller.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/Angular/conselhoClasse.controller.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jquery.mCustomScrollbar.concat.min.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/Angular/angular-directives/JQmCustomScrollbar.js"));
             }
 
             if (!IsPostBack)

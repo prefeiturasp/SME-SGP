@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* Scss Document */
 @font-face {
   font-family: 'Roboto';
@@ -538,7 +538,7 @@ input[type="number"].form-control {
 
 .nav-list-scroll {
   max-height: calc(100vh - 350px);
-  overflow: auto; }
+  overflow: hidden; }
 
 .nav-list {
   list-style: none;
