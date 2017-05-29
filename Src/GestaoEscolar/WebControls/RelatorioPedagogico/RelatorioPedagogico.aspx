@@ -192,6 +192,11 @@
                                             <td class="text-center cel-destaque" data-header="Final - Faltas" ng-if="indexMat == 0 || !materia.tipoComponenteRegencia" rowspan="{{ materia.tipoComponenteRegencia ? boletim.QtComponenteRegencia : 1 }}"><strong>{{materia.totalFaltas}}</strong></td>
                                             <td class="text-center cel-destaque" data-header="Final - Frequencia" ng-if="boletim.exibeCompensacaoAusencia && (indexMat == 0 || boletim.QtComponenteRegencia == 0)" rowspan="{{ boletim.QtComponenteRegencia > 0 ? boletim.QtComponentes : 1 }}"><strong>{{materia.FrequenciaFinalAjustada}}</strong></td>
                                         </tr>
+                                        <tr ng-if="(!boletim.parecerConclusivo || boletim.parecerConclusivo.length > 0)"
+                                            style="display: {{boletim.displayParecerConclusivo; }}">
+                                            <td class="text-center" colspan="20"><strong>Parecer conclusivo: {{ boletim.parecerConclusivo }}</strong>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
 
