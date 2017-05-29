@@ -177,6 +177,8 @@ namespace GestaoEscolar.Classe.JustificativaAbonoFalta
             UCComboTurmaDisciplina.Obrigatorio = true;
 
             UCBuscaDocenteTurma.InicializaCamposBusca();
+            if (UCBuscaDocenteTurma.ComboTurma.Valor[0] > 0 && UCBuscaDocenteTurma.ComboTurma.Valor[1] > 0 && UCBuscaDocenteTurma.ComboTurma.Valor[2] > 0)
+                UCBuscaDocenteTurma_IndexChanged_Turma();
 
             UCBuscaDocenteTurma.ComboEscola.FocusUA();
 
@@ -517,12 +519,6 @@ namespace GestaoEscolar.Classe.JustificativaAbonoFalta
                         UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0], true, 0, true);
                     else
                         UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0], UCBuscaDocenteTurma._VS_doc_id, 0, true);
-
-                    if (UCComboTurmaDisciplina.Combo.Items.Count <= 2)
-                    {
-                        UCComboTurmaDisciplina.SelectedIndex = UCComboTurmaDisciplina.MostrarMensagemSelecione ? UCComboTurmaDisciplina.Combo.Items.Count - 1 : 0;
-                    }
-
 
                     UCComboTurmaDisciplina.SetarFoco();
                     UCComboTurmaDisciplina.PermiteEditar = UCBuscaDocenteTurma.ComboTurma.Combo.SelectedIndex > 0;
