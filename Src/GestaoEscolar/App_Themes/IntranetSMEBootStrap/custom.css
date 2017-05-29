@@ -1143,9 +1143,7 @@ button.btn-primary {
     height: auto !important; }
   .area-rel-pedagogico .section-area {
     min-height: 0; }
-  .area-rel-pedagogico .panel-default {
-    page-break-inside: avoid; }
-    .area-rel-pedagogico .panel-default .panel-body {
-      border-top-color: #000 !important; } }
+  .area-rel-pedagogico .panel-default .panel-body {
+    border-top-color: #000 !important; } }
 
 /*# sourceMappingURL=custom.css.map */
