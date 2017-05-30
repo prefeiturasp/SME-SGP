@@ -117,6 +117,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoCapituloDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoDAO.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CurriculoDisciplinaEletivaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoEscolaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoEscolaPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoObjetivoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoPeriodoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralVigenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoRequisitoDAO.cs" />
@@ -408,6 +410,7 @@
     <Compile Include="ACA_CompromissoEstudoDAO.cs" />
     <Compile Include="ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaDAO.cs" />
+    <Compile Include="ACA_CurriculoCapituloDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
     <Compile Include="ACA_CurriculoDAO.cs" />
@@ -415,6 +418,7 @@
     <Compile Include="ACA_CurriculoDisciplinaEletivaDAO.cs" />
     <Compile Include="ACA_CurriculoEscolaDAO.cs" />
     <Compile Include="ACA_CurriculoEscolaPeriodoDAO.cs" />
+    <Compile Include="ACA_CurriculoObjetivoDAO.cs" />
     <Compile Include="ACA_CurriculoPeriodoDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralVigenciaDAO.cs" />
     <Compile Include="ACA_CurriculoRequisitoDAO.cs" />

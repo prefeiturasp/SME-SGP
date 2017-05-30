@@ -179,12 +179,14 @@
     <Compile Include="ACA_ConfiguracaoServicoPendenciaBO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaBO.cs" />
     <Compile Include="ACA_CurriculoBO.cs" />
+    <Compile Include="ACA_CurriculoCapituloBO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaBO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodoBO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralVigenciaBO.cs" />
     <Compile Include="ACA_CurriculoDisciplinaBO.cs" />
     <Compile Include="ACA_CurriculoDisciplinaEletivaBO.cs" />
     <Compile Include="ACA_CurriculoEscolaBO.cs" />
+    <Compile Include="ACA_CurriculoObjetivoBO.cs" />
     <Compile Include="ACA_CurriculoPeriodoBO.cs" />
     <Compile Include="ACA_CurriculoPeriodoVigenciaBO.cs" />
     <Compile Include="ACA_CurriculoTurnoBO.cs" />
