@@ -291,6 +291,20 @@
     <Compile Include="Academico\AberturaTurmasAnosAnteriores\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\AgendamentoSondagem\Agendamento.aspx.cs">
+      <DependentUpon>Agendamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\AgendamentoSondagem\Agendamento.aspx.designer.cs">
+      <DependentUpon>Agendamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\AgendamentoSondagem\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\AgendamentoSondagem\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\Aluno\Anotacoes.aspx.cs">
       <DependentUpon>Anotacoes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2915,6 +2929,13 @@
     <Compile Include="WebControls\Sistemas\UCSistemas.ascx.designer.cs">
       <DependentUpon>UCSistemas.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Sondagem\UCAgendamento.ascx.cs">
+      <DependentUpon>UCAgendamento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Sondagem\UCAgendamento.ascx.designer.cs">
+      <DependentUpon>UCAgendamento.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\TurmaDisciplina\UCGridDisciplina.ascx.cs">
       <DependentUpon>UCGridDisciplina.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2944,6 +2965,8 @@
   <ItemGroup>
     <Content Include="Academico\AberturaTurmasAnosAnteriores\Busca.aspx" />
     <Content Include="Academico\AberturaTurmasAnosAnteriores\Cadastro.aspx" />
+    <Content Include="Academico\AgendamentoSondagem\Agendamento.aspx" />
+    <Content Include="Academico\AgendamentoSondagem\Busca.aspx" />
     <Content Include="Academico\Areas\Busca.aspx" />
     <Content Include="Academico\Areas\Cadastro.aspx" />
     <Content Include="Academico\Areas\Documentos.aspx" />
@@ -4223,6 +4246,7 @@
     <Content Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx" />
     <Content Include="WebControls\Relatorio\UCDevReportView.ascx" />
+    <Content Include="WebControls\Sondagem\UCAgendamento.ascx" />
     <Content Include="WebControls\TurmaDisciplina\UCGridDisciplinaRegencia.ascx" />
     <Content Include="WSServicos.asmx" />
     <Content Include="WebControls\BoletimCompletoAluno\imagem.ashx" />
