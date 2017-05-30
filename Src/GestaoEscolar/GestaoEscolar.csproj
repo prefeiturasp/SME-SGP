@@ -490,6 +490,13 @@
     <Compile Include="Academico\ControleTurma\PlanejamentoAnual.aspx.designer.cs">
       <DependentUpon>PlanejamentoAnual.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\Curriculo\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Curriculo\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\Curso\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2611,6 +2618,13 @@
     <Compile Include="WebControls\ControleVigenciaDocentes\UCControleVigenciaDocentes.ascx.designer.cs">
       <DependentUpon>UCControleVigenciaDocentes.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Curriculo\UCCurriculo.ascx.cs">
+      <DependentUpon>UCCurriculo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Curriculo\UCCurriculo.ascx.designer.cs">
+      <DependentUpon>UCCurriculo.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Documento\UCGridDocumento.ascx.cs">
       <DependentUpon>UCGridDocumento.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2986,6 +3000,7 @@
     <Content Include="Academico\ControleTurma\Listao.aspx" />
     <Content Include="Academico\ControleTurma\MinhaEscolaGestor.aspx" />
     <Content Include="Academico\ControleTurma\PlanejamentoAnual.aspx" />
+    <Content Include="Academico\Curriculo\Cadastro.aspx" />
     <Content Include="Academico\HistoricoEscolar\Busca.aspx" />
     <Content Include="Academico\HistoricoEscolar\DadosAluno.aspx" />
     <Content Include="Academico\HistoricoEscolar\EnsinoFundamental.aspx" />
@@ -4221,6 +4236,7 @@
     <Content Include="WebControls\ControleTurma\UCControleTurma.ascx" />
     <Content Include="WebControls\ControleTurma\UCSelecaoDisciplinaCompartilhada.ascx" />
     <Content Include="WebControls\ControleVigenciaDocentes\UCControleVigenciaDocentes.ascx" />
+    <Content Include="WebControls\Curriculo\UCCurriculo.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotas.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotasFinal.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotasPadrao.ascx" />

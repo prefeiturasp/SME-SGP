@@ -45,6 +45,22 @@ SET XACT_ABORT ON
 		,@possuiVisaoUA = 0 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 	
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Administração' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Currículo' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Cadastro de currículo'
+		,@SiteMap1Url = '~/Academico/Curriculo/Cadastro.aspx'
+		,@SiteMap2Nome = NULL 
+		,@SiteMap2Url = NULL 
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 0 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 0 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+
 -- Fechar transação
 SET XACT_ABORT OFF
 COMMIT TRANSACTION	
