@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Agendamento.aspx.cs" Inherits="GestaoEscolar.Academico.Sondagem.Agendamento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Agendamento.aspx.cs" Inherits="GestaoEscolar.Academico.AgendamentoSondagem.Agendamento" %>
 
-<%@ PreviousPageType VirtualPath="~/Academico/Sondagem/Busca.aspx" %>
+<%@ PreviousPageType VirtualPath="~/Academico/AgendamentoSondagem/Busca.aspx" %>
 
 <%@ Register src="~/WebControls/Sondagem/UCAgendamento.ascx" tagname="UCAgendamento" tagprefix="uc1" %>
 

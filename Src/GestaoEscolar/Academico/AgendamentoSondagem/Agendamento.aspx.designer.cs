@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GestaoEscolar.Academico.Sondagem {
+namespace GestaoEscolar.Academico.AgendamentoSondagem {
     
     
     public partial class Agendamento {
@@ -27,9 +27,9 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new GestaoEscolar.Academico.Sondagem.Busca PreviousPage {
+        public new GestaoEscolar.Academico.AgendamentoSondagem.Busca PreviousPage {
             get {
-                return ((GestaoEscolar.Academico.Sondagem.Busca)(base.PreviousPage));
+                return ((GestaoEscolar.Academico.AgendamentoSondagem.Busca)(base.PreviousPage));
             }
         }
     }

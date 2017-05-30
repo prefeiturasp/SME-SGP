@@ -4,7 +4,7 @@ using MSTech.CoreSSO.BLL;
 using System.Web;
 using System.Web.UI;
 
-namespace GestaoEscolar.Academico.Sondagem
+namespace GestaoEscolar.Academico.AgendamentoSondagem
 {
     public partial class Agendamento : MotherPageLogado
     {
@@ -18,7 +18,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 {
                     if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
                     {
-                        UCAgendamento1.VS_paginaBusca = "Academico/Sondagem/Busca.aspx";
+                        UCAgendamento1.VS_paginaBusca = "Academico/AgendamentoSondagem/Busca.aspx";
                         UCAgendamento1.bntSalvarVisible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                         UCAgendamento1.btnCancelarText = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar ?
                                                          GetGlobalResourceObject("Academico", "Sondagem.Agendamento.btnCancelar.Text").ToString() :
@@ -29,7 +29,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     else
                     {
                         __SessionWEB.PostMessages = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.SelecioneSondagem").ToString(), UtilBO.TipoMensagem.Alerta);
-                        Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/Sondagem/Busca.aspx", false);
+                        Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Academico/AgendamentoSondagem/Busca.aspx", false);
                         HttpContext.Current.ApplicationInstance.CompleteRequest();
                     }
                 }
@@ -41,7 +41,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 }
             }
         }
-        
+
         #endregion
     }
 }
