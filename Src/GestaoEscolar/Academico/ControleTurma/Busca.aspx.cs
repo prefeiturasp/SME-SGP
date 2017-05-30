@@ -1367,7 +1367,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 Session["tipoPendencia"] = tipoPendencia;
                 Session["tpcIdPendencia"] = tpcIdPendencia;
                 Session["tudIdPendencia"] = tudIdPendencia;
-            }
+        }
             else
             {
                 Session.Remove("tipoPendencia");
@@ -1928,7 +1928,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             upnPendencias.Update();
 
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "AbrirPendencias", "$(document).ready(function() { $('.divPendencias').dialog('open'); });", true);
-        }
+            }
 
         private Control getControl(Control root, string pClientID)
         {

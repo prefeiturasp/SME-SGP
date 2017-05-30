@@ -428,7 +428,6 @@
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -881,7 +880,7 @@
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>=Fields!dis_nome.Value</Value>
+                                    <Value>=IIf(Fields!qtde_bimestre.Value&gt;=4,Fields!dis_nome.Value,Fields!dis_nomeAbreviado.Value)</Value>
                                     <Style>
                                       <FontSize>7pt</FontSize>
                                       <FontWeight>Bold</FontWeight>
@@ -1263,7 +1262,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!dis_nome.Value</Value>
+                            <Value>=IIf(Fields!qtde_bimestre.Value&gt;=4,Fields!dis_nome.Value,Fields!dis_nomeAbreviado.Value)</Value>
                             <Style>
                               <FontSize>7pt</FontSize>
                               <FontWeight>Bold</FontWeight>
@@ -2250,6 +2249,10 @@
           <DataField>mtu_numeroChamada</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="dis_nomeAbreviado">
+          <DataField>dis_nomeAbreviado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="periodoFechado">
           <DataField>periodoFechado</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
@@ -2257,6 +2260,10 @@
         <Field Name="mtu_resultadoDescricao">
           <DataField>mtu_resultadoDescricao</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="qtde_bimestre">
+          <DataField>qtde_bimestre</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="mtu_situacao">
           <DataField>mtu_situacao</DataField>

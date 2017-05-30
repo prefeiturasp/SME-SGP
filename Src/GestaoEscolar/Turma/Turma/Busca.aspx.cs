@@ -219,7 +219,7 @@ public partial class Academico_Turma_Busca : MotherPageLogado
             {
                 // Limpa o combo de cursos - carrega todos.ss
                 ucComboCursoCurriculo.Valor = new[] { -1, -1, -1 };
-                ucComboCursoCurriculo.CarregarCursoCurriculo();
+                ucComboCursoCurriculo.CarregarCursoCurriculo(true);
             }
 
             ucComboUAEscola.SelectedValueEscolas = new[] { -1, -1 };
@@ -246,7 +246,7 @@ public partial class Academico_Turma_Busca : MotherPageLogado
 
             if (ucComboUAEscola.Esc_ID > 0)
             {
-                ucComboCursoCurriculo.CarregarCursoCurriculoPorEscola(ucComboUAEscola.Esc_ID, ucComboUAEscola.Uni_ID, 0);
+                ucComboCursoCurriculo.CarregarCursoCurriculoPorEscola(ucComboUAEscola.Esc_ID, ucComboUAEscola.Uni_ID, 0, true);
                 ucComboCursoCurriculo.SetarFoco();
 
                 // Carrega os docentes de acordo com a escola selecionada.
@@ -256,7 +256,7 @@ public partial class Academico_Turma_Busca : MotherPageLogado
             }
             else
             {
-                ucComboCursoCurriculo.CarregarCursoCurriculo();
+                ucComboCursoCurriculo.CarregarCursoCurriculo(true);
             }
         }
         catch (Exception ex)

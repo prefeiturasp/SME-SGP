@@ -305,6 +305,7 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
                         var tud_idRelacionada = String.IsNullOrEmpty(gdvAulas.DataKeys[row.RowIndex]["tud_idRelacionada"].ToString()) ? -1 : Convert.ToInt64(gdvAulas.DataKeys[row.RowIndex]["tud_idRelacionada"]);
                         var tdt_posicao = Convert.ToByte(gdvAulas.DataKeys[row.RowIndex]["tdt_posicao"].ToString());
                         var fav_fechamentoAutomatico = Convert.ToBoolean(gdvAulas.DataKeys[row.RowIndex]["fav_fechamentoAutomatico"]);
+                        var fav_tipoApuracaoFrequencia = Convert.ToByte(gdvAulas.DataKeys[row.RowIndex]["fav_tipoApuracaoFrequencia"]);
 
                         //Se a turma estiver em um período efetivado não adiciona para salvar
                         if (VS_PeriodoEfetivado(tpc_id, Convert.ToInt32(gdvAulas.DataKeys[row.RowIndex]["cal_id"]),
@@ -326,7 +327,7 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
 
                             if (!dicTurmasDisciplinas.ContainsKey(tud_id))
                                 dicTurmasDisciplinas.Add(tud_id, nomeTurmaDisciplina);
-                        }
+                        }                        
 
                         foreach (var dia in diasSemana)
                         {
@@ -376,7 +377,7 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
                             tag.tud_tipo = tud_tipo;
                             tag.tud_cargaHorariaSemanal = tud_cargaHorariaSemanal;
                             tag.fav_fechamentoAutomatico = fav_fechamentoAutomatico;
-
+                            tag.fav_tipoApuracaoFrequencia = fav_tipoApuracaoFrequencia;
                             aulasSalvar.Add(tag);
                         }
                     }

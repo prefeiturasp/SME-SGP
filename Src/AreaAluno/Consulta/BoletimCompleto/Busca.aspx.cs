@@ -122,9 +122,16 @@ namespace AreaAluno.Consulta.BoletimCompleto
                     UCComboAnosLetivos.CarregarComboAnosLetivos(__SessionWEB.__UsuarioWEB.alu_id, 0);
 
                     // Selecionar o mtu_id que está na sessão do aluno.
-                    if (UCComboAnosLetivos.Combo.Items.FindByValue(__SessionWEB.__UsuarioWEB.mtu_id.ToString()) != null)
+
+                    var valores = (from ListItem item in UCComboAnosLetivos.Combo.Items
+                                   let mtu_id_cal_id = item.Value.Split(',')
+                                   where mtu_id_cal_id.Length > 0
+                                         && mtu_id_cal_id[0] == __SessionWEB.__UsuarioWEB.mtu_id.ToString()
+                                   select item.Value);
+
+                    if (valores.Any() && UCComboAnosLetivos.Combo.Items.FindByValue(valores.First()) != null)
                     {
-                        UCComboAnosLetivos.Valor = __SessionWEB.__UsuarioWEB.mtu_id.ToString();
+                        UCComboAnosLetivos.mtu_id = __SessionWEB.__UsuarioWEB.mtu_id;
                     }
 
                     //int mtu_id = 0;
@@ -199,7 +206,7 @@ namespace AreaAluno.Consulta.BoletimCompleto
             {
                 mtu_id = (string.IsNullOrEmpty(UCComboAnosLetivos.Valor)
                                ? __SessionWEB.__UsuarioWEB.mtu_id
-                               : Convert.ToInt32(UCComboAnosLetivos.Valor));
+                               : UCComboAnosLetivos.mtu_id);
             }
 
             if (tpc_id == 0)

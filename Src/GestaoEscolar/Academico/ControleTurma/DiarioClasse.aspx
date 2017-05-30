@@ -79,7 +79,7 @@
                             DataKeyNames="tau_id, tau_data, tdt_posicao, tdc_corDestaque, pes_nome, tdc_id, tau_efetivado,
                                           permissaoAlteracao, usu_id,  EventoSemAtividade, tau_statusFrequencia, tau_statusAtividadeAvaliativa
                                           , tau_statusAnotacoes, tau_statusPlanoAula, tud_id, tud_tipo, NomeDisciplinaRelacionada, tud_global
-                                          , tau_reposicao, semPlanoAula">
+                                          , tau_reposicao, semPlanoAula, fav_tipoApuracaoFrequencia">
                             <Columns>
                                 <asp:TemplateField HeaderText="Data da aula">
                                     <ItemTemplate>

@@ -3,7 +3,7 @@
 <div id="divAnosLetivos" runat="server" visible="false" class="divComboAno notprint">
     <asp:Label ID="lblAnosLetivos" runat="server" Text="Ano letivo - " />
     <asp:DropDownList ID="ddlAnosLetivos" runat="server"
-        DataTextField="Ano" DataValueField="mtu_id"
+        DataTextField="Ano" DataValueField="mtu_id_cal_id"
         OnSelectedIndexChanged="ddlAnosLetivos_SelectedIndexChanged"
         AutoPostBack="true">
     </asp:DropDownList>

@@ -519,6 +519,7 @@ namespace MSTech.GestaoEscolar.DAL
             , byte cur_situacao
             , Guid ent_id
             , int cal_id
+            , bool mostraEJAModalidades
         )
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CursoCurriculo_SelectBy_CalendarioEscola", _Banco);
@@ -568,6 +569,13 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@cal_id";
                 Param.Size = 32;
                 Param.Value = cal_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@mostraEJAModalidades";
+                Param.Size = 1;
+                Param.Value = mostraEJAModalidades;
                 qs.Parameters.Add(Param);
 
                 #endregion PARAMETROS
@@ -892,6 +900,7 @@ namespace MSTech.GestaoEscolar.DAL
             , int currentPage
             , int pageSize
             , out int totalRecords
+            , bool mostraEJAModalidades
         )
         {
             DataTable dt = new DataTable();
@@ -935,6 +944,13 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@ent_id";
                 Param.Size = 16;
                 Param.Value = ent_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@mostraEJAModalidades";
+                Param.Size = 1;
+                Param.Value = mostraEJAModalidades;
                 qs.Parameters.Add(Param);
 
                 #endregion PARAMETROS
@@ -1386,6 +1402,7 @@ namespace MSTech.GestaoEscolar.DAL
             , int tds_id
             , Guid ent_id
             , int cur_situacao
+            , bool mostraEJAModalidades
         )
         {
             DataTable dt = new DataTable();
@@ -1439,6 +1456,13 @@ namespace MSTech.GestaoEscolar.DAL
                     Param.Value = cur_situacao;
                 else
                     Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@mostraEJAModalidades";
+                Param.Size = 1;
+                Param.Value = mostraEJAModalidades;
                 qs.Parameters.Add(Param);
 
                 #endregion PARAMETROS

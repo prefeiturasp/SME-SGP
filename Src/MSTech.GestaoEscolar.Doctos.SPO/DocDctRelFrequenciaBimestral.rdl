@@ -79,7 +79,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>4.2cm</Height>
+              <Height>3.38434cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -104,7 +104,7 @@
                         </TablixColumns>
                         <TablixRows>
                           <TablixRow>
-                            <Height>0.72cm</Height>
+                            <Height>0.55686cm</Height>
                             <TablixCells>
                               <TablixCell>
                                 <CellContents>
@@ -143,7 +143,7 @@
                             </TablixCells>
                           </TablixRow>
                           <TablixRow>
-                            <Height>1.32cm</Height>
+                            <Height>1.18332cm</Height>
                             <TablixCells>
                               <TablixCell>
                                 <CellContents>
@@ -207,7 +207,7 @@
                             </TablixCells>
                           </TablixRow>
                           <TablixRow>
-                            <Height>0.72cm</Height>
+                            <Height>0.68916cm</Height>
                             <TablixCells>
                               <TablixCell>
                                 <CellContents>
@@ -332,7 +332,7 @@
                             </TablixCells>
                           </TablixRow>
                           <TablixRow>
-                            <Height>0.72cm</Height>
+                            <Height>0.63624cm</Height>
                             <TablixCells>
                               <TablixCell>
                                 <CellContents>
@@ -447,7 +447,7 @@
                             </TablixCells>
                           </TablixRow>
                           <TablixRow>
-                            <Height>0.72cm</Height>
+                            <Height>0.31874cm</Height>
                             <TablixCells>
                               <TablixCell>
                                 <CellContents>
@@ -533,7 +533,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.7cm</Height>
+              <Height>1.54579cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -623,18 +623,18 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>0.92989cm</Width>
+                                <Width>1.06218cm</Width>
                               </TablixColumn>
                               <TablixColumn>
                                 <Width>1.04479cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>16.84481cm</Width>
+                                <Width>17.13585cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
                               <TablixRow>
-                                <Height>0.6cm</Height>
+                                <Height>0.57809cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -647,7 +647,7 @@
                                               <TextRun>
                                                 <Value>=Fields!frequencia.Value</Value>
                                                 <Style>
-                                                  <FontSize>9pt</FontSize>
+                                                  <FontSize>=iif(Fields!regencia.Value = 1 and Fields!fav_tipoApuracaoFrequencia.Value = 1, "7pt", "9pt")</FontSize>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -686,7 +686,7 @@
                                               </TextRun>
                                             </TextRuns>
                                             <Style>
-                                              <TextAlign>Center</TextAlign>
+                                              <TextAlign>Left</TextAlign>
                                             </Style>
                                           </Paragraph>
                                         </Paragraphs>
@@ -762,7 +762,7 @@
                                   </SortExpression>
                                 </SortExpressions>
                                 <TablixHeader>
-                                  <Size>0.55cm</Size>
+                                  <Size>0.49708cm</Size>
                                   <CellContents>
                                     <Textbox Name="mes2">
                                       <CanGrow>true</CanGrow>
@@ -810,7 +810,7 @@
                                       </SortExpression>
                                     </SortExpressions>
                                     <TablixHeader>
-                                      <Size>0.55cm</Size>
+                                      <Size>0.47062cm</Size>
                                       <CellContents>
                                         <Textbox Name="dia2">
                                           <CanGrow>true</CanGrow>
@@ -853,7 +853,7 @@
                               </TablixMember>
                               <TablixMember>
                                 <TablixHeader>
-                                  <Size>1.1cm</Size>
+                                  <Size>0.9677cm</Size>
                                   <CellContents>
                                     <Textbox Name="Textbox38">
                                       <CanGrow>true</CanGrow>
@@ -894,7 +894,7 @@
                               </TablixMember>
                               <TablixMember>
                                 <TablixHeader>
-                                  <Size>0.55cm</Size>
+                                  <Size>0.49708cm</Size>
                                   <CellContents>
                                     <Textbox Name="Textbox3">
                                       <CanGrow>true</CanGrow>
@@ -932,7 +932,7 @@
                                 <TablixMembers>
                                   <TablixMember>
                                     <TablixHeader>
-                                      <Size>0.55cm</Size>
+                                      <Size>0.47062cm</Size>
                                       <CellContents>
                                         <Textbox Name="Textbox5">
                                           <CanGrow>true</CanGrow>
@@ -990,7 +990,7 @@
                                   </SortExpression>
                                 </SortExpressions>
                                 <TablixHeader>
-                                  <Size>1cm</Size>
+                                  <Size>0.65604cm</Size>
                                   <CellContents>
                                     <Textbox Name="numero2">
                                       <CanGrow>true</CanGrow>
@@ -1027,7 +1027,7 @@
                                 <TablixMembers>
                                   <TablixMember>
                                     <TablixHeader>
-                                      <Size>5.78179cm</Size>
+                                      <Size>5.70242cm</Size>
                                       <CellContents>
                                         <Textbox Name="pes_nome2">
                                           <CanGrow>true</CanGrow>
@@ -1079,7 +1079,7 @@
                           <RepeatColumnHeaders>true</RepeatColumnHeaders>
                           <RepeatRowHeaders>true</RepeatRowHeaders>
                           <DataSetName>DataSet1</DataSetName>
-                          <Height>1.7cm</Height>
+                          <Height>1.54579cm</Height>
                           <Width>25.60128cm</Width>
                           <Style>
                             <Border>
@@ -1157,7 +1157,7 @@
         <KeepTogether>true</KeepTogether>
         <DataSetName>DataSet1</DataSetName>
         <Left>0.00001cm</Left>
-        <Height>5.9cm</Height>
+        <Height>4.93014cm</Height>
         <Width>25.60128cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -1335,7 +1335,8 @@
             <TablixMember />
           </TablixMembers>
         </TablixRowHierarchy>
-        <Top>6.29049cm</Top>
+        <Top>5.04451cm</Top>
+        <Left>0.00001cm</Left>
         <Height>1.2cm</Height>
         <Width>3.51833cm</Width>
         <ZIndex>2</ZIndex>
@@ -1346,21 +1347,21 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.94901in</Height>
+    <Height>2.45847in</Height>
     <Style>
       <Border>
         <Style>None</Style>
       </Border>
     </Style>
   </Body>
-  <Width>25.61421cm</Width>
+  <Width>25.60129cm</Width>
   <Page>
     <PageHeight>21cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>1cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
@@ -1413,7 +1414,7 @@
           <QueryParameter Name="@mostraCodigoEscola">
             <Value>=Parameters!mostraCodigoEscola.Value</Value>
           </QueryParameter>
-		  <QueryParameter Name="@documentoOficial">
+          <QueryParameter Name="@documentoOficial">
             <Value>=Parameters!documentoOficial.Value</Value>
           </QueryParameter>
         </QueryParameters>
@@ -1484,6 +1485,10 @@
         <Field Name="DescricaoCabecalho2">
           <DataField>DescricaoCabecalho2</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fav_tipoApuracaoFrequencia">
+          <DataField>fav_tipoApuracaoFrequencia</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -1589,7 +1594,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>cal_ano</Prompt>
     </ReportParameter>
-	<ReportParameter Name="documentoOficial">
+    <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documentoOficial</Prompt>
     </ReportParameter>
