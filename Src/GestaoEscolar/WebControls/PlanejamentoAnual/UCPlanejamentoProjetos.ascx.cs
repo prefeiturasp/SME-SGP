@@ -746,8 +746,8 @@
             bool modalidadeEJA = tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_EJA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
             bool modalidadeCIEJA = tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_CIEJA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
 
-            litPlanoCiclo.Text = modalidadeEJA || modalidadeCIEJA ? "Plano da etapa" : litPlanoCiclo.Text;
-            litPlanoAnual.Text = modalidadeEJA ? "Plano semestral" : litPlanoAnual.Text;
+            litPlanoCiclo.Text = modalidadeEJA || modalidadeCIEJA ? GetGlobalResourceObject("UserControl", "UCPlanejamentoProjetos.litPlanoCiclo.Text.Etapa").ToString() : litPlanoCiclo.Text;
+            litPlanoAnual.Text = modalidadeEJA && !modalidadeCIEJA ? GetGlobalResourceObject("UserControl", "UCPlanejamentoProjetos.litPlanoAnual.Text.Semestral").ToString() : litPlanoAnual.Text;
 
 
             if (VS_tciIdsTurma.Count > 0 && abaPlanoCiclo.Visible)
