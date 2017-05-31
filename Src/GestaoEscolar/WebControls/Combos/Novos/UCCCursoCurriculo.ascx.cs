@@ -405,6 +405,20 @@ namespace GestaoEscolar.WebControls.Combos.Novos
 
         /// <summary>
         /// Carrega todos os cursos/currículos não excluídos logicamente
+        /// filtrando por escola, ano letivo e tipo de ciclo
+        /// </summary>
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="uni_id">ID da unidade</param>
+        /// <param name="cal_ano">Ano do calendario</param>
+        /// <param name="tci_id">ID do tipo de ciclo</param>
+        public void CarregarPorEscolaCalendarioAnoTipoCiclo(int esc_id, int uni_id, int cal_ano, int tci_id)
+        {
+            CarregarCombo(ACA_CursoBO.SelecionaCursoCurriculoPorEscolaCalendarioAnoTipoCiclo(esc_id, uni_id, cal_ano, tci_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
+        }
+
+
+        /// <summary>
+        /// Carrega todos os cursos/currículos não excluídos logicamente
         /// filtrando por escola e tipo nivel de ensino
         /// </summary>
         /// <param name="esc_id">ID da escola</param>
