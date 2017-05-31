@@ -10,7 +10,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
     <fieldset id="fdsSondagem" runat="server">
-        <legend><asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, AgendamentoSondagem.Busca.lblLegend.Text %>" /></legend>
+        <legend><asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, Sondagem.Busca.lblLegend.Text %>" /></legend>
         <div id="divPesquisa" runat="server">
             <asp:Label ID="lblTitulo" runat="server" Text="<%$ Resources:Academico, Sondagem.Busca.lblTitulo.Text %>" AssociatedControlID="txtTitulo"></asp:Label>
             <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
