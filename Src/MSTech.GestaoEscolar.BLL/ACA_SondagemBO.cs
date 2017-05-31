@@ -43,6 +43,9 @@ namespace MSTech.GestaoEscolar.BLL
     [Serializable]
     public class ACA_Sondagem_Lancamento
     {
+        public int sda_id { get; set; }
+        public string dataInicio { get; set; }
+        public string dataFim { get; set; }
         public long alu_id { get; set; }
         public string pes_nome { get; set; }
         public int mtu_numeroChamada { get; set; }
@@ -57,6 +60,15 @@ namespace MSTech.GestaoEscolar.BLL
         public string sdq_descricao { get; set; }
         public int sdq_ordem { get; set; }
         public bool respAluno { get; set; }
+    }
+
+    [Serializable]
+    public class ACA_Sondagem_ListAgendamentos
+    {
+        public long alu_id { get; set; }
+        public int sda_id { get; set; }
+        public string dataInicio { get; set; }
+        public string dataAgendamento { get; set; }
     }
 
     #endregion Estruturas

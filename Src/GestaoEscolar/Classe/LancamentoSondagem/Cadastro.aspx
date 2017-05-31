@@ -92,14 +92,48 @@
                                     <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
                                     <asp:HiddenField ID="hdnAluId" runat="server" />
                                 </td>
-                                <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
-                                    <ItemTemplate>
-                                        <td class="center" style="text-align:center;" id="tdResposta" runat="server">
-                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
-                                            <asp:HiddenField ID="hdnRespId" runat="server" />
-                                        </td>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                                <td class="center" style="text-align:center; padding: 0px !important;" id="tdRespostas" runat="server">
+                                    <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
+                                        <HeaderTemplate>
+                                            <div runat="server" id="divRespostasAgendamentos" visible="false">
+                                                <asp:Repeater runat="server" ID="rptAgendamentosAnteriores" OnItemDataBound="rptAgendamentosAnteriores_ItemDataBound">
+                                                    <ItemTemplate>
+                                                        <table class="grid sortableFrequencia" cellspacing="0" style="width: 100%; border: 0;">
+                                                            <thead>
+                                                                <th class="center {sorter :false} .sorterFalse" id="thAgendamento" runat="server" style="text-align:center">
+                                                                    <asp:Label ID="lblAgendamento" runat="server" Text='<%# Bind("dataAgendamento") %>'></asp:Label>
+                                                                </th>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <asp:Repeater runat="server" ID="rptRespAgendamentosAnteriores">
+                                                                        <ItemTemplate>
+                                                                            <td class="center" style="text-align:center;" id="tdRespAgendamento" runat="server">
+                                                                                <asp:RadioButton ID="rbRespAgendamento" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' Enabled="false" />
+                                                                            </td>
+                                                                        </ItemTemplate>
+                                                                    </asp:Repeater>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </div>
+                                            <table class="grid sortableFrequencia" cellspacing="0" style="width: 100%">
+                                                <tr>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                                    <td class="center" style="text-align:center;" id="tdResposta" runat="server">
+                                                        <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
+                                                        <asp:HiddenField ID="hdnRespId" runat="server" />
+                                                    </td>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                                </tr>
+                                            </table>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+                                </td>
                             </tr>
                         </ItemTemplate>
                         <AlternatingItemTemplate>
@@ -108,14 +142,48 @@
                                     <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
                                     <asp:HiddenField ID="hdnAluId" runat="server" />
                                 </td>
-                                <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
-                                    <ItemTemplate>
-                                        <td class="center" style="text-align:center;" id="tdResposta" runat="server">
-                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
-                                            <asp:HiddenField ID="hdnRespId" runat="server" />
-                                        </td>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                                <td class="center" style="text-align:center; padding: 0px !important;" id="tdRespostas" runat="server">
+                                    <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
+                                        <HeaderTemplate>
+                                            <div runat="server" id="divRespostasAgendamentos" visible="false">
+                                                <asp:Repeater runat="server" ID="rptAgendamentosAnteriores" OnItemDataBound="rptAgendamentosAnteriores_ItemDataBound">
+                                                    <ItemTemplate>
+                                                        <table class="grid sortableFrequencia" cellspacing="0" style="width: 100%; border: 0;">
+                                                            <thead>
+                                                                <th class="center {sorter :false} .sorterFalse" id="thAgendamento" runat="server" style="text-align:center">
+                                                                    <asp:Label ID="lblAgendamento" runat="server" Text='<%# Bind("dataAgendamento") %>'></asp:Label>
+                                                                </th>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <asp:Repeater runat="server" ID="rptRespAgendamentosAnteriores">
+                                                                        <ItemTemplate>
+                                                                            <td class="center" style="text-align:center;" id="tdRespAgendamento" runat="server">
+                                                                                <asp:RadioButton ID="rbRespAgendamento" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' Enabled="false" />
+                                                                            </td>
+                                                                        </ItemTemplate>
+                                                                    </asp:Repeater>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </div>
+                                            <table class="grid sortableFrequencia" cellspacing="0" style="width: 100%">
+                                                <tr>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                                    <td class="center" style="text-align:center;" id="tdResposta" runat="server">
+                                                        <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
+                                                        <asp:HiddenField ID="hdnRespId" runat="server" />
+                                                    </td>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                                </tr>
+                                            </table>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+                                </td>
                             </tr>
                         </AlternatingItemTemplate>
                         <FooterTemplate>
