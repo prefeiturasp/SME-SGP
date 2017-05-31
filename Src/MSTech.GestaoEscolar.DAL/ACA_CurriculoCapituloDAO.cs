@@ -8,11 +8,65 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using MSTech.GestaoEscolar.DAL.Abstracts;
     using System;
-    using System.Data;    /// <summary>
-                          /// Description: .
-                          /// </summary>
+    using System.Data;
+
+    /// <summary>
+    /// Description: .
+    /// </summary>
     public class ACA_CurriculoCapituloDAO : Abstract_ACA_CurriculoCapituloDAO
 	{
+        #region Consulta
+
+        /// <summary>
+        /// Retorna os capítulos do currículo cadastrados de acordo com o tipo de nível de ensino e disciplina.
+        /// </summary>
+        /// <param name="tne_id">Id do tipo de nível de ensino</param>
+        /// <param name="tds_id">Id do tipo de disciplina</param>
+        /// <returns></returns>
+        public DataTable SelecionaPorNivelEnsinoDisciplina(int tne_id, int tds_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CurriculoCapitulo_SelecionaPorNivelEnsinoDisciplina", _Banco);
+
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tne_id";
+                Param.Value = tne_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                if (tds_id > 0)
+                {
+                    Param.Value = tds_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        #endregion Consulta
+
         #region Métodos Sobrescritos
 
         /// <summary>
