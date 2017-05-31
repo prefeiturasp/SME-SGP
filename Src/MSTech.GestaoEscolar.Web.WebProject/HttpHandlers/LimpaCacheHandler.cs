@@ -1,5 +1,6 @@
 ﻿using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.BLL.Caching;
+using MSTech.GestaoEscolar.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,12 +33,18 @@ namespace MSTech.GestaoEscolar.Web.WebProject.HttpHandlers
 
             List<string> ltChaves = new List<string>();
 
+            List<ACA_CalendarioAnual> lstCalendario = ACA_CalendarioAnualBO.GetSelect().ToList();
+
             for (int i = 0; i < tud_ids.Length; i++)
             {
-                ltChaves.Add(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, esc_ids[i], uni_ids[i], cal_ids[i], tud_ids[i]));
                 ltChaves.Add(String.Format(ModelCache.FECHAMENTO_AUTO_FINAL_MODEL_KEY, tud_ids[i]));
                 ltChaves.Add(String.Format(ModelCache.FECHAMENTO_AUTO_FINAL_FILTRO_DEFICIENCIA_MODEL_KEY, tud_ids[i]));
-                ltChaves.Add(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, esc_ids[i], uni_ids[i], cal_ids[i], tud_ids[i]));
+
+                if (lstCalendario.Any(p => p.cal_id.ToString() == cal_ids[i]))
+                {
+                    int cal_ano = lstCalendario.First(p => p.cal_id.ToString() == cal_ids[i]).cal_ano;
+                    ltChaves.Add(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, esc_ids[i], uni_ids[i], cal_ano, tud_ids[i]));
+                }
             }
 
             return ltChaves;

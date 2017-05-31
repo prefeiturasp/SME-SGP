@@ -179,6 +179,21 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Tópico'
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'UCPlanejamentoProjetos.litPlanoCiclo.Text.Etapa' 
+            , @rcr_NomeResource = 'UserControl'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Plano da etapa'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'UCPlanejamentoProjetos.litPlanoAnual.Text.Semestral' 
+            , @rcr_NomeResource = 'UserControl'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Plano semestral'
+
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

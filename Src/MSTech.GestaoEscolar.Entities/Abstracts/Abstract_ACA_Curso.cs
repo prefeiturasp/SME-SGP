@@ -22,32 +22,32 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Campo Id da tabela ACA_Curso.
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_id] é obrigatório.")]
 		[DataObjectField(true, true, false)]
 		public virtual int cur_id { get; set; }
 
 		/// <summary>
 		/// Campo Id da tabela SYS_Entidde do CoreSSO.
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[ent_id] é obrigatório.")]
 		public virtual Guid ent_id { get; set; }
 
 		/// <summary>
 		/// Curso padrão..
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_padrao] é obrigatório.")]
 		public virtual bool cur_padrao { get; set; }
 
 		/// <summary>
 		/// Campo Id da tabela ACA_TipoNivelEnsino.
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[tne_id] é obrigatório.")]
 		public virtual int tne_id { get; set; }
 
 		/// <summary>
 		/// Campo Id da tabela ACA_TipoModalidadeEnsino.
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[tme_id] é obrigatório.")]
 		public virtual int tme_id { get; set; }
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// Nome do curso.
 		/// </summary>
 		[MSValidRange(200)]
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_nome] é obrigatório.")]
 		public virtual string cur_nome { get; set; }
 
 		/// <summary>
@@ -77,7 +77,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Identifica se o curso foi criado para alunos deficientes..
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_exclusivoDeficiente] é obrigatório.")]
 		public virtual bool cur_exclusivoDeficiente { get; set; }
 
 		/// <summary>
@@ -88,7 +88,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Data inicial da vigência..
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_vigenciaInicio] é obrigatório.")]
 		public virtual DateTime cur_vigenciaInicio { get; set; }
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Permitir fechamento/efetivação semestral.
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_efetivacaoSemestral] é obrigatório.")]
 		public virtual bool cur_efetivacaoSemestral { get; set; }
 
 		/// <summary>
@@ -110,25 +110,30 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Situação do registro.
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_situacao] é obrigatório.")]
 		public virtual byte cur_situacao { get; set; }
 
 		/// <summary>
 		/// Data de criação do registro.
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_dataCriacao] é obrigatório.")]
 		public virtual DateTime cur_dataCriacao { get; set; }
 
 		/// <summary>
 		/// Data de alteração do registro.
 		/// </summary>
-		[MSNotNullOrEmpty]
+		[MSNotNullOrEmpty("[cur_dataAlteracao] é obrigatório.")]
 		public virtual DateTime cur_dataAlteracao { get; set; }
 
 		/// <summary>
-		/// Propriedade cur_cargaHoraria.
+		/// Carga horária do curso..
 		/// </summary>
 		public virtual decimal cur_cargaHoraria { get; set; }
+
+		/// <summary>
+		/// Carga horária referente à atividades extra classe..
+		/// </summary>
+		public virtual decimal cur_cargaHorariaExtraClasse { get; set; }
 
     }
 }

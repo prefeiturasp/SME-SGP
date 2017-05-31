@@ -1500,9 +1500,7 @@ namespace GestaoEscolar.WebControls.Fechamento
                     CacheManager.Factory.RemoveByPattern(pattern);
                     pattern = String.Format("{0}_{1}", ModelCache.FECHAMENTO_AUTO_FINAL_COMPONENTES_REGENCIA_PATTERN_KEY, VS_tur_id);
                     CacheManager.Factory.RemoveByPattern(pattern);
-                    pattern = String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, VS_Turma.esc_id, VS_Turma.uni_id, VS_Turma.cal_id, Tud_id);
-                    CacheManager.Factory.Remove(pattern);
-                    pattern = String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, VS_Turma.esc_id, VS_Turma.uni_id, VS_Turma.cal_id, Tud_id);
+                    pattern = String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, VS_Turma.esc_id, VS_Turma.uni_id, VS_CalendarioAnual.cal_ano , Tud_id);
                     CacheManager.Factory.Remove(pattern);
                     AsyncProcessarFilaPendente = new CLS_AlunoFechamentoPendenciaBO.ProcessarFilaPendente(CLS_AlunoFechamentoPendenciaBO.Processar);
 

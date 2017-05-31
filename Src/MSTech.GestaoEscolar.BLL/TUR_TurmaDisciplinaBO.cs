@@ -299,7 +299,7 @@ namespace MSTech.GestaoEscolar.BLL
         public byte tud_tipo { get; set; }
         public int esc_id { get; set; }
         public int uni_id { get; set; }
-        public int cal_id { get; set; }
+        public int cal_ano { get; set; }
     }
 
     #endregion

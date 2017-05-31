@@ -122,6 +122,15 @@ namespace MSTech.GestaoEscolar.BLL
         /// Retorna a chave do cache utilizada para carregar o combo de curso
         /// </summary>
         /// <returns></returns>
+        private static string RetornaChaveCache_SelecionaCursoCurriculoPorEscolaCalendarioAnoTipoCiclo(int esc_id, int uni_id, int cal_ano, int tci_id, Guid ent_id)
+        {
+            return string.Format("Cache_SelecionaCursoCurriculoPorEscolaCalendarioAnoTipoCiclo_{0}_{1}_{2}_{3}_{4}", esc_id, uni_id, cal_ano, tci_id, ent_id);
+        }
+
+        /// <summary>
+        /// Retorna a chave do cache utilizada para carregar o combo de curso
+        /// </summary>
+        /// <returns></returns>
         private static string RetornaChaveCache_SelecionaCursoCurriculoPorEscolaNivelEnsino(int esc_id, int uni_id, int tne_id, Guid ent_id)
         {
             return string.Format("Cache_SelecionaCursoCurriculoPorEscolaNivelEnsino_{0}_{1}_{2}_{3}", esc_id, uni_id, tne_id, ent_id);
@@ -1347,6 +1356,49 @@ namespace MSTech.GestaoEscolar.BLL
             }
 
             return dados;
+        }
+
+        /// <summary>
+        /// Retorna todos os cursos/currículos não excluídos logicamente
+        /// filtrado por escola, ano letivo e tipo de ciclo
+        /// </summary>
+        /// <param name="esc_id">Escola do curso</param>
+        /// <param name="uni_id">Unidade da escola </param>
+        /// <param name="tci_id">Tipo de ciclo</param>
+        /// <param name="cal_ano">Ano letivo</param>
+        /// <param name="ent_id">Entidade do usuário logado</param>
+        /// <returns>DataTable com os dados</returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sComboCurso> SelecionaCursoCurriculoPorEscolaCalendarioAnoTipoCiclo
+        (
+            int esc_id
+            , int uni_id
+            , int cal_ano
+            , int tci_id
+            , Guid ent_id
+            , int appMinutosCacheLongo = 0
+        )
+        {
+            return CacheManager.Factory.Get
+                (
+                    RetornaChaveCache_SelecionaCursoCurriculoPorEscolaCalendarioAnoTipoCiclo(esc_id, uni_id, cal_ano, tci_id, ent_id)
+                    ,
+                    delegate ()
+                    {
+                        ACA_CursoDAO dao = new ACA_CursoDAO();
+                        using (DataTable dtDados = dao.SelecionaPorEscolaCalendarioAnoTipoCiclo(esc_id, uni_id, cal_ano, tci_id, ent_id))
+                        {
+                            return (from DataRow dr in dtDados.Rows
+                                    select new sComboCurso
+                                    {
+                                        cur_crr_id = dr["cur_crr_id"].ToString(),
+                                        cur_crr_nome = dr["cur_crr_nome"].ToString()
+                                    }).ToList();
+                        }
+                    }
+                    ,
+                    appMinutosCacheLongo
+                );
         }
 
 

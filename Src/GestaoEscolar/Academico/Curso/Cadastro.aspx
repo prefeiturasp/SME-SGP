@@ -413,6 +413,13 @@
                             ValidationExpression="[0-9]+(\,[0-9][0-9]?)?"
                             ErrorMessage="Carga horária não está no formato correto."
                             ValidationGroup="Curso">*</asp:RegularExpressionValidator>
+                        <asp:Label ID="lblCargaHorariaExtraCurricular" runat="server" Text="Carga horária extra curricular"
+                            AssociatedControlID="txtCargaHorariaExtraCurricular"></asp:Label>
+                        <asp:TextBox ID="txtCargaHorariaExtraCurricular" runat="server" SkinID="Decimal" MaxLength="8"></asp:TextBox>
+                        <asp:RegularExpressionValidator ID="revCargaHorariaExtraCurricular" runat="server" ControlToValidate="txtCargaHorariaExtraCurricular"
+                            ValidationExpression="[0-9]+(\,[0-9][0-9]?)?"
+                            ErrorMessage="Carga horária extra curricular não está no formato correto."
+                            ValidationGroup="Curso">*</asp:RegularExpressionValidator>
                         <asp:Label ID="LabelVigenciaIni" runat="server" Text="Vigência inicial *" AssociatedControlID="_txtVigenciaIni"></asp:Label>
                         <asp:TextBox ID="_txtVigenciaIni" runat="server" MaxLength="10" SkinID="Data"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_rfvVigenciaIni" runat="server" ControlToValidate="_txtVigenciaIni"

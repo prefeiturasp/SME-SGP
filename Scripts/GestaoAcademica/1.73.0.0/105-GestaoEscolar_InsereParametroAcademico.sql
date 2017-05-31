@@ -28,6 +28,22 @@ SET XACT_ABORT ON
 
 	*/
 
+	
+	EXEC MS_InsereParametroAcademico
+		@pac_chave = 'TIPO_MODALIDADE_EJA' -- Chave do parâmetro. (Obrigatório)
+		,@pac_valor = '6' -- Valor do parâmetro. (Obrigatório)
+		,@pac_descricao = 'Modalidade de ensino que se refere a modalidade EJA.' -- Descrição do parâmetro. (Obrigatório)
+		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
+		,@ent_id = @entId
+
+	EXEC MS_InsereParametroAcademico
+		@pac_chave = 'TIPO_MODALIDADE_CIEJA' -- Chave do parâmetro. (Obrigatório)
+		,@pac_valor = '8' -- Valor do parâmetro. (Obrigatório)
+		,@pac_descricao = 'Modalidade de ensino que se refere a modalidade CIEJA.' -- Descrição do parâmetro. (Obrigatório)
+		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
+		,@ent_id = @entId
+	
+
 -- Fechar transação	
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
