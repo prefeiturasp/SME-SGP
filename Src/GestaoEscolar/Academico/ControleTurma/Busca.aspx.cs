@@ -97,7 +97,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 ViewState["VS_semDados"] = value;
             }
         }
-
+        
         /// <summary>
         /// Retorna se o usuário logado é docente.
         /// </summary>
@@ -2867,7 +2867,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     RepeaterItem itemTurma = (RepeaterItem)grid.NamingContainer;
                     int indice = itemTurma.ItemIndex;
                     int esc_id = 0;
-                    int cal_id = 0;
+                    int[] cal_ids = null;
 
                     // Id Escola
                     HiddenField hdnId = itemTurma.FindControl("hdnEscola") as HiddenField;
@@ -2880,13 +2880,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                     HiddenField hdnCalendario = itemTurma.FindControl("hdnCalendario") as HiddenField;
                     if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
                     {
-                        cal_id = Convert.ToInt32(hdnCalendario.Value);
+                        cal_ids = hdnCalendario.Value.Split(';').Select(p => Convert.ToInt32(p)).ToArray(); ;
                     }
 
                     grid.PageIndex = e.NewPageIndex;
 
                     List<Struct_MinhasTurmas> dados = TUR_TurmaBO.SelecionaPorDocenteControleTurma(ent_id, doc_id, ApplicationWEB.AppMinutosCacheCurto);
-                    List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, cal_id, true, false);
+                    List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, -1, true, false).Where(p => cal_ids != null && cal_ids.Any(c => c == p.cal_id)).ToList();
                     if (dadosTurmasAtivas.Any())
                     {
                         dadosTurmasAtivas.ForEach(p => p.divergenciasAulasPrevistas = VS_listaDivergenciasAulasPrevistas.Any(t => t == p.tud_id));
@@ -3091,7 +3091,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         {
                             int indice = item.ItemIndex;
                             int esc_id = 0;
-                            int cal_id = 0;
+                            int[] cal_ids = null;
 
                             // Id Escola
                             HiddenField hdnId = item.FindControl("hdnEscola") as HiddenField;
@@ -3104,10 +3104,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                             HiddenField hdnCalendario = item.FindControl("hdnCalendario") as HiddenField;
                             if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
                             {
-                                cal_id = Convert.ToInt32(hdnCalendario.Value);
+                                cal_ids = hdnCalendario.Value.Split(';').Select(p => Convert.ToInt32(p)).ToArray(); ;
                             }
 
-                            List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, cal_id, true, false);
+                            List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, -1, true, false).Where(p => cal_ids != null && cal_ids.Any(c => c == p.cal_id)).ToList();
                             if (dadosTurmasAtivas.Any())
                             {
                                 dadosTurmasAtivas.ForEach(p => p.divergenciasAulasPrevistas = VS_listaDivergenciasAulasPrevistas.Any(t => t == p.tud_id));
