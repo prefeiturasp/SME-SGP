@@ -250,6 +250,8 @@
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjeto.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoRelacionada.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativa.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasse.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseAluno.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAula.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAulaAluno.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAulaAlunoTipoAnotacao.cs" />
@@ -544,6 +546,8 @@
     <Compile Include="CLS_PlanejamentoProjetoRelacionada.cs" />
     <Compile Include="CLS_QualificadorAtividade.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativa.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasse.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseAluno.cs" />
     <Compile Include="CLS_TurmaAula.cs" />
     <Compile Include="CLS_TurmaAulaAluno.cs" />
     <Compile Include="CLS_TurmaAulaAlunoTipoAnotacao.cs" />
