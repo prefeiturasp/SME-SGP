@@ -76,7 +76,7 @@
                         <asp:HiddenField ID="hdnUadSuperior" runat="server" Value='<%# Eval("uad_idSuperior") %>' />
                         <asp:HiddenField ID="hdnEscola" runat="server" Value='<%# Eval("esc_id") %>' />
                         <asp:HiddenField ID="hdnUnidadeEscola" runat="server" Value='<%# Eval("uni_id") %>' />
-                        <asp:HiddenField ID="hdnCalendario" runat="server" Value='<%# Eval("cal_id") %>' />
+                        <asp:HiddenField ID="hdnCalendario" runat="server" Value='<%# Eval("cal_ids") %>' />
                         <asp:HiddenField ID="hdnCalendarioAno" runat="server" Value='<%# Eval("cal_ano") %>' />
                         <fieldset>
                             <legend class="legendMinhasTurmas" runat="server" id="legMinhasTurmas">
