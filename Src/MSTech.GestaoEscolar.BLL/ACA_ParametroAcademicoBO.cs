@@ -1084,6 +1084,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
         [parametroAcademicoAttributes("Mostrar coluna de relatório pedagógico na consulta de manutenção de aluno", "Mostrar coluna de relatório pedagógico na consulta de manutenção de aluno é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         MOSTRAR_COLUNA_RELATORIOPEDAGOGICO_MANUTENCAO_ALUNO
+        ,
+        [parametroAcademicoAttributes("Tipo de evento de abertura de período para cadastro de sugestões no currículo", "Tipo de evento de abertura de período para cadastro de sugestões no currículo é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
+        TIPO_EVENTO_ABERTURA_SUGESTOES
     }   
 
     #endregion Enumerador
