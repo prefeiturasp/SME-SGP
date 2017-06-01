@@ -243,6 +243,8 @@
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoRelacionadaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseAlunoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAulaAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAulaAlunoTipoAnotacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAulaDAO.cs" />
@@ -538,6 +540,8 @@
     <Compile Include="CLS_PlanejamentoProjetoRelacionadaDAO.cs" />
     <Compile Include="CLS_QualificadorAtividadeDAO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaDAO.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoDAO.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseDAO.cs" />
     <Compile Include="CLS_TurmaAulaAlunoDAO.cs" />
     <Compile Include="CLS_TurmaAulaAlunoTipoAnotacaoDAO.cs" />
     <Compile Include="CLS_TurmaAulaDAO.cs" />

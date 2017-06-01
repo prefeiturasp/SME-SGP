@@ -308,6 +308,8 @@
     <Compile Include="CLS_PlanejamentoProjetoRelacionadaBO.cs" />
     <Compile Include="CLS_QualificadorAtividadeBO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaBO.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoBO.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseBO.cs" />
     <Compile Include="CLS_TurmaAulaAlunoTipoAnotacaoBO.cs" />
     <Compile Include="CLS_TurmaAulaDisciplinaRelacionadaBO.cs" />
     <Compile Include="CLS_TurmaAulaGeradaBO.cs" />
