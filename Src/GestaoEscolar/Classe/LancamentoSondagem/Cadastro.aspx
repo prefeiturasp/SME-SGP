@@ -91,6 +91,8 @@
                                 <td>
                                     <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
                                     <asp:HiddenField ID="hdnAluId" runat="server" />
+                                    <asp:Button runat="server" ID="btnExibirLancamentoAnteriores" Text=">" ToolTip="Exibir lançamentos anteriores" />
+                                    <asp:Button runat="server" ID="btnEsconderLancamentoAnteriores" Text="<" ToolTip="Esconder lançamentos anteriores" />
                                 </td>
                                 <td class="center" style="text-align:center; padding: 0px !important;" id="tdRespostas" runat="server">
                                     <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
@@ -141,6 +143,8 @@
                                 <td>
                                     <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
                                     <asp:HiddenField ID="hdnAluId" runat="server" />
+                                    <asp:Button runat="server" ID="btnExibirLancamentoAnteriores" Text=">" ToolTip="Exibir lançamentos anteriores" />
+                                    <asp:Button runat="server" ID="btnEsconderLancamentoAnteriores" Text="<" ToolTip="Esconder lançamentos anteriores" />
                                 </td>
                                 <td class="center" style="text-align:center; padding: 0px !important;" id="tdRespostas" runat="server">
                                     <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
