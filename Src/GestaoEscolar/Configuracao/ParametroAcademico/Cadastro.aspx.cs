@@ -1033,6 +1033,25 @@ public partial class Configuracao_ParametroAcademico_Cadastro : MotherPageLogado
         }
 
         #endregion Parametro - TIPO_PERIODO_CALENDARIO_RECESSO
+
+        #region Parametro - TIPO_EVENTO_ABERTURA_SUGESTOES
+
+        else if (pac_chave == "TIPO_EVENTO_ABERTURA_SUGESTOES")
+        {
+            parametroTextBox.Visible = false;
+            _cvParametroAcademicoValor.ErrorMessage = "Tipo de evento de abertura de período para cadastro de sugestões no currículo é obrigatório.";
+            _ddlParametroAcademicoValor.Items.Clear();
+            _ddlParametroAcademicoValor.DataTextField = "tev_nome";
+            _ddlParametroAcademicoValor.DataValueField = "tev_id";
+            _ddlParametroAcademicoValor.DataSource = ACA_TipoEventoBO.SelecionaTodosNaoRelacionados();
+            _ddlParametroAcademicoValor.Items.Insert(0, new ListItem("-- Selecione um tipo de evento --", "-1", true));
+            _ddlParametroAcademicoValor.AppendDataBoundItems = true;
+            _ddlParametroAcademicoValor.DataBind();
+            parametroCombo.Visible = true;
+        }
+
+        #endregion Parametro - TIPO_EVENTO_ABERTURA_SUGESTOES
+
     }
 
     private void SetaBuscaLogica(parametroAttributes parametroattributes)

@@ -835,7 +835,24 @@ namespace GestaoEscolar.Academico.ControleTurma
                         VS_listaDivergenciasAulasPrevistas = new List<long>();
 
                         //VS_Dados = dados;
-                        rptTurmas.DataSource = dadosEscolasAtivas;
+                        rptTurmas.DataSource = dadosEscolasAtivas
+                                                .GroupBy(p => new { esc_id = p.esc_id, uni_id = p.uni_id, cal_ano = p.cal_ano })
+                                                .Select(p => new
+                                                {
+                                                    esc_id = p.Key.esc_id
+                                                    ,
+                                                    uni_id = p.Key.uni_id
+                                                    ,
+                                                    cal_ano = p.Key.cal_ano
+                                                    ,
+                                                    uad_idSuperior = p.First().uad_idSuperior
+                                                    ,
+                                                    cal_ids = string.Join(";", p.GroupBy(c => c.cal_id).Select(c => c.Key.ToString()).ToArray())
+                                                    ,
+                                                    lengendTitulo = p.First().lengendTitulo
+                                                    ,
+                                                    turmasAnoAtual = p.First().turmasAnoAtual
+                                                }); ;
                         rptTurmas.DataBind();
 
                         VS_titular = dados.Exists(p => p.Turmas.Any(t => t.tdc_id == (int)EnumTipoDocente.Titular));
@@ -1862,22 +1879,27 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 int esc_id = 0;
                 int uni_id = 0;
-                int cal_id = 0;
+                int[] cal_ids = null;
                 HiddenField hdnId = rptItem.FindControl("hdnEscola") as HiddenField;
                 if (hdnId != null && !string.IsNullOrEmpty(hdnId.Value))
                     esc_id = Convert.ToInt32(hdnId.Value);
                 HiddenField hdnUniId = rptItem.FindControl("hdnUnidadeEscola") as HiddenField;
                 if (hdnUniId != null && !string.IsNullOrEmpty(hdnUniId.Value))
                     uni_id = Convert.ToInt32(hdnUniId.Value);
+                // Calendario
                 HiddenField hdnCalendario = rptItem.FindControl("hdnCalendario") as HiddenField;
                 if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
-                    cal_id = Convert.ToInt32(hdnCalendario.Value);
+                    cal_ids = hdnCalendario.Value.Split(';').Select(p => Convert.ToInt32(p)).ToArray();
 
                 // Verifico se existe evento de fechamento vigente para a escola e calendario,
                 // para mostrar o botao de atualizar pendencias.
                 string valor = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_NOTAS, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
                 string valorFinal = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_FINAL, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-                List<ACA_Evento> lstEventosEscola = ACA_EventoBO.GetEntity_Efetivacao_ListPorPeriodo(cal_id, -1, Guid.Empty, esc_id, uni_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
+                List<ACA_Evento> lstEventosEscola = cal_ids != null && cal_ids.Any() ?
+                            cal_ids.SelectMany(p => ACA_EventoBO.GetEntity_Efetivacao_ListPorPeriodo(p, -1, Guid.Empty, esc_id, uni_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id)).ToList() :
+                            new List<ACA_Evento>();
+               
                 bool existeEventoVigente = lstEventosEscola.Any(p => Convert.ToString(p.tev_id) == valor || Convert.ToString(p.tev_id) == valorFinal);
 
                 // Apenas para carregar as pendencias armazenadas
@@ -1887,7 +1909,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     List<Struct_MinhasTurmas> dados = TUR_TurmaBO.SelecionaPorDocenteControleTurma(__SessionWEB.__UsuarioWEB.Usuario.ent_id,
                                                                                                    __SessionWEB.__UsuarioWEB.Docente.doc_id,
                                                                                                    ApplicationWEB.AppMinutosCacheCurto);
-                    List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, cal_id, true, false);
+                    List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, -1, true, false).Where(p => cal_ids != null && cal_ids.Any(c => c == p.cal_id)).ToList();
 
                     List<sTurmaDisciplinaEscolaCalendario> lstCarregarPendencias = new List<sTurmaDisciplinaEscolaCalendario>();
                     lstCarregarPendencias.AddRange(dadosTurmasAtivas.Select(p =>
@@ -2790,7 +2812,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 long doc_id = __SessionWEB.__UsuarioWEB.Docente.doc_id;
                 int indice = e.Item.ItemIndex;
                 int esc_id = 0;
-                int cal_id = 0;
+                int cal_ano = 0;
 
                 // Id Escola
                 HiddenField hdnId = e.Item.FindControl("hdnEscola") as HiddenField;
@@ -2800,10 +2822,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 }
 
                 // Calendario
-                HiddenField hdnCalendario = e.Item.FindControl("hdnCalendario") as HiddenField;
-                if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
+                HiddenField hdnCalendarioAno = e.Item.FindControl("hdnCalendarioAno") as HiddenField;
+                if (hdnCalendarioAno != null && !string.IsNullOrEmpty(hdnCalendarioAno.Value))
                 {
-                    cal_id = Convert.ToInt32(hdnCalendario.Value);
+                    cal_ano = Convert.ToInt32(hdnCalendarioAno.Value);
                 }
 
                 int uni_id = 0;
@@ -2814,7 +2836,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 }
 
                 List<Struct_MinhasTurmas> dados = TUR_TurmaBO.SelecionaPorDocenteControleTurma(ent_id, doc_id, ApplicationWEB.AppMinutosCacheCurto);
-                List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, cal_id, true, false);
+                List<Struct_MinhasTurmas.Struct_Turmas> dadosTurmasAtivas = TUR_TurmaBO.SelecionaTurmasAtivasDocente(dados, esc_id, -1, true, false).Where(p => p.cal_ano == cal_ano).ToList();
                 if (dadosTurmasAtivas.Any())
                 {
                     VS_listaDivergenciasAulasPrevistas.AddRange(TUR_TurmaDisciplinaBO.SelecionaDisciplinasDivergenciasAulasPrevistas(string.Join(",", dadosTurmasAtivas.Select(p => p.tud_id.ToString()))));
@@ -3495,14 +3517,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                             HiddenField hdnUadSuperior = (HiddenField)rptItem.FindControl("hdnUadSuperior");
                             HiddenField hdnEscola = (HiddenField)rptItem.FindControl("hdnEscola");
                             HiddenField hdnUnidadeEscola = (HiddenField)rptItem.FindControl("hdnUnidadeEscola");
-                            HiddenField hdnCalendario = (HiddenField)rptItem.FindControl("hdnCalendario");
                             HiddenField hdnCalendarioAno = (HiddenField)rptItem.FindControl("hdnCalendarioAno");
                             GridView grv = (GridView)rptItem.FindControl("grvTurma");
 
                             if (grv != null && VS_listaPendencias.ContainsKey(grv.ClientID))
                                 lstPendencia = VS_listaPendencias[grv.ClientID];
 
-                            if (hdnUadSuperior != null && hdnEscola != null && hdnUnidadeEscola != null && hdnCalendario != null && hdnCalendarioAno != null && grv != null)
+                            if (hdnUadSuperior != null && hdnEscola != null && hdnUnidadeEscola != null && hdnCalendarioAno != null && grv != null)
                             {
                                 grid = new sGridTurmaEscolaCalendario
                                 {
@@ -3514,7 +3535,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                             ,
                                     uni_id = Convert.ToInt32(string.IsNullOrEmpty(hdnUnidadeEscola.Value) ? "-1" : hdnUnidadeEscola.Value)
                                             ,
-                                    cal_id = Convert.ToInt32(string.IsNullOrEmpty(hdnCalendario.Value) ? "-1" : hdnCalendario.Value)
+                                    cal_id = -1
                                             ,
                                     cal_ano = Convert.ToInt32(string.IsNullOrEmpty(hdnCalendarioAno.Value) ? "-1" : hdnCalendarioAno.Value)
                                 };
@@ -3585,7 +3606,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     parametros = "uad_idSuperiorGestao=" + grid.uad_idSuperior +
                                  "&esc_id=" + grid.esc_id +
                                  "&uni_id=" + grid.uni_id +
-                                 "&cal_id=-1" +
+                                 "&cal_id=" + grid.cal_id +
                                  "&cal_ano=" + grid.cal_ano +
                                  "&cur_id=-1" +
                                  "&crr_id=-1" +
