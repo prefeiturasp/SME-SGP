@@ -986,7 +986,9 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     {
                         HtmlGenericControl divRespostasAgendamentos = (HtmlGenericControl)e.Item.FindControl("divRespostasAgendamentos");
                         Repeater rptAgendamentosAnteriores = (Repeater)e.Item.FindControl("rptAgendamentosAnteriores");
-                        if (divRespostasAgendamentos != null && rptAgendamentosAnteriores != null)
+                        Button btnExibirLancamentoAnteriores = (Button)rptItemLancamento.FindControl("btnExibirLancamentoAnteriores");
+                        Button btnEsconderLancamentoAnteriores = (Button)rptItemLancamento.FindControl("btnEsconderLancamentoAnteriores");
+                        if (divRespostasAgendamentos != null && rptAgendamentosAnteriores != null && btnExibirLancamentoAnteriores != null && btnEsconderLancamentoAnteriores != null)
                         {
                             List<ACA_Sondagem_ListAgendamentos> lstAux = new List<ACA_Sondagem_ListAgendamentos>();
                             foreach (int sda_id in VS_lstLancamentoTurma.Where(p => p.alu_id == alu_id && p.sda_id != VS_sda_id).GroupBy(p => p.sda_id).Select(p => p.Key))
@@ -1001,6 +1003,15 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                             rptAgendamentosAnteriores.DataBind();
 
                             divRespostasAgendamentos.Visible = true;
+
+                            btnExibirLancamentoAnteriores.Attributes.Add("onclick", "return false");
+                            btnEsconderLancamentoAnteriores.Attributes.Add("onclick", "return false");
+
+                            btnExibirLancamentoAnteriores.OnClientClick = "$(" + divRespostasAgendamentos.ClientID + ").show(); $(" + btnEsconderLancamentoAnteriores.ClientID + ").show(); $(" + btnExibirLancamentoAnteriores.ClientID + ").hide();";
+                            btnEsconderLancamentoAnteriores.OnClientClick = "$(" + divRespostasAgendamentos.ClientID + ").hide(); $(" + btnExibirLancamentoAnteriores.ClientID + ").show(); $(" + btnEsconderLancamentoAnteriores.ClientID + ").hide();";
+
+                            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "Esconde" + btnEsconderLancamentoAnteriores.ClientID, "$(" + btnEsconderLancamentoAnteriores.ClientID + ").hide();", true);
+                            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "Esconde" + divRespostasAgendamentos.ClientID, "$(" + divRespostasAgendamentos.ClientID + ").hide();", true);
                         }
                     }
                 }
