@@ -951,6 +951,7 @@
     </ReportParameter>
     <ReportParameter Name="cal_id">
       <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
       <Prompt>cal id</Prompt>
     </ReportParameter>
     <ReportParameter Name="cur_id">

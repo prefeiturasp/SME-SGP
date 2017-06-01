@@ -318,6 +318,22 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna todos os tipos de disciplina obrigatórias para o nível de ensino
+        /// </summary>       
+        /// <param name="tne_id">ID do tipo de nível de ensino</param>  
+        /// <param name="ent_id">Id da entidade do usuário logado.</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaObrigatoriasPorNivelEnsino
+        (
+            int tne_id
+            , Guid ent_id
+        )
+        {
+            bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
+            return new ACA_TipoDisciplinaDAO().SelecionaObrigatoriasPorNivelEnsino(tne_id, controlarOrdem);
+        }
+
+        /// <summary>
         /// Retorna todos os tipos de disciplina não excluídos logicamente por nível de ensino
         /// Sem paginação
         /// </summary>       

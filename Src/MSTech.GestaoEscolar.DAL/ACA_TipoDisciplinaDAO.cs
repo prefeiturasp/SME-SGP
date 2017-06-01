@@ -149,6 +149,52 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna todos os tipos de disciplina obrigatórias para o nível de ensino
+        /// </summary>        
+        /// <param name="tne_id">ID do tipo de nível de ensino</param>
+        /// <param name="controlarOrdem">se vai ordenar por ordem ou não</param> 
+        public DataTable SelecionaObrigatoriasPorNivelEnsino
+        (
+            int tne_id
+            , bool controlarOrdem
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoDisciplina_SelecionaObrigatoriasPorNivelEnsino", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tne_id";
+                Param.Size = 4;
+                Param.Value = tne_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@controlarOrdem";
+                Param.Size = 1;
+                Param.Value = controlarOrdem;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Retorna todos os tipos de disciplina não excluídos logicamente com ligação em objetos de aprendizagem
         /// </summary>        
         /// <param name="cal_ano">Ano do objeto de aprendizagem</param>

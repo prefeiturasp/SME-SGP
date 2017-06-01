@@ -15,7 +15,8 @@
         <ContentTemplate>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
             <fieldset>
-                <legend><asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegend.Text %>" /></legend>
+                <legend>
+                    <asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegend.Text %>" /></legend>
                 <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
                 <asp:Label ID="lblTitulo" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblTitulo.Text %>" AssociatedControlID="txtTitulo" />
                 <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
@@ -23,11 +24,44 @@
                     Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.rfvTitulo.ErrorMessage %>" Text="*" />
                 <asp:Label ID="lblDescricao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblDescricao.Text %>" AssociatedControlID="txtDescricao" />
                 <asp:TextBox ID="txtDescricao" runat="server" TextMode="MultiLine" SkinID="limite4000" MaxLength="4000"></asp:TextBox>
-                <div><br /></div>
+                <div>
+                    <br />
+                </div>
                 <fieldset>
-                    <legend><asp:Label runat="server" ID="lblLegendQuestoes" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegendQuestoes.Text %>" /></legend>
+                    <legend>
+                        <asp:Label runat="server" ID="lblLegendQuestoes" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegendQuestoes.Text %>" /></legend>
                     <asp:Button runat="server" ID="btnAdicionarQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarQuestao.Text %>"
                         OnClick="btnAdicionarQuestao_Click" CausesValidation="false" />
+                    <div>
+                        <br />
+                    </div>
+                    <div id="divInserir" visible="false" runat="server">
+                        <asp:UpdatePanel runat="server" ID="updMessagePopUp" UpdateMode="Always">
+                            <ContentTemplate>
+                                <asp:Label ID="lblMessagePopUp" runat="server" EnableViewState="False"></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <asp:UpdatePanel runat="server" ID="updPopUp" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <fieldset>
+                                    <legend>
+                                        <asp:Label runat="server" ID="lblTituloPopUp" /></legend>
+                                    <div runat="server" id="divSigla" visible="false">
+                                        <asp:Label runat="server" ID="lblSigla" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblSigla.Text %>" AssociatedControlID="txtSigla" />
+                                        <asp:TextBox runat="server" ID="txtSigla" SkinID="text10C" MaxLength="20" />
+                                    </div>
+                                    <asp:Label runat="server" ID="lblCampo" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblCampo.Text %>" AssociatedControlID="txtItem" />
+                                    <asp:TextBox runat="server" ID="txtItem" SkinID="text60C" MaxLength="250" />
+                                    <div class="right">
+                                        <asp:Button ID="btnAdicionar" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false"
+                                            OnClick="btnAdicionar_Click" />
+                                        <asp:Button ID="btnCancelarItem" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
+                                            OnClientClick="document.getElementById('divInserir').setAttribute('visible', 'false');" />
+                                    </div>
+                                </fieldset>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
                     <asp:GridView runat="server" ID="grvQuestoes" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
                         DataKeyNames="sdq_id, sdq_descricao, sdq_subQuestao" EmptyDataText="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.EmptyDataText %>"
                         OnDataBound="grv_DataBound" OnRowDataBound="grv_RowDataBound" OnRowCommand="grvQuestoes_RowCommand">
@@ -64,7 +98,8 @@
                     </asp:GridView>
                 </fieldset>
                 <fieldset>
-                    <legend><asp:Label runat="server" ID="lblLegendSubQuestoes" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegendSubQuestoes.Text %>" /></legend>
+                    <legend>
+                        <asp:Label runat="server" ID="lblLegendSubQuestoes" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegendSubQuestoes.Text %>" /></legend>
                     <asp:Button runat="server" ID="btnAdicionarSubQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarSubQuestao.Text %>"
                         OnClick="btnAdicionarSubQuestao_Click" CausesValidation="false" />
                     <asp:GridView runat="server" ID="grvSubQuestoes" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
@@ -103,7 +138,8 @@
                     </asp:GridView>
                 </fieldset>
                 <fieldset>
-                    <legend><asp:Label runat="server" ID="lblLegendRespostas" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegendRespostas.Text %>" /></legend>
+                    <legend>
+                        <asp:Label runat="server" ID="lblLegendRespostas" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegendRespostas.Text %>" /></legend>
                     <asp:Button runat="server" ID="btnAdicionarResposta" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarResposta.Text %>"
                         OnClick="btnAdicionarResposta_Click" CausesValidation="false" />
                     <asp:GridView runat="server" ID="grvRespostas" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
@@ -151,30 +187,4 @@
             </fieldset>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <div id="divInserir" class="hide">
-        <asp:UpdatePanel runat="server" ID="updMessagePopUp" UpdateMode="Always">
-            <ContentTemplate>
-                <asp:Label ID="lblMessagePopUp" runat="server" EnableViewState="False"></asp:Label>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <asp:UpdatePanel runat="server" ID="updPopUp" UpdateMode="Conditional">
-            <ContentTemplate>
-                <fieldset>
-                    <legend><asp:Label runat="server" ID="lblTituloPopUp" /></legend>
-                    <div runat="server" id="divSigla" visible="false">
-                        <asp:Label runat="server" ID="lblSigla" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblSigla.Text %>" AssociatedControlID="txtSigla" />
-                        <asp:TextBox runat="server" ID="txtSigla" SkinID="text10C" MaxLength="20" />
-                    </div>
-                    <asp:Label runat="server" ID="lblCampo" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblCampo.Text %>" AssociatedControlID="txtItem" />
-                    <asp:TextBox runat="server" ID="txtItem" SkinID="text60C" MaxLength="250" />
-                    <div class="right">
-                            <asp:Button ID="btnAdicionar" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false" 
-                                OnClick="btnAdicionar_Click" />
-                            <asp:Button ID="btnCancelarItem" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
-                                OnClientClick="$('#divInserir').dialog('close');" />
-                    </div>
-                </fieldset>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </div>
 </asp:Content>

@@ -394,7 +394,8 @@ namespace GestaoEscolar.Academico.Sondagem
                 btnAdicionar.Text = VS_sdq_id > 0 || VS_sdr_id > 0 ? GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAlterar.Text").ToString() :
                                     GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAdicionar.Text").ToString();
 
-                ScriptManager.RegisterStartupScript(Page, typeof(Page), "EditarAulas", "$('#divInserir').dialog('open');", true);
+                divInserir.Visible = true;
+                //ScriptManager.RegisterStartupScript(Page, typeof(Page), "EditarAulas", "$('#divInserir').dialog('open');", true);
             }
             catch (ValidationException ex)
             {
@@ -632,7 +633,8 @@ namespace GestaoEscolar.Academico.Sondagem
                     }
                 }
 
-                ScriptManager.RegisterStartupScript(Page, typeof(Page), "FecharPopUp", "$('#divInserir').dialog('close');", true);
+                divInserir.Visible = false;
+                //ScriptManager.RegisterStartupScript(Page, typeof(Page), "FecharPopUp", "$('#divInserir').dialog('close');", true);
             }
             catch (ValidationException ex)
             {

@@ -1848,7 +1848,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                                                     ,
                                                                                     uni_id = t.uni_id
                                                                                     ,
-                                                                                    cal_id = t.cal_id
+                                                                                    cal_ano = t.cal_ano
                                                                                 }
                                                                                 ).Distinct().ToList()).ToList());
 
@@ -1903,7 +1903,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                                                 ,
                                                                                 uni_id = p.uni_id
                                                                                 ,
-                                                                                cal_id = p.cal_id
+                                                                                cal_ano = p.cal_ano
                                                                             }
                                                                             ).Distinct().ToList());
 
@@ -3545,7 +3545,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 string report, parametros;
 
-                if (grid.gridTurma != null && grid.esc_id > 0 && grid.uni_id > 0 && grid.cal_id > 0 && grid.cal_ano > 0)
+                if (grid.gridTurma != null && grid.esc_id > 0 && grid.uni_id > 0 && grid.cal_ano > 0)
                 {
                     var turmadisciplina = lstPendencia.Where(p =>
                         (
@@ -3560,8 +3560,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_id in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                     {
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_id));
                     }
 
                     string tud_ids = string.Join(",", turmadisciplina.GroupBy(p => p.ToString()).Select(p => p.Key.ToString()).ToArray());
@@ -3579,15 +3578,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_idRegencia in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                     {
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_idRegencia));
                     }
 
                     report = ((int)ReportNameGestaoAcademicaDocumentosDocente.DocDctAlunosPendenciaEfetivacao).ToString();
                     parametros = "uad_idSuperiorGestao=" + grid.uad_idSuperior +
                                  "&esc_id=" + grid.esc_id +
                                  "&uni_id=" + grid.uni_id +
-                                 "&cal_id=" + grid.cal_id +
+                                 "&cal_id=-1" +
                                  "&cal_ano=" + grid.cal_ano +
                                  "&cur_id=-1" +
                                  "&crr_id=-1" +

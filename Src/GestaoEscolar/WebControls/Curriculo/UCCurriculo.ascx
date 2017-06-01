@@ -1,1 +1,138 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCCurriculo.ascx.cs" Inherits="GestaoEscolar.WebControls.Curriculo.UCCurriculo" %>
+
+<%@ Register Src="~/WebControls/Combos/UCComboTipoNivelEnsino.ascx" TagName="UCComboTipoNivelEnsino" TagPrefix="uc1" %>
+
+<asp:UpdatePanel runat="server" ID="updMessage" UpdateMode="Always">
+    <ContentTemplate>
+        <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
+    </ContentTemplate>
+</asp:UpdatePanel>
+<asp:UpdatePanel runat="server" ID="updCadastro" UpdateMode="Always">
+    <ContentTemplate>
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+        <fieldset>
+            <legend><asp:Literal runat="server" ID="litLegend" Text="" /></legend>
+            <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />
+            <asp:Panel runat="server" ID="pnlCurriculo" style="margin-top:20px;" Visible="false" >
+                <!-- Introdução -->
+                <fieldset>
+                    <legend><asp:Literal runat="server" ID="litIntroducao" Text="<%$ Resources:Academico, Curriculo.Cadastro.litIntroducao.Text %>" /></legend>
+                    <asp:Button ID="btnNovoGeral" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoGeral.Text %>" OnClick="btnNovoGeral_Click"/>
+                    <asp:GridView ID="grvGeral" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.EmptyDataText %>"
+                        DataKeyNames="crc_id,crc_ordem,tds_id"
+                        OnRowDataBound="grvGeral_RowDataBound"
+                        OnRowCommand="grvGeral_RowCommand"
+                        OnDataBound="grvGeral_DataBound"
+                        OnRowEditing="grvGeral_RowEditing" 
+                        OnRowUpdating="grvGeral_RowUpdating" 
+                        OnRowDeleting="grvGeral_RowDeleting"
+                        OnRowCancelingEdit="grvGeral_RowCancelingEdit">
+                        <Columns>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaTopico %>">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' Font-Bold="true"></asp:Label>
+                                    <br /><br />
+                                    <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:Label ID="lblTitulo" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTitulo.Text %>' AssociatedControlID="txtTitulo"></asp:Label>
+                                    <asp:TextBox ID="txtTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' MaxLength="200" SkinID="text60C"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvTitulo.ErrorMessage %>"
+                                        ControlToValidate="txtTitulo" ValidationGroup="geral">*</asp:RequiredFieldValidator>
+                                    <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                <ItemTemplate>                                
+                                    <asp:ImageButton ID="btnSubir" runat="server" CausesValidation="false" CommandName="Subir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSubir.ToolTip %>" Height="16" Width="16" />
+                                    <asp:ImageButton ID="btnDescer" runat="server" CausesValidation="false" CommandName="Descer" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnDescer.ToolTip %>" Height="16" Width="16" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaEditar %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnEditar.ToolTip %>" CausesValidation="false" />
+                                    <asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="geral" Visible="false" />
+                                    <asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaExcluir %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluir.ToolTip %>" CausesValidation="false" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </fieldset>
+
+                <!-- Disciplinas -->
+                <%--<asp:Repeater runat="server" ID="rptDisciplinas">
+                    <ItemTemplate>
+                        <asp:RadioButton runat="server" ID="rbDisciplina" Text="" />
+                    </ItemTemplate>
+                </asp:Repeater>--%>
+                <asp:RadioButtonList runat="server" ID="rblDisciplina" RepeatDirection="Horizontal" DataValueField="tds_id" DataTextField="tds_nome" OnSelectedIndexChanged="rblDisciplina_SelectedIndexChanged" AutoPostBack="true"></asp:RadioButtonList>
+                <fieldset runat="server" id="fsDisciplina" visible="false">
+                    <legend><asp:Literal runat="server" ID="litDisciplina" Text="" /></legend>
+                    <asp:Button ID="btnNovoDisciplina" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoDisciplina.Text %>" OnClick="btnNovoDisciplina_Click"/>
+                    <asp:GridView ID="grvDisciplina" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvDisciplina.EmptyDataText %>"
+                        DataKeyNames="crc_id,crc_ordem,tds_id"
+                        OnRowDataBound="grvGeral_RowDataBound"
+                        OnRowCommand="grvGeral_RowCommand"
+                        OnDataBound="grvGeral_DataBound"
+                        OnRowEditing="grvGeral_RowEditing" 
+                        OnRowUpdating="grvGeral_RowUpdating" 
+                        OnRowDeleting="grvGeral_RowDeleting"
+                        OnRowCancelingEdit="grvGeral_RowCancelingEdit">
+                        <Columns>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvDisciplina.ColunaTopico %>">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' Font-Bold="true"></asp:Label>
+                                    <br /><br />
+                                    <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:Label ID="lblTitulo" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTitulo.Text %>' AssociatedControlID="txtTitulo"></asp:Label>
+                                    <asp:TextBox ID="txtTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' MaxLength="200" SkinID="text60C"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvTitulo.ErrorMessage %>"
+                                        ControlToValidate="txtTitulo" ValidationGroup="disciplina">*</asp:RequiredFieldValidator>
+                                    <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                <ItemTemplate>                                
+                                    <asp:ImageButton ID="btnSubir" runat="server" CausesValidation="false" CommandName="Subir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSubir.ToolTip %>" Height="16" Width="16" />
+                                    <asp:ImageButton ID="btnDescer" runat="server" CausesValidation="false" CommandName="Descer" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnDescer.ToolTip %>" Height="16" Width="16" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaEditar %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnEditar.ToolTip %>" CausesValidation="false" />
+                                    <asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="disciplina" Visible="false" />
+                                    <asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaExcluir %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluir.ToolTip %>" CausesValidation="false" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                    <br /><br />
+                    <fieldset>
+                        <legend><asp:Literal runat="server" ID="litHabilidades" Text="<%$ Resources:Academico, Curriculo.Cadastro.litHabilidades.Text %>" /></legend>
+
+                    </fieldset>
+                </fieldset>
+            </asp:Panel>
+        </fieldset>
+    </ContentTemplate>
+</asp:UpdatePanel>
