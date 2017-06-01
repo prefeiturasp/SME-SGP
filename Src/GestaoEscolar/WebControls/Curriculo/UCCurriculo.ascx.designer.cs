@@ -49,6 +49,15 @@ namespace GestaoEscolar.WebControls.Curriculo {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
         
         /// <summary>
+        /// ValidationSummary2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary2;
+        
+        /// <summary>
         /// litLegend control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace GestaoEscolar.WebControls.Curriculo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::WebControls_Combos_UCComboNivelEnsino UCComboTipoNivelEnsino1;
+        
+        /// <summary>
+        /// UCComboTipoModalidadeEnsino1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboModalidadeEnsino UCComboTipoModalidadeEnsino1;
         
         /// <summary>
         /// pnlCurriculo control.
@@ -155,5 +173,32 @@ namespace GestaoEscolar.WebControls.Curriculo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litHabilidades;
+        
+        /// <summary>
+        /// UCComboTipoCurriculoPeriodo1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.UCComboTipoCurriculoPeriodo UCComboTipoCurriculoPeriodo1;
+        
+        /// <summary>
+        /// pnlHabilidades control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlHabilidades;
+        
+        /// <summary>
+        /// btnNovoEixo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNovoEixo;
     }
 }

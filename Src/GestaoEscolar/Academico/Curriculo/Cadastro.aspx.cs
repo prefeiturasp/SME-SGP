@@ -19,9 +19,9 @@ namespace GestaoEscolar.Academico.Curriculo
 
             if (!IsPostBack)
             {
-                UCCurriculo1.permiteIncluir = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
-                UCCurriculo1.permiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
-                UCCurriculo1.permiteExcluir = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
+                UCCurriculo1.VS_permiteIncluir = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
+                UCCurriculo1.VS_permiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                UCCurriculo1.VS_permiteExcluir = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
             }
         }
 

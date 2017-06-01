@@ -23,7 +23,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="tne_id">Id do tipo de nível de ensino</param>
         /// <param name="tds_id">Id do tipo de disciplina</param>
         /// <returns></returns>
-        public DataTable SelecionaPorNivelEnsinoDisciplina(int tne_id, int tds_id)
+        public DataTable SelecionaPorNivelEnsinoDisciplina(int tne_id, int tme_id, int tds_id)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CurriculoCapitulo_SelecionaPorNivelEnsinoDisciplina", _Banco);
 
@@ -35,6 +35,12 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.DbType = DbType.Int32;
                 Param.ParameterName = "@tne_id";
                 Param.Value = tne_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_id";
+                Param.Value = tme_id;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

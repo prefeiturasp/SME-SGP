@@ -64,6 +64,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_id";
+                Param.Size = 4;
+                Param.Value = entity.tme_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
                 Param.ParameterName = "@tds_id";
                 Param.Size = 4;
                 Param.Value = entity.tds_id;
@@ -164,6 +171,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param.ParameterName = "@tne_id";
                 Param.Size = 4;
                 Param.Value = entity.tne_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_id";
+                Param.Size = 4;
+                Param.Value = entity.tme_id;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

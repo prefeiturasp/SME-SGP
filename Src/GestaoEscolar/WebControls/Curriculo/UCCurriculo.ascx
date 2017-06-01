@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCCurriculo.ascx.cs" Inherits="GestaoEscolar.WebControls.Curriculo.UCCurriculo" %>
 
 <%@ Register Src="~/WebControls/Combos/UCComboTipoNivelEnsino.ascx" TagName="UCComboTipoNivelEnsino" TagPrefix="uc1" %>
+<%@ Register Src="~/WebControls/Combos/UCComboTipoModalidadeEnsino.ascx" TagName="UCComboTipoModalidadeEnsino" TagPrefix="uc2" %>
+<%@ Register Src="~/WebControls/Combos/UCComboTipoCurriculoPeriodo.ascx" TagName="UCComboTipoCurriculoPeriodo" TagPrefix="uc3" %>
 
 <asp:UpdatePanel runat="server" ID="updMessage" UpdateMode="Always">
     <ContentTemplate>
@@ -9,10 +11,12 @@
 </asp:UpdatePanel>
 <asp:UpdatePanel runat="server" ID="updCadastro" UpdateMode="Always">
     <ContentTemplate>
-        <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="geral" />
+        <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="disciplina" />
         <fieldset>
             <legend><asp:Literal runat="server" ID="litLegend" Text="" /></legend>
             <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />
+            <uc2:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />
             <asp:Panel runat="server" ID="pnlCurriculo" style="margin-top:20px;" Visible="false" >
                 <!-- Introdução -->
                 <fieldset>
@@ -69,12 +73,8 @@
                 </fieldset>
 
                 <!-- Disciplinas -->
-                <%--<asp:Repeater runat="server" ID="rptDisciplinas">
-                    <ItemTemplate>
-                        <asp:RadioButton runat="server" ID="rbDisciplina" Text="" />
-                    </ItemTemplate>
-                </asp:Repeater>--%>
-                <asp:RadioButtonList runat="server" ID="rblDisciplina" RepeatDirection="Horizontal" DataValueField="tds_id" DataTextField="tds_nome" OnSelectedIndexChanged="rblDisciplina_SelectedIndexChanged" AutoPostBack="true"></asp:RadioButtonList>
+                <asp:RadioButtonList runat="server" ID="rblDisciplina" RepeatDirection="Vertical" DataValueField="tds_id" DataTextField="tds_nome" OnSelectedIndexChanged="rblDisciplina_SelectedIndexChanged" AutoPostBack="true"></asp:RadioButtonList>
+                <br />
                 <fieldset runat="server" id="fsDisciplina" visible="false">
                     <legend><asp:Literal runat="server" ID="litDisciplina" Text="" /></legend>
                     <asp:Button ID="btnNovoDisciplina" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoDisciplina.Text %>" OnClick="btnNovoDisciplina_Click"/>
@@ -127,9 +127,15 @@
                         </Columns>
                     </asp:GridView>
                     <br /><br />
+
+                    <!-- Conteúdos e habilidades -->
                     <fieldset>
                         <legend><asp:Literal runat="server" ID="litHabilidades" Text="<%$ Resources:Academico, Curriculo.Cadastro.litHabilidades.Text %>" /></legend>
+                        <uc3:UCComboTipoCurriculoPeriodo ID="UCComboTipoCurriculoPeriodo1" runat="server" Obrigatorio="false" MostrarMessageSelecione="true" />
+                        <asp:Panel runat="server" ID="pnlHabilidades" style="margin-top:20px;" Visible="false" >
+                            <asp:Button ID="btnNovoEixo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoEixo.Text %>" OnClick="btnNovoEixo_Click" />
 
+                        </asp:Panel>
                     </fieldset>
                 </fieldset>
             </asp:Panel>

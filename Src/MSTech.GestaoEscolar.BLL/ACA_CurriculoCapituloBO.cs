@@ -46,9 +46,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tds_id">Id do tipo de disciplina</param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static List<sCurriculoCapitulo> SelecionaPorNivelEnsinoDisciplina(int tne_id, int tds_id)
+        public static List<sCurriculoCapitulo> SelecionaPorNivelEnsinoDisciplina(int tne_id, int tme_id, int tds_id)
         {
-            DataTable dt = new ACA_CurriculoCapituloDAO().SelecionaPorNivelEnsinoDisciplina(tne_id, tds_id);
+            DataTable dt = new ACA_CurriculoCapituloDAO().SelecionaPorNivelEnsinoDisciplina(tne_id, tme_id, tds_id);
             List<sCurriculoCapitulo> retorno = (from DataRow dr in dt.Rows
                             select new sCurriculoCapitulo
                             {

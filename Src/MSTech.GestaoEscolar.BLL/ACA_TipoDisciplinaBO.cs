@@ -326,11 +326,12 @@ namespace MSTech.GestaoEscolar.BLL
         public static DataTable SelecionaObrigatoriasPorNivelEnsino
         (
             int tne_id
+            , int tme_id
             , Guid ent_id
         )
         {
             bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
-            return new ACA_TipoDisciplinaDAO().SelecionaObrigatoriasPorNivelEnsino(tne_id, controlarOrdem);
+            return new ACA_TipoDisciplinaDAO().SelecionaObrigatoriasPorNivelEnsino(tne_id, tme_id, controlarOrdem);
         }
 
         /// <summary>
