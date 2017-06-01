@@ -29,10 +29,16 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual int tne_id { get; set; }
 
-		/// <summary>
-		/// ID da tabela ACA_TipoDisciplina.
+        /// <summary>
+		/// ID da tabela ACA_TipoModalidadeEnsino.
 		/// </summary>
-		public virtual int tds_id { get; set; }
+		[MSNotNullOrEmpty]
+        public virtual int tme_id { get; set; }
+
+        /// <summary>
+        /// ID da tabela ACA_TipoDisciplina.
+        /// </summary>
+        public virtual int tds_id { get; set; }
 
 		/// <summary>
 		/// Ano do calendário.

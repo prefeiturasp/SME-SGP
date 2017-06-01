@@ -51,6 +51,20 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
+        private int VS_tme_id
+        {
+            get
+            {
+                if (ViewState["VS_tme_id"] != null)
+                    return Convert.ToInt32(ViewState["VS_tme_id"]);
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_tme_id"] = value;
+            }
+        }
+
         private int VS_tds_id
         {
             get
@@ -61,29 +75,45 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
-        public bool permiteIncluir
+        public bool VS_permiteIncluir
         {
+            get
+            {
+                if (ViewState["VS_permiteIncluir"] != null)
+                    return Convert.ToBoolean(ViewState["VS_permiteIncluir"]);
+                return false;
+            }
             set
             {
-                btnNovoGeral.Visible = btnNovoDisciplina.Visible = value;
+                ViewState["VS_permiteIncluir"] = value;
             }
         }
 
-        public bool permiteEditar
+        public bool VS_permiteEditar
         {
+            get
+            {
+                if (ViewState["VS_permiteEditar"] != null)
+                    return Convert.ToBoolean(ViewState["VS_permiteEditar"]);
+                return false;
+            }
             set
             {
-                grvGeral.Columns[colunaOrdem].Visible = grvGeral.Columns[colunaEditar].Visible = value;
-                grvDisciplina.Columns[colunaOrdem].Visible = grvDisciplina.Columns[colunaEditar].Visible = value;
+                ViewState["VS_permiteEditar"] = value;
             }
         }
 
-        public bool permiteExcluir
+        public bool VS_permiteExcluir
         {
+            get
+            {
+                if (ViewState["VS_permiteExcluir"] != null)
+                    return Convert.ToBoolean(ViewState["VS_permiteExcluir"]);
+                return false;
+            }
             set
             {
-                grvGeral.Columns[colunaExcluir].Visible = value;
-                grvDisciplina.Columns[colunaExcluir].Visible = value;
+                ViewState["VS_permiteExcluir"] = value;
             }
         }
 
@@ -95,7 +125,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                         (
                             ViewState["VS_ltCurriculoCapituloGeral"] ??
                             (
-                                ViewState["VS_ltCurriculoCapituloGeral"] = ACA_CurriculoCapituloBO.SelecionaPorNivelEnsinoDisciplina(VS_tne_id, -1)
+                                ViewState["VS_ltCurriculoCapituloGeral"] = ACA_CurriculoCapituloBO.SelecionaPorNivelEnsinoDisciplina(VS_tne_id, VS_tme_id, -1)
                             )
                         );
             }
@@ -113,7 +143,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                         (
                             ViewState["VS_ltCurriculoCapituloDisciplina"] ??
                             (
-                                ViewState["VS_ltCurriculoCapituloDisciplina"] = ACA_CurriculoCapituloBO.SelecionaPorNivelEnsinoDisciplina(VS_tne_id, VS_tds_id)
+                                ViewState["VS_ltCurriculoCapituloDisciplina"] = ACA_CurriculoCapituloBO.SelecionaPorNivelEnsinoDisciplina(VS_tne_id, VS_tme_id, VS_tds_id)
                             )
                         );
             }
@@ -134,6 +164,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                 try
                 {
                     UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
+                    UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
+                    lblEmptyEixo.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.lblEmptyEixo.Text").ToString(), UtilBO.TipoMensagem.Nenhuma);
                 }
                 catch (Exception ex)
                 {
@@ -142,7 +174,11 @@ namespace GestaoEscolar.WebControls.Curriculo
                 }
             }
 
+            btnNovoGeral.Visible = btnNovoDisciplina.Visible = VS_permiteIncluir;
+
             UCComboTipoNivelEnsino1.IndexChanged += UCComboTipoNivelEnsino1_IndexChanged;
+            UCComboTipoModalidadeEnsino1.IndexChanged += UCComboTipoModalidadeEnsino1_IndexChanged;
+            UCComboTipoCurriculoPeriodo1.OnSelectedIndexChanged += UCComboTipoCurriculoPeriodo1_OnSelectedIndexChanged;
         }
 
         #endregion Page life cycle
@@ -156,17 +192,57 @@ namespace GestaoEscolar.WebControls.Curriculo
                 Limpar();
 
                 VS_tne_id = UCComboTipoNivelEnsino1.Valor;
-                pnlCurriculo.Visible = UCComboTipoNivelEnsino1.Valor > 0;
+                pnlCurriculo.Visible = UCComboTipoNivelEnsino1.Valor > 0 && UCComboTipoModalidadeEnsino1.Valor > 0;
 
                 if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                 {
+                    UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
                     Carregar(-1);
 
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
                 }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar currículo.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        private void UCComboTipoModalidadeEnsino1_IndexChanged()
+        {
+            try
+            {
+                Limpar();
+
+                VS_tme_id = UCComboTipoModalidadeEnsino1.Valor;
+                pnlCurriculo.Visible = UCComboTipoNivelEnsino1.Valor > 0 && UCComboTipoModalidadeEnsino1.Valor > 0;
+
+                if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
+                {
+                    UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
+                    Carregar(-1);
+
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                    rblDisciplina.DataSource = dtDisciplinas;
+                    rblDisciplina.DataBind();
+                    rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar currículo.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        private void UCComboTipoCurriculoPeriodo1_OnSelectedIndexChanged()
+        {
+            try
+            {
             }
             catch (Exception ex)
             {
@@ -199,16 +275,27 @@ namespace GestaoEscolar.WebControls.Curriculo
         protected void grvGeral_DataBound(object sender, EventArgs e)
         {
             GridView grv = (GridView)sender;
-            int total = grv.Rows.Count;
-            grv.Columns[colunaOrdem].Visible = total > 1;
-            if (total > 1)
+            if (grv.EditIndex >= 0)
             {
-                //para deixar a seta do primeiro registro do grid só uma seta para baixo 
-                if (grv.Rows[0].FindControl("btnSubir") != null)            
-                    ((ImageButton)grv.Rows[0].FindControl("btnSubir")).Style.Add("visibility", "hidden");
-                //para deixar a seta do último registro do grid só uma seta para cima
-                if (grv.Rows[total - 1].FindControl("btnDescer") != null)                
-                    ((ImageButton)grv.Rows[total - 1].FindControl("btnDescer")).Style.Add("visibility", "hidden");
+                grv.Columns[colunaOrdem].Visible = false;
+                grv.Columns[colunaExcluir].Visible = false;
+            }
+            else
+            {
+                grv.Columns[colunaExcluir].Visible = VS_permiteExcluir;
+                grv.Columns[colunaEditar].Visible = VS_permiteEditar;
+
+                int total = grv.Rows.Count;
+                grv.Columns[colunaOrdem].Visible = VS_permiteEditar && total > 1;
+                if (total > 1)
+                {
+                    //para deixar a seta do primeiro registro do grid só uma seta para baixo 
+                    if (grv.Rows[0].FindControl("btnSubir") != null)
+                        ((ImageButton)grv.Rows[0].FindControl("btnSubir")).Style.Add("visibility", "hidden");
+                    //para deixar a seta do último registro do grid só uma seta para cima
+                    if (grv.Rows[total - 1].FindControl("btnDescer") != null)
+                        ((ImageButton)grv.Rows[total - 1].FindControl("btnDescer")).Style.Add("visibility", "hidden");
+                }
             }
         }
 
@@ -291,6 +378,16 @@ namespace GestaoEscolar.WebControls.Curriculo
                     btnDescer.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "baixo.png";
                     btnDescer.CommandArgument = e.Row.RowIndex.ToString();
                 }
+
+                GridView grv = (GridView)sender;
+                if (grv.EditIndex >= 0)
+                {
+                    ImageButton btnEditar = (ImageButton)e.Row.FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                    }
+                }
             }
         }
 
@@ -342,6 +439,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                         crc_id = Convert.ToInt32(chave["crc_id"])
                         ,
                         tne_id = VS_tne_id
+                        ,
+                        tme_id = VS_tme_id
                         ,
                         tds_id = tds_id
                         ,
@@ -430,6 +529,18 @@ namespace GestaoEscolar.WebControls.Curriculo
             try
             {
                 GridView grv = ((GridView)sender);
+                if (Convert.ToInt32(grv.DataKeys[e.RowIndex]["crc_id"]) <= 0)
+                {
+                    int tds_id = Convert.ToInt32(grv.DataKeys[e.RowIndex]["tds_id"]);
+                    if (tds_id <= 0)
+                    {
+                        VS_ltCurriculoCapituloGeral.RemoveAll(p => p.crc_id <= 0);
+                    }
+                    else
+                    {
+                        VS_ltCurriculoCapituloDisciplina.RemoveAll(p => p.crc_id <= 0);
+                    }
+                }
                 grv.EditIndex = -1;
                 Carregar(Convert.ToInt32(grv.DataKeys[0]["tds_id"]));
             }
@@ -532,6 +643,16 @@ namespace GestaoEscolar.WebControls.Curriculo
                 ApplicationWEB._GravaErro(ex);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar adicionar tópico.", UtilBO.TipoMensagem.Erro);
             }
+        }
+
+        protected void btnNovoEixo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnNovoObjetivo_Click(object sender, EventArgs e)
+        {
+
         }
 
         #endregion Eventos

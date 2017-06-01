@@ -156,6 +156,7 @@ namespace MSTech.GestaoEscolar.DAL
         public DataTable SelecionaObrigatoriasPorNivelEnsino
         (
             int tne_id
+            , int tme_id
             , bool controlarOrdem
         )
         {
@@ -169,6 +170,13 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@tne_id";
                 Param.Size = 4;
                 Param.Value = tne_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_id";
+                Param.Size = 4;
+                Param.Value = tme_id;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
