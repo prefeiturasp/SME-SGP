@@ -1778,8 +1778,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     rptDiarioAlunosFrequenciaTerriorio.DataSource =
                         MTR_MatriculaTurmaDisciplinaBO.SelecionaAlunosAtivosCOCPorTurmaDisciplina(
                         VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id, VS_tipoDocente, false, UCNavegacaoTelaPeriodo.cap_dataInicio, UCNavegacaoTelaPeriodo.cap_dataFim, ApplicationWEB.AppMinutosCacheMedio, tur_ids)
-                        .Where(p => ((p.mtd_dataSaida > entityAula.tau_data) || (p.mtd_dataSaida == null)) && (p.mtd_dataMatricula <= entityAula.tau_data)
-                                && VS_Aulas_Alunos.Any(q => q.alu_id == p.alu_id));
+                        .Where(p => p.mtd_dataMatricula <= entityAula.tau_data && (!((p.mtd_dataSaida > entityAula.tau_data) || (p.mtd_dataSaida == null)) ||
+                                VS_Aulas_Alunos.Any(q => q.alu_id == p.alu_id)));
                     rptDiarioAlunosFrequenciaTerriorio.DataBind();
                 }
                 else
@@ -1790,8 +1790,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     rptDiarioAlunosFrequencia.DataSource =
                         MTR_MatriculaTurmaDisciplinaBO.SelecionaAlunosAtivosCOCPorTurmaDisciplina(
                         VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id, VS_tipoDocente, false, UCNavegacaoTelaPeriodo.cap_dataInicio, UCNavegacaoTelaPeriodo.cap_dataFim, ApplicationWEB.AppMinutosCacheMedio, tur_ids)
-                        .Where(p => ((p.mtd_dataSaida > entityAula.tau_data) || (p.mtd_dataSaida == null)) && (p.mtd_dataMatricula <= entityAula.tau_data)
-                                && VS_Aulas_Alunos.Any(q => q.alu_id == p.alu_id));
+                        .Where(p => p.mtd_dataMatricula <= entityAula.tau_data && (!((p.mtd_dataSaida > entityAula.tau_data) || (p.mtd_dataSaida == null)) ||
+                                VS_Aulas_Alunos.Any(q => q.alu_id == p.alu_id)));
 
                     rptDiarioAlunosFrequencia.DataBind();
                 }
@@ -2157,7 +2157,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             List<AlunosTurmaDisciplina> ltAlunos = MTR_MatriculaTurmaDisciplinaBO.SelecionaAlunosAtivosCOCPorTurmaDisciplina(
                 VisibilidadeRegencia(ddlTurmaDisciplinaAtAvaliativa) ? ddlComponenteAtAvaliativa_Tud_Id_Selecionado : VS_tud_id_Aula,
                 UCNavegacaoTelaPeriodo.VS_tpc_id, VS_tipoDocente, false, UCNavegacaoTelaPeriodo.cap_dataInicio, UCNavegacaoTelaPeriodo.cap_dataFim, ApplicationWEB.AppMinutosCacheMedio, tur_ids)
-                .Where(p => ((p.mtd_dataSaida > entityAula.tau_data) || (p.mtd_dataSaida == null)) && (p.mtd_dataMatricula <= entityAula.tau_data)).ToList();
+                .Where(p => p.mtd_dataMatricula <= entityAula.tau_data).ToList();
 
             ltAtividadeIndicacaoNota = (from DataRow dr in DTAtividades.Rows
                                         where Convert.ToInt32(!string.IsNullOrEmpty(Convert.ToString(dr["tau_id"])) ? dr["tau_id"] : 0) == entityAula.tau_id
@@ -6631,14 +6631,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (ddlAnotacaoAluno != null && ddlAnotacaoAluno.Items.Count <= 0)
                 {
                     var x = from AlunosTurmaDisciplina atd in dtAlunosAnotacoes
-                            where atd.mtd_numeroChamada <= 0 && atd.mtd_dataMatricula <= VS_tau_data &&
-                                  (atd.mtd_dataSaida == null || atd.mtd_dataSaida >= VS_tau_data)
+                            where atd.mtd_numeroChamada <= 0 && atd.mtd_dataMatricula <= VS_tau_data
                             select atd.mtd_numeroChamada;
 
                     if (x.Count() > 0)
                     {
                         var dtOrdenadoPorNome = (from AlunosTurmaDisciplina atd in dtAlunosAnotacoes
-                                                 where atd.mtd_dataMatricula <= VS_tau_data && (atd.mtd_dataSaida == null || atd.mtd_dataSaida >= VS_tau_data)
+                                                 where atd.mtd_dataMatricula <= VS_tau_data
                                                  orderby atd.pes_nome ascending
                                                  select new
                                                  {
@@ -6652,7 +6651,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     else
                     {
                         var dtOrdenadoPorChamada = (from AlunosTurmaDisciplina atd in dtAlunosAnotacoes
-                                                    where atd.mtd_dataMatricula <= VS_tau_data && (atd.mtd_dataSaida == null || atd.mtd_dataSaida >= VS_tau_data)
+                                                    where atd.mtd_dataMatricula <= VS_tau_data
                                                     orderby atd.numeroChamada ascending
                                                     select new
                                                     {
@@ -6674,8 +6673,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                         // Pesquisa o registro do aluno com os ids passados.
                         AlunosTurmaDisciplina alunoTurmaDisciplina = (from AlunosTurmaDisciplina atd in dtAlunosAnotacoes
-                                                                      where atd.alu_mtu_mtd_id == alu_mtu_mtd_id && atd.mtd_dataMatricula <= VS_tau_data &&
-                                                                            (atd.mtd_dataSaida == null || atd.mtd_dataSaida >= VS_tau_data)
+                                                                      where atd.alu_mtu_mtd_id == alu_mtu_mtd_id && atd.mtd_dataMatricula <= VS_tau_data
                                                                       select atd).FirstOrDefault();
 
                         if (alunoTurmaDisciplina.Nome != null)
@@ -6769,14 +6767,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (cblAnotacaoAluno != null && cblAnotacaoAluno.Items.Count <= 0)
                 {
                     var x = from AlunosTurmaDisciplina atd in dtAlunosAnotacoes
-                            where atd.mtd_numeroChamada <= 0 && atd.mtd_dataMatricula <= VS_tau_data &&
-                                  (atd.mtd_dataSaida == null || atd.mtd_dataSaida >= VS_tau_data)
+                            where atd.mtd_numeroChamada <= 0 && atd.mtd_dataMatricula <= VS_tau_data
                             select atd.mtd_numeroChamada;
 
                     if (x.Count() > 0)
                     {
                         var dtOrdenadoPorNome = (from AlunosTurmaDisciplina atd in dtAlunosAnotacoes
-                                                 where atd.mtd_dataMatricula <= VS_tau_data && (atd.mtd_dataSaida == null || atd.mtd_dataSaida >= VS_tau_data)
+                                                 where atd.mtd_dataMatricula <= VS_tau_data
                                                  orderby atd.pes_nome ascending
                                                  select new
                                                  {
@@ -6790,7 +6787,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     else
                     {
                         var dtOrdenadoPorChamada = (from AlunosTurmaDisciplina atd in dtAlunosAnotacoes
-                                                    where atd.mtd_dataMatricula <= VS_tau_data && (atd.mtd_dataSaida == null || atd.mtd_dataSaida >= VS_tau_data)
+                                                    where atd.mtd_dataMatricula <= VS_tau_data
                                                     orderby atd.numeroChamada ascending
                                                     select new
                                                     {
