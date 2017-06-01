@@ -2289,7 +2289,7 @@ namespace MSTech.GestaoEscolar.BLL
                                                         esc_nome = g.FirstOrDefault()["tur_escolaUnidade"].ToString()
                                                         ,
                                                         lengendTitulo = g.FirstOrDefault()["tur_escolaUnidade"].ToString()
-                                                           + "<br />" + g.FirstOrDefault()["tur_calendario"].ToString()
+                                                                        + "<br />Ano letivo: " + g.FirstOrDefault()["cal_ano"].ToString()
                                                         ,
                                                         cal_id = g.Key.calendario
                                                         ,
