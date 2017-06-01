@@ -165,7 +165,6 @@ namespace GestaoEscolar.WebControls.Curriculo
                 {
                     UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
                     UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
-                    lblEmptyEixo.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.lblEmptyEixo.Text").ToString(), UtilBO.TipoMensagem.Nenhuma);
                 }
                 catch (Exception ex)
                 {
