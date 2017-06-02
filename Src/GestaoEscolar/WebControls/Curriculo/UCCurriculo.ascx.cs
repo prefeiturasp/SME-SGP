@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web.UI.WebControls;
 using System.Linq;
+using System.Web.UI;
 
 namespace GestaoEscolar.WebControls.Curriculo
 {
@@ -127,7 +128,7 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
-        public List<sCurriculoCapitulo> VS_ltCurriculoCapituloGeral
+        private List<sCurriculoCapitulo> VS_ltCurriculoCapituloGeral
         {
             get
             {
@@ -145,7 +146,7 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
-        public List<sCurriculoCapitulo> VS_ltCurriculoCapituloDisciplina
+        private List<sCurriculoCapitulo> VS_ltCurriculoCapituloDisciplina
         {
             get
             {
@@ -163,7 +164,7 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
-        public List<sCurriculoObjetivo> VS_ltCurriculoObjetivo
+        private List<sCurriculoObjetivo> VS_ltCurriculoObjetivo
         {
             get
             {
@@ -181,18 +182,27 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
+        private List<int> ltEixoAberto = new List<int>();
+
         #endregion Propriedades
 
         #region Page life cycle
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager sm = ScriptManager.GetCurrent(Page);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsUCCurriculo.js"));
+            }
+
             if (!IsPostBack)
             {
                 try
                 {
                     UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
                     UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
+                    grvEixo.CssClass += " accordion-grid";
                 }
                 catch (Exception ex)
                 {
@@ -597,19 +607,11 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 grv.Columns[colunaOrdem].Visible = false;
                 grv.Columns[colunaExcluir].Visible = false;
-                if (grv.Columns.Count - 1 >= colunaObjetivos)
-                {
-                    grv.Columns[colunaObjetivos].Visible = false;
-                }
             }
             else
             {
                 grv.Columns[colunaExcluir].Visible = VS_permiteExcluir;
                 grv.Columns[colunaEditar].Visible = VS_permiteEditar;
-                if (grv.Columns.Count - 1 >= colunaObjetivos)
-                {
-                    grv.Columns[colunaObjetivos].Visible = true;
-                }
 
                 int total = grv.Rows.Count;
                 grv.Columns[colunaOrdem].Visible = VS_permiteEditar && total > 1;
@@ -667,6 +669,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                         {
                             grv.EditIndex = -1;
                             VS_ltCurriculoObjetivo = null;
+                            GuardarEixosAbertos();
                             CarregarObjetivos(grv, Convert.ToByte(grv.DataKeys[index]["cro_tipo"]), Convert.ToInt32(grv.DataKeys[index]["cro_idPai"]));
                         }
                     }
@@ -728,6 +731,12 @@ namespace GestaoEscolar.WebControls.Curriculo
                         CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem, cro_id);
                     }
                 }
+
+                HiddenField hdnAberto = (HiddenField)e.Row.FindControl("hdnAberto");
+                if (hdnAberto != null)
+                {
+                    hdnAberto.Value = ltEixoAberto.Any(p => p == cro_id) ? "1" : "0";
+                }
             }
         }
 
@@ -737,6 +746,7 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 GridView grv = (GridView)sender;
                 grv.EditIndex = e.NewEditIndex;
+                GuardarEixosAbertos();
                 CarregarObjetivos(grv, Convert.ToByte(grv.DataKeys[e.NewEditIndex]["cro_tipo"]), Convert.ToInt32(grv.DataKeys[e.NewEditIndex]["cro_idPai"]));
 
                 ImageButton btnSalvar = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnSalvar");
@@ -818,6 +828,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                         }
                         grv.EditIndex = -1;
                         VS_ltCurriculoObjetivo = null;
+                        GuardarEixosAbertos();
                         CarregarObjetivos(grv, cro_tipo, cro_idPai);
                     }
                 }
@@ -863,6 +874,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                         }  
                         grv.EditIndex = -1;
                         VS_ltCurriculoObjetivo = null;
+                        GuardarEixosAbertos();
                         CarregarObjetivos(grv, cro_tipo, cro_idPai);
                     }
                 }
@@ -891,6 +903,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                     VS_ltCurriculoObjetivo.RemoveAll(p => p.cro_tipo == cro_tipo && p.cro_idPai == cro_idPai && p.cro_id <= 0);
                 }
                 grv.EditIndex = -1;
+                GuardarEixosAbertos();
                 CarregarObjetivos(grv, cro_tipo, cro_idPai);
             }
             catch (Exception ex)
@@ -1013,6 +1026,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 VS_ltCurriculoObjetivo.Add(entity);
                 int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo && p.cro_idPai <= 0).Count - 1;
                 grvEixo.EditIndex = index;
+                GuardarEixosAbertos();
                 CarregarObjetivos(grvEixo, (byte)ACA_CurriculoObjetivoTipo.Eixo, -1);
 
                 ImageButton btnSalvar = (ImageButton)grvEixo.Rows[index].FindControl("btnSalvar");
@@ -1193,6 +1207,22 @@ namespace GestaoEscolar.WebControls.Curriculo
         {
             grvObjetivo.DataSource = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == tipoObjetivo && p.cro_idPai == cro_idPai).OrderBy(p => p.cro_ordem);
             grvObjetivo.DataBind();
+        }
+
+        /// <summary>
+        /// Armazena os eixos abertos (accordion), para manter o estado.
+        /// </summary>
+        private void GuardarEixosAbertos()
+        {
+            ltEixoAberto = new List<int>();
+            foreach (GridViewRow eixo in grvEixo.Rows)
+            {
+                HiddenField hdnAberto = (HiddenField)eixo.FindControl("hdnAberto");
+                if (hdnAberto != null && hdnAberto.Value == "1")
+                {
+                    ltEixoAberto.Add(Convert.ToInt32(grvEixo.DataKeys[eixo.DataItemIndex]["cro_id"]));
+                }
+            }
         }
 
         #endregion Métodos
