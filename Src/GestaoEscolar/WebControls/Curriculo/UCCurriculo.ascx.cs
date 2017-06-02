@@ -184,6 +184,8 @@ namespace GestaoEscolar.WebControls.Curriculo
 
         private List<int> ltEixoAberto = new List<int>();
 
+        private bool comandoExecutado = false;
+
         #endregion Propriedades
 
         #region Page life cycle
@@ -631,8 +633,11 @@ namespace GestaoEscolar.WebControls.Curriculo
         {
             try
             {
-                if (e.CommandName == "Subir" || e.CommandName == "Descer")
+                if (!comandoExecutado && (e.CommandName == "Subir" || e.CommandName == "Descer"))
                 {
+                    // Variável adicionada para não propagar o comando para o grid pai.
+                    comandoExecutado = true;
+
                     GridView grv = (GridView)sender;
                     int index = int.Parse(e.CommandArgument.ToString());
                     int cro_idDescer = -1, cro_idSubir = -1;
@@ -1017,7 +1022,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                     ,
                     cro_descricao = string.Empty
                     ,
-                    cro_ordem = grvEixo.Rows.Count > 0 ? Convert.ToInt32(grvGeral.DataKeys[grvEixo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
+                    cro_ordem = grvEixo.Rows.Count > 0 ? Convert.ToInt32(grvEixo.DataKeys[grvEixo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
                     ,
                     cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Eixo
                     ,
