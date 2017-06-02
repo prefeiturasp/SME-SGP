@@ -260,6 +260,8 @@ namespace GestaoEscolar.Academico.Sondagem
                     ,
                     snd_descricao = txtDescricao.Text
                     ,
+                    sdn_opcaoResposta = Convert.ToByte(ddlOpcaoResposta.SelectedValue)
+                    ,
                     snd_situacao = (ckbBloqueado.Checked ? Convert.ToByte(2) : Convert.ToByte(1))
                     ,
                     snd_dataCriacao = DateTime.Now
@@ -478,7 +480,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     mensagem += (string.IsNullOrEmpty(mensagem) ? "" : "<br/>") + string.Format(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.DescricaoObrigatorio").ToString(), tipoText);
 
                 if (!string.IsNullOrEmpty(mensagem))
-                    throw new ValidationException(mensagem);
+                    throw new ValidationException(mensagem.Replace(" *", ""));
 
                 if (VS_ListaQuestao.Any(p => p.sdq_id != VS_sdq_id && p.sdq_descricao.Equals(txtItemQuestao.Text)))
                     throw new ValidationException(string.Format(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.JaExisteItem").ToString(), tipoText));
@@ -518,13 +520,11 @@ namespace GestaoEscolar.Academico.Sondagem
             }
             catch (ValidationException ex)
             {
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divInserir\\').scrollTo(0,0);', 0);", true);
                 lblMessagePopUpQuestao.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divInserir\\').scrollTo(0,0);', 0);", true);
                 lblMessagePopUpQuestao.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.ErroAdicionar").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1055,8 +1055,6 @@ namespace GestaoEscolar.Academico.Sondagem
             }
         }
 
-        #endregion
-
         protected void btnAdicionarSubquestao_Click(object sender, EventArgs e)
         {
             try
@@ -1068,7 +1066,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     mensagem += (string.IsNullOrEmpty(mensagem) ? "" : "<br/>") + string.Format(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.DescricaoObrigatorio").ToString(), tipoText);
 
                 if (!string.IsNullOrEmpty(mensagem))
-                    throw new ValidationException(mensagem);
+                    throw new ValidationException(mensagem.Replace(" *", ""));
 
                 if (VS_ListaSubQuestao.Any(p => p.sdq_id != VS_sdq_id && p.sdq_descricao.Equals(txtItemSubquestao.Text)))
                     throw new ValidationException(string.Format(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.JaExisteItem").ToString(), tipoText));
@@ -1108,13 +1106,11 @@ namespace GestaoEscolar.Academico.Sondagem
             }
             catch (ValidationException ex)
             {
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divInserir\\').scrollTo(0,0);', 0);", true);
                 lblMessagePopUpSubquestao.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divInserir\\').scrollTo(0,0);', 0);", true);
                 lblMessagePopUpSubquestao.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.ErroAdicionar").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1133,7 +1129,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     mensagem += (string.IsNullOrEmpty(mensagem) ? "" : "<br/>") + string.Format(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.DescricaoObrigatorio").ToString(), tipoText);
 
                 if (!string.IsNullOrEmpty(mensagem))
-                    throw new ValidationException(mensagem);
+                    throw new ValidationException(mensagem.Replace(" *", ""));
 
                 mensagem = "";
 
@@ -1144,7 +1140,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     mensagem += (string.IsNullOrEmpty(mensagem) ? "" : "<br/>") + string.Format(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.JaExisteItem").ToString(), tipoText);
 
                 if (!string.IsNullOrEmpty(mensagem))
-                    throw new ValidationException(mensagem);
+                    throw new ValidationException(mensagem.Replace(" *", ""));
 
                 if (VS_sdr_id > 0 && VS_ListaResposta.Any(l => l.sdr_id == VS_sdr_id))
                 {
@@ -1185,13 +1181,11 @@ namespace GestaoEscolar.Academico.Sondagem
             }
             catch (ValidationException ex)
             {
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divInserir\\').scrollTo(0,0);', 0);", true);
                 lblMessagePopUpResposta.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('$(\\'#divInserir\\').scrollTo(0,0);', 0);", true);
                 lblMessagePopUpResposta.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Cadastro.ErroAdicionar").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1210,5 +1204,7 @@ namespace GestaoEscolar.Academico.Sondagem
         {
             divInserirResposta.Visible = false;
         }
+
+        #endregion
     }
 }
