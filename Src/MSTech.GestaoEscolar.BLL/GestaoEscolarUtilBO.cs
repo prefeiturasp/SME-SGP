@@ -25,6 +25,8 @@ using MSTech.Security.Cryptography;
 using MSTech.Validation.Exceptions;
 using MSTech.GestaoEscolar.BLL.Caching;
 using MSTech.CoreSSO.DAL;
+using System.Runtime.CompilerServices;
+using MSTech.Validation;
 
 namespace MSTech.GestaoEscolar.BLL
 {
@@ -2853,6 +2855,136 @@ namespace MSTech.GestaoEscolar.BLL
             }
             zs.Close();
             return ms.ToArray();
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public sealed class OrderAttribute : Attribute
+    {
+        private readonly int order;
+        public OrderAttribute([CallerLineNumber]int order = 0)
+        {
+            this.order = order;
+        }
+
+        public int Order { get { return this.order; } }
+    }
+
+    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public sealed class DBNullValueAttribute : Attribute
+    {
+        private readonly string nullValue;
+        public DBNullValueAttribute(Type type)
+        {
+            if (type == typeof(DateTime))
+            {
+                this.nullValue = new DateTime().ToString();
+            }
+
+            if (type == typeof(string))
+            {
+                this.nullValue = string.Empty;
+            }
+
+            if (type == typeof(long) || type == typeof(int))
+            {
+                this.nullValue = "-1";
+            }
+        }
+
+        public string NullValue { get { return this.nullValue; } }
+    }
+
+    public abstract class TipoTabela
+    {
+        public TipoTabela(Abstract_Entity entity)
+        {
+            Type tp = GetType();
+
+            var properties = from property in tp.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                             let orderAttribute = property.GetCustomAttributes(typeof(OrderAttribute), false).SingleOrDefault() as OrderAttribute
+                             where orderAttribute != null
+                             orderby orderAttribute.Order
+                             select property;
+
+            foreach (PropertyInfo prop in properties)
+            {
+                PropertyInfo propClone = entity.GetType().GetProperty(prop.Name);
+
+                if (propClone != null && propClone.CanWrite)
+                {
+                    var value = propClone.GetValue(entity, null);
+
+                    if (value != null)
+                    {
+                        if (prop.PropertyType == typeof(string))
+                        {
+                            if (value.GetType() == typeof(DateTime))
+                            {
+                                DateTime date = Convert.ToDateTime(value);
+                                prop.SetValue(this, date.ToString(DateUtil.DATA_HORA_SEGUNDOS_MILIS), null);
+                            }
+                            else
+                            {
+                                prop.SetValue(this, value.ToString(), null);
+                            }
+                        }
+                        else
+                        {
+                            prop.SetValue(this, value, null);
+                        }
+                    }
+                }
+            }
+        }
+
+        public DataRow ToDataRow()
+        {
+            var properties = GetType().GetProperties();
+            var dt = new DataTable();
+
+            foreach (var property in properties)
+                dt.Columns.Add(property.Name, property.PropertyType);
+
+            DataRow drRetorno = dt.NewRow();
+
+            DataColumnCollection columnList = dt.Columns;
+
+            FieldInfo[] fields = GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (DataColumn coluna in columnList)
+            {
+                PropertyInfo prop = properties.ToList().Find(p => p.Name == coluna.ColumnName);
+                var emptyValueAttribute = prop.GetCustomAttributes(typeof(DBNullValueAttribute), false).SingleOrDefault() as DBNullValueAttribute;
+
+                if (prop != null)
+                {
+
+                    if (emptyValueAttribute != null && prop.GetValue(this).ToString() == emptyValueAttribute.NullValue)
+                    {
+                        drRetorno[coluna] = DBNull.Value;
+                    }
+                    else
+                    {
+                        drRetorno[coluna] = prop.GetValue(this);
+                    }
+                }
+
+                FieldInfo field = fields.ToList().Find(p => p.Name == coluna.ColumnName);
+                if (field != null)
+                {
+                    if (emptyValueAttribute != null && field.GetValue(this).ToString() == emptyValueAttribute.NullValue)
+                    {
+                        drRetorno[coluna] = DBNull.Value;
+                    }
+                    else
+                    {
+                        drRetorno[coluna] = field.GetValue(this);
+                    }
+                }
+            }
+
+            return drRetorno;
         }
     }
 
