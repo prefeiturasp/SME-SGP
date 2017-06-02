@@ -260,7 +260,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     ,
                     snd_descricao = txtDescricao.Text
                     ,
-                    sdn_opcaoResposta = (byte)Enum.Parse(typeof(ACA_SondagemOpcaoResposta), ddlOpcaoResposta.SelectedIndex.ToString())
+                    sdn_opcaoResposta = Convert.ToByte(ddlOpcaoResposta.SelectedValue)
                     ,
                     snd_situacao = (ckbBloqueado.Checked ? Convert.ToByte(2) : Convert.ToByte(1))
                     ,
