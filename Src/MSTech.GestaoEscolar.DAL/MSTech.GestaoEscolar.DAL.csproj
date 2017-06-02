@@ -118,6 +118,7 @@
     <Compile Include="Abstracts\Abstract_ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoCapituloDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoCapituloSugestaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoDAO.cs" />
@@ -126,9 +127,11 @@
     <Compile Include="Abstracts\Abstract_ACA_CurriculoEscolaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoEscolaPeriodoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoObjetivoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoObjetivoSugestaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoPeriodoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralVigenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoRequisitoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoSugestaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoTurnoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CursoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CursoRelacionadoDAO.cs" />
@@ -292,6 +295,7 @@
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEquipamentosDAO.cs" />
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaPredioDAO.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AvaliacaoMedia_AlteracaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_CurriculoSugestaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_LOG_MatriculaTurmaDisciplinaExcluidaDAO.cs" />
     <Compile Include="Abstracts\Abstract_LOG_MovimentacaoAcertoSituacaoAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_LOG_TurmaAula_AlteracaoDAO.cs" />
@@ -413,6 +417,7 @@
     <Compile Include="ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaDAO.cs" />
     <Compile Include="ACA_CurriculoCapituloDAO.cs" />
+    <Compile Include="ACA_CurriculoCapituloSugestaoDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
     <Compile Include="ACA_CurriculoDAO.cs" />
@@ -421,9 +426,11 @@
     <Compile Include="ACA_CurriculoEscolaDAO.cs" />
     <Compile Include="ACA_CurriculoEscolaPeriodoDAO.cs" />
     <Compile Include="ACA_CurriculoObjetivoDAO.cs" />
+    <Compile Include="ACA_CurriculoObjetivoSugestaoDAO.cs" />
     <Compile Include="ACA_CurriculoPeriodoDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralVigenciaDAO.cs" />
     <Compile Include="ACA_CurriculoRequisitoDAO.cs" />
+    <Compile Include="ACA_CurriculoSugestaoDAO.cs" />
     <Compile Include="ACA_CurriculoTurnoDAO.cs" />
     <Compile Include="ACA_CursoDAO.cs" />
     <Compile Include="ACA_CursoRelacionadoDAO.cs" />
@@ -591,6 +598,7 @@
     <Compile Include="ESC_UnidadeEscolaPredioDAO.cs" />
     <Compile Include="GestaoEscolarServicoDAO.cs" />
     <Compile Include="LOG_AvaliacaoMedia_AlteracaoDAO.cs" />
+    <Compile Include="LOG_CurriculoSugestaoDAO.cs" />
     <Compile Include="LOG_MatriculaTurmaDisciplinaExcluidaDAO.cs" />
     <Compile Include="LOG_MovimentacaoAcertoSituacaoAlunoDAO.cs" />
     <Compile Include="LOG_TurmaAula_AlteracaoDAO.cs" />
