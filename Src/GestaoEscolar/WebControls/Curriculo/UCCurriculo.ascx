@@ -157,6 +157,7 @@
                                             <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.rfvDescricao.ErrorMessage %>"
                                                 ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
                                         </EditItemTemplate>
+                                        <ItemStyle CssClass="accordion-head" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                         <ItemTemplate>                                
@@ -183,102 +184,105 @@
                                         <ItemTemplate>
                                             
                                             <!-- Objetivo -->
-                                            <asp:Button ID="btnNovoObjetivo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoObjetivo.Text %>" OnClick="btnNovoObjetivo_Click" />
-                                            <asp:GridView ID="grvObjetivo" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.EmptyDataText %>"
-                                                DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai"
-                                                OnRowDataBound="grvEixo_RowDataBound"
-                                                OnRowCommand="grvEixo_RowCommand"
-                                                OnDataBound="grvEixo_DataBound"
-                                                OnRowEditing="grvEixo_RowEditing" 
-                                                OnRowUpdating="grvEixo_RowUpdating" 
-                                                OnRowDeleting="grvEixo_RowDeleting"
-                                                OnRowCancelingEdit="grvEixo_RowCancelingEdit">
-                                                <Columns>
-                                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.ColunaObjetivo %>">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                                            <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
-                                                            <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage %>"
-                                                                ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
-                                                        </EditItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                                        <ItemTemplate>                                
-                                                            <asp:ImageButton ID="btnSubir" runat="server" CausesValidation="false" CommandName="Subir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSubir.ToolTip %>" Height="16" Width="16" />
-                                                            <asp:ImageButton ID="btnDescer" runat="server" CausesValidation="false" CommandName="Descer" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnDescer.ToolTip %>" Height="16" Width="16" />
-                                                        </ItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaEditar %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                                        <ItemTemplate>
-                                                            <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnEditar.ToolTip %>" CausesValidation="false" />
-                                                            <asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
-                                                            <asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
-                                                        </ItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaExcluir %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                                        <ItemTemplate>
-                                                            <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluir.ToolTip %>" CausesValidation="false" />
-                                                        </ItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
+                                            <div class="accordion-body">
+                                                <asp:HiddenField ID="hdnAberto" runat="server" Value="0" />
+                                                <asp:Button ID="btnNovoObjetivo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoObjetivo.Text %>" OnClick="btnNovoObjetivo_Click" />
+                                                <asp:GridView ID="grvObjetivo" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.EmptyDataText %>"
+                                                    DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai"
+                                                    OnRowDataBound="grvEixo_RowDataBound"
+                                                    OnRowCommand="grvEixo_RowCommand"
+                                                    OnDataBound="grvEixo_DataBound"
+                                                    OnRowEditing="grvEixo_RowEditing" 
+                                                    OnRowUpdating="grvEixo_RowUpdating" 
+                                                    OnRowDeleting="grvEixo_RowDeleting"
+                                                    OnRowCancelingEdit="grvEixo_RowCancelingEdit">
+                                                    <Columns>
+                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.ColunaObjetivo %>">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                                            </ItemTemplate>
+                                                            <EditItemTemplate>
+                                                                <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+                                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage %>"
+                                                                    ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                            </EditItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                                            <ItemTemplate>                                
+                                                                <asp:ImageButton ID="btnSubir" runat="server" CausesValidation="false" CommandName="Subir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSubir.ToolTip %>" Height="16" Width="16" />
+                                                                <asp:ImageButton ID="btnDescer" runat="server" CausesValidation="false" CommandName="Descer" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnDescer.ToolTip %>" Height="16" Width="16" />
+                                                            </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaEditar %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                                            <ItemTemplate>
+                                                                <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnEditar.ToolTip %>" CausesValidation="false" />
+                                                                <asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
+                                                                <asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+                                                            </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaExcluir %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                                            <ItemTemplate>
+                                                                <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluir.ToolTip %>" CausesValidation="false" />
+                                                            </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
                                             
-                                                            <!-- Objetivo de aprendizagem -->
-                                                            <asp:Button ID="btnNovoObjetivo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoObjetivoAprendizagem.Text %>" OnClick="btnNovoObjetivoAprendizagem_Click" />
-                                                            <asp:GridView ID="grvObjetivo" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.EmptyDataText %>"
-                                                                DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai"
-                                                                OnRowDataBound="grvEixo_RowDataBound"
-                                                                OnRowCommand="grvEixo_RowCommand"
-                                                                OnDataBound="grvEixo_DataBound"
-                                                                OnRowEditing="grvEixo_RowEditing" 
-                                                                OnRowUpdating="grvEixo_RowUpdating" 
-                                                                OnRowDeleting="grvEixo_RowDeleting"
-                                                                OnRowCancelingEdit="grvEixo_RowCancelingEdit">
-                                                                <Columns>
-                                                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.ColunaObjetivoAprendizagem %>">
-                                                                        <ItemTemplate>
-                                                                            <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
-                                                                        </ItemTemplate>
-                                                                        <EditItemTemplate>
-                                                                            <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                                                            <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
-                                                                            <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.rfvDescricao.ErrorMessage %>"
-                                                                                ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
-                                                                        </EditItemTemplate>
-                                                                    </asp:TemplateField>
-                                                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                                                        <ItemTemplate>                                
-                                                                            <asp:ImageButton ID="btnSubir" runat="server" CausesValidation="false" CommandName="Subir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSubir.ToolTip %>" Height="16" Width="16" />
-                                                                            <asp:ImageButton ID="btnDescer" runat="server" CausesValidation="false" CommandName="Descer" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnDescer.ToolTip %>" Height="16" Width="16" />
-                                                                        </ItemTemplate>
-                                                                        <ItemStyle HorizontalAlign="Center" />
-                                                                    </asp:TemplateField>
-                                                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaEditar %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                                                        <ItemTemplate>
-                                                                            <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnEditar.ToolTip %>" CausesValidation="false" />
-                                                                            <asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
-                                                                            <asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
-                                                                        </ItemTemplate>
-                                                                        <ItemStyle HorizontalAlign="Center" />
-                                                                    </asp:TemplateField>
-                                                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaExcluir %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                                                        <ItemTemplate>
-                                                                            <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluir.ToolTip %>" CausesValidation="false" />
-                                                                        </ItemTemplate>
-                                                                        <ItemStyle HorizontalAlign="Center" />
-                                                                    </asp:TemplateField>
-                                                                </Columns>
-                                                            </asp:GridView>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                            </asp:GridView>
+                                                                <!-- Objetivo de aprendizagem -->
+                                                                <asp:Button ID="btnNovoObjetivo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoObjetivoAprendizagem.Text %>" OnClick="btnNovoObjetivoAprendizagem_Click" />
+                                                                <asp:GridView ID="grvObjetivo" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.EmptyDataText %>"
+                                                                    DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai"
+                                                                    OnRowDataBound="grvEixo_RowDataBound"
+                                                                    OnRowCommand="grvEixo_RowCommand"
+                                                                    OnDataBound="grvEixo_DataBound"
+                                                                    OnRowEditing="grvEixo_RowEditing" 
+                                                                    OnRowUpdating="grvEixo_RowUpdating" 
+                                                                    OnRowDeleting="grvEixo_RowDeleting"
+                                                                    OnRowCancelingEdit="grvEixo_RowCancelingEdit">
+                                                                    <Columns>
+                                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.ColunaObjetivoAprendizagem %>">
+                                                                            <ItemTemplate>
+                                                                                <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                                                            </ItemTemplate>
+                                                                            <EditItemTemplate>
+                                                                                <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+                                                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
+                                                                                <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.rfvDescricao.ErrorMessage %>"
+                                                                                    ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                            </EditItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                                                            <ItemTemplate>                                
+                                                                                <asp:ImageButton ID="btnSubir" runat="server" CausesValidation="false" CommandName="Subir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSubir.ToolTip %>" Height="16" Width="16" />
+                                                                                <asp:ImageButton ID="btnDescer" runat="server" CausesValidation="false" CommandName="Descer" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnDescer.ToolTip %>" Height="16" Width="16" />
+                                                                            </ItemTemplate>
+                                                                            <ItemStyle HorizontalAlign="Center" />
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaEditar %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                                                            <ItemTemplate>
+                                                                                <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnEditar.ToolTip %>" CausesValidation="false" />
+                                                                                <asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
+                                                                                <asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+                                                                            </ItemTemplate>
+                                                                            <ItemStyle HorizontalAlign="Center" />
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaExcluir %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                                                            <ItemTemplate>
+                                                                                <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluir.ToolTip %>" CausesValidation="false" />
+                                                                            </ItemTemplate>
+                                                                            <ItemStyle HorizontalAlign="Center" />
+                                                                        </asp:TemplateField>
+                                                                    </Columns>
+                                                                </asp:GridView>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
