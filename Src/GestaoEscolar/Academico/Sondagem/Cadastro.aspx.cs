@@ -260,6 +260,8 @@ namespace GestaoEscolar.Academico.Sondagem
                     ,
                     snd_descricao = txtDescricao.Text
                     ,
+                    sdn_opcaoResposta = (byte)Enum.Parse(typeof(ACA_SondagemOpcaoResposta), ddlOpcaoResposta.SelectedIndex.ToString())
+                    ,
                     snd_situacao = (ckbBloqueado.Checked ? Convert.ToByte(2) : Convert.ToByte(1))
                     ,
                     snd_dataCriacao = DateTime.Now
