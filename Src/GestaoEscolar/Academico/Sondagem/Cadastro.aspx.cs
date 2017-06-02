@@ -15,7 +15,6 @@ namespace GestaoEscolar.Academico.Sondagem
 {
     public partial class Cadastro : MotherPageLogado
     {
-        //TODO[ANA] add resources (pesquisar se já não tem)
         #region Propriedades
 
         /// <summary>
@@ -1054,8 +1053,6 @@ namespace GestaoEscolar.Academico.Sondagem
             }
         }
 
-        #endregion
-
         protected void btnAdicionarSubquestao_Click(object sender, EventArgs e)
         {
             try
@@ -1205,5 +1202,7 @@ namespace GestaoEscolar.Academico.Sondagem
         {
             divInserirResposta.Visible = false;
         }
+
+        #endregion
     }
 }
