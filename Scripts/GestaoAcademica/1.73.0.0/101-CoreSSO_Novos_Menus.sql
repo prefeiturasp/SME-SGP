@@ -47,9 +47,9 @@ SET XACT_ABORT ON
 	
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
-		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
-		,@nomeModuloPai = 'Administração' -- Nome do módulo pai (Opcional, apenas quando houver)
-		,@nomeModulo = 'Currículo' -- Nome do módulo (Obrigatório)
+		,@nomeModuloAvo = 'Administração' -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Currículo' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Cadastro de currículo' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Cadastro de currículo'
 		,@SiteMap1Url = '~/Academico/Curriculo/Cadastro.aspx'
 		,@SiteMap2Nome = NULL 
@@ -60,6 +60,22 @@ SET XACT_ABORT ON
 		,@possuiVisaoGestao = 0 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 0 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = 'Administração' -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Currículo' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Registro de sugestões' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Registro de sugestões'
+		,@SiteMap1Url = '~/Academico/Curriculo/RegistroSugestoes.aspx'
+		,@SiteMap2Nome = NULL 
+		,@SiteMap2Url = NULL 
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
 
 -- Fechar transação
 SET XACT_ABORT OFF

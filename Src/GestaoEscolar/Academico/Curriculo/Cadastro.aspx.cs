@@ -22,6 +22,8 @@ namespace GestaoEscolar.Academico.Curriculo
                 UCCurriculo1.VS_permiteIncluir = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
                 UCCurriculo1.VS_permiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 UCCurriculo1.VS_permiteExcluir = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
+                UCCurriculo1.VS_permiteConsultarSugestao = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
+                UCCurriculo1.VS_permiteIncluirSugestao = false;
             }
         }
 

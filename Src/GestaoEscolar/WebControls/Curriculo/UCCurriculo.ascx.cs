@@ -128,6 +128,34 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
+        public bool VS_permiteIncluirSugestao
+        {
+            get
+            {
+                if (ViewState["VS_permiteIncluirSugestao"] != null)
+                    return Convert.ToBoolean(ViewState["VS_permiteIncluirSugestao"]);
+                return false;
+            }
+            set
+            {
+                ViewState["VS_permiteIncluirSugestao"] = value;
+            }
+        }
+
+        public bool VS_permiteConsultarSugestao
+        {
+            get
+            {
+                if (ViewState["VS_permiteConsultarSugestao"] != null)
+                    return Convert.ToBoolean(ViewState["VS_permiteConsultarSugestao"]);
+                return false;
+            }
+            set
+            {
+                ViewState["VS_permiteConsultarSugestao"] = value;
+            }
+        }
+
         private List<sCurriculoCapitulo> VS_ltCurriculoCapituloGeral
         {
             get

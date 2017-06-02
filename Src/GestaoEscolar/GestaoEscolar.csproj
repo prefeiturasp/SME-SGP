@@ -497,6 +497,13 @@
     <Compile Include="Academico\Curriculo\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\Curriculo\RegistroSugestoes.aspx.cs">
+      <DependentUpon>RegistroSugestoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Curriculo\RegistroSugestoes.aspx.designer.cs">
+      <DependentUpon>RegistroSugestoes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\Curso\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3001,6 +3008,7 @@
     <Content Include="Academico\ControleTurma\MinhaEscolaGestor.aspx" />
     <Content Include="Academico\ControleTurma\PlanejamentoAnual.aspx" />
     <Content Include="Academico\Curriculo\Cadastro.aspx" />
+    <Content Include="Academico\Curriculo\RegistroSugestoes.aspx" />
     <Content Include="Academico\HistoricoEscolar\Busca.aspx" />
     <Content Include="Academico\HistoricoEscolar\DadosAluno.aspx" />
     <Content Include="Academico\HistoricoEscolar\EnsinoFundamental.aspx" />
