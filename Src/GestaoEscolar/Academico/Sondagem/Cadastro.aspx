@@ -45,7 +45,7 @@
                             <ContentTemplate>
                                 <fieldset>
                                     <legend>
-                                        <asp:Label runat="server" ID="lblTituloPopUpQuestao" /></legend>
+                                        <asp:Label runat="server" ID="lblTituloPopUpQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarQuestao.Text %>"/></legend>
                                     <asp:Label runat="server" ID="lblCampoQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.HeaderNome %>" AssociatedControlID="txtItemQuestao" />
                                     <asp:TextBox runat="server" ID="txtItemQuestao" SkinID="text60C" MaxLength="250" />
                                     <asp:RequiredFieldValidator ID="revtxtItemQuestao" runat="server" ControlToValidate="txtItemQuestao"
