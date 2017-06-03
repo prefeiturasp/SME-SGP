@@ -196,6 +196,50 @@ namespace MSTech.GestaoEscolar.DAL
 
         #endregion Métodos de consulta     
 
+        #region Métodos de exclusão
+
+        /// <summary>
+        /// Exclui a atividade extraclasse
+        /// </summary>
+        /// <param name="tud_id"></param>
+        /// <param name="tae_id"></param>
+        /// <returns></returns>
+        public bool Deletar(long tud_id, int tae_id)
+        {
+            QueryStoredProcedure qs = new QueryStoredProcedure("NEW_CLS_TurmaAtividadeExtraClasse_Excluir", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@tud_id";
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                Param.Value = tud_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@tae_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = tae_id;
+                qs.Parameters.Add(Param);
+
+                #endregion 
+
+                qs.Execute();
+
+                return qs.Return > 0;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        #endregion
+
         #region Métodos sobrescritos
 
         protected override void ParamInserir(QuerySelectStoredProcedure qs, CLS_TurmaAtividadeExtraClasse entity)

@@ -760,6 +760,36 @@ namespace GestaoEscolar.Academico.ControleTurma
         private long Alu_idExtraClasse;
         private int Mtu_idExtraClasse;
 
+        private long VS_tud_idAtiExtraExcluir
+        {
+            get
+            {
+                if (ViewState["VS_tud_idAtiExtraExcluir"] == null)
+                    ViewState["VS_tud_idAtiExtraExcluir"] = 1;
+                return Convert.ToInt64(ViewState["VS_tud_idAtiExtraExcluir"]);
+            }
+
+            set
+            {
+                ViewState["VS_tud_idAtiExtraExcluir"] = value;
+            }
+        }
+
+        private int VS_tae_idAtiExtraExcluir
+        {
+            get
+            {
+                if (ViewState["VS_tae_idAtiExtraExcluir"] == null)
+                    ViewState["VS_tae_idAtiExtraExcluir"] = 1;
+                return Convert.ToInt32(ViewState["VS_tae_idAtiExtraExcluir"]);
+            }
+
+            set
+            {
+                ViewState["VS_tae_idAtiExtraExcluir"] = value;
+            }
+        }
+
         #endregion Propriedades
 
         #region Métodos
@@ -2472,6 +2502,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             UCLancamentoFrequenciaTerritorio.CarregarAusencias += UCLancamentoFrequenciaTerritorio_CarregarAusencias;
             UCSelecaoDisciplinaCompartilhada1.SelecionarDisciplina += UCSelecaoDisciplinaCompartilhada1_SelecionarDisciplina;
             UCControleTurma1.chkTurmasNormaisMultisseriadasIndexChanged += UCControleTurma_chkTurmasNormaisMultisseriadasIndexChanged;
+            UCConfirmacaoOperacao.ConfimaOperacao += UCConfirmacaoOperacao_ConfimaOperacao;
 
             // Configura javascripts da tela.
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -3694,8 +3725,11 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity))
                 {
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Adição de atividade | tud_id: {0}, tae_id: {1}", entity.tud_id, entity.tae_id));
+                    lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse salva com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     LimparCamposAtividadeExtraclasse();
                     CarregarListaoAtividadeExtraclasse();
+                    hdnTaeId.Value = string.Empty;
                 }
             }
             catch (ValidationException ex)
@@ -3709,6 +3743,9 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        /// <summary>
+        /// Limpa os campos de cadastro de atividade extraclasse.
+        /// </summary>
         private void LimparCamposAtividadeExtraclasse()
         {
             UCComboTipoAtividadeAvaliativa.Valor = -1;
@@ -3949,6 +3986,174 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             return false;
+        }
+
+        protected void btnEditarAtiExtra_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                ImageButton btnEditarAtiExtra = sender as ImageButton;
+                if (btnEditarAtiExtra != null)
+                {
+                    RepeaterItem itemAtividade = btnEditarAtiExtra.NamingContainer as RepeaterItem;
+                    Label lbltud_id = itemAtividade.FindControl("lbltud_id") as Label;
+                    Label lbltae_id = itemAtividade.FindControl("lbltae_id") as Label;
+
+                    if (lbltud_id != null && lbltae_id != null)
+                    {
+                        long tud_id = 0;
+                        int tae_id = 0;
+
+                        if (long.TryParse(lbltud_id.Text, out tud_id) && tud_id > 0 &&
+                            int.TryParse(lbltae_id.Text, out tae_id) && tae_id > 0)
+                        {
+                            CLS_TurmaAtividadeExtraClasse entity = new CLS_TurmaAtividadeExtraClasse
+                            {
+                                tud_id = tud_id
+                                ,
+                                tae_id = tae_id
+                            };
+                            CLS_TurmaAtividadeExtraClasseBO.GetEntity(entity);
+
+                            UCComboTipoAtividadeAvaliativa.Valor = entity.tav_id > 0 ? entity.tav_id : -1;
+                            txtNomeAtiExtra.Text = entity.tae_nome;
+                            txtDescricaoAtiExtra.Text = entity.tae_descricao;
+                            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? entity.tae_cargaHoraria.ToString() : string.Empty;
+
+                            hdnTaeId.Value = entity.tae_id.ToString();
+
+                            updAtiExtra.Update();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar editar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void btnExcluirAtiExtra_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                ImageButton btnExcluirAtiExtra = sender as ImageButton;
+                if (btnExcluirAtiExtra != null)
+                {
+                    RepeaterItem itemAtividade = btnExcluirAtiExtra.NamingContainer as RepeaterItem;
+                    Label lbltud_id = itemAtividade.FindControl("lbltud_id") as Label;
+                    Label lbltae_id = itemAtividade.FindControl("lbltae_id") as Label;
+
+                    if (lbltud_id != null && lbltae_id != null)
+                    {
+                        long tud_id = 0;
+                        int tae_id = 0;
+
+                        if (long.TryParse(lbltud_id.Text, out tud_id) && tud_id > 0 &&
+                            int.TryParse(lbltae_id.Text, out tae_id) && tae_id > 0)
+                        {
+                            VS_tud_idAtiExtraExcluir = tud_id;
+                            VS_tae_idAtiExtraExcluir = tae_id;
+                            UCConfirmacaoOperacao.Mensagem = "Confirma exclusão?";
+                            UCConfirmacaoOperacao.EventBtnNao = false;
+                            UCConfirmacaoOperacao.Update();
+                            ScriptManager.RegisterStartupScript(Page, typeof(Page), "ConfirmaExclusaoAtiExtra", "$(document).ready(function(){ scrollToTop(); $('#divConfirmacao').dialog('open'); });", true);
+                        }
+                    }
+                }
+            }
+            catch (ValidationException ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void btnLimparCamposAtiExtra_Click(object sender, EventArgs e)
+        {
+            LimparCamposAtividadeExtraclasse();
+        }
+
+        protected void rptAtividadesExtraClasseHeader_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                // Verifico se a atividade é de uma avaliação paralela.
+                ImageButton btnExcluirAtiExtra = (ImageButton)e.Item.FindControl("btnExcluirAtiExtra");
+                if (btnExcluirAtiExtra != null)
+                {
+                    btnExcluirAtiExtra.Visible = usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
+                }
+
+                ImageButton btnEditarAtiExtra = (ImageButton)e.Item.FindControl("btnEditarAtiExtra");
+                if (btnEditarAtiExtra != null)
+                {
+                    btnEditarAtiExtra.Visible = usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
+                }
+            }
+        }
+
+        private void UCConfirmacaoOperacao_ConfimaOperacao()
+        {
+            ExcluirAtividadeExtraClasse();
+        }
+
+        private void ExcluirAtividadeExtraClasse()
+        {
+            try
+            {
+                CLS_TurmaAtividadeExtraClasse entity = new CLS_TurmaAtividadeExtraClasse
+                {
+                    tud_id = VS_tud_idAtiExtraExcluir
+                    ,
+                    tae_id = VS_tae_idAtiExtraExcluir
+                };
+
+                var lstNota =
+                    (from RepeaterItem itemAluno in rptAlunoAtivExtra.Items
+                     let rptAtividades = itemAluno.FindControl("rptAtividades") as Repeater
+                     from RepeaterItem itemNota in rptAtividades.Items
+                     let lbltud_idNota = itemNota.FindControl("lbltud_id") as Label
+                     let lbltae_idNota = itemNota.FindControl("lbltae_id") as Label
+                     where (lbltud_idNota != null && lbltud_idNota.Text == VS_tud_idAtiExtraExcluir.ToString()) &&
+                           (lbltae_idNota != null && lbltae_idNota.Text == VS_tae_idAtiExtraExcluir.ToString())
+                     let txtNota = itemNota.FindControl("txtNota") as TextBox
+                     let ddlPareceres = itemNota.FindControl("ddlPareceres") as DropDownList
+                     let imgSituacao = itemNota.FindControl("imgSituacao") as Image
+                     select new
+                     {
+                         possuiNota = (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Numerica && !string.IsNullOrEmpty(txtNota.Text)) ||
+                                      (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Pareceres && ddlPareceres.SelectedValue != "-1") ||
+                                      (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Relatorios && imgSituacao.Visible)
+                     }).ToList();
+
+                if (lstNota.Any(p => p.possuiNota))
+                {
+                    throw new ValidationException("Não foi possível excluir a atividade extraclasse, pois já foram registrados os lançamentos.");
+                }
+
+                if (CLS_TurmaAtividadeExtraClasseBO.Deletar(entity))
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse excluída com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Exclusão de atividade | tud_id: {0}, tae_id: {1}", VS_tud_idAtiExtraExcluir, VS_tae_idAtiExtraExcluir));
+                    CarregarListaoAtividadeExtraclasse();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
         }
     }
 }
