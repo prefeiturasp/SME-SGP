@@ -16,7 +16,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
     {
         #region Constantes
 
-        private const int maxRespostasPagina = 15; 
+        private const int maxRespostasPagina = 15;
 
         #endregion
 
@@ -88,7 +88,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             {
                 if (ViewState["VS_lstLancamentoTurma"] == null)
                 {
-                     ViewState["VS_lstLancamentoTurma"] = new List<ACA_Sondagem_Lancamento>();
+                    ViewState["VS_lstLancamentoTurma"] = new List<ACA_Sondagem_Lancamento>();
                 }
                 return (List<ACA_Sondagem_Lancamento>)ViewState["VS_lstLancamentoTurma"];
             }
@@ -356,7 +356,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.ErroSalvar").ToString(), UtilBO.TipoMensagem.Erro);
             }
-}
+        }
 
         #endregion
 
@@ -382,7 +382,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
         {
             //Carrega os campos
             ddlTurma.Items.Clear();
-            
+
             ddlTurma.Items.Insert(0, new ListItem(GetGlobalResourceObject("Classe", "LancamentoSondagem.Cadastro.ddlTurma.MsgSelecione").ToString(), "-1", true));
 
             ddlTurma.DataSource = TUR_TurmaBO.GetSelectBy_SondagemAgendamento(
@@ -795,6 +795,16 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             {
                 if (lstQuestoes.Count > 0)
                 {
+                    Repeater rptQuestoesHistorico = (Repeater)e.Item.FindControl("rptQuestoesHistorico");
+                    if (rptQuestoesHistorico != null)
+                    {
+                        List<Questao> lstQuestoesHist = new List<Questao>();
+                        foreach (int sda_id in VS_lstLancamentoTurma.Where(p => p.sda_id != VS_sda_id).GroupBy(p => p.sda_id).Select(p => p.Key))
+                            lstQuestoesHist.AddRange(lstQuestoes.Skip((VS_NumPagina - 1) * VS_QtdQuestoesPagina).Take(VS_QtdQuestoesPagina));
+
+                        rptQuestoesHistorico.DataSource = lstQuestoesHist;
+                        rptQuestoesHistorico.DataBind();
+                    }
                     Repeater rptQuestoes = (Repeater)e.Item.FindControl("rptQuestoes");
                     if (rptQuestoes != null)
                     {
@@ -823,6 +833,16 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                         lstSubQuestoesQuestao.AddRange(lstSubQuestoes);
                     }
 
+                    Repeater rptSubQuestoesHistorico = (Repeater)e.Item.FindControl("rptSubQuestoesHistorico");
+                    if (rptSubQuestoesHistorico != null)
+                    {
+                        List<Questao> lstSubQuestoesHist = new List<Questao>();
+                        foreach (int sda_id in VS_lstLancamentoTurma.Where(p => p.sda_id != VS_sda_id).GroupBy(p => p.sda_id).Select(p => p.Key))
+                            lstSubQuestoesHist.AddRange(lstSubQuestoesQuestao.Skip((VS_NumPagina - 1) * VS_QtdSubQuestoesPagina).Take(VS_QtdSubQuestoesPagina));
+
+                        rptSubQuestoesHistorico.DataSource = lstSubQuestoesHist;
+                        rptSubQuestoesHistorico.DataBind();
+                    }
                     Repeater rptSubQuestoes = (Repeater)e.Item.FindControl("rptSubQuestoes");
                     if (rptSubQuestoes != null)
                     {
@@ -849,6 +869,16 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                         lstRespostasQuestao.AddRange(lstRespostas);
                     }
 
+                    Repeater rptRespostasHistorico = (Repeater)e.Item.FindControl("rptRespostasHistorico");
+                    if (rptRespostasHistorico != null)
+                    {
+                        List<Resposta> lstRespostasHist = new List<Resposta>();
+                        foreach (int sda_id in VS_lstLancamentoTurma.Where(p => p.sda_id != VS_sda_id).GroupBy(p => p.sda_id).Select(p => p.Key))
+                            lstRespostasHist.AddRange(lstRespostasQuestao.Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina));
+
+                        rptRespostasHistorico.DataSource = lstRespostasHist;
+                        rptRespostasHistorico.DataBind();
+                    }
                     Repeater rptRespostas = (Repeater)e.Item.FindControl("rptRespostas");
                     if (rptRespostas != null)
                     {
@@ -857,13 +887,22 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     }
                 }
 
+                Repeater rptAgendamentos = (Repeater)e.Item.FindControl("rptAgendamentos");
+                if (rptAgendamentos != null)
+                {
+                    rptAgendamentos.DataSource = VS_lstLancamentoTurma.GroupBy(p => new { sda_id = p.sda_id, dataInicio = p.dataInicio, dataFim = p.dataFim })
+                                                                      .Select(p => new { sda_id = p.Key.sda_id, dataInicio = p.Key.dataInicio, dataFim = p.Key.dataFim, periodo = p.Key.dataInicio + " - " + p.Key.dataFim })
+                                                                      .OrderBy(p => Convert.ToDateTime(p.dataInicio));
+                    rptAgendamentos.DataBind();
+                }
+
                 HtmlTableCell thBotoes = (HtmlTableCell)e.Item.FindControl("thBotoes");
                 if (thBotoes != null)
                 {
                     thBotoes.Visible = VS_TotalPaginas > 1;
                     if (thBotoes.Visible)
                     {
-                        thBotoes.Attributes.Add("colspan", VS_QtdRespostasPagina.ToString());
+                        thBotoes.Attributes.Add("colspan", (VS_QtdRespostasPagina * VS_lstLancamentoTurma.GroupBy(p => p.sda_id).Count()).ToString());
                     }
                 }
 
@@ -886,10 +925,43 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 HiddenField hdnAluId = (HiddenField)e.Item.FindControl("hdnAluId");
                 hdnAluId.Value = alu_id.ToString();
 
-                HtmlTableCell tdRespostas = (HtmlTableCell)e.Item.FindControl("tdRespostas");
-                if (tdRespostas != null)
+                Repeater rptRespostasAlunoHistorico = (Repeater)e.Item.FindControl("rptRespostasAlunoHistorico");
+                if (rptRespostasAlunoHistorico != null)
                 {
-                    tdRespostas.ColSpan = VS_lstLancamentoTurma.Where(p => p.alu_id == alu_id && p.sda_id == VS_sda_id).OrderBy(p => p.sdq_ordem).ThenBy(p => p.sdq_ordemSub).ThenBy(p => p.sdr_ordem).Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina).Count();
+                    List<ACA_Sondagem_Lancamento> lstRespAlunoHist = new List<ACA_Sondagem_Lancamento>();
+                    foreach (int sda_id in VS_lstLancamentoTurma.Where(p => p.sda_id != VS_sda_id).GroupBy(p => p.sda_id).Select(p => p.Key))
+                    {
+                        lstRespAlunoHist.AddRange((
+                        from ACA_Sondagem_Lancamento dr in VS_lstLancamentoTurma.Where(p => p.sda_id == sda_id)
+                        where dr.alu_id == alu_id
+                        select new ACA_Sondagem_Lancamento
+                        {
+                            sda_id = dr.sda_id
+                            ,
+                            alu_id = dr.alu_id
+                            ,
+                            sdr_id = dr.sdr_id
+                            ,
+                            sdr_descricao = dr.sdr_descricao
+                            ,
+                            sdr_ordem = dr.sdr_ordem
+                            ,
+                            sdq_idSub = dr.sdq_idSub
+                            ,
+                            sdq_ordemSub = dr.sdq_ordemSub
+                            ,
+                            sdq_id = dr.sdq_id
+                            ,
+                            sdq_ordem = dr.sdq_ordem
+                            ,
+                            respAluno = dr.respAluno
+                            ,
+                            dataInicio = dr.dataInicio
+                        }
+                        ).ToList().OrderBy(p => p.sdq_ordem).ThenBy(p => p.sdq_ordemSub).ThenBy(p => p.sdr_ordem).Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina).ToList());
+                    }
+                    rptRespostasAlunoHistorico.DataSource = lstRespAlunoHist;
+                    rptRespostasAlunoHistorico.DataBind();
                 }
 
                 Repeater rptRespostasAluno = (Repeater)e.Item.FindControl("rptRespostasAluno");
@@ -900,15 +972,27 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                         where dr.alu_id == alu_id
                         select new
                         {
+                            sda_id = dr.sda_id
+                            ,
                             alu_id = dr.alu_id
-                            , sdr_id = dr.sdr_id
-                            , sdr_descricao = dr.sdr_descricao
-                            , sdr_ordem = dr.sdr_ordem
-                            , sdq_idSub = dr.sdq_idSub
-                            , sdq_ordemSub = dr.sdq_ordemSub
-                            , sdq_id = dr.sdq_id
-                            , sdq_ordem = dr.sdq_ordem
-                            , respAluno = dr.respAluno
+                            ,
+                            sdr_id = dr.sdr_id
+                            ,
+                            sdr_descricao = dr.sdr_descricao
+                            ,
+                            sdr_ordem = dr.sdr_ordem
+                            ,
+                            sdq_idSub = dr.sdq_idSub
+                            ,
+                            sdq_ordemSub = dr.sdq_ordemSub
+                            ,
+                            sdq_id = dr.sdq_id
+                            ,
+                            sdq_ordem = dr.sdq_ordem
+                            ,
+                            respAluno = dr.respAluno
+                            ,
+                            dataInicio = dr.dataInicio
                         }
                     ).ToList().OrderBy(p => p.sdq_ordem).ThenBy(p => p.sdq_ordemSub).ThenBy(p => p.sdr_ordem).Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina);
                     rptRespostasAluno.DataBind();
@@ -916,33 +1000,14 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
             }
         }
 
-        protected void rptAgendamentosAnteriores_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void rptAgendamentos_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                Repeater rptRespostasAluno = (Repeater)e.Item.NamingContainer;
-                RepeaterItem rptItemLancamento = (RepeaterItem)((Repeater)((RepeaterItem)rptRespostasAluno.NamingContainer).NamingContainer).NamingContainer;
-                if (rptItemLancamento != null)
+                HtmlTableCell thAgendamento = (HtmlTableCell)e.Item.FindControl("thAgendamento");
+                if (thAgendamento != null)
                 {
-                    HtmlTableCell thAgendamento = (HtmlTableCell)e.Item.FindControl("thAgendamento");
-                    HtmlTableCell tdRespostas = (HtmlTableCell)rptItemLancamento.FindControl("tdRespostas");
-                    if (thAgendamento != null && tdRespostas != null)
-                    {
-                        thAgendamento.ColSpan = tdRespostas.ColSpan;
-                    }
-                }
-
-                long alu_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "alu_id"));
-                long sda_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "sda_id"));
-
-                Repeater rptRespAgendamentosAnteriores = (Repeater)e.Item.FindControl("rptRespAgendamentosAnteriores");
-                if (rptRespAgendamentosAnteriores != null)
-                {
-                    rptRespAgendamentosAnteriores.DataSource = VS_lstLancamentoTurma.Where(p => p.sda_id == sda_id && p.alu_id == alu_id)
-                                                                                    .OrderBy(p => p.sdq_ordem).ThenBy(p => p.sdq_ordemSub).ThenBy(p => p.sdr_ordem).Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina)
-                                                                                    .GroupBy(a => new { sda_id = a.sda_id, sdq_id = a.sdq_id, sdq_idSub = a.sdq_idSub, sdr_id = a.sdr_id, sdr_descricao = a.sdr_descricao, respAluno = a.respAluno })
-                                                                                    .Select(a => new { sda_id = a.Key.sda_id, sdq_id = a.Key.sdq_id, sdq_idSub = a.Key.sdq_idSub, sdr_id = a.Key.sdr_id, sdr_descricao = a.Key.sdr_descricao, respAluno = a.Key.respAluno });
-                    rptRespAgendamentosAnteriores.DataBind();
+                    thAgendamento.Attributes.Add("colspan", VS_QtdRespostasPagina.ToString());
                 }
             }
         }
@@ -974,50 +1039,9 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
 
         protected void rptRespostasAluno_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Header)
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                Repeater rptRespostasAluno = (Repeater)e.Item.NamingContainer;
-                RepeaterItem rptItemLancamento = (RepeaterItem)rptRespostasAluno.NamingContainer;
-                if (rptItemLancamento != null)
-                {
-                    long alu_id = Convert.ToInt64(DataBinder.Eval(rptItemLancamento.DataItem, "alu_id"));
-
-                    if (VS_lstLancamentoTurma.Where(a => a.sda_id != VS_sda_id && a.alu_id == alu_id).OrderBy(p => p.sdq_ordem).ThenBy(p => p.sdq_ordemSub).ThenBy(p => p.sdr_ordem).Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina).Any())
-                    {
-                        HtmlGenericControl divRespostasAgendamentos = (HtmlGenericControl)e.Item.FindControl("divRespostasAgendamentos");
-                        Repeater rptAgendamentosAnteriores = (Repeater)e.Item.FindControl("rptAgendamentosAnteriores");
-                        Button btnExibirLancamentoAnteriores = (Button)rptItemLancamento.FindControl("btnExibirLancamentoAnteriores");
-                        Button btnEsconderLancamentoAnteriores = (Button)rptItemLancamento.FindControl("btnEsconderLancamentoAnteriores");
-                        if (divRespostasAgendamentos != null && rptAgendamentosAnteriores != null && btnExibirLancamentoAnteriores != null && btnEsconderLancamentoAnteriores != null)
-                        {
-                            List<ACA_Sondagem_ListAgendamentos> lstAux = new List<ACA_Sondagem_ListAgendamentos>();
-                            foreach (int sda_id in VS_lstLancamentoTurma.Where(p => p.alu_id == alu_id && p.sda_id != VS_sda_id).GroupBy(p => p.sda_id).Select(p => p.Key))
-                            {
-                                lstAux.AddRange(VS_lstLancamentoTurma.Where(p => p.sda_id == sda_id && p.alu_id == alu_id)
-                                                                     .OrderBy(p => p.sdq_ordem).ThenBy(p => p.sdq_ordemSub).ThenBy(p => p.sdr_ordem).Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina)
-                                                                     .ToList().OrderByDescending(a => Convert.ToDateTime(a.dataInicio))
-                                                                     .GroupBy(a => new { alu_id = a.alu_id, sda_id = a.sda_id, dataInicio = a.dataInicio, dataAgendamento = a.dataInicio + " - " + a.dataFim })
-                                                                     .Select(a => new ACA_Sondagem_ListAgendamentos { alu_id = a.Key.alu_id, sda_id = a.Key.sda_id, dataInicio = a.Key.dataInicio, dataAgendamento = a.Key.dataAgendamento }).ToList());
-                            }
-                            rptAgendamentosAnteriores.DataSource = lstAux.OrderBy(a => Convert.ToDateTime(a.dataInicio));
-                            rptAgendamentosAnteriores.DataBind();
-
-                            divRespostasAgendamentos.Visible = true;
-
-                            btnExibirLancamentoAnteriores.Attributes.Add("onclick", "return false");
-                            btnEsconderLancamentoAnteriores.Attributes.Add("onclick", "return false");
-
-                            btnExibirLancamentoAnteriores.OnClientClick = "$(" + divRespostasAgendamentos.ClientID + ").show(); $(" + btnEsconderLancamentoAnteriores.ClientID + ").show(); $(" + btnExibirLancamentoAnteriores.ClientID + ").hide();";
-                            btnEsconderLancamentoAnteriores.OnClientClick = "$(" + divRespostasAgendamentos.ClientID + ").hide(); $(" + btnExibirLancamentoAnteriores.ClientID + ").show(); $(" + btnEsconderLancamentoAnteriores.ClientID + ").hide();";
-
-                            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "Esconde" + btnEsconderLancamentoAnteriores.ClientID, "$(" + btnEsconderLancamentoAnteriores.ClientID + ").hide();", true);
-                            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "Esconde" + divRespostasAgendamentos.ClientID, "$(" + divRespostasAgendamentos.ClientID + ").hide();", true);
-                        }
-                    }
-                }
-            }
-            else if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
+                int sda_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "sda_id"));
                 long alu_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "alu_id"));
                 int sdr_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "sdr_id"));
                 int sdq_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "sdq_id"));
@@ -1027,7 +1051,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 RadioButton rbResposta = (RadioButton)e.Item.FindControl("rbResposta");
                 if (rbResposta != null)
                 {
-                    rbResposta.GroupName = string.Format("{0}_{1}_{2}", alu_id, sdq_id, sdq_idSub);
+                    rbResposta.GroupName = string.Format("{0}_{1}_{2}_{3}", alu_id, sda_id, sdq_id, sdq_idSub);
 
                     if (string.IsNullOrEmpty(ultimoGrupo) || rbResposta.GroupName != ultimoGrupo)
                     {
@@ -1035,7 +1059,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                         ultimoGrupo = rbResposta.GroupName;
                     }
 
-                    rbResposta.Enabled = VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    rbResposta.Enabled = sda_id == VS_sda_id && VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
 
                 HiddenField hdnRespId = (HiddenField)e.Item.FindControl("hdnRespId");
