@@ -22,6 +22,7 @@
         var idDdlOrdenacaoFrequenciaTerritorio = '#<%=UCLancamentoFrequenciaTerritorio.ClientIdComboOrdenacao%>';
         var idDdlOrdenacaoFrequencia = '#<%= UCLancamentoFrequencia.ClientIdComboOrdenacao%>';
         var idDdlOrdenacaoAvaliacao = '#<%=UCComboOrdenacaoAvaliacao.ComboClientID%>';
+        var idDdlOrdenacaoAtivExtra = '#<%=UCComboOrdenacaoAtivExtra.ComboClientID%>';
         var idhdnOrdenacaoFrequenciaTerritorio = '#<%=UCLancamentoFrequenciaTerritorio.ClientIdHdnOrdenacao%>';
         var idhdnOrdenacaoFrequencia = '#<%=UCLancamentoFrequencia.ClientIdHdnOrdenacao%>';
         var idhdnOrdenacaoAvaliacao = '#<%=hdnOrdenacaoAvaliacao.ClientID%>';
@@ -34,6 +35,7 @@
             <asp:Label ID="lblMessage" runat="server" EnableViewState="false"></asp:Label>
             <asp:Label ID="lblPeriodoEfetivado" runat="server" EnableViewState="false" Visible="false"></asp:Label>
             <asp:Label ID="lblAulasSemPlano" runat="server" Visible="false"></asp:Label>
+            <asp:ValidationSummary ID="vsAtividadeExtra" runat="server" ValidationGroup="AtividadeExtraclasse" />
         </ContentTemplate>
     </asp:UpdatePanel>
     <fieldset>
@@ -487,9 +489,7 @@
                                                 <uc13:UCConfirmacaoOperacao ID="UCConfirmacaoOperacao" runat="server" ObservacaoVisivel="false" ObservacaoObrigatorio="false" />
                                         <asp:UpdatePanel ID="updAtiExtra" runat="server" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <fieldset>
-                                                    <asp:ValidationSummary ID="vsAtividadeExtra" runat="server" ValidationGroup="AtividadeExtraclasse" />
-                                                    <asp:Label ID="lblMensagemAtiExtra" runat="server"></asp:Label>
+                                                <fieldset id="fdsCadastroAtiExtra" runat="server">
                                                     <asp:HiddenField ID="hdnTaeId" runat="server" />
                                                     <uc12:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
                                                     <uc11:UCComboTipoAtividadeAvaliativa ID="UCComboTipoAtividadeAvaliativa" runat="server" Obrigatorio="true" ValidationGroup="AtividadeExtraclasse" />
@@ -566,7 +566,7 @@
                                                                                 <asp:TextBox ID="txtNota" runat="server" SkinID="Decimal" Width="50" MaxLength="6"></asp:TextBox>
                                                                                 <asp:DropDownList ID="ddlPareceres" runat="server" DataTextField="descricao" DataValueField="eap_valor">
                                                                                 </asp:DropDownList>
-                                                                                <asp:ImageButton ID="btnRelatorio" runat="server" SkinID="btDetalhar" OnClick="btnRelatorio_Click"
+                                                                                <asp:ImageButton ID="btnRelatorio" runat="server" SkinID="btDetalhar" OnClick="btnRelatorioAtiExtra_Click"
                                                                                     ToolTip="Lançar relatório" />
                                                                                 <asp:Image ID="imgSituacao" runat="server" SkinID="imgConfirmar" ToolTip="Relatório lançado"
                                                                                     Width="16px" Height="16px" Visible="false" ImageAlign="Top" />
