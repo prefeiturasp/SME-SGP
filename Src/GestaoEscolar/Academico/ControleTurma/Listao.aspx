@@ -11,6 +11,8 @@
 <%@ Register Src="~/WebControls/LancamentoFrequencia/UCLancamentoFrequencia.ascx" TagName="UCLancamentoFrequencia" TagPrefix="uc1" %>
 <%@ Register src="~/WebControls/ControleTurma/UCSelecaoDisciplinaCompartilhada.ascx" tagname="UCSelecaoDisciplinaCompartilhada" tagprefix="uc10" %>
 <%@ Register Src="~/WebControls/LancamentoFrequencia/UCLancamentoFrequenciaTerritorio.ascx" TagName="UCLancamentoFrequenciaTerritorio" TagPrefix="uc3" %>
+<%@ Register Src="~/WebControls/Combos/UCComboTipoAtividadeAvaliativa.ascx" TagName="UCComboTipoAtividadeAvaliativa" TagPrefix="uc11" %>
+<%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios" TagPrefix="uc12" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -22,6 +24,7 @@
         var idhdnOrdenacaoFrequenciaTerritorio = '#<%=UCLancamentoFrequenciaTerritorio.ClientIdHdnOrdenacao%>';
         var idhdnOrdenacaoFrequencia = '#<%=UCLancamentoFrequencia.ClientIdHdnOrdenacao%>';
         var idhdnOrdenacaoAvaliacao = '#<%=hdnOrdenacaoAvaliacao.ClientID%>';
+        var idhdnOrdenacaoAtivExtra = '#<%=hdnOrdenacaoAtivExtra.ClientID%>';
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -35,6 +38,7 @@
     <fieldset>
         <uc10:UCControleTurma ID="UCControleTurma1" runat="server" />
         <asp:HiddenField ID="hdnOrdenacaoAvaliacao" runat="server" />
+        <asp:HiddenField ID="hdnOrdenacaoAtivExtra" runat="server" />
 
         <div runat="server" id="divMessageTurmaAnterior"
             class="summaryMsgAnosAnteriores" style="<%$ Resources: Academico, ControleTurma.Busca.divMessageTurmaAnterior.Style %>">
@@ -52,6 +56,7 @@
                         <asp:HiddenField ID="hdnAlterouFrequencia" runat="server" />
                         <asp:HiddenField ID="hdnAlterouNota" runat="server" />
                         <asp:HiddenField ID="hdnAlterouPlanoAula" runat="server" />
+                        <asp:HiddenField ID="hdnAlterouAtividadeExtra" runat="server" />
                         <asp:HiddenField ID="hdnListaoSelecionado" runat="server" />
                         <asp:Label ID="lblMessage2" runat="server" EnableViewState="false"></asp:Label>
                         <div id="divListao" runat="server">
@@ -75,6 +80,8 @@
                                         <asp:Label runat="server" ID="lblAvaliacao" Text="<%$ Resources:Academico, ControleTurma.Listao.lblAvaliacao.Text %>"></asp:Label> </a></li>
                                     <li><a href="#divTabsListao-2" id="aPlanoAula" runat="server" visible="false" onclick="$(idbtnCompensacaoAusencia).hide();">
                                         <asp:Label runat="server" ID="lblPlanoAula" Text="<%$ Resources:Academico, ControleTurma.Listao.lblPlanoAula.Text %>"></asp:Label> </a></li>
+                                    <li><a href="#divTabsListao-3" id="aAtividadeExtraClasse" runat="server" visible="false">
+                                        <asp:Label runat="server" ID="lblAtividadeExtraClasse" Text="Listão de atividades extraclasse"></asp:Label></a></li>
                                     <%--<div id="msgTabs" class="msgTabs">Navegue entre as abas utilizando as setas.</div>--%>
                                 </ul>
                                 <div id="divTabsListao-0">
@@ -469,6 +476,103 @@
                                                     <br />
                                                     <br />
                                                 </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </asp:Panel>
+                                </div>
+                                <div id="divTabsListao-3">
+                                    <asp:Panel ID="pnlAtividadesExtraClasse" runat="server">
+                                        <asp:UpdatePanel ID="updAtiExtra" runat="server" UpdateMode="Conditional">
+                                            <ContentTemplate>
+                                                <fieldset>
+                                                    <asp:ValidationSummary ID="vsAtividadeExtra" runat="server" ValidationGroup="AtividadeExtraclasse" />
+                                                    <asp:Label ID="lblMensagemAtiExtra" runat="server"></asp:Label>
+                                                    <asp:HiddenField ID="hdnTaeId" runat="server" />
+                                                    <uc12:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
+                                                    <uc11:UCComboTipoAtividadeAvaliativa ID="UCComboTipoAtividadeAvaliativa" runat="server" Obrigatorio="true" ValidationGroup="AtividadeExtraclasse" />
+                                                    <asp:Label ID="lblNomeAtiExtra" runat="server" Text="Nome da atividade extraclasse *" AssociatedControlID="txtNomeAtiExtra"></asp:Label>
+                                                    <asp:TextBox ID="txtNomeAtiExtra" runat="server" SkinID="text60C" MaxLength="100"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="rfvNomeAtiExtra" runat="server" ControlToValidate="txtNomeAtiExtra" Display="Dynamic"
+                                                        ErrorMessage="Nome da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
+                                                    <asp:Label ID="lblDescricaoAtiExtra" runat="server" Text="Descrição da atividade extraclasse" AssociatedControlID="txtDescricaoAtiExtra"></asp:Label>
+                                                    <asp:TextBox ID="txtDescricaoAtiExtra" runat="server" TextMode="MultiLine" SkinID="limite2000"></asp:TextBox>
+                                                    <asp:Label ID="lblCargaAtiExtra" runat="server" Text="Carga horária da atividade extraclasse *" AssociatedControlID="txtCargaAtiExtra"></asp:Label>
+                                                    <asp:TextBox ID="txtCargaAtiExtra" runat="server" SkinID="Numerico" MaxLength="4"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="rfvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic"
+                                                        ErrorMessage="Carga horária da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
+                                                    <div class="right">
+                                                        <asp:Button ID="btnAdicionarAtiExtra" runat="server" Text="Adicionar atividade extraclasse" OnClick="btnAdicionarAtiExtra_Click" ValidationGroup="AtividadeExtraclasse" />
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <asp:Label ID="lblSemAtividadeExtra" runat="server"></asp:Label>
+                                                    <uc2:UCComboOrdenacao ID="UCComboOrdenacaoAtivExtra" runat="server" />
+                                                    <asp:Repeater ID="rptAlunoAtivExtra" runat="server" OnItemDataBound="rptAlunoAtivExtra_ItemDataBound">
+                                                        <HeaderTemplate>
+                                                            <div>
+                                                                <table id="tabela" class="grid tbLancamentoAvaliacoes sortableAtividadeExtra grid-responsive-list" cellspacing="0">
+                                                                    <thead>
+                                                                        <tr class="gridHeader" style="height: 30px;">
+                                                                            <th class="center">
+                                                                                <asp:Label ID="lblNumChamada" runat="server" Text='Nº Chamada'></asp:Label>
+                                                                            </th>
+                                                                            <th>
+                                                                                <asp:Label ID="lblNome" runat="server" Text='Nome do aluno'></asp:Label>
+                                                                            </th>
+                                                                            <asp:Repeater ID="rptAtividades" runat="server">
+                                                                                <ItemTemplate>
+                                                                                    <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px;">
+                                                                                        <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
+                                                                                        <asp:Label ID="lbltud_id" runat="server" Text='<%#Bind("tud_id") %>' Visible="false"></asp:Label>
+                                                                                        <div style="display: inline-block; width: 100%;">
+                                                                                            <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("nome") %>'></asp:Label>
+                                                                                        </div>
+                                                                                    </th>
+                                                                                </ItemTemplate>
+                                                                            </asp:Repeater>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                        </HeaderTemplate>
+                                                        <ItemTemplate>
+                                                            <tr class="gridRow">
+                                                                <td runat="server" id="tdNumChamadaAvaliacao" class="center" style="text-align: center;">
+                                                                    <asp:Label ID="lblalu_id" runat="server" Text='<%#Bind("alu_id") %>' Visible="false"></asp:Label>
+                                                                    <asp:Label ID="lblmtu_id" runat="server" Text='<%#Bind("mtu_id") %>' Visible="false"></asp:Label>
+                                                                    <asp:Label ID="lblmtd_id" runat="server" Text='<%#Bind("mtd_id") %>' Visible="false"></asp:Label>
+                                                                    <asp:Label ID="lblava_id" runat="server" Text='<%#Bind("ava_id") %>' Visible="false"></asp:Label>
+                                                                    <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("numeroChamada") %>'></asp:Label>
+                                                                </td>
+                                                                <td runat="server" id="tdNomeAvaliacao">
+                                                                    <asp:Label ID="lblNome" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
+                                                                    <asp:Label ID="lblNomeOficial" runat="server" Text='<%#Bind("pes_nome") %>' Visible="false">
+                                                                    </asp:Label>
+                                                                </td>
+                                                                <asp:Repeater ID="rptAtividades" runat="server" OnItemDataBound="rptAtividadesExtraClasse_ItemDataBound">
+                                                                    <ItemTemplate>
+                                                                        <td runat="server" id="tdAtividadesAtivAva" class="center grid-responsive-item-inline grid-responsive-center" style="text-align: center;">
+                                                                            <div id="divAtividades" runat="server" style="display: inline-block; width: 100%;">
+                                                                                <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
+                                                                                <asp:TextBox ID="txtNota" runat="server" SkinID="Decimal" Width="50" MaxLength="6"></asp:TextBox>
+                                                                                <asp:DropDownList ID="ddlPareceres" runat="server" DataTextField="descricao" DataValueField="eap_valor">
+                                                                                </asp:DropDownList>
+                                                                                <asp:ImageButton ID="btnRelatorio" runat="server" SkinID="btDetalhar" OnClick="btnRelatorio_Click"
+                                                                                    ToolTip="Lançar relatório" />
+                                                                                <asp:Image ID="imgSituacao" runat="server" SkinID="imgConfirmar" ToolTip="Relatório lançado"
+                                                                                    Width="16px" Height="16px" Visible="false" ImageAlign="Top" />
+                                                                                <asp:CheckBox ID="chkEntregou" runat="server" Text="Entregue" Style="display: inline-block;" /><br class="responsive-hide" />
+                                                                            </div>
+                                                                        </td>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                            </tbody>
+                                                    </table></div>
+                                                        </FooterTemplate>
+                                                    </asp:Repeater>
+                                                </fieldset>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </asp:Panel>

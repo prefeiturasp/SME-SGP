@@ -86,15 +86,22 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param = qs.NewParameter();
 			Param.DbType = DbType.DateTime;
 			Param.ParameterName = "@snd_dataCriacao";
-			Param.Size = 16;
+
 			Param.Value = entity.snd_dataCriacao;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.DateTime;
 			Param.ParameterName = "@snd_dataAlteracao";
-			Param.Size = 16;
+
 			Param.Value = entity.snd_dataAlteracao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Byte;
+			Param.ParameterName = "@sdn_opcaoResposta";
+			Param.Size = 1;
+			Param.Value = entity.sdn_opcaoResposta;
 			qs.Parameters.Add(Param);
 
 
@@ -148,15 +155,22 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param = qs.NewParameter();
 			Param.DbType = DbType.DateTime;
 			Param.ParameterName = "@snd_dataCriacao";
-			Param.Size = 16;
+
 			Param.Value = entity.snd_dataCriacao;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.DateTime;
 			Param.ParameterName = "@snd_dataAlteracao";
-			Param.Size = 16;
+
 			Param.Value = entity.snd_dataAlteracao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Byte;
+			Param.ParameterName = "@sdn_opcaoResposta";
+			Param.Size = 1;
+			Param.Value = entity.sdn_opcaoResposta;
 			qs.Parameters.Add(Param);
 
 
@@ -193,8 +207,8 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-			    entity.snd_id = Convert.ToInt32(qs.Return.Rows[0][0]);
-			    return (entity.snd_id > 0);
+			entity.snd_id = Convert.ToInt32(qs.Return.Rows[0][0]);
+			return (entity.snd_id > 0);
 			}
 
 			return false;

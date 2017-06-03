@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Web.UI.WebControls;
+using System.Linq;
+using System.Web.UI;
 
 namespace GestaoEscolar.WebControls.Curriculo
 {
@@ -17,6 +19,7 @@ namespace GestaoEscolar.WebControls.Curriculo
         private const int colunaOrdem = 1;
         private const int colunaEditar = 2;
         private const int colunaExcluir = 3;
+        private const int colunaObjetivos = 4;
 
         #endregion Constantes
 
@@ -75,6 +78,14 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
+        private int VS_tcp_id
+        {
+            get
+            {
+                return UCComboTipoCurriculoPeriodo1.Valor;
+            }
+        }
+
         public bool VS_permiteIncluir
         {
             get
@@ -117,7 +128,35 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
-        public List<sCurriculoCapitulo> VS_ltCurriculoCapituloGeral
+        public bool VS_permiteIncluirSugestao
+        {
+            get
+            {
+                if (ViewState["VS_permiteIncluirSugestao"] != null)
+                    return Convert.ToBoolean(ViewState["VS_permiteIncluirSugestao"]);
+                return false;
+            }
+            set
+            {
+                ViewState["VS_permiteIncluirSugestao"] = value;
+            }
+        }
+
+        public bool VS_permiteConsultarSugestao
+        {
+            get
+            {
+                if (ViewState["VS_permiteConsultarSugestao"] != null)
+                    return Convert.ToBoolean(ViewState["VS_permiteConsultarSugestao"]);
+                return false;
+            }
+            set
+            {
+                ViewState["VS_permiteConsultarSugestao"] = value;
+            }
+        }
+
+        private List<sCurriculoCapitulo> VS_ltCurriculoCapituloGeral
         {
             get
             {
@@ -135,7 +174,7 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
-        public List<sCurriculoCapitulo> VS_ltCurriculoCapituloDisciplina
+        private List<sCurriculoCapitulo> VS_ltCurriculoCapituloDisciplina
         {
             get
             {
@@ -153,18 +192,47 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
+        private List<sCurriculoObjetivo> VS_ltCurriculoObjetivo
+        {
+            get
+            {
+                return (List<sCurriculoObjetivo>)
+                        (
+                            ViewState["VS_ltCurriculoObjetivo"] ??
+                            (
+                                ViewState["VS_ltCurriculoObjetivo"] = ACA_CurriculoObjetivoBO.SelecionaPorNivelEnsinoDisciplinaPeriodo(VS_tne_id, VS_tme_id, VS_tds_id, VS_tcp_id)
+                            )
+                        );
+            }
+            set
+            {
+                ViewState["VS_ltCurriculoObjetivo"] = value;
+            }
+        }
+
+        private List<int> ltEixoAberto = new List<int>();
+
+        private bool comandoExecutado = false;
+
         #endregion Propriedades
 
         #region Page life cycle
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager sm = ScriptManager.GetCurrent(Page);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsUCCurriculo.js"));
+            }
+
             if (!IsPostBack)
             {
                 try
                 {
                     UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
                     UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
+                    grvEixo.CssClass += " accordion-grid";
                 }
                 catch (Exception ex)
                 {
@@ -173,7 +241,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 }
             }
 
-            btnNovoGeral.Visible = btnNovoDisciplina.Visible = VS_permiteIncluir;
+            btnNovoGeral.Visible = btnNovoDisciplina.Visible = btnNovoEixo.Visible = VS_permiteIncluir;
 
             UCComboTipoNivelEnsino1.IndexChanged += UCComboTipoNivelEnsino1_IndexChanged;
             UCComboTipoModalidadeEnsino1.IndexChanged += UCComboTipoModalidadeEnsino1_IndexChanged;
@@ -238,10 +306,23 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
-        private void UCComboTipoCurriculoPeriodo1_OnSelectedIndexChanged()
+        protected void rblDisciplina_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
+                litDisciplina.Text = rblDisciplina.SelectedItem.Text;
+                fsDisciplina.Visible = Convert.ToInt32(rblDisciplina.SelectedValue) > 0;
+                VS_ltCurriculoCapituloDisciplina = null;
+                VS_ltCurriculoObjetivo = null;
+                grvDisciplina.EditIndex = -1;
+                grvEixo.EditIndex = -1;
+                UCComboTipoCurriculoPeriodo1.SelectedIndex = 0;
+                pnlHabilidades.Visible = false;
+
+                if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
+                {
+                    Carregar(VS_tds_id);
+                }
             }
             catch (Exception ex)
             {
@@ -250,18 +331,17 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
-        protected void rblDisciplina_SelectedIndexChanged(object sender, EventArgs e)
+        private void UCComboTipoCurriculoPeriodo1_OnSelectedIndexChanged()
         {
             try
             {
-                litDisciplina.Text = rblDisciplina.SelectedItem.Text;
-                fsDisciplina.Visible = Convert.ToInt32(rblDisciplina.SelectedValue) > 0;
-                VS_ltCurriculoCapituloDisciplina = null;
-                grvDisciplina.EditIndex = -1;
+                pnlHabilidades.Visible = UCComboTipoCurriculoPeriodo1.Valor > 0;
+                VS_ltCurriculoObjetivo = null;
+                grvEixo.EditIndex = -1;
 
                 if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                 {
-                    Carregar(VS_tds_id);
+                    CarregarObjetivos(grvEixo, (byte)ACA_CurriculoObjetivoTipo.Eixo, -1);
                 }
             }
             catch (Exception ex)
@@ -308,23 +388,23 @@ namespace GestaoEscolar.WebControls.Curriculo
                     int index = int.Parse(e.CommandArgument.ToString());
                     int tds_id = Convert.ToInt32(grv.DataKeys[0]["tds_id"]);
                     int crc_idDescer = -1, crc_idSubir = -1;
-                    byte crc_ordemDescer = 0, crc_ordemSubir = 0;
+                    int crc_ordemDescer = 0, crc_ordemSubir = 0;
 
                     if (e.CommandName == "Subir")
                     {
                         crc_idDescer = Convert.ToInt32(grv.DataKeys[index - 1]["crc_id"]);
-                        crc_ordemDescer = Convert.ToByte(grv.DataKeys[index]["crc_ordem"]);
+                        crc_ordemDescer = Convert.ToInt32(grv.DataKeys[index]["crc_ordem"]);
 
                         crc_idSubir = Convert.ToInt32(grv.DataKeys[index]["crc_id"]);
-                        crc_ordemSubir = Convert.ToByte(grv.DataKeys[index - 1]["crc_ordem"]);
+                        crc_ordemSubir = Convert.ToInt32(grv.DataKeys[index - 1]["crc_ordem"]);
                     }
                     else if (e.CommandName == "Descer")
                     {
                         crc_idDescer = Convert.ToInt32(grv.DataKeys[index]["crc_id"]);
-                        crc_ordemDescer = Convert.ToByte(grv.DataKeys[index + 1]["crc_ordem"]);
+                        crc_ordemDescer = Convert.ToInt32(grv.DataKeys[index + 1]["crc_ordem"]);
 
                         crc_idSubir = Convert.ToInt32(grv.DataKeys[index + 1]["crc_id"]);
-                        crc_ordemSubir = Convert.ToByte(grv.DataKeys[index]["crc_ordem"]);
+                        crc_ordemSubir = Convert.ToInt32(grv.DataKeys[index]["crc_ordem"]);
                     }
 
                     if (crc_idDescer > 0 && crc_idSubir > 0)
@@ -550,6 +630,322 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
+        protected void grvEixo_DataBound(object sender, EventArgs e)
+        {
+            GridView grv = (GridView)sender;
+            if (grv.EditIndex >= 0)
+            {
+                grv.Columns[colunaOrdem].Visible = false;
+                grv.Columns[colunaExcluir].Visible = false;
+            }
+            else
+            {
+                grv.Columns[colunaExcluir].Visible = VS_permiteExcluir;
+                grv.Columns[colunaEditar].Visible = VS_permiteEditar;
+
+                int total = grv.Rows.Count;
+                grv.Columns[colunaOrdem].Visible = VS_permiteEditar && total > 1;
+                if (total > 1)
+                {
+                    //para deixar a seta do primeiro registro do grid só uma seta para baixo 
+                    if (grv.Rows[0].FindControl("btnSubir") != null)
+                        ((ImageButton)grv.Rows[0].FindControl("btnSubir")).Style.Add("visibility", "hidden");
+                    //para deixar a seta do último registro do grid só uma seta para cima
+                    if (grv.Rows[total - 1].FindControl("btnDescer") != null)
+                        ((ImageButton)grv.Rows[total - 1].FindControl("btnDescer")).Style.Add("visibility", "hidden");
+                }
+            }
+        }
+
+        protected void grvEixo_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (!comandoExecutado && (e.CommandName == "Subir" || e.CommandName == "Descer"))
+                {
+                    // Variável adicionada para não propagar o comando para o grid pai.
+                    comandoExecutado = true;
+
+                    GridView grv = (GridView)sender;
+                    int index = int.Parse(e.CommandArgument.ToString());
+                    int cro_idDescer = -1, cro_idSubir = -1;
+                    int cro_ordemDescer = 0, cro_ordemSubir = 0;
+
+                    if (e.CommandName == "Subir")
+                    {
+                        cro_idDescer = Convert.ToInt32(grv.DataKeys[index - 1]["cro_id"]);
+                        cro_ordemDescer = Convert.ToInt32(grv.DataKeys[index]["cro_ordem"]);
+
+                        cro_idSubir = Convert.ToInt32(grv.DataKeys[index]["cro_id"]);
+                        cro_ordemSubir = Convert.ToInt32(grv.DataKeys[index - 1]["cro_ordem"]);
+                    }
+                    else if (e.CommandName == "Descer")
+                    {
+                        cro_idDescer = Convert.ToInt32(grv.DataKeys[index]["cro_id"]);
+                        cro_ordemDescer = Convert.ToInt32(grv.DataKeys[index + 1]["cro_ordem"]);
+
+                        cro_idSubir = Convert.ToInt32(grv.DataKeys[index + 1]["cro_id"]);
+                        cro_ordemSubir = Convert.ToInt32(grv.DataKeys[index]["cro_ordem"]);
+                    }
+
+                    if (cro_idDescer > 0 && cro_idSubir > 0)
+                    {
+                        ACA_CurriculoObjetivo entityDescer = new ACA_CurriculoObjetivo { cro_id = cro_idDescer };
+                        ACA_CurriculoObjetivoBO.GetEntity(entityDescer);
+                        entityDescer.cro_ordem = cro_ordemDescer;
+
+                        ACA_CurriculoObjetivo entitySubir = new ACA_CurriculoObjetivo { cro_id = cro_idSubir };
+                        ACA_CurriculoObjetivoBO.GetEntity(entitySubir);
+                        entitySubir.cro_ordem = cro_ordemSubir;
+
+                        if (ACA_CurriculoObjetivoBO.SaveOrdem(entityDescer, entitySubir))
+                        {
+                            grv.EditIndex = -1;
+                            VS_ltCurriculoObjetivo = null;
+                            GuardarEixosAbertos();
+                            CarregarObjetivos(grv, Convert.ToByte(grv.DataKeys[index]["cro_tipo"]), Convert.ToInt32(grv.DataKeys[index]["cro_idPai"]));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void grvEixo_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ImageButton btnSubir = (ImageButton)e.Row.FindControl("btnSubir");
+                if (btnSubir != null)
+                {
+                    btnSubir.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "cima.png";
+                    btnSubir.CommandArgument = e.Row.RowIndex.ToString();
+                }
+
+                ImageButton btnDescer = (ImageButton)e.Row.FindControl("btnDescer");
+                if (btnDescer != null)
+                {
+                    btnDescer.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "baixo.png";
+                    btnDescer.CommandArgument = e.Row.RowIndex.ToString();
+                }
+
+                GridView grv = (GridView)sender;
+                if (grv.EditIndex >= 0)
+                {
+                    ImageButton btnEditar = (ImageButton)e.Row.FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                    }
+                }
+
+                int cro_id = Convert.ToInt32(grv.DataKeys[e.Row.RowIndex]["cro_id"]);
+                Button btnNovoObjetivo = (Button)e.Row.FindControl("btnNovoObjetivo");
+                if (btnNovoObjetivo != null)
+                {
+                    btnNovoObjetivo.Visible = VS_permiteIncluir;
+                    btnNovoObjetivo.CommandArgument = cro_id.ToString();
+                }
+
+                GridView grvObjetivo = (GridView)e.Row.FindControl("grvObjetivo");
+                if (grvObjetivo != null)
+                {
+                    byte cro_tipo = Convert.ToByte(grv.DataKeys[e.Row.RowIndex]["cro_tipo"]);
+                    if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo)
+                    {
+                        CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.Topico, cro_id);
+                    }
+                    else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico)
+                    {
+                        CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem, cro_id);
+                    }
+                }
+
+                HiddenField hdnAberto = (HiddenField)e.Row.FindControl("hdnAberto");
+                if (hdnAberto != null)
+                {
+                    hdnAberto.Value = ltEixoAberto.Any(p => p == cro_id) ? "1" : "0";
+                }
+            }
+        }
+
+        protected void grvEixo_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            try
+            {
+                GridView grv = (GridView)sender;
+                grv.EditIndex = e.NewEditIndex;
+                GuardarEixosAbertos();
+                CarregarObjetivos(grv, Convert.ToByte(grv.DataKeys[e.NewEditIndex]["cro_tipo"]), Convert.ToInt32(grv.DataKeys[e.NewEditIndex]["cro_idPai"]));
+
+                ImageButton btnSalvar = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnSalvar");
+                if (btnSalvar != null)
+                    btnSalvar.Visible = true;
+
+                ImageButton btnEditar = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnEditar");
+                if (btnEditar != null)
+                {
+                    btnEditar.Visible = false;
+                    ImageButton btnCancelarEdicao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnCancelarEdicao");
+                    if (btnCancelarEdicao != null)
+                        btnCancelarEdicao.Visible = true;
+                }
+
+                grv.Rows[e.NewEditIndex].Focus();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void grvEixo_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridView grv = ((GridView)sender);
+            try
+            {
+                TextBox txtDescricao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtDescricao");
+                if (txtDescricao != null)
+                {
+                    DataKey chave = grv.DataKeys[e.RowIndex];
+                    byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
+                    int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
+                    ACA_CurriculoObjetivo entity = new ACA_CurriculoObjetivo
+                    {
+                        IsNew = Convert.ToInt32(chave["cro_id"]) <= 0
+                        ,
+                        cro_id = Convert.ToInt32(chave["cro_id"])
+                        ,
+                        tne_id = VS_tne_id
+                        ,
+                        tme_id = VS_tme_id
+                        ,
+                        tds_id = VS_tds_id
+                        ,
+                        tcp_id = VS_tcp_id
+                        ,
+                        cal_ano = cal_ano
+                        ,
+                        cro_descricao = txtDescricao.Text
+                        ,
+                        cro_ordem = Convert.ToInt32(chave["cro_ordem"])
+                        ,
+                        cro_tipo = cro_tipo
+                        ,
+                        cro_idPai = cro_idPai
+                        ,
+                        cro_situacao = 1
+                        ,
+                        cro_dataCriacao = DateTime.Now
+                        ,
+                        cro_dataAlteracao = DateTime.Now
+                    };
+                    if (ACA_CurriculoObjetivoBO.Save(entity))
+                    {
+                        if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo)
+                        {
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarEixo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                        }
+                        else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico)
+                        {
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarObjetivo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                        }
+                        else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem)
+                        {
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarObjetivoAprendizagem").ToString(), UtilBO.TipoMensagem.Sucesso);
+                        }
+                        grv.EditIndex = -1;
+                        VS_ltCurriculoObjetivo = null;
+                        GuardarEixosAbertos();
+                        CarregarObjetivos(grv, cro_tipo, cro_idPai);
+                    }
+                }
+            }
+            catch (ValidationException ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetivo.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void grvEixo_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            GridView grv = ((GridView)sender);
+            try
+            {
+                DataKey chave = grv.DataKeys[e.RowIndex];
+                if (Convert.ToInt32(chave["cro_id"]) > 0)
+                {
+                    ACA_CurriculoObjetivo entity = new ACA_CurriculoObjetivo
+                    {
+                        cro_id = Convert.ToInt32(chave["cro_id"])
+                    };
+                    if (ACA_CurriculoObjetivoBO.Delete(entity))
+                    {
+                        byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
+                        int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
+                        if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo)
+                        {
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirEixo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                        }
+                        else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico)
+                        {
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirObjetivo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                        }
+                        else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem)
+                        {
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirObjetivoAprendizagem").ToString(), UtilBO.TipoMensagem.Sucesso);
+                        }  
+                        grv.EditIndex = -1;
+                        VS_ltCurriculoObjetivo = null;
+                        GuardarEixosAbertos();
+                        CarregarObjetivos(grv, cro_tipo, cro_idPai);
+                    }
+                }
+            }
+            catch (ValidationException ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir objetivo.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void grvEixo_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            try
+            {
+                GridView grv = ((GridView)sender);
+                DataKey chave = grv.DataKeys[e.RowIndex];
+                byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
+                int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
+                if (Convert.ToInt32(chave["cro_id"]) <= 0)
+                {
+                    VS_ltCurriculoObjetivo.RemoveAll(p => p.cro_tipo == cro_tipo && p.cro_idPai == cro_idPai && p.cro_id <= 0);
+                }
+                grv.EditIndex = -1;
+                GuardarEixosAbertos();
+                CarregarObjetivos(grv, cro_tipo, cro_idPai);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+            }
+        }
+
         protected void btnNovoGeral_Click(object sender, EventArgs e)
         {
             try
@@ -646,12 +1042,150 @@ namespace GestaoEscolar.WebControls.Curriculo
 
         protected void btnNovoEixo_Click(object sender, EventArgs e)
         {
+            try
+            {
+                sCurriculoObjetivo entity = new sCurriculoObjetivo
+                {
+                    cro_id = -1
+                    ,
+                    cro_descricao = string.Empty
+                    ,
+                    cro_ordem = grvEixo.Rows.Count > 0 ? Convert.ToInt32(grvEixo.DataKeys[grvEixo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
+                    ,
+                    cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Eixo
+                    ,
+                    cro_idPai = -1
+                };
+                VS_ltCurriculoObjetivo.Add(entity);
+                int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo && p.cro_idPai <= 0).Count - 1;
+                grvEixo.EditIndex = index;
+                GuardarEixosAbertos();
+                CarregarObjetivos(grvEixo, (byte)ACA_CurriculoObjetivoTipo.Eixo, -1);
 
+                ImageButton btnSalvar = (ImageButton)grvEixo.Rows[index].FindControl("btnSalvar");
+                if (btnSalvar != null)
+                    btnSalvar.Visible = true;
+
+                ImageButton btnEditar = (ImageButton)grvEixo.Rows[index].FindControl("btnEditar");
+                if (btnEditar != null)
+                {
+                    btnEditar.Visible = false;
+                    ImageButton btnCancelarEdicao = (ImageButton)grvEixo.Rows[index].FindControl("btnCancelarEdicao");
+                    if (btnCancelarEdicao != null)
+                        btnCancelarEdicao.Visible = true;
+                }
+
+                ImageButton btnExcluir = (ImageButton)grvEixo.Rows[index].FindControl("btnExcluir");
+                if (btnExcluir != null)
+                    btnExcluir.Visible = false;
+
+                grvEixo.Rows[index].Focus();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar adicionar eixo.", UtilBO.TipoMensagem.Erro);
+            }
         }
 
         protected void btnNovoObjetivo_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Button btnNovoObjetivo = (Button)sender;
+                GridView grvObjetivo = (GridView)btnNovoObjetivo.Parent.FindControl("grvObjetivo");
+                int cro_idPai = Convert.ToInt32(btnNovoObjetivo.CommandArgument);
+                sCurriculoObjetivo entity = new sCurriculoObjetivo
+                {
+                    cro_id = -1
+                    ,
+                    cro_descricao = string.Empty
+                    ,
+                    cro_ordem = grvObjetivo.Rows.Count > 0 ? Convert.ToInt32(grvObjetivo.DataKeys[grvObjetivo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
+                    ,
+                    cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Topico
+                    ,
+                    cro_idPai = cro_idPai
+                };
+                VS_ltCurriculoObjetivo.Add(entity);
+                int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico && p.cro_idPai == cro_idPai).Count - 1;
+                grvObjetivo.EditIndex = index;
+                CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.Topico, cro_idPai);
 
+                ImageButton btnSalvar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnSalvar");
+                if (btnSalvar != null)
+                    btnSalvar.Visible = true;
+
+                ImageButton btnEditar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnEditar");
+                if (btnEditar != null)
+                {
+                    btnEditar.Visible = false;
+                    ImageButton btnCancelarEdicao = (ImageButton)grvObjetivo.Rows[index].FindControl("btnCancelarEdicao");
+                    if (btnCancelarEdicao != null)
+                        btnCancelarEdicao.Visible = true;
+                }
+
+                ImageButton btnExcluir = (ImageButton)grvObjetivo.Rows[index].FindControl("btnExcluir");
+                if (btnExcluir != null)
+                    btnExcluir.Visible = false;
+
+                grvObjetivo.Rows[index].Focus();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar adicionar objetivo.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void btnNovoObjetivoAprendizagem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btnNovoObjetivo = (Button)sender;
+                GridView grvObjetivo = (GridView)btnNovoObjetivo.Parent.FindControl("grvObjetivo");
+                int cro_idPai = Convert.ToInt32(btnNovoObjetivo.CommandArgument);
+                sCurriculoObjetivo entity = new sCurriculoObjetivo
+                {
+                    cro_id = -1
+                    ,
+                    cro_descricao = string.Empty
+                    ,
+                    cro_ordem = grvObjetivo.Rows.Count > 0 ? Convert.ToInt32(grvObjetivo.DataKeys[grvObjetivo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
+                    ,
+                    cro_tipo = (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem
+                    ,
+                    cro_idPai = cro_idPai
+                };
+                VS_ltCurriculoObjetivo.Add(entity);
+                int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem && p.cro_idPai == cro_idPai).Count - 1;
+                grvObjetivo.EditIndex = index;
+                CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem, cro_idPai);
+
+                ImageButton btnSalvar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnSalvar");
+                if (btnSalvar != null)
+                    btnSalvar.Visible = true;
+
+                ImageButton btnEditar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnEditar");
+                if (btnEditar != null)
+                {
+                    btnEditar.Visible = false;
+                    ImageButton btnCancelarEdicao = (ImageButton)grvObjetivo.Rows[index].FindControl("btnCancelarEdicao");
+                    if (btnCancelarEdicao != null)
+                        btnCancelarEdicao.Visible = true;
+                }
+
+                ImageButton btnExcluir = (ImageButton)grvObjetivo.Rows[index].FindControl("btnExcluir");
+                if (btnExcluir != null)
+                    btnExcluir.Visible = false;
+
+                grvObjetivo.Rows[index].Focus();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar adicionar objetivo de aprendizagem.", UtilBO.TipoMensagem.Erro);
+            }
         }
 
         #endregion Eventos
@@ -671,9 +1205,15 @@ namespace GestaoEscolar.WebControls.Curriculo
             grvDisciplina.EditIndex = -1;
             grvDisciplina.DataSource = new List<sCurriculoCapitulo>();
             grvDisciplina.DataBind();
+            grvEixo.EditIndex = -1;
+            grvEixo.DataSource = new List<sCurriculoObjetivo>();
+            grvEixo.DataBind();
             VS_ltCurriculoCapituloGeral = null;
             VS_ltCurriculoCapituloDisciplina = null;
+            VS_ltCurriculoObjetivo = null;
             fsDisciplina.Visible = false;
+            UCComboTipoCurriculoPeriodo1.SelectedIndex = 0;
+            pnlHabilidades.Visible = false;
         }
 
         /// <summary>
@@ -690,6 +1230,31 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 grvDisciplina.DataSource = VS_ltCurriculoCapituloDisciplina;
                 grvDisciplina.DataBind();
+            }
+        }
+
+        /// <summary>
+        /// Carrega os objetivos de acordo com o tipo de nível de ensino selecionado.
+        /// </summary>
+        private void CarregarObjetivos(GridView grvObjetivo, byte tipoObjetivo, int cro_idPai)
+        {
+            grvObjetivo.DataSource = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == tipoObjetivo && p.cro_idPai == cro_idPai).OrderBy(p => p.cro_ordem);
+            grvObjetivo.DataBind();
+        }
+
+        /// <summary>
+        /// Armazena os eixos abertos (accordion), para manter o estado.
+        /// </summary>
+        private void GuardarEixosAbertos()
+        {
+            ltEixoAberto = new List<int>();
+            foreach (GridViewRow eixo in grvEixo.Rows)
+            {
+                HiddenField hdnAberto = (HiddenField)eixo.FindControl("hdnAberto");
+                if (hdnAberto != null && hdnAberto.Value == "1")
+                {
+                    ltEixoAberto.Add(Convert.ToInt32(grvEixo.DataKeys[eixo.DataItemIndex]["cro_id"]));
+                }
             }
         }
 

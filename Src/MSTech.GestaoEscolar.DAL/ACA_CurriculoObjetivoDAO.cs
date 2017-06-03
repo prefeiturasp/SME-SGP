@@ -13,6 +13,64 @@ namespace MSTech.GestaoEscolar.DAL
                           /// </summary>
     public class ACA_CurriculoObjetivoDAO : Abstract_ACA_CurriculoObjetivoDAO
 	{
+        #region Consulta
+
+        /// <summary>
+        /// Retorna os objetivos do currículo cadastrados de acordo com o tipo de nível de ensino e disciplina.
+        /// </summary>
+        /// <param name="tne_id">Id do tipo de nível de ensino</param>
+        /// <param name="tds_id">Id do tipo de disciplina</param>
+        /// <param name="tcp_id">Id do tipo de currículo período</param>
+        /// <returns></returns>
+        public DataTable SelecionaPorNivelEnsinoDisciplinaPeriodo(int tne_id, int tme_id, int tds_id, int tcp_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CurriculoObjetivo_SelecionaPorNivelEnsinoDisciplinaPeriodo", _Banco);
+
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tne_id";
+                Param.Value = tne_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_id";
+                Param.Value = tme_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Value = tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tcp_id";
+                Param.Value = tcp_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        #endregion Consulta
+
         #region Métodos Sobrescritos
 
         /// <summary>

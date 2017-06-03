@@ -5356,6 +5356,14 @@ table.radio td {
     opacity:0;   
 }
 
+.accordion-grid .accordion-closed{
+    display:none;
+}
+
+.accordion-grid .accordion-opened{
+    display:block;
+}
+
 /* iframe relatorio pedagogico */
 #iframe-rel-pedagogico{
     border: none;

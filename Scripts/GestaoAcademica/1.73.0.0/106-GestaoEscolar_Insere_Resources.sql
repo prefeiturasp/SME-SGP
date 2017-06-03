@@ -200,6 +200,259 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Novo eixo'
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvEixo.EmptyDataText' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Não existem eixos cadastrados.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvEixo.ColunaEixo' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Eixo'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvEixo.rfvDescricao.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Descrição do eixo é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvEixo.lblDescricao.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Descrição *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.MensagemSucessoSalvarEixo' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Eixo salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.MensagemSucessoExcluirEixo' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Eixo excluído com sucesso.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.btnNovoObjetivo.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Novo objetivo'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvObjetivo.EmptyDataText' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Não existem objetivos cadastrados.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvObjetivo.ColunaObjetivo' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Objetivo'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Descrição do objetivo é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.btnNovoObjetivoAprendizagem.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Novo objetivo de aprendizagem'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.MensagemSucessoSalvarObjetivo' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Objetivo salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.MensagemSucessoSalvarObjetivoAprendizagem' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Objetivo de aprendizagem salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.MensagemSucessoExcluirObjetivo' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Objetivo excluído com sucesso.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.MensagemSucessoExcluirObjetivoAprendizagem' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Objetivo de aprendizagem excluído com sucesso.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvObjetivoAprendizagem.EmptyDataText' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Não existem objetivos de aprendizagem cadastrados.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvObjetivoAprendizagem.ColunaObjetivoAprendizagem' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Objetivo de aprendizagem'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvObjetivoAprendizagem.rfvDescricao.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Descrição do objetivo de aprendizagem é obrigatório.'
+
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.ckbBloqueado.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Bloqueado'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.revtxtItemResposta.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Resposta/Avaliação é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.revtxtSigla.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sigla é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.revtxtItemSubquestao.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Subquestão é obrigatório'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.revtxtItemQuestao.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Questão é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvQuestoes.HeaderNome' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Questão *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.HeaderNome' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Resposta/Avaliação *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.HeaderSigla' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sigla *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.HeaderNome' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Subquestão *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.lblCampo.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Descrição'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.lblSigla.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sigla *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.lblTitulo.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Título *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.ddlOpcaoResposta.Multiselecao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Multiseleção'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.ddlOpcaoResposta.SelecaoUnica' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Seleção única'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.lblOpcaoResposta.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Opção de resposta *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.rfvOpcaoResposta.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Opção de resposta é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.ddlOpcaoResposta.Selecione' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Opção de resposta é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.RegistroSugestoes.UCCurriculo1.Titulo' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Registro de sugestões'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

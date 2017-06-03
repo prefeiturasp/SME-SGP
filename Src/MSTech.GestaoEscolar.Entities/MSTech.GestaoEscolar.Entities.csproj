@@ -126,6 +126,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_ACA_Curriculo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoCapitulo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoCapituloSugestao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaPeriodo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoDisciplina.cs" />
@@ -133,9 +134,11 @@
     <Compile Include="Abstracts\Abstract_ACA_CurriculoEscola.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoEscolaPeriodo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoObjetivo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoObjetivoSugestao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoPeriodo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralVigencia.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoRequisito.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CurriculoSugestao.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoTurno.cs" />
     <Compile Include="Abstracts\Abstract_ACA_Curso.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CursoRelacionado.cs" />
@@ -299,6 +302,7 @@
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEquipamentos.cs" />
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaPredio.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AvaliacaoMedia_Alteracao.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_CurriculoSugestao.cs" />
     <Compile Include="Abstracts\Abstract_LOG_MatriculaTurmaDisciplinaExcluida.cs" />
     <Compile Include="Abstracts\Abstract_LOG_MovimentacaoAcertoSituacaoAluno.cs" />
     <Compile Include="Abstracts\Abstract_LOG_TurmaAula_Alteracao.cs" />
@@ -399,7 +403,10 @@
     <Compile Include="ACA_CompromissoEstudo.cs" />
     <Compile Include="ACA_ConfiguracaoServicoPendencia.cs" />
     <Compile Include="ACA_CurriculoCapitulo.cs" />
+    <Compile Include="ACA_CurriculoCapituloSugestao.cs" />
     <Compile Include="ACA_CurriculoObjetivo.cs" />
+    <Compile Include="ACA_CurriculoObjetivoSugestao.cs" />
+    <Compile Include="ACA_CurriculoSugestao.cs" />
     <Compile Include="ACA_EventoLimite.cs" />
     <Compile Include="ACA_MotivoBaixaFrequencia.cs" />
     <Compile Include="ACA_ObjetoAprendizagem.cs" />
@@ -597,6 +604,7 @@
     <Compile Include="ESC_UnidadeEscolaPredio.cs" />
     <Compile Include="Interfaces\ICFG_Configuracao.cs" />
     <Compile Include="LOG_AvaliacaoMedia_Alteracao.cs" />
+    <Compile Include="LOG_CurriculoSugestao.cs" />
     <Compile Include="LOG_MatriculaTurmaDisciplinaExcluida.cs" />
     <Compile Include="LOG_MovimentacaoAcertoSituacaoAluno.cs" />
     <Compile Include="LOG_TurmaAula_Alteracao.cs" />

@@ -33,6 +33,17 @@ namespace MSTech.GestaoEscolar.BLL
         Excluido = 3
     }
 
+    /// <summary>
+    /// Tipo de opção de resposta
+    /// </summary>
+    public enum ACA_SondagemOpcaoResposta : byte
+    {
+        Multiselecao = 1
+        ,
+
+        SelecaoUnica = 2
+    }
+
     #endregion Enumeradores
 
     #region Estruturas

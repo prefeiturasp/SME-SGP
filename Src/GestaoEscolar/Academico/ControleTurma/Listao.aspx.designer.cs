@@ -67,6 +67,15 @@ namespace GestaoEscolar.Academico.ControleTurma {
         protected global::System.Web.UI.WebControls.HiddenField hdnOrdenacaoAvaliacao;
         
         /// <summary>
+        /// hdnOrdenacaoAtivExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnOrdenacaoAtivExtra;
+        
+        /// <summary>
         /// divMessageTurmaAnterior control.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,15 @@ namespace GestaoEscolar.Academico.ControleTurma {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnAlterouPlanoAula;
+        
+        /// <summary>
+        /// hdnAlterouAtividadeExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnAlterouAtividadeExtra;
         
         /// <summary>
         /// hdnListaoSelecionado control.
@@ -245,6 +263,24 @@ namespace GestaoEscolar.Academico.ControleTurma {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPlanoAula;
+        
+        /// <summary>
+        /// aAtividadeExtraClasse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aAtividadeExtraClasse;
+        
+        /// <summary>
+        /// lblAtividadeExtraClasse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAtividadeExtraClasse;
         
         /// <summary>
         /// pnlListaoLancamentoFrequencias control.
@@ -533,6 +569,177 @@ namespace GestaoEscolar.Academico.ControleTurma {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal lit3;
+        
+        /// <summary>
+        /// pnlAtividadesExtraClasse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAtividadesExtraClasse;
+        
+        /// <summary>
+        /// updAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updAtiExtra;
+        
+        /// <summary>
+        /// vsAtividadeExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsAtividadeExtra;
+        
+        /// <summary>
+        /// lblMensagemAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensagemAtiExtra;
+        
+        /// <summary>
+        /// hdnTaeId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTaeId;
+        
+        /// <summary>
+        /// UCCamposObrigatorios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios;
+        
+        /// <summary>
+        /// UCComboTipoAtividadeAvaliativa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboTipoAtividadeAvaliativa UCComboTipoAtividadeAvaliativa;
+        
+        /// <summary>
+        /// lblNomeAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNomeAtiExtra;
+        
+        /// <summary>
+        /// txtNomeAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNomeAtiExtra;
+        
+        /// <summary>
+        /// rfvNomeAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNomeAtiExtra;
+        
+        /// <summary>
+        /// lblDescricaoAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescricaoAtiExtra;
+        
+        /// <summary>
+        /// txtDescricaoAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescricaoAtiExtra;
+        
+        /// <summary>
+        /// lblCargaAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCargaAtiExtra;
+        
+        /// <summary>
+        /// txtCargaAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCargaAtiExtra;
+        
+        /// <summary>
+        /// rfvCargaAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCargaAtiExtra;
+        
+        /// <summary>
+        /// btnAdicionarAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdicionarAtiExtra;
+        
+        /// <summary>
+        /// lblSemAtividadeExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSemAtividadeExtra;
+        
+        /// <summary>
+        /// UCComboOrdenacaoAtivExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboOrdenacao UCComboOrdenacaoAtivExtra;
+        
+        /// <summary>
+        /// rptAlunoAtivExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAlunoAtivExtra;
         
         /// <summary>
         /// hdbtnCompensacaoAusenciaVisible control.

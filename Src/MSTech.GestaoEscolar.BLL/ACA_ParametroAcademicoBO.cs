@@ -845,8 +845,7 @@ namespace MSTech.GestaoEscolar.BLL
         [parametroAcademicoAttributes("Modalidade de ensino que se refere a modalidade EJA.", "Modalidade de ensino que se refere a modalidade EJA é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.integer)]
         TIPO_MODALIDADE_EJA
         ,
-
-        //TODO [ANA]
+        
         [parametroAcademicoAttributes("Modalidade de ensino que se refere a modalidade CIEJA.", "Modalidade de ensino que se refere a modalidade CIEJA é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.integer)]
         TIPO_MODALIDADE_CIEJA
         ,
