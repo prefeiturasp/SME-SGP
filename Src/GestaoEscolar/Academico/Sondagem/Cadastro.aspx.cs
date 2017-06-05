@@ -157,7 +157,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 ViewState["VS_sdr_id"] = value;
             }
         }
-        
+
         #endregion
 
         #region Métodos
@@ -665,7 +665,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     string textoAlterar = grvQuestoes.DataKeys[index]["sdq_descricao"].ToString();
 
                     VS_sdq_id = idAlterar;
-                    
+
                     txtItemQuestao.Text = textoAlterar;
                     updPopUpQuestao.Update();
                     btnAdicionarQuestao.Text = GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAlterar.Text").ToString();
@@ -822,7 +822,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     string textoAlterar = grvSubQuestoes.DataKeys[index]["sdq_descricao"].ToString();
 
                     VS_sdq_id = idAlterar;
-                    
+
                     txtItemSubquestao.Text = textoAlterar;
                     txtItemSubquestao.Focus();
                     updPopUpSubquestao.Update();
@@ -981,7 +981,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     string siglaAlterar = grvRespostas.DataKeys[index]["sdr_sigla"].ToString();
 
                     VS_sdr_id = idAlterar;
-                    
+
                     txtItemResposta.Text = textoAlterar;
                     txtSigla.Text = siglaAlterar;
                     txtSigla.Focus();
