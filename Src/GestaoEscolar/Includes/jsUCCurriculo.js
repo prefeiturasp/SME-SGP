@@ -14,7 +14,7 @@
     }
     $(".accordion-head").unbind('click').click(function () {
         var head = $(this);
-        if (head.find("input[type='text']").length == 0) {
+        if (head.find("input[type='text']").length == 0 && head.find("textarea").length == 0) {
             var item = $(head.parents("tr").find('.accordion-body'));
             var hdnAberto = item.find("input[id$='hdnAberto']");
             if (item.hasClass("accordion-closed")) {
