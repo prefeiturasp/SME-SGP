@@ -148,13 +148,40 @@ namespace GestaoEscolar.Classe.LancamentoSondagem {
         protected global::System.Web.UI.WebControls.Label lblResultadoVazio;
         
         /// <summary>
-        /// rptLancamento control.
+        /// divLancamentoMulti control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptLancamento;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLancamentoMulti;
+        
+        /// <summary>
+        /// rptLancamentoMulti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptLancamentoMulti;
+        
+        /// <summary>
+        /// divLancamentoUnica control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLancamentoUnica;
+        
+        /// <summary>
+        /// rptLancamentoUnico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptLancamentoUnico;
         
         /// <summary>
         /// btnSalvar control.
