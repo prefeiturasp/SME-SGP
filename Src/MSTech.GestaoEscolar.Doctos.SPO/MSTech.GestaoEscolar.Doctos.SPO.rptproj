@@ -114,6 +114,10 @@
       <FullPath>DocDctSubRelTarjetaBimestralRegencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>FrequenciaMensal.rdl</Name>
+      <FullPath>FrequenciaMensal.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>IndicadorFrequenciaDRE.rdl</Name>
       <FullPath>IndicadorFrequenciaDRE.rdl</FullPath>
     </ProjectItem>
@@ -154,8 +158,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>FrequenciaMensal.rdl</Name>
-      <FullPath>FrequenciaMensal.rdl</FullPath>
+      <Name>RelatorioSugestoesCurriculo.rdl</Name>
+      <FullPath>RelatorioSugestoesCurriculo.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

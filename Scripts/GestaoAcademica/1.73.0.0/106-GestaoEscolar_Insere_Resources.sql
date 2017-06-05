@@ -453,6 +453,48 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Registro de sugestões'
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.btnGerarRel.Text' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Gerar relatório'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.btnLimparPesquisa.Text' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Limpar pesquisa'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.DataInicioInvalida' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Data inicial deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.DataFimInvalida' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Data final deve estar no formato DD/MM/AAAA.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.DataFimMenorInicio' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Data final do período deve ser maior ou igual à data inicial.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.lblMessage.ErroPermissao' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
