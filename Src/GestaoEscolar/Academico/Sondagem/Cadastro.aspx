@@ -13,26 +13,27 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel runat="server" ID="updCadastro" UpdateMode="Always">
         <ContentTemplate>
-            <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
             <fieldset>
+
                 <legend>
                     <asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegend.Text %>" /></legend>
                 <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
+                <asp:ValidationSummary ID="vsSondagem" runat="server" ValidationGroup="vgSondagem" />
                 <asp:Label ID="lblTitulo" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblTitulo.Text %>" AssociatedControlID="txtTitulo" />
                 <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo"
+                <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo" ValidationGroup="vgSondagem"
                     Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.rfvTitulo.ErrorMessage %>" Text="*" />
                 <asp:Label ID="lblDescricao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblDescricao.Text %>" AssociatedControlID="txtDescricao" />
                 <asp:TextBox ID="txtDescricao" runat="server" TextMode="MultiLine" SkinID="limite4000" MaxLength="4000"></asp:TextBox>
                 <asp:Label ID="lblOpcaoResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblOpcaoResposta.Text %>" AssociatedControlID="ddlOpcaoResposta"></asp:Label>
                 <asp:DropDownList runat="server" ID="ddlOpcaoResposta">
-                    <asp:ListItem Text="<%$ Resources:Academico, Sondagem.Cadastro.ddlOpcaoResposta.Selecione %>" Value="0"></asp:ListItem>
+                    <asp:ListItem Text="<%$ Resources:Academico, Sondagem.Cadastro.ddlOpcaoResposta.Selecione %>" Selected="True" Value="0"></asp:ListItem>
                     <asp:ListItem Text="<%$ Resources:Academico, Sondagem.Cadastro.ddlOpcaoResposta.Multiselecao %>" Value="1"></asp:ListItem>
                     <asp:ListItem Text="<%$ Resources:Academico, Sondagem.Cadastro.ddlOpcaoResposta.SelecaoUnica %>" Value="2"></asp:ListItem>
                 </asp:DropDownList>
                 <asp:CompareValidator ID="cpvCombo" runat="server" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.rfvOpcaoResposta.ErrorMessage %>"
-                    ControlToValidate="ddlOpcaoResposta" Operator="NotEqual" ValueToCompare="0" Display="Dynamic"
-                    Visible="false">*</asp:CompareValidator>
+                    ControlToValidate="ddlOpcaoResposta" Operator="NotEqual" ValueToCompare="0" Display="Dynamic" ValidationGroup="vgSondagem"
+                    Visible="true">*</asp:CompareValidator>
                 <div>
                     <br />
                 </div>
@@ -54,16 +55,19 @@
                             <ContentTemplate>
                                 <fieldset>
                                     <legend>
-                                        <asp:Label runat="server" ID="lblTituloPopUpQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarQuestao.Text %>" /></legend>
-                                    <asp:Label runat="server" ID="lblCampoQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.HeaderNome %>" AssociatedControlID="txtItemQuestao" />
+                                        <asp:Label runat="server" ID="lblTituloPopUpQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarQuestao.Text %>" />
+                                    </legend>
+                                    <asp:ValidationSummary ID="vsQuestao" runat="server" ValidationGroup="vgQuestao" />
                                     <asp:TextBox runat="server" ID="txtItemQuestao" SkinID="text60C" MaxLength="250" />
-                                    <asp:RequiredFieldValidator ID="revtxtItemQuestao" runat="server" ControlToValidate="txtItemQuestao"
+                                    <asp:Label runat="server" ID="lblCampoQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.HeaderNome %>" AssociatedControlID="txtItemQuestao" />
+                                    <asp:RequiredFieldValidator ID="revtxtItemQuestao" runat="server" ControlToValidate="txtItemQuestao" ValidationGroup="vgQuestao"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemQuestao.ErrorMessage %>" Text="*" />
                                     <div class="right">
                                         <asp:Button ID="btnAdicionarQuestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false"
-                                            OnClick="btnAdicionarQuestao_Click" />
+                                            OnClick="btnAdicionarQuestao_Click" ValidationGroup="vgQuestao" />
                                         <asp:Button ID="btnCancelarItemQuestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                             OnClick="btnCancelarItemQuestao_Click" />
+                                    </div>
                                     </div>
                                 </fieldset>
                             </ContentTemplate>
@@ -124,12 +128,13 @@
                                     <legend>
                                         <asp:Label runat="server" ID="lblTituloPopUpSubquestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarSubQuestao.Text %>" />
                                     </legend>
+                                    <asp:ValidationSummary ID="vsSubquestao" runat="server" ValidationGroup="vgSubquestao" />
                                     <asp:Label runat="server" ID="lblCampoSubquestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvSubQuestoes.HeaderNome %>" AssociatedControlID="txtItemSubquestao" />
                                     <asp:TextBox runat="server" ID="txtItemSubquestao" SkinID="text60C" MaxLength="250" />
-                                    <asp:RequiredFieldValidator ID="revtxtItemSubquestao" runat="server" ControlToValidate="txtItemSubquestao"
+                                    <asp:RequiredFieldValidator ID="revtxtItemSubquestao" runat="server" ControlToValidate="txtItemSubquestao" ValidationGroup="vgSubquestao"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemSubquestao.ErrorMessage %>" Text="*" />
                                     <div class="right">
-                                        <asp:Button ID="btnAdicionarSubquestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false" OnClick="btnAdicionarSubquestao_Click" />
+                                        <asp:Button ID="btnAdicionarSubquestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false" OnClick="btnAdicionarSubquestao_Click" ValidationGroup="vgSubquestao" />
                                         <asp:Button ID="btnCancelarItemSubquestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                             OnClick="btnCancelarItemSubquestao_Click" />
                                     </div>
@@ -192,16 +197,17 @@
                                     <legend>
                                         <asp:Label runat="server" ID="lblTituloPopUpResposta" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarResposta.Text %>" />
                                     </legend>
+                                    <asp:ValidationSummary ID="vsResposta" runat="server" ValidationGroup="vgResposta" />
                                     <asp:Label runat="server" ID="lblSigla" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblSigla.Text %>" AssociatedControlID="txtSigla" />
                                     <asp:TextBox runat="server" ID="txtSigla" SkinID="text10C" MaxLength="20" />
-                                    <asp:RequiredFieldValidator ID="revtxtSigla" runat="server" ControlToValidate="txtSigla"
+                                    <asp:RequiredFieldValidator ID="revtxtSigla" runat="server" ControlToValidate="txtSigla" ValidationGroup="vgResposta"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtSigla.ErrorMessage %>" Text="*" />
                                     <asp:Label runat="server" ID="lblCampoResposta" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvRespostas.HeaderNome %>" AssociatedControlID="txtItemResposta" />
                                     <asp:TextBox runat="server" ID="txtItemResposta" SkinID="text60C" MaxLength="250" />
-                                    <asp:RequiredFieldValidator ID="revtxtItemResposta" runat="server" ControlToValidate="txtItemResposta"
+                                    <asp:RequiredFieldValidator ID="revtxtItemResposta" runat="server" ControlToValidate="txtItemResposta" ValidationGroup="vgResposta"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemResposta.ErrorMessage %>" Text="*" />
                                     <div class="right">
-                                        <asp:Button ID="btnAdicionarResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false" OnClick="btnAdicionarResposta_Click" />
+                                        <asp:Button ID="btnAdicionarResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false" OnClick="btnAdicionarResposta_Click" ValidationGroup="vgResposta" />
                                         <asp:Button ID="btnCancelarItemResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                             OnClick="btnCancelarItemResposta_Click" />
                                     </div>
@@ -247,7 +253,7 @@
                 </fieldset>
                 <asp:CheckBox ID="ckbBloqueado" runat="server" Visible="False" Text="<%$ Resources:Academico, Sondagem.Cadastro.ckbBloqueado.Text %>" />
                 <div class="right">
-                    <asp:Button ID="bntSalvar" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntSalvar.Text %>" OnClick="bntSalvar_Click" />
+                    <asp:Button ID="bntSalvar" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntSalvar.Text %>" OnClick="bntSalvar_Click" ValidationGroup="vgSondagem" />
                     <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                         OnClick="btnCancelar_Click" />
                 </div>

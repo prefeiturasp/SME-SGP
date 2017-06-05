@@ -444,7 +444,7 @@ SET XACT_ABORT ON
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Opção de resposta é obrigatório.'
+            , @rcr_valorPadrao = '-- Selecione uma opção de resposta --'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Curriculo.RegistroSugestoes.UCCurriculo1.Titulo' 
