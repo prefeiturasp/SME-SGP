@@ -89,10 +89,11 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
                 
                 if (dataInicio > dataFim)
                     throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataFimMenorInicio").ToString());
-
+                
                 report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioSugestoesCurriculo).ToString();
                 parametros = "dataInicio=" + dataInicio.ToShortDateString() +
                              "&dataFim=" + dataFim.ToShortDateString() +
+                             "&mostraCodigoEscola=" + ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.ORDENAR_ESCOLAS_POR_CODIGO, __SessionWEB.__UsuarioWEB.Usuario.ent_id) +
                              "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
                              "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria") +

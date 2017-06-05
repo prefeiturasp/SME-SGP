@@ -143,72 +143,6 @@
                 <VerticalAlign>Middle</VerticalAlign>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox5">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=IIF(Parameters!dre.Value &lt;&gt; "", Parameters!dre.Value, IIF(Parameters!escola.Value &lt;&gt; "", Parameters!escola.Value, ""))</Value>
-                      <Style>
-                        <FontSize>9pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.27185cm</Top>
-              <Left>2.93004cm</Left>
-              <Height>0.4cm</Height>
-              <Width>13.06996cm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border />
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox6">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=IIF(Parameters!escola.Value &lt;&gt; "" AND Parameters!dre.Value &lt;&gt; "" AND Parameters!escola.Value &lt;&gt; Parameters!dre.Value, Parameters!escola.Value, "")</Value>
-                      <Style>
-                        <FontSize>9pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.8219cm</Top>
-              <Left>2.93004cm</Left>
-              <Height>0.4cm</Height>
-              <Width>13.06996cm</Width>
-              <ZIndex>3</ZIndex>
-              <Style>
-                <Border />
-                <VerticalAlign>Middle</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-              </Style>
-            </Textbox>
             <Image Name="Image3">
               <Source>External</Source>
               <Value>=Parameters!logo.Value</Value>
@@ -217,7 +151,7 @@
               <Left>0.03175cm</Left>
               <Height>2.12cm</Height>
               <Width>2.12cm</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -395,7 +329,22 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>DSGestaoEscolar</DataSourceName>
-        <CommandText>select 1</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@dataInicio">
+            <Value>=Parameters!dataInicio.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@dataFim">
+            <Value>=Parameters!dataFim.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ent_id">
+            <Value>=Parameters!ent_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@mostraCodigoEscola">
+            <Value>=Parameters!mostraCodigoEscola.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>NEW_Relatorio_0005_RelatorioSugestoesCurriculo</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -442,6 +391,10 @@
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>logo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="mostraCodigoEscola">
+      <DataType>Boolean</DataType>
+      <Prompt>mostra Codigo Escola</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
