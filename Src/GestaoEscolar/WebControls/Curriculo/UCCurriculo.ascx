@@ -40,13 +40,41 @@
                                     <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:Label ID="lblTitulo" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTitulo.Text %>' AssociatedControlID="txtTitulo"></asp:Label>
-                                    <asp:TextBox ID="txtTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' MaxLength="200" SkinID="text60C"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvTitulo.ErrorMessage %>"
-                                        ControlToValidate="txtTitulo" ValidationGroup="geral">*</asp:RequiredFieldValidator>
-                                    <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+                                    <asp:Panel ID="pnlItem" runat="server">
+                                        <asp:Label ID="lblTitulo" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTitulo.Text %>' AssociatedControlID="txtTitulo"></asp:Label>
+                                        <asp:TextBox ID="txtTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' MaxLength="200" SkinID="text60C"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvTitulo.ErrorMessage %>"
+                                            ControlToValidate="txtTitulo" ValidationGroup="geral">*</asp:RequiredFieldValidator>
+                                        <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+                                        <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+                                    </asp:Panel>
+                                    <asp:Panel ID="pnlSugestao" runat="server">
+                                        <asp:Label ID="lblTituloSugestao" runat="server" Text='<%# Bind("crc_titulo") %>' Font-Bold="true"></asp:Label>
+                                        <br /><br />
+                                        <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
+                                        <br /><br />
+                                        <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
+                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
+                                            ControlToValidate="txtSugestao" ValidationGroup="geral">*</asp:RequiredFieldValidator>
+                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
+                                        <asp:DropDownList ID="ddlTipoSugestao" runat="server">
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
+                                    </asp:Panel>
                                 </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                <ItemTemplate>                                
+                                    <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btFormulario" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+                                    <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="geral" Visible="false" />
+                                    <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+                                    <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                 <ItemTemplate>                                
@@ -96,13 +124,41 @@
                                     <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:Label ID="lblTitulo" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTitulo.Text %>' AssociatedControlID="txtTitulo"></asp:Label>
-                                    <asp:TextBox ID="txtTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' MaxLength="200" SkinID="text60C"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvTitulo.ErrorMessage %>"
-                                        ControlToValidate="txtTitulo" ValidationGroup="disciplina">*</asp:RequiredFieldValidator>
-                                    <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
-                                </EditItemTemplate>
+		                            <asp:Panel ID="pnlItem" runat="server">
+			                            <asp:Label ID="lblTitulo" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTitulo.Text %>' AssociatedControlID="txtTitulo"></asp:Label>
+			                            <asp:TextBox ID="txtTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' MaxLength="200" SkinID="text60C"></asp:TextBox>
+			                            <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvTitulo.ErrorMessage %>"
+				                            ControlToValidate="txtTitulo" ValidationGroup="disciplina">*</asp:RequiredFieldValidator>
+			                            <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+			                            <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+		                            </asp:Panel>
+		                            <asp:Panel ID="pnlSugestao" runat="server">
+			                            <asp:Label ID="lblTituloSugestao" runat="server" Text='<%# Bind("crc_titulo") %>' Font-Bold="true"></asp:Label>
+			                            <br /><br />
+			                            <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
+			                            <br /><br />
+			                            <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
+			                            <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                            <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
+				                            ControlToValidate="txtSugestao" ValidationGroup="disciplina">*</asp:RequiredFieldValidator>
+			                            <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
+                                        <asp:DropDownList ID="ddlTipoSugestao" runat="server">
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+                                        </asp:DropDownList>
+			                            <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
+		                            </asp:Panel>
+	                            </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+                                <ItemTemplate>                                
+		                            <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btFormulario" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+		                            <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="disciplina" Visible="false" />
+		                            <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+		                            <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
+	                            </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                 <ItemTemplate>                                
@@ -152,12 +208,38 @@
                                             <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
                                         </ItemTemplate>
                                         <EditItemTemplate>
-                                            <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                            <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.rfvDescricao.ErrorMessage %>"
-                                                ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                            <asp:Panel ID="pnlItem" runat="server">
+                                                <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.rfvDescricao.ErrorMessage %>"
+                                                    ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                            </asp:Panel>
+                                            <asp:Panel ID="pnlSugestao" runat="server">
+                                                <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                                <br /><br />
+                                                <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
+			                                    <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                                    <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
+				                                    ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+			                                    <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
+			                                    <asp:DropDownList ID="ddlTipoSugestao" runat="server">
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+			                                    </asp:DropDownList>
+			                                    <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
+                                            </asp:Panel>
                                         </EditItemTemplate>
                                         <ItemStyle CssClass="accordion-head" />
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+	                                    <ItemTemplate>                                
+		                                    <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btFormulario" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+		                                    <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
+		                                    <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+		                                    <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
+	                                    </ItemTemplate>
+	                                    <ItemStyle HorizontalAlign="Center" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                         <ItemTemplate>                                
@@ -202,11 +284,37 @@
                                                                 <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
-                                                                <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage %>"
-                                                                    ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                <asp:Panel ID="pnlItem" runat="server">
+                                                                    <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+                                                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
+                                                                    <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage %>"
+                                                                        ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                </asp:Panel>
+                                                                <asp:Panel ID="pnlSugestao" runat="server">
+			                                                        <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+			                                                        <br /><br />
+			                                                        <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
+			                                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                                                        <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
+				                                                        ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+			                                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
+			                                                        <asp:DropDownList ID="ddlTipoSugestao" runat="server">
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+			                                                        </asp:DropDownList>
+			                                                        <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
+		                                                        </asp:Panel>
                                                             </EditItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+	                                                        <ItemTemplate>                                
+		                                                        <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btFormulario" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+		                                                        <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
+		                                                        <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+		                                                        <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
+	                                                        </ItemTemplate>
+	                                                        <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                                             <ItemTemplate>                                
@@ -249,11 +357,37 @@
                                                                                 <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
                                                                             </ItemTemplate>
                                                                             <EditItemTemplate>
-                                                                                <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                                                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
-                                                                                <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.rfvDescricao.ErrorMessage %>"
-                                                                                    ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                                <asp:Panel ID="pnlItem" runat="server">
+                                                                                    <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
+                                                                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
+                                                                                    <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.rfvDescricao.ErrorMessage %>"
+                                                                                        ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                                </asp:Panel>
+		                                                                        <asp:Panel ID="pnlSugestao" runat="server">
+			                                                                        <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+			                                                                        <br /><br />
+			                                                                        <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
+			                                                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                                                                        <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
+				                                                                        ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+			                                                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
+			                                                                        <asp:DropDownList ID="ddlTipoSugestao" runat="server">
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+			                                                                        </asp:DropDownList>
+			                                                                        <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
+		                                                                        </asp:Panel>
                                                                             </EditItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
+	                                                                        <ItemTemplate>                                
+		                                                                        <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btFormulario" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+		                                                                        <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
+		                                                                        <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+		                                                                        <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
+	                                                                        </ItemTemplate>
+	                                                                        <ItemStyle HorizontalAlign="Center" />
                                                                         </asp:TemplateField>
                                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaOrdem %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                                                             <ItemTemplate>                                

@@ -453,6 +453,83 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Registro de sugestões'
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.grvGeral.ColunaSugestão' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sugestão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.btnIncluirSugestao.ToolTip' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Registro de sugestão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.lblSugestao.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sugestão *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.lblTipoSugestao.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Tipo de sugestão *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.rfvSugestao.ErrorMessage' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sugestão é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.btnExcluirSugestao.ToolTip' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Excluir sugestão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.ddlTipoSugestao.Sugestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sugestão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.ddlTipoSugestao.Exclusao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Exclusão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.ddlTipoSugestao.Inclusao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Inclusão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.MensagemSucessoSalvarSugestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sugestão salva com sucesso.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Curriculo.Cadastro.MensagemSucessoExcluirSugestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sugestão excluída com sucesso.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
