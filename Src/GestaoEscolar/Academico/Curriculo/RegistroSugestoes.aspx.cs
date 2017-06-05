@@ -1,4 +1,5 @@
-﻿using MSTech.GestaoEscolar.Web.WebProject;
+﻿using MSTech.CoreSSO.BLL;
+using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Web.UI;
 
@@ -10,6 +11,12 @@ namespace GestaoEscolar.Academico.Curriculo
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
+            }
+
             if (!IsPostBack)
             {
                 UCCurriculo1.VS_permiteIncluir = false;

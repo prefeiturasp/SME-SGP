@@ -16,10 +16,11 @@ namespace GestaoEscolar.WebControls.Curriculo
     {
         #region Constantes
 
-        private const int colunaOrdem = 1;
-        private const int colunaEditar = 2;
-        private const int colunaExcluir = 3;
-        private const int colunaObjetivos = 4;
+        private const int colunaSugestao = 1;
+        private const int colunaOrdem = 2;        
+        private const int colunaEditar = 3;
+        private const int colunaExcluir = 4;
+        private const int colunaObjetivos = 5;
 
         #endregion Constantes
 
@@ -210,6 +211,60 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
+        private List<sCurriculoSugestaoCapitulo> VS_ltCurriculoSugestaoCapitulo
+        {
+            get
+            {
+                return (List<sCurriculoSugestaoCapitulo>)
+                        (
+                            ViewState["VS_ltCurriculoSugestaoCapitulo"] ??
+                            (
+                                ViewState["VS_ltCurriculoSugestaoCapitulo"] = ACA_CurriculoCapituloSugestaoBO.SelecionaPorNivelEnsinoDisciplinaUsuario(VS_tne_id, VS_tme_id, -1, VS_permiteIncluirSugestao ? __SessionWEB.__UsuarioWEB.Usuario.usu_id : Guid.Empty)
+                            )
+                        );
+            }
+            set
+            {
+                ViewState["VS_ltCurriculoSugestaoCapitulo"] = value;
+            }
+        }
+
+        private List<sCurriculoSugestaoCapitulo> VS_ltCurriculoSugestaoCapituloDisciplina
+        {
+            get
+            {
+                return (List<sCurriculoSugestaoCapitulo>)
+                        (
+                            ViewState["VS_ltCurriculoSugestaoCapituloDisciplina"] ??
+                            (
+                                ViewState["VS_ltCurriculoSugestaoCapituloDisciplina"] = ACA_CurriculoCapituloSugestaoBO.SelecionaPorNivelEnsinoDisciplinaUsuario(VS_tne_id, VS_tme_id, VS_tds_id, VS_permiteIncluirSugestao ? __SessionWEB.__UsuarioWEB.Usuario.usu_id : Guid.Empty)
+                            )
+                        );
+            }
+            set
+            {
+                ViewState["VS_ltCurriculoSugestaoCapituloDisciplina"] = value;
+            }
+        }
+
+        private List<sCurriculoSugestaoObjetivo> VS_ltCurriculoSugestaoObjetivo
+        {
+            get
+            {
+                return (List<sCurriculoSugestaoObjetivo>)
+                        (
+                            ViewState["VS_ltCurriculoSugestaoObjetivo"] ??
+                            (
+                                ViewState["VS_ltCurriculoSugestaoObjetivo"] = ACA_CurriculoObjetivoSugestaoBO.SelecionaPorNivelEnsinoDisciplinaPeriodoUsuario(VS_tne_id, VS_tme_id, VS_tds_id, VS_tcp_id, VS_permiteIncluirSugestao ? __SessionWEB.__UsuarioWEB.Usuario.usu_id : Guid.Empty)
+                            )
+                        );
+            }
+            set
+            {
+                ViewState["VS_ltCurriculoSugestaoObjetivo"] = value;
+            }
+        }
+
         private List<int> ltEixoAberto = new List<int>();
 
         private bool comandoExecutado = false;
@@ -314,6 +369,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                 fsDisciplina.Visible = Convert.ToInt32(rblDisciplina.SelectedValue) > 0;
                 VS_ltCurriculoCapituloDisciplina = null;
                 VS_ltCurriculoObjetivo = null;
+                VS_ltCurriculoSugestaoCapituloDisciplina = null;
+                VS_ltCurriculoSugestaoObjetivo = null;
                 grvDisciplina.EditIndex = -1;
                 grvEixo.EditIndex = -1;
                 UCComboTipoCurriculoPeriodo1.SelectedIndex = 0;
@@ -337,6 +394,7 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 pnlHabilidades.Visible = UCComboTipoCurriculoPeriodo1.Valor > 0;
                 VS_ltCurriculoObjetivo = null;
+                VS_ltCurriculoSugestaoObjetivo = null;
                 grvEixo.EditIndex = -1;
 
                 if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
@@ -376,6 +434,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                         ((ImageButton)grv.Rows[total - 1].FindControl("btnDescer")).Style.Add("visibility", "hidden");
                 }
             }
+            grv.Columns[colunaSugestao].Visible = VS_permiteIncluirSugestao;
         }
 
         protected void grvGeral_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -467,6 +526,67 @@ namespace GestaoEscolar.WebControls.Curriculo
                         btnEditar.Visible = false;
                     }
                 }
+
+                Panel pnlItem = (Panel)e.Row.FindControl("pnlItem");
+                if (pnlItem != null)
+                {
+                    pnlItem.Visible = VS_permiteEditar;
+                }
+
+                Panel pnlSugestao = (Panel)e.Row.FindControl("pnlSugestao");
+                if (pnlSugestao != null)
+                {
+                    pnlSugestao.Visible = VS_permiteIncluirSugestao;
+
+                    TextBox txtSugestao = (TextBox)e.Row.FindControl("txtSugestao");
+                    if (txtSugestao != null)
+                    {
+                        int tds_id = Convert.ToInt32(grv.DataKeys[e.Row.RowIndex]["tds_id"]);
+                        int crc_id = Convert.ToInt32(grv.DataKeys[e.Row.RowIndex]["crc_id"]);
+                        sCurriculoSugestaoCapitulo sugestao = new sCurriculoSugestaoCapitulo();
+
+                        if (tds_id > 0)
+                        {
+                            if (VS_ltCurriculoSugestaoCapituloDisciplina.Any(p => p.crc_id == crc_id))
+                            {
+                                sugestao = VS_ltCurriculoSugestaoCapituloDisciplina.Find(p => p.crc_id == crc_id);
+                            }
+                        }
+                        else
+                        {
+                            if (VS_ltCurriculoSugestaoCapitulo.Any(p => p.crc_id == crc_id))
+                            {
+                                sugestao = VS_ltCurriculoSugestaoCapitulo.Find(p => p.crc_id == crc_id);
+                            }
+                        }
+
+                        if (sugestao.crs_id > 0)
+                        {
+                            txtSugestao.Text = sugestao.crs_sugestao;
+
+                            DropDownList ddlTipoSugestao = (DropDownList)e.Row.FindControl("ddlTipoSugestao");
+                            if (ddlTipoSugestao != null)
+                            {
+                                ddlTipoSugestao.SelectedValue = sugestao.crs_tipo.ToString();
+                            }
+
+                            HiddenField hdnCrsId = (HiddenField)e.Row.FindControl("hdnCrsId");
+                            if (hdnCrsId != null)
+                            {
+                                hdnCrsId.Value = sugestao.crs_id.ToString();
+                            }
+                        }
+                    }
+                }
+
+                ImageButton btnIncluirSugestao = (ImageButton)e.Row.FindControl("btnIncluirSugestao");
+                if (btnIncluirSugestao != null)
+                {
+                    int tds_id = Convert.ToInt32(grv.DataKeys[e.Row.RowIndex]["tds_id"]);
+                    int crc_id = Convert.ToInt32(grv.DataKeys[e.Row.RowIndex]["crc_id"]);
+                    btnIncluirSugestao.CssClass += (tds_id > 0 && VS_ltCurriculoSugestaoCapituloDisciplina.Any(p => p.crc_id == crc_id))
+                                                    || (tds_id <= 0 && VS_ltCurriculoSugestaoCapitulo.Any(p => p.crc_id == crc_id)) ? " preenchido" : " vazio";
+                }
             }
         }
 
@@ -491,6 +611,27 @@ namespace GestaoEscolar.WebControls.Curriculo
                         btnCancelarEdicao.Visible = true;
                 }
 
+                ImageButton btnSalvarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnSalvarSugestao");
+                if (btnSalvarSugestao != null)
+                    btnSalvarSugestao.Visible = true;
+
+                ImageButton btnIncluirSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnIncluirSugestao");
+                if (btnIncluirSugestao != null)
+                {
+                    btnIncluirSugestao.Visible = false;
+                    ImageButton btnCancelarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnCancelarSugestao");
+                    if (btnCancelarSugestao != null)
+                        btnCancelarSugestao.Visible = true;
+                }
+
+                HiddenField hdnCrsId = (HiddenField)grv.Rows[e.NewEditIndex].FindControl("hdnCrsId");
+                if (hdnCrsId != null)
+                {
+                    ImageButton btnExcluirSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnExcluirSugestao");
+                    if (btnExcluirSugestao != null)
+                        btnExcluirSugestao.Visible = Convert.ToInt32(hdnCrsId.Value) > 0;
+                }
+
                 grv.Rows[e.NewEditIndex].Focus();
             }
             catch (Exception ex)
@@ -505,51 +646,99 @@ namespace GestaoEscolar.WebControls.Curriculo
             GridView grv = ((GridView)sender);
             try
             {
-                TextBox txtTitulo = (TextBox)grv.Rows[e.RowIndex].FindControl("txtTitulo");
-                TextBox txtDescricao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtDescricao");
-                if (txtTitulo != null && txtDescricao != null)
+                if (VS_permiteEditar)
                 {
-                    DataKey chave = grv.DataKeys[e.RowIndex];
-                    int tds_id = Convert.ToInt32(chave["tds_id"]);
-                    ACA_CurriculoCapitulo entity = new ACA_CurriculoCapitulo
+                    TextBox txtTitulo = (TextBox)grv.Rows[e.RowIndex].FindControl("txtTitulo");
+                    TextBox txtDescricao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtDescricao");
+                    if (txtTitulo != null && txtDescricao != null)
                     {
-                        IsNew = Convert.ToInt32(chave["crc_id"]) <= 0
-                        ,
-                        crc_id = Convert.ToInt32(chave["crc_id"])
-                        ,
-                        tne_id = VS_tne_id
-                        ,
-                        tme_id = VS_tme_id
-                        ,
-                        tds_id = tds_id
-                        ,
-                        cal_ano = cal_ano
-                        ,
-                        crc_titulo = txtTitulo.Text
-                        ,
-                        crc_descricao = txtDescricao.Text
-                        ,
-                        crc_ordem = Convert.ToInt32(chave["crc_ordem"])
-                        ,
-                        crc_situacao = 1
-                        ,
-                        crc_dataCriacao = DateTime.Now
-                        ,
-                        crc_dataAlteracao = DateTime.Now
-                    };
-                    if (ACA_CurriculoCapituloBO.Save(entity))
+                        DataKey chave = grv.DataKeys[e.RowIndex];
+                        int tds_id = Convert.ToInt32(chave["tds_id"]);
+                        ACA_CurriculoCapitulo entity = new ACA_CurriculoCapitulo
+                        {
+                            IsNew = Convert.ToInt32(chave["crc_id"]) <= 0
+                            ,
+                            crc_id = Convert.ToInt32(chave["crc_id"])
+                            ,
+                            tne_id = VS_tne_id
+                            ,
+                            tme_id = VS_tme_id
+                            ,
+                            tds_id = tds_id
+                            ,
+                            cal_ano = cal_ano
+                            ,
+                            crc_titulo = txtTitulo.Text
+                            ,
+                            crc_descricao = txtDescricao.Text
+                            ,
+                            crc_ordem = Convert.ToInt32(chave["crc_ordem"])
+                            ,
+                            crc_situacao = 1
+                            ,
+                            crc_dataCriacao = DateTime.Now
+                            ,
+                            crc_dataAlteracao = DateTime.Now
+                        };
+                        if (ACA_CurriculoCapituloBO.Save(entity))
+                        {
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvar").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            grv.EditIndex = -1;
+                            if (tds_id <= 0)
+                            {
+                                VS_ltCurriculoCapituloGeral = null;
+                            }
+                            else
+                            {
+                                VS_ltCurriculoCapituloDisciplina = null;
+                            }
+                            Carregar(tds_id);
+                        }
+                    }
+                }
+                else if (VS_permiteIncluirSugestao)
+                {
+                    TextBox txtSugestao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtSugestao");
+                    DropDownList ddlTipoSugestao = (DropDownList)grv.Rows[e.RowIndex].FindControl("ddlTipoSugestao");
+                    HiddenField hdnCrsId = (HiddenField)grv.Rows[e.RowIndex].FindControl("hdnCrsId");
+                    if (txtSugestao != null && ddlTipoSugestao != null && hdnCrsId != null)
                     {
-                        lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvar").ToString(), UtilBO.TipoMensagem.Sucesso);
-                        grv.EditIndex = -1;
-                        if (tds_id <= 0)
+                        DataKey chave = grv.DataKeys[e.RowIndex];
+                        int tds_id = Convert.ToInt32(chave["tds_id"]);
+                        int crc_id = Convert.ToInt32(chave["crc_id"]);
+                        int crs_id = Convert.ToInt32(hdnCrsId.Value);
+                        ACA_CurriculoSugestao entity = new ACA_CurriculoSugestao
                         {
-                            VS_ltCurriculoCapituloGeral = null;
-                        }
-                        else
+                            IsNew = crs_id <= 0
+                            ,
+                            crs_id = crs_id
+                            ,
+                            crs_sugestao = txtSugestao.Text
+                            ,
+                            crs_tipo = Convert.ToByte(ddlTipoSugestao.SelectedValue)
+                            ,
+                            usu_id = __SessionWEB.__UsuarioWEB.Usuario.usu_id
+                            ,
+                            crs_situacao = 1
+                            ,
+                            crs_dataCriacao = DateTime.Now
+                            ,
+                            crs_dataAlteracao = DateTime.Now
+                        };
+                        if (ACA_CurriculoCapituloSugestaoBO.Save(crc_id, entity))
                         {
-                            VS_ltCurriculoCapituloDisciplina = null;
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarSugestao").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            grv.EditIndex = -1;
+                            if (tds_id <= 0)
+                            {
+                                VS_ltCurriculoSugestaoCapitulo = null;
+                            }
+                            else
+                            {
+                                VS_ltCurriculoSugestaoCapituloDisciplina = null;
+                            }
+                            Carregar(tds_id);
                         }
-                        Carregar(tds_id);
                     }
                 }
             }
@@ -560,7 +749,14 @@ namespace GestaoEscolar.WebControls.Curriculo
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar tópico.", UtilBO.TipoMensagem.Erro);
+                if (VS_permiteEditar)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar tópico.", UtilBO.TipoMensagem.Erro);
+                }
+                else
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar sugestão.", UtilBO.TipoMensagem.Erro);
+                }
             }
         }
 
@@ -571,24 +767,53 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 if (Convert.ToInt32(grv.DataKeys[e.RowIndex]["crc_id"]) > 0)
                 {
-                    ACA_CurriculoCapitulo entity = new ACA_CurriculoCapitulo
+                    if (VS_permiteExcluir)
                     {
-                        crc_id = Convert.ToInt32(grv.DataKeys[e.RowIndex]["crc_id"])
-                    };
-                    if (ACA_CurriculoCapituloBO.Delete(entity))
+                        ACA_CurriculoCapitulo entity = new ACA_CurriculoCapitulo
+                        {
+                            crc_id = Convert.ToInt32(grv.DataKeys[e.RowIndex]["crc_id"])
+                        };
+                        if (ACA_CurriculoCapituloBO.Delete(entity))
+                        {
+                            int tds_id = Convert.ToInt32(grv.DataKeys[e.RowIndex]["tds_id"]);
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluir").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            grv.EditIndex = -1;
+                            if (tds_id <= 0)
+                            {
+                                VS_ltCurriculoCapituloGeral = null;
+                            }
+                            else
+                            {
+                                VS_ltCurriculoCapituloDisciplina = null;
+                            }
+                            Carregar(tds_id);
+                        }
+                    }
+                    else if (VS_permiteIncluirSugestao)
                     {
-                        int tds_id = Convert.ToInt32(grv.DataKeys[e.RowIndex]["tds_id"]);
-                        lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluir").ToString(), UtilBO.TipoMensagem.Sucesso);
-                        grv.EditIndex = -1;
-                        if (tds_id <= 0)
+                        HiddenField hdnCrsId = (HiddenField)grv.Rows[e.RowIndex].FindControl("hdnCrsId");
+                        if (hdnCrsId != null && Convert.ToInt32(hdnCrsId.Value) > 0)
                         {
-                            VS_ltCurriculoCapituloGeral = null;
+                            ACA_CurriculoSugestao entity = new ACA_CurriculoSugestao
+                            {
+                                crs_id = Convert.ToInt32(hdnCrsId.Value)
+                            };
+                            if (ACA_CurriculoSugestaoBO.Delete(entity))
+                            {
+                                int tds_id = Convert.ToInt32(grv.DataKeys[e.RowIndex]["tds_id"]);
+                                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirSugestao").ToString(), UtilBO.TipoMensagem.Sucesso);
+                                grv.EditIndex = -1;
+                                if (tds_id <= 0)
+                                {
+                                    VS_ltCurriculoSugestaoCapitulo = null;
+                                }
+                                else
+                                {
+                                    VS_ltCurriculoSugestaoCapituloDisciplina = null;
+                                }
+                                Carregar(tds_id);
+                            }
                         }
-                        else
-                        {
-                            VS_ltCurriculoCapituloDisciplina = null;
-                        }
-                        Carregar(tds_id);
                     }
                 }
             }
@@ -599,7 +824,14 @@ namespace GestaoEscolar.WebControls.Curriculo
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir tópico.", UtilBO.TipoMensagem.Erro);
+                if (VS_permiteExcluir)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir tópico.", UtilBO.TipoMensagem.Erro);
+                }
+                else
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir sugestão.", UtilBO.TipoMensagem.Erro);
+                }
             }
         }
 
@@ -608,7 +840,7 @@ namespace GestaoEscolar.WebControls.Curriculo
             try
             {
                 GridView grv = ((GridView)sender);
-                if (Convert.ToInt32(grv.DataKeys[e.RowIndex]["crc_id"]) <= 0)
+                if (VS_permiteIncluir && Convert.ToInt32(grv.DataKeys[e.RowIndex]["crc_id"]) <= 0)
                 {
                     int tds_id = Convert.ToInt32(grv.DataKeys[e.RowIndex]["tds_id"]);
                     if (tds_id <= 0)
@@ -655,6 +887,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                         ((ImageButton)grv.Rows[total - 1].FindControl("btnDescer")).Style.Add("visibility", "hidden");
                 }
             }
+            grv.Columns[colunaSugestao].Visible = VS_permiteIncluirSugestao;
         }
 
         protected void grvEixo_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -770,6 +1003,51 @@ namespace GestaoEscolar.WebControls.Curriculo
                 {
                     hdnAberto.Value = ltEixoAberto.Any(p => p == cro_id) ? "1" : "0";
                 }
+
+                Panel pnlItem = (Panel)e.Row.FindControl("pnlItem");
+                if (pnlItem != null)
+                {
+                    pnlItem.Visible = VS_permiteEditar;
+                }
+
+                Panel pnlSugestao = (Panel)e.Row.FindControl("pnlSugestao");
+                if (pnlSugestao != null)
+                {
+                    pnlSugestao.Visible = VS_permiteIncluirSugestao;
+
+                    TextBox txtSugestao = (TextBox)e.Row.FindControl("txtSugestao");
+                    if (txtSugestao != null)
+                    {
+                        sCurriculoSugestaoObjetivo sugestao = new sCurriculoSugestaoObjetivo();
+                        if (VS_ltCurriculoSugestaoObjetivo.Any(p => p.cro_id == cro_id))
+                        {
+                            sugestao = VS_ltCurriculoSugestaoObjetivo.Find(p => p.cro_id == cro_id);
+                        }
+
+                        if (sugestao.crs_id > 0)
+                        {
+                            txtSugestao.Text = sugestao.crs_sugestao;
+
+                            DropDownList ddlTipoSugestao = (DropDownList)e.Row.FindControl("ddlTipoSugestao");
+                            if (ddlTipoSugestao != null)
+                            {
+                                ddlTipoSugestao.SelectedValue = sugestao.crs_tipo.ToString();
+                            }
+
+                            HiddenField hdnCrsId = (HiddenField)e.Row.FindControl("hdnCrsId");
+                            if (hdnCrsId != null)
+                            {
+                                hdnCrsId.Value = sugestao.crs_id.ToString();
+                            }
+                        }
+                    }
+                }
+
+                ImageButton btnIncluirSugestao = (ImageButton)e.Row.FindControl("btnIncluirSugestao");
+                if (btnIncluirSugestao != null)
+                {
+                    btnIncluirSugestao.CssClass += VS_ltCurriculoSugestaoObjetivo.Any(p => p.cro_id == cro_id) ? " preenchido" : " vazio";
+                }
             }
         }
 
@@ -795,6 +1073,27 @@ namespace GestaoEscolar.WebControls.Curriculo
                         btnCancelarEdicao.Visible = true;
                 }
 
+                ImageButton btnSalvarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnSalvarSugestao");
+                if (btnSalvarSugestao != null)
+                    btnSalvarSugestao.Visible = true;
+
+                ImageButton btnIncluirSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnIncluirSugestao");
+                if (btnIncluirSugestao != null)
+                {
+                    btnIncluirSugestao.Visible = false;
+                    ImageButton btnCancelarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnCancelarSugestao");
+                    if (btnCancelarSugestao != null)
+                        btnCancelarSugestao.Visible = true;
+                }
+
+                HiddenField hdnCrsId = (HiddenField)grv.Rows[e.NewEditIndex].FindControl("hdnCrsId");
+                if (hdnCrsId != null)
+                {
+                    ImageButton btnExcluirSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnExcluirSugestao");
+                    if (btnExcluirSugestao != null)
+                        btnExcluirSugestao.Visible = Convert.ToInt32(hdnCrsId.Value) > 0;
+                }
+
                 grv.Rows[e.NewEditIndex].Focus();
             }
             catch (Exception ex)
@@ -809,60 +1108,103 @@ namespace GestaoEscolar.WebControls.Curriculo
             GridView grv = ((GridView)sender);
             try
             {
-                TextBox txtDescricao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtDescricao");
-                if (txtDescricao != null)
+                if (VS_permiteEditar)
                 {
-                    DataKey chave = grv.DataKeys[e.RowIndex];
-                    byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
-                    int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
-                    ACA_CurriculoObjetivo entity = new ACA_CurriculoObjetivo
+                    TextBox txtDescricao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtDescricao");
+                    if (txtDescricao != null)
                     {
-                        IsNew = Convert.ToInt32(chave["cro_id"]) <= 0
-                        ,
-                        cro_id = Convert.ToInt32(chave["cro_id"])
-                        ,
-                        tne_id = VS_tne_id
-                        ,
-                        tme_id = VS_tme_id
-                        ,
-                        tds_id = VS_tds_id
-                        ,
-                        tcp_id = VS_tcp_id
-                        ,
-                        cal_ano = cal_ano
-                        ,
-                        cro_descricao = txtDescricao.Text
-                        ,
-                        cro_ordem = Convert.ToInt32(chave["cro_ordem"])
-                        ,
-                        cro_tipo = cro_tipo
-                        ,
-                        cro_idPai = cro_idPai
-                        ,
-                        cro_situacao = 1
-                        ,
-                        cro_dataCriacao = DateTime.Now
-                        ,
-                        cro_dataAlteracao = DateTime.Now
-                    };
-                    if (ACA_CurriculoObjetivoBO.Save(entity))
+                        DataKey chave = grv.DataKeys[e.RowIndex];
+                        byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
+                        int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
+                        ACA_CurriculoObjetivo entity = new ACA_CurriculoObjetivo
+                        {
+                            IsNew = Convert.ToInt32(chave["cro_id"]) <= 0
+                            ,
+                            cro_id = Convert.ToInt32(chave["cro_id"])
+                            ,
+                            tne_id = VS_tne_id
+                            ,
+                            tme_id = VS_tme_id
+                            ,
+                            tds_id = VS_tds_id
+                            ,
+                            tcp_id = VS_tcp_id
+                            ,
+                            cal_ano = cal_ano
+                            ,
+                            cro_descricao = txtDescricao.Text
+                            ,
+                            cro_ordem = Convert.ToInt32(chave["cro_ordem"])
+                            ,
+                            cro_tipo = cro_tipo
+                            ,
+                            cro_idPai = cro_idPai
+                            ,
+                            cro_situacao = 1
+                            ,
+                            cro_dataCriacao = DateTime.Now
+                            ,
+                            cro_dataAlteracao = DateTime.Now
+                        };
+                        if (ACA_CurriculoObjetivoBO.Save(entity))
+                        {
+                            if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo)
+                            {
+                                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarEixo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            }
+                            else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico)
+                            {
+                                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarObjetivo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            }
+                            else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem)
+                            {
+                                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarObjetivoAprendizagem").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            }
+                            grv.EditIndex = -1;
+                            VS_ltCurriculoObjetivo = null;
+                            GuardarEixosAbertos();
+                            CarregarObjetivos(grv, cro_tipo, cro_idPai);
+                        }
+                    }
+                }
+                else if (VS_permiteIncluirSugestao)
+                {
+                    TextBox txtSugestao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtSugestao");
+                    DropDownList ddlTipoSugestao = (DropDownList)grv.Rows[e.RowIndex].FindControl("ddlTipoSugestao");
+                    HiddenField hdnCrsId = (HiddenField)grv.Rows[e.RowIndex].FindControl("hdnCrsId");
+                    if (txtSugestao != null && ddlTipoSugestao != null && hdnCrsId != null)
                     {
-                        if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo)
+                        DataKey chave = grv.DataKeys[e.RowIndex];
+                        int cro_id = Convert.ToInt32(chave["cro_id"]);
+                        byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
+                        int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
+                        int crs_id = Convert.ToInt32(hdnCrsId.Value);
+                        ACA_CurriculoSugestao entity = new ACA_CurriculoSugestao
                         {
-                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarEixo").ToString(), UtilBO.TipoMensagem.Sucesso);
-                        }
-                        else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico)
+                            IsNew = crs_id <= 0
+                            ,
+                            crs_id = crs_id
+                            ,
+                            crs_sugestao = txtSugestao.Text
+                            ,
+                            crs_tipo = Convert.ToByte(ddlTipoSugestao.SelectedValue)
+                            ,
+                            usu_id = __SessionWEB.__UsuarioWEB.Usuario.usu_id
+                            ,
+                            crs_situacao = 1
+                            ,
+                            crs_dataCriacao = DateTime.Now
+                            ,
+                            crs_dataAlteracao = DateTime.Now
+                        };
+                        if (ACA_CurriculoObjetivoSugestaoBO.Save(cro_id, entity))
                         {
-                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarObjetivo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarSugestao").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            grv.EditIndex = -1;
+                            VS_ltCurriculoSugestaoObjetivo = null;
+                            GuardarEixosAbertos();
+                            CarregarObjetivos(grv, cro_tipo, cro_idPai);
                         }
-                        else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem)
-                        {
-                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoSalvarObjetivoAprendizagem").ToString(), UtilBO.TipoMensagem.Sucesso);
-                        }
-                        grv.EditIndex = -1;
-                        VS_ltCurriculoObjetivo = null;
-                        GuardarEixosAbertos();
-                        CarregarObjetivos(grv, cro_tipo, cro_idPai);
                     }
                 }
             }
@@ -873,7 +1215,14 @@ namespace GestaoEscolar.WebControls.Curriculo
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetivo.", UtilBO.TipoMensagem.Erro);
+                if (VS_permiteEditar)
+                { 
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar objetivo.", UtilBO.TipoMensagem.Erro);
+                }
+                else
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar sugestão.", UtilBO.TipoMensagem.Erro);
+                }
             }
         }
 
@@ -885,30 +1234,54 @@ namespace GestaoEscolar.WebControls.Curriculo
                 DataKey chave = grv.DataKeys[e.RowIndex];
                 if (Convert.ToInt32(chave["cro_id"]) > 0)
                 {
-                    ACA_CurriculoObjetivo entity = new ACA_CurriculoObjetivo
+                    if (VS_permiteExcluir)
                     {
-                        cro_id = Convert.ToInt32(chave["cro_id"])
-                    };
-                    if (ACA_CurriculoObjetivoBO.Delete(entity))
+                        ACA_CurriculoObjetivo entity = new ACA_CurriculoObjetivo
+                        {
+                            cro_id = Convert.ToInt32(chave["cro_id"])
+                        };
+                        if (ACA_CurriculoObjetivoBO.Delete(entity))
+                        {
+                            byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
+                            int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
+                            if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo)
+                            {
+                                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirEixo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            }
+                            else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico)
+                            {
+                                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirObjetivo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            }
+                            else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem)
+                            {
+                                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirObjetivoAprendizagem").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            }
+                            grv.EditIndex = -1;
+                            VS_ltCurriculoObjetivo = null;
+                            GuardarEixosAbertos();
+                            CarregarObjetivos(grv, cro_tipo, cro_idPai);
+                        }
+                    }
+                    else if (VS_permiteIncluirSugestao)
                     {
-                        byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
-                        int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
-                        if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo)
+                        HiddenField hdnCrsId = (HiddenField)grv.Rows[e.RowIndex].FindControl("hdnCrsId");
+                        if (hdnCrsId != null && Convert.ToInt32(hdnCrsId.Value) > 0)
                         {
-                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirEixo").ToString(), UtilBO.TipoMensagem.Sucesso);
+                            ACA_CurriculoSugestao entity = new ACA_CurriculoSugestao
+                            {
+                                crs_id = Convert.ToInt32(hdnCrsId.Value)
+                            };
+                            if (ACA_CurriculoSugestaoBO.Delete(entity))
+                            {
+                                byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
+                                int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
+                                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirSugestao").ToString(), UtilBO.TipoMensagem.Sucesso);
+                                grv.EditIndex = -1;
+                                VS_ltCurriculoSugestaoObjetivo = null;
+                                GuardarEixosAbertos();
+                                CarregarObjetivos(grv, cro_tipo, cro_idPai);
+                            }
                         }
-                        else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico)
-                        {
-                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirObjetivo").ToString(), UtilBO.TipoMensagem.Sucesso);
-                        }
-                        else if (cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem)
-                        {
-                            lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemSucessoExcluirObjetivoAprendizagem").ToString(), UtilBO.TipoMensagem.Sucesso);
-                        }  
-                        grv.EditIndex = -1;
-                        VS_ltCurriculoObjetivo = null;
-                        GuardarEixosAbertos();
-                        CarregarObjetivos(grv, cro_tipo, cro_idPai);
                     }
                 }
             }
@@ -919,7 +1292,14 @@ namespace GestaoEscolar.WebControls.Curriculo
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir objetivo.", UtilBO.TipoMensagem.Erro);
+                if (VS_permiteExcluir)
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir objetivo.", UtilBO.TipoMensagem.Erro);
+                }
+                else
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir sugestão.", UtilBO.TipoMensagem.Erro);
+                }
             }
         }
 
@@ -931,7 +1311,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 DataKey chave = grv.DataKeys[e.RowIndex];
                 byte cro_tipo = Convert.ToByte(chave["cro_tipo"]);
                 int cro_idPai = Convert.ToInt32(chave["cro_idPai"]);
-                if (Convert.ToInt32(chave["cro_id"]) <= 0)
+                if (VS_permiteIncluir && Convert.ToInt32(chave["cro_id"]) <= 0)
                 {
                     VS_ltCurriculoObjetivo.RemoveAll(p => p.cro_tipo == cro_tipo && p.cro_idPai == cro_idPai && p.cro_id <= 0);
                 }
@@ -1214,6 +1594,9 @@ namespace GestaoEscolar.WebControls.Curriculo
             fsDisciplina.Visible = false;
             UCComboTipoCurriculoPeriodo1.SelectedIndex = 0;
             pnlHabilidades.Visible = false;
+            VS_ltCurriculoSugestaoCapitulo = null;
+            VS_ltCurriculoSugestaoCapituloDisciplina = null;
+            VS_ltCurriculoSugestaoObjetivo = null;
         }
 
         /// <summary>
