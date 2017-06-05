@@ -257,6 +257,20 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                     Param.Value = DBNull.Value;
                 }
                 qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@caf_qtAtividadeExtraclasse";
+                Param.Size = 4;
+                if (entity.caf_qtAtividadeExtraclasse > 0)
+                {
+                    Param.Value = entity.caf_qtAtividadeExtraclasse;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
             }
         }
 
@@ -437,6 +451,20 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 if (entity.caf_qtAulasExterna > 0)
                 {
                     Param.Value = entity.caf_qtAulasExterna;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@caf_qtAtividadeExtraclasse";
+                Param.Size = 4;
+                if (entity.caf_qtAtividadeExtraclasse > 0)
+                {
+                    Param.Value = entity.caf_qtAtividadeExtraclasse;
                 }
                 else
                 {

@@ -116,5 +116,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         /// Número de aulas externas.
         /// </summary>
         public virtual int caf_qtAulasExterna { get; set; }
+
+        /// <summary>
+        /// Carga horária total entregue de atividades extraclasse
+        /// </summary>
+        public virtual int caf_qtAtividadeExtraclasse { get; set; }
     }
 }
