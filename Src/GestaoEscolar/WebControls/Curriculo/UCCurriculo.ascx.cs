@@ -316,7 +316,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 VS_tne_id = UCComboTipoNivelEnsino1.Valor;
                 pnlCurriculo.Visible = UCComboTipoNivelEnsino1.Valor > 0 && UCComboTipoModalidadeEnsino1.Valor > 0;
 
-                if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
+                if (VS_tne_id > 0 && VS_tme_id > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                 {
                     UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
                     Carregar(-1);
@@ -325,6 +325,26 @@ namespace GestaoEscolar.WebControls.Curriculo
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
+
+                    if (VS_permiteIncluirSugestao)
+                    {
+                        // Grava log do acesso
+                        LOG_CurriculoSugestao logSugestao = new LOG_CurriculoSugestao
+                        {
+                            IsNew = true
+                            ,
+                            lcs_id = -1
+                            ,
+                            tne_id = VS_tne_id
+                            ,
+                            tme_id = VS_tme_id
+                            ,
+                            usu_id = __SessionWEB.__UsuarioWEB.Usuario.usu_id
+                            ,
+                            lcs_data = DateTime.Now
+                        };
+                        LOG_CurriculoSugestaoBO.Save(logSugestao);
+                    }
                 }
             }
             catch (Exception ex)
@@ -343,7 +363,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 VS_tme_id = UCComboTipoModalidadeEnsino1.Valor;
                 pnlCurriculo.Visible = UCComboTipoNivelEnsino1.Valor > 0 && UCComboTipoModalidadeEnsino1.Valor > 0;
 
-                if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
+                if (VS_tne_id > 0 && VS_tme_id > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                 {
                     UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
                     Carregar(-1);
@@ -352,6 +372,26 @@ namespace GestaoEscolar.WebControls.Curriculo
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
+
+                    if (VS_permiteIncluirSugestao)
+                    {
+                        // Grava log do acesso
+                        LOG_CurriculoSugestao logSugestao = new LOG_CurriculoSugestao
+                        {
+                            IsNew = true
+                            ,
+                            lcs_id = -1
+                            ,
+                            tne_id = VS_tne_id
+                            ,
+                            tme_id = VS_tme_id
+                            ,
+                            usu_id = __SessionWEB.__UsuarioWEB.Usuario.usu_id
+                            ,
+                            lcs_data = DateTime.Now
+                        };
+                        LOG_CurriculoSugestaoBO.Save(logSugestao);
+                    }
                 }
             }
             catch (Exception ex)
