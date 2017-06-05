@@ -1596,6 +1596,15 @@ namespace MSTech.GestaoEscolar.BLL
                 dr["atd_numeroFaltasExterna"] = DBNull.Value;
             }
 
+            if (entity.atd_numeroAtividadeExtraclasse > 0)
+            {
+                dr["atd_numeroAtividadeExtraclasse"] = entity.atd_numeroAtividadeExtraclasse;
+            }
+            else
+            {
+                dr["atd_numeroAtividadeExtraclasse"] = DBNull.Value;
+            }
+
             return dr;
         }
 
