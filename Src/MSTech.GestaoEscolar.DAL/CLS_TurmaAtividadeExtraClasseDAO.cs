@@ -153,7 +153,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="tpc_id"></param>
         /// <param name="dtTurmas"></param>
         /// <returns></returns>
-        public DataTable SelecionaPorPeriodoDisciplina_Alunos(long tud_id, int tpc_id, DataTable dtTurmas)
+        public DataTable SelecionaPorPeriodoDisciplina_Alunos(long tud_id, int tpc_id, bool usuario_superior, byte tdt_posicao, DataTable dtTurmas)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_TurmaAtividadeExtraClasse_SelecionaPorPeriodoDisciplina_Alunos", _Banco);
 
@@ -173,6 +173,20 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@tpc_id";
                 Param.Size = 4;
                 Param.Value = tpc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Byte;
+                Param.ParameterName = "@tdt_posicao";
+                Param.Size = 1;
+                Param.Value = tdt_posicao;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@usuario_superior";
+                Param.Size = 1;
+                Param.Value = usuario_superior;
                 qs.Parameters.Add(Param);
 
                 SqlParameter sqlParam = new SqlParameter();

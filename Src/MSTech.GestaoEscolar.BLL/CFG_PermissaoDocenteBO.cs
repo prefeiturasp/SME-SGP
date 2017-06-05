@@ -66,6 +66,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
         [Description("Objetos de conhecimento")]
         ObjetosAprendizagem = 11
+        ,
+        [Description("Atividades extraclasse")]
+        AtividadesExtraClasse = 12
     }
 
     #endregion

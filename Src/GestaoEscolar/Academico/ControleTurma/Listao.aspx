@@ -491,6 +491,8 @@
                                             <ContentTemplate>
                                                 <fieldset id="fdsCadastroAtiExtra" runat="server">
                                                     <asp:HiddenField ID="hdnTaeId" runat="server" />
+                                                    <asp:HiddenField ID="hdnTaePosicao" runat="server" />
+                                                    <asp:HiddenField ID="hdnPermissao" runat="server" />
                                                     <uc12:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
                                                     <uc11:UCComboTipoAtividadeAvaliativa ID="UCComboTipoAtividadeAvaliativa" runat="server" Obrigatorio="true" ValidationGroup="AtividadeExtraclasse" />
                                                     <asp:Label ID="lblNomeAtiExtra" runat="server" Text="Nome da atividade extraclasse *" AssociatedControlID="txtNomeAtiExtra"></asp:Label>
@@ -528,6 +530,8 @@
                                                                                     <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px;">
                                                                                         <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
                                                                                         <asp:Label ID="lbltud_id" runat="server" Text='<%#Bind("tud_id") %>' Visible="false"></asp:Label>
+                                                                                        <asp:Label ID="lblTaePosicao" runat="server" Text='<%#Bind("tdt_posicao") %>' Visible="false" />
+                                                                                        <asp:Label ID="lblPermissao" runat="server"  Text='<%#Bind("permissaoEdicao") %>' Visible="false" />
                                                                                         <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("nome") %>'></asp:Label>
                                                                                         <div style="display: block; margin-bottom: 5px;">
                                                                                             <asp:ImageButton ID="btnEditarAtiExtra" runat="server" SkinID="btEditar" 
