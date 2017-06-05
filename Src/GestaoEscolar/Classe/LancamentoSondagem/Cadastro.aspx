@@ -36,7 +36,8 @@
                 </fieldset>
                 <div class="responsive-scroll area-form">
                     <asp:Label ID="lblResultadoVazio" runat="server" Visible="false"></asp:Label>
-                    <asp:Repeater ID="rptLancamento" runat="server" OnItemDataBound="rptLancamento_ItemDataBound">
+                    <div runat="server" id="divLancamentoMulti" visible="false">
+                        <asp:Repeater ID="rptLancamentoMulti" runat="server" OnItemDataBound="rptLancamento_ItemDataBound">
                         <HeaderTemplate>
                             <table class="grid sortableFrequencia" cellspacing="0">
                                 <thead>
@@ -129,7 +130,7 @@
                                 <asp:Repeater ID="rptRespostasAlunoHistorico" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
                                     <ItemTemplate>
                                         <td class="center" style="text-align:center;" id="tdResposta" runat="server">
-                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
+                                            <asp:CheckBox ID="ckbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' Checked='<%# Bind("respAluno") %>' />
                                             <asp:HiddenField ID="hdnRespId" runat="server" />
                                         </td>
                                     </ItemTemplate>
@@ -137,7 +138,7 @@
                                 <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
                                     <ItemTemplate>
                                         <td class="center" style="text-align:center;" id="tdResposta" runat="server">
-                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
+                                            <asp:CheckBox ID="ckbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' Checked='<%# Bind("respAluno") %>' />
                                             <asp:HiddenField ID="hdnRespId" runat="server" />
                                         </td>
                                     </ItemTemplate>
@@ -153,7 +154,7 @@
                                 <asp:Repeater ID="rptRespostasAlunoHistorico" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
                                     <ItemTemplate>
                                         <td class="center" style="text-align:center;" id="tdResposta" runat="server">
-                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
+                                            <asp:CheckBox ID="ckbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' Checked='<%# Bind("respAluno") %>' />
                                             <asp:HiddenField ID="hdnRespId" runat="server" />
                                         </td>
                                     </ItemTemplate>
@@ -161,7 +162,7 @@
                                 <asp:Repeater ID="rptRespostasAluno" runat="server" OnItemDataBound="rptRespostasAluno_ItemDataBound">
                                     <ItemTemplate>
                                         <td class="center" style="text-align:center;" id="tdResposta" runat="server">
-                                            <asp:RadioButton ID="rbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' GroupName="" Checked='<%# Bind("respAluno") %>' />
+                                            <asp:CheckBox ID="ckbResposta" runat="server" Text="" ToolTip='<%# Bind("sdr_descricao") %>' Checked='<%# Bind("respAluno") %>' />
                                             <asp:HiddenField ID="hdnRespId" runat="server" />
                                         </td>
                                     </ItemTemplate>
@@ -173,6 +174,135 @@
                             </table>
                         </FooterTemplate>
                     </asp:Repeater>
+                    </div>
+                    <div runat="server" id="divLancamentoUnica" visible="false">
+                        <asp:Repeater ID="rptLancamentoUnico" runat="server" OnItemDataBound="rptLancamento_ItemDataBound">
+                        <HeaderTemplate>
+                            <table class="grid sortableFrequencia" cellspacing="0">
+                                <thead>
+                                    <tr class="gridHeader" id="headerBotoes">
+                                        <th></th>
+                                        <th runat="server" id="thBotoes">
+                                            <div style="float:left">
+                                                <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbAnterior" Text="|<" runat="server"
+                                                    CssClass="ui-icon ui-icon-circle-triangle-w" OnClick="lkbAnterior_Click" ToolTip="<%$ Resources:Classe, LancamentoSondagem.Cadastro.lkbAnterior.ToolTip %>"></asp:LinkButton>
+                                            </div>
+                                            <div style="float:right">
+                                                <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbProximo" Text=">|" runat="server"
+                                                    CssClass="ui-icon ui-icon-circle-triangle-e" OnClick="lkbProximo_Click" ToolTip="<%$ Resources:Classe, LancamentoSondagem.Cadastro.lkbProximo.ToolTip %>"/>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr class="gridHeader" id="headerAgendamentos">
+                                        <th runat="server" id="thAgendamentos">
+                                            <asp:Repeater ID="rptAgendamentos" runat="server" OnItemDataBound="rptAgendamentos_ItemDataBound">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false} .sorterFalse" id="thAgendamento" runat="server" style="border-left:1px solid #ccc">
+                                                    <asp:Label ID="lblAgendamento" runat="server" Text='<%# Bind("periodo") %>'></asp:Label>
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        </th>
+                                    </tr>
+                                    <tr class="gridHeader" id="headerQuestoes">
+                                        <th>
+                                            <asp:Label ID="lblNomeAluno" runat="server" Text="Aluno"></asp:Label>
+                                        </th>
+                                        <asp:Repeater ID="rptQuestoesHistorico" runat="server" OnItemDataBound="rptQuestoes_ItemDataBound">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false} .sorterFalse" id="thQuestao" runat="server" style="border-left:1px solid #ccc">
+                                                    <asp:Label ID="lblQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <asp:Repeater ID="rptQuestoes" runat="server" OnItemDataBound="rptQuestoes_ItemDataBound">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false} .sorterFalse" id="thQuestao" runat="server" style="border-left:1px solid #ccc">
+                                                    <asp:Label ID="lblQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tr>
+                                    <tr class="gridHeader" id="headerSubQuestoes">
+                                        <th>
+                                            <asp:Label ID="lblNomeAlunoSub" runat="server" Text="Aluno"></asp:Label>
+                                        </th>
+                                        <asp:Repeater ID="rptSubQuestoesHistorico" runat="server" OnItemDataBound="rptSubQuestoes_ItemDataBound">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false} .sorterFalse" id="thSubQuestao" runat="server" style="border-left:1px solid #ccc">
+                                                    <asp:Label ID="lblSubQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <asp:Repeater ID="rptSubQuestoes" runat="server" OnItemDataBound="rptSubQuestoes_ItemDataBound">
+                                            <ItemTemplate>
+                                                <th class="center {sorter :false} .sorterFalse" id="thSubQuestao" runat="server" style="border-left:1px solid #ccc">
+                                                    <asp:Label ID="lblSubQuestao" runat="server" Text='<%# Bind("sdq_descricao") %>'></asp:Label>
+                                                </th>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr class="gridRow">
+                                <td>
+                                    <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
+                                    <asp:HiddenField ID="hdnAluId" runat="server" />
+                                </td>
+                                <asp:Repeater ID="rptRespostasAlunoUnicoHistorico" runat="server" OnItemDataBound="rptRespostasAlunoUnico_ItemDataBound">
+                                    <ItemTemplate>
+                                        <td class="center" style="text-align:center;" id="tdResposta" runat="server">
+                                            <asp:DropDownList runat="server" ID="ddlResposta" DataTextField="sdr_descricao" DataValueField="sdr_id" SkinID="text10C"></asp:DropDownList>
+                                            <asp:HiddenField ID="hdnRespId" runat="server" />
+                                            <asp:HiddenField ID="groupName" runat="server" />
+                                        </td>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <asp:Repeater ID="rptRespostasAlunoUnico" runat="server" OnItemDataBound="rptRespostasAlunoUnico_ItemDataBound">
+                                    <ItemTemplate>
+                                        <td class="center" style="text-align:center;" id="tdResposta" runat="server">
+                                            <asp:DropDownList runat="server" ID="ddlResposta" DataTextField="sdr_descricao" DataValueField="sdr_id" SkinID="text10C"></asp:DropDownList>
+                                            <asp:HiddenField ID="hdnRespId" runat="server" />
+                                            <asp:HiddenField ID="groupName" runat="server" />
+                                        </td>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tr>
+                        </ItemTemplate>
+                        <AlternatingItemTemplate>
+                            <tr class="gridAlternatingRow">
+                                <td>
+                                    <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
+                                    <asp:HiddenField ID="hdnAluId" runat="server" />
+                                </td>
+                                <asp:Repeater ID="rptRespostasAlunoUnicoHistorico" runat="server" OnItemDataBound="rptRespostasAlunoUnico_ItemDataBound">
+                                    <ItemTemplate>
+                                        <td class="center" style="text-align:center;" id="tdResposta" runat="server">
+                                            <asp:DropDownList runat="server" ID="ddlResposta" DataTextField="sdr_descricao" DataValueField="sdr_id" SkinID="text10C"></asp:DropDownList>
+                                            <asp:HiddenField ID="hdnRespId" runat="server" />
+                                            <asp:HiddenField ID="groupName" runat="server" />
+                                        </td>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <asp:Repeater ID="rptRespostasAlunoUnico" runat="server" OnItemDataBound="rptRespostasAlunoUnico_ItemDataBound">
+                                    <ItemTemplate>
+                                        <td class="center" style="text-align:center;" id="tdResposta" runat="server">
+                                            <asp:DropDownList runat="server" ID="ddlResposta" DataTextField="sdr_descricao" DataValueField="sdr_id" SkinID="text10C"></asp:DropDownList>
+                                            <asp:HiddenField ID="hdnRespId" runat="server" />
+                                            <asp:HiddenField ID="groupName" runat="server" />
+                                        </td>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tr>
+                        </AlternatingItemTemplate>
+                        <FooterTemplate>
+                                </tbody>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                    </div>
                 </div>
                 <div class="right area-botoes-bottom">
                     <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Classe, LancamentoSondagem.Cadastro.btnSalvar.Text %>" OnClick="btnSalvar_Click" />

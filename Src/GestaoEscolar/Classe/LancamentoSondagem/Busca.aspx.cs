@@ -49,16 +49,18 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
         {
             get
             {
-                int[] retorno = new int[2];
+                int[] retorno = new int[3];
                 if (dgvSondagem.EditIndex >= 0)
                 {
                     retorno[0] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex]["snd_id"]);
                     retorno[1] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex]["sda_id"]);
+                    retorno[2] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.EditIndex]["sdn_opcaoResposta"]);
                 }
                 else
                 {
                     retorno[0] = -1;
                     retorno[1] = -1;
+                    retorno[2] = -1;
                 }
                 return retorno;
             }
@@ -71,16 +73,18 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
         {
             get
             {
-                int[] retorno = new int[2];
+                int[] retorno = new int[3];
                 if (dgvSondagem.SelectedIndex >= 0)
                 {
                     retorno[0] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex]["snd_id"]);
                     retorno[1] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex]["sda_id"]);
+                    retorno[2] = Convert.ToInt32(dgvSondagem.DataKeys[dgvSondagem.SelectedIndex]["sdn_opcaoResposta"]);
                 }
                 else
                 {
                     retorno[0] = -1;
                     retorno[1] = -1;
+                    retorno[2] = -1;
                 }
                 return retorno;
             }
