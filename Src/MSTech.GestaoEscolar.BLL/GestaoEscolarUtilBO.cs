@@ -2964,7 +2964,7 @@ namespace MSTech.GestaoEscolar.BLL
                 if (prop != null)
                 {
 
-                    if (emptyValueAttribute != null && prop.GetValue(this).ToString() == emptyValueAttribute.NullValue)
+                    if (emptyValueAttribute != null && (prop.GetValue(this) ?? string.Empty).ToString() == emptyValueAttribute.NullValue)
                     {
                         drRetorno[coluna] = DBNull.Value;
                     }
@@ -2977,7 +2977,7 @@ namespace MSTech.GestaoEscolar.BLL
                 FieldInfo field = fields.ToList().Find(p => p.Name == coluna.ColumnName);
                 if (field != null)
                 {
-                    if (emptyValueAttribute != null && field.GetValue(this).ToString() == emptyValueAttribute.NullValue)
+                    if (emptyValueAttribute != null && (field.GetValue(this) ?? string.Empty).ToString() == emptyValueAttribute.NullValue)
                     {
                         drRetorno[coluna] = DBNull.Value;
                     }
