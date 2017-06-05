@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Busca.aspx.cs" Inherits="GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo.Busca" %>
 
+<%@ Register src="~/WebControls/Combos/UCComboTipoDisciplina.ascx" tagname="UCComboTipoDisciplina" tagprefix="uc1" %>
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagPrefix="uc2" TagName="UCCamposObrigatorios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -17,6 +18,8 @@
             <uc2:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
             <asp:UpdatePanel ID="updFiltros" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
+                    <uc1:UCComboTipoDisciplina ID="UCComboTipoDisciplina1" runat="server" _MostrarMessageSelecione="true" ValidationGroup="Relatorio"
+                        Obrigatorio="true" PermiteEditar="true" />
                     <div runat="server" id="divData">
                         <div style="display: inline-block">
                             <asp:Label ID="lblDataInicio" runat="server" Text="Data inicial *" AssociatedControlID="txtDataInicio"></asp:Label>

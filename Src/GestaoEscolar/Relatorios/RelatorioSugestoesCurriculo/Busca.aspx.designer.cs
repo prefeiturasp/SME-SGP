@@ -67,6 +67,15 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo {
         protected global::System.Web.UI.UpdatePanel updFiltros;
         
         /// <summary>
+        /// UCComboTipoDisciplina1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboTipoDisciplina UCComboTipoDisciplina1;
+        
+        /// <summary>
         /// divData control.
         /// </summary>
         /// <remarks>

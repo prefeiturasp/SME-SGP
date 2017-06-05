@@ -65,6 +65,7 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         /// </summary>
         private void InicializarTela()
         {
+            UCComboTipoDisciplina1.CarregarTipoDisciplina();
             txtDataInicio.Text = "";
             txtDataFim.Text = "";
         }
@@ -83,18 +84,28 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
 
                 if (string.IsNullOrEmpty(txtDataInicio.Text) || !DateTime.TryParse(txtDataInicio.Text, out dataInicio))
                     throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataInicioInvalida").ToString());
-                
+
+                if (dataInicio > DateTime.Today)
+                    throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataInicioMaiorHoje").ToString());
+
                 if (string.IsNullOrEmpty(txtDataFim.Text) || !DateTime.TryParse(txtDataFim.Text, out dataFim))
                     throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataFimInvalida").ToString());
-                
+
+                if (dataFim > DateTime.Today)
+                    throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataFimMaiorHoje").ToString());
+
                 if (dataInicio > dataFim)
                     throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataFimMenorInicio").ToString());
                 
                 report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioSugestoesCurriculo).ToString();
-                parametros = "dataInicio=" + dataInicio.ToShortDateString() +
-                             "&dataFim=" + dataFim.ToShortDateString() +
-                             "&mostraCodigoEscola=" + ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.ORDENAR_ESCOLAS_POR_CODIGO, __SessionWEB.__UsuarioWEB.Usuario.ent_id) +
+                parametros = "tds_id=" + UCComboTipoDisciplina1.Valor.ToString() +
+                             "&tds_nome=" + UCComboTipoDisciplina1.Texto +
+                             "&dataInicioText=" + dataInicio.ToShortDateString() +
+                             "&dataFimText=" + dataFim.ToShortDateString() +
+                             "&dataInicio=" + dataInicio +
+                             "&dataFim=" + dataFim +
                              "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
+                             "&nomeTipoDisciplina=" + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
                              "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria") +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
@@ -119,6 +130,7 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         protected void SalvaBusca()
         {
             Dictionary<string, string> filtros = new Dictionary<string, string>();
+            filtros.Add("tds_id", UCComboTipoDisciplina1.Valor.ToString());
             filtros.Add("dataInicio", txtDataInicio.Text);
             filtros.Add("dataFim", txtDataFim.Text);
 
@@ -135,6 +147,9 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
             {
                 // Recuperar busca realizada e pesquisar automaticamente
                 string valor;
+
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tds_id", out valor);
+                UCComboTipoDisciplina1.Valor = Convert.ToInt32(valor);
 
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("dataInicio", out valor);
                 txtDataInicio.Text = valor;

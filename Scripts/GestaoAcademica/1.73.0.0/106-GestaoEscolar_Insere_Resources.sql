@@ -495,6 +495,20 @@ SET XACT_ABORT ON
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
 
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.DataInicioMaiorHoje' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Data inicial do período não pode ser posterior à data atual.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.DataFimMaiorHoje' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Data final do período não pode ser posterior à data atual.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
