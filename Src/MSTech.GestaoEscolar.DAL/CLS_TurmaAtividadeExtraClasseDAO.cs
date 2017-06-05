@@ -267,6 +267,7 @@ namespace MSTech.GestaoEscolar.DAL
             entity.tae_dataAlteracao = DateTime.Now;
             base.ParamAlterar(qs, entity);
             qs.Parameters.RemoveAt("@tae_dataCriacao");
+            qs.Parameters.RemoveAt("@tdt_posicao");
         }
 
         protected override bool Alterar(CLS_TurmaAtividadeExtraClasse entity)

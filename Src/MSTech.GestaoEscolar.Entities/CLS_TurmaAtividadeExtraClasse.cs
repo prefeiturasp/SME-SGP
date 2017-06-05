@@ -20,6 +20,9 @@ namespace MSTech.GestaoEscolar.Entities
         [DataObjectField(true, false, false)]
         public override int tae_id { get; set; }
 
+        [MSDefaultValue(1)]
+        public override byte tdt_posicao { get; set; }
+
         /// <summary>
         /// Situação do registro.
         /// </summary>

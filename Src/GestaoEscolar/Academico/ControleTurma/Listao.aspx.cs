@@ -4057,6 +4057,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     ,
                     tae_cargaHoraria = Convert.ToInt32(string.IsNullOrEmpty(txtCargaAtiExtra.Text) ? "0" : txtCargaAtiExtra.Text)
                     ,
+                    tdt_posicao = __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao ? (byte)1 : PosicaoDocente
+                    ,
                     IsNew = tae_id <= 0
                 };
 
