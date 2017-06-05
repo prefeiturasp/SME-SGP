@@ -28,7 +28,6 @@ SET XACT_ABORT ON
 
 	*/
 
-	
 	EXEC MS_InsereParametroAcademico
 		@pac_chave = 'TIPO_MODALIDADE_EJA' -- Chave do parâmetro. (Obrigatório)
 		,@pac_valor = '6' -- Valor do parâmetro. (Obrigatório)
@@ -44,7 +43,7 @@ SET XACT_ABORT ON
 		,@ent_id = @entId
 		
 	INSERT INTO ACA_TipoEvento (tev_nome, tev_periodoCalendario, tev_situacao, tev_dataCriacao, tev_dataAlteracao)
-	VALUES ('Abertura sugestões currículo', 0, 1, GETDATE(), GETDATE())
+	VALUES ('Abertura de sugestões de currículos', 0, 1, GETDATE(), GETDATE())
 	
 	DECLARE @tev_id INT = (SELECT SCOPE_IDENTITY());
 	
@@ -55,7 +54,6 @@ SET XACT_ABORT ON
 		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
 		,@ent_id = @entId
 	
-
 -- Fechar transação	
 SET XACT_ABORT OFF
 COMMIT TRANSACTION

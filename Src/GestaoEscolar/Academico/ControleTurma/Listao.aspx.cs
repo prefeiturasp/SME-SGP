@@ -1365,7 +1365,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     rptPlanoAula.Visible = false;
                     lblDadoPlanoAula.Visible = true;
-                    lblDadoPlanoAula.Text = UtilBO.GetErroMessage("Não há aulas cadastradas no bimestre selecionado.", UtilBO.TipoMensagem.Nenhuma);
+                    lblDadoPlanoAula.Text = UtilBO.GetErroMessage("Não há aulas cadastradas no bimestre selecionado.", UtilBO.TipoMensagem.Alerta);
                 }
                 else
                 {
