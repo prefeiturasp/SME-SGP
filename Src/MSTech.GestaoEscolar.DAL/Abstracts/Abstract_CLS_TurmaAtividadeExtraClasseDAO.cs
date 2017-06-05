@@ -132,7 +132,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.tae_cargaHoraria;
 			qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Byte;
+            Param.ParameterName = "@tdt_posicao";
+            Param.Size = 1;
+            Param.Value = entity.tdt_posicao;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
 			Param.DbType = DbType.Byte;
 			Param.ParameterName = "@tae_situacao";
 			Param.Size = 1;
@@ -236,7 +243,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.tae_cargaHoraria;
 			qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Byte;
+            Param.ParameterName = "@tdt_posicao";
+            Param.Size = 1;
+            Param.Value = entity.tdt_posicao;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
 			Param.DbType = DbType.Byte;
 			Param.ParameterName = "@tae_situacao";
 			Param.Size = 1;

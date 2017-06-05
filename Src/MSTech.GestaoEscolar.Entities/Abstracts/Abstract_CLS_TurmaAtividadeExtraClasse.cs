@@ -61,6 +61,12 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[tae_cargaHoraria] é obrigatório.")]
 		public virtual int tae_cargaHoraria { get; set; }
 
+        /// <summary>
+		/// Posição do docente.
+		/// </summary>
+		[MSNotNullOrEmpty("[tdt_posicao] é obrigatório.")]
+        public virtual byte tdt_posicao { get; set; }
+
 		/// <summary>
 		/// Situação do registro.
 		/// </summary>

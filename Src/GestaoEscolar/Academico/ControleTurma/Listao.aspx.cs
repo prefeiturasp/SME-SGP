@@ -145,6 +145,23 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Lista de permissões do docente para cadastro de avaliações.
+        /// </summary>
+        private List<sPermissaoDocente> VS_ltPermissaoAtividadeExtraclasse
+        {
+            get
+            {
+                return (List<sPermissaoDocente>)
+                        (
+                            ViewState["VS_ltPermissaoAtividadeExtraclasse"] ??
+                            (
+                                ViewState["VS_ltPermissaoAtividadeExtraclasse"] = CFG_PermissaoDocenteBO.SelecionaPermissaoModulo(UCControleTurma1.VS_tdt_posicao, (byte)EnumModuloPermissao.AtividadesExtraClasse)
+                            )
+                        );
+            }
+        }
+
+        /// <summary>
         /// Lista de permissões do docente para cadastro de efetivacap.
         /// </summary>
         private List<sPermissaoDocente> VS_ltPermissaoEfetivacao
@@ -625,6 +642,15 @@ namespace GestaoEscolar.Academico.ControleTurma
                 return !EntTurmaDisciplina.tud_naoLancarFrequencia && VS_ltPermissaoCompensacao.Any(p => p.pdc_permissaoConsulta);
             }
         }
+
+        private bool PermiteLancarAtividadeExtraclasse
+        {
+            get
+            {
+                return !EntTurmaDisciplina.tud_naoLancarNota && VS_ltPermissaoAtividadeExtraclasse.Any(p => p.pdc_permissaoEdicao);
+            }
+        }
+
 
         private List<sComboTurmaDisciplina> dtTurmaDisciplinaDoc
         {
@@ -1365,7 +1391,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     rptPlanoAula.Visible = false;
                     lblDadoPlanoAula.Visible = true;
-                    lblDadoPlanoAula.Text = UtilBO.GetErroMessage("Não há aulas cadastradas no bimestre selecionado.", UtilBO.TipoMensagem.Nenhuma);
+                    lblDadoPlanoAula.Text = UtilBO.GetErroMessage("Não há aulas cadastradas no bimestre selecionado.", UtilBO.TipoMensagem.Alerta);
                 }
                 else
                 {
@@ -2226,7 +2252,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 DataTable dt = CLS_TurmaAtividadeExtraClasseBO.SelecionaPorPeriodoDisciplina_Alunos(
                            VisibilidadeRegencia(ddlTurmaDisciplinaListao) ?
                                    ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id
-                               , UCNavegacaoTelaPeriodo.VS_tpc_id, tur_ids);
+                               , UCNavegacaoTelaPeriodo.VS_tpc_id, __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao
+                                , PosicaoDocente, tur_ids);
 
                 // Carregar as atividades e notas dos alunos nas atividades.
                 var x = (from DataRow dr in dt.Rows
@@ -4030,6 +4057,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     ,
                     tae_cargaHoraria = Convert.ToInt32(string.IsNullOrEmpty(txtCargaAtiExtra.Text) ? "0" : txtCargaAtiExtra.Text)
                     ,
+                    tdt_posicao = __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao ? (byte)1 : PosicaoDocente
+                    ,
                     IsNew = tae_id <= 0
                 };
 
@@ -4169,7 +4198,17 @@ namespace GestaoEscolar.Academico.ControleTurma
                     ddlPareceres.SelectedValue = avaliacao;
                 }
 
-                HabilitaControles(divAtividades.Controls, usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado);
+                bool permissaoAlteracao = PermiteLancarAtividadeExtraclasse && Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "permissaoEdicao")) > 0;
+                if (permissaoAlteracao && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                {
+                    permissaoAlteracao = (VS_situacaoTurmaDisciplina == 1 || (VS_situacaoTurmaDisciplina != 1));
+                }
+                if (permissaoAlteracao)
+                {
+                    permiteEdicao = true;
+                }
+                
+                HabilitaControles(divAtividades.Controls, usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado && permiteEdicao);
 
                 double eaeAvaliacao;
                 txtNota.Text = double.TryParse(avaliacao, out eaeAvaliacao) ? string.Format("{0:F" + NumeroCasasDecimais + "}", eaeAvaliacao) : avaliacao;
@@ -4224,6 +4263,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                     Label lbltud_id = itemAtividade.FindControl("lbltud_id") as Label;
                     Label lbltae_id = itemAtividade.FindControl("lbltae_id") as Label;
 
+                    Label lblTaePosicao = itemAtividade.FindControl("lblTaePosicao") as Label;
+                    Label lblPermissao = itemAtividade.FindControl("lblPermissao") as Label;
+
                     if (lbltud_id != null && lbltae_id != null)
                     {
                         long tud_id = 0;
@@ -4246,6 +4288,15 @@ namespace GestaoEscolar.Academico.ControleTurma
                             txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? entity.tae_cargaHoraria.ToString() : string.Empty;
 
                             hdnTaeId.Value = entity.tae_id.ToString();
+
+                            if (lblTaePosicao != null && lblPermissao != null)
+                            {
+                                byte posicao = 0;
+                                int permissao = 0;
+                                byte.TryParse(lblTaePosicao.Text, out posicao);
+                                int.TryParse(lblPermissao.Text, out permissao);
+                                HabilitaControles(fdsCadastroAtiExtra.Controls, permissao > 0 && PermiteLancarAtividadeExtraclasse);
+                            }
 
                             updAtiExtra.Update();
                         }

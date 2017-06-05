@@ -51,7 +51,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tpc_id"></param>
         /// <param name="dtTurmas"></param>
         /// <returns></returns>
-        public static DataTable SelecionaPorPeriodoDisciplina_Alunos(long tud_id, int tpc_id, string tur_ids = null)
+        public static DataTable SelecionaPorPeriodoDisciplina_Alunos(long tud_id, int tpc_id, bool usuario_superior, byte tdt_posicao, string tur_ids = null)
         {
             using (DataTable dtTurmas = TUR_Turma.TipoTabela_Turma())
             {
@@ -68,7 +68,7 @@ namespace MSTech.GestaoEscolar.BLL
                         );
                 }
 
-                return new CLS_TurmaAtividadeExtraClasseDAO().SelecionaPorPeriodoDisciplina_Alunos(tud_id, tpc_id, dtTurmas);
+                return new CLS_TurmaAtividadeExtraClasseDAO().SelecionaPorPeriodoDisciplina_Alunos(tud_id, tpc_id, usuario_superior, tdt_posicao, dtTurmas);
             }
         }
 
