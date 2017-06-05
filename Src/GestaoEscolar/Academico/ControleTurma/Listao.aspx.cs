@@ -33,6 +33,16 @@ namespace GestaoEscolar.Academico.ControleTurma
             public string arq_idRelatorio;
         }
 
+        [Serializable]
+        private struct NotasRelatorioAtiExtra
+        {
+            public string Id;
+            public long alu_id;
+            public int tae_id;
+            public int mtu_id;
+            public string valor;
+        }
+
         /// <summary>
         /// Estrutura que indica se uma atividade possui alunos com nota lançada.
         /// </summary>
@@ -200,6 +210,23 @@ namespace GestaoEscolar.Academico.ControleTurma
             set
             {
                 ViewState["VS_Nota_Relatorio"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Guarda as notas de relatório.
+        /// </summary>
+        private List<NotasRelatorioAtiExtra> VS_Nota_RelatorioAtiExtra
+        {
+            get
+            {
+                if (ViewState["VS_Nota_RelatorioAtiExtra"] == null)
+                    ViewState["VS_Nota_RelatorioAtiExtra"] = new List<NotasRelatorioAtiExtra>();
+                return (List<NotasRelatorioAtiExtra>)(ViewState["VS_Nota_RelatorioAtiExtra"]);
+            }
+            set
+            {
+                ViewState["VS_Nota_RelatorioAtiExtra"] = value;
             }
         }
 
@@ -759,6 +786,36 @@ namespace GestaoEscolar.Academico.ControleTurma
 
         private long Alu_idExtraClasse;
         private int Mtu_idExtraClasse;
+
+        private long VS_tud_idAtiExtraExcluir
+        {
+            get
+            {
+                if (ViewState["VS_tud_idAtiExtraExcluir"] == null)
+                    ViewState["VS_tud_idAtiExtraExcluir"] = 1;
+                return Convert.ToInt64(ViewState["VS_tud_idAtiExtraExcluir"]);
+            }
+
+            set
+            {
+                ViewState["VS_tud_idAtiExtraExcluir"] = value;
+            }
+        }
+
+        private int VS_tae_idAtiExtraExcluir
+        {
+            get
+            {
+                if (ViewState["VS_tae_idAtiExtraExcluir"] == null)
+                    ViewState["VS_tae_idAtiExtraExcluir"] = 1;
+                return Convert.ToInt32(ViewState["VS_tae_idAtiExtraExcluir"]);
+            }
+
+            set
+            {
+                ViewState["VS_tae_idAtiExtraExcluir"] = value;
+            }
+        }
 
         #endregion Propriedades
 
@@ -1914,6 +1971,27 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Adiciona um item na lista de relatórios do ViewState.
+        /// </summary>
+        /// <param name="tnt_id"></param>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <param name="valor"></param>
+        private void AdicionaItemRelatorioAtiExtra(int tae_id, long alu_id, int mtu_id, string valor)
+        {
+            VS_Nota_RelatorioAtiExtra.Add(new NotasRelatorioAtiExtra
+            {
+                tae_id = tae_id
+                ,
+                alu_id = alu_id
+                ,
+                mtu_id = mtu_id
+                ,
+                valor = valor
+            });
+        }
+
+        /// <summary>
         /// Seta imagem de relatório lançado para o item.
         /// </summary>
         /// <param name="itemAtividade">Item do repeater de atividades</param>
@@ -1932,6 +2010,37 @@ namespace GestaoEscolar.Academico.ControleTurma
             NotasRelatorio rel = VS_Nota_Relatorio.Find(p =>
                                     p.alu_id == alu_id
                                     && p.tnt_id == tnt_id
+                                    && p.mtu_id == mtu_id);
+
+            //Verifica se o relatório já foi lançado e seta a visibilidade do imgSituacao
+            if (!string.IsNullOrEmpty(rel.valor))
+            {
+                imgSituacao.Visible = true;
+                btnRelatorio.ToolTip = "Alterar lançamento do relatório";
+            }
+            else
+                imgSituacao.Visible = false;
+        }
+
+        /// <summary>
+        /// Seta imagem de relatório lançado para o item.
+        /// </summary>
+        /// <param name="itemAtividade">Item do repeater de atividades</param>
+        private void SetaImgRelatorioAtiExtra(RepeaterItem itemAtividade)
+        {
+            ImageButton btnRelatorio = (ImageButton)itemAtividade.FindControl("btnRelatorio");
+            Image imgSituacao = (Image)itemAtividade.FindControl("imgSituacao");
+
+            Repeater rptAtividades = (Repeater)itemAtividade.NamingContainer;
+            RepeaterItem itemAluno = (RepeaterItem)rptAtividades.NamingContainer;
+
+            long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
+            int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
+            int tae_id = Convert.ToInt32(((Label)itemAtividade.FindControl("lbltae_id")).Text);
+
+            NotasRelatorioAtiExtra rel = VS_Nota_RelatorioAtiExtra.Find(p =>
+                                    p.alu_id == alu_id
+                                    && p.tae_id == tae_id
                                     && p.mtu_id == mtu_id);
 
             //Verifica se o relatório já foi lançado e seta a visibilidade do imgSituacao
@@ -2091,11 +2200,16 @@ namespace GestaoEscolar.Academico.ControleTurma
             return script;
         }
 
+        /// <summary>
+        /// Carrega os listão de atividade extraclasse.
+        /// </summary>
         private void CarregarListaoAtividadeExtraclasse()
         {
             string tur_ids = UCControleTurma1.TurmasNormaisMultisseriadas.Any() ?
                                       string.Join(";", UCControleTurma1.TurmasNormaisMultisseriadas.Select(p => p.tur_id.ToString()).ToArray()) :
                                       string.Empty;
+
+            HabilitaControles(fdsCadastroAtiExtra.Controls, VS_Periodo_Aberto && usuarioPermissao && !VS_PeriodoEfetivado);
 
             // Carrega os alunos matriculados
             List<AlunosTurmaDisciplina> ListaAlunos = MTR_MatriculaTurmaDisciplinaBO.SelecionaAlunosAtivosCOCPorTurmaDisciplina(
@@ -2133,6 +2247,163 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             updAtiExtra.Update();
+        }
+
+        /// <summary>
+        /// Limpa os campos de cadastro de atividade extraclasse.
+        /// </summary>
+        private void LimparCamposAtividadeExtraclasse()
+        {
+            UCComboTipoAtividadeAvaliativa.Valor = -1;
+            txtNomeAtiExtra.Text = txtDescricaoAtiExtra.Text = txtCargaAtiExtra.Text = hdnTaeId.Value = string.Empty;
+            updAtiExtra.Update();
+        }
+
+        private void UCConfirmacaoOperacao_ConfimaOperacao()
+        {
+            ExcluirAtividadeExtraClasse();
+        }
+
+
+        /// <summary>
+        /// Salva listão de avaliações.
+        /// </summary>
+        /// <param name="PermaneceTela"></param>
+        /// <returns></returns>
+        public bool SalvarAtividadeExtra(out string msg)
+        {
+            msg = "";
+            if (!VS_Periodo_Aberto)
+                throw new ValidationException(String.Format("Listão de atividades extraclasse de {0} disponível apenas para consulta.", GestaoEscolarUtilBO.nomePadraoPeriodo_Calendario(__SessionWEB.__UsuarioWEB.Usuario.ent_id)));
+
+            List<CLS_TurmaAtividadeExtraClasseAluno> listaTumaAtividadeExtraclasse = new List<CLS_TurmaAtividadeExtraClasseAluno>();
+
+            bool visibilidadeRegencia = VisibilidadeRegencia(ddlTurmaDisciplinaListao);
+
+            foreach (RepeaterItem itemAluno in rptAlunoAtivExtra.Items)
+            {
+                Repeater rptAtividades = (Repeater)itemAluno.FindControl("rptAtividades");
+                long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
+                int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
+                int mtd_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtd_id")).Text);
+                string pes_nome = Convert.ToString(((Label)itemAluno.FindControl("lblNomeOficial")).Text);
+
+                // Adiciona itens na lista de TurmaNota - só pra alterar o tnt_efetivado.
+                foreach (RepeaterItem itemAtividadeAluno in rptAtividades.Items)
+                {
+                    HtmlGenericControl divAtividades = (HtmlGenericControl)itemAtividadeAluno.FindControl("divAtividades");
+                    if (divAtividades != null)
+                    {
+                        CheckBox chkEntregou = (CheckBox)itemAtividadeAluno.FindControl("chkEntregou");
+                        bool aea_entregue = chkEntregou != null ? chkEntregou.Checked : false;
+
+                        if (CLS_TurmaNotaAlunoBO.VerificaValoresNotas(VS_EntitiesControleTurma.escalaDocente.escalaAvaliacaoNumerica, RetornaAvaliacao(itemAtividadeAluno), pes_nome))
+                        {
+                            int tae_id = Convert.ToInt32(((Label)itemAtividadeAluno.FindControl("lbltae_id")).Text);
+
+                            // Busca relatório lançado.
+                            NotasRelatorioAtiExtra rel = VS_Nota_RelatorioAtiExtra.Find(p =>
+                                p.alu_id == alu_id
+                                && p.tae_id == tae_id
+                                && p.mtu_id == mtu_id);
+
+
+                            CLS_TurmaAtividadeExtraClasseAluno ent = new CLS_TurmaAtividadeExtraClasseAluno
+                            {
+                                tud_id = visibilidadeRegencia ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id,
+                                tae_id = tae_id,
+                                alu_id = alu_id,
+                                mtu_id = mtu_id,
+                                mtd_id = mtd_id,
+                                aea_avaliacao = RetornaAvaliacao(itemAtividadeAluno),
+                                aea_relatorio = rel.valor,
+                                aea_entregue = aea_entregue,
+                                aea_dataAlteracao = DateTime.Now,
+                                aea_situacao = 1
+                            };
+
+                            listaTumaAtividadeExtraclasse.Add(ent);
+                        }
+
+                        HabilitaControles(divAtividades.Controls, true);
+                    }
+                }
+            }
+
+            hdnAlterouAtividadeExtra.Value = "";
+
+            if (CLS_TurmaAtividadeExtraClasseAlunoBO.SalvarEmLote(listaTumaAtividadeExtraclasse))
+            {
+                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "Listão de atividade extraclasse | " +
+                                                                        "cal_id: " + UCNavegacaoTelaPeriodo.VS_cal_id + " | tpc_id: " + UCNavegacaoTelaPeriodo.VS_tpc_id +
+                                                                        " | tur_id: " + UCControleTurma1.VS_tur_id + "; tud_id: " + (visibilidadeRegencia ?
+                                                    ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id));
+
+                msg = UtilBO.GetErroMessage("Listão de atividades extraclasse salvo com sucesso.", UtilBO.TipoMensagem.Sucesso);
+
+                CarregarListaoAtividadeExtraclasse();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Exclui atividade extraclasse
+        /// </summary>
+        private void ExcluirAtividadeExtraClasse()
+        {
+            try
+            {
+                CLS_TurmaAtividadeExtraClasse entity = new CLS_TurmaAtividadeExtraClasse
+                {
+                    tud_id = VS_tud_idAtiExtraExcluir
+                    ,
+                    tae_id = VS_tae_idAtiExtraExcluir
+                };
+
+                var lstNota =
+                    (from RepeaterItem itemAluno in rptAlunoAtivExtra.Items
+                     let rptAtividades = itemAluno.FindControl("rptAtividades") as Repeater
+                     from RepeaterItem itemNota in rptAtividades.Items
+                     let lbltud_idNota = itemNota.FindControl("lbltud_id") as Label
+                     let lbltae_idNota = itemNota.FindControl("lbltae_id") as Label
+                     where (lbltud_idNota != null && lbltud_idNota.Text == VS_tud_idAtiExtraExcluir.ToString()) &&
+                           (lbltae_idNota != null && lbltae_idNota.Text == VS_tae_idAtiExtraExcluir.ToString())
+                     let txtNota = itemNota.FindControl("txtNota") as TextBox
+                     let ddlPareceres = itemNota.FindControl("ddlPareceres") as DropDownList
+                     let imgSituacao = itemNota.FindControl("imgSituacao") as Image
+                     let chkEntregou = itemNota.FindControl("chkEntregou") as CheckBox
+                     select new
+                     {
+                         possuiNota = (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Numerica && !string.IsNullOrEmpty(txtNota.Text)) ||
+                                      (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Pareceres && ddlPareceres.SelectedValue != "-1") ||
+                                      (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Relatorios && imgSituacao.Visible) ||
+                                      chkEntregou.Checked
+                     }).ToList();
+
+                if (lstNota.Any(p => p.possuiNota))
+                {
+                    throw new ValidationException("Não foi possível excluir a atividade extraclasse, pois já foram registrados os lançamentos.");
+                }
+
+                if (CLS_TurmaAtividadeExtraClasseBO.Deletar(entity))
+                {
+                    lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse excluída com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Exclusão de atividade | tud_id: {0}, tae_id: {1}", VS_tud_idAtiExtraExcluir, VS_tae_idAtiExtraExcluir));
+                    CarregarListaoAtividadeExtraclasse();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
         }
 
         #endregion Métodos
@@ -2472,6 +2743,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             UCLancamentoFrequenciaTerritorio.CarregarAusencias += UCLancamentoFrequenciaTerritorio_CarregarAusencias;
             UCSelecaoDisciplinaCompartilhada1.SelecionarDisciplina += UCSelecaoDisciplinaCompartilhada1_SelecionarDisciplina;
             UCControleTurma1.chkTurmasNormaisMultisseriadasIndexChanged += UCControleTurma_chkTurmasNormaisMultisseriadasIndexChanged;
+            UCConfirmacaoOperacao.ConfimaOperacao += UCConfirmacaoOperacao_ConfimaOperacao;
 
             // Configura javascripts da tela.
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -3017,7 +3289,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     && p.mtu_id == mtu_id);
 
                 // Guarda o tipo de alteração, o alu_id, o mtu_id e o tnt_id da linha que está sendo editada.
-                hdnIds.Value = 1 + ";" + alu_id + ";" + tnt_id + ";" + mtu_id;
+                hdnIds.Value = 1 + ";" + alu_id + ";" + tnt_id + ";" + mtu_id + ";1";
 
                 lblDadosRelatorio.Text = "<b>Nome do aluno:</b> " + ((Label)itemAluno.FindControl("lblNome")).Text;
                 txtRelatorio.Text = rel.valor;
@@ -3031,6 +3303,42 @@ namespace GestaoEscolar.Academico.ControleTurma
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o relatório.", UtilBO.TipoMensagem.Erro);
             }
         }
+
+        protected void btnRelatorioAtiExtra_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                // Recuperando item que chamou.
+                ImageButton btnRelatorio = (ImageButton)sender;
+                RepeaterItem itemAtividade = (RepeaterItem)btnRelatorio.NamingContainer;
+                Repeater rptAtividades = (Repeater)itemAtividade.NamingContainer;
+                RepeaterItem itemAluno = (RepeaterItem)rptAtividades.NamingContainer;
+
+                long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
+                int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
+                int tae_id = Convert.ToInt32(((Label)itemAtividade.FindControl("lbltae_id")).Text);
+
+                NotasRelatorioAtiExtra rel = VS_Nota_RelatorioAtiExtra.Find(p =>
+                    p.alu_id == alu_id
+                    && p.tae_id == tae_id
+                    && p.mtu_id == mtu_id);
+
+                // Guarda o tipo de alteração, o alu_id, o mtu_id e o tnt_id da linha que está sendo editada.
+                hdnIds.Value = 1 + ";" + alu_id + ";" + tae_id + ";" + mtu_id + ";2";
+
+                lblDadosRelatorio.Text = "<b>Nome do aluno:</b> " + ((Label)itemAluno.FindControl("lblNome")).Text;
+                txtRelatorio.Text = rel.valor;
+
+                // Abrir relatório.
+                ScriptManager.RegisterStartupScript(Page, typeof(Page), "RelatorioNota", "$(document).ready(function(){ $('#divRelatorio').dialog('open'); });", true);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o relatório.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
 
         protected void btnCompensacaoAusencia_Click(object sender, EventArgs e)
         {
@@ -3059,8 +3367,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                 long alu_id = Convert.ToInt32(s[1]);
                 int id = Convert.ToInt32(s[2]);
                 int mtu_id = Convert.ToInt32(s[3]);
+                int tipoListao = Convert.ToInt32(s[4]);
 
-                if (tipoAlteracao == 1)
+                if (tipoAlteracao == 1 && tipoListao == 1)
                 {
                     if (VS_Nota_Relatorio.Exists(p =>
                         p.tnt_id == id
@@ -3092,6 +3401,40 @@ namespace GestaoEscolar.Academico.ControleTurma
                         Repeater rptAtividades = (Repeater)item.FindControl("rptAtividadesAvaliacao");
                         foreach (RepeaterItem itemAtividade in rptAtividades.Items)
                             SetaImgRelatorio(itemAtividade);
+                    }
+                }
+                else if (tipoAlteracao == 1 && tipoListao == 2)
+                {
+                    if (VS_Nota_RelatorioAtiExtra.Exists(p =>
+                        p.tae_id == id
+                        && p.alu_id == alu_id
+                        && p.mtu_id == mtu_id))
+                    {
+                        int alterar = VS_Nota_RelatorioAtiExtra.FindIndex(p =>
+                            p.tae_id == id
+                            && p.alu_id == alu_id
+                            && p.mtu_id == mtu_id);
+
+                        VS_Nota_RelatorioAtiExtra[alterar] = new NotasRelatorioAtiExtra
+                        {
+                            valor = txtRelatorio.Text
+                            ,
+                            tae_id = id
+                            ,
+                            alu_id = alu_id
+                            ,
+                            mtu_id = mtu_id
+                        };
+                    }
+                    else
+                        AdicionaItemRelatorioAtiExtra(id, alu_id, mtu_id, txtRelatorio.Text);
+
+                    // Percorre os itens do repeater para atualizar os botões de relatório.
+                    foreach (RepeaterItem item in rptAlunoAtivExtra.Items)
+                    {
+                        Repeater rptAtividades = (Repeater)item.FindControl("rptAtividades");
+                        foreach (RepeaterItem itemAtividade in rptAtividades.Items)
+                            SetaImgRelatorioAtiExtra(itemAtividade);
                     }
                 }
 
@@ -3666,8 +4009,6 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
-        #endregion Eventos
-
         protected void btnAdicionarAtiExtra_Click(object sender, EventArgs e)
         {
             try
@@ -3694,26 +4035,22 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity))
                 {
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Adição de atividade | tud_id: {0}, tae_id: {1}", entity.tud_id, entity.tae_id));
+                    lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse salva com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     LimparCamposAtividadeExtraclasse();
                     CarregarListaoAtividadeExtraclasse();
+                    hdnTaeId.Value = string.Empty;
                 }
             }
             catch (ValidationException ex)
             {
-                lblMensagemAtiExtra.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
-                lblMensagemAtiExtra.Text = UtilBO.GetErroMessage("Erro ao tentar salvar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
             }
-        }
-
-        private void LimparCamposAtividadeExtraclasse()
-        {
-            UCComboTipoAtividadeAvaliativa.Valor = -1;
-            txtNomeAtiExtra.Text = txtDescricaoAtiExtra.Text = txtCargaAtiExtra.Text = string.Empty;
-            updAtiExtra.Update();
         }
 
         protected void rptAlunoAtivExtra_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -3742,7 +4079,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (e.Item.ItemType == ListItemType.Header)
                 {
                     // Busca todas as atividades para o cabeçalho.
-                    ltAtividades = (from DataRow dr in DTAtividadeExtraclasse .Rows
+                    ltAtividades = (from DataRow dr in DTAtividadeExtraclasse.Rows
                                     group dr by dr["tae_id"] into g
                                     orderby Convert.ToInt32(g.FirstOrDefault()["tae_id"])
                                             , Convert.ToInt64(g.FirstOrDefault()["tud_id"])
@@ -3839,8 +4176,10 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 if (tipo == EscalaAvaliacaoTipo.Relatorios)
                 {
-                    string relatorio = DataBinder.Eval(itemAtividade.DataItem, "relatorio").ToString();
-                    
+                    string aea_relatorio = DataBinder.Eval(itemAtividade.DataItem, "relatorio").ToString();
+                    AdicionaItemRelatorioAtiExtra(tae_id, alu_id, mtu_id, aea_relatorio);
+
+                    SetaImgRelatorioAtiExtra(itemAtividade);
                 }
 
                 chkEntregou.Checked = Convert.ToBoolean(DataBinder.Eval(itemAtividade.DataItem, "entregou").ToString());
@@ -3874,81 +4213,117 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
-        /// <summary>
-        /// Salva listão de avaliações.
-        /// </summary>
-        /// <param name="PermaneceTela"></param>
-        /// <returns></returns>
-        public bool SalvarAtividadeExtra(out string msg)
+        protected void btnEditarAtiExtra_Click(object sender, ImageClickEventArgs e)
         {
-            msg = "";
-            if (!VS_Periodo_Aberto)
-                throw new ValidationException(String.Format("Listão de atividades extraclasse de {0} disponível apenas para consulta.", GestaoEscolarUtilBO.nomePadraoPeriodo_Calendario(__SessionWEB.__UsuarioWEB.Usuario.ent_id)));
-
-            List<CLS_TurmaAtividadeExtraClasseAluno> listaTumaAtividadeExtraclasse = new List<CLS_TurmaAtividadeExtraClasseAluno>();
-
-            bool visibilidadeRegencia = VisibilidadeRegencia(ddlTurmaDisciplinaListao);
-
-            foreach (RepeaterItem itemAluno in rptAlunoAtivExtra.Items)
+            try
             {
-                Repeater rptAtividades = (Repeater)itemAluno.FindControl("rptAtividades");
-                long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
-                int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
-                int mtd_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtd_id")).Text);
-                string pes_nome = Convert.ToString(((Label)itemAluno.FindControl("lblNomeOficial")).Text);
-
-                // Adiciona itens na lista de TurmaNota - só pra alterar o tnt_efetivado.
-                foreach (RepeaterItem itemAtividadeAluno in rptAtividades.Items)
+                ImageButton btnEditarAtiExtra = sender as ImageButton;
+                if (btnEditarAtiExtra != null)
                 {
-                    HtmlGenericControl divAtividades = (HtmlGenericControl)itemAtividadeAluno.FindControl("divAtividades");
-                    if (divAtividades != null)
+                    RepeaterItem itemAtividade = btnEditarAtiExtra.NamingContainer as RepeaterItem;
+                    Label lbltud_id = itemAtividade.FindControl("lbltud_id") as Label;
+                    Label lbltae_id = itemAtividade.FindControl("lbltae_id") as Label;
+
+                    if (lbltud_id != null && lbltae_id != null)
                     {
-                        CheckBox chkEntregou = (CheckBox)itemAtividadeAluno.FindControl("chkEntregou");
-                        bool aea_entregue = chkEntregou != null ? chkEntregou.Checked : false;
+                        long tud_id = 0;
+                        int tae_id = 0;
 
-                        if (CLS_TurmaNotaAlunoBO.VerificaValoresNotas(VS_EntitiesControleTurma.escalaDocente.escalaAvaliacaoNumerica, RetornaAvaliacao(itemAtividadeAluno), pes_nome))
+                        if (long.TryParse(lbltud_id.Text, out tud_id) && tud_id > 0 &&
+                            int.TryParse(lbltae_id.Text, out tae_id) && tae_id > 0)
                         {
-                            int tae_id = Convert.ToInt32(((Label)itemAtividadeAluno.FindControl("lbltae_id")).Text);
-
-                            CLS_TurmaAtividadeExtraClasseAluno ent = new CLS_TurmaAtividadeExtraClasseAluno
+                            CLS_TurmaAtividadeExtraClasse entity = new CLS_TurmaAtividadeExtraClasse
                             {
-                                tud_id = visibilidadeRegencia ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id,
-                                tae_id = tae_id,
-                                alu_id = alu_id,
-                                mtu_id = mtu_id,
-                                mtd_id = mtd_id,
-                                aea_avaliacao = RetornaAvaliacao(itemAtividadeAluno),
-                                aea_relatorio = string.Empty,
-                                aea_entregue = aea_entregue,
-                                aea_dataAlteracao = DateTime.Now,
-                                aea_situacao = 1
+                                tud_id = tud_id
+                                ,
+                                tae_id = tae_id
                             };
+                            CLS_TurmaAtividadeExtraClasseBO.GetEntity(entity);
 
-                            listaTumaAtividadeExtraclasse.Add(ent);
+                            UCComboTipoAtividadeAvaliativa.Valor = entity.tav_id > 0 ? entity.tav_id : -1;
+                            txtNomeAtiExtra.Text = entity.tae_nome;
+                            txtDescricaoAtiExtra.Text = entity.tae_descricao;
+                            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? entity.tae_cargaHoraria.ToString() : string.Empty;
+
+                            hdnTaeId.Value = entity.tae_id.ToString();
+
+                            updAtiExtra.Update();
                         }
-
-                        HabilitaControles(divAtividades.Controls, true);
                     }
                 }
             }
-
-            hdnAlterouAtividadeExtra.Value = "";
-
-            if (CLS_TurmaAtividadeExtraClasseAlunoBO.SalvarEmLote(listaTumaAtividadeExtraclasse))
+            catch (Exception ex)
             {
-                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "Listão de atividade extraclasse | " +
-                                                                        "cal_id: " + UCNavegacaoTelaPeriodo.VS_cal_id + " | tpc_id: " + UCNavegacaoTelaPeriodo.VS_tpc_id +
-                                                                        " | tur_id: " + UCControleTurma1.VS_tur_id + "; tud_id: " + (visibilidadeRegencia ?
-                                                    ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id));
-
-                msg = UtilBO.GetErroMessage("Listão de atividades extraclasse salvo com sucesso.", UtilBO.TipoMensagem.Sucesso);
-
-                CarregarListaoAtividadeExtraclasse();
-
-                return true;
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar editar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
             }
-
-            return false;
         }
+
+        protected void btnExcluirAtiExtra_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                ImageButton btnExcluirAtiExtra = sender as ImageButton;
+                if (btnExcluirAtiExtra != null)
+                {
+                    RepeaterItem itemAtividade = btnExcluirAtiExtra.NamingContainer as RepeaterItem;
+                    Label lbltud_id = itemAtividade.FindControl("lbltud_id") as Label;
+                    Label lbltae_id = itemAtividade.FindControl("lbltae_id") as Label;
+
+                    if (lbltud_id != null && lbltae_id != null)
+                    {
+                        long tud_id = 0;
+                        int tae_id = 0;
+
+                        if (long.TryParse(lbltud_id.Text, out tud_id) && tud_id > 0 &&
+                            int.TryParse(lbltae_id.Text, out tae_id) && tae_id > 0)
+                        {
+                            VS_tud_idAtiExtraExcluir = tud_id;
+                            VS_tae_idAtiExtraExcluir = tae_id;
+                            UCConfirmacaoOperacao.Mensagem = "Confirma exclusão?";
+                            UCConfirmacaoOperacao.EventBtnNao = false;
+                            UCConfirmacaoOperacao.Update();
+                            ScriptManager.RegisterStartupScript(Page, typeof(Page), "ConfirmaExclusaoAtiExtra", "$(document).ready(function(){ scrollToTop(); $('#divConfirmacao').dialog('open'); });", true);
+                        }
+                    }
+                }
+            }
+            catch (ValidationException ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void btnLimparCamposAtiExtra_Click(object sender, EventArgs e)
+        {
+            LimparCamposAtividadeExtraclasse();
+        }
+
+        protected void rptAtividadesExtraClasseHeader_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                // Verifico se a atividade é de uma avaliação paralela.
+                ImageButton btnExcluirAtiExtra = (ImageButton)e.Item.FindControl("btnExcluirAtiExtra");
+                if (btnExcluirAtiExtra != null)
+                {
+                    btnExcluirAtiExtra.Visible = usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
+                }
+
+                ImageButton btnEditarAtiExtra = (ImageButton)e.Item.FindControl("btnEditarAtiExtra");
+                if (btnEditarAtiExtra != null)
+                {
+                    btnEditarAtiExtra.Visible = usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
+                }
+            }
+        }
+
+        #endregion Eventos
     }
 }

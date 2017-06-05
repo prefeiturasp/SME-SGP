@@ -104,5 +104,19 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         #endregion Métodos de alteração/inclusão
+
+        #region Métodos de exclusão
+
+        /// <summary>
+        /// Exclui a atividade extraclasse
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static bool Deletar(CLS_TurmaAtividadeExtraClasse entity)
+        {
+            return new CLS_TurmaAtividadeExtraClasseDAO().Deletar(entity.tud_id, entity.tae_id);
+        }
+
+        #endregion
     }
 }

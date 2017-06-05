@@ -13,6 +13,7 @@
 <%@ Register Src="~/WebControls/LancamentoFrequencia/UCLancamentoFrequenciaTerritorio.ascx" TagName="UCLancamentoFrequenciaTerritorio" TagPrefix="uc3" %>
 <%@ Register Src="~/WebControls/Combos/UCComboTipoAtividadeAvaliativa.ascx" TagName="UCComboTipoAtividadeAvaliativa" TagPrefix="uc11" %>
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios" TagPrefix="uc12" %>
+<%@ Register Src="~/WebControls/Mensagens/UCConfirmacaoOperacao.ascx" TagName="UCConfirmacaoOperacao" TagPrefix="uc13" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -21,6 +22,7 @@
         var idDdlOrdenacaoFrequenciaTerritorio = '#<%=UCLancamentoFrequenciaTerritorio.ClientIdComboOrdenacao%>';
         var idDdlOrdenacaoFrequencia = '#<%= UCLancamentoFrequencia.ClientIdComboOrdenacao%>';
         var idDdlOrdenacaoAvaliacao = '#<%=UCComboOrdenacaoAvaliacao.ComboClientID%>';
+        var idDdlOrdenacaoAtivExtra = '#<%=UCComboOrdenacaoAtivExtra.ComboClientID%>';
         var idhdnOrdenacaoFrequenciaTerritorio = '#<%=UCLancamentoFrequenciaTerritorio.ClientIdHdnOrdenacao%>';
         var idhdnOrdenacaoFrequencia = '#<%=UCLancamentoFrequencia.ClientIdHdnOrdenacao%>';
         var idhdnOrdenacaoAvaliacao = '#<%=hdnOrdenacaoAvaliacao.ClientID%>';
@@ -33,6 +35,7 @@
             <asp:Label ID="lblMessage" runat="server" EnableViewState="false"></asp:Label>
             <asp:Label ID="lblPeriodoEfetivado" runat="server" EnableViewState="false" Visible="false"></asp:Label>
             <asp:Label ID="lblAulasSemPlano" runat="server" Visible="false"></asp:Label>
+            <asp:ValidationSummary ID="vsAtividadeExtra" runat="server" ValidationGroup="AtividadeExtraclasse" />
         </ContentTemplate>
     </asp:UpdatePanel>
     <fieldset>
@@ -482,11 +485,11 @@
                                 </div>
                                 <div id="divTabsListao-3">
                                     <asp:Panel ID="pnlAtividadesExtraClasse" runat="server">
+                                        
+                                                <uc13:UCConfirmacaoOperacao ID="UCConfirmacaoOperacao" runat="server" ObservacaoVisivel="false" ObservacaoObrigatorio="false" />
                                         <asp:UpdatePanel ID="updAtiExtra" runat="server" UpdateMode="Conditional">
                                             <ContentTemplate>
-                                                <fieldset>
-                                                    <asp:ValidationSummary ID="vsAtividadeExtra" runat="server" ValidationGroup="AtividadeExtraclasse" />
-                                                    <asp:Label ID="lblMensagemAtiExtra" runat="server"></asp:Label>
+                                                <fieldset id="fdsCadastroAtiExtra" runat="server">
                                                     <asp:HiddenField ID="hdnTaeId" runat="server" />
                                                     <uc12:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
                                                     <uc11:UCComboTipoAtividadeAvaliativa ID="UCComboTipoAtividadeAvaliativa" runat="server" Obrigatorio="true" ValidationGroup="AtividadeExtraclasse" />
@@ -501,7 +504,8 @@
                                                     <asp:RequiredFieldValidator ID="rfvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic"
                                                         ErrorMessage="Carga horária da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
                                                     <div class="right">
-                                                        <asp:Button ID="btnAdicionarAtiExtra" runat="server" Text="Adicionar atividade extraclasse" OnClick="btnAdicionarAtiExtra_Click" ValidationGroup="AtividadeExtraclasse" />
+                                                        <asp:Button ID="btnAdicionarAtiExtra" runat="server" Text="Salvar atividade extraclasse" OnClick="btnAdicionarAtiExtra_Click" ValidationGroup="AtividadeExtraclasse" />
+                                                        <asp:Button ID="btnLimparCamposAtiExtra" runat="server" Text="Limpar cadastro de atividade extraclasse" OnClick="btnLimparCamposAtiExtra_Click" CausesValidation="false" />
                                                     </div>
                                                 </fieldset>
                                                 <fieldset>
@@ -519,13 +523,18 @@
                                                                             <th>
                                                                                 <asp:Label ID="lblNome" runat="server" Text='Nome do aluno'></asp:Label>
                                                                             </th>
-                                                                            <asp:Repeater ID="rptAtividades" runat="server">
+                                                                            <asp:Repeater ID="rptAtividades" runat="server" OnItemDataBound="rptAtividadesExtraClasseHeader_ItemDataBound">
                                                                                 <ItemTemplate>
                                                                                     <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px;">
                                                                                         <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
                                                                                         <asp:Label ID="lbltud_id" runat="server" Text='<%#Bind("tud_id") %>' Visible="false"></asp:Label>
-                                                                                        <div style="display: inline-block; width: 100%;">
-                                                                                            <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("nome") %>'></asp:Label>
+                                                                                        <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("nome") %>'></asp:Label>
+                                                                                        <div style="display: block; margin-bottom: 5px;">
+                                                                                            <asp:ImageButton ID="btnEditarAtiExtra" runat="server" SkinID="btEditar" 
+                                                                                                ToolTip="Editar atividade extraclasse" OnClick="btnEditarAtiExtra_Click"
+                                                                                                CausesValidation="false" />
+                                                                                            <asp:ImageButton ID="btnExcluirAtiExtra" runat="server" SkinID="btExcluir"
+                                                                                                ToolTip="Excluir atividade extraclasse" OnClick="btnExcluirAtiExtra_Click" />
                                                                                         </div>
                                                                                     </th>
                                                                                 </ItemTemplate>
@@ -553,10 +562,11 @@
                                                                         <td runat="server" id="tdAtividadesAtivAva" class="center grid-responsive-item-inline grid-responsive-center" style="text-align: center;">
                                                                             <div id="divAtividades" runat="server" style="display: inline-block; width: 100%;">
                                                                                 <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
+                                                                                <asp:Label ID="lbltud_id" runat="server" Text='<%#Bind("tud_id") %>' Visible="false"></asp:Label>
                                                                                 <asp:TextBox ID="txtNota" runat="server" SkinID="Decimal" Width="50" MaxLength="6"></asp:TextBox>
                                                                                 <asp:DropDownList ID="ddlPareceres" runat="server" DataTextField="descricao" DataValueField="eap_valor">
                                                                                 </asp:DropDownList>
-                                                                                <asp:ImageButton ID="btnRelatorio" runat="server" SkinID="btDetalhar" OnClick="btnRelatorio_Click"
+                                                                                <asp:ImageButton ID="btnRelatorio" runat="server" SkinID="btDetalhar" OnClick="btnRelatorioAtiExtra_Click"
                                                                                     ToolTip="Lançar relatório" />
                                                                                 <asp:Image ID="imgSituacao" runat="server" SkinID="imgConfirmar" ToolTip="Relatório lançado"
                                                                                     Width="16px" Height="16px" Visible="false" ImageAlign="Top" />

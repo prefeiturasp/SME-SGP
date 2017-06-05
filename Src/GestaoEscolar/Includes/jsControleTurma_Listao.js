@@ -41,8 +41,8 @@
         });
     }
 
-    if (idhdnOrdenacaoAtivExtra != "") {
-        $(idhdnOrdenacaoAtivExtra).unbind('change').change(function () {
+    if (idDdlOrdenacaoAtivExtra != "") {
+        $(idDdlOrdenacaoAtivExtra).unbind('change').change(function () {
             Ordena($(this), ".sortableAtividadeExtra");
         });
     }
@@ -186,7 +186,7 @@
 
     if (idhdnOrdenacaoAtivExtra != "" && $(idhdnOrdenacaoAtivExtra).length > 0) {
         if ($(idhdnOrdenacaoAtivExtra).val() == "") {
-            $(idhdnOrdenacaoAtivExtra).trigger('change');
+            $(idDdlOrdenacaoAtivExtra).trigger('change');
         }
         else {
             var col = parseInt($(idhdnOrdenacaoAtivExtra).val().split(",")[0]);
