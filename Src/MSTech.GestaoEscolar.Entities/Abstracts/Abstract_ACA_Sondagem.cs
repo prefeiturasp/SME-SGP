@@ -60,8 +60,8 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Enum da opção de resposta (1 = multiseleção; 2 = seleção única).
 		/// </summary>
-		[MSNotNullOrEmpty("[sdn_opcaoResposta] é obrigatório.")]
-		public virtual byte sdn_opcaoResposta { get; set; }
+		[MSNotNullOrEmpty("[snd_opcaoResposta] é obrigatório.")]
+		public virtual byte snd_opcaoResposta { get; set; }
 
     }
 }

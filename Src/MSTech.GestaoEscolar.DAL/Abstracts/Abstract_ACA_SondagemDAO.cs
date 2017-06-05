@@ -99,9 +99,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Byte;
-			Param.ParameterName = "@sdn_opcaoResposta";
+			Param.ParameterName = "@snd_opcaoResposta";
 			Param.Size = 1;
-			Param.Value = entity.sdn_opcaoResposta;
+			Param.Value = entity.snd_opcaoResposta;
 			qs.Parameters.Add(Param);
 
 
@@ -168,9 +168,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Byte;
-			Param.ParameterName = "@sdn_opcaoResposta";
+			Param.ParameterName = "@snd_opcaoResposta";
 			Param.Size = 1;
-			Param.Value = entity.sdn_opcaoResposta;
+			Param.Value = entity.snd_opcaoResposta;
 			qs.Parameters.Add(Param);
 
 

@@ -157,7 +157,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 ViewState["VS_sdr_id"] = value;
             }
         }
-        
+
         #endregion
 
         #region Métodos
@@ -180,6 +180,9 @@ namespace GestaoEscolar.Academico.Sondagem
 
                 txtDescricao.Text = snd.snd_descricao;
                 txtDescricao.Enabled = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+
+                ddlOpcaoResposta.SelectedValue = snd.snd_opcaoResposta.ToString();
+                ddlOpcaoResposta.Enabled = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
 
                 ckbBloqueado.Checked = !snd.snd_situacao.Equals(1);
                 ckbBloqueado.Enabled = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
@@ -260,7 +263,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     ,
                     snd_descricao = txtDescricao.Text
                     ,
-                    sdn_opcaoResposta = Convert.ToByte(ddlOpcaoResposta.SelectedValue)
+                    snd_opcaoResposta = Convert.ToByte(ddlOpcaoResposta.SelectedValue)
                     ,
                     snd_situacao = (ckbBloqueado.Checked ? Convert.ToByte(2) : Convert.ToByte(1))
                     ,
@@ -665,7 +668,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     string textoAlterar = grvQuestoes.DataKeys[index]["sdq_descricao"].ToString();
 
                     VS_sdq_id = idAlterar;
-                    
+
                     txtItemQuestao.Text = textoAlterar;
                     updPopUpQuestao.Update();
                     btnAdicionarQuestao.Text = GetGlobalResourceObject("Academico", "Sondagem.Cadastro.bntAlterar.Text").ToString();
@@ -822,7 +825,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     string textoAlterar = grvSubQuestoes.DataKeys[index]["sdq_descricao"].ToString();
 
                     VS_sdq_id = idAlterar;
-                    
+
                     txtItemSubquestao.Text = textoAlterar;
                     txtItemSubquestao.Focus();
                     updPopUpSubquestao.Update();
@@ -981,7 +984,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     string siglaAlterar = grvRespostas.DataKeys[index]["sdr_sigla"].ToString();
 
                     VS_sdr_id = idAlterar;
-                    
+
                     txtItemResposta.Text = textoAlterar;
                     txtSigla.Text = siglaAlterar;
                     txtSigla.Focus();

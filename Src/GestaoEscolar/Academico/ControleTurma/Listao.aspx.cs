@@ -145,6 +145,23 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Lista de permissões do docente para cadastro de avaliações.
+        /// </summary>
+        private List<sPermissaoDocente> VS_ltPermissaoAtividadeExtraclasse
+        {
+            get
+            {
+                return (List<sPermissaoDocente>)
+                        (
+                            ViewState["VS_ltPermissaoAtividadeExtraclasse"] ??
+                            (
+                                ViewState["VS_ltPermissaoAtividadeExtraclasse"] = CFG_PermissaoDocenteBO.SelecionaPermissaoModulo(UCControleTurma1.VS_tdt_posicao, (byte)EnumModuloPermissao.AtividadesExtraClasse)
+                            )
+                        );
+            }
+        }
+
+        /// <summary>
         /// Lista de permissões do docente para cadastro de efetivacap.
         /// </summary>
         private List<sPermissaoDocente> VS_ltPermissaoEfetivacao
@@ -626,6 +643,15 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        private bool PermiteLancarAtividadeExtraclasse
+        {
+            get
+            {
+                return !EntTurmaDisciplina.tud_naoLancarNota && VS_ltPermissaoAtividadeExtraclasse.Any(p => p.pdc_permissaoEdicao);
+            }
+        }
+
+
         private List<sComboTurmaDisciplina> dtTurmaDisciplinaDoc
         {
             get
@@ -979,6 +1005,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (exibeAtividadeExtra)
                 {
                     UCComboTipoAtividadeAvaliativa.CarregarTipoAtividadeAvaliativa(true);
+                    LimparCamposAtividadeExtraclasse();
                     CarregarListaoAtividadeExtraclasse();
                 }
 
@@ -2226,7 +2253,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 DataTable dt = CLS_TurmaAtividadeExtraClasseBO.SelecionaPorPeriodoDisciplina_Alunos(
                            VisibilidadeRegencia(ddlTurmaDisciplinaListao) ?
                                    ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id
-                               , UCNavegacaoTelaPeriodo.VS_tpc_id, tur_ids);
+                               , UCNavegacaoTelaPeriodo.VS_tpc_id, __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao
+                                , PosicaoDocente, tur_ids);
 
                 // Carregar as atividades e notas dos alunos nas atividades.
                 var x = (from DataRow dr in dt.Rows
@@ -2256,6 +2284,8 @@ namespace GestaoEscolar.Academico.ControleTurma
         {
             UCComboTipoAtividadeAvaliativa.Valor = -1;
             txtNomeAtiExtra.Text = txtDescricaoAtiExtra.Text = txtCargaAtiExtra.Text = hdnTaeId.Value = string.Empty;
+            HabilitaControles(divCadastroAtiExtra.Controls, (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto);
+            btnAdicionarAtiExtra.Visible = (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto;
             updAtiExtra.Update();
         }
 
@@ -2297,32 +2327,37 @@ namespace GestaoEscolar.Academico.ControleTurma
                         CheckBox chkEntregou = (CheckBox)itemAtividadeAluno.FindControl("chkEntregou");
                         bool aea_entregue = chkEntregou != null ? chkEntregou.Checked : false;
 
-                        if (CLS_TurmaNotaAlunoBO.VerificaValoresNotas(VS_EntitiesControleTurma.escalaDocente.escalaAvaliacaoNumerica, RetornaAvaliacao(itemAtividadeAluno), pes_nome))
+                        Int16 tdt_posicao = Convert.ToInt16(((Label)itemAtividadeAluno.FindControl("lblTaePosicao")).Text);
+
+                        if (!(PosicaoDocente > 0 && !VS_ltPermissaoAtividadeExtraclasse.Any(p => p.tdt_posicaoPermissao == tdt_posicao && p.pdc_permissaoEdicao)))
                         {
-                            int tae_id = Convert.ToInt32(((Label)itemAtividadeAluno.FindControl("lbltae_id")).Text);
-
-                            // Busca relatório lançado.
-                            NotasRelatorioAtiExtra rel = VS_Nota_RelatorioAtiExtra.Find(p =>
-                                p.alu_id == alu_id
-                                && p.tae_id == tae_id
-                                && p.mtu_id == mtu_id);
-
-
-                            CLS_TurmaAtividadeExtraClasseAluno ent = new CLS_TurmaAtividadeExtraClasseAluno
+                            if (CLS_TurmaNotaAlunoBO.VerificaValoresNotas(VS_EntitiesControleTurma.escalaDocente.escalaAvaliacaoNumerica, RetornaAvaliacao(itemAtividadeAluno), pes_nome))
                             {
-                                tud_id = visibilidadeRegencia ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id,
-                                tae_id = tae_id,
-                                alu_id = alu_id,
-                                mtu_id = mtu_id,
-                                mtd_id = mtd_id,
-                                aea_avaliacao = RetornaAvaliacao(itemAtividadeAluno),
-                                aea_relatorio = rel.valor,
-                                aea_entregue = aea_entregue,
-                                aea_dataAlteracao = DateTime.Now,
-                                aea_situacao = 1
-                            };
+                                int tae_id = Convert.ToInt32(((Label)itemAtividadeAluno.FindControl("lbltae_id")).Text);
 
-                            listaTumaAtividadeExtraclasse.Add(ent);
+                                // Busca relatório lançado.
+                                NotasRelatorioAtiExtra rel = VS_Nota_RelatorioAtiExtra.Find(p =>
+                                    p.alu_id == alu_id
+                                    && p.tae_id == tae_id
+                                    && p.mtu_id == mtu_id);
+
+
+                                CLS_TurmaAtividadeExtraClasseAluno ent = new CLS_TurmaAtividadeExtraClasseAluno
+                                {
+                                    tud_id = visibilidadeRegencia ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id,
+                                    tae_id = tae_id,
+                                    alu_id = alu_id,
+                                    mtu_id = mtu_id,
+                                    mtd_id = mtd_id,
+                                    aea_avaliacao = RetornaAvaliacao(itemAtividadeAluno),
+                                    aea_relatorio = rel.valor,
+                                    aea_entregue = aea_entregue,
+                                    aea_dataAlteracao = DateTime.Now,
+                                    aea_situacao = 1
+                                };
+
+                                listaTumaAtividadeExtraclasse.Add(ent);
+                            }
                         }
 
                         HabilitaControles(divAtividades.Controls, true);
@@ -3232,7 +3267,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             try
             {
                 Int32.TryParse(hdnAlterouAtividadeExtra.Value, out alterouAtividadeExtra);
-                if (Page.IsValid && pnlAtividadesExtraClasse.Visible && aAtividadeExtraClasse.Visible && !VS_PeriodoEfetivado && alterouAtividadeExtra > 0)
+                if (Page.IsValid && pnlAtividadesExtraClasse.Visible && aAtividadeExtraClasse.Visible && !VS_PeriodoEfetivado && alterouAtividadeExtra > 0 && PermiteLancarAtividadeExtraclasse)
                     SalvarAtividadeExtra(out msg);
             }
             catch (ValidationException ex)
@@ -4030,6 +4065,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     ,
                     tae_cargaHoraria = Convert.ToInt32(string.IsNullOrEmpty(txtCargaAtiExtra.Text) ? "0" : txtCargaAtiExtra.Text)
                     ,
+                    tdt_posicao = __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao ? (byte)1 : PosicaoDocente
+                    ,
                     IsNew = tae_id <= 0
                 };
 
@@ -4169,7 +4206,17 @@ namespace GestaoEscolar.Academico.ControleTurma
                     ddlPareceres.SelectedValue = avaliacao;
                 }
 
-                HabilitaControles(divAtividades.Controls, usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado);
+                bool permissaoAlteracao = PermiteLancarAtividadeExtraclasse && Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "permissaoEdicao")) > 0;
+                if (permissaoAlteracao && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                {
+                    permissaoAlteracao = (VS_situacaoTurmaDisciplina == 1 || (VS_situacaoTurmaDisciplina != 1));
+                }
+                if (permissaoAlteracao)
+                {
+                    permiteEdicao = true;
+                }
+                
+                HabilitaControles(divAtividades.Controls, usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado && permiteEdicao);
 
                 double eaeAvaliacao;
                 txtNota.Text = double.TryParse(avaliacao, out eaeAvaliacao) ? string.Format("{0:F" + NumeroCasasDecimais + "}", eaeAvaliacao) : avaliacao;
@@ -4224,6 +4271,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                     Label lbltud_id = itemAtividade.FindControl("lbltud_id") as Label;
                     Label lbltae_id = itemAtividade.FindControl("lbltae_id") as Label;
 
+                    Label lblTaePosicao = itemAtividade.FindControl("lblTaePosicao") as Label;
+                    Label lblPermissao = itemAtividade.FindControl("lblPermissao") as Label;
+
                     if (lbltud_id != null && lbltae_id != null)
                     {
                         long tud_id = 0;
@@ -4246,6 +4296,16 @@ namespace GestaoEscolar.Academico.ControleTurma
                             txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? entity.tae_cargaHoraria.ToString() : string.Empty;
 
                             hdnTaeId.Value = entity.tae_id.ToString();
+
+                            if (lblTaePosicao != null && lblPermissao != null)
+                            {
+                                byte posicao = 0;
+                                int permissao = 0;
+                                byte.TryParse(lblTaePosicao.Text, out posicao);
+                                int.TryParse(lblPermissao.Text, out permissao);
+                                HabilitaControles(divCadastroAtiExtra.Controls, permissao > 0 && PermiteLancarAtividadeExtraclasse);
+                                btnAdicionarAtiExtra.Visible = permissao > 0 && PermiteLancarAtividadeExtraclasse;
+                            }
 
                             updAtiExtra.Update();
                         }
@@ -4309,11 +4369,21 @@ namespace GestaoEscolar.Academico.ControleTurma
             if (e.Item.ItemType == ListItemType.Item ||
                 e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                bool permissaoAlteracao = PermiteLancarAtividadeExtraclasse && Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "permissaoEdicao")) > 0;
+                if (permissaoAlteracao && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                {
+                    permissaoAlteracao = (VS_situacaoTurmaDisciplina == 1 || (VS_situacaoTurmaDisciplina != 1));
+                }
+                if (permissaoAlteracao)
+                {
+                    permiteEdicao = true;
+                }
+
                 // Verifico se a atividade é de uma avaliação paralela.
                 ImageButton btnExcluirAtiExtra = (ImageButton)e.Item.FindControl("btnExcluirAtiExtra");
                 if (btnExcluirAtiExtra != null)
                 {
-                    btnExcluirAtiExtra.Visible = usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
+                    btnExcluirAtiExtra.Visible = usuarioPermissao && permiteEdicao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
                 }
 
                 ImageButton btnEditarAtiExtra = (ImageButton)e.Item.FindControl("btnEditarAtiExtra");
