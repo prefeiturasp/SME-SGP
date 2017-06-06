@@ -1398,6 +1398,7 @@ public partial class Academico_Curso_Cadastro : MotherPageLogado
                 {
                     UCComboTipoDisciplina1.Valor = Convert.ToInt32(_VS_disciplinas.Rows[i]["tds_id"].ToString());
                     _txtCodigoDisciplina.Text = _VS_disciplinas.Rows[i]["dis_codigo"].ToString();
+                    _txtCargaHorariaExtraClasse.Text = _VS_disciplinas.Rows[i]["dis_cargaHorariaExtraClasse"].ToString();
                     _txtNomeDisciplina.Text = _VS_disciplinas.Rows[i]["dis_nome"].ToString().Trim();
                     _txtNomeAbreviadoDisciplina.Text = _VS_disciplinas.Rows[i]["dis_nomeAbreviado"].ToString().Trim();
 
@@ -1417,6 +1418,7 @@ public partial class Academico_Curso_Cadastro : MotherPageLogado
             {
                 _txtNomeAbreviadoDisciplina.Enabled = false;
                 _txtCodigoDisciplina.Enabled = false;
+                _txtCargaHorariaExtraClasse.Enabled = false;
             }
         }
 
