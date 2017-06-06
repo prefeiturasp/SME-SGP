@@ -283,6 +283,8 @@ namespace MSTech.GestaoEscolar.BLL
             public bool divergenciasAulasPrevistas { get; set; }
 
             public int tne_id { get; set; }
+
+            public int tme_id { get; set; }
         }
     }
 
@@ -3836,6 +3838,8 @@ namespace MSTech.GestaoEscolar.BLL
                                        fav_fechamentoAutomatico = Convert.ToBoolean(drTurmas["fav_fechamentoAutomatico"])
                                        ,
                                        tne_id = drTurmas["tne_id"] != DBNull.Value ? Convert.ToInt32(drTurmas["tne_id"].ToString()) : -1
+                                       ,
+                                       tme_id = drTurmas["tme_id"] != DBNull.Value ? Convert.ToInt32(drTurmas["tme_id"].ToString()) : -1
                                    }).ToList()
                      }).ToList();
 
