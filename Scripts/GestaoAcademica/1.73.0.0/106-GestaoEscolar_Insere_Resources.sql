@@ -978,6 +978,13 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Limpar pesquisa'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Curso.Cadastro.LabelCargaHorariaExtraClasse.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Carga horária extraclasse'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

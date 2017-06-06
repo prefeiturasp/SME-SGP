@@ -519,7 +519,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
 
                 txtItemQuestao.Text = "";
-                divInserirQuestao.Visible = ParametroPermanecerTela;
+                divInserirQuestao.Visible = false;
             }
             catch (ValidationException ex)
             {
@@ -1105,7 +1105,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
 
                 txtItemSubquestao.Text = "";
-                divInserirSubquestao.Visible = ParametroPermanecerTela;
+                divInserirSubquestao.Visible = false;
             }
             catch (ValidationException ex)
             {
@@ -1180,7 +1180,7 @@ namespace GestaoEscolar.Academico.Sondagem
 
                 txtSigla.Text = "";
                 txtItemResposta.Text = "";
-                divInserirResposta.Visible = ParametroPermanecerTela;
+                divInserirResposta.Visible = false;
             }
             catch (ValidationException ex)
             {

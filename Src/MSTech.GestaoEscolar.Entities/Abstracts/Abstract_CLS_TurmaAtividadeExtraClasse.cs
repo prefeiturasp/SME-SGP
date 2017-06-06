@@ -59,7 +59,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// Carga horária da atividade extraclasse.
 		/// </summary>
 		[MSNotNullOrEmpty("[tae_cargaHoraria] é obrigatório.")]
-		public virtual int tae_cargaHoraria { get; set; }
+		public virtual decimal tae_cargaHoraria { get; set; }
 
         /// <summary>
 		/// Posição do docente.

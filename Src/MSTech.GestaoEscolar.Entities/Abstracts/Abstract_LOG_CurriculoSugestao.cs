@@ -46,5 +46,9 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// </summary>
 		public virtual DateTime lcs_data { get; set; }
 
+        /// <summary>
+		/// Ano do calendário.
+		/// </summary>
+		public virtual int cal_ano { get; set; }
     }
 }

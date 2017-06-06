@@ -176,6 +176,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         /// <summary>
         /// Carga horária total entregue de atividades extraclasse
         /// </summary>
-        public virtual int atd_numeroAtividadeExtraclasse { get; set; }
+        public virtual decimal atd_numeroAtividadeExtraclasse { get; set; }
     }
 }
