@@ -77,3 +77,9 @@ $corBotaoBottomHover: $corAcaoDarker;
   -moz-order: $order;
   order: $order;
 }
+
+@mixin flex-wrap(){
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+}

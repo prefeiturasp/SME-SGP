@@ -1,0 +1,345 @@
+@import 'variaveis';
+@import 'fonts';
+
+// TELA CURRICULO
+.text-titulo{
+  font-size:1rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom:8px;
+  display:block;
+}
+
+.fieldset-curriculo{
+  legend{
+    .btn{
+      float:right;
+      margin-right:12px;
+      font-size:0.8rem;
+    }
+  }
+
+  .grid{
+    input[type="image"]:not([style*="hidden"]){
+      height: 20px !important;
+      width: 20px !important;
+      border: 1px dotted #0163a2 !important;
+      padding: 3px;
+      box-sizing: border-box;
+    }
+  }
+
+  .accordion-grid, .grid-topico, .grid-itens-right{
+    border:0;
+    margin-bottom:0;
+
+    tr{
+      position:relative;
+
+      &:hover > td{
+        background:transparent !important;
+      }
+
+      td{
+        &:hover{
+          background:transparent !important;
+        }
+      }
+    }
+
+    > tbody > tr:not(.summary){
+      display:block;
+      background: #eee;
+      border-left: 5px solid rgba(0,0,0,.5);
+      margin-bottom:6px;
+
+      > td{
+        display:inline-block;
+        border-bottom:0;
+        padding:0;
+        @include border-radius(0);
+
+        > input[type="image"]{
+          position:absolute;
+          top:5px;
+
+          &[id*="btnExcluir"], &[id*="btnIncluirSugestao"]{
+            right:5px;
+          }
+
+          &[id*="btnEditar"]{
+            right:30px;
+          }
+
+          &[id*="btnDescer"]{
+            right:55px;
+          }
+
+          &[id*="btnSubir"]{
+            right:80px;
+          }
+
+          &[id*="btnSalvar"]{
+            position:static;
+            margin-left: 15px;
+            margin-bottom: 8px;
+          }
+
+          &[id*="btnCancelar"]{
+            position:static;
+            margin-bottom: 8px;
+          }
+
+          &.preenchido{
+            border:1px solid #0163a2 !important;
+            @include box-shadow(0 1px 0 #0163a2);
+          }
+        }
+
+        &:first-child{
+          display:block;
+          border-bottom: 0;
+          position:static;
+          padding:10px 110px 10px 12px;
+          width:100%;
+        }
+      }
+    }
+  }
+
+  .grid-topico{
+    + fieldset{
+      margin-top:16px;
+    }
+  }
+
+  .painel-habilidades{
+    position:relative;
+
+    input[type="submit"][id*="btnNovoEixo"]{
+        position: absolute;
+        right: 0;
+        top: -35px;
+    }
+
+    .accordion-grid{
+      > tbody{
+        > tr:not(.summary){
+          border-bottom:1px dashed rgba(0,0,0,.5);
+          border-left:0;
+          background:none;
+          
+          > td{
+            padding:0;
+
+            &:first-child {
+              cursor:pointer;
+              position:relative;
+
+              > span {
+                display:block;
+                padding:10px 0 0 25px;
+
+                &:before {
+                  content: '\e313';
+                  font-family: 'Material Icons';
+                  font-size: 24px;
+                  display: inline-block;
+                  position:absolute;
+                  left:-3px;
+                  top:5px;
+                }
+              }
+            }
+
+            &:last-child{
+              display:block;
+            }
+
+            > input[type="image"][id*="btnSalvar"]{
+              margin-left:25px;
+            }
+          }
+
+          .accordion-head{
+            > div{
+              margin-left: 25px;
+              margin-bottom: 6px;
+            }
+          }
+
+          .accordion-closed{
+            display:block;
+            height:0;
+            overflow:hidden;
+            padding:0;
+          }
+
+          .accordion-opened{
+            height:auto;
+            padding:0 0 15px 25px;
+          }
+
+          .accordion-body{
+            @include transition(padding 0.2s ease-out);
+
+            .grid{
+              width:100%;
+              margin-top:6px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .grid-itens-left{
+    border:none !important;
+
+    > tbody > tr:not(.summary){
+      margin-bottom:6px;
+      background:#eee;
+
+      > td{
+        border-bottom: 8px solid #fff;
+
+        &:not(:first-child):not(:last-child){
+          vertical-align: top;
+          width: 20px;
+          padding: 5px 3px;
+        }
+
+        &.td-acao-dupla{
+          width:50px !important;
+        }
+
+        &:last-child{
+          width:70%;
+          max-width:none;
+          padding:0;
+          position:relative;
+
+          &:before{
+            content:'';
+            display:inline-block;
+            position:absolute;
+            left:0;
+            bottom:0;
+            top:0;
+            width:5px;
+            background:rgba(0,0,0,.5);
+            z-index: 1;
+          }
+
+          > div{
+            border-top:1px solid rgba(0,0,0,.2);
+            width: 100%;
+            clear: both;
+          }
+
+          > .btn{
+            float:right;
+            margin:3px 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .grid-itens-right{
+    border:none !important;
+    margin-top:0 !important;
+
+    > tbody > tr:not(.summary){
+      border-bottom:1px solid rgba(0,0,0,.2);
+      margin-bottom:0;
+      border-left:0;
+
+      > td:first-child{
+        > span{
+          display:inline-block;
+          position:relative;
+          padding: 5px 0 0 7px;
+
+          &:before{
+            content:'';
+            display:inline-block;
+            width:0;
+            height:0;
+            border:6px solid transparent;
+            border-left-color:rgba(0,0,0,.5);
+            position:absolute;
+            left: -7px;
+            top: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .grid tr:hover td, .tbGrid tr:hover td,
+  .grid tr td .grid tr:hover td, .tbGrid tr td .grid tr:hover td{
+    background:transparent !important;
+  }
+}
+
+.selecao-disciplina{
+  table.radio{
+    tbody{
+      @include flex();
+      @include flex-wrap();
+    }
+
+    tr{
+      display:inline-block;
+      width:20%;
+
+      td{
+        display:block;
+        padding:5px;
+        height:100%;
+      }
+
+      input[type="radio"]{
+        display:none;
+      }
+
+      label{
+        display:block;
+        padding:10px;
+        border:1px solid #0163a2;
+        width:100%;
+        @include transition(all 0.2s ease-out);
+        @include border-radius(3px);
+        height:100%;
+        margin:0 !important;
+
+        &:hover{
+          background:#eee;
+          cursor:pointer;
+        }
+      }
+
+      input[type="radio"]:checked + label{
+        background:#0163a2;
+        color:#fff;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:600px){
+  .selecao-disciplina{
+    table.radio{
+      tr{
+        width:33.3%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width:960px){
+  .fieldset-curriculo .painel-habilidades input[type="submit"][id*="btnNovoEixo"]{
+    position:static;
+  }
+}
