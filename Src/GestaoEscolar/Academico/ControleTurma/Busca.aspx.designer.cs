@@ -553,6 +553,24 @@ namespace GestaoEscolar.Academico.ControleTurma {
         protected global::System.Web.UI.WebControls.Label lblTabTurmasExtintas;
         
         /// <summary>
+        /// liSemestreAnteriores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liSemestreAnteriores;
+        
+        /// <summary>
+        /// lblSemestreAnteriores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSemestreAnteriores;
+        
+        /// <summary>
         /// liTurmasInat control.
         /// </summary>
         /// <remarks>
@@ -596,6 +614,24 @@ namespace GestaoEscolar.Academico.ControleTurma {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvHistoricoTurmasExtintas;
+        
+        /// <summary>
+        /// fdsSemestreAnteriores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsSemestreAnteriores;
+        
+        /// <summary>
+        /// grvSemestreAnteriores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvSemestreAnteriores;
         
         /// <summary>
         /// fdsTurmasInativas control.
