@@ -485,8 +485,7 @@
                                 </div>
                                 <div id="divTabsListao-3">
                                     <asp:Panel ID="pnlAtividadesExtraClasse" runat="server">
-                                        
-                                                <uc13:UCConfirmacaoOperacao ID="UCConfirmacaoOperacao" runat="server" ObservacaoVisivel="false" ObservacaoObrigatorio="false" />
+                                        <uc13:UCConfirmacaoOperacao ID="UCConfirmacaoOperacao" runat="server" ObservacaoVisivel="false" ObservacaoObrigatorio="false" />
                                         <asp:UpdatePanel ID="updAtiExtra" runat="server" UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <fieldset id="fdsCadastroAtiExtra" runat="server">
@@ -506,6 +505,8 @@
                                                         <asp:TextBox ID="txtCargaAtiExtra" runat="server" SkinID="Numerico" MaxLength="4"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="rfvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic"
                                                             ErrorMessage="Carga horária da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
+                                                        <asp:CompareValidator ID="cvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic" ValueToCompare="0" Operator="GreaterThan"
+                                                            ErrorMessage="Carga horária da atividade extraclasse deve ser maior que 0." ValidationGroup="AtividadeExtraclasse">*</asp:CompareValidator>
                                                     </div>
                                                     <div class="right">
                                                         <asp:Button ID="btnAdicionarAtiExtra" runat="server" Text="Salvar atividade extraclasse" OnClick="btnAdicionarAtiExtra_Click" ValidationGroup="AtividadeExtraclasse" />
@@ -533,10 +534,10 @@
                                                                                         <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
                                                                                         <asp:Label ID="lbltud_id" runat="server" Text='<%#Bind("tud_id") %>' Visible="false"></asp:Label>
                                                                                         <asp:Label ID="lblTaePosicao" runat="server" Text='<%#Bind("tdt_posicao") %>' Visible="false" />
-                                                                                        <asp:Label ID="lblPermissao" runat="server"  Text='<%#Bind("permissaoEdicao") %>' Visible="false" />
+                                                                                        <asp:Label ID="lblPermissao" runat="server" Text='<%#Bind("permissaoEdicao") %>' Visible="false" />
                                                                                         <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("nome") %>'></asp:Label>
                                                                                         <div style="display: block; margin-bottom: 5px;">
-                                                                                            <asp:ImageButton ID="btnEditarAtiExtra" runat="server" SkinID="btEditar" 
+                                                                                            <asp:ImageButton ID="btnEditarAtiExtra" runat="server" SkinID="btEditar"
                                                                                                 ToolTip="Editar atividade extraclasse" OnClick="btnEditarAtiExtra_Click"
                                                                                                 CausesValidation="false" />
                                                                                             <asp:ImageButton ID="btnExcluirAtiExtra" runat="server" SkinID="btExcluir"
@@ -569,7 +570,7 @@
                                                                             <div id="divAtividades" runat="server" style="display: inline-block; width: 100%;">
                                                                                 <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
                                                                                 <asp:Label ID="lbltud_id" runat="server" Text='<%#Bind("tud_id") %>' Visible="false"></asp:Label>
-                                                                                <asp:Label ID="lblPermissao" runat="server"  Text='<%#Bind("permissaoEdicao") %>' Visible="false" />
+                                                                                <asp:Label ID="lblPermissao" runat="server" Text='<%#Bind("permissaoEdicao") %>' Visible="false" />
                                                                                 <asp:Label ID="lblTaePosicao" runat="server" Text='<%#Bind("tdt_posicao") %>' Visible="false" />
                                                                                 <asp:TextBox ID="txtNota" runat="server" SkinID="Decimal" Width="50" MaxLength="6"></asp:TextBox>
                                                                                 <asp:DropDownList ID="ddlPareceres" runat="server" DataTextField="descricao" DataValueField="eap_valor">

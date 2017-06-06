@@ -742,6 +742,15 @@ namespace GestaoEscolar.Academico.ControleTurma {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCargaAtiExtra;
         
         /// <summary>
+        /// cvCargaAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvCargaAtiExtra;
+        
+        /// <summary>
         /// btnAdicionarAtiExtra control.
         /// </summary>
         /// <remarks>

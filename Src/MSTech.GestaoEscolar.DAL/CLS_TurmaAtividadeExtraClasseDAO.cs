@@ -95,7 +95,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="cur_cargaHorariaExtraClasse"></param>
         /// <param name="cargaAtividadeExtraTotal"></param>
         /// <returns></returns>
-        public bool VerificaCargaHorariaCursoCalendario(long tud_id, int tae_id, int tae_cargaHoraria, out int cur_cargaHorariaExtraClasse, out int cargaAtividadeExtraTotal)
+        public bool VerificaCargaHorariaCursoCalendario(long tud_id, int tae_id, decimal tae_cargaHoraria, out decimal dis_cargaHorariaExtraClasse, out decimal cargaAtividadeExtraTotal)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_TurmaAtividadeExtraClasse_VerificaCargaHorariaCursoCalendario", _Banco);
 
@@ -122,8 +122,7 @@ namespace MSTech.GestaoEscolar.DAL
 
                 Param = qs.NewParameter();
                 Param.ParameterName = "@tae_cargaHoraria";
-                Param.DbType = DbType.Int32;
-                Param.Size = 4;
+                Param.DbType = DbType.Decimal;
                 Param.Value = tae_cargaHoraria;
                 qs.Parameters.Add(Param);
 
@@ -131,10 +130,10 @@ namespace MSTech.GestaoEscolar.DAL
 
                 qs.Execute();
 
-                cur_cargaHorariaExtraClasse = qs.Return.Rows.Count > 0 ? Convert.ToInt32(qs.Return.Rows[0]["dis_cargaHorariaExtraClasse"]) : 0;
-                cargaAtividadeExtraTotal = qs.Return.Rows.Count > 0 ? Convert.ToInt32(qs.Return.Rows[0]["cargaAtividadeExtraTotal"]) : 0;
+                dis_cargaHorariaExtraClasse = qs.Return.Rows.Count > 0 ? Convert.ToDecimal(qs.Return.Rows[0]["dis_cargaHorariaExtraClasse"]) : 0;
+                cargaAtividadeExtraTotal = qs.Return.Rows.Count > 0 ? Convert.ToDecimal(qs.Return.Rows[0]["cargaAtividadeExtraTotal"]) : 0;
 
-                return cargaAtividadeExtraTotal > cur_cargaHorariaExtraClasse;
+                return cargaAtividadeExtraTotal > dis_cargaHorariaExtraClasse;
             }
             finally
             {
