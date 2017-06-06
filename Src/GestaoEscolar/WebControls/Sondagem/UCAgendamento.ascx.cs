@@ -867,5 +867,22 @@ namespace GestaoEscolar.WebControls.Sondagem
         }
 
         #endregion
+
+        protected void ckbSelecionarTodosPeriodos_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (RepeaterItem rptItem in rptNivelEnsino.Items)
+            {
+                Repeater rptCampos = (Repeater)rptItem.FindControl("rptCampos");
+                if (rptCampos != null)
+                {
+                    foreach (RepeaterItem item in rptCampos.Items)
+                    {
+                        CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
+                        if (ckbCampo != null)
+                            ckbCampo.Checked = ckbSelecionarTodosPeriodos.Checked;
+                    }
+                }
+            }
+        }
     }
 }

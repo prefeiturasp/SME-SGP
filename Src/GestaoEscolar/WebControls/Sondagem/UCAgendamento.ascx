@@ -113,6 +113,7 @@
                 <div><br /></div>
                 <fieldset>
                     <legend><asp:Label runat="server" ID="lblLegendPeriodos" Text="<%$ Resources:Academico, Sondagem.Agendamento.lblLegendPeriodos.Text %>" /></legend>
+                    <asp:CheckBox ID="ckbSelecionarTodosPeriodos" runat="server" Text="Selecionar todos os períodos" OnCheckedChanged="ckbSelecionarTodosPeriodos_CheckedChanged" AutoPostBack="true"/>
                     <asp:Repeater runat="server" ID="rptNivelEnsino" OnItemDataBound="rptNivelEnsino_ItemDataBound">
                         <AlternatingItemTemplate>
                             <fieldset>
