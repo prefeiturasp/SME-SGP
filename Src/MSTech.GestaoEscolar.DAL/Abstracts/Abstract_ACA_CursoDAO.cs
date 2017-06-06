@@ -178,7 +178,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.DbType = DbType.Boolean;
 			Param.ParameterName = "@cur_conflitoTurnoSR";
 			Param.Size = 1;
-				Param.Value = entity.cur_conflitoTurnoSR;
+			Param.Value = entity.cur_conflitoTurnoSR;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
@@ -188,23 +188,11 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.cur_situacao;
 			qs.Parameters.Add(Param);
 
-			
-
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Decimal;
 			Param.ParameterName = "@cur_cargaHoraria";
-
-				Param.Value = entity.cur_cargaHoraria;
+			Param.Value = entity.cur_cargaHoraria;
 			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Decimal;
-			Param.ParameterName = "@cur_cargaHorariaExtraClasse";
-
-				Param.Value = entity.cur_cargaHorariaExtraClasse;
-			qs.Parameters.Add(Param);
-
-
 			}
 		}
 		
@@ -376,13 +364,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.ParameterName = "@cur_cargaHoraria";
 
 				Param.Value = entity.cur_cargaHoraria;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Decimal;
-			Param.ParameterName = "@cur_cargaHorariaExtraClasse";
-
-				Param.Value = entity.cur_cargaHorariaExtraClasse;
 			qs.Parameters.Add(Param);
 
 

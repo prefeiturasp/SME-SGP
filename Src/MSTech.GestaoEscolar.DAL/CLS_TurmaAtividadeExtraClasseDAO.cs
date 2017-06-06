@@ -131,7 +131,7 @@ namespace MSTech.GestaoEscolar.DAL
 
                 qs.Execute();
 
-                cur_cargaHorariaExtraClasse = qs.Return.Rows.Count > 0 ? Convert.ToInt32(qs.Return.Rows[0]["cur_cargaHorariaExtraClasse"]) : 0;
+                cur_cargaHorariaExtraClasse = qs.Return.Rows.Count > 0 ? Convert.ToInt32(qs.Return.Rows[0]["dis_cargaHorariaExtraClasse"]) : 0;
                 cargaAtividadeExtraTotal = qs.Return.Rows.Count > 0 ? Convert.ToInt32(qs.Return.Rows[0]["cargaAtividadeExtraTotal"]) : 0;
 
                 return cargaAtividadeExtraTotal > cur_cargaHorariaExtraClasse;
