@@ -367,28 +367,84 @@ SET XACT_ABORT ON
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Questão *'
+            , @rcr_valorPadrao = 'Questão'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.grvRespostas.HeaderNome' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Resposta/Avaliação *'
+            , @rcr_valorPadrao = 'Resposta/Avaliação'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.grvRespostas.HeaderSigla' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Sigla *'
+            , @rcr_valorPadrao = 'Sigla'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.HeaderNome' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Subquestão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvQuestoes.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Questão *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Resposta/Avaliação *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sigla *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Subquestão *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvQuestoes.questao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'questão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.respostaavaliacao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'resposta/avaliação'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.sigla' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'sigla'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.subquestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'subquestão'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.lblCampo.Text' 
@@ -396,20 +452,6 @@ SET XACT_ABORT ON
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Descrição'
-
-	EXEC MS_InsereResource 
-            @rcr_chave = 'Sondagem.Cadastro.lblSigla.Text' 
-            , @rcr_NomeResource = 'Academico'
-            , @rcr_cultura = 'pt-BR'
-            , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Sigla *'
-
-	EXEC MS_InsereResource 
-            @rcr_chave = 'Sondagem.Cadastro.lblTitulo.Text' 
-            , @rcr_NomeResource = 'Academico'
-            , @rcr_cultura = 'pt-BR'
-            , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Título *'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.ddlOpcaoResposta.Multiselecao' 
@@ -445,6 +487,34 @@ SET XACT_ABORT ON
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = '-- Selecione uma opção de resposta --'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.DescricaoObrigatorioQuestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Questão é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.DescricaoObrigatorioSubquestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Subquestão é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.SiglaObrigatorio' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sigla da {0} é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.DescricaoObrigatorioResposta' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Resposta/Avaliação é obrigatório.'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Curriculo.RegistroSugestoes.UCCurriculo1.Titulo' 
@@ -881,12 +951,33 @@ SET XACT_ABORT ON
 		, @rcr_valorPadrao = 'Fechar'
 
 	EXEC MS_InsereResource 
-            @rcr_chave = 'AgendamentoSondagem.Agendamento.ckbSelecionarTodosPeriodos.Text' 
-            , @rcr_NomeResource = 'Academico'
-            , @rcr_cultura = 'pt-BR'
-            , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Selecionar todos os períodos'
+		@rcr_chave = 'AgendamentoSondagem.Agendamento.ckbSelecionarTodosPeriodos.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Selecionar todos os períodos'
 			
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.lblMessage.ErroPermissao' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.btnGerarRel.Text' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Gerar relatório'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.btnLimparPesquisa.Text' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Limpar pesquisa'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
