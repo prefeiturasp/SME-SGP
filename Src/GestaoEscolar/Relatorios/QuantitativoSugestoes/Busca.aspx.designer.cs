@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo {
+namespace GestaoEscolar.Relatorios.QuantitativoSugestoes {
     
     
     public partial class Busca {
@@ -67,103 +67,31 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo {
         protected global::System.Web.UI.UpdatePanel updFiltros;
         
         /// <summary>
-        /// UCComboTipoDisciplina1 control.
+        /// UCComboAnoLetivo1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebControls_Combos_UCComboTipoDisciplina UCComboTipoDisciplina1;
+        protected global::WebControls_Combos_UCComboAnoLetivo UCComboAnoLetivo1;
         
         /// <summary>
-        /// divData control.
+        /// UCComboTipoNivelEnsino1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divData;
+        protected global::WebControls_Combos_UCComboNivelEnsino UCComboTipoNivelEnsino1;
         
         /// <summary>
-        /// lblDataInicio control.
+        /// UCComboTipoModalidadeEnsino1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDataInicio;
-        
-        /// <summary>
-        /// txtDataInicio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataInicio;
-        
-        /// <summary>
-        /// rfvDataInicio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDataInicio;
-        
-        /// <summary>
-        /// cvDataInicio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvDataInicio;
-        
-        /// <summary>
-        /// lblDataFim control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDataFim;
-        
-        /// <summary>
-        /// txtDataFim control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataFim;
-        
-        /// <summary>
-        /// rfvDataFim control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDataFim;
-        
-        /// <summary>
-        /// cvDataFim control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvDataFim;
-        
-        /// <summary>
-        /// cpvDataFim control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator cpvDataFim;
+        protected global::WebControls_Combos_UCComboModalidadeEnsino UCComboTipoModalidadeEnsino1;
         
         /// <summary>
         /// btnGerar control.

@@ -283,6 +283,8 @@ namespace MSTech.GestaoEscolar.BLL
             public bool divergenciasAulasPrevistas { get; set; }
 
             public int tne_id { get; set; }
+
+            public int tme_id { get; set; }
         }
     }
 
@@ -363,6 +365,8 @@ namespace MSTech.GestaoEscolar.BLL
         public int cal_ano { get; set; }
 
         public byte tdt_situacao { get; set; }
+
+        public int tme_id { get; set; }
     }
 
     [Serializable]
@@ -3545,6 +3549,8 @@ namespace MSTech.GestaoEscolar.BLL
                          tdt_id = Convert.ToInt32(g.FirstOrDefault()["tdt_id"])
                          ,
                          crg_tipo = Convert.ToByte(g.FirstOrDefault()["crg_tipo"])
+                         ,
+                         tme_id = Convert.ToInt32(g.FirstOrDefault()["tme_id"] != DBNull.Value ? g.FirstOrDefault()["tme_id"] : "-1")
                      }).ToList();
             return dados;
         }
@@ -3836,6 +3842,8 @@ namespace MSTech.GestaoEscolar.BLL
                                        fav_fechamentoAutomatico = Convert.ToBoolean(drTurmas["fav_fechamentoAutomatico"])
                                        ,
                                        tne_id = drTurmas["tne_id"] != DBNull.Value ? Convert.ToInt32(drTurmas["tne_id"].ToString()) : -1
+                                       ,
+                                       tme_id = drTurmas["tme_id"] != DBNull.Value ? Convert.ToInt32(drTurmas["tme_id"].ToString()) : -1
                                    }).ToList()
                      }).ToList();
 

@@ -489,6 +489,30 @@ namespace GestaoEscolar.Academico.ControleTurma
                     }
                 }
 
+                GridView grvTurmasEncerradas = e.Item.FindControl("grvTurmasEncerradas") as GridView;
+                if (grvTurmasEncerradas != null)
+                {
+                    HiddenField hdnIndiceRptTurmasEncerradas = e.Item.FindControl("hdnIndiceRptTurmasEncerradas") as HiddenField;
+                    if (hdnIndiceRptTurmasEncerradas != null)
+                    {
+                        hdnIndiceRptTurmasEncerradas.Value = indiceRptTurmas.ToString();
+                    }
+
+                    var turmasEncerradas = lista.Where(x => x.tur_situacao == (byte)TUR_TurmaSituacao.Encerrada &&
+                                                            (x.tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_EJA, Ent_ID_UsuarioLogado) ||
+                                                             x.tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_ENSINO_JOVENS_ADULTOS, Ent_ID_UsuarioLogado)));
+
+                    grvTurmasEncerradas.DataSource = turmasEncerradas;
+                    grvTurmasEncerradas.DataBind();
+
+                    Panel pnlTurmasEncerradas = (Panel)e.Item.FindControl("pnlTurmasEncerradas");
+                    HtmlGenericControl liTurmasEncerradas = (HtmlGenericControl)e.Item.FindControl("liTurmasEncerradas");
+                    if (pnlTurmasEncerradas != null && liTurmasEncerradas != null)
+                    {
+                        pnlTurmasEncerradas.Visible = liTurmasEncerradas.Visible = (grvTurmasEncerradas.Rows.Count > 0);
+                    }
+                }
+
                 // Carrega turmas extintas
                 GridView grvTurmasExtintas = e.Item.FindControl("grvTurmasExtintas") as GridView;
                 if (grvTurmasExtintas != null)
@@ -2059,6 +2083,65 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        protected void grvTurmasEncerradas_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            GridView grid = (GridView)sender;
+            if (e.CommandName == "DiarioClasse")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_DiarioClasse").ToString(), "DiarioClasse", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Indicadores")
+            {
+                try
+                {
+                    string[] args = e.CommandArgument.ToString().Split(',');
+                    if (args.Length > 4)
+                    {
+                        int esc_id = Convert.ToInt32(args[0]);
+                        long tur_id = Convert.ToInt64(args[1]);
+                        long tud_id = Convert.ToInt64(args[2]);
+                        int cal_id = Convert.ToInt32(args[3]);
+                        Guid ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id;
+
+                        CarregaAulasPrevistas(esc_id, tur_id, tud_id, cal_id, ent_id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os indicadores.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "Planejamento")
+            {
+                RedirecionaTelaMinhasTurmas("Planejamento", "PlanejamentoAnual", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Listao")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_Listao").ToString(), "Listao", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Fechamento")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_EFETIVACAO").ToString(), "Efetivacao", grid, e.CommandArgument.ToString(), false);
+            }
+            else if (e.CommandName == "FechamentoAutomatico")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_EFETIVACAO").ToString(), "Fechamento", grid, e.CommandArgument.ToString(), false);
+            }
+            else if (e.CommandName == "Alunos")
+            {
+                RedirecionaTelaMinhasTurmas("Alunos", "Alunos", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Frequencia")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("WebControls", "UCNavegacaoTelaPeriodo.btnFrequencia.Text").ToString(), "Frequencia", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Avaliacao")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("WebControls", "UCNavegacaoTelaPeriodo.btnAvaliacao.Text").ToString(), "Avaliacao", grid, e.CommandArgument.ToString(), true);
+            }
+        }
+
         #endregion Eventos
 
         #region Métodos
@@ -2804,23 +2887,33 @@ namespace GestaoEscolar.Academico.ControleTurma
                     RepeaterItem rptItem = (RepeaterItem)grv.NamingContainer;
                     if (rptItem != null)
                     {
-                        HtmlGenericControl divMensagemFechamentoPendencia = grv.ID == "grvTurmasExtintas" ?
-                            (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorExtintas") :
-                                                                            grv.ID == "grvProjetosRecParalela" ?
-                            (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorProjeto") :
-                            (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestor");
+                        HtmlGenericControl divMensagemFechamentoPendencia = null;
+                        HtmlGenericControl mensagemSemPendenciaFechamento = null;
+                        Label lblDataProcessamento = null;
+                        switch (grv.ID)
+                        {
+                            case "grvTurmasEncerradas":
+                                divMensagemFechamentoPendencia = (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorEncerradas");
+                                mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoEncerradas");
+                                lblDataProcessamento = (Label)rptItem.FindControl("lblDataProcessamentoEncerradas");
+                                break;
+                            case "grvTurmasExtintas":
+                                divMensagemFechamentoPendencia = (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorExtintas");
+                                mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoExtintas");
+                                lblDataProcessamento = (Label)rptItem.FindControl("lblDataProcessamentoExtintas");
+                                break;
+                            case "grvProjetosRecParalela":
+                                divMensagemFechamentoPendencia = (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorProjeto");
+                                mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoProjeto");
+                                lblDataProcessamento = (Label)rptItem.FindControl("lblDataProcessamentoProjeto");
+                                break;
+                            default:
+                                divMensagemFechamentoPendencia = (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestor");
+                                mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamento");
+                                lblDataProcessamento = (Label)rptItem.FindControl("lblDataProcessamento");
+                                break;
+                        }
 
-                        HtmlGenericControl mensagemSemPendenciaFechamento = grv.ID == "grvTurmasExtintas" ?
-                            (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoExtintas") :
-                                                                            grv.ID == "grvProjetosRecParalela" ?
-                            (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoProjeto") :
-                            (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamento");
-
-                        Label lblDataProcessamento = grv.ID == "grvTurmasExtintas" ?
-                            (Label)rptItem.FindControl("lblDataProcessamentoExtintas") :
-                                                        grv.ID == "grvProjetosRecParalela" ?
-                            (Label)rptItem.FindControl("lblDataProcessamentoProjeto") :
-                            (Label)rptItem.FindControl("lblDataProcessamento");
                         if (lblDataProcessamento != null)
                         {
                             lblDataProcessamento.Text = string.Empty;

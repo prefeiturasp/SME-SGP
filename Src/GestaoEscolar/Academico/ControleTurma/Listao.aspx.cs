@@ -1040,6 +1040,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o listão.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1115,6 +1116,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as frequências.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1178,6 +1180,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as frequências.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1326,6 +1329,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as notas.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1406,6 +1410,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os planos de aula.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1457,6 +1462,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     }
                     else
                     {
+                        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                         lblMessage.Text = UtilBO.GetErroMessage("Docente não possui permissão em disciplinas para lançamento de notas.", UtilBO.TipoMensagem.Alerta);
                         return false;
                     }
@@ -1541,6 +1547,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
                 return false;
             }
@@ -2425,6 +2432,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 if (CLS_TurmaAtividadeExtraClasseBO.Deletar(entity))
                 {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse excluída com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Exclusão de atividade | tud_id: {0}, tae_id: {1}", VS_tud_idAtiExtraExcluir, VS_tae_idAtiExtraExcluir));
                     CarregarListaoAtividadeExtraclasse();
@@ -2432,10 +2440,12 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
             }
@@ -2764,6 +2774,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -2877,6 +2888,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -2931,6 +2943,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2951,6 +2964,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2981,6 +2995,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2994,6 +3009,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -3048,6 +3064,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as compensações de ausências.", UtilBO.TipoMensagem.Erro);
             }
             finally
@@ -3106,6 +3123,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as compensações de ausências.", UtilBO.TipoMensagem.Erro);
             }
             finally
@@ -3127,6 +3145,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as compensações.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -3204,7 +3223,10 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             if (!string.IsNullOrEmpty(msg))
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = msg;
+            }
             msg = "";
 
             //Salva avaliação
@@ -3235,7 +3257,10 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             if (!string.IsNullOrEmpty(msg))
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text += msg;
+            }
             msg = "";
 
             //Salva plano de aula
@@ -3300,7 +3325,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 VS_Data_Listao_TurmaNota = DateTime.Now.AddSeconds(1);
 
             if (!string.IsNullOrEmpty(msg))
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text += msg;
+            }
             msg = "";
         }
 
@@ -3335,6 +3363,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o relatório.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -3370,6 +3399,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o relatório.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -3388,6 +3418,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar o sistema.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -3478,6 +3509,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o relatório.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -3850,6 +3882,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar as habilidades relacionadas a avaliação.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -4040,6 +4073,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -4073,6 +4107,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity))
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Adição de atividade | tud_id: {0}, tae_id: {1}", entity.tud_id, entity.tae_id));
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse salva com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     LimparCamposAtividadeExtraclasse();
                     CarregarListaoAtividadeExtraclasse();
@@ -4081,10 +4116,12 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
             }
@@ -4314,6 +4351,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
             catch (Exception ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar editar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
             }
@@ -4350,10 +4388,12 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
             }

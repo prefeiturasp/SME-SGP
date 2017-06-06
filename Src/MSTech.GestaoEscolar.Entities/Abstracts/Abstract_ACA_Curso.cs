@@ -130,10 +130,5 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// </summary>
 		public virtual decimal cur_cargaHoraria { get; set; }
 
-		/// <summary>
-		/// Carga horária referente à atividades extra classe..
-		/// </summary>
-		public virtual decimal cur_cargaHorariaExtraClasse { get; set; }
-
     }
 }

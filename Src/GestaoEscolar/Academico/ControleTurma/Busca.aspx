@@ -578,6 +578,12 @@
                                         Text="<%$ Resources:Academico, ControleTurma.Busca.lblTabsTurmasEx.text %>" />
                                     </a>
                                 </li>
+                                <li id="liSemestreAnteriores" runat="server">
+                                    <a href="#divTabsSemestreAnteriores">
+                                        <asp:Label ID="lblSemestreAnteriores" runat="server"
+                                            Text="Turmas de semestres anteriores"></asp:Label>
+                                    </a>
+                                </li>
                                 <li id="liTurmasInat" runat="server">
                                     <a href="#divTabsTurmasInat">
                                         <asp:Label ID="lblTabTurmasInativas" runat="server"
@@ -656,6 +662,48 @@
                                                                             + "," + Eval("tud_id") 
                                                                             + "," + Eval("cal_id") 
                                                                             + "," + Eval("tdt_posicao") %>'
+                                                        runat="server" SkinID="btIndicadores" CommandName="Indicadores"
+                                                        ToolTip="Visualizar indicadores de aulas da turma" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </fieldset>
+                            </div>
+                            <div id="divTabsSemestreAnteriores" class="hide">
+                                <fieldset id="fdsSemestreAnteriores" runat="server">
+                                    <asp:GridView ID="grvSemestreAnteriores" runat="server" AutoGenerateColumns="false"
+                                        DataKeyNames="tud_id,tdt_posicao,Turma"
+                                        OnRowCommand="grvSemestreAnteriores_RowCommand">
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="Turma">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lkbTurmaHistorico" runat="server"
+                                                        Text='<%# Eval("Turma") %>'
+                                                        CommandName="Turma"
+                                                        CommandArgument='<%# Eval("esc_id") 
+                                                                                + "," + Eval("tur_id") 
+                                                                                + "," + Eval("tud_id") 
+                                                                                + "," + Eval("cal_id") 
+                                                                                + "," + Eval("tdt_posicao")
+                                                                                + "," + Container.DataItemIndex
+                                                                                + "," + Eval("tud_tipo") 
+                                                                                + "," + (String.IsNullOrEmpty(Eval("docenciaCompartilhada").ToString()) ? "0" : "1") %>'></asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField HeaderText="Tipo de docência" DataField="tdc_nome">
+                                                <HeaderStyle CssClass="center" />
+                                                <ItemStyle HorizontalAlign="Center" />
+                                            </asp:BoundField>
+                                            <asp:TemplateField HeaderText="<%$ Resources:Mensagens, MSG_AulasDadas %>" HeaderStyle-CssClass="center"
+                                                ItemStyle-HorizontalAlign="Center">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="btnIndicadores"
+                                                        CommandArgument='<%# Eval("esc_id") 
+                                                                                + "," + Eval("tur_id")
+                                                                                + "," + Eval("tud_id") 
+                                                                                + "," + Eval("cal_id") 
+                                                                                + "," + Eval("tdt_posicao") %>'
                                                         runat="server" SkinID="btIndicadores" CommandName="Indicadores"
                                                         ToolTip="Visualizar indicadores de aulas da turma" />
                                                 </ItemTemplate>

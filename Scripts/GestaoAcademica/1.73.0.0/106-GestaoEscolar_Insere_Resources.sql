@@ -367,28 +367,84 @@ SET XACT_ABORT ON
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Questão *'
+            , @rcr_valorPadrao = 'Questão'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.grvRespostas.HeaderNome' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Resposta/Avaliação *'
+            , @rcr_valorPadrao = 'Resposta/Avaliação'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.grvRespostas.HeaderSigla' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Sigla *'
+            , @rcr_valorPadrao = 'Sigla'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.HeaderNome' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Subquestão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvQuestoes.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Questão *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Resposta/Avaliação *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sigla *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Subquestão *'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvQuestoes.questao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'questão'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.respostaavaliacao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'resposta/avaliação'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.sigla' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'sigla'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.grvSubQuestoes.subquestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'subquestão'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.lblCampo.Text' 
@@ -396,20 +452,6 @@ SET XACT_ABORT ON
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Descrição'
-
-	EXEC MS_InsereResource 
-            @rcr_chave = 'Sondagem.Cadastro.lblSigla.Text' 
-            , @rcr_NomeResource = 'Academico'
-            , @rcr_cultura = 'pt-BR'
-            , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Sigla *'
-
-	EXEC MS_InsereResource 
-            @rcr_chave = 'Sondagem.Cadastro.lblTitulo.Text' 
-            , @rcr_NomeResource = 'Academico'
-            , @rcr_cultura = 'pt-BR'
-            , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Título *'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Sondagem.Cadastro.ddlOpcaoResposta.Multiselecao' 
@@ -444,7 +486,35 @@ SET XACT_ABORT ON
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Opção de resposta é obrigatório.'
+            , @rcr_valorPadrao = '-- Selecione uma opção de resposta --'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.DescricaoObrigatorioQuestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Questão é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.DescricaoObrigatorioSubquestao' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Subquestão é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.SiglaObrigatorio' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Sigla da {0} é obrigatório.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'Sondagem.Cadastro.DescricaoObrigatorioResposta' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Resposta/Avaliação é obrigatório.'
 
 	EXEC MS_InsereResource 
             @rcr_chave = 'Curriculo.RegistroSugestoes.UCCurriculo1.Titulo' 
@@ -571,6 +641,342 @@ SET XACT_ABORT ON
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 
             , @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.DataInicioMaiorHoje' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Data inicial do período não pode ser posterior à data atual.'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'RelatorioSugestoesCurriculo.Busca.DataFimMaiorHoje' 
+            , @rcr_NomeResource = 'Relatorios'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Data final do período não pode ser posterior à data atual.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lit_25.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Minha escola'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Pesquisar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Pesquisar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.LimparPesquisa.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Limpar pesquisa'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_71.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turmas de semestres anteriores'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.SemResultado.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'A pesquisa não encontrou resultados.'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Turma.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_121.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Visualizar indicadores de aulas da turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgSituacaoAulasDadas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas lançadas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Planejamento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Planejamento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alunos.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alunos'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alunos.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alunos'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Turma.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_251.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Visualizar indicadores de aulas da turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgSituacaoAulasDadas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas lançadas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Planejamento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Planejamento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alunos.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alunos'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alunos.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alunos'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Turma.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_378.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Visualizar indicadores de aulas da turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgSituacaoAulasDadas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas lançadas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Planejamento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Planejamento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alunos.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alunos'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alunos.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alunos'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Turma.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_503.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Visualizar indicadores de aulas da turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'imgSituacaoAulasDadas.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aulas lançadas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Planejamento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Planejamento.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Planejamento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alunos.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alunos'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alunos.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alunos'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Bimestre.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Bimestre'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Periodo.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Período'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_623.HeaderText' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Previstas *'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_628.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de aulas previstas do {0} é obrigatório.'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_631.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de aulas previstas deve ser maior que 0 (zero).'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_639.HeaderText' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cumpridas'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_647.HeaderText' 
+		, @rcr_NomeResource = 'GestaoEscolar.Academico.ControleTurma.MinhaEscolaGestor'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Reposições'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Salvar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Salvar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Fechar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Fechar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'AgendamentoSondagem.Agendamento.ckbSelecionarTodosPeriodos.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Selecionar todos os períodos'
+			
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.lblMessage.ErroPermissao' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.btnGerarRel.Text' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Gerar relatório'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.btnLimparPesquisa.Text' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Limpar pesquisa'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 
