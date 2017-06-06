@@ -879,6 +879,13 @@ SET XACT_ABORT ON
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Fechar'
+
+	EXEC MS_InsereResource 
+            @rcr_chave = 'AgendamentoSondagem.Agendamento.ckbSelecionarTodosPeriodos.Text' 
+            , @rcr_NomeResource = 'Academico'
+            , @rcr_cultura = 'pt-BR'
+            , @rcr_codigo = 0 
+            , @rcr_valorPadrao = 'Selecionar todos os períodos'
 			
 -- Fechar transação     
 SET XACT_ABORT OFF 

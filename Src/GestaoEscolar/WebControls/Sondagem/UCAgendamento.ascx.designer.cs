@@ -292,6 +292,15 @@ namespace GestaoEscolar.WebControls.Sondagem {
         protected global::System.Web.UI.WebControls.Label lblLegendPeriodos;
         
         /// <summary>
+        /// ckbSelecionarTodosPeriodos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ckbSelecionarTodosPeriodos;
+        
+        /// <summary>
         /// rptNivelEnsino control.
         /// </summary>
         /// <remarks>
