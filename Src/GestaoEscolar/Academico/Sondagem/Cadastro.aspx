@@ -13,12 +13,12 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel runat="server" ID="updCadastro" UpdateMode="Always">
         <ContentTemplate>
+            <asp:ValidationSummary ID="vsSondagem" runat="server" ValidationGroup="vgSondagem" />
             <fieldset>
-
                 <legend>
-                    <asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegend.Text %>" /></legend>
+                    <asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblLegend.Text %>" />
+                </legend>
                 <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
-                <asp:ValidationSummary ID="vsSondagem" runat="server" ValidationGroup="vgSondagem" />
                 <asp:Label ID="lblTitulo" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblTitulo.Text %>" AssociatedControlID="txtTitulo" />
                 <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo" ValidationGroup="vgSondagem"
@@ -53,13 +53,13 @@
                         </asp:UpdatePanel>
                         <asp:UpdatePanel runat="server" ID="updPopUpQuestao" UpdateMode="Conditional">
                             <ContentTemplate>
+                                <asp:ValidationSummary ID="vsQuestao" runat="server" ValidationGroup="vgQuestao" />
                                 <fieldset>
                                     <legend>
                                         <asp:Label runat="server" ID="lblTituloPopUpQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarQuestao.Text %>" />
                                     </legend>
-                                    <asp:ValidationSummary ID="vsQuestao" runat="server" ValidationGroup="vgQuestao" />
-                                    <asp:Label runat="server" ID="lblCampoQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.Text %>" AssociatedControlID="txtItemQuestao" />                                    
-                                    <asp:TextBox runat="server" ID="txtItemQuestao" SkinID="text60C" MaxLength="250" ValidationGroup="vgQuestao"/>
+                                    <asp:Label runat="server" ID="lblCampoQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.Text %>" AssociatedControlID="txtItemQuestao" />
+                                    <asp:TextBox runat="server" ID="txtItemQuestao" SkinID="text60C" MaxLength="250" ValidationGroup="vgQuestao" />
                                     <asp:RequiredFieldValidator ID="revtxtItemQuestao" runat="server" ControlToValidate="txtItemQuestao" ValidationGroup="vgQuestao"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemQuestao.ErrorMessage %>" Text="*" />
                                     <div class="right">
@@ -124,11 +124,11 @@
                         </asp:UpdatePanel>
                         <asp:UpdatePanel runat="server" ID="updPopUpSubquestao" UpdateMode="Conditional">
                             <ContentTemplate>
+                                <asp:ValidationSummary ID="vsSubquestao" runat="server" ValidationGroup="vgSubquestao" />
                                 <fieldset>
                                     <legend>
                                         <asp:Label runat="server" ID="lblTituloPopUpSubquestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarSubQuestao.Text %>" />
                                     </legend>
-                                    <asp:ValidationSummary ID="vsSubquestao" runat="server" ValidationGroup="vgSubquestao" />
                                     <asp:Label runat="server" ID="lblCampoSubquestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvSubQuestoes.Text %>" AssociatedControlID="txtItemSubquestao" />
                                     <asp:TextBox runat="server" ID="txtItemSubquestao" SkinID="text60C" MaxLength="250" />
                                     <asp:RequiredFieldValidator ID="revtxtItemSubquestao" runat="server" ControlToValidate="txtItemSubquestao" ValidationGroup="vgSubquestao"
@@ -193,11 +193,11 @@
                         </asp:UpdatePanel>
                         <asp:UpdatePanel runat="server" ID="updPopUpResposta" UpdateMode="Conditional">
                             <ContentTemplate>
+                                <asp:ValidationSummary ID="vsResposta" runat="server" ValidationGroup="vgResposta" />
                                 <fieldset>
                                     <legend>
                                         <asp:Label runat="server" ID="lblTituloPopUpResposta" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarResposta.Text %>" />
                                     </legend>
-                                    <asp:ValidationSummary ID="vsResposta" runat="server" ValidationGroup="vgResposta" />
                                     <asp:Label runat="server" ID="lblSigla" Text="<%$ Resources:Academico, Sondagem.Cadastro.lblSigla.Text %>" AssociatedControlID="txtSigla" />
                                     <asp:TextBox runat="server" ID="txtSigla" SkinID="text10C" MaxLength="20" />
                                     <asp:RequiredFieldValidator ID="revtxtSigla" runat="server" ControlToValidate="txtSigla" ValidationGroup="vgResposta"

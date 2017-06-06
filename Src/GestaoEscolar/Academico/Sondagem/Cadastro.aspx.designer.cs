@@ -40,6 +40,15 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.UpdatePanel updCadastro;
         
         /// <summary>
+        /// vsSondagem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsSondagem;
+        
+        /// <summary>
         /// lblLegend control.
         /// </summary>
         /// <remarks>
@@ -56,15 +65,6 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios3;
-        
-        /// <summary>
-        /// vsSondagem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary vsSondagem;
         
         /// <summary>
         /// lblTitulo control.
@@ -193,15 +193,6 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.UpdatePanel updPopUpQuestao;
         
         /// <summary>
-        /// lblTituloPopUpQuestao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloPopUpQuestao;
-        
-        /// <summary>
         /// vsQuestao control.
         /// </summary>
         /// <remarks>
@@ -209,6 +200,15 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary vsQuestao;
+        
+        /// <summary>
+        /// lblTituloPopUpQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloPopUpQuestao;
         
         /// <summary>
         /// lblCampoQuestao control.
@@ -319,15 +319,6 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.UpdatePanel updPopUpSubquestao;
         
         /// <summary>
-        /// lblTituloPopUpSubquestao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloPopUpSubquestao;
-        
-        /// <summary>
         /// vsSubquestao control.
         /// </summary>
         /// <remarks>
@@ -335,6 +326,15 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary vsSubquestao;
+        
+        /// <summary>
+        /// lblTituloPopUpSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloPopUpSubquestao;
         
         /// <summary>
         /// lblCampoSubquestao control.
@@ -445,15 +445,6 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.UpdatePanel updPopUpResposta;
         
         /// <summary>
-        /// lblTituloPopUpResposta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloPopUpResposta;
-        
-        /// <summary>
         /// vsResposta control.
         /// </summary>
         /// <remarks>
@@ -461,6 +452,15 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary vsResposta;
+        
+        /// <summary>
+        /// lblTituloPopUpResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloPopUpResposta;
         
         /// <summary>
         /// lblSigla control.
