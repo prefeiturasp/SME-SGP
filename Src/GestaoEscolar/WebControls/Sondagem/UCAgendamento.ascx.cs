@@ -866,8 +866,6 @@ namespace GestaoEscolar.WebControls.Sondagem
             }
         }
 
-        #endregion
-
         protected void ckbSelecionarTodosPeriodos_CheckedChanged(object sender, EventArgs e)
         {
             foreach (RepeaterItem rptItem in rptNivelEnsino.Items)
@@ -884,5 +882,7 @@ namespace GestaoEscolar.WebControls.Sondagem
                 }
             }
         }
+
+        #endregion
     }
 }
