@@ -47,6 +47,22 @@ SET XACT_ABORT ON
 	
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Administração' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Currículo' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = NULL
+		,@SiteMap1Url = NULL
+		,@SiteMap2Nome = NULL 
+		,@SiteMap2Url = NULL 
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
+
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
 		,@nomeModuloAvo = 'Administração' -- Nome do módulo avó (Opcional, apenas quando houver) 
 		,@nomeModuloPai = 'Currículo' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Cadastro de currículo' -- Nome do módulo (Obrigatório)
