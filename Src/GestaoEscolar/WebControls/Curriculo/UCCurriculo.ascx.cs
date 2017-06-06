@@ -309,8 +309,16 @@ namespace GestaoEscolar.WebControls.Curriculo
                     }
                     else
                     {
-                        UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
-                        UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
+                        if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                        {
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocente(__SessionWEB.__UsuarioWEB.Docente.doc_id);
+                            UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsinoDocente(__SessionWEB.__UsuarioWEB.Docente.doc_id);
+                        }
+                        else
+                        {
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
+                            UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
+                        }
                         grvEixo.CssClass += " accordion-grid";
                     }
                 }
@@ -343,10 +351,17 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                 if (VS_tne_id > 0 && VS_tme_id > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                 {
-                    UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
+                    if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                    {
+                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocente(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
+                    }
+                    else
+                    {
+                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
+                    }
                     Carregar(-1);
 
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
@@ -392,10 +407,17 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                 if (VS_tne_id > 0 && VS_tme_id > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                 {
-                    UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
+                    if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                    {
+                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocente(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
+                    }
+                    else
+                    {
+                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
+                    }
                     Carregar(-1);
 
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;

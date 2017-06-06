@@ -173,6 +173,19 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
     }
 
     /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist  
+    /// de acordo com as atribuições do docente.
+    /// </summary>
+    public void CarregarTipoModalidadeEnsinoDocente(long doc_id)
+    {
+        ddlCombo.Items.Clear();
+        ddlCombo.DataSource = ACA_TipoModalidadeEnsinoBO.SelecionaTipoModalidadeEnsinoFilhosDocente(doc_id);
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione uma modalidade de ensino --", "-1", true));
+        ddlCombo.DataBind();
+    }
+
+    /// <summary>
     /// Adciona e remove a mensagem "Selecione um Cruso" do dropdownlist.
     /// Por padrão é false e a mensagem "Selecione um Curso" não é exibida.
     /// </summary>
@@ -185,6 +198,7 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
             ddlCombo.AppendDataBoundItems = value;
         }
     }
+
     #endregion
 
     #region EVENTOS

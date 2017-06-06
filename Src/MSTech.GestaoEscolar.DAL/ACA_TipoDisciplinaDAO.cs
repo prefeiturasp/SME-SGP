@@ -158,6 +158,7 @@ namespace MSTech.GestaoEscolar.DAL
             int tne_id
             , int tme_id
             , bool controlarOrdem
+            , long doc_id
         )
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoDisciplina_SelecionaObrigatoriasPorNivelEnsino", _Banco);
@@ -184,6 +185,20 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@controlarOrdem";
                 Param.Size = 1;
                 Param.Value = controlarOrdem;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@doc_id";
+                Param.Size = 8;
+                if (doc_id > 0)
+                {
+                    Param.Value = doc_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
                 qs.Parameters.Add(Param);
 
                 #endregion

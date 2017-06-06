@@ -66,6 +66,24 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna os tipos de currículo período ativos por nível e modalidade de ensino
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="tne_id">Tipo nivel de ensino</param>
+        /// <param name="tme_id">Tipo modalidade de ensino</param>
+        /// <param name="doc_id">ID do docente</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoCurriculoPeriodoDocente
+        (
+            int tne_id
+            , int tme_id
+            , long doc_id
+         )
+        {
+            return new ACA_TipoCurriculoPeriodoDAO().SelecionaTipoCurriculoPeriodoDocente(tne_id, tme_id, doc_id);
+        }
+
+        /// <summary>
         /// Verifica o maior número de ordem cadastado de tipo de curriculo período
         /// </summary>  
         [DataObjectMethod(DataObjectMethodType.Select, false)]

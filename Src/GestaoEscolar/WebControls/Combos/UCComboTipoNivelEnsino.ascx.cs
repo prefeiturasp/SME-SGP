@@ -170,10 +170,25 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
     }
 
     /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist    
+    /// de acordo com as atribuições do docente.
+    /// </summary>
+    public void CarregarTipoNivelEnsinoDocente(long doc_id)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("doc_id", doc_id.ToString());
+        odsDados.SelectMethod = "SelecionaTipoNivelEnsinoDocente";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
+        ddlCombo.DataBind();
+    }
+
+    /// <summary>
     /// Adciona e remove a mensagem "Selecione um Cruso" do dropdownlist.
     /// Por padrão é false e a mensagem "Selecione um Curso" não é exibida.
     /// </summary>
-    
+
     #endregion
 
     #region EVENTOS

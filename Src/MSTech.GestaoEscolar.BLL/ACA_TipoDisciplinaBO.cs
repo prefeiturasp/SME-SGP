@@ -328,10 +328,11 @@ namespace MSTech.GestaoEscolar.BLL
             int tne_id
             , int tme_id
             , Guid ent_id
+            , long doc_id
         )
         {
             bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
-            return new ACA_TipoDisciplinaDAO().SelecionaObrigatoriasPorNivelEnsino(tne_id, tme_id, controlarOrdem);
+            return new ACA_TipoDisciplinaDAO().SelecionaObrigatoriasPorNivelEnsino(tne_id, tme_id, controlarOrdem, doc_id);
         }
 
         /// <summary>
