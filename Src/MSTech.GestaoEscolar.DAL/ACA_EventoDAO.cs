@@ -890,6 +890,88 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Retorna se existem eventos vigentes de acordo com o tipo de evento e usuário.
+        /// </summary>
+        /// <param name="tev_id"></param>
+        /// <param name="adm"></param>
+        /// <param name="usu_id"></param>
+        /// <param name="gru_id"></param>
+        /// <param name="doc_id"></param>
+        /// <param name="cal_ano"></param>
+        /// <returns></returns>
+        public bool VerificaEventoVigentePorUsuario(int tev_id, bool adm, Guid usu_id, Guid gru_id, long doc_id, int cal_ano)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_Evento_VerificaEventoVigentePorUsuario", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tev_id";
+                Param.Size = 4;
+                Param.Value = tev_id;
+                qs.Parameters.Add(Param);                
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@adm";
+                Param.Size = 1;
+                Param.Value = adm;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@usu_id";
+                Param.Size = 16;
+                Param.Value = usu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@gru_id";
+                Param.Size = 16;
+                Param.Value = gru_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@doc_id";
+                Param.Size = 8;
+                Param.Value = doc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                if (cal_ano > 0)
+                {
+                    Param.Value = cal_ano;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                #endregion PARAMETROS
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #region Métodos Sobrescritos
 
         protected override string ConnectionStringName

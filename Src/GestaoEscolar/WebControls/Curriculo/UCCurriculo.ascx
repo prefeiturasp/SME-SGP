@@ -16,6 +16,7 @@
         <asp:ValidationSummary ID="ValidationSummary3" runat="server" ValidationGroup="eixo" />
         <fieldset class="fieldset-curriculo">
             <legend><asp:Literal runat="server" ID="litLegend" Text="" /></legend>
+            <asp:Label ID="lblMsgEvento" runat="server"></asp:Label>
             <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />
             <uc2:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />           
             
@@ -61,9 +62,9 @@
                                             ControlToValidate="txtSugestao" ValidationGroup="geral">*</asp:RequiredFieldValidator>
                                         <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
                                         <asp:DropDownList ID="ddlTipoSugestao" runat="server">
-                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
-                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
                                         </asp:DropDownList>
                                         <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
                                     </asp:Panel>
@@ -228,9 +229,9 @@
 				                                    ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                    <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
 			                                    <asp:DropDownList ID="ddlTipoSugestao" runat="server">
-				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
-				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
-				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
 			                                    </asp:DropDownList>
 			                                    <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
                                             </asp:Panel>
@@ -304,9 +305,9 @@
 				                                                        ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
 			                                                        <asp:DropDownList ID="ddlTipoSugestao" runat="server">
-				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
-				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
-				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
 			                                                        </asp:DropDownList>
 			                                                        <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
 		                                                        </asp:Panel>
@@ -377,9 +378,9 @@
 				                                                                        ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
 			                                                                        <asp:DropDownList ID="ddlTipoSugestao" runat="server">
-				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
-				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
-				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
 			                                                                        </asp:DropDownList>
 			                                                                        <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
 		                                                                        </asp:Panel>

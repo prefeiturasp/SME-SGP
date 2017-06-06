@@ -265,6 +265,23 @@ namespace GestaoEscolar.WebControls.Curriculo
             }
         }
 
+        private bool VS_abertoSugestao
+        {
+            get
+            {
+                if (ViewState["VS_abertoSugestao"] == null)
+                {
+                    int tev_id = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_EVENTO_ABERTURA_SUGESTOES, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                    ViewState["VS_abertoSugestao"] = ACA_EventoBO.VerificaEventoVigentePorUsuario(tev_id, __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao, __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, -1);
+                }
+                return (bool)ViewState["VS_abertoSugestao"];
+            }
+            set
+            {
+                ViewState["VS_abertoSugestao"] = value;
+            }
+        }
+
         private List<int> ltEixoAberto = new List<int>();
 
         private bool comandoExecutado = false;
@@ -285,9 +302,17 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 try
                 {
-                    UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
-                    UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
-                    grvEixo.CssClass += " accordion-grid";
+                    if (VS_permiteIncluirSugestao && !VS_abertoSugestao)
+                    {
+                        lblMsgEvento.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemEvento").ToString(), UtilBO.TipoMensagem.Informacao);
+                        UCComboTipoNivelEnsino1.Visible = UCComboTipoModalidadeEnsino1.Visible = false;
+                    }
+                    else
+                    {
+                        UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
+                        UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
+                        grvEixo.CssClass += " accordion-grid";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -604,11 +629,10 @@ namespace GestaoEscolar.WebControls.Curriculo
                             }
                         }
 
+                        DropDownList ddlTipoSugestao = (DropDownList)e.Row.FindControl("ddlTipoSugestao");
                         if (sugestao.crs_id > 0)
                         {
                             txtSugestao.Text = sugestao.crs_sugestao;
-
-                            DropDownList ddlTipoSugestao = (DropDownList)e.Row.FindControl("ddlTipoSugestao");
                             if (ddlTipoSugestao != null)
                             {
                                 ddlTipoSugestao.SelectedValue = sugestao.crs_tipo.ToString();
@@ -619,6 +643,12 @@ namespace GestaoEscolar.WebControls.Curriculo
                             {
                                 hdnCrsId.Value = sugestao.crs_id.ToString();
                             }
+                        }
+
+                        txtSugestao.Enabled = VS_abertoSugestao;
+                        if (ddlTipoSugestao != null)
+                        {
+                            ddlTipoSugestao.Enabled = VS_abertoSugestao;
                         }
                     }
                 }
@@ -657,7 +687,7 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                 ImageButton btnSalvarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnSalvarSugestao");
                 if (btnSalvarSugestao != null)
-                    btnSalvarSugestao.Visible = true;
+                    btnSalvarSugestao.Visible = VS_abertoSugestao;
 
                 ImageButton btnIncluirSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnIncluirSugestao");
                 if (btnIncluirSugestao != null)
@@ -1068,11 +1098,10 @@ namespace GestaoEscolar.WebControls.Curriculo
                             sugestao = VS_ltCurriculoSugestaoObjetivo.Find(p => p.cro_id == cro_id);
                         }
 
+                        DropDownList ddlTipoSugestao = (DropDownList)e.Row.FindControl("ddlTipoSugestao");
                         if (sugestao.crs_id > 0)
                         {
                             txtSugestao.Text = sugestao.crs_sugestao;
-
-                            DropDownList ddlTipoSugestao = (DropDownList)e.Row.FindControl("ddlTipoSugestao");
                             if (ddlTipoSugestao != null)
                             {
                                 ddlTipoSugestao.SelectedValue = sugestao.crs_tipo.ToString();
@@ -1083,6 +1112,12 @@ namespace GestaoEscolar.WebControls.Curriculo
                             {
                                 hdnCrsId.Value = sugestao.crs_id.ToString();
                             }
+                        }
+
+                        txtSugestao.Enabled = VS_abertoSugestao;
+                        if (ddlTipoSugestao != null)
+                        {
+                            ddlTipoSugestao.Enabled = VS_abertoSugestao;
                         }
                     }
                 }
@@ -1119,7 +1154,7 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                 ImageButton btnSalvarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnSalvarSugestao");
                 if (btnSalvarSugestao != null)
-                    btnSalvarSugestao.Visible = true;
+                    btnSalvarSugestao.Visible = VS_abertoSugestao;
 
                 ImageButton btnIncluirSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnIncluirSugestao");
                 if (btnIncluirSugestao != null)
