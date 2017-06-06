@@ -35,9 +35,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="cur_cargaHorariaExtraClasse"></param>
         /// <param name="cargaAtividadeExtraTotal"></param>
         /// <returns></returns>
-        public static bool VerificaCargaHorariaCursoCalendario(CLS_TurmaAtividadeExtraClasse entity, out int cur_cargaHorariaExtraClasse, out int cargaAtividadeExtraTotal)
+        public static bool VerificaCargaHorariaCursoCalendario(CLS_TurmaAtividadeExtraClasse entity, out decimal dis_cargaHorariaExtraClasse, out decimal cargaAtividadeExtraTotal)
         {
-            return new CLS_TurmaAtividadeExtraClasseDAO().VerificaCargaHorariaCursoCalendario(entity.tud_id, entity.tae_id, entity.tae_cargaHoraria, out cur_cargaHorariaExtraClasse, out cargaAtividadeExtraTotal);
+            return new CLS_TurmaAtividadeExtraClasseDAO().VerificaCargaHorariaCursoCalendario(entity.tud_id, entity.tae_id, entity.tae_cargaHoraria, out dis_cargaHorariaExtraClasse, out cargaAtividadeExtraTotal);
         }
 
         #endregion Métodos de verificação
@@ -90,11 +90,11 @@ namespace MSTech.GestaoEscolar.BLL
                     throw new ValidationException("Já existe uma atividade extraclasse com o mesmo nome e tipo para a disciplina no bimestre.");
                 }
 
-                int cur_cargaHorariaExtraClasse = 0, cargaAtividadeExtraTotal = 0;
+                decimal dis_cargaHorariaExtraClasse = 0, cargaAtividadeExtraTotal = 0;
 
-                if (VerificaCargaHorariaCursoCalendario(entity, out cur_cargaHorariaExtraClasse, out cargaAtividadeExtraTotal))
+                if (VerificaCargaHorariaCursoCalendario(entity, out dis_cargaHorariaExtraClasse, out cargaAtividadeExtraTotal))
                 {
-                    throw new ValidationException(string.Format("A soma de carga horária de atividades extraclasse ({0}) está acima da máxima permitida pelo curso ({1}).", cargaAtividadeExtraTotal, cur_cargaHorariaExtraClasse));
+                    throw new ValidationException(string.Format("A soma de carga horária de atividades extraclasse ({0}) está acima da máxima permitida pela disciplina ({1}).", cargaAtividadeExtraTotal, dis_cargaHorariaExtraClasse));
                 }
 
                 return new CLS_TurmaAtividadeExtraClasseDAO().Salvar(entity);
