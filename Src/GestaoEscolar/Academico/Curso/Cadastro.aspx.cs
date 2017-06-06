@@ -1118,7 +1118,6 @@ public partial class Academico_Curso_Cadastro : MotherPageLogado
             _txtVigenciaFim.Text = cur.cur_vigenciaFim == new DateTime() ? string.Empty : cur.cur_vigenciaFim.ToString("dd/MM/yyy");
             _ddlCursoSituacao.SelectedValue = cur.cur_situacao.ToString();
             txtCargaHoraria.Text = cur.cur_cargaHoraria.ToString();
-            //txtCargaHorariaExtraCurricular.Text = cur.cur_cargaHorariaExtraClasse.ToString();
 
             chkEfetivacaoSemestral.Checked = cur.cur_efetivacaoSemestral;
 
