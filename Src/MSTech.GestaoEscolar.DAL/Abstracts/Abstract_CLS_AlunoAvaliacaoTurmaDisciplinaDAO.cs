@@ -364,9 +364,8 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Decimal;
                 Param.ParameterName = "@atd_numeroAtividadeExtraclasse";
-                Param.Size = 4;
                 if (entity.atd_numeroAtividadeExtraclasse > 0)
                 {
                     Param.Value = entity.atd_numeroAtividadeExtraclasse;
@@ -669,9 +668,8 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Decimal;
                 Param.ParameterName = "@atd_numeroAtividadeExtraclasse";
-                Param.Size = 4;
                 if (entity.atd_numeroAtividadeExtraclasse > 0)
                 {
                     Param.Value = entity.atd_numeroAtividadeExtraclasse;
