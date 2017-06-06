@@ -342,6 +342,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                             usu_id = __SessionWEB.__UsuarioWEB.Usuario.usu_id
                             ,
                             lcs_data = DateTime.Now
+                            ,
+                            cal_ano = cal_ano
                         };
                         LOG_CurriculoSugestaoBO.Save(logSugestao);
                     }
@@ -389,6 +391,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                             usu_id = __SessionWEB.__UsuarioWEB.Usuario.usu_id
                             ,
                             lcs_data = DateTime.Now
+                            ,
+                            cal_ano = cal_ano
                         };
                         LOG_CurriculoSugestaoBO.Save(logSugestao);
                     }
