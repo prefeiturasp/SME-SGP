@@ -47,8 +47,8 @@
         </div>
         <div class="right area-botoes-bottom">
             <asp:Button ID="btnGerar" runat="server" Text="<%$ Resources:Relatorios, RelatorioSugestoesCurriculo.Busca.btnGerarRel.Text %>" OnClick="btnGerar_Click" ValidationGroup="Relatorio" />
-                        <asp:Button ID="btnLimparPesquisa" runat="server" Text="<%$ Resources:Relatorios, RelatorioSugestoesCurriculo.Busca.btnLimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click"
-                            CausesValidation="false" />
+            <asp:Button ID="btnLimparPesquisa" runat="server" Text="<%$ Resources:Relatorios, RelatorioSugestoesCurriculo.Busca.btnLimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click"
+                CausesValidation="false" />
         </div>
     </asp:Panel>
 </asp:Content>

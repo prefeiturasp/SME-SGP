@@ -488,6 +488,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         RelatorioSugestoesCurriculo
+        ,
+
+        QuantitativoSugestoes
     }
 
     [Serializable]
@@ -616,7 +619,8 @@ namespace MSTech.GestaoEscolar.BLL
         DivergenciasAulasPrevistas = 320,
         AnaliseSondagem = 321,
         FrequenciaMensal = 322,
-        RelatorioSugestoesCurriculo = 323
+        RelatorioSugestoesCurriculo = 323,
+        QuantitativoSugestoes = 324
     }
 
     /// <summary>

@@ -130,6 +130,10 @@
       <FullPath>RelatorioObjetoAprendizagem.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>RelatorioSugestoesCurriculo.rdl</Name>
+      <FullPath>RelatorioSugestoesCurriculo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>SubAtaEnriquecimentoCurricular.rdl</Name>
       <FullPath>SubAtaEnriquecimentoCurricular.rdl</FullPath>
     </ProjectItem>
@@ -158,8 +162,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>RelatorioSugestoesCurriculo.rdl</Name>
-      <FullPath>RelatorioSugestoesCurriculo.rdl</FullPath>
+      <Name>QuantitativoSugestoes.rdl</Name>
+      <FullPath>QuantitativoSugestoes.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

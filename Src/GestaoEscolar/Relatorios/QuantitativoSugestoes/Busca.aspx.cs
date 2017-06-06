@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using CFG_RelatorioBO = MSTech.GestaoEscolar.BLL.CFG_RelatorioBO;
 
-namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
+namespace GestaoEscolar.Relatorios.QuantitativoSugestoes
 {
     public partial class Busca : MotherPageLogado
     {
@@ -32,7 +32,7 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
                     if (!__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                     {
                         updFiltros.Visible = false;
-                        lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.lblMessage.ErroPermissao").ToString(), UtilBO.TipoMensagem.Alerta);
+                        lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Relatorios", "QuantitativoSugestoes.Busca.lblMessage.ErroPermissao").ToString(), UtilBO.TipoMensagem.Alerta);
                     }
 
                     Page.Form.DefaultButton = btnGerar.UniqueID;
@@ -65,9 +65,9 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         /// </summary>
         private void InicializarTela()
         {
-            UCComboTipoDisciplina1.CarregarTipoDisciplina();
-            txtDataInicio.Text = "";
-            txtDataFim.Text = "";
+            UCComboAnoLetivo1.Carregar();
+            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
+            UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
             updFiltros.Update();
         }
 
@@ -79,34 +79,14 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
             try
             {
                 string report, parametros;
-
-                DateTime dataInicio = new DateTime();
-                DateTime dataFim = new DateTime();
-
-                if (string.IsNullOrEmpty(txtDataInicio.Text) || !DateTime.TryParse(txtDataInicio.Text, out dataInicio))
-                    throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataInicioInvalida").ToString());
-
-                if (dataInicio > DateTime.Today)
-                    throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataInicioMaiorHoje").ToString());
-
-                if (string.IsNullOrEmpty(txtDataFim.Text) || !DateTime.TryParse(txtDataFim.Text, out dataFim))
-                    throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataFimInvalida").ToString());
-
-                if (dataFim > DateTime.Today)
-                    throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataFimMaiorHoje").ToString());
-
-                if (dataInicio > dataFim)
-                    throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataFimMenorInicio").ToString());
                 
-                report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioSugestoesCurriculo).ToString();
-                parametros = "tds_id=" + UCComboTipoDisciplina1.Valor.ToString() +
-                             "&tds_nome=" + UCComboTipoDisciplina1.Texto +
-                             "&dataInicioText=" + dataInicio.ToShortDateString() +
-                             "&dataFimText=" + dataFim.ToShortDateString() +
-                             "&dataInicio=" + dataInicio +
-                             "&dataFim=" + dataFim +
+                report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.QuantitativoSugestoes).ToString();
+                parametros = "cal_ano=" + UCComboAnoLetivo1.ano.ToString() +
+                             "&tne_id=" + UCComboTipoNivelEnsino1.Valor.ToString() +
+                             "&tne_nome=" + UCComboTipoNivelEnsino1.Texto +
+                             "&tme_id=" + UCComboTipoModalidadeEnsino1.Valor.ToString() +
+                             "&tme_nome=" + UCComboTipoModalidadeEnsino1.Texto +
                              "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
-                             "&nomeTipoDisciplina=" + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
                              "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria") +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
@@ -131,11 +111,11 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         protected void SalvaBusca()
         {
             Dictionary<string, string> filtros = new Dictionary<string, string>();
-            filtros.Add("tds_id", UCComboTipoDisciplina1.Valor.ToString());
-            filtros.Add("dataInicio", txtDataInicio.Text);
-            filtros.Add("dataFim", txtDataFim.Text);
+            filtros.Add("cal_ano", UCComboAnoLetivo1.ano.ToString());
+            filtros.Add("tne_id", UCComboTipoNivelEnsino1.Valor.ToString());
+            filtros.Add("tme_id", UCComboTipoModalidadeEnsino1.Valor.ToString());
 
-            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioSugestoesCurriculo, Filtros = filtros };
+            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.QuantitativoSugestoes, Filtros = filtros };
 
         }
 
@@ -144,19 +124,19 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         /// </summary>
         protected void CarregarBusca()
         {
-            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioSugestoesCurriculo)
+            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.QuantitativoSugestoes)
             {
                 // Recuperar busca realizada e pesquisar automaticamente
                 string valor;
 
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tds_id", out valor);
-                UCComboTipoDisciplina1.Valor = Convert.ToInt32(valor);
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("cal_ano", out valor);
+                UCComboAnoLetivo1.ano = Convert.ToInt32(valor);
 
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("dataInicio", out valor);
-                txtDataInicio.Text = valor;
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tne_id", out valor);
+                UCComboTipoNivelEnsino1.Valor = Convert.ToInt32(valor);
 
-                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("dataFim", out valor);
-                txtDataFim.Text = valor;
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tme_id", out valor);
+                UCComboTipoModalidadeEnsino1.Valor = Convert.ToInt32(valor);
 
                 updFiltros.Update();
             }
@@ -178,7 +158,7 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         protected void btnLimparPesquisa_Click(object sender, EventArgs e)
         {
             __SessionWEB.BuscaRealizada = new BuscaGestao();
-            Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Relatorios/RelatorioSugestoesCurriculo/Busca.aspx", false);
+            Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Relatorios/QuantitativoSugestoes/Busca.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 

@@ -951,12 +951,33 @@ SET XACT_ABORT ON
 		, @rcr_valorPadrao = 'Fechar'
 
 	EXEC MS_InsereResource 
-            @rcr_chave = 'AgendamentoSondagem.Agendamento.ckbSelecionarTodosPeriodos.Text' 
-            , @rcr_NomeResource = 'Academico'
-            , @rcr_cultura = 'pt-BR'
-            , @rcr_codigo = 0 
-            , @rcr_valorPadrao = 'Selecionar todos os períodos'
+		@rcr_chave = 'AgendamentoSondagem.Agendamento.ckbSelecionarTodosPeriodos.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Selecionar todos os períodos'
 			
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.lblMessage.ErroPermissao' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.btnGerarRel.Text' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Gerar relatório'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'QuantitativoSugestoes.Busca.btnLimparPesquisa.Text' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Limpar pesquisa'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

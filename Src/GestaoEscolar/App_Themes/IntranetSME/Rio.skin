@@ -108,6 +108,7 @@
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico-aulas.png"  SkinID="btAulas" Width="24px" Height="24px" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/atualizar.png" SkinID="btAtualizar" Width="24px" Height="24px" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/statusAlertaPendencia.png" SkinID="btStatusAlertaPendencia" ToolTip="Foram encontradas pendências para esse item." Width="16px" Height="16px" ImageAlign="Top" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/sugerir.png" SkinID="btSugerir" />
 
 <asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/tempo-real.png" SkinID="imgTempoReal" Width="20px" Height="20px" />
 <asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/confirmar.png"  SkinID="imgConfirmar" />
@@ -147,6 +148,8 @@
 <asp:Label   runat="server" CssClass="DragCell" SkinID="Drag" />
 <asp:Label   runat="server" CssClass="msgErroCombo" SkinID="SkinMsgErroCombo" />
 <asp:Label   runat="server" CssClass="summaryRed" SkinID="SummaryRed" />
+<asp:Label   runat="server" CssClass="text-titulo" SkinID="textTitulo" />
+
 <asp:ValidationSummary runat="server"  CssClass="summaryMensagem" DisplayMode="List" />
 <asp:CompareValidator runat="server" ForeColor="#df0000" />
 <asp:RequiredFieldValidator runat="server" ForeColor="#df0000" />
@@ -164,6 +167,36 @@
 </asp:GridView>
 
 <asp:GridView SkinID="GridResponsive" runat="server" CssClass="grid grid-responsive-list"  GridLines="None">
+    <RowStyle CssClass="gridRow collapsibleContainer" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow collapsibleContainer" />
+</asp:GridView>
+
+<asp:GridView SkinID="GridTopico" runat="server" CssClass="grid grid-topico"  GridLines="None">
+    <RowStyle CssClass="gridRow collapsibleContainer" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow collapsibleContainer" />
+</asp:GridView>
+
+<asp:GridView SkinID="GridItensLeft" runat="server" CssClass="grid grid-itens-left"  GridLines="None">
+    <RowStyle CssClass="gridRow collapsibleContainer" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow collapsibleContainer" />
+</asp:GridView>
+
+<asp:GridView SkinID="GridItensRight" runat="server" CssClass="grid grid-itens-right"  GridLines="None">
     <RowStyle CssClass="gridRow collapsibleContainer" />
     <EmptyDataRowStyle CssClass="summary" />
     <PagerStyle CssClass="gridPager" />

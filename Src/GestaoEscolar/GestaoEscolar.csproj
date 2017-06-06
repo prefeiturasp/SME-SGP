@@ -1667,6 +1667,13 @@
     <Compile Include="Relatorios\ObjetoAprendizagem\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\QuantitativoSugestoes\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\QuantitativoSugestoes\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\Relatorio.aspx.cs">
       <DependentUpon>Relatorio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3275,6 +3282,8 @@
     <Content Include="App_Themes\IntranetSME\images\logos\logo-barra-sp.gif" />
     <Content Include="App_Themes\IntranetSME\images\setaDestaque_.png" />
     <Content Include="App_Themes\IntranetSME\images\seta_.png" />
+    <Content Include="App_Themes\IntranetSME\images\sugerir.png" />
+    <Content Include="App_Themes\IntranetSME\new_css.css" />
     <Content Include="App_Themes\IntranetSME\responsividade.css" />
     <Content Include="Classe\Efetivacao\CadastroGestor.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
@@ -3389,6 +3398,8 @@
     <Content Include="App_Themes\IntranetSMEBootStrap\custom.css.map" />
     <Content Include="App_Themes\IntranetSMEBootStrap\custom.scss" />
     <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_layout-impressao.scss" />
+    <Content Include="App_Themes\IntranetSME\new_css.scss" />
+    <Content Include="App_Themes\IntranetSME\new_css.css.map" />
     <None Include="Configs\Session.txt" />
     <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
@@ -4186,6 +4197,7 @@
     <Content Include="Relatorios\FrequenciaMensal\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
+    <Content Include="Relatorios\QuantitativoSugestoes\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />
     <Content Include="Relatorios\RelatorioLogTablets\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosConselhoDeClasse\Busca.aspx" />

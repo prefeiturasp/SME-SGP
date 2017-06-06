@@ -53,7 +53,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-        <Top>5.97639cm</Top>
+        <Top>5.37639cm</Top>
         <Height>0.99688cm</Height>
         <Width>19cm</Width>
         <Visibility>
@@ -1114,7 +1114,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>6.97327cm</Height>
+    <Height>6.37327cm</Height>
     <Style />
   </Body>
   <Width>19cm</Width>
