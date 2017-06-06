@@ -4330,7 +4330,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             UCComboTipoAtividadeAvaliativa.Valor = entity.tav_id > 0 ? entity.tav_id : -1;
                             txtNomeAtiExtra.Text = entity.tae_nome;
                             txtDescricaoAtiExtra.Text = entity.tae_descricao;
-                            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? entity.tae_cargaHoraria.ToString() : string.Empty;
+                            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? Convert.ToInt32(entity.tae_cargaHoraria).ToString() : string.Empty;
 
                             hdnTaeId.Value = entity.tae_id.ToString();
 
