@@ -211,15 +211,6 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.WebControls.ValidationSummary vsQuestao;
         
         /// <summary>
-        /// txtItemQuestao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtItemQuestao;
-        
-        /// <summary>
         /// lblCampoQuestao control.
         /// </summary>
         /// <remarks>
@@ -227,6 +218,15 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCampoQuestao;
+        
+        /// <summary>
+        /// txtItemQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtItemQuestao;
         
         /// <summary>
         /// revtxtItemQuestao control.

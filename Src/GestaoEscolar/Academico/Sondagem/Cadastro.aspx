@@ -58,8 +58,8 @@
                                         <asp:Label runat="server" ID="lblTituloPopUpQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarQuestao.Text %>" />
                                     </legend>
                                     <asp:ValidationSummary ID="vsQuestao" runat="server" ValidationGroup="vgQuestao" />
-                                    <asp:TextBox runat="server" ID="txtItemQuestao" SkinID="text60C" MaxLength="250" />
-                                    <asp:Label runat="server" ID="lblCampoQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.HeaderNome %>" AssociatedControlID="txtItemQuestao" />
+                                    <asp:Label runat="server" ID="lblCampoQuestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.Text %>" AssociatedControlID="txtItemQuestao" />                                    
+                                    <asp:TextBox runat="server" ID="txtItemQuestao" SkinID="text60C" MaxLength="250" ValidationGroup="vgQuestao"/>
                                     <asp:RequiredFieldValidator ID="revtxtItemQuestao" runat="server" ControlToValidate="txtItemQuestao" ValidationGroup="vgQuestao"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemQuestao.ErrorMessage %>" Text="*" />
                                     <div class="right">
@@ -129,7 +129,7 @@
                                         <asp:Label runat="server" ID="lblTituloPopUpSubquestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnAdicionarSubQuestao.Text %>" />
                                     </legend>
                                     <asp:ValidationSummary ID="vsSubquestao" runat="server" ValidationGroup="vgSubquestao" />
-                                    <asp:Label runat="server" ID="lblCampoSubquestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvSubQuestoes.HeaderNome %>" AssociatedControlID="txtItemSubquestao" />
+                                    <asp:Label runat="server" ID="lblCampoSubquestao" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvSubQuestoes.Text %>" AssociatedControlID="txtItemSubquestao" />
                                     <asp:TextBox runat="server" ID="txtItemSubquestao" SkinID="text60C" MaxLength="250" />
                                     <asp:RequiredFieldValidator ID="revtxtItemSubquestao" runat="server" ControlToValidate="txtItemSubquestao" ValidationGroup="vgSubquestao"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemSubquestao.ErrorMessage %>" Text="*" />
@@ -202,7 +202,7 @@
                                     <asp:TextBox runat="server" ID="txtSigla" SkinID="text10C" MaxLength="20" />
                                     <asp:RequiredFieldValidator ID="revtxtSigla" runat="server" ControlToValidate="txtSigla" ValidationGroup="vgResposta"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtSigla.ErrorMessage %>" Text="*" />
-                                    <asp:Label runat="server" ID="lblCampoResposta" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvRespostas.HeaderNome %>" AssociatedControlID="txtItemResposta" />
+                                    <asp:Label runat="server" ID="lblCampoResposta" Text="<%$ Resources:Academico, Sondagem.Cadastro.grvRespostas.Text %>" AssociatedControlID="txtItemResposta" />
                                     <asp:TextBox runat="server" ID="txtItemResposta" SkinID="text60C" MaxLength="250" />
                                     <asp:RequiredFieldValidator ID="revtxtItemResposta" runat="server" ControlToValidate="txtItemResposta" ValidationGroup="vgResposta"
                                         Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemResposta.ErrorMessage %>" Text="*" />
