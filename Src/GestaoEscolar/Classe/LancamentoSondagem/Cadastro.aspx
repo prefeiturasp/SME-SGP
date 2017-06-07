@@ -34,7 +34,7 @@
                         OnSelectedIndexChanged="ddlTurma_SelectedIndexChanged">
                     </asp:DropDownList>
                 </fieldset>
-                <div class="responsive-scroll area-form">
+                <div class="responsive-scroll area-form scroll-table-full">
                     <asp:Label ID="lblResultadoVazio" runat="server" Visible="false"></asp:Label>
                     <div runat="server" id="divLancamentoMulti" visible="false">
                         <asp:Repeater ID="rptLancamentoMulti" runat="server" OnItemDataBound="rptLancamento_ItemDataBound">

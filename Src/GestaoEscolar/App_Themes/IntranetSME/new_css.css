@@ -284,11 +284,18 @@
     background: #0163a2;
     color: #fff; }
 
+.scroll-table-full {
+  max-width: calc(100vw - 120px);
+  overflow: auto; }
+
 @media screen and (max-width: 600px) {
   .selecao-disciplina table.radio tr {
     width: 33.3%; } }
 @media screen and (max-width: 960px) {
   .fieldset-curriculo .painel-habilidades input[type="submit"][id*="btnNovoEixo"] {
-    position: static; } }
+    position: static; }
+
+  .scroll-table-full {
+    max-width: calc(100vw - 40px); } }
 
 /*# sourceMappingURL=new_css.css.map */
