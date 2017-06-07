@@ -992,6 +992,13 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'O período para o cadastro de sugestões não está aberto.'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.btnListaSugestoes.ToolTip' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Registro de sugestões'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
