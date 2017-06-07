@@ -2646,6 +2646,13 @@
     <Compile Include="WebControls\Curriculo\UCCurriculo.ascx.designer.cs">
       <DependentUpon>UCCurriculo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Curriculo\UCListaSugestoes.ascx.cs">
+      <DependentUpon>UCListaSugestoes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Curriculo\UCListaSugestoes.ascx.designer.cs">
+      <DependentUpon>UCListaSugestoes.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Documento\UCGridDocumento.ascx.cs">
       <DependentUpon>UCGridDocumento.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4266,6 +4273,7 @@
     <Content Include="WebControls\ControleTurma\UCSelecaoDisciplinaCompartilhada.ascx" />
     <Content Include="WebControls\ControleVigenciaDocentes\UCControleVigenciaDocentes.ascx" />
     <Content Include="WebControls\Curriculo\UCCurriculo.ascx" />
+    <Content Include="WebControls\Curriculo\UCListaSugestoes.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotas.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotasFinal.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotasPadrao.ascx" />

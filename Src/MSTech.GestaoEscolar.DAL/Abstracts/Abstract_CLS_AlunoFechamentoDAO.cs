@@ -259,9 +259,8 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Decimal;
                 Param.ParameterName = "@caf_qtAtividadeExtraclasse";
-                Param.Size = 4;
                 if (entity.caf_qtAtividadeExtraclasse > 0)
                 {
                     Param.Value = entity.caf_qtAtividadeExtraclasse;
@@ -459,9 +458,8 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Decimal;
                 Param.ParameterName = "@caf_qtAtividadeExtraclasse";
-                Param.Size = 4;
                 if (entity.caf_qtAtividadeExtraclasse > 0)
                 {
                     Param.Value = entity.caf_qtAtividadeExtraclasse;

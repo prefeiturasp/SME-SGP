@@ -104,7 +104,19 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 }
                 qs.Parameters.Add(Param);
 
-
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                if (entity.cal_ano > 0)
+                {
+                    Param.Value = entity.cal_ano;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
             }
         }
 
@@ -173,7 +185,19 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 }
                 qs.Parameters.Add(Param);
 
-
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                if (entity.cal_ano > 0)
+                {
+                    Param.Value = entity.cal_ano;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
             }
         }
 

@@ -670,7 +670,7 @@ namespace MSTech.GestaoEscolar.BLL
             ACA_EventoDAO dao = new ACA_EventoDAO();
             return dao.Select_EventoLiberacao(cal_id, tur_id, tpc_id);
         }
-               
+
         /// <summary>
         /// Seleciona o evento do calendário
         /// </summary>
@@ -809,7 +809,7 @@ namespace MSTech.GestaoEscolar.BLL
                         cal_id = Convert.ToInt32(dr["cal_id"])
                     }).ToList();
         }
-                
+
         /// <summary>
         /// Seleciona os eventos por calendários, unidades escolares e tipo de evento.
         /// </summary>
@@ -843,9 +843,24 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 // busca no banco.
                 dados = (from DataRow eventos in dao.Select_EventoEfetivacaoTodosPorPeriodoEscola(cal_id, cap_id, esc_id, uni_id, tev_id).Rows
-                        select dao.DataRowToEntity(eventos, new ACA_Evento())).ToList();
+                         select dao.DataRowToEntity(eventos, new ACA_Evento())).ToList();
             }
             return dados;
+        }
+
+        /// <summary>
+        /// Retorna se existem eventos vigentes de acordo com o tipo de evento e usuário.
+        /// </summary>
+        /// <param name="tev_id"></param>
+        /// <param name="adm"></param>
+        /// <param name="usu_id"></param>
+        /// <param name="gru_id"></param>
+        /// <param name="doc_id"></param>
+        /// <param name="cal_ano"></param>
+        /// <returns></returns>
+        public static bool VerificaEventoVigentePorUsuario(int tev_id, bool adm, Guid usu_id, Guid gru_id, long doc_id, int cal_ano)
+        {
+            return new ACA_EventoDAO().VerificaEventoVigentePorUsuario(tev_id, adm, usu_id, gru_id, doc_id, cal_ano);
         }
 
         #endregion

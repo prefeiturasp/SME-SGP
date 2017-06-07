@@ -179,7 +179,7 @@
                         <asp:TextBox ID="_txtNomeAbreviadoDisciplina" runat="server" MaxLength="20" SkinID="text20C"></asp:TextBox>
                         <asp:Label ID="LabelCodigoDisciplina" runat="server" Text="Código" AssociatedControlID="_txtCodigoDisciplina"></asp:Label>
                         <asp:TextBox ID="_txtCodigoDisciplina" runat="server" MaxLength="10" SkinID="text10C"></asp:TextBox>
-                        <asp:Label ID="LabelCargaHorariaExtraClasse" runat="server" Text="Carga horária extra classe" AssociatedControlID="_txtCargaHorariaExtraClasse"></asp:Label>
+                        <asp:Label ID="LabelCargaHorariaExtraClasse" runat="server" Text="<%$ Resources:Academico, Curso.Cadastro.LabelCargaHorariaExtraClasse.Text %>" AssociatedControlID="_txtCargaHorariaExtraClasse"></asp:Label>
                         <asp:TextBox ID="_txtCargaHorariaExtraClasse" runat="server" SkinID="Decimal" MaxLength="8"></asp:TextBox>                        
                         <div class="right">
                             <asp:Button ID="_btnCancelarDisciplina" runat="server" CausesValidation="False" Text="Cancelar"

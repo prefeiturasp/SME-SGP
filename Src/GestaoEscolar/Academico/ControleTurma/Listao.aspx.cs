@@ -2374,7 +2374,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             hdnAlterouAtividadeExtra.Value = "";
 
-            if (CLS_TurmaAtividadeExtraClasseAlunoBO.SalvarEmLote(listaTumaAtividadeExtraclasse))
+            if (CLS_TurmaAtividadeExtraClasseAlunoBO.SalvarEmLote(listaTumaAtividadeExtraclasse, EntTurmaDisciplina.tud_id, UCNavegacaoTelaPeriodo.VS_tpc_id, EntTurmaDisciplina.tud_tipo, VS_EntitiesControleTurma.formatoAvaliacao.fav_fechamentoAutomatico, Ent_ID_UsuarioLogado))
             {
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "Listão de atividade extraclasse | " +
                                                                         "cal_id: " + UCNavegacaoTelaPeriodo.VS_cal_id + " | tpc_id: " + UCNavegacaoTelaPeriodo.VS_tpc_id +
@@ -4330,7 +4330,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             UCComboTipoAtividadeAvaliativa.Valor = entity.tav_id > 0 ? entity.tav_id : -1;
                             txtNomeAtiExtra.Text = entity.tae_nome;
                             txtDescricaoAtiExtra.Text = entity.tae_descricao;
-                            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? entity.tae_cargaHoraria.ToString() : string.Empty;
+                            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? Convert.ToInt32(entity.tae_cargaHoraria).ToString() : string.Empty;
 
                             hdnTaeId.Value = entity.tae_id.ToString();
 

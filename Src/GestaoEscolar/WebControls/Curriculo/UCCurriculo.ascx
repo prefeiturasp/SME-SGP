@@ -3,6 +3,7 @@
 <%@ Register Src="~/WebControls/Combos/UCComboTipoNivelEnsino.ascx" TagName="UCComboTipoNivelEnsino" TagPrefix="uc1" %>
 <%@ Register Src="~/WebControls/Combos/UCComboTipoModalidadeEnsino.ascx" TagName="UCComboTipoModalidadeEnsino" TagPrefix="uc2" %>
 <%@ Register Src="~/WebControls/Combos/UCComboTipoCurriculoPeriodo.ascx" TagName="UCComboTipoCurriculoPeriodo" TagPrefix="uc3" %>
+<%@ Register Src="~/WebControls/Curriculo/UCListaSugestoes.ascx" TagName="UCListaSugestoes" TagPrefix="uc4" %>
 
 <asp:UpdatePanel runat="server" ID="updMessage" UpdateMode="Always">
     <ContentTemplate>
@@ -16,8 +17,9 @@
         <asp:ValidationSummary ID="ValidationSummary3" runat="server" ValidationGroup="eixo" />
         <fieldset class="fieldset-curriculo">
             <legend><asp:Literal runat="server" ID="litLegend" Text="" /></legend>
-            <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />
-            <uc2:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />           
+            <asp:Label ID="lblMsgEvento" runat="server"></asp:Label>
+            <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" TrazerComboCarregado="true" />
+            <uc2:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" TrazerComboCarregado="true" />           
             
             <asp:Panel runat="server" ID="pnlCurriculo" style="margin-top:20px;" Visible="false" >
                 <!-- Introdução -->
@@ -40,6 +42,8 @@
                                 <ItemTemplate>
                                     <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' SkinID="textTitulo"></asp:Label>
                                     <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
+                                    <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                    <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <asp:Panel ID="pnlItem" runat="server">
@@ -49,6 +53,8 @@
                                             ControlToValidate="txtTitulo" ValidationGroup="geral">*</asp:RequiredFieldValidator>
                                         <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
                                         <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+                                        <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                        <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                     </asp:Panel>
                                     <asp:Panel ID="pnlSugestao" runat="server">
                                         <asp:Label ID="lblTituloSugestao" runat="server" Text='<%# Bind("crc_titulo") %>' Font-Bold="true"></asp:Label>
@@ -61,16 +67,17 @@
                                             ControlToValidate="txtSugestao" ValidationGroup="geral">*</asp:RequiredFieldValidator>
                                         <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
                                         <asp:DropDownList ID="ddlTipoSugestao" runat="server">
-                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
-                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+                                            <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
                                         </asp:DropDownList>
                                         <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
                                     </asp:Panel>
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                <ItemTemplate>                                
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" />                                
                                     <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
                                     <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="geral" Visible="false" />
                                     <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
@@ -127,6 +134,8 @@
                                     <ItemTemplate>
                                         <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' CssClass="text-titulo"></asp:Label>
                                         <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
+                                        <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                        <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                     </ItemTemplate>
                                     <EditItemTemplate>
 		                                <asp:Panel ID="pnlItem" runat="server">
@@ -136,7 +145,9 @@
 				                                ControlToValidate="txtTitulo" ValidationGroup="disciplina">*</asp:RequiredFieldValidator>
 			                                <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
 			                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
-		                                </asp:Panel>
+		                                    <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                            <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
+                                        </asp:Panel>
 		                                <asp:Panel ID="pnlSugestao" runat="server">
 			                                <asp:Label ID="lblTituloSugestao" runat="server" Text='<%# Bind("crc_titulo") %>' Font-Bold="true"></asp:Label>
 			                                <br /><br />
@@ -158,7 +169,8 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                     <ItemTemplate>                                
-		                                <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+		                                <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
+                                        <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
 		                                <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="disciplina" Visible="false" />
 		                                <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
 		                                <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
@@ -192,7 +204,7 @@
                     <!-- Conteúdos e habilidades -->
                     <fieldset>
                         <legend><asp:Literal runat="server" ID="litHabilidades" Text="<%$ Resources:Academico, Curriculo.Cadastro.litHabilidades.Text %>" /></legend>
-                        <uc3:UCComboTipoCurriculoPeriodo ID="UCComboTipoCurriculoPeriodo1" runat="server" Obrigatorio="false" MostrarMessageSelecione="true" />
+                        <uc3:UCComboTipoCurriculoPeriodo ID="UCComboTipoCurriculoPeriodo1" runat="server" Obrigatorio="false" MostrarMessageSelecione="true" TrazerComboCarregado="true" />
                         <div class="painel-habilidades">
                             <asp:Panel runat="server" ID="pnlHabilidades" style="margin-top:20px;" Visible="false" >
                             
@@ -211,6 +223,8 @@
                                     <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.ColunaEixo %>">
                                         <ItemTemplate>
                                             <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                            <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                            <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                         </ItemTemplate>
                                         <EditItemTemplate>
                                             <asp:Panel ID="pnlItem" runat="server">
@@ -218,6 +232,8 @@
                                                 <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
                                                 <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.rfvDescricao.ErrorMessage %>"
                                                     ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                                <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                             </asp:Panel>
                                             <asp:Panel ID="pnlSugestao" runat="server">
                                                 <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
@@ -228,9 +244,9 @@
 				                                    ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                    <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
 			                                    <asp:DropDownList ID="ddlTipoSugestao" runat="server">
-				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
-				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
-				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                    <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
 			                                    </asp:DropDownList>
 			                                    <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
                                             </asp:Panel>
@@ -239,7 +255,8 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
 	                                    <ItemTemplate>                                
-		                                    <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+		                                    <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
+                                            <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
 		                                    <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
 		                                    <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
 		                                    <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
@@ -287,6 +304,8 @@
                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.ColunaObjetivo %>">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                                                <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                                                <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <asp:Panel ID="pnlItem" runat="server">
@@ -294,6 +313,8 @@
                                                                     <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
                                                                     <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage %>"
                                                                         ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                    <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                                                    <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                                 </asp:Panel>
                                                                 <asp:Panel ID="pnlSugestao" runat="server">
 			                                                        <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
@@ -304,9 +325,9 @@
 				                                                        ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
 			                                                        <asp:DropDownList ID="ddlTipoSugestao" runat="server">
-				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
-				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
-				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
 			                                                        </asp:DropDownList>
 			                                                        <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
 		                                                        </asp:Panel>
@@ -314,7 +335,8 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
 	                                                        <ItemTemplate>                                
-		                                                        <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+		                                                        <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
+                                                                <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
 		                                                        <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
 		                                                        <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
 		                                                        <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
@@ -360,6 +382,8 @@
                                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.ColunaObjetivoAprendizagem %>">
                                                                             <ItemTemplate>
                                                                                 <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                                                                <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                                                                <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                                             </ItemTemplate>
                                                                             <EditItemTemplate>
                                                                                 <asp:Panel ID="pnlItem" runat="server">
@@ -367,6 +391,8 @@
                                                                                     <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' MaxLength="500" SkinID="text60C"></asp:TextBox>
                                                                                     <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.rfvDescricao.ErrorMessage %>"
                                                                                         ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                                    <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                                                                    <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                                                 </asp:Panel>
 		                                                                        <asp:Panel ID="pnlSugestao" runat="server">
 			                                                                        <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
@@ -377,9 +403,9 @@
 				                                                                        ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
 			                                                                        <asp:DropDownList ID="ddlTipoSugestao" runat="server">
-				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
-				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
-				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.lbTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="True"></asp:ListItem>
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+				                                                                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
 			                                                                        </asp:DropDownList>
 			                                                                        <asp:HiddenField ID="hdnCrsId" runat="server" Value="-1" />
 		                                                                        </asp:Panel>
@@ -387,7 +413,8 @@
                                                                         </asp:TemplateField>
                                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
 	                                                                        <ItemTemplate>                                
-		                                                                        <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+		                                                                        <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
+                                                                                <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
 		                                                                        <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
 		                                                                        <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
 		                                                                        <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />

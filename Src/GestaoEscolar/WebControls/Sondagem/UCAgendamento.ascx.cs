@@ -335,6 +335,7 @@ namespace GestaoEscolar.WebControls.Sondagem
             {
                 txtDataInicio.Text = dataInicio;
                 txtDataFim.Text = dataFim;
+                ckbSelecionarTodosPeriodos.Checked = false;
 
                 dtDadosRepeater = ACA_TipoCurriculoPeriodoBO.SelectByPesquisa(0, 0).AsEnumerable().Where(p => Convert.ToByte(p["tcp_situacao"]) != 3).CopyToDataTable();
                 var dtNivelEnsino = dtDadosRepeater.AsEnumerable().GroupBy(t => new
@@ -441,6 +442,27 @@ namespace GestaoEscolar.WebControls.Sondagem
                 ApplicationWEB._GravaErro(ex);
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Sondagem.Agendamento.ErroAbrirPopUp").ToString(), UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        /// <summary>
+        /// Seta o valor do atributo Checked de todos os CheckBox do Repeater de Períodos
+        /// </summary>
+        /// <param name="check"></param>
+        private void SetChecksPeriodos(bool check)
+        {
+            foreach (RepeaterItem rptItem in rptNivelEnsino.Items)
+            {
+                Repeater rptCampos = (Repeater)rptItem.FindControl("rptCampos");
+                if (rptCampos != null)
+                {
+                    foreach (RepeaterItem item in rptCampos.Items)
+                    {
+                        CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
+                        if (ckbCampo != null)
+                            ckbCampo.Checked = check;
+                    }
+                }
             }
         }
 
@@ -865,22 +887,10 @@ namespace GestaoEscolar.WebControls.Sondagem
                 }
             }
         }
-
+        
         protected void ckbSelecionarTodosPeriodos_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (RepeaterItem rptItem in rptNivelEnsino.Items)
-            {
-                Repeater rptCampos = (Repeater)rptItem.FindControl("rptCampos");
-                if (rptCampos != null)
-                {
-                    foreach (RepeaterItem item in rptCampos.Items)
-                    {
-                        CheckBox ckbCampo = (CheckBox)item.FindControl("ckbCampo");
-                        if (ckbCampo != null)
-                            ckbCampo.Checked = ckbSelecionarTodosPeriodos.Checked;
-                    }
-                }
-            }
+            SetChecksPeriodos(ckbSelecionarTodosPeriodos.Checked);            
         }
 
         #endregion

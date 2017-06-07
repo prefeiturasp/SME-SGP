@@ -106,5 +106,16 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectBy_Pesquisa_Area_Conhecimento(false, 1, 1, out totalRecords);
         }
 
+        /// <summary>
+        /// Retorna todos os tipos de nível de ensino não excluídos logicamente
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="doc_id">ID do docente</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoNivelEnsinoDocente(long doc_id)
+        {
+            return new ACA_TipoNivelEnsinoDAO().SelecionaTipoNivelEnsinoDocente(doc_id);
+        }
     }    
 }
