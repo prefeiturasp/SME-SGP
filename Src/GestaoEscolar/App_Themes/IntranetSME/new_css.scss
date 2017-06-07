@@ -27,6 +27,11 @@
       padding: 3px;
       box-sizing: border-box;
     }
+
+    input[type="image"].preenchido{
+      border:1px solid #0163a2 !important;
+      @include box-shadow(0 1px 0 #0163a2);
+    }
   }
 
   .accordion-grid, .grid-topico, .grid-itens-right{

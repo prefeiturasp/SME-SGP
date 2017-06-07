@@ -4,9 +4,9 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("fonts/material-icons/MaterialIcons-Regular.eot");
+  src: url("fonts/materialicons/MaterialIcons-Regular.eot");
   /* For IE6-8 */
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("fonts/material-icons/MaterialIcons-Regular.woff2") format("woff2"), url("fonts/material-icons/MaterialIcons-Regular.woff") format("woff"), url("fonts/material-icons/MaterialIcons-Regular.ttf") format("truetype"); }
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("fonts/materialicons/MaterialIcons-Regular.woff2") format("woff2"), url("fonts/materialicons/MaterialIcons-Regular.woff") format("woff"), url("fonts/materialicons/MaterialIcons-Regular.ttf") format("truetype"); }
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -83,6 +83,12 @@
   border: 1px dotted #0163a2 !important;
   padding: 3px;
   box-sizing: border-box; }
+.fieldset-curriculo .grid input[type="image"].preenchido {
+  border: 1px solid #0163a2 !important;
+  -webkit-box-shadow: 0 1px 0 #0163a2;
+  -moz-box-shadow: 0 1px 0 #0163a2;
+  -ms-box-shadow: 0 1px 0 #0163a2;
+  box-shadow: 0 1px 0 #0163a2; }
 .fieldset-curriculo .accordion-grid, .fieldset-curriculo .grid-topico, .fieldset-curriculo .grid-itens-right {
   border: 0;
   margin-bottom: 0; }
