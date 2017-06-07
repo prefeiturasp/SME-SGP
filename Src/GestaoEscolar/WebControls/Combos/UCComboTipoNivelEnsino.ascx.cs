@@ -130,9 +130,42 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
         }
     }
 
+    /// <summary>
+    /// Indica se deve trazer o primeiro item selecinado caso seja o único
+    /// (Sem contar a MensagemSelecione)
+    /// </summary>
+    public bool TrazerComboCarregado
+    {
+        get
+        {
+            if (ViewState["TrazerComboCarregado"] != null)
+                return Convert.ToBoolean(ViewState["TrazerComboCarregado"]);
+            return false;
+        }
+        set
+        {
+            ViewState["TrazerComboCarregado"] = value;
+        }
+    }
+
     #endregion
 
     #region METODOS
+
+    /// <summary>
+    /// Traz o primeiro item selecinado caso seja o único
+    /// </summary>
+    private void SelecionaPrimeiroItem()
+    {
+        if (TrazerComboCarregado && ddlCombo.Items.Count == 2 && ddlCombo.Items[0].Value == "-1")
+        {
+            // Seleciona o primeiro item.
+            ddlCombo.SelectedValue = ddlCombo.Items[1].Value;
+
+            if (IndexChanged != null)
+                IndexChanged();
+        }
+    }
 
     /// <summary>
     /// Seta o foco no combo    
@@ -153,6 +186,7 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
         ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
     }
 
       /// <summary>
@@ -182,6 +216,7 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
         ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
     }
 
     /// <summary>
