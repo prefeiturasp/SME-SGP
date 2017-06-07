@@ -95,8 +95,6 @@ public partial class Configuracao_TipoPeriodoCurso_Cadastro : MotherPageLogado
 
             lblLegendaCadastroPeriodoCurso.Text = "Cadastro de" + " " + "tipo de" + " " + GestaoEscolarUtilBO.nomePadraoPeriodo(__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower();
             lblDescricao.Text = "Tipo de" + " " + GestaoEscolarUtilBO.nomePadraoPeriodo(__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower() + "*";
-
-            lblObjetoAprendizagem.Text = "Possui objeto de conhecimento";
         }
     }
 
