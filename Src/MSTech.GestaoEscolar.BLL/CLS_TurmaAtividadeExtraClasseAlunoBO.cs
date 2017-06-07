@@ -59,10 +59,24 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="lstTurmaAtividadeExtraClasseAluno"></param>
         /// <returns></returns>
-        public static bool SalvarEmLote(List<CLS_TurmaAtividadeExtraClasseAluno> lstTurmaAtividadeExtraClasseAluno)
+        public static bool SalvarEmLote(List<CLS_TurmaAtividadeExtraClasseAluno> lstTurmaAtividadeExtraClasseAluno, long tud_id, int tpc_id, byte tud_tipo, bool fechamentoAutomatico, Guid ent_id)
         {
-            DataTable dt = lstTurmaAtividadeExtraClasseAluno.Select(p => new TipoTabela_TurmaAtividadeExtraClasseALuno(p).ToDataRow()).CopyToDataTable();
-            return new CLS_TurmaAtividadeExtraClasseAlunoDAO().SalvarEmLote(dt);
+            using (DataTable dt = lstTurmaAtividadeExtraClasseAluno.Select(p => new TipoTabela_TurmaAtividadeExtraClasseALuno(p).ToDataRow()).CopyToDataTable())
+            {
+                CLS_TurmaAtividadeExtraClasseAlunoDAO dao = new CLS_TurmaAtividadeExtraClasseAlunoDAO();
+                if (dao.SalvarEmLote(dt))
+                {
+                    // Caso o fechamento seja automático, grava na fila de processamento.
+                    if (fechamentoAutomatico && tud_tipo != (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia && tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, ent_id))
+                    {
+                        CLS_AlunoFechamentoPendenciaBO.SalvarFilaFrequencia(tud_id, tpc_id, dao._Banco);
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
         }
 
         #endregion Métodos de inclusão/alteração
