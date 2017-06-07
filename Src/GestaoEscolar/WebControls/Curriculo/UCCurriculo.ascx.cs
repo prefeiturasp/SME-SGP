@@ -298,6 +298,12 @@ namespace GestaoEscolar.WebControls.Curriculo
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsUCCurriculo.js"));
             }
 
+            btnNovoGeral.Visible = btnNovoDisciplina.Visible = btnNovoEixo.Visible = VS_permiteIncluir;
+
+            UCComboTipoNivelEnsino1.IndexChanged += UCComboTipoNivelEnsino1_IndexChanged;
+            UCComboTipoModalidadeEnsino1.IndexChanged += UCComboTipoModalidadeEnsino1_IndexChanged;
+            UCComboTipoCurriculoPeriodo1.OnSelectedIndexChanged += UCComboTipoCurriculoPeriodo1_OnSelectedIndexChanged;
+
             if (!IsPostBack)
             {
                 try
@@ -328,12 +334,6 @@ namespace GestaoEscolar.WebControls.Curriculo
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
                 }
             }
-
-            btnNovoGeral.Visible = btnNovoDisciplina.Visible = btnNovoEixo.Visible = VS_permiteIncluir;
-
-            UCComboTipoNivelEnsino1.IndexChanged += UCComboTipoNivelEnsino1_IndexChanged;
-            UCComboTipoModalidadeEnsino1.IndexChanged += UCComboTipoModalidadeEnsino1_IndexChanged;
-            UCComboTipoCurriculoPeriodo1.OnSelectedIndexChanged += UCComboTipoCurriculoPeriodo1_OnSelectedIndexChanged;
         }
 
         #endregion Page life cycle
@@ -351,6 +351,18 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                 if (VS_tne_id > 0 && VS_tme_id > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                 {
+                    Carregar(-1);
+                    
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
+                    rblDisciplina.DataSource = dtDisciplinas;
+                    rblDisciplina.DataBind();
+                    rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
+                    if (rblDisciplina.Items.Count == 1)
+                    {
+                        rblDisciplina.SelectedIndex = 0;
+                        rblDisciplina_SelectedIndexChanged(null, null);
+                    }
+
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
                         UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocente(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
@@ -359,12 +371,6 @@ namespace GestaoEscolar.WebControls.Curriculo
                     {
                         UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
                     }
-                    Carregar(-1);
-
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
-                    rblDisciplina.DataSource = dtDisciplinas;
-                    rblDisciplina.DataBind();
-                    rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
 
                     if (VS_permiteIncluirSugestao)
                     {
@@ -407,6 +413,18 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                 if (VS_tne_id > 0 && VS_tme_id > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                 {
+                    Carregar(-1);
+
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
+                    rblDisciplina.DataSource = dtDisciplinas;
+                    rblDisciplina.DataBind();
+                    rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
+                    if (rblDisciplina.Items.Count == 1)
+                    {
+                        rblDisciplina.SelectedIndex = 0;
+                        rblDisciplina_SelectedIndexChanged(null, null);
+                    }
+
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
                         UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocente(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
@@ -415,12 +433,6 @@ namespace GestaoEscolar.WebControls.Curriculo
                     {
                         UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
                     }
-                    Carregar(-1);
-
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsino(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id);
-                    rblDisciplina.DataSource = dtDisciplinas;
-                    rblDisciplina.DataBind();
-                    rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
 
                     if (VS_permiteIncluirSugestao)
                     {
@@ -1431,41 +1443,45 @@ namespace GestaoEscolar.WebControls.Curriculo
         {
             try
             {
-                sCurriculoCapitulo entity = new sCurriculoCapitulo
+                // Se ainda não existe outro item novo sendo cadastrado...
+                if (grvGeral.EditIndex < 0 || Convert.ToInt32(grvGeral.DataKeys[grvGeral.EditIndex]["crc_id"]) > 0)
                 {
-                    crc_id = -1
-                    ,
-                    tds_id = -1
-                    ,
-                    crc_titulo = string.Empty
-                    ,
-                    crc_descricao = string.Empty
-                    ,
-                    crc_ordem = grvGeral.Rows.Count > 0 ? Convert.ToInt32(grvGeral.DataKeys[grvGeral.Rows.Count - 1]["crc_ordem"]) + 1 : 1
-                };
-                VS_ltCurriculoCapituloGeral.Add(entity);
-                int index = VS_ltCurriculoCapituloGeral.Count - 1;
-                grvGeral.EditIndex = index;
-                Carregar(-1);
+                    sCurriculoCapitulo entity = new sCurriculoCapitulo
+                    {
+                        crc_id = -1
+                        ,
+                        tds_id = -1
+                        ,
+                        crc_titulo = string.Empty
+                        ,
+                        crc_descricao = string.Empty
+                        ,
+                        crc_ordem = grvGeral.Rows.Count > 0 ? Convert.ToInt32(grvGeral.DataKeys[grvGeral.Rows.Count - 1]["crc_ordem"]) + 1 : 1
+                    };
+                    VS_ltCurriculoCapituloGeral.Add(entity);
+                    int index = VS_ltCurriculoCapituloGeral.Count - 1;
+                    grvGeral.EditIndex = index;
+                    Carregar(-1);
 
-                ImageButton btnSalvar = (ImageButton)grvGeral.Rows[index].FindControl("btnSalvar");
-                if (btnSalvar != null)
-                    btnSalvar.Visible = true;
+                    ImageButton btnSalvar = (ImageButton)grvGeral.Rows[index].FindControl("btnSalvar");
+                    if (btnSalvar != null)
+                        btnSalvar.Visible = true;
 
-                ImageButton btnEditar = (ImageButton)grvGeral.Rows[index].FindControl("btnEditar");
-                if (btnEditar != null)
-                {
-                    btnEditar.Visible = false;
-                    ImageButton btnCancelarEdicao = (ImageButton)grvGeral.Rows[index].FindControl("btnCancelarEdicao");
-                    if (btnCancelarEdicao != null)
-                        btnCancelarEdicao.Visible = true;
+                    ImageButton btnEditar = (ImageButton)grvGeral.Rows[index].FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                        ImageButton btnCancelarEdicao = (ImageButton)grvGeral.Rows[index].FindControl("btnCancelarEdicao");
+                        if (btnCancelarEdicao != null)
+                            btnCancelarEdicao.Visible = true;
+                    }
+
+                    ImageButton btnExcluir = (ImageButton)grvGeral.Rows[index].FindControl("btnExcluir");
+                    if (btnExcluir != null)
+                        btnExcluir.Visible = false;
+
+                    grvGeral.Rows[index].Focus();
                 }
-
-                ImageButton btnExcluir = (ImageButton)grvGeral.Rows[index].FindControl("btnExcluir");
-                if (btnExcluir != null)
-                    btnExcluir.Visible = false;
-
-                grvGeral.Rows[index].Focus();
             }
             catch (Exception ex)
             {
@@ -1478,41 +1494,45 @@ namespace GestaoEscolar.WebControls.Curriculo
         {
             try
             {
-                sCurriculoCapitulo entity = new sCurriculoCapitulo
+                // Se ainda não existe outro item novo sendo cadastrado...
+                if (grvDisciplina.EditIndex < 0 || Convert.ToInt32(grvDisciplina.DataKeys[grvDisciplina.EditIndex]["crc_id"]) > 0)
                 {
-                    crc_id = -1
-                    ,
-                    tds_id = VS_tds_id
-                    ,
-                    crc_titulo = string.Empty
-                    ,
-                    crc_descricao = string.Empty
-                    ,
-                    crc_ordem = grvDisciplina.Rows.Count > 0 ? Convert.ToInt32(grvDisciplina.DataKeys[grvDisciplina.Rows.Count - 1]["crc_ordem"]) + 1 : 1
-                };
-                VS_ltCurriculoCapituloDisciplina.Add(entity);
-                int index = VS_ltCurriculoCapituloDisciplina.Count - 1;
-                grvDisciplina.EditIndex = index;
-                Carregar(VS_tds_id);
+                    sCurriculoCapitulo entity = new sCurriculoCapitulo
+                    {
+                        crc_id = -1
+                        ,
+                        tds_id = VS_tds_id
+                        ,
+                        crc_titulo = string.Empty
+                        ,
+                        crc_descricao = string.Empty
+                        ,
+                        crc_ordem = grvDisciplina.Rows.Count > 0 ? Convert.ToInt32(grvDisciplina.DataKeys[grvDisciplina.Rows.Count - 1]["crc_ordem"]) + 1 : 1
+                    };
+                    VS_ltCurriculoCapituloDisciplina.Add(entity);
+                    int index = VS_ltCurriculoCapituloDisciplina.Count - 1;
+                    grvDisciplina.EditIndex = index;
+                    Carregar(VS_tds_id);
 
-                ImageButton btnSalvar = (ImageButton)grvDisciplina.Rows[index].FindControl("btnSalvar");
-                if (btnSalvar != null)
-                    btnSalvar.Visible = true;
+                    ImageButton btnSalvar = (ImageButton)grvDisciplina.Rows[index].FindControl("btnSalvar");
+                    if (btnSalvar != null)
+                        btnSalvar.Visible = true;
 
-                ImageButton btnEditar = (ImageButton)grvDisciplina.Rows[index].FindControl("btnEditar");
-                if (btnEditar != null)
-                {
-                    btnEditar.Visible = false;
-                    ImageButton btnCancelarEdicao = (ImageButton)grvDisciplina.Rows[index].FindControl("btnCancelarEdicao");
-                    if (btnCancelarEdicao != null)
-                        btnCancelarEdicao.Visible = true;
+                    ImageButton btnEditar = (ImageButton)grvDisciplina.Rows[index].FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                        ImageButton btnCancelarEdicao = (ImageButton)grvDisciplina.Rows[index].FindControl("btnCancelarEdicao");
+                        if (btnCancelarEdicao != null)
+                            btnCancelarEdicao.Visible = true;
+                    }
+
+                    ImageButton btnExcluir = (ImageButton)grvDisciplina.Rows[index].FindControl("btnExcluir");
+                    if (btnExcluir != null)
+                        btnExcluir.Visible = false;
+
+                    grvDisciplina.Rows[index].Focus();
                 }
-
-                ImageButton btnExcluir = (ImageButton)grvDisciplina.Rows[index].FindControl("btnExcluir");
-                if (btnExcluir != null)
-                    btnExcluir.Visible = false;
-
-                grvDisciplina.Rows[index].Focus();
             }
             catch (Exception ex)
             {
@@ -1525,42 +1545,46 @@ namespace GestaoEscolar.WebControls.Curriculo
         {
             try
             {
-                sCurriculoObjetivo entity = new sCurriculoObjetivo
+                // Se ainda não existe outro item novo sendo cadastrado...
+                if (grvEixo.EditIndex < 0 || Convert.ToInt32(grvEixo.DataKeys[grvEixo.EditIndex]["cro_id"]) > 0)
                 {
-                    cro_id = -1
-                    ,
-                    cro_descricao = string.Empty
-                    ,
-                    cro_ordem = grvEixo.Rows.Count > 0 ? Convert.ToInt32(grvEixo.DataKeys[grvEixo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
-                    ,
-                    cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Eixo
-                    ,
-                    cro_idPai = -1
-                };
-                VS_ltCurriculoObjetivo.Add(entity);
-                int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo && p.cro_idPai <= 0).Count - 1;
-                grvEixo.EditIndex = index;
-                GuardarEixosAbertos();
-                CarregarObjetivos(grvEixo, (byte)ACA_CurriculoObjetivoTipo.Eixo, -1);
+                    sCurriculoObjetivo entity = new sCurriculoObjetivo
+                    {
+                        cro_id = -1
+                        ,
+                        cro_descricao = string.Empty
+                        ,
+                        cro_ordem = grvEixo.Rows.Count > 0 ? Convert.ToInt32(grvEixo.DataKeys[grvEixo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
+                        ,
+                        cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Eixo
+                        ,
+                        cro_idPai = -1
+                    };
+                    VS_ltCurriculoObjetivo.Add(entity);
+                    int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo && p.cro_idPai <= 0).Count - 1;
+                    grvEixo.EditIndex = index;
+                    GuardarEixosAbertos();
+                    CarregarObjetivos(grvEixo, (byte)ACA_CurriculoObjetivoTipo.Eixo, -1);
 
-                ImageButton btnSalvar = (ImageButton)grvEixo.Rows[index].FindControl("btnSalvar");
-                if (btnSalvar != null)
-                    btnSalvar.Visible = true;
+                    ImageButton btnSalvar = (ImageButton)grvEixo.Rows[index].FindControl("btnSalvar");
+                    if (btnSalvar != null)
+                        btnSalvar.Visible = true;
 
-                ImageButton btnEditar = (ImageButton)grvEixo.Rows[index].FindControl("btnEditar");
-                if (btnEditar != null)
-                {
-                    btnEditar.Visible = false;
-                    ImageButton btnCancelarEdicao = (ImageButton)grvEixo.Rows[index].FindControl("btnCancelarEdicao");
-                    if (btnCancelarEdicao != null)
-                        btnCancelarEdicao.Visible = true;
+                    ImageButton btnEditar = (ImageButton)grvEixo.Rows[index].FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                        ImageButton btnCancelarEdicao = (ImageButton)grvEixo.Rows[index].FindControl("btnCancelarEdicao");
+                        if (btnCancelarEdicao != null)
+                            btnCancelarEdicao.Visible = true;
+                    }
+
+                    ImageButton btnExcluir = (ImageButton)grvEixo.Rows[index].FindControl("btnExcluir");
+                    if (btnExcluir != null)
+                        btnExcluir.Visible = false;
+
+                    grvEixo.Rows[index].Focus();
                 }
-
-                ImageButton btnExcluir = (ImageButton)grvEixo.Rows[index].FindControl("btnExcluir");
-                if (btnExcluir != null)
-                    btnExcluir.Visible = false;
-
-                grvEixo.Rows[index].Focus();
             }
             catch (Exception ex)
             {
@@ -1575,42 +1599,46 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 Button btnNovoObjetivo = (Button)sender;
                 GridView grvObjetivo = (GridView)btnNovoObjetivo.Parent.FindControl("grvObjetivo");
-                int cro_idPai = Convert.ToInt32(btnNovoObjetivo.CommandArgument);
-                sCurriculoObjetivo entity = new sCurriculoObjetivo
+                // Se ainda não existe outro item novo sendo cadastrado...
+                if (grvObjetivo.EditIndex < 0 || Convert.ToInt32(grvObjetivo.DataKeys[grvObjetivo.EditIndex]["cro_id"]) > 0)
                 {
-                    cro_id = -1
-                    ,
-                    cro_descricao = string.Empty
-                    ,
-                    cro_ordem = grvObjetivo.Rows.Count > 0 ? Convert.ToInt32(grvObjetivo.DataKeys[grvObjetivo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
-                    ,
-                    cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Topico
-                    ,
-                    cro_idPai = cro_idPai
-                };
-                VS_ltCurriculoObjetivo.Add(entity);
-                int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico && p.cro_idPai == cro_idPai).Count - 1;
-                grvObjetivo.EditIndex = index;
-                CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.Topico, cro_idPai);
+                    int cro_idPai = Convert.ToInt32(btnNovoObjetivo.CommandArgument);
+                    sCurriculoObjetivo entity = new sCurriculoObjetivo
+                    {
+                        cro_id = -1
+                        ,
+                        cro_descricao = string.Empty
+                        ,
+                        cro_ordem = grvObjetivo.Rows.Count > 0 ? Convert.ToInt32(grvObjetivo.DataKeys[grvObjetivo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
+                        ,
+                        cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Topico
+                        ,
+                        cro_idPai = cro_idPai
+                    };
+                    VS_ltCurriculoObjetivo.Add(entity);
+                    int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico && p.cro_idPai == cro_idPai).Count - 1;
+                    grvObjetivo.EditIndex = index;
+                    CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.Topico, cro_idPai);
 
-                ImageButton btnSalvar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnSalvar");
-                if (btnSalvar != null)
-                    btnSalvar.Visible = true;
+                    ImageButton btnSalvar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnSalvar");
+                    if (btnSalvar != null)
+                        btnSalvar.Visible = true;
 
-                ImageButton btnEditar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnEditar");
-                if (btnEditar != null)
-                {
-                    btnEditar.Visible = false;
-                    ImageButton btnCancelarEdicao = (ImageButton)grvObjetivo.Rows[index].FindControl("btnCancelarEdicao");
-                    if (btnCancelarEdicao != null)
-                        btnCancelarEdicao.Visible = true;
+                    ImageButton btnEditar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                        ImageButton btnCancelarEdicao = (ImageButton)grvObjetivo.Rows[index].FindControl("btnCancelarEdicao");
+                        if (btnCancelarEdicao != null)
+                            btnCancelarEdicao.Visible = true;
+                    }
+
+                    ImageButton btnExcluir = (ImageButton)grvObjetivo.Rows[index].FindControl("btnExcluir");
+                    if (btnExcluir != null)
+                        btnExcluir.Visible = false;
+
+                    grvObjetivo.Rows[index].Focus();
                 }
-
-                ImageButton btnExcluir = (ImageButton)grvObjetivo.Rows[index].FindControl("btnExcluir");
-                if (btnExcluir != null)
-                    btnExcluir.Visible = false;
-
-                grvObjetivo.Rows[index].Focus();
             }
             catch (Exception ex)
             {
@@ -1625,42 +1653,46 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 Button btnNovoObjetivo = (Button)sender;
                 GridView grvObjetivo = (GridView)btnNovoObjetivo.Parent.FindControl("grvObjetivo");
-                int cro_idPai = Convert.ToInt32(btnNovoObjetivo.CommandArgument);
-                sCurriculoObjetivo entity = new sCurriculoObjetivo
+                // Se ainda não existe outro item novo sendo cadastrado...
+                if (grvObjetivo.EditIndex < 0 || Convert.ToInt32(grvObjetivo.DataKeys[grvObjetivo.EditIndex]["cro_id"]) > 0)
                 {
-                    cro_id = -1
-                    ,
-                    cro_descricao = string.Empty
-                    ,
-                    cro_ordem = grvObjetivo.Rows.Count > 0 ? Convert.ToInt32(grvObjetivo.DataKeys[grvObjetivo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
-                    ,
-                    cro_tipo = (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem
-                    ,
-                    cro_idPai = cro_idPai
-                };
-                VS_ltCurriculoObjetivo.Add(entity);
-                int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem && p.cro_idPai == cro_idPai).Count - 1;
-                grvObjetivo.EditIndex = index;
-                CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem, cro_idPai);
+                    int cro_idPai = Convert.ToInt32(btnNovoObjetivo.CommandArgument);
+                    sCurriculoObjetivo entity = new sCurriculoObjetivo
+                    {
+                        cro_id = -1
+                        ,
+                        cro_descricao = string.Empty
+                        ,
+                        cro_ordem = grvObjetivo.Rows.Count > 0 ? Convert.ToInt32(grvObjetivo.DataKeys[grvObjetivo.Rows.Count - 1]["cro_ordem"]) + 1 : 1
+                        ,
+                        cro_tipo = (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem
+                        ,
+                        cro_idPai = cro_idPai
+                    };
+                    VS_ltCurriculoObjetivo.Add(entity);
+                    int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem && p.cro_idPai == cro_idPai).Count - 1;
+                    grvObjetivo.EditIndex = index;
+                    CarregarObjetivos(grvObjetivo, (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem, cro_idPai);
 
-                ImageButton btnSalvar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnSalvar");
-                if (btnSalvar != null)
-                    btnSalvar.Visible = true;
+                    ImageButton btnSalvar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnSalvar");
+                    if (btnSalvar != null)
+                        btnSalvar.Visible = true;
 
-                ImageButton btnEditar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnEditar");
-                if (btnEditar != null)
-                {
-                    btnEditar.Visible = false;
-                    ImageButton btnCancelarEdicao = (ImageButton)grvObjetivo.Rows[index].FindControl("btnCancelarEdicao");
-                    if (btnCancelarEdicao != null)
-                        btnCancelarEdicao.Visible = true;
+                    ImageButton btnEditar = (ImageButton)grvObjetivo.Rows[index].FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                        ImageButton btnCancelarEdicao = (ImageButton)grvObjetivo.Rows[index].FindControl("btnCancelarEdicao");
+                        if (btnCancelarEdicao != null)
+                            btnCancelarEdicao.Visible = true;
+                    }
+
+                    ImageButton btnExcluir = (ImageButton)grvObjetivo.Rows[index].FindControl("btnExcluir");
+                    if (btnExcluir != null)
+                        btnExcluir.Visible = false;
+
+                    grvObjetivo.Rows[index].Focus();
                 }
-
-                ImageButton btnExcluir = (ImageButton)grvObjetivo.Rows[index].FindControl("btnExcluir");
-                if (btnExcluir != null)
-                    btnExcluir.Visible = false;
-
-                grvObjetivo.Rows[index].Focus();
             }
             catch (Exception ex)
             {

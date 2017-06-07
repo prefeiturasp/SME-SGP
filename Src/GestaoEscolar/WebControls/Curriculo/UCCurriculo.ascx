@@ -17,8 +17,8 @@
         <fieldset class="fieldset-curriculo">
             <legend><asp:Literal runat="server" ID="litLegend" Text="" /></legend>
             <asp:Label ID="lblMsgEvento" runat="server"></asp:Label>
-            <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />
-            <uc2:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" />           
+            <uc1:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" TrazerComboCarregado="true" />
+            <uc2:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino1" runat="server" Obrigatorio="true" MostrarMessageSelecione="true" TrazerComboCarregado="true" />           
             
             <asp:Panel runat="server" ID="pnlCurriculo" style="margin-top:20px;" Visible="false" >
                 <!-- Introdução -->
@@ -193,7 +193,7 @@
                     <!-- Conteúdos e habilidades -->
                     <fieldset>
                         <legend><asp:Literal runat="server" ID="litHabilidades" Text="<%$ Resources:Academico, Curriculo.Cadastro.litHabilidades.Text %>" /></legend>
-                        <uc3:UCComboTipoCurriculoPeriodo ID="UCComboTipoCurriculoPeriodo1" runat="server" Obrigatorio="false" MostrarMessageSelecione="true" />
+                        <uc3:UCComboTipoCurriculoPeriodo ID="UCComboTipoCurriculoPeriodo1" runat="server" Obrigatorio="false" MostrarMessageSelecione="true" TrazerComboCarregado="true" />
                         <div class="painel-habilidades">
                             <asp:Panel runat="server" ID="pnlHabilidades" style="margin-top:20px;" Visible="false" >
                             

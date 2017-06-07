@@ -173,6 +173,24 @@ namespace GestaoEscolar.WebControls.Combos
             }
         }
 
+        /// <summary>
+        /// Indica se deve trazer o primeiro item selecinado caso seja o único
+        /// (Sem contar a MensagemSelecione)
+        /// </summary>
+        public bool TrazerComboCarregado
+        {
+            get
+            {
+                if (ViewState["TrazerComboCarregado"] != null)
+                    return Convert.ToBoolean(ViewState["TrazerComboCarregado"]);
+                return false;
+            }
+            set
+            {
+                ViewState["TrazerComboCarregado"] = value;
+            }
+        }
+
         #endregion
 
         #region Page Life Cycle
@@ -191,6 +209,21 @@ namespace GestaoEscolar.WebControls.Combos
         #endregion Page Life Cycle
 
         #region METODOS
+
+        /// <summary>
+        /// Traz o primeiro item selecinado caso seja o único
+        /// </summary>
+        private void SelecionaPrimeiroItem()
+        {
+            if (TrazerComboCarregado && ddlCombo.Items.Count == 2 && ddlCombo.Items[0].Value == "-1")
+            {
+                // Seleciona o primeiro item.
+                ddlCombo.SelectedValue = ddlCombo.Items[1].Value;
+
+                if (OnSelectedIndexChanged != null)
+                    OnSelectedIndexChanged();
+            }
+        }
 
         /// <summary>
         /// Seta o foco no combo    
@@ -220,6 +253,7 @@ namespace GestaoEscolar.WebControls.Combos
             ddlCombo.DataSource = ACA_TipoCurriculoPeriodoBO.SelectByPesquisa(tne_id, tme_id);
             MostrarMessageSelecione = true;
             ddlCombo.DataBind();
+            SelecionaPrimeiroItem();
         }
 
         /// <summary>
@@ -232,6 +266,7 @@ namespace GestaoEscolar.WebControls.Combos
             ddlCombo.DataSource = ACA_TipoCurriculoPeriodoBO.SelecionaTipoCurriculoPeriodoDocente(tne_id, tme_id, doc_id);
             MostrarMessageSelecione = true;
             ddlCombo.DataBind();
+            SelecionaPrimeiroItem();
         }
 
         protected void ddlCombo_SelectedIndexChanged(object sender, EventArgs e)
