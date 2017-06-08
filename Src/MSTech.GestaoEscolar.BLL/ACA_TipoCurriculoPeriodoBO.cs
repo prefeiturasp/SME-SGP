@@ -73,14 +73,15 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tme_id">Tipo modalidade de ensino</param>
         /// <param name="doc_id">ID do docente</param>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static DataTable SelecionaTipoCurriculoPeriodoDocente
+        public static DataTable SelecionaTipoCurriculoPeriodoDocenteEvento
         (
             int tne_id
             , int tme_id
             , long doc_id
+            , string eventosAbertos
          )
         {
-            return new ACA_TipoCurriculoPeriodoDAO().SelecionaTipoCurriculoPeriodoDocente(tne_id, tme_id, doc_id);
+            return new ACA_TipoCurriculoPeriodoDAO().SelecionaTipoCurriculoPeriodoDocenteEvento(tne_id, tme_id, doc_id, eventosAbertos);
         }
 
         /// <summary>

@@ -198,9 +198,9 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>
         /// <param name="doc_id">ID do docente</param>
         /// <returns></returns>               
-        public DataTable SelecionaTipoModalidadeEnsinoDocente(long doc_id)
+        public DataTable SelecionaTipoModalidadeEnsinoDocenteEvento(long doc_id, string eventosAbertos)
         {
-            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoModalidadeEnsino_SelecionaTipoModalidadeEnsinoDocente", _Banco);
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoModalidadeEnsino_SelecionaTipoModalidadeEnsinoDocenteEvento", _Banco);
             try
             {
                 #region PARAMETROS
@@ -210,6 +210,12 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@doc_id";
                 Param.Size = 8;
                 Param.Value = doc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.ParameterName = "@eventosAbertos";
+                Param.Value = eventosAbertos;
                 qs.Parameters.Add(Param);
 
                 #endregion PARAMETROS

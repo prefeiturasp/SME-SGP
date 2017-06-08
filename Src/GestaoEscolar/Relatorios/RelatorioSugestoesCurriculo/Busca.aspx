@@ -19,7 +19,7 @@
             <asp:UpdatePanel ID="updFiltros" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <uc1:UCComboTipoDisciplina ID="UCComboTipoDisciplina1" runat="server" _MostrarMessageSelecione="true" ValidationGroup="Relatorio"
-                        Obrigatorio="true" PermiteEditar="true" />
+                        Obrigatorio="false" PermiteEditar="true" />
                     <div runat="server" id="divData">
                         <div style="display: inline-block">
                             <asp:Label ID="lblDataInicio" runat="server" Text="Data inicial *" AssociatedControlID="txtDataInicio"></asp:Label>

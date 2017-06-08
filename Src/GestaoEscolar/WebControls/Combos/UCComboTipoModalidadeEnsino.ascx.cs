@@ -206,10 +206,10 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
     /// Mostra os dados não excluídos logicamente no dropdownlist  
     /// de acordo com as atribuições do docente.
     /// </summary>
-    public void CarregarTipoModalidadeEnsinoDocente(long doc_id)
+    public void CarregarTipoModalidadeEnsinoDocenteEvento(long doc_id, string eventosAbertos)
     {
         ddlCombo.Items.Clear();
-        ddlCombo.DataSource = ACA_TipoModalidadeEnsinoBO.SelecionaTipoModalidadeEnsinoFilhosDocente(doc_id);
+        ddlCombo.DataSource = ACA_TipoModalidadeEnsinoBO.SelecionaTipoModalidadeEnsinoFilhosDocenteEvento(doc_id, eventosAbertos);
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione uma modalidade de ensino --", "-1", true));
         ddlCombo.DataBind();

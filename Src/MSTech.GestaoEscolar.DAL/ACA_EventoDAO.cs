@@ -900,7 +900,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="doc_id"></param>
         /// <param name="cal_ano"></param>
         /// <returns></returns>
-        public bool VerificaEventoVigentePorUsuario(int tev_id, bool adm, Guid usu_id, Guid gru_id, long doc_id, int cal_ano)
+        public string VerificaEventoVigentePorUsuario(int tev_id, bool adm, Guid usu_id, Guid gru_id, long doc_id, int cal_ano)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_Evento_VerificaEventoVigentePorUsuario", _Banco);
             try
@@ -960,7 +960,12 @@ namespace MSTech.GestaoEscolar.DAL
 
                 qs.Execute();
 
-                return qs.Return.Rows.Count > 0;
+                string retorno = string.Empty;
+                foreach (DataRow evt in qs.Return.Rows)
+                {
+                    retorno += string.IsNullOrEmpty(retorno) ? evt["evt_id"].ToString() : string.Format(",{0}", evt["evt_id"].ToString());
+                }
+                return retorno;
             }
             catch (Exception ex)
             {

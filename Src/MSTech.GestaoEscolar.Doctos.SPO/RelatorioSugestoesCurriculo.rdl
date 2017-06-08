@@ -53,7 +53,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-        <Top>5.37639cm</Top>
+        <Top>8.42931cm</Top>
         <Height>0.99688cm</Height>
         <Width>19cm</Width>
         <Visibility>
@@ -154,7 +154,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Capítulo: </Value>
+                              <Value>Tópico: </Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -368,7 +368,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -402,7 +401,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -478,6 +476,437 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox17">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Componente curricular: </Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Fields!tds_nome.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#989898</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>4</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="crc_titulo2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>    Tópico: </Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Fields!crc_titulo.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>crc_titulo</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>Silver</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>4</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox32">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Data sugestão</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox19</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox51">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Tipo</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox48</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox33">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Pessoa</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox21</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox34">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Sugestão</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox25</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="crs_dataAlteracaoText2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!crs_dataAlteracaoText.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>crs_dataAlteracaoText1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="crs_tipo2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!crs_tipo.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>crs_tipo1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="pes_nome2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!pes_nome.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>pes_nome1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="crs_sugestao2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!crs_sugestao.Value</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>crs_sugestao1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox41">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>    Período do curso: </Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Fields!tcp_descricao.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox41</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>DarkGray</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>4</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox20">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -485,7 +914,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Eixo</Value>
+                              <Value>         Eixo</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -541,7 +970,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>    Tópico</Value>
+                              <Value>              Objetivo</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -597,7 +1026,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>         Objetivo de aprendizagem</Value>
+                              <Value>                   Objetivo de aprendizagem</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -957,15 +1386,21 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
-                    <TablixMember>
-                      <KeepWithGroup>After</KeepWithGroup>
-                      <RepeatOnNewPage>true</RepeatOnNewPage>
-                    </TablixMember>
+                    <TablixMember />
                     <TablixMember>
                       <Group Name="crc_id">
                         <GroupExpressions>
                           <GroupExpression>=Fields!crc_id.Value</GroupExpression>
                         </GroupExpressions>
+                        <Filters>
+                          <Filter>
+                            <FilterExpression>=Fields!tds_id.Value</FilterExpression>
+                            <Operator>Equal</Operator>
+                            <FilterValues>
+                              <FilterValue DataType="Integer">0</FilterValue>
+                            </FilterValues>
+                          </Filter>
+                        </Filters>
                       </Group>
                       <SortExpressions>
                         <SortExpression>
@@ -1002,77 +1437,60 @@
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
-                      <Group Name="cro_idEixo">
+                      <Group Name="tds_id">
                         <GroupExpressions>
-                          <GroupExpression>=Fields!cro_idEixo.Value</GroupExpression>
+                          <GroupExpression>=Fields!tds_id.Value</GroupExpression>
                         </GroupExpressions>
+                        <Filters>
+                          <Filter>
+                            <FilterExpression>=Fields!tds_id.Value</FilterExpression>
+                            <Operator>GreaterThan</Operator>
+                            <FilterValues>
+                              <FilterValue DataType="Integer">0</FilterValue>
+                            </FilterValues>
+                          </Filter>
+                        </Filters>
                       </Group>
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!cro_ordem.Value</Value>
+                          <Value>=Fields!tds_ordem.Value</Value>
                         </SortExpression>
                         <SortExpression>
-                          <Value>=Fields!cro_descricao.Value</Value>
+                          <Value>=Fields!tds_nome.Value</Value>
                         </SortExpression>
                       </SortExpressions>
                       <TablixMembers>
+                        <TablixMember />
                         <TablixMember>
-                          <Visibility>
-                            <Hidden>=IIF(Fields!cro_idEixo.Value &gt; 0, false, true)</Hidden>
-                          </Visibility>
-                          <KeepWithGroup>After</KeepWithGroup>
-                          <RepeatOnNewPage>true</RepeatOnNewPage>
-                        </TablixMember>
-                        <TablixMember>
-                          <Group Name="cro_idTopico">
+                          <Group Name="crc_id1">
                             <GroupExpressions>
-                              <GroupExpression>=Fields!cro_idTopico.Value</GroupExpression>
+                              <GroupExpression>=Fields!crc_id.Value</GroupExpression>
                             </GroupExpressions>
+                            <Filters>
+                              <Filter>
+                                <FilterExpression>=Fields!crc_id.Value</FilterExpression>
+                                <Operator>GreaterThan</Operator>
+                                <FilterValues>
+                                  <FilterValue DataType="Integer">0</FilterValue>
+                                </FilterValues>
+                              </Filter>
+                            </Filters>
                           </Group>
                           <SortExpressions>
                             <SortExpression>
-                              <Value>=Fields!cro_ordem.Value</Value>
+                              <Value>=Fields!crc_ordem.Value</Value>
                             </SortExpression>
                             <SortExpression>
-                              <Value>=Fields!cro_descricao.Value</Value>
+                              <Value>=Fields!crc_titulo.Value</Value>
                             </SortExpression>
                           </SortExpressions>
                           <TablixMembers>
+                            <TablixMember />
+                            <TablixMember />
                             <TablixMember>
-                              <Visibility>
-                                <Hidden>=IIF(Fields!cro_idTopico.Value &gt; 0, false, true)</Hidden>
-                              </Visibility>
-                              <KeepWithGroup>After</KeepWithGroup>
-                              <RepeatOnNewPage>true</RepeatOnNewPage>
-                            </TablixMember>
-                            <TablixMember>
-                              <Group Name="cro_id">
-                                <GroupExpressions>
-                                  <GroupExpression>=Fields!cro_id.Value</GroupExpression>
-                                </GroupExpressions>
-                              </Group>
-                              <SortExpressions>
-                                <SortExpression>
-                                  <Value>=Fields!cro_ordem.Value</Value>
-                                </SortExpression>
-                                <SortExpression>
-                                  <Value>=Fields!cro_descricao.Value</Value>
-                                </SortExpression>
-                              </SortExpressions>
                               <TablixMembers>
                                 <TablixMember>
-                                  <Visibility>
-                                    <Hidden>=IIF((Fields!cro_idTopico.Value = Fields!cro_id.Value OR Fields!cro_idEixo.Value = Fields!cro_id.Value), true, false)</Hidden>
-                                  </Visibility>
-                                  <KeepWithGroup>After</KeepWithGroup>
-                                  <RepeatOnNewPage>true</RepeatOnNewPage>
-                                </TablixMember>
-                                <TablixMember>
-                                  <KeepWithGroup>After</KeepWithGroup>
-                                  <RepeatOnNewPage>true</RepeatOnNewPage>
-                                </TablixMember>
-                                <TablixMember>
-                                  <Group Name="Details" />
+                                  <Group Name="Details2" />
                                   <SortExpressions>
                                     <SortExpression>
                                       <Value>=Fields!crs_dataAlteracao.Value</Value>
@@ -1088,10 +1506,138 @@
                               </TablixMembers>
                             </TablixMember>
                           </TablixMembers>
+                          <Visibility>
+                            <Hidden>=IIF(Fields!crc_id.Value &gt; 0, false, true)</Hidden>
+                          </Visibility>
+                        </TablixMember>
+                        <TablixMember>
+                          <Group Name="tcp_id">
+                            <GroupExpressions>
+                              <GroupExpression>=Fields!tcp_id.Value</GroupExpression>
+                            </GroupExpressions>
+                            <Filters>
+                              <Filter>
+                                <FilterExpression>=Fields!tcp_id.Value</FilterExpression>
+                                <Operator>GreaterThan</Operator>
+                                <FilterValues>
+                                  <FilterValue DataType="Integer">0</FilterValue>
+                                </FilterValues>
+                              </Filter>
+                            </Filters>
+                          </Group>
+                          <SortExpressions>
+                            <SortExpression>
+                              <Value>=Fields!tcp_ordem.Value</Value>
+                            </SortExpression>
+                            <SortExpression>
+                              <Value>=Fields!tcp_descricao.Value</Value>
+                            </SortExpression>
+                          </SortExpressions>
+                          <TablixMembers>
+                            <TablixMember>
+                              <KeepWithGroup>After</KeepWithGroup>
+                            </TablixMember>
+                            <TablixMember>
+                              <Group Name="cro_idEixo">
+                                <GroupExpressions>
+                                  <GroupExpression>=Fields!cro_idEixo.Value</GroupExpression>
+                                </GroupExpressions>
+                              </Group>
+                              <SortExpressions>
+                                <SortExpression>
+                                  <Value>=Fields!cro_ordem.Value</Value>
+                                </SortExpression>
+                                <SortExpression>
+                                  <Value>=Fields!cro_descricao.Value</Value>
+                                </SortExpression>
+                              </SortExpressions>
+                              <TablixMembers>
+                                <TablixMember>
+                                  <Visibility>
+                                    <Hidden>=IIF(Fields!cro_idEixo.Value &gt; 0, false, true)</Hidden>
+                                  </Visibility>
+                                  <KeepWithGroup>After</KeepWithGroup>
+                                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                                </TablixMember>
+                                <TablixMember>
+                                  <Group Name="cro_idTopico">
+                                    <GroupExpressions>
+                                      <GroupExpression>=Fields!cro_idTopico.Value</GroupExpression>
+                                    </GroupExpressions>
+                                  </Group>
+                                  <SortExpressions>
+                                    <SortExpression>
+                                      <Value>=Fields!cro_ordem.Value</Value>
+                                    </SortExpression>
+                                    <SortExpression>
+                                      <Value>=Fields!cro_descricao.Value</Value>
+                                    </SortExpression>
+                                  </SortExpressions>
+                                  <TablixMembers>
+                                    <TablixMember>
+                                      <Visibility>
+                                        <Hidden>=IIF(Fields!cro_idTopico.Value &gt; 0, false, true)</Hidden>
+                                      </Visibility>
+                                      <KeepWithGroup>After</KeepWithGroup>
+                                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                                    </TablixMember>
+                                    <TablixMember>
+                                      <Group Name="cro_id">
+                                        <GroupExpressions>
+                                          <GroupExpression>=Fields!cro_id.Value</GroupExpression>
+                                        </GroupExpressions>
+                                      </Group>
+                                      <SortExpressions>
+                                        <SortExpression>
+                                          <Value>=Fields!cro_ordem.Value</Value>
+                                        </SortExpression>
+                                        <SortExpression>
+                                          <Value>=Fields!cro_descricao.Value</Value>
+                                        </SortExpression>
+                                      </SortExpressions>
+                                      <TablixMembers>
+                                        <TablixMember>
+                                          <Visibility>
+                                            <Hidden>=IIF((Fields!cro_idTopico.Value = Fields!cro_id.Value OR Fields!cro_idEixo.Value = Fields!cro_id.Value), true, false)</Hidden>
+                                          </Visibility>
+                                          <KeepWithGroup>After</KeepWithGroup>
+                                          <RepeatOnNewPage>true</RepeatOnNewPage>
+                                        </TablixMember>
+                                        <TablixMember>
+                                          <KeepWithGroup>After</KeepWithGroup>
+                                          <RepeatOnNewPage>true</RepeatOnNewPage>
+                                        </TablixMember>
+                                        <TablixMember>
+                                          <Group Name="Details" />
+                                          <SortExpressions>
+                                            <SortExpression>
+                                              <Value>=Fields!crs_dataAlteracao.Value</Value>
+                                            </SortExpression>
+                                            <SortExpression>
+                                              <Value>=Fields!crs_tipo.Value</Value>
+                                            </SortExpression>
+                                            <SortExpression>
+                                              <Value>=Fields!pes_nome.Value</Value>
+                                            </SortExpression>
+                                          </SortExpressions>
+                                        </TablixMember>
+                                      </TablixMembers>
+                                    </TablixMember>
+                                  </TablixMembers>
+                                </TablixMember>
+                              </TablixMembers>
+                              <Visibility>
+                                <Hidden>=IIF(Fields!cro_idEixo.Value &gt; 0, false, true)</Hidden>
+                              </Visibility>
+                            </TablixMember>
+                          </TablixMembers>
+                          <Visibility>
+                            <Hidden>=IIF(Fields!tcp_id.Value &gt; 0, false, true)</Hidden>
+                          </Visibility>
                         </TablixMember>
                       </TablixMembers>
                       <Visibility>
-                        <Hidden>=IIF(Fields!cro_idEixo.Value &gt; 0, false, true)</Hidden>
+                        <Hidden>=IIF(Fields!tds_id.Value &gt; 0, false, true)</Hidden>
                       </Visibility>
                     </TablixMember>
                   </TablixMembers>
@@ -1102,8 +1648,8 @@
         </TablixRowHierarchy>
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.17639cm</Top>
-        <Height>5.2cm</Height>
+        <Top>0.22931cm</Top>
+        <Height>8.2cm</Height>
         <Width>19cm</Width>
         <ZIndex>1</ZIndex>
         <Visibility>
@@ -1116,7 +1662,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>6.37327cm</Height>
+    <Height>9.42619cm</Height>
     <Style />
   </Body>
   <Width>19cm</Width>
@@ -1294,9 +1840,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
           <Top>3.38172cm</Top>
-          <Left>10.87908cm</Left>
+          <Left>11.9245cm</Left>
           <Height>0.6cm</Height>
-          <Width>8.12092cm</Width>
+          <Width>7.0755cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -1327,7 +1873,7 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=Parameters!tds_nome.Value</Value>
+                  <Value>=IIF(Parameters!tds_id.Value &gt; 0, Parameters!tds_nome.Value, "Todos")</Value>
                   <Style>
                     <FontWeight>Normal</FontWeight>
                   </Style>
@@ -1341,7 +1887,7 @@
           <rd:DefaultName>Textbox14</rd:DefaultName>
           <Top>3.38172cm</Top>
           <Height>0.6cm</Height>
-          <Width>10.87908cm</Width>
+          <Width>11.9245cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -1479,25 +2025,49 @@
           <DataField>tne_ordem</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="tcp_id">
+          <DataField>tcp_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="crs_sugestao">
           <DataField>crs_sugestao</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tcp_descricao">
+          <DataField>tcp_descricao</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="tme_id">
           <DataField>tme_id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="tcp_ordem">
+          <DataField>tcp_ordem</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="cro_descricaoEixo">
           <DataField>cro_descricaoEixo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tds_id">
+          <DataField>tds_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="crc_titulo">
           <DataField>crc_titulo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="tds_nome">
+          <DataField>tds_nome</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="cro_descricaoTopico">
           <DataField>cro_descricaoTopico</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="tds_ordem">
+          <DataField>tds_ordem</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="crc_ordem">
           <DataField>crc_ordem</DataField>
@@ -1575,6 +2145,7 @@
     </ReportParameter>
     <ReportParameter Name="tds_id">
       <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
       <Prompt>tds id</Prompt>
     </ReportParameter>
     <ReportParameter Name="nomeTipoDisciplina">

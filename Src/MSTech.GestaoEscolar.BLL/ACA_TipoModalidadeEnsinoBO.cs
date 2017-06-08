@@ -64,9 +64,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="doc_id">ID do docente</param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static DataTable SelecionaTipoModalidadeEnsinoFilhosDocente(long doc_id)
+        public static DataTable SelecionaTipoModalidadeEnsinoFilhosDocenteEvento(long doc_id, string eventosAbertos)
         {
-            return new ACA_TipoModalidadeEnsinoDAO().SelecionaTipoModalidadeEnsinoDocente(doc_id);
+            return new ACA_TipoModalidadeEnsinoDAO().SelecionaTipoModalidadeEnsinoDocenteEvento(doc_id, eventosAbertos);
         }
 
         /// <summary>
