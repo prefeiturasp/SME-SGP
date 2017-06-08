@@ -2,6 +2,9 @@
 
 <%@ Register src="~/WebControls/Combos/UCComboTipoDisciplina.ascx" tagname="UCComboTipoDisciplina" tagprefix="uc1" %>
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagPrefix="uc2" TagName="UCCamposObrigatorios" %>
+<%@ Register Src="~/WebControls/Combos/UCComboTipoCurriculoPeriodo.ascx" TagName="UCComboTipoCurriculoPeriodo" TagPrefix="uc3" %>
+<%@ Register Src="~/WebControls/Combos/UCComboTipoNivelEnsino.ascx" TagName="UCComboTipoNivelEnsino" TagPrefix="uc4" %>
+<%@ Register Src="~/WebControls/Combos/UCComboTipoModalidadeEnsino.ascx" TagName="UCComboTipoModalidadeEnsino" TagPrefix="uc5" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -18,8 +21,21 @@
             <uc2:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
             <asp:UpdatePanel ID="updFiltros" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <uc1:UCComboTipoDisciplina ID="UCComboTipoDisciplina1" runat="server" _MostrarMessageSelecione="true" ValidationGroup="Relatorio"
-                        Obrigatorio="false" PermiteEditar="true" />
+                    <uc4:UCComboTipoNivelEnsino ID="UCComboTipoNivelEnsino1" runat="server" Obrigatorio="false" MostrarMessageSelecione="true" TrazerComboCarregado="true" />
+                    <uc5:UCComboTipoModalidadeEnsino ID="UCComboTipoModalidadeEnsino1" runat="server" Obrigatorio="false" MostrarMessageSelecione="true" TrazerComboCarregado="true" />           
+                    <asp:CheckBox runat="server" ID="chkGeral" Text="Apenas sugestões no tópico geral" AutoPostBack="true" OnCheckedChanged="chkGeral_CheckedChanged" />
+                    <div runat="server" id="divFiltrosEspecificos">
+                        <uc1:UCComboTipoDisciplina ID="UCComboTipoDisciplina1" runat="server" _MostrarMessageSelecione="true" ValidationGroup="Relatorio"
+                            Obrigatorio="false" PermiteEditar="true" />
+                        <uc3:UCComboTipoCurriculoPeriodo ID="UCComboTipoCurriculoPeriodo1" runat="server" Obrigatorio="false" MostrarMessageSelecione="true" TrazerComboCarregado="true" />
+                    </div>
+                    <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
+                    <asp:DropDownList ID="ddlTipoSugestao" runat="server">
+                        <asp:ListItem Text="Todos" Value="0" Selected="True"></asp:ListItem>
+                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Sugestao %>' Value="1" Selected="False"></asp:ListItem>
+                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Exclusao %>' Value="2" Selected="False"></asp:ListItem>
+                        <asp:ListItem Text='<%$ Resources:Academico, Curriculo.Cadastro.ddlTipoSugestao.Inclusao %>' Value="3" Selected="False"></asp:ListItem>
+                    </asp:DropDownList>
                     <div runat="server" id="divData">
                         <div style="display: inline-block">
                             <asp:Label ID="lblDataInicio" runat="server" Text="Data inicial *" AssociatedControlID="txtDataInicio"></asp:Label>

@@ -27,6 +27,9 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
                     sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
                 }
 
+                UCComboTipoNivelEnsino1.IndexChanged += UCComboTipoNivelEnsino1_IndexChanged;
+                UCComboTipoModalidadeEnsino1.IndexChanged += UCComboTipoModalidadeEnsino1_IndexChanged;
+
                 if (!IsPostBack)
                 {
                     if (!__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
@@ -65,7 +68,10 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         /// </summary>
         private void InicializarTela()
         {
-            UCComboTipoDisciplina1.CarregarTipoDisciplina();
+            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
+            UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
+            UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor);
+            UCComboTipoDisciplina1.CarregarTipoDisciplinaPorNivelEnsino(UCComboTipoNivelEnsino1.Valor);
             txtDataInicio.Text = "";
             txtDataFim.Text = "";
             updFiltros.Update();
@@ -99,8 +105,17 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
                     throw new ValidationException(GetGlobalResourceObject("Relatorios", "RelatorioSugestoesCurriculo.Busca.DataFimMenorInicio").ToString());
                 
                 report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioSugestoesCurriculo).ToString();
-                parametros = "tds_id=" + UCComboTipoDisciplina1.Valor.ToString() +
+                parametros = "tne_id=" + UCComboTipoNivelEnsino1.Valor.ToString() +
+                             "&tne_nome=" + (UCComboTipoNivelEnsino1.Valor > 0 ? UCComboTipoNivelEnsino1.Texto : "Todos") +
+                             "&tme_id=" + UCComboTipoModalidadeEnsino1.Valor.ToString() +
+                             "&tme_nome=" + (UCComboTipoModalidadeEnsino1.Valor > 0 ? UCComboTipoModalidadeEnsino1.Texto : "Todas") +
+                             "&apenasGeral=" + chkGeral.Checked +
+                             "&tcp_id=" + UCComboTipoCurriculoPeriodo1.Valor.ToString() +
+                             "&tcp_descricao=" + (UCComboTipoCurriculoPeriodo1.Valor > 0 ? UCComboTipoCurriculoPeriodo1.Texto : "Todos") +
+                             "&tds_id=" + UCComboTipoDisciplina1.Valor.ToString() +
                              "&tds_nome=" + (UCComboTipoDisciplina1.Valor > 0 ? UCComboTipoDisciplina1.Texto : "Todos") +
+                             "&tipoSugestao=" + ddlTipoSugestao.SelectedValue +
+                             "&tipoSugestaoText=" + ddlTipoSugestao.SelectedItem.Text +
                              "&dataInicioText=" + dataInicio.ToShortDateString() +
                              "&dataFimText=" + dataFim.ToShortDateString() +
                              "&dataInicio=" + dataInicio +
@@ -131,7 +146,12 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         protected void SalvaBusca()
         {
             Dictionary<string, string> filtros = new Dictionary<string, string>();
+            filtros.Add("tne_id", UCComboTipoNivelEnsino1.Valor.ToString());
+            filtros.Add("tme_id", UCComboTipoModalidadeEnsino1.Valor.ToString());
+            filtros.Add("apenasGeral", chkGeral.Checked.ToString());
+            filtros.Add("tcp_id", UCComboTipoCurriculoPeriodo1.Valor.ToString());
             filtros.Add("tds_id", UCComboTipoDisciplina1.Valor.ToString());
+            filtros.Add("tipoSugestao", ddlTipoSugestao.SelectedValue);
             filtros.Add("dataInicio", txtDataInicio.Text);
             filtros.Add("dataFim", txtDataFim.Text);
 
@@ -149,8 +169,26 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
                 // Recuperar busca realizada e pesquisar automaticamente
                 string valor;
 
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tne_id", out valor);
+                UCComboTipoNivelEnsino1.Valor = Convert.ToInt32(valor);
+                UCComboTipoNivelEnsino1_IndexChanged();
+
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tme_id", out valor);
+                UCComboTipoModalidadeEnsino1.Valor = Convert.ToInt32(valor);
+                UCComboTipoModalidadeEnsino1_IndexChanged();
+
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("apenasGeral", out valor);
+                chkGeral.Checked = Convert.ToBoolean(valor);
+                chkGeral_CheckedChanged(chkGeral, new EventArgs());
+
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tcp_id", out valor);
+                UCComboTipoCurriculoPeriodo1.Valor = Convert.ToInt32(valor);
+
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tds_id", out valor);
                 UCComboTipoDisciplina1.Valor = Convert.ToInt32(valor);
+
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tipoSugestao", out valor);
+                ddlTipoSugestao.SelectedValue = valor;
 
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("dataInicio", out valor);
                 txtDataInicio.Text = valor;
@@ -166,6 +204,34 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
 
         #region Eventos
 
+        private void UCComboTipoNivelEnsino1_IndexChanged()
+        {
+            try
+            {
+                UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor);
+                UCComboTipoDisciplina1.CarregarTipoDisciplinaPorNivelEnsino(UCComboTipoNivelEnsino1.Valor);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar currículo.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        private void UCComboTipoModalidadeEnsino1_IndexChanged()
+        {
+            try
+            {
+                UCComboTipoCurriculoPeriodo1.Valor = -1;
+                UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar currículo.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
         protected void btnGerar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -180,6 +246,13 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
             __SessionWEB.BuscaRealizada = new BuscaGestao();
             Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Relatorios/RelatorioSugestoesCurriculo/Busca.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+
+        protected void chkGeral_CheckedChanged(object sender, EventArgs e)
+        {
+            UCComboTipoDisciplina1.Valor = -1;
+            UCComboTipoCurriculoPeriodo1.Valor = -1;
+            divFiltrosEspecificos.Visible = !chkGeral.Checked;
         }
 
         #endregion Eventos

@@ -54,6 +54,7 @@
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
         <Top>8.42931cm</Top>
+        <Left>0cm</Left>
         <Height>0.99688cm</Height>
         <Width>19cm</Width>
         <Visibility>
@@ -1582,9 +1583,9 @@
                                       <RepeatOnNewPage>true</RepeatOnNewPage>
                                     </TablixMember>
                                     <TablixMember>
-                                      <Group Name="cro_id">
+                                      <Group Name="cro_idApre">
                                         <GroupExpressions>
-                                          <GroupExpression>=Fields!cro_id.Value</GroupExpression>
+                                          <GroupExpression>=Fields!cro_idApre.Value</GroupExpression>
                                         </GroupExpressions>
                                       </Group>
                                       <SortExpressions>
@@ -1598,7 +1599,7 @@
                                       <TablixMembers>
                                         <TablixMember>
                                           <Visibility>
-                                            <Hidden>=IIF((Fields!cro_idTopico.Value = Fields!cro_id.Value OR Fields!cro_idEixo.Value = Fields!cro_id.Value), true, false)</Hidden>
+                                            <Hidden>=IIF(Fields!cro_idApre.Value &gt; 0, false, true)</Hidden>
                                           </Visibility>
                                           <KeepWithGroup>After</KeepWithGroup>
                                           <RepeatOnNewPage>true</RepeatOnNewPage>
@@ -1626,9 +1627,6 @@
                                   </TablixMembers>
                                 </TablixMember>
                               </TablixMembers>
-                              <Visibility>
-                                <Hidden>=IIF(Fields!cro_idEixo.Value &gt; 0, false, true)</Hidden>
-                              </Visibility>
                             </TablixMember>
                           </TablixMembers>
                           <Visibility>
@@ -1649,6 +1647,7 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.22931cm</Top>
+        <Left>0cm</Left>
         <Height>8.2cm</Height>
         <Width>19cm</Width>
         <ZIndex>1</ZIndex>
@@ -1665,10 +1664,10 @@
     <Height>9.42619cm</Height>
     <Style />
   </Body>
-  <Width>19cm</Width>
+  <Width>19.03528cm</Width>
   <Page>
     <PageHeader>
-      <Height>3.98172cm</Height>
+      <Height>5.18172cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1807,30 +1806,40 @@
                 <TextRun>
                   <Value>Período: </Value>
                   <Style>
+                    <FontSize>9pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
                 <TextRun>
                   <Value>=Parameters!dataInicioText.Value</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
                 <TextRun>
                   <Value xml:space="preserve"> </Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
                 <TextRun>
                   <Value>-</Value>
                   <Style>
+                    <FontSize>9pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
                 <TextRun>
                   <Value xml:space="preserve"> </Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
                 <TextRun>
                   <Value>=Parameters!dataFimText.Value</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -1839,8 +1848,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
-          <Top>3.38172cm</Top>
-          <Left>11.9245cm</Left>
+          <Top>4.58172cm</Top>
+          <Left>11.95978cm</Left>
           <Height>0.6cm</Height>
           <Width>7.0755cm</Width>
           <ZIndex>2</ZIndex>
@@ -1861,20 +1870,37 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Parameters!nomeTipoDisciplina.Value</Value>
+                  <Value>Nível de ensino: </Value>
                   <Style>
+                    <FontSize>9pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>: </Value>
+                  <Value>=IIF(Parameters!tne_id.Value &gt; 0, Parameters!tne_nome.Value, "Todos")</Value>
                   <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value xml:space="preserve"> </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>Modalidade de ensino: </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=IIF(Parameters!tds_id.Value &gt; 0, Parameters!tds_nome.Value, "Todos")</Value>
+                  <Value>=IIF(Parameters!tme_id.Value &gt; 0, Parameters!tme_nome.Value, "Todas")</Value>
                   <Style>
+                    <FontSize>9pt</FontSize>
                     <FontWeight>Normal</FontWeight>
                   </Style>
                 </TextRun>
@@ -1886,9 +1912,124 @@
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
           <Top>3.38172cm</Top>
+          <Left>0cm</Left>
+          <Height>0.6cm</Height>
+          <Width>19cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox16">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Tipo de sugestão: </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!tipoSugestaoText.Value</Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox14</rd:DefaultName>
+          <Top>4.58172cm</Top>
+          <Left>0cm</Left>
           <Height>0.6cm</Height>
           <Width>11.9245cm</Width>
-          <ZIndex>3</ZIndex>
+          <ZIndex>4</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox21">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Período do curso: </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=IIF(Parameters!tcp_id.Value &gt; 0, Parameters!tcp_descricao.Value, "Todas")</Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value xml:space="preserve"> </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!nomeTipoDisciplina.Value</Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>: </Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Microsoft.VisualBasic.Interaction.IIF(Parameters!tds_id.Value &gt; 0, Parameters!tds_nome.Value, "Todos")</Value>
+                  <Style>
+                    <FontSize>9pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox14</rd:DefaultName>
+          <Top>3.98172cm</Top>
+          <Height>0.6cm</Height>
+          <Width>19cm</Width>
+          <ZIndex>5</ZIndex>
+          <Visibility>
+            <Hidden>=IIF(CBool(Parameters!apenasGeral.Value) = true, true, false)</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1971,17 +2112,32 @@
       <Query>
         <DataSourceName>DSGestaoEscolar</DataSourceName>
         <QueryParameters>
+          <QueryParameter Name="@tne_id">
+            <Value>=Parameters!tne_id.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@tds_id">
             <Value>=Parameters!tds_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@tme_id">
+            <Value>=Parameters!tme_id.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@dataInicio">
             <Value>=Parameters!dataInicio.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@apenasGeral">
+            <Value>=Parameters!apenasGeral.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@dataFim">
             <Value>=Parameters!dataFim.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@tcp_id">
+            <Value>=Parameters!tcp_id.Value</Value>
+          </QueryParameter>
           <QueryParameter Name="@ent_id">
             <Value>=Parameters!ent_id.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@tipoSugestao">
+            <Value>=Parameters!tipoSugestao.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
@@ -2003,6 +2159,10 @@
         </Field>
         <Field Name="cro_idTopico">
           <DataField>cro_idTopico</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="cro_idApre">
+          <DataField>cro_idApre</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="crs_id">
@@ -2171,6 +2331,54 @@
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>dataFimText</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tne_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>tne id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tme_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>tme id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="apenasGeral">
+      <DataType>Boolean</DataType>
+      <Prompt>apenas Geral</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tcp_id">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>tcp id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tipoSugestao">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>tipo Sugestao</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tne_nome">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>tne_nome</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tme_nome">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>tme_nome</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tcp_descricao">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>tcp_descricao</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tipoSugestaoText">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>tipoSugestaoText</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>

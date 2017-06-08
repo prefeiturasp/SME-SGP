@@ -67,6 +67,42 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo {
         protected global::System.Web.UI.UpdatePanel updFiltros;
         
         /// <summary>
+        /// UCComboTipoNivelEnsino1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboNivelEnsino UCComboTipoNivelEnsino1;
+        
+        /// <summary>
+        /// UCComboTipoModalidadeEnsino1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboModalidadeEnsino UCComboTipoModalidadeEnsino1;
+        
+        /// <summary>
+        /// chkGeral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkGeral;
+        
+        /// <summary>
+        /// divFiltrosEspecificos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFiltrosEspecificos;
+        
+        /// <summary>
         /// UCComboTipoDisciplina1 control.
         /// </summary>
         /// <remarks>
@@ -74,6 +110,33 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::WebControls_Combos_UCComboTipoDisciplina UCComboTipoDisciplina1;
+        
+        /// <summary>
+        /// UCComboTipoCurriculoPeriodo1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.UCComboTipoCurriculoPeriodo UCComboTipoCurriculoPeriodo1;
+        
+        /// <summary>
+        /// lblTipoSugestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTipoSugestao;
+        
+        /// <summary>
+        /// ddlTipoSugestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoSugestao;
         
         /// <summary>
         /// divData control.
