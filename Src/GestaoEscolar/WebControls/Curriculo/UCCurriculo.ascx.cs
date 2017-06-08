@@ -802,6 +802,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 {
                     TextBox txtTitulo = (TextBox)grv.Rows[e.RowIndex].FindControl("txtTitulo");
                     TextBox txtDescricao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtDescricao");
+
                     if (txtTitulo != null && txtDescricao != null)
                     {
                         DataKey chave = grv.DataKeys[e.RowIndex];
@@ -854,6 +855,10 @@ namespace GestaoEscolar.WebControls.Curriculo
                     TextBox txtSugestao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtSugestao");
                     DropDownList ddlTipoSugestao = (DropDownList)grv.Rows[e.RowIndex].FindControl("ddlTipoSugestao");
                     HiddenField hdnCrsId = (HiddenField)grv.Rows[e.RowIndex].FindControl("hdnCrsId");
+                    
+                    if (txtSugestao.Text.Length > 400)
+                        throw new ValidationException("A sugestão deve conter no máximo 400 caracteres.");
+                    
                     if (txtSugestao != null && ddlTipoSugestao != null && hdnCrsId != null)
                     {
                         DataKey chave = grv.DataKeys[e.RowIndex];

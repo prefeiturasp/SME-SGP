@@ -52,7 +52,7 @@
                                         <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvTitulo.ErrorMessage %>"
                                             ControlToValidate="txtTitulo" ValidationGroup="geral">*</asp:RequiredFieldValidator>
                                         <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                        <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+                                        <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite400"></asp:TextBox>
                                         <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                         <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                     </asp:Panel>
@@ -62,7 +62,7 @@
                                         <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
                                         <br /><br />
                                         <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
-                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite400"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
                                             ControlToValidate="txtSugestao" ValidationGroup="geral">*</asp:RequiredFieldValidator>
                                         <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
@@ -144,7 +144,7 @@
 			                                <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvTitulo.ErrorMessage %>"
 				                                ControlToValidate="txtTitulo" ValidationGroup="disciplina">*</asp:RequiredFieldValidator>
 			                                <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-			                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite400"></asp:TextBox>
 		                                    <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                             <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                         </asp:Panel>
@@ -154,7 +154,7 @@
 			                                <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
 			                                <br /><br />
 			                                <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
-			                                <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                                <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite400"></asp:TextBox>
 			                                <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
 				                                ControlToValidate="txtSugestao" ValidationGroup="disciplina">*</asp:RequiredFieldValidator>
 			                                <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
@@ -239,7 +239,7 @@
                                                 <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
                                                 <br /><br />
                                                 <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
-			                                    <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                                    <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite400"></asp:TextBox>
 			                                    <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
 				                                    ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                    <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
@@ -320,7 +320,7 @@
 			                                                        <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
 			                                                        <br /><br />
 			                                                        <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
-			                                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite400"></asp:TextBox>
 			                                                        <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
 				                                                        ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
@@ -398,7 +398,7 @@
 			                                                                        <asp:Label ID="lblDescricaoSugestao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
 			                                                                        <br /><br />
 			                                                                        <asp:Label ID="lblSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblSugestao.Text %>' AssociatedControlID="txtSugestao"></asp:Label>
-			                                                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
+			                                                                        <asp:TextBox ID="txtSugestao" runat="server" MaxLength="400" TextMode="MultiLine" SkinID="limite400"></asp:TextBox>
 			                                                                        <asp:RequiredFieldValidator ID="rfvSugestao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.rfvSugestao.ErrorMessage %>"
 				                                                                        ControlToValidate="txtSugestao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
 			                                                                        <asp:Label ID="lblTipoSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblTipoSugestao.Text %>' AssociatedControlID="ddlTipoSugestao"></asp:Label>
