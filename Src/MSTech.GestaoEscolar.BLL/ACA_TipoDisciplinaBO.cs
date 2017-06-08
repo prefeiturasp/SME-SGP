@@ -323,16 +323,17 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tne_id">ID do tipo de nível de ensino</param>  
         /// <param name="ent_id">Id da entidade do usuário logado.</param>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static DataTable SelecionaObrigatoriasPorNivelEnsino
+        public static DataTable SelecionaObrigatoriasPorNivelEnsinoEvento
         (
             int tne_id
             , int tme_id
             , Guid ent_id
             , long doc_id
+            , string eventosAbertos
         )
         {
             bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
-            return new ACA_TipoDisciplinaDAO().SelecionaObrigatoriasPorNivelEnsino(tne_id, tme_id, controlarOrdem, doc_id);
+            return new ACA_TipoDisciplinaDAO().SelecionaObrigatoriasPorNivelEnsinoEvento(tne_id, tme_id, controlarOrdem, doc_id, eventosAbertos);
         }
 
         /// <summary>

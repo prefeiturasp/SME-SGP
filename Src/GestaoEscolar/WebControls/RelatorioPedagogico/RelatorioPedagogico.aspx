@@ -411,7 +411,7 @@
                                                                 <span class="list-header">{{questao.descricao}}</span>
                                                                 <div class="obs-block" ng-repeat="agendamento in questao.agendamentos">
                                                                     <p ng-repeat="resposta in agendamento.respostas">
-                                                                        <span class="list-item"><strong>{{resposta.subQuestao}}</strong>{{resposta.resposta}}</span>
+                                                                        <span class="list-item"><strong>{{resposta.subQuestao}}</strong><span ng-repeat="(index, respostaAluno) in resposta.respostasAluno">{{respostaAluno.resposta}}<span ng-if="index < resposta.respostasAluno.length - 1">; </span></span></span>
                                                                     </p>
                                                                     <p class="text-autor">Período de agendamento: <strong>{{agendamento.dataInicio}} - {{agendamento.dataFim ? agendamento.dataFim : "*"}}</strong></p>
                                                                 </div>

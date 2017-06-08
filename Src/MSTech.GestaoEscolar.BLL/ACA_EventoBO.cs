@@ -858,7 +858,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="doc_id"></param>
         /// <param name="cal_ano"></param>
         /// <returns></returns>
-        public static bool VerificaEventoVigentePorUsuario(int tev_id, bool adm, Guid usu_id, Guid gru_id, long doc_id, int cal_ano)
+        public static string VerificaEventoVigentePorUsuario(int tev_id, bool adm, Guid usu_id, Guid gru_id, long doc_id, int cal_ano)
         {
             return new ACA_EventoDAO().VerificaEventoVigentePorUsuario(tev_id, adm, usu_id, gru_id, doc_id, cal_ano);
         }
