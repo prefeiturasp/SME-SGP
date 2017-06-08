@@ -100,7 +100,7 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
                 
                 report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioSugestoesCurriculo).ToString();
                 parametros = "tds_id=" + UCComboTipoDisciplina1.Valor.ToString() +
-                             "&tds_nome=" + UCComboTipoDisciplina1.Texto +
+                             "&tds_nome=" + (UCComboTipoDisciplina1.Valor > 0 ? UCComboTipoDisciplina1.Texto : "Todos") +
                              "&dataInicioText=" + dataInicio.ToShortDateString() +
                              "&dataFimText=" + dataFim.ToShortDateString() +
                              "&dataInicio=" + dataInicio +
