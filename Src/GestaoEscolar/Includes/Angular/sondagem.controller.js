@@ -204,8 +204,8 @@
                 graphData[list[s].id] = [];
 
                 for (var a = 0; a < list[s].agendamentos.length; a++) {
-
-                    var agendamento = { idQuestao: -1, dataInicio: list[s].agendamentos[a].dataInicio, dataFim: list[s].agendamentos[a].dataFim, respostas: [] }
+                    
+                    var agendamento = { dataInicio: list[s].agendamentos[a].dataInicio, dataFim: list[s].agendamentos[a].dataFim, respostas: [] }
 
                     if (graphLabels[list[s].id].indexOf(list[s].agendamentos[a].dataInicio) == -1) {
                         graphLabels[list[s].id].push(list[s].agendamentos[a].dataInicio);
@@ -217,8 +217,6 @@
 
                         if (questao.length) {
 
-                            agendamento.idQuestao = questao[0].id;
-
                             var subQuestao = $filter('filter')(list[s].subQuestoes, { id: list[s].agendamentos[a].respostasAluno[r].idSubQuestao }, true);
                             var resposta = $filter('filter')(list[s].respostas, { id: list[s].agendamentos[a].respostasAluno[r].idResposta }, true);
 
@@ -229,11 +227,11 @@
                                 }
 
                                 if (resposta.length) {
-                                    agendamento.respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: resposta[0].descricao })
+                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: subQuestao[0].id, subQuestao: subQuestao[0].descricao, resposta: resposta[0].descricao })
                                     graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
-                                    agendamento.respostas.push({ id: questao[0].id, subQuestao: subQuestao[0].descricao, resposta: "" })
+                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: subQuestao[0].id, subQuestao: subQuestao[0].descricao, resposta: "" })
                                     graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
@@ -244,11 +242,11 @@
                                 }
 
                                 if (resposta.length) {
-                                    agendamento.respostas.push({ id: questao[0].id, subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
+                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: -1, subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
                                     graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
-                                    agendamento.respostas.push({ id: questao[0].id, subQuestao: questao[0].descricao, resposta: "" })
+                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: -1, subQuestao: questao[0].descricao, resposta: "" })
                                     graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
@@ -260,11 +258,11 @@
                             }
 
                             if (resposta.length) {
-                                agendamento.respostas.push({ id: -1, subQuestao: "", resposta: resposta[0].descricao })
+                                agendamento.respostas.push({ idQuestao: -1, idSubQ: -1, subQuestao: "", resposta: resposta[0].descricao })
                                 graphData[list[s].id].push({ questao: "Sondagem: " + list[s].titulo, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                             }
                             else {
-                                agendamento.respostas.push({ id: -1, subQuestao: "", resposta: "" })
+                                agendamento.respostas.push({ idQuestao: -1, idSubQ: -1, subQuestao: "", resposta: "" })
                                 graphData[list[s].id].push({ questao: "Sondagem: " + list[s].titulo, resposta: "", idResposta: 0 });
                             }
                         }
@@ -282,8 +280,24 @@
                 }
                 else {
                     for (var q = 0; q < list[s].questoes.length; q++) {
+                         list[s].questoes[q]["agendamentos"] = []
+                        for (var a = 0; a < agendamentos.length; a++) {
+                            var respostas =  $filter('toArray')($filter('groupBy')($filter('filter')(agendamentos[a].respostas, { idQuestao: list[s].questoes[q].id }, true), 'idSubQ'));
+                            if (respostas.length) { 
+                                
+                                var resp = [];
 
-                        list[s].questoes[q]["agendamentos"] = $filter('filter')(agendamentos, { idQuestao: list[s].questoes[q].id }, true);
+                                for (var i = 0; i < respostas.length; i++) {
+                                    var subQ = { subQuestao: respostas[i][0].subQuestao, respostasAluno: []};
+                                    for (var j = 0; j < respostas[i].length; j++) {
+                                        subQ.respostasAluno.push({ resposta: respostas[i][j].resposta });
+                                    }
+                                    resp.push(subQ);
+                                }
+
+                                list[s].questoes[q]["agendamentos"].push({ dataInicio: agendamentos[a].dataInicio, dataFim: agendamentos[a].dataFim, respostas: resp });
+                            }
+                        }
                     }
                 }
 
