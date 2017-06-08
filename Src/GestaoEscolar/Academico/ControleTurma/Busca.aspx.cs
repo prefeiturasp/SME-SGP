@@ -2810,6 +2810,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                         UCComboUAEscola2.SelectedIndexEscolas = 1;
                         UCComboUAEscola2_IndexChangedUnidadeEscola();
                     }
+
+                    liTurmasEx.Visible = grvHistoricoTurmasExtintas.Rows.Count > 0;
+                    liSemestreAnteriores.Visible = grvSemestreAnteriores.Rows.Count > 0;
+                    liTurmasInat.Visible = grvHistoricoTurmasInativas.Rows.Count > 0;
                 }
 
                 ScriptManager.RegisterStartupScript(Page, typeof(Page), "MostrarHistorico", "$(document).ready(function() { $('#divHistorico').dialog('open'); });", true);
