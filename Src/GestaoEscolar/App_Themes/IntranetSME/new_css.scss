@@ -27,6 +27,18 @@
       padding: 3px;
       box-sizing: border-box;
     }
+
+    input[type="image"]{
+      &.preenchido{
+        border:1px solid #0163a2 !important;
+        @include box-shadow(0 1px 0 #0163a2);
+      }
+
+      &:disabled{
+        opacity:0.65;
+        background: rgba(0,0,0,.15);
+      }
+    }
   }
 
   .accordion-grid, .grid-topico, .grid-itens-right{
@@ -90,6 +102,10 @@
             margin-bottom: 8px;
           }
 
+          &[id*="btnListaSugestoes"]{
+            right:105px;
+          }
+
           &.preenchido{
             border:1px solid #0163a2 !important;
             @include box-shadow(0 1px 0 #0163a2);
@@ -100,7 +116,7 @@
           display:block;
           border-bottom: 0;
           position:static;
-          padding:10px 110px 10px 12px;
+          padding:10px 130px 10px 12px;
           width:100%;
         }
       }
@@ -138,7 +154,7 @@
 
               > span {
                 display:block;
-                padding:10px 0 0 25px;
+                padding:10px 130px 0 25px;
 
                 &:before {
                   content: '\e313';
@@ -281,6 +297,40 @@
   .grid tr td .grid tr:hover td, .tbGrid tr td .grid tr:hover td{
     background:transparent !important;
   }
+
+  .ul-sugestoes{
+    list-style: none;
+    border: 1px solid rgba(0,0,0,.2);
+    @include border-radius(3px);
+    margin: 10px 0 0 !important;
+
+    &.list-closed{
+      border:none;
+
+      li{
+        padding:0;
+        height:0;
+        overflow:hidden;
+        @include transition(all 0.2s ease-out);
+        border:none;
+      }
+    }
+
+    li{
+      padding: 10px 10px 10px 40px;
+      border-bottom: 1px solid rgba(0,0,0,.2);
+      line-height: 1.3;
+      background:url('images/sugerir.png') 15px 10px no-repeat;
+      height:auto;
+      @include transition(all 0.2s ease-out);
+
+      small{
+        display: block;
+        opacity: 0.75;
+        font-size: 0.65rem;
+      }
+    }
+  }
 }
 
 .selecao-disciplina{
@@ -328,6 +378,11 @@
   }
 }
 
+.scroll-table-full{
+  max-width: calc(100vw - 120px);
+  overflow: auto;
+}
+
 @media screen and (max-width:600px){
   .selecao-disciplina{
     table.radio{
@@ -338,8 +393,50 @@
   }
 }
 
+
+@media screen and (max-width:700px){
+  .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid{
+    tr{
+      display:block;
+      width:100%;
+
+      td{
+        display:inline-block;
+
+        &:first-child, &:last-child{
+          display:block;
+          width:100%;
+
+          .btn{
+            float:left;
+          }
+        }
+
+        &:not(:first-child):not(:last-child){
+          float:right;
+
+          input[type="image"]{
+            position: absolute;
+            border-width: 0px;
+            top: 5px;
+            @include transform(translateX(-15px));
+          }
+        }
+
+        &:not(:last-child){
+          border-bottom:0;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width:960px){
   .fieldset-curriculo .painel-habilidades input[type="submit"][id*="btnNovoEixo"]{
     position:static;
+  }
+
+  .scroll-table-full{
+    max-width: calc(100vw - 40px);
   }
 }

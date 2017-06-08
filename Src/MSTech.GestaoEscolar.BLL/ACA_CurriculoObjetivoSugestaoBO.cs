@@ -26,6 +26,8 @@ namespace MSTech.GestaoEscolar.BLL
         public int crs_id { get; set; }
         public string crs_sugestao { get; set; }
         public byte crs_tipo { get; set; }
+        public string pes_nome { get; set; }
+        public DateTime data { get; set; }
     }
 
     #endregion
@@ -60,6 +62,10 @@ namespace MSTech.GestaoEscolar.BLL
                                                             crs_sugestao = dr["crs_sugestao"].ToString()
                                                             ,
                                                             crs_tipo = Convert.ToByte(dr["crs_tipo"])
+                                                            ,
+                                                            pes_nome = Convert.ToString(dr["pes_nome"])
+                                                            ,
+                                                            data = Convert.ToDateTime(dr["data"])
                                                         }).ToList();
             return retorno;
         }
