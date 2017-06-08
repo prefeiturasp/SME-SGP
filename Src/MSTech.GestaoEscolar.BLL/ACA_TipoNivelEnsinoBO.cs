@@ -113,9 +113,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="doc_id">ID do docente</param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static DataTable SelecionaTipoNivelEnsinoDocente(long doc_id)
+        public static DataTable SelecionaTipoNivelEnsinoDocenteEvento(long doc_id, string eventosAbertos)
         {
-            return new ACA_TipoNivelEnsinoDAO().SelecionaTipoNivelEnsinoDocente(doc_id);
+            return new ACA_TipoNivelEnsinoDAO().SelecionaTipoNivelEnsinoDocenteEvento(doc_id, eventosAbertos);
         }
     }    
 }

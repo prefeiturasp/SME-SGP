@@ -153,15 +153,16 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>        
         /// <param name="tne_id">ID do tipo de nível de ensino</param>
         /// <param name="controlarOrdem">se vai ordenar por ordem ou não</param> 
-        public DataTable SelecionaObrigatoriasPorNivelEnsino
+        public DataTable SelecionaObrigatoriasPorNivelEnsinoEvento
         (
             int tne_id
             , int tme_id
             , bool controlarOrdem
             , long doc_id
+            , string eventosAbertos
         )
         {
-            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoDisciplina_SelecionaObrigatoriasPorNivelEnsino", _Banco);
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoDisciplina_SelecionaObrigatoriasPorNivelEnsinoEvento", _Banco);
             try
             {
                 #region PARAMETROS
@@ -199,6 +200,12 @@ namespace MSTech.GestaoEscolar.DAL
                 {
                     Param.Value = DBNull.Value;
                 }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.ParameterName = "@eventosAbertos";
+                Param.Value = eventosAbertos;
                 qs.Parameters.Add(Param);
 
                 #endregion
