@@ -1244,6 +1244,12 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     ckbResposta.Enabled = sda_id == VS_sda_id && VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
 
+                DropDownList ddlResposta = (DropDownList)e.Item.FindControl("ddlResposta");
+                if (ddlResposta != null)
+                {
+                    ddlResposta.Enabled = sda_id == VS_sda_id && VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                }
+
                 HiddenField hdnRespId = (HiddenField)e.Item.FindControl("hdnRespId");
                 if (hdnRespId != null)
                 {

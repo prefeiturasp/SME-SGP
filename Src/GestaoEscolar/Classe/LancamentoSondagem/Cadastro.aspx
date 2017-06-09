@@ -101,7 +101,6 @@
                                     </tr>
                                     <tr class="gridHeader">
                                         <th>
-                                            <asp:Label ID="lblNomeAluno" runat="server" Text="Aluno"></asp:Label>
                                         </th>
                                         <asp:Repeater ID="rptRespostasHistorico" runat="server">
                                             <ItemTemplate>
