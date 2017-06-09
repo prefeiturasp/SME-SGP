@@ -71,7 +71,7 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
             UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
             UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor);
-            UCComboTipoDisciplina1.CarregarTipoDisciplinaPorNivelEnsino(UCComboTipoNivelEnsino1.Valor);
+            UCComboTipoDisciplina1.CarregarObrigatoriasPorNivelEnsinoEvento(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, "-1");
             txtDataInicio.Text = "";
             txtDataFim.Text = "";
             updFiltros.Update();
@@ -209,7 +209,7 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
             try
             {
                 UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor);
-                UCComboTipoDisciplina1.CarregarTipoDisciplinaPorNivelEnsino(UCComboTipoNivelEnsino1.Valor);
+                UCComboTipoDisciplina1.CarregarObrigatoriasPorNivelEnsinoEvento(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, "-1");
             }
             catch (Exception ex)
             {
@@ -222,8 +222,8 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         {
             try
             {
-                UCComboTipoCurriculoPeriodo1.Valor = -1;
                 UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor);
+                UCComboTipoDisciplina1.CarregarObrigatoriasPorNivelEnsinoEvento(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, "-1");
             }
             catch (Exception ex)
             {

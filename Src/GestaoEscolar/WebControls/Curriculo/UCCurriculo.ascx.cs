@@ -309,7 +309,7 @@ namespace GestaoEscolar.WebControls.Curriculo
             {
                 try
                 {
-                    if (VS_permiteIncluirSugestao)
+                    if (!VS_permiteIncluirSugestao)
                     {
                         lblMsgEvento.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.SemPermissao").ToString(), UtilBO.TipoMensagem.Informacao);
                         UCComboTipoNivelEnsino1.Visible = UCComboTipoModalidadeEnsino1.Visible = false;

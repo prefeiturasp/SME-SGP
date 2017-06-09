@@ -335,6 +335,27 @@ public partial class WebControls_Combos_UCComboTipoDisciplina : MotherUserContro
     }
 
     /// <summary>
+    /// Retorna todos os tipos de disciplina obrigatórias para o nível de ensino
+    /// e o tipo de disciplina no combo   
+    /// </summary>
+    public void CarregarObrigatoriasPorNivelEnsinoEvento(int tne_id, int tme_id, Guid ent_id, long doc_id, string eventosAbertos)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("tne_id", tne_id.ToString());
+        odsDados.SelectParameters.Add("tme_id", tme_id.ToString());
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectParameters.Add("doc_id", doc_id.ToString());
+        odsDados.SelectParameters.Add("eventosAbertos", eventosAbertos.ToString());
+
+        ddlCombo.DataTextField = "tne_tds_nome";
+        odsDados.SelectMethod = "SelecionaObrigatoriasPorNivelEnsinoEvento";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um tipo de " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " --", "-1", true));
+        ddlCombo.DataBind();
+    }
+
+    /// <summary>
     /// Adiciona e remove a mensagem "Selecione um ..." do dropdownlist.  
     /// Por padrão é false e a mensagem não é exibida.
     /// </summary>
