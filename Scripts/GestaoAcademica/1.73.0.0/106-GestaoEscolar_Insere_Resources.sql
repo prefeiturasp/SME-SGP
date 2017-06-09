@@ -999,6 +999,13 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Registro de sugestões'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.SemPermissao' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
