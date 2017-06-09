@@ -325,7 +325,7 @@
                 if (!list[s].questoes.length) {
                     list[s].questoes = [];
                     list[s].questoes.push({ descricao: "" });
-                    list[s].questoes[q]["agendamentos"] = [];
+                    list[s].questoes[0]["agendamentos"] = [];
                     for (var a = 0; a < agendamentos.length; a++) {
                         var respostas = $filter('toArray')($filter('groupBy')(agendamentos[a].respostas, 'idSubQ'));
                         if (respostas.length) {
@@ -339,7 +339,7 @@
                                 resp.push(subQ);
                             }
 
-                            list[s].questoes[q]["agendamentos"].push({ dataInicio: agendamentos[a].dataInicio, dataFim: agendamentos[a].dataFim, respostas: resp });
+                            list[s].questoes[0]["agendamentos"].push({ dataInicio: agendamentos[a].dataInicio, dataFim: agendamentos[a].dataFim, respostas: resp });
                         }
                     }
                 }

@@ -866,15 +866,6 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     {
                         rptQuestoes.DataSource = lstQuestoes.Skip((VS_NumPagina - 1) * VS_QtdQuestoesPagina).Take(VS_QtdQuestoesPagina);
                         rptQuestoes.DataBind();
-
-                        if (VS_snd_opcaoResposta == (byte)ACA_SondagemOpcaoResposta.SelecaoUnica && lstSubQuestoes.Count > 0)
-                        {
-                            Label lblNomeAluno = (Label)e.Item.FindControl("lblNomeAluno");
-                            if (lblNomeAluno != null)
-                            {
-                                lblNomeAluno.Visible = false;
-                            }
-                        }
                     }
                 }
                 else
@@ -1263,16 +1254,18 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 string estiloBorda = "1px solid #eee";
 
                 CheckBox ckbResposta = (CheckBox)e.Item.FindControl("ckbResposta");
-                HiddenField groupName = (HiddenField)e.Item.FindControl("groupName");
-
-                if (ckbResposta != null && groupName != null)
+                if (ckbResposta != null)
                 {
-                    groupName.Value = string.Format("{0}_{1}_{2}_{3}", alu_id, sda_id, sdq_id, sdq_idSub);
-
-                    if (string.IsNullOrEmpty(ultimoGrupo) || groupName.Value != ultimoGrupo)
+                    HiddenField groupName = (HiddenField)e.Item.FindControl("groupName");
+                    if (groupName != null)
                     {
-                        estiloBorda = "1px solid #ccc";
-                        ultimoGrupo = groupName.Value;
+                        groupName.Value = string.Format("{0}_{1}_{2}_{3}", alu_id, sda_id, sdq_id, sdq_idSub);
+
+                        if (string.IsNullOrEmpty(ultimoGrupo) || groupName.Value != ultimoGrupo)
+                        {
+                            estiloBorda = "1px solid #ccc";
+                            ultimoGrupo = groupName.Value;
+                        }
                     }
 
                     ckbResposta.Enabled = sda_id == VS_sda_id && VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
