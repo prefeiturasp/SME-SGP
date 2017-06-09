@@ -318,15 +318,22 @@ namespace GestaoEscolar.WebControls.Curriculo
                     {
                         if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                         {
-                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEvento(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoSemInfantil(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
                             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsinoDocenteEvento(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
                         }
                         else
                         {
-                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoSemInfantil();
                             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
                         }
                         grvEixo.CssClass += " accordion-grid";
+
+                        if (UCComboTipoNivelEnsino1.QuantidadeItensCombo == 1 
+                            || UCComboTipoModalidadeEnsino1.QuantidadeItensCombo == 1)
+                        {
+                            lblMsgEvento.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Academico", "Curriculo.Cadastro.MensagemVazio").ToString(), UtilBO.TipoMensagem.Nenhuma);
+                            UCComboTipoNivelEnsino1.Visible = UCComboTipoModalidadeEnsino1.Visible = false;
+                        }
                     }
                 }
                 catch (Exception ex)

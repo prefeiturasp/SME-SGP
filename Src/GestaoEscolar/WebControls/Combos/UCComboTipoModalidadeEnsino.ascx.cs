@@ -118,6 +118,17 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
         }
     }
 
+    /// <summary>
+    /// Propriedade que verifica quantos items existem no combo
+    /// </summary>
+    public int QuantidadeItensCombo
+    {
+        get
+        {
+            return ddlCombo.Items.Count;
+        }
+    }
+
     #endregion
 
     #region Delegates

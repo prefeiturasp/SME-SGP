@@ -1006,6 +1006,13 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.MensagemVazio' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Não foram encontrados currículos para o registro de sugestões.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

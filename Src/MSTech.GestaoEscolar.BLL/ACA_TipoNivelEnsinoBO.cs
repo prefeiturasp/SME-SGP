@@ -57,7 +57,24 @@ namespace MSTech.GestaoEscolar.BLL
             ACA_TipoNivelEnsinoDAO dao = new ACA_TipoNivelEnsinoDAO();
             return dao.SelectBy_Pesquisa(false, 1, 1, out totalRecords);
         }
-        
+
+        /// <summary>
+        /// Retorna todos os tipos de nível de ensino não excluídos logicamente,
+        /// desconsiderando o nível infantil
+        /// Sem paginação
+        /// </summary>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoNivelEnsinoSemInfantil(Guid ent_id)
+        {
+            int tne_idInfantil = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, ent_id);
+            DataTable dt = SelecionaTipoNivelEnsino();
+            if (dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).Length > 0)
+            {
+                return dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).CopyToDataTable();
+            }
+            return new DataTable();
+        }
+
         /// <summary>
         /// Verifica o maior número de ordem cadastado de tipo de nivel de ensino
         /// </summary>
@@ -113,9 +130,15 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="doc_id">ID do docente</param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public static DataTable SelecionaTipoNivelEnsinoDocenteEvento(long doc_id, string eventosAbertos)
+        public static DataTable SelecionaTipoNivelEnsinoDocenteEventoSemInfantil(long doc_id, string eventosAbertos, Guid ent_id)
         {
-            return new ACA_TipoNivelEnsinoDAO().SelecionaTipoNivelEnsinoDocenteEvento(doc_id, eventosAbertos);
+            int tne_idInfantil = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, ent_id);
+            DataTable dt = new ACA_TipoNivelEnsinoDAO().SelecionaTipoNivelEnsinoDocenteEvento(doc_id, eventosAbertos);
+            if (dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).Length > 0)
+            {
+                return dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).CopyToDataTable();
+            }
+            return new DataTable();
         }
     }    
 }
