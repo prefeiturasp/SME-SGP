@@ -171,14 +171,20 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.DbType = DbType.Int32;
                 Param.ParameterName = "@tne_id";
                 Param.Size = 4;
-                Param.Value = tne_id;
+                if (tne_id > 0)
+                    Param.Value = tne_id;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int32;
                 Param.ParameterName = "@tme_id";
                 Param.Size = 4;
-                Param.Value = tme_id;
+                if (tme_id > 0)
+                    Param.Value = tme_id;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
