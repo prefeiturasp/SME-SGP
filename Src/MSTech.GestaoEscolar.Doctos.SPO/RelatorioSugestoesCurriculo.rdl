@@ -1977,7 +1977,7 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=IIF(Parameters!tcp_id.Value &gt; 0, Parameters!tcp_descricao.Value, "Todas")</Value>
+                  <Value>=IIF(Parameters!tcp_id.Value &gt; 0, Parameters!tcp_descricao.Value, "Todos")</Value>
                   <Style>
                     <FontSize>9pt</FontSize>
                     <FontWeight>Normal</FontWeight>
