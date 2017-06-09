@@ -168,10 +168,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 ckbBloqueado.Checked = !snd.snd_situacao.Equals(1);
                 ckbBloqueado.Enabled = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 ckbBloqueado.Visible = true;
-
-                List<CLS_AlunoSondagem> lstAlunoSondagem = CLS_AlunoSondagemBO.SelectAgendamentosBy_Sondagem(snd_id, 0);
-                List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(snd_id);
-
+                
                 List<ACA_SondagemQuestao> lstAux = ACA_SondagemQuestaoBO.SelectQuestoesBy_Sondagem(snd_id);
 
                 VS_ListaQuestao = lstAux.Where(q => q.sdq_subQuestao == false).ToList();
