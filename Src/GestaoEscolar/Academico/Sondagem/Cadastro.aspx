@@ -4,6 +4,30 @@
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios"
     TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <script type="text/javascript">
+        function ExibirValidacao(vs, grupo)
+        {
+            if (!Page_ClientValidate(grupo)) {     
+                var vsummary = document.getElementById(vs);
+                if(vsummary != null)
+                {
+                    setTimeout(function () { vsummary.scrollIntoView(true) }, 500);
+                }
+            }  
+        }
+        function AdicionarQuestao_Click()
+        {
+            ExibirValidacao('<%=vsQuestao.ClientID%>', 'vgQuestao');
+        } 
+        function AdicionarSubQuestao_Click()
+        {
+            ExibirValidacao('<%=vsSubquestao.ClientID%>', 'vgSubquestao');
+        } 
+        function AdicionarResposta_Click()
+        {
+            ExibirValidacao('<%=vsResposta.ClientID%>', 'vgResposta');
+        } 
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel runat="server" ID="updMessage" UpdateMode="Always">
@@ -66,7 +90,7 @@
                                             Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemQuestao.ErrorMessage %>" Text="*" />
                                         <div class="right">
                                             <asp:Button ID="btnAdicionarQuestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>"
-                                                OnClick="btnAdicionarQuestao_Click" ValidationGroup="vgQuestao" />
+                                                OnClick="btnAdicionarQuestao_Click" ValidationGroup="vgQuestao" OnClientClick="AdicionarQuestao_Click();" />
                                             <asp:Button ID="btnCancelarItemQuestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                                 OnClick="btnCancelarItemQuestao_Click" />
                                         </div>
@@ -140,7 +164,7 @@
                                             Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemSubquestao.ErrorMessage %>" Text="*" />
                                         <div class="right">
                                             <asp:Button ID="btnAdicionarSubquestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" 
-                                                OnClick="btnAdicionarSubquestao_Click" ValidationGroup="vgSubquestao" />
+                                                OnClick="btnAdicionarSubquestao_Click" ValidationGroup="vgSubquestao" OnClientClick="AdicionarSubQuestao_Click();" />
                                             <asp:Button ID="btnCancelarItemSubquestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                                 OnClick="btnCancelarItemSubquestao_Click" />
                                         </div>
@@ -218,7 +242,7 @@
                                             Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemResposta.ErrorMessage %>" Text="*" />
                                         <div class="right">
                                             <asp:Button ID="btnAdicionarResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" 
-                                                OnClick="btnAdicionarResposta_Click" ValidationGroup="vgResposta" />
+                                                OnClick="btnAdicionarResposta_Click" ValidationGroup="vgResposta" OnClientClick="AdicionarResposta_Click();" />
                                             <asp:Button ID="btnCancelarItemResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                                 OnClick="btnCancelarItemResposta_Click" />
                                         </div>
