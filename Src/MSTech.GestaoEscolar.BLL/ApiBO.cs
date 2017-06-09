@@ -7408,6 +7408,7 @@ namespace MSTech.GestaoEscolar.BLL
                                               ,
                                              respostasAluno = (from dr in dt.AsEnumerable()
                                                                group dr by new { snd_id = dr.Field<int>("snd_id"), sda_id = dr.Field<int>("sda_id"), sdq_id = dr.Field<int>("sdq_id"), sdq_idSub = dr.Field<int>("sdq_idSub") } into asn
+                                                               orderby Convert.ToInt32(asn.FirstOrDefault()["sdq_ordemSub"]), Convert.ToInt32(asn.FirstOrDefault()["sdq_ordem"])
                                                                where asn.Key.snd_id == sda.Key.snd_id && asn.Key.sda_id == sda.Key.sda_id
                                                                from resposta in asn
                                                                select new RespostaAlunoDTO

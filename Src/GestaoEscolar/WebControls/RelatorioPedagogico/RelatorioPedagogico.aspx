@@ -419,7 +419,7 @@
                                                         </ul>
                                                         <canvas id="line" class="chart chart-line" chart-data="getGraphData(sondagem.id)"
                                                             chart-labels="getGraphLabels(sondagem.id)" chart-series="getGraphSeries(sondagem.id)" chart-options="getGraphOptions(sondagem.id)"
-                                                            chart-dataset-override="graphDatasetOverride" width="90" height="33"></canvas>
+                                                            chart-dataset-override="graphDatasetOverride" width="90" height="50"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
