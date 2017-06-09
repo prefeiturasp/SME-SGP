@@ -148,6 +148,17 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
         }
     }
 
+    /// <summary>
+    /// Propriedade que verifica quantos items existem no combo
+    /// </summary>
+    public int QuantidadeItensCombo
+    {
+        get
+        {
+            return ddlCombo.Items.Count;
+        }
+    }
+
     #endregion
 
     #region METODOS
@@ -189,7 +200,22 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
         SelecionaPrimeiroItem();
     }
 
-      /// <summary>
+    /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist    
+    /// </summary>
+    public void CarregarTipoNivelEnsinoSemInfantil()
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectMethod = "SelecionaTipoNivelEnsinoSemInfantil";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
+        ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
+    }
+
+    /// <summary>
     /// Mostra os dados não excluídos logicamente no dropdownlist    
     /// </summary>
     public void CarregarTipoNivelEnsinoEscola(int esc_id, int uni_id)
@@ -207,13 +233,14 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
     /// Mostra os dados não excluídos logicamente no dropdownlist    
     /// de acordo com as atribuições do docente.
     /// </summary>
-    public void CarregarTipoNivelEnsinoDocenteEvento(long doc_id, string eventosAbertos)
+    public void CarregarTipoNivelEnsinoDocenteEventoSemInfantil(long doc_id, string eventosAbertos)
     {
         ddlCombo.Items.Clear();
         odsDados.SelectParameters.Clear();
         odsDados.SelectParameters.Add("doc_id", doc_id.ToString());
         odsDados.SelectParameters.Add("eventosAbertos", eventosAbertos);
-        odsDados.SelectMethod = "SelecionaTipoNivelEnsinoDocenteEvento";
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectMethod = "SelecionaTipoNivelEnsinoDocenteEventoSemInfantil";
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
         ddlCombo.DataBind();

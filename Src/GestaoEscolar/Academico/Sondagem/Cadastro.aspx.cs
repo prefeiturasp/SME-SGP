@@ -78,26 +78,7 @@ namespace GestaoEscolar.Academico.Sondagem
                 return ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.BOTAO_SALVAR_PERMANECE_TELA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
             }
         }
-
-        /// <summary>
-        /// Propriedade em ViewState que informa se pode editar a sondagem (se já estiver em uso ou com agendamento vigente)
-        /// </summary>
-        private bool VS_permiteEditar
-        {
-            get
-            {
-                if (ViewState["VS_permiteEditar"] != null)
-                {
-                    return Convert.ToBoolean(ViewState["VS_permiteEditar"]);
-                }
-                return true;
-            }
-            set
-            {
-                ViewState["VS_permiteEditar"] = value;
-            }
-        }
-
+        
         /// <summary>
         /// Propriedade em ViewState que armazena valor de snd_id
         /// no caso de atualização de um registro ja existente.
@@ -190,9 +171,6 @@ namespace GestaoEscolar.Academico.Sondagem
 
                 List<CLS_AlunoSondagem> lstAlunoSondagem = CLS_AlunoSondagemBO.SelectAgendamentosBy_Sondagem(snd_id, 0);
                 List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(snd_id);
-                VS_permiteEditar = !lstAgendamentos.Any(a => a.sda_dataFim >= DateTime.Today && a.sda_dataInicio <= DateTime.Today &&
-                                                             a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado) &&
-                                   !lstAlunoSondagem.Any(a => a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado);
 
                 List<ACA_SondagemQuestao> lstAux = ACA_SondagemQuestaoBO.SelectQuestoesBy_Sondagem(snd_id);
 
@@ -235,7 +213,7 @@ namespace GestaoEscolar.Academico.Sondagem
                     ((ImageButton)grvRespostas.Rows[grvRespostas.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                 }
 
-                btnNovaQuestao.Visible = btnNovaResposta.Visible = btnNovaSubQuestao.Visible = VS_permiteEditar;
+                btnNovaQuestao.Visible = btnNovaResposta.Visible = btnNovaSubQuestao.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
             }
             catch (Exception ex)
             {
@@ -618,22 +596,17 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     if (idExcluir > 0 && VS_ListaQuestao.Any(l => l.sdq_id == idExcluir))
                     {
-                        if (!VS_permiteEditar)
-                            VS_ListaQuestao[VS_ListaQuestao.IndexOf(VS_ListaQuestao.Where(l => l.sdq_id == idExcluir).First())].sdq_situacao = (byte)ACA_SondagemQuestaoSituacao.Excluido;
-                        else
+                        int ind = VS_ListaQuestao.IndexOf(VS_ListaQuestao.Where(l => l.sdq_id == idExcluir).First());
+                        int ordem = VS_ListaQuestao.Where(l => l.sdq_id == idExcluir).First().sdq_ordem;
+
+                        //Ajusta as ordens
+                        for (int i = ind + 1; i < VS_ListaQuestao.Count; i++)
                         {
-                            int ind = VS_ListaQuestao.IndexOf(VS_ListaQuestao.Where(l => l.sdq_id == idExcluir).First());
-                            int ordem = VS_ListaQuestao.Where(l => l.sdq_id == idExcluir).First().sdq_ordem;
-
-                            //Ajusta as ordens
-                            for (int i = ind + 1; i < VS_ListaQuestao.Count; i++)
-                            {
-                                VS_ListaQuestao[i].sdq_ordem = ordem;
-                                ordem += 1;
-                            }
-
-                            VS_ListaQuestao.RemoveAt(ind);
+                            VS_ListaQuestao[i].sdq_ordem = ordem;
+                            ordem += 1;
                         }
+
+                        VS_ListaQuestao.RemoveAt(ind);
                     }
                     VS_ListaQuestao = VS_ListaQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
 
@@ -774,22 +747,17 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     if (idExcluir > 0 && VS_ListaSubQuestao.Any(l => l.sdq_id == idExcluir))
                     {
-                        if (!VS_permiteEditar)
-                            VS_ListaSubQuestao[VS_ListaSubQuestao.IndexOf(VS_ListaSubQuestao.Where(l => l.sdq_id == idExcluir).First())].sdq_situacao = (byte)ACA_SondagemQuestaoSituacao.Excluido;
-                        else
+                        int ind = VS_ListaSubQuestao.IndexOf(VS_ListaSubQuestao.Where(l => l.sdq_id == idExcluir).First());
+                        int ordem = VS_ListaSubQuestao.Where(l => l.sdq_id == idExcluir).First().sdq_ordem;
+
+                        //Ajusta as ordens
+                        for (int i = ind + 1; i < VS_ListaSubQuestao.Count; i++)
                         {
-                            int ind = VS_ListaSubQuestao.IndexOf(VS_ListaSubQuestao.Where(l => l.sdq_id == idExcluir).First());
-                            int ordem = VS_ListaSubQuestao.Where(l => l.sdq_id == idExcluir).First().sdq_ordem;
-
-                            //Ajusta as ordens
-                            for (int i = ind + 1; i < VS_ListaSubQuestao.Count; i++)
-                            {
-                                VS_ListaSubQuestao[i].sdq_ordem = ordem;
-                                ordem += 1;
-                            }
-
-                            VS_ListaSubQuestao.RemoveAt(ind);
+                            VS_ListaSubQuestao[i].sdq_ordem = ordem;
+                            ordem += 1;
                         }
+
+                        VS_ListaSubQuestao.RemoveAt(ind);
                     }
 
                     VS_ListaSubQuestao = VS_ListaSubQuestao.OrderBy(q => q.sdq_ordem).ThenBy(q => q.sdq_descricao).ToList();
@@ -932,22 +900,17 @@ namespace GestaoEscolar.Academico.Sondagem
 
                     if (idExcluir > 0 && VS_ListaResposta.Any(l => l.sdr_id == idExcluir))
                     {
-                        if (!VS_permiteEditar)
-                            VS_ListaResposta[VS_ListaResposta.IndexOf(VS_ListaResposta.Where(l => l.sdr_id == idExcluir).First())].sdr_situacao = (byte)ACA_SondagemQuestaoSituacao.Excluido;
-                        else
+                        int ind = VS_ListaResposta.IndexOf(VS_ListaResposta.Where(l => l.sdr_id == idExcluir).First());
+                        int ordem = VS_ListaResposta.Where(l => l.sdr_id == idExcluir).First().sdr_ordem;
+
+                        //Ajusta as ordens
+                        for (int i = ind + 1; i < VS_ListaResposta.Count; i++)
                         {
-                            int ind = VS_ListaResposta.IndexOf(VS_ListaResposta.Where(l => l.sdr_id == idExcluir).First());
-                            int ordem = VS_ListaResposta.Where(l => l.sdr_id == idExcluir).First().sdr_ordem;
-
-                            //Ajusta as ordens
-                            for (int i = ind + 1; i < VS_ListaResposta.Count; i++)
-                            {
-                                VS_ListaResposta[i].sdr_ordem = ordem;
-                                ordem += 1;
-                            }
-
-                            VS_ListaResposta.RemoveAt(ind);
+                            VS_ListaResposta[i].sdr_ordem = ordem;
+                            ordem += 1;
                         }
+
+                        VS_ListaResposta.RemoveAt(ind);
                     }
 
                     VS_ListaResposta = VS_ListaResposta.OrderBy(r => r.sdr_ordem).ThenBy(r => r.sdr_sigla).ThenBy(r => r.sdr_descricao).ToList();
@@ -1024,21 +987,13 @@ namespace GestaoEscolar.Academico.Sondagem
                 if (btnAlterar != null)
                 {
                     btnAlterar.CommandArgument = e.Row.RowIndex.ToString();
-                    //btnAlterar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && VS_permiteEditar;
                 }
-
-                //Label lblAlterar = (Label)e.Row.FindControl("lblAlterar");
-                //if (lblAlterar != null)
-                //{
-                //    lblAlterar.Visible = !(__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && VS_permiteEditar);
-                //}
-
                 ImageButton _btnSubir = (ImageButton)e.Row.FindControl("_btnSubir");
                 if (_btnSubir != null)
                 {
                     _btnSubir.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "cima.png";
                     _btnSubir.CommandArgument = e.Row.RowIndex.ToString();
-                    _btnSubir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && VS_permiteEditar;
+                    _btnSubir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
 
                 ImageButton _btnDescer = (ImageButton)e.Row.FindControl("_btnDescer");
@@ -1046,14 +1001,14 @@ namespace GestaoEscolar.Academico.Sondagem
                 {
                     _btnDescer.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "baixo.png";
                     _btnDescer.CommandArgument = e.Row.RowIndex.ToString();
-                    _btnDescer.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && VS_permiteEditar;
+                    _btnDescer.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
 
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
                 {
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && VS_permiteEditar;
+                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
             }
         }
