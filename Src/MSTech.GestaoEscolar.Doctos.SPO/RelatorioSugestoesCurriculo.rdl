@@ -54,7 +54,6 @@
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
         <Top>8.42931cm</Top>
-        <Left>0cm</Left>
         <Height>0.99688cm</Height>
         <Width>19cm</Width>
         <Visibility>
@@ -1647,7 +1646,6 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.22931cm</Top>
-        <Left>0cm</Left>
         <Height>8.2cm</Height>
         <Width>19cm</Width>
         <ZIndex>1</ZIndex>
@@ -1664,7 +1662,7 @@
     <Height>9.42619cm</Height>
     <Style />
   </Body>
-  <Width>19.03528cm</Width>
+  <Width>19cm</Width>
   <Page>
     <PageHeader>
       <Height>5.18172cm</Height>
@@ -1783,9 +1781,8 @@
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
           <Top>2.64829cm</Top>
-          <Left>0.00471cm</Left>
           <Height>0.66287cm</Height>
-          <Width>18.99529cm</Width>
+          <Width>19cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -1851,7 +1848,7 @@
           <Top>4.58172cm</Top>
           <Left>11.95978cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.0755cm</Width>
+          <Width>7.04022cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -1912,7 +1909,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
           <Top>3.38172cm</Top>
-          <Left>0cm</Left>
           <Height>0.6cm</Height>
           <Width>19cm</Width>
           <ZIndex>3</ZIndex>
@@ -1954,7 +1950,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
           <Top>4.58172cm</Top>
-          <Left>0cm</Left>
           <Height>0.6cm</Height>
           <Width>11.9245cm</Width>
           <ZIndex>4</ZIndex>
