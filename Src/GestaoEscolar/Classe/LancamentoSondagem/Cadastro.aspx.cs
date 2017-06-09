@@ -277,7 +277,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                         {
                             VS_snd_id = PreviousPage.SelectedItem[0];
                             VS_sda_id = PreviousPage.SelectedItem[1];
-                            VS_snd_opcaoResposta = (byte)PreviousPage.EditItem[2];
+                            VS_snd_opcaoResposta = (byte)PreviousPage.SelectedItem[2];
                             VS_responder = false;
                         }
 
