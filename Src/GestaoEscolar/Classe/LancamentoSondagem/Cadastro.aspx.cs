@@ -866,15 +866,6 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     {
                         rptQuestoes.DataSource = lstQuestoes.Skip((VS_NumPagina - 1) * VS_QtdQuestoesPagina).Take(VS_QtdQuestoesPagina);
                         rptQuestoes.DataBind();
-
-                        if (VS_snd_opcaoResposta == (byte)ACA_SondagemOpcaoResposta.SelecaoUnica && lstSubQuestoes.Count > 0)
-                        {
-                            Label lblNomeAluno = (Label)e.Item.FindControl("lblNomeAluno");
-                            if (lblNomeAluno != null)
-                            {
-                                lblNomeAluno.Visible = false;
-                            }
-                        }
                     }
                 }
                 else
