@@ -4104,7 +4104,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     IsNew = tae_id <= 0
                 };
 
-                if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity))
+                if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity, EntTurmaDisciplina.tud_tipo, VS_EntitiesControleTurma.formatoAvaliacao.fav_fechamentoAutomatico, Ent_ID_UsuarioLogado))
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Adição de atividade | tud_id: {0}, tae_id: {1}", entity.tud_id, entity.tae_id));
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);

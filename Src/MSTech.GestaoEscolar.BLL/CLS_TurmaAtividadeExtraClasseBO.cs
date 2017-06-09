@@ -9,9 +9,10 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.GestaoEscolar.DAL;
     using System.Data;
     using System.Linq;
-    using Validation.Exceptions;/// <summary>
-                                /// Description: CLS_TurmaAtividadeExtraClasse Business Object. 
-                                /// </summary>
+    using Validation.Exceptions;
+    using System;/// <summary>
+                 /// Description: CLS_TurmaAtividadeExtraClasse Business Object. 
+                 /// </summary>
     public class CLS_TurmaAtividadeExtraClasseBO : BusinessBase<CLS_TurmaAtividadeExtraClasseDAO, CLS_TurmaAtividadeExtraClasse>
 	{
         #region Métodos de verificação
@@ -81,7 +82,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static bool Salvar(CLS_TurmaAtividadeExtraClasse entity)
+        public static bool Salvar(CLS_TurmaAtividadeExtraClasse entity, byte tud_tipo, bool fechamentoAutomatico, Guid ent_id)
         {
             if (entity.Validate())
             {
@@ -97,7 +98,20 @@ namespace MSTech.GestaoEscolar.BLL
                     throw new ValidationException(string.Format("A soma de carga horária de atividades extraclasse ({0}) está acima da máxima permitida pela disciplina ({1}).", cargaAtividadeExtraTotal, dis_cargaHorariaExtraClasse));
                 }
 
-                return new CLS_TurmaAtividadeExtraClasseDAO().Salvar(entity);
+                CLS_TurmaAtividadeExtraClasseDAO dao = new CLS_TurmaAtividadeExtraClasseDAO();
+                bool isNew = entity.IsNew;
+                if (dao.Salvar(entity))
+                {
+                    // Caso o fechamento seja automático, grava na fila de processamento.
+                    if (!isNew && fechamentoAutomatico && tud_tipo != (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia && entity.tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, ent_id))
+                    {
+                        CLS_AlunoFechamentoPendenciaBO.SalvarFilaFrequencia(entity.tud_id, entity.tpc_id, dao._Banco);
+                    }
+
+                    return true;
+                }
+
+                return false;
             }
 
             throw new ValidationException(GestaoEscolarUtilBO.ErrosValidacao(entity));
