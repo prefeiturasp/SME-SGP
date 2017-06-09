@@ -277,7 +277,7 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                         {
                             VS_snd_id = PreviousPage.SelectedItem[0];
                             VS_sda_id = PreviousPage.SelectedItem[1];
-                            VS_snd_opcaoResposta = (byte)PreviousPage.EditItem[2];
+                            VS_snd_opcaoResposta = (byte)PreviousPage.SelectedItem[2];
                             VS_responder = false;
                         }
 
@@ -866,6 +866,15 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     {
                         rptQuestoes.DataSource = lstQuestoes.Skip((VS_NumPagina - 1) * VS_QtdQuestoesPagina).Take(VS_QtdQuestoesPagina);
                         rptQuestoes.DataBind();
+
+                        if (VS_snd_opcaoResposta == (byte)ACA_SondagemOpcaoResposta.SelecaoUnica && lstSubQuestoes.Count > 0)
+                        {
+                            Label lblNomeAluno = (Label)e.Item.FindControl("lblNomeAluno");
+                            if (lblNomeAluno != null)
+                            {
+                                lblNomeAluno.Visible = false;
+                            }
+                        }
                     }
                 }
                 else
@@ -940,6 +949,20 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     {
                         rptRespostas.DataSource = lstRespostasQuestao.Skip((VS_NumPagina - 1) * VS_QtdRespostasPagina).Take(VS_QtdRespostasPagina);
                         rptRespostas.DataBind();
+                    }
+                }
+
+                if (VS_snd_opcaoResposta == (byte)ACA_SondagemOpcaoResposta.SelecaoUnica)
+                {
+                    Label lblNomeAlunoGeral = (Label)e.Item.FindControl("lblNomeAlunoGeral");
+                    Label lblNomeAluno = (Label)e.Item.FindControl("lblNomeAluno");
+                    Label lblNomeAlunoSub = (Label)e.Item.FindControl("lblNomeAlunoSub");
+
+                    if (lblNomeAluno != null && lblNomeAlunoSub != null && lblNomeAlunoGeral != null)
+                    {
+                        lblNomeAlunoGeral.Visible = lstQuestoes.Count <= 0 && lstSubQuestoes.Count <= 0;
+                        lblNomeAluno.Visible = lstQuestoes.Count > 0 && lstSubQuestoes.Count <= 0;
+                        lblNomeAlunoSub.Visible = lstSubQuestoes.Count > 0;
                     }
                 }
 
@@ -1178,10 +1201,21 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                 HtmlTableCell thAgendamento = (HtmlTableCell)e.Item.FindControl("thAgendamento");
                 if (thAgendamento != null)
                 {
+                    int numQuestoes = lstQuestoes.Count() > 0 ? lstQuestoes.Count() : 1;
+                    int numSubQuestoes = lstSubQuestoes.Count() > 0 ? lstSubQuestoes.Count() : 1;
+                    int span; 
                     if (VS_snd_opcaoResposta == (byte)ACA_SondagemOpcaoResposta.Multiselecao)
-                        thAgendamento.Attributes.Add("colspan", VS_QtdRespostasPagina.ToString());
+                    {
+                        int numRespostas = lstRespostas.Count() > 0 ? lstRespostas.Count() : 1;
+                        span = numQuestoes * numSubQuestoes * numRespostas;
+                        thAgendamento.Attributes.Add("colspan", VS_QtdRespostasPagina < span ? VS_QtdRespostasPagina.ToString() : span.ToString());
+                    }                  
                     else if (VS_snd_opcaoResposta == (byte)ACA_SondagemOpcaoResposta.SelecaoUnica)
-                        thAgendamento.Attributes.Add("colspan", (VS_QtdSubQuestoesPagina > 0 ? VS_QtdSubQuestoesPagina : VS_QtdQuestoesPagina).ToString());
+                    {
+                        int qtdPagina = VS_QtdSubQuestoesPagina > 0 ? VS_QtdSubQuestoesPagina * VS_QtdQuestoesPagina : VS_QtdQuestoesPagina;
+                        span = numQuestoes * numSubQuestoes;
+                        thAgendamento.Attributes.Add("colspan", qtdPagina < span ? qtdPagina.ToString() : span.ToString());
+                    } 
                 }
             }
         }
@@ -1242,6 +1276,12 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     }
 
                     ckbResposta.Enabled = sda_id == VS_sda_id && VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                }
+
+                DropDownList ddlResposta = (DropDownList)e.Item.FindControl("ddlResposta");
+                if (ddlResposta != null)
+                {
+                    ddlResposta.Enabled = sda_id == VS_sda_id && VS_responder && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
 
                 HiddenField hdnRespId = (HiddenField)e.Item.FindControl("hdnRespId");
