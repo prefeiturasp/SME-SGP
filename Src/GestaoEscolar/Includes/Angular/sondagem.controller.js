@@ -70,7 +70,7 @@
                             ticks: {
                                 userCallback: function (value, index, values) {
                                     if ($scope.respDic[id][value]) {
-                                        return stringToArray($scope.respDic[id][value], 30);
+                                        return stringToArray($scope.respDic[id][value], 40);
                                     }
                                     else {
                                         return "";
@@ -78,6 +78,8 @@
                                 }
                                 ,
                                 beginAtZero: true
+                                ,
+                                stepSize: 50
                             }
                         }
                     ]
@@ -177,19 +179,6 @@
         };
 
         function modelSondagens(list) {
-            for (var s = 0; s < list.length; s++) {
-                $scope.respDic[list[s].id] = [];
-                $scope.respDic[list[s].id][0] = "";
-                $scope.sondRespDic[list[s].id] = []
-                $scope.sondRespDic[list[s].id][0] = 0;
-                var aux = 1;
-                for (var r = 0; r < list[s].respostas.length; r++) {
-                    $scope.respDic[list[s].id][aux] = list[s].respostas[r].descricao;
-                    $scope.sondRespDic[list[s].id][list[s].respostas[r].id] = aux;
-                    aux++;
-                }
-            }
-
             var graphLabels = {};
             var graphSeries = {};
             var graphData = {};
@@ -197,15 +186,30 @@
             for (var s = 0; s < list.length; s++) {
                 var agendamentos = [];
 
+                var aux = 50;
+                $scope.respDic[list[s].id] = [];
+                $scope.respDic[list[s].id][0] = "";
+                $scope.sondRespDic[list[s].id] = []
+                $scope.sondRespDic[list[s].id][0] = 0;
+
+                 for (var r = 0; r < list[s].respostas.length; r++) {
+                    $scope.respDic[list[s].id][aux] = list[s].respostas[r].descricao;
+                    $scope.sondRespDic[list[s].id][list[s].respostas[r].id] = aux;
+                    aux = aux + 50;
+                }
+
                 //graphLabels.push("");
 
                 graphLabels[list[s].id] = [];
                 graphSeries[list[s].id] = [];
-                graphData[list[s].id] = [];
+                graphData[list[s].id] = {};
 
                 for (var a = 0; a < list[s].agendamentos.length; a++) {
                     
-                    var agendamento = { dataInicio: list[s].agendamentos[a].dataInicio, dataFim: list[s].agendamentos[a].dataFim, respostas: [] }
+                    
+                    graphData[list[s].id][list[s].agendamentos[a].id] = [];
+
+                    var agendamento = { id: list[s].agendamentos[a].id, dataInicio: list[s].agendamentos[a].dataInicio, dataFim: list[s].agendamentos[a].dataFim, respostas: [] }
 
                     if (graphLabels[list[s].id].indexOf(list[s].agendamentos[a].dataInicio) == -1) {
                         graphLabels[list[s].id].push(list[s].agendamentos[a].dataInicio);
@@ -227,12 +231,12 @@
                                 }
 
                                 if (resposta.length) {
-                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: subQuestao[0].id, subQuestao: subQuestao[0].descricao, resposta: resposta[0].descricao })
-                                    graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
+                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: subQuestao[0].id, subQuestao: subQuestao[0].descricao, idResposta: resposta[0].id, resposta: resposta[0].descricao })
+                                    graphData[list[s].id][list[s].agendamentos[a].id].push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
-                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: subQuestao[0].id, subQuestao: subQuestao[0].descricao, resposta: "" })
-                                    graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: "", idResposta: 0 });
+                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: subQuestao[0].id, subQuestao: subQuestao[0].descricao, idResposta: 0, resposta: "" })
+                                    graphData[list[s].id][list[s].agendamentos[a].id].push({ questao: "Questão: " + questao[0].descricao + " | Subquestão: " + subQuestao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
                             else {
@@ -242,12 +246,12 @@
                                 }
 
                                 if (resposta.length) {
-                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: -1, subQuestao: questao[0].descricao, resposta: resposta[0].descricao })
-                                    graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
+                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: -1, subQuestao: questao[0].descricao, idResposta: resposta[0].id, resposta: resposta[0].descricao })
+                                    graphData[list[s].id][list[s].agendamentos[a].id].push({ questao: "Questão: " + questao[0].descricao, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                                 }
                                 else {
-                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: -1, subQuestao: questao[0].descricao, resposta: "" })
-                                    graphData[list[s].id].push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
+                                    agendamento.respostas.push({ idQuestao: questao[0].id, idSubQ: -1, subQuestao: questao[0].descricao, idResposta: 0, resposta: "" })
+                                    graphData[list[s].id][list[s].agendamentos[a].id].push({ questao: "Questão: " + questao[0].descricao, resposta: "", idResposta: 0 });
                                 }
                             }
                         } else {
@@ -258,12 +262,12 @@
                             }
 
                             if (resposta.length) {
-                                agendamento.respostas.push({ idQuestao: -1, idSubQ: -1, subQuestao: "", resposta: resposta[0].descricao })
-                                graphData[list[s].id].push({ questao: "Sondagem: " + list[s].titulo, resposta: resposta[0].descricao, idResposta: resposta[0].id });
+                                agendamento.respostas.push({ idQuestao: -1, idSubQ: -1, subQuestao: "", idResposta: resposta[0].id, resposta: resposta[0].descricao })
+                                graphData[list[s].id][list[s].agendamentos[a].id].push({ questao: "Sondagem: " + list[s].titulo, resposta: resposta[0].descricao, idResposta: resposta[0].id });
                             }
                             else {
-                                agendamento.respostas.push({ idQuestao: -1, idSubQ: -1, subQuestao: "", resposta: "" })
-                                graphData[list[s].id].push({ questao: "Sondagem: " + list[s].titulo, resposta: "", idResposta: 0 });
+                                agendamento.respostas.push({ idQuestao: -1, idSubQ: -1, subQuestao: "", idResposta: 0, resposta: "" })
+                                graphData[list[s].id][list[s].agendamentos[a].id].push({ questao: "Sondagem: " + list[s].titulo, resposta: "", idResposta: 0 });
                             }
                         }
                     }
@@ -271,12 +275,63 @@
                     agendamentos.push(agendamento);
                 }
 
-                //graphLabels.push("");
+                var respQ = []
+                for (var i = 0; i < agendamentos.length; i++) {
+                    for (var j = 0; j < agendamentos[i].respostas.length; j++) {
+                        respQ.push({ id: agendamentos[i].id.toString() + ',' +  agendamentos[i].respostas[j].idQuestao.toString() + "," + agendamentos[i].respostas[j].idSubQ.toString(), idResposta: agendamentos[i].respostas[j].idResposta, resposta: agendamentos[i].respostas[j].resposta  })
+                    }
+                }
+
+                var respQGroup = $filter('toArray')($filter('groupBy')(respQ, 'id'));
+
+                var combResp = []
+                if (respQGroup.length) {
+                    for (var i = 0; i < respQGroup.length; i++) {
+                        if (respQGroup[i].length > 1) {
+                            var r = $filter('orderBy')(respQGroup[i], 'idResposta');
+                            if (combResp.indexOf(r) == -1) {
+                                combResp.push(r);
+                            }
+                        }
+                    }
+                }
+
+                for (var c = 0; c < combResp.length; c++) {
+                    var resposta = "";
+                    var idResposta = "";
+                    if (combResp[c].length > 1) {
+                        for (var r = 0; r < combResp[c].length; r++) {
+                            resposta = resposta + combResp[c][r].resposta + " | ";
+                            idResposta = idResposta.toString() + "000" + combResp[c][r].idResposta.toString();
+                        }
+                        if ($scope.respDic[list[s].id].indexOf(resposta) == -1) {
+                            $scope.respDic[list[s].id][aux] = resposta;
+                            $scope.sondRespDic[list[s].id][parseInt(idResposta)] = aux;
+                            aux = aux + 50;
+                        }
+                    }
+                }
 
                 if (!list[s].questoes.length) {
                     list[s].questoes = [];
                     list[s].questoes.push({ descricao: "" });
-                    list[s].questoes[0]["agendamentos"] = agendamentos;
+                    list[s].questoes[q]["agendamentos"] = [];
+                    for (var a = 0; a < agendamentos.length; a++) {
+                        var respostas = $filter('toArray')($filter('groupBy')(agendamentos[a].respostas, 'idSubQ'));
+                        if (respostas.length) {
+                            var resp = [];
+
+                            for (var i = 0; i < respostas.length; i++) {
+                                var subQ = { subQuestao: respostas[i][0].subQuestao, respostasAluno: [] };
+                                for (var j = 0; j < respostas[i].length; j++) {
+                                    subQ.respostasAluno.push({ resposta: respostas[i][j].resposta });
+                                }
+                                resp.push(subQ);
+                            }
+
+                            list[s].questoes[q]["agendamentos"].push({ dataInicio: agendamentos[a].dataInicio, dataFim: agendamentos[a].dataFim, respostas: resp });
+                        }
+                    }
                 }
                 else {
                     for (var q = 0; q < list[s].questoes.length; q++) {
@@ -301,15 +356,35 @@
                     }
                 }
 
-                var dadosAgrup = $filter('toArray')($filter('groupBy')(graphData[list[s].id], 'questao'), true);
                 var graphDataAgroup = [];
-                for (var d = 0; d < dadosAgrup.length; d++) {
-                    var resp = [];
-                    for (var v = 0; v < dadosAgrup[d].length; v++) {
-                        resp.push($scope.sondRespDic[list[s].id][dadosAgrup[d][v].idResposta]);
+                var resp = [];
+                for (var a = 0; a < list[s].agendamentos.length; a++) {
+
+                    var dadosAgrup = $filter('toArray')($filter('groupBy')(graphData[list[s].id][list[s].agendamentos[a].id], 'questao'), true);    
+                    
+                    for (var d = 0; d < dadosAgrup.length; d++) {
+                        var idResposta = "";
+                        if (dadosAgrup[d].length > 1) {
+                            for (var v = 0; v < dadosAgrup[d].length; v++) {
+                                idResposta = idResposta.toString() + "000" + dadosAgrup[d][v].idResposta.toString();
+                            }
+                            resp.push( { questao: dadosAgrup[d][0].questao, resp: $scope.sondRespDic[list[s].id][parseInt(idResposta)] });
+                        }
+                        else {
+                            resp.push( { questao: dadosAgrup[d][0].questao, resp: $scope.sondRespDic[list[s].id][dadosAgrup[d][0].idResposta] });
+                        }
+
                     }
-                    graphDataAgroup.push(resp);
                 }
+
+                for (var i = 0; i < graphSeries[list[s].id].length; i++) {
+                    var respOrd = [];
+                    var aux = $filter('filter')(resp, { questao: graphSeries[list[s].id][i] }, true);
+                    for (var j = 0; j < aux.length; j++) {
+                        respOrd.push(aux[j].resp);
+                    }
+                    graphDataAgroup.push(respOrd);
+                } 
 
                 graphData[list[s].id] = graphDataAgroup;
 
