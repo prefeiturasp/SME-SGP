@@ -1,4 +1,5 @@
 ﻿var btnSalvar, focoCampo;
+var btnAction = ""; var executeExcluir = false;
 function jsUCCurriculo() {
     // Accordion dos eixos
     var lstHdnAberto = $("input[id$='hdnAberto']");
@@ -42,32 +43,54 @@ function jsUCCurriculo() {
         }
     }
     // No foco inicial do campo de texto, foco para também exibir o botão de salvar
-    var lstCampoTexto = $("input[type='text'],textarea");
-    for (var i = 0; i < lstCampoTexto.length; i++) {
-        var campoTexto = $(lstCampoTexto[i]);
-        campoTexto.focusin(function () {
-            var item = $(this).parents("tr");
-            if (item.length > 0)
+    $("input[type='text'],textarea").focusin(function () {
+        var item = $(this).parents("tr").first();
+        if (item.length > 0)
+        {
+            btnSalvar = item.find("input[id$='btnSalvar']");
+            if (btnSalvar.length == 0)
             {
-                btnSalvar = item.find("input[id$='btnSalvar']");
-                if (btnSalvar.length == 0)
-                {
-                    btnSalvar = item.find("input[id$='btnSalvarSugestao']");
-                }
+                btnSalvar = item.find("input[id$='btnSalvarSugestao']");
             }
-            var lstCampoTexto = $("input[type='text'],textarea");
-            for (var j = 0; j < lstCampoTexto.length; j++) {
-                $(lstCampoTexto[j]).unbind('focusin');
-            }
-            focoCampo = $(this);
-            setTimeout(function() { if (btnSalvar.length > 0) { btnSalvar.focus(); focoCampo.focus(); }; }, 1);
-        });
-    }
+        }
+        $("input[type='text'],textarea").unbind('focusin');
+        focoCampo = $(this);
+        setTimeout(function() { if (btnSalvar.length > 0) { btnSalvar.focus(); focoCampo.focus(); }; }, 1);
+    });
     // Move a tela para o topo, quando tiver mensagem
     if ($("[id$='lblMessage']").length > 0 && $("[id$='lblMessage']").html() != "")
     {
         setTimeout('window.scrollTo(0,0);', 0);
     }
+    // Confirmação excluir customizado
+    $(".btExcluir").die("click").live("click", function () {
+        var item = $(this).parents("tr").first();
+        var msg = "Confirma a exclusão?";
+        if (item.find(".preenchido").length > 0)
+        {
+            msg = "Este item possui sugestões cadastradas. Confirma a exclusão?";
+        }
+        btnAction = "#" + this.id;
+        if ($("#divConfirm").length > 0) {
+            $("#divConfirm").remove();
+        }
+        $("<div id=\"divConfirm\" title=\"Confirmação\">" + msg + "</div>").dialog({
+            bgiframe: true
+            , autoOpen: false
+            , resizable: false
+            , modal: true
+            , buttons: {
+                "Sim": function () { $(this).dialog("close"); executeExcluir = true; $(btnAction).click(); }
+                , "Não": function () { $(this).dialog("close"); }
+            }
+        });
+        if (!executeExcluir) {
+            $("#divConfirm").dialog("open");
+        }
+        var result = executeExcluir;
+        executeExcluir = false;
+        return result;
+    });
 }
 
 function ListarSugestoes(head)
