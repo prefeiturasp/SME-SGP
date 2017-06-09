@@ -943,6 +943,20 @@ namespace GestaoEscolar.Classe.LancamentoSondagem
                     }
                 }
 
+                if (VS_snd_opcaoResposta == (byte)ACA_SondagemOpcaoResposta.SelecaoUnica)
+                {
+                    Label lblNomeAlunoGeral = (Label)e.Item.FindControl("lblNomeAlunoGeral");
+                    Label lblNomeAluno = (Label)e.Item.FindControl("lblNomeAluno");
+                    Label lblNomeAlunoSub = (Label)e.Item.FindControl("lblNomeAlunoSub");
+
+                    if (lblNomeAluno != null && lblNomeAlunoSub != null && lblNomeAlunoGeral != null)
+                    {
+                        lblNomeAlunoGeral.Visible = lstQuestoes.Count <= 0 && lstSubQuestoes.Count <= 0;
+                        lblNomeAluno.Visible = lstQuestoes.Count > 0 && lstSubQuestoes.Count <= 0;
+                        lblNomeAlunoSub.Visible = lstSubQuestoes.Count > 0;
+                    }
+                }
+
                 Repeater rptAgendamentos = (Repeater)e.Item.FindControl("rptAgendamentos");
                 if (rptAgendamentos != null)
                 {

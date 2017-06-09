@@ -101,6 +101,7 @@
                                     </tr>
                                     <tr class="gridHeader">
                                         <th>
+                                            <asp:Label ID="lblNomeAluno" runat="server" Text="Aluno"></asp:Label>
                                         </th>
                                         <asp:Repeater ID="rptRespostasHistorico" runat="server">
                                             <ItemTemplate>
@@ -180,7 +181,9 @@
                             <table class="grid sortableFrequencia" cellspacing="0">
                                 <thead>
                                     <tr class="gridHeader" id="headerBotoes">
-                                        <th></th>
+                                        <th>
+                                            <asp:Label ID="lblNomeAlunoGeral" runat="server" Text="Aluno"></asp:Label>
+                                        </th>
                                         <th runat="server" id="thBotoes">
                                             <div style="float:left">
                                                 <asp:LinkButton Style="zoom: 140%; -moz-transform: scale(1.40);" ID="lkbAnterior" Text="|<" runat="server"
