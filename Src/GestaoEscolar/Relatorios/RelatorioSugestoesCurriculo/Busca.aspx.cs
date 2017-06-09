@@ -208,6 +208,18 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         {
             try
             {
+                if (UCComboTipoNivelEnsino1.Valor == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
+                {
+                    chkGeral.Enabled = false;
+                    if (!chkGeral.Checked)
+                    {
+                        chkGeral.Checked = true;
+                        chkGeral_CheckedChanged(chkGeral, new EventArgs());
+                    }
+                }
+                else
+                    chkGeral.Enabled = true;
+
                 UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor);
                 UCComboTipoDisciplina1.CarregarObrigatoriasPorNivelEnsinoEvento(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, "-1");
             }
