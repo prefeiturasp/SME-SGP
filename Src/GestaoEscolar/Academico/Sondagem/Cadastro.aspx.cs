@@ -381,6 +381,7 @@ namespace GestaoEscolar.Academico.Sondagem
             {
                 VS_sdq_id = 0;
                 VS_sdr_id = 0;
+                txtItemQuestao.Text = "";
                 txtItemQuestao.Focus();
                 updPopUpQuestao.Update();
                 divInserirQuestao.Visible = true;
@@ -405,6 +406,7 @@ namespace GestaoEscolar.Academico.Sondagem
             {
                 VS_sdq_id = 0;
                 VS_sdr_id = 0;
+                txtItemSubquestao.Text = "";
                 txtItemSubquestao.Focus();
                 updPopUpSubquestao.Update();
                 divInserirSubquestao.Visible = true;
@@ -429,6 +431,8 @@ namespace GestaoEscolar.Academico.Sondagem
             {
                 VS_sdq_id = 0;
                 VS_sdr_id = 0;
+                txtSigla.Text = "";
+                txtItemResposta.Text = "";
                 txtSigla.Focus();
                 updPopUpResposta.Update();
                 divInserirResposta.Visible = true;
