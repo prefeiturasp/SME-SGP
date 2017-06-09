@@ -54,6 +54,7 @@
                             </asp:UpdatePanel>
                             <asp:UpdatePanel runat="server" ID="updPopUpQuestao" UpdateMode="Conditional">
                                 <ContentTemplate>
+                                    <asp:Panel runat="server" DefaultButton="btnAdicionarQuestao">
                                     <asp:ValidationSummary ID="vsQuestao" runat="server" ValidationGroup="vgQuestao" />
                                     <fieldset>
                                         <legend>
@@ -64,12 +65,13 @@
                                         <asp:RequiredFieldValidator ID="revtxtItemQuestao" runat="server" ControlToValidate="txtItemQuestao" ValidationGroup="vgQuestao"
                                             Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemQuestao.ErrorMessage %>" Text="*" />
                                         <div class="right">
-                                            <asp:Button ID="btnAdicionarQuestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false"
+                                            <asp:Button ID="btnAdicionarQuestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>"
                                                 OnClick="btnAdicionarQuestao_Click" ValidationGroup="vgQuestao" />
                                             <asp:Button ID="btnCancelarItemQuestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                                 OnClick="btnCancelarItemQuestao_Click" />
                                         </div>
                                     </fieldset>
+                                    </asp:Panel>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -126,6 +128,7 @@
                             </asp:UpdatePanel>
                             <asp:UpdatePanel runat="server" ID="updPopUpSubquestao" UpdateMode="Conditional">
                                 <ContentTemplate>
+                                    <asp:Panel runat="server" DefaultButton="btnAdicionarSubquestao">
                                     <asp:ValidationSummary ID="vsSubquestao" runat="server" ValidationGroup="vgSubquestao" />
                                     <fieldset>
                                         <legend>
@@ -136,11 +139,13 @@
                                         <asp:RequiredFieldValidator ID="revtxtItemSubquestao" runat="server" ControlToValidate="txtItemSubquestao" ValidationGroup="vgSubquestao"
                                             Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemSubquestao.ErrorMessage %>" Text="*" />
                                         <div class="right">
-                                            <asp:Button ID="btnAdicionarSubquestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false" OnClick="btnAdicionarSubquestao_Click" ValidationGroup="vgSubquestao" />
+                                            <asp:Button ID="btnAdicionarSubquestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" 
+                                                OnClick="btnAdicionarSubquestao_Click" ValidationGroup="vgSubquestao" />
                                             <asp:Button ID="btnCancelarItemSubquestao" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                                 OnClick="btnCancelarItemSubquestao_Click" />
                                         </div>
                                     </fieldset>
+                                    </asp:Panel>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -197,6 +202,7 @@
                             </asp:UpdatePanel>
                             <asp:UpdatePanel runat="server" ID="updPopUpResposta" UpdateMode="Conditional">
                                 <ContentTemplate>
+                                    <asp:Panel runat="server" DefaultButton="btnAdicionarResposta">
                                     <asp:ValidationSummary ID="vsResposta" runat="server" ValidationGroup="vgResposta" />
                                     <fieldset>
                                         <legend>
@@ -211,11 +217,13 @@
                                         <asp:RequiredFieldValidator ID="revtxtItemResposta" runat="server" ControlToValidate="txtItemResposta" ValidationGroup="vgResposta"
                                             Display="Dynamic" ErrorMessage="<%$ Resources:Academico, Sondagem.Cadastro.revtxtItemResposta.ErrorMessage %>" Text="*" />
                                         <div class="right">
-                                            <asp:Button ID="btnAdicionarResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" CausesValidation="false" OnClick="btnAdicionarResposta_Click" ValidationGroup="vgResposta" />
+                                            <asp:Button ID="btnAdicionarResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.bntAdicionar.Text %>" 
+                                                OnClick="btnAdicionarResposta_Click" ValidationGroup="vgResposta" />
                                             <asp:Button ID="btnCancelarItemResposta" runat="server" Text="<%$ Resources:Academico, Sondagem.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                                                 OnClick="btnCancelarItemResposta_Click" />
                                         </div>
                                     </fieldset>
+                                    </asp:Panel>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
