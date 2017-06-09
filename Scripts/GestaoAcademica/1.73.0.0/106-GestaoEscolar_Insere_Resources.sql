@@ -405,7 +405,7 @@ SET XACT_ABORT ON
             , @rcr_valorPadrao = 'Resposta/Avaliação *'
 
 	EXEC MS_InsereResource 
-            @rcr_chave = 'Sondagem.Cadastro.grvRespostas.Text' 
+            @rcr_chave = 'Sondagem.Cadastro.lblSigla.Text' 
             , @rcr_NomeResource = 'Academico'
             , @rcr_cultura = 'pt-BR'
             , @rcr_codigo = 0 

@@ -21,6 +21,8 @@ $(document).ready(function () {
     });
 
     $('#btn-print').click(function (e) {
+        if ($('iframe.chartjs-hidden-iframe').length > 0)
+            $('iframe.chartjs-hidden-iframe').css('display', 'none');
         e.preventDefault();
         window.print();
     });
