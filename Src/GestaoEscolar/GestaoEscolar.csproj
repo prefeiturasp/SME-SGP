@@ -4187,6 +4187,7 @@
     <Content Include="Includes\redactor\redactor.min.js" />
     <Content Include="Includes\jsSetExitPageConfirmer.js" />
     <Content Include="Includes\scrolling.js" />
+    <Content Include="Includes\underscore-min.js" />
     <Content Include="Index.aspx" />
     <Content Include="Manutencao.aspx" />
     <Content Include="manutencao.htm" />

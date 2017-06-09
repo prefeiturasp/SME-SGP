@@ -10,6 +10,7 @@
     <link href="../../Includes/jquery.mCustomScrollbar.css" rel="stylesheet" media="screen">
 </head>
 <body>
+    <script  src="../../Includes/underscore-min.js" type="text/javascript"></script>
     <script src="../../Includes/Charts/Chart.min.js"></script>
     <script src="../../Includes/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="../../Includes/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>   
@@ -95,15 +96,15 @@
                                         <div ng-if="mensagemAlerta" class="summary">
                                             {{mensagemAlerta}}
                                         </div>
-                                        <div ng-if="calendarioLoaded">
+                                        <div>
                                             <div class="dropdown">
                                                 <button class="btn btn-default dropdown-toggle dropdown-ico" type="button" id="dropdownMenu1"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-disabled="listCalendario.length <= 1">
                                                     <span>{{params.ano}}</span> - <span class="info-turma">{{matricula.tci_nome}} / {{matricula.tur_codigo}}</span>
                                                     <span class="caret"></span>
                                                 </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-if="listCalendario.length > 1">
-                                                    <li ng-repeat="calendario in listCalendario" ng-if="calendario.cal_ano!=params.ano">
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" ng-show="listCalendario.length > 1">
+                                                    <li ng-repeat="calendario in listCalendario" ng-show="calendario.cal_ano!=params.ano">
                                                         <a href="#" ng-click="trocarAno(calendario.cal_ano, calendario.mtu_id, calendario.tpc_id)">{{calendario.cal_ano}}</a>
                                                     </li>
                                                 </ul>
@@ -164,7 +165,7 @@
                         <div ng-if="mensagemAlerta" class="summary">
                             {{mensagemAlerta}}
                         </div>
-                        <section id="area-notas-faltas" class="section-area" ng-repeat="boletim in listBoletins | limitTo : 1" ng-ig="boletimLoaded">
+                        <section id="area-notas-faltas" class="section-area" ng-repeat="boletim in listBoletins | limitTo : 1" ng-show="boletimLoaded">
                             <h3 ng-if="!boletim.ensinoInfantil"><i class="material-icons pull-left">&#xE5CC;</i>{{boletim.nomeNota}}s e faltas</h3>
                             <div class="conteudo">
 
@@ -306,14 +307,14 @@
                             {{mensagemAlerta}}
                         </div>
                         <!-- OBSERVACOES CONSELHO -->
-                        <section id="area-obs-conselho" class="section-area" ng-if="conselhoLoaded">
+                        <section id="area-obs-conselho" class="section-area">
                             <h3><i class="material-icons pull-left">&#xE5CC;</i>Observações do conselho de classe</h3>
                             <div class="conteudo">
                                 <div class="sr-only">Conteúdo dividido por Accordion</div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="panel-group accordion" id="accordionConselho" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
+                                            <div class="panel panel-default" ng-repeat="conselho in listDadosConselho" ng-show="conselhoLoaded">
                                                 <div class="panel-heading" role="tab" id="{{'headingConselho-' + conselho.tpc_id}}">
                                                     <h4 class="panel-title">
                                                         <a role="button" data-toggle="collapse" data-parent="#accordionConselho" href="{{'#collapseConselho-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapseConselho-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
@@ -343,14 +344,14 @@
                         </section>
 
                         <!-- Compromisso de estudo -->
-                        <section id="area-com-estudos" class="section-area" ng-if="conselhoLoaded">
+                        <section id="area-com-estudos" class="section-area">
                             <h3><i class="material-icons pull-left">&#xE5CC;</i>Compromissos de estudo</h3>
                             <div class="conteudo">
                                 <div class="sr-only">Conteúdo dividido por Accordion</div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="panel-group accordion" id="accordionCompromisso" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default" ng-repeat="conselho in listDadosConselho">
+                                            <div class="panel panel-default" ng-repeat="conselho in listDadosConselho" ng-show="conselhoLoaded">
                                                 <div class="panel-heading" role="tab" id="{{'headingCompromisso-' + conselho.tpc_id}}">
                                                     <h4 class="panel-title">
                                                         <a role="button" data-toggle="collapse" data-parent="#accordionCompromisso" href="{{'#collapseCompromisso-' + conselho.tpc_id}}" aria-expanded="true" aria-controls="{{'collapseCompromisso-' + conselho.tpc_id}}" class="collapsed">{{conselho.tpc_nome}}
@@ -390,21 +391,21 @@
                         <div ng-if="mensagemAlerta" class="summary">
                             {{mensagemAlerta}}
                         </div>
-                        <section id="area-sondagem" class="section-area" ng-if="sondagemLoaded">
+                        <section id="area-sondagem" class="section-area">
                             <h3><i class="material-icons pull-left">&#xE5CC;</i>Resultados de sondagem</h3>
                             <div class="conteudo">
                                 <div class="sr-only">Conteúdo dividido por Accordion</div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="panel-group accordion" id="accordionSondagem" role="tablist" aria-multiselectable="true">
-                                            <div class="panel panel-default" ng-repeat="sondagem in listSondagens">
+                                            <div class="panel panel-default" ng-repeat="sondagem in listSondagens" ng-show="sondagemLoaded">
                                                 <div class="panel-heading" role="tab" id="{{'headingSondagem-' + sondagem.id}}">
                                                     <h4 class="panel-title">
-                                                        <a role="button" data-toggle="collapse" data-parent="#accordionSondagem" href="{{'#collapseSondagem-' + sondagem.id}}" aria-expanded="true" aria-controls="{{'collapseSondagem-' + sondagem.id}}" class="collapsed">{{sondagem.titulo}}
+                                                        <a role="button" data-toggle="collapse" data-parent="#accordionSondagem" href="{{'#collapseSondagem-' + sondagem.id}}" aria-expanded="true" aria-controls="{{'collapseSondagem-' + sondagem.id}}" >{{sondagem.titulo}}
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="{{'collapseSondagem-' + sondagem.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{'headingSondagem-' + sondagem.id}}">
+                                                <div id="{{'collapseSondagem-' + sondagem.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{'headingSondagem-' + sondagem.id}}">
                                                     <div class="panel-body">
                                                         <ul class="list">
                                                             <li ng-repeat="questao in sondagem.questoes">
@@ -417,9 +418,11 @@
                                                                 </div>
                                                             </li>
                                                         </ul>
-                                                        <canvas id="line" class="chart chart-line" chart-data="getGraphData(sondagem.id)"
-                                                            chart-labels="getGraphLabels(sondagem.id)" chart-series="getGraphSeries(sondagem.id)" chart-options="getGraphOptions(sondagem.id)"
-                                                            chart-dataset-override="graphDatasetOverride" width="90" height="50"></canvas>
+                                                        <div style="max-width:700px">
+                                                            <canvas id="line" class="chart chart-line" chart-data="getGraphData(sondagem.id)"
+                                                                chart-labels="getGraphLabels(sondagem.id)" chart-series="getGraphSeries(sondagem.id)" chart-options="getGraphOptions(sondagem.id)"
+                                                                chart-dataset-override="graphDatasetOverride" width="90" height="50"></canvas>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -443,16 +446,16 @@
                             {{mensagemAlerta}}
                         </div>
                         <!-- OBSERVACOES INDIVIDUAIS -->
-                        <section id="area-obs-individuais" class="section-area" ng-if="anotacaoLoaded">
+                        <section id="area-obs-individuais" class="section-area" >
                             <h3><i class="material-icons pull-left">&#xE5CC;</i>Observações individuais</h3>
                             <div class="conteudo">
-                                <div class="obs-block" ng-repeat="anotacao in listAnotacoesDocente">
+                                <div class="obs-block" ng-repeat="anotacao in listAnotacoesDocente" ng-show="anotacaoLoaded">
                                     <p>
                                         {{anotacao.anotacao}}
                                     </p>
                                     <p class="text-autor">Observação do(a) professor(a) <strong>{{anotacao.nomeDocente}} | {{anotacao.nomeDisciplina}} | {{anotacao.data}}</strong></p>
                                 </div>
-                                <div class="obs-block" ng-repeat="anotacao in listAnotacoesGestor">
+                                <div class="obs-block" ng-repeat="anotacao in listAnotacoesGestor" ng-show="anotacaoLoaded">
                                     <p>
                                         {{anotacao.anotacao}}
                                     </p>
@@ -475,10 +478,10 @@
                             {{mensagemAlerta}}
                         </div>
                         <!-- Justificativa de falta -->
-                        <section id="area-just-faltas" class="section-area" ng-if="justificativaLoaded">
+                        <section id="area-just-faltas" class="section-area">
                             <h3><i class="material-icons pull-left">&#xE5CC;</i>Justificativas de faltas</h3>
                             <div class="conteudo">
-                                <div class="obs-block" ng-repeat="justificativa in listJustificativa">
+                                <div class="obs-block" ng-repeat="justificativa in listJustificativa" ng-show="justificativaLoaded">
                                     <p>
                                         <strong>{{justificativa.tipo}}</strong><span ng-if="justificativa.observacao"> - {{justificativa.observacao}}</span>
                                     </p>
@@ -501,10 +504,10 @@
                             {{mensagemAlerta}}
                         </div>
                         <!-- Movimentações -->
-                        <section id="area-cons-mov" class="section-area" ng-if="movimentacaoLoaded">
+                        <section id="area-cons-mov" class="section-area">
                             <h3><i class="material-icons pull-left">&#xE5CC;</i>Remanejamentos e reclassificações</h3>
                             <div class="conteudo">
-                                <div class="obs-block" ng-repeat="movimentacao in listMovimentacoes">
+                                <div class="obs-block" ng-repeat="movimentacao in listMovimentacoes" ng-show="movimentacaoLoaded">
                                     <h4>
                                         <strong>{{movimentacao.tipo}}</strong>
                                     </h4>

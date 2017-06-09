@@ -27,21 +27,31 @@
 
         function init() {
             configVariables();
+
+            $timeout(function () {
+                [].forEach.call(document.querySelectorAll('#area-sondagem .panel-title a'), function (ctrl) {
+                    angular.element(ctrl).addClass('collapsed');
+                });
+
+                [].forEach.call(document.querySelectorAll('#area-sondagem div.panel-collapse'), function (ctrl) {
+                    angular.element(ctrl).removeClass('in');
+                });
+            }, 700);
         };
 
-        $scope.getGraphLabels = function (id) {
+        $scope.getGraphLabels = _.memoize(function (id) {
             return $scope.graphLabels[id];
-        }
+        });
 
-        $scope.getGraphSeries = function (id) {
+        $scope.getGraphSeries = _.memoize(function (id) {
             return $scope.graphSeries[id];
-        }
+        });
 
-        $scope.getGraphData = function (id) {
+        $scope.getGraphData = _.memoize(function (id) {
             return $scope.graphData[id];
-        }
+        });
 
-        $scope.getGraphOptions = function (id) {
+        $scope.getGraphOptions = _.memoize(function (id) {
             return {
                 responsive: true,
                 scales: {
@@ -107,7 +117,7 @@
                     }
                 }
             };
-        }
+        });
 
         function configVariables() {
             $scope.sondagemLoaded = false;
