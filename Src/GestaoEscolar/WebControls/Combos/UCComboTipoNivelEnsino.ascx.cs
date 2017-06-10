@@ -233,6 +233,25 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
     /// Mostra os dados não excluídos logicamente no dropdownlist    
     /// de acordo com as atribuições do docente.
     /// </summary>
+    public void CarregarTipoNivelEnsinoDocenteEventoSemInfantilAno(long doc_id, string eventosAbertos, int cal_ano)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("doc_id", doc_id.ToString());
+        odsDados.SelectParameters.Add("cal_ano", cal_ano.ToString());
+        odsDados.SelectParameters.Add("eventosAbertos", eventosAbertos);
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectMethod = "SelecionaTipoNivelEnsinoDocenteEventoSemInfantilAno";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
+        ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
+    }
+
+    /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist    
+    /// de acordo com as atribuições do docente.
+    /// </summary>
     public void CarregarTipoNivelEnsinoDocenteEventoSemInfantil(long doc_id, string eventosAbertos)
     {
         ddlCombo.Items.Clear();

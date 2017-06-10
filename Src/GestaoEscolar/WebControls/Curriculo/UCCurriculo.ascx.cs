@@ -318,8 +318,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                     {
                         if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                         {
-                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoSemInfantil(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
-                            UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsinoDocenteEvento(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoSemInfantilAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                            UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                         }
                         else
                         {
@@ -361,7 +361,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 {
                     Carregar(-1);
                     
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEvento(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
@@ -373,7 +373,7 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocenteEvento(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
+                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocenteEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                     }
                     else
                     {
@@ -423,7 +423,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 {
                     Carregar(-1);
 
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEvento(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
@@ -435,7 +435,7 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocenteEvento(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1");
+                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocenteEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                     }
                     else
                     {

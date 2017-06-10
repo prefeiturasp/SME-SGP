@@ -260,6 +260,19 @@ namespace GestaoEscolar.WebControls.Combos
         /// Mostra os dados não excluídos logicamente no dropdownlist    
         /// de acordo com as atribuições do docente.
         /// </summary>
+        public void CarregarPorNivelEnsinoModalidadeDocenteEventoAno(int tne_id, int tme_id, long doc_id, string eventosAbertos, int cal_ano)
+        {
+            ddlCombo.Items.Clear();
+            ddlCombo.DataSource = ACA_TipoCurriculoPeriodoBO.SelecionaTipoCurriculoPeriodoDocenteEventoAno(tne_id, tme_id, doc_id, eventosAbertos, cal_ano);
+            MostrarMessageSelecione = true;
+            ddlCombo.DataBind();
+            SelecionaPrimeiroItem();
+        }
+
+        /// <summary>
+        /// Mostra os dados não excluídos logicamente no dropdownlist    
+        /// de acordo com as atribuições do docente.
+        /// </summary>
         public void CarregarPorNivelEnsinoModalidadeDocenteEvento(int tne_id, int tme_id, long doc_id, string eventosAbertos)
         {
             ddlCombo.Items.Clear();
