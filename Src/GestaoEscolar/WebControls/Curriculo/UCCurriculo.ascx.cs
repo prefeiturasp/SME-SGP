@@ -73,7 +73,7 @@ namespace GestaoEscolar.WebControls.Curriculo
         {
             get
             {
-                if (rblDisciplina.Items.Count > 0)
+                if (rblDisciplina.Items.Count > 0 && !string.IsNullOrEmpty(rblDisciplina.SelectedValue))
                     return Convert.ToInt32(rblDisciplina.SelectedValue);
                 return -1;
             }
@@ -508,7 +508,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 VS_ltCurriculoSugestaoObjetivo = null;
                 grvEixo.EditIndex = -1;
 
-                if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
+                if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar && VS_tds_id > 0)
                 {
                     CarregarObjetivos(grvEixo, (byte)ACA_CurriculoObjetivoTipo.Eixo, -1);
                 }
