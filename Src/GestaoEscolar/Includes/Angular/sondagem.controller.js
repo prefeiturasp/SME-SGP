@@ -89,7 +89,7 @@
                                 ,
                                 beginAtZero: true
                                 ,
-                                stepSize: 50
+                                stepSize: 10
                             }
                         }
                     ]
@@ -196,7 +196,7 @@
             for (var s = 0; s < list.length; s++) {
                 var agendamentos = [];
 
-                var aux = 50;
+                var aux = 10;
                 $scope.respDic[list[s].id] = [];
                 $scope.respDic[list[s].id][0] = "";
                 $scope.sondRespDic[list[s].id] = []
@@ -205,7 +205,7 @@
                  for (var r = 0; r < list[s].respostas.length; r++) {
                     $scope.respDic[list[s].id][aux] = list[s].respostas[r].descricao;
                     $scope.sondRespDic[list[s].id][list[s].respostas[r].id] = aux;
-                    aux = aux + 50;
+                    aux = aux + 10;
                 }
 
                 //graphLabels.push("");
@@ -317,7 +317,7 @@
                         if ($scope.respDic[list[s].id].indexOf(resposta) == -1) {
                             $scope.respDic[list[s].id][aux] = resposta;
                             $scope.sondRespDic[list[s].id][parseInt(idResposta)] = aux;
-                            aux = aux + 50;
+                            aux = aux + 10;
                         }
                     }
                 }
@@ -334,7 +334,7 @@
                             for (var i = 0; i < respostas.length; i++) {
                                 var subQ = { subQuestao: respostas[i][0].subQuestao, respostasAluno: [] };
                                 for (var j = 0; j < respostas[i].length; j++) {
-                                    subQ.respostasAluno.push({ resposta: respostas[i][j].resposta });
+                                    subQ.respostasAluno.push({ idResposta: respostas[i][j].idResposta, resposta: respostas[i][j].resposta });
                                 }
                                 resp.push(subQ);
                             }
@@ -355,7 +355,7 @@
                                 for (var i = 0; i < respostas.length; i++) {
                                     var subQ = { subQuestao: respostas[i][0].subQuestao, respostasAluno: []};
                                     for (var j = 0; j < respostas[i].length; j++) {
-                                        subQ.respostasAluno.push({ resposta: respostas[i][j].resposta });
+                                        subQ.respostasAluno.push({ idResposta: respostas[i][j].idResposta, resposta: respostas[i][j].resposta });
                                     }
                                     resp.push(subQ);
                                 }
@@ -375,8 +375,9 @@
                     for (var d = 0; d < dadosAgrup.length; d++) {
                         var idResposta = "";
                         if (dadosAgrup[d].length > 1) {
-                            for (var v = 0; v < dadosAgrup[d].length; v++) {
-                                idResposta = idResposta.toString() + "000" + dadosAgrup[d][v].idResposta.toString();
+                            var dadosOrd = $filter('orderBy')(dadosAgrup[d], 'idResposta');
+                            for (var v = 0; v < dadosOrd.length; v++) {
+                                idResposta = idResposta.toString() + "000" + dadosOrd[v].idResposta.toString();
                             }
                             resp.push( { questao: dadosAgrup[d][0].questao, resp: $scope.sondRespDic[list[s].id][parseInt(idResposta)] });
                         }
