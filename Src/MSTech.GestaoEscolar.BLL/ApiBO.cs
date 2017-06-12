@@ -6132,8 +6132,8 @@ namespace MSTech.GestaoEscolar.BLL
                                         }).ToList()
                         }).ToList();
 
-                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalAulas = d.totalAulas + (d.notas.Any(n => n.nota.possuiFreqExterna) ? "*" : ""));
-                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalFaltas = d.totalFaltas + (d.notas.Any(n => n.nota.possuiFreqExterna) ? "*" : ""));
+                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalAulas = d.totalAulas + (d.notas.Any(n => n.nota != null && n.nota.possuiFreqExterna) ? "*" : ""));
+                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalFaltas = d.totalFaltas + (d.notas.Any(n => n.nota != null && n.nota.possuiFreqExterna) ? "*" : ""));
 
                     if (controleOrdemDisciplinas)
                     {
