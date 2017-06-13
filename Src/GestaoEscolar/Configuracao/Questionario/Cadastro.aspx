@@ -25,7 +25,7 @@
                 <asp:TextBox ID="_txtTitulo" runat="server" CssClass="wrap150px" SkinID="text30C"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="_rfvTitulo" runat="server" ErrorMessage="Título é obrigatório."
                     ControlToValidate="_txtTitulo" ValidationGroup="Questionario">*</asp:RequiredFieldValidator>
-                <asp:GridView ID="_grvQuestionario" runat="server" AutoGenerateColumns="False" DataKeyNames="pda_id,rlt_id,ent_id,pda_situacao,IsNew"
+                <asp:GridView ID="_grvQuestionario" runat="server" AutoGenerateColumns="False"
                     EmptyDataText="Não existem ? cadastrados." OnDataBinding="_grvQuestionario_DataBinding"
                     OnRowDataBound="_grvQuestionario_RowDataBound" OnRowEditing="_grvQuestionario_RowEditing"
                     OnRowUpdating="_grvQuestionario_RowUpdating" OnRowDeleting="_grvQuestionario_RowDeleting"
@@ -51,11 +51,12 @@
                             </HeaderTemplate>
                             <ItemTemplate>
                                 &nbsp;
-                                <asp:Label ID="_lblTipoConteudo" runat="server" Text='<%#Bind("TipoConteudo")%>' CssClass="wrap150px"></asp:Label>
+                                <asp:Label ID="_lblTipoConteudo" runat="server" Text='<%#Bind("qtc_tipo")%>' CssClass="wrap150px"></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 &nbsp;
-                                <asp:DropDownList ID="_ddlTipoConteudo" runat="server" SelectedValue='<%#Bind("tct_id")%>' CssClass="wrap150px">
+                                <asp:DropDownList ID="_ddlTipoConteudo" runat="server" SelectedValue='<%#Bind("qtc_tipo")%>' CssClass="wrap150px">
+                                    <asp:ListItem Text="-- Selecione --" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Título 1" Value="1"></asp:ListItem>
                                     <asp:ListItem Text="Título 2" Value="2"></asp:ListItem>
                                     <asp:ListItem Text="Texto" Value="3"></asp:ListItem>
@@ -86,51 +87,40 @@
                                 <asp:Label ID="lbl1" runat="server" Text="Respostas"></asp:Label>
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <asp:UpdatePanel ID="_updResposta" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <uc2:UCLoader ID="UCLoader1" runat="server" />
-                                        <asp:GridView ID="_grvResposta" runat="server" AutoGenerateColumns="False" DataKeyNames="pda_id,rlt_id,ent_id,pda_situacao,IsNew"
-                                            EmptyDataText="Não existem respostas cadastradas." OnDataBinding="_grvResposta_DataBinding"
-                                            OnRowDataBound="_grvResposta_RowDataBound" OnRowEditing="_grvResposta_RowEditing"
-                                            OnRowUpdating="_grvResposta_RowUpdating" OnRowDeleting="_grvResposta_RowDeleting"
-                                            OnRowCancelingEdit="_grvResposta_RowCancelingEdit">
-                                            <Columns>
-                                                <asp:TemplateField>
-                                                    <HeaderTemplate>
-                                                        <asp:Label ID="lbl1" runat="server" Text="Texto"></asp:Label>
-                                                    </HeaderTemplate>
-                                                    <ItemTemplate>
-                                                        &nbsp;
-                                               <asp:Label ID="_lblTextoResposta" runat="server" Text='<%#Bind("TextoResposta")%>' CssClass="wrap150px"></asp:Label>
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        &nbsp;
-                                               <asp:TextBox ID="_txtTextoResposta" runat="server" CssClass="wrap150px" SkinID="text30C"></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField>
-                                                    <HeaderTemplate>
-                                                        <asp:Label ID="lbl1" runat="server" Text="Permite adicionar texto"></asp:Label>
-                                                    </HeaderTemplate>
-                                                    <ItemTemplate>
-                                                        &nbsp;
-                                                <asp:Label ID="_lblPermiteAdicionarTexto" runat="server" Text='<%#Bind("PermiteAdicionarTexto")%>' CssClass="wrap150px"></asp:Label>
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        &nbsp;
-                                                 <asp:RadioButton ID="_rbtPermiteAdicionarTexto" runat="server" Text="Permite adicionar texto" />
-                                                    </EditItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                        </asp:GridView>
-                                    </ContentTemplate>
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="_btnNovaResposta" EventName="Click" />
-                                    </Triggers>
-                                </asp:UpdatePanel>
+                                <%-- Repeater de respostas --%>
                                 <asp:Button ID="_btnNovaResposta" runat="server" CausesValidation="False" Text="Incluir nova resposta"
                                     OnClick="_btnNovaResposta_Click" />
                             </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Editar" HeaderStyle-CssClass="center">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="_imgEditar" runat="server" CommandName="Edit" SkinID="btEditar"
+                                    ToolTip="Editar" CausesValidation="false" />
+                                <asp:ImageButton ID="_imgCancelar" runat="server" CommandName="Cancel" SkinID="btDesfazer"
+                                    ToolTip="Cancelar edição" CausesValidation="false" Visible="false" />
+                            </ItemTemplate>
+                            <HeaderStyle CssClass="center" />
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Salvar" HeaderStyle-CssClass="center">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="_imgSalvar" runat="server" CommandName="Update" SkinID="btConfirmar"
+                                    ToolTip="Salvar" ValidationGroup='Questionario'
+                                    Visible="false" />
+                                <asp:ImageButton ID="_imgCancelar" runat="server" CommandName="Cancel" SkinID="btCancelar"
+                                    ToolTip="Cancelar" CausesValidation="false"
+                                    Visible="false" />
+                            </ItemTemplate>
+                            <HeaderStyle CssClass="center" />
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Excluir" HeaderStyle-CssClass="center">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="_imgExcluir" runat="server" CommandName="Delete" SkinID="btExcluir"
+                                    ToolTip="Excluir" CausesValidation="false" />
+                            </ItemTemplate>
+                            <HeaderStyle CssClass="center" />
+                            <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
