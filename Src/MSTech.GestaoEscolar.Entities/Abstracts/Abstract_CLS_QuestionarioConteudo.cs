@@ -45,5 +45,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[qtc_tipo] é obrigatório.")]
 		public virtual byte qtc_tipo { get; set; }
 
+		/// <summary>
+		/// Tipo de resposta para o tipo de conteúdo Pergunta..
+		/// </summary>
+		public virtual byte qtc_tipoResposta { get; set; }
+
     }
 }

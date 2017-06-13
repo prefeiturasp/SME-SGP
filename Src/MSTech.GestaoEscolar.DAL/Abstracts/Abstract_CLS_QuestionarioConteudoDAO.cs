@@ -76,6 +76,20 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.qtc_tipo;
 			qs.Parameters.Add(Param);
 
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Byte;
+			Param.ParameterName = "@qtc_tipoResposta";
+			Param.Size = 1;
+				if(entity.qtc_tipoResposta > 0 )
+				{
+					Param.Value = entity.qtc_tipoResposta;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
+			qs.Parameters.Add(Param);
+
 
 			}
 		}
@@ -115,6 +129,20 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.ParameterName = "@qtc_tipo";
 			Param.Size = 1;
 			Param.Value = entity.qtc_tipo;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Byte;
+			Param.ParameterName = "@qtc_tipoResposta";
+			Param.Size = 1;
+				if(entity.qtc_tipoResposta > 0 )
+				{
+					Param.Value = entity.qtc_tipoResposta;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
 			qs.Parameters.Add(Param);
 
 
