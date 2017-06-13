@@ -446,6 +446,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         MultisseriadaDocente = 4
+        ,
+
+        AtendimentoEducacionalEspecializado = 5
     }
 
     /// <summary>
