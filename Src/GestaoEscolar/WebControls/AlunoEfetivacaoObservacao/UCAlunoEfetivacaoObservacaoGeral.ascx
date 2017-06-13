@@ -676,6 +676,107 @@
                                     </table>
                                 </div>
                             </div>
+                            <div id="divAEE" runat="server">
+                                <hr />
+                                <div class="div-gestor-scroll">
+                                    <table class="table-boletim">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" class="th-disciplina">
+                                                    <asp:Label runat="server" ID="lblAEETitulo" Text="<%$ Resources:UserControl, UCDadosBoletim.lblAEETitulo.Text %>"></asp:Label>
+                                                </th>
+                                                <asp:Repeater ID="rptPeriodosNomesAEE" runat="server">
+                                                    <ItemTemplate>
+                                                        <th id="Th1" class="th-periodo" runat="server" visible='<%#mostraConceitoGlobal %>'>
+                                                            <span><%#Eval("tpc_nome") %></span>
+                                                        </th>
+                                                        <th id="Th2" class="th-periodo" runat="server" visible='<%#!mostraConceitoGlobal %>'>
+                                                            <span><%#Eval("tpc_nome") %></span>
+                                                        </th>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                                <th rowspan="2" class="th-frequencia">
+                                                    <asp:Label runat="server" ID="lblPorcentagemFreqAEE" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblPorcentagemFreqAEE.Text %>"></asp:Label>
+                                                </th>
+                                                <th rowspan="2" class="th-parecer-final" id="thFreqFinalAEE" runat="server" visible="false">
+                                                    <asp:Label runat="server" ID="lblParecerFinalAEE" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblParecerFinalAEE.Text %>"></asp:Label>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <asp:Repeater ID="rptPeriodosColunasFixasAEE" runat="server">
+                                                    <ItemTemplate>
+                                                        <th class="th-faltas">
+                                                            <asp:Label runat="server" ID="lblQtdFaltas" Text="<%$ Resources:UserControl, UCAlunoEfetivacaoObservacaoGeral.lblQtdFaltas.Text %>"></asp:Label>
+                                                        </th>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <asp:Repeater ID="rptDisciplinasAEE" runat="server" OnItemDataBound="rptDisciplinasRecuperacao_ItemDataBound">
+                                                <ItemTemplate>
+                                                    <tr class='tr-disciplina'>
+                                                        <th id="tdNomeDiciplina" runat="server" class="th-disciplina">
+                                                            <asp:Literal ID="litNomeDisciplina" runat="server" Text='<%#Eval("Disciplina")%>'></asp:Literal>
+                                                        </th>
+                                                        <asp:Repeater ID="rptNotasDisciplina" OnItemDataBound="rptNotasDisciplina_ItemDataBound" runat="server" DataSource='<%#Eval("notas") %>'>
+                                                            <ItemTemplate>
+
+                                                                <td class="td-notas" id="tdFaltas" runat="server">
+                                                                    <%#Eval("nota.numeroFaltas")%>
+                                                                </td>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                        <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server">
+                                                            <asp:Literal runat="server" ID="litFrequenciaAjustada" Text='<%#Eval("FrequenciaFinalAjustada") %>'></asp:Literal>
+                                                        </td>
+
+                                                        <td class="td-notas" id="tdParecerFinal" runat="server">
+                                                            <asp:HiddenField ID="hfTudId" runat="server" Value='<%# Eval("tud_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfMtuId" runat="server" Value='<%# Eval("mtu_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfMtdId" runat="server" Value='<%# Eval("mtd_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfAtdId" runat="server" Value='<%# Eval("atd_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfFavId" runat="server" Value='<%# Eval("fav_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfAvaId" runat="server" Value='<%# Eval("ava_idResultado") %>' />
+                                                            <asp:Label ID="lblParecerFinal" runat="server"></asp:Label>
+                                                            <asp:DropDownList ID="ddlParecerFinal" runat="server" Style="margin: 0px;"></asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                                <AlternatingItemTemplate>
+                                                    <tr class='tr-disciplina'>
+                                                        <th id="tdNomeDiciplina" runat="server" class="th-disciplina">
+                                                            <asp:Literal ID="litNomeDisciplina" runat="server" Text='<%#Eval("Disciplina")%>'></asp:Literal>
+                                                        </th>
+                                                        <asp:Repeater ID="rptNotasDisciplina" OnItemDataBound="rptNotasDisciplina_ItemDataBound" runat="server" DataSource='<%#Eval("notas") %>'>
+                                                            <ItemTemplate>
+
+                                                                <td class="td-notas" id="tdFaltas" runat="server">
+                                                                    <%#Eval("nota.numeroFaltas")%>
+                                                                </td>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                        <td class="td-notas" id="tdTotFrequenciaAjustada" runat="server">
+                                                            <asp:Literal runat="server" ID="litFrequenciaAjustada" Text='<%#Eval("FrequenciaFinalAjustada") %>'></asp:Literal>
+                                                        </td>
+
+                                                        <td class="td-notas" id="tdParecerFinal" runat="server">
+                                                            <asp:HiddenField ID="hfTudId" runat="server" Value='<%# Eval("tud_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfMtuId" runat="server" Value='<%# Eval("mtu_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfMtdId" runat="server" Value='<%# Eval("mtd_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfAtdId" runat="server" Value='<%# Eval("atd_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfFavId" runat="server" Value='<%# Eval("fav_idResultado") %>' />
+                                                            <asp:HiddenField ID="hfAvaId" runat="server" Value='<%# Eval("ava_idResultado") %>' />
+                                                            <asp:Label ID="lblParecerFinal" runat="server"></asp:Label>
+                                                            <asp:DropDownList ID="ddlParecerFinal" runat="server" Style="margin: 0px;"></asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                </AlternatingItemTemplate>
+                                            </asp:Repeater>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
                         <div id="divLegenda" runat="server" visible="false" class="legenda">

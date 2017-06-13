@@ -18,6 +18,27 @@ SET XACT_ABORT ON
 
 	*/
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'UCDadosBoletim.lblAEETitulo.Text' 
+        , @rcr_NomeResource = 'UserControl'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Atendimento educacional especializado'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'UCAlunoEfetivacaoObservacaoGeral.lblParecerFinalAEE.Text' 
+        , @rcr_NomeResource = 'UserControl'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Parecer Final'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'UCAlunoEfetivacaoObservacaoGeral.lblPorcentagemFreqAEE.Text' 
+        , @rcr_NomeResource = 'UserControl'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = '% Freq.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

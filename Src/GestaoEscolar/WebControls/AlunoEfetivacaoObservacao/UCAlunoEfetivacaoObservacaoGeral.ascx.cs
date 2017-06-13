@@ -2768,6 +2768,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                 var thFreqFinalRecuperacao = new HtmlTableCell();
                 thFreqFinalRecuperacao = (HtmlTableCell)divBoletim.FindControl("thFreqFinalRecuperacao");
                 thFreqFinalRecuperacao.Visible = true;
+
+                var thFreqFinalAEE = new HtmlTableCell();
+                thFreqFinalAEE = (HtmlTableCell)divBoletim.FindControl("thFreqFinalAEE");
+                thFreqFinalAEE.Visible = true;
             }
 
             #region Periodos / COCs / Bimestres
@@ -2794,6 +2798,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             rptPeriodosColunasFixasEI.DataSource = periodos;
             rptPeriodosNomesRecuperacao.DataSource = periodos;
             rptPeriodosColunasFixasRecuperacao.DataSource = periodos;
+            rptPeriodosNomesAEE.DataSource = periodos;
+            rptPeriodosColunasFixasAEE.DataSource = periodos;
             rptPeriodosNomes.DataBind();
             rptPeriodosColunasFixas.DataBind();
             rptPeriodosNomesEnriquecimento.DataBind();
@@ -2802,6 +2808,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             rptPeriodosColunasFixasEI.DataBind();
             rptPeriodosNomesRecuperacao.DataBind();
             rptPeriodosColunasFixasRecuperacao.DataBind();
+            rptPeriodosNomesAEE.DataBind();
+            rptPeriodosColunasFixasAEE.DataBind();
 
             #endregion Periodos / COCs / Bimestres
 
@@ -3200,6 +3208,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             var disciplinas = (from item in todasDisciplinas
                                where !item.enriquecimentoCurricular //Retira as que são de enriquecimento curricular
                                && !item.recuperacao //Retira as recuperacoes
+                               && item.tud_Tipo != (byte)TurmaDisciplinaTipo.AtendimentoEducacionalEspecializado //Retira AEE
                                select item
                                );
 
@@ -3247,6 +3256,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             var disciplinasEnriquecimentoCurricular = (from item in todasDisciplinas
                                                        where item.enriquecimentoCurricular //Verifica se são de enriquecimento curricular
                                                        && !item.recuperacao //Retira as recuperacoes
+                                                       && item.tud_Tipo != (byte)TurmaDisciplinaTipo.AtendimentoEducacionalEspecializado //Retira AEE
                                                        select item
                               );
 
@@ -3333,6 +3343,30 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             }
 
             #endregion Recuperacao
+
+            #region AEE
+
+            var disciplinasAEE = (from item in todasDisciplinas
+                                  where item.tud_Tipo == (byte)TurmaDisciplinaTipo.AtendimentoEducacionalEspecializado //Seleciona AEE
+                                  select item
+                              );
+
+            if (disciplinasAEE.Count() > 0)
+            {
+                divAEE.Visible = true;
+                var dispOrdenadasAEE = from item in disciplinasAEE
+                                       orderby item.regencia, controleOrdemDisciplinas ? item.tds_ordem.ToString() : item.Disciplina
+                                       select item;
+
+                rptDisciplinasAEE.DataSource = dispOrdenadasAEE.Where(p => p.mostrarDisciplina > 0);
+                rptDisciplinasAEE.DataBind();
+            }
+            else
+            {
+                divAEE.Visible = false;
+            }
+
+            #endregion AEE
         }
 
         /// <summary>
@@ -3713,6 +3747,33 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
 
                 foreach (RepeaterItem rptItem in rptDisciplinasRecuperacao.Items)
+                {
+                    if (rptItem.FindControl("tdParecerFinal").Visible)
+                    {
+                        DropDownList ddlParecerFinal = (DropDownList)rptItem.FindControl("ddlParecerFinal");
+                        if (ddlParecerFinal != null && ddlParecerFinal.Visible)
+                        {
+                            listaMatriculaTurmaDisciplina.Add(new MTR_MatriculaTurmaDisciplina
+                            {
+                                alu_id = VS_alu_id
+                                        ,
+                                mtu_id = VS_mtu_id
+                                        ,
+                                mtd_id = Convert.ToInt32(((HiddenField)rptItem.FindControl("hfMtdId")).Value)
+                                        ,
+                                mtd_resultado = Convert.ToByte(ddlParecerFinal.SelectedValue == "-1" ? "0" : ddlParecerFinal.SelectedValue)
+                                        ,
+                                tud_id = Convert.ToInt64(((HiddenField)rptItem.FindControl("hfTudId")).Value)
+                                        ,
+                                apenasResultado = true
+                            });
+
+                            AdicionaLinhaDisciplina(rptItem, ref listaDisciplina);
+                        }
+                    }
+                }
+
+                foreach (RepeaterItem rptItem in rptDisciplinasAEE.Items)
                 {
                     if (rptItem.FindControl("tdParecerFinal").Visible)
                     {

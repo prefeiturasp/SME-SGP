@@ -877,6 +877,78 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao {
         protected global::System.Web.UI.WebControls.Repeater rptDisciplinasRecuperacao;
         
         /// <summary>
+        /// divAEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAEE;
+        
+        /// <summary>
+        /// lblAEETitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAEETitulo;
+        
+        /// <summary>
+        /// rptPeriodosNomesAEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptPeriodosNomesAEE;
+        
+        /// <summary>
+        /// lblPorcentagemFreqAEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPorcentagemFreqAEE;
+        
+        /// <summary>
+        /// thFreqFinalAEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell thFreqFinalAEE;
+        
+        /// <summary>
+        /// lblParecerFinalAEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblParecerFinalAEE;
+        
+        /// <summary>
+        /// rptPeriodosColunasFixasAEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptPeriodosColunasFixasAEE;
+        
+        /// <summary>
+        /// rptDisciplinasAEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptDisciplinasAEE;
+        
+        /// <summary>
         /// divLegenda control.
         /// </summary>
         /// <remarks>
