@@ -1211,6 +1211,13 @@
     <Compile Include="Configuracao\PermissaoDocente\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuracao\Questionario\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\Recomendacoes\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3674,6 +3681,7 @@
     <Content Include="Configuracao\ParametroResultado\Busca.aspx" />
     <Content Include="Configuracao\ParametroResultado\Cadastro.aspx" />
     <Content Include="Configuracao\PermissaoDocente\Cadastro.aspx" />
+    <Content Include="Configuracao\Questionario\Cadastro.aspx" />
     <Content Include="Configuracao\Recomendacoes\Busca.aspx" />
     <Content Include="Configuracao\Recomendacoes\Cadastro.aspx" />
     <Content Include="Configuracao\RelatorioDocumentoAluno\Cadastro.aspx" />

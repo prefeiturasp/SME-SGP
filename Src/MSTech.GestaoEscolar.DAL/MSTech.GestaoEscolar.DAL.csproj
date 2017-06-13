@@ -245,6 +245,9 @@
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnosticoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoRelacionadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioConteudoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioRespostaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseDAO.cs" />
@@ -546,6 +549,9 @@
     <Compile Include="CLS_PlanejamentoProjetoDAO.cs" />
     <Compile Include="CLS_PlanejamentoProjetoRelacionadaDAO.cs" />
     <Compile Include="CLS_QualificadorAtividadeDAO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoDAO.cs" />
+    <Compile Include="CLS_QuestionarioDAO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaDAO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaDAO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoDAO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseDAO.cs" />
