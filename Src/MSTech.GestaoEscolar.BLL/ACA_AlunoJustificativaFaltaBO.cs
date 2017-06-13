@@ -88,6 +88,18 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna os dados das justificativas do aluno.
+        /// </summary>
+        /// <param name="ano">Ano das justificativas</param>
+        /// <param name="alu_id">Id do aluno</param>
+        /// <returns></returns>
+        public static DataTable SelecionaJustificativasPorAluno(int ano, long alu_id)
+        {
+            ACA_AlunoJustificativaFaltaDAO dao = new ACA_AlunoJustificativaFaltaDAO();
+            return dao.SelectJustificativasBy_Aluno(ano, alu_id);
+        }
+
+        /// <summary>
         ///  Salva (inclusão ou alteração) uma justificativa de falta.
         /// </summary>
         /// <param name="entity">Entidade ACA_AlunoJustificativaFalta</param>

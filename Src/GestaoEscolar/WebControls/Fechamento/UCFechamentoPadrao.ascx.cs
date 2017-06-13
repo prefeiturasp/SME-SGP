@@ -453,6 +453,27 @@ namespace GestaoEscolar.WebControls.Fechamento
             }
         }
 
+        /// <summary>
+        /// Guarda as notas de relatório.
+        /// </summary>
+        private List<ACA_ConfiguracaoServicoPendencia> VS_ListConfiguracaoServicoPendencia
+        {
+            get
+            {
+                if (ViewState["VS_ListConfiguracaoServicoPendencia"] != null)
+                {
+                    return (List<ACA_ConfiguracaoServicoPendencia>)ViewState["VS_ListConfiguracaoServicoPendencia"];
+                }
+
+                return new List<ACA_ConfiguracaoServicoPendencia>();
+            }
+
+            set
+            {
+                ViewState["VS_ListConfiguracaoServicoPendencia"] = value;
+            }
+        }
+
         #endregion Armazenadas no ViewState
 
         #region Usadas no DataBound
@@ -883,26 +904,31 @@ namespace GestaoEscolar.WebControls.Fechamento
                             || (
                                 String.IsNullOrEmpty(dadosGeral.Avaliacao)
                                 && String.IsNullOrEmpty(dadosGeral.AvaliacaoPosConselho)
+                                && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semSintese)
                             )
                             // ou nota incompativel com o tipo de escala de avaliacao
                             || ((EscalaAvaliacaoTipo)VS_EscalaAvaliacao.esa_tipo == EscalaAvaliacaoTipo.Numerica
                                 &&
                                 (
                                     (!String.IsNullOrEmpty(dadosGeral.Avaliacao)
-                                    && String.IsNullOrEmpty(NotaFormatada(dadosGeral.Avaliacao)))
+                                    && String.IsNullOrEmpty(NotaFormatada(dadosGeral.Avaliacao))
+                                    && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semSintese))
                                     ||
                                     (!String.IsNullOrEmpty(dadosGeral.AvaliacaoPosConselho)
-                                    && String.IsNullOrEmpty(NotaFormatada(dadosGeral.AvaliacaoPosConselho)))
+                                    && String.IsNullOrEmpty(NotaFormatada(dadosGeral.AvaliacaoPosConselho))
+                                    && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semSintese))
                                 )
                             )
                             || ((EscalaAvaliacaoTipo)VS_EscalaAvaliacao.esa_tipo == EscalaAvaliacaoTipo.Pareceres
                                 &&
                                 (
                                     (!String.IsNullOrEmpty(dadosGeral.Avaliacao)
-                                    && !LtPareceres.Any(p => p.eap_valor.Equals(dadosGeral.Avaliacao)))
+                                    && !LtPareceres.Any(p => p.eap_valor.Equals(dadosGeral.Avaliacao))
+                                    && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semSintese))
                                     ||
                                     (!String.IsNullOrEmpty(dadosGeral.AvaliacaoPosConselho)
-                                    && !LtPareceres.Any(p => p.eap_valor.Equals(dadosGeral.AvaliacaoPosConselho)))
+                                    && !LtPareceres.Any(p => p.eap_valor.Equals(dadosGeral.AvaliacaoPosConselho))
+                                    && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semSintese))
                                 )
                             );
 
@@ -955,7 +981,8 @@ namespace GestaoEscolar.WebControls.Fechamento
                 // Se não for Experiência (Território do Saber) mantem a verificação atual.
                 if (EntTurmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Experiencia)
                 {
-                    if (VS_QtdeAulasDadas <= 0 && EntTurmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia)
+                    if (VS_QtdeAulasDadas <= 0 && EntTurmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                        && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_disciplinaSemAula))
                     {
                         // Quando é tud_naoLancarNota ou recuperação paralela, é necessário verificar se tem alguma
                         // aula criada no bimestre.
@@ -966,7 +993,7 @@ namespace GestaoEscolar.WebControls.Fechamento
                 else
                 {
                     // Quando é tud_naoLancarNota e Experiência (Território do Saber), verifica se existe aula criada de acordo com a vigência da Experiência
-                    if (CLS_TurmaAulaBO.VerificaPendenciaCadastroAulaExperiencia(Tud_id, VS_tpc_id))
+                    if (CLS_TurmaAulaBO.VerificaPendenciaCadastroAulaExperiencia(Tud_id, VS_tpc_id) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_disciplinaSemAula))
                     {
                         return true;
                     }
@@ -1160,6 +1187,17 @@ namespace GestaoEscolar.WebControls.Fechamento
                 {
                     tud_naoLancarNota = EntTurmaDisciplina.tud_naoLancarNota;
                 }
+
+                VS_ListConfiguracaoServicoPendencia = new List<ACA_ConfiguracaoServicoPendencia>();
+
+                foreach (int cur_id in TUR_TurmaCurriculoBO.GetSelectBy_Turma(VS_tur_id, ApplicationWEB.AppMinutosCacheLongo)
+                                                           .GroupBy(t => t.cur_id).Select(t => t.Key))
+                {
+                    ACA_Curso cur = new ACA_Curso { cur_id = cur_id };
+                    ACA_CursoBO.GetEntity(cur);
+                    VS_ListConfiguracaoServicoPendencia.AddRange(ACA_ConfiguracaoServicoPendenciaBO.SelectTodasBy_tne_id_tme_id_tur_tipo(cur.tne_id, cur.tme_id, VS_Turma.tur_tipo));
+                }
+
                 if (EntTurmaDisciplina.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia && !tud_naoLancarNota)
                 {
                     if (listaAlunosComponentesRegencia != null

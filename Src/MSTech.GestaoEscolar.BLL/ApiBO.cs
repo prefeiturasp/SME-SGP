@@ -3178,6 +3178,21 @@ namespace MSTech.GestaoEscolar.BLL
         #region ACA_CalendarioAnual
 
         /// <summary>
+        /// Seleciona todos os calendários pelos quais o aluno passou
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <returns></returns>
+        public static CalendarioAlunoSaidaDTO SelecionaCalendarioPorAluno(long alu_id)
+        {
+            CalendarioAlunoSaidaDTO retorno = new CalendarioAlunoSaidaDTO();
+            using (DataTable dt = MTR_MatriculaTurmaBO.GetSelectAnoMatricula(alu_id))
+            {
+                retorno.calendarios = GestaoEscolarUtilBO.MapToEnumerable<CalendarioAlunoDTO>(dt).ToList();
+                return retorno;
+            }
+        }
+
+        /// <summary>
         /// Seleciona todos os calendários anuais ativos.
         /// </summary>
         /// <returns>List<ACA_CalendarioAnualDTO></returns>
@@ -6076,6 +6091,8 @@ namespace MSTech.GestaoEscolar.BLL
                                                             ,
                                                             tpc_id = bNota.tpc_id
                                                             ,
+                                                            tpc_nome = bNota.tpc_nome
+                                                            ,
                                                             NotaRP = bNota.NotaRP
                                                             ,
                                                             numeroAulas = bNota.tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada ? "-" :
@@ -6322,6 +6339,32 @@ namespace MSTech.GestaoEscolar.BLL
 
 
         #endregion
+
+        #region MTR_MatriculaTurma
+
+        /// <summary>
+        /// Seleciona o parecer conclusivo do aluno pelo seu código EOL e pelo código EOL da turma
+        /// </summary>
+        /// <param name="CodigoEOLTurma">Código EOL da turma</param>
+        /// <param name="CodigoEOLAluno">Código EOL do aluno.</param>
+        /// <returns></returns>
+        public static ParecerConclusivo SelecionaResultadoPorAlunoTurmaEOL(int CodigoEOLTurma, string CodigoEOLAluno)
+        {
+            using (DataTable dt = MTR_MatriculaTurmaBO.SelecionaResultadoPorAlunoTurmaEOL(CodigoEOLTurma, CodigoEOLAluno))
+            {
+                return dt.Rows.Count > 0 ?
+                    new ParecerConclusivo
+                    {
+                        CodigoEOLTurma = CodigoEOLTurma.ToString()
+                        ,
+                        CodigoEOLAluno = CodigoEOLAluno
+                        ,
+                        Resultado = dt.Rows[0]["tpr_nomenclatura"].ToString().ToUpper()
+                    } : null;
+            }
+        }
+
+        #endregion MTR_MatriculaTurma
 
         #endregion Geral - Sistema Gestão Escolar
 
@@ -7282,6 +7325,289 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         #endregion Plataforma de Itens e Avaliações
+
+        #region Relatório pedagógico
+        
+
+        /// <summary>
+        /// Retorna os dados das sondagens que o aluno participou.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+        /// <returns>Objeto com os dados das sondagens.</returns>
+        public static SondagemSaidaDTO BuscaSondagemAluno(AnoAlunoEntradaDTO filtros)
+        {
+            SondagemSaidaDTO retorno = new SondagemSaidaDTO();
+            try
+            {
+                DataTable dt = ACA_SondagemBO.SelecionaSondagemPorAluno(filtros.ano, filtros.alu_id);
+
+                List<SondagemDTO> lista =
+                    (from dr in dt.AsEnumerable()
+                     group dr by dr.Field<int>("snd_id") into snd
+                     orderby snd.Key
+                     select new SondagemDTO
+                     {
+                         id = snd.Key
+                         ,
+                         titulo = snd.FirstOrDefault()["snd_titulo"].ToString()
+                         ,
+                         descricao = snd.FirstOrDefault()["snd_descricao"].ToString()
+                         ,
+                         questoes = (from dr in dt.AsEnumerable()
+                                     group dr by new { snd_id = dr.Field<int>("snd_id"), sdq_id = dr.Field<int>("sdq_id") } into sdq
+                                     orderby Convert.ToInt32(sdq.FirstOrDefault()["sdq_ordem"])
+                                     where sdq.Key.snd_id == snd.Key && sdq.Key.sdq_id > 0
+                                     select new QuestaoDTO
+                                     {
+                                         id = sdq.Key.sdq_id
+                                            ,
+                                         descricao = sdq.FirstOrDefault()["sdq_descricao"].ToString()
+                                            ,
+                                         ordem = Convert.ToInt32(sdq.FirstOrDefault()["sdq_ordem"])
+                                     }).ToList()
+                         ,
+                         subQuestoes = (from dr in dt.AsEnumerable()
+                                        group dr by new { snd_id = dr.Field<int>("snd_id"), sdq_idSub = dr.Field<int>("sdq_idSub") } into sdqSub
+                                        orderby Convert.ToInt32(sdqSub.FirstOrDefault()["sdq_ordemSub"])
+                                        where sdqSub.Key.snd_id == snd.Key && sdqSub.Key.sdq_idSub > 0
+                                        select new QuestaoDTO
+                                        {
+                                            id = sdqSub.Key.sdq_idSub
+                                               ,
+                                            descricao = sdqSub.FirstOrDefault()["sdq_descricaoSub"].ToString()
+                                               ,
+                                            ordem = Convert.ToInt32(sdqSub.FirstOrDefault()["sdq_ordemSub"])
+                                        }).ToList()
+                         ,
+                         respostas = (from dr in dt.AsEnumerable()
+                                      group dr by new { snd_id = dr.Field<int>("snd_id"), sdr_id = dr.Field<int>("sdr_id") } into sdr
+                                      orderby Convert.ToInt32(sdr.FirstOrDefault()["sdr_ordem"])
+                                      where sdr.Key.snd_id == snd.Key
+                                      select new RespostaDTO
+                                      {
+                                          id = sdr.Key.sdr_id
+                                              ,
+                                          sigla = sdr.FirstOrDefault()["sdr_sigla"].ToString()
+                                              ,
+                                          descricao = sdr.FirstOrDefault()["sdr_descricao"].ToString()
+                                              ,
+                                          ordem = Convert.ToInt32(sdr.FirstOrDefault()["sdr_ordem"])
+                                      }).ToList()
+                         ,
+                         agendamentos = (from dr in dt.AsEnumerable()
+                                         group dr by new { snd_id = dr.Field<int>("snd_id"), sda_id = dr.Field<int>("sda_id") } into sda
+                                         orderby Convert.ToDateTime(sda.FirstOrDefault()["sda_dataInicio"])
+                                         where sda.Key.snd_id == snd.Key
+                                         select new AgendamentoDTO
+                                         {
+                                             id = sda.Key.sda_id
+                                             ,
+                                             dataInicio = Convert.ToDateTime(sda.FirstOrDefault()["sda_dataInicio"]).ToString("dd/MM/yyyy")
+                                             ,
+                                             dataFim = Convert.ToDateTime(sda.FirstOrDefault()["sda_dataFim"]).ToString("dd/MM/yyyy")
+                                              ,
+                                             respostasAluno = (from dr in dt.AsEnumerable()
+                                                               group dr by new { snd_id = dr.Field<int>("snd_id"), sda_id = dr.Field<int>("sda_id"), sdq_id = dr.Field<int>("sdq_id"), sdq_idSub = dr.Field<int>("sdq_idSub") } into asn
+                                                               where asn.Key.snd_id == sda.Key.snd_id && asn.Key.sda_id == sda.Key.sda_id
+                                                               select new RespostaAlunoDTO
+                                                               {
+                                                                   idQuestao = asn.Key.sdq_id
+                                                                   ,
+                                                                   idSubQuestao = asn.Key.sdq_idSub
+                                                                   ,
+                                                                   idResposta = Convert.ToInt32(asn.FirstOrDefault()["sdr_id"])
+                                                               }).ToList()
+                                         }).ToList()
+                     }
+                    ).ToList();
+
+                retorno.sondagens = lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        /// <summary>
+        /// Retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
+        /// <returns>Objeto com os dados das anotações.</returns>
+        public static AlunoAnotacaoSaidaDTO BuscaAnotacoesAluno(AnoAlunoTurmaEntradaDTO filtros)
+        {
+            AlunoAnotacaoSaidaDTO retorno = new AlunoAnotacaoSaidaDTO();
+            try
+            {
+                DataTable dt = CLS_TurmaAulaAlunoBO.SelecionaAnotacoesPorAluno(filtros.ano, filtros.alu_id, filtros.mtu_id);
+
+                List<AnotacaoDocenteDTO> lista = (from dr in dt.AsEnumerable()
+                                                  orderby Convert.ToDateTime(dr["tau_data"])
+                                                  select new AnotacaoDocenteDTO
+                                                  {
+                                                      data = Convert.ToDateTime(dr["tau_data"]).ToString("dd/MM/yyyy")
+                                                      ,
+                                                      anotacao = dr["taa_anotacao"].ToString()
+                                                      ,
+                                                      nomeDocente = dr["pes_nome"].ToString()
+                                                      ,
+                                                      nomeEscola = dr["esc_nome"].ToString()
+                                                      ,
+                                                      codigoTurma = dr["tur_codigo"].ToString()
+                                                      ,
+                                                      nomeDisciplina = dr["dis_nome"].ToString()
+                                                  }
+                    ).ToList();
+
+                retorno.anotacoesDocente = lista;
+
+                List<ACA_AlunoAnotacao> listaGestor = ACA_AlunoAnotacaoBO.SelecionaAnotacoesAluno(filtros.alu_id, filtros.ano);
+
+                retorno.anotacoesGestor = (from dr in listaGestor
+                                           orderby dr.ano_dataAnotacao
+                                           select new AnotacaoGestorDTO
+                                           {
+                                               data = dr.ano_dataAnotacao.ToString("dd/MM/yyyy")
+                                               ,
+                                               anotacao = dr.ano_anotacao
+                                               ,
+                                               funcaoGestor = dr.gru_nome
+                                           }
+                                           ).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        /// <summary>
+        /// Retorna os dados das justificativas do aluno.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+        /// <returns>Objeto com os dados das justificativas.</returns>
+        public static AlunoJustificativaFaltaSaidaDTO BuscaJustificativasAluno(AnoAlunoEntradaDTO filtros)
+        {
+            AlunoJustificativaFaltaSaidaDTO retorno = new AlunoJustificativaFaltaSaidaDTO();
+            try
+            {
+                DataTable dt = ACA_AlunoJustificativaFaltaBO.SelecionaJustificativasPorAluno(filtros.ano, filtros.alu_id);
+
+                List<JustificativaDTO> lista = (from dr in dt.AsEnumerable()
+                                                orderby Convert.ToDateTime(dr["afj_dataInicio"])
+                                                select new JustificativaDTO
+                                                {
+                                                    tipo = dr["tjf_nome"].ToString()
+                                                    ,
+                                                    dataInicio = Convert.ToDateTime(dr["afj_dataInicio"]).ToString("dd/MM/yyyy")
+                                                    ,
+                                                    dataFim = dr["afj_dataFim"] == DBNull.Value ? "" : Convert.ToDateTime(dr["afj_dataFim"]).ToString("dd/MM/yyyy")
+                                                    ,
+                                                    observacao = dr["afj_observacao"].ToString()
+                                                }
+                                                ).ToList();
+
+                retorno.justificativas = lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        /// <summary>
+        /// Retorna os dados de algumas movimentações específicas do aluno.
+        /// </summary>
+        /// <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma..</param>
+        /// <returns>Objeto com os dados das movimentações.</returns>
+        public static AlunoMovimentacaoSaidaDTO BuscaMovimentacoesEspecificasAluno(AnoAlunoTurmaEntradaDTO filtros)
+        {
+            AlunoMovimentacaoSaidaDTO retorno = new AlunoMovimentacaoSaidaDTO();
+            try
+            {
+                DataTable dt = MTR_MovimentacaoBO.SelecionaMovimentacoesEspecificasPorAluno(filtros.ano, filtros.alu_id, filtros.mtu_id);
+
+                List<MovimentacaoDTO> lista = (from dr in dt.AsEnumerable()
+                                               orderby Convert.ToDateTime(dr["mov_dataRealizacao"]) descending
+                                               select new MovimentacaoDTO
+                                               {
+                                                    dataRealizacao = Convert.ToDateTime(dr["mov_dataRealizacao"]).ToString("dd/MM/yyyy")
+                                                    , tipo = dr["tmo_nome"].ToString()
+                                                    , escolaAnterior = dr["escolaAnterior"].ToString()
+                                                    , escolaAtual = dr["escolaAtual"].ToString()
+                                                    , turmaAnterior = dr["turmaAnterior"].ToString()
+                                                    , turmaAtual = dr["turmaAtual"].ToString()
+                                               }
+                                               ).ToList();
+
+                retorno.movimentacoes = lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return retorno;
+        }
+
+        /// <summary>
+        /// Seleciona dados da matrícula do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public static MatriculaTurmaSaidaDTO BuscaMatriculaTurma(long alu_id, int mtu_id)
+        {
+            MatriculaTurmaSaidaDTO retorno = new MatriculaTurmaSaidaDTO();
+            try
+            {
+                using (DataTable dt = MTR_MatriculaTurmaBO.SelecionaDadosMatriculaAluno(alu_id, mtu_id))
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        retorno = (MatriculaTurmaSaidaDTO)GestaoEscolarUtilBO.DataRowToEntity(dt.Rows[0], new MatriculaTurmaSaidaDTO());
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Busca os dados de conselho de classe do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public static ConselhoClasseSaidaDTO BuscaDadosConselhoClasse(long alu_id, int mtu_id)
+        {
+            ConselhoClasseSaidaDTO retorno = new ConselhoClasseSaidaDTO();
+            try
+            {
+                using (DataTable dt = CLS_AlunoAvaliacaoTurmaBO.BuscaDadosConselhoClasseAlunos(alu_id, mtu_id))
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        retorno.dadosConselho = GestaoEscolarUtilBO.MapToEnumerable<ConselhoClasseDTO>(dt).ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return retorno;
+        }
+
+        #endregion Relatório pedagógico
 
         #endregion Métodos
     }

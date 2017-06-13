@@ -24,7 +24,7 @@
             <ContentTemplate>
                 <uc1:UCBuscaDocenteTurma ID="UCBuscaDocenteTurma" runat="server" _VS_CarregarApenasTurmasNormais="true" _VS_MostarComboTipoCiclo="false" />
                 <uc6:UCComboTurmaDisciplina runat="server" ID="UCComboTurmaDisciplina" 
-                    Obrigatorio="true" PermiteEditar="false" MostrarMensagemSelecione="true"
+                    Obrigatorio="true" MostrarMensagemSelecione="true"
                     VS_MostraFilhosRegencia="false" />
                 <uc4:UCCamposBuscaAluno ID="UCCamposBuscaAluno1" runat="server" />
                 <div class="clear"></div>           

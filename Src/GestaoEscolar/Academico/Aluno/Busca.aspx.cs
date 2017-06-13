@@ -10,6 +10,7 @@ using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.Validation.Exceptions;
+using System.IO;
 
 public partial class Academico_Aluno_Busca : MotherPageLogado
 {
@@ -20,6 +21,7 @@ public partial class Academico_Aluno_Busca : MotherPageLogado
     private const int indiceColunaAnotacoes = 8;
     private const int indiceColunaCapturarFoto = 9;
     private const int indiceColunaBoletim = 10;
+    private const int indiceColunaRelatorioPedagogico = 11;
 
     #endregion Constantes
 
@@ -542,6 +544,8 @@ public partial class Academico_Aluno_Busca : MotherPageLogado
 
                 _grvAluno.Columns[indiceColunaBoletim].Visible = mostraBoletim;
 
+                _grvAluno.Columns[indiceColunaRelatorioPedagogico].Visible = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_COLUNA_RELATORIOPEDAGOGICO_MANUTENCAO_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
                 chkApenasGemeos.Visible = PermiteAlunoGemeo;
 
                 if (_VS_doc_id > 0)
@@ -723,6 +727,12 @@ public partial class Academico_Aluno_Busca : MotherPageLogado
             {
                 _btnBoletim.CommandArgument = e.Row.RowIndex.ToString();
             }
+
+            ImageButton btnRelatorioPedagogico = (ImageButton)e.Row.FindControl("btnRelatorioPedagogico");
+            if (btnRelatorioPedagogico != null)
+            {
+                btnRelatorioPedagogico.CommandArgument = e.Row.RowIndex.ToString();
+            }
         }
     }
 
@@ -747,6 +757,30 @@ public partial class Academico_Aluno_Busca : MotherPageLogado
             {
                 ApplicationWEB._GravaErro(ex);
                 _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar gerar o boletim completo do aluno.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        if (e.CommandName == "RelatorioPedagogico")
+        {
+            try
+            {
+                int index = int.Parse(e.CommandArgument.ToString());
+
+                Session.Remove("alu_id_RelatorioPedagogico");
+                Session.Remove("PaginaRetorno_RelatorioPedagogico");
+
+                Session.Add("alu_id_RelatorioPedagogico", Convert.ToInt64(_grvAluno.DataKeys[index].Value));
+                Session.Add("PaginaRetorno_RelatorioPedagogico", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/Aluno/Busca.aspx"));
+                RedirecionarPagina("~/Documentos/RelatorioPedagogico/RelatorioPedagogico.aspx");
+            }
+            catch (ValidationException ex)
+            {
+                _lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar gerar o relatório pedagógico do aluno.", UtilBO.TipoMensagem.Erro);
             }
         }
     }

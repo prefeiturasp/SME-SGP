@@ -411,7 +411,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <returns>DataTable com os anos</returns>
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public DataTable GetSelectAnoMatricula
+        public static DataTable GetSelectAnoMatricula
         (
            long alu_id
         )
@@ -1191,6 +1191,28 @@ namespace MSTech.GestaoEscolar.BLL
                                               .Select()
                                               .Select(p => (DadosAlunoEntradaRede)GestaoEscolarUtilBO.DataRowToEntity(p, new DadosAlunoEntradaRede()))
                                               .ToList();
+        }
+
+        /// <summary>
+        /// Seleciona o parecer conclusivo do aluno pelo seu código EOL e pelo código EOL da turma
+        /// </summary>
+        /// <param name="CodigoEOLTurma">Código EOL da turma</param>
+        /// <param name="CodigoEOLAluno">Código EOL do aluno.</param>
+        /// <returns></returns>
+        public static DataTable SelecionaResultadoPorAlunoTurmaEOL(int CodigoEOLTurma, string CodigoEOLAluno)
+        {
+            return new MTR_MatriculaTurmaDAO().SelecionaResultadoPorAlunoTurmaEOL(CodigoEOLTurma, CodigoEOLAluno);
+        }
+
+        /// <summary>
+        /// Seleciona dados da matrícula do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public static DataTable SelecionaDadosMatriculaAluno(long alu_id, int mtu_id)
+        {
+            return new MTR_MatriculaTurmaDAO().SelecionaDadosMatriculaAluno(alu_id, mtu_id);
         }
 
         #endregion Consultas

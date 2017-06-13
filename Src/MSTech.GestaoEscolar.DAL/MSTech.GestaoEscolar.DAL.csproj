@@ -115,6 +115,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEventoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioPeriodoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />
@@ -405,6 +406,7 @@
     <Compile Include="ACA_CalendarioEventoDAO.cs" />
     <Compile Include="ACA_CalendarioPeriodoDAO.cs" />
     <Compile Include="ACA_CompromissoEstudoDAO.cs" />
+    <Compile Include="ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaDAO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodoDAO.cs" />

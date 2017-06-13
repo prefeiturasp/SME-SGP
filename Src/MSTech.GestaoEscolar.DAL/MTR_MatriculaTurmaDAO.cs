@@ -1998,6 +1998,79 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Seleciona o parecer conclusivo do aluno pelo seu código EOL e pelo código EOL da turma
+        /// </summary>
+        /// <param name="CodigoEOLTurma">Código EOL da turma</param>
+        /// <param name="CodigoEOLAluno">Código EOL do aluno.</param>
+        /// <returns></returns>
+        public DataTable SelecionaResultadoPorAlunoTurmaEOL(int CodigoEOLTurma, string CodigoEOLAluno)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_MTR_MatriculaTurma_SelecionaResultadoPorAlunoTurmaEOL", _Banco);
+
+            #region Parâmetros
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@CodigoEOLTurma";
+            Param.DbType = DbType.Int32;
+            Param.Size = 4;
+            Param.Value = CodigoEOLTurma;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.ParameterName = "@CodigoEOLAluno";
+            Param.DbType = DbType.String;
+            Param.Size = 50;
+            Param.Value = CodigoEOLAluno;
+            qs.Parameters.Add(Param);
+
+            #endregion Parâmetros
+
+            qs.Execute();
+
+            return qs.Return;
+        }
+
+        /// <summary>
+        /// Seleciona dados da matrícula do aluno
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <returns></returns>
+        public DataTable SelecionaDadosMatriculaAluno(long alu_id, int mtu_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_MTR_MatriculaTurma_SelecionaDadosMatriculaAluno", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@alu_id";
+                Param.Size = 8;
+                Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@mtu_id";
+                Param.Size = 4;
+                Param.Value = mtu_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #endregion Métodos
 
         #region Métodos Sobrescritos

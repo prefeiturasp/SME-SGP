@@ -63,7 +63,7 @@
                     <HeaderStyle CssClass="center" />
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:TemplateField HeaderText="Importação do fechamento">
+                <asp:TemplateField HeaderText="Importação do fechamento" Visible="false">
                     <ItemTemplate>
                         <asp:ImageButton ID="_btnImportacao" runat="server" CommandName="ImportacaoFechamento" SkinID="btDetalhar"
                             CausesValidation="False" />

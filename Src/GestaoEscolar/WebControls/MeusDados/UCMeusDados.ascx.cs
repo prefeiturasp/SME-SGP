@@ -332,7 +332,7 @@ public partial class WebControls_MeusDados_UCMeusDados : MotherUserControl
         // Configura criptografia da senha
         eCriptografa criptografia = (eCriptografa)Enum.Parse(typeof(eCriptografa), Convert.ToString(__SessionWEB.__UsuarioWEB.Usuario.usu_criptografia), true);
         if (!Enum.IsDefined(typeof(eCriptografa), criptografia))
-            criptografia = eCriptografa.TripleDES;
+            criptografia = eCriptografa.SHA512;
 
         try
         {
@@ -344,6 +344,7 @@ public partial class WebControls_MeusDados_UCMeusDados : MotherUserControl
                 if (!string.IsNullOrEmpty(txtNovaSenha.Text))
                 {
                     entityUsuario.usu_senha = txtNovaSenha.Text;
+                    entityUsuario.usu_criptografia = (byte)eCriptografa.SHA512;
                 }
 
                 entityUsuario.usu_email = txtEmail.Text;
@@ -352,7 +353,6 @@ public partial class WebControls_MeusDados_UCMeusDados : MotherUserControl
                 // Grava Log de sistema
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "usu_id: " + entityUsuario.usu_id);
                 Response.Redirect(ApplicationWEB._DiretorioVirtual + ApplicationWEB._PaginaLogoff, false);
-
             }
             else
             {
@@ -393,7 +393,7 @@ public partial class WebControls_MeusDados_UCMeusDados : MotherUserControl
         // Configura criptografia da senha
         eCriptografa criptografia = (eCriptografa)Enum.Parse(typeof(eCriptografa), Convert.ToString(entityUsuario.usu_criptografia), true);
         if (!Enum.IsDefined(typeof(eCriptografa), criptografia))
-            criptografia = eCriptografa.TripleDES;
+            criptografia = eCriptografa.SHA512;
 
         return UtilBO.EqualsSenha(entityUsuario.usu_senha, UtilBO.CriptografarSenha(senhaAtual, criptografia), criptografia);
     }
@@ -411,7 +411,7 @@ public partial class WebControls_MeusDados_UCMeusDados : MotherUserControl
 
         entityUsuario.usu_email = email;
 
-        return !SYS_UsuarioBO.VerificaEmailExistente(entityUsuario);
+        return string.IsNullOrEmpty(entityUsuario.usu_email) || !SYS_UsuarioBO.VerificaEmailExistente(entityUsuario);
     }
 
     /// <summary>
@@ -432,7 +432,7 @@ public partial class WebControls_MeusDados_UCMeusDados : MotherUserControl
             // Configura criptografia da senha
             eCriptografa criptografia = (eCriptografa)Enum.Parse(typeof(eCriptografa), Convert.ToString(entityUsuario.usu_criptografia), true);
             if (!Enum.IsDefined(typeof(eCriptografa), criptografia))
-                criptografia = eCriptografa.TripleDES;
+                criptografia = eCriptografa.SHA512;
 
             return !listaHistoricoSenhas.Any(p => p.ush_senha == UtilBO.CriptografarSenha(novaSenha, criptografia) && p.ush_criptografia == entityUsuario.usu_criptografia);
         }

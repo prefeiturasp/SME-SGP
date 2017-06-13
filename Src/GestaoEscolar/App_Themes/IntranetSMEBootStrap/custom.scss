@@ -1,0 +1,20 @@
+/* Scss Document */
+//bootstrap
+@import "bootstrap/variables";
+
+//fonts
+@import "styles-custom/roboto-fonts";
+@import "styles-custom/materialicons-fonts";
+
+//custom
+@import "styles-custom/custom-variables";
+
+@import "styles-custom/layout-geral";
+
+@import "styles-custom/custom-navbar";
+@import "styles-custom/custom-tabs";
+@import "styles-custom/custom-accordion";
+@import "styles-custom/custom-list-group";
+@import "styles-custom/custom-tables";
+
+@import "styles-custom/layout-impressao";

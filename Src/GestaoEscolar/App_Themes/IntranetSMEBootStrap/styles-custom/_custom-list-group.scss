@@ -1,0 +1,50 @@
+.list-group-item{
+	border:none;
+	border-bottom:1px solid $corBordaPadrao;
+	margin-bottom:0;
+
+	&, &:first-child, &:last-child{
+		@include border-radius(0);
+	}
+}
+
+.list{
+	list-style: none;
+	padding-left:0;
+
+	.list-header{
+		font-weight: bold;
+		color: $brand-secondary;
+		font-size: 1.2rem;
+		display:block;
+	}
+
+	li:not(:first-child){
+		.list-header{
+			margin-top:20px;
+		}
+	}
+
+	.list-item{
+		padding:10px 0;
+		display:block;
+		border-bottom: 1px dotted $corBordaPadrao;
+
+		strong{
+			&:after{
+				content:'\E5C8';
+				font-family: "Material Icons";
+				font-size:16px;
+				line-height: 20px;
+				color:$brand-secondary;
+				display: inline-block;
+				margin: 0 8px;
+				vertical-align: bottom;
+			}
+		}
+	}
+
+	&.sub{
+		padding-left:30px;
+	}
+}

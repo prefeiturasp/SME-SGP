@@ -1,0 +1,586 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GestaoEscolar.Api</name>
+    </assembly>
+    <members>
+        <member name="M:GestaoEscolar.Api.App_Start.AuthenticationFilter.#ctor(System.Boolean)">
+            <summary>
+            Overriden constructor to allow explicit disabling of this
+            filter's behavior. Pass false to disable (same as no filter
+            but declarative)
+            </summary>
+            <param name="active"></param>
+        </member>
+        <member name="M:GestaoEscolar.Api.App_Start.AuthenticationFilter.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Override to Web API filter method to handle Basic Auth check
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="M:GestaoEscolar.Api.App_Start.AuthenticationFilter.AuthHeader(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Parses the Authorization header and creates user credentials
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:GestaoEscolar.Api.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.Models.HelpPageApiModel.ResponseCodes">
+            <summary>
+            Gets the HttpStatusCode associated with this model
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,GestaoEscolar.Api.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,GestaoEscolar.Api.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create one using <see cref="T:GestaoEscolar.Api.Areas.HelpPage.ObjectGenerator"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},GestaoEscolar.Api.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(GestaoEscolar.Api.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,GestaoEscolar.Api.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:GestaoEscolar.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GestaoEscolar.Api.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:GestaoEscolar.Api.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GestaoEscolar.Api.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.ClassificacoesEscolaresController.GetTiposClassificacoesEscolares">
+            <summary>
+            Busca todos tipos de classificações escolares
+            </summary>
+            <returns>Lista de todas o tipos de classificações escolares ativas distintas</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.CargosController.GetCargos">
+            <summary>
+            Busca uma lista de cargos
+            </summary>
+            <returns>Retorna uma lista de cargos</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.CalendariosAnuaisController.GetCalendariosAnuais">
+            <summary>
+            Busca os calendários anuais
+            </summary>
+            <returns>Lista de todos os anos letivos distintos</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.DisciplinaController.GetDisciplinas">
+            <summary>
+            Busca uma lista de disciplina
+            </summary>
+            <returns>Retorna uma lista de disciplina</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TiposDocenteController.GetTiposDocente">
+            <summary>
+            Busca uma lista de tipos de docente
+            </summary>
+            <returns>Retorna uma lista de tipos de docente</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetMinhasTurmas(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Busca dados das minhas turmas de acordo com os filtros
+            </summary>
+            <param name="escolaId">(Obrigarório) Id da escola</param>
+            <param name="unidadeId">(Obrigarório) Id da unidade escolar</param>
+            <param name="calendarioId">(Obrigarório) Id do calendário escolar</param>
+            <param name="cursoId">(Obrigarório) Id do curso</param>
+            <param name="curriculoId">(Obrigarório) Id do currículo</param>
+            <param name="periodoId">(Opcional) Id do período</param>
+            <param name="cicloId">(Opcional) Id do ciclo</param>
+            <param name="codigoTurma">(Opcional) Código da turma</param>
+            <param name="XOrder">(Opcional - Padrão = nome) Coluna que será feita a ordenação: nome, curso, turma ou tipoDocencia</param>
+            <param name="XOrderAsc">(Opcional - Padrão = true) True para crescente e False para decrescente</param>
+            <param name="XPaginationPerPage">(Opcional - Padrão = 10) Número de itens por página</param>
+            <param name="XPaginationCurrentPage">(Opcional - Padrão = 1) Número da página</param>
+            <returns>Retorna um objeto de minhas turmas</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetMinhasTurmasDocente">
+            <summary>
+            Busca dados das minhas turmas do docente
+            </summary>
+            <returns>Retorna um lista de minhas turmas por escola</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetTurmasComponenteCurricular(System.Int64,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte)">
+            <summary>
+            Busca os dados das aulas dadas de acordo com o parâmetro
+            </summary>
+            <param name="turmaDisciplinaId">(Obrigarório) Id da turma disciplina</param>
+            <param name="escolaId">(Obrigarório) Id da escola</param>
+            <param name="unidadeId">(Obrigarório) Id da unidade escolar</param>
+            <param name="calendarioId">(Opcional para docente) Id do calendário escolar</param>
+            <param name="cursoId">(Opcional para docente) Id do curso</param>
+            <param name="curriculoId">(Opcional para docente) Id do currículo</param>
+            <param name="periodoId">(Opcional para docente) Id do período</param>
+            <param name="cicloId">(Opcional para docente) Id do ciclo</param>
+            <param name="turmaId">(Opcional para docente) Id da turma</param>
+            <param name="turmaDocentePosicao">(Opcional para docente) Posição do docente</param>
+            <returns>Retorna objeto de aulas dadas</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.GetPeriodosAulasTurma(System.Int32,System.Int32,System.Int64,System.Byte)">
+            <summary>
+            Busca lista dos períodos e aulas de uma turma
+            </summary>
+            <param name="calendarioId">(Obrigarório) Id do calendário escolar</param>
+            <param name="turmaId">(Obrigarório) Id da turma</param>
+            <param name="turmaDisciplinaId">(Obrigarório) Id da turma disciplina</param>
+            <param name="turmaDocentePosicao">(Obrigarório) Posição do docente</param>
+            <returns>Retorna lista de períodos e aulas de uma turma</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.TurmasController.PutAulasDadasPrevistasTurma(GestaoEscolar.Api.Models.TurmaDisciplinaAulaPrevista)">
+            <summary>
+            Atualiza os períodos de aulas previstas
+            </summary>
+            <param name="turmaDisciplina">Objeto contendo os dados referêntes as turmas previstas que serão alteradas</param>
+            <returns>Mensagem de sucesso ou falha na alteração</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.PeriodosController.GetPeriodos(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Busca uma lista de períodos de acordo com o id do curso, do currículo e do ciclo 
+            </summary>
+            <param name="cursoId">(Obrigarório) Id do curso</param>
+            <param name="curriculoId">(Obrigarório) Id do currículo</param>
+            <param name="cicloId">(Opcional) Id do ciclo</param>
+            <returns>Retorna uma lista de períodos</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.CiclosController.GetCiclos(System.Int32,System.Int32)">
+            <summary>
+            Busca uma lista de ciclos de acordo com o id do curso e do currículo
+            </summary>
+            <param name="cursoId">(Obrigarório) Id do curso</param>
+            <param name="curriculoId">(Obrigarório) Id do currículo</param>
+            <returns>Retorna uma lista de ciclos</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.CursosController.GetCursos(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Busca cursos de acordo com a escola, unidade escolar e o calendário
+            </summary>
+            <param name="escolaId">(Obrigarório) Id da escola</param>
+            <param name="unidadeId">(Obrigarório) Id da unidade escolar</param>
+            <param name="calendarioId">(Obrigarório) Id do calendário escolar</param>
+            <returns>Retorna uma lista de cursos</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.CalendariosEscolaresController.GetCalendarioAnual">
+            <summary>
+            Busca calendários escolares do período anual de acordo com a entidade do usuário
+            </summary>
+            <returns>Retorna uma lista de calendários escolares</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.EscolasController.GetEscolas(System.Nullable{System.Guid})">
+            <summary>
+            Busca escolas de acordo com a permissão do grupo do usuário do token e o id da diretoria
+            </summary>
+            <param name="diretoriaId">(Opcional) Id da diretoria</param>
+            <returns>Retorna uma lista de escolas</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.EscolasController.GetEscolasByFilter(System.Nullable{System.Boolean})">
+            <summary>
+            Busca escolas de acordo com a permissão do grupo do usuário do token e o id da diretoria
+            </summary>
+            <param name="escolasControladas">(Opcional) True para retornar apenas as escolas controladas. False para retornar as escolas não controlas e Não passar nada retorna todas controladas e não controladas, que o grupo do usuário tem permissão</param>
+            <returns>Retorna uma lista de escolas</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.UsuariosController.PostLogin(GestaoEscolar.Api.Models.Usuario)">
+            <summary>
+            Loga o usuário e retorna um token para acessos posteriores
+            </summary>
+            <param name="usuario">Objeto com dados do usuário</param>
+            <returns>Sucesso: token - Erro: Menssagem de validação</returns>
+        </member>
+        <member name="M:GestaoEscolar.Api.Areas.v1.DiretoriasController.GetDiretorias">
+            <summary>
+            Busca diretorias de acordo com a permissão do grupo do usuário do token
+            </summary>
+            <returns>Lista de diretorias</returns>
+        </member>
+    </members>
+</doc>

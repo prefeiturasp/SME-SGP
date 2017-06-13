@@ -705,7 +705,7 @@ namespace MSTech.GestaoEscolar.BLL
         [parametroAcademicoAttributes("Permitir importação de dados para efetivação.", "Permitir importação de dados para efetivação é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         PERMITIR_IMPORTACAO_DADOS_EFETIVACAO
         ,
-
+        
         [parametroAcademicoAttributes("Tipo de evento de liberação do boletim online.", "Tipo de evento de liberação do boletim online é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         TIPO_EVENTO_LIBERACAO_BOLETIM_ONLINE
         ,
@@ -1076,6 +1076,9 @@ namespace MSTech.GestaoEscolar.BLL
 
         [parametroAcademicoAttributes("Nível de ensino que se refere ao curso do ensino médio", "Nível de ensino que se refere ao curso do ensino médio é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         TIPO_NIVEL_ENSINO_MEDIO
+        ,
+        [parametroAcademicoAttributes("Mostrar coluna de relatório pedagógico na consulta de manutenção de aluno", "Mostrar coluna de relatório pedagógico na consulta de manutenção de aluno é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
+        MOSTRAR_COLUNA_RELATORIOPEDAGOGICO_MANUTENCAO_ALUNO
     }   
 
     #endregion Enumerador

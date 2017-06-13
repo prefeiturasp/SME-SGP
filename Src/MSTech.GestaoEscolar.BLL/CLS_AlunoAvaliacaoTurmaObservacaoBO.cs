@@ -67,6 +67,7 @@ namespace MSTech.GestaoEscolar.BLL
             public bool naoVisualizarDados { get; set; }
             public DateTime cap_dataInicio { get; set; }
             public DateTime cap_dataFim { get; set; }
+            public string tur_codigoEOL { get; set; }
         }
 
         #endregion
@@ -662,7 +663,8 @@ namespace MSTech.GestaoEscolar.BLL
                             usuarioAlteracao = dr["usuarioAlteracao"].ToString(),
                             naoVisualizarDados = Convert.ToBoolean(dr["naoVisualizarDados"]),
                             cap_dataInicio = Convert.ToDateTime(dr["cap_dataInicio"]),
-                            cap_dataFim = Convert.ToDateTime(dr["cap_dataFim"])
+                            cap_dataFim = Convert.ToDateTime(dr["cap_dataFim"]),
+                            tur_codigoEOL = dr["tur_codigoEOL"].ToString()
                         }).ToList();
 
             return lista;

@@ -1,4 +1,7 @@
-﻿function jsUCAlunoEfetivacaoObservacaoGeral() {
+﻿
+var erroAPIEOL = false;
+
+function jsUCAlunoEfetivacaoObservacaoGeral() {
 
     $(document).ready(function () {
         createTabs("#divTabs", "input[id$='txtSelectedTab']");
@@ -17,6 +20,58 @@
     $(".frequencia input").each(function () {
         var valorArredondado = AplicaVariacaoFrequencia(parseFloat($(this).val().replace(",", ".")));
         $(this).val(valorArredondado);
+    });
+
+    $()
+
+    $('.ddlResultadoParecerConclusivo').unbind('change').bind('change', function () {
+        var lbl = $('span[id$="lblMensagemResultadoInvalido"]');
+        var lblMensagem = $('span[id$="lblMensagem"]');
+        var lblErro = $('span[id$="lblMensagemResultadoErro"]');
+        if ($('.ddlResultadoParecerConclusivo').children("option").filter(":selected").val() != "-1") {
+            try
+            {
+                VerificarIntegridadeParecerEOL(function (retorno) {
+                    if (retorno == "") {
+                        lbl.addClass('hide');
+                        lblMensagem.addClass('hide');
+                        lblErro.removeClass('hide');
+                        $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
+                        setTimeout('$(\'#divCadastroObservacaoGeral\').scrollTo(0,0);', 0);
+                    }
+                    else if (retorno == "true" || retorno == "True" || retorno == "TRUE") {
+                        lbl.addClass('hide');
+                        lblMensagem.addClass('hide');
+                        lblErro.addClass('hide');
+                    }
+                    else {
+                        if (erroAPIEOL) {
+                            lbl.addClass('hide');
+                            lblMensagem.addClass('hide');
+                            lblErro.removeClass('hide');
+                        }
+                        else {
+                            lbl.removeClass('hide');
+                            lblMensagem.addClass('hide');
+                            lblErro.addClass('hide');
+                        }
+                        $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
+                        setTimeout('$(\'#divCadastroObservacaoGeral\').scrollTo(0,0);', 0);
+                    }
+                });
+            }
+            catch (e)
+            {
+                lbl.addClass('hide');
+                lblMensagem.addClass('hide');
+                lblErro.removeClass('hide');
+                $('select[$(".ddlResultadoParecerConclusivo")]').val("-1");
+            }
+        } else {
+            lbl.addClass('hide');
+            lblMensagem.addClass('hide');
+            lblErro.addClass('hide');
+        }
     });
 
     function AplicaVariacaoFrequencia(result) {
@@ -81,6 +136,32 @@ function LimitarCaracter(idCampo, idContador, TamMax) {
 
     var Caracteres = (idCampo).value.length;
     $(idCampo).next($(idContador)).html(Caracteres + "/" + TamMax);
+}
+
+function VerificarIntegridadeParecerEOL(onComplete) {
+    var codigoEOLTurma = $('input[id$="hdnCodigoEOLTurma"]').val();
+    var codigoEOLAluno = $('input[id$="hdnCodigoEOLAluno"]').val();
+    var resultado = $('.ddlResultadoParecerConclusivo').children("option").filter(":selected").text();
+
+    var retorno = "false";
+    erroAPIEOL = false;
+
+    $.ajax({
+        type: "POST",
+        url: pageName + "/VerificarIntegridadeParecerEOL",
+        data: '{ "CodigoEOLTurma": "' + codigoEOLTurma + '", "CodigoEOLAluno": "' + codigoEOLAluno + '", "resultado": "' + resultado + '", "chamadaJavaScript": "true"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            retorno = data.d;
+        },
+        error: function (data, success, error) {
+            erroAPIEOL = true;
+        },
+        complete: function (data) {
+            onComplete(retorno);
+        }
+    });
 }
 
 // Insere as funções na lista de funcões - será chamado no Init.js.

@@ -12,10 +12,14 @@
 <asp:UpdatePanel ID="updObservacao" runat="server" UpdateMode="Always">
     <ContentTemplate>
         <asp:Label ID="lblMensagem" runat="server"></asp:Label>
+        <asp:Label ID="lblMensagemResultadoInvalido" runat="server" CssClass="hide"></asp:Label>
+        <asp:Label ID="lblMensagemResultadoErro" runat="server" CssClass="hide"></asp:Label>
         <asp:Panel ID="pnlObservacao" runat="server">
             <div class="dados-aluno clearfix">
                 <div class="div-inline">
                     <asp:HiddenField ID="hdnTipoFechamento" runat="server" />
+                    <asp:HiddenField ID="hdnCodigoEOLTurma" runat="server" />
+                    <asp:HiddenField ID="hdnCodigoEOLAluno" runat="server" />
                     <asp:Image runat="server" ID="imgFotoAluno" />
                 </div>
                 <div class="div-inline">
@@ -87,9 +91,8 @@
                         <div id="divParecerConclusivo" class="div-inline align-middle div-parecer-conclusivo" runat="server">
                             <asp:HiddenField ID="hfDataUltimaAlteracaoParecerConclusivo" runat="server" />
                             <asp:Label ID="lblParecerConclusivo" runat="server" Text="<%$ Resources:Mensagens, MSG_RESULTADOEFETIVACAO %>" Font-Bold="true" AssociatedControlID="ddlResultado"></asp:Label>
-                            <asp:DropDownList ID="ddlResultado" runat="server"></asp:DropDownList>
-                        </div>
-                        <br />
+                            <asp:DropDownList ID="ddlResultado" runat="server" CssClass="ddlResultadoParecerConclusivo"></asp:DropDownList>
+                        </div><br />
                         <br />
                         <div id="divInseridoPor" runat="server">
                             <asp:Label ID="lblHistoricoParecer" runat="server" Text=""></asp:Label>

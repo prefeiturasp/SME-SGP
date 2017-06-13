@@ -132,12 +132,13 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Plano de aula">
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="btnPlanoAula" runat="server" SkinID="btAulas" CommandArgument='<%# Container.DataItemIndex %>' CommandName="PlanoAula" ToolTip="Adicionar ou editar o plano de aula" />
+                                        <asp:ImageButton ID="btnPlanoAula" runat="server" SkinID="btAulas" CommandArgument='<%# Container.DataItemIndex %>' CommandName="PlanoAula" ToolTip="Adicionar ou editar o plano de aula" 
+                                           style="height:20px;width:20px;border-width:0px;"/>
                                         <asp:Image ID="imgPlanoAulaSituacao" runat="server" SkinID="imgConfirmar" ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.imgPlanoAulaSituacao %>"
                                             Width="16px" Height="16px" Visible="false" ImageAlign="Top" />
                                         <asp:Image ID="imgPlanoAulaSituacaoIncompleta" runat="server" SkinID="imgConfirmarAmarelo" Visible="false"
                                             ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.imgPlanoAulaSituacaoIncompleta %>" Width="16px" Height="16px" ImageAlign="Top" />
-                                        <asp:Image ID="imgSemPlanoAula" runat="server" SkinID="imgStatusAlertaAulaSemPlano" Visible="false" ImageAlign="Top" Width="20px" Height="20px" />
+                                        <asp:Image ID="imgSemPlanoAula" runat="server" SkinID="imgAviso" Visible="false" ImageAlign="AbsMiddle" Width="16px" Height="16px" />
                                     </ItemTemplate>
                                     <HeaderStyle CssClass="center" HorizontalAlign="Center" />
                                     <ItemStyle CssClass="center grid-responsive-item-inline grid-responsive-center" HorizontalAlign="Center" />
@@ -181,8 +182,8 @@
                             <asp:Literal ID="lit2" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemSubstitutoRegencia %>"></asp:Literal>
                         </div>
                         <div id="divAvisoAulaSemPlano" runat="server" style="float: left; width: 100%;" visible="false">
-                            <asp:Image ID="imgLegendaAvisoAulaSemPlano" runat="server" SkinID="imgStatusAlertaAulaSemPlano"
-                                ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>" Width="18px" Height="18px" ImageAlign="AbsMiddle" />
+                            <asp:Image ID="imgLegendaAvisoAulaSemPlano" runat="server" SkinID="imgAviso"
+                                ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>" Width="18px" Height="18px" ImageAlign="AbsMiddle"/>
                             <asp:Literal ID="lit3" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>"></asp:Literal>
                         </div>
 

@@ -1,0 +1,62 @@
+@using System.Web.Http
+@using GestaoEscolar.Api.Areas.HelpPage.Models
+@model HelpPageApiModel
+
+@{ 
+    var description = Model.ApiDescription;
+    bool hasParameters = description.ParameterDescriptions.Count > 0;
+    bool hasRequestSamples = Model.SampleRequests.Count > 0;
+    bool hasResponseSamples = Model.SampleResponses.Count > 0;
+}
+<h1>@description.HttpMethod.Method @description.RelativePath</h1>
+<div>
+    @if (description.Documentation != null)
+    {
+        <p>@description.Documentation</p>
+    }
+    else
+    {
+        <p></p>
+    }
+
+    @if (Model.ResponseCodes != null)
+    {
+        <h2>Possíveis códigos de retorno</h2>
+        <ul>
+            @foreach (var code in Model.ResponseCodes)
+            {
+                <li>@code (@((int)code))</li>
+            }
+        </ul>
+    }
+
+    @if (hasParameters || hasRequestSamples)
+    {
+        <h2>Informação da requisição</h2>
+        if (hasParameters)
+        {
+            <h3>Parâmetros</h3>
+            @Html.DisplayFor(apiModel => apiModel.ApiDescription.ParameterDescriptions, "Parameters")
+        }
+        if (hasRequestSamples)
+        {
+            <h3>Formato da requisição</h3>
+            @Html.DisplayFor(apiModel => apiModel.SampleRequests, "Samples")
+        }
+    } 
+
+    @if (hasResponseSamples)
+    {
+        <h2>Informação da resposta</h2>
+        if (description.ResponseDescription.Documentation != null)
+        {
+            <p>@description.ResponseDescription.Documentation</p>
+        }
+        else
+        {
+            <p>-</p>
+        }
+        <h3>Formato da resposta</h3>
+        @Html.DisplayFor(apiModel => apiModel.SampleResponses, "Samples")
+    }
+</div>

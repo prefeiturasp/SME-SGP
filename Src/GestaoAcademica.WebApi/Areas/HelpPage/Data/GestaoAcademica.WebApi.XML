@@ -42,6 +42,20 @@
             </summary>
             <param name="actionContext"></param>
         </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.alunoAnotacaoController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoTurmaEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados das anotações do aluno, tanto do docente como da equipe gestora.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma.</param>
+            <returns>Objeto com os dados das anotações.</returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.alunoJustificativaFaltaController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados das justificativas do aluno.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+            <returns>Objeto com os dados das justificativas.</returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.aluno_fechamento_pendenciaController.GetFila">
             <summary>
             Seleciona a fila de alunoFechamentoPendencia do serviço
@@ -123,6 +137,15 @@
             <param name="dataBase">Id do calendário anual.</param>
             <returns>HttpResponseMessage</returns>
         </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.GetCalendarioPorAluno(System.Int64)">
+            <summary>
+            Seleciona os dados do calendario anual por id do aluno.
+            -- Utilização: URL_API/calendario_anual?alu_id=1
+            -- Parâmetros: id do aluno
+            </summary>
+            <param name="alu_id"></param>
+            <returns></returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.calendarios_anuaisController.Post">
             <summary>
             Persiste os dados do Json.
@@ -164,7 +187,22 @@
             </summary>
             <returns>HttpResponseMessage</returns>
         </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.conselhoClasseController.GetPorMatricula(System.Int64,System.Int32)">
+            <summary>
+            Retorna dados de conselho de classe da matrícula do aluno
+            </summary>
+            <param name="alu_id"></param>
+            <param name="mtu_id"></param>
+            <returns></returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.curriculos_periodoController.GetCurriculoPeriodoPorEscola(System.Int32)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.matriculaTurmaController.Get(System.Int64,System.Int32)">
+            <summary>
+            Seleciona dados da matrícula do aluno
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: id da matricula e id do aluno.</param>
+            <returns>Objeto com os dados da matrícula do aluno.</returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.orientacoes_curricularController.Get(System.Int64)">
             <summary>
             Descrição: Retorna o registro de escola pelo id
@@ -291,6 +329,19 @@
             <returns>HttpResponseMessage</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.movimentacoesController.Get(System.Int64,System.Int32)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.movimentacoesController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoTurmaEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados de algumas movimentações específicas do aluno.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano, id do aluno e id da matrícula na turma..</param>
+            <returns>Objeto com os dados das movimentações.</returns>
+        </member>
+        <member name="T:GestaoAcademica.WebApi.Controllers.parecerConclusivoController">
+            <summary>
+            Recurso parecer conclusivo.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.parecerConclusivoController.GetResultadoAluno(System.Int32,System.String)" -->
         <member name="M:GestaoAcademica.WebApi.Controllers.protocolosController.Get(System.String)">
             <summary>
             Descrição: retorna um registro de protocolo pelo id (Guid)
@@ -324,6 +375,13 @@
             -- Utilização: URL_API/recursos_aula
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.sondagemController.Get(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.AnoAlunoEntradaDTO)">
+            <summary>
+            Descrição: retorna os dados das sondagens que o aluno participou.
+            </summary>
+            <param name="filtros">Objeto com parâmetros de entrada: ano e id do aluno.</param>
+            <returns>Objeto com os dados das sondagens.</returns>
         </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.SyncDiarioClasse.ApiListagemEventosController.GetByEscola(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.BuscaEventosEntradaDTO)">
             <summary>

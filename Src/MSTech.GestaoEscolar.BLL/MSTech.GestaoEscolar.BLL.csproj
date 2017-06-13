@@ -176,6 +176,7 @@
     <Compile Include="ACA_CalendarioEventoBO.cs" />
     <Compile Include="ACA_CalendarioPeriodoBO.cs" />
     <Compile Include="ACA_CompromissoEstudoBO.cs" />
+    <Compile Include="ACA_ConfiguracaoServicoPendenciaBO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaBO.cs" />
     <Compile Include="ACA_CurriculoBO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaBO.cs" />

@@ -7,6 +7,9 @@
 <%@ Register Src="~/WebControls/Fechamento/UCFechamento.ascx" TagName="UCFechamento" TagPrefix="uc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        var pageName = "Fechamento.aspx";
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblMessage" runat="server" EnableViewState="false"></asp:Label>
