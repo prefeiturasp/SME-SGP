@@ -310,6 +310,9 @@
     <Compile Include="CLS_PlanejamentoProjetoBO.cs" />
     <Compile Include="CLS_PlanejamentoProjetoRelacionadaBO.cs" />
     <Compile Include="CLS_QualificadorAtividadeBO.cs" />
+    <Compile Include="CLS_QuestionarioBO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoBO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaBO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaBO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoBO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseBO.cs" />

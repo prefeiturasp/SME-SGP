@@ -252,6 +252,9 @@
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnostico.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjeto.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoRelacionada.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_Questionario.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioConteudo.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioResposta.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativa.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasse.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseAluno.cs" />
@@ -552,6 +555,9 @@
     <Compile Include="CLS_PlanejamentoProjeto.cs" />
     <Compile Include="CLS_PlanejamentoProjetoRelacionada.cs" />
     <Compile Include="CLS_QualificadorAtividade.cs" />
+    <Compile Include="CLS_Questionario.cs" />
+    <Compile Include="CLS_QuestionarioConteudo.cs" />
+    <Compile Include="CLS_QuestionarioResposta.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativa.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasse.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAluno.cs" />
