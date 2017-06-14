@@ -121,6 +121,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEscola.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEvento.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CargaHorariaExtraclasse.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ConfiguracaoServicoPendencia.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplina.cs" />
@@ -403,6 +404,7 @@
     <Compile Include="ACA_AlunoJustificativaFalta.cs" />
     <Compile Include="ACA_AreaConhecimento.cs" />
     <Compile Include="ACA_ArquivoArea.cs" />
+    <Compile Include="ACA_CargaHorariaExtraclasse.cs" />
     <Compile Include="ACA_CompromissoEstudo.cs" />
     <Compile Include="ACA_ConfiguracaoServicoPendencia.cs" />
     <Compile Include="ACA_CurriculoCapitulo.cs" />
