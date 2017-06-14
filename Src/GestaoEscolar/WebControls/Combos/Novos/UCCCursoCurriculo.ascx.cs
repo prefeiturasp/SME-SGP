@@ -503,6 +503,15 @@ namespace GestaoEscolar.WebControls.Combos.Novos
             CarregarCombo(ACA_CursoBO.SelecionaCursoCurriculoPorNivelEnsino(tne_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
         }
 
+        /// <summary>
+        /// Carregar por modalidade de ensino.
+        /// </summary>
+        /// <param name="tme_id"></param>
+        public void CarregarPorModalidadeEnsino(int tme_id)
+        {
+            CarregarCombo(ACA_CursoBO.Seleciona_Cursos_Por_ModalidadeEnsino(tme_id, -1, -1, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
+        }
+
         #endregion Métodos
 
         #region Eventos

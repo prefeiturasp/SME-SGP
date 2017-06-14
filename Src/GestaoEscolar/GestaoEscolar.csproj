@@ -385,6 +385,13 @@
     <Compile Include="Academico\CalendarioAnual\Visualizar.aspx.designer.cs">
       <DependentUpon>Visualizar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\CargaHorariaExtraclasse\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\CargaHorariaExtraclasse\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3041,6 +3048,7 @@
     <Content Include="Academico\Areas\Cadastro.aspx" />
     <Content Include="Academico\Areas\Documentos.aspx" />
     <Content Include="Academico\CalendarioAnual\CadastroLimites.aspx" />
+    <Content Include="Academico\CargaHorariaExtraclasse\Cadastro.aspx" />
     <Content Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx" />
     <Content Include="Academico\ConfiguracaoServicoPendencia\Cadastro.aspx" />
     <Content Include="Academico\ControleSemanal\Busca.aspx" />
