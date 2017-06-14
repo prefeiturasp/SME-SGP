@@ -72,7 +72,8 @@ namespace MSTech.GestaoEscolar.Entities
             dt.Columns.Add("atd_numeroAulasReposicao", typeof(Int32));
             dt.Columns.Add("atd_numeroAulasExterna", typeof(Int32));
             dt.Columns.Add("atd_numeroFaltasExterna", typeof(Int32));
-            dt.Columns.Add("atd_numeroAtividadeExtraclasse", typeof(Decimal));
+            dt.Columns.Add("atd_numeroAtividadeExtraclassePrevista", typeof(Decimal));
+            dt.Columns.Add("atd_numeroAtividadeExtraclasseEntregue", typeof(Decimal));
             return dt;
         }
 	}

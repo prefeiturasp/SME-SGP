@@ -90,6 +90,27 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 				}
 			qs.Parameters.Add(Param);
 
+			Param = qs.NewParameter();
+			Param.DbType = DbType.DateTime;
+			Param.ParameterName = "@qtc_dataCriacao";
+
+			Param.Value = entity.qtc_dataCriacao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.DateTime;
+			Param.ParameterName = "@qtc_dataAlteracao";
+
+			Param.Value = entity.qtc_dataAlteracao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Int32;
+			Param.ParameterName = "@qtc_situacao";
+			Param.Size = 4;
+			Param.Value = entity.qtc_situacao;
+			qs.Parameters.Add(Param);
+
 
 			}
 		}
@@ -143,6 +164,27 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 				{
 					Param.Value = DBNull.Value;
 				}
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.DateTime;
+			Param.ParameterName = "@qtc_dataCriacao";
+
+			Param.Value = entity.qtc_dataCriacao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.DateTime;
+			Param.ParameterName = "@qtc_dataAlteracao";
+
+			Param.Value = entity.qtc_dataAlteracao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Int32;
+			Param.ParameterName = "@qtc_situacao";
+			Param.Size = 4;
+			Param.Value = entity.qtc_situacao;
 			qs.Parameters.Add(Param);
 
 
