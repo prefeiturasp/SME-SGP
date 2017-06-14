@@ -4,9 +4,10 @@
 
 namespace MSTech.GestaoEscolar.BLL
 {
-	using MSTech.Business.Common;
-	using MSTech.GestaoEscolar.Entities;
-	using MSTech.GestaoEscolar.DAL;
+    using MSTech.Business.Common;
+    using MSTech.GestaoEscolar.Entities;
+    using MSTech.GestaoEscolar.DAL;
+    using System.Data;
 
     #region Enumeradores
 
@@ -29,6 +30,20 @@ namespace MSTech.GestaoEscolar.BLL
     /// </summary>
     public class CLS_QuestionarioConteudoBO : BusinessBase<CLS_QuestionarioConteudoDAO, CLS_QuestionarioConteudo>
 	{
-				
-	}
+
+        /// <summary>
+        ///Busca os conteúdos filtrado por questionário
+        /// </summary>
+        /// <param name="qst_id"></param>
+        /// <returns></returns>
+        public static DataTable SelectByQuestionario
+           (
+                int qst_id
+           )
+        {
+            CLS_QuestionarioConteudoDAO dao = new CLS_QuestionarioConteudoDAO();
+            return dao.SelectByQuestionario(qst_id);
+        }
+
+    }
 }

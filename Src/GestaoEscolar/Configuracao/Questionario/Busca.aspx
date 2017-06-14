@@ -36,8 +36,8 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Incluir conteúdos">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnIncluirConteudos" runat="server" CommandName="IncluirConteudos" SkinID="btIncluirConteudos"
-                                    CausesValidation="False" />
+                                <asp:Button ID="btnIncluirConteudos" runat="server" Text="Incluir conteúdos" OnClick="btnIncluirConteudos_Click"
+                                    CausesValidation="False" CommandName="Edit"  PostBackUrl="~/Configuracao/Questionario/BuscaConteudo.aspx" />
                             </ItemTemplate>
                             <HeaderStyle CssClass="center" />
                             <ItemStyle HorizontalAlign="Center" />

@@ -158,6 +158,14 @@ namespace GestaoEscolar.Configuracao.Questionario
             Response.Redirect("~/Configuracao/Questionario/Cadastro.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
+
+        protected void btnIncluirConteudos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Configuracao/Questionario/BuscaConteudo.aspx", false);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+
+
         #endregion
 
         #region Métodos
