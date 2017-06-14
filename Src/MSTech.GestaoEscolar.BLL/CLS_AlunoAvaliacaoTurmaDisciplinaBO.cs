@@ -1596,13 +1596,22 @@ namespace MSTech.GestaoEscolar.BLL
                 dr["atd_numeroFaltasExterna"] = DBNull.Value;
             }
 
-            if (entity.atd_numeroAtividadeExtraclasse > 0)
+            if (entity.atd_numeroAtividadeExtraclassePrevista > 0)
             {
-                dr["atd_numeroAtividadeExtraclasse"] = entity.atd_numeroAtividadeExtraclasse;
+                dr["atd_numeroAtividadeExtraclassePrevista"] = entity.atd_numeroAtividadeExtraclassePrevista;
             }
             else
             {
-                dr["atd_numeroAtividadeExtraclasse"] = DBNull.Value;
+                dr["atd_numeroAtividadeExtraclassePrevista"] = DBNull.Value;
+            }
+
+            if (entity.atd_numeroAtividadeExtraclasseEntregue > 0)
+            {
+                dr["atd_numeroAtividadeExtraclasseEntregue"] = entity.atd_numeroAtividadeExtraclasseEntregue;
+            }
+            else
+            {
+                dr["atd_numeroAtividadeExtraclasseEntregue"] = DBNull.Value;
             }
 
             return dr;

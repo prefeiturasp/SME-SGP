@@ -50,5 +50,23 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// </summary>
 		public virtual byte qtc_tipoResposta { get; set; }
 
+		/// <summary>
+		/// Data de criação do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qtc_dataCriacao] é obrigatório.")]
+		public virtual DateTime qtc_dataCriacao { get; set; }
+
+		/// <summary>
+		/// Data da última alteração do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qtc_dataAlteracao] é obrigatório.")]
+		public virtual DateTime qtc_dataAlteracao { get; set; }
+
+		/// <summary>
+		/// Situação do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qtc_situacao] é obrigatório.")]
+		public virtual int qtc_situacao { get; set; }
+
     }
 }
