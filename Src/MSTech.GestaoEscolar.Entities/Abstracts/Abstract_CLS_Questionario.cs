@@ -33,5 +33,23 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[qst_titulo] é obrigatório.")]
 		public virtual string qst_titulo { get; set; }
 
+		/// <summary>
+		/// Data de criação do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qst_dataCriacao] é obrigatório.")]
+		public virtual DateTime qst_dataCriacao { get; set; }
+
+		/// <summary>
+		/// Data da última alteração do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qst_dataAlteracao] é obrigatório.")]
+		public virtual DateTime qst_dataAlteracao { get; set; }
+
+		/// <summary>
+		/// Situação do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qst_situacao] é obrigatório.")]
+		public virtual int qst_situacao { get; set; }
+
     }
 }

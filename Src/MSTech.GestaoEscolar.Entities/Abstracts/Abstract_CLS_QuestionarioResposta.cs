@@ -51,5 +51,23 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[qtr_permiteAdicionarTexto] é obrigatório.")]
 		public virtual bool qtr_permiteAdicionarTexto { get; set; }
 
+		/// <summary>
+		/// Data de criação do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qtr_dataCriacao] é obrigatório.")]
+		public virtual DateTime qtr_dataCriacao { get; set; }
+
+		/// <summary>
+		/// Data da última alteração do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qtr_dataAlteracao] é obrigatório.")]
+		public virtual DateTime qtr_dataAlteracao { get; set; }
+
+		/// <summary>
+		/// Situação do registro..
+		/// </summary>
+		[MSNotNullOrEmpty("[qtr_situacao] é obrigatório.")]
+		public virtual int qtr_situacao { get; set; }
+
     }
 }
