@@ -1218,12 +1218,33 @@
     <Compile Include="Configuracao\PermissaoDocente\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuracao\Questionario\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\BuscaConteudo.aspx.cs">
+      <DependentUpon>BuscaConteudo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\BuscaConteudo.aspx.designer.cs">
+      <DependentUpon>BuscaConteudo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\Questionario\Cadastro.aspx.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Configuracao\Questionario\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroConteudo.aspx.cs">
+      <DependentUpon>CadastroConteudo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroConteudo.aspx.designer.cs">
+      <DependentUpon>CadastroConteudo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuracao\Recomendacoes\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
@@ -3689,7 +3710,10 @@
     <Content Include="Configuracao\ParametroResultado\Busca.aspx" />
     <Content Include="Configuracao\ParametroResultado\Cadastro.aspx" />
     <Content Include="Configuracao\PermissaoDocente\Cadastro.aspx" />
+    <Content Include="Configuracao\Questionario\Busca.aspx" />
+    <Content Include="Configuracao\Questionario\BuscaConteudo.aspx" />
     <Content Include="Configuracao\Questionario\Cadastro.aspx" />
+    <Content Include="Configuracao\Questionario\CadastroConteudo.aspx" />
     <Content Include="Configuracao\Recomendacoes\Busca.aspx" />
     <Content Include="Configuracao\Recomendacoes\Cadastro.aspx" />
     <Content Include="Configuracao\RelatorioDocumentoAluno\Cadastro.aspx" />
