@@ -94,15 +94,6 @@ namespace GestaoEscolar.Academico.CargaHorariaExtraclasse {
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCCCurriculoPeriodo UCCCurriculoPeriodo;
         
         /// <summary>
-        /// pnlCadastro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlCadastro;
-        
-        /// <summary>
         /// updCadastro control.
         /// </summary>
         /// <remarks>
@@ -119,5 +110,23 @@ namespace GestaoEscolar.Academico.CargaHorariaExtraclasse {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptDisciplinas;
+        
+        /// <summary>
+        /// btnSalvar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

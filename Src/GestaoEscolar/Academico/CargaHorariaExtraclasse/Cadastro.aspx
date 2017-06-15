@@ -23,11 +23,8 @@
                 <uc:UCCCurriculoPeriodo ID="UCCCurriculoPeriodo" runat="server" Obrigatorio="true" MostrarMensagemSelecione="true" ValidationGroup="CargaHorariaExtraclasse" />
             </ContentTemplate>
         </asp:UpdatePanel>
-    </asp:Panel>
-    <asp:Panel ID="pnlCadastro" runat="server" GroupingText="Disciplinas" Visible="false">
         <asp:UpdatePanel ID="updCadastro" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-
                 <asp:Repeater ID="rptDisciplinas" runat="server" OnItemDataBound="rptDisciplinas_ItemDataBound">
                     <HeaderTemplate>
                         <table id="tabela" class="grid grid-responsive-list" cellspacing="0">
@@ -37,14 +34,13 @@
                                         <asp:Label ID="lblDisciplina" runat="server" Text="Disciplina"></asp:Label>
                                     </th>
                                     <th id="thCargaHoraria" runat="server">
-                                        <asp:Label ID="lblCargaHoraria" runat="server" Text="Carga horária de atividade extraclasse"></asp:Label>
+                                        <asp:Label ID="lblCargaHoraria" runat="server" Text="Carga horária de atividade extraclasse *"></asp:Label>
                                     </th>
                                 </tr>
-                                <tr>
-                                    <th></th>
+                                <tr class="gridHeader">
                                     <asp:Repeater ID="rptPeriodoCalendario" runat="server">
                                         <ItemTemplate>
-                                            <th>
+                                            <th class="center">
                                                 <asp:Label ID="lblPeriodoCalendario" runat="server" Text='<%#Bind("tpc_nome") %>'></asp:Label>
                                             </th>
                                         </ItemTemplate>
@@ -56,24 +52,30 @@
                     <ItemTemplate>
                         <tr class="gridRow">
                             <td>
+                                <asp:HiddenField ID="hdnDisId" runat="server" Value='<%#Bind("dis_id") %>' />
                                 <asp:Label ID="lblDisciplina" runat="server" Text='<%#Bind("dis_nome") %>'></asp:Label>
                             </td>
-                            <asp:Repeater ID="rptPeriodoCalendario" runat="server">
+                            <asp:Repeater ID="rptPeriodoCalendario" runat="server" OnItemDataBound="rptPeriodoCalendario_ItemDataBound">
                                 <ItemTemplate>
-                                    <td>
+                                    <td class="center" style="text-align: center;">
                                         <asp:HiddenField ID="hdnTpcId" runat="server" Value='<%#Bind("tpc_id") %>' />
-                                        <asp:TextBox ID="txtCargaHoraria" runat="server" SkinID="Numerico"></asp:TextBox>
+                                        <asp:HiddenField ID="hdnCheId" runat="server" Value="-1" />
+                                        <asp:TextBox ID="txtCargaHoraria" runat="server" CssClass="text4C numeric" MaxLength="4"></asp:TextBox>
                                     </td>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </tr>
                     </ItemTemplate>
                     <FooterTemplate>
-                            </tbody>
+                        </tbody>
                         </table>
                     </FooterTemplate>
                 </asp:Repeater>
             </ContentTemplate>
         </asp:UpdatePanel>
+        <div class="right">
+            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" ValidationGroup="CargaHorariaExtraclasse" />
+            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" CausesValidation="false" />
+        </div>
     </asp:Panel>
 </asp:Content>

@@ -9,12 +9,75 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using System;
     using System.Data;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Description: .
     /// </summary>
     public class ACA_CargaHorariaExtraclasseDAO : Abstract_ACA_CargaHorariaExtraclasseDAO
 	{
+        #region Métodos de consulta
+
+        /// <summary>
+        /// Seleciona as cargas horárias das disciplinas por curso, calendário e período do curso
+        /// </summary>
+        /// <param name="cur_id"></param>
+        /// <param name="crr_id"></param>
+        /// <param name="crp_id"></param>
+        /// <param name="cal_id"></param>
+        /// <returns></returns>
+        public List<ACA_CargaHorariaExtraclasse> SelecionaPorCurriculoPeriodoCalendario(int cur_id, int crr_id, int crp_id, int cal_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CargaHorariaExtraclasse_SelecionaPorCurriculoPeriodoCalendario", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@cur_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = cur_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@crr_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = crr_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@crp_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = crp_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@cal_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = cal_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0 ?
+                    qs.Return.Select().Select(p => DataRowToEntity(p, new ACA_CargaHorariaExtraclasse())).ToList() : new List<ACA_CargaHorariaExtraclasse>();
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        #endregion
+
         #region Métodos sobrescritos
 
         protected override void ParamInserir(QuerySelectStoredProcedure qs, ACA_CargaHorariaExtraclasse entity)
