@@ -14,6 +14,8 @@
     using MSTech.Validation.Exceptions;
     public partial class Cadastro : MotherPageLogado
     {
+        #region Propriedades
+
         private int Cur_id
         {
             get
@@ -50,6 +52,10 @@
 
         private List<ACA_CargaHorariaExtraclasse> LstCargaHoraria;
 
+        #endregion
+
+        #region Page Life Cycle
+
         protected void Page_Load(object sender, EventArgs e)
         {
             UCCCursoCurriculo.IndexChanged += UCCCursoCurriculo_IndexChanged;
@@ -83,6 +89,10 @@
                 lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
             }
         }
+
+        #endregion
+
+        #region Métodos
 
         private void CarregarTela()
         {
@@ -166,6 +176,10 @@
             }
         }
 
+        #endregion
+
+        #region Delegates
+
         private void UCCCursoCurriculo_IndexChanged()
         {
             UCCCalendario.Valor = -1;
@@ -196,6 +210,10 @@
             CarregarTela();
         }
 
+        #endregion
+
+        #region Eventos
+
         protected void rptDisciplinas_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Header ||
@@ -220,13 +238,6 @@
             }
         }
 
-        protected void btnSalvar_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-                Salvar();
-            }
-        }
 
         protected void rptPeriodoCalendario_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -275,9 +286,20 @@
             }
         }
 
+
+        protected void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                Salvar();
+            }
+        }
+
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             RedirecionarPagina("Cadastro.aspx");
         }
+
+        #endregion
     }
 }
