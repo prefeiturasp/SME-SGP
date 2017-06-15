@@ -36,9 +36,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="cur_cargaHorariaExtraClasse"></param>
         /// <param name="cargaAtividadeExtraTotal"></param>
         /// <returns></returns>
-        public static bool VerificaCargaHorariaCursoCalendario(CLS_TurmaAtividadeExtraClasse entity, out decimal dis_cargaHorariaExtraClasse, out decimal cargaAtividadeExtraTotal)
+        public static bool VerificaCargaHorariaCursoCalendario(CLS_TurmaAtividadeExtraClasse entity, int cal_id, out decimal che_cargaHoraria, out decimal cargaAtividadeExtraTotal)
         {
-            return new CLS_TurmaAtividadeExtraClasseDAO().VerificaCargaHorariaCursoCalendario(entity.tud_id, entity.tae_id, entity.tae_cargaHoraria, out dis_cargaHorariaExtraClasse, out cargaAtividadeExtraTotal);
+            return new CLS_TurmaAtividadeExtraClasseDAO().VerificaCargaHorariaCursoCalendario(entity.tud_id, cal_id, entity.tpc_id, entity.tae_id, entity.tae_cargaHoraria, out che_cargaHoraria, out cargaAtividadeExtraTotal);
         }
 
         #endregion Métodos de verificação
@@ -82,7 +82,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static bool Salvar(CLS_TurmaAtividadeExtraClasse entity, byte tud_tipo, bool fechamentoAutomatico, Guid ent_id)
+        public static bool Salvar(CLS_TurmaAtividadeExtraClasse entity, int cal_id, byte tud_tipo, bool fechamentoAutomatico, Guid ent_id)
         {
             if (entity.Validate())
             {
@@ -93,7 +93,7 @@ namespace MSTech.GestaoEscolar.BLL
 
                 decimal dis_cargaHorariaExtraClasse = 0, cargaAtividadeExtraTotal = 0;
 
-                if (VerificaCargaHorariaCursoCalendario(entity, out dis_cargaHorariaExtraClasse, out cargaAtividadeExtraTotal))
+                if (VerificaCargaHorariaCursoCalendario(entity, cal_id, out dis_cargaHorariaExtraClasse, out cargaAtividadeExtraTotal))
                 {
                     throw new ValidationException(string.Format("A soma de carga horária de atividades extraclasse ({0}) está acima da máxima permitida pela disciplina ({1}).", cargaAtividadeExtraTotal, dis_cargaHorariaExtraClasse));
                 }
