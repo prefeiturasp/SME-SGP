@@ -171,6 +171,7 @@
     <Compile Include="Abstracts\Abstract_ACA_TipoDesempenhoAprendizadoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDeficienciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaRelacionadaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDocenteDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoEquipamentoDeficienteDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoEventoDAO.cs" />
@@ -474,6 +475,7 @@
     <Compile Include="ACA_TipoDesempenhoAprendizadoDAO.cs" />
     <Compile Include="ACA_TipoDisciplinaDAO.cs" />
     <Compile Include="ACA_TipoDisciplinaDeficienciaDAO.cs" />
+    <Compile Include="ACA_TipoDisciplinaRelacionadaDAO.cs" />
     <Compile Include="ACA_TipoDocenteDAO.cs" />
     <Compile Include="ACA_TipoEquipamentoDeficienteDAO.cs" />
     <Compile Include="ACA_TipoEventoDAO.cs" />

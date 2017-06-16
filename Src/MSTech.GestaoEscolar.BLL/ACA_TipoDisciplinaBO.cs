@@ -58,6 +58,8 @@ namespace MSTech.GestaoEscolar.BLL
             TerritorioSaber = 4
             ,
             NaoCadastrada = 5
+            ,
+            RecuperacaoParalela = 6
         }
 
         #endregion Enumeradores

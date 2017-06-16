@@ -178,6 +178,7 @@
     <Compile Include="Abstracts\Abstract_ACA_TipoDesempenhoAprendizado.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDeficiencia.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaRelacionada.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDocente.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoEquipamentoDeficiente.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoEvento.cs" />
@@ -428,6 +429,7 @@
     <Compile Include="ACA_TipoCiclo.cs" />
     <Compile Include="ACA_TipoCurriculoPeriodo.cs" />
     <Compile Include="ACA_TipoDisciplinaDeficiencia.cs" />
+    <Compile Include="ACA_TipoDisciplinaRelacionada.cs" />
     <Compile Include="ACA_TipoDocente.cs" />
     <Compile Include="ACA_TipoEventoGrupo.cs" />
     <Compile Include="ACA_TipoJustificativaExclusaoAulas.cs" />

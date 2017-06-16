@@ -231,6 +231,7 @@
     <Compile Include="ACA_TipoDesempenhoAprendizadoBO.cs" />
     <Compile Include="ACA_TipoDisciplinaBO.cs" />
     <Compile Include="ACA_TipoDisciplinaDeficienciaBO.cs" />
+    <Compile Include="ACA_TipoDisciplinaRelacionadaBO.cs" />
     <Compile Include="ACA_TipoDocenteBO.cs" />
     <Compile Include="ACA_TipoEquipamentoDeficienteBO.cs" />
     <Compile Include="ACA_TipoEventoBO.cs" />
