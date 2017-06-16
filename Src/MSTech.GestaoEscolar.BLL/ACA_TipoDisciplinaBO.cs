@@ -616,5 +616,20 @@ namespace MSTech.GestaoEscolar.BLL
             }
             return new ACA_TipoDisciplina();
         }
+
+        /// <summary>
+        /// Retorna todos os tipos de disciplina relacionadas pelo tipo do tipo de disciplina.
+        /// </summary>    
+        /// <param name="tds_id">ID do tipo de disciplina de recuperação paralela</param>
+        /// <param name="tds_tipo">Tipo do tipo de disciplina</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoDisciplinaRelacionadaPorTipo
+        (
+            int tds_id
+            , string tds_tipo
+        )
+        {
+            return new ACA_TipoDisciplinaDAO().SelecionaTipoDisciplinaRelacionadaPorTipo(tds_id, tds_tipo);
+        }
     }
 }

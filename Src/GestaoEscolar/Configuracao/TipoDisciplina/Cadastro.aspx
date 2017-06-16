@@ -61,7 +61,27 @@
         <asp:Label ID="lblQtdeDisciplinaRelacionada" runat="server" Text="<%$ Resources:Configuracao, TipoDisciplina.Cadastro.lblQtdeDisciplinaRelacionada.Text %>" AssociatedControlID="txtQtdeDisciplinaRelacionada"></asp:Label>      
         <asp:TextBox ID="txtQtdeDisciplinaRelacionada" runat="server" MaxLength="3" SkinID="Numerico" Enabled="false"></asp:TextBox>
 
+        <br />
+        <fieldset id="fdsRelacionadas" runat="server" visible="false">
+            <legend>Tipos de componentes curriculares relacionados *</legend>
+            <div></div>
+            <asp:Repeater ID="rptRelacionadas" runat="server">
+                <HeaderTemplate>
+                    <div class="checkboxlist-columns">
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("tds_id") %>' />
+                    <asp:CheckBox ID="ckbRelacionada" runat="server" Text='<%# Eval("tds_nome") %>' Checked='<%# Convert.ToBoolean(Eval("relacionada")) %>' />
+                </ItemTemplate>
+                <FooterTemplate>
+                    </div> 
+                </FooterTemplate>
+            </asp:Repeater>
+        </fieldset>
+
         <div class="right">
+            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CausesValidation="true"
+                OnClick="btnSalvar_Click" />
             <asp:Button ID="_btnCancelar" runat="server" Text="Voltar" CausesValidation="false"
                 OnClick="_btnCancelar_Click" />
         </div>

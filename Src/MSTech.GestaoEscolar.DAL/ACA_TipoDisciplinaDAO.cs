@@ -650,5 +650,49 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
+
+        /// <summary>
+        /// Retorna todos os tipos de disciplina relacionadas pelo tipo do tipo de disciplina.
+        /// </summary>    
+        /// <param name="tds_id">ID do tipo de disciplina de recuperação paralela</param>
+        /// <param name="tds_tipo">Tipo do tipo de disciplina</param>
+        /// <returns>DataTable com os dados</returns>
+        public DataTable SelecionaTipoDisciplinaRelacionadaPorTipo
+        (
+            int tds_id
+            , string tds_tipo
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoDisciplina_SelecionaTipoDisciplinaRelacionadaPorTipo", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Value = tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.String;
+                Param.ParameterName = "@tds_tipo";
+                if (!string.IsNullOrEmpty(tds_tipo))
+                    Param.Value = tds_tipo;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
     }
 }

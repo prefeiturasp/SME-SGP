@@ -131,6 +131,14 @@ public partial class Configuracao_TipoDisciplina_Cadastro : MotherPageLogado
             {
                 ckbAlunoEspecial.Checked = true;
             }
+
+            if (_TipoDisciplina.tds_tipo == (byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela)
+            {
+                DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaTipoDisciplinaRelacionadaPorTipo(_TipoDisciplina.tds_id, ((byte)ACA_TipoDisciplinaBO.TipoDisciplina.Disciplina).ToString());
+                rptRelacionadas.DataSource = dtDisciplinas;
+                rptRelacionadas.DataBind();
+                fdsRelacionadas.Visible = true;
+            }
         }
         catch (Exception ex)
         {
@@ -279,6 +287,11 @@ public partial class Configuracao_TipoDisciplina_Cadastro : MotherPageLogado
     protected void ckbAlunoEspecial_CheckedChanged(object sender, EventArgs e)
     {
         habilitaDivDisciplinaEspecial();
+    }
+
+    protected void btnSalvar_Click(object sender, EventArgs e)
+    {
+
     }
 
     #endregion
