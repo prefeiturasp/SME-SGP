@@ -126,6 +126,10 @@
       <FullPath>IndicadorFrequenciaPeriodoCurso.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>QuantitativoSugestoes.rdl</Name>
+      <FullPath>QuantitativoSugestoes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>RelatorioObjetoAprendizagem.rdl</Name>
       <FullPath>RelatorioObjetoAprendizagem.rdl</FullPath>
     </ProjectItem>
@@ -161,10 +165,6 @@
       <Name>TurmasProgramaSocialFrequencia.rdl</Name>
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
-    <ProjectItem>
-      <Name>QuantitativoSugestoes.rdl</Name>
-      <FullPath>QuantitativoSugestoes.rdl</FullPath>
-    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -184,9 +184,9 @@
       <Options>
         <OutputPath>bin\DebugLocal</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://dev-sql14cli/ReportServer</TargetServerURL>
-        <TargetFolder>/GestaoEscolar/DES_SPO_GestaoPedagogica/</TargetFolder>
-        <TargetDataSourceFolder>/GestaoEscolar/DES_SPO_GestaoPedagogica/</TargetDataSourceFolder>
+        <TargetServerURL>http://10.10.10.54/Reportserver</TargetServerURL>
+        <TargetFolder>/GestaoEscolar/PUB_DEV_SPO_GestaoPedagogica/</TargetFolder>
+        <TargetDataSourceFolder>/GestaoEscolar/PUB_DEV_SPO_GestaoPedagogica/</TargetDataSourceFolder>
       </Options>
     </Configuration>
     <Configuration>
