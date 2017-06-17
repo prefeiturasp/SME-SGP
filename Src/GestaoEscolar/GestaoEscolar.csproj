@@ -910,6 +910,20 @@
     <Compile Include="Classe\LancamentoSondagem\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classe\RelatorioAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\RelatorioAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\RelatorioAtendimento\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\RelatorioAtendimento\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx.cs">
       <DependentUpon>BuscaCabecalhoAvisosTextos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2968,6 +2982,13 @@
     <Compile Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx.designer.cs">
       <DependentUpon>UCPlanejamentoProjetos.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx.cs">
+      <DependentUpon>UCRelatorioAtendimento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx.designer.cs">
+      <DependentUpon>UCRelatorioAtendimento.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\RelatorioPedagogico\imagem.ashx.cs">
       <DependentUpon>imagem.ashx</DependentUpon>
     </Compile>
@@ -3449,6 +3470,8 @@
     <Content Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx" />
     <Content Include="Classe\LancamentoSondagem\Busca.aspx" />
     <Content Include="Classe\LancamentoSondagem\Cadastro.aspx" />
+    <Content Include="Classe\RelatorioAtendimento\Busca.aspx" />
+    <Content Include="Classe\RelatorioAtendimento\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
     <Content Include="Configuracao\FilaFechamento\Busca.aspx" />
     <Content Include="Configuracao\FilaFechamento\Fila.aspx" />
@@ -4337,6 +4360,7 @@
     <Content Include="WebControls\OrientacaoCurricular\UCNivelOrientacao.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoAnual.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx" />
+    <Content Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx" />
     <Content Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx" />
     <Content Include="WebControls\Relatorio\UCDevReportView.ascx" />
