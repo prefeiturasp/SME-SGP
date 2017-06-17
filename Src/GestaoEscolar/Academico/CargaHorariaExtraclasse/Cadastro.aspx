@@ -74,8 +74,12 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <div class="right">
-            <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" ValidationGroup="CargaHorariaExtraclasse" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" CausesValidation="false" />
+            <asp:UpdatePanel ID="updBotoes" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" ValidationGroup="CargaHorariaExtraclasse" />
+                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" CausesValidation="false" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </asp:Panel>
 </asp:Content>

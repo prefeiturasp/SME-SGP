@@ -12,6 +12,7 @@
     using System.Web.UI.HtmlControls;
     using MSTech.GestaoEscolar.Entities;
     using MSTech.Validation.Exceptions;
+    using System.Data;
     public partial class Cadastro : MotherPageLogado
     {
         #region Propriedades
@@ -105,12 +106,16 @@
                     LstTipoPeriodoCalendario = ACA_TipoPeriodoCalendarioBO.SelecionaTipoPeriodoCalendarioPorCalendario(UCCCalendario.Valor, ApplicationWEB.AppMinutosCacheLongo);
 
                     LstCargaHoraria = ACA_CargaHorariaExtraclasseBO.SelecionaPorCurriculoPeriodoCalendario(Cur_id, Crr_id, Crp_id, Cal_id);
+                    using (DataTable dt = ACA_CurriculoDisciplinaBO.SelecionaDisciplinasParaFormacaoTurmaNormal(Cur_id, Crr_id, Crp_id))
+                    {
+                        rptDisciplinas.DataSource = dt;
+                        rptDisciplinas.DataBind();
 
-                    rptDisciplinas.DataSource = ACA_CurriculoDisciplinaBO.SelecionaDisciplinasParaFormacaoTurmaNormal(Cur_id, Crr_id, Crp_id);
-                    rptDisciplinas.DataBind();
-
-                    rptDisciplinas.Visible = btnSalvar.Visible = rptDisciplinas.Items.Count > 0;
+                        rptDisciplinas.Visible = btnSalvar.Visible = dt.Rows.Count > 0;
+                    }
                 }
+
+                updBotoes.Update();
 
                 updCadastro.Update();
             }
@@ -197,6 +202,7 @@
                 UCCCurriculoPeriodo.PermiteEditar = true;
             }
 
+            updBotoes.Update();
             updFiltros.Update();
         }
 
