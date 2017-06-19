@@ -9,8 +9,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-[assembly: OwinStartupAttribute(typeof(AreaAluno.Startup))]
-namespace AreaAluno
+[assembly: OwinStartupAttribute(typeof(GestaoEscolar.Startup))]
+namespace GestaoEscolar
 {
     public partial class Startup
     {
@@ -44,7 +44,6 @@ namespace AreaAluno
                     ClientSecret = IDSSettings.ClientSecret,
                     Scope = IDSSettings.Scope,
                     ResponseType = IDSSettings.ResponseType,
-                    PostLogoutRedirectUri = IDSSettings.RedirectUri,
                     Notifications = new OpenIdConnectAuthenticationNotifications
                     {
                         SecurityTokenValidated = async n =>

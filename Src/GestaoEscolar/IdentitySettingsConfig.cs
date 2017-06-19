@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using System.IO;
 
-namespace AreaAluno
+namespace GestaoEscolar
 {
     public class IdentitySettingsConfig
     {

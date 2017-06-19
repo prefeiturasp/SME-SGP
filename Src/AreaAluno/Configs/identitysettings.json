@@ -1,6 +1,6 @@
 ﻿{
   "Cookies_AuthenticationType": "Cookies",
-  "Cookies_LoginPath": "/Account/Login",
+  "Cookies_LoginPath": "/SAML/Login.aspx",
   "Cookies_CookieName": "AspNet.MSCookies",
   "AuthenticationType": "mstech",
   "SignInAsAuthenticationType": "Cookies",
