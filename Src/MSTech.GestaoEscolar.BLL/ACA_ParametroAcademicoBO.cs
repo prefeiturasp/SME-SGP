@@ -282,10 +282,6 @@ namespace MSTech.GestaoEscolar.BLL
         TIPO_EVENTO_EFETIVACAO_RECUPERACAO
         ,
 
-        [parametroAcademicoAttributes("Tipo de disciplina eletiva do aluno", "", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.integer)]
-        TIPO_DISCIPLINA_ELETIVA_ALUNO
-        ,
-
         [parametroAcademicoAttributes("Intervalo máximo da ação retroativa (dias)", "", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.text)]
         INTERVALO_MAXIMO_ACAO_RETROATIVA
         ,
@@ -1437,44 +1433,6 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
-        /// Valida dados relacionados ao valor do parâmetro, para saber se será possível salvar.
-        /// Parâmetro TIPO_DISCIPLINA_ELETIVA_ALUNO: não pode salvar caso a disciplina já cadastrada ou a que será
-        ///     inserida já possua registros ligados a ela.
-        /// </summary>
-        /// <param name="entity">Parâmetro acadêmico que será salvo</param>
-        private static void ValidaDadosRelacionados(ACA_ParametroAcademico entity)
-        {
-            if ((eChaveAcademico)Enum.Parse(typeof(eChaveAcademico), entity.pac_chave) == eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO)
-            {
-                // Verifica se o parâmetro tipo de disciplina eletiva do aluno atual pode ser alterado
-                int tp_disciplinaAtual = ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, entity.ent_id);
-                int tds_idAtual = tp_disciplinaAtual;
-
-                if (tds_idAtual > 0)
-                {
-                    if (ACA_DisciplinaBO.VerificaTipoDisciplina(tds_idAtual).Rows.Count > 0)
-                    {
-                        throw new ValidationException
-                            ("Não é possível alterar o parâmetro, pois possui outros registros ligados a ele.");
-                    }
-                }
-
-                // Verifica se o novo parâmetro tipo de disciplina eletiva do aluno pode ser utilizado
-                string tp_disciplina = entity.pac_valor;
-                int tds_id = string.IsNullOrEmpty(tp_disciplina) ? -1 : Convert.ToInt32(tp_disciplina);
-
-                if (tds_id == -1)
-                    throw new ValidationException("Tipo de " + CustomResource.GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " é obrigatório.");
-
-                if (ACA_DisciplinaBO.RetornaDisciplinasPorTipo(tds_id).Rows.Count > 0)
-                {
-                    throw new ValidationException
-                        ("Não é possível utilizar o(a) " + CustomResource.GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " , pois possui outros registros ligados a ele(a).");
-                }
-            }
-        }
-
-        /// <summary>
         /// Valida as vigências para parâmetros do tipo Unico ou Multiplo.
         /// Independe de outros registros para inserir.
         /// </summary>
@@ -1567,8 +1525,6 @@ namespace MSTech.GestaoEscolar.BLL
             //Valida a entidade e verifica se o valor do parametro é diferente de nulo
             if ((entity.Validate()))
             {
-                ValidaDadosRelacionados(entity);
-
                 if (tipo == TipoParametroAcademico.Unico || tipo == TipoParametroAcademico.Multiplo)
                 {
                     string msg;

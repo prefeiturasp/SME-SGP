@@ -773,7 +773,6 @@ namespace MSTech.GestaoEscolar.DAL
             int cur_id
             , int esc_id
             , int uni_id
-            , int tds_id
             , Guid ent_id
             , long doc_id = 0
             , Guid usu_id = new Guid()
@@ -813,13 +812,6 @@ namespace MSTech.GestaoEscolar.DAL
                     Param.Value = uni_id;
                 else
                     Param.Value = DBNull.Value;
-                qs.Parameters.Add(Param);
-
-                Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_id";
-                Param.Size = 4;
-                Param.Value = tds_id;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

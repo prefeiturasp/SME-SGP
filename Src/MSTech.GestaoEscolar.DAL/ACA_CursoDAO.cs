@@ -1399,7 +1399,6 @@ namespace MSTech.GestaoEscolar.DAL
         (
             int esc_id
             , int uni_id
-            , int tds_id
             , Guid ent_id
             , int cur_situacao
             , bool mostraEJAModalidades
@@ -1427,16 +1426,6 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.Size = 4;
                 if (uni_id > 0)
                     Param.Value = uni_id;
-                else
-                    Param.Value = DBNull.Value;
-                qs.Parameters.Add(Param);
-
-                Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_id";
-                Param.Size = 4;
-                if (tds_id > 0)
-                    Param.Value = tds_id;
                 else
                     Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);

@@ -66,7 +66,7 @@ namespace MSTech.GestaoEscolar.DAL
             int tds_id
             , int tne_id
             , int tds_base
-            , int tds_idNaoConsiderar
+            , bool desconsiderarRecParalela
             , bool controlarOrdem
             , bool paginado
             , int currentPage
@@ -110,13 +110,10 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_idNaoConsiderar";
-                Param.Size = 4;
-                if (tds_idNaoConsiderar > 0)
-                    Param.Value = tds_idNaoConsiderar;
-                else
-                    Param.Value = DBNull.Value;
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@desconsiderarRecParalela";
+                Param.Size = 1;
+                Param.Value = desconsiderarRecParalela;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -253,7 +250,7 @@ namespace MSTech.GestaoEscolar.DAL
         public DataTable SelectBy_ObjetosAprendizagem
         (
             int cal_ano
-            , int tds_idNaoConsiderar
+            , bool desconsiderarRecParalela
             , bool controlarOrdem
             , int esc_id
             , Guid uad_idSuperior
@@ -264,15 +261,12 @@ namespace MSTech.GestaoEscolar.DAL
             try
             {
                 #region PARAMETROS
-                
+
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_idNaoConsiderar";
-                Param.Size = 4;
-                if (tds_idNaoConsiderar > 0)
-                    Param.Value = tds_idNaoConsiderar;
-                else
-                    Param.Value = DBNull.Value;
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@desconsiderarRecParalela";
+                Param.Size = 1;
+                Param.Value = desconsiderarRecParalela;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -343,7 +337,7 @@ namespace MSTech.GestaoEscolar.DAL
             int tds_id
             , int tne_id
             , int tds_base
-            , int tds_idNaoConsiderar
+            , bool desconsiderarRecParalela
             , bool controlarOrdem
             , bool paginado
             , int currentPage
@@ -387,13 +381,10 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_idNaoConsiderar";
-                Param.Size = 4;
-                if (tds_idNaoConsiderar > 0)
-                    Param.Value = tds_idNaoConsiderar;
-                else
-                    Param.Value = DBNull.Value;
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@desconsiderarRecParalela";
+                Param.Size = 1;
+                Param.Value = desconsiderarRecParalela;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

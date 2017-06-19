@@ -180,21 +180,14 @@ namespace GestaoEscolar.WebControls.Combos
         }
 
         /// <summary>
-        /// Carrega as disciplinas que sejam do tipo Eletiva do aluno (tds_id definido no parâmetro
-        /// acadêmico TIPO_DISCIPLINA_ELETIVA_ALUNO). Somente disciplinas Ativas.
+        /// Carrega as disciplinas que sejam do tipo Eletiva do aluno. Somente disciplinas Ativas.
         /// </summary>
         public void CarregarDisciplinasEletivasAluno(int cur_id, int crr_id)
         {
             try
             {
-                int tds_id = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO
-                    , __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-
-                if (tds_id <= 0)
-                    throw new Exception("Parâmetro 'Tipo de " + GetGlobalResourceObject("Mensagens","MSG_DISCIPLINA") + " eletivo(a)' não está definido.");
-
                 ddlCombo.Items.Clear();
-                ddlCombo.DataSource = ACA_DisciplinaBO.SelecionaPor_Tipo_Curso(cur_id, crr_id, tds_id, ACA_DisciplinaBO.ACA_DisciplinaSituacao.Ativo);
+                ddlCombo.DataSource = ACA_DisciplinaBO.SelecionaPor_Tipo_Curso(cur_id, crr_id, ACA_DisciplinaBO.ACA_DisciplinaSituacao.Ativo);
                 ddlCombo.Items.Insert(0, new ListItem("-- Selecione um(a) " + GetGlobalResourceObject("Mensagens","MSG_DISCIPLINA") + " --", "-1", true));
                 ddlCombo.AppendDataBoundItems = true;
                 ddlCombo.DataBind();
@@ -206,22 +199,15 @@ namespace GestaoEscolar.WebControls.Combos
         }
 
         /// <summary>
-        /// Carrega as disciplinas que sejam do tipo Eletiva do aluno (tds_id definido no parâmetro
-        /// acadêmico TIPO_DISCIPLINA_ELETIVA_ALUNO). Somente disciplinas Ativas e que tenha
+        /// Carrega as disciplinas que sejam do tipo Eletiva do aluno. Somente disciplinas Ativas e que tenha
         /// períodos compatíveis com a escola.
         /// </summary>
         public void CarregarDisciplinasEletivasAlunoPeriodo(int cur_id, int crr_id, int esc_id, int uni_id)
         {
             try
             {
-                int tds_id = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO
-                    , __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-
-                if (tds_id <= 0)
-                    throw new Exception("Parâmetro 'Tipo de " + GetGlobalResourceObject("Mensagens","MSG_DISCIPLINA") + " eletivo(a)' não está definido.");
-
                 ddlCombo.Items.Clear();
-                ddlCombo.DataSource = ACA_DisciplinaBO.SelecionaPor_Tipo_CursoPeriodo(cur_id, crr_id, tds_id, ACA_DisciplinaBO.ACA_DisciplinaSituacao.Ativo, esc_id, uni_id);
+                ddlCombo.DataSource = ACA_DisciplinaBO.SelecionaPor_Tipo_CursoPeriodo(cur_id, crr_id, ACA_DisciplinaBO.ACA_DisciplinaSituacao.Ativo, esc_id, uni_id);
                 ddlCombo.Items.Insert(0, new ListItem("-- Selecione um(a) " + GetGlobalResourceObject("Mensagens","MSG_DISCIPLINA") + " --", "-1", true));
                 ddlCombo.AppendDataBoundItems = true;
                 ddlCombo.DataBind();
