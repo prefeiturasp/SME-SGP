@@ -250,6 +250,10 @@
     <Compile Include="Abstracts\Abstract_CLS_QuestionarioConteudoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_QuestionarioDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_QuestionarioRespostaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoCargoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoGrupoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoQuestionarioDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseDAO.cs" />
@@ -556,6 +560,10 @@
     <Compile Include="CLS_QuestionarioConteudoDAO.cs" />
     <Compile Include="CLS_QuestionarioDAO.cs" />
     <Compile Include="CLS_QuestionarioRespostaDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoCargoDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoGrupoDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoQuestionarioDAO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaDAO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoDAO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseDAO.cs" />

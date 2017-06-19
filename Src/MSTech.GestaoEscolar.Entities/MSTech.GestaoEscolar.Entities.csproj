@@ -257,6 +257,10 @@
     <Compile Include="Abstracts\Abstract_CLS_Questionario.cs" />
     <Compile Include="Abstracts\Abstract_CLS_QuestionarioConteudo.cs" />
     <Compile Include="Abstracts\Abstract_CLS_QuestionarioResposta.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoCargo.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoGrupo.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoQuestionario.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativa.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasse.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseAluno.cs" />
@@ -562,6 +566,10 @@
     <Compile Include="CLS_Questionario.cs" />
     <Compile Include="CLS_QuestionarioConteudo.cs" />
     <Compile Include="CLS_QuestionarioResposta.cs" />
+    <Compile Include="CLS_RelatorioAtendimento.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoCargo.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoGrupo.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoQuestionario.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativa.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasse.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAluno.cs" />
