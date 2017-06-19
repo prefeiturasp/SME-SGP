@@ -2112,17 +2112,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                     }
                 }
 
-                // Recupera a data de saída do aluno na turma/disciplina
-                string sDataSaida = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "mtd_dataSaida"));
-                if (!string.IsNullOrEmpty(sDataSaida))
-                {
-                    DateTime dataSaida = Convert.ToDateTime(sDataSaida);
-                    if (dataSaida.Date < UCNavegacaoTelaPeriodo.cap_dataFim)
-                    {
-                        if (lblNome != null)
-                            lblNome.Text += "<br/>" + "<b>Data de saída:</b> " + dataSaida.ToString("dd/MM/yyyy");
-                    }
-                }
+                // Issue #313 - removi texto de data de saída, pois já traz a informação no nome do aluno.
+                //// Recupera a data de saída do aluno na turma/disciplina
+                //string sDataSaida = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "mtd_dataSaida"));
+                //if (!string.IsNullOrEmpty(sDataSaida))
+                //{
+                //    DateTime dataSaida = Convert.ToDateTime(sDataSaida);
+                //    if (dataSaida.Date < UCNavegacaoTelaPeriodo.cap_dataFim)
+                //    {
+                //        if (lblNome != null)
+                //            lblNome.Text += "<br/>" + "<b>Data de saída:</b> " + dataSaida.ToString("dd/MM/yyyy");
+                //    }
+                //}
             }
         }
 
