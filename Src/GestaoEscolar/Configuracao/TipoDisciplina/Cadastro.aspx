@@ -61,7 +61,7 @@
         <asp:Label ID="lblQtdeDisciplinaRelacionada" runat="server" Text="<%$ Resources:Configuracao, TipoDisciplina.Cadastro.lblQtdeDisciplinaRelacionada.Text %>" AssociatedControlID="txtQtdeDisciplinaRelacionada"></asp:Label>      
         <asp:TextBox ID="txtQtdeDisciplinaRelacionada" runat="server" MaxLength="3" SkinID="Numerico" Enabled="false"></asp:TextBox>
 
-        <br />
+        <br /><br />
         <fieldset id="fdsRelacionadas" runat="server" visible="false">
             <legend>Tipos de componentes curriculares relacionados *</legend>
             <div></div>
@@ -81,7 +81,7 @@
 
         <div class="right">
             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" CausesValidation="true"
-                OnClick="btnSalvar_Click" />
+                OnClick="btnSalvar_Click" Visible="false" />
             <asp:Button ID="_btnCancelar" runat="server" Text="Voltar" CausesValidation="false"
                 OnClick="_btnCancelar_Click" />
         </div>

@@ -60,6 +60,8 @@ namespace MSTech.GestaoEscolar.BLL
             NaoCadastrada = 5
             ,
             RecuperacaoParalela = 6
+            ,
+            AtendimentoEducacionalEspecializado = 7
         }
 
         #endregion Enumeradores
