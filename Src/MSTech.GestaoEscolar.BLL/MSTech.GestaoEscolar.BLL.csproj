@@ -314,11 +314,16 @@
     <Compile Include="CLS_QualificadorAtividadeBO.cs" />
     <Compile Include="CLS_QuestionarioBO.cs" />
     <Compile Include="CLS_QuestionarioConteudoBO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoPreenchimentoBO.cs" />
     <Compile Include="CLS_QuestionarioRespostaBO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaPreenchimentoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoCargoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoGrupoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoQuestionarioBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAlunoBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoBO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaBO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoBO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseBO.cs" />
