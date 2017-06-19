@@ -20,7 +20,7 @@
                 <div align="left">
                     <asp:Button ID="btnNovo" runat="server" Text="Incluir novo conteúdo" CommandName="Edit"
                         CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/CadastroConteudo.aspx"/>
-                    <asp:Button ID="btnCancelar" runat="server" Text="Calcelar" 
+                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" 
                         CausesValidation="false" PostBackUrl="~/Configuracao/Questionario/BuscaQuestionario.aspx" />
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
@@ -47,8 +47,8 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Incluir perguntas">
                             <ItemTemplate>
-                                <asp:Button ID="btnIncluirPerguntas" runat="server" Text="Incluir perguntas" OnClick="btnIncluirPerguntas_Click"
-                                    CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/CadastroPergunta.aspx" CommandName="Edit"/>
+                                <asp:Button ID="btnIncluirRespostas" runat="server" Text="Incluir respostas"
+                                    CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/BuscaResposta.aspx" CommandName="Edit"/>
                             </ItemTemplate>
                             <HeaderStyle CssClass="center" />
                             <ItemStyle HorizontalAlign="Center" />

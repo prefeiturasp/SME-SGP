@@ -65,10 +65,6 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
-        /// <summary>
-        /// Carrega os dados do Questionário nos controles caso seja alteração.
-        /// </summary>
-        /// <param name="qst_id">ID do recurso</param>
         private void _Carregar(int qst_id, int qtc_id)
         {
             try

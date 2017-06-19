@@ -26,7 +26,7 @@ namespace GestaoEscolar.Configuracao.Questionario
         {
             get
             {
-                if (grvResultado.EditIndex > 0)
+                if (grvResultado.EditIndex >= 0)
                     return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[1] ?? 0);
                 else return -1;
             }
@@ -149,10 +149,10 @@ namespace GestaoEscolar.Configuracao.Questionario
                     lblTipoResposta.Text = tipoResposta > 0 ? GestaoEscolarUtilBO.GetEnumDescription((QuestionarioTipoResposta)tipoResposta) : string.Empty;
                 }
 
-                Button btnIncluirPerguntas = (Button)e.Row.FindControl("btnIncluirPerguntas");
-                if (btnIncluirPerguntas != null)
+                Button btnIncluirRespostas = (Button)e.Row.FindControl("btnIncluirRespostas");
+                if (btnIncluirRespostas != null)
                 {
-                    btnIncluirPerguntas.Visible = tipoConteudo == (byte)QuestionarioTipoConteudo.Pergunta;
+                    btnIncluirRespostas.Visible = (tipoConteudo == (byte)QuestionarioTipoConteudo.Pergunta) && !(tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto);
                 }
             }
         }
@@ -193,13 +193,7 @@ namespace GestaoEscolar.Configuracao.Questionario
             // Mostra o total de registros
             UCTotalRegistros1.Total = CLS_QuestionarioConteudoBO.GetTotalRecords();
             ConfiguraColunasOrdenacao(grvResultado);
-        }
-
-        protected void btnIncluirPerguntas_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Configuracao/Questionario/BuscaPergunta.aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
-        }
+        }        
 
         #region Métodos
 

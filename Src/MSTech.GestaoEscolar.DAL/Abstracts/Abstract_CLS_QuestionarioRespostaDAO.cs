@@ -63,13 +63,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.Byte;
-			Param.ParameterName = "@qtr_tipo";
-			Param.Size = 1;
-			Param.Value = entity.qtr_tipo;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
 			Param.DbType = DbType.String;
 			Param.ParameterName = "@qtr_texto";
 			Param.Size = 50;
@@ -129,13 +122,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.ParameterName = "@qtc_id";
 			Param.Size = 4;
 			Param.Value = entity.qtc_id;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Byte;
-			Param.ParameterName = "@qtr_tipo";
-			Param.Size = 1;
-			Param.Value = entity.qtr_tipo;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();

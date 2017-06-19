@@ -33,12 +33,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		public virtual int qtc_id { get; set; }
 
 		/// <summary>
-		/// Tipo da resposta. (1 - Múltipla seleção; 2 - Seleção única; 3 - Texto aberto).
-		/// </summary>
-		[MSNotNullOrEmpty("[qtr_tipo] é obrigatório.")]
-		public virtual byte qtr_tipo { get; set; }
-
-		/// <summary>
 		/// Texto da resposta..
 		/// </summary>
 		[MSValidRange(50)]

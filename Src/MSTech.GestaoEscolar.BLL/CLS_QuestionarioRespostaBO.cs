@@ -8,6 +8,7 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.DAL;
     using System.ComponentModel;
+    using System.Data;
 
     #region Enumeradores
 
@@ -27,7 +28,14 @@ namespace MSTech.GestaoEscolar.BLL
     /// Description: CLS_QuestionarioResposta Business Object. 
     /// </summary>
     public class CLS_QuestionarioRespostaBO : BusinessBase<CLS_QuestionarioRespostaDAO, CLS_QuestionarioResposta>
-	{
-				
-	}
+    {
+        public static DataTable SelectByConteudo
+       (
+            int qtc_id
+       )
+        {
+            CLS_QuestionarioRespostaDAO dao = new CLS_QuestionarioRespostaDAO();
+            return dao.SelectByConteudo(qtc_id);
+        }
+    }
 }

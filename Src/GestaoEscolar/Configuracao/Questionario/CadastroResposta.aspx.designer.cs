@@ -10,106 +10,115 @@
 namespace GestaoEscolar.Configuracao.Questionario {
     
     
-    public partial class BuscaResposta {
+    public partial class CadastroResposta {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// _updMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel _updMessage;
         
         /// <summary>
-        /// lblMessage control.
+        /// _lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
+        protected global::System.Web.UI.WebControls.Label _lblMessage;
         
         /// <summary>
-        /// ValidationSummary1 control.
+        /// ValidationSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
         
         /// <summary>
-        /// updResultado control.
+        /// UCCamposObrigatorios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updResultado;
+        protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios;
         
         /// <summary>
-        /// fdsResultados control.
+        /// UCLoader1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsResultados;
+        protected global::WebControls_Mensagens_UCLoader UCLoader1;
         
         /// <summary>
-        /// UCComboQtdePaginacao1 control.
+        /// _lblTexto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebControls_Combos_UCComboQtdePaginacao UCComboQtdePaginacao1;
+        protected global::System.Web.UI.WebControls.Label _lblTexto;
         
         /// <summary>
-        /// btnNovo control.
+        /// _txtTexto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNovo;
+        protected global::System.Web.UI.WebControls.TextBox _txtTexto;
         
         /// <summary>
-        /// btnCancelar control.
+        /// _rfvTexto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _rfvTexto;
         
         /// <summary>
-        /// grvResultado control.
+        /// _chkPermiteAdicionarTexto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvResultado;
+        protected global::System.Web.UI.WebControls.CheckBox _chkPermiteAdicionarTexto;
         
         /// <summary>
-        /// UCTotalRegistros1 control.
+        /// lblPermiteAdicionarTexto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WebControls_Mensagens_UCTotalRegistros UCTotalRegistros1;
+        protected global::System.Web.UI.WebControls.Label lblPermiteAdicionarTexto;
         
         /// <summary>
-        /// odsResultado control.
+        /// _btnSalvar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource odsResultado;
+        protected global::System.Web.UI.WebControls.Button _btnSalvar;
+        
+        /// <summary>
+        /// _btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button _btnCancelar;
         
         /// <summary>
         /// PreviousPage property.
@@ -117,9 +126,9 @@ namespace GestaoEscolar.Configuracao.Questionario {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new GestaoEscolar.Configuracao.Questionario.BuscaConteudo PreviousPage {
+        public new GestaoEscolar.Configuracao.Questionario.BuscaResposta PreviousPage {
             get {
-                return ((GestaoEscolar.Configuracao.Questionario.BuscaConteudo)(base.PreviousPage));
+                return ((GestaoEscolar.Configuracao.Questionario.BuscaResposta)(base.PreviousPage));
             }
         }
     }

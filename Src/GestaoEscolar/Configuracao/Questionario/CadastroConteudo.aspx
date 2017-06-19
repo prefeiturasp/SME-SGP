@@ -35,7 +35,7 @@
             ControlToValidate="_ddlTipoConteudo" Operator="GreaterThan" ValueToCompare="0"
             Display="Dynamic" ValidationGroup="Conteudo">*</asp:CompareValidator>
         <asp:Label ID="lblTipoResposta" runat="server" Text="Tipo de resposta" AssociatedControlID="_ddlTipoResposta"></asp:Label>
-        <asp:DropDownList ID="_ddlTipoResposta" runat="server" CssClass="wrap150px" Enabled="false" AppendDataBoundItems="True">
+        <asp:DropDownList ID="_ddlTipoResposta" runat="server" CssClass="wrap150px" Enabled="false">
             <asp:ListItem Text="-- Selecione --" Value="0"></asp:ListItem>
             <asp:ListItem Text="Múltipla seleção" Value="1"></asp:ListItem>
             <asp:ListItem Text="Seleção única" Value="2"></asp:ListItem>

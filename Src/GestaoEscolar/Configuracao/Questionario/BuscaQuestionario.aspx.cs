@@ -19,7 +19,9 @@ namespace GestaoEscolar.Configuracao.Questionario
         public int PaginaQuestionario_qst_id {
             get
             {
-                return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[0] ?? 0);
+                if (grvResultado.EditIndex >= 0)
+                    return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[0] ?? 0);
+                else return -1;
             }
             set { }
         }
