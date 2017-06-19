@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Busca.aspx.cs" Inherits="GestaoEscolar.Configuracao.Questionario.Busca" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="BuscaQuestionario.aspx.cs" Inherits="GestaoEscolar.Configuracao.Questionario.Busca" %>
 
 <%@ Register Src="../../WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros" TagPrefix="uc3" %>
 <%@ Register Src="~/WebControls/Combos/UCComboQtdePaginacao.ascx" TagName="UCComboQtdePaginacao" TagPrefix="uc4" %>
@@ -36,7 +36,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Incluir conteúdos">
                             <ItemTemplate>
-                                <asp:Button ID="btnIncluirConteudos" runat="server" Text="Incluir conteúdos" OnClick="btnIncluirConteudos_Click"
+                                <asp:Button ID="btnIncluirConteudos" runat="server" Text="Incluir conteúdos"
                                     CausesValidation="False" CommandName="Edit"  PostBackUrl="~/Configuracao/Questionario/BuscaConteudo.aspx" />
                             </ItemTemplate>
                             <HeaderStyle CssClass="center" />

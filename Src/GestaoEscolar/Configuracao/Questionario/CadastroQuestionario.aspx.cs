@@ -18,7 +18,7 @@ namespace GestaoEscolar.Configuracao.Questionario
         #region PROPRIEDADES
 
 
-        private int _VS_qst_id
+        public int _VS_qst_id
         {
             get
             {
@@ -42,7 +42,7 @@ namespace GestaoEscolar.Configuracao.Questionario
             if (!IsPostBack)
             {
                 if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
-                    _Carregar(PreviousPage.EditItem);
+                    _Carregar(PreviousPage.PaginaQuestionario_qst_id);
                 else
                 {
                     _btnSalvar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
@@ -130,7 +130,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                         __SessionWEB.PostMessages = UtilBO.GetErroMessage("Questionário alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
 
-                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/Questionario/Busca.aspx", false);
+                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/Questionario/BuscaQuestionario.aspx", false);
                     HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
                 else

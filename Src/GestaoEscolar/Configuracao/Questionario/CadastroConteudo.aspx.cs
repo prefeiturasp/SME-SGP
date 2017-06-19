@@ -29,7 +29,7 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
-        private int _VS_qtc_id
+        public int _VS_qtc_id
         {
             get
             {
@@ -49,13 +49,15 @@ namespace GestaoEscolar.Configuracao.Questionario
             {
                 if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
                 {
-                    //_Carregar(PreviousPage.Edit_qst_id, PreviousPage.Edit_qtc_id);
-                    _VS_qst_id = PreviousPage.Edit_qst_id;
+                    //TODO ANA _VS_qst_id está vindo -1 pq?
+                    _Carregar(PreviousPage._VS_qst_id, PreviousPage.PaginaConteudo_qtc_id);
+                    _VS_qst_id = PreviousPage._VS_qst_id;
+                    _VS_qtc_id = PreviousPage.PaginaConteudo_qtc_id;
                 }
 
                 else
                 {
-                    //_btnSalvar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
+                    _btnSalvar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
                 }
 
                 Page.Form.DefaultFocus = _txtTexto.ClientID;
@@ -77,7 +79,9 @@ namespace GestaoEscolar.Configuracao.Questionario
                 _VS_qtc_id = Conteudo.qtc_id;
                 _txtTexto.Text = Conteudo.qtc_texto;
                 _ddlTipoConteudo.SelectedValue = Conteudo.qtc_tipo.ToString();
-                _ddlTipoResposta.SelectedValue = Conteudo.qtc_tipoResposta > 0 ? Conteudo.qtc_tipoResposta.ToString() : "0";
+                _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
+                lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
+                _ddlTipoResposta.SelectedValue = Conteudo.qtc_tipoResposta.ToString();
             }
             catch (Exception e)
             {
@@ -109,8 +113,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                     qst_id = _VS_qst_id
                     ,
                     qtc_id = _VS_qtc_id
-                    ,
-                    IsNew = _VS_qst_id > 0 && _VS_qtc_id > 0
                 };
 
                 CLS_QuestionarioConteudoBO.GetEntity(Conteudo);
@@ -132,6 +134,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                         __SessionWEB.PostMessages = UtilBO.GetErroMessage("Conteúdo alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
 
+                    Session["qst_id"] = _VS_qst_id;
                     Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/Questionario/BuscaConteudo.aspx", false);
                     HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
@@ -157,6 +160,12 @@ namespace GestaoEscolar.Configuracao.Questionario
                 ApplicationWEB._GravaErro(e);
                 _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o conteúdo.", UtilBO.TipoMensagem.Erro);
             }
+        }
+
+        protected void _ddlTipoConteudo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
+            lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
         }
     }
 }

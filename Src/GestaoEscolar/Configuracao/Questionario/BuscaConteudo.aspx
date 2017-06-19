@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="BuscaConteudo.aspx.cs" Inherits="GestaoEscolar.Configuracao.Questionario.BuscaConteudo" %>
-<%@ PreviousPageType VirtualPath="~/Configuracao/Questionario/Busca.aspx" %>
+<%@ PreviousPageType VirtualPath="~/Configuracao/Questionario/BuscaQuestionario.aspx" %>
 <%@ Register Src="../../WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros" TagPrefix="uc3" %>
 <%@ Register Src="~/WebControls/Combos/UCComboQtdePaginacao.ascx" TagName="UCComboQtdePaginacao" TagPrefix="uc4" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -18,11 +18,13 @@
                 <uc4:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao1_IndexChanged" />
                 <br />
                 <div align="left">
-                    <asp:Button ID="btnNovo" runat="server" Text="Incluir novo conteúdo" OnClick="btnNovo_Click"
+                    <asp:Button ID="btnNovo" runat="server" Text="Incluir novo conteúdo" CommandName="Edit"
                         CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/CadastroConteudo.aspx"/>
+                    <asp:Button ID="btnCancelar" runat="server" Text="Calcelar" 
+                        CausesValidation="false" PostBackUrl="~/Configuracao/Questionario/BuscaQuestionario.aspx" />
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
-                    BorderStyle="None" DataKeyNames="qst_id, qtc_id" DataSourceID="odsResultado" AllowCustomPaging="true"
+                    BorderStyle="None" DataKeyNames="qst_id, qtc_id, qtc_tipo, qtc_tipoResposta" DataSourceID="odsResultado" AllowCustomPaging="true"
                     EmptyDataText="A pesquisa não encontrou resultados." OnRowCommand="grvResultado_RowCommand"
                     OnRowDataBound="grvResultado_RowDataBound" AllowSorting="true" EnableModelValidation="true" OnDataBound="grvResultado_DataBound">
                     <Columns>
@@ -33,12 +35,20 @@
                                     PostBackUrl="~/Configuracao/Questionario/CadastroConteudo.aspx" CssClass="wrap400px"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="qtc_tipo" HeaderText="Tipo conteúdo" />
-                        <asp:BoundField DataField="qtc_tipoResposta" HeaderText="Tipo de resposta" />
+                        <asp:TemplateField HeaderText="Tipo de conteúdo">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTipoConteudo" runat="server"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Tipo de resposta">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTipoResposta" runat="server"></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Incluir perguntas">
                             <ItemTemplate>
                                 <asp:Button ID="btnIncluirPerguntas" runat="server" Text="Incluir perguntas" OnClick="btnIncluirPerguntas_Click"
-                                    CausesValidation="False" />
+                                    CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/CadastroPergunta.aspx" CommandName="Edit"/>
                             </ItemTemplate>
                             <HeaderStyle CssClass="center" />
                             <ItemStyle HorizontalAlign="Center" />

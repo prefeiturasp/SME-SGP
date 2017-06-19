@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeBehind="Cadastro.aspx.cs" Inherits="GestaoEscolar.Configuracao.Questionario.Cadastro"
+    CodeBehind="CadastroQuestionario.aspx.cs" Inherits="GestaoEscolar.Configuracao.Questionario.Cadastro"
     ValidateRequest="false" %>
-<%@ PreviousPageType VirtualPath="~/Configuracao/Questionario/Busca.aspx" %>
+<%@ PreviousPageType VirtualPath="~/Configuracao/Questionario/BuscaQuestionario.aspx" %>
 <%@ Register Src="../../WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios"
     TagPrefix="uc1" %>
 <%@ Register Src="../../WebControls/Mensagens/UCLoader.ascx" TagName="UCLoader" TagPrefix="uc2" %>

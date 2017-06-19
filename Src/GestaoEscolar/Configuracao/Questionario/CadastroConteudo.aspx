@@ -22,21 +22,28 @@
         <asp:TextBox ID="_txtTexto" runat="server" CssClass="wrap150px" SkinID="text30C"></asp:TextBox>
         <asp:RequiredFieldValidator ID="_rfvTexto" runat="server" ErrorMessage="Texto do conteúdo é obrigatório."
             ControlToValidate="_txtTexto" ValidationGroup="Conteudo">*</asp:RequiredFieldValidator>
-        <asp:Label ID="lblTipoConteudo" runat="server" Text="Tipo de conteúdo" AssociatedControlID="_ddlTipoConteudo"></asp:Label>
-        <asp:DropDownList ID="_ddlTipoConteudo" runat="server" CssClass="wrap150px">
+        <asp:Label ID="lblTipoConteudo" runat="server" Text="Tipo de conteúdo *" AssociatedControlID="_ddlTipoConteudo"></asp:Label>
+        <asp:DropDownList ID="_ddlTipoConteudo" runat="server" CssClass="wrap150px" 
+            OnSelectedIndexChanged="_ddlTipoConteudo_SelectedIndexChanged" AutoPostBack="true">
             <asp:ListItem Text="-- Selecione --" Value="0"></asp:ListItem>
             <asp:ListItem Text="Título 1" Value="1"></asp:ListItem>
             <asp:ListItem Text="Título 2" Value="2"></asp:ListItem>
             <asp:ListItem Text="Texto" Value="3"></asp:ListItem>
             <asp:ListItem Text="Pergunta" Value="4"></asp:ListItem>
         </asp:DropDownList>
+        <asp:CompareValidator ID="_cpvTipoConteudo" runat="server" ErrorMessage="Tipo de conteúdo é obrigatório."
+            ControlToValidate="_ddlTipoConteudo" Operator="GreaterThan" ValueToCompare="0"
+            Display="Dynamic" ValidationGroup="Conteudo">*</asp:CompareValidator>
         <asp:Label ID="lblTipoResposta" runat="server" Text="Tipo de resposta" AssociatedControlID="_ddlTipoResposta"></asp:Label>
-        <asp:DropDownList ID="_ddlTipoResposta" runat="server" CssClass="wrap150px" Enabled="false">
+        <asp:DropDownList ID="_ddlTipoResposta" runat="server" CssClass="wrap150px" Enabled="false" AppendDataBoundItems="True">
             <asp:ListItem Text="-- Selecione --" Value="0"></asp:ListItem>
             <asp:ListItem Text="Múltipla seleção" Value="1"></asp:ListItem>
             <asp:ListItem Text="Seleção única" Value="2"></asp:ListItem>
             <asp:ListItem Text="Texto aberto" Value="3"></asp:ListItem>
         </asp:DropDownList>
+        <asp:CompareValidator ID="_cpvTipoResposta" runat="server" ErrorMessage="Tipo de resposta é obrigatório."
+            ControlToValidate="_ddlTipoResposta" Operator="GreaterThan" ValueToCompare="0"
+            Display="Dynamic" ValidationGroup="Conteudo" Visible="false">*</asp:CompareValidator>
         <div class="right">
             <asp:Button ID="_btnSalvar" runat="server" Text="Salvar" OnClick="_btnSalvar_Click" ValidationGroup="Conteudo" />
             <asp:Button ID="_btnCancelar" runat="server" Text="Cancelar" CausesValidation="false"

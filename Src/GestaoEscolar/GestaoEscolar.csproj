@@ -1232,12 +1232,12 @@
     <Compile Include="Configuracao\PermissaoDocente\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Configuracao\Questionario\Busca.aspx.cs">
-      <DependentUpon>Busca.aspx</DependentUpon>
+    <Compile Include="Configuracao\Questionario\BuscaQuestionario.aspx.cs">
+      <DependentUpon>BuscaQuestionario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Configuracao\Questionario\Busca.aspx.designer.cs">
-      <DependentUpon>Busca.aspx</DependentUpon>
+    <Compile Include="Configuracao\Questionario\BuscaQuestionario.aspx.designer.cs">
+      <DependentUpon>BuscaQuestionario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuracao\Questionario\BuscaConteudo.aspx.cs">
       <DependentUpon>BuscaConteudo.aspx</DependentUpon>
@@ -1246,12 +1246,19 @@
     <Compile Include="Configuracao\Questionario\BuscaConteudo.aspx.designer.cs">
       <DependentUpon>BuscaConteudo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Configuracao\Questionario\Cadastro.aspx.cs">
-      <DependentUpon>Cadastro.aspx</DependentUpon>
+    <Compile Include="Configuracao\Questionario\BuscaResposta.aspx.cs">
+      <DependentUpon>BuscaResposta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Configuracao\Questionario\Cadastro.aspx.designer.cs">
-      <DependentUpon>Cadastro.aspx</DependentUpon>
+    <Compile Include="Configuracao\Questionario\BuscaResposta.aspx.designer.cs">
+      <DependentUpon>BuscaResposta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroQuestionario.aspx.cs">
+      <DependentUpon>CadastroQuestionario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroQuestionario.aspx.designer.cs">
+      <DependentUpon>CadastroQuestionario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuracao\Questionario\CadastroConteudo.aspx.cs">
       <DependentUpon>CadastroConteudo.aspx</DependentUpon>
@@ -3733,9 +3740,10 @@
     <Content Include="Configuracao\ParametroResultado\Busca.aspx" />
     <Content Include="Configuracao\ParametroResultado\Cadastro.aspx" />
     <Content Include="Configuracao\PermissaoDocente\Cadastro.aspx" />
-    <Content Include="Configuracao\Questionario\Busca.aspx" />
+    <Content Include="Configuracao\Questionario\BuscaQuestionario.aspx" />
     <Content Include="Configuracao\Questionario\BuscaConteudo.aspx" />
-    <Content Include="Configuracao\Questionario\Cadastro.aspx" />
+    <Content Include="Configuracao\Questionario\BuscaResposta.aspx" />
+    <Content Include="Configuracao\Questionario\CadastroQuestionario.aspx" />
     <Content Include="Configuracao\Questionario\CadastroConteudo.aspx" />
     <Content Include="Configuracao\Recomendacoes\Busca.aspx" />
     <Content Include="Configuracao\Recomendacoes\Cadastro.aspx" />

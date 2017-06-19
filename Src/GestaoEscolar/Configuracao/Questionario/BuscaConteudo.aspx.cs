@@ -16,10 +16,22 @@ namespace GestaoEscolar.Configuracao.Questionario
     {
         #region Constantes
 
-        protected const int IndexOfColunaIncluirPerguntas = 3;
+        protected const int IndexOfColunaIncluirRespostas = 3;
         protected const int IndexOfColunaTipoResposta = 2;
+        protected const int IndexOfColunaTipoConteudo = 1;
 
         #endregion
+
+        public int PaginaConteudo_qtc_id
+        {
+            get
+            {
+                if (grvResultado.EditIndex > 0)
+                    return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[1] ?? 0);
+                else return -1;
+            }
+            set { }
+        }
 
         private int _VS_qtc_id
         {
@@ -35,22 +47,18 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
-        public int Edit_qst_id
+        public int _VS_qst_id
         {
             get
             {
-                return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[0] ?? 0);
+                if (ViewState["_VS_qst_id"] != null)
+                    return Convert.ToInt32(ViewState["_VS_qst_id"]);
+                return -1;
             }
-            set { }
-        }
-
-        public int Edit_qtc_id
-        {
-            get
+            set
             {
-                return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[1] ?? 0);
+                ViewState["_VS_qst_id"] = value;
             }
-            set { }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -82,7 +90,13 @@ namespace GestaoEscolar.Configuracao.Questionario
                     }
 
                     if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
-                        _VS_qtc_id = PreviousPage.Edit_qst_id;
+                        _VS_qst_id = PreviousPage.PaginaQuestionario_qst_id;
+                    else
+                    {
+                        int qst_id = !String.IsNullOrEmpty(Session["qst_id"].ToString()) ? Convert.ToInt32(Session["qst_id"]) : -1;
+                        if (qst_id > 0)
+                            _VS_qst_id = qst_id;
+                    }
 
                     Pesquisar();
 
@@ -95,14 +109,8 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                 // Permissões da pagina
                 //TODO[ANA]
-                //btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
+                btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
             }
-        }
-
-        protected void btnNovo_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Configuracao/Questionario/CadastroConteudo.aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
         protected void grvResultado_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -125,6 +133,26 @@ namespace GestaoEscolar.Configuracao.Questionario
                 {
                     btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
+                }
+
+                byte tipoConteudo = Convert.ToByte(grvResultado.DataKeys[e.Row.RowIndex].Values["qtc_tipo"].ToString());
+                byte tipoResposta = Convert.ToByte(grvResultado.DataKeys[e.Row.RowIndex].Values["qtc_tipoResposta"].ToString());
+
+                Label lblTipoConteudo = (Label)e.Row.FindControl("lblTipoConteudo");
+                if (lblTipoConteudo != null)
+                {
+                    lblTipoConteudo.Text = GestaoEscolarUtilBO.GetEnumDescription((QuestionarioTipoConteudo)tipoConteudo);
+                }
+                Label lblTipoResposta = (Label)e.Row.FindControl("lblTipoResposta");
+                if (lblTipoResposta != null)
+                {
+                    lblTipoResposta.Text = tipoResposta > 0 ? GestaoEscolarUtilBO.GetEnumDescription((QuestionarioTipoResposta)tipoResposta) : string.Empty;
+                }
+
+                Button btnIncluirPerguntas = (Button)e.Row.FindControl("btnIncluirPerguntas");
+                if (btnIncluirPerguntas != null)
+                {
+                    btnIncluirPerguntas.Visible = tipoConteudo == (byte)QuestionarioTipoConteudo.Pergunta;
                 }
             }
         }
@@ -188,7 +216,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                 grvResultado.PageIndex = 0;
                 odsResultado.SelectParameters.Clear();
-                odsResultado.SelectParameters.Add("qst_id", _VS_qtc_id.ToString());
+                odsResultado.SelectParameters.Add("qst_id", _VS_qst_id.ToString());
 
                 // quantidade de itens por página
                 string qtItensPagina = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.QT_ITENS_PAGINACAO);

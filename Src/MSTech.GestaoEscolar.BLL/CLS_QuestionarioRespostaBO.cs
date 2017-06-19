@@ -4,19 +4,20 @@
 
 namespace MSTech.GestaoEscolar.BLL
 {
-	using MSTech.Business.Common;
-	using MSTech.GestaoEscolar.Entities;
-	using MSTech.GestaoEscolar.DAL;
+    using MSTech.Business.Common;
+    using MSTech.GestaoEscolar.Entities;
+    using MSTech.GestaoEscolar.DAL;
+    using System.ComponentModel;
 
     #region Enumeradores
 
-    public enum TipoResposta
+    public enum QuestionarioTipoResposta
     {
-        [StringValue("Múltipla seleção")]
+        [Description("Múltipla seleção")]
         MultiplaSelecao = 1,
-        [StringValue("Seleção única")]
+        [Description("Seleção única")]
         SelecaoUnica,
-        [StringValue("Texto aberto")]
+        [Description("Texto aberto")]
         TextoAberto
     }
 

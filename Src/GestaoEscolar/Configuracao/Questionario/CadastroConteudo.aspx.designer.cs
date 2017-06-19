@@ -103,6 +103,15 @@ namespace GestaoEscolar.Configuracao.Questionario {
         protected global::System.Web.UI.WebControls.DropDownList _ddlTipoConteudo;
         
         /// <summary>
+        /// _cpvTipoConteudo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator _cpvTipoConteudo;
+        
+        /// <summary>
         /// lblTipoResposta control.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,15 @@ namespace GestaoEscolar.Configuracao.Questionario {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList _ddlTipoResposta;
+        
+        /// <summary>
+        /// _cpvTipoResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator _cpvTipoResposta;
         
         /// <summary>
         /// _btnSalvar control.

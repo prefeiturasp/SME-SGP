@@ -16,8 +16,7 @@ namespace GestaoEscolar.Configuracao.Questionario
     {
         #region Propriedades
 
-        public int Edit_qst_id
-        {
+        public int PaginaQuestionario_qst_id {
             get
             {
                 return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[0] ?? 0);
@@ -25,11 +24,17 @@ namespace GestaoEscolar.Configuracao.Questionario
             set { }
         }
 
-        public int EditItem
+        public int _VS_qst_id
         {
             get
             {
-                return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Value);
+                if (ViewState["_VS_qst_id"] != null)
+                    return Convert.ToInt32(ViewState["_VS_qst_id"]);
+                return -1;
+            }
+            set
+            {
+                ViewState["_VS_qst_id"] = value;
             }
         }
 
@@ -158,13 +163,6 @@ namespace GestaoEscolar.Configuracao.Questionario
             Response.Redirect("~/Configuracao/Questionario/Cadastro.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
-
-        protected void btnIncluirConteudos_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Configuracao/Questionario/BuscaConteudo.aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
-        }
-
 
         #endregion
 

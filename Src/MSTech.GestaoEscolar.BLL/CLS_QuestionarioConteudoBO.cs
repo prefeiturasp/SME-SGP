@@ -8,18 +8,19 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.DAL;
     using System.Data;
+    using System.ComponentModel;
 
     #region Enumeradores
 
-    public enum TipoConteudo
+    public enum QuestionarioTipoConteudo
     {
-        [StringValue("Título 1")]
+        [Description("Título 1")]
         Titulo1 = 1,
-        [StringValue("Título 2")]
+        [Description("Título 2")]
         Titulo2,
-        [StringValue("Texto")]
+        [Description("Texto")]
         Texto,
-        [StringValue("Pergunta")]
+        [Description("Pergunta")]
         Pergunta
     }
 
