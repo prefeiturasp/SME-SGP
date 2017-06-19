@@ -151,7 +151,6 @@ namespace MSTech.GestaoEscolar.DAL
         (
             int cur_id
             , int crr_id
-            , int tds_id
             , byte dis_situacao
         )
         {
@@ -171,13 +170,6 @@ namespace MSTech.GestaoEscolar.DAL
             Param.ParameterName = "@crr_id";
             Param.Size = 4;
             Param.Value = crr_id;
-            qs.Parameters.Add(Param);
-
-            Param = qs.NewParameter();
-            Param.DbType = DbType.Int32;
-            Param.ParameterName = "@tds_id";
-            Param.Size = 4;
-            Param.Value = tds_id;
             qs.Parameters.Add(Param);
 
             Param = qs.NewParameter();
@@ -212,7 +204,6 @@ namespace MSTech.GestaoEscolar.DAL
         (
             int cur_id
             , int crr_id
-            , int tds_id
             , byte dis_situacao
             , int esc_id
             , int uni_id
@@ -234,13 +225,6 @@ namespace MSTech.GestaoEscolar.DAL
             Param.ParameterName = "@crr_id";
             Param.Size = 4;
             Param.Value = crr_id;
-            qs.Parameters.Add(Param);
-
-            Param = qs.NewParameter();
-            Param.DbType = DbType.Int32;
-            Param.ParameterName = "@tds_id";
-            Param.Size = 4;
-            Param.Value = tds_id;
             qs.Parameters.Add(Param);
 
             Param = qs.NewParameter();

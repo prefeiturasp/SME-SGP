@@ -438,7 +438,7 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         /// <param name="cur_situacao">Situação do curso</param>
         public void CarregarComDisciplinaEletiva(int esc_id, int uni_id, int cur_situacao, bool mostraEJAModalidades = false)
         {
-            CarregarCombo(ACA_CursoBO.SelectCursoComDisciplinaEletiva(esc_id, uni_id, ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id), __SessionWEB.__UsuarioWEB.Usuario.ent_id, cur_situacao, mostraEJAModalidades, ApplicationWEB.AppMinutosCacheLongo));
+            CarregarCombo(ACA_CursoBO.SelectCursoComDisciplinaEletiva(esc_id, uni_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, cur_situacao, mostraEJAModalidades, ApplicationWEB.AppMinutosCacheLongo));
         }
 
         /// <summary>
