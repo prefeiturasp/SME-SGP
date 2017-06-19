@@ -256,7 +256,6 @@
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoGrupoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoQuestionarioDAO.cs" />
-    <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativaDAO.cs" />
@@ -571,7 +570,6 @@
     <Compile Include="CLS_RelatorioAtendimentoDAO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoGrupoDAO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoQuestionarioDAO.cs" />
-    <Compile Include="CLS_RelatorioPreenchimentoAlunoDAO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoDAO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaDAO.cs" />
