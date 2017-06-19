@@ -21,8 +21,8 @@
         <asp:TextBox ID="_txtTexto" runat="server" CssClass="wrap150px" SkinID="text30C"></asp:TextBox>
         <asp:RequiredFieldValidator ID="_rfvTexto" runat="server" ErrorMessage="Texto da resposta é obrigatório."
             ControlToValidate="_txtTexto" ValidationGroup="Resposta">*</asp:RequiredFieldValidator>
-        <asp:CheckBox ID="_chkPermiteAdicionarTexto" runat="server" />
-        <asp:Label ID="lblPermiteAdicionarTexto" runat="server" AssociatedControlID="_chkPermiteAdicionarTexto" Text="Permite adicionar texto"></asp:Label>
+        <br />
+        <asp:CheckBox ID="_chkPermiteAdicionarTexto" runat="server" Text="Permite adicionar texto"/>
         <div class="right">
             <asp:Button ID="_btnSalvar" runat="server" Text="Salvar" OnClick="_btnSalvar_Click" ValidationGroup="Resposta" />
             <asp:Button ID="_btnCancelar" runat="server" Text="Cancelar" CausesValidation="false"

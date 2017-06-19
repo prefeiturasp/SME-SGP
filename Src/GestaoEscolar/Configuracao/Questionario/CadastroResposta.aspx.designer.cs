@@ -94,15 +94,6 @@ namespace GestaoEscolar.Configuracao.Questionario {
         protected global::System.Web.UI.WebControls.CheckBox _chkPermiteAdicionarTexto;
         
         /// <summary>
-        /// lblPermiteAdicionarTexto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPermiteAdicionarTexto;
-        
-        /// <summary>
         /// _btnSalvar control.
         /// </summary>
         /// <remarks>

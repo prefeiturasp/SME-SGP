@@ -34,9 +34,9 @@
                                     PostBackUrl="~/Configuracao/Questionario/Cadastro.aspx" CssClass="wrap400px"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Incluir conteúdos">
+                        <asp:TemplateField HeaderText="Incluir conteúdo">
                             <ItemTemplate>
-                                <asp:Button ID="btnIncluirConteudos" runat="server" Text="Incluir conteúdos"
+                                <asp:Button ID="btnIncluirConteudos" runat="server" Text="Incluir conteúdo"
                                     CausesValidation="False" CommandName="Edit"  PostBackUrl="~/Configuracao/Questionario/BuscaConteudo.aspx" />
                             </ItemTemplate>
                             <HeaderStyle CssClass="center" />
@@ -55,7 +55,7 @@
                 <uc3:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvResultado" />
                 <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="GetSelect" TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioBO"
                     StartRowIndexParameterName="currentPage" EnablePaging="True" MaximumRowsParameterName="pageSize"
-            SelectCountMethod="GetTotalRecords" ></asp:ObjectDataSource>
+                    SelectCountMethod="GetTotalRecords" ></asp:ObjectDataSource>
             </fieldset>
         </ContentTemplate>
     </asp:UpdatePanel>

@@ -45,9 +45,9 @@
                                 <asp:Label ID="lblTipoResposta" runat="server"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Incluir perguntas">
+                        <asp:TemplateField HeaderText="Incluir resposta">
                             <ItemTemplate>
-                                <asp:Button ID="btnIncluirRespostas" runat="server" Text="Incluir respostas"
+                                <asp:Button ID="btnIncluirRespostas" runat="server" Text="Incluir resposta"
                                     CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/BuscaResposta.aspx" CommandName="Edit"/>
                             </ItemTemplate>
                             <HeaderStyle CssClass="center" />
