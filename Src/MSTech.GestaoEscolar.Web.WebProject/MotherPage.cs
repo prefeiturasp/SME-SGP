@@ -343,24 +343,29 @@ namespace MSTech.GestaoEscolar.Web.WebProject
             {
                 if (HttpContext.Current.User.Identity.IsAuthenticated)
                 {
-                    var identity = HttpContext.Current.User.Identity as FormsIdentity;
-                    if (identity != null)
+                    //var identity = HttpContext.Current.User.Identity as FormsIdentity;
+                    //if (identity != null)
+                    //{
+                    var identity = HttpContext.Current.User.Identity;
+                    var entityId = identity.GetEntityId();
+                    var usuLogin = identity.GetUsuLogin();
+                    if (identity != null && entityId != null && usuLogin != null)
                     {
-                        // Recupera Ticket de autenticação gravado em Cookie
-                        FormsIdentity id = identity;
-                        FormsAuthenticationTicket ticket = id.Ticket;
+
+                        //    // Recupera Ticket de autenticação gravado em Cookie
+                        //    FormsIdentity id = identity;
+                        //FormsAuthenticationTicket ticket = id.Ticket;
 
                         // Carrega usuário na session através do ticket de authenticação
                         __SessionWEB.__UsuarioWEB.Usuario = new SYS_Usuario
                            {
-                               ent_id = new Guid(UtilBO.GetNameFormsAuthentication(ticket.Name, UtilBO.TypeName.Entidade))
-                               ,
-                               usu_login = UtilBO.GetNameFormsAuthentication(ticket.Name, UtilBO.TypeName.Login)
-                           };
+                               ent_id = new Guid(entityId),
+                               usu_login = usuLogin
+                        };
                         SYS_UsuarioBO.GetSelectBy_ent_id_usu_login(__SessionWEB.__UsuarioWEB.Usuario);
 
                         // Carrega grupo na session através do ticket de autenticação
-                        string gru_id = UtilBO.GetNameFormsAuthentication(ticket.Name, UtilBO.TypeName.Grupo);
+                        var gru_id = identity.GetGrupoId();
                         if (!string.IsNullOrEmpty(gru_id))
                             __SessionWEB.__UsuarioWEB.Grupo = SYS_GrupoBO.GetEntity(new SYS_Grupo { gru_id = new Guid(gru_id) });
                         else

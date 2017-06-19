@@ -35,7 +35,7 @@ namespace GestaoEscolar.Api.Areas.v1
             try
             {
                 var lst = ACA_CursoBO.SelecionaCursoCurriculoCalendarioEscola(escolaId, unidadeId, 0,
-                    __userLogged.Usuario.ent_id, calendarioId, ApplicationWEB.AppMinutosCacheLongo);
+                    __userLogged.Usuario.ent_id, calendarioId, false,  ApplicationWEB.AppMinutosCacheLongo);
 
                 return Request.CreateResponse(HttpStatusCode.OK,
                         lst.Select(p => new Curso
