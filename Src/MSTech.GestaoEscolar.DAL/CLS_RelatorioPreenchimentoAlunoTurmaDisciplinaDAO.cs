@@ -65,13 +65,6 @@ namespace MSTech.GestaoEscolar.DAL
             qs.Parameters.Add(Param);
 
             Param = qs.NewParameter();
-            Param.DbType = DbType.Int64;
-            Param.ParameterName = "@alu_id";
-            Param.Size = 8;
-            Param.Value = entity.alu_id;
-            qs.Parameters.Add(Param);
-
-            Param = qs.NewParameter();
             Param.DbType = DbType.Int32;
             Param.ParameterName = "@ptd_situacao";
             Param.Size = 1;
