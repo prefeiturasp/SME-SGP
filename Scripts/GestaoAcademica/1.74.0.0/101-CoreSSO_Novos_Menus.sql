@@ -66,7 +66,7 @@ SET XACT_ABORT ON
 		,@nomeModulo = 'Relatório de Atendimento Educacional Especializado' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Consulta de relatórios de AEE'
 		,@SiteMap1Url = '~/Classe/RelatorioAtendimento/Busca.aspx'
-		,@SiteMap2Nome = 'Cadastro de relatórios de AEE'
+		,@SiteMap2Nome = 'Lançamento de relatórios de AEE'
 		,@SiteMap2Url = '~/Classe/RelatorioAtendimento/Cadastro.aspx'
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão

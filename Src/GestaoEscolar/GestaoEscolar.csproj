@@ -4266,6 +4266,7 @@
     <Content Include="Includes\jsUCCalendario.js" />
     <Content Include="Includes\jsUCCurriculo.js" />
     <Content Include="Includes\jsUCInformacoesComplementares.js" />
+    <Content Include="Includes\jsUCLancamentoRelatorioAtendimento.js" />
     <Content Include="Includes\jsUCPlanejamentoProjetos.js" />
     <Content Include="Includes\jsUCSelecaoDisciplinaCompartilhada.js" />
     <Content Include="Includes\jsUCTransferencia.js" />

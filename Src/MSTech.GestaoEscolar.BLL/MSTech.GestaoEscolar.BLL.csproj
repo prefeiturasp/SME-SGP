@@ -287,6 +287,7 @@
     <Compile Include="CLS_AlunoAvaliacaoTurmaObservacaoBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaQualidadeBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacaoBO.cs" />
+    <Compile Include="CLS_AlunoDeficienciaDetalheBO.cs" />
     <Compile Include="CLS_AlunoFechamentoBO.cs" />
     <Compile Include="CLS_AlunoFechamentoPendenciaBO.cs" />
     <Compile Include="CLS_AlunoFrequenciaExternaBO.cs" />
