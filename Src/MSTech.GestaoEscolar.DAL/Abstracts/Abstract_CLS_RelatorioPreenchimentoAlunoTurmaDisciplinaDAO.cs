@@ -42,13 +42,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param.Value = entity.reap_id;
                 qs.Parameters.Add(Param);
 
-                Param = qs.NewParameter();
-                Param.DbType = DbType.Int64;
-                Param.ParameterName = "@alu_id";
-                Param.Size = 8;
-                Param.Value = entity.alu_id;
-                qs.Parameters.Add(Param);
-
 
             }
         }
@@ -219,13 +212,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param.ParameterName = "@reap_id";
                 Param.Size = 8;
                 Param.Value = entity.reap_id;
-                qs.Parameters.Add(Param);
-
-                Param = qs.NewParameter();
-                Param.DbType = DbType.Int64;
-                Param.ParameterName = "@alu_id";
-                Param.Size = 8;
-                Param.Value = entity.alu_id;
                 qs.Parameters.Add(Param);
 
 
