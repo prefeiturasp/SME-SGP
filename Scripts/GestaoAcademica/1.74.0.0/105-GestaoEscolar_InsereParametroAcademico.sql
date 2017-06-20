@@ -28,6 +28,16 @@ SET XACT_ABORT ON
 
 	*/
 	
+	Declare @tde_id as uniqueidentifier
+		SELECT @tde_id = tde_id FROM Synonym_PES_TipoDeficiencia WHERE tde_nome = 'DEFICIENCIA MULTIPLA'
+		
+		EXEC MS_InsereParametroAcademico
+		@pac_chave = 'DEFICIENCIA_MULTIPLA' -- Chave do parâmetro. (Obrigatório)
+		,@pac_valor = @tde_id -- Valor do parâmetro. (Obrigatório)
+		,@pac_descricao = 'Indica a deficiência do tipo múltipla, que terá deficiências dependentes.' -- Descrição do parâmetro. (Obrigatório)
+		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
+		,@ent_id = @entId
+	
 -- Fechar transação	
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
