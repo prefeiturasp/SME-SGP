@@ -111,6 +111,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.qtc_situacao;
 			qs.Parameters.Add(Param);
 
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Int32;
+			Param.ParameterName = "@qtc_ordem";
+			Param.Size = 4;
+			Param.Value = entity.qtc_ordem;
+			qs.Parameters.Add(Param);
+
 
 			}
 		}
@@ -185,6 +192,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.ParameterName = "@qtc_situacao";
 			Param.Size = 4;
 			Param.Value = entity.qtc_situacao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Int32;
+			Param.ParameterName = "@qtc_ordem";
+			Param.Size = 4;
+			Param.Value = entity.qtc_ordem;
 			qs.Parameters.Add(Param);
 
 

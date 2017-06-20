@@ -14,13 +14,20 @@ namespace MSTech.GestaoEscolar.DAL
     /// Description: .
     /// </summary>
     public class CLS_QuestionarioConteudoDAO : Abstract_CLS_QuestionarioConteudoDAO
-	{
+    {
         /// <summary>
         ///Busca os conteúdos filtrado por questionário
         /// </summary>
         /// <param name="qst_id"></param>
         /// <returns></returns>
-        public DataTable SelectByQuestionario(int qst_id)
+        public DataTable SelectByQuestionario
+            (
+                bool paginado
+                , int currentPage
+                , int pageSize
+                , int qst_id
+                , out int totalRecords
+            )
         {
             DataTable dt = new DataTable();
 
@@ -41,7 +48,13 @@ namespace MSTech.GestaoEscolar.DAL
 
                 #endregion
 
-                qs.Execute();
+                if (paginado)
+                    totalRecords = qs.Execute(currentPage, pageSize);
+                else
+                {
+                    qs.Execute();
+                    totalRecords = qs.Return.Rows.Count;
+                }
 
                 if (qs.Return.Rows.Count > 0)
                     dt = qs.Return;

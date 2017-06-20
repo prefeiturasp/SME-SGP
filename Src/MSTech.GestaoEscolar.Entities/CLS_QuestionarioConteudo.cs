@@ -12,6 +12,7 @@ namespace MSTech.GestaoEscolar.Entities
     /// <summary>
     /// Description: .
     /// </summary>
+    [Serializable]
     public class CLS_QuestionarioConteudo : Abstract_CLS_QuestionarioConteudo
 	{
         /// <summary>
@@ -59,5 +60,10 @@ namespace MSTech.GestaoEscolar.Entities
         [MSDefaultValue(1)]
         [MSNotNullOrEmpty()]
         public override int qtc_situacao { get; set; }
+
+        /// <summary>
+		/// Ordem do conteúdo..
+		/// </summary>
+        public override int qtc_ordem { get; set; }
     }
 }

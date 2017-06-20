@@ -24,11 +24,11 @@
                         CausesValidation="false" PostBackUrl="~/Configuracao/Questionario/BuscaQuestionario.aspx" />
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
-                    BorderStyle="None" DataKeyNames="qst_id, qtc_id, qtc_tipo, qtc_tipoResposta" DataSourceID="odsResultado" AllowCustomPaging="true"
+                    BorderStyle="None" DataKeyNames="qst_id, qtc_id, qtc_tipo, qtc_tipoResposta, qtc_ordem" DataSourceID="odsResultado" AllowCustomPaging="true"
                     EmptyDataText="A pesquisa não encontrou resultados." OnRowCommand="grvResultado_RowCommand"
                     OnRowDataBound="grvResultado_RowDataBound" AllowSorting="true" EnableModelValidation="true" OnDataBound="grvResultado_DataBound">
                     <Columns>
-                        <asp:TemplateField HeaderText="Texto" SortExpression="qtc_texto">
+                        <asp:TemplateField HeaderText="Texto">
                             <ItemTemplate>
                                 <asp:Label ID="lblAlterar" runat="server" Text='<%# Bind("qtc_texto") %>' CssClass="wrap400px"></asp:Label>
                                 <asp:LinkButton ID="btnAlterar" runat="server" CommandName="Edit" Text='<%# Bind("qtc_texto") %>'
@@ -53,6 +53,16 @@
                             <HeaderStyle CssClass="center" />
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Ordem" SortExpression="qtc_ordem">
+                        <ItemTemplate>
+                            <asp:ImageButton ID="_btnSubir" runat="server" CausesValidation="false" CommandName="Subir"
+                                Height="16" Width="16" />
+                            <asp:ImageButton ID="_btnDescer" runat="server" CausesValidation="false" CommandName="Descer"
+                                Height="16" Width="16" />
+                        </ItemTemplate>
+                        <HeaderStyle CssClass="center" HorizontalAlign="Center" />
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
                         <asp:TemplateField HeaderText="Excluir">
                             <ItemTemplate>
                                 <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Deletar" SkinID="btExcluir"
@@ -64,8 +74,10 @@
                     </Columns>
                 </asp:GridView>
                 <uc3:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvResultado" />
-                <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="SelectByQuestionario" TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioConteudoBO"       
-            SelectCountMethod="GetTotalRecords" ></asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="SelectByQuestionarioPaginado" 
+                    TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioConteudoBO" SelectCountMethod="GetTotalRecords" 
+                    DataObjectTypeName="MSTech.GestaoEscolar.Entities.CLS_QuestionarioConteudo" EnablePaging="True"
+                    OnSelecting="odsResultado_Selecting" MaximumRowsParameterName="pageSize" StartRowIndexParameterName="currentPage"></asp:ObjectDataSource>
             </fieldset>
         </ContentTemplate>
     </asp:UpdatePanel>

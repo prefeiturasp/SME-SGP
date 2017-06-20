@@ -42,7 +42,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 ViewState["_VS_qtc_id"] = value;
             }
         }
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -110,7 +110,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                     ,
                     qtc_id = _VS_qtc_id
                 };
-
+                
                 CLS_QuestionarioConteudoBO.GetEntity(Conteudo);
                 Conteudo.qtc_texto = _txtTexto.Text;
                 Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
