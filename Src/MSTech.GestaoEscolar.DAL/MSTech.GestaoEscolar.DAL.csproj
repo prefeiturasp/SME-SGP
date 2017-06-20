@@ -195,6 +195,8 @@
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoMigracaoRioDAO.cs" />
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoInscricaoCrecheDAO.cs" />
     <Compile Include="Abstracts\Abstract_CFG_CorRelatorioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_DeficienciaDetalheDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_DeficienciaFIlhaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CFG_FaixaRelatorioDAO.cs" />
     <Compile Include="Abstracts\Abstract_CFG_HistoricoConceitoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CFG_HistoricoPedagogicoDAO.cs" />
@@ -495,6 +497,8 @@
     <Compile Include="CFG_ConfiguracaoMigracaoRioDAO.cs" />
     <Compile Include="CFG_ConfiguracaoInscricaoCrecheDAO.cs" />
     <Compile Include="CFG_CorRelatorioDAO.cs" />
+    <Compile Include="CFG_DeficienciaDetalheDAO.cs" />
+    <Compile Include="CFG_DeficienciaFIlhaDAO.cs" />
     <Compile Include="CFG_FaixaRelatorioDAO.cs" />
     <Compile Include="CFG_HistoricoConceitoDAO.cs" />
     <Compile Include="CFG_HistoricoPedagogicoDAO.cs" />

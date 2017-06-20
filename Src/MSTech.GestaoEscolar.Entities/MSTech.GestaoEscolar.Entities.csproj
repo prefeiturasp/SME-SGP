@@ -202,6 +202,8 @@
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoMigracaoRio.cs" />
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoInscricaoCreche.cs" />
     <Compile Include="Abstracts\Abstract_CFG_CorRelatorio.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_DeficienciaDetalhe.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_DeficienciaFIlha.cs" />
     <Compile Include="Abstracts\Abstract_CFG_FaixaRelatorio.cs" />
     <Compile Include="Abstracts\Abstract_CFG_HistoricoConceito.cs" />
     <Compile Include="Abstracts\Abstract_CFG_HistoricoPedagogico.cs" />
@@ -429,6 +431,8 @@
     <Compile Include="ACA_TipoResultado.cs" />
     <Compile Include="ACA_TipoResultadoCurriculoPeriodo.cs" />
     <Compile Include="CFG_CorRelatorio.cs" />
+    <Compile Include="CFG_DeficienciaDetalhe.cs" />
+    <Compile Include="CFG_DeficienciaFIlha.cs" />
     <Compile Include="CFG_HistoricoPedagogico.cs" />
     <Compile Include="CFG_HistoricoPedagogicoTipoCurriculoPeriodo.cs" />
     <Compile Include="CFG_ModuloClasse.cs" />

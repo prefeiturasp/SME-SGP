@@ -261,6 +261,8 @@
     <Compile Include="CFG_ConfiguracaoMigracaoRioBO.cs" />
     <Compile Include="CFG_ConfiguracaoInscricaoCrecheBO.cs" />
     <Compile Include="CFG_CorRelatorioBO.cs" />
+    <Compile Include="CFG_DeficienciaDetalheBO.cs" />
+    <Compile Include="CFG_DeficienciaFIlhaBO.cs" />
     <Compile Include="CFG_FaixaRelatorioBO.cs" />
     <Compile Include="CFG_HistoricoConceitoBO.cs" />
     <Compile Include="CFG_HistoricoPedagogicoBO.cs" />
