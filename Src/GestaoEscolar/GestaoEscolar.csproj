@@ -2891,6 +2891,13 @@
     <Compile Include="WebControls\LancamentoFrequencia\UCLancamentoFrequencia.ascx.designer.cs">
       <DependentUpon>UCLancamentoFrequencia.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\LancamentoRelatorioAtendimento\UCLancamentoRelatorioAtendimento.ascx.cs">
+      <DependentUpon>UCLancamentoRelatorioAtendimento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\LancamentoRelatorioAtendimento\UCLancamentoRelatorioAtendimento.ascx.designer.cs">
+      <DependentUpon>UCLancamentoRelatorioAtendimento.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Mensagens\UCCamposObrigatorios.ascx.cs">
       <DependentUpon>UCCamposObrigatorios.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4372,6 +4379,7 @@
     <Content Include="WebControls\LancamentoAvaliacao\UCCadastroAvaliacao.ascx" />
     <Content Include="WebControls\LancamentoFrequencia\UCLancamentoFrequenciaTerritorio.ascx" />
     <Content Include="WebControls\LancamentoFrequencia\UCLancamentoFrequencia.ascx" />
+    <Content Include="WebControls\LancamentoRelatorioAtendimento\UCLancamentoRelatorioAtendimento.ascx" />
     <Content Include="WebControls\NavegacaoTelaPeriodo\UCNavegacaoTelaPeriodo.ascx" />
     <Content Include="WebControls\OrientacaoCurricular\UCNivelOrientacao.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoAnual.ascx" />
