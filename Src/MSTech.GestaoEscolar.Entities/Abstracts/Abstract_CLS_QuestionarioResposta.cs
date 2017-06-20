@@ -63,5 +63,11 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[qtr_situacao] é obrigatório.")]
 		public virtual int qtr_situacao { get; set; }
 
+		/// <summary>
+		/// Ordem da resposta..
+		/// </summary>
+		[MSNotNullOrEmpty("[qtr_ordem] é obrigatório.")]
+		public virtual int qtr_ordem { get; set; }
+
     }
 }

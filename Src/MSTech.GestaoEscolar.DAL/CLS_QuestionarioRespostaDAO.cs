@@ -15,7 +15,14 @@ namespace MSTech.GestaoEscolar.DAL
     /// </summary>
     public class CLS_QuestionarioRespostaDAO : Abstract_CLS_QuestionarioRespostaDAO
 	{
-        public DataTable SelectByConteudo(int qtc_id)
+        public DataTable SelectByConteudo
+            (   
+                bool paginado
+                , int currentPage
+                , int pageSize
+                , int qtc_id
+                , out int totalRecords
+            )
         {
             DataTable dt = new DataTable();
 
@@ -36,7 +43,13 @@ namespace MSTech.GestaoEscolar.DAL
 
                 #endregion
 
-                qs.Execute();
+                if (paginado)
+                    totalRecords = qs.Execute(currentPage, pageSize);
+                else
+                {
+                    qs.Execute();
+                    totalRecords = qs.Return.Rows.Count;
+                }
 
                 if (qs.Return.Rows.Count > 0)
                     dt = qs.Return;

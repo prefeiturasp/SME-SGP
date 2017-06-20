@@ -137,7 +137,11 @@ namespace GestaoEscolar.Configuracao.Questionario
                 grvResultado.PageSize = itensPagina;
                 // atualiza o grid
                 grvResultado.DataBind();
-                grvResultado.Sort("", SortDirection.Ascending);
+                if (grvResultado.Rows.Count > 0)
+                {
+                    ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                    ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+                }
                 updResultado.Update();
 
             }
@@ -155,6 +159,11 @@ namespace GestaoEscolar.Configuracao.Questionario
             grvResultado.PageIndex = 0;
             // atualiza o grid
             grvResultado.DataBind();
+            if (grvResultado.Rows.Count > 0)
+            {
+                ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+            }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -180,6 +189,11 @@ namespace GestaoEscolar.Configuracao.Questionario
                     {
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
+                        if (grvResultado.Rows.Count > 0)
+                        {
+                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+                        }
                         ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "qtr_id: " + entity.qtr_id + ", qtc_id: " + entity.qtc_id);
                         lblMessage.Text = UtilBO.GetErroMessage("Resposta excluída com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
@@ -192,6 +206,88 @@ namespace GestaoEscolar.Configuracao.Questionario
                 {
                     ApplicationWEB._GravaErro(ex);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao excluir resposta.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+
+            if (e.CommandName == "Subir")
+            {
+                try
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+
+                    int qtr_idDescer = Convert.ToInt32(grvResultado.DataKeys[index - 1]["qtr_id"]);
+                    int qtr_ordemDescer = Convert.ToInt32(grvResultado.DataKeys[index]["qtr_ordem"]);
+                    CLS_QuestionarioResposta entityDescer = new CLS_QuestionarioResposta { qtr_id = qtr_idDescer, qtc_id = _VS_qtc_id };
+                    CLS_QuestionarioRespostaBO.GetEntity(entityDescer);
+                    entityDescer.qtr_ordem = qtr_ordemDescer;
+
+                    int qtr_idSubir = Convert.ToInt32(grvResultado.DataKeys[index]["qtr_id"]);
+                    int qtr_ordemSubir = Convert.ToInt32(grvResultado.DataKeys[index - 1]["qtr_ordem"]);
+                    CLS_QuestionarioResposta entitySubir = new CLS_QuestionarioResposta { qtr_id = qtr_idSubir, qtc_id = _VS_qtc_id };
+                    CLS_QuestionarioRespostaBO.GetEntity(entitySubir);
+                    entitySubir.qtr_ordem = qtr_ordemSubir;
+
+                    if (CLS_QuestionarioRespostaBO.SaveOrdem(entityDescer, entitySubir))
+                    {
+                        grvResultado.DataBind();
+                        grvResultado.PageIndex = 0;
+                        grvResultado.DataBind();
+
+                        if (grvResultado.Rows.Count > 0)
+                        {
+                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+                        }
+                    }
+
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "qtr_id: " + qtr_idSubir + ", qtc_id: " + _VS_qtc_id);
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "qtr_id: " + qtr_idDescer + ", qtc_id: " + _VS_qtc_id);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+                }
+            }
+
+            if (e.CommandName == "Descer")
+            {
+                try
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+
+                    int qtr_idDescer = Convert.ToInt32(grvResultado.DataKeys[index]["qtr_id"]);
+                    int qtr_ordemDescer = Convert.ToInt32(grvResultado.DataKeys[index + 1]["qtr_ordem"]);
+                    CLS_QuestionarioResposta entityDescer = new CLS_QuestionarioResposta { qtr_id = qtr_idDescer, qtc_id = _VS_qtc_id };
+                    CLS_QuestionarioRespostaBO.GetEntity(entityDescer);
+                    entityDescer.qtr_ordem = qtr_ordemDescer;
+
+                    int qtr_idSubir = Convert.ToInt32(grvResultado.DataKeys[index + 1]["qtr_id"]);
+                    int qtr_ordemSubir = Convert.ToInt32(grvResultado.DataKeys[index]["qtr_ordem"]);
+                    CLS_QuestionarioResposta entitySubir = new CLS_QuestionarioResposta { qtr_id = qtr_idSubir, qtc_id = _VS_qtc_id };
+                    CLS_QuestionarioRespostaBO.GetEntity(entitySubir);
+                    entitySubir.qtr_ordem = qtr_ordemSubir;
+
+                    if (CLS_QuestionarioRespostaBO.SaveOrdem(entityDescer, entitySubir))
+                    {
+                        grvResultado.DataBind();
+                        grvResultado.PageIndex = 0;
+                        grvResultado.DataBind();
+
+                        if (grvResultado.Rows.Count > 0)
+                        {
+                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+                        }
+                    }
+
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "qtr_id: " + qtr_idSubir + ", qtc_id: " + _VS_qtc_id);
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "qtr_id: " + qtr_idDescer + ", qtc_id: " + _VS_qtc_id);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
                 }
             }
         }
@@ -223,6 +319,22 @@ namespace GestaoEscolar.Configuracao.Questionario
                 {
                     lblPermiteAdicionarTexto.Text = Convert.ToBoolean(grvResultado.DataKeys[e.Row.RowIndex].Values["qtr_permiteAdicionarTexto"].ToString()) ? "Sim" : "Não";
                 }
+
+                ImageButton _btnSubir = (ImageButton)e.Row.FindControl("_btnSubir");
+                if (_btnSubir != null)
+                {
+                    _btnSubir.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "cima.png";
+                    _btnSubir.CommandArgument = e.Row.RowIndex.ToString();
+                    _btnSubir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                }
+
+                ImageButton _btnDescer = (ImageButton)e.Row.FindControl("_btnDescer");
+                if (_btnDescer != null)
+                {
+                    _btnDescer.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "baixo.png";
+                    _btnDescer.CommandArgument = e.Row.RowIndex.ToString();
+                    _btnDescer.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                }
             }
         }
 
@@ -231,6 +343,12 @@ namespace GestaoEscolar.Configuracao.Questionario
             // Mostra o total de registros
             UCTotalRegistros1.Total = CLS_QuestionarioConteudoBO.GetTotalRecords();
             ConfiguraColunasOrdenacao(grvResultado);
+        }
+
+        protected void odsResultado_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+        {
+            if (e.ExecutingSelectCount)
+                e.InputParameters.Clear();
         }
     }
 }

@@ -54,5 +54,10 @@ namespace MSTech.GestaoEscolar.Entities
         [MSNotNullOrEmpty()]
         public override int qtr_situacao { get; set; }
 
+        /// <summary>
+        /// Ordem da resposta..
+        /// </summary>
+        public override int qtr_ordem { get; set; }
+
     }
 }

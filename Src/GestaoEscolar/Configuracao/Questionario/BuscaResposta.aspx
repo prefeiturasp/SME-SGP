@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="BuscaResposta.aspx.cs" Inherits="GestaoEscolar.Configuracao.Questionario.BuscaResposta" %>
+
 <%@ PreviousPageType VirtualPath="~/Configuracao/Questionario/BuscaConteudo.aspx" %>
 <%@ Register Src="../../WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros" TagPrefix="uc3" %>
 <%@ Register Src="~/WebControls/Combos/UCComboQtdePaginacao.ascx" TagName="UCComboQtdePaginacao" TagPrefix="uc4" %>
@@ -19,12 +20,12 @@
                 <br />
                 <div align="left">
                     <asp:Button ID="btnNovo" runat="server" Text="Incluir nova resposta"
-                        CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/CadastroResposta.aspx"/>
-                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" 
+                        CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/CadastroResposta.aspx" />
+                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar"
                         CausesValidation="false" OnClick="btnCancelar_Click" />
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
-                    BorderStyle="None" DataKeyNames="qtr_id, qtc_id, qtr_texto, qtr_permiteAdicionarTexto" 
+                    BorderStyle="None" DataKeyNames="qtr_id, qtc_id, qtr_texto, qtr_permiteAdicionarTexto, qtr_ordem"
                     DataSourceID="odsResultado" AllowCustomPaging="true"
                     EmptyDataText="A pesquisa não encontrou resultados." OnRowCommand="grvResultado_RowCommand"
                     OnRowDataBound="grvResultado_RowDataBound" AllowSorting="true" EnableModelValidation="true" OnDataBound="grvResultado_DataBound">
@@ -40,7 +41,17 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblPermiteAdicionarTexto" runat="server"></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>                        
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Ordem" SortExpression="qtc_ordem">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="_btnSubir" runat="server" CausesValidation="false" CommandName="Subir"
+                                    Height="16" Width="16" />
+                                <asp:ImageButton ID="_btnDescer" runat="server" CausesValidation="false" CommandName="Descer"
+                                    Height="16" Width="16" />
+                            </ItemTemplate>
+                            <HeaderStyle CssClass="center" HorizontalAlign="Center" />
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Excluir">
                             <ItemTemplate>
                                 <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Deletar" SkinID="btExcluir"
@@ -52,8 +63,10 @@
                     </Columns>
                 </asp:GridView>
                 <uc3:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvResultado" />
-                <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="SelectByConteudo" TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioRespostaBO"       
-            SelectCountMethod="GetTotalRecords" ></asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="SelectByConteudoPaginado" 
+                    TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioRespostaBO" SelectCountMethod="GetTotalRecords"
+                    DataObjectTypeName="MSTech.GestaoEscolar.Entities.CLS_QuestionarioResposta" EnablePaging="True"
+                    OnSelecting="odsResultado_Selecting" MaximumRowsParameterName="pageSize" StartRowIndexParameterName="currentPage"></asp:ObjectDataSource>
             </fieldset>
         </ContentTemplate>
     </asp:UpdatePanel>
