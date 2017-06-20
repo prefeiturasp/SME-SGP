@@ -225,6 +225,7 @@
     <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaObservacaoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaQualidadeDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoAvaliacaoTurmaRecomendacaoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_AlunoDeficienciaDetalheDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoFechamentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoFechamentoPendenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_AlunoFrequenciaExternaDAO.cs" />
@@ -540,6 +541,7 @@
     <Compile Include="CLS_AlunoAvaliacaoTurmaObservacaoDAO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaQualidadeDAO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacaoDAO.cs" />
+    <Compile Include="CLS_AlunoDeficienciaDetalheDAO.cs" />
     <Compile Include="CLS_AlunoFechamentoDAO.cs" />
     <Compile Include="CLS_AlunoFechamentoPendenciaDAO.cs" />
     <Compile Include="CLS_AlunoFrequenciaExternaDAO.cs" />
