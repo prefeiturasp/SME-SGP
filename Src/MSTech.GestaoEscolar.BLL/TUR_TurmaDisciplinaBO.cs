@@ -56,6 +56,8 @@ namespace MSTech.GestaoEscolar.BLL
         Experiencia = 18
         ,
         TerritorioSaber = 19
+        ,
+        AtendimentoEducacionalEspecializado = 20
     }
 
     /// <summary>

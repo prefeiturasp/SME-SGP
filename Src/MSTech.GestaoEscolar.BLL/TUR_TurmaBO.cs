@@ -446,6 +446,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         MultisseriadaDocente = 4
+        ,
+
+        AtendimentoEducacionalEspecializado = 5
     }
 
     /// <summary>
@@ -1344,13 +1347,14 @@ namespace MSTech.GestaoEscolar.BLL
                         totalRecords = 0;
                         DataTable dtDados = dao.SelectBy_Docente_TodosTipos_Posicao(ent_id, doc_id, posicao, esc_id, cal_id, mostrarCodigoNome, turmasNormais, mostraEletivas, out totalRecords);
                         dados = (from DataRow dr in dtDados.Rows
+                                 group dr by dr["tur_id"] into g
                                  select new sComboTurmas
                                  {
-                                     tur_id = dr["tur_id"].ToString(),
-                                     tur_codigo = dr["tur_codigo"].ToString(),
-                                     tur_crp_ttn_id = dr["tur_crp_ttn_id"].ToString(),
-                                     tur_cod_desc_nome = dr["tur_cod_desc_nome"].ToString(),
-                                     tur_esc_nome = dr["tur_esc_nome"].ToString(),
+                                     tur_id = g.First()["tur_id"].ToString(),
+                                     tur_codigo = g.First()["tur_codigo"].ToString(),
+                                     tur_crp_ttn_id = g.First()["tur_crp_ttn_id"].ToString(),
+                                     tur_cod_desc_nome = g.First()["tur_cod_desc_nome"].ToString(),
+                                     tur_esc_nome = g.First()["tur_esc_nome"].ToString(),
                                  }).ToList();
 
                         // Adiciona cache com validade do tempo informado na configuração.
@@ -1370,13 +1374,14 @@ namespace MSTech.GestaoEscolar.BLL
                 totalRecords = 0;
                 DataTable dtDados = dao.SelectBy_Docente_TodosTipos_Posicao(ent_id, doc_id, posicao, esc_id, cal_id, mostrarCodigoNome, turmasNormais, mostraEletivas, out totalRecords);
                 dados = (from DataRow dr in dtDados.Rows
+                         group dr by dr["tur_id"] into g
                          select new sComboTurmas
                          {
-                             tur_id = dr["tur_id"].ToString(),
-                             tur_codigo = dr["tur_codigo"].ToString(),
-                             tur_crp_ttn_id = dr["tur_crp_ttn_id"].ToString(),
-                             tur_cod_desc_nome = dr["tur_cod_desc_nome"].ToString(),
-                             tur_esc_nome = dr["tur_esc_nome"].ToString(),
+                             tur_id = g.First()["tur_id"].ToString(),
+                             tur_codigo = g.First()["tur_codigo"].ToString(),
+                             tur_crp_ttn_id = g.First()["tur_crp_ttn_id"].ToString(),
+                             tur_cod_desc_nome = g.First()["tur_cod_desc_nome"].ToString(),
+                             tur_esc_nome = g.First()["tur_esc_nome"].ToString(),
                          }).ToList();
             }
 

@@ -121,6 +121,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEscola.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEvento.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioPeriodo.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CargaHorariaExtraclasse.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudo.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ConfiguracaoServicoPendencia.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplina.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Abstracts\Abstract_ACA_TipoDesempenhoAprendizado.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDeficiencia.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaRelacionada.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDocente.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoEquipamentoDeficiente.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoEvento.cs" />
@@ -254,6 +256,17 @@
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnostico.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjeto.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoRelacionada.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_Questionario.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioConteudo.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioConteudoPreenchimento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioResposta.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioRespostaPreenchimento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoCargo.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoGrupo.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoQuestionario.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAlunoTurmaDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativa.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasse.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseAluno.cs" />
@@ -402,6 +415,7 @@
     <Compile Include="ACA_AlunoJustificativaFalta.cs" />
     <Compile Include="ACA_AreaConhecimento.cs" />
     <Compile Include="ACA_ArquivoArea.cs" />
+    <Compile Include="ACA_CargaHorariaExtraclasse.cs" />
     <Compile Include="ACA_CompromissoEstudo.cs" />
     <Compile Include="ACA_ConfiguracaoServicoPendencia.cs" />
     <Compile Include="ACA_CurriculoCapitulo.cs" />
@@ -425,6 +439,7 @@
     <Compile Include="ACA_TipoCiclo.cs" />
     <Compile Include="ACA_TipoCurriculoPeriodo.cs" />
     <Compile Include="ACA_TipoDisciplinaDeficiencia.cs" />
+    <Compile Include="ACA_TipoDisciplinaRelacionada.cs" />
     <Compile Include="ACA_TipoDocente.cs" />
     <Compile Include="ACA_TipoEventoGrupo.cs" />
     <Compile Include="ACA_TipoJustificativaExclusaoAulas.cs" />
@@ -556,6 +571,17 @@
     <Compile Include="CLS_PlanejamentoProjeto.cs" />
     <Compile Include="CLS_PlanejamentoProjetoRelacionada.cs" />
     <Compile Include="CLS_QualificadorAtividade.cs" />
+    <Compile Include="CLS_Questionario.cs" />
+    <Compile Include="CLS_QuestionarioConteudo.cs" />
+    <Compile Include="CLS_QuestionarioConteudoPreenchimento.cs" />
+    <Compile Include="CLS_QuestionarioResposta.cs" />
+    <Compile Include="CLS_QuestionarioRespostaPreenchimento.cs" />
+    <Compile Include="CLS_RelatorioAtendimento.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoCargo.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoGrupo.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoQuestionario.cs" />
+    <Compile Include="CLS_RelatorioPreenchimento.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplina.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativa.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasse.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAluno.cs" />

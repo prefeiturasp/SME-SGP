@@ -27,6 +27,7 @@ namespace MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida
         public string parecerFinal { get; set; }
         public string parecerConclusivo { get; set; }
         public bool recuperacao { get; set; }
+        public bool aee { get; set; }
         public string disRelacionadas { get; set; }
 
         public List<BuscaBoletimEscolarDosAlunosSaidaNotasDTO> notas { get; set; }

@@ -131,6 +131,15 @@ public partial class Configuracao_TipoDisciplina_Cadastro : MotherPageLogado
             {
                 ckbAlunoEspecial.Checked = true;
             }
+
+            if (_TipoDisciplina.tds_tipo == (byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela)
+            {
+                DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaTipoDisciplinaRelacionadaPorTipo(_TipoDisciplina.tds_id, ((byte)ACA_TipoDisciplinaBO.TipoDisciplina.Disciplina).ToString());
+                rptRelacionadas.DataSource = dtDisciplinas;
+                rptRelacionadas.DataBind();
+                fdsRelacionadas.Visible = true;
+                btnSalvar.Visible = true;
+            }
         }
         catch (Exception ex)
         {
@@ -279,6 +288,47 @@ public partial class Configuracao_TipoDisciplina_Cadastro : MotherPageLogado
     protected void ckbAlunoEspecial_CheckedChanged(object sender, EventArgs e)
     {
         habilitaDivDisciplinaEspecial();
+    }
+
+    protected void btnSalvar_Click(object sender, EventArgs e)
+    {
+        List<ACA_TipoDisciplinaRelacionada> lstRelacionadas = new List<ACA_TipoDisciplinaRelacionada>();
+        if (rptRelacionadas.Visible)
+        {
+            try
+            {                
+                foreach (RepeaterItem dis in rptRelacionadas.Items)
+                {
+                    HiddenField hdnId = (HiddenField)dis.FindControl("hdnId");
+                    CheckBox ckbRelacionada = (CheckBox)dis.FindControl("ckbRelacionada");
+                    if (ckbRelacionada.Checked)
+                    {
+                        lstRelacionadas.Add(new ACA_TipoDisciplinaRelacionada { tds_id = _VS_tds_id, tds_idRelacionada = Convert.ToInt32(hdnId.Value) });
+                        ACA_TipoDisciplinaRelacionada disRelacionada = new ACA_TipoDisciplinaRelacionada();
+                    }
+                }
+
+                if (lstRelacionadas.Count() > 0)
+                {
+                    ACA_TipoDisciplinaRelacionadaBO.Save(lstRelacionadas);
+
+                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Tipo de componente curricular salvo com sucesso.", UtilBO.TipoMensagem.Sucesso);
+
+                    Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/TipoDisciplina/Busca.aspx", false);
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar tipo de componente curricular.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+        
+        if (lstRelacionadas.Count() == 0)
+        {
+            _lblMessage.Text = UtilBO.GetErroMessage("Tipo de componente curricular relacionado é obrigatório.", UtilBO.TipoMensagem.Alerta);
+        }
     }
 
     #endregion

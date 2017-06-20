@@ -2112,17 +2112,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                     }
                 }
 
-                // Recupera a data de saída do aluno na turma/disciplina
-                string sDataSaida = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "mtd_dataSaida"));
-                if (!string.IsNullOrEmpty(sDataSaida))
-                {
-                    DateTime dataSaida = Convert.ToDateTime(sDataSaida);
-                    if (dataSaida.Date < UCNavegacaoTelaPeriodo.cap_dataFim)
-                    {
-                        if (lblNome != null)
-                            lblNome.Text += "<br/>" + "<b>Data de saída:</b> " + dataSaida.ToString("dd/MM/yyyy");
-                    }
-                }
+                // Issue #313 - removi texto de data de saída, pois já traz a informação no nome do aluno.
+                //// Recupera a data de saída do aluno na turma/disciplina
+                //string sDataSaida = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "mtd_dataSaida"));
+                //if (!string.IsNullOrEmpty(sDataSaida))
+                //{
+                //    DateTime dataSaida = Convert.ToDateTime(sDataSaida);
+                //    if (dataSaida.Date < UCNavegacaoTelaPeriodo.cap_dataFim)
+                //    {
+                //        if (lblNome != null)
+                //            lblNome.Text += "<br/>" + "<b>Data de saída:</b> " + dataSaida.ToString("dd/MM/yyyy");
+                //    }
+                //}
             }
         }
 
@@ -4104,7 +4105,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     IsNew = tae_id <= 0
                 };
 
-                if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity, EntTurmaDisciplina.tud_tipo, VS_EntitiesControleTurma.formatoAvaliacao.fav_fechamentoAutomatico, Ent_ID_UsuarioLogado))
+                if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity, VS_EntitiesControleTurma.calendarioAnual.cal_id, EntTurmaDisciplina.tud_tipo, VS_EntitiesControleTurma.formatoAvaliacao.fav_fechamentoAutomatico, Ent_ID_UsuarioLogado))
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Adição de atividade | tud_id: {0}, tae_id: {1}", entity.tud_id, entity.tae_id));
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);

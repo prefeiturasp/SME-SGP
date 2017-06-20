@@ -65,10 +65,12 @@
             $scope.listBoletins = [];
             $scope.matter = [];
             $scope.recovery = [];
+            $scope.aee = [];
             $scope.enrichment = [];
             $scope.params = params;
             $scope.showCurricularEnrichment = false;
             $scope.showRecuperacao = false;
+            $scope.showAEE = false;
             $scope.docenciaCompartilhada = [];
             $scope.docenciaCompartilhadaSign = "*";
             $scope.mensagemErro = "";
@@ -148,9 +150,11 @@
                 j = 0;
                 $scope.matter = [];
                 $scope.recovery = [];
+                $scope.aee = [];
                 $scope.enrichment = [];
                 $scope.showCurricularEnrichment = false;
                 $scope.showRecuperacao = false;
+                $scope.showAEE = false;
                 $scope.docenciaCompartilhada = [];
                 $scope.docenciaCompartilhadaSign = "*";
                 for (j; j < maxJ; j++) {
@@ -164,8 +168,8 @@
                             notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: listaK[k].nota.numeroFaltas });
                         }
                         else {
-                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, conceito: "-" });
-                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: "-" });
+                            notas.push({ tpc_nome: "", conceito: "-" });
+                            notas.push({ tpc_nome: "", faltas: "-" });
                         }
                     }//for K
                     listaJ[j]["avaliacao"] = notas;
@@ -173,7 +177,9 @@
                 }//for j
                 list[i]["matter"] = $scope.matter;
                 list[i]["recovery"] = $scope.recovery;
+                list[i]["aee"] = $scope.aee;
                 list[i]["showRecuperacao"] = $scope.showRecuperacao;
+                list[i]["showAEE"] = $scope.showAEE;
                 list[i]["enrichment"] = $scope.enrichment;
                 list[i]["showCurricularEnrichment"] = $scope.showCurricularEnrichment;
                 list[i]["docenciaCompartilhada"] = $scope.docenciaCompartilhada;
@@ -206,6 +212,9 @@
             } else if (item.recuperacao) {
                 $scope.showRecuperacao = true;
                 $scope.recovery.push(item);
+            } else if (item.aee) {
+                $scope.showAEE = true;
+                $scope.aee.push(item);
             } else {
                 $scope.matter.push(item);
             };
@@ -358,10 +367,12 @@
             $scope.listBoletins = [];
             $scope.matter = [];
             $scope.recovery = [];
+            $scope.aee = [];
             $scope.enrichment = [];
             $scope.params = params;
             $scope.showCurricularEnrichment = false;
             $scope.showRecuperacao = false;
+            $scope.showAEE = false;
             $scope.docenciaCompartilhada = [];
             $scope.docenciaCompartilhadaSign = "*";
             $scope.mensagemErro = "";
@@ -445,9 +456,11 @@
                 j = 0;
                 $scope.matter = [];
                 $scope.recovery = [];
+                $scope.aee = [];
                 $scope.enrichment = [];
                 $scope.showCurricularEnrichment = false;
                 $scope.showRecuperacao = false;
+                $scope.showAEE = false;
                 $scope.docenciaCompartilhada = [];
                 $scope.docenciaCompartilhadaSign = "*";
                 for (j; j < maxJ; j++) {
@@ -461,8 +474,8 @@
                             notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: listaK[k].nota.numeroFaltas });
                         }
                         else {
-                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, conceito: "-" });
-                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: "-" });
+                            notas.push({ tpc_nome: "", conceito: "-" });
+                            notas.push({ tpc_nome: "", faltas: "-" });
                         }
                     }//for K
                     listaJ[j]["avaliacao"] = notas;
@@ -470,7 +483,9 @@
                 }//for j
                 list[i]["matter"] = $scope.matter;
                 list[i]["recovery"] = $scope.recovery;
+                list[i]["aee"] = $scope.aee;
                 list[i]["showRecuperacao"] = $scope.showRecuperacao;
+                list[i]["showAEE"] = $scope.showAEE;
                 list[i]["enrichment"] = $scope.enrichment;
                 list[i]["showCurricularEnrichment"] = $scope.showCurricularEnrichment;
                 list[i]["docenciaCompartilhada"] = $scope.docenciaCompartilhada;
@@ -504,6 +519,9 @@
             } else if (item.recuperacao) {
                 $scope.showRecuperacao = true;
                 $scope.recovery.push(item);
+            } else if (item.aee) {
+                $scope.showAEE = true;
+                $scope.aee.push(item);
             } else {
                 $scope.matter.push(item);
             };

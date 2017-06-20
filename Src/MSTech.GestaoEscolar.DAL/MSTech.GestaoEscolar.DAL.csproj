@@ -114,6 +114,7 @@
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEscolaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioEventoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CalendarioPeriodoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_CargaHorariaExtraclasseDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CompromissoEstudoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_CoordenadorDisciplinaDAO.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Abstracts\Abstract_ACA_TipoDesempenhoAprendizadoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaDeficienciaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_ACA_TipoDisciplinaRelacionadaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoDocenteDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoEquipamentoDeficienteDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TipoEventoDAO.cs" />
@@ -247,6 +249,17 @@
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoOrientacaoCurricularDiagnosticoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_PlanejamentoProjetoRelacionadaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioConteudoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioConteudoPreenchimentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioRespostaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_QuestionarioRespostaPreenchimentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoCargoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoGrupoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoQuestionarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativaDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseAlunoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasseDAO.cs" />
@@ -415,6 +428,7 @@
     <Compile Include="ACA_CalendarioEscolaDAO.cs" />
     <Compile Include="ACA_CalendarioEventoDAO.cs" />
     <Compile Include="ACA_CalendarioPeriodoDAO.cs" />
+    <Compile Include="ACA_CargaHorariaExtraclasseDAO.cs" />
     <Compile Include="ACA_CompromissoEstudoDAO.cs" />
     <Compile Include="ACA_ConfiguracaoServicoPendenciaDAO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaDAO.cs" />
@@ -471,6 +485,7 @@
     <Compile Include="ACA_TipoDesempenhoAprendizadoDAO.cs" />
     <Compile Include="ACA_TipoDisciplinaDAO.cs" />
     <Compile Include="ACA_TipoDisciplinaDeficienciaDAO.cs" />
+    <Compile Include="ACA_TipoDisciplinaRelacionadaDAO.cs" />
     <Compile Include="ACA_TipoDocenteDAO.cs" />
     <Compile Include="ACA_TipoEquipamentoDeficienteDAO.cs" />
     <Compile Include="ACA_TipoEventoDAO.cs" />
@@ -550,6 +565,17 @@
     <Compile Include="CLS_PlanejamentoProjetoDAO.cs" />
     <Compile Include="CLS_PlanejamentoProjetoRelacionadaDAO.cs" />
     <Compile Include="CLS_QualificadorAtividadeDAO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoDAO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoPreenchimentoDAO.cs" />
+    <Compile Include="CLS_QuestionarioDAO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaDAO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaPreenchimentoDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoCargoDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoGrupoDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoQuestionarioDAO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoDAO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaDAO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoDAO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseDAO.cs" />

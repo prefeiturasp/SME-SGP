@@ -118,8 +118,13 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         public virtual int caf_qtAulasExterna { get; set; }
 
         /// <summary>
+        /// Carga horária total prevista de atividades extraclasse
+        /// </summary>
+        public virtual decimal caf_qtAtividadeExtraclassePrevista { get; set; }
+
+        /// <summary>
         /// Carga horária total entregue de atividades extraclasse
         /// </summary>
-        public virtual decimal caf_qtAtividadeExtraclasse { get; set; }
+        public virtual decimal caf_qtAtividadeExtraclasseEntregue { get; set; }
     }
 }

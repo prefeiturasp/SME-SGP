@@ -95,7 +95,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="cur_cargaHorariaExtraClasse"></param>
         /// <param name="cargaAtividadeExtraTotal"></param>
         /// <returns></returns>
-        public bool VerificaCargaHorariaCursoCalendario(long tud_id, int tae_id, decimal tae_cargaHoraria, out decimal dis_cargaHorariaExtraClasse, out decimal cargaAtividadeExtraTotal)
+        public bool VerificaCargaHorariaCursoCalendario(long tud_id, int cal_id, int tpc_id, int tae_id, decimal tae_cargaHoraria, out decimal che_cargaHoraria, out decimal cargaAtividadeExtraTotal)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_TurmaAtividadeExtraClasse_VerificaCargaHorariaCursoCalendario", _Banco);
 
@@ -108,6 +108,20 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.DbType = DbType.Int64;
                 Param.Size = 8;
                 Param.Value = tud_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@cal_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = cal_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@tpc_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = tpc_id;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -130,10 +144,10 @@ namespace MSTech.GestaoEscolar.DAL
 
                 qs.Execute();
 
-                dis_cargaHorariaExtraClasse = qs.Return.Rows.Count > 0 ? Convert.ToDecimal(qs.Return.Rows[0]["dis_cargaHorariaExtraClasse"]) : 0;
+                che_cargaHoraria = qs.Return.Rows.Count > 0 ? Convert.ToDecimal(qs.Return.Rows[0]["che_cargaHoraria"]) : 0;
                 cargaAtividadeExtraTotal = qs.Return.Rows.Count > 0 ? Convert.ToDecimal(qs.Return.Rows[0]["cargaAtividadeExtraTotal"]) : 0;
 
-                return cargaAtividadeExtraTotal > dis_cargaHorariaExtraClasse;
+                return cargaAtividadeExtraTotal > che_cargaHoraria;
             }
             finally
             {

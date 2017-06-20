@@ -66,7 +66,7 @@ namespace MSTech.GestaoEscolar.DAL
             int tds_id
             , int tne_id
             , int tds_base
-            , int tds_idNaoConsiderar
+            , bool desconsiderarRecParalela
             , bool controlarOrdem
             , bool paginado
             , int currentPage
@@ -110,13 +110,10 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_idNaoConsiderar";
-                Param.Size = 4;
-                if (tds_idNaoConsiderar > 0)
-                    Param.Value = tds_idNaoConsiderar;
-                else
-                    Param.Value = DBNull.Value;
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@desconsiderarRecParalela";
+                Param.Size = 1;
+                Param.Value = desconsiderarRecParalela;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -253,7 +250,7 @@ namespace MSTech.GestaoEscolar.DAL
         public DataTable SelectBy_ObjetosAprendizagem
         (
             int cal_ano
-            , int tds_idNaoConsiderar
+            , bool desconsiderarRecParalela
             , bool controlarOrdem
             , int esc_id
             , Guid uad_idSuperior
@@ -264,15 +261,12 @@ namespace MSTech.GestaoEscolar.DAL
             try
             {
                 #region PARAMETROS
-                
+
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_idNaoConsiderar";
-                Param.Size = 4;
-                if (tds_idNaoConsiderar > 0)
-                    Param.Value = tds_idNaoConsiderar;
-                else
-                    Param.Value = DBNull.Value;
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@desconsiderarRecParalela";
+                Param.Size = 1;
+                Param.Value = desconsiderarRecParalela;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -343,7 +337,7 @@ namespace MSTech.GestaoEscolar.DAL
             int tds_id
             , int tne_id
             , int tds_base
-            , int tds_idNaoConsiderar
+            , bool desconsiderarRecParalela
             , bool controlarOrdem
             , bool paginado
             , int currentPage
@@ -387,13 +381,10 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_idNaoConsiderar";
-                Param.Size = 4;
-                if (tds_idNaoConsiderar > 0)
-                    Param.Value = tds_idNaoConsiderar;
-                else
-                    Param.Value = DBNull.Value;
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@desconsiderarRecParalela";
+                Param.Size = 1;
+                Param.Value = desconsiderarRecParalela;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -644,6 +635,50 @@ namespace MSTech.GestaoEscolar.DAL
             catch
             {
                 throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Retorna todos os tipos de disciplina relacionadas pelo tipo do tipo de disciplina.
+        /// </summary>    
+        /// <param name="tds_id">ID do tipo de disciplina de recuperação paralela</param>
+        /// <param name="tds_tipo">Tipo do tipo de disciplina</param>
+        /// <returns>DataTable com os dados</returns>
+        public DataTable SelecionaTipoDisciplinaRelacionadaPorTipo
+        (
+            int tds_id
+            , string tds_tipo
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoDisciplina_SelecionaTipoDisciplinaRelacionadaPorTipo", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tds_id";
+                Param.Value = tds_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.String;
+                Param.ParameterName = "@tds_tipo";
+                if (!string.IsNullOrEmpty(tds_tipo))
+                    Param.Value = tds_tipo;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
             }
             finally
             {
