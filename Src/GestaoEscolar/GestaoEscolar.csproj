@@ -931,6 +931,20 @@
     <Compile Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx.designer.cs">
       <DependentUpon>BuscaCabecalhoAvisosTextos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuracao\DeficienciaDetalhe\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\DeficienciaDetalhe\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\FilaFechamento\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3501,6 +3515,8 @@
     <Content Include="Classe\RelatorioAtendimento\Busca.aspx" />
     <Content Include="Classe\RelatorioAtendimento\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
+    <Content Include="Configuracao\DeficienciaDetalhe\Busca.aspx" />
+    <Content Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx" />
     <Content Include="Configuracao\FilaFechamento\Busca.aspx" />
     <Content Include="Configuracao\FilaFechamento\Fila.aspx" />
     <Content Include="Configuracao\ModuloClasse\Cadastro.aspx" />
