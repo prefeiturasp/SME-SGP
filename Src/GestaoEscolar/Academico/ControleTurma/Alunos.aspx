@@ -42,6 +42,8 @@
                                 <asp:TemplateField HeaderText="Nome do aluno" SortExpression="pes_nome">
                                     <ItemTemplate>
                                         <asp:Label ID="lblNomeAluno" runat="server" Text='<%# Bind("pes_nome") %>'></asp:Label>
+                                        <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                                            ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="pes_dataNascimento" HeaderText="Data de nascimento" DataFormatString="{0:dd/MM/yyy}"

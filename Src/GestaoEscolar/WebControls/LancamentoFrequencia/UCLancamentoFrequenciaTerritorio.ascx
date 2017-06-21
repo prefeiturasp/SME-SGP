@@ -107,6 +107,8 @@
                             <td id="tdNomeAluno" runat="server">
                                 <asp:Label ID="lblNome" runat="server" Text='<%#Bind("pes_nome") %>'>
                                 </asp:Label>
+                                <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                                    ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
                             </td>
                             <asp:Repeater ID="rptAulas" runat="server" OnItemDataBound="rptAulas_ItemDataBound">
                                 <ItemTemplate>
@@ -147,6 +149,8 @@
                             <td id="tdNomeAluno" runat="server">
                                 <asp:Label ID="lblNome" runat="server" Text='<%#Bind("pes_nome") %>'>
                                 </asp:Label>
+                                <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                                    ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
                             </td>
                             <asp:Repeater ID="rptAulas" runat="server" OnItemDataBound="rptAulas_ItemDataBound">
                                 <ItemTemplate>

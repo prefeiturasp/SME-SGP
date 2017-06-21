@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace GestaoEscolar.Academico.ControleTurma
 {
@@ -654,6 +655,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 UCNavegacaoTelaPeriodo.OnAlteraPeriodo += CarregarTela;
                 UCSelecaoDisciplinaCompartilhada1.SelecionarDisciplina += UCSelecaoDisciplinaCompartilhada1_SelecionarDisciplina;
                 UCControleTurma1.chkTurmasNormaisMultisseriadasIndexChanged += UCControleTurma_chkTurmasNormaisMultisseriadasIndexChanged;
+                UCFechamento.AbrirRelatorioRP += UCFechamento_AbrirRelatorioRP;
 
                 bool mudaCorTitulo = VS_cal_ano < DateTime.Now.Year && VS_turmasAnoAtual && VS_EntitiesControleTurma.turma.tur_situacao == 1;
 
@@ -668,6 +670,24 @@ namespace GestaoEscolar.Academico.ControleTurma
                 ApplicationWEB._GravaErro(ex);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
+        }
+
+        private void UCFechamento_AbrirRelatorioRP(long alu_id)
+        {
+            Session.Remove("alu_id_RelatorioRP");
+            Session.Remove("tur_id_RelatorioRP");
+            Session.Remove("tud_id_RelatorioRP");
+            Session.Remove("tpc_id_RelatorioRP");
+            Session.Remove("PaginaRetorno_RelatorioRP");
+
+            Session.Add("alu_id_RelatorioRP", alu_id);
+            Session.Add("tur_id_RelatorioRP", UCControleTurma1.VS_tur_id);
+            Session.Add("tud_id_RelatorioRP", UCControleTurma1.VS_tud_id);
+            Session.Add("tpc_id_RelatorioRP", UCNavegacaoTelaPeriodo.VS_tpc_id);
+            Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            //RedirecionarPagina("~/");
         }
 
         #endregion Eventos

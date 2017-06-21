@@ -71,7 +71,9 @@
 			        <td id="tdNomeAluno" runat="server" style="border-top:0px;">
 				        <asp:Label ID="lblAluno" runat="server" Text='<%#Bind("pes_nome") %>' CssClass="tamanho-lbl-aluno"></asp:Label>
                         <asp:Label ID="lblNomeAluno" runat="server" Text='<%#Bind("pes_nome") %>' Visible="false"></asp:Label>
-			        </td>
+			            <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                            ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                    </td>
                         
                     <%-- Notas/Frequencia de todos os periodos --%>
                     <asp:Repeater ID="rptItemPeriodos" runat="server" OnItemDataBound="rptItemPeriodos_ItemDataBound">
