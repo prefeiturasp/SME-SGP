@@ -47,7 +47,7 @@ namespace GestaoEscolar.Configuracao.Questionario
             get
             {
                 if (grvResultado.EditIndex >= 0)
-                    return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[0] ?? 0);
+                    return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values["qtr_id"] ?? 0);
                 else return -1;
             }
             set { }
@@ -181,7 +181,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 try
                 {
                     int index = int.Parse(e.CommandArgument.ToString());
-                    int qtr_id = Convert.ToInt32(grvResultado.DataKeys[index].Values[0]);
+                    int qtr_id = Convert.ToInt32(grvResultado.DataKeys[index].Values["qtr_id"]);
 
                     CLS_QuestionarioResposta entity = new CLS_QuestionarioResposta { qtr_id = qtr_id };
 
@@ -341,7 +341,7 @@ namespace GestaoEscolar.Configuracao.Questionario
         protected void grvResultado_DataBound(object sender, EventArgs e)
         {
             // Mostra o total de registros
-            UCTotalRegistros1.Total = CLS_QuestionarioConteudoBO.GetTotalRecords();
+            UCTotalRegistros1.Total = CLS_QuestionarioRespostaBO.GetTotalRecords();
             ConfiguraColunasOrdenacao(grvResultado);
         }
 

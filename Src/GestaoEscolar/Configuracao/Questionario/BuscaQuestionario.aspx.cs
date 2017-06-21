@@ -20,7 +20,7 @@ namespace GestaoEscolar.Configuracao.Questionario
             get
             {
                 if (grvResultado.EditIndex >= 0)
-                    return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values[0] ?? 0);
+                    return Convert.ToInt32(grvResultado.DataKeys[grvResultado.EditIndex].Values["qst_id"] ?? 0);
                 else return -1;
             }
             set { }
@@ -105,7 +105,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 try
                 {
                     int index = int.Parse(e.CommandArgument.ToString());
-                    int qst_id = Convert.ToInt32(grvResultado.DataKeys[index].Values[0]);
+                    int qst_id = Convert.ToInt32(grvResultado.DataKeys[index].Values["qst_id"]);
 
                     CLS_Questionario entity = new CLS_Questionario { qst_id = qst_id };
 
