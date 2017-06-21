@@ -161,7 +161,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 
         protected void btnNovo_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Configuracao/Questionario/Cadastro.aspx", false);
+            Response.Redirect("~/Configuracao/Questionario/CadastroQuestionario.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 

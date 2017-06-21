@@ -31,7 +31,7 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblAlterar" runat="server" Text='<%# Bind("qst_titulo") %>' CssClass="wrap400px"></asp:Label>
                                 <asp:LinkButton ID="btnAlterar" runat="server" CommandName="Edit" Text='<%# Bind("qst_titulo") %>'
-                                    PostBackUrl="~/Configuracao/Questionario/Cadastro.aspx" CssClass="wrap400px"></asp:LinkButton>
+                                    PostBackUrl="~/Configuracao/Questionario/CadastroQuestionario.aspx" CssClass="wrap400px"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Incluir conteúdo">

@@ -39,13 +39,13 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		public virtual string qtc_texto { get; set; }
 
 		/// <summary>
-		/// Tipo do conteúdo..
+		/// Tipo do conteúdo. (1 - Título 1; 2 - Título 2; 3 - Texto; 4 - Pergunta).
 		/// </summary>
 		[MSNotNullOrEmpty("[qtc_tipo] é obrigatório.")]
 		public virtual byte qtc_tipo { get; set; }
 
 		/// <summary>
-		/// Tipo de resposta para o tipo de conteúdo Pergunta..
+		/// Tipo de resposta para o tipo de conteúdo Pergunta. (1 - Múltipla seleção; 2 - Seleção única; 3 - Texto aberto).
 		/// </summary>
 		public virtual byte qtc_tipoResposta { get; set; }
 
