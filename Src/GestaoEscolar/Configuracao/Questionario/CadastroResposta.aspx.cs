@@ -15,6 +15,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 {
     public partial class CadastroResposta : MotherPageLogado
     {
+        #region Propriedades
         private int _VS_qtc_id
         {
             get
@@ -56,13 +57,16 @@ namespace GestaoEscolar.Configuracao.Questionario
                 ViewState["_VS_qtr_id"] = value;
             }
         }
+
+        #endregion
+
+        #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
                 {
-                    //TODO ANA _VS_qst_id está vindo -1 pq?
                     _Carregar(PreviousPage._VS_qtc_id, PreviousPage.PaginaResposta_qtr_id);
                     _VS_qtc_id = PreviousPage._VS_qtc_id;
                     _VS_qtr_id = PreviousPage.PaginaResposta_qtr_id;
@@ -79,29 +83,22 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
         
-        private void _Carregar(int qtc_id, int qtr_id)
-        {
-            try
-            {
-                CLS_QuestionarioResposta Resposta = new CLS_QuestionarioResposta { qtc_id = qtc_id, qtr_id = qtr_id };
-                CLS_QuestionarioRespostaBO.GetEntity(Resposta);
-                _VS_qtr_id = Resposta.qtr_id;
-                _VS_qtc_id = Resposta.qtc_id;
-                _txtTexto.Text = Resposta.qtr_texto;
-                _chkPermiteAdicionarTexto.Checked = Resposta.qtr_permiteAdicionarTexto;
-            }
-            catch (Exception e)
-            {
-                ApplicationWEB._GravaErro(e);
-                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar a resposta.", UtilBO.TipoMensagem.Erro);
-            }
-        }
-
         protected void _btnSalvar_Click(object sender, EventArgs e)
         {
             _Salvar();
         }
 
+        protected void _btnCancelar_Click(object sender, EventArgs e)
+        {
+            Session["qtc_id"] = _VS_qtc_id;
+            Session["qst_id"] = _VS_qst_id;
+            Response.Redirect("BuscaResposta.aspx", false);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+
+        #endregion
+
+        #region Métodos
         private void _Salvar()
         {
             try
@@ -160,12 +157,24 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
-        protected void _btnCancelar_Click(object sender, EventArgs e)
+        private void _Carregar(int qtc_id, int qtr_id)
         {
-            Session["qtc_id"] = _VS_qtc_id;
-            Session["qst_id"] = _VS_qst_id;
-            Response.Redirect("BuscaResposta.aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
+            try
+            {
+                CLS_QuestionarioResposta Resposta = new CLS_QuestionarioResposta { qtc_id = qtc_id, qtr_id = qtr_id };
+                CLS_QuestionarioRespostaBO.GetEntity(Resposta);
+                _VS_qtr_id = Resposta.qtr_id;
+                _VS_qtc_id = Resposta.qtc_id;
+                _txtTexto.Text = Resposta.qtr_texto;
+                _chkPermiteAdicionarTexto.Checked = Resposta.qtr_permiteAdicionarTexto;
+            }
+            catch (Exception e)
+            {
+                ApplicationWEB._GravaErro(e);
+                _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar a resposta.", UtilBO.TipoMensagem.Erro);
+            }
         }
+
+        #endregion
     }
 }

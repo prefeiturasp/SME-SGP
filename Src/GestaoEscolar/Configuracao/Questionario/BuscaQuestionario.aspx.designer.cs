@@ -49,13 +49,13 @@ namespace GestaoEscolar.Configuracao.Questionario {
         protected global::System.Web.UI.UpdatePanel updResultado;
         
         /// <summary>
-        /// fdsResultados control.
+        /// fdsResultado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsResultados;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsResultado;
         
         /// <summary>
         /// UCComboQtdePaginacao1 control.

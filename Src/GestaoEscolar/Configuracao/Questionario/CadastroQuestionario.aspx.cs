@@ -15,9 +15,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 {
     public partial class Cadastro : MotherPageLogado
     {
-        #region PROPRIEDADES
-
-
+        #region Propriedades
         public int _VS_qst_id
         {
             get
@@ -32,10 +30,9 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
         
-
         #endregion
 
-        #region Eventos Page Life Cycle
+        #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -52,11 +49,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 Page.Form.DefaultButton = _btnSalvar.UniqueID;
             }
         }
-
-        #endregion
-
-        #region EVENTOS
-
+        
         protected void _btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Busca.aspx", false);
@@ -70,12 +63,8 @@ namespace GestaoEscolar.Configuracao.Questionario
 
         #endregion
 
-        #region MÉTODOS
-
-        /// <summary>
-        /// Carrega os dados do Questionário nos controles caso seja alteração.
-        /// </summary>
-        /// <param name="qst_id">ID do recurso</param>
+        #region Métodos
+        
         private void _Carregar(int qst_id)
         {
             try
@@ -91,10 +80,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 _lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o recurso de aula.", UtilBO.TipoMensagem.Erro);
             }
         }
-
-        /// <summary>
-        /// Insere e altera um Questionário.
-        /// </summary>
+        
         private void _Salvar()
         {
             try

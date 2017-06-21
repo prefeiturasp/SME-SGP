@@ -14,7 +14,7 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="updResultado" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <fieldset id="fdsResultados" runat="server" visible="false">
+            <fieldset id="fdsResultado" runat="server" visible="false">
                 <legend>Consulta de questionários</legend>
                 <uc4:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao1_IndexChanged" />
                 <br />

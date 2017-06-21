@@ -15,6 +15,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 {
     public partial class CadastroConteudo : MotherPageLogado
     {
+        #region Propriedades
         private int _VS_qst_id
         {
             get
@@ -42,14 +43,26 @@ namespace GestaoEscolar.Configuracao.Questionario
                 ViewState["_VS_qtc_id"] = value;
             }
         }
-        
+
+        #endregion
+
+        #region Delegates
+        protected void _ddlTipoConteudo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
+            lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
+        }
+
+        #endregion
+
+        #region Eventos
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
                 {
-                    //TODO ANA _VS_qst_id está vindo -1 pq?
                     _Carregar(PreviousPage._VS_qst_id, PreviousPage.PaginaConteudo_qtc_id);
                     _VS_qst_id = PreviousPage._VS_qst_id;
                     _VS_qtc_id = PreviousPage.PaginaConteudo_qtc_id;
@@ -65,6 +78,20 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
+        protected void _btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("BuscaConteudo.aspx", false);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+
+        protected void _btnSalvar_Click(object sender, EventArgs e)
+        {
+            _Salvar();
+        }
+        
+        #endregion
+
+        #region Métodos
         private void _Carregar(int qst_id, int qtc_id)
         {
             try
@@ -78,6 +105,8 @@ namespace GestaoEscolar.Configuracao.Questionario
                 _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
                 lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
                 _ddlTipoResposta.SelectedValue = Conteudo.qtc_tipoResposta.ToString();
+                //TODO ANA
+                //_ddlTipoConteudo.Enabled = questionário não respondido ainda
             }
             catch (Exception e)
             {
@@ -86,20 +115,6 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
-        protected void _btnCancelar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("BuscaConteudo.aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
-        }
-
-        protected void _btnSalvar_Click(object sender, EventArgs e)
-        {
-            _Salvar();
-        }
-
-        /// <summary>
-        /// Insere e altera um Questionário.
-        /// </summary>
         private void _Salvar()
         {
             try
@@ -113,6 +128,8 @@ namespace GestaoEscolar.Configuracao.Questionario
                 
                 CLS_QuestionarioConteudoBO.GetEntity(Conteudo);
                 Conteudo.qtc_texto = _txtTexto.Text;
+                //TODO ANA
+                //se questionário não respondido, então Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
                 Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
                 Conteudo.qtc_tipoResposta = Convert.ToByte(_ddlTipoResposta.SelectedValue.ToString());
                 Conteudo.qtc_situacao = 1; //ativo
@@ -158,10 +175,6 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
-        protected void _ddlTipoConteudo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
-            lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
-        }
+        #endregion
     }
 }

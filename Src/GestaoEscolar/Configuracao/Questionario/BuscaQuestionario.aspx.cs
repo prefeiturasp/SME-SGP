@@ -80,8 +80,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 {
                     if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                     {
-                        //TODO[ANA]
-                        //Page.ClientScript.RegisterStartupScript(GetType(), fdsResultado.ClientID, String.Format("MsgInformacao('{0}');", String.Concat("#", fdsResultado.ClientID)), true);
+                        Page.ClientScript.RegisterStartupScript(GetType(), fdsResultado.ClientID, String.Format("MsgInformacao('{0}');", String.Concat("#", fdsResultado.ClientID)), true);
                     }
 
                     Pesquisar();
@@ -169,15 +168,12 @@ namespace GestaoEscolar.Configuracao.Questionario
         #endregion
 
         #region Métodos
-
-        /// <summary>
-        /// Realiza a consulta pelos filtros informados.
-        /// </summary>
+        
         private void Pesquisar()
         {
             try
             {
-                fdsResultados.Visible = true;
+                fdsResultado.Visible = true;
 
                 odsResultado.SelectParameters.Clear();
 

@@ -14,14 +14,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 {
     public partial class BuscaConteudo : MotherPageLogado
     {
-        #region Constantes
-
-        protected const int IndexOfColunaIncluirRespostas = 3;
-        protected const int IndexOfColunaTipoResposta = 2;
-        protected const int IndexOfColunaTipoConteudo = 1;
-
-        #endregion
-
+        #region Propriedades
         public int PaginaConteudo_qtc_id
         {
             get
@@ -61,6 +54,10 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
+        #endregion
+
+        #region Eventos
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -85,8 +82,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 {
                     if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                     {
-                        //TODO[ANA]
-                        //Page.ClientScript.RegisterStartupScript(GetType(), fdsResultado.ClientID, String.Format("MsgInformacao('{0}');", String.Concat("#", fdsResultado.ClientID)), true);
+                        Page.ClientScript.RegisterStartupScript(GetType(), fdsResultado.ClientID, String.Format("MsgInformacao('{0}');", String.Concat("#", fdsResultado.ClientID)), true);
                     }
 
                     if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
@@ -108,7 +104,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                 }
 
                 // Permissões da pagina
-                //TODO[ANA]
                 btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
             }
         }
@@ -301,17 +296,21 @@ namespace GestaoEscolar.Configuracao.Questionario
             UCTotalRegistros1.Total = CLS_QuestionarioConteudoBO.GetTotalRecords();
             ConfiguraColunasOrdenacao(grvResultado);
         }        
+        
+        protected void odsResultado_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+        {
+            if (e.ExecutingSelectCount)
+                e.InputParameters.Clear();
+        }
+
+        #endregion
 
         #region Métodos
-
-        /// <summary>
-        /// Realiza a consulta pelos filtros informados.
-        /// </summary>
         private void Pesquisar()
         {
             try
             {
-                fdsResultados.Visible = true;
+                fdsResultado.Visible = true;
 
                 odsResultado.SelectParameters.Clear();
 
@@ -348,6 +347,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 
         #endregion
 
+        #region Delegates
         protected void UCComboQtdePaginacao1_IndexChanged()
         {
             // atribui nova quantidade itens por página para o grid
@@ -363,10 +363,7 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
-        protected void odsResultado_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
-        {
-            if (e.ExecutingSelectCount)
-                e.InputParameters.Clear();
-        }
+        #endregion
+
     }
 }

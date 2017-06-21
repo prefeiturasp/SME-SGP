@@ -14,6 +14,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 {
     public partial class BuscaResposta : MotherPageLogado
     {
+        #region Propriedades
         public int _VS_qtc_id
         {
             get
@@ -52,6 +53,29 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
             set { }
         }
+
+        #endregion
+
+        #region Delegates
+
+        protected void UCComboQtdePaginacao1_IndexChanged()
+        {
+            // atribui nova quantidade itens por página para o grid
+            grvResultado.PageSize = UCComboQtdePaginacao1.Valor;
+            grvResultado.PageIndex = 0;
+            // atualiza o grid
+            grvResultado.DataBind();
+            if (grvResultado.Rows.Count > 0)
+            {
+                ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+            }
+        }
+
+        #endregion
+
+        #region Eventos
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -76,8 +100,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 {
                     if (__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar)
                     {
-                        //TODO[ANA]
-                        //Page.ClientScript.RegisterStartupScript(GetType(), fdsResultado.ClientID, String.Format("MsgInformacao('{0}');", String.Concat("#", fdsResultado.ClientID)), true);
+                        Page.ClientScript.RegisterStartupScript(GetType(), fdsResultado.ClientID, String.Format("MsgInformacao('{0}');", String.Concat("#", fdsResultado.ClientID)), true);
                     }
 
                     if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
@@ -107,64 +130,9 @@ namespace GestaoEscolar.Configuracao.Questionario
                 }
 
                 // Permissões da pagina
-                //TODO[ANA]
                 btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
             }
-        }
-
-        /// <summary>
-        /// Realiza a consulta pelos filtros informados.
-        /// </summary>
-        private void Pesquisar()
-        {
-            try
-            {
-                fdsResultados.Visible = true;
-
-                odsResultado.SelectParameters.Clear();
-
-                grvResultado.PageIndex = 0;
-                odsResultado.SelectParameters.Clear();
-                odsResultado.SelectParameters.Add("qtc_id", _VS_qtc_id.ToString());
-
-                // quantidade de itens por página
-                string qtItensPagina = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.QT_ITENS_PAGINACAO);
-                int itensPagina = string.IsNullOrEmpty(qtItensPagina) ? ApplicationWEB._Paginacao : Convert.ToInt32(qtItensPagina);
-
-                // mostra essa quantidade no combobox
-                UCComboQtdePaginacao1.Valor = itensPagina;
-                // atribui essa quantidade para o grid
-                grvResultado.PageSize = itensPagina;
-                // atualiza o grid
-                grvResultado.DataBind();
-                if (grvResultado.Rows.Count > 0)
-                {
-                    ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                    ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                }
-                updResultado.Update();
-
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar respostas.", UtilBO.TipoMensagem.Erro);
-            }
-        }
-
-        protected void UCComboQtdePaginacao1_IndexChanged()
-        {
-            // atribui nova quantidade itens por página para o grid
-            grvResultado.PageSize = UCComboQtdePaginacao1.Valor;
-            grvResultado.PageIndex = 0;
-            // atualiza o grid
-            grvResultado.DataBind();
-            if (grvResultado.Rows.Count > 0)
-            {
-                ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-            }
-        }
+        }        
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -350,5 +318,47 @@ namespace GestaoEscolar.Configuracao.Questionario
             if (e.ExecutingSelectCount)
                 e.InputParameters.Clear();
         }
+
+        #endregion
+
+        #region Métodos
+        private void Pesquisar()
+        {
+            try
+            {
+                fdsResultado.Visible = true;
+
+                odsResultado.SelectParameters.Clear();
+
+                grvResultado.PageIndex = 0;
+                odsResultado.SelectParameters.Clear();
+                odsResultado.SelectParameters.Add("qtc_id", _VS_qtc_id.ToString());
+
+                // quantidade de itens por página
+                string qtItensPagina = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.QT_ITENS_PAGINACAO);
+                int itensPagina = string.IsNullOrEmpty(qtItensPagina) ? ApplicationWEB._Paginacao : Convert.ToInt32(qtItensPagina);
+
+                // mostra essa quantidade no combobox
+                UCComboQtdePaginacao1.Valor = itensPagina;
+                // atribui essa quantidade para o grid
+                grvResultado.PageSize = itensPagina;
+                // atualiza o grid
+                grvResultado.DataBind();
+                if (grvResultado.Rows.Count > 0)
+                {
+                    ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                    ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+                }
+                updResultado.Update();
+
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar respostas.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        #endregion
     }
 }
