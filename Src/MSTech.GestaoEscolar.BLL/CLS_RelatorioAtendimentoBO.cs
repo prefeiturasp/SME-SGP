@@ -34,6 +34,13 @@ namespace MSTech.GestaoEscolar.BLL
         public List<CLS_RelatorioAtendimentoCargo> lstCargoPermissao { get; set; }
 
         public List<Questionario> lstQuestionario { get; set; }
+
+        public RelatorioAtendimento()
+        {
+            lstCargoPermissao = new List<CLS_RelatorioAtendimentoCargo>();
+            lstGrupoPermissao = new List<CLS_RelatorioAtendimentoGrupo>();
+            lstQuestionario = new List<Questionario>();
+        }
     }
 
 

@@ -16,6 +16,11 @@ namespace MSTech.GestaoEscolar.BLL
     {
         public int raq_ordem { get; set; }
         public List<QuestionarioConteudo> lstConteudo { get; set; }
+
+        public Questionario()
+        {
+            lstConteudo = new List<QuestionarioConteudo>();
+        }
     }
 
     /// <summary>

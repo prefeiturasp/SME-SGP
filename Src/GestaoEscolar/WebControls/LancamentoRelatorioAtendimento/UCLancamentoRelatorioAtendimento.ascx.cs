@@ -3,11 +3,14 @@
     using MSTech.CoreSSO.BLL;
     using MSTech.CoreSSO.Entities;
     using MSTech.GestaoEscolar.BLL;
+    using MSTech.GestaoEscolar.CustomResourceProviders;
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.Web.WebProject;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Reflection;
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
@@ -59,7 +62,32 @@
             }
         }
 
+        private bool PermiteAprovar
+        {
+            get
+            {
+                return VS_RelatorioAtendimento.lstCargoPermissao.Any(p => p.rac_permissaoAprovacao) ||
+                       VS_RelatorioAtendimento.lstGrupoPermissao.Any(p => p.rag_permissaoAprovacao);
+            }
+        }
 
+        private bool PermiteEditar
+        {
+            get
+            {
+                return VS_RelatorioAtendimento.lstCargoPermissao.Any(p => p.rac_permissaoEdicao) ||
+                       VS_RelatorioAtendimento.lstGrupoPermissao.Any(p => p.rag_permissaoEdicao);
+            }
+        }
+
+        private bool PermiteConsultar
+        {
+            get
+            {
+                return VS_RelatorioAtendimento.lstCargoPermissao.Any(p => p.rac_permissaoConsulta) ||
+                       VS_RelatorioAtendimento.lstGrupoPermissao.Any(p => p.rag_permissaoConsulta) || PermiteAprovar || PermiteEditar;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -154,6 +182,14 @@
                 }
             }
 
+            if (VS_RelatorioAtendimento.arq_idAnexo > 0 && PermiteEditar)
+            {
+                divDownloadAnexo.Visible = true;
+                hplDownloadAnexo.Text = VS_RelatorioAtendimento.rea_tituloAnexo;
+                hplDownloadAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", VS_RelatorioAtendimento.arq_idAnexo);
+            }
+
+            CarregarSituacao();
             CarregarHipoteseDiagnostica(VS_RelatorioAtendimento.rea_permiteEditarHipoteseDiagnostica);
             CarregarQuestionarios();
 
@@ -177,6 +213,33 @@
 
             rptQuestionario.DataSource = VS_RelatorioAtendimento.lstQuestionario;
             rptQuestionario.DataBind();
+        }
+
+        private void CarregarSituacao()
+        {
+            ddlSituacao.Items.Clear();
+
+            Type objType = typeof(RelatorioPreenchimentoAlunoSituacao);
+            FieldInfo[] propriedades = objType.GetFields();
+            foreach (FieldInfo objField in propriedades)
+            {
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])objField.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                if (attributes.Length > 0)
+                {
+                    RelatorioPreenchimentoAlunoSituacao situacao = (RelatorioPreenchimentoAlunoSituacao)Enum.Parse(typeof(RelatorioPreenchimentoAlunoSituacao), objField.GetRawConstantValue().ToString());
+                    if (situacao.In(RelatorioPreenchimentoAlunoSituacao.Rascunho, RelatorioPreenchimentoAlunoSituacao.Finalizado) ||
+                        (situacao == RelatorioPreenchimentoAlunoSituacao.Aprovado && PermiteAprovar))
+                    {
+                        ddlSituacao.Items.Add(new ListItem(CustomResource.GetGlobalResourceObject("Enumerador", attributes[0].Description), ((byte)situacao).ToString()));
+                    }
+                }
+            }
+        }
+
+        public void RetornaLancamentoRelatorio()
+        {
+
         }
 
         protected void rptTipoDeficiencia_ItemDataBound(object sender, RepeaterItemEventArgs e)

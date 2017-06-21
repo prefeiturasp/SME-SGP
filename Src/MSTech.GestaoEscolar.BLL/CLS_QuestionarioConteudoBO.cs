@@ -42,6 +42,11 @@ namespace MSTech.GestaoEscolar.BLL
     public class QuestionarioConteudo : CLS_QuestionarioConteudo
     {
         public List<CLS_QuestionarioResposta> lstRepostas { get; set; }
+
+        public QuestionarioConteudo()
+        {
+            lstRepostas = new List<CLS_QuestionarioResposta>();
+        }
     }
 
     /// <summary>
