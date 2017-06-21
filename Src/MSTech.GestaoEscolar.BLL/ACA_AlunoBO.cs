@@ -2647,6 +2647,11 @@ namespace MSTech.GestaoEscolar.BLL
                     appMinutosCacheLongo
                 );
 
+            if (dt.Columns.Contains("pes_idade"))
+            {
+                dt.Columns.Remove("pes_idade");
+            }
+
             DataColumn dcIdade = new DataColumn();
             dcIdade.DataType = typeof(string);
             dcIdade.ColumnName = "pes_idade";
@@ -2789,6 +2794,11 @@ namespace MSTech.GestaoEscolar.BLL
                     ,
                     appMinutosCacheLongo
                 );
+
+            if (dt.Columns.Contains("pes_idade"))
+            {
+                dt.Columns.Remove("pes_idade");
+            }
 
             DataColumn dcIdade = new DataColumn();
             dcIdade.DataType = typeof(string);
