@@ -5,6 +5,7 @@
 namespace MSTech.GestaoEscolar.DAL
 {
     using Data.Common;
+    using Entities;
     using MSTech.GestaoEscolar.DAL.Abstracts;
     using System;
     using System.Collections.Generic;
@@ -23,9 +24,9 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>
         /// <param name="usu_id"></param>
         /// <returns></returns>
-        public List<byte> SelecionaTiposPorPermissao(Guid usu_id)
+        public DataTable SelecionaPorPermissaoUsuarioTipo(Guid usu_id, byte rea_tipo)
         {
-            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioAtendimento_SelecionaTiposPorPermissao", _Banco);
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioAtendimento_SelecionaPorPermissaoUsuarioTipo", _Banco);
 
             try
             {
@@ -38,12 +39,25 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.Value = usu_id;
                 qs.Parameters.Add(Param);
 
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_tipo";
+                Param.DbType = DbType.Byte;
+                Param.Size = 1;
+                if (rea_tipo > 0)
+                {
+                    Param.Value = rea_tipo;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
                 #endregion
 
                 qs.Execute();
 
-                return qs.Return.Rows.Count > 0 ?
-                    qs.Return.Select().Select(p => Convert.ToByte(p["rea_tipo"])).ToList() : new List<byte>();
+                return qs.Return;
             }
             finally
             {

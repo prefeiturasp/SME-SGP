@@ -1,9 +1,11 @@
 ﻿namespace GestaoEscolar.WebControls.Combos
 {
     using MSTech.GestaoEscolar.BLL;
+    using MSTech.GestaoEscolar.CustomResourceProviders;
     using MSTech.GestaoEscolar.Web.WebProject;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Web;
     using System.Web.UI;

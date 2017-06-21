@@ -27,6 +27,7 @@ namespace MSTech.GestaoEscolar.BLL
         RP = 3
     }
 
+    [Serializable]
     public class RelatorioAtendimento : CLS_RelatorioAtendimento
     {
         public List<CLS_RelatorioAtendimentoGrupo> lstGrupoPermissao { get; set; }
@@ -48,11 +49,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="usu_id"></param>
         /// <returns></returns>
-        public static List<CLS_RelatorioAtendimentoTipo> SelecionaTiposPorPermissao(Guid usu_id)
+        public static List<CLS_RelatorioAtendimento> SelecionaPorPermissaoUsuarioTipo(Guid usu_id, CLS_RelatorioAtendimentoTipo rea_tipo)
         {
-            return new CLS_RelatorioAtendimentoDAO().SelecionaTiposPorPermissao(usu_id)
-                                                    .Select(p => (CLS_RelatorioAtendimentoTipo)p)
-                                                    .ToList();
+            return new CLS_RelatorioAtendimentoDAO().SelecionaPorPermissaoUsuarioTipo(usu_id, (byte)rea_tipo).ToEntityList<CLS_RelatorioAtendimento>();
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ namespace MSTech.GestaoEscolar.Entities
     /// <summary>
     /// Description: .
     /// </summary>
+    [Serializable]
     public class CLS_Questionario : Abstract_CLS_Questionario
 	{        
         public override int qst_id { get; set; }
