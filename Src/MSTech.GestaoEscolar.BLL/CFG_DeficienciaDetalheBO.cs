@@ -57,6 +57,7 @@ namespace MSTech.GestaoEscolar.BLL
                     {
                         dfd.dfd_id = -1;
                         dfd.dfd_dataCriacao = DateTime.Now;
+                        dfd.tde_id = tde_id;
                     }
                     dfd.dfd_dataAlteracao = DateTime.Now;
                     if (!CFG_DeficienciaDetalheBO.Save(dfd, dao._Banco))

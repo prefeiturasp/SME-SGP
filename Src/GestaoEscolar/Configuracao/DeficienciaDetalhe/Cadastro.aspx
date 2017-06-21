@@ -80,11 +80,11 @@
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
-                        <asp:GridView runat="server" ID="grvDetalhes" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
+                        <asp:GridView runat="server" ID="grvDetalhes" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="true"
                             DataKeyNames="tde_id, dfd_id, dfd_nome" EmptyDataText="Nenhum detalhamento cadastrado."
                             OnRowDataBound="grv_RowDataBound" OnRowCommand="grvDetalhes_RowCommand">
                             <Columns>
-                                <asp:BoundField DataField="dfd_nome" HeaderText="Detalhe" />
+                                <asp:BoundField DataField="dfd_nome" HeaderText="Detalhe" SortExpression="dfd_nome"/>
                                 <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.HeaderExcluir %>">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"
