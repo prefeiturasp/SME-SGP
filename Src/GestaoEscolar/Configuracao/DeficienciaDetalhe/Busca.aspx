@@ -19,17 +19,22 @@
             OnClick="_btnNovoDetalhamento_Click" />
         <asp:GridView ID="_dgvDeficienciaDetalhe" runat="server" AutoGenerateColumns="False"
             DataKeyNames="tde_id" DataSourceID="odsDeficienciaDetalhe" EmptyDataText="Nenhum detalhamento de deficiência."
-            OnDataBound="_dgvDeficienciaDetalhe_DataBound" OnRowDataBound="_dgvDeficienciaDetalhe_RowDataBound">
+            OnDataBound="_dgvDeficienciaDetalhe_DataBound" OnRowDataBound="_dgvDeficienciaDetalhe_RowDataBound" >
             <Columns>
-                <asp:TemplateField HeaderText="Deficiência">
+                <asp:TemplateField HeaderStyle-HorizontalAlign="Left">        
+                    <HeaderTemplate>
+                        <div style="text-align:left;">
+                            <asp:Label runat="server" Text="Deficiência"></asp:Label>
+                        </div>
+                    </HeaderTemplate>            
                     <ItemTemplate>
                         <asp:LinkButton ID="_btnAlterar" runat="server" CommandName="Edit" Text='<%# Bind("tde_nome") %>'
                             PostBackUrl="~/Configuracao/DeficienciaDetalhe/Cadastro.aspx"></asp:LinkButton>
                         <asp:Label ID="_lblAlterar" runat="server" Text='<%# Bind("tde_nome") %>'></asp:Label>
                     </ItemTemplate>
+                    <HeaderStyle HorizontalAlign="Left" />
                 </asp:TemplateField>
             </Columns>
-            <HeaderStyle HorizontalAlign="Center" />
         </asp:GridView>
         <uc4:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="_dgvAreaConhecimento" />
         <asp:ObjectDataSource ID="odsDeficienciaDetalhe" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.CFG_DetalheDeficiencia"

@@ -13,6 +13,18 @@ namespace MSTech.GestaoEscolar.BLL
 	/// </summary>
 	public class CLS_QuestionarioConteudoPreenchimentoBO : BusinessBase<CLS_QuestionarioConteudoPreenchimentoDAO, CLS_QuestionarioConteudoPreenchimento>
 	{
-				
+        /// <summary>
+        /// Retorna se o conteúdo foi preenchido.
+        /// </summary>
+        /// <param name="qtc_id">Id do conteúdo.</param>
+        /// <returns></returns>
+		public static bool ConteudoPreenchido
+           (
+                int qtc_id
+           )
+        {
+            CLS_QuestionarioConteudoPreenchimentoDAO dao = new CLS_QuestionarioConteudoPreenchimentoDAO();
+            return dao.SelecionaConteudoPreenchido(qtc_id).Rows.Count > 0;
+        }		
 	}
 }

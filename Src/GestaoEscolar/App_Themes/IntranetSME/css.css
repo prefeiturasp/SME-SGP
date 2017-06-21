@@ -5375,6 +5375,18 @@ form[action*="RelatorioPedagogico"] #ft{
     }
 }
 
+.rel-atendimento #divInformacao {
+    width: 100%; 
+    float: left; 
+    clear: none;
+    background-color: #EEEEEE;
+    padding: 15px;
+}
+
+.rel-atendimento #divInformacao br {
+    line-height: 250%;
+}
+
 a.btRelatorioRP {
     width:26px;
     height:20px;

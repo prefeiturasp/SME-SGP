@@ -10,7 +10,7 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Data;
     using System.ComponentModel;
     using Validation.Exceptions;
-
+    using System.Collections.Generic;
     #region Enumeradores
 
     public enum QuestionarioTipoConteudo
@@ -25,7 +25,22 @@ namespace MSTech.GestaoEscolar.BLL
         Pergunta
     }
 
+    public enum QuestionarioTipoResposta
+    {
+        [Description("Múltipla seleção")]
+        MultiplaSelecao = 1,
+        [Description("Seleção única")]
+        SelecaoUnica,
+        [Description("Texto aberto")]
+        TextoAberto
+    }
+
     #endregion
+
+    public class QuestionarioConteudo : CLS_QuestionarioConteudo
+    {
+        public List<CLS_QuestionarioResposta> lstRepostas { get; set; }
+    }
 
     /// <summary>
     /// Description: CLS_QuestionarioConteudo Business Object. 

@@ -80,6 +80,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 
         protected void _btnCancelar_Click(object sender, EventArgs e)
         {
+            Session["qst_id"] = _VS_qst_id;
             Response.Redirect("BuscaConteudo.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
@@ -88,7 +89,7 @@ namespace GestaoEscolar.Configuracao.Questionario
         {
             _Salvar();
         }
-        
+
         #endregion
 
         #region Métodos
@@ -105,8 +106,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
                 lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
                 _ddlTipoResposta.SelectedValue = Conteudo.qtc_tipoResposta.ToString();
-                //TODO ANA
-                //_ddlTipoConteudo.Enabled = questionário não respondido ainda
+                _ddlTipoConteudo.Enabled = _ddlTipoResposta.Enabled = !CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id);
             }
             catch (Exception e)
             {
@@ -125,13 +125,14 @@ namespace GestaoEscolar.Configuracao.Questionario
                     ,
                     qtc_id = _VS_qtc_id
                 };
-                
+
                 CLS_QuestionarioConteudoBO.GetEntity(Conteudo);
                 Conteudo.qtc_texto = _txtTexto.Text;
-                //TODO ANA
-                //se questionário não respondido, então Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
-                Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
-                Conteudo.qtc_tipoResposta = Convert.ToByte(_ddlTipoResposta.SelectedValue.ToString());
+                if (!CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id))
+                {
+                    Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
+                    Conteudo.qtc_tipoResposta = Convert.ToByte(_ddlTipoResposta.SelectedValue.ToString());
+                }
                 Conteudo.qtc_situacao = 1; //ativo
 
                 if (CLS_QuestionarioConteudoBO.Save(Conteudo))
