@@ -893,6 +893,31 @@ namespace GestaoEscolar.Academico.ControleTurma
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    Session.Remove("alu_id_RelatorioAEE");
+                    Session.Remove("tur_id_RelatorioAEE");
+                    Session.Remove("tud_id_RelatorioAEE");
+                    Session.Remove("tpc_id_RelatorioAEE");
+                    Session.Remove("PaginaRetorno_RelatorioAEE");
+
+                    Session.Add("alu_id_RelatorioAEE", Convert.ToInt64(e.CommandArgument.ToString()));
+                    Session.Add("tur_id_RelatorioAEE", UCControleTurma1.VS_tur_id);
+                    Session.Add("tud_id_RelatorioAEE", UCControleTurma1.VS_tud_id);
+                    Session.Add("tpc_id_RelatorioAEE", UCNavegacaoTelaPeriodo.VS_tpc_id);
+                    Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
+
+                    CarregaSessionPaginaRetorno();
+                    //RedirecionarPagina("~/");
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
         }
 
         protected void grvAluno_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -934,6 +959,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (_btnDetalhes != null)
                 {
                     _btnDetalhes.CommandArgument = e.Row.RowIndex.ToString();
+                }
+
+                LinkButton btnRelatorioAEE = (LinkButton)e.Row.FindControl("btnRelatorioAEE");
+                if (btnRelatorioAEE != null)
+                {
+                    btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Row.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo 
+                                                && Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "PossuiDeficiencia"));
+                    btnRelatorioAEE.CommandArgument = alu_id.ToString();
                 }
 
                 // Mostra o ícone para as anotações de recuperação paralela (RP):

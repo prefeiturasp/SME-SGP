@@ -5394,3 +5394,11 @@ a.btRelatorioRP {
     display:inline-block;
     float:right;
 }
+
+a.btRelatorioAEE {
+    width:26px;
+    height:20px;
+    background-image:url(images/ico_avaliacao_aee.png);
+    display:inline-block;
+    float:right;
+}

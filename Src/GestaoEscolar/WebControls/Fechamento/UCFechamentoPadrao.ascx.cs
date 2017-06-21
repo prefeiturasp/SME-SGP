@@ -851,6 +851,10 @@ namespace GestaoEscolar.WebControls.Fechamento
 
         public event commandAbrirRelatorioRP AbrirRelatorioRP;
 
+        public delegate void commandAbrirRelatorioAEE(long alu_id);
+
+        public event commandAbrirRelatorioAEE AbrirRelatorioAEE;
+
         #endregion DELEGATES
 
         #region Métodos

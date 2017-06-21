@@ -656,6 +656,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 UCSelecaoDisciplinaCompartilhada1.SelecionarDisciplina += UCSelecaoDisciplinaCompartilhada1_SelecionarDisciplina;
                 UCControleTurma1.chkTurmasNormaisMultisseriadasIndexChanged += UCControleTurma_chkTurmasNormaisMultisseriadasIndexChanged;
                 UCFechamento.AbrirRelatorioRP += UCFechamento_AbrirRelatorioRP;
+                UCFechamento.AbrirRelatorioAEE += UCFechamento_AbrirRelatorioAEE;
 
                 bool mudaCorTitulo = VS_cal_ano < DateTime.Now.Year && VS_turmasAnoAtual && VS_EntitiesControleTurma.turma.tur_situacao == 1;
 
@@ -685,6 +686,24 @@ namespace GestaoEscolar.Academico.ControleTurma
             Session.Add("tud_id_RelatorioRP", UCControleTurma1.VS_tud_id);
             Session.Add("tpc_id_RelatorioRP", UCNavegacaoTelaPeriodo.VS_tpc_id);
             Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            //RedirecionarPagina("~/");
+        }
+
+        private void UCFechamento_AbrirRelatorioAEE(long alu_id)
+        {
+            Session.Remove("alu_id_RelatorioAEE");
+            Session.Remove("tur_id_RelatorioAEE");
+            Session.Remove("tud_id_RelatorioAEE");
+            Session.Remove("tpc_id_RelatorioAEE");
+            Session.Remove("PaginaRetorno_RelatorioAEE");
+
+            Session.Add("alu_id_RelatorioAEE", alu_id);
+            Session.Add("tur_id_RelatorioAEE", UCControleTurma1.VS_tur_id);
+            Session.Add("tud_id_RelatorioAEE", UCControleTurma1.VS_tud_id);
+            Session.Add("tpc_id_RelatorioAEE", UCNavegacaoTelaPeriodo.VS_tpc_id);
+            Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
 
             CarregaSessionPaginaRetorno();
             //RedirecionarPagina("~/");

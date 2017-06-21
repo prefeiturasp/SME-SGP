@@ -2477,7 +2477,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             Session.Add("tur_id_RelatorioRP", UCControleTurma1.VS_tur_id);
             Session.Add("tud_id_RelatorioRP", tud_id);
             Session.Add("tpc_id_RelatorioRP", UCNavegacaoTelaPeriodo.VS_tpc_id);
-            Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
+            Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
 
             CarregaSessionPaginaRetorno();
             //RedirecionarPagina("~/");
