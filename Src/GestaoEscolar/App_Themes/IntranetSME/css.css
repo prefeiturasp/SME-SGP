@@ -5374,3 +5374,11 @@ form[action*="RelatorioPedagogico"] #ft{
         margin-bottom:0;
     }
 }
+
+a.btRelatorioRP {
+    width:26px;
+    height:20px;
+    background-image:url(images/ico_avaliacao_rp.png);
+    display:inline-block;
+    float:right;
+}

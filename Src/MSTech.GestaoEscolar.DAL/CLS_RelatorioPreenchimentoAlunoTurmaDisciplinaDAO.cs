@@ -15,6 +15,57 @@ namespace MSTech.GestaoEscolar.DAL
     /// </summary>
     public class CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO : Abstract_CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO
 	{
+        /// <summary>
+        /// Retorna o id dos alunos que possuem registro de anotação da recuperação paralela.
+        /// </summary>
+        /// <param name="tpc_id"></param>
+        /// <param name="tur_id"></param>
+        /// <param name="tud_id"></param>
+        /// <returns></returns>
+        public DataTable SelecionaAlunoPreenchimentoPorPeriodoDisciplina(int tpc_id, long tur_id, long tud_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioPreenchimentoAlunoTurmaDisciplina_SelecionaAlunoPreenchimentoPorPeriodoDisciplina", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tpc_id";
+                Param.Size = 4;
+                Param.Value = tpc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@tur_id";
+                Param.Size = 8;
+                Param.Value = tur_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@tud_id";
+                Param.Size = 8;
+                Param.Value = tud_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #region Métodos Sobrescritos
 
         /// <summary>

@@ -176,6 +176,8 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
         private CFG_PermissaoModuloOperacao permissaoModuloLancamentoFrequenciaInfantil;
         private int tne_id;
 
+        private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
+
         #endregion Propriedades
 
         #region Delegates
@@ -187,6 +189,10 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
         public delegate void commandCarregarAusencias(long alu_id, int mtu_id, int mtd_id);
 
         public event commandCarregarAusencias CarregarAusencias;
+
+        public delegate void commandAbrirRelatorioRP(long alu_id);
+
+        public event commandAbrirRelatorioRP AbrirRelatorioRP;
 
         #endregion Delegates
 
@@ -293,6 +299,11 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
             rptAlunosFrequencia.DataSource = MTR_MatriculaTurmaDisciplinaBO.SelecionaAlunosAtivosCOCPorTurmaDisciplina(tudId,
             tpcId, tipoDocente, false, capDataInicio, capDataFim, ApplicationWEB.AppMinutosCacheMedio, tur_ids)
             .Where(p => ((p.mtd_dataSaida > dtInicio) || (p.mtd_dataSaida == null)) && (p.mtd_dataMatricula <= dtFim));
+
+            if (entitiesControleTurma.turma.tur_tipo == (byte)TUR_TurmaTipo.Normal)
+            {
+                lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(tpcId, turId, tudId, ApplicationWEB.AppMinutosCacheMedio);
+            }
 
             this.tudTipo = entitiesControleTurma.turmaDisciplina.tud_tipo;
             this.permiteVisualizarCompensacao = permiteVisualizarCompensacao;
@@ -714,6 +725,20 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                         imgDetalharCompensacaoSituacao.Visible = dados.Count > 0
                             ? dados.FirstOrDefault().AlunoComCompensacao
                             : false;
+
+                    // Mostra o ícone para as anotações de recuperação paralela (RP):
+                    // - para todos os alunos, quando a turma for de recuperação paralela,
+                    // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
+                    if (tudTipo == (byte)TurmaDisciplinaTipo.DisciplinaEletivaAluno
+                        || lstAlunosRelatorioRP.Any(p => p.alu_id == Alu_id))
+                    {
+                        LinkButton btnRelatorioRP = (LinkButton)e.Item.FindControl("btnRelatorioRP");
+                        if (btnRelatorioRP != null)
+                        {
+                            btnRelatorioRP.Visible = true;
+                            btnRelatorioRP.CommandArgument = Alu_id.ToString();
+                        }
+                    }
                 }
 
                 if (rptAulas != null)
@@ -748,6 +773,21 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                 {
                     if (CarregarAusencias != null)
                         CarregarAusencias(alu_id, mtu_id, mtd_id);
+                }
+            }
+            else if (e.CommandName == "RelatorioRP")
+            {
+                try
+                {
+                    if (AbrirRelatorioRP != null)
+                    {
+                        AbrirRelatorioRP(Convert.ToInt64(e.CommandArgument.ToString()));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    //lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }

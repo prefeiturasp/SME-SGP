@@ -3384,6 +3384,9 @@
     <Content Include="App_Themes\IntranetSME\images\ico-avaliacao-gestor.png" />
     <Content Include="App_Themes\IntranetSME\images\ico-frequencia-gestor.png" />
     <Content Include="App_Themes\IntranetSME\images\icoAlerta.png" />
+    <Content Include="App_Themes\IntranetSME\images\ico_avaliacao_aee.png" />
+    <Content Include="App_Themes\IntranetSME\images\ico_avaliacao_drop.png" />
+    <Content Include="App_Themes\IntranetSME\images\ico_avaliacao_rp.png" />
     <Content Include="App_Themes\IntranetSME\images\img-checkboxlist-columns.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-barra-sp.gif" />
     <Content Include="App_Themes\IntranetSME\images\setaDestaque_.png" />
