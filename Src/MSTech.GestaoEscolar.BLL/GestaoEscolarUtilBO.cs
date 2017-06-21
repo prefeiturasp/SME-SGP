@@ -27,6 +27,7 @@ using MSTech.GestaoEscolar.BLL.Caching;
 using MSTech.CoreSSO.DAL;
 using System.Runtime.CompilerServices;
 using MSTech.Validation;
+using System.Web.UI;
 
 namespace MSTech.GestaoEscolar.BLL
 {
@@ -53,6 +54,70 @@ namespace MSTech.GestaoEscolar.BLL
             }
 
             return entity.pes_nome;
+        }
+
+        /// <summary>
+        /// Retorna o sexo da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string SexoFormatado(this PES_Pessoa entity)
+        {
+            switch (entity.pes_sexo)
+            {
+                case 1:
+                    return "Masculino";
+                case 2:
+                    return "Feminino";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Retorna a raça/core da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string RacaCorFormatado(this PES_Pessoa entity)
+        {
+            switch (entity.pes_racaCor)
+            {
+                case 1:
+                    return "Branca";
+                case 2:
+                    return "Preta";
+                case 3:
+                    return "Parda";
+                case 4:
+                    return "Amarela";
+                case 5:
+                    return "Indígena";
+                case 6:
+                    return "Não declarada";
+            }
+
+            return string.Empty;
+        }
+
+        public static bool In<T>(this T valor, params T[] array)
+        {
+            return array.Contains(valor);
+        }
+
+        public static T ToEntity<T>(this DataRow dataRow) where T: class, new()
+        {
+            return (T)GestaoEscolarUtilBO.DataRowToEntity(dataRow, new T());
+        }
+
+        public static List<T> ToEntityList<T>(this DataTable datatable) where T : class, new()
+        {
+            if (datatable.Rows.Count > 0)
+            {
+                return GestaoEscolarUtilBO.MapToEnumerable<T>(datatable).ToList();
+            }
+
+            return new List<T>();
         }
     }
 
