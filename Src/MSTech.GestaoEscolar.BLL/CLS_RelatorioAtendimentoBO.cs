@@ -85,9 +85,9 @@ namespace MSTech.GestaoEscolar.BLL
                             List<QuestionarioConteudo> lstQuestionarioConteudo = dtQuestionarioConteudo.ToEntityList<QuestionarioConteudo>();
                             List<CLS_QuestionarioResposta> lstQuestionarioResposta = dtQuestionarioResposta.ToEntityList<CLS_QuestionarioResposta>();
 
-                            lstQuestionarioConteudo.ForEach(c => c.lstRepostas = lstQuestionarioResposta.Where(r => r.qtc_id == c.qtc_id).ToList());
-                            lstQuestionario.ForEach(q => q.lstConteudo = lstQuestionarioConteudo.Where(c => c.qst_id == q.qst_id).ToList());
-                            rel.lstQuestionario = lstQuestionario;
+                            lstQuestionarioConteudo.ForEach(c => c.lstRepostas = lstQuestionarioResposta.Where(r => r.qtc_id == c.qtc_id).OrderBy(r => r.qtr_ordem).ToList());
+                            lstQuestionario.ForEach(q => q.lstConteudo = lstQuestionarioConteudo.Where(c => c.qst_id == q.qst_id).OrderBy(c => c.qtc_ordem).ToList());
+                            rel.lstQuestionario = lstQuestionario.OrderBy(q => q.raq_ordem).ToList();
                         }
 
                         return rel;
