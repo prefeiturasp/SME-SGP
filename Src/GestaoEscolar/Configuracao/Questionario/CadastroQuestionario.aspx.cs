@@ -52,7 +52,7 @@ namespace GestaoEscolar.Configuracao.Questionario
         
         protected void _btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Busca.aspx", false);
+            Response.Redirect("BuscaQuestionario.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
