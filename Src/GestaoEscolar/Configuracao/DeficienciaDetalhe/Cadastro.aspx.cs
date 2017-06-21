@@ -302,6 +302,8 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                 else
                 {
                     int dfd_id = VS_ListaDetalhe.Any() ? VS_ListaDetalhe.Max(l => l.dfd_id) + 1 : 1;
+                    if (txtItemDetalhe.Text.Length > 100)
+                        throw new ValidationException("O nome do detalhe não deve exceder 100 caracteres.");
                     VS_ListaDetalhe.Add(new CFG_DeficienciaDetalhe
                     {
                         tde_id = VS_tde_id,

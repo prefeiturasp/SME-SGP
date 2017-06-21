@@ -66,7 +66,7 @@
                                                 <asp:Label runat="server" ID="lblTituloPopUpDetalhe" Text="Adicionar detalhe" />
                                             </legend>
                                             <asp:Label runat="server" ID="lblCampoDetalhe" Text="Detalhe" AssociatedControlID="txtItemDetalhe" />
-                                            <asp:TextBox runat="server" ID="txtItemDetalhe" SkinID="text60C" MaxLength="250" ValidationGroup="vgDetalhe" />
+                                            <asp:TextBox runat="server" ID="txtItemDetalhe" SkinID="text60C" MaxLength="100" ValidationGroup="vgDetalhe" />
                                             <asp:RequiredFieldValidator ID="revtxtItemDetalhe" runat="server" ControlToValidate="txtItemDetalhe" ValidationGroup="vgDetalhe"
                                                 Display="Dynamic" ErrorMessage="Descrição do detalhe é obrigatória." Text="*" />
                                             <div class="right">
