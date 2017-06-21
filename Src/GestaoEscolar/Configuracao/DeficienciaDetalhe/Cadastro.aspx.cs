@@ -394,6 +394,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
         protected void btnCancelarItemDetalhe_Click(object sender, EventArgs e)
         {
             divInserirDetalhe.Visible = false;
+            updCadastroQualidade.Update();
         }
 
 
