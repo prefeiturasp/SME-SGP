@@ -155,10 +155,10 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                     VS_ListaDetalhe = lstAux.ToList();
 
                     UCComboTipoDeficiencia._Combo.Enabled = !(VS_ListaDetalhe.Count > 0);
-
+                    
                     grvDetalhes.DataSource = VS_ListaDetalhe.Where(q => q.dfd_situacao != 3);
                     grvDetalhes.DataBind();
-                }                
+                }
 
             }
             catch (Exception ex)
@@ -175,6 +175,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
         {
             try
             {
+                VS_tde_id = new Guid(UCComboTipoDeficiencia._Combo.SelectedValue);
                 //verifica se é deficência multipla
                 if (VS_tde_id == ACA_ParametroAcademicoBO.ParametroValorGuidPorEntidade(eChaveAcademico.DEFICIENCIA_MULTIPLA, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
@@ -286,7 +287,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
             try
             {
                 string mensagem = "";
-                
+
                 if (string.IsNullOrEmpty(txtItemDetalhe.Text))
                     mensagem += (string.IsNullOrEmpty(mensagem) ? "" : "<br/>") + string.Format("Descrição do detalhe é obrigatório.");
 
@@ -301,6 +302,8 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                 else
                 {
                     int dfd_id = VS_ListaDetalhe.Any() ? VS_ListaDetalhe.Max(l => l.dfd_id) + 1 : 1;
+                    if (txtItemDetalhe.Text.Length > 100)
+                        throw new ValidationException("O nome do detalhe não deve exceder 100 caracteres.");
                     VS_ListaDetalhe.Add(new CFG_DeficienciaDetalhe
                     {
                         tde_id = VS_tde_id,
@@ -314,7 +317,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
 
                 grvDetalhes.DataSource = VS_ListaDetalhe.Where(q => q.dfd_situacao != 3);
                 grvDetalhes.DataBind();
-                
+
                 txtItemDetalhe.Text = "";
                 divInserirDetalhe.Visible = false;
                 updCadastroQualidade.Update();
@@ -419,7 +422,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
             {
                 string mensagem = "";
 
-                if (UCComboTipoDeficienciaFilha._Combo.SelectedIndex <=0)
+                if (UCComboTipoDeficienciaFilha._Combo.SelectedIndex <= 0)
                     mensagem += (string.IsNullOrEmpty(mensagem) ? "" : "<br/>") + string.Format("Deficiência relacionada é obrigatória.");
 
                 if (!string.IsNullOrEmpty(mensagem))
@@ -434,7 +437,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                     tde_idFilha = new Guid(UCComboTipoDeficienciaFilha._Combo.SelectedValue),
                     tde_nomeFilha = UCComboTipoDeficienciaFilha._Combo.SelectedItem.Text,
                     IsNew = true
-                });                
+                });
 
                 VS_ListaFilha = VS_ListaFilha.OrderBy(q => q.tde_nomeFilha).ToList();
 
@@ -465,7 +468,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                     int index = int.Parse(e.CommandArgument.ToString());
                     Guid idExcluir = new Guid(gdvDeficienciaFilha.DataKeys[index]["tde_idFilha"].ToString());
 
-                    if (idExcluir !=  Guid.NewGuid() && VS_ListaFilha.Any(l => l.tde_idFilha == idExcluir))
+                    if (idExcluir != Guid.NewGuid() && VS_ListaFilha.Any(l => l.tde_idFilha == idExcluir))
                     {
                         int ind = VS_ListaFilha.IndexOf(VS_ListaFilha.Where(l => l.tde_idFilha == idExcluir).First());
 
@@ -499,13 +502,13 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                 VS_tde_idFilha = Guid.NewGuid();
                 UCComboTipoDeficienciaFilha._Combo.SelectedIndex = 0;
                 UCComboTipoDeficienciaFilha.Focus();
-                
+
                 divInserirFilha.Visible = true;
                 updPopUpFilha.Update();
                 btnFilha.Text = "Adicionar deficiência relacionada";
 
                 lblDefRelacionada.Text += divInserirFilha.Visible.ToString();
-               // updCadastroQualidade.Update();
+                // updCadastroQualidade.Update();
             }
             catch (ValidationException ex)
             {
@@ -545,7 +548,8 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
             Response.Redirect("Busca.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
-
+        
         #endregion Eventos
+        
     }
 }
