@@ -10,21 +10,7 @@ namespace MSTech.GestaoEscolar.BLL
     using System.ComponentModel;
     using System.Data;
     using Validation.Exceptions;
-
-    #region Enumeradores
-
-    public enum QuestionarioTipoResposta
-    {
-        [Description("Múltipla seleção")]
-        MultiplaSelecao = 1,
-        [Description("Seleção única")]
-        SelecaoUnica,
-        [Description("Texto aberto")]
-        TextoAberto
-    }
-
-    #endregion
-
+    
     /// <summary>
     /// Description: CLS_QuestionarioResposta Business Object. 
     /// </summary>

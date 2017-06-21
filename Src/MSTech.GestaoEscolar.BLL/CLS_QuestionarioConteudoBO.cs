@@ -25,6 +25,16 @@ namespace MSTech.GestaoEscolar.BLL
         Pergunta
     }
 
+    public enum QuestionarioTipoResposta
+    {
+        [Description("Múltipla seleção")]
+        MultiplaSelecao = 1,
+        [Description("Seleção única")]
+        SelecaoUnica,
+        [Description("Texto aberto")]
+        TextoAberto
+    }
+
     #endregion
 
     /// <summary>
