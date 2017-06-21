@@ -35,7 +35,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Texto do conteúdo..
 		/// </summary>
-		[MSValidRange(50)]
 		[MSNotNullOrEmpty("[qtc_texto] é obrigatório.")]
 		public virtual string qtc_texto { get; set; }
 

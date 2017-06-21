@@ -27,7 +27,6 @@ namespace MSTech.GestaoEscolar.Entities
         /// <summary>
         /// Texto da resposta..
         /// </summary>
-        [MSValidRange(50)]
         [MSNotNullOrEmpty("Texto da resposta é obrigatório.")]
         public override string qtr_texto { get; set; }
 

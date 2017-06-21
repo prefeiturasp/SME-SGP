@@ -58,7 +58,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 							Param = qs.NewParameter();
 			Param.DbType = DbType.String;
 			Param.ParameterName = "@qst_titulo";
-			Param.Size = 50;
+			Param.Size = 500;
 			Param.Value = entity.qst_titulo;
 			qs.Parameters.Add(Param);
 
@@ -106,7 +106,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param = qs.NewParameter();
 			Param.DbType = DbType.String;
 			Param.ParameterName = "@qst_titulo";
-			Param.Size = 50;
+			Param.Size = 500;
 			Param.Value = entity.qst_titulo;
 			qs.Parameters.Add(Param);
 

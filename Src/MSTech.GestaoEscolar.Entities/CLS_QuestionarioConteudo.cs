@@ -29,7 +29,6 @@ namespace MSTech.GestaoEscolar.Entities
         /// <summary>
         /// Texto do conteúdo..
         /// </summary>
-        [MSValidRange(50)]
         [MSNotNullOrEmpty("Texto do conteúdo é obrigatório.")]
         public override string qtc_texto { get; set; }
 

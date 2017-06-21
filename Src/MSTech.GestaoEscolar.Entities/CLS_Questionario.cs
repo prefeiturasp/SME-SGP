@@ -15,7 +15,7 @@ namespace MSTech.GestaoEscolar.Entities
 	{        
         public override int qst_id { get; set; }
         
-        [MSValidRange(50)]
+        [MSValidRange(500)]
         [MSNotNullOrEmpty("Título do questionário é obrigatório.")]
         public override string qst_titulo { get; set; }
 
