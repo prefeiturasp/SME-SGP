@@ -11,6 +11,7 @@ namespace MSTech.GestaoEscolar.Entities
     /// <summary>
     /// Description: .
     /// </summary>
+    [Serializable]
     public class CLS_QuestionarioResposta : Abstract_CLS_QuestionarioResposta
 	{
         /// <summary>

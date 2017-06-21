@@ -12,6 +12,18 @@ namespace MSTech.GestaoEscolar.BLL
     using Caching;
     using System.Linq;
     using System.Data;
+    using System.ComponentModel;
+    public enum RelatorioPreenchimentoAlunoSituacao : byte
+    {
+        [Description("CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Rascunho")]
+        Rascunho = 1
+        ,
+        [Description("CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Finalizado")]
+        Finalizado = 2
+        ,
+        [Description("CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Aprovado")]
+        Aprovado = 3
+    }
 
     [Serializable]
     public class Struct_PreenchimentoAluno

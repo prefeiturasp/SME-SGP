@@ -3,17 +3,91 @@
     using MSTech.CoreSSO.BLL;
     using MSTech.CoreSSO.Entities;
     using MSTech.GestaoEscolar.BLL;
+    using MSTech.GestaoEscolar.CustomResourceProviders;
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.Web.WebProject;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Reflection;
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
 
     public partial class UCLancamentoRelatorioAtendimento : MotherUserControl
     {
+
+        private long VS_alu_id
+        {
+            get
+            {
+                return Convert.ToInt64(ViewState["VS_alu_id"] ?? -1);
+            }
+
+            set
+            {
+                ViewState["VS_alu_id"] = value;
+            }
+        }
+
+        private int VS_rea_id
+        {
+            get
+            {
+                return Convert.ToInt32(ViewState["VS_rea_id"] ?? -1);
+            }
+
+            set
+            {
+                ViewState["VS_rea_id"] = value;
+            }
+        }
+
+        private RelatorioAtendimento VS_RelatorioAtendimento
+        {
+            get
+            {
+                if (ViewState["VS_RelatorioAtendimento"] == null)
+                {
+                    ViewState["VS_RelatorioAtendimento"] = new RelatorioAtendimento();
+                }
+
+                return (RelatorioAtendimento)ViewState["VS_RelatorioAtendimento"];
+            }
+
+            set
+            {
+                ViewState["VS_RelatorioAtendimento"] = value;
+            }
+        }
+
+        private bool PermiteAprovar
+        {
+            get
+            {
+                return VS_RelatorioAtendimento.lstCargoPermissao.Any(p => p.rac_permissaoAprovacao) ||
+                       VS_RelatorioAtendimento.lstGrupoPermissao.Any(p => p.rag_permissaoAprovacao);
+            }
+        }
+
+        private bool PermiteEditar
+        {
+            get
+            {
+                return VS_RelatorioAtendimento.lstCargoPermissao.Any(p => p.rac_permissaoEdicao) ||
+                       VS_RelatorioAtendimento.lstGrupoPermissao.Any(p => p.rag_permissaoEdicao);
+            }
+        }
+
+        private bool PermiteConsultar
+        {
+            get
+            {
+                return VS_RelatorioAtendimento.lstCargoPermissao.Any(p => p.rac_permissaoConsulta) ||
+                       VS_RelatorioAtendimento.lstGrupoPermissao.Any(p => p.rag_permissaoConsulta) || PermiteAprovar || PermiteEditar;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -56,20 +130,20 @@
 
         public void Carregar(long alu_id, int rea_id, bool documentoOficial = false)
         {
-            ACA_Aluno entityAluno = new ACA_Aluno { alu_id = alu_id };
+            VS_alu_id = alu_id;
+            VS_rea_id = rea_id;
+            ACA_Aluno entityAluno = new ACA_Aluno { alu_id = VS_alu_id };
             ACA_AlunoBO.GetEntity(entityAluno);
 
             PES_Pessoa entityPessoa = new PES_Pessoa { pes_id = entityAluno.pes_id };
             PES_PessoaBO.GetEntity(entityPessoa);
 
-            CLS_RelatorioAtendimento entityRelatorio = new CLS_RelatorioAtendimento { rea_id = rea_id };
-            CLS_RelatorioAtendimentoBO.GetEntity(entityRelatorio);
+            VS_RelatorioAtendimento = CLS_RelatorioAtendimentoBO.SelecionaRelatorio(rea_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo);
 
             eExibicaoNomePessoa exibicaoNome = documentoOficial ? eExibicaoNomePessoa.NomeSocial | eExibicaoNomePessoa.NomeRegistro : eExibicaoNomePessoa.NomeSocial;
 
             string nomeAluno = entityPessoa.NomeFormatado(exibicaoNome);
 
-            lblInformacaoAluno.Text = "<b>" + entityRelatorio.rea_titulo + "</b><br/><br/>";
             //Nome
             lblInformacaoAluno.Text += "<b>Nome do aluno: </b>" + nomeAluno + "<br/>";
 
@@ -85,10 +159,10 @@
 
             if (!string.IsNullOrEmpty(sexo))
             {
-                lblInformacaoAluno.Text += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Sexo: </b>" + sexo;
+                lblInformacaoAluno.Text += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Sexo: </b>" + sexo;
             }
 
-            if (!entityRelatorio.rea_permiteEditarRecaCor)
+            if (!VS_RelatorioAtendimento.rea_permiteEditarRecaCor)
             {
                 UCCRacaCor.Visible = false;
 
@@ -96,7 +170,7 @@
 
                 if (!string.IsNullOrEmpty(racaCor))
                 {
-                    lblInformacaoAluno.Text += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Raça/cor: </b>" + racaCor;
+                    lblInformacaoAluno.Text += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Raça/cor: </b>" + racaCor;
                 }
             }
             else
@@ -108,13 +182,23 @@
                 }
             }
 
-            CarregarHipoteseDiagnostica(alu_id, entityRelatorio.rea_permiteEditarHipoteseDiagnostica);
-            CarregarQuestionarios(rea_id);
+            if (VS_RelatorioAtendimento.arq_idAnexo > 0 && PermiteEditar)
+            {
+                divDownloadAnexo.Visible = true;
+                hplDownloadAnexo.Text = VS_RelatorioAtendimento.rea_tituloAnexo;
+                hplDownloadAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", VS_RelatorioAtendimento.arq_idAnexo);
+            }
+
+            CarregarSituacao();
+            CarregarHipoteseDiagnostica(VS_RelatorioAtendimento.rea_permiteEditarHipoteseDiagnostica);
+            CarregarQuestionarios();
+
+            updLancamentoRelatorio.Update();
         }
 
-        private void CarregarHipoteseDiagnostica(long alu_id, bool permiteEditar)
+        private void CarregarHipoteseDiagnostica(bool permiteEditar)
         {
-            rptTipoDeficiencia.DataSource = CLS_AlunoDeficienciaDetalheBO.SelecionaPorAluno(alu_id);
+            rptTipoDeficiencia.DataSource = CLS_AlunoDeficienciaDetalheBO.SelecionaPorAluno(VS_alu_id);
             rptTipoDeficiencia.DataBind();
 
             liHipoteseDiagnostica.Visible = fdsHipoteseDiagnostica.Visible = rptTipoDeficiencia.Items.Count > 0;
@@ -122,15 +206,40 @@
             HabilitaControles(fdsHipoteseDiagnostica.Controls, permiteEditar);
         }
 
-        private void CarregarQuestionarios(int rea_id)
+        private void CarregarQuestionarios()
         {
-            RelatorioAtendimento rel = CLS_RelatorioAtendimentoBO.SelecionaRelatorio(rea_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo);
-
-            rptAbaQuestionarios.DataSource = rel.lstQuestionario;
+            rptAbaQuestionarios.DataSource = VS_RelatorioAtendimento.lstQuestionario;
             rptAbaQuestionarios.DataBind();
 
-            rptQuestionario.DataSource = rel.lstQuestionario;
+            rptQuestionario.DataSource = VS_RelatorioAtendimento.lstQuestionario;
             rptQuestionario.DataBind();
+        }
+
+        private void CarregarSituacao()
+        {
+            ddlSituacao.Items.Clear();
+
+            Type objType = typeof(RelatorioPreenchimentoAlunoSituacao);
+            FieldInfo[] propriedades = objType.GetFields();
+            foreach (FieldInfo objField in propriedades)
+            {
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])objField.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                if (attributes.Length > 0)
+                {
+                    RelatorioPreenchimentoAlunoSituacao situacao = (RelatorioPreenchimentoAlunoSituacao)Enum.Parse(typeof(RelatorioPreenchimentoAlunoSituacao), objField.GetRawConstantValue().ToString());
+                    if (situacao.In(RelatorioPreenchimentoAlunoSituacao.Rascunho, RelatorioPreenchimentoAlunoSituacao.Finalizado) ||
+                        (situacao == RelatorioPreenchimentoAlunoSituacao.Aprovado && PermiteAprovar))
+                    {
+                        ddlSituacao.Items.Add(new ListItem(CustomResource.GetGlobalResourceObject("Enumerador", attributes[0].Description), ((byte)situacao).ToString()));
+                    }
+                }
+            }
+        }
+
+        public void RetornaLancamentoRelatorio()
+        {
+
         }
 
         protected void rptTipoDeficiencia_ItemDataBound(object sender, RepeaterItemEventArgs e)

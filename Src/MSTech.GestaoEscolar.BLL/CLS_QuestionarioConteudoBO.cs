@@ -11,6 +11,7 @@ namespace MSTech.GestaoEscolar.BLL
     using System.ComponentModel;
     using Validation.Exceptions;
     using System.Collections.Generic;
+    using System;
     #region Enumeradores
 
     public enum QuestionarioTipoConteudo
@@ -37,9 +38,15 @@ namespace MSTech.GestaoEscolar.BLL
 
     #endregion
 
+    [Serializable]
     public class QuestionarioConteudo : CLS_QuestionarioConteudo
     {
         public List<CLS_QuestionarioResposta> lstRepostas { get; set; }
+
+        public QuestionarioConteudo()
+        {
+            lstRepostas = new List<CLS_QuestionarioResposta>();
+        }
     }
 
     /// <summary>

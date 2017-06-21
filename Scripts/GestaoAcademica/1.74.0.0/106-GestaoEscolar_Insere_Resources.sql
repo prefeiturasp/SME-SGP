@@ -45,6 +45,48 @@ SET XACT_ABORT ON
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Anotações da recuperação paralela'
+		
+	EXEC MS_InsereResource 
+        @rcr_chave = 'CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.AEE' 
+        , @rcr_NomeResource = 'Enumerador'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'AEE'
+
+	EXEC MS_InsereResource 
+			@rcr_chave = 'CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.NAAPA' 
+			, @rcr_NomeResource = 'Enumerador'
+			, @rcr_cultura = 'pt-BR'
+			, @rcr_codigo = 0 
+			, @rcr_valorPadrao = 'NAAPA'
+
+	EXEC MS_InsereResource 
+			@rcr_chave = 'CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.RP' 
+			, @rcr_NomeResource = 'Enumerador'
+			, @rcr_cultura = 'pt-BR'
+			, @rcr_codigo = 0 
+			, @rcr_valorPadrao = 'Recuperação paralela'
+
+	EXEC MS_InsereResource 
+			@rcr_chave = 'CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Rascunho' 
+			, @rcr_NomeResource = 'Enumerador'
+			, @rcr_cultura = 'pt-BR'
+			, @rcr_codigo = 0 
+			, @rcr_valorPadrao = 'Rascunho'
+
+	EXEC MS_InsereResource 
+			@rcr_chave = 'CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Finalizado' 
+			, @rcr_NomeResource = 'Enumerador'
+			, @rcr_cultura = 'pt-BR'
+			, @rcr_codigo = 0 
+			, @rcr_valorPadrao = 'Finalizado'
+
+	EXEC MS_InsereResource 
+			@rcr_chave = 'CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Aprovado' 
+			, @rcr_NomeResource = 'Enumerador'
+			, @rcr_cultura = 'pt-BR'
+			, @rcr_codigo = 0 
+			, @rcr_valorPadrao = 'Aprovado'
 
 	EXEC MS_InsereResource 
         @rcr_chave = 'ControleTurma.Alunos.btnRelatorioAEE.ToolTip' 

@@ -1,17 +1,15 @@
-﻿namespace GestaoEscolar.WebControls.Combos
-{
-    using MSTech.GestaoEscolar.BLL;
-    using MSTech.GestaoEscolar.CustomResourceProviders;
-    using MSTech.GestaoEscolar.Web.WebProject;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
+﻿using MSTech.GestaoEscolar.BLL;
+using MSTech.GestaoEscolar.Web.WebProject;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
-    public partial class UCComboTipoRelatorioAtendimento : MotherUserControl
+namespace GestaoEscolar.WebControls.Combos
+{
+    public partial class UCComboRelatorioAtendimento : MotherUserControl
     {
         #region Delegates
 
@@ -23,7 +21,7 @@
 
         #region Constantes
 
-        private const string valorSelecione = "0";
+        private const string valorSelecione = "-1";
 
         #endregion
 
@@ -233,13 +231,15 @@
             ddlCombo.Focus();
         }
 
-        public void CarregarTipos()
+        public void CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo rea_tipo)
         {
             try
             {
                 ddlCombo.Items.Clear();
+                ddlCombo.DataSource = CLS_RelatorioAtendimentoBO.SelecionaPorPermissaoUsuarioTipo(__SessionWEB.__UsuarioWEB.Usuario.usu_id, rea_tipo);
                 CarregarMensagemSelecione();
-                GestaoEscolarUtilBO.CarregarComboEnum<CLS_RelatorioAtendimentoTipo>(ddlCombo);
+
+                ddlCombo.DataBind();
             }
             catch (Exception)
             {

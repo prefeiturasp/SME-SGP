@@ -9,10 +9,18 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.GestaoEscolar.DAL;
     using System.Data;
     using System.Collections.Generic;
+    using System;
+
+    [Serializable]
     public class Questionario : CLS_Questionario
     {
         public int raq_ordem { get; set; }
         public List<QuestionarioConteudo> lstConteudo { get; set; }
+
+        public Questionario()
+        {
+            lstConteudo = new List<QuestionarioConteudo>();
+        }
     }
 
     /// <summary>

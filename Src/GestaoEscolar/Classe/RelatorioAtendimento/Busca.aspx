@@ -49,7 +49,7 @@
                 <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound" 
                     OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
                     EmptyDataText="A pesquisa não encontrou resultados." OnDataBinding="grvResultados_DataBinding"
-                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id">
+                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id">
                     <Columns>
                         <asp:BoundField HeaderText="Nome" DataField="pes_nome" SortExpression="pes_nome" />
                         <asp:BoundField HeaderText="Idade" DataField="pes_idade" SortExpression="pes_idade" />
@@ -58,7 +58,7 @@
                         <asp:BoundField HeaderText="Turma" DataField="tur_codigo" SortExpression="tur_codigo"/>
                         <asp:TemplateField HeaderText="Lançar relatório" HeaderStyle-CssClass="center">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnResponder" runat="server" SkinID="btRelatorio" PostBackUrl="~/Classe/RelatorioAtendimento/Cadastro.aspx" />
+                                <asp:ImageButton ID="btnResponder" runat="server" SkinID="btRelatorio" CommandName="Edit" PostBackUrl="~/Classe/RelatorioAtendimento/Cadastro.aspx" />
                             </ItemTemplate>
                             <ItemStyle CssClass="center" HorizontalAlign="Center" />
                         </asp:TemplateField>

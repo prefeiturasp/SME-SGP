@@ -2269,8 +2269,11 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     decimal variacao = dadosAluno.listaNotasEFaltas.FirstOrDefault().fav_variacao;
                     VS_FormatacaoPorcentagemFrequencia = GestaoEscolarUtilBO.CriaFormatacaoDecimal(variacao > 0 ? GestaoEscolarUtilBO.RetornaNumeroCasasDecimais(variacao) : 2);
 
-                    decimal FrequenciaFinalAjustadaRegencia = dadosAluno.listaNotasEFaltas.LastOrDefault(p => ((p.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || p.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia)
-                                                                                && (p.FrequenciaFinalAjustada > 0 && p.bimestreComLancamento))).FrequenciaFinalAjustada;
+                    decimal FrequenciaFinalAjustadaRegencia = dadosAluno.listaNotasEFaltas.LastOrDefault
+                        (p => ((p.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || p.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia)
+                                // Só considera a regência, quando a turma tem tipo de apuração de frequência por Horas (pois EJA é regência mas é por tempos).
+                                && EntFormatoAvaliacao.fav_tipoApuracaoFrequencia != (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.TemposAula
+                                && (p.FrequenciaFinalAjustada > 0 && p.bimestreComLancamento))).FrequenciaFinalAjustada;
 
                     if (FrequenciaFinalAjustadaRegencia > 0)
                     {

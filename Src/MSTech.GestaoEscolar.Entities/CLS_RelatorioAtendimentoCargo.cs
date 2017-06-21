@@ -4,12 +4,13 @@
 
 namespace MSTech.GestaoEscolar.Entities
 {
-	using MSTech.GestaoEscolar.Entities.Abstracts;
-		
-	/// <summary>
-	/// Description: .
-	/// </summary>
-	public class CLS_RelatorioAtendimentoCargo : Abstract_CLS_RelatorioAtendimentoCargo
+    using MSTech.GestaoEscolar.Entities.Abstracts;
+    using System;
+    /// <summary>
+    /// Description: .
+    /// </summary>
+    [Serializable]
+    public class CLS_RelatorioAtendimentoCargo : Abstract_CLS_RelatorioAtendimentoCargo
 	{
 	}
 }

@@ -13,6 +13,15 @@ namespace GestaoEscolar.WebControls.LancamentoRelatorioAtendimento {
     public partial class UCLancamentoRelatorioAtendimento {
         
         /// <summary>
+        /// updLancamentoRelatorio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updLancamentoRelatorio;
+        
+        /// <summary>
         /// lblInformacaoAluno control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,51 @@ namespace GestaoEscolar.WebControls.LancamentoRelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::WebControls_Combos_UCComboRacaCor UCCRacaCor;
+        
+        /// <summary>
+        /// lblSituacao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSituacao;
+        
+        /// <summary>
+        /// ddlSituacao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSituacao;
+        
+        /// <summary>
+        /// divDownloadAnexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDownloadAnexo;
+        
+        /// <summary>
+        /// lblDownloadAnexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDownloadAnexo;
+        
+        /// <summary>
+        /// hplDownloadAnexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hplDownloadAnexo;
         
         /// <summary>
         /// liHipoteseDiagnostica control.

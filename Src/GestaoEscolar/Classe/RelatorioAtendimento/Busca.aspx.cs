@@ -92,6 +92,30 @@
             }
         }
 
+        /// <summary>
+        /// Retorna o alu_id do registro que esta sendo editado.
+        /// </summary>
+        public long EditItemAluId
+        {
+            get
+            {
+                return Convert.ToInt64(grvResultados.DataKeys[grvResultados.EditIndex]["alu_id"]);
+            }
+        }
+
+        /// <summary>
+        /// Retorna o cal_id do registro que esta sendo editado.
+        /// </summary>
+        public int EditItemCalId
+        {
+            get
+            {
+                return Convert.ToInt32(grvResultados.DataKeys[grvResultados.EditIndex]["cal_id"]);
+            }
+        }
+
+
+
         #endregion
 
         #region Page Life Cycle
