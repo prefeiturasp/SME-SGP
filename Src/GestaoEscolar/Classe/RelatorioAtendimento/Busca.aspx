@@ -49,7 +49,7 @@
                 <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound" 
                     OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
                     EmptyDataText="A pesquisa não encontrou resultados." OnDataBinding="grvResultados_DataBinding"
-                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id">
+                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
                     <Columns>
                         <asp:BoundField HeaderText="Nome" DataField="pes_nome" SortExpression="pes_nome" />
                         <asp:BoundField HeaderText="Idade" DataField="pes_idade" SortExpression="pes_idade" />

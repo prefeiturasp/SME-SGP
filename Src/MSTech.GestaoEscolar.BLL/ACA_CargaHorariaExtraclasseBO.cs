@@ -34,6 +34,19 @@ namespace MSTech.GestaoEscolar.BLL
             return new ACA_CargaHorariaExtraclasseDAO().SelecionaPorCurriculoPeriodoCalendario(cur_id, crr_id, crp_id, cal_id);
         }
 
+        /// <summary>
+        /// Verifica se existe atividade cadastrada ou lançamento cadastrado para a carga horária.
+        /// </summary>
+        /// <param name="dis_ids">Id da disciplina</param>
+        /// <returns></returns>
+        public static DataTable VerificaAtividadeLancamento(string dis_ids)
+        {
+            DataTable dt = string.IsNullOrEmpty(dis_ids) ? new DataTable()
+                : new ACA_CargaHorariaExtraclasseDAO().SelectAtividadeLancamento(dis_ids);
+
+            return dt;
+        }
+
         #endregion
 
         #region Métodos de inclusão/Alteração

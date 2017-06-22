@@ -25,7 +25,7 @@
             <div class="right">
                 <asp:UpdatePanel ID="updBotoes" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:Button ID="btnSalvar" runat="server" Text="Salvar" Visible="false" />
+                        <asp:Button ID="btnSalvar" runat="server" Text="Salvar" Visible="false" OnClick="btnSalvar_Click" />
                         <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CausesValidation="false" OnClick="btnCancelar_Click" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -36,7 +36,7 @@
                 <asp:Panel id="pnlLancamento" runat="server" Visible="false">
                     <uc:UCLancamentoRelatorioAtendimento ID="UCLancamentoRelatorioAtendimento" runat="server" />
                     <div class="right">
-                        <asp:Button ID="btnSalvarBaixo" runat="server" Text="Salvar" />
+                        <asp:Button ID="btnSalvarBaixo" runat="server" Text="Salvar" OnClick="btnSalvar_Click" />
                         <asp:Button ID="btnCancelarBaixo" runat="server" Text="Cancelar" CausesValidation="false" OnClick="btnCancelar_Click" />
                     </div>
                 </asp:Panel>

@@ -103,6 +103,18 @@
             }
         }
 
+
+        /// <summary>
+        /// Retorna o tur_id do registro que esta sendo editado.
+        /// </summary>
+        public long EditItemTurId
+        {
+            get
+            {
+                return Convert.ToInt64(grvResultados.DataKeys[grvResultados.EditIndex]["tur_id"]);
+            }
+        }
+
         /// <summary>
         /// Retorna o cal_id do registro que esta sendo editado.
         /// </summary>
@@ -137,6 +149,14 @@
             {
                 try
                 {
+                    string msg = __SessionWEB.PostMessages;
+
+                    if (!string.IsNullOrEmpty(msg))
+                    {
+                        lblMensagem.Text = msg;
+                        updMensagem.Update();
+                    }
+
                     InicializarTela();
                 }
                 catch (Exception ex)

@@ -140,7 +140,7 @@ namespace MSTech.GestaoEscolar.DAL
             __STP_DELETE = "NEW_CLS_RelatorioPreenchimentoAlunoTurmaDisciplina_UpdateSituacao";
             return base.Delete(entity);
         }
-
+        
         #endregion Métodos Sobrescritos
     }
 }

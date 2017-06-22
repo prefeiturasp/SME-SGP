@@ -119,6 +119,72 @@ namespace MSTech.GestaoEscolar.BLL
 
             return new List<T>();
         }
+
+        public static T FindControl<T>(this RepeaterItem item, string id) where T : Control
+        {
+            return item.FindControl(id) as T;
+        }
+
+        public static string GetValue(this HiddenField hdn)
+        {
+            if (hdn == null)
+            {
+                return string.Empty;
+            }
+
+            return hdn.Value;
+        }
+
+        public static string GetText(this TextBox txt)
+        {
+            if (txt == null)
+            {
+                return string.Empty;
+            }
+
+            return txt.Text;
+        }
+
+        public static bool IsChecked(this RadioButton rdb)
+        {
+            if (rdb == null)
+            {
+                return false;
+            }
+            
+            return rdb.Checked;
+        }
+
+        public static bool IsChecked(this CheckBox chk)
+        {
+            if (chk == null)
+            {
+                return false;
+            }
+
+            return chk.Checked;
+        }
+
+        public static int ToInt32(this string str)
+        {
+            int valor = -1;
+            int.TryParse(str, out valor);
+            return valor;
+        }
+
+        public static long ToInt64(this string str)
+        {
+            long valor = -1;
+            long.TryParse(str, out valor);
+            return valor;
+        }
+
+        public static byte ToByte(this string str)
+        {
+            byte valor = 0;
+            byte.TryParse(str, out valor);
+            return valor;
+        }
     }
 
     #endregion Métodos de extensão
