@@ -106,7 +106,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
                 lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
                 _ddlTipoResposta.SelectedValue = Conteudo.qtc_tipoResposta.ToString();
-                _ddlTipoConteudo.Enabled = _ddlTipoResposta.Enabled = !CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id);
+                _ddlTipoConteudo.Enabled = _ddlTipoResposta.Enabled = !CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id.ToString());
             }
             catch (Exception e)
             {
@@ -128,7 +128,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                 CLS_QuestionarioConteudoBO.GetEntity(Conteudo);
                 Conteudo.qtc_texto = _txtTexto.Text;
-                if (!CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id))
+                if (!CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id.ToString()))
                 {
                     Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
                     Conteudo.qtc_tipoResposta = Convert.ToByte(_ddlTipoResposta.SelectedValue.ToString());

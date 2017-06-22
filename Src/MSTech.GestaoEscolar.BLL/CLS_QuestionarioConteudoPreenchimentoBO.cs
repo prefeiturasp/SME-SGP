@@ -20,11 +20,11 @@ namespace MSTech.GestaoEscolar.BLL
         /// <returns></returns>
 		public static bool ConteudoPreenchido
            (
-                int qtc_id
+                string qtc_ids
            )
         {
             CLS_QuestionarioConteudoPreenchimentoDAO dao = new CLS_QuestionarioConteudoPreenchimentoDAO();
-            return dao.SelecionaConteudoPreenchido(qtc_id).Rows.Count > 0;
+            return dao.SelecionaConteudoPreenchido(qtc_ids).Rows.Count > 0;
         }		
 	}
 }
