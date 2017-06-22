@@ -111,6 +111,19 @@ namespace MSTech.GestaoEscolar.BLL
                         );
         }
 
+        /// <summary>
+        /// Pesquisa relatórios por tipo.
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable PesquisaRelatorioPorTipo(byte rea_tipo, int currentPage, int pageSize)
+        {
+            if (pageSize == 0)
+                pageSize = 1;
+            DataTable dt = new CLS_RelatorioAtendimentoDAO().PesquisaRelatorioPorTipo(rea_tipo, currentPage / pageSize, pageSize, out totalRecords);
+            
+            return dt;
+        }
+
         #endregion 
     }
 }
