@@ -95,6 +95,13 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Relatórios do AEE'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'TUR_TurmaHorarioBO.SalvarTurmaHorario.ValidacaoTemposAula' 
+        , @rcr_NomeResource = 'BLL'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'O componente curricular {0} ultrapassou a carga horária ({1}) na turma {2} em {3} aulas.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

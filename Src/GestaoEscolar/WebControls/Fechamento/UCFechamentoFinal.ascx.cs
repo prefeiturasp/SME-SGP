@@ -1545,6 +1545,7 @@ namespace GestaoEscolar.WebControls.Fechamento
                 ((ImageButton)rptItem.FindControl("btnObservacaoConselho")).Enabled = value;
                 ((ImageButton)rptItem.FindControl("btnBoletim")).Enabled = value;
                 ((LinkButton)rptItem.FindControl("btnRelatorioRP")).Enabled = value;
+                ((LinkButton)rptItem.FindControl("btnRelatorioAEE")).Enabled = value;
 
                 foreach (RepeaterItem rptItemRegencia in rptComponenteRegencia.Items)
                 {
@@ -1594,6 +1595,12 @@ namespace GestaoEscolar.WebControls.Fechamento
                 if (btnRelatorioRP != null)
                 {
                     btnRelatorioRP.Enabled = true;
+                }
+
+                LinkButton btnRelatorioAEE = (LinkButton)rptItem.FindControl("btnRelatorioAEE");
+                if (btnRelatorioAEE != null)
+                {
+                    btnRelatorioAEE.Enabled = true;
                 }
             }
         }
