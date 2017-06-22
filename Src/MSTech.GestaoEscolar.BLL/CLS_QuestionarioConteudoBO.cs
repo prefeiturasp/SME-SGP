@@ -53,7 +53,7 @@ namespace MSTech.GestaoEscolar.BLL
     /// Description: CLS_QuestionarioConteudo Business Object. 
     /// </summary>
     public class CLS_QuestionarioConteudoBO : BusinessBase<CLS_QuestionarioConteudoDAO, CLS_QuestionarioConteudo>
-	{
+    {
 
         /// <summary>
         ///Busca os conteúdos filtrado por questionário
@@ -73,7 +73,21 @@ namespace MSTech.GestaoEscolar.BLL
                 pageSize = 1;
 
             CLS_QuestionarioConteudoDAO dao = new CLS_QuestionarioConteudoDAO();
-            return dao.SelectByQuestionario(true, currentPage / pageSize, pageSize, qst_id, out totalRecords);
+            return dao.SelectByQuestionarioPaginado(true, currentPage / pageSize, pageSize, qst_id, out totalRecords);
+        }
+
+        /// <summary>
+        ///Busca os conteúdos filtrado por questionário
+        /// </summary>
+        /// <param name="qst_id"></param>
+        /// <returns></returns>
+        public static DataTable SelectByQuestionario
+           (
+                int qst_id
+           )
+        {
+            CLS_QuestionarioConteudoDAO dao = new CLS_QuestionarioConteudoDAO();
+            return dao.SelectByQuestionario(qst_id);
         }
 
         /// <summary>
@@ -102,6 +116,5 @@ namespace MSTech.GestaoEscolar.BLL
 
             return true;
         }
-
     }
 }

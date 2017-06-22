@@ -21,7 +21,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <returns></returns>
         public DataTable SelecionaConteudoPreenchido
                 (
-                   int qtc_id
+                   string qtc_ids
                 )
         {
             DataTable dt = new DataTable();
@@ -32,14 +32,11 @@ namespace MSTech.GestaoEscolar.DAL
                 #region PARAMETROS
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@qtc_id";
-                if (qtc_id > 0)
-                    Param.Value = qtc_id;
-                else
-                    Param.Value = DBNull.Value;
+                Param.DbType = DbType.String;
+                Param.ParameterName = "@qtc_ids";
+                Param.Value = qtc_ids;
                 qs.Parameters.Add(Param);
-
+                
                 #endregion
 
                 qs.Execute();

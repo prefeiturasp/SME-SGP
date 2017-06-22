@@ -5,6 +5,7 @@ using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,7 +17,8 @@ namespace GestaoEscolar.Configuracao.Questionario
     {
         #region Propriedades
 
-        public int PaginaQuestionario_qst_id {
+        public int PaginaQuestionario_qst_id
+        {
             get
             {
                 if (grvResultado.EditIndex >= 0)
@@ -108,13 +110,29 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                     CLS_Questionario entity = new CLS_Questionario { qst_id = qst_id };
 
-                    if (CLS_QuestionarioBO.Delete(entity))
+                    //Verifica os conteúdos do questionário
+                    DataTable ConteudosQuestionario = CLS_QuestionarioConteudoBO.SelectByQuestionario(qst_id);
+                    var listQtc_ids = ConteudosQuestionario.AsEnumerable().Select(q => q.Field<int>("qtc_id")).ToArray();
+                    string qtc_ids = string.Join(",", listQtc_ids.Select(item => item.ToString()).ToArray());
+
+                    //Verifica se o questionário não foi respondido
+                    if (!CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(qtc_ids))
+                    {
+                        if (CLS_QuestionarioBO.Delete(entity))
+                        {
+                            grvResultado.PageIndex = 0;
+                            grvResultado.DataBind();
+                            ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "qst_id: " + qst_id);
+                            lblMessage.Text = UtilBO.GetErroMessage("Questionário excluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                        }
+                    }
+                    else
                     {
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
-                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "qst_id: " + qst_id);
-                        lblMessage.Text = UtilBO.GetErroMessage("Questionário excluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                        throw new ValidationException("O questionário não pode ser excluído pois já foi respondido.");
                     }
+                        
                 }
                 catch (ValidationException ex)
                 {
@@ -168,7 +186,7 @@ namespace GestaoEscolar.Configuracao.Questionario
         #endregion
 
         #region Métodos
-        
+
         private void Pesquisar()
         {
             try
