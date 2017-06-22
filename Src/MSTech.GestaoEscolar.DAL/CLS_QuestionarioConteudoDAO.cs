@@ -20,7 +20,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>
         /// <param name="qst_id"></param>
         /// <returns></returns>
-        public DataTable SelectByQuestionario
+        public DataTable SelectByQuestionarioPaginado
             (
                 bool paginado
                 , int currentPage
@@ -56,6 +56,47 @@ namespace MSTech.GestaoEscolar.DAL
                     totalRecords = qs.Return.Rows.Count;
                 }
 
+                if (qs.Return.Rows.Count > 0)
+                    dt = qs.Return;
+
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        public DataTable SelectByQuestionario
+            (
+                int qst_id
+            )
+        {
+            DataTable dt = new DataTable();
+
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_QuestionarioConteudo_SelectBy_qst_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@qst_id";
+                if (qst_id > 0)
+                    Param.Value = qst_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+                  
                 if (qs.Return.Rows.Count > 0)
                     dt = qs.Return;
 
