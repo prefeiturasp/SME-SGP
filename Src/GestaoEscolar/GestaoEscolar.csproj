@@ -924,6 +924,13 @@
     <Compile Include="Classe\RelatorioAtendimento\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx.cs">
       <DependentUpon>BuscaCabecalhoAvisosTextos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3524,6 +3531,7 @@
     <Content Include="Classe\LancamentoSondagem\Cadastro.aspx" />
     <Content Include="Classe\RelatorioAtendimento\Busca.aspx" />
     <Content Include="Classe\RelatorioAtendimento\Cadastro.aspx" />
+    <Content Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
     <Content Include="Configuracao\DeficienciaDetalhe\Busca.aspx" />
     <Content Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx" />

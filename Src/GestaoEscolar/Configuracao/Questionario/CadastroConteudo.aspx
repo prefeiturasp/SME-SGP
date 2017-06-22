@@ -19,7 +19,7 @@
         <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
         <uc2:UCLoader ID="UCLoader1" runat="server" />
         <asp:Label ID="_lblTexto" runat="server" Text="Texto do conteúdo *" AssociatedControlID="_txtTexto"></asp:Label>
-        <asp:TextBox ID="_txtTexto" runat="server" CssClass="wrap150px" SkinID="text30C"></asp:TextBox>
+        <asp:TextBox ID="_txtTexto" runat="server" TextMode="MultiLine" SkinID="limite4000" MaxLength="4000"></asp:TextBox>
         <asp:RequiredFieldValidator ID="_rfvTexto" runat="server" ErrorMessage="Texto do conteúdo é obrigatório."
             ControlToValidate="_txtTexto" ValidationGroup="Conteudo">*</asp:RequiredFieldValidator>
         <br />

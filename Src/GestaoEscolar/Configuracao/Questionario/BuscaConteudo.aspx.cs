@@ -141,7 +141,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 Label lblTipoResposta = (Label)e.Row.FindControl("lblTipoResposta");
                 if (lblTipoResposta != null)
                 {
-                    lblTipoResposta.Text = tipoResposta > 0 ? GestaoEscolarUtilBO.GetEnumDescription((QuestionarioTipoResposta)tipoResposta) : string.Empty;
+                    lblTipoResposta.Text = tipoResposta > 0 ? GestaoEscolarUtilBO.GetEnumDescription((QuestionarioTipoResposta)tipoResposta) : "-";
                 }
 
                 Button btnIncluirRespostas = (Button)e.Row.FindControl("btnIncluirRespostas");

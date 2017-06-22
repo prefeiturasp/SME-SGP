@@ -38,7 +38,7 @@
             <fieldset>
                 <legend>Cadastro de detalhamento de deficiência</legend>
                 <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios4" runat="server" />
-                <uc1:UCComboTipoDeficiencia runat="server" ID="UCComboTipoDeficiencia" _MostrarMessageSelecione="True" _MostrarMessageTodas="False" />
+                <uc1:UCComboTipoDeficiencia runat="server" ID="UCComboTipoDeficiencia" _MostrarMessageTodas="False" />
                 <div>
                     <br />
                 </div>
@@ -82,7 +82,7 @@
                         </div>
                         <asp:GridView runat="server" ID="grvDetalhes" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="true"
                             DataKeyNames="tde_id, dfd_id, dfd_nome" EmptyDataText="Nenhum detalhamento cadastrado."
-                            OnRowDataBound="grv_RowDataBound" OnRowCommand="grvDetalhes_RowCommand">
+                            OnRowDataBound="grv_RowDataBound" OnRowCommand="grvDetalhes_RowCommand" OnSorting="grvDetalhes_Sorting">
                             <Columns>
                                 <asp:BoundField DataField="dfd_nome" HeaderText="Detalhe" SortExpression="dfd_nome"/>
                                 <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.HeaderExcluir %>">
@@ -122,7 +122,7 @@
                                                     <legend>
                                                         <asp:Label runat="server" ID="Label3" Text="Adicionar deficiência relacionada" />
                                                     </legend>
-                                                    <uc1:UCComboTipoDeficiencia runat="server" ID="UCComboTipoDeficienciaFilha" _MostrarMessageSelecione="True" _MostrarMessageTodas="False" />
+                                                    <uc1:UCComboTipoDeficiencia runat="server" ID="UCComboTipoDeficienciaFilha" _MostrarMessageTodas="False" />
 
                                                     <div class="right">
                                                         <asp:Button ID="btnFilha" runat="server" Text="Adicionar deficiência relacionada"
