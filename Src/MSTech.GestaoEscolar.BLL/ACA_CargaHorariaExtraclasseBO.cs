@@ -41,7 +41,10 @@ namespace MSTech.GestaoEscolar.BLL
         /// <returns></returns>
         public static DataTable VerificaAtividadeLancamento(string dis_ids)
         {
-            return new ACA_CargaHorariaExtraclasseDAO().SelectAtividadeLancamento(dis_ids);
+            DataTable dt = string.IsNullOrEmpty(dis_ids) ? new DataTable()
+                : new ACA_CargaHorariaExtraclasseDAO().SelectAtividadeLancamento(dis_ids);
+
+            return dt;
         }
 
         #endregion
