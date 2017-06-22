@@ -133,6 +133,12 @@ namespace MSTech.GestaoEscolar.DAL
             return base.Alterar(entity);
         }
 
+        public override bool Delete(CLS_QuestionarioConteudo entity)
+        {
+            __STP_DELETE = "NEW_CLS_QuestionarioConteudo_UpdateSituacao";
+            return base.Delete(entity);
+        }
+
         protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, CLS_QuestionarioConteudo entity)
         {
             if (entity != null & qs != null)

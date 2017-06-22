@@ -910,7 +910,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
 
                     CarregaSessionPaginaRetorno();
-                    //RedirecionarPagina("~/");
+                    RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
                 }
                 catch (Exception ex)
                 {

@@ -2483,6 +2483,24 @@ namespace GestaoEscolar.Academico.ControleTurma
             //RedirecionarPagina("~/");
         }
 
+        private void AbrirRelatorioAEE(long alu_id, long tud_id)
+        {
+            Session.Remove("alu_id_RelatorioAEE");
+            Session.Remove("tur_id_RelatorioAEE");
+            Session.Remove("tud_id_RelatorioAEE");
+            Session.Remove("tpc_id_RelatorioAEE");
+            Session.Remove("PaginaRetorno_RelatorioAEE");
+
+            Session.Add("alu_id_RelatorioAEE", alu_id);
+            Session.Add("tur_id_RelatorioAEE", UCControleTurma1.VS_tur_id);
+            Session.Add("tud_id_RelatorioAEE", tud_id);
+            Session.Add("tpc_id_RelatorioAEE", UCNavegacaoTelaPeriodo.VS_tpc_id);
+            Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
+        }
+
         #endregion Métodos
 
         #region Eventos
@@ -2824,6 +2842,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             UCConfirmacaoOperacao.ConfimaOperacao += UCConfirmacaoOperacao_ConfimaOperacao;
             UCLancamentoFrequencia.AbrirRelatorioRP += UCLancamentoFrequencia_AbrirRelatorioRP;
             UCLancamentoFrequenciaTerritorio.AbrirRelatorioRP += UCLancamentoFrequencia_AbrirRelatorioRP;
+            UCLancamentoFrequencia.AbrirRelatorioAEE += UCLancamentoFrequencia_AbrirRelatorioAEE;
+            UCLancamentoFrequenciaTerritorio.AbrirRelatorioAEE += UCLancamentoFrequencia_AbrirRelatorioAEE;
 
             // Configura javascripts da tela.
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -2880,6 +2900,11 @@ namespace GestaoEscolar.Academico.ControleTurma
         private void UCLancamentoFrequencia_AbrirRelatorioRP(long alu_id)
         {
             AbrirRelatorioRP(alu_id, UCControleTurma1.VS_tud_id);
+        }
+
+        private void UCLancamentoFrequencia_AbrirRelatorioAEE(long alu_id)
+        {
+            AbrirRelatorioAEE(alu_id, UCControleTurma1.VS_tud_id);
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -3567,6 +3592,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()), VisibilidadeRegencia(ddlTurmaDisciplinaListao) ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
         }
 
         protected void rptAlunosAvaliacao_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -3682,6 +3719,14 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                         tdNumChamadaAvaliacao.Style["background-color"] = tdNomeAvaliacao.Style["background-color"] =
                         tdMedia.Style["background-color"] = ApplicationWEB.AlunoInativo;
+                    }
+
+                    LinkButton btnRelatorioAEE = (LinkButton)e.Item.FindControl("btnRelatorioAEE");
+                    if (btnRelatorioAEE != null)
+                    {
+                        btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                    && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "PossuiDeficiencia"));
+                        btnRelatorioAEE.CommandArgument = Alu_id.ToString();
                     }
 
                     // Mostra o ícone para as anotações de recuperação paralela (RP):
@@ -4210,6 +4255,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()), UCControleTurma1.VS_tud_id);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
         }
 
         protected void rptAlunoAtivExtra_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -4282,6 +4339,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                         HtmlControl tdNomeAvaliacao = (HtmlControl)e.Item.FindControl("tdNomeAvaliacao");
 
                         tdNumChamadaAvaliacao.Style["background-color"] = tdNomeAvaliacao.Style["background-color"] = ApplicationWEB.AlunoInativo;
+                    }
+
+                    LinkButton btnRelatorioAEE = (LinkButton)e.Item.FindControl("btnRelatorioAEE");
+                    if (btnRelatorioAEE != null)
+                    {
+                        btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                    && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "PossuiDeficiencia"));
+                        btnRelatorioAEE.CommandArgument = Alu_id.ToString();
                     }
 
                     // Mostra o ícone para as anotações de recuperação paralela (RP):

@@ -218,6 +218,8 @@
                                                                 </asp:Label>
                                                                 <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
                                                                     ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                                                                <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
+                                                                    ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
                                                             </td>
                                                             <asp:Repeater ID="rptAtividadesAvaliacao" runat="server" OnItemDataBound="rptAtividades_ItemDataBound">
                                                                 <ItemTemplate>
@@ -266,6 +268,8 @@
                                                                 </asp:Label>
                                                                 <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
                                                                     ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                                                                <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
+                                                                    ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
                                                             </td>
                                                             <asp:Repeater ID="rptAtividadesAvaliacao" runat="server" OnItemDataBound="rptAtividades_ItemDataBound">
                                                                 <ItemTemplate>
@@ -569,6 +573,8 @@
                                                                     </asp:Label>
                                                                     <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
                                                                         ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                                                                    <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
+                                                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
                                                                 </td>
                                                                 <asp:Repeater ID="rptAtividades" runat="server" OnItemDataBound="rptAtividadesExtraClasse_ItemDataBound">
                                                                     <ItemTemplate>

@@ -706,7 +706,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
 
             CarregaSessionPaginaRetorno();
-            //RedirecionarPagina("~/");
+            RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
         }
 
         #endregion Eventos

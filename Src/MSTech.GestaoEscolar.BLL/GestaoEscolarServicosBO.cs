@@ -90,7 +90,7 @@ namespace MSTech.GestaoEscolar.BLL
             GestaoEscolarServicoDAO dao = new GestaoEscolarServicoDAO();
             dao.ExecJobArquivoExclusaoAsync();
         }
-                        
+
         /// <summary>
         /// Retorna a expressão de configuração de acordo com o nome do trigger.
         /// </summary>
@@ -239,7 +239,7 @@ namespace MSTech.GestaoEscolar.BLL
 
             CLS_CompensacaoAusenciaBO.ProcessarProtocoloCompensacao(ltProtocolo, TENTATIVAS_PROCESSAMENTO_PROTOCOLO);
         }
-        
+
         /// <summary>
         /// Atualiza as situaçoes das atribuiçoes esporádicas e das TurmaDocente geradas de acordo com a vigencia.
         /// </summary>
@@ -265,7 +265,7 @@ namespace MSTech.GestaoEscolar.BLL
         {
             new GestaoEscolarServicoDAO().ExecJobFechamentoRecalcularFrequenciaAulasPrevistasAsync();
         }
-        
+
         public static void ExecJobGeracaoHistoricoPedagogico()
         {
             new GestaoEscolarServicoDAO().ExecJobGeracaoHistoricoPedagogicoAsync();
@@ -283,11 +283,11 @@ namespace MSTech.GestaoEscolar.BLL
         {
             new GestaoEscolarServicoDAO().ExecJobJobAtualizaFrequenciaAjustadaFinalAsync();
         }
-        
+
         /// <summary>
         /// Faz o pré procesamento do relatório pendências por disciplinas e alunos
         /// </summary>
-        public static void ExecJOB_ProcessamentoRelatorioDisciplinasAlunosPendenciasAsync()
+        public static void ExecJOB_ProcessamentoRelatorioDisciplinasAlunosPendenciasAsync(bool limpacache = true)
         {
             using (DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoRelatorioDisciplinasAlunosPendenciasAsync())
             {
@@ -296,29 +296,32 @@ namespace MSTech.GestaoEscolar.BLL
                     List<sChaveCachePendenciaFechamento> ltChave = (from DataRow dr in dt.Rows
                                                                     select (sChaveCachePendenciaFechamento)GestaoEscolarUtilBO.DataRowToEntity(dr, new sChaveCachePendenciaFechamento())).ToList();
 
-                    // Informações do e-mail.
-                    IDictionary<string, ICFG_Configuracao> configuracao;
-                    CFG_ConfiguracaoBO.Consultar(eConfig.Academico, out configuracao);
-                    string ips = configuracao["AppEnderecoIPRaizHandlerLimpaCache"].cfg_valor;
-
-                    string[] listaIps = ips.Split('|');
-
-                    foreach (string ip in listaIps)
+                    if (limpacache)
                     {
-                        string handler = ip + "/Configuracao/Conteudo/LimpaCache.ashx?tipoCache=2";
-                        handler += "&esc_ids=" + string.Join(";", ltChave.Select(p => p.esc_id));
-                        handler += "&uni_ids=" + string.Join(";", ltChave.Select(p => p.uni_id));
-                        handler += "&cal_ids=" + string.Join(";", ltChave.Select(p => p.cal_id));
-                        handler += "&tud_ids=" + string.Join(";", ltChave.Select(p => p.tud_id));
+                        // Informações do e-mail.
+                        IDictionary<string, ICFG_Configuracao> configuracao;
+                        CFG_ConfiguracaoBO.Consultar(eConfig.Academico, out configuracao);
+                        string ips = configuracao["AppEnderecoIPRaizHandlerLimpaCache"].cfg_valor;
 
-                        try
-                        {
-                            HttpWebRequest request = WebRequest.Create(handler) as HttpWebRequest;
-                            request.GetResponseAsync();
-                        }
-                        catch
-                        {
+                        string[] listaIps = ips.Split('|');
 
+                        foreach (string ip in listaIps)
+                        {
+                            string handler = ip + "/Configuracao/Conteudo/LimpaCache.ashx?tipoCache=2";
+                            handler += "&esc_ids=" + string.Join(";", ltChave.Select(p => p.esc_id));
+                            handler += "&uni_ids=" + string.Join(";", ltChave.Select(p => p.uni_id));
+                            handler += "&cal_ids=" + string.Join(";", ltChave.Select(p => p.cal_id));
+                            handler += "&tud_ids=" + string.Join(";", ltChave.Select(p => p.tud_id));
+
+                            try
+                            {
+                                HttpWebRequest request = WebRequest.Create(handler) as HttpWebRequest;
+                                request.GetResponseAsync();
+                            }
+                            catch
+                            {
+
+                            }
                         }
                     }
                 }
@@ -328,33 +331,36 @@ namespace MSTech.GestaoEscolar.BLL
         /// <summary>
         /// Faz o pré procesamento de notas e frequeências que estão na fila para o novo fechamento
         /// </summary>
-        public static void ExecJOB_ProcessamentoNotaFrequenciaFechamentoAsync()
+        public static void ExecJOB_ProcessamentoNotaFrequenciaFechamentoAsync(bool limpacache = true)
         {
             using (DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoNotaFrequenciaFechamentoAsync())
             {
-                if (dt.Rows.Count > 0)
+                if (limpacache)
                 {
-                    List<sChavesCacheFechamento> ltChave = (from DataRow dr in dt.Rows
-                                                            select (sChavesCacheFechamento)GestaoEscolarUtilBO.DataRowToEntity(dr, new sChavesCacheFechamento())).ToList();
-
-                    // Informações da configuracao.
-                    IDictionary<string, ICFG_Configuracao> configuracao;
-                    CFG_ConfiguracaoBO.Consultar(eConfig.Academico, out configuracao);
-                    string ips = configuracao["AppEnderecoIPRaizHandlerLimpaCache"].cfg_valor;
-
-                    string[] listaIps = ips.Split('|');
-
-                    foreach (string ip in listaIps)
+                    if (dt.Rows.Count > 0)
                     {
-                        string handler = ip + "/Configuracao/Conteudo/LimpaCache.ashx?tipoCache=1";
-                        handler += "&tur_ids=" + string.Join(";", ltChave.Select(p => p.tur_id));
-                        handler += "&tud_ids=" + string.Join(";", ltChave.Select(p => p.tud_id));
-                        handler += "&fav_ids=" + string.Join(";", ltChave.Select(p => p.fav_id));
-                        handler += "&ava_ids=" + string.Join(";", ltChave.Select(p => p.ava_id));
-                        handler += "&tpc_ids=" + string.Join(";", ltChave.Select(p => p.tpc_id));
+                        List<sChavesCacheFechamento> ltChave = (from DataRow dr in dt.Rows
+                                                                select (sChavesCacheFechamento)GestaoEscolarUtilBO.DataRowToEntity(dr, new sChavesCacheFechamento())).ToList();
 
-                        HttpWebRequest request = WebRequest.Create(handler) as HttpWebRequest;
-                        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                        // Informações da configuracao.
+                        IDictionary<string, ICFG_Configuracao> configuracao;
+                        CFG_ConfiguracaoBO.Consultar(eConfig.Academico, out configuracao);
+                        string ips = configuracao["AppEnderecoIPRaizHandlerLimpaCache"].cfg_valor;
+
+                        string[] listaIps = ips.Split('|');
+
+                        foreach (string ip in listaIps)
+                        {
+                            string handler = ip + "/Configuracao/Conteudo/LimpaCache.ashx?tipoCache=1";
+                            handler += "&tur_ids=" + string.Join(";", ltChave.Select(p => p.tur_id));
+                            handler += "&tud_ids=" + string.Join(";", ltChave.Select(p => p.tud_id));
+                            handler += "&fav_ids=" + string.Join(";", ltChave.Select(p => p.fav_id));
+                            handler += "&ava_ids=" + string.Join(";", ltChave.Select(p => p.ava_id));
+                            handler += "&tpc_ids=" + string.Join(";", ltChave.Select(p => p.tpc_id));
+
+                            HttpWebRequest request = WebRequest.Create(handler) as HttpWebRequest;
+                            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                        }
                     }
                 }
             }
@@ -367,7 +373,7 @@ namespace MSTech.GestaoEscolar.BLL
         {
             new GestaoEscolarServicoDAO().ExecJOB_AtualizaFechamento_AberturaEventoAsync();
         }
-        
+
         /// <summary>
         /// Executa o job que processa as pendências da escola no bimestre de acordo com a abertura do evento.
         /// </summary>
@@ -375,7 +381,7 @@ namespace MSTech.GestaoEscolar.BLL
         {
             new GestaoEscolarServicoDAO().ExecJobProcessamentoPendenciasAberturaEventoAsync();
         }
-        
+
         /// <summary>
         /// Retorna o parametro academico.
         /// </summary>
