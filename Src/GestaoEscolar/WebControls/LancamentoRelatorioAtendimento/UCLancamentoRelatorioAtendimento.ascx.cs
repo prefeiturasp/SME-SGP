@@ -145,7 +145,7 @@
             string nomeAluno = entityPessoa.NomeFormatado(exibicaoNome);
 
             //Nome
-            lblInformacaoAluno.Text += "<b>Nome do aluno: </b>" + nomeAluno + "<br/>";
+            lblInformacaoAluno.Text += "<b>Nome do aluno: </b>" + nomeAluno;
 
             //Idade
             if (entityPessoa.pes_dataNascimento != new DateTime() && entityPessoa.pes_dataNascimento < DateTime.Today)

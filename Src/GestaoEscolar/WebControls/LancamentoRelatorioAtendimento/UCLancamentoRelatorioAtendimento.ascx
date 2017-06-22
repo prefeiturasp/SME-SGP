@@ -5,14 +5,18 @@
     <ContentTemplate>
         <div id="divInformacao">
             <asp:Label ID="lblInformacaoAluno" runat="server"></asp:Label>
-            <uc:UCCRacaCor ID="UCCRacaCor" runat="server" Visible="false" />
-            <div class="clear"></div>
-            <asp:Label ID="lblSituacao" runat="server" Text="Situação de preenchimento" AssociatedControlID="ddlSituacao"></asp:Label>
-            <asp:DropDownList ID="ddlSituacao" runat="server"></asp:DropDownList>
-            <div class="clear"></div>
-            <div id="divDownloadAnexo" runat="server" class="relatorio-manual" visible="false">
-                <asp:Label ID="lblDownloadAnexo" runat="server" Text="Instruções de preenchimento: "></asp:Label>
-                <asp:HyperLink ID="hplDownloadAnexo" runat="server" SkinID="hplAnexo" ToolTip="Realizar o download de instruções de preenchimento"></asp:HyperLink>
+            <div class="row-custom">
+                <div class="m-col-custom-4 p-col-custom-12">                    
+                    <uc:UCCRacaCor ID="UCCRacaCor" runat="server" Visible="false" />
+                </div>
+                <div class="m-col-custom-4 p-col-custom-12">
+                    <asp:Label ID="lblSituacao" runat="server" Text="Situação de preenchimento" AssociatedControlID="ddlSituacao"></asp:Label>
+                    <asp:DropDownList ID="ddlSituacao" runat="server"></asp:DropDownList>
+                </div>
+                <div class="m-col-custom-4 p-col-custom-12 relatorio-manual" id="divDownloadAnexo" runat="server" visible="false">
+                    <label><asp:Label ID="lblDownloadAnexo" runat="server" Text="Instruções de preenchimento: "></asp:Label></label>
+                    <asp:HyperLink ID="hplDownloadAnexo" runat="server" SkinID="hplAnexo" ToolTip="Realizar o download de instruções de preenchimento" Width="22px"></asp:HyperLink>
+                </div>
             </div>
         </div>
 
@@ -52,7 +56,7 @@
                         <fieldset>
                             <asp:Repeater ID="rptConteudo" runat="server" OnItemDataBound="rptConteudo_ItemDataBound">
                                 <ItemTemplate>
-                                    <div class="quetionario-conteudo">
+                                    <div class="questionario-conteudo">
                                         <asp:HiddenField ID="hdnTipoResposta" runat="server" Value='<%# Eval("qtc_tipoResposta") %>' />
                                         <asp:HiddenField ID="hdnQtcId" runat="server" Value='<%# Eval("qtc_id") %>' />
                                         <asp:Label ID="lblTextoConteudo" runat="server" Text='<%# Eval("qtc_texto") %>' CssClass='<%# RetornaClasseQuestionarioConteudo((byte)Eval("qtc_tipo")) %>'></asp:Label>
@@ -60,13 +64,14 @@
                                         <div class="clear"></div>
                                         <asp:Repeater ID="rptResposta" runat="server" OnItemDataBound="rptResposta_ItemDataBound">
                                             <ItemTemplate>
-                                                <asp:CheckBox ID="chkResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-multi-selecao" Visible="false" />
-                                                <asp:RadioButton ID="rdbResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-selecao-unica" Visible="false" />
-                                                <asp:TextBox ID="txtRespostaTextoAdicional" runat="server" CssClass="questionario-conteudo-resposta-texto-adicional" Visible="false"></asp:TextBox>
+                                                <div class="questionario-resposta">
+                                                    <asp:CheckBox ID="chkResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-multi-selecao" Visible="false" />
+                                                    <asp:RadioButton ID="rdbResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-selecao-unica" Visible="false" />
+                                                    <asp:TextBox ID="txtRespostaTextoAdicional" runat="server" CssClass="questionario-conteudo-resposta-texto-adicional" Visible="false"></asp:TextBox>
+                                                </div>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </div>
-                                    <div class="clear"></div>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </fieldset>
