@@ -38,7 +38,7 @@
             <fieldset>
                 <legend>Cadastro de detalhamento de deficiência</legend>
                 <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios4" runat="server" />
-                <uc1:UCComboTipoDeficiencia runat="server" ID="UCComboTipoDeficiencia" _MostrarMessageSelecione="True" _MostrarMessageTodas="False" />
+                <uc1:UCComboTipoDeficiencia runat="server" ID="UCComboTipoDeficiencia" _MostrarMessageTodas="False" />
                 <div>
                     <br />
                 </div>
@@ -122,7 +122,7 @@
                                                     <legend>
                                                         <asp:Label runat="server" ID="Label3" Text="Adicionar deficiência relacionada" />
                                                     </legend>
-                                                    <uc1:UCComboTipoDeficiencia runat="server" ID="UCComboTipoDeficienciaFilha" _MostrarMessageSelecione="True" _MostrarMessageTodas="False" />
+                                                    <uc1:UCComboTipoDeficiencia runat="server" ID="UCComboTipoDeficienciaFilha" _MostrarMessageTodas="False" />
 
                                                     <div class="right">
                                                         <asp:Button ID="btnFilha" runat="server" Text="Adicionar deficiência relacionada"
