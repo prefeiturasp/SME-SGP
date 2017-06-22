@@ -13,6 +13,8 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Linq;
     using System.Data;
     using System.ComponentModel;
+    using Validation.Exceptions;
+    using Data.Common;
     public enum RelatorioPreenchimentoAlunoSituacao : byte
     {
         [Description("CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Rascunho")]
@@ -81,6 +83,16 @@ namespace MSTech.GestaoEscolar.BLL
             }
 
             return lista;
+        }
+
+        public static new bool Save(CLS_RelatorioPreenchimentoAlunoTurmaDisciplina entity, TalkDBTransaction banco)
+        {
+            if (entity.Validate())
+            {
+                return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO { _Banco = banco }.Salvar(entity);
+            }
+
+            throw new ValidationException(GestaoEscolarUtilBO.ErrosValidacao(entity));
         }
     }
 }

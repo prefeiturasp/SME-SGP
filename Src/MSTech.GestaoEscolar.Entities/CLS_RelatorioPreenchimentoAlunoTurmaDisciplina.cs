@@ -6,11 +6,13 @@ namespace MSTech.GestaoEscolar.Entities
 {
     using MSTech.GestaoEscolar.Entities.Abstracts;
     using System;
+    using System.ComponentModel;
     using Validation;
 
     /// <summary>
     /// Description: .
     /// </summary>
+    [Serializable]
     public class CLS_RelatorioPreenchimentoAlunoTurmaDisciplina : Abstract_CLS_RelatorioPreenchimentoAlunoTurmaDisciplina
 	{
         /// <summary>
