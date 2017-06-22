@@ -440,3 +440,108 @@
     max-width: calc(100vw - 40px);
   }
 }
+
+
+// RELATORIOS AVALIATIVOS
+a.btRelatorioRP, a.btRelatorioAEE, .btn-dropdown-relatorio {
+  width:26px;
+  height:20px;
+  background-image:url(images/ico_avaliacao_rp.png);
+  background-repeat:no-repeat;
+  display:none;
+  border:none;
+  outline:none;
+  background-color:transparent;
+}
+
+a.btRelatorioAEE {
+  width:30px;
+  background-image:url(images/ico_avaliacao_aee.png);
+}
+
+.td-relatorio{
+  position:relative;
+  min-width:175px;
+  padding-right: 38px !important;
+  height:42px;
+}
+
+.dropdown-relatorio{
+  display:inline-block;
+  position:absolute;
+  right: 5px;
+  top: 11px;
+  z-index:1;
+  min-height:0;
+
+  a{
+    text-decoration: none;
+    line-height: 1.3;
+
+    &:only-of-type{
+      display:inline-block;
+    }
+  }
+
+  &.opened{
+    position:absolute;
+    background-color:#fff;
+    border:1px solid #ddd;
+    width: 175px;
+    top:36px;
+    min-height:36px;
+    @include box-shadow(-1px 1px 3px rgba(0,0,0,.2));
+
+    .item-dropdown-relatorio{
+      background-position: 8px 6px;
+      display:block;
+      height:auto;
+      padding: 10px 6px 10px 45px;
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+
+      &:hover{
+        background-color:#eee;
+        @include transition(background-color 0.2s ease-out);
+      }
+
+      &:after{
+        content:attr(title);
+        width:120px;
+        display:inline-block;
+      }
+    }
+
+    .btn-dropdown-relatorio{
+      position:absolute;
+      right:0;
+      top:-26px;
+    }
+  }
+}
+
+.btn-dropdown-relatorio{
+  width:21px;
+  background-image:url(images/ico_avaliacao_drop.png);
+  cursor:pointer;
+}
+
+a + a + .btn-dropdown-relatorio{
+  display:inline-block;
+}
+
+div[id*="divTabsListao"] .grid.sortableFrequencia{
+  .checkBoxList {
+    margin: 6px 0 0;
+  }
+}
+
+div[id*="divTabsListao"] .grid.tbLancamentoAvaliacoes{
+  br.responsive-hide{
+    display:none;
+  }
+}
+
+.text-left{
+  text-align:left !important;
+}
