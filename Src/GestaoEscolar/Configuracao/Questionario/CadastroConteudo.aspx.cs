@@ -51,6 +51,7 @@ namespace GestaoEscolar.Configuracao.Questionario
         {
             _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
             lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
+            _ddlTipoResposta.SelectedValue = Convert.ToByte(_ddlTipoConteudo.SelectedValue) != (byte)QuestionarioTipoConteudo.Pergunta ? "0" : _ddlTipoResposta.SelectedValue;
         }
 
         #endregion
@@ -103,10 +104,10 @@ namespace GestaoEscolar.Configuracao.Questionario
                 _VS_qtc_id = Conteudo.qtc_id;
                 _txtTexto.Text = Conteudo.qtc_texto;
                 _ddlTipoConteudo.SelectedValue = Conteudo.qtc_tipo.ToString();
-                _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
                 lblTipoResposta.Text = _cpvTipoResposta.Visible ? "Tipo de resposta *" : "Tipo de resposta";
                 _ddlTipoResposta.SelectedValue = Conteudo.qtc_tipoResposta.ToString();
                 _ddlTipoConteudo.Enabled = _ddlTipoResposta.Enabled = !CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id.ToString());
+                _ddlTipoResposta.Enabled = _cpvTipoResposta.Visible = Convert.ToByte(_ddlTipoConteudo.SelectedValue) == (byte)QuestionarioTipoConteudo.Pergunta;
             }
             catch (Exception e)
             {
@@ -128,10 +129,15 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                 CLS_QuestionarioConteudoBO.GetEntity(Conteudo);
                 Conteudo.qtc_texto = _txtTexto.Text;
+
+                //TODO ANA Verificar se é do tipo pergunta para alterar o tipo de resposta  
                 if (!CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id.ToString()))
                 {
                     Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
-                    Conteudo.qtc_tipoResposta = Convert.ToByte(_ddlTipoResposta.SelectedValue.ToString());
+                    if (Conteudo.qtc_tipo != (byte)QuestionarioTipoConteudo.Pergunta)
+                        Conteudo.qtc_tipoResposta = Convert.ToByte(_ddlTipoResposta.SelectedValue.ToString());
+                    else
+                        Conteudo.qtc_tipoResposta = 0;
                 }
                 Conteudo.qtc_situacao = 1; //ativo
 
