@@ -810,7 +810,7 @@
 
             abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = VS_permiteEditarObjAprendizagem &&
                                 Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem) &&
-                                entityTurma.tur_tipo == (byte)TUR_TurmaTipo.Normal;
+                                (entityTurma.tur_tipo == (byte)TUR_TurmaTipo.Normal || entityTurma.tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado);
 
             if (abaobjAprendizagem.Visible)
             {
