@@ -194,6 +194,10 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
 
         public event commandAbrirRelatorioRP AbrirRelatorioRP;
 
+        public delegate void commandAbrirRelatorioAEE(long alu_id);
+
+        public event commandAbrirRelatorioAEE AbrirRelatorioAEE;
+
         #endregion Delegates
 
         #region Métodos
@@ -726,6 +730,14 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                             ? dados.FirstOrDefault().AlunoComCompensacao
                             : false;
 
+                    LinkButton btnRelatorioAEE = (LinkButton)e.Item.FindControl("btnRelatorioAEE");
+                    if (btnRelatorioAEE != null)
+                    {
+                        btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                    && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "PossuiDeficiencia"));
+                        btnRelatorioAEE.CommandArgument = Alu_id.ToString();
+                    }
+
                     // Mostra o ícone para as anotações de recuperação paralela (RP):
                     // - para todos os alunos, quando a turma for de recuperação paralela,
                     // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
@@ -788,6 +800,18 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                 {
                     ApplicationWEB._GravaErro(ex);
                     //lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    //lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }

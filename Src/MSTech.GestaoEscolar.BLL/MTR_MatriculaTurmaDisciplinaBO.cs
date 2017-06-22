@@ -337,6 +337,8 @@ namespace MSTech.GestaoEscolar.BLL
         public decimal FrequenciaFinalAjustada { get; set; }
         public byte mtu_resultado { get; set; }
         public int QtAulasEfetivado { get; set; }
+        public bool PossuiDeficiencia { get; set; }
+        public byte alu_situacaoID { get; set; }
     }
 
     /// <summary>
