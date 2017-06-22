@@ -20,7 +20,7 @@
         <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
         <uc2:UCLoader ID="UCLoader1" runat="server" />
         <asp:Label ID="_lblTitulo" runat="server" Text="Título do questionário *" AssociatedControlID="_txtTitulo"></asp:Label>
-        <asp:TextBox ID="_txtTitulo" runat="server" CssClass="wrap150px" SkinID="text30C"></asp:TextBox>
+        <asp:TextBox ID="_txtTitulo" runat="server" CssClass="wrap150px" SkinID="limite500" MaxLength="500"></asp:TextBox>
         <asp:RequiredFieldValidator ID="_rfvTitulo" runat="server" ErrorMessage="Título do questionário é obrigatório."
             ControlToValidate="_txtTitulo" ValidationGroup="Questionario">*</asp:RequiredFieldValidator>
         <div class="right">

@@ -56,7 +56,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 
         #endregion
 
-        #region Eventos
+        #region Evento
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -128,6 +128,9 @@ namespace GestaoEscolar.Configuracao.Questionario
                 };
 
                 CLS_QuestionarioConteudoBO.GetEntity(Conteudo);
+                if (_txtTexto.Text.Length > 4000)
+                    throw new ValidationException("O texto do conteúdo não deve exceder 4000 caracteres.");
+
                 Conteudo.qtc_texto = _txtTexto.Text;
 
                 //TODO ANA Verificar se é do tipo pergunta para alterar o tipo de resposta  
