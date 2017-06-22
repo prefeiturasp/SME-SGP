@@ -3,6 +3,7 @@
   <ConnectionProperties>
     <Extension>SQL</Extension>
     <ConnectString>Data Source=DEV-SQL16;Initial Catalog=PUB_DEV_SPO_GestaoPedagogica</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
   </ConnectionProperties>
   <DataSourceID>8c9c49ff-f793-44e7-9bdb-7018f561d59e</DataSourceID>
 </RptDataSource>
