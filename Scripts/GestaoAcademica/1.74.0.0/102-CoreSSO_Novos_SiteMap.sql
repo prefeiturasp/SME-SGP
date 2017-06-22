@@ -43,6 +43,12 @@ SET XACT_ABORT ON
 		,@SiteMapNome = 'Cadastro de respostas' -- Nome do SiteMap (Obrigatório)
 		,@SiteMapUrl = '~/Configuracao/Questionario/CadastroResposta.aspx' -- Url da SiteMap (Obrigatório)
 
+	EXEC MS_InsereSiteMap
+		@nomeSistema = @nomeSistema -- Nome do sistema (Obrigatório - Vária de acordo com o cliente)
+		,@nomeModulo = 'Minhas turmas' -- Nome do módulo (Obrigatório)
+		,@SiteMapNome = 'Anotações da recuperação paralela' -- Nome do SiteMap (Obrigatório)
+		,@SiteMapUrl = '~/Classe/RelatorioRecuperacaoParalela/Cadastro.aspx' -- Url da SiteMap (Obrigatório)
+
 -- Fechar transação
 SET XACT_ABORT OFF
 COMMIT TRANSACTION

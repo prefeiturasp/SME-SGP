@@ -688,7 +688,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
 
             CarregaSessionPaginaRetorno();
-            //RedirecionarPagina("~/");
+            RedirecionarPagina("~/Classe/RelatorioRecuperacaoParalela/Cadastro.aspx");
         }
 
         private void UCFechamento_AbrirRelatorioAEE(long alu_id)
