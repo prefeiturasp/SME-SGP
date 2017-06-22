@@ -531,6 +531,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
         protected void btnCancelarItemFilha_Click(object sender, EventArgs e)
         {
             divInserirFilha.Visible = false;
+            updCadastroQualidade.Update();
         }
 
 
