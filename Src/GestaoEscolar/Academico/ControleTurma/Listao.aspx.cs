@@ -2495,10 +2495,10 @@ namespace GestaoEscolar.Academico.ControleTurma
             Session.Add("tur_id_RelatorioAEE", UCControleTurma1.VS_tur_id);
             Session.Add("tud_id_RelatorioAEE", tud_id);
             Session.Add("tpc_id_RelatorioAEE", UCNavegacaoTelaPeriodo.VS_tpc_id);
-            Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
+            Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
 
             CarregaSessionPaginaRetorno();
-            //RedirecionarPagina("~/");
+            RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
         }
 
         #endregion Métodos
