@@ -53,7 +53,7 @@ namespace MSTech.GestaoEscolar.BLL
     /// Description: CLS_QuestionarioConteudo Business Object. 
     /// </summary>
     public class CLS_QuestionarioConteudoBO : BusinessBase<CLS_QuestionarioConteudoDAO, CLS_QuestionarioConteudo>
-	{
+    {
 
         /// <summary>
         ///Busca os conteúdos filtrado por questionário
@@ -85,7 +85,7 @@ namespace MSTech.GestaoEscolar.BLL
            (
                 int qst_id
            )
-        {            
+        {
             CLS_QuestionarioConteudoDAO dao = new CLS_QuestionarioConteudoDAO();
             return dao.SelectByQuestionario(qst_id);
         }
@@ -116,6 +116,5 @@ namespace MSTech.GestaoEscolar.BLL
 
             return true;
         }
-
     }
 }

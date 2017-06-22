@@ -9,6 +9,7 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using System;
     using System.Data;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Description: .
@@ -79,6 +80,12 @@ namespace MSTech.GestaoEscolar.DAL
             return base.Alterar(entity);
         }
 
+        public override bool Delete(CLS_Questionario entity)
+        {
+            __STP_DELETE = "NEW_CLS_Questionario_UpdateSituacao";
+            return base.Delete(entity);
+        }
+
         protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, CLS_Questionario entity)
         {
             if (entity != null & qs != null)
@@ -87,6 +94,18 @@ namespace MSTech.GestaoEscolar.DAL
             }
 
             return false;
+        }
+
+        public override IList<CLS_Questionario> Select()
+        {
+            __STP_SELECT = "NEW_CLS_Questionario_SelectAtivos";            
+            return base.Select();
+        }
+
+        public override IList<CLS_Questionario> Select_Paginado(int currentPage, int pageSize, out int totalRecord)
+        {
+            __STP_SELECT = "NEW_CLS_Questionario_SelectAtivos";
+            return base.Select_Paginado(currentPage, pageSize, out totalRecord);
         }
 
         #endregion Métodos sobrescritos
