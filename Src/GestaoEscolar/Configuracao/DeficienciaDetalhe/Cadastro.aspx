@@ -82,7 +82,7 @@
                         </div>
                         <asp:GridView runat="server" ID="grvDetalhes" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="true"
                             DataKeyNames="tde_id, dfd_id, dfd_nome" EmptyDataText="Nenhum detalhamento cadastrado."
-                            OnRowDataBound="grv_RowDataBound" OnRowCommand="grvDetalhes_RowCommand">
+                            OnRowDataBound="grv_RowDataBound" OnRowCommand="grvDetalhes_RowCommand" OnSorting="grvDetalhes_Sorting">
                             <Columns>
                                 <asp:BoundField DataField="dfd_nome" HeaderText="Detalhe" SortExpression="dfd_nome"/>
                                 <asp:TemplateField HeaderText="<%$ Resources:Academico, Sondagem.Cadastro.grvQuestoes.HeaderExcluir %>">

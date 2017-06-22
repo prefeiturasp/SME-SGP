@@ -143,7 +143,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
 
                     UCComboTipoDeficiencia._Combo.Enabled = !(VS_ListaFilha.Count > 0);
 
-                    gdvDeficienciaFilha.DataSource = VS_ListaFilha.OrderBy(p=> p.tde_nomeFilha);
+                    gdvDeficienciaFilha.DataSource = VS_ListaFilha.OrderBy(p => p.tde_nomeFilha);
                     gdvDeficienciaFilha.DataBind();
                 }
                 //não é multipla e vai inserir o detalhamento 
@@ -156,8 +156,8 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                     VS_ListaDetalhe = lstAux.ToList();
 
                     UCComboTipoDeficiencia._Combo.Enabled = !(VS_ListaDetalhe.Count > 0);
-                    
-                    grvDetalhes.DataSource = VS_ListaDetalhe.Where(q => q.dfd_situacao != 3).OrderBy(q=>q.dfd_nome);
+
+                    grvDetalhes.DataSource = VS_ListaDetalhe.Where(q => q.dfd_situacao != 3).OrderBy(q => q.dfd_nome);
                     grvDetalhes.DataBind();
                 }
 
@@ -428,7 +428,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                 if (UCComboTipoDeficienciaFilha._Combo.SelectedIndex <= 0)
                     mensagem += (string.IsNullOrEmpty(mensagem) ? "" : "<br/>") + string.Format("Deficiência relacionada é obrigatória.");
 
-                if ( new Guid(UCComboTipoDeficienciaFilha._Combo.SelectedValue) == ACA_ParametroAcademicoBO.ParametroValorGuidPorEntidade(eChaveAcademico.DEFICIENCIA_MULTIPLA, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
+                if (new Guid(UCComboTipoDeficienciaFilha._Combo.SelectedValue) == ACA_ParametroAcademicoBO.ParametroValorGuidPorEntidade(eChaveAcademico.DEFICIENCIA_MULTIPLA, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                     mensagem += (string.IsNullOrEmpty(mensagem) ? "" : "<br/>") + string.Format("O tipo de deficiência não pode se relacionar com ele mesmo.");
 
 
@@ -554,8 +554,32 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
             Response.Redirect("Busca.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
-        
+
         #endregion Eventos
-        
+
+        protected void grvDetalhes_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            //Retrieve the table from the session object.
+            DataTable dt = GestaoEscolarUtilBO.EntityToDataTable(VS_ListaDetalhe);
+
+            if (dt != null)
+            {
+                //Sort the data.
+
+                string sortDirection = ViewState["SortDirection"] as string;
+
+                if (sortDirection == "ASC")
+                    sortDirection = "DESC";
+                else
+                    sortDirection = "ASC";
+
+                dt.DefaultView.Sort = e.SortExpression + " " + sortDirection;
+                grvDetalhes.DataSource = dt;
+                grvDetalhes.DataBind();
+
+                ViewState["SortDirection"] = sortDirection;
+            }
+        }
+
     }
 }
