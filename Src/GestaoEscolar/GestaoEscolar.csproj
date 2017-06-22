@@ -1323,6 +1323,20 @@
     <Compile Include="Configuracao\RecursosAula\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuracao\RelatorioAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\RelatorioAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\RelatorioAtendimento\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\RelatorioAtendimento\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\RelatorioDocumentoAluno\Cadastro.aspx.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3803,6 +3817,8 @@
     <Content Include="Configuracao\Questionario\CadastroResposta.aspx" />
     <Content Include="Configuracao\Recomendacoes\Busca.aspx" />
     <Content Include="Configuracao\Recomendacoes\Cadastro.aspx" />
+    <Content Include="Configuracao\RelatorioAtendimento\Busca.aspx" />
+    <Content Include="Configuracao\RelatorioAtendimento\Cadastro.aspx" />
     <Content Include="Configuracao\RelatorioDocumentoAluno\Cadastro.aspx" />
     <Content Include="Configuracao\Servico\ConfigurarServico.aspx" />
     <Content Include="Configuracao\ServidorRelatorios\Cadastro.aspx" />

@@ -79,8 +79,9 @@
 
 <asp:LinkButton runat="server" CssClass="ui-icon ui-icon-circle-triangle-e" SkinID="Arrow" />
 <asp:LinkButton runat="server" CssClass="btn" SkinID="botao" />
-<asp:LinkButton runat="server" CssClass="btRelatorioRP" SkinID="btRelatorioRP" />
-<asp:LinkButton runat="server" CssClass="btRelatorioAEE" SkinID="btRelatorioAEE" />
+<asp:LinkButton runat="server" CssClass="btRelatorioRP item-dropdown-relatorio" SkinID="btRelatorioRP" />
+<asp:LinkButton runat="server" CssClass="btRelatorioAEE item-dropdown-relatorio" SkinID="btRelatorioAEE" />
+
 <asp:Button runat="server" CssClass="btn btLoader" SkinID="btLoader" />
 <asp:Button runat="server" CssClass="btn" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/tempo-real.png"  SkinID="btTempoReal" Width="20px" Height="20px" />

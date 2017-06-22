@@ -104,13 +104,17 @@
                                 <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("numeroChamada") %>'>
                                 </asp:Label>
                             </td>
-                            <td id="tdNomeAluno" runat="server">
+                            <td id="tdNomeAluno" runat="server" class="td-relatorio">
                                 <asp:Label ID="lblNome" runat="server" Text='<%#Bind("pes_nome") %>'>
                                 </asp:Label>
-                                <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
-                                    ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
-                                <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
-                                    ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
+                                <div class="dropdown-relatorio">
+                                    <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                                    <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
+                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
+                                    <!-- botao dropdown -->
+                                    <button title="Seleção de relatório" class="btn-dropdown-relatorio"></button>
+                                </div>
                             </td>
                             <asp:Repeater ID="rptAulas" runat="server" OnItemDataBound="rptAulas_ItemDataBound">
                                 <ItemTemplate>
@@ -148,13 +152,17 @@
                                 <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("numeroChamada") %>'>
                                 </asp:Label>
                             </td>
-                            <td id="tdNomeAluno" runat="server">
+                            <td id="tdNomeAluno" runat="server" class="td-relatorio">
                                 <asp:Label ID="lblNome" runat="server" Text='<%#Bind("pes_nome") %>'>
                                 </asp:Label>
-                                <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
-                                    ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
-                                <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
-                                    ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
+                                <div class="dropdown-relatorio">
+                                    <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                                    <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
+                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
+                                    <!-- botao dropdown -->
+                                    <button title="Seleção de relatório" class="btn-dropdown-relatorio"></button>
+                                </div>
                             </td>
                             <asp:Repeater ID="rptAulas" runat="server" OnItemDataBound="rptAulas_ItemDataBound">
                                 <ItemTemplate>
