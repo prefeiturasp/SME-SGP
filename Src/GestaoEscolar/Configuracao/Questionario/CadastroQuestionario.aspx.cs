@@ -91,6 +91,10 @@ namespace GestaoEscolar.Configuracao.Questionario
                 };
 
                 CLS_QuestionarioBO.GetEntity(Questionario);
+
+                if (_txtTitulo.Text.Length > 500)
+                    throw new ValidationException("O título do questionário não deve exceder 500 caracteres.");
+
                 Questionario.qst_titulo = _txtTitulo.Text;
                 Questionario.qst_situacao = 1; //ativo
 

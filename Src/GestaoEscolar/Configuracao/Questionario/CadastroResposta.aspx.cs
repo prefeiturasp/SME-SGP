@@ -111,6 +111,10 @@ namespace GestaoEscolar.Configuracao.Questionario
                 };
 
                 CLS_QuestionarioRespostaBO.GetEntity(Resposta);
+
+                if (_txtTexto.Text.Length > 4000)
+                    throw new ValidationException("O texto da resposta não deve exceder 4000 caracteres.");
+
                 Resposta.qtr_texto = _txtTexto.Text;
                 Resposta.qtr_permiteAdicionarTexto = _chkPermiteAdicionarTexto.Checked;
                 Resposta.qtr_situacao = 1; //ativo
