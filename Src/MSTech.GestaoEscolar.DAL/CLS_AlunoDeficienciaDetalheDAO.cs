@@ -5,6 +5,7 @@
 namespace MSTech.GestaoEscolar.DAL
 {
     using Data.Common;
+    using Entities;
     using MSTech.GestaoEscolar.DAL.Abstracts;
     using System.Data;
     /// <summary>
@@ -43,5 +44,25 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         #endregion Métodos de consulta
+
+        #region Métodos sobrecritos
+
+        /// <summary>
+		/// Recebe o valor do auto incremento e coloca na propriedade.
+		/// </summary>
+		/// <param name="qs">Objeto da Store Procedure.</param>
+		/// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
+		/// <returns>TRUE - Se entity.ParametroId > 0</returns>
+		protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, CLS_AlunoDeficienciaDetalhe entity)
+        {
+            if (entity != null & qs != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
     }
 }

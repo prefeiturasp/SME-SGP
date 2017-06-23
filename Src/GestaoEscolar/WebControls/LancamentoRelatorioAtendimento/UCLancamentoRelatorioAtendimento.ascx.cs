@@ -147,6 +147,53 @@
             }
         }
 
+        public byte RacaCor
+        {
+            get
+            {
+                if (UCCRacaCor._Combo.SelectedValue != "-1")
+                {
+                    return Convert.ToByte(UCCRacaCor._Combo.SelectedValue);
+                }
+                else
+                {
+                    return (byte)0;
+                }
+            }
+        }
+
+        public bool PermiteAlterarRacaCor
+        {
+            get
+            {
+                return VS_RelatorioAtendimento.rea_permiteEditarRecaCor;
+            }
+        }
+
+        public byte SituacaoRelatorioPreenchimento
+        {
+            get
+            {
+                return VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao;
+            }
+        }
+
+        public bool PreenchimentoFinalizado
+        {
+            get
+            {
+                return RelatorioConcluido();
+            }
+        }
+
+        private bool PermiteEditarAprovado
+        {
+            get
+            {
+                return ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.PERMITIR_EDITAR_RELATORIO_APROVADO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager sm = ScriptManager.GetCurrent(this.Page);
@@ -203,12 +250,20 @@
 
             VS_RelatorioPreenchimentoAluno = CLS_RelatorioPreenchimentoBO.SelecionaPorRelatorioAlunoTurmaDisciplina(VS_rea_id, VS_alu_id, VS_tur_id, VS_tud_id, VS_tpc_id);
 
+            if (VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado &&
+                PermiteConsultar && !PermiteEditar && !PermiteAprovar)
+            {
+                throw new PermissaoRelatorioPreenchimentoValidationException("O usuário tem permissão apenas para consultar relatórios aprovados.");
+            }
+
             eExibicaoNomePessoa exibicaoNome = documentoOficial ? eExibicaoNomePessoa.NomeSocial | eExibicaoNomePessoa.NomeRegistro : eExibicaoNomePessoa.NomeSocial;
 
             string nomeAluno = entityPessoa.NomeFormatado(exibicaoNome);
 
+            lblInformacaoAluno.Text = string.Empty;
+
             //Nome
-            lblInformacaoAluno.Text += "<b>Nome do aluno: </b>" + nomeAluno;
+            lblInformacaoAluno.Text += "<b>Nome do aluno: </b>" + nomeAluno + "<br />";
 
             //Idade
             if (entityPessoa.pes_dataNascimento != new DateTime() && entityPessoa.pes_dataNascimento < DateTime.Today)
@@ -243,6 +298,9 @@
                 {
                     UCCRacaCor._Combo.SelectedValue = entityPessoa.pes_racaCor.ToString();
                 }
+
+                UCCRacaCor._Combo.Enabled = PermiteEditar &&
+                    (PermiteEditarAprovado || VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado);
             }
 
             if (VS_RelatorioAtendimento.arq_idAnexo > 0 && PermiteEditar)
@@ -268,7 +326,8 @@
 
                 liHipoteseDiagnostica.Visible = fdsHipoteseDiagnostica.Visible = rptTipoDeficiencia.Items.Count > 0;
 
-                HabilitaControles(fdsHipoteseDiagnostica.Controls, VS_RelatorioAtendimento.rea_permiteEditarHipoteseDiagnostica && PermiteEditar);
+                HabilitaControles(fdsHipoteseDiagnostica.Controls, VS_RelatorioAtendimento.rea_permiteEditarHipoteseDiagnostica && PermiteEditar &&
+                    (PermiteEditarAprovado || VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado));
             }
         }
 
@@ -280,7 +339,8 @@
             rptQuestionario.DataSource = VS_RelatorioAtendimento.lstQuestionario;
             rptQuestionario.DataBind();
 
-            HabilitaControles(rptQuestionario.Controls, PermiteEditar);
+            HabilitaControles(rptQuestionario.Controls, PermiteEditar &&
+                (PermiteEditarAprovado || VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado));
         }
 
         private bool RelatorioConcluido()
@@ -291,7 +351,8 @@
                                  where rptConteudo != null && raq_id > 0
                                  from RepeaterItem itemConteudo in rptConteudo.Items
                                  let tipoResposta = itemConteudo.FindControl<HiddenField>("hdnTipoResposta").GetValue().ToByte()
-                                 where tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto
+                                 let tipo = itemConteudo.FindControl<HiddenField>("hdnTipo").GetValue().ToByte()
+                                 where tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto && tipo == (byte)QuestionarioTipoConteudo.Pergunta
                                  let qtc_id = itemConteudo.FindControl<HiddenField>("hdnQtcId").GetValue().ToInt32()
                                  let qcp_textoResposta = itemConteudo.FindControl<TextBox>("txtResposta").GetText()
                                  where qtc_id > 0 && string.IsNullOrEmpty(qcp_textoResposta)
@@ -302,9 +363,10 @@
                                  where rptConteudo != null && raq_id > 0
                                  from RepeaterItem itemConteudo in rptConteudo.Items
                                  let tipoResposta = itemConteudo.FindControl<HiddenField>("hdnTipoResposta").GetValue().ToByte()
+                                 let tipo = itemConteudo.FindControl<HiddenField>("hdnTipo").GetValue().ToByte()
                                  let qtc_id = itemConteudo.FindControl<HiddenField>("hdnQtcId").GetValue().ToInt32()
                                  let rptResposta = itemConteudo.FindControl("rptResposta") as Repeater
-                                 where rptResposta != null && tipoResposta != (byte)QuestionarioTipoResposta.TextoAberto
+                                 where rptResposta != null && tipoResposta != (byte)QuestionarioTipoResposta.TextoAberto && tipo == (byte)QuestionarioTipoConteudo.Pergunta
                                  let qtdeRespondido = (from RepeaterItem itemResposta in rptResposta.Items
                                                        let qtr_id = itemResposta.FindControl<HiddenField>("hdnQtrId").GetValue().ToInt32()
                                                        let txtRespostaTextoAdicional = itemResposta.FindControl<TextBox>("txtRespostaTextoAdicional")
@@ -344,9 +406,8 @@
         {
             RelatorioPreenchimentoAluno rel = new RelatorioPreenchimentoAluno();
             long reap_id = VS_RelatorioPreenchimentoAluno.entityRelatorioPreenchimento.reap_id;
-            bool relatorioConcluido = RelatorioConcluido();
 
-            if (!relatorioConcluido && aprovar)
+            if (!PreenchimentoFinalizado && aprovar)
             {
                 throw new ValidationException("Preenchimento do relatório não está finalizado. Verifique se todas as perguntas foram respondidas antes de aprovar o relatório.");
             }
@@ -364,7 +425,7 @@
                 reap_id = reap_id > 0 ? reap_id : -1
                 ,
                 ptd_situacao = aprovar ? (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado : 
-                                    (relatorioConcluido ? (byte)RelatorioPreenchimentoAlunoSituacao.Finalizado : (byte)RelatorioPreenchimentoAlunoSituacao.Rascunho)
+                                    (PreenchimentoFinalizado ? (byte)RelatorioPreenchimentoAlunoSituacao.Finalizado : (byte)RelatorioPreenchimentoAlunoSituacao.Rascunho)
                 ,
                 IsNew = reap_id <= 0
             };
@@ -384,7 +445,8 @@
                                                         where rptConteudo != null && raq_id > 0
                                                         from RepeaterItem itemConteudo in rptConteudo.Items
                                                         let tipoResposta = itemConteudo.FindControl<HiddenField>("hdnTipoResposta").GetValue().ToByte()
-                                                        where tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto
+                                                        let tipo = itemConteudo.FindControl<HiddenField>("hdnTipo").GetValue().ToByte()
+                                                        where tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto && tipo == (byte)QuestionarioTipoConteudo.Pergunta
                                                         let qtc_id = itemConteudo.FindControl<HiddenField>("hdnQtcId").GetValue().ToInt32()
                                                         let qcp_textoResposta = itemConteudo.FindControl<TextBox>("txtResposta").GetText()
                                                         where qtc_id > 0 && !string.IsNullOrEmpty(qcp_textoResposta)
@@ -404,8 +466,9 @@
                                                         where rptConteudo != null && raq_id > 0
                                                         from RepeaterItem itemConteudo in rptConteudo.Items
                                                         let tipoResposta = itemConteudo.FindControl<HiddenField>("hdnTipoResposta").GetValue().ToByte()
+                                                        let tipo = itemConteudo.FindControl<HiddenField>("hdnTipo").GetValue().ToByte()
                                                         let rptResposta = itemConteudo.FindControl("rptResposta") as Repeater
-                                                        where rptResposta != null && tipoResposta != (byte)QuestionarioTipoResposta.TextoAberto
+                                                        where rptResposta != null && tipoResposta != (byte)QuestionarioTipoResposta.TextoAberto && tipo == (byte)QuestionarioTipoConteudo.Pergunta
                                                         from RepeaterItem itemResposta in rptResposta.Items
                                                         let qtr_id = itemResposta.FindControl<HiddenField>("hdnQtrId").GetValue().ToInt32()
                                                         let txtRespostaTextoAdicional = itemResposta.FindControl<TextBox>("txtRespostaTextoAdicional")

@@ -38,6 +38,13 @@ SET XACT_ABORT ON
 		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
 		,@ent_id = @entId
 	
+	EXEC MS_InsereParametroAcademico
+		@pac_chave = 'PERMITIR_EDITAR_RELATORIO_APROVADO' -- Chave do parâmetro. (Obrigatório)
+		,@pac_valor = 'False' -- Valor do parâmetro. (Obrigatório)
+		,@pac_descricao = 'Permitir editar lançamento de relatório aprovado.' -- Descrição do parâmetro. (Obrigatório)
+		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
+		,@ent_id = @entId
+	
 -- Fechar transação	
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
