@@ -62,18 +62,25 @@ public partial class Configuracao_TipoAtividadeAvaliativa_Cadastro : MotherPageL
     {
         try
         {
-            CLS_TipoAtividadeAvaliativa entity = new CLS_TipoAtividadeAvaliativa
+
+            CLS_TipoAtividadeAvaliativa entity = new CLS_TipoAtividadeAvaliativa();
+            entity.tav_id = _VS_tav_id;
+            entity = CLS_TipoAtividadeAvaliativaBO.GetEntity(entity);
+            entity.tav_nome = txtTipoAtividadeAvaliativa.Text;
+            entity.qat_id = Int32.Parse(ddlQualificador.SelectedValue);
+
+            if (_VS_tav_id > 0)
             {
-                tav_id = _VS_tav_id
-                ,
-                tav_nome = txtTipoAtividadeAvaliativa.Text                
-                ,
-                tav_situacao = 1
-                ,
-                qat_id = Int32.Parse(ddlQualificador.SelectedValue)
-                ,
-                IsNew = (_VS_tav_id > 0) ? false : true
-            };
+                entity.IsNew = false;
+                entity.tav_dataAlteracao = DateTime.Now;
+            }
+            else
+            {
+                entity.IsNew = true;
+                entity.tav_situacao = 1;
+                entity.tav_dataAlteracao = DateTime.Now;
+                entity.tav_dataCriacao = DateTime.Now;
+            }        
 
             if (CLS_TipoAtividadeAvaliativaBO.Save(entity))
             {
