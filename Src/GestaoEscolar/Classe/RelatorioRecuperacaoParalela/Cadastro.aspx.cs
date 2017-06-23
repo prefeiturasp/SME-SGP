@@ -1,20 +1,70 @@
-﻿using MSTech.GestaoEscolar.Web.WebProject;
+﻿using MSTech.CoreSSO.BLL;
+using MSTech.GestaoEscolar.BLL;
+using MSTech.GestaoEscolar.Entities;
+using MSTech.GestaoEscolar.Web.WebProject;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
 {
     public partial class Cadastro : MotherPageLogado
     {
+        #region Constantes
+
+        private const int colunaExcluir = 2;
+
+        #endregion Constantes
+
+        #region Propriedades
+
         private long VS_alu_id
         {
             get
             {
                 return Convert.ToInt64(ViewState["VS_alu_id"] ?? -1);
             }
-
             set
             {
                 ViewState["VS_alu_id"] = value;
+            }
+        }
+
+        private long VS_tur_id
+        {
+            get
+            {
+                return Convert.ToInt64(ViewState["VS_tur_id"] ?? -1);
+            }
+            set
+            {
+                ViewState["VS_tur_id"] = value;
+            }
+        }
+
+        private long VS_tud_id
+        {
+            get
+            {
+                return Convert.ToInt64(ViewState["VS_tud_id"] ?? -1);
+            }
+            set
+            {
+                ViewState["VS_tud_id"] = value;
+            }
+        }
+
+        private bool VS_permiteEditar
+        {
+            get
+            {
+                return Convert.ToBoolean(ViewState["VS_permiteEditar"] ?? false);
+            }
+            set
+            {
+                ViewState["VS_permiteEditar"] = value;
             }
         }
 
@@ -66,23 +116,256 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             }
         }
 
+        private byte VS_periodicidadePreenchimento
+        {
+            get
+            {
+                return Convert.ToByte(ViewState["VS_periodicidadePreenchimento"] ?? 0);
+            }
+            set
+            {
+                ViewState["VS_periodicidadePreenchimento"] = value;
+            }
+        }
+
+        #endregion Propriedades
+
+        #region Structs
+
+        /// <summary>
+        /// Estrutura que armazena as disciplinas para carregar o combo.
+        /// </summary>
+        [Serializable]
+        private struct sDisciplinas
+        {
+            public string tds_nome { get; set; }
+            public int tds_id { get; set; }
+        }
+
+        #endregion Structs
+
+        #region Eventos
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
+            }
+
             if (!IsPostBack)
             {
                 if (Session["PaginaRetorno_RelatorioRP"] != null)
                 {
-                    VS_PaginaRetorno = Session["PaginaRetorno_RelatorioRP"].ToString();
-                    Session.Remove("PaginaRetorno_RelatorioRP");
-                    VS_DadosPaginaRetorno = Session["DadosPaginaRetorno"];
-                    Session.Remove("DadosPaginaRetorno");
-                    VS_DadosPaginaRetorno_MinhasTurmas = Session["VS_DadosTurmas"];
-                    Session.Remove("VS_DadosTurmas");
-                }
+                    try
+                    {
+                        VS_PaginaRetorno = Session["PaginaRetorno_RelatorioRP"].ToString();
+                        Session.Remove("PaginaRetorno_RelatorioRP");
+                        VS_DadosPaginaRetorno = Session["DadosPaginaRetorno"];
+                        Session.Remove("DadosPaginaRetorno");
+                        VS_DadosPaginaRetorno_MinhasTurmas = Session["VS_DadosTurmas"];
+                        Session.Remove("VS_DadosTurmas");
 
-                updFiltros.Update();
+                        Dictionary<string, string> listaDados = (Dictionary<string, string>)VS_DadosPaginaRetorno;
+                        bool eletiva = Convert.ToByte(listaDados["Edit_tur_tipo"]) == (byte)TUR_TurmaTipo.EletivaAluno;
+                        VS_tur_id = Convert.ToInt64(listaDados["Edit_tur_id"]);
+                        VS_tud_id = Convert.ToInt64(listaDados["Tud_idRetorno_ControleTurma"]);
+                        VS_permiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && eletiva;
+
+                        VS_alu_id = Convert.ToInt64(Session["alu_id_RelatorioRP"]);
+                        Session.Remove("alu_id_RelatorioRP");
+
+                        // Carrega o combo de períodos do calendário
+                        UCCPeriodoCalendario.CarregarPorTurma(VS_tur_id);
+                        UCCPeriodoCalendario.PermiteEditar = false;
+                        UCCPeriodoCalendario.Tpc_ID = Convert.ToInt32(listaDados["Edit_tpc_id"]);
+
+                        UCCRelatorioAtendimento.PermiteEditar = false;
+
+                        // Carregar o combo de disciplinas
+                        string strTdsId = Session["tds_id_RelatorioRP"].ToString();
+                        List<sDisciplinas> lstDisciplinas = new List<sDisciplinas>();
+                        if (eletiva)
+                        {
+                            TUR_Turma turma = TUR_TurmaBO.GetEntity(new TUR_Turma { tur_id = VS_tur_id });
+                            TUR_TurmaDisciplina turmaDisciplina = TUR_TurmaDisciplinaBO.GetEntity(new TUR_TurmaDisciplina { tud_id = VS_tud_id });
+
+                            sDisciplinas disciplina = new sDisciplinas { tds_nome = string.Format("{0} - {1}", turma.tur_codigo, turmaDisciplina.tud_nome), tds_id = -1 };
+                            lstDisciplinas.Add(disciplina);
+                        }
+                        else
+                        {
+                            List<string> lstStrTdsId = strTdsId.Split(',').ToList();
+                            lstStrTdsId.ForEach(p => {
+                                ACA_TipoDisciplina tipoDisciplina = ACA_TipoDisciplinaBO.GetEntity(new ACA_TipoDisciplina { tds_id = Convert.ToInt32(p) });
+                                sDisciplinas disciplina = new sDisciplinas { tds_nome = tipoDisciplina.tds_nome, tds_id = tipoDisciplina.tds_id };
+                                lstDisciplinas.Add(disciplina);
+                            });
+                        }
+                        ddlDisciplina.DataSource = lstDisciplinas;
+                        ddlDisciplina.Items.Insert(0, new ListItem(string.Format("-- Selecione um(a) {0} --", GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA").ToString()), "-1", true));
+                        ddlDisciplina.DataBind();
+
+                        if (ddlDisciplina.Items.Count == 2)
+                        {
+                            // Seleciona o único item
+                            ddlDisciplina.SelectedIndex = 1;
+                            ddlDisciplina_SelectedIndexChanged(null, null);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ApplicationWEB._GravaErro(ex);
+                        lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar relatórios.", UtilBO.TipoMensagem.Erro);
+                    }
+                }
+            }
+
+            UCCRelatorioAtendimento.IndexChanged += UCCRelatorioAtendimento_IndexChanged;
+        }
+
+        protected void ddlDisciplina_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlDisciplina.SelectedIndex > 0)
+            {
+                try
+                {
+                    // Desabilita o combo
+                    ddlDisciplina.Enabled = false;
+
+                    // Habilita o combo de relatórios
+                    UCCRelatorioAtendimento.PermiteEditar = true;
+
+                    // Carrega o combo de relatórios
+                    UCCRelatorioAtendimento.CarregarRelatoriosRPDisciplina(VS_alu_id, VS_tud_id, Convert.ToInt32(ddlDisciplina.SelectedValue));
+                    if (UCCRelatorioAtendimento.QuantidadeItensCombo == 2)
+                    {
+                        // Seleciona o único item
+                        UCCRelatorioAtendimento.SelectedIndex = 1;
+                        UCCRelatorioAtendimento_IndexChanged();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar relatórios.", UtilBO.TipoMensagem.Erro);
+                }
             }
         }
+
+        private void UCCRelatorioAtendimento_IndexChanged()
+        {
+            if (UCCRelatorioAtendimento.Valor > 0)
+            {
+                try
+                {
+                    // Desabilita o combo
+                    UCCRelatorioAtendimento.PermiteEditar = false;
+
+                    // Exibe o botão para incluir novo apenas se for do tipo periódica
+                    CLS_RelatorioAtendimento relatorio = CLS_RelatorioAtendimentoBO.GetEntity(new CLS_RelatorioAtendimento { rea_id = UCCRelatorioAtendimento.Valor });
+                    divBotoes.Visible = VS_permiteEditar && relatorio.rea_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidadePreenchimento.Periodico;
+
+                    // Exibe o botão salvar apenas se o usuário tem permissão
+                    btnSalvar.Visible = btnSalvarBaixo.Visible = VS_permiteEditar;
+
+                    // Carrega lançamentos
+                    VS_periodicidadePreenchimento = relatorio.rea_periodicidadePreenchimento;
+                    if (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidadePreenchimento.Periodico)
+                    {
+                        UCCPeriodoCalendario.Visible = true;
+                        pnlLancamento.Visible = false;
+                        grvLancamentos.Visible = true;
+
+                        grvLancamentos.Columns[colunaExcluir].Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && VS_permiteEditar;
+                        grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(VS_alu_id, VS_tud_id, Convert.ToInt32(ddlDisciplina.SelectedValue), relatorio.rea_id, UCCPeriodoCalendario.Tpc_ID);
+                        grvLancamentos.DataBind();
+                    }
+                    else
+                    {
+                        UCCPeriodoCalendario.Visible = false;
+                        pnlLancamento.Visible = true;
+                        grvLancamentos.Visible = false;
+                        UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, VS_tud_id, -1, relatorio.rea_id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar anotações.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+        }
+
+        protected void grvLancamentos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
+                if (btnExcluir != null)
+                {
+                    btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
+                }
+
+                ImageButton btnAlterar = (ImageButton)e.Row.FindControl("btnAlterar");
+                if (btnAlterar != null)
+                {
+                    btnAlterar.CommandArgument = e.Row.RowIndex.ToString();
+                }
+            }
+        }
+
+        protected void grvLancamentos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int index = int.Parse(e.CommandArgument.ToString());
+            int reap_id = Convert.ToInt32(grvLancamentos.DataKeys[index].Values["reap_id"]);
+
+            if (e.CommandName == "Alterar")
+            {
+                // Esconde o grid de lançamentos
+                grvLancamentos.Visible = false;
+
+                // Carrega o lançamento cadastrado
+                pnlLancamento.Visible = true;
+            }
+            else if (e.CommandName == "Deletar")
+            {
+
+            }
+        }
+
+        protected void btnNovo_Click(object sender, EventArgs e)
+        {
+            try
+            { 
+                // Esconde o grid de lançamentos
+                grvLancamentos.Visible = false;
+
+                // Carrega um novo lançamento
+                pnlLancamento.Visible = true;
+                UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, VS_tud_id, -1, UCCRelatorioAtendimento.Valor);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar anotação.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void btnSalvar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            VerificaPaginaRedirecionar();
+        }
+
+        #endregion Eventos
+
+        #region Métodos
 
         /// <summary>
         /// Verifica qual página deve voltar e redireciona.
@@ -104,9 +387,6 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             }
         }
 
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            VerificaPaginaRedirecionar();
-        }
+        #endregion Métodos
     }
 }

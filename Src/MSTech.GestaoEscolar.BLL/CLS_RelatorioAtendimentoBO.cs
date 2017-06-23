@@ -27,6 +27,13 @@ namespace MSTech.GestaoEscolar.BLL
         RP = 3
     }
 
+    public enum CLS_RelatorioAtendimentoPeriodicidadePreenchimento : byte
+    {
+        Periodico = 1
+        ,
+        Encerramento = 2
+    }
+
     [Serializable]
     public class RelatorioAtendimento : CLS_RelatorioAtendimento
     {
@@ -59,6 +66,15 @@ namespace MSTech.GestaoEscolar.BLL
         public static List<CLS_RelatorioAtendimento> SelecionaPorPermissaoUsuarioTipo(Guid usu_id, CLS_RelatorioAtendimentoTipo rea_tipo)
         {
             return new CLS_RelatorioAtendimentoDAO().SelecionaPorPermissaoUsuarioTipo(usu_id, (byte)rea_tipo).ToEntityList<CLS_RelatorioAtendimento>();
+        }
+
+        /// <summary>
+        /// Carrega os relatórios de RP verificando a permissão do usuário e o tipo de disciplina.
+        /// </summary>
+        /// <returns></returns>
+        public static List<CLS_RelatorioAtendimento> SelecionaRelatoriosRPDisciplina(Guid usu_id, long alu_id, long tud_id, int tds_idRP)
+        {
+            return new CLS_RelatorioAtendimentoDAO().SelecionaRelatoriosRPDisciplina(usu_id, alu_id, tud_id, tds_idRP).ToEntityList<CLS_RelatorioAtendimento>();
         }
 
         /// <summary>

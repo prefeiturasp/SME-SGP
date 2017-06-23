@@ -171,14 +171,14 @@ namespace GestaoEscolar.WebControls.Combos
         /// <summary>
         /// Retorna e seta o valor selecionado no combo
         /// </summary>
-        public byte Valor
+        public int Valor
         {
             get
             {
                 if (string.IsNullOrEmpty(ddlCombo.SelectedValue))
                     return 0;
 
-                return Convert.ToByte(ddlCombo.SelectedValue);
+                return Convert.ToInt32(ddlCombo.SelectedValue);
             }
             set
             {
@@ -218,7 +218,7 @@ namespace GestaoEscolar.WebControls.Combos
         private void CarregarMensagemSelecione()
         {
             if (MostrarMensagemSelecione && (ddlCombo.Items.FindByValue(valorSelecione) == null))
-                ddlCombo.Items.Insert(0, new ListItem("-- Selecione um tipo de relatório --", valorSelecione, true));
+                ddlCombo.Items.Insert(0, new ListItem("-- Selecione um relatório --", valorSelecione, true));
 
             ddlCombo.AppendDataBoundItems = MostrarMensagemSelecione;
         }
@@ -246,6 +246,15 @@ namespace GestaoEscolar.WebControls.Combos
                 lblMessage.Text = "Erro ao tentar carregar " + lblTitulo.Text.Replace('*', ' ').ToLower() + ".";
                 lblMessage.Visible = true;
             }
+        }
+
+        public void CarregarRelatoriosRPDisciplina(long alu_id, long tud_id, int tds_idRP)
+        {
+            ddlCombo.Items.Clear();
+            ddlCombo.DataSource = CLS_RelatorioAtendimentoBO.SelecionaRelatoriosRPDisciplina(__SessionWEB.__UsuarioWEB.Usuario.usu_id, alu_id, tud_id, tds_idRP);
+            CarregarMensagemSelecione();
+
+            ddlCombo.DataBind();
         }
 
         #endregion

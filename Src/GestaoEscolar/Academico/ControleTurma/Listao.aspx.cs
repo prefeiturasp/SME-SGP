@@ -2468,15 +2468,11 @@ namespace GestaoEscolar.Academico.ControleTurma
         private void AbrirRelatorioRP(long alu_id, long tud_id)
         {
             Session.Remove("alu_id_RelatorioRP");
-            Session.Remove("tur_id_RelatorioRP");
             Session.Remove("tud_id_RelatorioRP");
-            Session.Remove("tpc_id_RelatorioRP");
             Session.Remove("PaginaRetorno_RelatorioRP");
 
             Session.Add("alu_id_RelatorioRP", alu_id);
-            Session.Add("tur_id_RelatorioRP", UCControleTurma1.VS_tur_id);
             Session.Add("tud_id_RelatorioRP", tud_id);
-            Session.Add("tpc_id_RelatorioRP", UCNavegacaoTelaPeriodo.VS_tpc_id);
             Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
 
             CarregaSessionPaginaRetorno();
@@ -2486,15 +2482,9 @@ namespace GestaoEscolar.Academico.ControleTurma
         private void AbrirRelatorioAEE(long alu_id, long tud_id)
         {
             Session.Remove("alu_id_RelatorioAEE");
-            Session.Remove("tur_id_RelatorioAEE");
-            Session.Remove("tud_id_RelatorioAEE");
-            Session.Remove("tpc_id_RelatorioAEE");
             Session.Remove("PaginaRetorno_RelatorioAEE");
 
             Session.Add("alu_id_RelatorioAEE", alu_id);
-            Session.Add("tur_id_RelatorioAEE", UCControleTurma1.VS_tur_id);
-            Session.Add("tud_id_RelatorioAEE", tud_id);
-            Session.Add("tpc_id_RelatorioAEE", UCNavegacaoTelaPeriodo.VS_tpc_id);
             Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
 
             CarregaSessionPaginaRetorno();

@@ -872,16 +872,13 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 try
                 {
+                    string[] args = e.CommandArgument.ToString().Split(';');
+
                     Session.Remove("alu_id_RelatorioRP");
-                    Session.Remove("tur_id_RelatorioRP");
-                    Session.Remove("tud_id_RelatorioRP");
-                    Session.Remove("tpc_id_RelatorioRP");
                     Session.Remove("PaginaRetorno_RelatorioRP");
 
-                    Session.Add("alu_id_RelatorioRP", Convert.ToInt64(e.CommandArgument.ToString()));
-                    Session.Add("tur_id_RelatorioRP", UCControleTurma1.VS_tur_id);
-                    Session.Add("tud_id_RelatorioRP", UCControleTurma1.VS_tud_id);
-                    Session.Add("tpc_id_RelatorioRP", UCNavegacaoTelaPeriodo.VS_tpc_id);
+                    Session.Add("alu_id_RelatorioRP", Convert.ToInt64(args[0]));
+                    Session.Add("tds_id_RelatorioRP", args[1]);
                     Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
 
                     CarregaSessionPaginaRetorno();
@@ -898,15 +895,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                 try
                 {
                     Session.Remove("alu_id_RelatorioAEE");
-                    Session.Remove("tur_id_RelatorioAEE");
-                    Session.Remove("tud_id_RelatorioAEE");
-                    Session.Remove("tpc_id_RelatorioAEE");
                     Session.Remove("PaginaRetorno_RelatorioAEE");
 
                     Session.Add("alu_id_RelatorioAEE", Convert.ToInt64(e.CommandArgument.ToString()));
-                    Session.Add("tur_id_RelatorioAEE", UCControleTurma1.VS_tur_id);
-                    Session.Add("tud_id_RelatorioAEE", UCControleTurma1.VS_tud_id);
-                    Session.Add("tpc_id_RelatorioAEE", UCNavegacaoTelaPeriodo.VS_tpc_id);
                     Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
 
                     CarregaSessionPaginaRetorno();
@@ -980,6 +971,26 @@ namespace GestaoEscolar.Academico.ControleTurma
                     {
                         btnRelatorioRP.Visible = true;
                         btnRelatorioRP.CommandArgument = alu_id.ToString();
+
+                        if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno)
+                        {
+                            btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                        }
+                        else
+                        {
+                            string strTds = string.Empty;
+                            (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == alu_id)
+                             group preenchimento by new { tds_id = preenchimento.tds_id } into grupo
+                             select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
+                            if (strTds.Length > 1)
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
+                            }
+                            else
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                            }
+                        }
                     }
                 }
             }
