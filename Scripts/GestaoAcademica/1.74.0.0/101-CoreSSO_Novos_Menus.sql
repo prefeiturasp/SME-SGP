@@ -29,16 +29,31 @@ SET XACT_ABORT ON
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 	*/
 
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Configurações' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Questionários' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Listagem de questionários'
+		,@SiteMap1Url = '~/Configuracao/Questionario/Busca.aspx'
+		,@SiteMap2Nome = 'Cadastro de questionários'
+		,@SiteMap2Url = '~/Configuracao/Questionario/Cadastro.aspx'
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 0 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 0 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
 		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
 		,@nomeModuloPai = 'Configurações' -- Nome do módulo pai (Opcional, apenas quando houver)
-		,@nomeModulo = 'Cadastro de questionários' -- Nome do módulo (Obrigatório)
-		,@SiteMap1Nome = 'Listagem de questionários'
-		,@SiteMap1Url = '~/Configuracao/Questionario/Busca.aspx'
-		,@SiteMap2Nome = 'Cadastro de questionários'
-		,@SiteMap2Url = '~/Configuracao/Questionario/Cadastro.aspx'
+		,@nomeModulo = 'Relatórios de atendimento' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Listagem de relatórios de atendimento'
+		,@SiteMap1Url = '~/Configuracao/RelatorioAtendimento/Busca.aspx'
+		,@SiteMap2Nome = 'Cadastro de relatórios de atendimento'
+		,@SiteMap2Url = '~/Configuracao/RelatorioAtendimento/Cadastro.aspx'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
