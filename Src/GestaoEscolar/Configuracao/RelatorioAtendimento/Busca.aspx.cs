@@ -185,5 +185,10 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         }
 
         #endregion
+
+        protected void grvDados_PageIndexChanged(object sender, EventArgs e)
+        {
+            cancelaSelect = false;
+        }
     }
 }
