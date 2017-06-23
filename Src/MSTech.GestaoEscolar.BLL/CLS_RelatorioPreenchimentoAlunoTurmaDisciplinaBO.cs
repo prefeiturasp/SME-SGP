@@ -15,16 +15,19 @@ namespace MSTech.GestaoEscolar.BLL
     using System.ComponentModel;
     using Validation.Exceptions;
     using Data.Common;
+
     public enum RelatorioPreenchimentoAlunoSituacao : byte
     {
         [Description("CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Rascunho")]
         Rascunho = 1
         ,
+        Excluido = 3
+        ,
         [Description("CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Finalizado")]
-        Finalizado = 2
+        Finalizado = 4
         ,
         [Description("CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.RelatorioPreenchimentoAlunoSituacao.Aprovado")]
-        Aprovado = 3
+        Aprovado = 5
     }
 
     [Serializable]
@@ -33,6 +36,14 @@ namespace MSTech.GestaoEscolar.BLL
         public long alu_id { get; set; }
 
         public int tds_id { get; set; }
+    }
+
+    public class PermissaoRelatorioPreenchimentoValidationException : ValidationException
+    {
+        public PermissaoRelatorioPreenchimentoValidationException(string message)
+            : base(message)
+        {
+        }
     }
 
     /// <summary>
