@@ -1,0 +1,88 @@
+// LAYOUT GRIDS (base 12)
+$gap: 24px;
+$meioGap: $gap/2;
+
+// MEDIAS QUERIES BASE
+$tela-p: 480px;
+$tela-m: 768px;
+$tela-g: 992px;
+$tela-gg: 1200px;
+
+@mixin calcColWidth($col,$sum,$gap:$gap){
+	width: calc(#{percentage($col/$sum)} - #{$gap});
+}
+
+.row-custom{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: stretch;
+	
+	margin-left:-#{$meioGap};
+	width: calc(100% + #{$gap});
+	
+	[class*="col-custom-"]{
+		margin:0 $meioGap;
+	}
+}
+
+@for $i from 1 through 12{
+	.p-col-custom-#{$i}{
+		@include calcColWidth($i,12);
+	
+		.row-custom.no-gap &{
+			@include calcColWidth($i,12,0px);
+		}
+	}
+}
+// Se for maior que uma tela pequena
+@media only screen and (min-width: $tela-p) {
+	@for $i from 1 through 12{
+		.m-col-custom-#{$i}{
+			@include calcColWidth($i,12);
+		
+			.row-custom.no-gap &{
+				@include calcColWidth($i,12,0px);
+			}
+		}
+	}
+}
+// Se for maior que uma tela media
+@media only screen and (min-width: $tela-m) {
+	@for $i from 1 through 12{
+		.g-col-custom-#{$i}{
+			@include calcColWidth($i,12);
+		
+			.row-custom.no-gap &{
+				@include calcColWidth($i,12,0px);
+			}
+		}
+	}
+}
+// Se for maior que uma tela grande
+@media only screen and (min-width: $tela-g) {
+	@for $i from 1 through 12{
+		.gg-col-custom-#{$i}{
+			@include calcColWidth($i,12);
+		
+			.row-custom.no-gap &{
+				@include calcColWidth($i,12,0px);
+			}
+		}
+	}
+}
+
+// layout grids - sem gap
+.row-custom.no-gap{ width:100%;}
+.row-custom.no-gap, .row-custom.no-gap [class*="col-custom-"]{ margin:0;}
+
+// layout grids - centered
+.alignItens-center{ display: flex; align-items: center;}
+
+// layout grids - top
+.alignItens-top{ display: flex; align-items: flex-start;}
+
+// layout grids - bottom
+.alignItens-bottom{ display: flex; align-items: flex-end;}
+
+.row-custom [class*="col-custom-"].box{ margin-top:10px; margin-bottom:10px;}

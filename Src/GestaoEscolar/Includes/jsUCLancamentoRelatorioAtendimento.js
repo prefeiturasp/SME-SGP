@@ -6,7 +6,7 @@
 
     $('input[type="radio"]').unbind('click').bind('click', function () {
         var id = $(this).attr('id');
-        $(this).parent('span').parent('div.questionario-conteudo-resposta').parent('div.quetionario-conteudo').find('input[type="radio"]').each(function () {
+        $(this).parent('span').parent('div.questionario-resposta').parent('div.quetionario-conteudo').find('input[type="radio"]').each(function () {
             if ($(this).attr('id') == id) {
                 $(this).attr('checked', 'checked');
             } else {
