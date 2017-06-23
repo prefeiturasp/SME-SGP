@@ -265,14 +265,14 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
 
                     // Exibe o botão para incluir novo apenas se for do tipo periódica
                     CLS_RelatorioAtendimento relatorio = CLS_RelatorioAtendimentoBO.GetEntity(new CLS_RelatorioAtendimento { rea_id = UCCRelatorioAtendimento.Valor });
-                    divBotoes.Visible = VS_permiteEditar && relatorio.rea_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidadePreenchimento.Periodico;
+                    divBotoes.Visible = VS_permiteEditar && relatorio.rea_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
 
                     // Exibe o botão salvar apenas se o usuário tem permissão
                     btnSalvar.Visible = btnSalvarBaixo.Visible = VS_permiteEditar;
 
                     // Carrega lançamentos
                     VS_periodicidadePreenchimento = relatorio.rea_periodicidadePreenchimento;
-                    if (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidadePreenchimento.Periodico)
+                    if (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico)
                     {
                         UCCPeriodoCalendario.Visible = true;
                         pnlLancamento.Visible = false;
