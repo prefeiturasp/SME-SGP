@@ -29,7 +29,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         #endregion
 
         #region Métodos
-        
+
         private void Pesquisar()
         {
             try
@@ -90,7 +90,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             grvDados.PageIndex = 0;
             Pesquisar();
         }
-        
+
         protected void btnNovo_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Configuracao/RelatorioAtendimento/Cadastro.aspx", false);
@@ -113,7 +113,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
             e.Cancel = cancelaSelect;
         }
-        
+
         protected void grvDados_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Deletar")
@@ -145,7 +145,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 }
             }
         }
-        
+
         protected void grvDados_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             try
@@ -184,11 +184,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             UCTotalRegistros1.Total = CLS_RelatorioAtendimentoBO.GetTotalRecords();
         }
 
-        #endregion
-
         protected void grvDados_PageIndexChanged(object sender, EventArgs e)
         {
             cancelaSelect = false;
         }
+
+        #endregion
+
     }
 }
