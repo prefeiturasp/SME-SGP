@@ -27,6 +27,7 @@
                     <ContentTemplate>
                         <asp:Button ID="btnSalvar" runat="server" Text="Salvar" Visible="false" OnClick="btnSalvar_Click" />
                         <asp:Button ID="btnAprovar" runat="server" Text="Aprovar" Visible="false" OnClick="btnAprovar_Click" />
+                        <asp:Button ID="btnDesaprovar" runat="server" Text="Editar" Visible="false" OnClick="btnDesaprovar_Click" />
                         <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CausesValidation="false" OnClick="btnCancelar_Click" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -39,6 +40,7 @@
                     <div class="right">
                         <asp:Button ID="btnSalvarBaixo" runat="server" Text="Salvar" OnClick="btnSalvar_Click" />
                         <asp:Button ID="btnAprovarBaixo" runat="server" Text="Aprovar" OnClick="btnAprovar_Click" />
+                        <asp:Button ID="btnDesaprovarBaixo" runat="server" Text="Editar" OnClick="btnDesaprovar_Click" />
                         <asp:Button ID="btnCancelarBaixo" runat="server" Text="Cancelar" CausesValidation="false" OnClick="btnCancelar_Click" />
                     </div>
                 </asp:Panel>

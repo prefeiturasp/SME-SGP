@@ -1082,10 +1082,12 @@ namespace MSTech.GestaoEscolar.BLL
         ,
         [parametroAcademicoAttributes("Tipo de evento de abertura de período para cadastro de sugestões no currículo", "Tipo de evento de abertura de período para cadastro de sugestões no currículo é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         TIPO_EVENTO_ABERTURA_SUGESTOES
- ,
+        ,
         [parametroAcademicoAttributes("Indica a deficiência do tipo múltipla, que terá deficiências dependentes.", "Indicar um tipo de deficiência múltipla é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         DEFICIENCIA_MULTIPLA
-
+        ,
+        [parametroAcademicoAttributes("Permitir editar lançamento de relatório aprovado.", "Permitir editar lançamento de relatório aprovado é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
+        PERMITIR_EDITAR_RELATORIO_APROVADO
     }   
 
     #endregion Enumerador

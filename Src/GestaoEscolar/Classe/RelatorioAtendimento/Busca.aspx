@@ -58,7 +58,8 @@
                         <asp:BoundField HeaderText="Turma" DataField="tur_codigo" SortExpression="tur_codigo"/>
                         <asp:TemplateField HeaderText="Lançar relatório" HeaderStyle-CssClass="center">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnResponder" runat="server" SkinID="btRelatorio" CommandName="Edit" PostBackUrl="~/Classe/RelatorioAtendimento/Cadastro.aspx" />
+                                <asp:ImageButton ID="btnResponder" runat="server" SkinID="btRelatorio" CommandName="Edit" PostBackUrl="~/Classe/RelatorioAtendimento/Cadastro.aspx" 
+                                    ToolTip="Lnaçar relatório de atendimento AEE" />
                             </ItemTemplate>
                             <ItemStyle CssClass="center" HorizontalAlign="Center" />
                         </asp:TemplateField>

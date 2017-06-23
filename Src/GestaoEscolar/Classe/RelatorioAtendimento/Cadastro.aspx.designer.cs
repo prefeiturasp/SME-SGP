@@ -94,6 +94,15 @@ namespace GestaoEscolar.Classe.RelatorioAtendimento {
         protected global::System.Web.UI.WebControls.Button btnAprovar;
         
         /// <summary>
+        /// btnDesaprovar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDesaprovar;
+        
+        /// <summary>
         /// btnCancelar control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace GestaoEscolar.Classe.RelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAprovarBaixo;
+        
+        /// <summary>
+        /// btnDesaprovarBaixo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDesaprovarBaixo;
         
         /// <summary>
         /// btnCancelarBaixo control.

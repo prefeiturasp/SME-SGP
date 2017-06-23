@@ -33,7 +33,7 @@
             <asp:GridView ID="grvDados" runat="server" AutoGenerateColumns="False" DataKeyNames="rea_id"
                 OnRowCommand="grvDados_RowCommand" OnRowDataBound="grvDados_RowDataBound"
                 DataSourceID="odsDados" AllowPaging="True" EmptyDataText="Não foram encontrados relatórios cadastrados." 
-                OnDataBound="grvDados_DataBound"
+                OnDataBound="grvDados_DataBound" OnPageIndexChanged="grvDados_PageIndexChanged"
                 SkinID="GridResponsive">
                 <Columns>
                     <asp:TemplateField HeaderText="Título do relatório">

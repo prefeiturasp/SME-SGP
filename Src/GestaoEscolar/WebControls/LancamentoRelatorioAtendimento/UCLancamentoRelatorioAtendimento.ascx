@@ -11,7 +11,7 @@
                 </div>
                 
                 <div class="m-col-custom-4 p-col-custom-12 relatorio-manual" id="divDownloadAnexo" runat="server" visible="false">
-                    <label><asp:Label ID="lblDownloadAnexo" runat="server" Text="Instruções de preenchimento: "></asp:Label></label>
+                    <label><asp:Label ID="lblDownloadAnexo" runat="server" Text="Instruções de preenchimento "></asp:Label></label>
                     <asp:HyperLink ID="hplDownloadAnexo" runat="server" SkinID="hplAnexo" ToolTip="Realizar o download de instruções de preenchimento" Width="22px"></asp:HyperLink>
                 </div>
             </div>
@@ -55,6 +55,7 @@
                             <asp:Repeater ID="rptConteudo" runat="server" OnItemDataBound="rptConteudo_ItemDataBound">
                                 <ItemTemplate>
                                     <div class="questionario-conteudo">
+                                        <asp:HiddenField ID="hdnTipo" runat="server" Value='<%# Eval("qtc_tipo") %>' />
                                         <asp:HiddenField ID="hdnTipoResposta" runat="server" Value='<%# Eval("qtc_tipoResposta") %>' />
                                         <asp:HiddenField ID="hdnQtcId" runat="server" Value='<%# Eval("qtc_id") %>' />
                                         <asp:Label ID="lblTextoConteudo" runat="server" Text='<%# Eval("qtc_texto") %>' CssClass='<%# RetornaClasseQuestionarioConteudo((byte)Eval("qtc_tipo")) %>'></asp:Label>
