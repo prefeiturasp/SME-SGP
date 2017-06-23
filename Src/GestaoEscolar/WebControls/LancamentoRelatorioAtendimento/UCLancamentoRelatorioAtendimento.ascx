@@ -61,10 +61,12 @@
                                         <div class="clear"></div>
                                         <asp:Repeater ID="rptResposta" runat="server" OnItemDataBound="rptResposta_ItemDataBound">
                                             <ItemTemplate>
-                                                <asp:HiddenField ID="hdnQtrId" runat="server" Value='<%# Eval("qtr_id") %>' />
-                                                <asp:CheckBox ID="chkResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-multi-selecao" Visible="false" />
-                                                <asp:RadioButton ID="rdbResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-selecao-unica" Visible="false" />
-                                                <asp:TextBox ID="txtRespostaTextoAdicional" runat="server" CssClass="questionario-conteudo-resposta-texto-adicional" Visible="false"></asp:TextBox>
+                                                <div class="questionario-conteudo-resposta">
+                                                    <asp:HiddenField ID="hdnQtrId" runat="server" Value='<%# Eval("qtr_id") %>' />
+                                                    <asp:CheckBox ID="chkResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-multi-selecao" Visible="false" />
+                                                    <asp:RadioButton ID="rdbResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-selecao-unica" Visible="false" />
+                                                    <asp:TextBox ID="txtRespostaTextoAdicional" runat="server" CssClass="questionario-conteudo-resposta-texto-adicional" Visible="false"></asp:TextBox>
+                                                </div>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </div>
