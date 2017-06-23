@@ -102,6 +102,363 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'O componente curricular {0} ultrapassou a carga horária ({1}) na turma {2} em {3} aulas.'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblLegend.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Relatório de atendimento'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblTitulo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Título *'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.rfvTitulo.ErrorMessage' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Título do relatório é obrigatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblPeriodicidade.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Periodicidade *'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ddlPeriodicidade.msgSelecione' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = '-- Selecione uma peridiocidade --'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Periodico' 
+        , @rcr_NomeResource = 'Enumerador'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Periódico'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Encerramento' 
+        , @rcr_NomeResource = 'Enumerador'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Encerramento'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.cpvPeriodicidade.ErrorMessag' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Peridiocidade do relatório é obrigatória.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblTipo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Tipo de relatório *'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ddlTipo.msgSelecione' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = '-- Selecione um tipo --'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.cpvTipo.ErrorMessage' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Tipo de relatório é obrigatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.chkExibeRacaCor.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permite editar raça/cor'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.chkExibeHipotese.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permite editar hipótese diagnóstica'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblTituloAnexo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Título do anexo'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblAnexo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Anexo'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.fupAnexo.ToolTip' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Arquivo anexo do relatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblLegendQuestionario.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Questionário'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.btnAdicionarQuestionario.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Adicionar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.btnCacelarQuestionario.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Nenhum questionário ligado ao relatório de atendimento.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvQuestionario.HeaderTitulo' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Título'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvQuestionario.HeaderOrdem' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Ordem'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.grvQuestoes.HeaderExcluir' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Excluir'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvQuestionario.btnExcluir.ToolTip' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Excluir questionário do relatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblLegendGrupo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Grupo de acesso'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvGrupo.EmptyDataText' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Nenhum grupo de acesso ligado ao relatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvGrupo.HeaderNome' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Nome'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvGrupo.HeaderPermissaoConsulta' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permissão de consulta'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvGrupo.HeaderPermissaoEdicao' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permissão de edição'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvGrupo.HeaderPermissaoExclusao' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permissão de exclusão'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvGrupo.HeaderPermissaoAprovacao' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permissão de aprovação'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblLegendCargo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Cargo'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvCargo.EmptyDataText' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Nenhum cargo relacionado ao relatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvCargo.HeaderDescricao' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Descrição'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoConsulta' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permissão de consulta'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoEdicao' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permissão de edição'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoExclusao' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permissão de exclusão'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoAprovacao' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permissão de aprovação'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ckbBloqueado.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Bloqueado'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.bntSalvar.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Salvar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.btnCancelar.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ErroCarregarRelatorio' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Erro ao carregar relatório de atendimento.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.TituloAnexoSemArquivo' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Título do anexo é obrigatório se adicionar um arquivo.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.RelatorioIncluidoSucesso' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Relatório de atendimento incuído com sucesso.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.RelatorioAlteradoSucesso' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Relatório de atendimento alterado com sucesso.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ErroSalvarRelatorio' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Erro ao tentar salvar o relatório de atendimento.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.btnVoltar.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Voltar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ErroCarregarSistema' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Erro ao tentar carregar o sistema.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.QuestionarioObrigatorio' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Questionário é obrigatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ErroAdicionarQuestionario' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Erro ao tentar adicionar o questionário.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.btnNovoQuestionario.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Adicionar questionário'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

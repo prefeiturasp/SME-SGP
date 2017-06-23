@@ -4,14 +4,77 @@
 
 namespace MSTech.GestaoEscolar.DAL
 {
-	using MSTech.GestaoEscolar.DAL.Abstracts;
-	
-	/// <summary>
-	/// Description: .
-	/// </summary>
-	public class CLS_RelatorioAtendimentoCargoDAO : Abstract_CLS_RelatorioAtendimentoCargoDAO
-	{
-		///// <summary>
+    using System;
+    using System.Data;
+    using MSTech.GestaoEscolar.DAL.Abstracts;
+    using Data.Common;
+    /// <summary>
+    /// Description: .
+    /// </summary>
+    public class CLS_RelatorioAtendimentoCargoDAO : Abstract_CLS_RelatorioAtendimentoCargoDAO
+    {
+        /// <summary>
+        /// Carrega os cargos para o relatório de atendimento
+        /// </summary>
+        /// <param name="rea_id">ID do relatorio de atendimento</param>
+        /// <returns></returns>
+        public DataTable SelectBy_rea_id(int rea_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioAtendimentoCargo_SelectBy_rea_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = rea_id;
+                qs.Parameters.Add(Param);
+                
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Exclui os cargos para o relatório de atendimento
+        /// </summary>
+        /// <param name="rea_id">ID do relatorio de atendimento</param>
+        /// <returns></returns>
+        public void DeleteBy_rea_id(long rea_id)
+        {
+            QueryStoredProcedure qs = new QueryStoredProcedure("NEW_CLS_RelatorioAtendimentoCargo_DeleteBy_rea_id", _Banco);
+
+            try
+            {
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = rea_id;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente.
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem modificados.</param>
@@ -142,5 +205,5 @@ namespace MSTech.GestaoEscolar.DAL
         // {
         //    return base.DataRowToEntity(dr, entity, limparEntity);
         // }
-	}
+    }
 }

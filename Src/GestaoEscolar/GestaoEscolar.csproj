@@ -2373,6 +2373,13 @@
     <Compile Include="WebControls\Combos\UCComboParametroGrupoPerfil.ascx.designer.cs">
       <DependentUpon>UCComboParametroGrupoPerfil.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Combos\UCComboQuestionario.ascx.cs">
+      <DependentUpon>UCComboQuestionario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboQuestionario.ascx.designer.cs">
+      <DependentUpon>UCComboQuestionario.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Combos\UCComboRelatorioAtendimento.ascx.cs">
       <DependentUpon>UCComboRelatorioAtendimento.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4403,6 +4410,7 @@
     <Content Include="WebControls\Combos\UCComboAvisoTextoGeralCampoAuxiliar.ascx" />
     <Content Include="WebControls\Combos\UCComboCargaHoraria.ascx" />
     <Content Include="WebControls\Combos\UCComboOrdenacaoPosNome.ascx" />
+    <Content Include="WebControls\Combos\UCComboQuestionario.ascx" />
     <Content Include="WebControls\Combos\UCComboRelatorioAtendimento.ascx" />
     <Content Include="WebControls\Combos\UCComboServico.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoAvisoTextoGeral.ascx" />
