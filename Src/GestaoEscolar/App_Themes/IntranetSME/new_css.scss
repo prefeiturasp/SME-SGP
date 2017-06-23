@@ -492,6 +492,7 @@ a.btRelatorioAEE {
     top:36px;
     min-height:36px;
     @include box-shadow(-1px 1px 3px rgba(0,0,0,.2));
+    z-index:2;
 
     .item-dropdown-relatorio{
       background-position: 8px 6px;

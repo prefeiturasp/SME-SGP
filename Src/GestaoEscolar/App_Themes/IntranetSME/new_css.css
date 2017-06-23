@@ -676,7 +676,8 @@ a.btRelatorioAEE {
     -webkit-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.2);
     -ms-box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.2);
-    box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.2); }
+    box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 2; }
     .dropdown-relatorio.opened .item-dropdown-relatorio {
       background-position: 8px 6px;
       display: block;
