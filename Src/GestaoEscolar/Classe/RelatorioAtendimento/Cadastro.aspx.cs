@@ -2,10 +2,11 @@
 {
     using MSTech.CoreSSO.BLL;
     using MSTech.GestaoEscolar.BLL;
+    using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.Web.WebProject;
     using MSTech.Validation.Exceptions;
     using System;
-
+    using System.Collections.Generic;
     public partial class Cadastro : MotherPageLogado
     {
         private long VS_alu_id
@@ -34,7 +35,6 @@
             }
         }
         
-
         private int VS_cal_id
         {
             get
@@ -127,19 +127,36 @@
 
         private void CarregarRelatorio()
         {
-            pnlLancamento.Visible = btnSalvar.Visible = false;
-
-            if (UCCPeriodoCalendario.Valor[0] > 0 && UCCPeriodoCalendario.Valor[1] > 0 && UCCRelatorioAtendimento.Valor > 0)
+            try
             {
-                pnlLancamento.GroupingText = UCCRelatorioAtendimento.Texto;
-                UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, -1, UCCPeriodoCalendario.Valor[0], UCCRelatorioAtendimento.Valor, false);
-                pnlLancamento.Visible = btnSalvar.Visible = true;
-                UCCPeriodoCalendario.PermiteEditar = UCCRelatorioAtendimento.PermiteEditar = false; 
-            }
 
-            updBotoes.Update();
-            updFiltros.Update();
-            updLancamento.Update();
+                pnlLancamento.Visible = btnSalvar.Visible = btnSalvarBaixo.Visible = btnAprovar.Visible = btnAprovarBaixo.Visible = false;
+
+                if (UCCPeriodoCalendario.Valor[0] > 0 && UCCPeriodoCalendario.Valor[1] > 0 && UCCRelatorioAtendimento.Valor > 0)
+                {
+                    pnlLancamento.GroupingText = UCCRelatorioAtendimento.Texto;
+                    UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, -1, UCCPeriodoCalendario.Valor[0], UCCRelatorioAtendimento.Valor, false);
+                    pnlLancamento.Visible = true;
+                    btnSalvar.Visible = btnSalvarBaixo.Visible = UCLancamentoRelatorioAtendimento.PermiteEditar;
+                    btnAprovar.Visible = btnAprovarBaixo.Visible = UCLancamentoRelatorioAtendimento.PermiteAprovar;
+                    UCCPeriodoCalendario.PermiteEditar = UCCRelatorioAtendimento.PermiteEditar = false;
+                }
+
+                updBotoes.Update();
+                updFiltros.Update();
+                updLancamento.Update();
+            }
+            catch (PermissaoRelatorioPreenchimentoValidationException ex)
+            {
+                lblMensagem.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                updMensagem.Update();
+            }
+            catch (Exception ex)
+            {
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o relatório de atendimento.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+                updMensagem.Update();
+            }
         }
 
         /// <summary>
@@ -159,12 +176,13 @@
             RedirecionarPagina(url);
         }
 
-        private void Salvar()
+        private void Salvar(bool aprovar)
         {
             try
             {
-                RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento();
-                if (CLS_RelatorioPreenchimentoBO.Salvar(rel))
+                RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(aprovar);
+                List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
+                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe))
                 {
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage("Relatório de atendimento preenchido com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "Relatório de atendimento preenchido com sucesso | reap_id: " + rel.entityRelatorioPreenchimento.reap_id);
@@ -221,7 +239,15 @@
         {
             if (Page.IsValid)
             {
-                Salvar();
+                Salvar(false);
+            }
+        }
+
+        protected void btnAprovar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                Salvar(true);
             }
         }
     }

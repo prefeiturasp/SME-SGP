@@ -7,9 +7,6 @@
             <asp:Label ID="lblInformacaoAluno" runat="server"></asp:Label>
             <uc:UCCRacaCor ID="UCCRacaCor" runat="server" Visible="false" />
             <div class="clear"></div>
-            <asp:Label ID="lblSituacao" runat="server" Text="Situação de preenchimento" AssociatedControlID="ddlSituacao"></asp:Label>
-            <asp:DropDownList ID="ddlSituacao" runat="server"></asp:DropDownList>
-            <div class="clear"></div>
             <div id="divDownloadAnexo" runat="server" class="relatorio-manual" visible="false">
                 <asp:Label ID="lblDownloadAnexo" runat="server" Text="Instruções de preenchimento: "></asp:Label>
                 <asp:HyperLink ID="hplDownloadAnexo" runat="server" SkinID="hplAnexo" ToolTip="Realizar o download de instruções de preenchimento"></asp:HyperLink>

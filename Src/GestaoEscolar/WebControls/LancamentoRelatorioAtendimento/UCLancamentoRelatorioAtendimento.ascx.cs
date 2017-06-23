@@ -6,6 +6,7 @@
     using MSTech.GestaoEscolar.CustomResourceProviders;
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.Web.WebProject;
+    using MSTech.Validation.Exceptions;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -119,7 +120,7 @@
             }
         }
 
-        private bool PermiteAprovar
+        public bool PermiteAprovar
         {
             get
             {
@@ -128,7 +129,7 @@
             }
         }
 
-        private bool PermiteEditar
+        public bool PermiteEditar
         {
             get
             {
@@ -137,7 +138,7 @@
             }
         }
 
-        private bool PermiteConsultar
+        public bool PermiteConsultar
         {
             get
             {
@@ -250,22 +251,25 @@
                 hplDownloadAnexo.Text = VS_RelatorioAtendimento.rea_tituloAnexo;
                 hplDownloadAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", VS_RelatorioAtendimento.arq_idAnexo);
             }
-
-            CarregarSituacao();
-            CarregarHipoteseDiagnostica(VS_RelatorioAtendimento.rea_permiteEditarHipoteseDiagnostica);
+            
+            CarregarHipoteseDiagnostica();
             CarregarQuestionarios();
 
             updLancamentoRelatorio.Update();
         }
 
-        private void CarregarHipoteseDiagnostica(bool permiteEditar)
+        private void CarregarHipoteseDiagnostica()
         {
-            rptTipoDeficiencia.DataSource = CLS_AlunoDeficienciaDetalheBO.SelecionaPorAluno(VS_alu_id);
-            rptTipoDeficiencia.DataBind();
+            liHipoteseDiagnostica.Visible = fdsHipoteseDiagnostica.Visible = false;
+            if (VS_RelatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.AEE)
+            {
+                rptTipoDeficiencia.DataSource = CLS_AlunoDeficienciaDetalheBO.SelecionaPorAluno(VS_alu_id);
+                rptTipoDeficiencia.DataBind();
 
-            liHipoteseDiagnostica.Visible = fdsHipoteseDiagnostica.Visible = rptTipoDeficiencia.Items.Count > 0;
+                liHipoteseDiagnostica.Visible = fdsHipoteseDiagnostica.Visible = rptTipoDeficiencia.Items.Count > 0;
 
-            HabilitaControles(fdsHipoteseDiagnostica.Controls, permiteEditar);
+                HabilitaControles(fdsHipoteseDiagnostica.Controls, VS_RelatorioAtendimento.rea_permiteEditarHipoteseDiagnostica && PermiteEditar);
+            }
         }
 
         private void CarregarQuestionarios()
@@ -275,34 +279,78 @@
 
             rptQuestionario.DataSource = VS_RelatorioAtendimento.lstQuestionario;
             rptQuestionario.DataBind();
+
+            HabilitaControles(rptQuestionario.Controls, PermiteEditar);
         }
 
-        private void CarregarSituacao()
+        private bool RelatorioConcluido()
         {
-            ddlSituacao.Items.Clear();
+            var conteudoVazio = (from RepeaterItem itemQuestionario in rptQuestionario.Items
+                                 let raq_id = itemQuestionario.FindControl<HiddenField>("hdnRaqId").GetValue().ToInt32()
+                                 let rptConteudo = itemQuestionario.FindControl("rptConteudo") as Repeater
+                                 where rptConteudo != null && raq_id > 0
+                                 from RepeaterItem itemConteudo in rptConteudo.Items
+                                 let tipoResposta = itemConteudo.FindControl<HiddenField>("hdnTipoResposta").GetValue().ToByte()
+                                 where tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto
+                                 let qtc_id = itemConteudo.FindControl<HiddenField>("hdnQtcId").GetValue().ToInt32()
+                                 let qcp_textoResposta = itemConteudo.FindControl<TextBox>("txtResposta").GetText()
+                                 where qtc_id > 0 && string.IsNullOrEmpty(qcp_textoResposta)
+                                 select qtc_id).Union
+                                (from RepeaterItem itemQuestionario in rptQuestionario.Items
+                                 let raq_id = itemQuestionario.FindControl<HiddenField>("hdnRaqId").GetValue().ToInt32()
+                                 let rptConteudo = itemQuestionario.FindControl("rptConteudo") as Repeater
+                                 where rptConteudo != null && raq_id > 0
+                                 from RepeaterItem itemConteudo in rptConteudo.Items
+                                 let tipoResposta = itemConteudo.FindControl<HiddenField>("hdnTipoResposta").GetValue().ToByte()
+                                 let qtc_id = itemConteudo.FindControl<HiddenField>("hdnQtcId").GetValue().ToInt32()
+                                 let rptResposta = itemConteudo.FindControl("rptResposta") as Repeater
+                                 where rptResposta != null && tipoResposta != (byte)QuestionarioTipoResposta.TextoAberto
+                                 let qtdeRespondido = (from RepeaterItem itemResposta in rptResposta.Items
+                                                       let qtr_id = itemResposta.FindControl<HiddenField>("hdnQtrId").GetValue().ToInt32()
+                                                       let txtRespostaTextoAdicional = itemResposta.FindControl<TextBox>("txtRespostaTextoAdicional")
+                                                       where (tipoResposta == (byte)QuestionarioTipoResposta.SelecaoUnica ?
+                                                                itemResposta.FindControl<RadioButton>("rdbResposta").IsChecked() :
+                                                                itemResposta.FindControl<CheckBox>("chkResposta").IsChecked()) &&
+                                                              (txtRespostaTextoAdicional != null ?
+                                                                (txtRespostaTextoAdicional.Visible && !string.IsNullOrEmpty(txtRespostaTextoAdicional.Text)) || !txtRespostaTextoAdicional.Visible : true)
+                                                       select qtr_id).Count()
+                                 where qtdeRespondido == 0
+                                 select qtc_id);
 
-            Type objType = typeof(RelatorioPreenchimentoAlunoSituacao);
-            FieldInfo[] propriedades = objType.GetFields();
-            foreach (FieldInfo objField in propriedades)
-            {
-                DescriptionAttribute[] attributes = (DescriptionAttribute[])objField.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-                if (attributes.Length > 0)
-                {
-                    RelatorioPreenchimentoAlunoSituacao situacao = (RelatorioPreenchimentoAlunoSituacao)Enum.Parse(typeof(RelatorioPreenchimentoAlunoSituacao), objField.GetRawConstantValue().ToString());
-                    if (situacao.In(RelatorioPreenchimentoAlunoSituacao.Rascunho, RelatorioPreenchimentoAlunoSituacao.Finalizado) ||
-                        (situacao == RelatorioPreenchimentoAlunoSituacao.Aprovado && PermiteAprovar))
-                    {
-                        ddlSituacao.Items.Add(new ListItem(CustomResource.GetGlobalResourceObject("Enumerador", attributes[0].Description), ((byte)situacao).ToString()));
-                    }
-                }
-            }
+            return conteudoVazio.Count() == 0;
         }
 
-        public RelatorioPreenchimentoAluno RetornaQuestionarioPreenchimento()
+        public List<CLS_AlunoDeficienciaDetalhe> RetornaListaDeficienciaDetalhe()
+        {
+            return (from RepeaterItem itemTipoDeficiencia in rptTipoDeficiencia.Items
+                    let tde_id = new Guid(itemTipoDeficiencia.FindControl<HiddenField>("hdnTdeId").GetValue())
+                    let rptHipoteseDiagnostica = itemTipoDeficiencia.FindControl<Repeater>("rptHipoteseDiagnostica")
+                    where rptHipoteseDiagnostica != null
+                    from RepeaterItem itemDeficienciaDetalhe in rptHipoteseDiagnostica.Items
+                    let dfd_id = itemDeficienciaDetalhe.FindControl<HiddenField>("hdnDfdId").GetValue().ToInt32()
+                    let chkDeficienciaDetalhe = itemDeficienciaDetalhe.FindControl<CheckBox>("chkDeficienciaDetalhe")
+                    where chkDeficienciaDetalhe.IsChecked()
+                    select new CLS_AlunoDeficienciaDetalhe
+                    {
+                        tde_id = tde_id
+                        ,
+                        dfd_id = dfd_id
+                        ,
+                        alu_id = VS_alu_id
+                    }).ToList();
+        }
+
+        public RelatorioPreenchimentoAluno RetornaQuestionarioPreenchimento(bool aprovar)
         {
             RelatorioPreenchimentoAluno rel = new RelatorioPreenchimentoAluno();
             long reap_id = VS_RelatorioPreenchimentoAluno.entityRelatorioPreenchimento.reap_id;
+            bool relatorioConcluido = RelatorioConcluido();
+
+            if (!relatorioConcluido && aprovar)
+            {
+                throw new ValidationException("Preenchimento do relatório não está finalizado. Verifique se todas as perguntas foram respondidas antes de aprovar o relatório.");
+            }
+
             rel.entityPreenchimentoAlunoTurmaDisciplina = new CLS_RelatorioPreenchimentoAlunoTurmaDisciplina
             {
                 alu_id = VS_alu_id
@@ -315,7 +363,8 @@
                 ,
                 reap_id = reap_id > 0 ? reap_id : -1
                 ,
-                ptd_situacao = Convert.ToByte(ddlSituacao.SelectedValue)
+                ptd_situacao = aprovar ? (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado : 
+                                    (relatorioConcluido ? (byte)RelatorioPreenchimentoAlunoSituacao.Finalizado : (byte)RelatorioPreenchimentoAlunoSituacao.Rascunho)
                 ,
                 IsNew = reap_id <= 0
             };
