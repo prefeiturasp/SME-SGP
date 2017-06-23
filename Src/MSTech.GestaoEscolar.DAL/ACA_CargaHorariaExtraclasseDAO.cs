@@ -76,6 +76,43 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        public DataTable SelectAtividadeLancamento
+        (
+            string dis_ids
+        )
+        {
+            DataTable dt = new DataTable();
+
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CargaHorariaExtraclasse_SelectAtividadeLancamento", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.String;
+                Param.ParameterName = "@dis_ids";
+                Param.Value = dis_ids;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                if (qs.Return.Rows.Count > 0)
+                    dt = qs.Return;
+
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #endregion
 
         #region Métodos sobrescritos

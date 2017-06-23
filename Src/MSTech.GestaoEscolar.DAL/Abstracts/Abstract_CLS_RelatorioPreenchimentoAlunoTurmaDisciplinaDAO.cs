@@ -80,7 +80,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param.DbType = DbType.Int64;
                 Param.ParameterName = "@tud_id";
                 Param.Size = 8;
-                Param.Value = entity.tud_id;
+                if (entity.tud_id > 0)
+                {
+                    Param.Value = entity.tud_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -156,7 +163,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param.DbType = DbType.Int64;
                 Param.ParameterName = "@tud_id";
                 Param.Size = 8;
-                Param.Value = entity.tud_id;
+                if (entity.tud_id > 0)
+                {
+                    Param.Value = entity.tud_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

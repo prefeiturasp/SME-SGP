@@ -41,7 +41,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         /// <summary>
         /// ID da tabela TUR_TurmaDisciplina..
         /// </summary>
-        [MSNotNullOrEmpty("[tud_id] é obrigatório.")]
         public virtual long tud_id { get; set; }
 
         /// <summary>

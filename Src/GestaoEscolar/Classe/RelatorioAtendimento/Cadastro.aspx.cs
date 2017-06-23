@@ -3,6 +3,7 @@
     using MSTech.CoreSSO.BLL;
     using MSTech.GestaoEscolar.BLL;
     using MSTech.GestaoEscolar.Web.WebProject;
+    using MSTech.Validation.Exceptions;
     using System;
 
     public partial class Cadastro : MotherPageLogado
@@ -19,6 +20,20 @@
                 ViewState["VS_alu_id"] = value;
             }
         }
+
+        private long VS_tur_id
+        {
+            get
+            {
+                return Convert.ToInt64(ViewState["VS_tur_id"] ?? -1);
+            }
+
+            set
+            {
+                ViewState["VS_tur_id"] = value;
+            }
+        }
+        
 
         private int VS_cal_id
         {
@@ -92,6 +107,7 @@
                 {
                     VS_alu_id = PreviousPage.EditItemAluId;
                     VS_cal_id = PreviousPage.EditItemCalId;
+                    VS_tur_id = PreviousPage.EditItemTurId;
                 }
                 else if (Session["PaginaRetorno_RelatorioAEE"] != null)
                 {
@@ -116,7 +132,7 @@
             if (UCCPeriodoCalendario.Valor[0] > 0 && UCCPeriodoCalendario.Valor[1] > 0 && UCCRelatorioAtendimento.Valor > 0)
             {
                 pnlLancamento.GroupingText = UCCRelatorioAtendimento.Texto;
-                UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, UCCRelatorioAtendimento.Valor, false);
+                UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, -1, UCCPeriodoCalendario.Valor[0], UCCRelatorioAtendimento.Valor, false);
                 pnlLancamento.Visible = btnSalvar.Visible = true;
                 UCCPeriodoCalendario.PermiteEditar = UCCRelatorioAtendimento.PermiteEditar = false; 
             }
@@ -141,6 +157,31 @@
             }
 
             RedirecionarPagina(url);
+        }
+
+        private void Salvar()
+        {
+            try
+            {
+                RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento();
+                if (CLS_RelatorioPreenchimentoBO.Salvar(rel))
+                {
+                    __SessionWEB.PostMessages = UtilBO.GetErroMessage("Relatório de atendimento preenchido com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "Relatório de atendimento preenchido com sucesso | reap_id: " + rel.entityRelatorioPreenchimento.reap_id);
+                    VerificaPaginaRedirecionar();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                lblMensagem.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                updMensagem.Update();
+            }
+            catch (Exception ex)
+            {
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o relatório de atendimento.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+                updMensagem.Update();
+            }
         }
 
         private void UCCPeriodoCalendario_IndexChanged()
@@ -174,6 +215,14 @@
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             VerificaPaginaRedirecionar();
+        }
+
+        protected void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                Salvar();
+            }
         }
     }
 }

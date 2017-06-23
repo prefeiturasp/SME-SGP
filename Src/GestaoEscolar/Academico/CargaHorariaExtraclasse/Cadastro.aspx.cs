@@ -53,6 +53,8 @@
 
         private List<ACA_CargaHorariaExtraclasse> LstCargaHoraria;
 
+        public Dictionary<int, bool> DisciplinaPermiteEditar { get; set; }
+
         #endregion
 
         #region Page Life Cycle
@@ -109,6 +111,7 @@
                     using (DataTable dt = ACA_CurriculoDisciplinaBO.SelecionaDisciplinasParaFormacaoTurmaNormal(Cur_id, Crr_id, Crp_id))
                     {
                         rptDisciplinas.DataSource = dt;
+                        VerificarPermissaoEdicao();
                         rptDisciplinas.DataBind();
 
                         rptDisciplinas.Visible = btnSalvar.Visible = dt.Rows.Count > 0;
@@ -118,6 +121,7 @@
                 updBotoes.Update();
 
                 updCadastro.Update();
+
             }
             catch (Exception ex)
             {
@@ -179,6 +183,21 @@
                 ApplicationWEB._GravaErro(ex);
                 updMensagem.Update();
             }
+        }
+
+        /// <summary>
+        /// Preenche uma lista com as disciplinas e a flag que indica se permite editar a carga horária extra classe da disciplina
+        /// </summary>
+        private void VerificarPermissaoEdicao()
+        {
+            DisciplinaPermiteEditar = new Dictionary<int, bool>();
+
+            var listDis_ids = ((DataTable)rptDisciplinas.DataSource).AsEnumerable().Select(q => q.Field<int>("dis_id")).ToArray();
+            string dis_ids = string.Join(",", listDis_ids.Select(item => item.ToString()).ToArray());
+
+            DisciplinaPermiteEditar = ACA_CargaHorariaExtraclasseBO.VerificaAtividadeLancamento(dis_ids).AsEnumerable()
+                            .ToDictionary<DataRow, int, bool>(row => row.Field<int>("dis_id"), row => Convert.ToBoolean(row.Field<string>("permiteEditar")));
+            
         }
 
         #endregion
@@ -287,6 +306,7 @@
                     {
                         txtCargaHoraria.Text = entity.che_cargaHoraria > 0 ?
                             Convert.ToInt32(entity.che_cargaHoraria).ToString() : string.Empty;
+                        txtCargaHoraria.Enabled = DisciplinaPermiteEditar[entity.dis_id];
                     }
                 }
             }

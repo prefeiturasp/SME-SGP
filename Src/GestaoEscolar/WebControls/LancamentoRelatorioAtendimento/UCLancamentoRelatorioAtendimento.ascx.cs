@@ -31,6 +31,45 @@
             }
         }
 
+        private long VS_tur_id
+        {
+            get
+            {
+                return Convert.ToInt64(ViewState["VS_tur_id"] ?? -1);
+            }
+
+            set
+            {
+                ViewState["VS_tur_id"] = value;
+            }
+        }
+
+        private long VS_tud_id
+        {
+            get
+            {
+                return Convert.ToInt64(ViewState["VS_tud_id"] ?? -1);
+            }
+
+            set
+            {
+                ViewState["VS_tud_id"] = value;
+            }
+        }
+
+        private int VS_tpc_id
+        {
+            get
+            {
+                return Convert.ToInt32(ViewState["VS_tpc_id"] ?? -1);
+            }
+
+            set
+            {
+                ViewState["VS_tpc_id"] = value;
+            }
+        }
+
         private int VS_rea_id
         {
             get
@@ -59,6 +98,24 @@
             set
             {
                 ViewState["VS_RelatorioAtendimento"] = value;
+            }
+        }
+
+        private RelatorioPreenchimentoAluno VS_RelatorioPreenchimentoAluno
+        {
+            get
+            {
+                if (ViewState["VS_RelatorioPreenchimentoAluno"] == null)
+                {
+                    ViewState["VS_RelatorioPreenchimentoAluno"] = new RelatorioPreenchimentoAluno();
+                }
+
+                return (RelatorioPreenchimentoAluno)ViewState["VS_RelatorioPreenchimentoAluno"];
+            }
+
+            set
+            {
+                ViewState["VS_RelatorioPreenchimentoAluno"] = value;
             }
         }
 
@@ -128,9 +185,12 @@
             return "divTabs-" + qst_id.ToString();
         }
 
-        public void Carregar(long alu_id, int rea_id, bool documentoOficial = false)
+        public void Carregar(long alu_id, long tur_id, long tud_id, int tpc_id, int rea_id, bool documentoOficial = false)
         {
             VS_alu_id = alu_id;
+            VS_tur_id = tur_id;
+            VS_tud_id = tud_id;
+            VS_tpc_id = tpc_id;
             VS_rea_id = rea_id;
             ACA_Aluno entityAluno = new ACA_Aluno { alu_id = VS_alu_id };
             ACA_AlunoBO.GetEntity(entityAluno);
@@ -139,6 +199,8 @@
             PES_PessoaBO.GetEntity(entityPessoa);
 
             VS_RelatorioAtendimento = CLS_RelatorioAtendimentoBO.SelecionaRelatorio(rea_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo);
+
+            VS_RelatorioPreenchimentoAluno = CLS_RelatorioPreenchimentoBO.SelecionaPorRelatorioAlunoTurmaDisciplina(VS_rea_id, VS_alu_id, VS_tur_id, VS_tud_id, VS_tpc_id);
 
             eExibicaoNomePessoa exibicaoNome = documentoOficial ? eExibicaoNomePessoa.NomeSocial | eExibicaoNomePessoa.NomeRegistro : eExibicaoNomePessoa.NomeSocial;
 
@@ -237,9 +299,80 @@
             }
         }
 
-        public void RetornaLancamentoRelatorio()
+        public RelatorioPreenchimentoAluno RetornaQuestionarioPreenchimento()
         {
+            RelatorioPreenchimentoAluno rel = new RelatorioPreenchimentoAluno();
+            long reap_id = VS_RelatorioPreenchimentoAluno.entityRelatorioPreenchimento.reap_id;
+            rel.entityPreenchimentoAlunoTurmaDisciplina = new CLS_RelatorioPreenchimentoAlunoTurmaDisciplina
+            {
+                alu_id = VS_alu_id
+                ,
+                tur_id = VS_tur_id
+                ,
+                tud_id = VS_tud_id
+                ,
+                tpc_id = VS_tpc_id
+                ,
+                reap_id = reap_id > 0 ? reap_id : -1
+                ,
+                ptd_situacao = Convert.ToByte(ddlSituacao.SelectedValue)
+                ,
+                IsNew = reap_id <= 0
+            };
 
+            rel.entityRelatorioPreenchimento = new CLS_RelatorioPreenchimento
+            {
+                rea_id = VS_rea_id
+                ,
+                reap_id = reap_id > 0 ? reap_id : -1
+                ,
+                IsNew = reap_id <= 0
+            };
+
+            rel.lstQuestionarioConteudoPreenchimento = (from RepeaterItem itemQuestionario in rptQuestionario.Items
+                                                        let raq_id = itemQuestionario.FindControl<HiddenField>("hdnRaqId").GetValue().ToInt32()
+                                                        let rptConteudo = itemQuestionario.FindControl("rptConteudo") as Repeater
+                                                        where rptConteudo != null && raq_id > 0
+                                                        from RepeaterItem itemConteudo in rptConteudo.Items
+                                                        let tipoResposta = itemConteudo.FindControl<HiddenField>("hdnTipoResposta").GetValue().ToByte()
+                                                        where tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto
+                                                        let qtc_id = itemConteudo.FindControl<HiddenField>("hdnQtcId").GetValue().ToInt32()
+                                                        let qcp_textoResposta = itemConteudo.FindControl<TextBox>("txtResposta").GetText()
+                                                        where qtc_id > 0 && !string.IsNullOrEmpty(qcp_textoResposta)
+                                                        select new CLS_QuestionarioConteudoPreenchimento
+                                                        {
+                                                            raq_id = raq_id
+                                                            ,
+                                                            qtc_id = qtc_id
+                                                            ,
+                                                            qcp_textoResposta = qcp_textoResposta
+
+                                                        }).ToList();
+
+            rel.lstQuestionarioRespostaPreenchimento = (from RepeaterItem itemQuestionario in rptQuestionario.Items
+                                                        let raq_id = itemQuestionario.FindControl<HiddenField>("hdnRaqId").GetValue().ToInt32()
+                                                        let rptConteudo = itemQuestionario.FindControl("rptConteudo") as Repeater
+                                                        where rptConteudo != null && raq_id > 0
+                                                        from RepeaterItem itemConteudo in rptConteudo.Items
+                                                        let tipoResposta = itemConteudo.FindControl<HiddenField>("hdnTipoResposta").GetValue().ToByte()
+                                                        let rptResposta = itemConteudo.FindControl("rptResposta") as Repeater
+                                                        where rptResposta != null && tipoResposta != (byte)QuestionarioTipoResposta.TextoAberto
+                                                        from RepeaterItem itemResposta in rptResposta.Items
+                                                        let qtr_id = itemResposta.FindControl<HiddenField>("hdnQtrId").GetValue().ToInt32()
+                                                        let txtRespostaTextoAdicional = itemResposta.FindControl<TextBox>("txtRespostaTextoAdicional")
+                                                        where tipoResposta == (byte)QuestionarioTipoResposta.SelecaoUnica ?
+                                                                itemResposta.FindControl<RadioButton>("rdbResposta").IsChecked() :
+                                                                itemResposta.FindControl<CheckBox>("chkResposta").IsChecked()
+                                                        select new CLS_QuestionarioRespostaPreenchimento
+                                                        {
+                                                            raq_id = raq_id
+                                                            ,
+                                                            qtr_id = qtr_id
+                                                            ,
+                                                            qrp_textoAdicional = txtRespostaTextoAdicional != null && txtRespostaTextoAdicional.Visible ? 
+                                                                                    txtRespostaTextoAdicional.Text : string.Empty
+                                                        }).ToList();
+            return rel;
         }
 
         protected void rptTipoDeficiencia_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -282,11 +415,28 @@
         {
             if (e.Item.ItemType.In(ListItemType.Item, ListItemType.AlternatingItem))
             {
+                int raq_id = -1;
+                Repeater rptConteudo = sender as Repeater;
+                if (rptConteudo != null)
+                {
+                    RepeaterItem itemQuestionario = rptConteudo.NamingContainer as RepeaterItem;
+                    if (itemQuestionario != null)
+                    {
+                        raq_id = itemQuestionario.FindControl<HiddenField>("hdnRaqId").GetValue().ToInt32();
+                    }
+                }
+
                 TextBox txtResposta = e.Item.FindControl("txtResposta") as TextBox;
                 byte qtc_tipoResposta = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "qtc_tipoResposta"));
                 if (txtResposta != null && qtc_tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto)
                 {
+                    int qtc_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "qtc_id"));
                     txtResposta.Visible = true;
+
+                    if (VS_RelatorioPreenchimentoAluno.lstQuestionarioConteudoPreenchimento.Any(p => p.raq_id == raq_id && p.qtc_id == qtc_id && !string.IsNullOrEmpty(p.qcp_textoResposta)))
+                    {
+                        txtResposta.Text = VS_RelatorioPreenchimentoAluno.lstQuestionarioConteudoPreenchimento.Find(p => p.raq_id == raq_id && p.qtc_id == qtc_id).qcp_textoResposta;
+                    }
                 }
                 else
                 {
@@ -311,6 +461,7 @@
             if (e.Item.ItemType.In(ListItemType.Item, ListItemType.AlternatingItem))
             {
                 byte qtc_tipoResposta = 0;
+                int raq_id = -1;
                 string qtc_id = string.Empty;
                 Repeater rptResposta = sender as Repeater;
                 if (rptResposta != null)
@@ -329,10 +480,25 @@
                         {
                             qtc_id = hdnQtcId.Value;
                         }
+
+                        Repeater rptConteudo = itemConteudo.NamingContainer as Repeater;
+
+                        if (rptConteudo != null)
+                        {
+                            RepeaterItem itemQuestionario = rptConteudo.NamingContainer as RepeaterItem;
+
+                            if (itemQuestionario != null)
+                            {
+                                raq_id = itemQuestionario.FindControl<HiddenField>("hdnRaqId").GetValue().ToInt32();
+                            }
+                        }
                     }
                 }
 
                 bool qtr_permiteAdicionarTexto = Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "qtr_permiteAdicionarTexto"));
+                int qtr_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "qtr_id"));
+
+                bool respostaMarcada = VS_RelatorioPreenchimentoAluno.lstQuestionarioRespostaPreenchimento.Any(p => p.raq_id == raq_id && p.qtr_id == qtr_id);
 
                 CheckBox chkResposta = e.Item.FindControl("chkResposta") as CheckBox;
                 RadioButton rdbResposta = e.Item.FindControl("rdbResposta") as RadioButton;
@@ -341,17 +507,24 @@
                 if (chkResposta != null && qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao)
                 {
                     chkResposta.Visible = true;
+                    chkResposta.Checked = respostaMarcada;
                 }
                 
                 if (rdbResposta != null && qtc_tipoResposta == (byte)QuestionarioTipoResposta.SelecaoUnica)
                 {
                     rdbResposta.Visible = true;
                     rdbResposta.GroupName = qtc_id;
+                    rdbResposta.Checked = respostaMarcada;
                 }
 
                 if (txtRespostaTextoAdicional != null && qtr_permiteAdicionarTexto)
                 {
                     txtRespostaTextoAdicional.Visible = true;
+
+                    if (VS_RelatorioPreenchimentoAluno.lstQuestionarioRespostaPreenchimento.Any(p => p.raq_id == raq_id && p.qtr_id == qtr_id && !string.IsNullOrEmpty(p.qrp_textoAdicional)))
+                    {
+                        txtRespostaTextoAdicional.Text = VS_RelatorioPreenchimentoAluno.lstQuestionarioRespostaPreenchimento.Find(p => p.raq_id == raq_id && p.qtr_id == qtr_id).qrp_textoAdicional;
+                    }
                 }
             }
         }

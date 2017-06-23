@@ -14,6 +14,7 @@ namespace MSTech.GestaoEscolar.BLL
     [Serializable]
     public class Questionario : CLS_Questionario
     {
+        public int raq_id { get; set; }
         public int raq_ordem { get; set; }
         public List<QuestionarioConteudo> lstConteudo { get; set; }
 

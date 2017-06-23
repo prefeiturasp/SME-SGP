@@ -114,7 +114,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                     DataTable ConteudosQuestionario = CLS_QuestionarioConteudoBO.SelectByQuestionario(qst_id);
                     var listQtc_ids = ConteudosQuestionario.AsEnumerable().Select(q => q.Field<int>("qtc_id")).ToArray();
                     string qtc_ids = string.Join(",", listQtc_ids.Select(item => item.ToString()).ToArray());
-
+                    
                     //Verifica se o questionário não foi respondido
                     if (!CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(qtc_ids))
                     {
@@ -130,7 +130,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                     {
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
-                        throw new ValidationException("O questionário não pode ser excluído pois já foi respondido.");
+                        throw new ValidationException("O questionário não pode ser excluído, pois já foi respondido.");
                     }
                         
                 }

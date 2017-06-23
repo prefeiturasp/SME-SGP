@@ -55,5 +55,33 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
+
+        /// <summary>
+        /// Exclui os conteudos respondidos por reap_id
+        /// </summary>
+        /// <param name="reap_id"></param>
+        /// <returns></returns>
+        public bool ExcluirPorReapId(long reap_id)
+        {
+            QueryStoredProcedure qs = new QueryStoredProcedure("NEW_CLS_QuestionarioConteudoPreenchimento_ExcluiPorReapId", _Banco);
+
+            try
+            {
+                Param = qs.NewParameter();
+                Param.ParameterName = "@reap_id";
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                Param.Value = reap_id;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                return qs.Return > 0;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
     }
 }
