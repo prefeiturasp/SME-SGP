@@ -487,6 +487,202 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Questionário já adicionado no relatório.'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'pnlFiltros.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.RelatorioAtendimento.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Lançamento de relatórios de AEE'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Salvar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Salvar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'btnAprovar.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.RelatorioAtendimento.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aprovar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Editar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Editar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Cancelar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Salvar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Salvar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'btnAprovarBaixo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.RelatorioAtendimento.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Aprovar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Editar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Editar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Cancelar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cancelar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'pnlBusca.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.RelatorioAtendimento.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Consulta de relatórios de AEE'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Pesquisar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Pesquisar'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.LimparPesquisa.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Limpar pesquisa'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Resultados.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Resultados'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.SemResultado.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'A pesquisa não encontrou resultados.'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Nome.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nome'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Idade.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Idade'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Escola.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Escola'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Curso.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Curso'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Turma.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Turma'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.LancarRelatorio.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Lançar relatório'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_61.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.RelatorioAtendimento.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Lnaçar relatório de atendimento AEE'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblDownloadAnexo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Instruções de preenchimento '
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'hplDownloadAnexo.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Realizar o download de instruções de preenchimento'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lit_22.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Hipótese diagnóstica'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblTitulo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.Combos.UCComboRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Relatório'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'cpvCombo.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.Combos.UCComboRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Relatório é obrigatório.'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblTitulo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.Combos.UCComboTipoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Tipo de relatório'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'cpvCombo.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.Combos.UCComboTipoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Tipo de relatório é obrigatório.'
+		
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

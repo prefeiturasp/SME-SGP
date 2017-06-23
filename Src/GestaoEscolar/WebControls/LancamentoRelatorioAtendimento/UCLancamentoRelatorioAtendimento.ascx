@@ -6,13 +6,13 @@
         <div id="divInformacao">
             <asp:Label ID="lblInformacaoAluno" runat="server"></asp:Label>
             <div class="row-custom">
-                <div class="m-col-custom-4 p-col-custom-12">                    
+                <div class="m-col-custom-4 p-col-custom-12">
                     <uc:UCCRacaCor ID="UCCRacaCor" runat="server" Visible="false" />
                 </div>
-                
+
                 <div class="m-col-custom-4 p-col-custom-12 relatorio-manual" id="divDownloadAnexo" runat="server" visible="false">
-                    <label><asp:Label ID="lblDownloadAnexo" runat="server" Text="Instruções de preenchimento "></asp:Label></label>
-                    <asp:HyperLink ID="hplDownloadAnexo" runat="server" SkinID="hplAnexo" ToolTip="Realizar o download de instruções de preenchimento" Width="22px"></asp:HyperLink>
+                    <label><asp:Label ID="lblDownloadAnexo" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lblDownloadAnexo.Text %>"></asp:Label></label>
+                    <asp:HyperLink ID="hplDownloadAnexo" runat="server" SkinID="hplAnexo" ToolTip="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, hplDownloadAnexo.ToolTip %>" Width="22px"></asp:HyperLink>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="clear"></div>
         <div id="divTabsRelatorio">
             <ul class="hide">
-                <li runat="server" id="liHipoteseDiagnostica"><a href="#divTabs-0">Hipótese diagnóstica</a></li>
+                <li runat="server" id="liHipoteseDiagnostica"><a href="#divTabs-0"><asp:Literal ID="lit_22" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lit_22.Text %>"></asp:Literal></a></li>
                 <asp:Repeater ID="rptAbaQuestionarios" runat="server">
                     <ItemTemplate>
                         <li><a href='#<%# RetornaTabID((int)Eval("qst_id"))%>'><%# Eval("qst_titulo") %></a></li>

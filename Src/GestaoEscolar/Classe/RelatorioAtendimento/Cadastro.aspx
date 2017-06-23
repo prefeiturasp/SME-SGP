@@ -15,7 +15,7 @@
                 <asp:Label ID="lblMensagem" runat="server"></asp:Label>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <asp:Panel ID="pnlFiltros" runat="server" GroupingText="Lançamento de relatórios de AEE">
+        <asp:Panel ID="pnlFiltros" runat="server" GroupingText="<%$ Resources:GestaoEscolar.Classe.RelatorioAtendimento.Cadastro, pnlFiltros.Text %>">
             <asp:UpdatePanel ID="updFiltros" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <uc:UCCRelatorioAtendimento ID="UCCRelatorioAtendimento" runat="server" />
@@ -25,10 +25,10 @@
             <div class="right">
                 <asp:UpdatePanel ID="updBotoes" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:Button ID="btnSalvar" runat="server" Text="Salvar" Visible="false" OnClick="btnSalvar_Click" />
-                        <asp:Button ID="btnAprovar" runat="server" Text="Aprovar" Visible="false" OnClick="btnAprovar_Click" />
-                        <asp:Button ID="btnDesaprovar" runat="server" Text="Editar" Visible="false" OnClick="btnDesaprovar_Click" />
-                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CausesValidation="false" OnClick="btnCancelar_Click" />
+                        <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Padrao, Padrao.Salvar.Text %>" Visible="false" OnClick="btnSalvar_Click" />
+                        <asp:Button ID="btnAprovar" runat="server" Text="<%$ Resources:GestaoEscolar.Classe.RelatorioAtendimento.Cadastro, btnAprovar.Text %>" Visible="false" OnClick="btnAprovar_Click" />
+                        <asp:Button ID="btnDesaprovar" runat="server" Text="<%$ Resources:Padrao, Padrao.Editar.Text %>" Visible="false" OnClick="btnDesaprovar_Click" />
+                        <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Padrao, Padrao.Cancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -38,10 +38,10 @@
                 <asp:Panel id="pnlLancamento" runat="server" Visible="false">
                     <uc:UCLancamentoRelatorioAtendimento ID="UCLancamentoRelatorioAtendimento" runat="server" />
                     <div class="right">
-                        <asp:Button ID="btnSalvarBaixo" runat="server" Text="Salvar" OnClick="btnSalvar_Click" />
-                        <asp:Button ID="btnAprovarBaixo" runat="server" Text="Aprovar" OnClick="btnAprovar_Click" />
-                        <asp:Button ID="btnDesaprovarBaixo" runat="server" Text="Editar" OnClick="btnDesaprovar_Click" />
-                        <asp:Button ID="btnCancelarBaixo" runat="server" Text="Cancelar" CausesValidation="false" OnClick="btnCancelar_Click" />
+                        <asp:Button ID="btnSalvarBaixo" runat="server" Text="<%$ Resources:Padrao, Padrao.Salvar.Text %>" OnClick="btnSalvar_Click" />
+                        <asp:Button ID="btnAprovarBaixo" runat="server" Text="<%$ Resources:GestaoEscolar.Classe.RelatorioAtendimento.Cadastro, btnAprovarBaixo.Text %>" OnClick="btnAprovar_Click" />
+                        <asp:Button ID="btnDesaprovarBaixo" runat="server" Text="<%$ Resources:Padrao, Padrao.Editar.Text %>" OnClick="btnDesaprovar_Click" />
+                        <asp:Button ID="btnCancelarBaixo" runat="server" Text="<%$ Resources:Padrao, Padrao.Cancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
                     </div>
                 </asp:Panel>
             </ContentTemplate>
