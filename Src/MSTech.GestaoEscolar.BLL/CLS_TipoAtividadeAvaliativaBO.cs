@@ -65,6 +65,29 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna todos os tipos de atividades avaliativas não excluídos logicamente
+        /// Sem paginação
+        /// </summary>        
+        /// <param name="appMinutosCacheLongo">Minutos configurados para guardar a consulta em cache (caso não informado, não utiliza cache)</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<CLS_TipoAtividadeAvaliativa> SelecionaTipoAtividadeAvaliativaPaginado( int currentPage, int pageSize)
+        {
+            List<CLS_TipoAtividadeAvaliativa> dados = null;
+
+            Func<List<CLS_TipoAtividadeAvaliativa>> retorno = delegate ()
+            {
+                CLS_TipoAtividadeAvaliativaDAO dao = new CLS_TipoAtividadeAvaliativaDAO();
+                int page = currentPage / pageSize;
+                return dados = dao.SelectBy_Pesquisa(true, page, pageSize, out totalRecords)
+                            .Rows.Cast<DataRow>().Select(p => dao.DataRowToEntity(p, new CLS_TipoAtividadeAvaliativa())).ToList();
+            };
+
+            dados = retorno();
+
+            return dados;
+        }
+
+        /// <summary>
         /// Retorna os tipos de atividades avaliativas não excluídos logicamente
         /// </summary>
         /// <param name="apenasAtivos">True - retorna apenas ativos | False - retorna todos</param>
@@ -150,6 +173,50 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelecionaTipoAtividadeAvaliativaRelacionado(caaId, qatId);
         }
 
-        #endregion
-    }
+        /// <summary>
+        /// Verifica a integridade antes de deletar
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="banco"></param>
+        /// <returns></returns>
+        public static bool Delete
+        (
+            CLS_TipoAtividadeAvaliativa entity
+            , TalkDBTransaction banco = null
+        )
+        {
+            CLS_TipoAtividadeAvaliativaDAO dao = new CLS_TipoAtividadeAvaliativaDAO();
+            if (banco == null)
+                dao._Banco.Open(IsolationLevel.ReadCommitted);
+            else
+                dao._Banco = banco;
+
+            string tabelasNaoVerificarIntegridade = "CLS_TipoAtividadeAvaliativa";
+
+            try
+            {
+                //Verifica se a disciplina pode ser deletada
+                if (GestaoEscolarUtilBO.VerificarIntegridade("tav_id", entity.tav_id.ToString(), tabelasNaoVerificarIntegridade, dao._Banco))
+                    throw new ValidationException("Não é possível excluir o tipo de atividade " + entity.tav_nome + ", pois possui outros registros ligados a ela.");
+
+                 //Deleta logicamente a disciplina
+                return dao.Delete(entity);
+            }
+            catch (Exception err)
+            {
+                if (banco == null)
+                    dao._Banco.Close(err);
+
+                throw;
+            }
+            finally
+            {
+                if (banco == null)
+                    dao._Banco.Close();
+            }
+
+        }
+
+            #endregion
+        }
 }

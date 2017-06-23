@@ -12,6 +12,7 @@ namespace MSTech.GestaoEscolar.BLL
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
 
     [Serializable]
     public class RelatorioPreenchimentoAluno
@@ -88,7 +89,7 @@ namespace MSTech.GestaoEscolar.BLL
             throw new ValidationException(GestaoEscolarUtilBO.ErrosValidacao(entity)); 
         }
 
-        public static bool Salvar(RelatorioPreenchimentoAluno relatorio)
+        public static bool Salvar(RelatorioPreenchimentoAluno relatorio, List<CLS_AlunoDeficienciaDetalhe> lstDeficienciaDetalhe)
         {
             CLS_RelatorioPreenchimentoDAO dao = new CLS_RelatorioPreenchimentoDAO();
             dao._Banco.Open(IsolationLevel.ReadCommitted);
@@ -96,6 +97,24 @@ namespace MSTech.GestaoEscolar.BLL
             try
             {
                 bool retorno = true;
+
+                List<CLS_AlunoDeficienciaDetalhe> lstDeficienciaDetalheBanco =
+                    (from sAlunoDeficiencia alunoDeficiencia in CLS_AlunoDeficienciaDetalheBO.SelecionaPorAluno(relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id)
+                     from sAlunoDeficienciaDetalhe alunoDeficienciaDetalhe in alunoDeficiencia.lstDeficienciaDetalhe
+                     select new CLS_AlunoDeficienciaDetalhe
+                     {
+                         alu_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id
+                         ,
+                         tde_id = alunoDeficiencia.tde_id
+                         ,
+                         dfd_id = alunoDeficienciaDetalhe.dfd_id
+                     }).ToList();
+
+                if (lstDeficienciaDetalheBanco.Any())
+                {
+                    lstDeficienciaDetalheBanco.ForEach(p => CLS_AlunoDeficienciaDetalheBO.Delete(p, dao._Banco));
+                }
+
 
                 if (relatorio.entityRelatorioPreenchimento.reap_id > 0)
                 {
@@ -123,6 +142,14 @@ namespace MSTech.GestaoEscolar.BLL
                     {
                         p.reap_id = relatorio.entityRelatorioPreenchimento.reap_id;
                         retorno &= CLS_QuestionarioRespostaPreenchimentoBO.Save(p, dao._Banco);
+                    }
+                );
+
+                lstDeficienciaDetalhe.ForEach
+                (
+                    p =>
+                    {
+                        retorno &= CLS_AlunoDeficienciaDetalheBO.Save(p, dao._Banco);
                     }
                 );
 
