@@ -4,14 +4,124 @@
 
 namespace MSTech.GestaoEscolar.DAL
 {
-	using MSTech.GestaoEscolar.DAL.Abstracts;
-	
-	/// <summary>
-	/// Description: .
-	/// </summary>
-	public class CLS_RelatorioAtendimentoQuestionarioDAO : Abstract_CLS_RelatorioAtendimentoQuestionarioDAO
-	{
-		///// <summary>
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using MSTech.GestaoEscolar.DAL.Abstracts;
+    using Entities;
+    using Data.Common;
+    using System.Data;    /// <summary>
+                          /// Description: .
+                          /// </summary>
+    public class CLS_RelatorioAtendimentoQuestionarioDAO : Abstract_CLS_RelatorioAtendimentoQuestionarioDAO
+    {
+        public List<CLS_RelatorioAtendimentoQuestionario> SelectBy_rea_id(int rea_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioAtendimentoQuestionario_SelectBy_rea_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = rea_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0 ?
+                    qs.Return.Rows.Cast<DataRow>().AsParallel().Select(p => DataRowToEntity(p, new CLS_RelatorioAtendimentoQuestionario())).ToList() :
+                    new List<CLS_RelatorioAtendimentoQuestionario>();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Parâmetros para efetuar a inclusão preservando a data de criação
+        /// </summary>
+        /// <param name="qs"></param>
+        /// <param name="entity"></param>
+        protected override void ParamInserir(QuerySelectStoredProcedure qs, CLS_RelatorioAtendimentoQuestionario entity)
+        {
+            base.ParamInserir(qs, entity);
+
+            qs.Parameters["@raq_dataCriacao"].Value = DateTime.Now;
+            qs.Parameters["@raq_dataAlteracao"].Value = DateTime.Now;
+        }
+
+        /// <summary>
+        /// Parâmetros para efetuar a alteração preservando a data de criação
+        /// </summary>
+        protected override void ParamAlterar(QueryStoredProcedure qs, CLS_RelatorioAtendimentoQuestionario entity)
+        {
+            base.ParamAlterar(qs, entity);
+
+            qs.Parameters.RemoveAt("@raq_dataCriacao");
+            qs.Parameters["@raq_dataAlteracao"].Value = DateTime.Now;
+        }
+
+
+        /// <summary>
+        /// Método alterado para que o update não faça a alteração da data de criação
+        /// </summary>
+        /// <param name="entity"> Entidade CLS_RelatorioAtendimentoQuestionario</param>
+        /// <returns>true = sucesso | false = fracasso</returns> 
+        protected override bool Alterar(CLS_RelatorioAtendimentoQuestionario entity)
+        {
+            __STP_UPDATE = "NEW_CLS_RelatorioAtendimentoQuestionario_UPDATE";
+            return base.Alterar(entity);
+        }
+
+        /// <summary>
+        /// Parâmetros para efetuar a exclusão lógica.
+        /// </summary>
+        protected override void ParamDeletar(QueryStoredProcedure qs, CLS_RelatorioAtendimentoQuestionario entity)
+        {
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@raq_id";
+            Param.Size = 4;
+            Param.Value = entity.raq_id;
+            qs.Parameters.Add(Param);
+            
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@raq_situacao";
+            Param.Size = 1;
+            Param.Value = 3;
+            qs.Parameters.Add(Param);
+
+            Param = qs.NewParameter();
+            Param.DbType = DbType.DateTime;
+            Param.ParameterName = "@raq_dataAlteracao";
+            Param.Size = 8;
+            Param.Value = DateTime.Now;
+            qs.Parameters.Add(Param);
+        }
+
+        /// <summary>
+        /// Método alterado para que o delete não faça exclusão física e sim lógica (update).
+        /// </summary>
+        /// <param name="entity"> Entidade CLS_RelatorioAtendimentoQuestionario</param>
+        /// <returns>true = sucesso | false = fracasso</returns>         
+        public override bool Delete(CLS_RelatorioAtendimentoQuestionario entity)
+        {
+            __STP_DELETE = "NEW_CLS_RelatorioAtendimentoQuestionario_UpdateSituacao";
+            return base.Delete(entity);
+        }
+
+        ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente.
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem modificados.</param>
@@ -142,5 +252,5 @@ namespace MSTech.GestaoEscolar.DAL
         // {
         //    return base.DataRowToEntity(dr, entity, limparEntity);
         // }
-	}
+    }
 }

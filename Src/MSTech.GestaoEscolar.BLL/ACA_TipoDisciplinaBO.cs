@@ -37,6 +37,7 @@ namespace MSTech.GestaoEscolar.BLL
         public string tne_nome { get; set; }
         public string tne_tds_nome { get; set; }
         public string tds_base_nome { get; set; }
+        public byte tds_tipo { get; set; }
         public int tds_base { get; set; }
         public string tds_situacao { get; set; }
     }
@@ -179,7 +180,22 @@ namespace MSTech.GestaoEscolar.BLL
             ACA_TipoDisciplinaDAO dao = new ACA_TipoDisciplinaDAO();
             return dao.SelectBy_Pesquisa(0, 0, 0, false, controlarOrdem, false, 1, 1, out totalRecords);
         }
-        
+
+        /// <summary>
+        /// Retorna todos os tipos de disciplina não excluídos logicamente
+        /// Sem paginação
+        /// </summary>   
+        /// <param name="ent_id">Id da entidade do usuário logado.</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<sTipoDisciplina> SelecionaTipoDisciplinaTipo(Guid ent_id, byte tds_tipo, int AppMinutosCacheLongo = 0)
+        {
+            List<sTipoDisciplina> lista = SelecionaTipoDisciplina(ent_id, AppMinutosCacheLongo);
+
+            lista.Where(t => t.tds_tipo == tds_tipo).ToList();
+
+            return lista;
+        }
+
         /// <summary>
         /// Retorna todos os tipos de disciplina não excluídos logicamente
         /// Sem paginação

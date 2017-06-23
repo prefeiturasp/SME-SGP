@@ -40,24 +40,6 @@ namespace GestaoEscolar.WebControls.LancamentoRelatorioAtendimento {
         protected global::WebControls_Combos_UCComboRacaCor UCCRacaCor;
         
         /// <summary>
-        /// lblSituacao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSituacao;
-        
-        /// <summary>
-        /// ddlSituacao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSituacao;
-        
-        /// <summary>
         /// divDownloadAnexo control.
         /// </summary>
         /// <remarks>

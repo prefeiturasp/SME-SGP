@@ -130,7 +130,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                     {
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
-                        throw new ValidationException("O questionário não pode ser excluído pois já foi respondido.");
+                        throw new ValidationException("O questionário não pode ser excluído, pois já foi respondido.");
                     }
                         
                 }

@@ -12,9 +12,12 @@ namespace MSTech.GestaoEscolar.BLL
     using System;
     using System.Linq;
     using System.Data;
-    using Caching;    /// <summary>
-                      /// Situações da movimentação dos tipos de movimentação
-                      /// </summary>
+    using Caching;
+    using System.Web;
+    using Validation.Exceptions;
+    /// <summary>
+    /// Situações da movimentação dos tipos de movimentação
+    /// </summary>
     public enum CLS_RelatorioAtendimentoTipo : byte
     {
         [Description("CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.AEE")]
@@ -27,10 +30,12 @@ namespace MSTech.GestaoEscolar.BLL
         RP = 3
     }
 
-    public enum CLS_RelatorioAtendimentoPeriodicidadePreenchimento : byte
+    public enum CLS_RelatorioAtendimentoPeriodicidade : byte
     {
+        [Description("CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Periodico")]
         Periodico = 1
         ,
+        [Description("CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Encerramento")]
         Encerramento = 2
     }
 
@@ -138,6 +143,82 @@ namespace MSTech.GestaoEscolar.BLL
             DataTable dt = new CLS_RelatorioAtendimentoDAO().PesquisaRelatorioPorTipo(rea_tipo, currentPage / pageSize, pageSize, out totalRecords);
             
             return dt;
+        }
+
+        /// <summary>
+        /// Salva o relatório de atendimento
+        /// </summary>
+        /// <param name="rea">Entidade do relatório de atendimento</param>
+        /// <param name="lstGrupo">Lista de grupos</param>
+        /// <param name="lstCargo">Lista de cargos</param>
+        /// <param name="lstQuestionario">Lista de questionários</param>
+        /// <param name="postedFile">Arquivo anexo</param>
+        /// <returns></returns>
+        public static bool Salvar(CLS_RelatorioAtendimento rea, List<CLS_RelatorioAtendimentoGrupo> lstGrupo, List<CLS_RelatorioAtendimentoCargo> lstCargo, List<CLS_RelatorioAtendimentoQuestionario> lstQuestionario, SYS_Arquivo arquivo)
+        {
+            CLS_RelatorioAtendimentoDAO dao = new CLS_RelatorioAtendimentoDAO();
+            dao._Banco.Open(IsolationLevel.ReadCommitted);
+            try
+            {
+                if (arquivo.arq_tamanhoKB > 0)
+                {
+                    if (SYS_ArquivoBO.Save(arquivo, dao._Banco))
+                        rea.arq_idAnexo = arquivo.arq_id;
+                }
+
+                bool isNew = rea.IsNew;
+                if (!Save(rea, dao._Banco))
+                    throw new ValidationException("Erro ao salvar o relatório de atendimento.");
+
+                List<CLS_RelatorioAtendimentoQuestionario> lstQuestionarioBanco = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(rea.rea_id);
+
+                if (!isNew)
+                {
+                    CLS_RelatorioAtendimentoCargoBO.DeleteBy_rea_id(rea.rea_id, dao._Banco);
+                    CLS_RelatorioAtendimentoGrupoBO.DeleteBy_rea_id(rea.rea_id, dao._Banco);
+
+                    //Exclui todos os questionários que não estão mais ligados ao relatório
+                    foreach (CLS_RelatorioAtendimentoQuestionario raq in lstQuestionarioBanco.Where(b => !lstQuestionario.Any(q => q.raq_id == b.raq_id && q.raq_situacao == (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Ativo && !q.IsNew)))
+                    {
+                        raq.raq_situacao = (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido;
+                        if (!CLS_RelatorioAtendimentoQuestionarioBO.Delete(raq, dao._Banco))
+                            throw new ValidationException("Erro ao remover questionário do relatório de atendimento.");
+                    }
+                }
+
+                foreach (CLS_RelatorioAtendimentoGrupo rag in lstGrupo)
+                {
+                    rag.rea_id = rea.rea_id;
+                    if (!CLS_RelatorioAtendimentoGrupoBO.Save(rag, dao._Banco))
+                        throw new ValidationException("Erro ao salvar grupo do relatório de atendimento.");
+                }
+
+                foreach (CLS_RelatorioAtendimentoCargo rac in lstCargo)
+                {
+                    rac.rea_id = rea.rea_id;
+                    if (!CLS_RelatorioAtendimentoCargoBO.Save(rac, dao._Banco))
+                        throw new ValidationException("Erro ao salvar cargo do relatório de atendimento.");
+                }
+
+                foreach (CLS_RelatorioAtendimentoQuestionario raq in lstQuestionario.Where(q => q.raq_situacao == (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Ativo))
+                {
+                    raq.rea_id = rea.rea_id;
+                    if (raq.IsNew)
+                        raq.raq_id = -1;
+                    if (!CLS_RelatorioAtendimentoQuestionarioBO.Save(raq, dao._Banco))
+                        throw new ValidationException("Erro ao salvar questionário do relatório de atendimento.");
+                }
+            }
+            catch (Exception ex)
+            {
+                dao._Banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                dao._Banco.Close();
+            }
+            return true;
         }
 
         #endregion 

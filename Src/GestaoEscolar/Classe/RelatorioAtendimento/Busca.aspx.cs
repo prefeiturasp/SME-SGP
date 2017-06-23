@@ -191,7 +191,7 @@
 
                 if (UCCCalendario.Valor > 0)
                 {
-                    UCCTurma.CarregarPorEscolaCurriculoCalendario(UCCUAEscola.Esc_ID, UCCUAEscola.Uni_ID, UCCCurriculoPeriodo.Valor[0], UCCCurriculoPeriodo.Valor[1], UCCCurriculoPeriodo.Valor[2], UCCCalendario.Valor);
+                    UCCTurma.CarregarPorEscolaCurriculoCalendario_TurmasNormais(UCCUAEscola.Esc_ID, UCCUAEscola.Uni_ID, UCCCurriculoPeriodo.Valor[0], UCCCurriculoPeriodo.Valor[1], UCCCurriculoPeriodo.Valor[2], UCCCalendario.Valor);
                     UCCTurma.PermiteEditar = true;
                     UCCTurma.Focus();
                 }
@@ -461,7 +461,7 @@
 
             }
 
-            if (Page.IsValid)
+            if (UCCTurma.Valor[0] > 0)
             {
                 Pesquisar();
             }
@@ -573,7 +573,8 @@
 
         protected void btnLimparPesquisa_Click(object sender, EventArgs e)
         {
-
+            __SessionWEB.BuscaRealizada = new BuscaGestao();
+            RedirecionarPagina("Busca.aspx");
         }
 
         protected void grvResultados_DataBound(object sender, EventArgs e)

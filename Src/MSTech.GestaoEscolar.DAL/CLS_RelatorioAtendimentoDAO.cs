@@ -199,17 +199,18 @@ namespace MSTech.GestaoEscolar.DAL
 
         protected override void ParamInserir(QuerySelectStoredProcedure qs, CLS_RelatorioAtendimento entity)
         {
-            entity.rea_dataCriacao = DateTime.Now;
-            entity.rea_dataAlteracao = DateTime.Now;
             base.ParamInserir(qs, entity);
+
+            qs.Parameters["@rea_dataCriacao"].Value = DateTime.Now;
+            qs.Parameters["@rea_dataAlteracao"].Value = DateTime.Now;
         }
 
         protected override void ParamAlterar(QueryStoredProcedure qs, CLS_RelatorioAtendimento entity)
         {
-            entity.rea_dataAlteracao = DateTime.Now;
             base.ParamAlterar(qs, entity);
 
-            qs.Parameters.RemoveAt("@rea_dataAlteracao");
+            qs.Parameters.RemoveAt("@rea_dataCriacao");
+            qs.Parameters["@rea_dataAlteracao"].Value = DateTime.Now;
         }
 
         protected override bool Alterar(CLS_RelatorioAtendimento entity)
@@ -220,7 +221,12 @@ namespace MSTech.GestaoEscolar.DAL
 
         protected override void ParamDeletar(QueryStoredProcedure qs, CLS_RelatorioAtendimento entity)
         {
-            base.ParamDeletar(qs, entity);
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@rea_id";
+            Param.Size = 4;
+            Param.Value = entity.rea_id;
+            qs.Parameters.Add(Param);
 
             Param = qs.NewParameter();
             Param.DbType = DbType.DateTime;

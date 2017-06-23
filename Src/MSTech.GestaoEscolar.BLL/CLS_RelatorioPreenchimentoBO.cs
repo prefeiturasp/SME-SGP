@@ -12,7 +12,10 @@ namespace MSTech.GestaoEscolar.BLL
     using System;
     using System.Collections.Generic;
     using System.Data;
-
+    using System.Linq;
+    using CoreSSO.Entities;
+    using CoreSSO.BLL;
+    using CoreSSO.DAL;
     [Serializable]
     public class RelatorioPreenchimentoAluno
     {
@@ -88,14 +91,47 @@ namespace MSTech.GestaoEscolar.BLL
             throw new ValidationException(GestaoEscolarUtilBO.ErrosValidacao(entity)); 
         }
 
-        public static bool Salvar(RelatorioPreenchimentoAluno relatorio)
+        public static bool Salvar(RelatorioPreenchimentoAluno relatorio, List<CLS_AlunoDeficienciaDetalhe> lstDeficienciaDetalhe, bool permiteAlterarRacaCor, byte racaCor)
         {
             CLS_RelatorioPreenchimentoDAO dao = new CLS_RelatorioPreenchimentoDAO();
             dao._Banco.Open(IsolationLevel.ReadCommitted);
 
+            PES_PessoaDAO daoCore = new PES_PessoaDAO();
+            daoCore._Banco.Open(IsolationLevel.ReadCommitted);
+
             try
             {
                 bool retorno = true;
+
+                if (permiteAlterarRacaCor)
+                {
+                    ACA_Aluno alu = new ACA_Aluno { alu_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id };
+                    ACA_AlunoBO.GetEntity(alu);
+
+                    PES_Pessoa pes = new PES_Pessoa { pes_id = alu.pes_id };
+                    PES_PessoaBO.GetEntity(pes);
+
+                    pes.pes_racaCor = racaCor;
+                    PES_PessoaBO.Save(pes, daoCore._Banco);
+                }
+
+                List<CLS_AlunoDeficienciaDetalhe> lstDeficienciaDetalheBanco =
+                    (from sAlunoDeficiencia alunoDeficiencia in CLS_AlunoDeficienciaDetalheBO.SelecionaPorAluno(relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id)
+                     from sAlunoDeficienciaDetalhe alunoDeficienciaDetalhe in alunoDeficiencia.lstDeficienciaDetalhe
+                     select new CLS_AlunoDeficienciaDetalhe
+                     {
+                         alu_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id
+                         ,
+                         tde_id = alunoDeficiencia.tde_id
+                         ,
+                         dfd_id = alunoDeficienciaDetalhe.dfd_id
+                     }).ToList();
+
+                if (lstDeficienciaDetalheBanco.Any())
+                {
+                    lstDeficienciaDetalheBanco.ForEach(p => CLS_AlunoDeficienciaDetalheBO.Delete(p, dao._Banco));
+                }
+
 
                 if (relatorio.entityRelatorioPreenchimento.reap_id > 0)
                 {
@@ -126,11 +162,20 @@ namespace MSTech.GestaoEscolar.BLL
                     }
                 );
 
+                lstDeficienciaDetalhe.ForEach
+                (
+                    p =>
+                    {
+                        retorno &= CLS_AlunoDeficienciaDetalheBO.Save(p, dao._Banco);
+                    }
+                );
+
                 return retorno;
             }
             catch (Exception ex)
             {
                 dao._Banco.Close(ex);
+                daoCore._Banco.Close(ex);
                 throw;
             }
             finally
@@ -138,6 +183,11 @@ namespace MSTech.GestaoEscolar.BLL
                 if (dao._Banco.ConnectionIsOpen)
                 {
                     dao._Banco.Close();
+                }
+
+                if (daoCore._Banco.ConnectionIsOpen)
+                {
+                    daoCore._Banco.Close();
                 }
             }
         }

@@ -4,14 +4,85 @@
 
 namespace MSTech.GestaoEscolar.DAL
 {
-	using MSTech.GestaoEscolar.DAL.Abstracts;
-	
-	/// <summary>
-	/// Description: .
-	/// </summary>
-	public class CLS_RelatorioAtendimentoGrupoDAO : Abstract_CLS_RelatorioAtendimentoGrupoDAO
-	{
-		///// <summary>
+    using Data.Common;
+    using MSTech.GestaoEscolar.DAL.Abstracts;
+    using System.Data;
+    using System;
+
+    /// <summary>
+    /// Description: .
+    /// </summary>
+    public class CLS_RelatorioAtendimentoGrupoDAO : Abstract_CLS_RelatorioAtendimentoGrupoDAO
+    {
+        /// <summary>
+        /// Carrega os cargos para o relatório de atendimento
+        /// </summary>
+        /// <param name="rea_id">ID do relatorio de atendimento</param>
+        /// <returns></returns>
+        public DataTable SelectBy_rea_id(int rea_id, int sis_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioAtendimentoGrupo_SelectBy_rea_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = rea_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@sis_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = sis_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Exclui os grupos para o relatório de atendimento
+        /// </summary>
+        /// <param name="rea_id">ID do relatorio de atendimento</param>
+        /// <returns></returns>
+        public void DeleteBy_rea_id(long rea_id)
+        {
+            QueryStoredProcedure qs = new QueryStoredProcedure("NEW_CLS_RelatorioAtendimentoGrupo_DeleteBy_rea_id", _Banco);
+
+            try
+            {
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = rea_id;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente.
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem modificados.</param>
@@ -142,5 +213,5 @@ namespace MSTech.GestaoEscolar.DAL
         // {
         //    return base.DataRowToEntity(dr, entity, limparEntity);
         // }
-	}
+    }
 }

@@ -176,7 +176,7 @@ namespace GestaoEscolar.WebControls.Combos
             get
             {
                 if (string.IsNullOrEmpty(ddlCombo.SelectedValue))
-                    return 0;
+                    return -1;
 
                 return Convert.ToInt32(ddlCombo.SelectedValue);
             }
