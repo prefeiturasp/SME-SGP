@@ -151,8 +151,11 @@ namespace MSTech.GestaoEscolar.BLL
             dao._Banco.Open(IsolationLevel.ReadCommitted);
             try
             {
-                if (SYS_ArquivoBO.Save(arquivo, dao._Banco))
-                    rea.arq_idAnexo = arquivo.arq_id;
+                if (arquivo.arq_tamanhoKB > 0)
+                {
+                    if (SYS_ArquivoBO.Save(arquivo, dao._Banco))
+                        rea.arq_idAnexo = arquivo.arq_id;
+                }
 
                 bool isNew = rea.IsNew;
                 if (!Save(rea, dao._Banco))
@@ -166,7 +169,7 @@ namespace MSTech.GestaoEscolar.BLL
                     CLS_RelatorioAtendimentoGrupoBO.DeleteBy_rea_id(rea.rea_id, dao._Banco);
 
                     //Exclui todos os questionários que não estão mais ligados ao relatório
-                    foreach (CLS_RelatorioAtendimentoQuestionario raq in lstQuestionarioBanco.Where(b => !lstQuestionario.Any(q => q.raq_id == b.raq_id && q.raq_situacao == (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Ativo)))
+                    foreach (CLS_RelatorioAtendimentoQuestionario raq in lstQuestionarioBanco.Where(b => !lstQuestionario.Any(q => q.raq_id == b.raq_id && q.raq_situacao == (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Ativo && !q.IsNew)))
                     {
                         raq.raq_situacao = (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido;
                         if (!CLS_RelatorioAtendimentoQuestionarioBO.Delete(raq, dao._Banco))

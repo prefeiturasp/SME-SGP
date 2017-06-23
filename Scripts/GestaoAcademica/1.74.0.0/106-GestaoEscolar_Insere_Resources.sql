@@ -459,6 +459,34 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Adicionar questionário'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.lblLegendAnexo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Anexo'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.NenhumQuestionarioAdicionado' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Adicione pelo menos um questionário.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.NenhumaPermissao' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Selecione pelo menos uma permissão para grupo ou cargo.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.QuestionarioJaAdicionado' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Questionário já adicionado no relatório.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

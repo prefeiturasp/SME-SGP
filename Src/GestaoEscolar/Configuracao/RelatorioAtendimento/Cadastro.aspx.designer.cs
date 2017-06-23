@@ -184,6 +184,33 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         protected global::System.Web.UI.WebControls.CheckBox chkExibeHipotese;
         
         /// <summary>
+        /// divDisciplina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDisciplina;
+        
+        /// <summary>
+        /// UCComboTipoDisciplina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WebControls_Combos_UCComboTipoDisciplina UCComboTipoDisciplina;
+        
+        /// <summary>
+        /// lblLegendAnexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLegendAnexo;
+        
+        /// <summary>
         /// lblTituloAnexo control.
         /// </summary>
         /// <remarks>

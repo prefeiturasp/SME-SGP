@@ -106,12 +106,10 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 ddlPeriodicidade.SelectedValue = rea.rea_periodicidadePreenchimento.ToString();
                 ddlTipo.SelectedValue = rea.rea_tipo.ToString();
                 ddlTipo_SelectedIndexChanged(ddlTipo, new EventArgs());
+                chkExibeHipotese.Checked = rea.rea_permiteEditarHipoteseDiagnostica;
+                chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
                 hplAnexo.Visible = rea.arq_idAnexo > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
                 hplAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
-
-                CarregaCargos();
-                CarregaGrupos();
-                CarregaQuestionarios();
             }
             catch (Exception ex)
             {
@@ -136,8 +134,9 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     rea_id = VS_rea_id,
                     rea_titulo = txtTitulo.Text,
                     rea_tipo = Convert.ToByte(ddlTipo.SelectedValue),
-                    rea_permiteEditarRecaCor = chkExibeRacaCor.Checked,
-                    rea_permiteEditarHipoteseDiagnostica = chkExibeHipotese.Checked,
+                    rea_permiteEditarRecaCor = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE && chkExibeRacaCor.Checked,
+                    rea_permiteEditarHipoteseDiagnostica = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE && chkExibeHipotese.Checked,
+                    tds_id = (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP ? -1 : UCComboTipoDisciplina.Valor),
                     rea_periodicidadePreenchimento = Convert.ToByte(ddlPeriodicidade.SelectedValue),
                     rea_tituloAnexo = txtTituloAnexo.Text,
                     IsNew = VS_rea_id <= 0
@@ -158,10 +157,17 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     }
                 }
 
+                if (!VS_lstQuestionarios.Any(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido))
+                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumQuestionarioAdicionado").ToString());
+
                 List<CLS_RelatorioAtendimentoGrupo> lstGrupo = CarregaGruposPreenchidos();
 
                 List<CLS_RelatorioAtendimentoCargo> lstCargo = CarregaCargosPreenchidos();
-                
+
+                if (!lstGrupo.Any(g => g.rag_permissaoAprovacao || g.rag_permissaoConsulta || g.rag_permissaoEdicao || g.rag_permissaoExclusao) &&
+                    !lstCargo.Any(c => c.rac_permissaoAprovacao || c.rac_permissaoConsulta || c.rac_permissaoEdicao || c.rac_permissaoExclusao))
+                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumaPermissao").ToString());
+
                 if (CLS_RelatorioAtendimentoBO.Salvar(rea, lstGrupo, lstCargo, VS_lstQuestionarios, VS_arquivo))
                 {
                     string message = "";
@@ -396,10 +402,18 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             txtTitulo.Text = txtTituloAnexo.Text = "";
             ddlTipo.SelectedValue = "0";
             ddlPeriodicidade.SelectedValue = "0";
-            chkExibeHipotese.Checked = chkExibeRacaCor.Checked = false;
+            chkExibeHipotese.Checked = chkExibeRacaCor.Checked = divDisciplina.Visible = false;
+            UCComboTipoDisciplina.Valor = -1;
             hplAnexo.Text = "";
             divAdicionarQuestionario.Visible = false;
             UCComboQuestionario.CarregarQuestionario();
+            UCComboTipoDisciplina.CarregarTipoDisciplinaTipo((byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela);
+            gvCargo.DataSource = new DataTable();
+            gvGrupo.DataSource = new DataTable();
+            gvQuestionario.DataSource = VS_lstQuestionarios;
+            gvCargo.DataBind();
+            gvGrupo.DataBind();
+            gvQuestionario.DataBind();
         }
 
         #endregion
@@ -440,6 +454,10 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                         ckbBloqueado.Visible = false;
                     }
 
+                    CarregaCargos();
+                    CarregaGrupos();
+                    CarregaQuestionarios();
+
                     Page.Form.DefaultFocus = txtTitulo.ClientID;
                     Page.Form.DefaultButton = bntSalvar.UniqueID;
                 }
@@ -468,9 +486,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         {
             divHipotese.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE;
             divRacaCor.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE;
+            divDisciplina.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP;
 
             if (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.AEE)
                 chkExibeHipotese.Checked = chkExibeRacaCor.Checked = false;
+            if (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.RP)
+                UCComboTipoDisciplina.Valor = -1;
         }
         
         protected void btnAdicionarQuestionario_Click(object sender, EventArgs e)
@@ -479,6 +500,9 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             {
                 if (UCComboQuestionario.Valor <= 0)
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioObrigatorio").ToString());
+
+                if (VS_lstQuestionarios.Any(q => q.qst_id == UCComboQuestionario.Valor && q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido))
+                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioJaAdicionado").ToString());
 
                 int raq_id = (VS_lstQuestionarios.Any() ? VS_lstQuestionarios.Max(q => q.raq_id) + 1 : 1);
                 while (VS_lstQuestionarios.Any(q => q.raq_id == raq_id))

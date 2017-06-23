@@ -5,7 +5,8 @@
     TagPrefix="uc1" %>
 <%@ Register Src="~/WebControls/Combos/UCComboQuestionario.ascx" TagName="UCComboQuestionario" 
     TagPrefix="uc2" %>
-
+<%@ Register Src="~/WebControls/Combos/UCComboTipoDisciplina.ascx" TagName="UCComboTipoDisciplina" 
+    TagPrefix="uc3" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -25,7 +26,7 @@
                 <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
                 <asp:Label ID="lblTitulo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTitulo.Text %>" AssociatedControlID="txtTitulo" />
                 <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo" ValidationGroup="vgSondagem"
+                <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo" ValidationGroup="vgRelatorioAtendimento"
                     Display="Dynamic" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.rfvTitulo.ErrorMessage %>" Text="*" />
                 <asp:Label ID="lblPeriodicidade" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblPeriodicidade.Text %>" AssociatedControlID="ddlPeriodicidade"></asp:Label>
                 <asp:DropDownList ID="ddlPeriodicidade" runat="server">
@@ -35,7 +36,7 @@
                 </asp:DropDownList>
                 <asp:CompareValidator ID="cpvPeriodicidade" runat="server" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.cpvPeriodicidade.ErrorMessage %>"
                     ControlToValidate="ddlPeriodicidade" Operator="GreaterThan" ValueToCompare="0"
-                    Display="Dynamic" ValidationGroup="Conteudo">*</asp:CompareValidator>
+                    Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
                 <asp:Label ID="lblTipo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTipo.Text %>" AssociatedControlID="ddlTipo"></asp:Label>
                 <asp:DropDownList ID="ddlTipo" runat="server"  
                     OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" AutoPostBack="true">
@@ -46,18 +47,31 @@
                 </asp:DropDownList>
                 <asp:CompareValidator ID="cpvTipo" runat="server" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.cpvTipo.ErrorMessage %>"
                     ControlToValidate="ddlTipo" Operator="GreaterThan" ValueToCompare="0"
-                    Display="Dynamic" ValidationGroup="Conteudo">*</asp:CompareValidator>
+                    Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
                 <div runat="server" id="divRacaCor" visible="false">
                     <asp:CheckBox runat="server" ID="chkExibeRacaCor" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkExibeRacaCor.Text %>" />
                 </div>
                 <div runat="server" id="divHipotese" visible="false">
                     <asp:CheckBox runat="server" ID="chkExibeHipotese" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkExibeHipotese.Text %>" />
                 </div>
-                <asp:Label ID="lblTituloAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTituloAnexo.Text %>" AssociatedControlID="txtTituloAnexo" />
-                <asp:TextBox ID="txtTituloAnexo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
-                <asp:Label ID="lblAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblAnexo.Text %>" AssociatedControlID="fupAnexo"></asp:Label>
-                <asp:FileUpload ID="fupAnexo" runat="server" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.fupAnexo.ToolTip %>" />
-                <asp:HyperLink ID="hplAnexo" runat="server"></asp:HyperLink>
+                <div runat="server" id="divDisciplina" visible="false">
+                    <uc3:UCComboTipoDisciplina runat="server" ID="UCComboTipoDisciplina" MostrarMessageSelecione="True" PermiteEditar="True" />
+                </div>
+                <div>
+                    <br />
+                </div>
+                <div>
+                    <fieldset>
+                        <legend>
+                            <asp:Label ID="lblLegendAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblLegendAnexo.Text %>" />
+                        </legend>
+                        <asp:Label ID="lblTituloAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTituloAnexo.Text %>" AssociatedControlID="txtTituloAnexo" />
+                        <asp:TextBox ID="txtTituloAnexo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
+                        <asp:Label ID="lblAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblAnexo.Text %>" AssociatedControlID="fupAnexo"></asp:Label>
+                        <asp:FileUpload ID="fupAnexo" runat="server" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.fupAnexo.ToolTip %>" />
+                        <asp:HyperLink ID="hplAnexo" runat="server"></asp:HyperLink>
+                    </fieldset>
+                </div>
                 <asp:UpdatePanel ID="updQuestionario" runat="server" UpdateMode="Always">
                     <ContentTemplate>
                         <fieldset>

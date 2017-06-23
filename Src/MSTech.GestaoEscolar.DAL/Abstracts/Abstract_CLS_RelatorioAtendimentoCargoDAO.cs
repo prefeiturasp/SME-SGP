@@ -200,7 +200,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-				throw new NotImplementedException("Método 'ReceberAutoIncremento' não implementado.");
+                return true;
 			}
 
 			return false;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using MSTech.GestaoEscolar.Web.WebProject;
+using MSTech.GestaoEscolar.BLL;
 
 public partial class WebControls_Combos_UCComboTipoDisciplina : MotherUserControl
 {
@@ -184,6 +185,24 @@ public partial class WebControls_Combos_UCComboTipoDisciplina : MotherUserContro
         odsDados.SelectParameters.Add("AppMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
 
         odsDados.SelectMethod = "SelecionaTipoDisciplina";
+        ddlCombo.DataTextField = "tds_nome";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um tipo de " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " --", "-1", true));
+        ddlCombo.DataBind();
+    }
+
+    /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist    
+    /// </summary>
+    public void CarregarTipoDisciplinaTipo(byte tds_tipo)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectParameters.Add("tds_tipo", tds_tipo.ToString());
+        odsDados.SelectParameters.Add("AppMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
+
+        odsDados.SelectMethod = "SelecionaTipoDisciplinaTipo";
         ddlCombo.DataTextField = "tds_nome";
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um tipo de " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " --", "-1", true));
