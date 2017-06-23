@@ -18,7 +18,11 @@
 
     public partial class UCLancamentoRelatorioAtendimento : MotherUserControl
     {
+        #region Propriedades
 
+        /// <summary>
+        /// ID do aluno.
+        /// </summary>
         private long VS_alu_id
         {
             get
@@ -32,6 +36,9 @@
             }
         }
 
+        /// <summary>
+        /// ID da turma
+        /// </summary>
         private long VS_tur_id
         {
             get
@@ -45,6 +52,9 @@
             }
         }
 
+        /// <summary>
+        /// ID da turma disciplina.
+        /// </summary>
         private long VS_tud_id
         {
             get
@@ -58,6 +68,9 @@
             }
         }
 
+        /// <summary>
+        /// ID do período do calendário.
+        /// </summary>
         private int VS_tpc_id
         {
             get
@@ -71,6 +84,9 @@
             }
         }
 
+        /// <summary>
+        /// ID do relatório.
+        /// </summary>
         private int VS_rea_id
         {
             get
@@ -84,6 +100,9 @@
             }
         }
 
+        /// <summary>
+        /// Estrutura do relatório.
+        /// </summary>
         private RelatorioAtendimento VS_RelatorioAtendimento
         {
             get
@@ -102,6 +121,9 @@
             }
         }
 
+        /// <summary>
+        /// Dados preenchidos para o relatório.
+        /// </summary>
         private RelatorioPreenchimentoAluno VS_RelatorioPreenchimentoAluno
         {
             get
@@ -120,6 +142,9 @@
             }
         }
 
+        /// <summary>
+        /// Permissão de aprovação do usuário.
+        /// </summary>
         public bool PermiteAprovar
         {
             get
@@ -129,6 +154,9 @@
             }
         }
 
+        /// <summary>
+        /// Permissão de edição do usuário.
+        /// </summary>
         public bool PermiteEditar
         {
             get
@@ -138,6 +166,9 @@
             }
         }
 
+        /// <summary>
+        /// Permissão de consulta do usuário.
+        /// </summary>
         public bool PermiteConsultar
         {
             get
@@ -147,6 +178,9 @@
             }
         }
 
+        /// <summary>
+        /// Raça/cor
+        /// </summary>
         public byte RacaCor
         {
             get
@@ -162,6 +196,9 @@
             }
         }
 
+        /// <summary>
+        /// Permite alterar raça cor.
+        /// </summary>
         public bool PermiteAlterarRacaCor
         {
             get
@@ -170,6 +207,9 @@
             }
         }
 
+        /// <summary>
+        /// Situação do preenchimento do relatório.
+        /// </summary>
         public byte SituacaoRelatorioPreenchimento
         {
             get
@@ -178,6 +218,9 @@
             }
         }
 
+        /// <summary>
+        /// Situação de preenchimento (Finalizado ou rascunho)
+        /// </summary>
         public bool PreenchimentoFinalizado
         {
             get
@@ -186,6 +229,9 @@
             }
         }
 
+        /// <summary>
+        /// Permite editar relatório já aprovado.
+        /// </summary>
         private bool PermiteEditarAprovado
         {
             get
@@ -193,6 +239,10 @@
                 return ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.PERMITIR_EDITAR_RELATORIO_APROVADO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
             }
         }
+
+        #endregion
+
+        #region Page Life Cycle
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -206,6 +256,15 @@
             }
         }
 
+        #endregion
+
+        #region Métodos
+
+        /// <summary>
+        /// Retorna classes dos conteúdos do relatório.
+        /// </summary>
+        /// <param name="qtc_tipo"></param>
+        /// <returns></returns>
         public string RetornaClasseQuestionarioConteudo(byte qtc_tipo)
         {
             switch (qtc_tipo)
@@ -233,8 +292,18 @@
             return "divTabs-" + qst_id.ToString();
         }
 
+        /// <summary>
+        /// Carrega o relatório.
+        /// </summary>
+        /// <param name="alu_id"></param>
+        /// <param name="tur_id"></param>
+        /// <param name="tud_id"></param>
+        /// <param name="tpc_id"></param>
+        /// <param name="rea_id"></param>
+        /// <param name="documentoOficial"></param>
         public void Carregar(long alu_id, long tur_id, long tud_id, int tpc_id, int rea_id, bool documentoOficial = false)
         {
+            txtSelectedTab.Value = "0";
             VS_alu_id = alu_id;
             VS_tur_id = tur_id;
             VS_tud_id = tud_id;
@@ -316,6 +385,9 @@
             updLancamentoRelatorio.Update();
         }
 
+        /// <summary>
+        /// Carrega a aba de deficiência
+        /// </summary>
         private void CarregarHipoteseDiagnostica()
         {
             liHipoteseDiagnostica.Visible = fdsHipoteseDiagnostica.Visible = false;
@@ -331,6 +403,9 @@
             }
         }
 
+        /// <summary>
+        /// Carrega os questionários
+        /// </summary>
         private void CarregarQuestionarios()
         {
             rptAbaQuestionarios.DataSource = VS_RelatorioAtendimento.lstQuestionario;
@@ -343,6 +418,10 @@
                 (PermiteEditarAprovado || VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado));
         }
 
+        /// <summary>
+        /// Indica se o relatório foi preenchido.
+        /// </summary>
+        /// <returns></returns>
         private bool RelatorioConcluido()
         {
             var conteudoVazio = (from RepeaterItem itemQuestionario in rptQuestionario.Items
@@ -382,6 +461,10 @@
             return conteudoVazio.Count() == 0;
         }
 
+        /// <summary>
+        /// Retorna listas de deficiência do aluno.
+        /// </summary>
+        /// <returns></returns>
         public List<CLS_AlunoDeficienciaDetalhe> RetornaListaDeficienciaDetalhe()
         {
             return (from RepeaterItem itemTipoDeficiencia in rptTipoDeficiencia.Items
@@ -402,6 +485,11 @@
                     }).ToList();
         }
 
+        /// <summary>
+        /// Retorna o questionário preenchido do aluno.
+        /// </summary>
+        /// <param name="aprovar"></param>
+        /// <returns></returns>
         public RelatorioPreenchimentoAluno RetornaQuestionarioPreenchimento(bool aprovar)
         {
             RelatorioPreenchimentoAluno rel = new RelatorioPreenchimentoAluno();
@@ -486,6 +574,10 @@
                                                         }).ToList();
             return rel;
         }
+
+        #endregion
+
+        #region Eventos
 
         protected void rptTipoDeficiencia_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -640,5 +732,7 @@
                 }
             }
         }
+
+        #endregion
     }
 }

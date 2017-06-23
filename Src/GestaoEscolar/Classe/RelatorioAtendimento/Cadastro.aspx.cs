@@ -9,6 +9,8 @@
     using System.Collections.Generic;
     public partial class Cadastro : MotherPageLogado
     {
+        #region Propriedades
+
         private long VS_alu_id
         {
             get
@@ -96,6 +98,10 @@
             }
         }
 
+        #endregion
+
+        #region Page Life Cycle
+
         protected void Page_Load(object sender, EventArgs e)
         {
             UCCRelatorioAtendimento.IndexChanged += UCCRelatorioAtendimento_IndexChanged;
@@ -156,6 +162,13 @@
             }
         }
 
+        #endregion
+
+        #region Métodos
+
+        /// <summary>
+        /// Carrega o relatório para preenchimento
+        /// </summary>
         private void CarregarRelatorio()
         {
             try
@@ -180,8 +193,6 @@
                     btnDesaprovar.Visible = btnDesaprovarBaixo.Visible = UCLancamentoRelatorioAtendimento.PermiteAprovar && UCLancamentoRelatorioAtendimento.PermiteEditar &&
                         UCLancamentoRelatorioAtendimento.SituacaoRelatorioPreenchimento == (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado &&
                         !ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.PERMITIR_EDITAR_RELATORIO_APROVADO, Ent_ID_UsuarioLogado);
-
-                    UCCPeriodoCalendario.PermiteEditar = UCCRelatorioAtendimento.PermiteEditar = false;
                 }
 
                 updBotoes.Update();
@@ -218,6 +229,10 @@
             RedirecionarPagina(url);
         }
 
+        /// <summary>
+        /// Salva o relatório preenchido
+        /// </summary>
+        /// <param name="aprovar"></param>
         private void Salvar(bool aprovar)
         {
             try
@@ -246,6 +261,9 @@
             }
         }
 
+        /// <summary>
+        /// Desfaz a aprovação do relatório.
+        /// </summary>
         private void Desaprovar()
         {
             try
@@ -272,6 +290,10 @@
                 updMensagem.Update();
             }
         }
+
+        #endregion
+
+        #region Delegates
 
         private void UCCPeriodoCalendario_IndexChanged()
         {
@@ -301,6 +323,10 @@
             }
         }
 
+        #endregion
+
+        #region Eventos
+
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             VerificaPaginaRedirecionar();
@@ -329,5 +355,7 @@
                 Desaprovar();
             }
         }
+
+        #endregion
     }
 }

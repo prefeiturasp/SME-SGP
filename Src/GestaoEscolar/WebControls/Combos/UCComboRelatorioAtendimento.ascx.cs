@@ -171,14 +171,14 @@ namespace GestaoEscolar.WebControls.Combos
         /// <summary>
         /// Retorna e seta o valor selecionado no combo
         /// </summary>
-        public byte Valor
+        public int Valor
         {
             get
             {
                 if (string.IsNullOrEmpty(ddlCombo.SelectedValue))
-                    return 0;
+                    return -1;
 
-                return Convert.ToByte(ddlCombo.SelectedValue);
+                return Convert.ToInt32(ddlCombo.SelectedValue);
             }
             set
             {
