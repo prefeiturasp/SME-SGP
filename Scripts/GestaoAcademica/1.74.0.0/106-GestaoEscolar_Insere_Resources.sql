@@ -683,6 +683,41 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Tipo de relatório é obrigatório.'
 		
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.pnlFiltros.GroupingText' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Anotações da recuperação paralela'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.btnNovo.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Nova anotação'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.btnSalvar.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Salvar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.btnCancelar.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Cancelar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.grvLancamentos.EmptyDataText' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Não existem anotações de recuperação paralela para o aluno.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

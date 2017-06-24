@@ -36,6 +36,8 @@ namespace MSTech.GestaoEscolar.BLL
         public long alu_id { get; set; }
 
         public int tds_id { get; set; }
+
+        public int tds_idRelacionada { get; set; }
     }
 
     public class PermissaoRelatorioPreenchimentoValidationException : ValidationException
@@ -75,7 +77,7 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO dao = new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO();
                 return (from dr in dao.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(tpc_id, tur_id, tud_id).AsEnumerable()
-                        select new Struct_PreenchimentoAluno { alu_id = Convert.ToInt64(dr["alu_id"]), tds_id = Convert.ToInt32(dr["tds_id"]) }).ToList();
+                        select new Struct_PreenchimentoAluno { alu_id = Convert.ToInt64(dr["alu_id"]), tds_id = Convert.ToInt32(dr["tds_id"]), tds_idRelacionada = Convert.ToInt32(dr["tds_idRelacionada"]) }).ToList();
             };
 
             if (appMinutosCache > 0)
@@ -94,6 +96,15 @@ namespace MSTech.GestaoEscolar.BLL
             }
 
             return lista;
+        }
+
+        /// <summary>
+        /// Retorna os lançamentos feito para o aluno de acordo com os parâmetros.
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tud_id, int tds_id, int rea_id, int tpc_id)
+        {
+            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, tud_id, tds_id, rea_id, tpc_id);
         }
 
         public static new bool Save(CLS_RelatorioPreenchimentoAlunoTurmaDisciplina entity, TalkDBTransaction banco)

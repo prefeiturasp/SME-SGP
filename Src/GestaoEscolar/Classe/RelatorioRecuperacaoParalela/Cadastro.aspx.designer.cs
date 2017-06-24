@@ -40,22 +40,85 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela {
         protected global::System.Web.UI.WebControls.Panel pnlFiltros;
         
         /// <summary>
-        /// updFiltros control.
+        /// lblDisciplina control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updFiltros;
+        protected global::System.Web.UI.WebControls.Label lblDisciplina;
         
         /// <summary>
-        /// updBotoes control.
+        /// ddlDisciplina control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updBotoes;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDisciplina;
+        
+        /// <summary>
+        /// UCCRelatorioAtendimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.UCComboRelatorioAtendimento UCCRelatorioAtendimento;
+        
+        /// <summary>
+        /// UCCPeriodoCalendario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.Novos.UCCPeriodoCalendario UCCPeriodoCalendario;
+        
+        /// <summary>
+        /// divBotoes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBotoes;
+        
+        /// <summary>
+        /// btnNovo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNovo;
+        
+        /// <summary>
+        /// updLancamento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updLancamento;
+        
+        /// <summary>
+        /// grvLancamentos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvLancamentos;
+        
+        /// <summary>
+        /// pnlLancamento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlLancamento;
         
         /// <summary>
         /// btnSalvar control.
@@ -74,24 +137,6 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar;
-        
-        /// <summary>
-        /// updLancamento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updLancamento;
-        
-        /// <summary>
-        /// pnlLancamento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlLancamento;
         
         /// <summary>
         /// UCLancamentoRelatorioAtendimento control.

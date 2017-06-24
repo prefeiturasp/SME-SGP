@@ -74,6 +74,15 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Carrega os relatórios de RP verificando a permissão do usuário e o tipo de disciplina.
+        /// </summary>
+        /// <returns></returns>
+        public static List<CLS_RelatorioAtendimento> SelecionaRelatoriosRPDisciplina(Guid usu_id, long alu_id, long tud_id, int tds_idRP)
+        {
+            return new CLS_RelatorioAtendimentoDAO().SelecionaRelatoriosRPDisciplina(usu_id, alu_id, tud_id, tds_idRP).ToEntityList<CLS_RelatorioAtendimento>();
+        }
+
+        /// <summary>
         /// Carrega a estrutura do relatório
         /// </summary>
         /// <param name="rea_id"></param>
