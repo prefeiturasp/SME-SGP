@@ -28,7 +28,7 @@
                         <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Padrao, Padrao.Salvar.Text %>" Visible="false" OnClick="btnSalvar_Click" />
                         <asp:Button ID="btnAprovar" runat="server" Text="<%$ Resources:GestaoEscolar.Classe.RelatorioAtendimento.Cadastro, btnAprovar.Text %>" Visible="false" OnClick="btnAprovar_Click" />
                         <asp:Button ID="btnDesaprovar" runat="server" Text="<%$ Resources:Padrao, Padrao.Editar.Text %>" Visible="false" OnClick="btnDesaprovar_Click" />
-                        <asp:Button ID="btnLimparBusca" runat="server" Text="Limpar pesquisa" OnClick="btnLimparBusca_Click" />
+                        <asp:Button ID="btnLimparBusca" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparBusca_Click" />
                         <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Padrao, Padrao.Cancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" CssClass="btnMensagemUnload" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -42,7 +42,7 @@
                         <asp:Button ID="btnSalvarBaixo" runat="server" Text="<%$ Resources:Padrao, Padrao.Salvar.Text %>" OnClick="btnSalvar_Click" />
                         <asp:Button ID="btnAprovarBaixo" runat="server" Text="<%$ Resources:GestaoEscolar.Classe.RelatorioAtendimento.Cadastro, btnAprovarBaixo.Text %>" OnClick="btnAprovar_Click" />
                         <asp:Button ID="btnDesaprovarBaixo" runat="server" Text="<%$ Resources:Padrao, Padrao.Editar.Text %>" OnClick="btnDesaprovar_Click" />
-                        <asp:Button ID="btnLimparBuscaBaixo" runat="server" Text="Limpar pesquisa" OnClick="btnLimparBusca_Click" />
+                        <asp:Button ID="btnLimparBuscaBaixo" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparBusca_Click" />
                         <asp:Button ID="btnCancelarBaixo" runat="server" Text="<%$ Resources:Padrao, Padrao.Cancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" CssClass="btnMensagemUnload" />
                     </div>
                 </asp:Panel>
