@@ -795,6 +795,27 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Lançamento de anotação salvo com sucesso.'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.MensagemSucessoExcluir' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento de anotação excluído com sucesso.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.grvLancamentos.ColunaDescricao' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Data do lançamento'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.lblDisciplina.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Turma - Componente curricular'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

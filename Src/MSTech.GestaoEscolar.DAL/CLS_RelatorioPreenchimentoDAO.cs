@@ -83,7 +83,7 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@reap_id";
                 Param.DbType = DbType.Int64;
                 Param.Size = 8;
-                if (reap_id > 0)
+                if (reap_id >= 0)
                 {
                     Param.Value = reap_id;
                 }

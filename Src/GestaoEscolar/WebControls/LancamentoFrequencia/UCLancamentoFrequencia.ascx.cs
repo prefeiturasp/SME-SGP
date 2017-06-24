@@ -748,27 +748,7 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                         if (btnRelatorioRP != null)
                         {
                             btnRelatorioRP.Visible = true;
-                            btnRelatorioRP.CommandArgument = Alu_id.ToString();
-
-                            if (tudTipo == (byte)TurmaDisciplinaTipo.DisciplinaEletivaAluno)
-                            {
-                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
-                            }
-                            else
-                            {
-                                string strTds = string.Empty;
-                                (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_id)
-                                 group preenchimento by new { tds_id = preenchimento.tds_id } into grupo
-                                 select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
-                                if (strTds.Length > 1)
-                                {
-                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
-                                }
-                                else
-                                {
-                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
-                                }
-                            }
+                            btnRelatorioRP.CommandArgument = string.Format("{0};-1", Alu_id.ToString());
                         }
                     }
                 }

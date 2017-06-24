@@ -38,6 +38,14 @@ namespace MSTech.GestaoEscolar.BLL
         public int tds_id { get; set; }
 
         public int tds_idRelacionada { get; set; }
+
+        public long tur_id { get; set; }
+
+        public string tur_codigo { get; set; }
+
+        public long tud_id { get; set; }
+
+        public string tud_nome { get; set; }
     }
 
     public class PermissaoRelatorioPreenchimentoValidationException : ValidationException
@@ -77,7 +85,13 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO dao = new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO();
                 return (from dr in dao.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(tpc_id, tur_id, tud_id).AsEnumerable()
-                        select new Struct_PreenchimentoAluno { alu_id = Convert.ToInt64(dr["alu_id"]), tds_id = Convert.ToInt32(dr["tds_id"]), tds_idRelacionada = Convert.ToInt32(dr["tds_idRelacionada"]) }).ToList();
+                        select new Struct_PreenchimentoAluno { alu_id = Convert.ToInt64(dr["alu_id"])
+                                                                , tds_id = Convert.ToInt32(dr["tds_id"])
+                                                                , tds_idRelacionada = Convert.ToInt32(dr["tds_idRelacionada"])
+                                                                , tur_id = Convert.ToInt64(dr["tur_id"])
+                                                                , tur_codigo = dr["tur_codigo"].ToString()
+                                                                , tud_id = Convert.ToInt64(dr["tud_id"])
+                                                                , tud_nome = dr["tud_nome"].ToString() }).ToList();
             };
 
             if (appMinutosCache > 0)

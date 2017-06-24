@@ -140,7 +140,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     rea_tipo = Convert.ToByte(ddlTipo.SelectedValue),
                     rea_permiteEditarRecaCor = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE && chkExibeRacaCor.Checked,
                     rea_permiteEditarHipoteseDiagnostica = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE && chkExibeHipotese.Checked,
-                    tds_id = (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP ? -1 : UCComboTipoDisciplina.Valor),
+                    tds_id = (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.RP ? -1 : UCComboTipoDisciplina.Valor),
                     rea_periodicidadePreenchimento = Convert.ToByte(ddlPeriodicidade.SelectedValue),
                     rea_tituloAnexo = txtTituloAnexo.Text,
                     IsNew = VS_rea_id <= 0

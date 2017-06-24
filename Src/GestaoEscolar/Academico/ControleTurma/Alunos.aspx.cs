@@ -879,7 +879,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     Session.Remove("PaginaRetorno_RelatorioRP");
 
                     Session.Add("alu_id_RelatorioRP", Convert.ToInt64(args[0]));
-                    Session.Add("tds_id_RelatorioRP", args[1]);
+                    Session.Add("tds_id_RelatorioRP", -1);
                     Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
 
                     CarregaSessionPaginaRetorno();
@@ -971,27 +971,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (btnRelatorioRP != null)
                     {
                         btnRelatorioRP.Visible = true;
-                        btnRelatorioRP.CommandArgument = alu_id.ToString();
-
-                        if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno)
-                        {
-                            btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
-                        }
-                        else
-                        {
-                            string strTds = string.Empty;
-                            (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == alu_id)
-                             group preenchimento by new { tds_id = preenchimento.tds_id } into grupo
-                             select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
-                            if (strTds.Length > 1)
-                            {
-                                btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
-                            }
-                            else
-                            {
-                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
-                            }
-                        }
+                        btnRelatorioRP.CommandArgument = string.Format("{0};-1", alu_id.ToString());
                     }
                 }
             }
