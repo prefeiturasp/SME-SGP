@@ -27,7 +27,7 @@
     <asp:TextBox ID="_txtMae" runat="server" MaxLength="200" SkinID="text60C"></asp:TextBox>
 </div>
 <div id="divMatriculaAluno" runat="server">
-    <asp:Label ID="_lblMatricula" runat="server" AssociatedControlID="_txtMatricula"></asp:Label>
+    <asp:Label ID="_lblMatricula" runat="server" Text="<%$ Resources:Mensagens, MSG_NUMEROMATRICULA %>" AssociatedControlID="_txtMatricula"></asp:Label>
     <asp:TextBox ID="_txtMatricula" runat="server" MaxLength="50" SkinID="text20C"></asp:TextBox>
 </div>
 <div id="divMatriculaEstAluno" runat="server">
