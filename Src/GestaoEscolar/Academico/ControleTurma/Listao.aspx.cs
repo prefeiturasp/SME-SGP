@@ -3732,15 +3732,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                             btnRelatorioRP.Visible = true;
                             btnRelatorioRP.CommandArgument = Alu_id.ToString();
 
-                            if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno)
-                            {
-                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
-                            }
-                            else
+                            if (VisibilidadeRegencia(ddlTurmaDisciplinaListao))
                             {
                                 string strTds = string.Empty;
                                 (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_id)
-                                 group preenchimento by new { tds_id = preenchimento.tds_id } into grupo
+                                 group preenchimento by new { tds_id = preenchimento.tds_idRelacionada } into grupo
                                  select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
                                 if (strTds.Length > 1)
                                 {
@@ -3750,6 +3746,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 {
                                     btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
                                 }
+                            }
+                            else
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
                             }
                         }
                     }
@@ -4373,15 +4373,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                             btnRelatorioRP.Visible = true;
                             btnRelatorioRP.CommandArgument = Alu_idExtraClasse.ToString();
 
-                            if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno)
-                            {
-                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
-                            }
-                            else
+                            if (VisibilidadeRegencia(ddlTurmaDisciplinaListao))
                             {
                                 string strTds = string.Empty;
                                 (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_idExtraClasse)
-                                 group preenchimento by new { tds_id = preenchimento.tds_id } into grupo
+                                 group preenchimento by new { tds_id = preenchimento.tds_idRelacionada } into grupo
                                  select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
                                 if (strTds.Length > 1)
                                 {
@@ -4391,6 +4387,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 {
                                     btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
                                 }
+                            }
+                            else
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
                             }
                         }
                     }

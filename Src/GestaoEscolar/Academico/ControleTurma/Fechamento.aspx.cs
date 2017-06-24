@@ -680,7 +680,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             Session.Remove("PaginaRetorno_RelatorioRP");
 
             Session.Add("alu_id_RelatorioRP", alu_id);
-            Session.Add("tds_id_RelatorioRP", tds_idRP);
+            Session.Add("tds_id_RelatorioRP", -1);
             Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
 
             CarregaSessionPaginaRetorno();

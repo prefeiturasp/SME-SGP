@@ -94,13 +94,13 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela {
         protected global::System.Web.UI.WebControls.Button btnNovo;
         
         /// <summary>
-        /// updLancamento control.
+        /// fdsLancamento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updLancamento;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsLancamento;
         
         /// <summary>
         /// litLancamento control.
@@ -175,13 +175,13 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela {
         protected global::System.Web.UI.WebControls.Button btnCancelarBaixo;
         
         /// <summary>
-        /// div1 control.
+        /// divVoltar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divVoltar;
         
         /// <summary>
         /// btnVoltar control.
