@@ -67,20 +67,26 @@
                 <legend>
                     <asp:Label ID="lblLegendAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblLegendAnexo.Text %>" />
                 </legend>
-                <asp:ValidationSummary ID="vsAnexo" runat="server" ValidationGroup="vgAnexo" />
-                <asp:Label ID="lblTituloAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTituloAnexo.Text %>" AssociatedControlID="txtTituloAnexo" />
-                <asp:TextBox ID="txtTituloAnexo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
-                <table><tr>
-                    <td>
-                        <asp:Label ID="lblAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblAnexo.Text %>" AssociatedControlID="fupAnexo"></asp:Label>
-                        <asp:FileUpload ID="fupAnexo" runat="server" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.fupAnexo.ToolTip %>" />
-                    </td>
-                    <td>
-                        <asp:ImageButton runat="server" ID="btnAddAnexo" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnAddAnexo.Text %>" ValidationGroup="vgAnexo"
-                            SkinID="btNovo" OnClick="btnAddAnexo_Click" style="padding-left: 5px; padding-top: 25px" />
-                    </td>
-                </tr></table>
-                <asp:HyperLink ID="hplAnexo" runat="server"></asp:HyperLink>
+                <div runat="server" id="divAddAnexo" visible="false">
+                    <asp:ValidationSummary ID="vsAnexo" runat="server" ValidationGroup="vgAnexo" />
+                    <asp:Label ID="lblTituloAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTituloAnexo.Text %>" AssociatedControlID="txtTituloAnexo" />
+                    <asp:TextBox ID="txtTituloAnexo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
+                    <table><tr>
+                        <td>
+                            <asp:Label ID="lblAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblAnexo.Text %>" AssociatedControlID="fupAnexo"></asp:Label>
+                            <asp:FileUpload ID="fupAnexo" runat="server" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.fupAnexo.ToolTip %>" />
+                        </td>
+                        <td>
+                            <asp:ImageButton runat="server" ID="btnAddAnexo" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnAddAnexo.Text %>" ValidationGroup="vgAnexo"
+                                SkinID="btNovo" OnClick="btnAddAnexo_Click" style="padding-left: 5px; padding-top: 25px" />
+                        </td>
+                    </tr></table>
+                </div>
+                <div runat="server" id="divAnexoAdicionado" visible="false">
+                    <asp:HyperLink runat="server" ID="hplAnexo"></asp:HyperLink>
+                    <asp:ImageButton runat="server" ID="btnExcluirAnexo" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnExcluirAnexo.Text %>" CausesValidation="false"
+                        SkinID="btExcluir" OnClick="btnExcluirAnexo_Click" />
+                </div>
             </fieldset>
         </div>
         <asp:UpdatePanel ID="updQuestionario" runat="server" UpdateMode="Always">

@@ -211,6 +211,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         protected global::System.Web.UI.WebControls.Label lblLegendAnexo;
         
         /// <summary>
+        /// divAddAnexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAddAnexo;
+        
+        /// <summary>
         /// vsAnexo control.
         /// </summary>
         /// <remarks>
@@ -265,6 +274,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         protected global::System.Web.UI.WebControls.ImageButton btnAddAnexo;
         
         /// <summary>
+        /// divAnexoAdicionado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAnexoAdicionado;
+        
+        /// <summary>
         /// hplAnexo control.
         /// </summary>
         /// <remarks>
@@ -272,6 +290,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplAnexo;
+        
+        /// <summary>
+        /// btnExcluirAnexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnExcluirAnexo;
         
         /// <summary>
         /// updQuestionario control.

@@ -154,16 +154,20 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="lstQuestionario">Lista de questionários</param>
         /// <param name="postedFile">Arquivo anexo</param>
         /// <returns></returns>
-        public static bool Salvar(CLS_RelatorioAtendimento rea, List<CLS_RelatorioAtendimentoGrupo> lstGrupo, List<CLS_RelatorioAtendimentoCargo> lstCargo, List<CLS_RelatorioAtendimentoQuestionario> lstQuestionario, SYS_Arquivo arquivo, int TamanhoMaximoArquivo, string[] TiposArquivosPermitidos)
+        public static bool Salvar(CLS_RelatorioAtendimento rea, List<CLS_RelatorioAtendimentoGrupo> lstGrupo, List<CLS_RelatorioAtendimentoCargo> lstCargo, List<CLS_RelatorioAtendimentoQuestionario> lstQuestionario, long arquivo, int TamanhoMaximoArquivo, string[] TiposArquivosPermitidos)
         {
             CLS_RelatorioAtendimentoDAO dao = new CLS_RelatorioAtendimentoDAO();
             dao._Banco.Open(IsolationLevel.ReadCommitted);
             try
             {
-                if (arquivo.arq_tamanhoKB > 0)
+                rea.arq_idAnexo = arquivo;
+
+                if (arquivo > 0)
                 {
-                    if (SYS_ArquivoBO.Save(arquivo, TamanhoMaximoArquivo, TiposArquivosPermitidos, dao._Banco))
-                        rea.arq_idAnexo = arquivo.arq_id;
+                    SYS_Arquivo arq = new SYS_Arquivo { arq_id = arquivo };
+                    SYS_ArquivoBO.GetEntity(arq, dao._Banco);
+                    arq.arq_situacao = (byte)SYS_ArquivoSituacao.Ativo;
+                    SYS_ArquivoBO.Save(arq, dao._Banco);
                 }
 
                 bool isNew = rea.IsNew;

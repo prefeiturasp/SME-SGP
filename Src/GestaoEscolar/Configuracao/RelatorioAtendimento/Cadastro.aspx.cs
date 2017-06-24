@@ -32,11 +32,11 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         /// <summary>
         /// Armazena em viewstate o arquivo selecionado.
         /// </summary>
-        private SYS_Arquivo VS_arquivo
+        private long VS_arquivo
         {
             get
             {
-                return (SYS_Arquivo)(ViewState["VS_arquivo"] ?? new SYS_Arquivo());
+                return (long)(ViewState["VS_arquivo"] ?? -1);
             }
 
             set
@@ -108,9 +108,10 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 ddlTipo_SelectedIndexChanged(ddlTipo, new EventArgs());
                 chkExibeHipotese.Checked = rea.rea_permiteEditarHipoteseDiagnostica;
                 chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
-                hplAnexo.Visible = rea.arq_idAnexo > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
                 hplAnexo.Text = rea.rea_tituloAnexo;
-                hplAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
+                hplAnexo.NavigateUrl = rea.arq_idAnexo == 0 ? "" : String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
+                divAddAnexo.Visible = rea.arq_idAnexo == 0;
+                divAnexoAdicionado.Visible = rea.arq_idAnexo > 0;
             }
             catch (Exception ex)
             {
@@ -127,9 +128,6 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         {
             try
             {
-                if (!string.IsNullOrEmpty(txtTituloAnexo.Text) && !fupAnexo.HasFile && string.IsNullOrEmpty(hplAnexo.NavigateUrl))
-                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.TituloAnexoSemArquivo").ToString());
-                                
                 CLS_RelatorioAtendimento rea = new CLS_RelatorioAtendimento
                 {
                     rea_id = VS_rea_id,
@@ -383,7 +381,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         /// </summary>
         private void Inicializar()
         {
-            VS_arquivo = new SYS_Arquivo();
+            VS_arquivo = -1;
             VS_rea_id = -1;
             txtTitulo.Text = txtTituloAnexo.Text = "";
             ddlTipo.SelectedValue = "0";
@@ -391,6 +389,9 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             chkExibeHipotese.Checked = chkExibeRacaCor.Checked = divDisciplina.Visible = false;
             UCComboTipoDisciplina.Valor = -1;
             hplAnexo.Text = "";
+            hplAnexo.NavigateUrl = "";
+            divAddAnexo.Visible = true;
+            divAnexoAdicionado.Visible = false;
             UCComboQuestionario.CarregarQuestionario();
             UCComboTipoDisciplina.CarregarTipoDisciplinaTipo((byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela);
             gvCargo.DataSource = new DataTable();
@@ -693,6 +694,9 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         {
             try
             {
+                if (string.IsNullOrEmpty(txtTituloAnexo.Text) && fupAnexo.HasFile)
+                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.TituloAnexoObrigatorio").ToString());
+
                 if (fupAnexo.HasFile)
                 {
                     string nomeArquivoSemExtensao = Path.GetFileNameWithoutExtension(fupAnexo.PostedFile.FileName);
@@ -702,10 +706,16 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
                     Stream arquivo = CopiarArquivo(fupAnexo.PostedFile.InputStream);
 
-                    VS_arquivo = CriarAnexo(arquivo, nomeArquivo, tamanhoArquivo, typeMime);
+                    SYS_Arquivo arq = CriarAnexo(arquivo, nomeArquivo, tamanhoArquivo, typeMime);
+                    arq.arq_situacao = (byte)SYS_ArquivoSituacao.Temporario;
+                    SYS_ArquivoBO.Save(arq, ApplicationWEB.TamanhoMaximoArquivo, ApplicationWEB.TiposArquivosPermitidos);
+                    VS_arquivo = arq.arq_id;
 
                     hplAnexo.Text = txtTituloAnexo.Text;
-                    fupAnexo.Visible = false;
+                    hplAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", arq.arq_id);
+
+                    divAddAnexo.Visible = false;
+                    divAnexoAdicionado.Visible = true;
                 }
                 else
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.SelecioneArquivo").ToString());
@@ -720,6 +730,30 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 ApplicationWEB._GravaErro(ex);
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroAdicionarArquivo").ToString(), UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void btnExcluirAnexo_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                txtTituloAnexo.Text = "";
+                hplAnexo.Text = "";
+                hplAnexo.NavigateUrl = "";
+                VS_arquivo = -1;
+                divAddAnexo.Visible = true;
+                divAnexoAdicionado.Visible = false;
+            }
+            catch (ValidationException ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroExcluirArquivo").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
 
