@@ -31,15 +31,6 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// updCadastro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updCadastro;
-        
-        /// <summary>
         /// vsRelatorioAtendimento control.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios3;
+        
+        /// <summary>
+        /// updCadastro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updCadastro;
         
         /// <summary>
         /// lblTitulo control.
@@ -211,6 +211,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         protected global::System.Web.UI.WebControls.Label lblLegendAnexo;
         
         /// <summary>
+        /// vsAnexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsAnexo;
+        
+        /// <summary>
         /// lblTituloAnexo control.
         /// </summary>
         /// <remarks>
@@ -245,6 +254,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fupAnexo;
+        
+        /// <summary>
+        /// btnAddAnexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnAddAnexo;
         
         /// <summary>
         /// hplAnexo control.
@@ -301,22 +319,13 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         protected global::GestaoEscolar.WebControls.Combos.UCComboQuestionario UCComboQuestionario;
         
         /// <summary>
-        /// btnAdicionarQuestionario control.
+        /// btnAddQuestionario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdicionarQuestionario;
-        
-        /// <summary>
-        /// btnCacelarQuestionario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCacelarQuestionario;
+        protected global::System.Web.UI.WebControls.ImageButton btnAddQuestionario;
         
         /// <summary>
         /// gvQuestionario control.
@@ -326,15 +335,6 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvQuestionario;
-        
-        /// <summary>
-        /// btnNovoQuestionario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNovoQuestionario;
         
         /// <summary>
         /// updGrupo control.
@@ -353,6 +353,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblLegendGrupo;
+        
+        /// <summary>
+        /// pnlGrupo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlGrupo;
         
         /// <summary>
         /// gvGrupo control.
@@ -380,6 +389,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblLegendCargo;
+        
+        /// <summary>
+        /// pnlCargo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCargo;
         
         /// <summary>
         /// gvCargo control.

@@ -154,7 +154,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="lstQuestionario">Lista de questionários</param>
         /// <param name="postedFile">Arquivo anexo</param>
         /// <returns></returns>
-        public static bool Salvar(CLS_RelatorioAtendimento rea, List<CLS_RelatorioAtendimentoGrupo> lstGrupo, List<CLS_RelatorioAtendimentoCargo> lstCargo, List<CLS_RelatorioAtendimentoQuestionario> lstQuestionario, SYS_Arquivo arquivo)
+        public static bool Salvar(CLS_RelatorioAtendimento rea, List<CLS_RelatorioAtendimentoGrupo> lstGrupo, List<CLS_RelatorioAtendimentoCargo> lstCargo, List<CLS_RelatorioAtendimentoQuestionario> lstQuestionario, SYS_Arquivo arquivo, int TamanhoMaximoArquivo, string[] TiposArquivosPermitidos)
         {
             CLS_RelatorioAtendimentoDAO dao = new CLS_RelatorioAtendimentoDAO();
             dao._Banco.Open(IsolationLevel.ReadCommitted);
@@ -162,7 +162,7 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 if (arquivo.arq_tamanhoKB > 0)
                 {
-                    if (SYS_ArquivoBO.Save(arquivo, dao._Banco))
+                    if (SYS_ArquivoBO.Save(arquivo, TamanhoMaximoArquivo, TiposArquivosPermitidos, dao._Banco))
                         rea.arq_idAnexo = arquivo.arq_id;
                 }
 
