@@ -774,6 +774,27 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Periodicidade do relatório é obrigatória.'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.litLancamento.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento de anotação'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Voltar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.MensagemSucessoSalvar' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento de anotação salvo com sucesso.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
