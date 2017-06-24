@@ -137,7 +137,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 if (!CLS_QuestionarioConteudoPreenchimentoBO.ConteudoPreenchido(Conteudo.qtc_id.ToString()))
                 {
                     Conteudo.qtc_tipo = Convert.ToByte(_ddlTipoConteudo.SelectedValue.ToString());
-                    if (Conteudo.qtc_tipo != (byte)QuestionarioTipoConteudo.Pergunta)
+                    if (Conteudo.qtc_tipo == (byte)QuestionarioTipoConteudo.Pergunta)
                         Conteudo.qtc_tipoResposta = Convert.ToByte(_ddlTipoResposta.SelectedValue.ToString());
                     else
                         Conteudo.qtc_tipoResposta = 0;
