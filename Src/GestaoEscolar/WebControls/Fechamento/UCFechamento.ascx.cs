@@ -21,7 +21,7 @@ namespace GestaoEscolar.WebControls.Fechamento
     {
         #region DELEGATES
 
-        public delegate void commandAbrirRelatorioRP(long alu_id);
+        public delegate void commandAbrirRelatorioRP(long alu_id, string tds_idRP);
         public event commandAbrirRelatorioRP AbrirRelatorioRP;
 
         public delegate void commandAbrirRelatorioAEE(long alu_id);
@@ -1481,11 +1481,11 @@ namespace GestaoEscolar.WebControls.Fechamento
             UCAlunoEfetivacaoObservacao_AbrirRelatorio(idRelatorio, nota, arq_idRelatorio, dadosAluno);
         }
 
-        private void UCFechamento_AbrirRelatorioRP(long alu_id)
+        private void UCFechamento_AbrirRelatorioRP(long alu_id, string tds_idRP)
         {
             if (AbrirRelatorioRP != null)
             {
-                AbrirRelatorioRP(alu_id);
+                AbrirRelatorioRP(alu_id, tds_idRP);
             }
         }
 

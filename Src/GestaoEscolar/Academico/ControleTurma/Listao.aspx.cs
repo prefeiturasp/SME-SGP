@@ -2465,21 +2465,21 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
-        private void AbrirRelatorioRP(long alu_id, long tud_id)
+        private void AbrirRelatorioRP(long alu_id, string tds_idRP)
         {
             Session.Remove("alu_id_RelatorioRP");
-            Session.Remove("tud_id_RelatorioRP");
+            Session.Remove("tds_id_RelatorioRP");
             Session.Remove("PaginaRetorno_RelatorioRP");
 
             Session.Add("alu_id_RelatorioRP", alu_id);
-            Session.Add("tud_id_RelatorioRP", tud_id);
+            Session.Add("tds_id_RelatorioRP", tds_idRP);
             Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
 
             CarregaSessionPaginaRetorno();
             RedirecionarPagina("~/Classe/RelatorioRecuperacaoParalela/Cadastro.aspx");
         }
 
-        private void AbrirRelatorioAEE(long alu_id, long tud_id)
+        private void AbrirRelatorioAEE(long alu_id)
         {
             Session.Remove("alu_id_RelatorioAEE");
             Session.Remove("PaginaRetorno_RelatorioAEE");
@@ -2887,14 +2887,14 @@ namespace GestaoEscolar.Academico.ControleTurma
             trExibirAlunoDispensadoListao.Visible = UCLancamentoFrequencia.VisivelAlunoDispensado = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_LEGENDA_ALUNO_DISPENSADO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
         }
 
-        private void UCLancamentoFrequencia_AbrirRelatorioRP(long alu_id)
+        private void UCLancamentoFrequencia_AbrirRelatorioRP(long alu_id, string tds_idRP)
         {
-            AbrirRelatorioRP(alu_id, UCControleTurma1.VS_tud_id);
+            AbrirRelatorioRP(alu_id, tds_idRP);
         }
 
         private void UCLancamentoFrequencia_AbrirRelatorioAEE(long alu_id)
         {
-            AbrirRelatorioAEE(alu_id, UCControleTurma1.VS_tud_id);
+            AbrirRelatorioAEE(alu_id);
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -3574,7 +3574,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 try
                 {
-                    AbrirRelatorioRP(Convert.ToInt64(e.CommandArgument.ToString()), VisibilidadeRegencia(ddlTurmaDisciplinaListao) ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id);
+                    string[] args = e.CommandArgument.ToString().Split(';');
+                    AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
                 }
                 catch (Exception ex)
                 {
@@ -3586,7 +3587,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 try
                 {
-                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()), VisibilidadeRegencia(ddlTurmaDisciplinaListao) ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id);
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
                 }
                 catch (Exception ex)
                 {
@@ -3730,6 +3731,26 @@ namespace GestaoEscolar.Academico.ControleTurma
                         {
                             btnRelatorioRP.Visible = true;
                             btnRelatorioRP.CommandArgument = Alu_id.ToString();
+
+                            if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno)
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                            }
+                            else
+                            {
+                                string strTds = string.Empty;
+                                (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_id)
+                                 group preenchimento by new { tds_id = preenchimento.tds_id } into grupo
+                                 select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
+                                if (strTds.Length > 1)
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
+                                }
+                                else
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                                }
+                            }
                         }
                     }
                 }
@@ -4237,7 +4258,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 try
                 {
-                    AbrirRelatorioRP(Convert.ToInt64(e.CommandArgument.ToString()), UCControleTurma1.VS_tud_id);
+                    string[] args = e.CommandArgument.ToString().Split(';');
+                    AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
                 }
                 catch (Exception ex)
                 {
@@ -4249,7 +4271,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 try
                 {
-                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()), UCControleTurma1.VS_tud_id);
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
                 }
                 catch (Exception ex)
                 {
@@ -4350,6 +4372,26 @@ namespace GestaoEscolar.Academico.ControleTurma
                         {
                             btnRelatorioRP.Visible = true;
                             btnRelatorioRP.CommandArgument = Alu_idExtraClasse.ToString();
+
+                            if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno)
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                            }
+                            else
+                            {
+                                string strTds = string.Empty;
+                                (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_idExtraClasse)
+                                 group preenchimento by new { tds_id = preenchimento.tds_id } into grupo
+                                 select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
+                                if (strTds.Length > 1)
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
+                                }
+                                else
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                                }
+                            }
                         }
                     }
                 }
