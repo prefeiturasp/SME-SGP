@@ -113,6 +113,10 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 divAddAnexo.Visible = rea.arq_idAnexo == 0;
                 divAnexoAdicionado.Visible = rea.arq_idAnexo > 0;
                 UCComboTipoDisciplina.Valor = rea.tds_id;
+
+                CarregaCargos();
+                CarregaGrupos();
+                CarregaQuestionarios();
             }
             catch (Exception ex)
             {
@@ -305,7 +309,9 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         private void CarregaQuestionarios()
         {
             VS_lstQuestionarios = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(VS_rea_id);
-            gvQuestionario.DataSource = VS_lstQuestionarios;
+            VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
+
+            gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
             gvQuestionario.DataBind();
         }
 
@@ -439,11 +445,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                                            GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.btnCancelar.Text").ToString() :
                                            GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.btnVoltar.Text").ToString();
                         ckbBloqueado.Visible = false;
+
+                        CarregaCargos();
+                        CarregaGrupos();
+                        CarregaQuestionarios();
                     }
 
-                    CarregaCargos();
-                    CarregaGrupos();
-                    CarregaQuestionarios();
 
                     Page.Form.DefaultFocus = txtTitulo.ClientID;
                     Page.Form.DefaultButton = bntSalvar.UniqueID;
