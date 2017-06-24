@@ -203,7 +203,7 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
 
         public event commandCarregarAusencias CarregarAusencias;
 
-        public delegate void commandAbrirRelatorioRP(long alu_id);
+        public delegate void commandAbrirRelatorioRP(long alu_id, string tds_idRP);
 
         public event commandAbrirRelatorioRP AbrirRelatorioRP;
 
@@ -801,6 +801,26 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                         {
                             btnRelatorioRP.Visible = true;
                             btnRelatorioRP.CommandArgument = Alu_id.ToString();
+
+                            if (tudTipo == (byte)TurmaDisciplinaTipo.DisciplinaEletivaAluno)
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                            }
+                            else
+                            {
+                                string strTds = string.Empty;
+                                (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_id)
+                                 group preenchimento by new { tds_id = preenchimento.tds_id } into grupo
+                                 select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
+                                if (strTds.Length > 1)
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
+                                }
+                                else
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                                }
+                            }
                         }
                     }
                 }
@@ -843,7 +863,8 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                 {
                     if (AbrirRelatorioRP != null)
                     {
-                        AbrirRelatorioRP(Convert.ToInt64(e.CommandArgument.ToString()));
+                        string[] args = e.CommandArgument.ToString().Split(';');
+                        AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
                     }
                 }
                 catch (Exception ex)

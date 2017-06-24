@@ -4267,6 +4267,7 @@
     <Content Include="Includes\jsCadastroJustificativaFalta.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsCadastroLancamentoSondagem.js" />
+    <Content Include="Includes\jsCadastroRelatorioAtendimento.js" />
     <Content Include="Includes\jsCadastroSondagem.js" />
     <Content Include="Includes\jsConfirmaFormacaoDocente.js" />
     <Content Include="Includes\jsFilaFilaFechamento.js" />

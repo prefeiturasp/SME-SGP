@@ -717,6 +717,13 @@ SET XACT_ABORT ON
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Não existem anotações de recuperação paralela para o aluno.'
+		
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Padrao.LimparPesquisa.Text' 
+        , @rcr_NomeResource = 'Padrao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Limpar pesquisa'
 
 	EXEC MS_InsereResource 
         @rcr_chave = 'RelatorioAtendimento.Cadastro.btnAddAnexo.Text' 
