@@ -170,6 +170,14 @@ namespace MSTech.GestaoEscolar.BLL
                     }
                 );
 
+                CLS_RelatorioAtendimento relatorioAtendimento = CLS_RelatorioAtendimentoBO.GetEntity(new CLS_RelatorioAtendimento { rea_id = relatorio.entityRelatorioPreenchimento.rea_id });
+                if (relatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.RP)
+                {
+                    ACA_CalendarioAnual calendario = ACA_CalendarioAnualBO.SelecionaPorTurma(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tur_id);
+                    List<MTR_MatriculaTurma> matriculasAno = MTR_MatriculaTurmaBO.GetSelectMatriculasAlunoAno(relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id, calendario.cal_ano);
+                    matriculasAno.ForEach(p => CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, p.tur_id)); 
+                }
+
                 return retorno;
             }
             catch (Exception ex)

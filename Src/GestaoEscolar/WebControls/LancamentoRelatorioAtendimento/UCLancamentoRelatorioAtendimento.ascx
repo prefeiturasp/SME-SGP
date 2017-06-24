@@ -59,7 +59,7 @@
                                         <asp:HiddenField ID="hdnTipoResposta" runat="server" Value='<%# Eval("qtc_tipoResposta") %>' />
                                         <asp:HiddenField ID="hdnQtcId" runat="server" Value='<%# Eval("qtc_id") %>' />
                                         <asp:Label ID="lblTextoConteudo" runat="server" Text='<%# Eval("qtc_texto") %>' CssClass='<%# RetornaClasseQuestionarioConteudo((byte)Eval("qtc_tipo")) %>'></asp:Label>
-                                        <asp:TextBox ID="txtResposta" runat="server" CssClass="questionario-conteudo-resposta-texto" Visible="false" TextMode="MultiLine"></asp:TextBox>
+                                        <asp:TextBox ID="txtResposta" runat="server" CssClass="questionario-conteudo-resposta-texto" Visible="false" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
                                         <div class="clear"></div>
                                         <asp:Repeater ID="rptResposta" runat="server" OnItemDataBound="rptResposta_ItemDataBound">
                                             <ItemTemplate>
@@ -67,7 +67,7 @@
                                                     <asp:HiddenField ID="hdnQtrId" runat="server" Value='<%# Eval("qtr_id") %>' />
                                                     <asp:CheckBox ID="chkResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-multi-selecao" Visible="false" />
                                                     <asp:RadioButton ID="rdbResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-selecao-unica" Visible="false" />
-                                                    <asp:TextBox ID="txtRespostaTextoAdicional" runat="server" CssClass="questionario-conteudo-resposta-texto-adicional" Visible="false"></asp:TextBox>
+                                                    <asp:TextBox ID="txtRespostaTextoAdicional" runat="server" CssClass="questionario-conteudo-resposta-texto-adicional" Visible="false" MaxLength="500"></asp:TextBox>
                                                 </div>
                                             </ItemTemplate>
                                         </asp:Repeater>

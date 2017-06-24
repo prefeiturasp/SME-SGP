@@ -381,6 +381,28 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna as matrículas do aluno não excluídas logicamente por ano.
+        /// </summary>
+        /// <param name="alu_id">ID do aluno</param>
+        /// <returns>Retorna entidade para MatriculaTurma</returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static List<MTR_MatriculaTurma> GetSelectMatriculasAlunoAno
+        (
+            long alu_id
+            , int cal_ano
+        )
+        {
+            List<MTR_MatriculaTurma> entities = new List<MTR_MatriculaTurma>();
+            MTR_MatriculaTurmaDAO dao = new MTR_MatriculaTurmaDAO();
+            DataTable dt = dao.SelectBy_MatriculaAlunoAno(alu_id, cal_ano);
+            foreach (DataRow dr in dt.Rows)
+            {
+                entities.Add(dao.DataRowToEntity(dr, new MTR_MatriculaTurma()));
+            }
+            return entities;
+        }
+
+        /// <summary>
         /// Retorna para a entidade a ultima matricula cadastrada,
         /// para os alunos da lista passada por parametro.
         /// </summary>

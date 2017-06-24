@@ -70,6 +70,11 @@ namespace MSTech.GestaoEscolar.BLL
             return string.Format("Cache_AlunoPreenchimentoPorPeriodoDisciplina_{0}_{1}_{2}", tpc_id, tur_id, tud_id);
         }
 
+        public static void LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(int tpc_id, long tur_id)
+        {
+            CacheManager.Factory.RemoveByPattern(string.Format("Cache_AlunoPreenchimentoPorPeriodoDisciplina_{0}_{1}", tpc_id, tur_id));
+        }
+
         /// <summary>
         /// Retorna o id dos alunos que possuem registro de anotação da recuperação paralela.
         /// </summary>
@@ -116,9 +121,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// Retorna os lançamentos feito para o aluno de acordo com os parâmetros.
         /// </summary>
         /// <returns></returns>
-        public static DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tud_id, int tds_id, int rea_id, int tpc_id)
+        public static DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tud_id, bool apenasComPreenchimento, int rea_id, int tpc_id)
         {
-            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, tud_id, tds_id, rea_id, tpc_id);
+            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, tud_id, apenasComPreenchimento, rea_id, tpc_id);
         }
 
         public static new bool Save(CLS_RelatorioPreenchimentoAlunoTurmaDisciplina entity, TalkDBTransaction banco)

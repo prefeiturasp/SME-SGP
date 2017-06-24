@@ -253,6 +253,9 @@
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsUCLancamentoRelatorioAtendimento.js"));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.UiAriaTabs));
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsTabs.js"));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
             }
         }
 

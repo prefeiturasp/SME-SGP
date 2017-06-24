@@ -632,7 +632,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'GestaoEscolar.Classe.RelatorioAtendimento.Busca'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Lnaçar relatório de atendimento AEE'
+		, @rcr_valorPadrao = 'Lançar relatório de atendimento AEE'
 	
 	EXEC MS_InsereResource 
 		@rcr_chave = 'lblDownloadAnexo.Text' 

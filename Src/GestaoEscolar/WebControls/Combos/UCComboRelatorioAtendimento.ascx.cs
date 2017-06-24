@@ -1,4 +1,5 @@
 ﻿using MSTech.GestaoEscolar.BLL;
+using MSTech.GestaoEscolar.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Collections.Generic;
@@ -248,10 +249,18 @@ namespace GestaoEscolar.WebControls.Combos
             }
         }
 
-        public void CarregarRelatoriosRPDisciplina(long alu_id, long tud_id, int tds_idRP)
+        public void CarregarRelatoriosRPDisciplina(long alu_id, long tud_id, bool apenasComPreenchimento, byte rea_periodicidadePreenchimento)
         {
             ddlCombo.Items.Clear();
-            ddlCombo.DataSource = CLS_RelatorioAtendimentoBO.SelecionaRelatoriosRPDisciplina(__SessionWEB.__UsuarioWEB.Usuario.usu_id, alu_id, tud_id, tds_idRP);
+            List<CLS_RelatorioAtendimento> lstRelatorioAtendimento = CLS_RelatorioAtendimentoBO.SelecionaRelatoriosRPDisciplina(__SessionWEB.__UsuarioWEB.Usuario.usu_id, alu_id, tud_id, apenasComPreenchimento);
+            if (rea_periodicidadePreenchimento > 0)
+            {
+                ddlCombo.DataSource = lstRelatorioAtendimento.FindAll(p => p.rea_periodicidadePreenchimento == rea_periodicidadePreenchimento);
+            }
+            else
+            {
+                ddlCombo.DataSource = lstRelatorioAtendimento;
+            }
             CarregarMensagemSelecione();
 
             ddlCombo.DataBind();
