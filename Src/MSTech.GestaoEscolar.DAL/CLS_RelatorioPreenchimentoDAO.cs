@@ -22,7 +22,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="tud_id"></param>
         /// <param name="tpc_id"></param>
         /// <returns></returns>
-		public DataSet SelecionaPorRelatorioAlunoTurmaDisciplina(int rea_id, long alu_id, long tur_id, long tud_id, int tpc_id)
+		public DataSet SelecionaPorRelatorioAlunoTurmaDisciplina(int rea_id, long alu_id, long tur_id, long tud_id, int tpc_id, long reap_id)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioPreenchimento_SelecionaPorRelatorioAlunoTurmaDisciplina", _Banco);
 
@@ -72,6 +72,20 @@ namespace MSTech.GestaoEscolar.DAL
                 if (tpc_id > 0)
                 {
                     Param.Value = tpc_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@reap_id";
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                if (reap_id > 0)
+                {
+                    Param.Value = reap_id;
                 }
                 else
                 {

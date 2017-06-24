@@ -2,6 +2,7 @@
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
+using MSTech.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -182,6 +183,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                         UCCPeriodoCalendario.Tpc_ID = Convert.ToInt32(listaDados["Edit_tpc_id"]);
 
                         UCCRelatorioAtendimento.PermiteEditar = false;
+                        updLancamento.Visible = false;
 
                         // Carregar o combo de disciplinas
                         string strTdsId = Session["tds_id_RelatorioRP"].ToString();
@@ -327,6 +329,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                 grvLancamentos.Visible = false;
 
                 // Carrega o lançamento cadastrado
+                UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, VS_tud_id, UCCPeriodoCalendario.Tpc_ID, UCCRelatorioAtendimento.Valor, false, reap_id);
                 pnlLancamento.Visible = true;
             }
             else if (e.CommandName == "Deletar")
@@ -344,7 +347,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
 
                 // Carrega um novo lançamento
                 pnlLancamento.Visible = true;
-                UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, VS_tud_id, -1, UCCRelatorioAtendimento.Valor);
+                UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, VS_tud_id, UCCPeriodoCalendario.Tpc_ID, UCCRelatorioAtendimento.Valor);
             }
             catch (Exception ex)
             {
@@ -355,10 +358,15 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-
+            Salvar();
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            VerificaPaginaRedirecionar();
+        }
+
+        protected void btnVoltar_Click(object sender, EventArgs e)
         {
             VerificaPaginaRedirecionar();
         }
@@ -384,6 +392,45 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             if (!string.IsNullOrEmpty(url))
             {
                 RedirecionarPagina(url);
+            }
+        }
+
+        /// <summary>
+        /// Salva o relatório preenchido.
+        /// </summary>
+        private void Salvar()
+        {
+            try
+            {
+                RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(false);
+                List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
+                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor))
+                {
+                    string msg = GetGlobalResourceObject("Classe", "RelatorioRecuperacaoParalela.Cadastro.MensagemSucessoSalvar").ToString();
+                    lblMensagem.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Sucesso);
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, msg + " | reap_id: " + rel.entityRelatorioPreenchimento.reap_id);
+
+                    if (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico)
+                    {
+                        pnlLancamento.Visible = false;
+                        grvLancamentos.Visible = true;
+
+                        // Recarrega o grid de lançamentos
+                        grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(VS_alu_id, VS_tud_id, Convert.ToInt32(ddlDisciplina.SelectedValue), UCCRelatorioAtendimento.Valor, UCCPeriodoCalendario.Tpc_ID);
+                        grvLancamentos.DataBind();
+                    }
+                }
+            }
+            catch (ValidationException ex)
+            {
+                lblMensagem.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                updMensagem.Update();
+            }
+            catch (Exception ex)
+            {
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar salvar lançamento de anotação.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+                updMensagem.Update();
             }
         }
 

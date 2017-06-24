@@ -51,11 +51,11 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tud_id"></param>
         /// <param name="tpc_id"></param>
         /// <returns></returns>
-        public static RelatorioPreenchimentoAluno SelecionaPorRelatorioAlunoTurmaDisciplina(int rea_id, long alu_id, long tur_id, long tud_id, int tpc_id)
+        public static RelatorioPreenchimentoAluno SelecionaPorRelatorioAlunoTurmaDisciplina(int rea_id, long alu_id, long tur_id, long tud_id, int tpc_id, long reap_id)
         {
             RelatorioPreenchimentoAluno rel = new RelatorioPreenchimentoAluno();
 
-            using (DataSet ds = new CLS_RelatorioPreenchimentoDAO().SelecionaPorRelatorioAlunoTurmaDisciplina(rea_id, alu_id, tur_id, tud_id, tpc_id))
+            using (DataSet ds = new CLS_RelatorioPreenchimentoDAO().SelecionaPorRelatorioAlunoTurmaDisciplina(rea_id, alu_id, tur_id, tud_id, tpc_id, reap_id))
             {
                 using (DataTable dtRelatorioPreenchimento = ds.Tables[0],
                                  dtRelatorioPreenchimentoAlunoTurmaDisciplina = ds.Tables[1],

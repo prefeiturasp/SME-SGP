@@ -27,39 +27,45 @@
         </asp:Panel>
         <asp:UpdatePanel ID="updLancamento" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
             <ContentTemplate>
-                <!-- Utilizado em relatórios que permitem mais de um lançamento -->
-                <asp:GridView ID="grvLancamentos" runat="server" AutoGenerateColumns="false"
-                    EmptyDataText="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.grvLancamentos.EmptyDataText %>"
-                    DataKeyNames="reap_id" OnRowCommand="grvLancamentos_RowCommand" OnRowDataBound="grvLancamentos_RowDataBound">
-                    <Columns>
-                        <asp:BoundField DataField="reap_descricao" HeaderText=""></asp:BoundField>
-                        <asp:TemplateField HeaderText="Alterar">
-                            <ItemTemplate>
-                                <asp:ImageButton ID="btnAlterar" runat="server" CommandName="Alterar" SkinID="btEditar" CausesValidation="False" />
-                            </ItemTemplate>
-                            <HeaderStyle CssClass="center" />
-                            <ItemStyle HorizontalAlign="Center" />
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Excluir">
-                            <ItemTemplate>
-                                <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Deletar" SkinID="btExcluir" CausesValidation="False" />
-                            </ItemTemplate>
-                            <HeaderStyle CssClass="center" />
-                            <ItemStyle HorizontalAlign="Center" />
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>    
-                <asp:Panel id="pnlLancamento" runat="server" Visible="false">
-                    <div class="right area-botoes-top" style="border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
-                        <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnSalvar.Text %>" CausesValidation="false" OnClick="btnSalvar_Click" />
-                        <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnCancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
+                <fieldset>
+                    <legend><asp:Literal runat="server" ID="litLancamento" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.litLancamento.Text %>"></asp:Literal></legend>
+                    <!-- Utilizado em relatórios que permitem mais de um lançamento -->
+                    <asp:GridView ID="grvLancamentos" runat="server" AutoGenerateColumns="false"
+                        EmptyDataText="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.grvLancamentos.EmptyDataText %>"
+                        DataKeyNames="reap_id" OnRowCommand="grvLancamentos_RowCommand" OnRowDataBound="grvLancamentos_RowDataBound">
+                        <Columns>
+                            <asp:BoundField DataField="reap_descricao" HeaderText=""></asp:BoundField>
+                            <asp:TemplateField HeaderText="Alterar">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnAlterar" runat="server" CommandName="Alterar" SkinID="btEditar" CausesValidation="False" />
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="center" />
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Excluir">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Deletar" SkinID="btExcluir" CausesValidation="False" />
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="center" />
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>    
+                    <asp:Panel id="pnlLancamento" runat="server" Visible="false">
+                        <div class="right area-botoes-top" style="border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+                            <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnSalvar.Text %>" CausesValidation="false" OnClick="btnSalvar_Click" />
+                            <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnCancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
+                        </div>
+                        <uc:UCLancamentoRelatorioAtendimento ID="UCLancamentoRelatorioAtendimento" runat="server" />        
+                        <div class="right">
+                            <asp:Button ID="btnSalvarBaixo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnSalvar.Text %>" CausesValidation="false" OnClick="btnSalvar_Click" />
+                            <asp:Button ID="btnCancelarBaixo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnCancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
+                        </div>
+                    </asp:Panel>
+                    <div class="right" runat="server" visible="false" id="div1">
+                        <asp:Button ID="btnVoltar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text %>" CausesValidation="false" OnClick="btnVoltar_Click" />
                     </div>
-                    <uc:UCLancamentoRelatorioAtendimento ID="UCLancamentoRelatorioAtendimento" runat="server" />        
-                    <div class="right">
-                        <asp:Button ID="btnSalvarBaixo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnSalvar.Text %>" CausesValidation="false" OnClick="btnSalvar_Click" />
-                        <asp:Button ID="btnCancelarBaixo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnCancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
-                    </div>
-                </asp:Panel>
+                </fieldset>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
