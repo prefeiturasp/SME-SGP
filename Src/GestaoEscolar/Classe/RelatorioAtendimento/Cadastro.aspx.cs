@@ -7,6 +7,7 @@
     using MSTech.Validation.Exceptions;
     using System;
     using System.Collections.Generic;
+    using System.Web.UI;
     public partial class Cadastro : MotherPageLogado
     {
         #region Propriedades
@@ -137,6 +138,15 @@
                         VS_tur_id = Convert.ToInt64(dadosPaginaRetorno["Edit_tur_id"]);
                         tpc_idSelecionado = Convert.ToInt32(dadosPaginaRetorno["Edit_tpc_id"]);
                     }
+                    else if (Session["alu_idLimpaBusca"] != null)
+                    {
+                        VS_alu_id = Convert.ToInt64(Session["alu_idLimpaBusca"]);
+                        VS_cal_id = Convert.ToInt32(Session["cal_idLimpaBusca"]);
+                        VS_tur_id = Convert.ToInt64(Session["tur_idLimpaBusca"]);
+                        Session.Remove("alu_idLimpaBusca");
+                        Session.Remove("cal_idLimpaBusca");
+                        Session.Remove("tur_idLimpaBusca");
+                    }
 
                     UCCRelatorioAtendimento.CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo.AEE);
                     UCCPeriodoCalendario.CarregarPorCalendario(VS_cal_id);
@@ -148,6 +158,7 @@
                         if (cap != null && cap.cap_id > 0)
                         {
                             UCCPeriodoCalendario.Valor = new[] { tpc_idSelecionado, cap.cap_id };
+                            UCCPeriodoCalendario_IndexChanged();
                         }
                     }
 
@@ -159,6 +170,15 @@
                     ApplicationWEB._GravaErro(ex);
                     updMensagem.Update();
                 }
+            }
+
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                RegistrarParametrosMensagemSair(true, (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.ExitPageConfirm));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsSetExitPageConfirmer.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroRelatorioAtendimento.js"));
             }
         }
 
@@ -173,9 +193,28 @@
         {
             try
             {
-
                 pnlLancamento.Visible = btnSalvar.Visible = btnSalvarBaixo.Visible = btnAprovar.Visible = btnAprovarBaixo.Visible =
                      btnDesaprovar.Visible = btnDesaprovarBaixo.Visible = false;
+
+                if (Convert.ToString(btnCancelar.CssClass).Contains("btnMensagemUnload"))
+                {
+                    btnCancelar.CssClass.Replace("btnMensagemUnload", "");
+                }
+
+                if (Convert.ToString(btnCancelarBaixo.CssClass).Contains("btnMensagemUnload"))
+                {
+                    btnCancelarBaixo.CssClass.Replace("btnMensagemUnload", "");
+                }
+
+                if (Convert.ToString(btnLimparBusca.CssClass).Contains("btnMensagemUnload"))
+                {
+                    btnLimparBusca.CssClass.Replace("btnMensagemUnload", "");
+                }
+
+                if (Convert.ToString(btnLimparBuscaBaixo.CssClass).Contains("btnMensagemUnload"))
+                {
+                    btnLimparBuscaBaixo.CssClass.Replace("btnMensagemUnload", "");
+                }
 
                 if (UCCPeriodoCalendario.Valor[0] > 0 && UCCPeriodoCalendario.Valor[1] > 0 && UCCRelatorioAtendimento.Valor > 0)
                 {
@@ -193,6 +232,28 @@
                     btnDesaprovar.Visible = btnDesaprovarBaixo.Visible = UCLancamentoRelatorioAtendimento.PermiteAprovar && UCLancamentoRelatorioAtendimento.PermiteEditar &&
                         UCLancamentoRelatorioAtendimento.SituacaoRelatorioPreenchimento == (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado &&
                         !ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.PERMITIR_EDITAR_RELATORIO_APROVADO, Ent_ID_UsuarioLogado);
+
+                    UCCPeriodoCalendario.PermiteEditar = UCCRelatorioAtendimento.PermiteEditar = false;
+
+                    if (!Convert.ToString(btnCancelar.CssClass).Contains("btnMensagemUnload"))
+                    {
+                        btnCancelar.CssClass += " btnMensagemUnload";
+                    }
+
+                    if (!Convert.ToString(btnCancelarBaixo.CssClass).Contains("btnMensagemUnload"))
+                    {
+                        btnCancelarBaixo.CssClass += " btnMensagemUnload";
+                    }
+
+                    if (!Convert.ToString(btnLimparBusca.CssClass).Contains("btnMensagemUnload"))
+                    {
+                        btnLimparBusca.CssClass += " btnMensagemUnload";
+                    }
+
+                    if (!Convert.ToString(btnLimparBuscaBaixo.CssClass).Contains("btnMensagemUnload"))
+                    {
+                        btnLimparBuscaBaixo.CssClass += " btnMensagemUnload";
+                    }
                 }
 
                 updBotoes.Update();
@@ -354,6 +415,14 @@
             {
                 Desaprovar();
             }
+        }
+
+        protected void btnLimparBusca_Click(object sender, EventArgs e)
+        {
+            Session["alu_idLimpaBusca"] = VS_alu_id;
+            Session["cal_idLimpaBusca"] = VS_cal_id;
+            Session["tur_idLimpaBusca"] = VS_tur_id;
+            RedirecionarPagina("Cadastro.aspx");
         }
 
         #endregion
