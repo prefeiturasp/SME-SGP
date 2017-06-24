@@ -112,6 +112,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 hplAnexo.NavigateUrl = rea.arq_idAnexo == 0 ? "" : String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
                 divAddAnexo.Visible = rea.arq_idAnexo == 0;
                 divAnexoAdicionado.Visible = rea.arq_idAnexo > 0;
+                UCComboTipoDisciplina.Valor = rea.tds_id;
             }
             catch (Exception ex)
             {
