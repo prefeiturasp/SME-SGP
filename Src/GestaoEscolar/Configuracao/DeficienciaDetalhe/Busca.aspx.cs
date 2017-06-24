@@ -33,12 +33,6 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScriptManager sm = ScriptManager.GetCurrent(this);
-            if (sm != null)
-            {
-                sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
-            }
-
             if (!IsPostBack)
             {
                 string message = __SessionWEB.PostMessages;

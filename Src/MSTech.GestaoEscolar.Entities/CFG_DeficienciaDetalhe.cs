@@ -44,5 +44,8 @@ namespace MSTech.GestaoEscolar.Entities
         /// Data de alteração.
         /// </summary>
         public override DateTime dfd_dataAlteracao { get; set; }
+
+
+        public bool PermiteExcluir { get; set; }
     }
 }

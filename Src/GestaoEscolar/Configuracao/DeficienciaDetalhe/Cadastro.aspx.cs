@@ -120,16 +120,14 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
 
 
         /// <summary>
-        /// Método para carregar um registro de área de conhecimento, a fim de atualizar suas informações.
-        /// Recebe dados referente à área de conhecimento para realizar a busca.
+        /// Método para carregar uma deficiência com seus detalhamentos.
         /// </summary>
         /// <param name="tde_id">ID do tipo de deficiencia</param>
         public void Carregar(Guid tde_id)
         {
             try
             {
-
-                //verifica se é deficiencia multipla
+                // verifica se é deficiencia multipla
                 if (tde_id == ACA_ParametroAcademicoBO.ParametroValorGuidPorEntidade(eChaveAcademico.DEFICIENCIA_MULTIPLA, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
                     divDetalhe.Visible = false;
@@ -216,7 +214,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar área de conhecimento.", UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar detalhamentos da deficiência.", UtilBO.TipoMensagem.Erro);
             }
         }
 
@@ -229,10 +227,7 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
             ScriptManager sm = ScriptManager.GetCurrent(this);
             if (sm != null)
             {
-                sm.Scripts.Add(new ScriptReference(ArquivoJS.CamposData));
-                sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
-                sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
-                sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
             }
 
             if (!IsPostBack)
@@ -412,7 +407,10 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                 if (btnExcluir != null)
                 {
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir;
+                    CFG_DeficienciaDetalhe ent = (e.Row.DataItem as CFG_DeficienciaDetalhe) ?? new CFG_DeficienciaDetalhe { PermiteExcluir = true };
+                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir 
+                        && 
+                        (ent.IsNew || ent.PermiteExcluir);
                 }
             }
         }
@@ -548,15 +546,6 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
             }
         }
 
-
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Busca.aspx", false);
-            HttpContext.Current.ApplicationInstance.CompleteRequest();
-        }
-
-        #endregion Eventos
-
         protected void grvDetalhes_Sorting(object sender, GridViewSortEventArgs e)
         {
             //Retrieve the table from the session object.
@@ -580,6 +569,14 @@ namespace GestaoEscolar.Configuracao.DeficienciaDetalhe
                 ViewState["SortDirection"] = sortDirection;
             }
         }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Busca.aspx", false);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+
+        #endregion Eventos
 
     }
 }

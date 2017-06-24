@@ -46,7 +46,7 @@
                     <fieldset>
                         <legend>
                             <asp:Label runat="server" ID="lblLegendDetalhe" Text="Detalhamento" /></legend>
-                        <asp:Button runat="server" ID="btnNovoDetalhe" Text="Novo detalhe"
+                        <asp:Button runat="server" ID="btnNovoDetalhe" Text="Incluir novo detalhe"
                             OnClick="btnNovoDetalhe_Click" CausesValidation="false" />
                         <div>
                             <br />
