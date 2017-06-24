@@ -70,7 +70,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// Retorna os lançamentos feito para o aluno de acordo com os parâmetros.
         /// </summary>
         /// <returns></returns>
-        public DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tud_id, int tds_id, int rea_id, int tpc_id)
+        public DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tud_id, bool apenasComPreenchimento, int rea_id, int tpc_id)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioPreenchimentoAlunoTurmaDisciplina_SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo", _Banco);
             try
@@ -92,10 +92,10 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_id";
-                Param.Size = 4;
-                Param.Value = tds_id;
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@apenasComPreenchimento";
+                Param.Size = 1;
+                Param.Value = apenasComPreenchimento;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

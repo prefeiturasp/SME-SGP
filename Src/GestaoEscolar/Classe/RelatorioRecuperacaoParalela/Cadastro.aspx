@@ -66,7 +66,7 @@
                     <asp:Button ID="btnSalvarBaixo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnSalvar.Text %>" CausesValidation="false" OnClick="btnSalvar_Click" />
                     <asp:Button ID="btnCancelarBaixo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnCancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
                 </div>
-            </asp:Panel>
+            </asp:Panel><br />
             <div class="right" runat="server" id="divVoltar">
                 <asp:Button ID="btnVoltar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text %>" CausesValidation="false" OnClick="btnVoltar_Click" />
             </div>

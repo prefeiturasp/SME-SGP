@@ -69,7 +69,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// Carrega os relatórios de RP verificando a permissão do usuário e o tipo de disciplina.
         /// </summary>
         /// <returns></returns>
-        public DataTable SelecionaRelatoriosRPDisciplina(Guid usu_id, long alu_id, long tud_id, int tds_idRP)
+        public DataTable SelecionaRelatoriosRPDisciplina(Guid usu_id, long alu_id, long tud_id, bool apenasComPreenchimento)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioAtendimento_SelecionaRelatoriosRPDisciplina", _Banco);
 
@@ -99,10 +99,10 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.ParameterName = "@tds_id";
-                Param.DbType = DbType.Int32;
-                Param.Size = 4;
-                Param.Value = tds_idRP;
+                Param.ParameterName = "@apenasComPreenchimento";
+                Param.DbType = DbType.Boolean;
+                Param.Size = 1;
+                Param.Value = apenasComPreenchimento;
                 qs.Parameters.Add(Param);
 
                 #endregion
