@@ -673,14 +673,14 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
-        private void UCFechamento_AbrirRelatorioRP(long alu_id)
+        private void UCFechamento_AbrirRelatorioRP(long alu_id, string tds_idRP)
         {
             Session.Remove("alu_id_RelatorioRP");
-            Session.Remove("tud_id_RelatorioRP");
+            Session.Remove("tds_id_RelatorioRP");
             Session.Remove("PaginaRetorno_RelatorioRP");
 
             Session.Add("alu_id_RelatorioRP", alu_id);
-            Session.Add("tud_id_RelatorioRP", UCControleTurma1.VS_tud_id);
+            Session.Add("tds_id_RelatorioRP", tds_idRP);
             Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
 
             CarregaSessionPaginaRetorno();

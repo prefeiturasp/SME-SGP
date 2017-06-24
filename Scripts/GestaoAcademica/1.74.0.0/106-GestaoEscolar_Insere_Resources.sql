@@ -725,6 +725,76 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Limpar pesquisa'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.btnAddAnexo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Adicionar anexo'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ErroAdicionarArquivo' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Erro ao tentar adicionar anexo.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.SelecioneArquivo' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Selecione um aqruivo para adicionar anexo.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.btnExcluirAnexo.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Excluir anexo'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.ErroExcluirArquivo' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Erro ao tentar excluir anexo.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.TituloAnexoObrigatorio' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Título do anexo é obrigatório para adicionar um arquivo.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.cpvPeriodicidade.ErrorMessage' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Periodicidade do relatório é obrigatória.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.litLancamento.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento de anotação'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Voltar'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioRecuperacaoParalela.Cadastro.MensagemSucessoSalvar' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento de anotação salvo com sucesso.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

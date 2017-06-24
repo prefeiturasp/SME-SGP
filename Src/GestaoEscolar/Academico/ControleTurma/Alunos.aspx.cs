@@ -875,6 +875,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     string[] args = e.CommandArgument.ToString().Split(';');
 
                     Session.Remove("alu_id_RelatorioRP");
+                    Session.Remove("tds_id_RelatorioRP");
                     Session.Remove("PaginaRetorno_RelatorioRP");
 
                     Session.Add("alu_id_RelatorioRP", Convert.ToInt64(args[0]));
