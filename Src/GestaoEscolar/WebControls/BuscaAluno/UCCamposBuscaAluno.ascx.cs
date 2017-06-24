@@ -9,7 +9,6 @@ public partial class WebControls_BuscaAluno_UCCamposBuscaAluno : MotherUserContr
     protected void Page_Load(object sender, EventArgs e)
     {
         cvDataNascimento.ErrorMessage = GestaoEscolarUtilBO.RetornaMsgValidacaoData("Data de nascimento do aluno");
-        _lblMatricula.Text = GestaoEscolarUtilBO.nomePadraoMatriculaEstadual(__SessionWEB.__UsuarioWEB.Usuario.ent_id);
     }
 
     #region ENUM

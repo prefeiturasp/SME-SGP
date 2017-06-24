@@ -16,7 +16,7 @@
     <asp:UpdatePanel ID="updMensagem" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:Label ID="lblMensagem" runat="server" EnableViewState="false"></asp:Label>
-            <asp:ValidationSummary ID="vsSummary" runat="server" ValidationGroup="BuscaAlunos" />
+            <asp:ValidationSummary ID="vsSummary" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
 
@@ -25,18 +25,18 @@
             <asp:Panel ID="pnlBusca" runat="server" GroupingText="<%$ Resources:GestaoEscolar.Classe.RelatorioAtendimento.Busca, pnlBusca.Text %>">
                 <uc:UCCObrigatorios ID="UCCObrigatorios" runat="server" />
                 <uc:UCCUAEscola ID="UCCUAEscola" runat="server" CarregarEscolaAutomatico="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true"
-                    ObrigatorioUA="true" ObrigatorioEscola="true" ValidationGroup="BuscaAlunos" />
-                <uc:UCCCursoCurriculo ID="UCCCursoCurriculo" MostrarMensagemSelecione="true" Obrigatorio="true" ValidationGroup="BuscaAlunos"
+                    ObrigatorioUA="true" ObrigatorioEscola="true"  />
+                <uc:UCCCursoCurriculo ID="UCCCursoCurriculo" MostrarMensagemSelecione="true" Obrigatorio="true"
                     runat="server" />
-                <uc:UCCCurriculoPeriodo ID="UCCCurriculoPeriodo" MostrarMensagemSelecione="true" Obrigatorio="true" ValidationGroup="BuscaAlunos"
+                <uc:UCCCurriculoPeriodo ID="UCCCurriculoPeriodo" MostrarMensagemSelecione="true" Obrigatorio="true"
                     runat="server" />
-                <uc:UCCCalendario ID="UCCCalendario" runat="server" MostrarMensagemSelecione="true" Obrigatorio="true" ValidationGroup="BuscaAlunos" />
-                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" Obrigatorio="true" ValidationGroup="BuscaAlunos" />
+                <uc:UCCCalendario ID="UCCCalendario" runat="server" MostrarMensagemSelecione="true" Obrigatorio="true"  />
+                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" Obrigatorio="true" />
                 <div id="divBuscaAvancadaAluno" runat="server" class="divBuscaAvancadaAluno">
-                    <uc:UCCBuscaAluno ID="UCCBuscaAluno" runat="server" />
+                    <uc:UCCBuscaAluno ID="UCCBuscaAluno" runat="server"  />
                 </div>
                 <div class="right">
-                    <asp:Button ID="btnPesquisar" runat="server" Text="<%$ Resources:Padrao, Padrao.Pesquisar.Text %>" OnClick="btnPesquisar_Click" ValidationGroup="BuscaAlunos" />
+                    <asp:Button ID="btnPesquisar" runat="server" Text="<%$ Resources:Padrao, Padrao.Pesquisar.Text %>" OnClick="btnPesquisar_Click" />
                     <asp:Button ID="btnLimparPesquisa" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click" CausesValidation="false" />
                 </div>
             </asp:Panel>

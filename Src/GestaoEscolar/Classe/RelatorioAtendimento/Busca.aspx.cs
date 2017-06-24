@@ -3,6 +3,7 @@
     using MSTech.CoreSSO.BLL;
     using MSTech.GestaoEscolar.BLL;
     using MSTech.GestaoEscolar.Web.WebProject;
+    using MSTech.Validation.Exceptions;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -144,6 +145,15 @@
             }
 
             UCCQtdePaginacao.IndexChanged += UCCQtdePaginacao_IndexChanged;
+
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.CamposData));
+            }
 
             if (!IsPostBack)
             {
@@ -401,6 +411,7 @@
         {
             if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAEE)
             {
+                DateTime data;
                 string valor, valor2, valor3;
                 
                 if (__SessionWEB.__UsuarioWEB.Docente.doc_id <= 0)
@@ -451,7 +462,10 @@
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("pes_nome", out valor);
                 UCCBuscaAluno.NomeAluno = valor;
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("pes_dataNascimento", out valor);
-                UCCBuscaAluno.DataNascAluno = valor;
+                if (DateTime.TryParse(valor, out data))
+                {
+                    UCCBuscaAluno.DataNascAluno = valor;
+                }
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("pes_nomeMae", out valor);
                 UCCBuscaAluno.NomeMaeAluno = valor;
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("alc_matricula", out valor);
@@ -565,9 +579,14 @@
 
         protected void btnPesquisar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            if (Page.IsValid && UCCBuscaAluno.IsValid)
             {
                 Pesquisar();
+            }
+            else
+            {
+                lblMensagem.Text = UtilBO.GetErroMessage("Data de nascimento do aluno não está no formato dd/mm/aaaa ou é inexistente.", UtilBO.TipoMensagem.Alerta);
+                updMensagem.Update();
             }
         }
 

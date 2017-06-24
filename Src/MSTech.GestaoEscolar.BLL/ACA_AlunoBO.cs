@@ -2740,9 +2740,7 @@ namespace MSTech.GestaoEscolar.BLL
 
             totalRecords = 0;
 
-            Func<DataTable> retorno = delegate ()
-            {
-                return new ACA_AlunoDAO().BuscaAlunosRelatoriosAEE(
+            DataTable dt = new ACA_AlunoDAO().BuscaAlunosRelatoriosAEE(
                                 cal_id
                                 , esc_id
                                 , uni_id
@@ -2763,37 +2761,6 @@ namespace MSTech.GestaoEscolar.BLL
                                 , MostraCodigoEscola
                                 , documentoOficial
                                 , out totalRecords);
-            };
-
-            string cacheKey = string.Format(ModelCache.ALUNO_BUSCA_RELATORIOS_AEE_KEY,
-                                                 cal_id
-                                                , esc_id
-                                                , uni_id
-                                                , cur_id
-                                                , crr_id
-                                                , crp_id
-                                                , tur_id
-                                                , tipoBusca
-                                                , pes_nome
-                                                , pes_dataNascimento
-                                                , pes_nomeMae
-                                                , alc_matricula
-                                                , alc_matriculaEstadual
-                                                , ent_id
-                                                , uad_idSuperior
-                                                , adm
-                                                , usu_id
-                                                , gru_id
-                                                , documentoOficial);
-
-            DataTable dt = CacheManager.Factory.Get
-                (
-                    cacheKey
-                    ,
-                    retorno
-                    ,
-                    appMinutosCacheLongo
-                );
 
             if (dt.Columns.Contains("pes_idade"))
             {

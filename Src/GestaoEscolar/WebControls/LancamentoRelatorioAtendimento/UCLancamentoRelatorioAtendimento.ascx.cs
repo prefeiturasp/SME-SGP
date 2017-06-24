@@ -253,6 +253,9 @@
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsUCLancamentoRelatorioAtendimento.js"));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.UiAriaTabs));
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsTabs.js"));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
             }
         }
 
@@ -337,9 +340,11 @@
             //Idade
             if (entityPessoa.pes_dataNascimento != new DateTime() && entityPessoa.pes_dataNascimento < DateTime.Today)
             {
+                lblInformacaoAluno.Text += "<b>Data de nascimento: </b>" + entityPessoa.pes_dataNascimento.ToString("dd/MM/yyyy");
+
                 string dataExtenso = GestaoEscolarUtilBO.DiferencaDataExtenso(entityPessoa.pes_dataNascimento, DateTime.Today);
                 if (!string.IsNullOrEmpty(dataExtenso))
-                    lblInformacaoAluno.Text += "<b>Idade: </b>" + dataExtenso;
+                    lblInformacaoAluno.Text += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Idade: </b>" + dataExtenso;
             }
 
             string sexo = entityPessoa.SexoFormatado();
