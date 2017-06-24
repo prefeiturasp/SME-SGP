@@ -32,11 +32,11 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         /// <summary>
         /// Armazena em viewstate o arquivo selecionado.
         /// </summary>
-        private SYS_Arquivo VS_arquivo
+        private long VS_arquivo
         {
             get
             {
-                return (SYS_Arquivo)(ViewState["VS_arquivo"] ?? new SYS_Arquivo());
+                return (long)(ViewState["VS_arquivo"] ?? -1);
             }
 
             set
@@ -108,8 +108,11 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 ddlTipo_SelectedIndexChanged(ddlTipo, new EventArgs());
                 chkExibeHipotese.Checked = rea.rea_permiteEditarHipoteseDiagnostica;
                 chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
-                hplAnexo.Visible = rea.arq_idAnexo > 0 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
-                hplAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
+                hplAnexo.Text = rea.rea_tituloAnexo;
+                hplAnexo.NavigateUrl = rea.arq_idAnexo == 0 ? "" : String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
+                divAddAnexo.Visible = rea.arq_idAnexo == 0;
+                divAnexoAdicionado.Visible = rea.arq_idAnexo > 0;
+                UCComboTipoDisciplina.Valor = rea.tds_id;
             }
             catch (Exception ex)
             {
@@ -126,9 +129,6 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         {
             try
             {
-                if (!string.IsNullOrEmpty(txtTituloAnexo.Text) && !fupAnexo.HasFile && string.IsNullOrEmpty(hplAnexo.NavigateUrl))
-                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.TituloAnexoSemArquivo").ToString());
-                                
                 CLS_RelatorioAtendimento rea = new CLS_RelatorioAtendimento
                 {
                     rea_id = VS_rea_id,
@@ -142,21 +142,6 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     IsNew = VS_rea_id <= 0
                 };
 
-                if (fupAnexo.HasFile)
-                {
-                    if (GestaoEscolarUtilBO.VerificarArquivo(fupAnexo.PostedFile))
-                    {
-                        string nomeArquivoSemExtensao = Path.GetFileNameWithoutExtension(fupAnexo.PostedFile.FileName);
-                        string nomeArquivo = fupAnexo.PostedFile.FileName;
-                        int tamanhoArquivo = fupAnexo.PostedFile.ContentLength;
-                        string typeMime = fupAnexo.PostedFile.ContentType;
-
-                        Stream arquivo = CopiarArquivo(fupAnexo.PostedFile.InputStream);
-
-                        VS_arquivo = CriarAnexo(arquivo, nomeArquivo, tamanhoArquivo, typeMime);
-                    }
-                }
-
                 if (!VS_lstQuestionarios.Any(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido))
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumQuestionarioAdicionado").ToString());
 
@@ -168,7 +153,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     !lstCargo.Any(c => c.rac_permissaoAprovacao || c.rac_permissaoConsulta || c.rac_permissaoEdicao || c.rac_permissaoExclusao))
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumaPermissao").ToString());
 
-                if (CLS_RelatorioAtendimentoBO.Salvar(rea, lstGrupo, lstCargo, VS_lstQuestionarios, VS_arquivo))
+                if (CLS_RelatorioAtendimentoBO.Salvar(rea, lstGrupo, lstCargo, VS_lstQuestionarios, VS_arquivo, ApplicationWEB.TamanhoMaximoArquivo, ApplicationWEB.TiposArquivosPermitidos))
                 {
                     string message = "";
                     if (VS_rea_id <= 0)
@@ -397,7 +382,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         /// </summary>
         private void Inicializar()
         {
-            VS_arquivo = new SYS_Arquivo();
+            VS_arquivo = -1;
             VS_rea_id = -1;
             txtTitulo.Text = txtTituloAnexo.Text = "";
             ddlTipo.SelectedValue = "0";
@@ -405,7 +390,9 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             chkExibeHipotese.Checked = chkExibeRacaCor.Checked = divDisciplina.Visible = false;
             UCComboTipoDisciplina.Valor = -1;
             hplAnexo.Text = "";
-            divAdicionarQuestionario.Visible = false;
+            hplAnexo.NavigateUrl = "";
+            divAddAnexo.Visible = true;
+            divAnexoAdicionado.Visible = false;
             UCComboQuestionario.CarregarQuestionario();
             UCComboTipoDisciplina.CarregarTipoDisciplinaTipo((byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela);
             gvCargo.DataSource = new DataTable();
@@ -521,8 +508,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
                 gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
                 gvQuestionario.DataBind();
-
-                divAdicionarQuestionario.Visible = false;
+                
                 UCComboQuestionario.Valor = -1;
             }
             catch (ValidationException ex)
@@ -537,13 +523,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroAdicionarQuestionario").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
-
-        protected void btnCacelarQuestionario_Click(object sender, EventArgs e)
-        {
-            divAdicionarQuestionario.Visible = false;
-            UCComboQuestionario.Valor = -1;
-        }
-
+        
         protected void gvQuestionario_DataBound(object sender, EventArgs e)
         {
             GridView grv = (GridView)sender;
@@ -624,7 +604,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 {
                     ApplicationWEB._GravaErro(ex);
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
                 }
             }
             else if (e.CommandName == "Descer")
@@ -661,7 +641,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 {
                     ApplicationWEB._GravaErro(ex);
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
                 }
             }
             else if (e.CommandName == "Excluir")
@@ -706,15 +686,76 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 {
                     ApplicationWEB._GravaErro(ex);
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Erro);
+                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
                 }
             }
         }
 
-        protected void btnNovoQuestionario_Click(object sender, EventArgs e)
+        protected void btnAddAnexo_Click(object sender, ImageClickEventArgs e)
         {
-            divAdicionarQuestionario.Visible = true;
-            UCComboQuestionario.Valor = -1;
+            try
+            {
+                if (string.IsNullOrEmpty(txtTituloAnexo.Text) && fupAnexo.HasFile)
+                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.TituloAnexoObrigatorio").ToString());
+
+                if (fupAnexo.HasFile)
+                {
+                    string nomeArquivoSemExtensao = Path.GetFileNameWithoutExtension(fupAnexo.PostedFile.FileName);
+                    string nomeArquivo = fupAnexo.PostedFile.FileName;
+                    int tamanhoArquivo = fupAnexo.PostedFile.ContentLength;
+                    string typeMime = fupAnexo.PostedFile.ContentType;
+
+                    Stream arquivo = CopiarArquivo(fupAnexo.PostedFile.InputStream);
+
+                    SYS_Arquivo arq = CriarAnexo(arquivo, nomeArquivo, tamanhoArquivo, typeMime);
+                    arq.arq_situacao = (byte)SYS_ArquivoSituacao.Temporario;
+                    SYS_ArquivoBO.Save(arq, ApplicationWEB.TamanhoMaximoArquivo, ApplicationWEB.TiposArquivosPermitidos);
+                    VS_arquivo = arq.arq_id;
+
+                    hplAnexo.Text = txtTituloAnexo.Text;
+                    hplAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", arq.arq_id);
+
+                    divAddAnexo.Visible = false;
+                    divAnexoAdicionado.Visible = true;
+                }
+                else
+                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.SelecioneArquivo").ToString());
+            }
+            catch (ValidationException ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroAdicionarArquivo").ToString(), UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void btnExcluirAnexo_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                txtTituloAnexo.Text = "";
+                hplAnexo.Text = "";
+                hplAnexo.NavigateUrl = "";
+                VS_arquivo = -1;
+                divAddAnexo.Visible = true;
+                divAnexoAdicionado.Visible = false;
+            }
+            catch (ValidationException ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroExcluirArquivo").ToString(), UtilBO.TipoMensagem.Erro);
+            }
         }
 
         #endregion
