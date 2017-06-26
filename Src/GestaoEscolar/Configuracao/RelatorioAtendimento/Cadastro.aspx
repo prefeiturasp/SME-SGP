@@ -198,6 +198,8 @@
                             EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.EmptyDataText %>" DataKeyNames="crg_id">
                             <Columns>
                                 <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderDescricao %>" DataField="crg_descricao" />
+                                <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderCodigo %>" DataField="crg_codigo" />
+                                <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderTipoVinculo %>" DataField="tvi_nome" />
                                 <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoConsulta %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:CheckBox runat="server" ID="chkpermissaoConsulta" Checked='<%# Eval("rac_permissaoConsulta") %>' />

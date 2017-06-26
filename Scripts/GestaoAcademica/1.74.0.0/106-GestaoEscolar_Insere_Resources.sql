@@ -816,6 +816,20 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Turma - Componente curricular'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvCargo.HeaderCodigo' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Código do cargo'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.gvCargo.HeaderTipoVinculo' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Tipo de vínculo'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
