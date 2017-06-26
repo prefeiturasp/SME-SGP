@@ -349,6 +349,10 @@ namespace GestaoEscolar.Configuracao.Questionario
                     ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
                     ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                 }
+
+                lblInfo.Text = "<b>Questionário: </b>"+CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id }).qst_titulo +
+                                "<br><b>Conteúdo: </b>"+ CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id }).qtc_texto +"<br>";
+
                 updResultado.Update();
 
             }

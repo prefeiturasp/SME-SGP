@@ -14,15 +14,29 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="updResultado" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
+            <fieldset>
+                <div id="divInformacao" style="width: 60%; float: left; clear: none;">
+                    <asp:Label runat="server" ID="lblInfo" Visible="true"></asp:Label>
+                    <br />
+                </div>
+                <div class="right">
+                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar"
+                        CausesValidation="false" OnClick="btnCancelar_Click" />
+                </div>
+            </fieldset>
             <fieldset id="fdsResultado" runat="server" visible="false">
                 <legend>Consulta de respostas</legend>
+                <%--<div id="divInformacao" style="width: 60%; float: left; clear: none;">
+                    <asp:Label runat="server" ID="lblInfo" Visible="true"></asp:Label>
+                    <br />
+                </div>--%>
                 <uc4:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao1_IndexChanged" />
                 <br />
                 <div align="left">
                     <asp:Button ID="btnNovo" runat="server" Text="Incluir nova resposta"
                         CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/CadastroResposta.aspx" />
-                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar"
-                        CausesValidation="false" OnClick="btnCancelar_Click" />
+                    <%--<asp:Button ID="btnCancelar" runat="server" Text="Cancelar"
+                        CausesValidation="false" OnClick="btnCancelar_Click" />--%>
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
                     BorderStyle="None" DataKeyNames="qtr_id, qtc_id, qtr_texto, qtr_permiteAdicionarTexto, qtr_ordem"
@@ -63,7 +77,7 @@
                     </Columns>
                 </asp:GridView>
                 <uc3:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvResultado" />
-                <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="SelectByConteudoPaginado" 
+                <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="SelectByConteudoPaginado"
                     TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioRespostaBO" SelectCountMethod="GetTotalRecords"
                     DataObjectTypeName="MSTech.GestaoEscolar.Entities.CLS_QuestionarioResposta" EnablePaging="True"
                     OnSelecting="odsResultado_Selecting" MaximumRowsParameterName="pageSize" StartRowIndexParameterName="currentPage"></asp:ObjectDataSource>

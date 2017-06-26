@@ -335,6 +335,8 @@ namespace GestaoEscolar.Configuracao.Questionario
                     ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                 }
 
+                lblInfo.Text = "<b>Questionário: </b>"+ CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id }).qst_titulo +"<br>";
+
                 updResultado.Update();
 
             }
