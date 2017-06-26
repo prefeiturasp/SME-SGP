@@ -15,9 +15,9 @@ namespace MSTech.GestaoEscolar.BLL
     using Caching;
     using System.Web;
     using Validation.Exceptions;
-    /// <summary>
-    /// Situações da movimentação dos tipos de movimentação
-    /// </summary>
+    using Data.Common;    /// <summary>
+                          /// Situações da movimentação dos tipos de movimentação
+                          /// </summary>
     public enum CLS_RelatorioAtendimentoTipo : byte
     {
         [Description("CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.AEE")]
@@ -145,6 +145,8 @@ namespace MSTech.GestaoEscolar.BLL
             return dt;
         }
 
+        #endregion
+
         /// <summary>
         /// Salva o relatório de atendimento
         /// </summary>
@@ -184,6 +186,9 @@ namespace MSTech.GestaoEscolar.BLL
                     //Exclui todos os questionários que não estão mais ligados ao relatório
                     foreach (CLS_RelatorioAtendimentoQuestionario raq in lstQuestionarioBanco.Where(b => !lstQuestionario.Any(q => q.raq_id == b.raq_id && q.raq_situacao == (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Ativo && !q.IsNew)))
                     {
+                        if (raq.emUso)
+                            throw new ValidationException(string.Format("O questionário ({0}) possui lançamentos no relatório e não pode ser excluído.", raq.qst_titulo));
+
                         raq.raq_situacao = (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido;
                         if (!CLS_RelatorioAtendimentoQuestionarioBO.Delete(raq, dao._Banco))
                             throw new ValidationException("Erro ao remover questionário do relatório de atendimento.");
@@ -225,6 +230,41 @@ namespace MSTech.GestaoEscolar.BLL
             return true;
         }
 
-        #endregion 
+        /// <summary>
+        /// Deleta um relatório de atendimento que não estiver sendo usado
+        /// </summary>
+        /// <param name="entity">Entidade do relatório de atendimento que vai excluir</param>
+        /// <param name="banco">Transação de banco</param>
+        /// <returns></returns>
+        public static bool Delete(CLS_RelatorioAtendimento entity, TalkDBTransaction banco = null)
+        {
+            CLS_RelatorioAtendimentoDAO dao = new CLS_RelatorioAtendimentoDAO();
+            if (banco == null)
+                dao._Banco.Open(IsolationLevel.ReadCommitted);
+            else
+                dao._Banco = banco;
+
+            string tabelasNaoVerificarIntegridade = "CLS_RelatorioAtendimento,CLS_RelatorioAtendimentoCargo,CLS_RelatorioAtendimentoGrupo,CLS_RelatorioAtendimentoQuestionario";
+
+            try
+            {
+                //Verifica se a disciplina pode ser deletada
+                if (GestaoEscolarUtilBO.VerificarIntegridade("snd_id", entity.rea_id.ToString(), tabelasNaoVerificarIntegridade, dao._Banco))
+                    throw new ValidationException("Não é possível excluir o relatório de atendimento " + entity.rea_titulo + ", pois possui outros registros ligados a ele.");
+
+                //Deleta logicamente a disciplina
+                return dao.Delete(entity);
+            }
+            catch (Exception ex)
+            {
+                dao._Banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                dao._Banco.Close();
+            }
+            return true;
+        }
     }
 }
