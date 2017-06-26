@@ -103,15 +103,20 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
                 txtTitulo.Text = rea.rea_titulo;
                 txtTituloAnexo.Text = rea.rea_tituloAnexo;
+                ddlTipo.Enabled = false;
                 ddlTipo.SelectedValue = rea.rea_tipo.ToString();
                 ddlTipo_SelectedIndexChanged(ddlTipo, new EventArgs());
+                ddlPeriodicidade.Enabled = false;
                 ddlPeriodicidade.SelectedValue = rea.rea_periodicidadePreenchimento.ToString();
+                chkExibeHipotese.Enabled = false;
                 chkExibeHipotese.Checked = rea.rea_permiteEditarHipoteseDiagnostica;
+                chkExibeRacaCor.Enabled = false;
                 chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
                 hplAnexo.Text = rea.rea_tituloAnexo;
                 hplAnexo.NavigateUrl = rea.arq_idAnexo == 0 ? "" : String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
                 divAddAnexo.Visible = rea.arq_idAnexo == 0;
                 divAnexoAdicionado.Visible = rea.arq_idAnexo > 0;
+                UCComboTipoDisciplina.PermiteEditar = false;
                 UCComboTipoDisciplina.Valor = rea.tds_id;
 
                 CarregaCargos();
