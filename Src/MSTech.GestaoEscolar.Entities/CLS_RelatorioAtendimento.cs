@@ -55,7 +55,6 @@ namespace MSTech.GestaoEscolar.Entities
         /// <summary>
         /// Periodicidade de preenchimento do relatório de atendimento (1 - Periódico, 2 - Encerramento).
         /// </summary>
-        [MSNotNullOrEmpty("Periodicidade de preenchimento é obrigatório.")]
         public override byte rea_periodicidadePreenchimento { get; set; }
         
         /// <summary>

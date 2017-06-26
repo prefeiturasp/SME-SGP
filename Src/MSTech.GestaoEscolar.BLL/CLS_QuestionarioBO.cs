@@ -10,7 +10,7 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Data;
     using System.Collections.Generic;
     using System;
-
+    using Data.Common;
     [Serializable]
     public class Questionario : CLS_Questionario
     {
@@ -41,6 +41,20 @@ namespace MSTech.GestaoEscolar.BLL
         {
             CLS_QuestionarioDAO dao = new CLS_QuestionarioDAO();
             return dao.SelectBy_qst_titulo(qst_titulo);
+        }
+
+        /// <summary>
+        /// Verifica se o questionário estáem uso no relatório
+        /// </summary>
+        /// <param name="qst_id">ID do questionário</param>
+        /// <param name="rea_id">ID do relatório</param>
+        /// <returns></returns>
+        public static bool VerificaQuestionarioEmUso(int qst_id, int rea_id, TalkDBTransaction banco = null)
+        {
+            CLS_QuestionarioDAO dao = new CLS_QuestionarioDAO();
+            if (banco != null)
+                dao._Banco = banco;
+            return dao.VerificaQuestionarioEmUso(qst_id, rea_id);
         }
     }
 }

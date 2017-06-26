@@ -578,8 +578,11 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
                 {
+                    bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["IsNew"]);
+                    bool emUsoExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["emUso"]);
+
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    btnExcluir.Visible = (isNewExcluir || !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
             }
         }
@@ -667,6 +670,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     int index = int.Parse(e.CommandArgument.ToString());
 
                     int idExcluir = Convert.ToInt32(gvQuestionario.DataKeys[index]["raq_id"]);
+
+                    int qst_idExcluir = Convert.ToInt32(gvQuestionario.DataKeys[index]["qst_id"]);
+                    bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[index]["IsNew"]);
+
+                    if (VS_rea_id > 0 && !isNewExcluir && CLS_QuestionarioBO.VerificaQuestionarioEmUso(qst_idExcluir, VS_rea_id))
+                        throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioEmUso").ToString());
 
                     if (idExcluir > 0 && VS_lstQuestionarios.Any(l => l.raq_id == idExcluir))
                     {

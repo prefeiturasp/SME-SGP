@@ -55,5 +55,10 @@ namespace MSTech.GestaoEscolar.Entities
         /// Variável auxiliar do tírulo do questionário.
         /// </summary>
         public string qst_titulo { get; set; }
+
+        /// <summary>
+        /// Variável auxiliar que informa se o questionário está em uso no relatório
+        /// </summary>
+        public bool emUso { get; set; }
     }
 }

@@ -59,6 +59,49 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Verifica se o questionário está em uso no relatório
+        /// </summary>
+        /// <param name="qst_id">ID do questionário</param>
+        /// <param name="rea_id">ID do relatório</param>
+        /// <returns></returns>
+        public bool VerificaQuestionarioEmUso(int qst_id, int rea_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_Questionario_VerificaQuestionarioEmUso", _Banco);
+            try
+            {
+                #region PARAMETROS
+                
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@qst_id";
+                Param.Size = 4;
+                Param.Value = qst_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@rea_id";
+                Param.Size = 4;
+                Param.Value = rea_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+                
+                return qs.Return.Rows.Count > 0;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #region Métodos sobrescritos
 
         protected override void ParamInserir(QuerySelectStoredProcedure qs, CLS_Questionario entity)
