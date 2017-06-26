@@ -147,7 +147,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 Button btnIncluirRespostas = (Button)e.Row.FindControl("btnIncluirRespostas");
                 if (btnIncluirRespostas != null)
                 {
-                    btnIncluirRespostas.Visible = (tipoConteudo == (byte)QuestionarioTipoConteudo.Pergunta) && !(tipoResposta == (byte)QuestionarioTipoResposta.TextoAberto);
+                    btnIncluirRespostas.Visible = (tipoConteudo == (byte)QuestionarioTipoConteudo.Pergunta) && (tipoResposta != (byte)QuestionarioTipoResposta.TextoAberto);
                 }
 
                 ImageButton _btnSubir = (ImageButton)e.Row.FindControl("_btnSubir");
