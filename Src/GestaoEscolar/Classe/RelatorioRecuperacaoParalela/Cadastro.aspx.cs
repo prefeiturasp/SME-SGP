@@ -543,9 +543,10 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                                     && VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
 
                 // Exibe o botão salvar apenas se o usuário tem permissão
-                btnSalvar.Visible = btnSalvarBaixo.Visible = VS_disciplinaRP
-                                                                && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
-                                                                && VS_permissoesRP.permissaoEdicao;
+                UCLancamentoRelatorioAtendimento.VS_PermiteEditar = 
+                    btnSalvar.Visible = btnSalvarBaixo.Visible = VS_disciplinaRP
+                                                                    && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
+                                                                    && VS_permissoesRP.permissaoEdicao;
 
                 // Carrega lançamentos
                 fdsLancamento.Visible = true;

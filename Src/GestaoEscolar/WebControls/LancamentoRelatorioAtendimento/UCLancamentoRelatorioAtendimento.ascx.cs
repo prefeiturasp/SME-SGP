@@ -143,6 +143,22 @@
         }
 
         /// <summary>
+        /// Permissão de alteração da tela.
+        /// </summary>
+        public bool VS_PermiteEditar
+        {
+            get
+            {
+                return Convert.ToBoolean(ViewState["VS_PermiteEditar"] ?? true);
+            }
+
+            set
+            {
+                ViewState["VS_PermiteEditar"] = value;
+            }
+        }
+
+        /// <summary>
         /// Permissão de aprovação do usuário.
         /// </summary>
         public bool PermiteAprovar
@@ -161,8 +177,9 @@
         {
             get
             {
-                return VS_RelatorioAtendimento.lstCargoPermissao.Any(p => p.rac_permissaoEdicao) ||
-                       VS_RelatorioAtendimento.lstGrupoPermissao.Any(p => p.rag_permissaoEdicao);
+                return VS_PermiteEditar &&
+                       (VS_RelatorioAtendimento.lstCargoPermissao.Any(p => p.rac_permissaoEdicao) ||
+                        VS_RelatorioAtendimento.lstGrupoPermissao.Any(p => p.rag_permissaoEdicao));
             }
         }
 
