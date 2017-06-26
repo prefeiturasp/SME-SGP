@@ -76,13 +76,22 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela {
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCCPeriodoCalendario UCCPeriodoCalendario;
         
         /// <summary>
-        /// divBotoes control.
+        /// btnVoltar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBotoes;
+        protected global::System.Web.UI.WebControls.Button btnVoltar;
+        
+        /// <summary>
+        /// btnLimparBusca control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimparBusca;
         
         /// <summary>
         /// btnNovo control.
@@ -175,21 +184,12 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela {
         protected global::System.Web.UI.WebControls.Button btnCancelarBaixo;
         
         /// <summary>
-        /// divVoltar control.
+        /// btnVoltarBaixo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divVoltar;
-        
-        /// <summary>
-        /// btnVoltar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVoltar;
+        protected global::System.Web.UI.WebControls.Button btnVoltarBaixo;
     }
 }

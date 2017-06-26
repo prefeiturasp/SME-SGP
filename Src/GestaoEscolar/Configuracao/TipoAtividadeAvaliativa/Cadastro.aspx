@@ -18,8 +18,8 @@
         <asp:TextBox ID="txtTipoAtividadeAvaliativa" runat="server" MaxLength="100" SkinID="text60C"></asp:TextBox>
         <asp:RequiredFieldValidator ID="rfvTipoAtividadeAvaliativa" runat="server" ControlToValidate="txtTipoAtividadeAvaliativa"
             Display="Dynamic" ErrorMessage="Tipo de atividade avaliativa é obrigatório.">*</asp:RequiredFieldValidator>
-        <asp:Label ID="lblQualificador" Text="<%$ Resources:Configuracao, TipoAtividadeAvaliativa.Cadastro.lblQualificador.Text %>" runat="server" AssociatedControlID="ddlQualificador"></asp:Label>
-        <asp:DropDownList ID="ddlQualificador" runat="server" AppendDataBoundItems="True" SkinID="text60C">
+        <asp:Label ID="lblQualificador" Text="<%$ Resources:Configuracao, TipoAtividadeAvaliativa.Cadastro.lblQualificador.Text %>" runat="server" AssociatedControlID="ddlQualificador" Visible="false"></asp:Label>
+        <asp:DropDownList ID="ddlQualificador" runat="server" AppendDataBoundItems="True" SkinID="text60C" Visible="false">
         </asp:DropDownList>
         <div align="right">
             <asp:Button ID="btnSalvar" runat="server" Text="Salvar" OnClick="btnSalvar_Click" />
