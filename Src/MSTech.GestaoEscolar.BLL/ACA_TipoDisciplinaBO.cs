@@ -189,11 +189,34 @@ namespace MSTech.GestaoEscolar.BLL
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public static List<sTipoDisciplina> SelecionaTipoDisciplinaTipo(Guid ent_id, byte tds_tipo, int AppMinutosCacheLongo = 0)
         {
-            List<sTipoDisciplina> lista = SelecionaTipoDisciplina(ent_id, AppMinutosCacheLongo);
+            List<sTipoDisciplina> lista = null;
 
-            lista.Where(t => t.tds_tipo == tds_tipo).ToList();
+            if (AppMinutosCacheLongo > 0 && HttpContext.Current != null)
+            {
+                string chave = String.Format("Cache_SelecionaTipoDisciplinaTipo_{0}", ent_id);
+                object cache = HttpContext.Current.Cache[chave];
 
-            return lista;
+                if (cache == null)
+                {
+                    bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
+
+                    lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_Pesquisa(0, 0, 0, (tds_tipo != (byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela), controlarOrdem, false, 1, 1, out totalRecords).AsEnumerable()
+                             select (sTipoDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTipoDisciplina())).ToList();
+
+                    HttpContext.Current.Cache.Insert(chave, lista, null, DateTime.Now.AddMinutes(AppMinutosCacheLongo), System.Web.Caching.Cache.NoSlidingExpiration);
+                }
+                else
+                    lista = (List<sTipoDisciplina>)cache;
+            }
+            else
+            {
+                bool controlarOrdem = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.CONTROLAR_ORDEM_DISCIPLINAS, ent_id);
+
+                lista = (from dr in new ACA_TipoDisciplinaDAO().SelectBy_Pesquisa(0, 0, 0, true, controlarOrdem, false, 1, 1, out totalRecords).AsEnumerable()
+                         select (sTipoDisciplina)GestaoEscolarUtilBO.DataRowToEntity(dr, new sTipoDisciplina())).ToList();
+            }
+
+            return lista.Where(t => t.tds_tipo == tds_tipo).ToList();
         }
 
         /// <summary>
