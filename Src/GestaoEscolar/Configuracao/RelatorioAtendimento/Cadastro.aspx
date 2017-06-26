@@ -57,7 +57,7 @@
                     <asp:CheckBox runat="server" ID="chkExibeHipotese" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkExibeHipotese.Text %>" />
                 </div>
                 <div runat="server" id="divDisciplina" visible="false">
-                    <uc3:UCComboTipoDisciplina runat="server" ID="UCComboTipoDisciplina" MostrarMessageSelecione="True" PermiteEditar="True" />
+                    <uc3:UCComboTipoDisciplina runat="server" ID="UCComboTipoDisciplina" MostrarMessageSelecione="True" PermiteEditar="True" Obrigatorio="true" ValidationGroup="vgRelatorioAtendimento" />
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

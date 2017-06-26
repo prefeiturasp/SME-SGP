@@ -191,7 +191,7 @@ namespace MSTech.GestaoEscolar.BLL
         {
             List<sTipoDisciplina> lista = SelecionaTipoDisciplina(ent_id, AppMinutosCacheLongo);
 
-            lista.Where(t => t.tds_tipo == tds_tipo).ToList();
+            lista = lista.Where(t => t.tds_tipo == tds_tipo).ToList();
 
             return lista;
         }
