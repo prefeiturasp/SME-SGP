@@ -28,15 +28,6 @@
                 <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo" ValidationGroup="vgRelatorioAtendimento"
                     Display="Dynamic" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.rfvTitulo.ErrorMessage %>" Text="*" />
-                <asp:Label ID="lblPeriodicidade" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblPeriodicidade.Text %>" AssociatedControlID="ddlPeriodicidade"></asp:Label>
-                <asp:DropDownList ID="ddlPeriodicidade" runat="server">
-                    <asp:ListItem Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.ddlPeriodicidade.msgSelecione %>" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Periodico %>" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Encerramento %>" Value="2"></asp:ListItem>
-                </asp:DropDownList>
-                <asp:CompareValidator ID="cpvPeriodicidade" runat="server" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.cpvPeriodicidade.ErrorMessage %>"
-                    ControlToValidate="ddlPeriodicidade" Operator="GreaterThan" ValueToCompare="0"
-                    Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
                 <asp:Label ID="lblTipo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTipo.Text %>" AssociatedControlID="ddlTipo"></asp:Label>
                 <asp:DropDownList ID="ddlTipo" runat="server"  
                     OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" AutoPostBack="true">
@@ -48,6 +39,17 @@
                 <asp:CompareValidator ID="cpvTipo" runat="server" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.cpvTipo.ErrorMessage %>"
                     ControlToValidate="ddlTipo" Operator="GreaterThan" ValueToCompare="0"
                     Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
+                <div runat="server" id="divPeriodicidade" visible="false">
+                    <asp:Label ID="lblPeriodicidade" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblPeriodicidade.Text %>" AssociatedControlID="ddlPeriodicidade"></asp:Label>
+                    <asp:DropDownList ID="ddlPeriodicidade" runat="server">
+                        <asp:ListItem Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.ddlPeriodicidade.msgSelecione %>" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Periodico %>" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Encerramento %>" Value="2"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:CompareValidator ID="cpvPeriodicidade" runat="server" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.cpvPeriodicidade.ErrorMessage %>"
+                        ControlToValidate="ddlPeriodicidade" Operator="GreaterThan" ValueToCompare="0"
+                        Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
+                </div>
                 <div runat="server" id="divRacaCor" visible="false">
                     <asp:CheckBox runat="server" ID="chkExibeRacaCor" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkExibeRacaCor.Text %>" />
                 </div>

@@ -94,33 +94,6 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTitulo;
         
         /// <summary>
-        /// lblPeriodicidade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPeriodicidade;
-        
-        /// <summary>
-        /// ddlPeriodicidade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPeriodicidade;
-        
-        /// <summary>
-        /// cpvPeriodicidade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator cpvPeriodicidade;
-        
-        /// <summary>
         /// lblTipo control.
         /// </summary>
         /// <remarks>
@@ -146,6 +119,42 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator cpvTipo;
+        
+        /// <summary>
+        /// divPeriodicidade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPeriodicidade;
+        
+        /// <summary>
+        /// lblPeriodicidade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPeriodicidade;
+        
+        /// <summary>
+        /// ddlPeriodicidade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPeriodicidade;
+        
+        /// <summary>
+        /// cpvPeriodicidade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cpvPeriodicidade;
         
         /// <summary>
         /// divRacaCor control.

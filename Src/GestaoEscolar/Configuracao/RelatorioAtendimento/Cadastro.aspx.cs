@@ -103,9 +103,9 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
                 txtTitulo.Text = rea.rea_titulo;
                 txtTituloAnexo.Text = rea.rea_tituloAnexo;
-                ddlPeriodicidade.SelectedValue = rea.rea_periodicidadePreenchimento.ToString();
                 ddlTipo.SelectedValue = rea.rea_tipo.ToString();
                 ddlTipo_SelectedIndexChanged(ddlTipo, new EventArgs());
+                ddlPeriodicidade.SelectedValue = rea.rea_periodicidadePreenchimento.ToString();
                 chkExibeHipotese.Checked = rea.rea_permiteEditarHipoteseDiagnostica;
                 chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
                 hplAnexo.Text = rea.rea_tituloAnexo;
@@ -393,7 +393,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             txtTitulo.Text = txtTituloAnexo.Text = "";
             ddlTipo.SelectedValue = "0";
             ddlPeriodicidade.SelectedValue = "0";
-            chkExibeHipotese.Checked = chkExibeRacaCor.Checked = divDisciplina.Visible = false;
+            chkExibeHipotese.Checked = chkExibeRacaCor.Checked = divDisciplina.Visible = divPeriodicidade.Visible = false;
             UCComboTipoDisciplina.Valor = -1;
             hplAnexo.Text = "";
             hplAnexo.NavigateUrl = "";
@@ -481,11 +481,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             divHipotese.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE;
             divRacaCor.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE;
             divDisciplina.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP;
+            divPeriodicidade.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP;
 
             if (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.AEE)
                 chkExibeHipotese.Checked = chkExibeRacaCor.Checked = false;
             if (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.RP)
+            {
                 UCComboTipoDisciplina.Valor = -1;
+                ddlPeriodicidade.SelectedValue = "0";
+            }
         }
         
         protected void btnAdicionarQuestionario_Click(object sender, EventArgs e)
