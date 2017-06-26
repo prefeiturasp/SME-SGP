@@ -21,7 +21,9 @@
             </asp:DropDownList>
             <uc:UCCRelatorioAtendimento ID="UCCRelatorioAtendimento" runat="server" MostrarMensagemSelecione="true" />
             <uc:UCCPeriodoCalendario ID="UCCPeriodoCalendario" runat="server" MostrarMensagemSelecione="true" Visible="false" />
-            <div class="right" runat="server" visible="false" id="divBotoes">
+            <div class="right">
+                <asp:Button ID="btnVoltar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text %>" CausesValidation="false" OnClick="btnVoltar_Click" />
+                <asp:Button ID="btnLimparBusca" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparBusca_Click" Visible="false" />
                 <asp:Button ID="btnNovo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnNovo.Text %>" CausesValidation="false" OnClick="btnNovo_Click" />
             </div>
         </asp:Panel>
@@ -67,8 +69,8 @@
                     <asp:Button ID="btnCancelarBaixo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnCancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
                 </div>
             </asp:Panel><br />
-            <div class="right" runat="server" id="divVoltar">
-                <asp:Button ID="btnVoltar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text %>" CausesValidation="false" OnClick="btnVoltar_Click" />
+            <div class="right">
+                <asp:Button ID="btnVoltarBaixo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text %>" CausesValidation="false" OnClick="btnVoltar_Click" />
             </div>
         </fieldset>
     </div>

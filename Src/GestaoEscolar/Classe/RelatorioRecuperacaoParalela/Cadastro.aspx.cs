@@ -35,30 +35,6 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             }
         }
 
-        private long VS_tur_id
-        {
-            get
-            {
-                return Convert.ToInt64(ViewState["VS_tur_id"] ?? -1);
-            }
-            set
-            {
-                ViewState["VS_tur_id"] = value;
-            }
-        }
-
-        private long VS_tud_id
-        {
-            get
-            {
-                return Convert.ToInt64(ViewState["VS_tud_id"] ?? -1);
-            }
-            set
-            {
-                ViewState["VS_tud_id"] = value;
-            }
-        }
-
         private bool VS_permiteEditar
         {
             get
@@ -155,6 +131,9 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             if (sm != null)
             {
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
+                RegistrarParametrosMensagemSair(true, (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.ExitPageConfirm));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsSetExitPageConfirmer.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroRelatorioRP.js"));
             }
 
@@ -173,29 +152,30 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
 
                         Dictionary<string, string> listaDados = (Dictionary<string, string>)VS_DadosPaginaRetorno;
                         bool eletiva = Convert.ToByte(listaDados["Edit_tur_tipo"]) == (byte)TUR_TurmaTipo.EletivaAluno;
-                        VS_tur_id = Convert.ToInt64(listaDados["Edit_tur_id"]);
-                        VS_tud_id = Convert.ToInt64(listaDados["Tud_idRetorno_ControleTurma"]);
+                        long tur_id = Convert.ToInt64(listaDados["Edit_tur_id"]);
+                        long tud_id = Convert.ToInt64(listaDados["Tud_idRetorno_ControleTurma"]);
                         VS_permiteEditar = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar && eletiva;
 
                         VS_alu_id = Convert.ToInt64(Session["alu_id_RelatorioRP"]);
                         Session.Remove("alu_id_RelatorioRP");
 
                         // Carrega o combo de períodos do calendário
-                        UCCPeriodoCalendario.CarregarPorTurma(VS_tur_id);
+                        UCCPeriodoCalendario.CarregarPorTurma(tur_id);
                         UCCPeriodoCalendario.PermiteEditar = false;
                         UCCPeriodoCalendario.Tpc_ID = Convert.ToInt32(listaDados["Edit_tpc_id"]);
 
                         UCCRelatorioAtendimento.PermiteEditar = false;
                         fdsLancamento.Visible = false;
+                        btnNovo.Visible = false;
 
                         // Carregar o combo de disciplinas
                         List<sDisciplinas> lstDisciplinas = new List<sDisciplinas>();
                         if (eletiva)
                         {
-                            TUR_Turma turma = TUR_TurmaBO.GetEntity(new TUR_Turma { tur_id = VS_tur_id });
-                            TUR_TurmaDisciplina turmaDisciplina = TUR_TurmaDisciplinaBO.GetEntity(new TUR_TurmaDisciplina { tud_id = VS_tud_id });
+                            TUR_Turma turma = TUR_TurmaBO.GetEntity(new TUR_Turma { tur_id = tur_id });
+                            TUR_TurmaDisciplina turmaDisciplina = TUR_TurmaDisciplinaBO.GetEntity(new TUR_TurmaDisciplina { tud_id = tud_id });
 
-                            sDisciplinas disciplina = new sDisciplinas { tud_nome = string.Format("{0} - {1}", turma.tur_codigo, turmaDisciplina.tud_nome), tur_tud_id = string.Format("{0};{1}", VS_tur_id, VS_tud_id) };
+                            sDisciplinas disciplina = new sDisciplinas { tud_nome = string.Format("{0} - {1}", turma.tur_codigo, turmaDisciplina.tud_nome), tur_tud_id = string.Format("{0};{1}", tur_id, tud_id) };
                             lstDisciplinas.Add(disciplina);
                         }
                         else
@@ -203,7 +183,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                             int strTdsId = Convert.ToInt32(Session["tds_id_RelatorioRP"]);
                             Session.Remove("tds_id_RelatorioRP");
 
-                            List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCCPeriodoCalendario.Tpc_ID, VS_tur_id, VS_tud_id, ApplicationWEB.AppMinutosCacheMedio);
+                            List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCCPeriodoCalendario.Tpc_ID, tur_id, tud_id, ApplicationWEB.AppMinutosCacheMedio);
                             lstAlunosRelatorioRP.FindAll(p => p.alu_id == VS_alu_id && (strTdsId <= 0 || p.tds_idRelacionada == strTdsId)).ForEach(
                                 p => {
                                     sDisciplinas disciplina = new sDisciplinas { tud_nome = string.Format("{0} - {1}", p.tur_codigo, p.tud_nome), tur_tud_id = string.Format("{0};{1}", p.tur_id, p.tud_id) };
@@ -230,6 +210,71 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             }
 
             UCCRelatorioAtendimento.IndexChanged += UCCRelatorioAtendimento_IndexChanged;
+            UCCPeriodoCalendario.IndexChanged += UCCPeriodoCalendario_IndexChanged;
+
+            if (!Convert.ToString(btnLimparBusca.CssClass).Contains("btnMensagemUnload"))
+            {
+                btnLimparBusca.CssClass += " btnMensagemUnload";
+            }
+
+            if (!Convert.ToString(btnVoltar.CssClass).Contains("btnMensagemUnload"))
+            {
+                btnVoltar.CssClass += " btnMensagemUnload";
+            }
+
+            if (!Convert.ToString(btnVoltarBaixo.CssClass).Contains("btnMensagemUnload"))
+            {
+                btnVoltarBaixo.CssClass += " btnMensagemUnload";
+            }
+
+            if (!Convert.ToString(btnCancelar.CssClass).Contains("btnMensagemUnload"))
+            {
+                btnCancelar.CssClass += " btnMensagemUnload";
+            }
+
+            if (!Convert.ToString(btnCancelarBaixo.CssClass).Contains("btnMensagemUnload"))
+            {
+                btnCancelarBaixo.CssClass += " btnMensagemUnload";
+            }
+        }
+
+        private void UCCPeriodoCalendario_IndexChanged()
+        {
+            if (UCCPeriodoCalendario.Tpc_ID > 0)
+            {
+                UCCPeriodoCalendario.PermiteEditar = false;
+
+                if (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Encerramento
+                        || (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico && UCCPeriodoCalendario.Tpc_ID > 0))
+                {
+                    btnNovo.Visible = VS_permiteEditar && VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
+
+                    // Exibe o botão salvar apenas se o usuário tem permissão
+                    btnSalvar.Visible = btnSalvarBaixo.Visible = VS_permiteEditar;
+
+                    // Carrega lançamentos
+                    fdsLancamento.Visible = true;
+
+                    btnLimparBusca.Visible = true;
+                }
+
+                pnlLancamento.Visible = false;
+                grvLancamentos.Visible = true;
+                btnCancelar.Visible = btnCancelarBaixo.Visible = true;
+
+                grvLancamentos.Columns[colunaDetalhar].Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar && !VS_permiteEditar;
+                grvLancamentos.Columns[colunaAlterar].Visible = VS_permiteEditar;
+                grvLancamentos.Columns[colunaExcluir].Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && VS_permiteEditar;
+
+                string[] ids = ddlDisciplina.SelectedValue.Split(';');
+                grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(VS_alu_id, Convert.ToInt64(ids[1]), !VS_permiteEditar, UCCRelatorioAtendimento.Valor, UCCPeriodoCalendario.Tpc_ID);
+                grvLancamentos.DataBind();
+            }
+            else
+            {
+                fdsLancamento.Visible = false;
+                btnNovo.Visible = false;
+            }
         }
 
         protected void ddlDisciplina_SelectedIndexChanged(object sender, EventArgs e)
@@ -247,7 +292,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     string[] ids = ddlDisciplina.SelectedValue.Split(';');
 
                     // Carrega o combo de relatórios
-                    UCCRelatorioAtendimento.CarregarRelatoriosRPDisciplina(VS_alu_id, Convert.ToInt64(ids[1]), !VS_permiteEditar, UCCPeriodoCalendario.Tpc_ID > 0 ? (byte)0 : (byte)CLS_RelatorioAtendimentoPeriodicidade.Encerramento);
+                    UCCRelatorioAtendimento.CarregarRelatoriosRPDisciplina(VS_alu_id, Convert.ToInt64(ids[1]), !VS_permiteEditar, !btnLimparBusca.Visible && UCCPeriodoCalendario.Tpc_ID <= 0 ? (byte)CLS_RelatorioAtendimentoPeriodicidade.Encerramento : (byte)0);
                     if (UCCRelatorioAtendimento.QuantidadeItensCombo == 2)
                     {
                         // Seleciona o único item
@@ -264,6 +309,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             else
             {
                 fdsLancamento.Visible = false;
+                btnNovo.Visible = false;
             }
         }
 
@@ -278,33 +324,47 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
 
                     // Exibe o botão para incluir novo apenas se for do tipo periódica
                     CLS_RelatorioAtendimento relatorio = CLS_RelatorioAtendimentoBO.GetEntity(new CLS_RelatorioAtendimento { rea_id = UCCRelatorioAtendimento.Valor });
-                    divBotoes.Visible = VS_permiteEditar && relatorio.rea_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
+                    VS_periodicidadePreenchimento = relatorio.rea_periodicidadePreenchimento;
 
-                    // Exibe o botão salvar apenas se o usuário tem permissão
-                    btnSalvar.Visible = btnSalvarBaixo.Visible = VS_permiteEditar;
+                    if (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Encerramento
+                        || (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico && UCCPeriodoCalendario.Tpc_ID > 0))
+                    {
+                        btnNovo.Visible = VS_permiteEditar && VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
 
-                    // Carrega lançamentos
-                    fdsLancamento.Visible = true;
-                    divVoltar.Visible = true;
+                        // Exibe o botão salvar apenas se o usuário tem permissão
+                        btnSalvar.Visible = btnSalvarBaixo.Visible = VS_permiteEditar;
+
+                        // Carrega lançamentos
+                        fdsLancamento.Visible = true;
+
+                        btnLimparBusca.Visible = true;
+                    }
 
                     string[] ids = ddlDisciplina.SelectedValue.Split(';');
                     long tur_id = Convert.ToInt64(ids[0]);
                     long tud_id = Convert.ToInt64(ids[1]);
 
-                    VS_periodicidadePreenchimento = relatorio.rea_periodicidadePreenchimento;
                     if (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico)
                     {
                         UCCPeriodoCalendario.Visible = true;
-                        pnlLancamento.Visible = false;
-                        grvLancamentos.Visible = true;
-                        btnCancelar.Visible = btnCancelarBaixo.Visible = true;
 
-                        grvLancamentos.Columns[colunaDetalhar].Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar && !VS_permiteEditar;
-                        grvLancamentos.Columns[colunaAlterar].Visible = VS_permiteEditar;
-                        grvLancamentos.Columns[colunaExcluir].Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && VS_permiteEditar;
-                       
-                        grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(VS_alu_id, tud_id, !VS_permiteEditar, relatorio.rea_id, UCCPeriodoCalendario.Tpc_ID);
-                        grvLancamentos.DataBind();
+                        if (UCCPeriodoCalendario.Tpc_ID > 0)
+                        {
+                            pnlLancamento.Visible = false;
+                            grvLancamentos.Visible = true;
+                            btnCancelar.Visible = btnCancelarBaixo.Visible = true;
+
+                            grvLancamentos.Columns[colunaDetalhar].Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar && !VS_permiteEditar;
+                            grvLancamentos.Columns[colunaAlterar].Visible = VS_permiteEditar;
+                            grvLancamentos.Columns[colunaExcluir].Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && VS_permiteEditar;
+
+                            grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(VS_alu_id, tud_id, !VS_permiteEditar, relatorio.rea_id, UCCPeriodoCalendario.Tpc_ID);
+                            grvLancamentos.DataBind();
+                        }
+                        else
+                        {
+                            UCCPeriodoCalendario.PermiteEditar = true;
+                        }
                     }
                     else
                     {
@@ -325,6 +385,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             else
             {
                 fdsLancamento.Visible = false;
+                btnNovo.Visible = false;
             }
         }
 
@@ -363,7 +424,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     reap_id = Convert.ToInt32(grvLancamentos.DataKeys[index].Values["reap_id"]);
 
                     // Esconde o grid de lançamentos
-                    grvLancamentos.Visible = divVoltar.Visible = false;
+                    grvLancamentos.Visible = false;
 
                     string[] ids = ddlDisciplina.SelectedValue.Split(';');
                     long tur_id = Convert.ToInt64(ids[0]);
@@ -372,6 +433,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     // Carrega o lançamento cadastrado
                     UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, tur_id, tud_id, UCCPeriodoCalendario.Tpc_ID, UCCRelatorioAtendimento.Valor, false, reap_id);
                     pnlLancamento.Visible = true;
+                    btnNovo.Visible = false;
                 }
                 catch (Exception ex)
                 {
@@ -416,20 +478,40 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             try
             { 
                 // Esconde o grid de lançamentos
-                grvLancamentos.Visible = divVoltar.Visible = false;
+                grvLancamentos.Visible = false;
 
                 string[] ids = ddlDisciplina.SelectedValue.Split(';');
                 long tur_id = Convert.ToInt64(ids[0]);
                 long tud_id = Convert.ToInt64(ids[1]);
 
                 // Carrega um novo lançamento
-                pnlLancamento.Visible = true;
                 UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, tur_id, tud_id, UCCPeriodoCalendario.Tpc_ID, UCCRelatorioAtendimento.Valor, false, 0);
+                pnlLancamento.Visible = true;
+                btnNovo.Visible = false;
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
                 lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar anotação.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void btnLimparBusca_Click(object sender, EventArgs e)
+        {
+            ddlDisciplina.SelectedIndex = 0;
+            ddlDisciplina.Enabled = true;
+            UCCRelatorioAtendimento.SelectedIndex = 0;
+            UCCRelatorioAtendimento.PermiteEditar = false;
+            UCCPeriodoCalendario.SelectedIndex = 0;
+            UCCPeriodoCalendario.PermiteEditar = false;
+            UCCPeriodoCalendario.Visible = false;
+            fdsLancamento.Visible = false;
+            btnNovo.Visible = false;
+            if (ddlDisciplina.Items.Count == 2)
+            {
+                // Seleciona o único item
+                ddlDisciplina.SelectedIndex = 1;
+                ddlDisciplina_SelectedIndexChanged(null, null);
             }
         }
 
@@ -441,7 +523,8 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             pnlLancamento.Visible = false;
-            grvLancamentos.Visible = divVoltar.Visible = true;
+            grvLancamentos.Visible = true;
+            btnNovo.Visible = VS_permiteEditar;
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -491,7 +574,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     if (VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico)
                     {
                         pnlLancamento.Visible = false;
-                        grvLancamentos.Visible = divVoltar.Visible = true;
+                        grvLancamentos.Visible = true;
 
                         string[] ids = ddlDisciplina.SelectedValue.Split(';');
 
