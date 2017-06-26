@@ -135,5 +135,21 @@ namespace MSTech.GestaoEscolar.BLL
 
             throw new ValidationException(GestaoEscolarUtilBO.ErrosValidacao(entity));
         }
+
+        public static bool Delete(CLS_RelatorioPreenchimentoAlunoTurmaDisciplina entity, int rea_id)
+        {
+            bool sucesso = Delete(entity);
+            if (sucesso)
+            {
+                CLS_RelatorioAtendimento relatorioAtendimento = CLS_RelatorioAtendimentoBO.GetEntity(new CLS_RelatorioAtendimento { rea_id = rea_id });
+                if (relatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.RP)
+                {
+                    ACA_CalendarioAnual calendario = ACA_CalendarioAnualBO.SelecionaPorTurma(entity.tur_id);
+                    List<MTR_MatriculaTurma> matriculasAno = MTR_MatriculaTurmaBO.GetSelectMatriculasAlunoAno(entity.alu_id, calendario.cal_ano);
+                    matriculasAno.ForEach(p => LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(entity.tpc_id, p.tur_id));
+                }
+            }
+            return sucesso;
+        }
     }
 }
