@@ -81,7 +81,8 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                             USUID.Value.ToString(),
                             GRUID.Value.ToString(),
                             MATRICULAESTADUAL.ToString(),
-                            Convert.ToInt32(NIVELENSINOEDUCACAOINFANTIL.Value));
+                            Convert.ToInt32(NIVELENSINOEDUCACAOINFANTIL.Value),
+                            false);
 
             RegistrosEncontrados = dsGestaoEscolar1.NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.Rows.Count > 0;
             conceito = dsGestaoEscolar1.NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.AsEnumerable().All(p => p.esa_tipo != 1);
@@ -105,8 +106,8 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                                                        Convert.ToInt32(dadosGeral.Field<object>("uni_id")) == Convert.ToInt32(this.GetCurrentColumnValue("uni_id").ToString()) &&
                                                        Convert.ToInt64(dadosGeral.Field<object>("tur_id")) == Convert.ToInt64(this.GetCurrentColumnValue("tur_id").ToString()) &&
                                                        Convert.ToInt32(dadosGeral.Field<object>("dis_id")) == Convert.ToInt32(this.GetCurrentColumnValue("dis_id").ToString())
-                                                 group dadosGeral by new { dis_id = dadosGeral.dis_id
-                                                                            , dis_nome = dadosGeral.dis_nome
+                                                 group dadosGeral by new { dis_id = dadosGeral.tds_id
+                                                                            , dis_nome = dadosGeral.tds_nome
                                                                             , far_ordenar = dadosGeral.far_ordenar
                                                                             , far_valor = dadosGeral.far_valor
                                                                             , far_descricao = dadosGeral.far_descricao

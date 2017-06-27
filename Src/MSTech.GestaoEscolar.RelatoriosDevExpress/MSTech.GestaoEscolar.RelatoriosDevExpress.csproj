@@ -321,6 +321,7 @@
     <EmbeddedResource Include="Doctos.Spo\SubRelGrafIndividualNotas.resx">
       <DependentUpon>SubRelGrafIndividualNotas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MSTech.GestaoEscolar.BLL\MSTech.GestaoEscolar.BLL.csproj">
