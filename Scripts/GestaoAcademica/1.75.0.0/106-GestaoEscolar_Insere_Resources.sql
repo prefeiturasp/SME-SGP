@@ -17,6 +17,13 @@ SET XACT_ABORT ON
             , @rcr_valorPadrao = 'A visualização do texto na tela abaixo não corresponde, necessariamente, ao formato no qual ele será impresso. Este formato segue as normas estabelecidas pela Secretaria Municipal de Educação.'
 
 	*/
+	
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioAtendimento.Cadastro.chkAcoesRealizadas.Text' 
+        , @rcr_NomeResource = 'Configuracao'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Permite Ações Relizadas'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 
