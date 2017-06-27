@@ -1702,6 +1702,13 @@
       <DependentUpon>MeusDados.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relatorios\AcoesRealizadas\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\AcoesRealizadas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\AtaFinalEnriquecimentoCurricular\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4385,6 +4392,7 @@
     <Content Include="Manutencao.aspx" />
     <Content Include="manutencao.htm" />
     <Content Include="MeusDados.aspx" />
+    <Content Include="Relatorios\AcoesRealizadas\Busca.aspx" />
     <Content Include="Relatorios\AtaFinalEnriquecimentoCurricular\Busca.aspx" />
     <Content Include="Relatorios\AtaFinalResultadosEnriquecimentoCurricular\Busca.aspx" />
     <Content Include="Relatorios\AtaFinalResultados\Busca.aspx" />

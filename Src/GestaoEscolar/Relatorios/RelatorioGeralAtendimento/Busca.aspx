@@ -1,98 +1,77 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Busca.aspx.cs" Inherits="GestaoEscolar.Relatorios.RelatorioGeralAtendimento.Busca" %>
 
-<%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagPrefix="uc1" TagName="UCCamposObrigatorios" %>
-<%@ Register Src="~/WebControls/Combos/UCComboTipoRelatorioAtendimento.ascx" TagPrefix="uc2" TagName="UCComboTipoRelatorioAtendimento" %>
-<%@ Register Src="~/WebControls/Combos/UCComboRelatorioAtendimento.ascx" TagPrefix="uc3" TagName="UCCRelatorioAtendimento" %>
-<%@ Register Src="~/WebControls/Combos/UCComboUAEscola.ascx" TagName="UCComboUAEscola" TagPrefix="uc4" %>
-<%@ Register Src="~/WebControls/Combos/Novos/UCCCalendario.ascx" TagName="UCCCalendario" TagPrefix="uc5" %>
-<%@ Register Src="~/WebControls/Combos/Novos/UCCCurriculoPeriodo.ascx" TagName="UCComboCurriculoPeriodo" TagPrefix="uc6" %>
-<%@ Register Src="~/WebControls/Combos/Novos/UCCCursoCurriculo.ascx" TagName="UCComboCursoCurriculo" TagPrefix="uc7" %>
-<%@ Register Src="~/WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros" TagPrefix="uc8" %>
+<%@ Register Src="~/WebControls/Combos/UCComboUAEscola.ascx" TagName="UCCUAEscola" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/Combos/Novos/UCCCursoCurriculo.ascx" TagName="UCCCursoCurriculo" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/Combos/Novos/UCCCurriculoPeriodo.ascx" TagName="UCCCurriculoPeriodo" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/Combos/Novos/UCCCalendario.ascx" TagName="UCCCalendario" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/Combos/Novos/UCCTurma.ascx" TagName="UCCTurma" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/BuscaAluno/UCCamposBuscaAluno.ascx" TagName="UCCBuscaAluno" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCObrigatorios" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/Combos/UCComboQtdePaginacao.ascx" TagName="UCCQtdePaginacao" TagPrefix="uc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:UpdatePanel ID="_updMessage" runat="server">
+    <asp:UpdatePanel ID="updMensagem" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:Label ID="_lblMessage" runat="server" EnableViewState="false"></asp:Label>
+            <asp:Label ID="lblMensagem" runat="server" EnableViewState="false"></asp:Label>
+            <asp:ValidationSummary ID="vsSummary" runat="server" />
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:UpdatePanel ID="_updPesquisa" runat="server" UpdateMode="Conditional">
+
+    <asp:UpdatePanel ID="updFiltros" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <fieldset id="_fdsPesquisa" runat="server" style="margin-left: 10px;">
-                <legend>Parâmetros de busca</legend>
-                <uc1:UCCamposObrigatorios ID="_UCCamposObrigatorios" runat="server" />
-                <uc2:UCComboTipoRelatorioAtendimento runat="server" ID="_UCComboTipoRelatorioAtendimento" 
-                    MostrarMensagemSelecione="true" Obrigatorio="true" Titulo="Tipo de relatório"/>
-                <uc3:UCCRelatorioAtendimento ID="_UCCRelatorioAtendimento" runat="server" Obrigatorio="true"/>
-                <uc4:UCComboUAEscola ID="_UCComboUAEscola" runat="server" MostrarMessageSelecioneUA="true" 
-                    MostrarMessageSelecioneEscola="true" CarregarEscolaAutomatico="true" ObrigatorioUA="true" ObrigatorioEscola="true" />
-                <uc7:UCComboCursoCurriculo ID="_UCComboCursoCurriculo" MostrarMensagemSelecione="true" runat="server" 
-                    Obrigatorio="true"/>
-                <uc6:UCComboCurriculoPeriodo ID="_UCComboCurriculoPeriodo" MostrarMensagemSelecione="true" runat="server" 
-                    Obrigatorio="true"/>
-                <uc5:UCCCalendario ID="_UCComboCalendario" runat="server" MostrarMensagemSelecione="true" 
-                    Obrigatorio="true"/>
-            </fieldset>
+            <asp:Panel ID="pnlBusca" runat="server" GroupingText="Relatório geral de atendimento">
+                <uc:UCCObrigatorios ID="UCCObrigatorios" runat="server" />
+                <uc:UCCUAEscola ID="UCCUAEscola" runat="server" CarregarEscolaAutomatico="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true"
+                    ObrigatorioUA="true" ObrigatorioEscola="true" />
+                <uc:UCCCursoCurriculo ID="UCCCursoCurriculo" MostrarMensagemSelecione="true" Obrigatorio="true"
+                    runat="server" />
+                <uc:UCCCurriculoPeriodo ID="UCCCurriculoPeriodo" MostrarMensagemSelecione="true" Obrigatorio="true"
+                    runat="server" />
+                <uc:UCCCalendario ID="UCCCalendario" runat="server" MostrarMensagemSelecione="true" Obrigatorio="true" />
+                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" Obrigatorio="true" />
+                <div id="divBuscaAvancadaAluno" runat="server" class="divBuscaAvancadaAluno">
+                    <uc:UCCBuscaAluno ID="UCCBuscaAluno" runat="server" />
+                </div>
+                <div class="right">
+                    <asp:Button ID="btnPesquisar" runat="server" Text="<%$ Resources:Padrao, Padrao.Pesquisar.Text %>" OnClick="btnPesquisar_Click" />
+                    <asp:Button ID="btnLimparPesquisa" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click" CausesValidation="false" />
+                </div>
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <div class="right area-botoes-bottom">
-        <asp:Button ID="_btnPesquisar" runat="server" Text="" OnClick="_btnPesquisar_Click"
-            CausesValidation="false" />
-        <asp:Button ID="_btnLimparPesquisa" runat="server" Text="" OnClick="_btnLimparPesquisa_Click"
-            CausesValidation="false" />
-    </div>
-    <asp:UpdatePanel ID="_updResultado" runat="server" UpdateMode="Conditional">
+    <asp:UpdatePanel ID="updResultados" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <fieldset id="_fdsResultado" runat="server">
-                <legend>Resultados</legend>
-                <div class="right area-botoes-top">
-                    <asp:Button ID="_btnGerarRelatorioCima" runat="server" Text="Gerar relatório" OnClick="_btnGerarRelatorioCima_Click" />
+            <asp:Panel ID="pnlResultados" runat="server" GroupingText="<%$ Resources:Padrao, Padrao.Resultados.Text %>">
+                <div style="float: left; width: 50%">
+                    <asp:CheckBox ID="chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos" todososcursospeja='0'
+                        runat="server" />
                 </div>
-                <div class="area-form">
-                    <br />
-                    <br />
-                    <div id="DivSelecionaTodos" runat="server">
-                        <div style="float: left; width: 50%">
-                            <asp:CheckBox ID="_chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos"
-                                runat="server" />
-                        </div>
-                        <div align="right" id="divQtdPaginacao" runat="server">
-                            <asp:Label ID="_lblPag" runat="server" Text="Itens por página"></asp:Label>
-                            <asp:DropDownList ID="_ddlQtPaginado" runat="server" AutoPostBack="True" OnSelectedIndexChanged="_ddlQtPaginado_SelectedIndexChanged1">
-                                <asp:ListItem>10</asp:ListItem>
-                                <asp:ListItem>20</asp:ListItem>
-                                <asp:ListItem>50</asp:ListItem>
-                                <asp:ListItem>100</asp:ListItem>
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <br />
-                    <asp:GridView ID="_grvAlunos" runat="server" AllowPaging="True" AllowCustomPaging="true" AutoGenerateColumns="False"
-                        BorderStyle="None" DataKeyNames=""
-                        EmptyDataText="A pesquisa não encontrou resultados."
-                        OnRowDataBound="_grvAlunos_RowDataBound" OnDataBound="_grvAlunos_DataBound"
-                        AllowSorting="True" OnPageIndexChanging="_grvAlunos_PageIndexChanging" OnSorting="_grvAlunos_Sorting"
-                        EnableModelValidation="True" SkinID="GridResponsive">
-                        <Columns>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:CheckBox ID="_chkSelecionar" runat="server" alu_id='<%# Eval("alu_id") %>' cal_id='<%# Eval("cal_id") %>'
-                                        esc_id='<%# Eval("esc_id") %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <%-- Fields --%>
-                        </Columns>
-                    </asp:GridView>
-                    <uc8:UCTotalRegistros id="_UCTotalRegistros" runat="server" associatedgridviewid="_grvAlunos"
-                        class="clTotalReg" />
-                </div>
-                <div class="right area-botoes-bottom">
-                    <asp:Button ID="_btnGerarRelatorio" runat="server" Text="Gerar relatório" OnClick="_btnGerarRelatorio_Click" />
-                </div>
-            </fieldset>
+                <uc:UCCQtdePaginacao ID="UCCQtdePaginacao" runat="server" />
+                <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound"
+                    OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
+                    EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>" OnDataBinding="grvResultados_DataBinding"
+                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
+                    <Columns>
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelecionar" runat="server" alu_id='<%# Eval("alu_id") %>' cal_id='<%# Eval("cal_id") %>'
+                                    tur_id='<%# Eval("tur_id") %>' esc_id='<%# Eval("esc_id") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Nome.Text %>" DataField="pes_nome" SortExpression="pes_nome" />
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Idade.Text %>" DataField="pes_idade" SortExpression="pes_idade" />
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Escola.Text %>" DataField="tur_escolaUnidade" SortExpression="tur_escolaUnidade" />
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Curso.Text %>" DataField="tur_curso" SortExpression="tur_curso" />
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Turma.Text %>" DataField="tur_codigo" SortExpression="tur_codigo" />
+                    </Columns>
+                </asp:GridView>
+                <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
