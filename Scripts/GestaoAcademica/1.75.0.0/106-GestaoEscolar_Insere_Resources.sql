@@ -23,7 +23,7 @@ SET XACT_ABORT ON
         , @rcr_NomeResource = 'Configuracao'
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
-        , @rcr_valorPadrao = 'Permite Ações Relizadas'
+        , @rcr_valorPadrao = 'Permite ações realizadas'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 
