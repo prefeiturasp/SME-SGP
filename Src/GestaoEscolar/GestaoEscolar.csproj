@@ -924,6 +924,20 @@
     <Compile Include="Classe\RelatorioAtendimento\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classe\RelatorioNaapa\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\RelatorioNaapa\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\RelatorioNaapa\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\RelatorioNaapa\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1785,6 +1799,13 @@
     </Compile>
     <Compile Include="Relatorios\RelatorioDev.aspx.designer.cs">
       <DependentUpon>RelatorioDev.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelatorioGeralAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelatorioGeralAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\RelatorioLogTablets\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
@@ -3553,6 +3574,8 @@
     <Content Include="Classe\LancamentoSondagem\Cadastro.aspx" />
     <Content Include="Classe\RelatorioAtendimento\Busca.aspx" />
     <Content Include="Classe\RelatorioAtendimento\Cadastro.aspx" />
+    <Content Include="Classe\RelatorioNaapa\Busca.aspx" />
+    <Content Include="Classe\RelatorioNaapa\Cadastro.aspx" />
     <Content Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
     <Content Include="Configuracao\DeficienciaDetalhe\Busca.aspx" />
@@ -4361,6 +4384,7 @@
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Relatorios\QuantitativoSugestoes\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />
+    <Content Include="Relatorios\RelatorioGeralAtendimento\Busca.aspx" />
     <Content Include="Relatorios\RelatorioLogTablets\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosConselhoDeClasse\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosAlunosBaixaFrequencia\Busca.aspx" />
