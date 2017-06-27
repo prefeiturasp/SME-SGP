@@ -182,8 +182,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
                 // Seta propriedades necessárias para ordenação nas colunas.
                 ConfiguraColunasOrdenacao(grvResultados);
 
-                grvResultados.DataBind();
-                //grvResultados.VirtualItemCount = ACA_AlunoBO.GetTotalRecords();
+                SelecionaDados();
             }
         }
 
@@ -326,36 +325,39 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
         /// Retorna os dados de alunos
         /// </summary>
         /// <returns></returns>
-        private DataTable SelecionaDados()
+        private void SelecionaDados()
         {
-            DataTable dt = ACA_AlunoBO.BuscaAlunos_BoletimEscolar
-                (
-                    UCCCalendario.Valor,
-                    UCCUAEscola.Esc_ID,
-                    UCCUAEscola.Uni_ID,
-                    UCCCursoCurriculo.Valor[0],
-                    UCCCursoCurriculo.Valor[1],
-                    UCCCurriculoPeriodo.Valor[2],
-                    UCCTurma.Valor[0],
-                    Convert.ToByte(UCCBuscaAluno.TipoBuscaNomeAluno),
-                    UCCBuscaAluno.NomeAluno,
-                    Convert.ToDateTime(string.IsNullOrEmpty(UCCBuscaAluno.DataNascAluno) ? new DateTime().ToString() : UCCBuscaAluno.DataNascAluno),
-                    UCCBuscaAluno.NomeMaeAluno,
-                    UCCBuscaAluno.MatriculaAluno,
-                    UCCBuscaAluno.MatriculaEstadualAluno,
-                    __SessionWEB.__UsuarioWEB.Usuario.ent_id,
-                    UCCUAEscola.Uad_ID,
-                    (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao),
-                    __SessionWEB.__UsuarioWEB.Usuario.usu_id,
-                    __SessionWEB.__UsuarioWEB.Grupo.gru_id,
-                    false,
-                    UCCQtdePaginacao.Valor,
-                    grvResultados.PageIndex,
-                    (int)VS_SortDirection,
-                    VS_Ordenacao
-                );
+            DataTable dt = ACA_AlunoBO.BuscaAlunos_Documentos
+                    (
+                        UCCCalendario.Valor,
+                        UCCUAEscola.Esc_ID,
+                        UCCUAEscola.Uni_ID,
+                        UCCCursoCurriculo.Valor[0],
+                        UCCCursoCurriculo.Valor[1],
+                        UCCCurriculoPeriodo.Valor[2],
+                        UCCTurma.Valor[0],
+                        Convert.ToByte(UCCBuscaAluno.TipoBuscaNomeAluno),
+                        UCCBuscaAluno.NomeAluno,
+                        Convert.ToDateTime(string.IsNullOrEmpty(UCCBuscaAluno.DataNascAluno) ? new DateTime().ToString() : UCCBuscaAluno.DataNascAluno),
+                        UCCBuscaAluno.NomeMaeAluno,
+                        UCCBuscaAluno.MatriculaAluno,
+                        UCCBuscaAluno.MatriculaEstadualAluno,
+                        __SessionWEB.__UsuarioWEB.Usuario.ent_id,
+                        UCCUAEscola.Uad_ID,
+                        (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao),
+                        __SessionWEB.__UsuarioWEB.Usuario.usu_id,
+                        __SessionWEB.__UsuarioWEB.Grupo.gru_id,
+                        false,
+                        UCCQtdePaginacao.Valor,
+                        grvResultados.PageIndex,
+                        (int)VS_SortDirection,
+                        VS_Ordenacao,
+                        false
+                    );
 
-            return dt;
+            grvResultados.VirtualItemCount = ACA_AlunoBO.GetTotalRecords();
+            grvResultados.DataSource = dt;
+            grvResultados.DataBind();
         }
 
         /// <summary>
@@ -386,7 +388,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
                 filtros.Add("alc_matricula", UCCBuscaAluno.MatriculaAluno);
             }
 
-            filtros.Add("VS_Ordenacao", "pes_nome");
+            filtros.Add("VS_Ordenacao", VS_Ordenacao);
             filtros.Add("VS_SortDirection", VS_SortDirection.ToString());
 
             __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioNAAPA, Filtros = filtros };
@@ -463,7 +465,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
 
             }
 
-            if (UCCTurma.Valor[0] > 0)
+            if (UCCCalendario.Valor > 0)
             {
                 Pesquisar();
             }
@@ -486,8 +488,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
 
                 grvResultados.PageIndex = 0;
                 grvResultados.PageSize = UCCQtdePaginacao.Valor;
-
-                grvResultados.DataBind();
+                SelecionaDados();
 
                 UCCQtdePaginacao.Visible = grvResultados.Rows.Count > 0;
 
@@ -593,23 +594,14 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
         protected void grvResultados_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grvResultados.PageIndex = e.NewPageIndex;
-            grvResultados.DataBind();
-            //grvResultados.VirtualItemCount = ACA_AlunoBO.GetTotalRecords();
-        }
-
-        protected void grvResultados_DataBinding(object sender, EventArgs e)
-        {
-            if (grvResultados.DataSource == null)
-            {
-                grvResultados.DataSource = SelecionaDados();
-            }
+            SelecionaDados();
         }
 
         protected void grvResultados_Sorting(object sender, GridViewSortEventArgs e)
         {
             VS_SortDirection = SortDir(e.SortExpression);
             VS_Ordenacao = e.SortExpression;
-            grvResultados.DataBind();
+            SelecionaDados();
         }
 
         protected void grvResultados_RowEditing(object sender, GridViewEditEventArgs e)
