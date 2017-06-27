@@ -624,6 +624,10 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     {
                         pnlLancamento.Visible = false;
                         grvLancamentos.Visible = true;
+                        btnNovo.Visible = VS_disciplinaRP
+                                && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
+                                && VS_permissoesRP.permissaoEdicao
+                                && VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
 
                         string[] ids = ddlDisciplina.SelectedValue.Split(';');
 
