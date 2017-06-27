@@ -34,9 +34,9 @@ SET XACT_ABORT ON
 		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
 		,@nomeModuloPai = 'Registro de Classe' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Relatório NAAPA' -- Nome do módulo (Obrigatório)
-		,@SiteMap1Nome = 'Consulta de relatórios de NAAPA'
+		,@SiteMap1Nome = 'Consulta de relatórios do NAAPA'
 		,@SiteMap1Url = '~/Classe/RelatorioNaapa/Busca.aspx'
-		,@SiteMap2Nome = 'Lançamento de relatórios de NAAPA'
+		,@SiteMap2Nome = 'Lançamento de relatórios do NAAPA'
 		,@SiteMap2Url = '~/Classe/RelatorioNaapa/Cadastro.aspx'
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão

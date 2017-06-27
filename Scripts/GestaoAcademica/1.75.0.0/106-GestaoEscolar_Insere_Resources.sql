@@ -18,6 +18,20 @@ SET XACT_ABORT ON
 
 	*/
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'pnlBusca.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.RelatorioNaapa.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Consulta de relatórios do NAAPA'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctrl_61.ToolTip' 
+		, @rcr_NomeResource = 'GestaoEscolar.Classe.RelatorioNaapa.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Lançar relatório do NAAPA'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
