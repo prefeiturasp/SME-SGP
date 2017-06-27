@@ -26,13 +26,13 @@ namespace GestaoEscolar.Relatorios.SinteseResultadosAvaliacao.GraficoTurmaMatriz
             divPeriodoCalendario.Visible = true;
             UCBuscaDocenteTurma.ComboTurma.Obrigatorio &= UCBuscaDocenteTurma._VS_doc_id > 0;
             UCCPeriodoCalendario.MostrarMensagemSelecione = true;
-            UCCPeriodoCalendario.Obrigatorio = true;
+            UCCPeriodoCalendario.Obrigatorio = false;
             UCBuscaDocenteTurma.ComboEscola.ObrigatorioUA = true;
             UCBuscaDocenteTurma.ComboEscola.ObrigatorioEscola = true;
             UCBuscaDocenteTurma.ComboCalendario.Obrigatorio = true;
             UCBuscaDocenteTurma.ComboCurriculoPeriodo.Obrigatorio = true;
             UCBuscaDocenteTurma.ComboCursoCurriculo.Obrigatorio = true;
-            UCBuscaDocenteTurma.ComboTurma.Obrigatorio = true;
+            UCBuscaDocenteTurma.ComboTurma.Obrigatorio = false;
             divPeriodoCalendario.Visible = true;
             UCCPeriodoCalendario.SelecionaPeriodoAtualAoCarregar = true;
 
