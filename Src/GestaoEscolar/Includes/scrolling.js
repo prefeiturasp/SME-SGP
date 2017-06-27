@@ -24,7 +24,11 @@ $(document).ready(function () {
         if ($('iframe.chartjs-hidden-iframe').length > 0)
             $('iframe.chartjs-hidden-iframe').css('display', 'none');
         e.preventDefault();
+        if ($('iframe.chartjs-hidden-iframe').length > 0)
+            $('iframe.chartjs-hidden-iframe').css('display', 'none');
         window.print();
+        if ($('iframe.chartjs-hidden-iframe').length > 0)
+            $('iframe.chartjs-hidden-iframe').css('display', 'block');
     });
 
     $('#btn-voltar').click(function (e) {

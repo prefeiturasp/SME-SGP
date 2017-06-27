@@ -362,6 +362,19 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                     Param.Value = DBNull.Value;
                 }
                 qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@atd_numeroAtividadeExtraclasse";
+                if (entity.atd_numeroAtividadeExtraclasse > 0)
+                {
+                    Param.Value = entity.atd_numeroAtividadeExtraclasse;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
             }
         }
 		
@@ -647,6 +660,19 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 if (entity.atd_numeroAulasExterna > 0)
                 {
                     Param.Value = entity.atd_numeroAulasExterna;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@atd_numeroAtividadeExtraclasse";
+                if (entity.atd_numeroAtividadeExtraclasse > 0)
+                {
+                    Param.Value = entity.atd_numeroAtividadeExtraclasse;
                 }
                 else
                 {

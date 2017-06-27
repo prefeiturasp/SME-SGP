@@ -204,6 +204,15 @@ namespace MSTech.GestaoEscolar.BLL
                 dr["caf_qtAulasExterna"] = DBNull.Value;
             }
 
+            if (entity.caf_qtAtividadeExtraclasse > 0)
+            {
+                dr["caf_qtAtividadeExtraclasse"] = entity.caf_qtAtividadeExtraclasse;
+            }
+            else
+            {
+                dr["caf_qtAtividadeExtraclasse"] = DBNull.Value;
+            }
+
             return dr;
         }
 	}

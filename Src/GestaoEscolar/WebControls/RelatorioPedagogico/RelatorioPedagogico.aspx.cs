@@ -103,6 +103,7 @@
             ScriptManager sm = ScriptManager.GetCurrent(Page);
             if (sm != null)
             {
+                sm.Scripts.Add(new ScriptReference("~/Includes/underscore-min.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/jquery-2.0.3.min.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/bootstrap/bootstrap.min.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/scrolling.js"));

@@ -1526,7 +1526,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             divEventoSemAtividade.Visible = divAvisoSubstituto.Visible = divAvisoAulaSemPlano.Visible = false;
 
-            if (ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_RELATORIOS_DIARIO_DE_CLASSE, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
+            if (ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_RELATORIOS_DIARIO_DE_CLASSE, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                && VS_EntitiesControleTurma.turma.tur_tipo == (byte)TUR_TurmaTipo.Normal)
             {
                 if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                 {  // validação especifica para o tipo do docente logado

@@ -291,6 +291,20 @@
     <Compile Include="Academico\AberturaTurmasAnosAnteriores\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\AgendamentoSondagem\Agendamento.aspx.cs">
+      <DependentUpon>Agendamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\AgendamentoSondagem\Agendamento.aspx.designer.cs">
+      <DependentUpon>Agendamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\AgendamentoSondagem\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\AgendamentoSondagem\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\Aluno\Anotacoes.aspx.cs">
       <DependentUpon>Anotacoes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -475,6 +489,20 @@
     </Compile>
     <Compile Include="Academico\ControleTurma\PlanejamentoAnual.aspx.designer.cs">
       <DependentUpon>PlanejamentoAnual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\Curriculo\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Curriculo\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Academico\Curriculo\RegistroSugestoes.aspx.cs">
+      <DependentUpon>RegistroSugestoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\Curriculo\RegistroSugestoes.aspx.designer.cs">
+      <DependentUpon>RegistroSugestoes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Academico\Curso\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
@@ -1639,6 +1667,13 @@
     <Compile Include="Relatorios\ObjetoAprendizagem\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\QuantitativoSugestoes\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\QuantitativoSugestoes\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\Relatorio.aspx.cs">
       <DependentUpon>Relatorio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1693,6 +1728,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Relatorios\RelatoriosCP\GraficoIndividualNotas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\RelatorioSugestoesCurriculo\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelatorioSugestoesCurriculo\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\SinteseResultadosAvaliacao\GraficoComponenteCurricularTurmas\Busca.aspx.cs">
@@ -2597,6 +2639,20 @@
     <Compile Include="WebControls\ControleVigenciaDocentes\UCControleVigenciaDocentes.ascx.designer.cs">
       <DependentUpon>UCControleVigenciaDocentes.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Curriculo\UCCurriculo.ascx.cs">
+      <DependentUpon>UCCurriculo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Curriculo\UCCurriculo.ascx.designer.cs">
+      <DependentUpon>UCCurriculo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Curriculo\UCListaSugestoes.ascx.cs">
+      <DependentUpon>UCListaSugestoes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Curriculo\UCListaSugestoes.ascx.designer.cs">
+      <DependentUpon>UCListaSugestoes.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Documento\UCGridDocumento.ascx.cs">
       <DependentUpon>UCGridDocumento.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2915,6 +2971,13 @@
     <Compile Include="WebControls\Sistemas\UCSistemas.ascx.designer.cs">
       <DependentUpon>UCSistemas.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Sondagem\UCAgendamento.ascx.cs">
+      <DependentUpon>UCAgendamento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Sondagem\UCAgendamento.ascx.designer.cs">
+      <DependentUpon>UCAgendamento.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\TurmaDisciplina\UCGridDisciplina.ascx.cs">
       <DependentUpon>UCGridDisciplina.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2944,6 +3007,8 @@
   <ItemGroup>
     <Content Include="Academico\AberturaTurmasAnosAnteriores\Busca.aspx" />
     <Content Include="Academico\AberturaTurmasAnosAnteriores\Cadastro.aspx" />
+    <Content Include="Academico\AgendamentoSondagem\Agendamento.aspx" />
+    <Content Include="Academico\AgendamentoSondagem\Busca.aspx" />
     <Content Include="Academico\Areas\Busca.aspx" />
     <Content Include="Academico\Areas\Cadastro.aspx" />
     <Content Include="Academico\Areas\Documentos.aspx" />
@@ -2963,6 +3028,8 @@
     <Content Include="Academico\ControleTurma\Listao.aspx" />
     <Content Include="Academico\ControleTurma\MinhaEscolaGestor.aspx" />
     <Content Include="Academico\ControleTurma\PlanejamentoAnual.aspx" />
+    <Content Include="Academico\Curriculo\Cadastro.aspx" />
+    <Content Include="Academico\Curriculo\RegistroSugestoes.aspx" />
     <Content Include="Academico\HistoricoEscolar\Busca.aspx" />
     <Content Include="Academico\HistoricoEscolar\DadosAluno.aspx" />
     <Content Include="Academico\HistoricoEscolar\EnsinoFundamental.aspx" />
@@ -3222,6 +3289,8 @@
     <Content Include="App_Themes\IntranetSME\images\logos\logo-barra-sp.gif" />
     <Content Include="App_Themes\IntranetSME\images\setaDestaque_.png" />
     <Content Include="App_Themes\IntranetSME\images\seta_.png" />
+    <Content Include="App_Themes\IntranetSME\images\sugerir.png" />
+    <Content Include="App_Themes\IntranetSME\new_css.css" />
     <Content Include="App_Themes\IntranetSME\responsividade.css" />
     <Content Include="Classe\Efetivacao\CadastroGestor.aspx" />
     <Content Include="Classe\JustificativaAbonoFalta\Busca.aspx" />
@@ -3336,6 +3405,8 @@
     <Content Include="App_Themes\IntranetSMEBootStrap\custom.css.map" />
     <Content Include="App_Themes\IntranetSMEBootStrap\custom.scss" />
     <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_layout-impressao.scss" />
+    <Content Include="App_Themes\IntranetSME\new_css.scss" />
+    <Content Include="App_Themes\IntranetSME\new_css.css.map" />
     <None Include="Configs\Session.txt" />
     <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
@@ -4100,6 +4171,7 @@
     <Content Include="Includes\jsUCAlunoEfetivacaoObservacao.js" />
     <Content Include="Includes\jsUCAlunoEfetivacaoObservacaoGeral.js" />
     <Content Include="Includes\jsUCCalendario.js" />
+    <Content Include="Includes\jsUCCurriculo.js" />
     <Content Include="Includes\jsUCInformacoesComplementares.js" />
     <Content Include="Includes\jsUCPlanejamentoProjetos.js" />
     <Content Include="Includes\jsUCSelecaoDisciplinaCompartilhada.js" />
@@ -4115,6 +4187,7 @@
     <Content Include="Includes\redactor\redactor.min.js" />
     <Content Include="Includes\jsSetExitPageConfirmer.js" />
     <Content Include="Includes\scrolling.js" />
+    <Content Include="Includes\underscore-min.js" />
     <Content Include="Index.aspx" />
     <Content Include="Manutencao.aspx" />
     <Content Include="manutencao.htm" />
@@ -4132,6 +4205,7 @@
     <Content Include="Relatorios\FrequenciaMensal\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
+    <Content Include="Relatorios\QuantitativoSugestoes\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />
     <Content Include="Relatorios\RelatorioLogTablets\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosConselhoDeClasse\Busca.aspx" />
@@ -4139,6 +4213,7 @@
     <Content Include="Relatorios\RelatoriosCP\DadosAlunosJustificativaFalta\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\GraficoConsolidadoAtivAvaliada\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\GraficoIndividualNotas\Busca.aspx" />
+    <Content Include="Relatorios\RelatorioSugestoesCurriculo\Busca.aspx" />
     <Content Include="Relatorios\SinteseResultadosAvaliacao\GraficoComponenteCurricularTurmas\Busca.aspx" />
     <Content Include="Relatorios\SinteseResultadosAvaliacao\GraficoTurmaMatrizCurricular\Busca.aspx" />
     <Content Include="Turma\TurmaMultisseriada\Busca.aspx" />
@@ -4198,6 +4273,8 @@
     <Content Include="WebControls\ControleTurma\UCControleTurma.ascx" />
     <Content Include="WebControls\ControleTurma\UCSelecaoDisciplinaCompartilhada.ascx" />
     <Content Include="WebControls\ControleVigenciaDocentes\UCControleVigenciaDocentes.ascx" />
+    <Content Include="WebControls\Curriculo\UCCurriculo.ascx" />
+    <Content Include="WebControls\Curriculo\UCListaSugestoes.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotas.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotasFinal.ascx" />
     <Content Include="WebControls\EfetivacaoNotas\UCEfetivacaoNotasPadrao.ascx" />
@@ -4223,6 +4300,7 @@
     <Content Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx" />
     <Content Include="WebControls\Relatorio\UCDevReportView.ascx" />
+    <Content Include="WebControls\Sondagem\UCAgendamento.ascx" />
     <Content Include="WebControls\TurmaDisciplina\UCGridDisciplinaRegencia.ascx" />
     <Content Include="WSServicos.asmx" />
     <Content Include="WebControls\BoletimCompletoAluno\imagem.ashx" />

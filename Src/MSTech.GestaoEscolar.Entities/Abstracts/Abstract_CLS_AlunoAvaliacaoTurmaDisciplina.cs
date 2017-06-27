@@ -172,5 +172,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         /// Propriedade atd_numeroAulasExterna.
         /// </summary>
         public virtual int atd_numeroAulasExterna { get; set; }
+
+        /// <summary>
+        /// Carga horária total entregue de atividades extraclasse
+        /// </summary>
+        public virtual decimal atd_numeroAtividadeExtraclasse { get; set; }
     }
 }

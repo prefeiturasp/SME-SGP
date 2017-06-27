@@ -59,6 +59,30 @@ namespace MSTech.GestaoEscolar.BLL
 
         /// <summary>
         /// Retorna todos os tipos de modalidade de ensino não excluídos logicamente
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="doc_id">ID do docente</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoModalidadeEnsinoFilhosDocenteEventoAno(long doc_id, string eventosAbertos, int cal_ano)
+        {
+            return new ACA_TipoModalidadeEnsinoDAO().SelecionaTipoModalidadeEnsinoDocenteEvento(doc_id, eventosAbertos, cal_ano);
+        }
+
+        /// <summary>
+        /// Retorna todos os tipos de modalidade de ensino não excluídos logicamente
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="doc_id">ID do docente</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoModalidadeEnsinoFilhosDocenteEvento(long doc_id, string eventosAbertos)
+        {
+            return new ACA_TipoModalidadeEnsinoDAO().SelecionaTipoModalidadeEnsinoDocenteEvento(doc_id, eventosAbertos, 0);
+        }
+
+        /// <summary>
+        /// Retorna todos os tipos de modalidade de ensino não excluídos logicamente
         /// Vinculados a escola informada.
         /// <param name="esc_id">Id da escola</param>
         /// <param name="uni_id">Id da unidade escolar</param>

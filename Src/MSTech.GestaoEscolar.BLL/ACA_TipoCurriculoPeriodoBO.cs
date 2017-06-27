@@ -66,6 +66,45 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna os tipos de currículo período ativos por nível e modalidade de ensino
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="tne_id">Tipo nivel de ensino</param>
+        /// <param name="tme_id">Tipo modalidade de ensino</param>
+        /// <param name="doc_id">ID do docente</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoCurriculoPeriodoDocenteEventoAno
+        (
+            int tne_id
+            , int tme_id
+            , long doc_id
+            , string eventosAbertos
+            , int cal_ano
+         )
+        {
+            return new ACA_TipoCurriculoPeriodoDAO().SelecionaTipoCurriculoPeriodoDocenteEvento(tne_id, tme_id, doc_id, eventosAbertos, cal_ano);
+        }
+
+        /// <summary>
+        /// Retorna os tipos de currículo período ativos por nível e modalidade de ensino
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="tne_id">Tipo nivel de ensino</param>
+        /// <param name="tme_id">Tipo modalidade de ensino</param>
+        /// <param name="doc_id">ID do docente</param>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoCurriculoPeriodoDocenteEvento
+        (
+            int tne_id
+            , int tme_id
+            , long doc_id
+            , string eventosAbertos
+         )
+        {
+            return new ACA_TipoCurriculoPeriodoDAO().SelecionaTipoCurriculoPeriodoDocenteEvento(tne_id, tme_id, doc_id, eventosAbertos, 0);
+        }
+
+        /// <summary>
         /// Verifica o maior número de ordem cadastado de tipo de curriculo período
         /// </summary>  
         [DataObjectMethod(DataObjectMethodType.Select, false)]

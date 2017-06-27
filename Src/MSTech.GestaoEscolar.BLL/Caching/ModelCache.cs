@@ -655,21 +655,6 @@
         /// {0} : ID da escola.
         /// {1} : ID da unidade de escola.
         /// {2} : ID do calendario.
-        /// {3} : ID da turma disciplina.
-        /// </summary>
-        /// <remarks>
-        /// {0} : ID da escola.
-        /// {1} : ID da unidade de escola.
-        /// {2} : ID do calendario.
-        /// {3} : ID da turma disciplina.
-        /// </remarks>
-        public const string PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY = "Cache_SelecionaPendenciasFechamentoDisciplinas_{0}_{1}_{2}_{3}";
-
-        /// <summary>
-        /// Key para carregar pendências de fechamento
-        /// {0} : ID da escola.
-        /// {1} : ID da unidade de escola.
-        /// {2} : ID do calendario.
         
         /// </summary>
         /// <remarks>

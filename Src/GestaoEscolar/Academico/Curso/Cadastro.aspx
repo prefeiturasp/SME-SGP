@@ -179,6 +179,8 @@
                         <asp:TextBox ID="_txtNomeAbreviadoDisciplina" runat="server" MaxLength="20" SkinID="text20C"></asp:TextBox>
                         <asp:Label ID="LabelCodigoDisciplina" runat="server" Text="Código" AssociatedControlID="_txtCodigoDisciplina"></asp:Label>
                         <asp:TextBox ID="_txtCodigoDisciplina" runat="server" MaxLength="10" SkinID="text10C"></asp:TextBox>
+                        <asp:Label ID="LabelCargaHorariaExtraClasse" runat="server" Text="<%$ Resources:Academico, Curso.Cadastro.LabelCargaHorariaExtraClasse.Text %>" AssociatedControlID="_txtCargaHorariaExtraClasse"></asp:Label>
+                        <asp:TextBox ID="_txtCargaHorariaExtraClasse" runat="server" SkinID="Decimal" MaxLength="8"></asp:TextBox>                        
                         <div class="right">
                             <asp:Button ID="_btnCancelarDisciplina" runat="server" CausesValidation="False" Text="Cancelar"
                                 OnClientClick="$('.divDisciplina').dialog('close');" />
@@ -412,7 +414,7 @@
                         <asp:RegularExpressionValidator ID="revCargaHoraria" runat="server" ControlToValidate="txtCargaHoraria"
                             ValidationExpression="[0-9]+(\,[0-9][0-9]?)?"
                             ErrorMessage="Carga horária não está no formato correto."
-                            ValidationGroup="Curso">*</asp:RegularExpressionValidator>
+                            ValidationGroup="Curso">*</asp:RegularExpressionValidator>                        
                         <asp:Label ID="LabelVigenciaIni" runat="server" Text="Vigência inicial *" AssociatedControlID="_txtVigenciaIni"></asp:Label>
                         <asp:TextBox ID="_txtVigenciaIni" runat="server" MaxLength="10" SkinID="Data"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="_rfvVigenciaIni" runat="server" ControlToValidate="_txtVigenciaIni"

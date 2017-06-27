@@ -149,6 +149,99 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna todos os tipos de disciplina obrigatórias para o nível de ensino
+        /// </summary>        
+        /// <param name="tne_id">ID do tipo de nível de ensino</param>
+        /// <param name="controlarOrdem">se vai ordenar por ordem ou não</param> 
+        public DataTable SelecionaObrigatoriasPorNivelEnsinoEvento
+        (
+            int tne_id
+            , int tme_id
+            , bool controlarOrdem
+            , long doc_id
+            , string eventosAbertos
+            , int cal_ano
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoDisciplina_SelecionaObrigatoriasPorNivelEnsinoEvento", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tne_id";
+                Param.Size = 4;
+                if (tne_id > 0)
+                    Param.Value = tne_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_id";
+                Param.Size = 4;
+                if (tme_id > 0)
+                    Param.Value = tme_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@controlarOrdem";
+                Param.Size = 1;
+                Param.Value = controlarOrdem;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@doc_id";
+                Param.Size = 8;
+                if (doc_id > 0)
+                {
+                    Param.Value = doc_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.ParameterName = "@eventosAbertos";
+                Param.Value = eventosAbertos;
+                qs.Parameters.Add(Param);
+                
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                if (cal_ano > 0)
+                    Param.Value = cal_ano;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Retorna todos os tipos de disciplina não excluídos logicamente com ligação em objetos de aprendizagem
         /// </summary>        
         /// <param name="cal_ano">Ano do objeto de aprendizagem</param>

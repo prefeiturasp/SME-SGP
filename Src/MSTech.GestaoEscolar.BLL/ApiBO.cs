@@ -6132,8 +6132,8 @@ namespace MSTech.GestaoEscolar.BLL
                                         }).ToList()
                         }).ToList();
 
-                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalAulas = d.totalAulas + (d.notas.Any(n => n.nota.possuiFreqExterna) ? "*" : ""));
-                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalFaltas = d.totalFaltas + (d.notas.Any(n => n.nota.possuiFreqExterna) ? "*" : ""));
+                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalAulas = d.totalAulas + (d.notas.Any(n => n.nota != null && n.nota.possuiFreqExterna) ? "*" : ""));
+                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalFaltas = d.totalFaltas + (d.notas.Any(n => n.nota != null && n.nota.possuiFreqExterna) ? "*" : ""));
 
                     if (controleOrdemDisciplinas)
                     {
@@ -7408,14 +7408,16 @@ namespace MSTech.GestaoEscolar.BLL
                                               ,
                                              respostasAluno = (from dr in dt.AsEnumerable()
                                                                group dr by new { snd_id = dr.Field<int>("snd_id"), sda_id = dr.Field<int>("sda_id"), sdq_id = dr.Field<int>("sdq_id"), sdq_idSub = dr.Field<int>("sdq_idSub") } into asn
+                                                               orderby Convert.ToInt32(asn.FirstOrDefault()["sdq_ordemSub"]), Convert.ToInt32(asn.FirstOrDefault()["sdq_ordem"])
                                                                where asn.Key.snd_id == sda.Key.snd_id && asn.Key.sda_id == sda.Key.sda_id
+                                                               from resposta in asn
                                                                select new RespostaAlunoDTO
                                                                {
                                                                    idQuestao = asn.Key.sdq_id
                                                                    ,
                                                                    idSubQuestao = asn.Key.sdq_idSub
                                                                    ,
-                                                                   idResposta = Convert.ToInt32(asn.FirstOrDefault()["sdr_id"])
+                                                                   idResposta = Convert.ToInt32(resposta["sdr_id"])
                                                                }).ToList()
                                          }).ToList()
                      }

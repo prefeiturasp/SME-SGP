@@ -164,8 +164,8 @@
                             notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: listaK[k].nota.numeroFaltas });
                         }
                         else {
-                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, conceito: "-" });
-                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: "-" });
+                            notas.push({ tpc_nome: "", conceito: "-" });
+                            notas.push({ tpc_nome: "", faltas: "-" });
                         }
                     }//for K
                     listaJ[j]["avaliacao"] = notas;
@@ -461,8 +461,8 @@
                             notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: listaK[k].nota.numeroFaltas });
                         }
                         else {
-                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, conceito: "-" });
-                            notas.push({ tpc_nome: listaK[k].nota.tpc_nome, faltas: "-" });
+                            notas.push({ tpc_nome: "", conceito: "-" });
+                            notas.push({ tpc_nome: "", faltas: "-" });
                         }
                     }//for K
                     listaJ[j]["avaliacao"] = notas;

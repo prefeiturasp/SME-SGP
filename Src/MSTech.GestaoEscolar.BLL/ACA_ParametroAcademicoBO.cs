@@ -404,7 +404,7 @@ namespace MSTech.GestaoEscolar.BLL
         [parametroAcademicoAttributes("Modalidade de ensino que se refere a modalidade regular do ensino fundamental", "Modalidade de ensino que se refere a modalidade regular do ensino fundamental é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         TIPO_MODALIDADE_ENSINO_REGULAR
         ,
-
+        
         [parametroAcademicoAttributes("Modalidade de ensino para jovens e adultos(Integração Censo Escolar)", "", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.text)]
         TIPO_MODALIDADE_ENSINO_JOVENS_ADULTOS
         ,
@@ -842,8 +842,12 @@ namespace MSTech.GestaoEscolar.BLL
         PERMITIR_CADASTRO_ANOTACOES_GERAIS_ALUNO
         ,
 
-        [parametroAcademicoAttributes("Modalidade de ensino que se refere a modalidade EJA.", "Modalidade de ensino que se refere a modalidade EJA é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
+        [parametroAcademicoAttributes("Modalidade de ensino que se refere a modalidade EJA.", "Modalidade de ensino que se refere a modalidade EJA é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.integer)]
         TIPO_MODALIDADE_EJA
+        ,
+        
+        [parametroAcademicoAttributes("Modalidade de ensino que se refere a modalidade CIEJA.", "Modalidade de ensino que se refere a modalidade CIEJA é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.integer)]
+        TIPO_MODALIDADE_CIEJA
         ,
 
         [parametroAcademicoAttributes("Programas sociais que irão processar frequências de alunos.", "Programa social é obrigatório.", false, false, TipoParametroAcademico.Multiplo, DataTypeParametroAcademico.specific)]
@@ -1079,6 +1083,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
         [parametroAcademicoAttributes("Mostrar coluna de relatório pedagógico na consulta de manutenção de aluno", "Mostrar coluna de relatório pedagógico na consulta de manutenção de aluno é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         MOSTRAR_COLUNA_RELATORIOPEDAGOGICO_MANUTENCAO_ALUNO
+        ,
+        [parametroAcademicoAttributes("Tipo de evento de abertura de período para cadastro de sugestões no currículo", "Tipo de evento de abertura de período para cadastro de sugestões no currículo é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
+        TIPO_EVENTO_ABERTURA_SUGESTOES
     }   
 
     #endregion Enumerador

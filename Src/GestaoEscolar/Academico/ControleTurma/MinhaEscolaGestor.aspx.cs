@@ -30,7 +30,6 @@ namespace GestaoEscolar.Academico.ControleTurma
             public Guid uad_idSuperior { get; set; }
             public int esc_id { get; set; }
             public int uni_id { get; set; }
-            public int cal_id { get; set; }
             public int cal_ano { get; set; }
         }
 
@@ -160,7 +159,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     foreach (RepeaterItem itemTurma in rptTurmas.Items)
                     {
                         int esc_id = 0;
-                        int cal_id = 0;
+                        int[] cal_ids = null;
 
                         // Id Escola
                         HiddenField hdnId = itemTurma.FindControl("hdnEscola") as HiddenField;
@@ -173,7 +172,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         HiddenField hdnCalendario = itemTurma.FindControl("hdnCalendario") as HiddenField;
                         if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
                         {
-                            cal_id = Convert.ToInt32(hdnCalendario.Value);
+                            cal_ids = hdnCalendario.Value.Split(';').Select(p => Convert.ToInt32(p)).ToArray();
                         }
 
                         int uni_id = 0;
@@ -187,7 +186,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                         // para mostrar o botao de atualizar pendencias.
                         string valor = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_NOTAS, ent_id);
                         string valorFinal = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_FINAL, ent_id);
-                        List<ACA_Evento> lstEventosEscola = ACA_EventoBO.GetEntity_Efetivacao_ListPorPeriodo(cal_id, -1, Guid.Empty, esc_id, uni_id, ent_id);
+                        List<ACA_Evento> lstEventosEscola = cal_ids != null && cal_ids.Any() ?
+                            cal_ids.SelectMany(p => ACA_EventoBO.GetEntity_Efetivacao_ListPorPeriodo(p, -1, Guid.Empty, esc_id, uni_id, ent_id)).ToList() :
+                            new List<ACA_Evento>();
 
                         if (lstEventosEscola.Any(p => Convert.ToString(p.tev_id) == valor || Convert.ToString(p.tev_id) == valorFinal))
                         {
@@ -434,7 +435,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 Guid ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id;
                 int esc_id = 0;
-                int cal_id = 0;
+                int cal_ano = 0;
 
                 // Id Escola
                 HiddenField hdnId = e.Item.FindControl("hdnEscola") as HiddenField;
@@ -444,10 +445,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 }
 
                 // Calendario
-                HiddenField hdnCalendario = e.Item.FindControl("hdnCalendario") as HiddenField;
-                if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
+                HiddenField hdnCalendarioAno = e.Item.FindControl("hdnCalendarioAno") as HiddenField;
+                if (hdnCalendarioAno != null && !string.IsNullOrEmpty(hdnCalendarioAno.Value))
                 {
-                    cal_id = Convert.ToInt32(hdnCalendario.Value);
+                    cal_ano = Convert.ToInt32(hdnCalendarioAno.Value);
                 }
 
                 int uni_id = 0;
@@ -462,7 +463,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 dados.All(p =>
                 {
-                    lista.AddRange(p.Turmas.Where(t => t.esc_id == esc_id && t.cal_id == cal_id));
+                    lista.AddRange(p.Turmas.Where(t => t.esc_id == esc_id && t.cal_ano == cal_ano));
                     return true;
                 });
 
@@ -485,6 +486,30 @@ namespace GestaoEscolar.Academico.ControleTurma
                     {
                         rptCiclosAbas.DataSource = ciclos;
                         rptCiclosAbas.DataBind();
+                    }
+                }
+
+                GridView grvTurmasEncerradas = e.Item.FindControl("grvTurmasEncerradas") as GridView;
+                if (grvTurmasEncerradas != null)
+                {
+                    HiddenField hdnIndiceRptTurmasEncerradas = e.Item.FindControl("hdnIndiceRptTurmasEncerradas") as HiddenField;
+                    if (hdnIndiceRptTurmasEncerradas != null)
+                    {
+                        hdnIndiceRptTurmasEncerradas.Value = indiceRptTurmas.ToString();
+                    }
+
+                    var turmasEncerradas = lista.Where(x => x.tur_situacao == (byte)TUR_TurmaSituacao.Encerrada &&
+                                                            (x.tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_EJA, Ent_ID_UsuarioLogado) ||
+                                                             x.tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_ENSINO_JOVENS_ADULTOS, Ent_ID_UsuarioLogado)));
+
+                    grvTurmasEncerradas.DataSource = turmasEncerradas;
+                    grvTurmasEncerradas.DataBind();
+
+                    Panel pnlTurmasEncerradas = (Panel)e.Item.FindControl("pnlTurmasEncerradas");
+                    HtmlGenericControl liTurmasEncerradas = (HtmlGenericControl)e.Item.FindControl("liTurmasEncerradas");
+                    if (pnlTurmasEncerradas != null && liTurmasEncerradas != null)
+                    {
+                        pnlTurmasEncerradas.Visible = liTurmasEncerradas.Visible = (grvTurmasEncerradas.Rows.Count > 0);
                     }
                 }
 
@@ -551,7 +576,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 int cur_id = 0;
                 int crr_id = 0;
                 bool carregarGridTurmas = false;
-                int cal_id = 0;
+                int cal_ano = 0;
 
                 // Id Escola
                 HiddenField hdnId = e.Item.Parent.Parent.FindControl("hdnEscola") as HiddenField;
@@ -568,10 +593,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 }
 
                 // Calendario
-                HiddenField hdnCalendario = e.Item.Parent.Parent.FindControl("hdnCalendario") as HiddenField;
-                if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
+                HiddenField hdnCalendarioAno = e.Item.Parent.Parent.FindControl("hdnCalendarioAno") as HiddenField;
+                if (hdnCalendarioAno != null && !string.IsNullOrEmpty(hdnCalendarioAno.Value))
                 {
-                    cal_id = Convert.ToInt32(hdnCalendario.Value);
+                    cal_ano = Convert.ToInt32(hdnCalendarioAno.Value);
                 }
 
                 HiddenField hdnCiclo = e.Item.FindControl("hdnCiclo") as HiddenField;
@@ -583,7 +608,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 UCCCursoCurriculo UCCurso = e.Item.FindControl("UCCCursoCurriculo1") as UCCCursoCurriculo;
                 if (UCCurso != null)
                 {
-                    UCCurso.CarregarPorEscolaCalendarioTipoCiclo(esc_id, uni_id, cal_id, ciclo);
+                    UCCurso.CarregarPorEscolaCalendarioAnoTipoCiclo(esc_id, uni_id, cal_ano, ciclo);
 
                     cur_id = UCCurso.Valor[0];
                     crr_id = UCCurso.Valor[1];
@@ -641,7 +666,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     dados.All(p =>
                     {
-                        lista.AddRange(p.Turmas.Where(t => t.esc_id == esc_id && t.cal_id == cal_id));
+                        lista.AddRange(p.Turmas.Where(t => t.esc_id == esc_id && t.cal_ano == cal_ano));
                         return true;
                     });
 
@@ -1412,8 +1437,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                                         ,
                                         uni_id = Convert.ToInt32(string.IsNullOrEmpty(hdnUnidadeEscola.Value) ? "-1" : hdnUnidadeEscola.Value)
                                         ,
-                                        cal_id = Convert.ToInt32(string.IsNullOrEmpty(hdnCalendario.Value) ? "-1" : hdnCalendario.Value)
-                                        ,
                                         cal_ano = Convert.ToInt32(string.IsNullOrEmpty(hdnCalendarioAno.Value) ? "-1" : hdnCalendarioAno.Value)
                                     };
                                 }
@@ -1424,7 +1447,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 string report, parametros;
 
-                if (grid.gridTurma != null && grid.esc_id > 0 && grid.uni_id > 0 && grid.cal_id > 0 && grid.cal_ano > 0 && rptItemTurma != null)
+                if (grid.gridTurma != null && grid.esc_id > 0 && grid.uni_id > 0 && grid.cal_ano > 0 && rptItemTurma != null)
                 {
 
                     var turmadisciplina = ((from GridViewRow row in grid.gridTurma.Rows
@@ -1457,8 +1480,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_id in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                     {
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_id));
                     }
 
                     string tud_ids = string.Join(",", turmadisciplina.GroupBy(p => p.ToString()).Select(p => p.Key.ToString()).ToArray());
@@ -1484,8 +1506,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                         foreach (Int64 tud_idRegencia in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                         {
-                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
-                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
+                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_idRegencia));
                         }
                     }
 
@@ -1493,7 +1514,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     parametros = "uad_idSuperiorGestao=" + grid.uad_idSuperior +
                                  "&esc_id=" + grid.esc_id +
                                  "&uni_id=" + grid.uni_id +
-                                 "&cal_id=" + grid.cal_id +
+                                 "&cal_id=-1" +
                                  "&cal_ano=" + grid.cal_ano +
                                  "&cur_id=-1" +
                                  "&crr_id=-1" +
@@ -1555,8 +1576,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 ,
                                 uni_id = Convert.ToInt32(string.IsNullOrEmpty(hdnUnidadeEscola.Value) ? "-1" : hdnUnidadeEscola.Value)
                                 ,
-                                cal_id = Convert.ToInt32(string.IsNullOrEmpty(hdnCalendario.Value) ? "-1" : hdnCalendario.Value)
-                                ,
                                 cal_ano = Convert.ToInt32(string.IsNullOrEmpty(hdnCalendarioAno.Value) ? "-1" : hdnCalendarioAno.Value)
                             };
                         }
@@ -1565,7 +1584,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 string report, parametros;
 
-                if (grid.gridTurma != null && grid.esc_id > 0 && grid.uni_id > 0 && grid.cal_id > 0 && grid.cal_ano > 0 && rptItemTurma != null)
+                if (grid.gridTurma != null && grid.esc_id > 0 && grid.uni_id > 0 && grid.cal_ano > 0 && rptItemTurma != null)
                 {
                     var turmadisciplina = from GridViewRow row in grid.gridTurma.Rows
                                           join REL_TurmaDisciplinaSituacaoFechamento_Pendencia pend in VS_listaPendencias[rptItemTurma.ClientID]
@@ -1583,8 +1602,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_id in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                     {
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_id));
                     }
 
                     string tud_ids = string.Join(",", turmadisciplina.GroupBy(p => p.ToString()).Select(p => p.Key.ToString()).ToArray());
@@ -1609,23 +1627,21 @@ namespace GestaoEscolar.Academico.ControleTurma
                         //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                         foreach (Int64 tud_idRegencia in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                         {
-                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
-                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
+                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_idRegencia));
                         }
                     }
 
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_idRegencia in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                     {
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_idRegencia));
                     }
 
                     report = ((int)ReportNameGestaoAcademicaDocumentosDocente.DocDctAlunosPendenciaEfetivacao).ToString();
                     parametros = "uad_idSuperiorGestao=" + grid.uad_idSuperior +
                                  "&esc_id=" + grid.esc_id +
                                  "&uni_id=" + grid.uni_id +
-                                 "&cal_id=" + grid.cal_id +
+                                 "&cal_id=-1" +
                                  "&cal_ano=" + grid.cal_ano +
                                  "&cur_id=-1" +
                                  "&crr_id=-1" +
@@ -1687,8 +1703,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 ,
                                 uni_id = Convert.ToInt32(string.IsNullOrEmpty(hdnUnidadeEscola.Value) ? "-1" : hdnUnidadeEscola.Value)
                                 ,
-                                cal_id = Convert.ToInt32(string.IsNullOrEmpty(hdnCalendario.Value) ? "-1" : hdnCalendario.Value)
-                                ,
                                 cal_ano = Convert.ToInt32(string.IsNullOrEmpty(hdnCalendarioAno.Value) ? "-1" : hdnCalendarioAno.Value)
                             };
                         }                        
@@ -1697,7 +1711,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 string report, parametros;
 
-                if (grid.gridTurma != null && grid.esc_id > 0 && grid.uni_id > 0 && grid.cal_id > 0 && grid.cal_ano > 0 && rptItemTurma != null)
+                if (grid.gridTurma != null && grid.esc_id > 0 && grid.uni_id > 0 && grid.cal_ano > 0 && rptItemTurma != null)
                 {
                     var turmadisciplina = from GridViewRow row in grid.gridTurma.Rows
                                           join REL_TurmaDisciplinaSituacaoFechamento_Pendencia pend in VS_listaPendencias[rptItemTurma.ClientID]
@@ -1715,8 +1729,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_id in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                     {
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_id));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_id));
                     }
 
                     string tud_ids = string.Join(",", turmadisciplina.GroupBy(p => p.ToString()).Select(p => p.Key.ToString()).ToArray());
@@ -1741,23 +1754,21 @@ namespace GestaoEscolar.Academico.ControleTurma
                         //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                         foreach (Int64 tud_idRegencia in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                         {
-                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
-                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
+                            CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_idRegencia));
                         }
                     }
 
                     //Limpa o cache apenas dos tud_ids que serão recarregados no relatório
                     foreach (Int64 tud_idRegencia in turmadisciplina.GroupBy(p => p).Select(p => p.Key))
                     {
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
-                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_id, tud_idRegencia));
+                        CacheManager.Factory.RemoveByPattern(String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, grid.esc_id, grid.uni_id, grid.cal_ano, tud_idRegencia));
                     }
 
                     report = ((int)ReportNameGestaoAcademicaDocumentosDocente.DocDctAlunosPendenciaEfetivacao).ToString();
                     parametros = "uad_idSuperiorGestao=" + grid.uad_idSuperior +
                                  "&esc_id=" + grid.esc_id +
                                  "&uni_id=" + grid.uni_id +
-                                 "&cal_id=" + grid.cal_id +
+                                 "&cal_id=-1" +
                                  "&cal_ano=" + grid.cal_ano +
                                  "&cur_id=-1" +
                                  "&crr_id=-1" +
@@ -2072,6 +2083,65 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        protected void grvTurmasEncerradas_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            GridView grid = (GridView)sender;
+            if (e.CommandName == "DiarioClasse")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_DiarioClasse").ToString(), "DiarioClasse", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Indicadores")
+            {
+                try
+                {
+                    string[] args = e.CommandArgument.ToString().Split(',');
+                    if (args.Length > 4)
+                    {
+                        int esc_id = Convert.ToInt32(args[0]);
+                        long tur_id = Convert.ToInt64(args[1]);
+                        long tud_id = Convert.ToInt64(args[2]);
+                        int cal_id = Convert.ToInt32(args[3]);
+                        Guid ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id;
+
+                        CarregaAulasPrevistas(esc_id, tur_id, tud_id, cal_id, ent_id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os indicadores.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "Planejamento")
+            {
+                RedirecionaTelaMinhasTurmas("Planejamento", "PlanejamentoAnual", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Listao")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_Listao").ToString(), "Listao", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Fechamento")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_EFETIVACAO").ToString(), "Efetivacao", grid, e.CommandArgument.ToString(), false);
+            }
+            else if (e.CommandName == "FechamentoAutomatico")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_EFETIVACAO").ToString(), "Fechamento", grid, e.CommandArgument.ToString(), false);
+            }
+            else if (e.CommandName == "Alunos")
+            {
+                RedirecionaTelaMinhasTurmas("Alunos", "Alunos", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Frequencia")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("WebControls", "UCNavegacaoTelaPeriodo.btnFrequencia.Text").ToString(), "Frequencia", grid, e.CommandArgument.ToString(), true);
+            }
+            else if (e.CommandName == "Avaliacao")
+            {
+                RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("WebControls", "UCNavegacaoTelaPeriodo.btnAvaliacao.Text").ToString(), "Avaliacao", grid, e.CommandArgument.ToString(), true);
+            }
+        }
+
         #endregion Eventos
 
         #region Métodos
@@ -2134,7 +2204,24 @@ namespace GestaoEscolar.Academico.ControleTurma
                         lblMensagem.Text = UtilBO.GetErroMessage("Nenhuma turma encontrada para o Gestor.", UtilBO.TipoMensagem.Alerta);
                         return;
                     }
-                    rptTurmas.DataSource = dados.Where(p => p.Turmas.Any(t => t.tur_situacao == (byte)TUR_TurmaSituacao.Ativo));
+                    rptTurmas.DataSource = dados.Where(p => p.Turmas.Any(t => t.tur_situacao == (byte)TUR_TurmaSituacao.Ativo))
+                                                .GroupBy(p => new { esc_id = p.esc_id, uni_id = p.uni_id, cal_ano = p.cal_ano })
+                                                .Select(p => new
+                                                {
+                                                    esc_id = p.Key.esc_id
+                                                    ,
+                                                    uni_id = p.Key.uni_id
+                                                    ,
+                                                    cal_ano = p.Key.cal_ano
+                                                    ,
+                                                    uad_idSuperior = p.First().uad_idSuperior
+                                                    ,
+                                                    cal_ids = string.Join(";", p.GroupBy(c => c.cal_id).Select(c => c.Key.ToString()).ToArray())
+                                                    ,
+                                                    lengendTitulo = p.First().lengendTitulo
+                                                    ,
+                                                    turmasAnoAtual = p.First().turmasAnoAtual
+                                                });
 
                     #region Salvar busca realizada com os parâmetros do ODS.
 
@@ -2158,7 +2245,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 foreach (RepeaterItem itemTurma in rptTurmas.Items)
                 {
                     int esc_id = 0;
-                    int cal_id = 0;
+                    int[] cal_ids = null;
+
 
                     // Id Escola
                     HiddenField hdnId = itemTurma.FindControl("hdnEscola") as HiddenField;
@@ -2171,7 +2259,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     HiddenField hdnCalendario = itemTurma.FindControl("hdnCalendario") as HiddenField;
                     if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
                     {
-                        cal_id = Convert.ToInt32(hdnCalendario.Value);
+                        cal_ids = hdnCalendario.Value.Split(';').Select(p => Convert.ToInt32(p)).ToArray();
                     }
 
                     int uni_id = 0;
@@ -2185,7 +2273,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                     // para mostrar o botao de atualizar pendencias.
                     string valor = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_NOTAS, ent_id);
                     string valorFinal = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_FINAL, ent_id);
-                    List<ACA_Evento> lstEventosEscola = ACA_EventoBO.GetEntity_Efetivacao_ListPorPeriodo(cal_id, -1, Guid.Empty, esc_id, uni_id, ent_id);
+                    List<ACA_Evento> lstEventosEscola = cal_ids != null && cal_ids.Any() ?
+                        cal_ids.SelectMany(p => ACA_EventoBO.GetEntity_Efetivacao_ListPorPeriodo(p, -1, Guid.Empty, esc_id, uni_id, ent_id)).ToList() :
+                        new List<ACA_Evento>();
 
                     if (lstEventosEscola.Any(p => Convert.ToString(p.tev_id) == valor || Convert.ToString(p.tev_id) == valorFinal))
                     {
@@ -2215,7 +2305,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 int crr_id = 0;
                 int crp_id = 0;
                 int tds_id = 0;
-                int cal_id = 0;
+                int[] cal_ids = null;
 
                 foreach (RepeaterItem rpTurma in rptTurmas.Items)
                 {
@@ -2239,7 +2329,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         HiddenField hdnCalendario = rpTurma.FindControl("hdnCalendario") as HiddenField;
                         if (hdnCalendario != null && !string.IsNullOrEmpty(hdnCalendario.Value))
                         {
-                            cal_id = Convert.ToInt32(hdnCalendario.Value);
+                            cal_ids = hdnCalendario.Value.Split(';').Select(p => Convert.ToInt32(p)).ToArray();
                         }
 
                         // txtSelectedTab
@@ -2324,7 +2414,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                                         dados.All(p =>
                                         {
-                                            lista.AddRange(p.Turmas.Where(t => t.esc_id == esc_id && t.cal_id == cal_id));
+                                            lista.AddRange(p.Turmas.Where(t => t.esc_id == esc_id && cal_ids.Any(c => c == t.cal_id)));
                                             return true;
                                         });
 
@@ -2380,7 +2470,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                                         // para mostrar o botao de atualizar pendencias.
                                         string valor = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_NOTAS, ent_id);
                                         string valorFinal = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_EVENTO_EFETIVACAO_FINAL, ent_id);
-                                        List<ACA_Evento> lstEventosEscola = ACA_EventoBO.GetEntity_Efetivacao_ListPorPeriodo(cal_id, -1, Guid.Empty, esc_id, uni_id, ent_id);
+                                        List<ACA_Evento> lstEventosEscola = cal_ids != null && cal_ids.Any() ?
+                                            cal_ids.SelectMany(p => ACA_EventoBO.GetEntity_Efetivacao_ListPorPeriodo(p, -1, Guid.Empty, esc_id, uni_id, ent_id)).ToList() :
+                                            new List<ACA_Evento>();
 
                                         if (lstEventosEscola.Any(p => Convert.ToString(p.tev_id) == valor || Convert.ToString(p.tev_id) == valorFinal))
                                         {
@@ -2795,23 +2887,33 @@ namespace GestaoEscolar.Academico.ControleTurma
                     RepeaterItem rptItem = (RepeaterItem)grv.NamingContainer;
                     if (rptItem != null)
                     {
-                        HtmlGenericControl divMensagemFechamentoPendencia = grv.ID == "grvTurmasExtintas" ?
-                            (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorExtintas") :
-                                                                            grv.ID == "grvProjetosRecParalela" ?
-                            (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorProjeto") :
-                            (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestor");
+                        HtmlGenericControl divMensagemFechamentoPendencia = null;
+                        HtmlGenericControl mensagemSemPendenciaFechamento = null;
+                        Label lblDataProcessamento = null;
+                        switch (grv.ID)
+                        {
+                            case "grvTurmasEncerradas":
+                                divMensagemFechamentoPendencia = (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorEncerradas");
+                                mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoEncerradas");
+                                lblDataProcessamento = (Label)rptItem.FindControl("lblDataProcessamentoEncerradas");
+                                break;
+                            case "grvTurmasExtintas":
+                                divMensagemFechamentoPendencia = (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorExtintas");
+                                mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoExtintas");
+                                lblDataProcessamento = (Label)rptItem.FindControl("lblDataProcessamentoExtintas");
+                                break;
+                            case "grvProjetosRecParalela":
+                                divMensagemFechamentoPendencia = (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestorProjeto");
+                                mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoProjeto");
+                                lblDataProcessamento = (Label)rptItem.FindControl("lblDataProcessamentoProjeto");
+                                break;
+                            default:
+                                divMensagemFechamentoPendencia = (HtmlGenericControl)rptItem.FindControl("mensagemPendenciaFechamentoMinhaEscolaGestor");
+                                mensagemSemPendenciaFechamento = (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamento");
+                                lblDataProcessamento = (Label)rptItem.FindControl("lblDataProcessamento");
+                                break;
+                        }
 
-                        HtmlGenericControl mensagemSemPendenciaFechamento = grv.ID == "grvTurmasExtintas" ?
-                            (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoExtintas") :
-                                                                            grv.ID == "grvProjetosRecParalela" ?
-                            (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamentoProjeto") :
-                            (HtmlGenericControl)rptItem.FindControl("mensagemSemPendenciaFechamento");
-
-                        Label lblDataProcessamento = grv.ID == "grvTurmasExtintas" ?
-                            (Label)rptItem.FindControl("lblDataProcessamentoExtintas") :
-                                                        grv.ID == "grvProjetosRecParalela" ?
-                            (Label)rptItem.FindControl("lblDataProcessamentoProjeto") :
-                            (Label)rptItem.FindControl("lblDataProcessamento");
                         if (lblDataProcessamento != null)
                         {
                             lblDataProcessamento.Text = string.Empty;
@@ -2968,6 +3070,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 HiddenField hdnEscola = (HiddenField)itemTurma.FindControl("hdnEscola");
                 HiddenField hdnCalendario = (HiddenField)itemTurma.FindControl("hdnCalendario");
+                int[] cal_ids = null;
+                cal_ids = hdnCalendario.Value.Split(';').Select(p => Convert.ToInt32(p)).ToArray();
                 int esc_id = Convert.ToInt32(hdnEscola.Value);
 
                 List<sTurmaDisciplinaEscolaCalendario> lstCarregarPendencias = new List<sTurmaDisciplinaEscolaCalendario>();
@@ -2976,7 +3080,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 dados.All(p =>
                 {
                     lista.AddRange(p.Turmas.Where(t => t.esc_id == esc_id
-                                                        && t.cal_id == Convert.ToInt32(hdnCalendario.Value)
+                                                        && cal_ids != null && cal_ids.Any(c => c == t.cal_id)
                                                         && (t.tur_situacao == (byte)TUR_TurmaSituacao.Ativo
                                                             || t.tur_situacao == (byte)TUR_TurmaSituacao.Extinta)));
                     return true;
@@ -2995,7 +3099,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                                 ,
                                                                 uni_id = p.uni_id
                                                                 ,
-                                                                cal_id = p.cal_id
+                                                                cal_ano = p.cal_ano
                                                             }
                                                             ).Distinct().ToList());
 
