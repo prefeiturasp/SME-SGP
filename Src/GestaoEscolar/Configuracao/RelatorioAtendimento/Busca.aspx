@@ -7,63 +7,60 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
-    <fieldset id="fdsFiltro" runat="server">
-        <legend>Consulta de relatórios de atendimento</legend>
-        <div id="divPesquisa" runat="server">
-            <asp:Label ID="lbl" runat="server" Text="Tipo de relatório" AssociatedControlID="ddlTipoRelatorio"></asp:Label>
-            <asp:DropDownList ID="ddlTipoRelatorio" runat="server" SkinID="text30C">
-                <asp:ListItem Text="-- Selecione um tipo de relatório --" Value="0"></asp:ListItem>
-                <asp:ListItem Text="AEE" Value="1"></asp:ListItem>
-                <asp:ListItem Text="NAAPA" Value="2"></asp:ListItem>
-                <asp:ListItem Text="Recuperação Paralela" Value="3"></asp:ListItem>
-            </asp:DropDownList>
-        </div>
-        <div class="right">
-            <asp:Button ID="btnPesquisar" runat="server" Text="Pesquisar" OnClick="btnPesquisar_Click" />
-            <span class="area-botoes-bottom">
-                <asp:Button ID="btnNovo" runat="server" Text="Incluir novo relatório de atendimento" OnClick="btnNovo_Click" />
-            </span>
-        </div>
-    </fieldset>
-    <fieldset id="fdsResultados" runat="server">
-        <legend>Listagem de relatórios de atendimento</legend>
-        <div>
-            <uc1:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao1_IndexChanged" />
-            <asp:GridView ID="grvDados" runat="server" AutoGenerateColumns="False" DataKeyNames="rea_id"
-                OnRowCommand="grvDados_RowCommand" OnRowDataBound="grvDados_RowDataBound"
-                DataSourceID="odsDados" AllowPaging="True" EmptyDataText="Não foram encontrados relatórios cadastrados." 
-                OnDataBound="grvDados_DataBound" OnPageIndexChanged="grvDados_PageIndexChanged"
-                SkinID="GridResponsive">
-                <Columns>
-                    <asp:TemplateField HeaderText="Título do relatório">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="_btnAlterar" runat="server" Text='<%# Eval("rea_titulo") %>' 
-                                PostBackUrl="~/Configuracao/RelatorioAtendimento/Cadastro.aspx"
-                                CommandName="Edit">
-                            </asp:LinkButton>
-                            <asp:Label ID="_lblAlterar" runat="server" Text='<%# Eval("rea_titulo") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField HeaderText="Tipo de relatório" DataField="Tipo" />
-                    <asp:TemplateField HeaderText="Excluir" HeaderStyle-HorizontalAlign="Center" 
-                        ItemStyle-HorizontalAlign="Center"
-                        HeaderStyle-Width="70px">
-                        <ItemTemplate>
-                            <asp:ImageButton ID="_btnExcluir" SkinID="btExcluir" runat="server" CommandName="Deletar" ToolTip="Excluir relatório" />
-                        </ItemTemplate>
-                        <HeaderStyle CssClass="center"></HeaderStyle>
-                        <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
-            <uc2:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvDados" />
-            <asp:ObjectDataSource ID="odsDados" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.CLS_RelatorioAtendimento"
-                SelectMethod="PesquisaRelatorioPorTipo" TypeName="MSTech.GestaoEscolar.BLL.CLS_RelatorioAtendimentoBO"
-                MaximumRowsParameterName="pageSize" SelectCountMethod="GetTotalRecords" StartRowIndexParameterName="currentPage"
-                EnablePaging="True"
-                OnSelecting="odsDados_Selecting">
-            </asp:ObjectDataSource>
-        </div>
-    </fieldset>
+    <asp:UpdatePanel ID="updMensagem" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <asp:Label ID="lblMensagem" runat="server" EnableViewState="false"></asp:Label>
+            <asp:ValidationSummary ID="vsSummary" runat="server" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <asp:UpdatePanel ID="updFiltros" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <asp:Panel ID="pnlBusca" runat="server" GroupingText="<%$ Resources:GestaoEscolar.Classe.RelatorioAtendimento.Busca, pnlBusca.Text %>">
+                <uc:UCCObrigatorios ID="UCCObrigatorios" runat="server" />
+                <uc:UCCUAEscola ID="UCCUAEscola" runat="server" CarregarEscolaAutomatico="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true"
+                    ObrigatorioUA="true" ObrigatorioEscola="true"  />
+                <uc:UCCCursoCurriculo ID="UCCCursoCurriculo" MostrarMensagemSelecione="true" Obrigatorio="true"
+                    runat="server" />
+                <uc:UCCCurriculoPeriodo ID="UCCCurriculoPeriodo" MostrarMensagemSelecione="true" Obrigatorio="true"
+                    runat="server" />
+                <uc:UCCCalendario ID="UCCCalendario" runat="server" MostrarMensagemSelecione="true" Obrigatorio="true"  />
+                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" Obrigatorio="true" />
+                <div id="divBuscaAvancadaAluno" runat="server" class="divBuscaAvancadaAluno">
+                    <uc:UCCBuscaAluno ID="UCCBuscaAluno" runat="server"  />
+                </div>
+                <div class="right">
+                    <asp:Button ID="btnPesquisar" runat="server" Text="<%$ Resources:Padrao, Padrao.Pesquisar.Text %>" OnClick="btnPesquisar_Click" />
+                    <asp:Button ID="btnLimparPesquisa" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparPesquisa_Click" CausesValidation="false" />
+                </div>
+            </asp:Panel>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <asp:UpdatePanel ID="updResultados" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <asp:Panel ID="pnlResultados" runat="server" GroupingText="<%$ Resources:Padrao, Padrao.Resultados.Text %>">
+                <uc:UCCQtdePaginacao ID="UCCQtdePaginacao" runat="server" />
+                <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound"
+                    OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
+                    EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>" OnDataBinding="grvResultados_DataBinding"
+                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
+                    <Columns>
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Nome.Text %>" DataField="pes_nome" SortExpression="pes_nome" />
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Idade.Text %>" DataField="pes_idade" SortExpression="pes_idade" />
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Escola.Text %>" DataField="tur_escolaUnidade" SortExpression="tur_escolaUnidade"/>
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Curso.Text %>" DataField="tur_curso" SortExpression="tur_curso" />
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Turma.Text %>" DataField="tur_codigo" SortExpression="tur_codigo"/>
+                        <asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.LancarRelatorio.Text %>" HeaderStyle-CssClass="center">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="btnResponder" runat="server" SkinID="btRelatorio" CommandName="Edit" PostBackUrl="~/Classe/RelatorioAtendimento/Cadastro.aspx"
+                                    ToolTip="<%$ Resources:GestaoEscolar.Classe.RelatorioAtendimento.Busca, ctrl_61.ToolTip %>" />
+                            </ItemTemplate>
+                            <ItemStyle CssClass="center" HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+                <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
+            </asp:Panel>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>
