@@ -310,7 +310,6 @@ namespace GestaoEscolar.Configuracao.Questionario
         {
             // Mostra o total de registros
             UCTotalRegistros1.Total = CLS_QuestionarioRespostaBO.GetTotalRecords();
-            ConfiguraColunasOrdenacao(grvResultado);
         }
 
         protected void odsResultado_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
