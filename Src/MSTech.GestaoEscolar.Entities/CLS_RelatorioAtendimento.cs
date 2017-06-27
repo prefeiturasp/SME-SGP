@@ -48,6 +48,12 @@ namespace MSTech.GestaoEscolar.Entities
         public override bool rea_permiteEditarHipoteseDiagnostica { get; set; }
 
         /// <summary>
+        /// Permite editar campo de Acoes Realizadas.
+        /// </summary>
+        [MSNotNullOrEmpty("Permite Ações realizadas é obrigatório.")]
+        public override bool rea_permiteAcoesRealizadas { get; set; }
+
+        /// <summary>
         /// ID do tipo de disciplina do relatório de atendimento.
         /// </summary>
         public override int tds_id { get; set; }
