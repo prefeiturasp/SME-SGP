@@ -267,6 +267,7 @@
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoGrupo.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoQuestionario.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimento.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAcoesRealizadas.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAlunoTurmaDisciplina.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TipoAtividadeAvaliativa.cs" />
     <Compile Include="Abstracts\Abstract_CLS_TurmaAtividadeExtraClasse.cs" />
@@ -586,6 +587,7 @@
     <Compile Include="CLS_RelatorioAtendimentoGrupo.cs" />
     <Compile Include="CLS_RelatorioAtendimentoQuestionario.cs" />
     <Compile Include="CLS_RelatorioPreenchimento.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAcoesRealizadas.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplina.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativa.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasse.cs" />
