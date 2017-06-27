@@ -110,6 +110,8 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 ddlPeriodicidade.SelectedValue = rea.rea_periodicidadePreenchimento.ToString();
                 chkExibeHipotese.Enabled = false;
                 chkExibeHipotese.Checked = rea.rea_permiteEditarHipoteseDiagnostica;
+                chkAcoesRealizadas.Enabled = false;
+                chkAcoesRealizadas.Checked = rea.rea_permiteAcoesRealizadas;
                 chkExibeRacaCor.Enabled = false;
                 chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
                 hplAnexo.Text = rea.rea_tituloAnexo;
@@ -145,6 +147,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     rea_tipo = Convert.ToByte(ddlTipo.SelectedValue),
                     rea_permiteEditarRecaCor = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE && chkExibeRacaCor.Checked,
                     rea_permiteEditarHipoteseDiagnostica = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE && chkExibeHipotese.Checked,
+                    rea_permiteAcoesRealizadas = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.NAAPA && chkAcoesRealizadas.Checked,
                     tds_id = (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.RP ? -1 : UCComboTipoDisciplina.Valor),
                     rea_periodicidadePreenchimento = Convert.ToByte(ddlPeriodicidade.SelectedValue),
                     rea_tituloAnexo = txtTituloAnexo.Text,
@@ -487,6 +490,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             divRacaCor.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE;
             divDisciplina.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP;
             divPeriodicidade.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP;
+            divAcoesRealizadas.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.NAAPA;
 
             if (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.AEE)
                 chkExibeHipotese.Checked = chkExibeRacaCor.Checked = false;
@@ -495,6 +499,9 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 UCComboTipoDisciplina.Valor = -1;
                 ddlPeriodicidade.SelectedValue = "0";
             }
+
+
+
         }
         
         protected void btnAdicionarQuestionario_Click(object sender, EventArgs e)

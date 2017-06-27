@@ -1800,6 +1800,13 @@
     <Compile Include="Relatorios\RelatorioDev.aspx.designer.cs">
       <DependentUpon>RelatorioDev.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\RelatorioGeralAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\RelatorioGeralAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\RelatorioLogTablets\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4377,6 +4384,7 @@
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Relatorios\QuantitativoSugestoes\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />
+    <Content Include="Relatorios\RelatorioGeralAtendimento\Busca.aspx" />
     <Content Include="Relatorios\RelatorioLogTablets\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosConselhoDeClasse\Busca.aspx" />
     <Content Include="Relatorios\RelatoriosCP\DadosAlunosBaixaFrequencia\Busca.aspx" />

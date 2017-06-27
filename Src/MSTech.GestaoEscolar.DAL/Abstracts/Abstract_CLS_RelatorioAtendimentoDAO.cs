@@ -82,8 +82,15 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Size = 1;
 			Param.Value = entity.rea_permiteEditarHipoteseDiagnostica;
 			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
+                
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Boolean;
+            Param.ParameterName = "@rea_permiteAcoesRealizadas";
+            Param.Size = 1;
+            Param.Value = entity.rea_permiteAcoesRealizadas;
+            qs.Parameters.Add(Param);
+                
+            Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@tds_id";
 			Param.Size = 4;
@@ -200,8 +207,15 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Size = 1;
 			Param.Value = entity.rea_permiteEditarHipoteseDiagnostica;
 			qs.Parameters.Add(Param);
+                
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Boolean;
+            Param.ParameterName = "@rea_permiteAcoesRealizadas";
+            Param.Size = 1;
+            Param.Value = entity.rea_permiteAcoesRealizadas;
+            qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
+            Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@tds_id";
 			Param.Size = 4;
