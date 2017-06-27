@@ -59,6 +59,37 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        public DataTable GetSelectPaginado
+        (
+            bool paginado
+            , int currentPage
+            , int pageSize
+            , out int totalRecords
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_Questionario_SelectAtivos", _Banco);
+            try
+            {
+                if (paginado)
+                    totalRecords = qs.Execute(currentPage, pageSize);
+                else
+                {
+                    qs.Execute();
+                    totalRecords = qs.Return.Rows.Count;
+                }
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         /// <summary>
         /// Verifica se o questionário está em uso no relatório
         /// </summary>

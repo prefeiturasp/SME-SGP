@@ -53,9 +53,10 @@
                     </Columns>
                 </asp:GridView>
                 <uc3:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvResultado" />
-                <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="GetSelect" TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioBO"
+                <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="GetSelectPaginado" TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioBO"
                     StartRowIndexParameterName="currentPage" EnablePaging="True" MaximumRowsParameterName="pageSize"
-                    SelectCountMethod="GetTotalRecords" ></asp:ObjectDataSource>
+                    SelectCountMethod="GetTotalRecords" DataObjectTypeName="MSTech.GestaoEscolar.Entities.CLS_Questionario"
+                    OnSelecting="odsResultado_Selecting"></asp:ObjectDataSource>
             </fieldset>
         </ContentTemplate>
     </asp:UpdatePanel>
