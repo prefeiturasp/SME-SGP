@@ -624,6 +624,8 @@ namespace MSTech.GestaoEscolar.BLL
         QuantitativoSugestoes
         ,
         RelatorioAEE
+        ,
+        RelatorioGeralAtendimento
     }
 
     [Serializable]
