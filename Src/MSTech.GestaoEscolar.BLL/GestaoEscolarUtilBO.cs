@@ -623,7 +623,11 @@ namespace MSTech.GestaoEscolar.BLL
 
         QuantitativoSugestoes
         ,
+
         RelatorioAEE
+        ,
+
+        RelatorioNAAPA
     }
 
     [Serializable]
