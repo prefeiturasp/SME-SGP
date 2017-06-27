@@ -361,6 +361,9 @@
     <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricularDAO.cs" />
     <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricularNivelAprendizadoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ORC_OrientacaoCurricularRelacionamentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_REL_GraficoAtendimentoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_REL_GraficoAtendimento_FiltrosFixosDAO.cs" />
+    <Compile Include="Abstracts\Abstract_REL_GraficoAtendimento_FiltrosPersonalizadosDAO.cs" />
     <Compile Include="Abstracts\Abstract_REL_TurmaDisciplinaSituacaoFechamentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_RES_ChaveResourceDAO.cs" />
     <Compile Include="Abstracts\Abstract_RHU_CargaHorariaDAO.cs" />
@@ -681,6 +684,9 @@
     <Compile Include="ORC_OrientacaoCurricularNivelAprendizadoDAO.cs" />
     <Compile Include="ORC_OrientacaoCurricularRelacionamentoDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="REL_GraficoAtendimentoDAO.cs" />
+    <Compile Include="REL_GraficoAtendimento_FiltrosFixosDAO.cs" />
+    <Compile Include="REL_GraficoAtendimento_FiltrosPersonalizadosDAO.cs" />
     <Compile Include="REL_TurmaDisciplinaSituacaoFechamentoDAO.cs" />
     <Compile Include="RES_ChaveResourceDAO.cs" />
     <Compile Include="RHU_CargaHorariaDAO.cs" />

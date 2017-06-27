@@ -980,6 +980,20 @@
     <Compile Include="Configuracao\FilaFechamento\Fila.aspx.designer.cs">
       <DependentUpon>Fila.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuracao\GraficoAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\GraficoAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\GraficoAtendimento\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\GraficoAtendimento\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\ModuloClasse\Cadastro.aspx.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1688,6 +1702,13 @@
       <DependentUpon>MeusDados.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relatorios\AcoesRealizadas\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\AcoesRealizadas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\AtaFinalEnriquecimentoCurricular\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3582,6 +3603,8 @@
     <Content Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx" />
     <Content Include="Configuracao\FilaFechamento\Busca.aspx" />
     <Content Include="Configuracao\FilaFechamento\Fila.aspx" />
+    <Content Include="Configuracao\GraficoAtendimento\Busca.aspx" />
+    <Content Include="Configuracao\GraficoAtendimento\Cadastro.aspx" />
     <Content Include="Configuracao\ModuloClasse\Cadastro.aspx" />
     <Content Include="App_Themes\IntranetSME\css.css" />
     <Content Include="App_Themes\IntranetSME\GestaoEscolar.css" />
@@ -4369,6 +4392,7 @@
     <Content Include="Manutencao.aspx" />
     <Content Include="manutencao.htm" />
     <Content Include="MeusDados.aspx" />
+    <Content Include="Relatorios\AcoesRealizadas\Busca.aspx" />
     <Content Include="Relatorios\AtaFinalEnriquecimentoCurricular\Busca.aspx" />
     <Content Include="Relatorios\AtaFinalResultadosEnriquecimentoCurricular\Busca.aspx" />
     <Content Include="Relatorios\AtaFinalResultados\Busca.aspx" />

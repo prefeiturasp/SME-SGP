@@ -29,14 +29,14 @@ namespace GestaoEscolar.Relatorios.RelatoriosCP.GraficoConsolidadoAtivAvaliada
             UCBuscaDocenteTurma.ComboTurma.Obrigatorio &= UCBuscaDocenteTurma._VS_doc_id > 0;
             UCCPeriodoCalendario.SelecionaPeriodoAtualAoCarregar = false;
             UCCPeriodoCalendario.MostrarMensagemSelecione = true;
-            UCCPeriodoCalendario.Obrigatorio = true;
+            UCCPeriodoCalendario.Obrigatorio = false;
             UCBuscaDocenteTurma.ComboEscola.ObrigatorioUA = true;
             UCBuscaDocenteTurma.ComboEscola.ObrigatorioEscola = true;
             UCBuscaDocenteTurma.ComboCalendario.Obrigatorio = true;
             UCBuscaDocenteTurma.ComboCurriculoPeriodo.Obrigatorio = true;
             UCBuscaDocenteTurma.ComboCursoCurriculo.Obrigatorio = true;
-            UCBuscaDocenteTurma.ComboTurma.Obrigatorio = true;
-            UCComboTipoDisciplina.Obrigatorio = true;
+            UCBuscaDocenteTurma.ComboTurma.Obrigatorio = false;
+            UCComboTipoDisciplina.Obrigatorio = false;
             UCBuscaDocenteTurma._VS_CarregarApenasTurmasNormais = true;
             divDisciplina.Visible =
             divPeriodoCalendario.Visible = false;
