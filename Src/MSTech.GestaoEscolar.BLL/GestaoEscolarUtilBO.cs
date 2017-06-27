@@ -628,6 +628,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         RelatorioNAAPA
+        ,
+
+        RelatorioGeralAtendimento
     }
 
     [Serializable]
