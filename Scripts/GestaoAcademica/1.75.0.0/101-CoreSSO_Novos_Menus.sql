@@ -31,13 +31,15 @@ SET XACT_ABORT ON
 
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
-		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
-		,@nomeModuloPai = 'Registro de Classe' -- Nome do módulo pai (Opcional, apenas quando houver)
-		,@nomeModulo = 'Relatório NAAPA' -- Nome do módulo (Obrigatório)
-		,@SiteMap1Nome = 'Consulta de relatórios do NAAPA'
-		,@SiteMap1Url = '~/Classe/RelatorioNaapa/Busca.aspx'
-		,@SiteMap2Nome = 'Lançamento de relatórios do NAAPA'
-		,@SiteMap2Url = '~/Classe/RelatorioNaapa/Cadastro.aspx'
+		,@nomeModuloAvo = 'Relatórios' -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Relatórios de atendimento' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Relatório geral' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Relatório geral'
+		,@SiteMap1Url = '~/Relatorios/RelatorioGeralAtendimento/Busca.aspx'
+		,@SiteMap2Nome = NULL
+		,@SiteMap2Url = NULL
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
