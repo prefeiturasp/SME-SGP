@@ -339,7 +339,8 @@
 
             VS_RelatorioPreenchimentoAluno = CLS_RelatorioPreenchimentoBO.SelecionaPorRelatorioAlunoTurmaDisciplina(VS_rea_id, VS_alu_id, VS_tur_id, VS_tud_id, VS_tpc_id, reap_id);
 
-            if (VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado &&
+            if (VS_RelatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.AEE &&
+                VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado &&
                 PermiteConsultar && !PermiteEditar && !PermiteAprovar)
             {
                 throw new PermissaoRelatorioPreenchimentoValidationException("O usuário tem permissão apenas para consultar relatórios aprovados.");
