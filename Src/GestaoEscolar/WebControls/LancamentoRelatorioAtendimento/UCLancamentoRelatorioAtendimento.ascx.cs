@@ -374,7 +374,7 @@
 
             if (!VS_RelatorioAtendimento.rea_permiteEditarRecaCor)
             {
-                UCCRacaCor.Visible = false;
+                divRacaCor.Visible = false;
 
                 string racaCor = entityPessoa.RacaCorFormatado();
 
@@ -385,7 +385,7 @@
             }
             else
             {
-                UCCRacaCor.Visible = true;
+                divRacaCor.Visible = true;
                 if (UCCRacaCor._Combo.Items.FindByValue(entityPessoa.pes_racaCor.ToString()) != null)
                 {
                     UCCRacaCor._Combo.SelectedValue = entityPessoa.pes_racaCor.ToString();
@@ -401,7 +401,11 @@
                 hplDownloadAnexo.Text = VS_RelatorioAtendimento.rea_tituloAnexo;
                 hplDownloadAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", VS_RelatorioAtendimento.arq_idAnexo);
             }
-            
+            else
+            {
+                divDownloadAnexo.Visible = false;
+            }
+
             CarregarHipoteseDiagnostica();
             CarregarQuestionarios();
 
