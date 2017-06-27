@@ -28,12 +28,15 @@ namespace MSTech.GestaoEscolar.BLL
 
         public List<CLS_QuestionarioRespostaPreenchimento> lstQuestionarioRespostaPreenchimento { get; set; }
 
+        public bool processarPendencia { get; set; }
+
         public RelatorioPreenchimentoAluno()
         {
             entityRelatorioPreenchimento = new CLS_RelatorioPreenchimento();
             entityPreenchimentoAlunoTurmaDisciplina = new CLS_RelatorioPreenchimentoAlunoTurmaDisciplina();
             lstQuestionarioConteudoPreenchimento = new List<CLS_QuestionarioConteudoPreenchimento>();
             lstQuestionarioRespostaPreenchimento = new List<CLS_QuestionarioRespostaPreenchimento>();
+            processarPendencia = false;
         }
     }
 
@@ -176,6 +179,11 @@ namespace MSTech.GestaoEscolar.BLL
                     ACA_CalendarioAnual calendario = ACA_CalendarioAnualBO.SelecionaPorTurma(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tur_id);
                     List<MTR_MatriculaTurma> matriculasAno = MTR_MatriculaTurmaBO.GetSelectMatriculasAlunoAno(relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id, calendario.cal_ano);
                     matriculasAno.ForEach(p => CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, p.tur_id)); 
+                }
+
+                if (relatorio.processarPendencia)
+                {
+                    CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id, relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, dao._Banco);
                 }
 
                 return retorno;

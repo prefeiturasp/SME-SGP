@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento {
+namespace GestaoEscolar.Relatorios.AcoesRealizadas {
     
     
     public partial class Busca {
@@ -166,13 +166,22 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento {
         protected global::System.Web.UI.WebControls.Panel pnlResultados;
         
         /// <summary>
-        /// chkTodos control.
+        /// DivSelecionaTodos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkTodos;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivSelecionaTodos;
+        
+        /// <summary>
+        /// _chkTodos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox _chkTodos;
         
         /// <summary>
         /// UCCQtdePaginacao control.
