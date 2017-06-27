@@ -753,7 +753,8 @@ namespace MSTech.GestaoEscolar.BLL
         AnaliseSondagem = 321,
         FrequenciaMensal = 322,
         RelatorioSugestoesCurriculo = 323,
-        QuantitativoSugestoes = 324
+        QuantitativoSugestoes = 324,
+        RelatorioGeralAtendimento = 325
     }
 
     /// <summary>
