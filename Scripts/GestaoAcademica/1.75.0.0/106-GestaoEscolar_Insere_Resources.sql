@@ -102,6 +102,20 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Excluir'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.MensagemSucessoSalvar' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento do relatório salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.MensagemSucessoExcluir' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento do relatório excluído com sucesso.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

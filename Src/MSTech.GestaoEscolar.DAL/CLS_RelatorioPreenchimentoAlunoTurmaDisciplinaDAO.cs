@@ -70,7 +70,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// Retorna os lançamentos feito para o aluno de acordo com os parâmetros.
         /// </summary>
         /// <returns></returns>
-        public DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tud_id, bool apenasComPreenchimento, int rea_id, int tpc_id)
+        public DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tur_id, long tud_id, bool apenasComPreenchimento, int rea_id, int tpc_id)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioPreenchimentoAlunoTurmaDisciplina_SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo", _Banco);
             try
@@ -86,9 +86,30 @@ namespace MSTech.GestaoEscolar.DAL
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.Int64;
+                Param.ParameterName = "@tur_id";
+                Param.Size = 8;
+                if (tur_id > 0)
+                {
+                    Param.Value = tur_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
                 Param.ParameterName = "@tud_id";
                 Param.Size = 8;
-                Param.Value = tud_id;
+                if (tud_id > 0)
+                {
+                    Param.Value = tud_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -106,10 +127,17 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Int32;  
                 Param.ParameterName = "@tpc_id";
                 Param.Size = 4;
-                Param.Value = tpc_id;
+                if (tpc_id > 0)
+                {
+                    Param.Value = tpc_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
                 qs.Parameters.Add(Param);
                 
                 #endregion

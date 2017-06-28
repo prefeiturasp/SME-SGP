@@ -4314,6 +4314,7 @@
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsCadastroLancamentoSondagem.js" />
     <Content Include="Includes\jsCadastroRelatorioAtendimento.js" />
+    <Content Include="Includes\jsCadastroRelatorioNaapa.js" />
     <Content Include="Includes\jsCadastroRelatorioRP.js" />
     <Content Include="Includes\jsCadastroSondagem.js" />
     <Content Include="Includes\jsConfirmaFormacaoDocente.js" />
