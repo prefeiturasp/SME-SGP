@@ -31,7 +31,7 @@
                 <uc:UCCCurriculoPeriodo ID="UCCCurriculoPeriodo" MostrarMensagemSelecione="true" Obrigatorio="true"
                     runat="server" />
                 <uc:UCCCalendario ID="UCCCalendario" runat="server" MostrarMensagemSelecione="true" Obrigatorio="true" />
-                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" Obrigatorio="true" />
+                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" />
                 <div id="divBuscaAvancadaAluno" runat="server" class="divBuscaAvancadaAluno">
                     <uc:UCCBuscaAluno ID="UCCBuscaAluno" runat="server" />
                 </div>
@@ -45,8 +45,11 @@
     <asp:UpdatePanel ID="updResultados" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:Panel ID="pnlResultados" runat="server" GroupingText="<%$ Resources:Padrao, Padrao.Resultados.Text %>">
+                <div class="right area-botoes-top">
+                    <asp:Button ID="btnGerarRelatorioCima" runat="server" Text="Gerar relatório" OnClick="btnGerarRelatorioCima_Click" />
+                </div>
                 <div style="float: left; width: 50%">
-                    <asp:CheckBox ID="chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos" todososcursospeja='0'
+                    <asp:CheckBox ID="chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos"
                         runat="server" />
                 </div>
                 <uc:UCCQtdePaginacao ID="UCCQtdePaginacao" runat="server" />
@@ -71,6 +74,9 @@
                     </Columns>
                 </asp:GridView>
                 <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
+                 <div class="right area-botoes-bottom">
+                    <asp:Button ID="btnGerarRelatorio" runat="server" Text="Gerar relatório" OnClick="btnGerarRelatorio_Click" />
+                </div>
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
