@@ -466,7 +466,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
             DataTable dt;
             if (__SessionWEB.__UsuarioWEB.Docente.doc_id <= 0)
             {
-                dt = ACA_AlunoBO.BuscaAlunosRelatoriosAEE
+                dt = ACA_AlunoBO.BuscaAlunosRelatorioGeralAtendimento
                     (
                         UCCCalendario.Valor,
                         UCCUAEscola.Esc_ID,
