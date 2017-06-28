@@ -178,12 +178,30 @@ namespace MSTech.GestaoEscolar.BLL
                 {
                     ACA_CalendarioAnual calendario = ACA_CalendarioAnualBO.SelecionaPorTurma(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tur_id);
                     List<MTR_MatriculaTurma> matriculasAno = MTR_MatriculaTurmaBO.GetSelectMatriculasAlunoAno(relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id, calendario.cal_ano);
-                    matriculasAno.ForEach(p => CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, p.tur_id)); 
-                }
+                    matriculasAno.ForEach(p => CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, p.tur_id));
 
-                if (relatorio.processarPendencia)
-                {
-                    CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id, relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, dao._Banco);
+                    if (relatorio.processarPendencia)
+                    {
+                        if (relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id > 0)
+                        {
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id, relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, dao._Banco);
+                        }
+                        else
+                        {
+                            ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(calendario.cal_id, GestaoEscolarUtilBO.MinutosCacheLongo);
+                            List<AlunoFechamentoPendencia> FilaProcessamento = new List<AlunoFechamentoPendencia>();
+                            FilaProcessamento.AddRange(ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(calendario.cal_id, GestaoEscolarUtilBO.MinutosCacheLongo)
+                                .Select(p => new AlunoFechamentoPendencia
+                                {
+                                    tud_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id,
+                                    tpc_id = p.tpc_id,
+                                    afp_frequencia = true,
+                                    afp_nota = false,
+                                    afp_processado = 2
+                                }).ToList());
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(FilaProcessamento, dao._Banco);
+                        }
+                    }
                 }
 
                 return retorno;
