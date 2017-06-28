@@ -1,6 +1,8 @@
-﻿using MSTech.CoreSSO.BLL;
+﻿using DevExpress.XtraReports.UI;
+using MSTech.CoreSSO.BLL;
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Web.WebProject;
+using MSTech.Security.Cryptography;
 using MSTech.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -30,7 +32,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
         {
             get
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAEE)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioGeralAtendimento)
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
                     string valor;
@@ -45,13 +47,13 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
 
             set
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAEE)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioGeralAtendimento)
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
                     if (filtros.ContainsKey("VS_Ordenacao"))
                     {
                         filtros["VS_Ordenacao"] = value;
-                        __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAEE, Filtros = filtros };
+                        __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioGeralAtendimento, Filtros = filtros };
                     }
                 }
 
@@ -65,7 +67,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
         {
             get
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAEE)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioGeralAtendimento)
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
                     string valor;
@@ -80,16 +82,29 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
 
             set
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAEE)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioGeralAtendimento)
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
                     if (filtros.ContainsKey("VS_SortDirection"))
                     {
                         filtros["VS_SortDirection"] = value.ToString();
-                        __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAEE, Filtros = filtros };
+                        __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioGeralAtendimento, Filtros = filtros };
                     }
                 }
 
+            }
+        }
+
+        /// <summary>
+        /// Alunos selecionados no grid para impressao de seus documentos
+        /// </summary>
+        private SortedDictionary<long, bool> _VS_AlunosSelecionados
+        {
+            get
+            {
+                if (ViewState["_VS_AlunosSelecionados"] == null)
+                    ViewState["_VS_AlunosSelecionados"] = new SortedDictionary<long, bool>();
+                return (SortedDictionary<long, bool>)ViewState["_VS_AlunosSelecionados"];
             }
         }
 
@@ -105,7 +120,8 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
                 UCCUAEscola.IndexChangedUnidadeEscola += UCCUAEscola_IndexChangedUnidadeEscola;
                 UCCCursoCurriculo.IndexChanged += UCCCursoCurriculo_IndexChanged;
                 UCCCurriculoPeriodo.IndexChanged += UCCCurriculoPeriodo_IndexChanged;
-                UCCCalendario.IndexChanged += UCCCalendario_IndexChanged;
+                UCCCalendario.IndexChanged += UCCCalendario_IndexChanged;                
+                UCCTipoRelatorioAtendimento.IndexChanged += UCCTipoRelatorioAtendimento_IndexChanged;
             }
 
             UCCQtdePaginacao.IndexChanged += UCCQtdePaginacao_IndexChanged;
@@ -117,6 +133,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.CamposData));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsBuscaRelatorioGeralAtendimento.js"));
             }
 
             if (!IsPostBack)
@@ -287,23 +304,50 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
             }
         }
 
+        private void UCCTipoRelatorioAtendimento_IndexChanged()
+        {
+            try
+            {
+                UCCRelatorioAtendimento.Valor = -1;
+                UCCRelatorioAtendimento.PermiteEditar = false;
+
+                if (UCCTipoRelatorioAtendimento.Valor > 0)
+                {
+                    UCCRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)UCCTipoRelatorioAtendimento.Valor);
+                    UCCRelatorioAtendimento.PermiteEditar = true;
+                    UCCRelatorioAtendimento.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o(s) relatório(s).", UtilBO.TipoMensagem.Erro);
+                updMensagem.Update();
+            }
+            finally
+            {
+                updFiltros.Update();
+            }
+        }
+
         #endregion
 
         #region Métodos
 
         private void InicializarTela()
         {
+            UCCTipoRelatorioAtendimento.CarregarTipos();
+
             if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
             {
                 pnlBusca.Visible = false;
-                pnlResultados.Visible = true;
-                pnlResultados.GroupingText = pnlBusca.GroupingText;
+                fdsResultados.Visible = true;
                 Pesquisar();
             }
             else
             {
                 pnlBusca.Visible = true;
-                pnlResultados.Visible = false;
+                fdsResultados.Visible = false;
                 UCCUAEscola.Inicializar();
                 if (UCCUAEscola.VisibleUA)
                 {
@@ -330,7 +374,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
         {
             try
             {
-                pnlResultados.Visible = false;
+                fdsResultados.Visible = false;
 
                 SalvaBusca();
 
@@ -345,7 +389,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
 
                 UCCQtdePaginacao.Visible = grvResultados.Rows.Count > 0;
 
-                pnlResultados.Visible = true;
+                fdsResultados.Visible = true;
 
                 updResultados.Update();
             }
@@ -358,7 +402,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
 
         private void VerificarBusca()
         {
-            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAEE)
+            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioGeralAtendimento)
             {
                 DateTime data;
                 string valor, valor2, valor3;
@@ -387,7 +431,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
                         }
                     }
                 }
-
+                
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("cur_id", out valor2);
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("crr_id", out valor);
                 UCCCursoCurriculo.Valor = new[] { Convert.ToInt32(valor2), Convert.ToInt32(valor) };
@@ -422,6 +466,13 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
                 __SessionWEB.BuscaRealizada.Filtros.TryGetValue("alc_matriculaEstadual", out valor);
                 UCCBuscaAluno.MatriculaEstadualAluno = valor;
 
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("rea_tipo", out valor);
+                UCCTipoRelatorioAtendimento.Valor = Convert.ToByte(valor);
+                UCCTipoRelatorioAtendimento_IndexChanged();
+
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("rea_id", out valor);
+                UCCRelatorioAtendimento.Valor = Convert.ToInt32(valor);
+
             }
 
             if (UCCTurma.Valor[0] > 0)
@@ -436,6 +487,9 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
 
             if (__SessionWEB.__UsuarioWEB.Docente.doc_id <= 0)
             {
+                filtros.Add("rea_tipo", UCCTipoRelatorioAtendimento.Valor.ToString());
+                filtros.Add("rea_id", UCCRelatorioAtendimento.Valor.ToString());
+
                 filtros.Add("uad_idSuperior", UCCUAEscola.Uad_ID.ToString());
                 filtros.Add("esc_id", UCCUAEscola.Esc_ID.ToString());
                 filtros.Add("uni_id", UCCUAEscola.Uni_ID.ToString());
@@ -458,7 +512,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
             filtros.Add("VS_Ordenacao", "pes_nome");
             filtros.Add("VS_SortDirection", "asc");
 
-            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAEE, Filtros = filtros };
+            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioGeralAtendimento, Filtros = filtros };
         }
 
         private DataTable SelecionaDados()
@@ -516,6 +570,130 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
             return sDir;
         }
 
+        private void GerarRelatório()
+        {
+            try
+            {
+                __SessionWEB.PostMessages = String.Empty;
+                string report = String.Empty;
+                string parametros = String.Empty;
+                string dem_ids; // ids dos registros na tabela de validacao de documentos
+                string esc_ids = String.Empty;
+                string alu_ids_boletim = String.Empty;
+                string tur_ids_boletim = String.Empty;
+                string tur_ids = String.Empty;
+                bool bGerarRelatorio = true;
+                XtraReport DevReport = null;
+
+                // Alu_ids não ordenado pelo id, e sim pelo nome
+                string alu_ids_boletim_nao_ordenado = String.Empty;
+
+                _VS_AlunosSelecionados.Clear();
+
+                //bool bTodasPaginas = false;
+                //Boolean.TryParse(hdnSelecionaGrid.Value, out bTodasPaginas);
+
+                if (chkTodos.Checked)
+                {
+                    DataTable dtAlunos = SelecionaDados();
+
+                    foreach (DataRow row in dtAlunos.Rows)
+                    {
+                        alu_ids_boletim_nao_ordenado = (String.IsNullOrEmpty(alu_ids_boletim_nao_ordenado) ? "" : alu_ids_boletim_nao_ordenado + ",") + row["alu_id"];
+
+                        if (!_VS_AlunosSelecionados.ContainsKey(Convert.ToInt64(row["alu_id"])))
+                        {
+                            esc_ids = !String.IsNullOrEmpty(esc_ids) ? String.Concat(esc_ids + ',', row["esc_id"].ToString()) : row["esc_id"].ToString();
+                            _VS_AlunosSelecionados.Add(Convert.ToInt64(row["alu_id"]), true);
+                            tur_ids = (String.IsNullOrEmpty(tur_ids) ? "" : tur_ids + ",") + row["tur_id"];
+                        }
+
+
+                        alu_ids_boletim = (String.IsNullOrEmpty(alu_ids_boletim) ? "" : alu_ids_boletim + ",") + row["alu_id"];
+                        tur_ids_boletim = (String.IsNullOrEmpty(tur_ids_boletim) ? "" : tur_ids_boletim + ",") + row["tur_id"];
+
+
+                    }
+                }
+                else // se só a pagina atual tem selecionados corre as linhas do grid pegando os alu_ids atuais
+                {
+                    foreach (GridViewRow row in grvResultados.Rows)
+                    {
+                        CheckBox chkSelecionar = (CheckBox)row.FindControl("chkSelecionar");
+
+                        if (chkSelecionar.Checked)
+                        {
+                            alu_ids_boletim_nao_ordenado = (String.IsNullOrEmpty(alu_ids_boletim_nao_ordenado) ? "" : alu_ids_boletim_nao_ordenado + ",") + grvResultados.DataKeys[row.RowIndex].Values["alu_id"];
+
+                            if (!_VS_AlunosSelecionados.ContainsKey(Convert.ToInt64(grvResultados.DataKeys[row.RowIndex].Values["alu_id"])))
+                            {
+                                _VS_AlunosSelecionados.Add(Convert.ToInt64(grvResultados.DataKeys[row.RowIndex].Values["alu_id"]), true);
+                                esc_ids = !String.IsNullOrEmpty(esc_ids) ? String.Concat(esc_ids + ',', Convert.ToString(grvResultados.DataKeys[row.RowIndex].Values["esc_id"])) : Convert.ToString(grvResultados.DataKeys[row.RowIndex].Values["esc_id"]);
+                                tur_ids = (String.IsNullOrEmpty(tur_ids) ? "" : tur_ids + ",") + grvResultados.DataKeys[row.RowIndex].Values["tur_id"];
+                            }
+
+
+                            alu_ids_boletim = (String.IsNullOrEmpty(alu_ids_boletim) ? "" : alu_ids_boletim + ",") + grvResultados.DataKeys[row.RowIndex].Values["alu_id"];
+                            tur_ids_boletim = (String.IsNullOrEmpty(tur_ids_boletim) ? "" : tur_ids_boletim + ",") + grvResultados.DataKeys[row.RowIndex].Values["tur_id"];
+
+                        }
+                    }
+                }
+
+                if (_VS_AlunosSelecionados.Count > 0)
+                {
+                    string alu_ids = String.Empty;
+
+                    foreach (KeyValuePair<long, bool> kvp in _VS_AlunosSelecionados)
+                    {
+                        alu_ids = !String.IsNullOrEmpty(alu_ids) ? String.Concat(alu_ids + ',', kvp.Key) : kvp.Key.ToString();
+                    }
+
+                    String sDeclaracaoHMTL = string.Empty;
+                    String sReportDev = string.Empty;
+
+                    //TODO [ANA]
+
+                    sDeclaracaoHMTL = CFG_ParametroDocumentoAlunoBO.ParametroValor(ChaveParametroDocumentoAluno.DECLARACAO_HTML, __SessionWEB.__UsuarioWEB.Usuario.ent_id, (int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioGeralAtendimento);
+                    report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioGeralAtendimento).ToString();
+                    parametros = "alu_id=" + (alu_ids_boletim_nao_ordenado) +
+                                 "&tur_id=" + tur_ids_boletim +
+                                 "&tur_id=" + UCCTurma.Valor[0] +
+                                 "&cal_id=" + UCCCalendario.Valor +
+                                 "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
+                                 "&situacao=" + false +//ChkEmitirAnterior.Checked +
+                                 "&esc_exibeBoletimUnicoEscola=" + ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_BOLETIM_UNICO_ESCOLA, __SessionWEB.__UsuarioWEB.Usuario.ent_id) +
+                                 "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString(), ApplicationWEB.LogoRelatorioSSRS) +
+                                 "&atg_tipo=" + Convert.ToInt32(ACA_AvisoTextoGeralBO.eTiposAvisosTextosGerais.CabecalhoRelatorio).ToString();
+
+
+                    SymmetricAlgorithm sa = new SymmetricAlgorithm(SymmetricAlgorithm.Tipo.TripleDES);
+
+
+
+                    MSTech.GestaoEscolar.BLL.CFG_RelatorioBO.CallReport("Documentos", report, parametros, HttpContext.Current);
+
+
+
+                }
+                else
+                {
+                    throw new ValidationException("Selecione pelo menos um aluno para gerar relatório.");
+                }
+            }
+            catch (ValidationException ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMensagem.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception err)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                ApplicationWEB._GravaErro(err);
+                lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o relatório.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
         #endregion
 
         #region Eventos
@@ -571,6 +749,17 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
             grvResultados.EditIndex = e.NewEditIndex;
         }
 
+        protected void btnGerarRelatorioCima_Click(object sender, EventArgs e)
+        {
+            GerarRelatório();
+        }
+
+        protected void btnGerarRelatorio_Click(object sender, EventArgs e)
+        {
+            GerarRelatório();
+        }
+
         #endregion
+
     }
 }
