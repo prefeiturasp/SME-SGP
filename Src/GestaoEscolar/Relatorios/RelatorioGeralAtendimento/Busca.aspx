@@ -5,6 +5,8 @@
 <%@ Register Src="~/WebControls/Combos/Novos/UCCCurriculoPeriodo.ascx" TagName="UCCCurriculoPeriodo" TagPrefix="uc" %>
 <%@ Register Src="~/WebControls/Combos/Novos/UCCCalendario.ascx" TagName="UCCCalendario" TagPrefix="uc" %>
 <%@ Register Src="~/WebControls/Combos/Novos/UCCTurma.ascx" TagName="UCCTurma" TagPrefix="uc" %>
+<%@ Register Src="~/WebControls/Combos/UCComboTipoRelatorioAtendimento.ascx" TagPrefix="uc" TagName="UCCTipoRelatorioAtendimento" %>
+<%@ Register Src="~/WebControls/Combos/UCComboRelatorioAtendimento.ascx" TagPrefix="uc" TagName="UCCRelatorioAtendimento" %>
 <%@ Register Src="~/WebControls/BuscaAluno/UCCamposBuscaAluno.ascx" TagName="UCCBuscaAluno" TagPrefix="uc" %>
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCObrigatorios" TagPrefix="uc" %>
 <%@ Register Src="~/WebControls/Mensagens/UCTotalRegistros.ascx" TagName="UCTotalRegistros" TagPrefix="uc" %>
@@ -24,6 +26,9 @@
         <ContentTemplate>
             <asp:Panel ID="pnlBusca" runat="server" GroupingText="Relatório geral de atendimento">
                 <uc:UCCObrigatorios ID="UCCObrigatorios" runat="server" />
+                <uc:UCCTipoRelatorioAtendimento runat="server" ID="UCCTipoRelatorioAtendimento" 
+                    MostrarMensagemSelecione="true" Obrigatorio="true" Titulo="Tipo de relatório *"/>
+                <uc:UCCRelatorioAtendimento ID="UCCRelatorioAtendimento" runat="server" Obrigatorio="true" PermiteEditar="false"/>
                 <uc:UCCUAEscola ID="UCCUAEscola" runat="server" CarregarEscolaAutomatico="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true"
                     ObrigatorioUA="true" ObrigatorioEscola="true" />
                 <uc:UCCCursoCurriculo ID="UCCCursoCurriculo" MostrarMensagemSelecione="true" Obrigatorio="true"
