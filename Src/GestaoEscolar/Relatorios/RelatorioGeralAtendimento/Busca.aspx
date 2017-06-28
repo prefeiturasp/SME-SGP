@@ -44,40 +44,46 @@
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="updResultados" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:Panel ID="pnlResultados" runat="server" GroupingText="<%$ Resources:Padrao, Padrao.Resultados.Text %>">
+            <fieldset id="fdsResultados" runat="server">
+                <legend>Resultados</legend>
                 <div class="right area-botoes-top">
                     <asp:Button ID="btnGerarRelatorioCima" runat="server" Text="Gerar relatório" OnClick="btnGerarRelatorioCima_Click" />
                 </div>
-                <div style="float: left; width: 50%">
-                    <asp:CheckBox ID="chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos"
-                        runat="server" />
+                <div class="area-form">
+                    <br />
+                    <br />
+                    <div style="float: left; width: 50%">
+                        <asp:CheckBox ID="chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos"
+                            runat="server" />
+                    </div>
+                    <uc:UCCQtdePaginacao ID="UCCQtdePaginacao" runat="server" />                    
+                    <br /> 
+                    <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound"
+                        OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
+                        EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>" OnDataBinding="grvResultados_DataBinding"
+                        OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
+                        <Columns>
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="chkSelecionar" runat="server" alu_id='<%# Eval("alu_id") %>' cal_id='<%# Eval("cal_id") %>'
+                                        tur_id='<%# Eval("tur_id") %>' esc_id='<%# Eval("esc_id") %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Nome.Text %>" DataField="pes_nome" SortExpression="pes_nome" />
+                            <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Idade.Text %>" DataField="pes_idade" SortExpression="pes_idade" />
+                            <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Escola.Text %>" DataField="tur_escolaUnidade" SortExpression="tur_escolaUnidade" />
+                            <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Curso.Text %>" DataField="tur_curso" SortExpression="tur_curso" />
+                            <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Turma.Text %>" DataField="tur_codigo" SortExpression="tur_codigo" />
+                        </Columns>
+                    </asp:GridView>
+                    <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
                 </div>
-                <uc:UCCQtdePaginacao ID="UCCQtdePaginacao" runat="server" />
-                <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound"
-                    OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
-                    EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>" OnDataBinding="grvResultados_DataBinding"
-                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
-                    <Columns>
-                        <asp:TemplateField>
-                            <HeaderTemplate>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:CheckBox ID="chkSelecionar" runat="server" alu_id='<%# Eval("alu_id") %>' cal_id='<%# Eval("cal_id") %>'
-                                    tur_id='<%# Eval("tur_id") %>' esc_id='<%# Eval("esc_id") %>' />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Nome.Text %>" DataField="pes_nome" SortExpression="pes_nome" />
-                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Idade.Text %>" DataField="pes_idade" SortExpression="pes_idade" />
-                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Escola.Text %>" DataField="tur_escolaUnidade" SortExpression="tur_escolaUnidade" />
-                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Curso.Text %>" DataField="tur_curso" SortExpression="tur_curso" />
-                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Turma.Text %>" DataField="tur_codigo" SortExpression="tur_codigo" />
-                    </Columns>
-                </asp:GridView>
-                <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
-                 <div class="right area-botoes-bottom">
+                <div class="right area-botoes-bottom">
                     <asp:Button ID="btnGerarRelatorio" runat="server" Text="Gerar relatório" OnClick="btnGerarRelatorio_Click" />
                 </div>
-            </asp:Panel>
+            </fieldset>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
