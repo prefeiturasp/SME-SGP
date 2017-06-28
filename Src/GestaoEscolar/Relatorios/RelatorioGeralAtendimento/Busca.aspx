@@ -31,7 +31,7 @@
                 <uc:UCCCurriculoPeriodo ID="UCCCurriculoPeriodo" MostrarMensagemSelecione="true" Obrigatorio="true"
                     runat="server" />
                 <uc:UCCCalendario ID="UCCCalendario" runat="server" MostrarMensagemSelecione="true" Obrigatorio="true" />
-                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" Obrigatorio="true" />
+                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" />
                 <div id="divBuscaAvancadaAluno" runat="server" class="divBuscaAvancadaAluno">
                     <uc:UCCBuscaAluno ID="UCCBuscaAluno" runat="server" />
                 </div>
