@@ -312,14 +312,13 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
             if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
             {
                 pnlBusca.Visible = false;
-                pnlResultados.Visible = true;
-                pnlResultados.GroupingText = pnlBusca.GroupingText;
+                fdsResultados.Visible = true;
                 Pesquisar();
             }
             else
             {
                 pnlBusca.Visible = true;
-                pnlResultados.Visible = false;
+                fdsResultados.Visible = false;
                 UCCUAEscola.Inicializar();
                 if (UCCUAEscola.VisibleUA)
                 {
@@ -346,7 +345,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
         {
             try
             {
-                pnlResultados.Visible = false;
+                fdsResultados.Visible = false;
 
                 SalvaBusca();
 
@@ -361,7 +360,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
 
                 UCCQtdePaginacao.Visible = grvResultados.Rows.Count > 0;
 
-                pnlResultados.Visible = true;
+                fdsResultados.Visible = true;
 
                 updResultados.Update();
             }
