@@ -116,6 +116,62 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Lançamento do relatório excluído com sucesso.'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'litAcoesRealizadas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Ações realizadas'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'btnNovaAcao.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nova ação'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'grvAcoes.EmptyDataText' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Não existem ações realizadas cadastradas nesse lançamento.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ckbImpressao.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Exibir na impressão'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblData.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data *'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'rfvData.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data da ação realizada é obrigatório.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblAcao.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Ação realizada *'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'rfvAcao.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Ação realizada é obrigatório.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

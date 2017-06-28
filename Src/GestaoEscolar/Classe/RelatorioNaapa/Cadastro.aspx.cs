@@ -176,6 +176,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
                 {
                     // Desabilita o combo
                     UCCRelatorioAtendimento.PermiteEditar = false;
+                    litLancamento.Text = UCCRelatorioAtendimento.Texto;
 
                     // Seleciona as permissões do usuário no relatório
                     MSTech.GestaoEscolar.BLL.RelatorioAtendimento relatorioAtendimento = CLS_RelatorioAtendimentoBO.SelecionaRelatorio(UCCRelatorioAtendimento.Valor, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo);
