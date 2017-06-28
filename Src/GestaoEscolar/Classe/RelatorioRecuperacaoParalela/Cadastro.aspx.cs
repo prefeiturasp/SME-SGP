@@ -516,7 +516,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             pnlLancamento.Visible = false;
             grvLancamentos.Visible = true;
             btnNovo.Visible = VS_disciplinaRP
-                                && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
+                                && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir
                                 && VS_permissoesRP.permissaoEdicao
                                 && VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
         }
@@ -537,7 +537,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             {
                 // Exibe o botão para incluir novo apenas se for do tipo periódica
                 btnNovo.Visible = VS_disciplinaRP
-                                    && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
+                                    && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir
                                     && VS_permissoesRP.permissaoEdicao
                                     && VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
 
