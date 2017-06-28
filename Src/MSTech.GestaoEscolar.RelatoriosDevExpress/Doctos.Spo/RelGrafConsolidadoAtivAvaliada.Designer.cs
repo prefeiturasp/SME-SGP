@@ -73,10 +73,11 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.lblDRE = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader3 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPanel1 = new DevExpress.XtraReports.UI.XRPanel();
+            this.lblTurma = new DevExpress.XtraReports.UI.XRLabel();
             this.xrChart1 = new DevExpress.XtraReports.UI.XRChart();
             this.nEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaTableAdapter = new MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo.DSGestaoEscolarTableAdapters.NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaTableAdapter();
-            this.xrLine2 = new DevExpress.XtraReports.UI.XRLine();
             this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
+            this.xrLine2 = new DevExpress.XtraReports.UI.XRLine();
             this.GroupHeader4 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.lblSemRegistroGrafico = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader5 = new DevExpress.XtraReports.UI.GroupHeaderBand();
@@ -346,7 +347,8 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.GroupHeader3.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPanel1,
-            this.xrSubreport1});
+            this.xrSubreport1,
+            this.xrLine2});
             this.GroupHeader3.Dpi = 100F;
             this.GroupHeader3.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("tur_codigo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
@@ -357,19 +359,34 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             new DevExpress.XtraReports.UI.GroupField("tds_ordem", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("tds_nome", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("tds_id", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeader3.HeightF = 422.4167F;
+            this.GroupHeader3.HeightF = 438.4583F;
             this.GroupHeader3.Name = "GroupHeader3";
+            this.GroupHeader3.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBandExceptFirstEntry;
             this.GroupHeader3.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader3_BeforePrint);
             // 
             // xrPanel1
             // 
             this.xrPanel1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrChart1,
-            this.xrLine2});
+            this.lblTurma,
+            this.xrChart1});
             this.xrPanel1.Dpi = 100F;
-            this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0.2930959F, 0F);
+            this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 7.999992F);
             this.xrPanel1.Name = "xrPanel1";
-            this.xrPanel1.SizeF = new System.Drawing.SizeF(699.4135F, 398.375F);
+            this.xrPanel1.SizeF = new System.Drawing.SizeF(699.4135F, 407.0417F);
+            // 
+            // lblTurma
+            // 
+            this.lblTurma.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_tpc_tds_nome")});
+            this.lblTurma.Dpi = 100F;
+            this.lblTurma.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+            this.lblTurma.LocationFloat = new DevExpress.Utils.PointFloat(0F, 2.000008F);
+            this.lblTurma.Name = "lblTurma";
+            this.lblTurma.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lblTurma.SizeF = new System.Drawing.SizeF(699.4133F, 23F);
+            this.lblTurma.StylePriority.UseFont = false;
+            this.lblTurma.StylePriority.UseTextAlignment = false;
+            this.lblTurma.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xrChart1
             // 
@@ -400,7 +417,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.xrChart1.Legend.Name = "Default Legend";
             this.xrChart1.Legend.Padding.Right = 20;
             this.xrChart1.Legend.Padding.Top = 20;
-            this.xrChart1.LocationFloat = new DevExpress.Utils.PointFloat(96.6649F, 18.20828F);
+            this.xrChart1.LocationFloat = new DevExpress.Utils.PointFloat(90.74999F, 32.29001F);
             this.xrChart1.Name = "xrChart1";
             series1.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Qualitative;
             pieSeriesLabel1.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
@@ -416,27 +433,27 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
         series1};
             sideBySideBarSeriesLabel1.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
             this.xrChart1.SeriesTemplate.Label = sideBySideBarSeriesLabel1;
-            this.xrChart1.SizeF = new System.Drawing.SizeF(507.2917F, 370.1667F);
+            this.xrChart1.SizeF = new System.Drawing.SizeF(598.6635F, 370.1667F);
             // 
             // nEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaTableAdapter
             // 
             this.nEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaTableAdapter.ClearBeforeFill = true;
             // 
-            // xrLine2
-            // 
-            this.xrLine2.Dpi = 100F;
-            this.xrLine2.LocationFloat = new DevExpress.Utils.PointFloat(9.409587E-05F, 0F);
-            this.xrLine2.Name = "xrLine2";
-            this.xrLine2.SizeF = new System.Drawing.SizeF(699.4134F, 8F);
-            // 
             // xrSubreport1
             // 
             this.xrSubreport1.Dpi = 100F;
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0.0001271566F, 398.3749F);
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0.2935251F, 415.4583F);
             this.xrSubreport1.Name = "xrSubreport1";
             this.xrSubreport1.ReportSource = new MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo.SubRelGrafConsolidadoAtivAvaliada();
             this.xrSubreport1.SizeF = new System.Drawing.SizeF(699.7065F, 23F);
             this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
+            // 
+            // xrLine2
+            // 
+            this.xrLine2.Dpi = 100F;
+            this.xrLine2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrLine2.Name = "xrLine2";
+            this.xrLine2.SizeF = new System.Drawing.SizeF(699.4134F, 8F);
             // 
             // GroupHeader4
             // 
@@ -617,5 +634,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
         private DevExpress.XtraReports.UI.XRPictureBox ImgLogo;
         public DevExpress.XtraReports.Parameters.Parameter ARQID_LOGO;
         private DevExpress.XtraReports.UI.XRLabel xrLabel1;
+        private DevExpress.XtraReports.UI.XRLabel lblTurma;
     }
 }

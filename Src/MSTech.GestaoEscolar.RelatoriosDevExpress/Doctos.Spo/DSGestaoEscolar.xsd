@@ -164,31 +164,33 @@
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="far_descricao" DataSetColumn="far_descricao" />
-              <Mapping SourceColumn="mtu_numeroChamada" DataSetColumn="mtu_numeroChamada" />
               <Mapping SourceColumn="pes_nome" DataSetColumn="pes_nome" />
-              <Mapping SourceColumn="aat_avaliacaoglobal" DataSetColumn="aat_avaliacaoglobal" />
-              <Mapping SourceColumn="atd_avaliacao" DataSetColumn="atd_avaliacao" />
-              <Mapping SourceColumn="valorMinimoAprovacaoPorDisciplina" DataSetColumn="valorMinimoAprovacaoPorDisciplina" />
-              <Mapping SourceColumn="uni_id" DataSetColumn="uni_id" />
               <Mapping SourceColumn="tur_id" DataSetColumn="tur_id" />
-              <Mapping SourceColumn="tur_codigo" DataSetColumn="tur_codigo" />
-              <Mapping SourceColumn="DREEscola" DataSetColumn="DREEscola" />
-              <Mapping SourceColumn="esa_tipo" DataSetColumn="esa_tipo" />
               <Mapping SourceColumn="uad_nome" DataSetColumn="uad_nome" />
               <Mapping SourceColumn="esc_nome" DataSetColumn="esc_nome" />
-              <Mapping SourceColumn="CicloTurBimestre" DataSetColumn="CicloTurBimestre" />
-              <Mapping SourceColumn="cal_ano" DataSetColumn="cal_ano" />
-              <Mapping SourceColumn="far_cor" DataSetColumn="far_cor" />
+              <Mapping SourceColumn="tpc_id" DataSetColumn="tpc_id" />
+              <Mapping SourceColumn="far_descricao" DataSetColumn="far_descricao" />
               <Mapping SourceColumn="far_valor" DataSetColumn="far_valor" />
-              <Mapping SourceColumn="esc_id" DataSetColumn="esc_id" />
+              <Mapping SourceColumn="far_cor" DataSetColumn="far_cor" />
               <Mapping SourceColumn="tds_id" DataSetColumn="tds_id" />
               <Mapping SourceColumn="tds_nome" DataSetColumn="tds_nome" />
               <Mapping SourceColumn="tds_ordem" DataSetColumn="tds_ordem" />
-              <Mapping SourceColumn="tpc_id" DataSetColumn="tpc_id" />
+              <Mapping SourceColumn="mtu_numeroChamada" DataSetColumn="mtu_numeroChamada" />
+              <Mapping SourceColumn="aat_avaliacaoglobal" DataSetColumn="aat_avaliacaoglobal" />
+              <Mapping SourceColumn="atd_avaliacao" DataSetColumn="atd_avaliacao" />
+              <Mapping SourceColumn="valorMinimoAprovacaoPorDisciplina" DataSetColumn="valorMinimoAprovacaoPorDisciplina" />
+              <Mapping SourceColumn="esc_id" DataSetColumn="esc_id" />
+              <Mapping SourceColumn="uni_id" DataSetColumn="uni_id" />
+              <Mapping SourceColumn="tur_codigo" DataSetColumn="tur_codigo" />
+              <Mapping SourceColumn="DREEscola" DataSetColumn="DREEscola" />
+              <Mapping SourceColumn="esa_tipo" DataSetColumn="esa_tipo" />
+              <Mapping SourceColumn="cal_ano" DataSetColumn="cal_ano" />
               <Mapping SourceColumn="tpc_nome" DataSetColumn="tpc_nome" />
               <Mapping SourceColumn="tpc_ordem" DataSetColumn="tpc_ordem" />
+              <Mapping SourceColumn="tur_tpc_tds_nome" DataSetColumn="tur_tpc_tds_nome" />
+              <Mapping SourceColumn="CicloTurBimestre" DataSetColumn="CicloTurBimestre" />
               <Mapping SourceColumn="Ciclo" DataSetColumn="Ciclo" />
+              <Mapping SourceColumn="far_ordenar" DataSetColumn="far_ordenar" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -687,7 +689,7 @@
   <xs:element name="DSGestaoEscolar" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSGestaoEscolar" msprop:Generator_UserDSName="DSGestaoEscolar">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="NEW_RelatorioAvaliacao_Efetivacao_Grafico" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_Efetivacao_GraficoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_Efetivacao_Grafico" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowChanged" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_Efetivacao_Grafico" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowDeleted" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRow" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_Efetivacao_Grafico" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowChangeEvent">
+        <xs:element name="NEW_RelatorioAvaliacao_Efetivacao_Grafico" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_Efetivacao_GraficoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_Efetivacao_Grafico" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_Efetivacao_Grafico" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowDeleted" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_Efetivacao_Grafico" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowChanged" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRowChangeEvent" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_Efetivacao_GraficoRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="far_descricao" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfar_descricao" msprop:Generator_ColumnPropNameInRow="far_descricao" msprop:Generator_ColumnPropNameInTable="far_descricaoColumn" msprop:Generator_UserColumnName="far_descricao" minOccurs="0">
@@ -716,7 +718,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_RelatorioAvaliacao_DescricaoAtividade" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_DescricaoAtividadeDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_DescricaoAtividade" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowChanged" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_DescricaoAtividade" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowDeleted" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_DescricaoAtividadeRow" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_DescricaoAtividade" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowChangeEvent">
+        <xs:element name="NEW_RelatorioAvaliacao_DescricaoAtividade" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_DescricaoAtividadeDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_DescricaoAtividade" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_DescricaoAtividade" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowDeleted" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_DescricaoAtividade" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowChanged" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_DescricaoAtividadeRowChangeEvent" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_DescricaoAtividadeRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Nome" msprop:Generator_ColumnVarNameInTable="columnNome" msprop:Generator_ColumnPropNameInRow="Nome" msprop:Generator_ColumnPropNameInTable="NomeColumn" msprop:Generator_UserColumnName="Nome" minOccurs="0">
@@ -736,7 +738,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_RelatorioAvaliacao_AtAvaliativa_Grafico" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_AtAvaliativa_Grafico" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_AtAvaliativa_Grafico" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowDeleted" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_AtAvaliativa_Grafico" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowChanged" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowChangeEvent" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRow">
+        <xs:element name="NEW_RelatorioAvaliacao_AtAvaliativa_Grafico" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_AtAvaliativa_Grafico" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowChanged" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_AtAvaliativa_Grafico" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowDeleted" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRow" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_AtAvaliativa_Grafico" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_AtAvaliativa_GraficoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="far_descricao" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfar_descricao" msprop:Generator_ColumnPropNameInRow="far_descricao" msprop:Generator_ColumnPropNameInTable="far_descricaoColumn" msprop:Generator_UserColumnName="far_descricao" minOccurs="0">
@@ -758,7 +760,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_RelatorioGrafConsAtivAvaliada_Cabecalho" msprop:Generator_TableClassName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioGrafConsAtivAvaliada_Cabecalho" msprop:Generator_RowChangedName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowChanged" msprop:Generator_TablePropName="NEW_RelatorioGrafConsAtivAvaliada_Cabecalho" msprop:Generator_RowDeletingName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowDeleted" msprop:Generator_RowClassName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRow" msprop:Generator_UserTableName="NEW_RelatorioGrafConsAtivAvaliada_Cabecalho" msprop:Generator_RowEvArgName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowChangeEvent">
+        <xs:element name="NEW_RelatorioGrafConsAtivAvaliada_Cabecalho" msprop:Generator_TableClassName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioGrafConsAtivAvaliada_Cabecalho" msprop:Generator_TablePropName="NEW_RelatorioGrafConsAtivAvaliada_Cabecalho" msprop:Generator_RowDeletingName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowDeleted" msprop:Generator_UserTableName="NEW_RelatorioGrafConsAtivAvaliada_Cabecalho" msprop:Generator_RowChangedName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowChanged" msprop:Generator_RowEvArgName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRowChangeEvent" msprop:Generator_RowClassName="NEW_RelatorioGrafConsAtivAvaliada_CabecalhoRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Ciclo" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCiclo" msprop:Generator_ColumnPropNameInRow="Ciclo" msprop:Generator_ColumnPropNameInTable="CicloColumn" msprop:Generator_UserColumnName="Ciclo" minOccurs="0">
@@ -806,17 +808,9 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma" msprop:Generator_TableClassName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma" msprop:Generator_RowChangedName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow" msprop:Generator_UserTableName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowChangeEvent">
+        <xs:element name="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma" msprop:Generator_TableClassName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma" msprop:Generator_TablePropName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma" msprop:Generator_RowChangedName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="far_descricao" msprop:Generator_ColumnVarNameInTable="columnfar_descricao" msprop:Generator_ColumnPropNameInRow="far_descricao" msprop:Generator_ColumnPropNameInTable="far_descricaoColumn" msprop:Generator_UserColumnName="far_descricao" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="200" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="mtu_numeroChamada" msprop:Generator_ColumnVarNameInTable="columnmtu_numeroChamada" msprop:Generator_ColumnPropNameInRow="mtu_numeroChamada" msprop:Generator_ColumnPropNameInTable="mtu_numeroChamadaColumn" msprop:Generator_UserColumnName="mtu_numeroChamada" type="xs:int" minOccurs="0" />
               <xs:element name="pes_nome" msprop:Generator_ColumnVarNameInTable="columnpes_nome" msprop:Generator_ColumnPropNameInRow="pes_nome" msprop:Generator_ColumnPropNameInTable="pes_nomeColumn" msprop:Generator_UserColumnName="pes_nome" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -824,6 +818,54 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="tur_id" msprop:Generator_ColumnVarNameInTable="columntur_id" msprop:Generator_ColumnPropNameInRow="tur_id" msprop:Generator_ColumnPropNameInTable="tur_idColumn" msprop:Generator_UserColumnName="tur_id" type="xs:long" minOccurs="0" />
+              <xs:element name="uad_nome" msprop:Generator_ColumnVarNameInTable="columnuad_nome" msprop:Generator_ColumnPropNameInRow="uad_nome" msprop:Generator_ColumnPropNameInTable="uad_nomeColumn" msprop:Generator_UserColumnName="uad_nome" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="esc_nome" msprop:Generator_ColumnVarNameInTable="columnesc_nome" msprop:Generator_ColumnPropNameInRow="esc_nome" msprop:Generator_ColumnPropNameInTable="esc_nomeColumn" msprop:Generator_UserColumnName="esc_nome" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tpc_id" msprop:Generator_ColumnVarNameInTable="columntpc_id" msprop:Generator_ColumnPropNameInRow="tpc_id" msprop:Generator_ColumnPropNameInTable="tpc_idColumn" msprop:Generator_UserColumnName="tpc_id" type="xs:int" minOccurs="0" />
+              <xs:element name="far_descricao" msprop:Generator_ColumnVarNameInTable="columnfar_descricao" msprop:Generator_ColumnPropNameInRow="far_descricao" msprop:Generator_ColumnPropNameInTable="far_descricaoColumn" msprop:Generator_UserColumnName="far_descricao" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="far_valor" msprop:Generator_ColumnVarNameInTable="columnfar_valor" msprop:Generator_ColumnPropNameInRow="far_valor" msprop:Generator_ColumnPropNameInTable="far_valorColumn" msprop:Generator_UserColumnName="far_valor" type="xs:int" minOccurs="0" />
+              <xs:element name="far_ordenar" msprop:Generator_ColumnVarNameInTable="columnfar_ordenar" msprop:Generator_ColumnPropNameInRow="far_ordenar" msprop:Generator_ColumnPropNameInTable="far_ordenarColumn" msprop:Generator_UserColumnName="far_ordenar" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="far_cor" msprop:Generator_ColumnVarNameInTable="columnfar_cor" msprop:Generator_ColumnPropNameInRow="far_cor" msprop:Generator_ColumnPropNameInTable="far_corColumn" msprop:Generator_UserColumnName="far_cor" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tds_id" msprop:Generator_ColumnVarNameInTable="columntds_id" msprop:Generator_ColumnPropNameInRow="tds_id" msprop:Generator_ColumnPropNameInTable="tds_idColumn" msprop:Generator_UserColumnName="tds_id" type="xs:int" minOccurs="0" />
+              <xs:element name="tds_nome" msprop:Generator_ColumnVarNameInTable="columntds_nome" msprop:Generator_ColumnPropNameInRow="tds_nome" msprop:Generator_ColumnPropNameInTable="tds_nomeColumn" msprop:Generator_UserColumnName="tds_nome" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tds_ordem" msprop:Generator_ColumnVarNameInTable="columntds_ordem" msprop:Generator_ColumnPropNameInRow="tds_ordem" msprop:Generator_ColumnPropNameInTable="tds_ordemColumn" msprop:Generator_UserColumnName="tds_ordem" type="xs:int" minOccurs="0" />
+              <xs:element name="mtu_numeroChamada" msprop:Generator_ColumnVarNameInTable="columnmtu_numeroChamada" msprop:Generator_ColumnPropNameInRow="mtu_numeroChamada" msprop:Generator_ColumnPropNameInTable="mtu_numeroChamadaColumn" msprop:Generator_UserColumnName="mtu_numeroChamada" type="xs:int" minOccurs="0" />
               <xs:element name="aat_avaliacaoglobal" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnaat_avaliacaoglobal" msprop:Generator_ColumnPropNameInRow="aat_avaliacaoglobal" msprop:Generator_ColumnPropNameInTable="aat_avaliacaoglobalColumn" msprop:Generator_UserColumnName="aat_avaliacaoglobal" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -845,8 +887,8 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="esc_id" msprop:Generator_ColumnVarNameInTable="columnesc_id" msprop:Generator_ColumnPropNameInRow="esc_id" msprop:Generator_ColumnPropNameInTable="esc_idColumn" msprop:Generator_UserColumnName="esc_id" type="xs:int" minOccurs="0" />
               <xs:element name="uni_id" msprop:Generator_ColumnVarNameInTable="columnuni_id" msprop:Generator_ColumnPropNameInRow="uni_id" msprop:Generator_ColumnPropNameInTable="uni_idColumn" msprop:Generator_UserColumnName="uni_id" type="xs:int" minOccurs="0" />
-              <xs:element name="tur_id" msprop:Generator_ColumnVarNameInTable="columntur_id" msprop:Generator_ColumnPropNameInRow="tur_id" msprop:Generator_ColumnPropNameInTable="tur_idColumn" msprop:Generator_UserColumnName="tur_id" type="xs:long" minOccurs="0" />
               <xs:element name="tur_codigo" msprop:Generator_ColumnVarNameInTable="columntur_codigo" msprop:Generator_ColumnPropNameInRow="tur_codigo" msprop:Generator_ColumnPropNameInTable="tur_codigoColumn" msprop:Generator_UserColumnName="tur_codigo" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -854,7 +896,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DREEscola" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDREEscola" msprop:Generator_ColumnPropNameInRow="DREEscola" msprop:Generator_ColumnPropNameInTable="DREEscolaColumn" msprop:Generator_UserColumnName="DREEscola" minOccurs="0">
+              <xs:element name="DREEscola" msprop:Generator_ColumnVarNameInTable="columnDREEscola" msprop:Generator_ColumnPropNameInRow="DREEscola" msprop:Generator_ColumnPropNameInTable="DREEscolaColumn" msprop:Generator_UserColumnName="DREEscola" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="403" />
@@ -862,18 +904,19 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="esa_tipo" msprop:Generator_ColumnVarNameInTable="columnesa_tipo" msprop:Generator_ColumnPropNameInRow="esa_tipo" msprop:Generator_ColumnPropNameInTable="esa_tipoColumn" msprop:Generator_UserColumnName="esa_tipo" type="xs:unsignedByte" minOccurs="0" />
-              <xs:element name="far_valor" msprop:Generator_ColumnVarNameInTable="columnfar_valor" msprop:Generator_ColumnPropNameInRow="far_valor" msprop:Generator_ColumnPropNameInTable="far_valorColumn" msprop:Generator_UserColumnName="far_valor" type="xs:int" minOccurs="0" />
-              <xs:element name="uad_nome" msprop:Generator_ColumnVarNameInTable="columnuad_nome" msprop:Generator_ColumnPropNameInRow="uad_nome" msprop:Generator_ColumnPropNameInTable="uad_nomeColumn" msprop:Generator_UserColumnName="uad_nome" minOccurs="0">
+              <xs:element name="cal_ano" msprop:Generator_ColumnVarNameInTable="columncal_ano" msprop:Generator_ColumnPropNameInRow="cal_ano" msprop:Generator_ColumnPropNameInTable="cal_anoColumn" msprop:Generator_UserColumnName="cal_ano" type="xs:int" minOccurs="0" />
+              <xs:element name="tpc_nome" msprop:Generator_ColumnVarNameInTable="columntpc_nome" msprop:Generator_ColumnPropNameInRow="tpc_nome" msprop:Generator_ColumnPropNameInTable="tpc_nomeColumn" msprop:Generator_UserColumnName="tpc_nome" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="200" />
+                    <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="esc_nome" msprop:Generator_ColumnVarNameInTable="columnesc_nome" msprop:Generator_ColumnPropNameInRow="esc_nome" msprop:Generator_ColumnPropNameInTable="esc_nomeColumn" msprop:Generator_UserColumnName="esc_nome" minOccurs="0">
+              <xs:element name="tpc_ordem" msprop:Generator_ColumnVarNameInTable="columntpc_ordem" msprop:Generator_ColumnPropNameInRow="tpc_ordem" msprop:Generator_ColumnPropNameInTable="tpc_ordemColumn" msprop:Generator_UserColumnName="tpc_ordem" type="xs:int" minOccurs="0" />
+              <xs:element name="tur_tpc_tds_nome" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columntur_tpc_tds_nome" msprop:Generator_ColumnPropNameInRow="tur_tpc_tds_nome" msprop:Generator_ColumnPropNameInTable="tur_tpc_tds_nomeColumn" msprop:Generator_UserColumnName="tur_tpc_tds_nome" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="200" />
+                    <xs:maxLength value="336" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -884,34 +927,6 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="cal_ano" msprop:Generator_ColumnVarNameInTable="columncal_ano" msprop:Generator_ColumnPropNameInRow="cal_ano" msprop:Generator_ColumnPropNameInTable="cal_anoColumn" msprop:Generator_UserColumnName="cal_ano" type="xs:int" minOccurs="0" />
-              <xs:element name="far_cor" msprop:Generator_ColumnVarNameInTable="columnfar_cor" msprop:Generator_ColumnPropNameInRow="far_cor" msprop:Generator_ColumnPropNameInTable="far_corColumn" msprop:Generator_UserColumnName="far_cor" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="200" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="esc_id" msprop:Generator_ColumnVarNameInTable="columnesc_id" msprop:Generator_ColumnPropNameInRow="esc_id" msprop:Generator_ColumnPropNameInTable="esc_idColumn" msprop:Generator_UserColumnName="esc_id" type="xs:int" minOccurs="0" />
-              <xs:element name="far_ordenar" msprop:Generator_ColumnVarNameInTable="columnfar_ordenar" msprop:Generator_ColumnPropNameInRow="far_ordenar" msprop:Generator_ColumnPropNameInTable="far_ordenarColumn" msprop:Generator_UserColumnName="far_ordenar" type="xs:string" minOccurs="0" />
-              <xs:element name="tds_id" msprop:Generator_ColumnVarNameInTable="columntds_id" msprop:Generator_ColumnPropNameInRow="tds_id" msprop:Generator_ColumnPropNameInTable="tds_idColumn" msprop:Generator_UserColumnName="tds_id" type="xs:int" minOccurs="0" />
-              <xs:element name="tds_nome" msprop:Generator_ColumnVarNameInTable="columntds_nome" msprop:Generator_ColumnPropNameInRow="tds_nome" msprop:Generator_ColumnPropNameInTable="tds_nomeColumn" msprop:Generator_UserColumnName="tds_nome" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="200" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="tds_ordem" msprop:Generator_ColumnVarNameInTable="columntds_ordem" msprop:Generator_ColumnPropNameInRow="tds_ordem" msprop:Generator_ColumnPropNameInTable="tds_ordemColumn" msprop:Generator_UserColumnName="tds_ordem" type="xs:int" minOccurs="0" />
-              <xs:element name="tpc_id" msprop:Generator_ColumnVarNameInTable="columntpc_id" msprop:Generator_ColumnPropNameInRow="tpc_id" msprop:Generator_ColumnPropNameInTable="tpc_idColumn" msprop:Generator_UserColumnName="tpc_id" type="xs:int" minOccurs="0" />
-              <xs:element name="tpc_nome" msprop:Generator_ColumnVarNameInTable="columntpc_nome" msprop:Generator_ColumnPropNameInRow="tpc_nome" msprop:Generator_ColumnPropNameInTable="tpc_nomeColumn" msprop:Generator_UserColumnName="tpc_nome" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="tpc_ordem" msprop:Generator_ColumnVarNameInTable="columntpc_ordem" msprop:Generator_ColumnPropNameInRow="tpc_ordem" msprop:Generator_ColumnPropNameInTable="tpc_ordemColumn" msprop:Generator_UserColumnName="tpc_ordem" type="xs:int" minOccurs="0" />
               <xs:element name="Ciclo" msprop:Generator_ColumnVarNameInTable="columnCiclo" msprop:Generator_ColumnPropNameInRow="Ciclo" msprop:Generator_ColumnPropNameInTable="CicloColumn" msprop:Generator_UserColumnName="Ciclo" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -922,7 +937,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_RelatorioAvaliacao_Efetivacao" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_EfetivacaoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_Efetivacao" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_EfetivacaoRowChanged" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_Efetivacao" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_EfetivacaoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_EfetivacaoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_EfetivacaoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_EfetivacaoRowDeleted" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_EfetivacaoRow" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_Efetivacao" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_EfetivacaoRowChangeEvent">
+        <xs:element name="NEW_RelatorioAvaliacao_Efetivacao" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_EfetivacaoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_Efetivacao" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_Efetivacao" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_EfetivacaoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_EfetivacaoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_EfetivacaoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_EfetivacaoRowDeleted" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_Efetivacao" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_EfetivacaoRowChanged" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_EfetivacaoRowChangeEvent" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_EfetivacaoRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrdemFaixa" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnOrdemFaixa" msprop:Generator_ColumnPropNameInRow="OrdemFaixa" msprop:Generator_ColumnPropNameInTable="OrdemFaixaColumn" msprop:Generator_UserColumnName="OrdemFaixa" type="xs:long" minOccurs="0" />
@@ -950,7 +965,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_RelatorioAvaliacao_AtAvaliativa" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_AtAvaliativaDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_AtAvaliativa" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_AtAvaliativa" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_AtAvaliativaRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_AtAvaliativaRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_AtAvaliativaRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_AtAvaliativaRowDeleted" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_AtAvaliativa" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_AtAvaliativaRowChanged" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_AtAvaliativaRowChangeEvent" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_AtAvaliativaRow">
+        <xs:element name="NEW_RelatorioAvaliacao_AtAvaliativa" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_AtAvaliativaDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_AtAvaliativa" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_AtAvaliativaRowChanged" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_AtAvaliativa" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_AtAvaliativaRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_AtAvaliativaRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_AtAvaliativaRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_AtAvaliativaRowDeleted" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_AtAvaliativaRow" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_AtAvaliativa" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_AtAvaliativaRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrdemFaixa" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnOrdemFaixa" msprop:Generator_ColumnPropNameInRow="OrdemFaixa" msprop:Generator_ColumnPropNameInTable="OrdemFaixaColumn" msprop:Generator_UserColumnName="OrdemFaixa" type="xs:long" minOccurs="0" />
@@ -978,7 +993,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_RelatorioAvaliacao_Cabecalho" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_CabecalhoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_Cabecalho" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_Cabecalho" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_CabecalhoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_CabecalhoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_CabecalhoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_CabecalhoRowDeleted" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_Cabecalho" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_CabecalhoRowChanged" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_CabecalhoRowChangeEvent" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_CabecalhoRow">
+        <xs:element name="NEW_RelatorioAvaliacao_Cabecalho" msprop:Generator_TableClassName="NEW_RelatorioAvaliacao_CabecalhoDataTable" msprop:Generator_TableVarName="tableNEW_RelatorioAvaliacao_Cabecalho" msprop:Generator_RowChangedName="NEW_RelatorioAvaliacao_CabecalhoRowChanged" msprop:Generator_TablePropName="NEW_RelatorioAvaliacao_Cabecalho" msprop:Generator_RowDeletingName="NEW_RelatorioAvaliacao_CabecalhoRowDeleting" msprop:Generator_RowChangingName="NEW_RelatorioAvaliacao_CabecalhoRowChanging" msprop:Generator_RowEvHandlerName="NEW_RelatorioAvaliacao_CabecalhoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_RelatorioAvaliacao_CabecalhoRowDeleted" msprop:Generator_RowClassName="NEW_RelatorioAvaliacao_CabecalhoRow" msprop:Generator_UserTableName="NEW_RelatorioAvaliacao_Cabecalho" msprop:Generator_RowEvArgName="NEW_RelatorioAvaliacao_CabecalhoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="tur_id" msprop:Generator_ColumnVarNameInTable="columntur_id" msprop:Generator_ColumnPropNameInRow="tur_id" msprop:Generator_ColumnPropNameInTable="tur_idColumn" msprop:Generator_UserColumnName="tur_id" type="xs:long" minOccurs="0" />
@@ -1055,7 +1070,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_GrafIndividualNotas_Turmas" msprop:Generator_TableClassName="NEW_Relatorio_GrafIndividualNotas_TurmasDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafIndividualNotas_Turmas" msprop:Generator_RowChangedName="NEW_Relatorio_GrafIndividualNotas_TurmasRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_GrafIndividualNotas_Turmas" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafIndividualNotas_TurmasRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafIndividualNotas_TurmasRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafIndividualNotas_TurmasRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafIndividualNotas_TurmasRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_GrafIndividualNotas_TurmasRow" msprop:Generator_UserTableName="NEW_Relatorio_GrafIndividualNotas_Turmas" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafIndividualNotas_TurmasRowChangeEvent">
+        <xs:element name="NEW_Relatorio_GrafIndividualNotas_Turmas" msprop:Generator_TableClassName="NEW_Relatorio_GrafIndividualNotas_TurmasDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafIndividualNotas_Turmas" msprop:Generator_TablePropName="NEW_Relatorio_GrafIndividualNotas_Turmas" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafIndividualNotas_TurmasRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafIndividualNotas_TurmasRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafIndividualNotas_TurmasRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafIndividualNotas_TurmasRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_GrafIndividualNotas_Turmas" msprop:Generator_RowChangedName="NEW_Relatorio_GrafIndividualNotas_TurmasRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafIndividualNotas_TurmasRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_GrafIndividualNotas_TurmasRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="cal_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columncal_id" msprop:Generator_ColumnPropNameInRow="cal_id" msprop:Generator_ColumnPropNameInTable="cal_idColumn" msprop:Generator_UserColumnName="cal_id" type="xs:int" />
@@ -1100,7 +1115,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_GrafIndividualNotas" msprop:Generator_TableClassName="NEW_Relatorio_GrafIndividualNotasDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafIndividualNotas" msprop:Generator_TablePropName="NEW_Relatorio_GrafIndividualNotas" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafIndividualNotasRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafIndividualNotasRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafIndividualNotasRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafIndividualNotasRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_GrafIndividualNotas" msprop:Generator_RowChangedName="NEW_Relatorio_GrafIndividualNotasRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafIndividualNotasRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_GrafIndividualNotasRow">
+        <xs:element name="NEW_Relatorio_GrafIndividualNotas" msprop:Generator_TableClassName="NEW_Relatorio_GrafIndividualNotasDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafIndividualNotas" msprop:Generator_RowChangedName="NEW_Relatorio_GrafIndividualNotasRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_GrafIndividualNotas" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafIndividualNotasRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafIndividualNotasRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafIndividualNotasRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafIndividualNotasRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_GrafIndividualNotasRow" msprop:Generator_UserTableName="NEW_Relatorio_GrafIndividualNotas" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafIndividualNotasRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="cal_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columncal_id" msprop:Generator_ColumnPropNameInRow="cal_id" msprop:Generator_ColumnPropNameInTable="cal_idColumn" msprop:Generator_UserColumnName="cal_id" type="xs:int" />
@@ -1173,7 +1188,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_GrafTurmaMatrizCurricular" msprop:Generator_TableClassName="NEW_Relatorio_GrafTurmaMatrizCurricularDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafTurmaMatrizCurricular" msprop:Generator_RowChangedName="NEW_Relatorio_GrafTurmaMatrizCurricularRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_GrafTurmaMatrizCurricular" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafTurmaMatrizCurricularRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafTurmaMatrizCurricularRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafTurmaMatrizCurricularRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafTurmaMatrizCurricularRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_GrafTurmaMatrizCurricularRow" msprop:Generator_UserTableName="NEW_Relatorio_GrafTurmaMatrizCurricular" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafTurmaMatrizCurricularRowChangeEvent">
+        <xs:element name="NEW_Relatorio_GrafTurmaMatrizCurricular" msprop:Generator_TableClassName="NEW_Relatorio_GrafTurmaMatrizCurricularDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafTurmaMatrizCurricular" msprop:Generator_TablePropName="NEW_Relatorio_GrafTurmaMatrizCurricular" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafTurmaMatrizCurricularRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafTurmaMatrizCurricularRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafTurmaMatrizCurricularRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafTurmaMatrizCurricularRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_GrafTurmaMatrizCurricular" msprop:Generator_RowChangedName="NEW_Relatorio_GrafTurmaMatrizCurricularRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafTurmaMatrizCurricularRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_GrafTurmaMatrizCurricularRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="qtdAlunos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnqtdAlunos" msprop:Generator_ColumnPropNameInRow="qtdAlunos" msprop:Generator_ColumnPropNameInTable="qtdAlunosColumn" msprop:Generator_UserColumnName="qtdAlunos" type="xs:int" minOccurs="0" />
@@ -1255,7 +1270,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_GrafComponenteCurricularTurmas" msprop:Generator_TableClassName="NEW_Relatorio_GrafComponenteCurricularTurmasDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafComponenteCurricularTurmas" msprop:Generator_TablePropName="NEW_Relatorio_GrafComponenteCurricularTurmas" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafComponenteCurricularTurmasRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafComponenteCurricularTurmasRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafComponenteCurricularTurmasRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafComponenteCurricularTurmasRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_GrafComponenteCurricularTurmas" msprop:Generator_RowChangedName="NEW_Relatorio_GrafComponenteCurricularTurmasRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafComponenteCurricularTurmasRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_GrafComponenteCurricularTurmasRow">
+        <xs:element name="NEW_Relatorio_GrafComponenteCurricularTurmas" msprop:Generator_TableClassName="NEW_Relatorio_GrafComponenteCurricularTurmasDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafComponenteCurricularTurmas" msprop:Generator_RowChangedName="NEW_Relatorio_GrafComponenteCurricularTurmasRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_GrafComponenteCurricularTurmas" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafComponenteCurricularTurmasRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafComponenteCurricularTurmasRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafComponenteCurricularTurmasRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafComponenteCurricularTurmasRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_GrafComponenteCurricularTurmasRow" msprop:Generator_UserTableName="NEW_Relatorio_GrafComponenteCurricularTurmas" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafComponenteCurricularTurmasRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="qtdAlunos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnqtdAlunos" msprop:Generator_ColumnPropNameInRow="qtdAlunos" msprop:Generator_ColumnPropNameInTable="qtdAlunosColumn" msprop:Generator_UserColumnName="qtdAlunos" type="xs:int" minOccurs="0" />
@@ -1352,7 +1367,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_GrafIndividualNotaComponente_Alunos" msprop:Generator_TableClassName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafIndividualNotaComponente_Alunos" msprop:Generator_RowChangedName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_GrafIndividualNotaComponente_Alunos" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRow" msprop:Generator_UserTableName="NEW_Relatorio_GrafIndividualNotaComponente_Alunos" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowChangeEvent">
+        <xs:element name="NEW_Relatorio_GrafIndividualNotaComponente_Alunos" msprop:Generator_TableClassName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafIndividualNotaComponente_Alunos" msprop:Generator_TablePropName="NEW_Relatorio_GrafIndividualNotaComponente_Alunos" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_GrafIndividualNotaComponente_Alunos" msprop:Generator_RowChangedName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_GrafIndividualNotaComponente_AlunosRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="alu_id" msprop:Generator_ColumnVarNameInTable="columnalu_id" msprop:Generator_ColumnPropNameInRow="alu_id" msprop:Generator_ColumnPropNameInTable="alu_idColumn" msprop:Generator_UserColumnName="alu_id" type="xs:long" />
@@ -1399,7 +1414,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_0005_HistoricoEscolarCertificado" msprop:Generator_TableClassName="NEW_Relatorio_0005_HistoricoEscolarCertificadoDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_HistoricoEscolarCertificado" msprop:Generator_TablePropName="NEW_Relatorio_0005_HistoricoEscolarCertificado" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_0005_HistoricoEscolarCertificado" msprop:Generator_RowChangedName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRow">
+        <xs:element name="NEW_Relatorio_0005_HistoricoEscolarCertificado" msprop:Generator_TableClassName="NEW_Relatorio_0005_HistoricoEscolarCertificadoDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_HistoricoEscolarCertificado" msprop:Generator_RowChangedName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_0005_HistoricoEscolarCertificado" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRow" msprop:Generator_UserTableName="NEW_Relatorio_0005_HistoricoEscolarCertificado" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_HistoricoEscolarCertificadoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="certificado" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columncertificado" msprop:Generator_ColumnPropNameInRow="certificado" msprop:Generator_ColumnPropNameInTable="certificadoColumn" msprop:Generator_UserColumnName="certificado" minOccurs="0">
@@ -1412,7 +1427,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_0005_HistoricoCabecalho" msprop:Generator_TableClassName="NEW_Relatorio_0005_HistoricoCabecalhoDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_HistoricoCabecalho" msprop:Generator_TablePropName="NEW_Relatorio_0005_HistoricoCabecalho" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_HistoricoCabecalhoRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_HistoricoCabecalhoRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_HistoricoCabecalhoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_HistoricoCabecalhoRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_0005_HistoricoCabecalho" msprop:Generator_RowChangedName="NEW_Relatorio_0005_HistoricoCabecalhoRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_HistoricoCabecalhoRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_0005_HistoricoCabecalhoRow">
+        <xs:element name="NEW_Relatorio_0005_HistoricoCabecalho" msprop:Generator_TableClassName="NEW_Relatorio_0005_HistoricoCabecalhoDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_HistoricoCabecalho" msprop:Generator_RowChangedName="NEW_Relatorio_0005_HistoricoCabecalhoRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_0005_HistoricoCabecalho" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_HistoricoCabecalhoRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_HistoricoCabecalhoRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_HistoricoCabecalhoRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_HistoricoCabecalhoRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_0005_HistoricoCabecalhoRow" msprop:Generator_UserTableName="NEW_Relatorio_0005_HistoricoCabecalho" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_HistoricoCabecalhoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="DRE" msprop:Generator_ColumnVarNameInTable="columnDRE" msprop:Generator_ColumnPropNameInRow="DRE" msprop:Generator_ColumnPropNameInTable="DREColumn" msprop:Generator_UserColumnName="DRE" minOccurs="0">
@@ -1553,7 +1568,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_0005_HistoricoEscolarObsComplementar" msprop:Generator_TableClassName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_HistoricoEscolarObsComplementar" msprop:Generator_RowChangedName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_0005_HistoricoEscolarObsComplementar" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRow" msprop:Generator_UserTableName="NEW_Relatorio_0005_HistoricoEscolarObsComplementar" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowChangeEvent">
+        <xs:element name="NEW_Relatorio_0005_HistoricoEscolarObsComplementar" msprop:Generator_TableClassName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_HistoricoEscolarObsComplementar" msprop:Generator_TablePropName="NEW_Relatorio_0005_HistoricoEscolarObsComplementar" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_0005_HistoricoEscolarObsComplementar" msprop:Generator_RowChangedName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_0005_HistoricoEscolarObsComplementarRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="obsComplementar" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnobsComplementar" msprop:Generator_ColumnPropNameInRow="obsComplementar" msprop:Generator_ColumnPropNameInTable="obsComplementarColumn" msprop:Generator_UserColumnName="obsComplementar" minOccurs="0">
@@ -1566,7 +1581,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_0005_HistoricoEscolarObservacoes" msprop:Generator_TableClassName="NEW_Relatorio_0005_HistoricoEscolarObservacoesDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_HistoricoEscolarObservacoes" msprop:Generator_TablePropName="NEW_Relatorio_0005_HistoricoEscolarObservacoes" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_0005_HistoricoEscolarObservacoes" msprop:Generator_RowChangedName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRow">
+        <xs:element name="NEW_Relatorio_0005_HistoricoEscolarObservacoes" msprop:Generator_TableClassName="NEW_Relatorio_0005_HistoricoEscolarObservacoesDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_HistoricoEscolarObservacoes" msprop:Generator_RowChangedName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_0005_HistoricoEscolarObservacoes" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRow" msprop:Generator_UserTableName="NEW_Relatorio_0005_HistoricoEscolarObservacoes" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_HistoricoEscolarObservacoesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="hop_descricao" msprop:Generator_ColumnVarNameInTable="columnhop_descricao" msprop:Generator_ColumnPropNameInRow="hop_descricao" msprop:Generator_ColumnPropNameInTable="hop_descricaoColumn" msprop:Generator_UserColumnName="hop_descricao">
@@ -1579,7 +1594,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_GrafIndividualNotaComponente" msprop:Generator_TableClassName="NEW_Relatorio_GrafIndividualNotaComponenteDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafIndividualNotaComponente" msprop:Generator_RowChangedName="NEW_Relatorio_GrafIndividualNotaComponenteRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_GrafIndividualNotaComponente" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafIndividualNotaComponenteRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafIndividualNotaComponenteRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafIndividualNotaComponenteRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafIndividualNotaComponenteRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_GrafIndividualNotaComponenteRow" msprop:Generator_UserTableName="NEW_Relatorio_GrafIndividualNotaComponente" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafIndividualNotaComponenteRowChangeEvent">
+        <xs:element name="NEW_Relatorio_GrafIndividualNotaComponente" msprop:Generator_TableClassName="NEW_Relatorio_GrafIndividualNotaComponenteDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_GrafIndividualNotaComponente" msprop:Generator_TablePropName="NEW_Relatorio_GrafIndividualNotaComponente" msprop:Generator_RowDeletingName="NEW_Relatorio_GrafIndividualNotaComponenteRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_GrafIndividualNotaComponenteRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_GrafIndividualNotaComponenteRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_GrafIndividualNotaComponenteRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_GrafIndividualNotaComponente" msprop:Generator_RowChangedName="NEW_Relatorio_GrafIndividualNotaComponenteRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_GrafIndividualNotaComponenteRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_GrafIndividualNotaComponenteRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="alu_id" msprop:Generator_ColumnVarNameInTable="columnalu_id" msprop:Generator_ColumnPropNameInRow="alu_id" msprop:Generator_ColumnPropNameInTable="alu_idColumn" msprop:Generator_UserColumnName="alu_id" type="xs:long" />
@@ -1606,7 +1621,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_0005_DocDctPlanoAnual" msprop:Generator_TableClassName="NEW_Relatorio_0005_DocDctPlanoAnualDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_DocDctPlanoAnual" msprop:Generator_TablePropName="NEW_Relatorio_0005_DocDctPlanoAnual" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_DocDctPlanoAnualRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_DocDctPlanoAnualRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_DocDctPlanoAnualRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_DocDctPlanoAnualRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_0005_DocDctPlanoAnual" msprop:Generator_RowChangedName="NEW_Relatorio_0005_DocDctPlanoAnualRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_DocDctPlanoAnualRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_0005_DocDctPlanoAnualRow">
+        <xs:element name="NEW_Relatorio_0005_DocDctPlanoAnual" msprop:Generator_TableClassName="NEW_Relatorio_0005_DocDctPlanoAnualDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_DocDctPlanoAnual" msprop:Generator_RowChangedName="NEW_Relatorio_0005_DocDctPlanoAnualRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_0005_DocDctPlanoAnual" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_DocDctPlanoAnualRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_DocDctPlanoAnualRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_DocDctPlanoAnualRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_DocDctPlanoAnualRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_0005_DocDctPlanoAnualRow" msprop:Generator_UserTableName="NEW_Relatorio_0005_DocDctPlanoAnual" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_DocDctPlanoAnualRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Escola" msprop:Generator_ColumnVarNameInTable="columnEscola" msprop:Generator_ColumnPropNameInRow="Escola" msprop:Generator_ColumnPropNameInTable="EscolaColumn" msprop:Generator_UserColumnName="Escola" minOccurs="0">
@@ -1649,7 +1664,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NEW_Relatorio_0005_DocDctPlanoCicloSerie" msprop:Generator_TableClassName="NEW_Relatorio_0005_DocDctPlanoCicloSerieDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_DocDctPlanoCicloSerie" msprop:Generator_TablePropName="NEW_Relatorio_0005_DocDctPlanoCicloSerie" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowDeleted" msprop:Generator_UserTableName="NEW_Relatorio_0005_DocDctPlanoCicloSerie" msprop:Generator_RowChangedName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowChanged" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowChangeEvent" msprop:Generator_RowClassName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRow">
+        <xs:element name="NEW_Relatorio_0005_DocDctPlanoCicloSerie" msprop:Generator_TableClassName="NEW_Relatorio_0005_DocDctPlanoCicloSerieDataTable" msprop:Generator_TableVarName="tableNEW_Relatorio_0005_DocDctPlanoCicloSerie" msprop:Generator_RowChangedName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowChanged" msprop:Generator_TablePropName="NEW_Relatorio_0005_DocDctPlanoCicloSerie" msprop:Generator_RowDeletingName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowDeleting" msprop:Generator_RowChangingName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowChanging" msprop:Generator_RowEvHandlerName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowChangeEventHandler" msprop:Generator_RowDeletedName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowDeleted" msprop:Generator_RowClassName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRow" msprop:Generator_UserTableName="NEW_Relatorio_0005_DocDctPlanoCicloSerie" msprop:Generator_RowEvArgName="NEW_Relatorio_0005_DocDctPlanoCicloSerieRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Escola" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnEscola" msprop:Generator_ColumnPropNameInRow="Escola" msprop:Generator_ColumnPropNameInTable="EscolaColumn" msprop:Generator_UserColumnName="Escola" minOccurs="0">

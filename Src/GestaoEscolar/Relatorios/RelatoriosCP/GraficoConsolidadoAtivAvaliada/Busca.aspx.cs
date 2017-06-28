@@ -289,7 +289,7 @@ namespace GestaoEscolar.Relatorios.RelatoriosCP.GraficoConsolidadoAtivAvaliada
             try
             {
                 if (UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[0] > 0 && UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[1] > 0 && UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[2] > 0 &&
-                    UCBuscaDocenteTurma.ComboEscola.Esc_ID > 0 && UCBuscaDocenteTurma.ComboEscola.Uni_ID > 0 && UCBuscaDocenteTurma.ComboCalendario.Valor > 0 && UCCPeriodoCalendario.Valor[1] > 0)
+                    UCBuscaDocenteTurma.ComboEscola.Esc_ID > 0 && UCBuscaDocenteTurma.ComboEscola.Uni_ID > 0 && UCBuscaDocenteTurma.ComboCalendario.Valor > 0)
                 {
                     UCComboTipoDisciplina.CarregarTipoDisciplinaPorCursoCurriculoPeriodoEscola(UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[0],
                                                                                                UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[1],
@@ -321,7 +321,7 @@ namespace GestaoEscolar.Relatorios.RelatoriosCP.GraficoConsolidadoAtivAvaliada
             try
             {
                 if (UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[0] > 0 && UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[1] > 0 && UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[2] > 0 &&
-                    UCBuscaDocenteTurma.ComboEscola.Esc_ID > 0 && UCBuscaDocenteTurma.ComboEscola.Uni_ID > 0 && UCBuscaDocenteTurma.ComboCalendario.Valor > 0 && UCCPeriodoCalendario.Valor[1] > 0)
+                    UCBuscaDocenteTurma.ComboEscola.Esc_ID > 0 && UCBuscaDocenteTurma.ComboEscola.Uni_ID > 0 && UCBuscaDocenteTurma.ComboCalendario.Valor > 0)
                 {
                     UCComboTipoDisciplina.CarregarTipoDisciplinaPorCursoCurriculoPeriodoEscola(UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[0],
                                                                                                UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[1],

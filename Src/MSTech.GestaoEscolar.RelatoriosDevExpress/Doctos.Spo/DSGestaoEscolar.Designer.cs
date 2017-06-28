@@ -2436,43 +2436,23 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaDataTable : global::System.Data.TypedTableBase<NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow> {
             
-            private global::System.Data.DataColumn columnfar_descricao;
-            
-            private global::System.Data.DataColumn columnmtu_numeroChamada;
-            
             private global::System.Data.DataColumn columnpes_nome;
             
-            private global::System.Data.DataColumn columnaat_avaliacaoglobal;
-            
-            private global::System.Data.DataColumn columnatd_avaliacao;
-            
-            private global::System.Data.DataColumn columnvalorMinimoAprovacaoPorDisciplina;
-            
-            private global::System.Data.DataColumn columnuni_id;
-            
             private global::System.Data.DataColumn columntur_id;
-            
-            private global::System.Data.DataColumn columntur_codigo;
-            
-            private global::System.Data.DataColumn columnDREEscola;
-            
-            private global::System.Data.DataColumn columnesa_tipo;
-            
-            private global::System.Data.DataColumn columnfar_valor;
             
             private global::System.Data.DataColumn columnuad_nome;
             
             private global::System.Data.DataColumn columnesc_nome;
             
-            private global::System.Data.DataColumn columnCicloTurBimestre;
+            private global::System.Data.DataColumn columntpc_id;
             
-            private global::System.Data.DataColumn columncal_ano;
+            private global::System.Data.DataColumn columnfar_descricao;
             
-            private global::System.Data.DataColumn columnfar_cor;
-            
-            private global::System.Data.DataColumn columnesc_id;
+            private global::System.Data.DataColumn columnfar_valor;
             
             private global::System.Data.DataColumn columnfar_ordenar;
+            
+            private global::System.Data.DataColumn columnfar_cor;
             
             private global::System.Data.DataColumn columntds_id;
             
@@ -2480,11 +2460,33 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             private global::System.Data.DataColumn columntds_ordem;
             
-            private global::System.Data.DataColumn columntpc_id;
+            private global::System.Data.DataColumn columnmtu_numeroChamada;
+            
+            private global::System.Data.DataColumn columnaat_avaliacaoglobal;
+            
+            private global::System.Data.DataColumn columnatd_avaliacao;
+            
+            private global::System.Data.DataColumn columnvalorMinimoAprovacaoPorDisciplina;
+            
+            private global::System.Data.DataColumn columnesc_id;
+            
+            private global::System.Data.DataColumn columnuni_id;
+            
+            private global::System.Data.DataColumn columntur_codigo;
+            
+            private global::System.Data.DataColumn columnDREEscola;
+            
+            private global::System.Data.DataColumn columnesa_tipo;
+            
+            private global::System.Data.DataColumn columncal_ano;
             
             private global::System.Data.DataColumn columntpc_nome;
             
             private global::System.Data.DataColumn columntpc_ordem;
+            
+            private global::System.Data.DataColumn columntur_tpc_tds_nome;
+            
+            private global::System.Data.DataColumn columnCicloTurBimestre;
             
             private global::System.Data.DataColumn columnCiclo;
             
@@ -2523,22 +2525,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn far_descricaoColumn {
-                get {
-                    return this.columnfar_descricao;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn mtu_numeroChamadaColumn {
-                get {
-                    return this.columnmtu_numeroChamada;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn pes_nomeColumn {
                 get {
                     return this.columnpes_nome;
@@ -2547,73 +2533,9 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn aat_avaliacaoglobalColumn {
-                get {
-                    return this.columnaat_avaliacaoglobal;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn atd_avaliacaoColumn {
-                get {
-                    return this.columnatd_avaliacao;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn valorMinimoAprovacaoPorDisciplinaColumn {
-                get {
-                    return this.columnvalorMinimoAprovacaoPorDisciplina;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn uni_idColumn {
-                get {
-                    return this.columnuni_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn tur_idColumn {
                 get {
                     return this.columntur_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn tur_codigoColumn {
-                get {
-                    return this.columntur_codigo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DREEscolaColumn {
-                get {
-                    return this.columnDREEscola;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn esa_tipoColumn {
-                get {
-                    return this.columnesa_tipo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn far_valorColumn {
-                get {
-                    return this.columnfar_valor;
                 }
             }
             
@@ -2635,33 +2557,25 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CicloTurBimestreColumn {
+            public global::System.Data.DataColumn tpc_idColumn {
                 get {
-                    return this.columnCicloTurBimestre;
+                    return this.columntpc_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn cal_anoColumn {
+            public global::System.Data.DataColumn far_descricaoColumn {
                 get {
-                    return this.columncal_ano;
+                    return this.columnfar_descricao;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn far_corColumn {
+            public global::System.Data.DataColumn far_valorColumn {
                 get {
-                    return this.columnfar_cor;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn esc_idColumn {
-                get {
-                    return this.columnesc_id;
+                    return this.columnfar_valor;
                 }
             }
             
@@ -2670,6 +2584,14 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             public global::System.Data.DataColumn far_ordenarColumn {
                 get {
                     return this.columnfar_ordenar;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn far_corColumn {
+                get {
+                    return this.columnfar_cor;
                 }
             }
             
@@ -2699,9 +2621,81 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn tpc_idColumn {
+            public global::System.Data.DataColumn mtu_numeroChamadaColumn {
                 get {
-                    return this.columntpc_id;
+                    return this.columnmtu_numeroChamada;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn aat_avaliacaoglobalColumn {
+                get {
+                    return this.columnaat_avaliacaoglobal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn atd_avaliacaoColumn {
+                get {
+                    return this.columnatd_avaliacao;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn valorMinimoAprovacaoPorDisciplinaColumn {
+                get {
+                    return this.columnvalorMinimoAprovacaoPorDisciplina;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn esc_idColumn {
+                get {
+                    return this.columnesc_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn uni_idColumn {
+                get {
+                    return this.columnuni_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn tur_codigoColumn {
+                get {
+                    return this.columntur_codigo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DREEscolaColumn {
+                get {
+                    return this.columnDREEscola;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn esa_tipoColumn {
+                get {
+                    return this.columnesa_tipo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn cal_anoColumn {
+                get {
+                    return this.columncal_ano;
                 }
             }
             
@@ -2718,6 +2712,22 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             public global::System.Data.DataColumn tpc_ordemColumn {
                 get {
                     return this.columntpc_ordem;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn tur_tpc_tds_nomeColumn {
+                get {
+                    return this.columntur_tpc_tds_nome;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CicloTurBimestreColumn {
+                get {
+                    return this.columnCicloTurBimestre;
                 }
             }
             
@@ -2767,59 +2777,61 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow AddNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow(
-                        string far_descricao, 
-                        int mtu_numeroChamada, 
                         string pes_nome, 
-                        string aat_avaliacaoglobal, 
-                        string atd_avaliacao, 
-                        string valorMinimoAprovacaoPorDisciplina, 
-                        int uni_id, 
                         long tur_id, 
-                        string tur_codigo, 
-                        string DREEscola, 
-                        byte esa_tipo, 
-                        int far_valor, 
                         string uad_nome, 
                         string esc_nome, 
-                        string CicloTurBimestre, 
-                        int cal_ano, 
-                        string far_cor, 
-                        int esc_id, 
+                        int tpc_id, 
+                        string far_descricao, 
+                        int far_valor, 
                         string far_ordenar, 
+                        string far_cor, 
                         int tds_id, 
                         string tds_nome, 
                         int tds_ordem, 
-                        int tpc_id, 
+                        int mtu_numeroChamada, 
+                        string aat_avaliacaoglobal, 
+                        string atd_avaliacao, 
+                        string valorMinimoAprovacaoPorDisciplina, 
+                        int esc_id, 
+                        int uni_id, 
+                        string tur_codigo, 
+                        string DREEscola, 
+                        byte esa_tipo, 
+                        int cal_ano, 
                         string tpc_nome, 
                         int tpc_ordem, 
+                        string tur_tpc_tds_nome, 
+                        string CicloTurBimestre, 
                         string Ciclo) {
                 NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow rowNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow = ((NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        far_descricao,
-                        mtu_numeroChamada,
                         pes_nome,
-                        aat_avaliacaoglobal,
-                        atd_avaliacao,
-                        valorMinimoAprovacaoPorDisciplina,
-                        uni_id,
                         tur_id,
-                        tur_codigo,
-                        DREEscola,
-                        esa_tipo,
-                        far_valor,
                         uad_nome,
                         esc_nome,
-                        CicloTurBimestre,
-                        cal_ano,
-                        far_cor,
-                        esc_id,
+                        tpc_id,
+                        far_descricao,
+                        far_valor,
                         far_ordenar,
+                        far_cor,
                         tds_id,
                         tds_nome,
                         tds_ordem,
-                        tpc_id,
+                        mtu_numeroChamada,
+                        aat_avaliacaoglobal,
+                        atd_avaliacao,
+                        valorMinimoAprovacaoPorDisciplina,
+                        esc_id,
+                        uni_id,
+                        tur_codigo,
+                        DREEscola,
+                        esa_tipo,
+                        cal_ano,
                         tpc_nome,
                         tpc_ordem,
+                        tur_tpc_tds_nome,
+                        CicloTurBimestre,
                         Ciclo};
                 rowNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaRow);
@@ -2843,104 +2855,109 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnfar_descricao = base.Columns["far_descricao"];
-                this.columnmtu_numeroChamada = base.Columns["mtu_numeroChamada"];
                 this.columnpes_nome = base.Columns["pes_nome"];
-                this.columnaat_avaliacaoglobal = base.Columns["aat_avaliacaoglobal"];
-                this.columnatd_avaliacao = base.Columns["atd_avaliacao"];
-                this.columnvalorMinimoAprovacaoPorDisciplina = base.Columns["valorMinimoAprovacaoPorDisciplina"];
-                this.columnuni_id = base.Columns["uni_id"];
                 this.columntur_id = base.Columns["tur_id"];
-                this.columntur_codigo = base.Columns["tur_codigo"];
-                this.columnDREEscola = base.Columns["DREEscola"];
-                this.columnesa_tipo = base.Columns["esa_tipo"];
-                this.columnfar_valor = base.Columns["far_valor"];
                 this.columnuad_nome = base.Columns["uad_nome"];
                 this.columnesc_nome = base.Columns["esc_nome"];
-                this.columnCicloTurBimestre = base.Columns["CicloTurBimestre"];
-                this.columncal_ano = base.Columns["cal_ano"];
-                this.columnfar_cor = base.Columns["far_cor"];
-                this.columnesc_id = base.Columns["esc_id"];
+                this.columntpc_id = base.Columns["tpc_id"];
+                this.columnfar_descricao = base.Columns["far_descricao"];
+                this.columnfar_valor = base.Columns["far_valor"];
                 this.columnfar_ordenar = base.Columns["far_ordenar"];
+                this.columnfar_cor = base.Columns["far_cor"];
                 this.columntds_id = base.Columns["tds_id"];
                 this.columntds_nome = base.Columns["tds_nome"];
                 this.columntds_ordem = base.Columns["tds_ordem"];
-                this.columntpc_id = base.Columns["tpc_id"];
+                this.columnmtu_numeroChamada = base.Columns["mtu_numeroChamada"];
+                this.columnaat_avaliacaoglobal = base.Columns["aat_avaliacaoglobal"];
+                this.columnatd_avaliacao = base.Columns["atd_avaliacao"];
+                this.columnvalorMinimoAprovacaoPorDisciplina = base.Columns["valorMinimoAprovacaoPorDisciplina"];
+                this.columnesc_id = base.Columns["esc_id"];
+                this.columnuni_id = base.Columns["uni_id"];
+                this.columntur_codigo = base.Columns["tur_codigo"];
+                this.columnDREEscola = base.Columns["DREEscola"];
+                this.columnesa_tipo = base.Columns["esa_tipo"];
+                this.columncal_ano = base.Columns["cal_ano"];
                 this.columntpc_nome = base.Columns["tpc_nome"];
                 this.columntpc_ordem = base.Columns["tpc_ordem"];
+                this.columntur_tpc_tds_nome = base.Columns["tur_tpc_tds_nome"];
+                this.columnCicloTurBimestre = base.Columns["CicloTurBimestre"];
                 this.columnCiclo = base.Columns["Ciclo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnfar_descricao = new global::System.Data.DataColumn("far_descricao", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfar_descricao);
-                this.columnmtu_numeroChamada = new global::System.Data.DataColumn("mtu_numeroChamada", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmtu_numeroChamada);
                 this.columnpes_nome = new global::System.Data.DataColumn("pes_nome", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpes_nome);
-                this.columnaat_avaliacaoglobal = new global::System.Data.DataColumn("aat_avaliacaoglobal", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaat_avaliacaoglobal);
-                this.columnatd_avaliacao = new global::System.Data.DataColumn("atd_avaliacao", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnatd_avaliacao);
-                this.columnvalorMinimoAprovacaoPorDisciplina = new global::System.Data.DataColumn("valorMinimoAprovacaoPorDisciplina", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnvalorMinimoAprovacaoPorDisciplina);
-                this.columnuni_id = new global::System.Data.DataColumn("uni_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnuni_id);
                 this.columntur_id = new global::System.Data.DataColumn("tur_id", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntur_id);
-                this.columntur_codigo = new global::System.Data.DataColumn("tur_codigo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntur_codigo);
-                this.columnDREEscola = new global::System.Data.DataColumn("DREEscola", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDREEscola);
-                this.columnesa_tipo = new global::System.Data.DataColumn("esa_tipo", typeof(byte), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnesa_tipo);
-                this.columnfar_valor = new global::System.Data.DataColumn("far_valor", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfar_valor);
                 this.columnuad_nome = new global::System.Data.DataColumn("uad_nome", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnuad_nome);
                 this.columnesc_nome = new global::System.Data.DataColumn("esc_nome", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnesc_nome);
-                this.columnCicloTurBimestre = new global::System.Data.DataColumn("CicloTurBimestre", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCicloTurBimestre);
-                this.columncal_ano = new global::System.Data.DataColumn("cal_ano", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncal_ano);
-                this.columnfar_cor = new global::System.Data.DataColumn("far_cor", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfar_cor);
-                this.columnesc_id = new global::System.Data.DataColumn("esc_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnesc_id);
+                this.columntpc_id = new global::System.Data.DataColumn("tpc_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntpc_id);
+                this.columnfar_descricao = new global::System.Data.DataColumn("far_descricao", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfar_descricao);
+                this.columnfar_valor = new global::System.Data.DataColumn("far_valor", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfar_valor);
                 this.columnfar_ordenar = new global::System.Data.DataColumn("far_ordenar", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfar_ordenar);
+                this.columnfar_cor = new global::System.Data.DataColumn("far_cor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfar_cor);
                 this.columntds_id = new global::System.Data.DataColumn("tds_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntds_id);
                 this.columntds_nome = new global::System.Data.DataColumn("tds_nome", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntds_nome);
                 this.columntds_ordem = new global::System.Data.DataColumn("tds_ordem", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntds_ordem);
-                this.columntpc_id = new global::System.Data.DataColumn("tpc_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntpc_id);
+                this.columnmtu_numeroChamada = new global::System.Data.DataColumn("mtu_numeroChamada", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmtu_numeroChamada);
+                this.columnaat_avaliacaoglobal = new global::System.Data.DataColumn("aat_avaliacaoglobal", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaat_avaliacaoglobal);
+                this.columnatd_avaliacao = new global::System.Data.DataColumn("atd_avaliacao", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnatd_avaliacao);
+                this.columnvalorMinimoAprovacaoPorDisciplina = new global::System.Data.DataColumn("valorMinimoAprovacaoPorDisciplina", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnvalorMinimoAprovacaoPorDisciplina);
+                this.columnesc_id = new global::System.Data.DataColumn("esc_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnesc_id);
+                this.columnuni_id = new global::System.Data.DataColumn("uni_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnuni_id);
+                this.columntur_codigo = new global::System.Data.DataColumn("tur_codigo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntur_codigo);
+                this.columnDREEscola = new global::System.Data.DataColumn("DREEscola", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDREEscola);
+                this.columnesa_tipo = new global::System.Data.DataColumn("esa_tipo", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnesa_tipo);
+                this.columncal_ano = new global::System.Data.DataColumn("cal_ano", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncal_ano);
                 this.columntpc_nome = new global::System.Data.DataColumn("tpc_nome", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntpc_nome);
                 this.columntpc_ordem = new global::System.Data.DataColumn("tpc_ordem", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntpc_ordem);
+                this.columntur_tpc_tds_nome = new global::System.Data.DataColumn("tur_tpc_tds_nome", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntur_tpc_tds_nome);
+                this.columnCicloTurBimestre = new global::System.Data.DataColumn("CicloTurBimestre", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCicloTurBimestre);
                 this.columnCiclo = new global::System.Data.DataColumn("Ciclo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCiclo);
-                this.columnfar_descricao.MaxLength = 200;
                 this.columnpes_nome.MaxLength = 200;
+                this.columnuad_nome.MaxLength = 200;
+                this.columnesc_nome.MaxLength = 200;
+                this.columnfar_descricao.MaxLength = 15;
+                this.columnfar_ordenar.MaxLength = 200;
+                this.columnfar_cor.MaxLength = 200;
+                this.columntds_nome.MaxLength = 200;
                 this.columnaat_avaliacaoglobal.ReadOnly = true;
                 this.columnaat_avaliacaoglobal.MaxLength = 20;
                 this.columnatd_avaliacao.MaxLength = 20;
                 this.columnvalorMinimoAprovacaoPorDisciplina.MaxLength = 10;
                 this.columntur_codigo.MaxLength = 30;
-                this.columnDREEscola.ReadOnly = true;
                 this.columnDREEscola.MaxLength = 403;
-                this.columnuad_nome.MaxLength = 200;
-                this.columnesc_nome.MaxLength = 200;
-                this.columnCicloTurBimestre.MaxLength = 400;
-                this.columnfar_cor.MaxLength = 200;
-                this.columntds_nome.MaxLength = 200;
                 this.columntpc_nome.MaxLength = 100;
+                this.columntur_tpc_tds_nome.ReadOnly = true;
+                this.columntur_tpc_tds_nome.MaxLength = 336;
+                this.columnCicloTurBimestre.MaxLength = 400;
                 this.columnCiclo.MaxLength = 400;
             }
             
@@ -9404,40 +9421,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string far_descricao {
-                get {
-                    try {
-                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricaoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'far_descricao\' in table \'NEW_Relatorio_GrafConsAtivAvaliada" +
-                                "_AlunosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricaoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int mtu_numeroChamada {
-                get {
-                    try {
-                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.mtu_numeroChamadaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'mtu_numeroChamada\' in table \'NEW_Relatorio_GrafConsAtivAval" +
-                                "iada_AlunosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.mtu_numeroChamadaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string pes_nome {
                 get {
                     try {
@@ -9455,74 +9438,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string aat_avaliacaoglobal {
-                get {
-                    try {
-                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.aat_avaliacaoglobalColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'aat_avaliacaoglobal\' in table \'NEW_Relatorio_GrafConsAtivAv" +
-                                "aliada_AlunosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.aat_avaliacaoglobalColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string atd_avaliacao {
-                get {
-                    try {
-                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.atd_avaliacaoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'atd_avaliacao\' in table \'NEW_Relatorio_GrafConsAtivAvaliada" +
-                                "_AlunosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.atd_avaliacaoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string valorMinimoAprovacaoPorDisciplina {
-                get {
-                    try {
-                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.valorMinimoAprovacaoPorDisciplinaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'valorMinimoAprovacaoPorDisciplina\' in table \'NEW_Relatorio_" +
-                                "GrafConsAtivAvaliada_AlunosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.valorMinimoAprovacaoPorDisciplinaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int uni_id {
-                get {
-                    try {
-                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.uni_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'uni_id\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alunos" +
-                                "Turma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.uni_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public long tur_id {
                 get {
                     try {
@@ -9535,74 +9450,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
                 }
                 set {
                     this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string tur_codigo {
-                get {
-                    try {
-                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_codigoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'tur_codigo\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Al" +
-                                "unosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_codigoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DREEscola {
-                get {
-                    try {
-                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.DREEscolaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DREEscola\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alu" +
-                                "nosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.DREEscolaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte esa_tipo {
-                get {
-                    try {
-                        return ((byte)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esa_tipoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'esa_tipo\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alun" +
-                                "osTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esa_tipoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int far_valor {
-                get {
-                    try {
-                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_valorColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'far_valor\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alu" +
-                                "nosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_valorColumn] = value;
                 }
             }
             
@@ -9642,69 +9489,52 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CicloTurBimestre {
+            public int tpc_id {
                 get {
                     try {
-                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.CicloTurBimestreColumn]));
+                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CicloTurBimestre\' in table \'NEW_Relatorio_GrafConsAtivAvali" +
-                                "ada_AlunosTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.CicloTurBimestreColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int cal_ano {
-                get {
-                    try {
-                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.cal_anoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'cal_ano\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Aluno" +
-                                "sTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.cal_anoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string far_cor {
-                get {
-                    try {
-                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_corColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'far_cor\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Aluno" +
-                                "sTurma\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_corColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int esc_id {
-                get {
-                    try {
-                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esc_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'esc_id\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alunos" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'tpc_id\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alunos" +
                                 "Turma\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esc_idColumn] = value;
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string far_descricao {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricaoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'far_descricao\' in table \'NEW_Relatorio_GrafConsAtivAvaliada" +
+                                "_AlunosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricaoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int far_valor {
+                get {
+                    try {
+                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_valorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'far_valor\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alu" +
+                                "nosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_valorColumn] = value;
                 }
             }
             
@@ -9722,6 +9552,23 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
                 }
                 set {
                     this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_ordenarColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string far_cor {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_corColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'far_cor\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Aluno" +
+                                "sTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_corColumn] = value;
                 }
             }
             
@@ -9778,18 +9625,171 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int tpc_id {
+            public int mtu_numeroChamada {
                 get {
                     try {
-                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_idColumn]));
+                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.mtu_numeroChamadaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'tpc_id\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alunos" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'mtu_numeroChamada\' in table \'NEW_Relatorio_GrafConsAtivAval" +
+                                "iada_AlunosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.mtu_numeroChamadaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string aat_avaliacaoglobal {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.aat_avaliacaoglobalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'aat_avaliacaoglobal\' in table \'NEW_Relatorio_GrafConsAtivAv" +
+                                "aliada_AlunosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.aat_avaliacaoglobalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string atd_avaliacao {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.atd_avaliacaoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'atd_avaliacao\' in table \'NEW_Relatorio_GrafConsAtivAvaliada" +
+                                "_AlunosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.atd_avaliacaoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string valorMinimoAprovacaoPorDisciplina {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.valorMinimoAprovacaoPorDisciplinaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'valorMinimoAprovacaoPorDisciplina\' in table \'NEW_Relatorio_" +
+                                "GrafConsAtivAvaliada_AlunosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.valorMinimoAprovacaoPorDisciplinaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int esc_id {
+                get {
+                    try {
+                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esc_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'esc_id\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alunos" +
                                 "Turma\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_idColumn] = value;
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esc_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int uni_id {
+                get {
+                    try {
+                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.uni_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'uni_id\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alunos" +
+                                "Turma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.uni_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string tur_codigo {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_codigoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'tur_codigo\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Al" +
+                                "unosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_codigoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DREEscola {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.DREEscolaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DREEscola\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alu" +
+                                "nosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.DREEscolaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte esa_tipo {
+                get {
+                    try {
+                        return ((byte)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esa_tipoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'esa_tipo\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Alun" +
+                                "osTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esa_tipoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int cal_ano {
+                get {
+                    try {
+                        return ((int)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.cal_anoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'cal_ano\' in table \'NEW_Relatorio_GrafConsAtivAvaliada_Aluno" +
+                                "sTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.cal_anoColumn] = value;
                 }
             }
             
@@ -9829,6 +9829,40 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string tur_tpc_tds_nome {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_tpc_tds_nomeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'tur_tpc_tds_nome\' in table \'NEW_Relatorio_GrafConsAtivAvali" +
+                                "ada_AlunosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_tpc_tds_nomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CicloTurBimestre {
+                get {
+                    try {
+                        return ((string)(this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.CicloTurBimestreColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CicloTurBimestre\' in table \'NEW_Relatorio_GrafConsAtivAvali" +
+                                "ada_AlunosTurma\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.CicloTurBimestreColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Ciclo {
                 get {
                     try {
@@ -9846,30 +9880,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isfar_descricaoNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricaoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setfar_descricaoNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricaoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Ismtu_numeroChamadaNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.mtu_numeroChamadaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setmtu_numeroChamadaNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.mtu_numeroChamadaColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Ispes_nomeNull() {
                 return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.pes_nomeColumn);
             }
@@ -9882,54 +9892,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isaat_avaliacaoglobalNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.aat_avaliacaoglobalColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setaat_avaliacaoglobalNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.aat_avaliacaoglobalColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isatd_avaliacaoNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.atd_avaliacaoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setatd_avaliacaoNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.atd_avaliacaoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsvalorMinimoAprovacaoPorDisciplinaNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.valorMinimoAprovacaoPorDisciplinaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetvalorMinimoAprovacaoPorDisciplinaNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.valorMinimoAprovacaoPorDisciplinaColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isuni_idNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.uni_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setuni_idNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.uni_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Istur_idNull() {
                 return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_idColumn);
             }
@@ -9938,54 +9900,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Settur_idNull() {
                 this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Istur_codigoNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_codigoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Settur_codigoNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_codigoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDREEscolaNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.DREEscolaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDREEscolaNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.DREEscolaColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isesa_tipoNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esa_tipoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setesa_tipoNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esa_tipoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isfar_valorNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_valorColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setfar_valorNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_valorColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10014,50 +9928,38 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCicloTurBimestreNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.CicloTurBimestreColumn);
+            public bool Istpc_idNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_idColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCicloTurBimestreNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.CicloTurBimestreColumn] = global::System.Convert.DBNull;
+            public void Settpc_idNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Iscal_anoNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.cal_anoColumn);
+            public bool Isfar_descricaoNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricaoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setcal_anoNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.cal_anoColumn] = global::System.Convert.DBNull;
+            public void Setfar_descricaoNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricaoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isfar_corNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_corColumn);
+            public bool Isfar_valorNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_valorColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setfar_corNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_corColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isesc_idNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esc_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setesc_idNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esc_idColumn] = global::System.Convert.DBNull;
+            public void Setfar_valorNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_valorColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10070,6 +9972,18 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setfar_ordenarNull() {
                 this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_ordenarColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isfar_corNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_corColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setfar_corNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_corColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10110,14 +10024,122 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Istpc_idNull() {
-                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_idColumn);
+            public bool Ismtu_numeroChamadaNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.mtu_numeroChamadaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Settpc_idNull() {
-                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_idColumn] = global::System.Convert.DBNull;
+            public void Setmtu_numeroChamadaNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.mtu_numeroChamadaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isaat_avaliacaoglobalNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.aat_avaliacaoglobalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setaat_avaliacaoglobalNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.aat_avaliacaoglobalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isatd_avaliacaoNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.atd_avaliacaoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setatd_avaliacaoNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.atd_avaliacaoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsvalorMinimoAprovacaoPorDisciplinaNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.valorMinimoAprovacaoPorDisciplinaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetvalorMinimoAprovacaoPorDisciplinaNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.valorMinimoAprovacaoPorDisciplinaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isesc_idNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esc_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setesc_idNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esc_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isuni_idNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.uni_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setuni_idNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.uni_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Istur_codigoNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_codigoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Settur_codigoNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_codigoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDREEscolaNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.DREEscolaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDREEscolaNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.DREEscolaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isesa_tipoNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esa_tipoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setesa_tipoNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.esa_tipoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Iscal_anoNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.cal_anoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setcal_anoNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.cal_anoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10142,6 +10164,30 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Settpc_ordemNull() {
                 this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tpc_ordemColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Istur_tpc_tds_nomeNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_tpc_tds_nomeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Settur_tpc_tds_nomeNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.tur_tpc_tds_nomeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCicloTurBimestreNull() {
+                return this.IsNull(this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.CicloTurBimestreColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCicloTurBimestreNull() {
+                this[this.tableNEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.CicloTurBimestreColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15913,31 +15959,33 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo.DSGestaoEscolarTa
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma";
-            tableMapping.ColumnMappings.Add("far_descricao", "far_descricao");
-            tableMapping.ColumnMappings.Add("mtu_numeroChamada", "mtu_numeroChamada");
             tableMapping.ColumnMappings.Add("pes_nome", "pes_nome");
-            tableMapping.ColumnMappings.Add("aat_avaliacaoglobal", "aat_avaliacaoglobal");
-            tableMapping.ColumnMappings.Add("atd_avaliacao", "atd_avaliacao");
-            tableMapping.ColumnMappings.Add("valorMinimoAprovacaoPorDisciplina", "valorMinimoAprovacaoPorDisciplina");
-            tableMapping.ColumnMappings.Add("uni_id", "uni_id");
             tableMapping.ColumnMappings.Add("tur_id", "tur_id");
-            tableMapping.ColumnMappings.Add("tur_codigo", "tur_codigo");
-            tableMapping.ColumnMappings.Add("DREEscola", "DREEscola");
-            tableMapping.ColumnMappings.Add("esa_tipo", "esa_tipo");
             tableMapping.ColumnMappings.Add("uad_nome", "uad_nome");
             tableMapping.ColumnMappings.Add("esc_nome", "esc_nome");
-            tableMapping.ColumnMappings.Add("CicloTurBimestre", "CicloTurBimestre");
-            tableMapping.ColumnMappings.Add("cal_ano", "cal_ano");
-            tableMapping.ColumnMappings.Add("far_cor", "far_cor");
+            tableMapping.ColumnMappings.Add("tpc_id", "tpc_id");
+            tableMapping.ColumnMappings.Add("far_descricao", "far_descricao");
             tableMapping.ColumnMappings.Add("far_valor", "far_valor");
-            tableMapping.ColumnMappings.Add("esc_id", "esc_id");
+            tableMapping.ColumnMappings.Add("far_cor", "far_cor");
             tableMapping.ColumnMappings.Add("tds_id", "tds_id");
             tableMapping.ColumnMappings.Add("tds_nome", "tds_nome");
             tableMapping.ColumnMappings.Add("tds_ordem", "tds_ordem");
-            tableMapping.ColumnMappings.Add("tpc_id", "tpc_id");
+            tableMapping.ColumnMappings.Add("mtu_numeroChamada", "mtu_numeroChamada");
+            tableMapping.ColumnMappings.Add("aat_avaliacaoglobal", "aat_avaliacaoglobal");
+            tableMapping.ColumnMappings.Add("atd_avaliacao", "atd_avaliacao");
+            tableMapping.ColumnMappings.Add("valorMinimoAprovacaoPorDisciplina", "valorMinimoAprovacaoPorDisciplina");
+            tableMapping.ColumnMappings.Add("esc_id", "esc_id");
+            tableMapping.ColumnMappings.Add("uni_id", "uni_id");
+            tableMapping.ColumnMappings.Add("tur_codigo", "tur_codigo");
+            tableMapping.ColumnMappings.Add("DREEscola", "DREEscola");
+            tableMapping.ColumnMappings.Add("esa_tipo", "esa_tipo");
+            tableMapping.ColumnMappings.Add("cal_ano", "cal_ano");
             tableMapping.ColumnMappings.Add("tpc_nome", "tpc_nome");
             tableMapping.ColumnMappings.Add("tpc_ordem", "tpc_ordem");
+            tableMapping.ColumnMappings.Add("tur_tpc_tds_nome", "tur_tpc_tds_nome");
+            tableMapping.ColumnMappings.Add("CicloTurBimestre", "CicloTurBimestre");
             tableMapping.ColumnMappings.Add("Ciclo", "Ciclo");
+            tableMapping.ColumnMappings.Add("far_ordenar", "far_ordenar");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
