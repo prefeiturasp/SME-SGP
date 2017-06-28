@@ -166,6 +166,15 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento {
         protected global::System.Web.UI.WebControls.Panel pnlResultados;
         
         /// <summary>
+        /// btnGerarRelatorioCima control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGerarRelatorioCima;
+        
+        /// <summary>
         /// chkTodos control.
         /// </summary>
         /// <remarks>
@@ -200,5 +209,14 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::WebControls_Mensagens_UCTotalRegistros UCTotalRegistros;
+        
+        /// <summary>
+        /// btnGerarRelatorio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGerarRelatorio;
     }
 }
