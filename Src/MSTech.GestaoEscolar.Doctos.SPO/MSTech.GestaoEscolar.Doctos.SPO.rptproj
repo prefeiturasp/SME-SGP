@@ -165,6 +165,10 @@
       <Name>TurmasProgramaSocialFrequencia.rdl</Name>
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>RelatorioGeralAtendimento.rdl</Name>
+      <FullPath>RelatorioGeralAtendimento.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>

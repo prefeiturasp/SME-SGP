@@ -53,6 +53,69 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Calendário'
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.pnlFiltros.GroupingText' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento de relatórios do NAAPA'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.btnNovo.Text' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Novo lançamento'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.grvLancamentos.EmptyDataText' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'A pesquisa não encontrou resultados.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.grvLancamentos.ColunaDescricao' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Data do lançamento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Alterar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Alterar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Detalhar.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Detalhar'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Padrao.Excluir.Text' 
+		, @rcr_NomeResource = 'Padrao'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Excluir'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.MensagemSucessoSalvar' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento do relatório salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.MensagemSucessoExcluir' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento do relatório excluído com sucesso.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
