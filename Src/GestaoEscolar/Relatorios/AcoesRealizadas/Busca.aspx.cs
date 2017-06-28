@@ -122,7 +122,6 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         #endregion
 
         #region Page Life Cycle
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (__SessionWEB.__UsuarioWEB.Docente.doc_id <= 0)
@@ -139,10 +138,13 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
             ScriptManager sm = ScriptManager.GetCurrent(this);
             if (sm != null)
             {
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.Json));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.CamposData));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmBtn));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsRelatorioAcoesRealizadas.js"));
             }
 
             if (!IsPostBack)

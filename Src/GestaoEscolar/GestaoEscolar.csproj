@@ -4305,6 +4305,7 @@
     <Content Include="Includes\jsMsgConfirmCancelamentoAgendamento.js" />
     <Content Include="Includes\jsPopupFrequenciaExterna.js" />
     <Content Include="Includes\jsQuadroHorarios.js" />
+    <Content Include="Includes\jsRelatorioAcoesRealizadas.js" />
     <Content Include="Includes\jsResponsividadeTabelas.js" />
     <Content Include="Includes\jsAtribuicaoDocente.js" />
     <Content Include="Includes\jsCadastroEventoLimite.js" />
