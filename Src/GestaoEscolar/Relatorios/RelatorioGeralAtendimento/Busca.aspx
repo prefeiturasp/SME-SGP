@@ -46,7 +46,7 @@
         <ContentTemplate>
             <asp:Panel ID="pnlResultados" runat="server" GroupingText="<%$ Resources:Padrao, Padrao.Resultados.Text %>">
                 <div style="float: left; width: 50%">
-                    <asp:CheckBox ID="chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos" todososcursospeja='0'
+                    <asp:CheckBox ID="chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos"
                         runat="server" />
                 </div>
                 <uc:UCCQtdePaginacao ID="UCCQtdePaginacao" runat="server" />

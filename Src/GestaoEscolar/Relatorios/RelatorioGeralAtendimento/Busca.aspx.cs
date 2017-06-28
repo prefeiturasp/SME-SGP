@@ -117,6 +117,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.CamposData));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsBuscaRelatorioGeralAtendimento.js"));
             }
 
             if (!IsPostBack)
