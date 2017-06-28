@@ -324,6 +324,7 @@
     <Compile Include="CLS_RelatorioAtendimentoCargoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoGrupoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoQuestionarioBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAcoesRealizadasBO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoBO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaBO.cs" />
@@ -409,6 +410,9 @@
     <Compile Include="ORC_OrientacaoCurricularBO.cs" />
     <Compile Include="ORC_OrientacaoCurricularNivelAprendizadoBO.cs" />
     <Compile Include="ORC_OrientacaoCurricularRelacionamentoBO.cs" />
+    <Compile Include="REL_GraficoAtendimentoBO.cs" />
+    <Compile Include="REL_GraficoAtendimento_FiltrosFixosBO.cs" />
+    <Compile Include="REL_GraficoAtendimento_FiltrosPersonalizadosBO.cs" />
     <Compile Include="REL_TurmaDisciplinaSituacaoFechamentoBO.cs" />
     <Compile Include="RHU_CargaHorariaBO.cs" />
     <Compile Include="RHU_CargoDisciplinaBO.cs" />

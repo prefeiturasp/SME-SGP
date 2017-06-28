@@ -441,7 +441,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     reap_id = Convert.ToInt32(grvLancamentos.DataKeys[index].Values["reap_id"]);
 
                     string[] ids = ddlDisciplina.SelectedValue.Split(';');
-                    if (CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.Delete(new CLS_RelatorioPreenchimentoAlunoTurmaDisciplina { reap_id = reap_id, tur_id = Convert.ToInt64(ids[0]), alu_id = VS_alu_id, tpc_id = UCCPeriodoCalendario.Tpc_ID }, UCCRelatorioAtendimento.Valor))
+                    if (CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.Delete(new CLS_RelatorioPreenchimentoAlunoTurmaDisciplina { reap_id = reap_id, tur_id = Convert.ToInt64(ids[0]), tud_id = Convert.ToInt64(ids[1]), alu_id = VS_alu_id, tpc_id = UCCPeriodoCalendario.Tpc_ID }, UCCRelatorioAtendimento.Valor))
                     {
                         // Recarrega o grid de lançamentos
                         grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(VS_alu_id, Convert.ToInt64(ids[1]), !VS_disciplinaRP, UCCRelatorioAtendimento.Valor, UCCPeriodoCalendario.Tpc_ID);
@@ -614,6 +614,13 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             {
                 RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(false);
                 List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
+
+                ACA_FormatoAvaliacao fav = TUR_TurmaBO.SelecionaFormatoAvaliacao(rel.entityPreenchimentoAlunoTurmaDisciplina.tur_id);
+                if (fav != null)
+                {
+                    rel.processarPendencia = fav.fav_fechamentoAutomatico;
+                }
+
                 if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor))
                 {
                     string msg = GetGlobalResourceObject("Classe", "RelatorioRecuperacaoParalela.Cadastro.MensagemSucessoSalvar").ToString();

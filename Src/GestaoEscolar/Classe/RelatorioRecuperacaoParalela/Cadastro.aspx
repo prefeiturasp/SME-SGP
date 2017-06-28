@@ -35,21 +35,21 @@
                 DataKeyNames="reap_id" OnRowCommand="grvLancamentos_RowCommand" OnRowDataBound="grvLancamentos_RowDataBound">
                 <Columns>
                     <asp:BoundField DataField="reap_descricao" HeaderText="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.grvLancamentos.ColunaDescricao %>"></asp:BoundField>
-                    <asp:TemplateField HeaderText="Detalhar" HeaderStyle-Width="100">
+                    <asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.Detalhar.Text %>" HeaderStyle-Width="100">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnDetalhar" runat="server" CommandName="Detalhar" SkinID="btDetalhar" CausesValidation="False" />
                         </ItemTemplate>
                         <HeaderStyle CssClass="center" />
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Alterar" HeaderStyle-Width="100">
+                    <asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.Alterar.Text %>" HeaderStyle-Width="100">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnAlterar" runat="server" CommandName="Alterar" SkinID="btEditar" CausesValidation="False" />
                         </ItemTemplate>
                         <HeaderStyle CssClass="center" />
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Excluir" HeaderStyle-Width="100">
+                    <asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.Excluir.Text %>" HeaderStyle-Width="100">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Deletar" SkinID="btExcluir" CausesValidation="False" />
                         </ItemTemplate>

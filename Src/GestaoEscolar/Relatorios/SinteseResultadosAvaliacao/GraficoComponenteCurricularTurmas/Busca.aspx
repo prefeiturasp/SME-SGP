@@ -22,10 +22,10 @@
                     <uc2:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
                     <div id="divPesquisa" class="divPesquisa" runat="server">
                         <uc1:UCBuscaDocenteTurma runat="server" ID="UCBuscaDocenteTurma" Visible="false" />
-                        <div runat="server" id="divPeriodoCalendario" visible="false">
+                        <div runat="server" id="divPeriodoCalendario">
                             <uc3:UCCPeriodoCalendario runat="server" ID="UCCPeriodoCalendario" MostrarMensagemSelecione="true" Obrigatorio="false" PermiteEditar="false" />
                         </div>
-                        <div runat="server" id="divDisciplina" visible="false">
+                        <div runat="server" id="divDisciplina">
                             <uc4:UCComboTipoDisciplina ID="UCComboTipoDisciplina" runat="server" />
                         </div>
                     </div>

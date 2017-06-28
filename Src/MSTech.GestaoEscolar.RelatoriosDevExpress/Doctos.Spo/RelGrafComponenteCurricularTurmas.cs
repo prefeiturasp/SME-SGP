@@ -25,6 +25,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
         /// The tds_id
         /// </summary>
         int tds_id;
+        int tpc_id;
 
         #endregion
 
@@ -115,14 +116,20 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                 tds_id = Convert.ToInt32(this.GetCurrentColumnValue("tds_id").ToString());
             else
                 tds_id = 0;
-            if (tds_id > 0)
+            if (this.GetCurrentColumnValue("tpc_id") != null)
+                tpc_id = Convert.ToInt32(this.GetCurrentColumnValue("tpc_id").ToString());
+            else
+                tpc_id = 0;
+            if (tds_id > 0 && tpc_id > 0)
             {
                 int totalTurma = dsGestaoEscolar1.NEW_Relatorio_GrafComponenteCurricularTurmas.AsEnumerable()
                                         .Any(p => Convert.ToInt32(p.Field<object>("tds_id")) == tds_id &&
+                                                  Convert.ToInt32(p.Field<object>("tpc_id")) == tpc_id &&
                                                     p.Field<object>("totalTurma") != null &&
                                                     Convert.ToInt32(p.Field<object>("totalTurma")) > 0) ?
                                  dsGestaoEscolar1.NEW_Relatorio_GrafComponenteCurricularTurmas.AsEnumerable()
                                         .Where(p => Convert.ToInt32(p.Field<object>("tds_id")) == tds_id &&
+                                                    Convert.ToInt32(p.Field<object>("tpc_id")) == tpc_id &&
                                                     p.Field<object>("totalTurma") != null &&
                                                     Convert.ToInt32(p.Field<object>("totalTurma")) > 0)
                                                     .Max(t => t.totalTurma) : 0;
@@ -132,6 +139,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                 {
                     List<string> lstFaixa = (from dadosGeral in dsGestaoEscolar1.NEW_Relatorio_GrafComponenteCurricularTurmas.AsEnumerable()
                                              where Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == tds_id &&
+                                                   Convert.ToInt32(dadosGeral.Field<object>("tpc_id")) == tpc_id &&
                                                    dadosGeral.Field<object>("far_descricao") != null &&
                                                    !string.IsNullOrEmpty(dadosGeral.Field<object>("far_descricao").ToString())
                                              group dadosGeral by new 
@@ -156,6 +164,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
 
                         serie.DataSource = (from dadosGeral in dsGestaoEscolar1.NEW_Relatorio_GrafComponenteCurricularTurmas.AsEnumerable()
                                             where Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == tds_id &&
+                                                  Convert.ToInt32(dadosGeral.Field<object>("tpc_id")) == tpc_id &&
                                                   dadosGeral.Field<object>("far_descricao") != null &&
                                                   dadosGeral.Field<object>("far_descricao").ToString() == far_descricao
                                             select dadosGeral).CopyToDataTable();
@@ -186,7 +195,8 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
 
                     //Carrega as faixas da turma com as cores
                     var lstFaixas = (from dadosGeral in dsGestaoEscolar1.NEW_Relatorio_GrafComponenteCurricularTurmas.AsEnumerable()
-                                     where Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == tds_id
+                                     where Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == tds_id &&
+                                           Convert.ToInt32(dadosGeral.Field<object>("tpc_id")) == tpc_id
                                      group dadosGeral by new
                                      {
                                          far_ordenar = dadosGeral.Field<object>("far_ordenar") != null
@@ -213,7 +223,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                         xrChart1.PaletteName = "Gestao";
                     }
                     if (dsGestaoEscolar1.NEW_Relatorio_GrafComponenteCurricularTurmas.AsEnumerable()
-                            .Any(p => Convert.ToInt32(p.Field<object>("tds_id")) == tds_id && p.Field<object>("totalTurma") != null && Convert.ToInt32(p.Field<object>("totalTurma")) > 0 && p.esa_tipo != 1))
+                            .Any(p => Convert.ToInt32(p.Field<object>("tds_id")) == tds_id && Convert.ToInt32(p.Field<object>("tpc_id")) == tpc_id && p.Field<object>("totalTurma") != null && Convert.ToInt32(p.Field<object>("totalTurma")) > 0 && p.esa_tipo != 1))
                     {
                         ((TextAnnotation)xrChart1.AnnotationRepository[0]).Text = "Conceitos";
                         xrChart1.Legend.Padding.Right = 3;

@@ -40,9 +40,11 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo.DSGestaoEscolarTa
 namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo 
 {
 }
-namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo {
-    
-    
-    public partial class DSGestaoEscolar {
+namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
+{
+
+
+    public partial class DSGestaoEscolar
+    {
     }
 }

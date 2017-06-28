@@ -39,7 +39,7 @@
             this.ESCID = new DevExpress.XtraReports.Parameters.Parameter();
             this.UNIID = new DevExpress.XtraReports.Parameters.Parameter();
             this.TURID = new DevExpress.XtraReports.Parameters.Parameter();
-            this.DISID = new DevExpress.XtraReports.Parameters.Parameter();
+            this.TDSID = new DevExpress.XtraReports.Parameters.Parameter();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.lblAlunos = new DevExpress.XtraReports.UI.XRLabel();
             this.xrControlStyle1 = new DevExpress.XtraReports.UI.XRControlStyle();
@@ -50,6 +50,7 @@
             // 
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.lblpes_nome});
+            this.Detail.Dpi = 100F;
             this.Detail.HeightF = 15.83335F;
             this.Detail.MultiColumn.ColumnCount = 3;
             this.Detail.MultiColumn.Mode = DevExpress.XtraReports.UI.MultiColumnMode.UseColumnCount;
@@ -63,6 +64,7 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblpes_nome.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.pes_nome")});
+            this.lblpes_nome.Dpi = 100F;
             this.lblpes_nome.Font = new System.Drawing.Font("Arial", 7F);
             this.lblpes_nome.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblpes_nome.Name = "lblpes_nome";
@@ -76,6 +78,7 @@
             // 
             // TopMargin
             // 
+            this.TopMargin.Dpi = 100F;
             this.TopMargin.HeightF = 0F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -83,6 +86,7 @@
             // 
             // BottomMargin
             // 
+            this.BottomMargin.Dpi = 100F;
             this.BottomMargin.HeightF = 0F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -92,6 +96,7 @@
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.lblfar_descricao});
+            this.GroupHeader1.Dpi = 100F;
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("far_valor", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("far_descricao", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
@@ -105,6 +110,7 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblfar_descricao.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.far_descricao")});
+            this.lblfar_descricao.Dpi = 100F;
             this.lblfar_descricao.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
             this.lblfar_descricao.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblfar_descricao.Name = "lblfar_descricao";
@@ -138,14 +144,15 @@
             // 
             this.TURID.Name = "TURID";
             // 
-            // DISID
+            // TDSID
             // 
-            this.DISID.Name = "DISID";
+            this.TDSID.Name = "TDSID";
             // 
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.lblAlunos});
+            this.ReportHeader.Dpi = 100F;
             this.ReportHeader.HeightF = 20F;
             this.ReportHeader.Name = "ReportHeader";
             // 
@@ -154,6 +161,7 @@
             this.lblAlunos.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.lblAlunos.Dpi = 100F;
             this.lblAlunos.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.lblAlunos.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblAlunos.Name = "lblAlunos";
@@ -186,10 +194,10 @@
             this.ESCID,
             this.UNIID,
             this.TURID,
-            this.DISID});
+            this.TDSID});
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.xrControlStyle1});
-            this.Version = "12.1";
+            this.Version = "16.1";
             this.DataSourceDemanded += new System.EventHandler<System.EventArgs>(this.SubRelGrafConsolidadoAtivAvaliada_DataSourceDemanded);
             ((System.ComponentModel.ISupportInitialize)(this.dsGestaoEscolar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -206,7 +214,7 @@
         public DevExpress.XtraReports.Parameters.Parameter ESCID;
         public DevExpress.XtraReports.Parameters.Parameter UNIID;
         public DevExpress.XtraReports.Parameters.Parameter TURID;
-        public DevExpress.XtraReports.Parameters.Parameter DISID;
+        public DevExpress.XtraReports.Parameters.Parameter TDSID;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
         private DevExpress.XtraReports.UI.XRLabel lblAlunos;
         private DevExpress.XtraReports.UI.XRControlStyle xrControlStyle1;

@@ -980,6 +980,20 @@
     <Compile Include="Configuracao\FilaFechamento\Fila.aspx.designer.cs">
       <DependentUpon>Fila.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuracao\GraficoAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\GraficoAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\GraficoAtendimento\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\GraficoAtendimento\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\ModuloClasse\Cadastro.aspx.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3589,6 +3603,8 @@
     <Content Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx" />
     <Content Include="Configuracao\FilaFechamento\Busca.aspx" />
     <Content Include="Configuracao\FilaFechamento\Fila.aspx" />
+    <Content Include="Configuracao\GraficoAtendimento\Busca.aspx" />
+    <Content Include="Configuracao\GraficoAtendimento\Cadastro.aspx" />
     <Content Include="Configuracao\ModuloClasse\Cadastro.aspx" />
     <Content Include="App_Themes\IntranetSME\css.css" />
     <Content Include="App_Themes\IntranetSME\GestaoEscolar.css" />
