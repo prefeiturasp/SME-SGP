@@ -122,17 +122,14 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         #endregion
 
         #region Page Life Cycle
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (__SessionWEB.__UsuarioWEB.Docente.doc_id <= 0)
-            {
-                UCCUAEscola.IndexChangedUA += UCCUAEscola_IndexChangedUA;
-                UCCUAEscola.IndexChangedUnidadeEscola += UCCUAEscola_IndexChangedUnidadeEscola;
-                UCCCursoCurriculo.IndexChanged += UCCCursoCurriculo_IndexChanged;
-                UCCCurriculoPeriodo.IndexChanged += UCCCurriculoPeriodo_IndexChanged;
-                UCCCalendario.IndexChanged += UCCCalendario_IndexChanged;
-            }
-
+            UCCUAEscola.IndexChangedUA += UCCUAEscola_IndexChangedUA;
+            UCCUAEscola.IndexChangedUnidadeEscola += UCCUAEscola_IndexChangedUnidadeEscola;
+            UCCCursoCurriculo.IndexChanged += UCCCursoCurriculo_IndexChanged;
+            UCCCurriculoPeriodo.IndexChanged += UCCCurriculoPeriodo_IndexChanged;
+            UCCCalendario.IndexChanged += UCCCalendario_IndexChanged;
             UCCQtdePaginacao.IndexChanged += UCCQtdePaginacao_IndexChanged;
 
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -184,8 +181,7 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
                 // Seta propriedades necessárias para ordenação nas colunas.
                 ConfiguraColunasOrdenacao(grvResultados);
 
-                grvResultados.DataBind();
-                //grvResultados.VirtualItemCount = ACA_AlunoBO.GetTotalRecords();
+                SelecionaDados();
             }
         }
 
@@ -328,9 +324,9 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         /// Retorna os dados de alunos
         /// </summary>
         /// <returns></returns>
-        private DataTable SelecionaDados()
+        private void SelecionaDados()
         {
-            DataTable dt = ACA_AlunoBO.BuscaAlunos_BoletimEscolar
+            DataTable dt = ACA_AlunoBO.BuscaAlunos_Documentos
                 (
                     UCCCalendario.Valor,
                     UCCUAEscola.Esc_ID,
@@ -354,10 +350,13 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
                     UCCQtdePaginacao.Valor,
                     grvResultados.PageIndex,
                     (int)VS_SortDirection,
-                    VS_Ordenacao
+                    VS_Ordenacao,
+                    false
                 );
 
-            return dt;
+            grvResultados.VirtualItemCount = ACA_AlunoBO.GetTotalRecords();
+            grvResultados.DataSource = dt;
+            grvResultados.DataBind();
         }
 
         /// <summary>
@@ -367,31 +366,28 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         {
             Dictionary<string, string> filtros = new Dictionary<string, string>();
 
-            if (__SessionWEB.__UsuarioWEB.Docente.doc_id <= 0)
-            {
-                filtros.Add("uad_idSuperior", UCCUAEscola.Uad_ID.ToString());
-                filtros.Add("esc_id", UCCUAEscola.Esc_ID.ToString());
-                filtros.Add("uni_id", UCCUAEscola.Uni_ID.ToString());
-                filtros.Add("cur_id", UCCCursoCurriculo.Valor[0].ToString());
-                filtros.Add("crr_id", UCCCursoCurriculo.Valor[1].ToString());
-                filtros.Add("crp_id", UCCCurriculoPeriodo.Valor[2].ToString());
-                filtros.Add("cal_id", UCCCalendario.Valor.ToString());
-                filtros.Add("tur_id", UCCTurma.Valor[0].ToString());
-                filtros.Add("ttn_id", UCCTurma.Valor[2].ToString());
-                filtros.Add("crp_idTurma", UCCTurma.Valor[1].ToString());
-                filtros.Add("tipoBusca", UCCBuscaAluno.TipoBuscaNomeAluno);
+            filtros.Add("uad_idSuperior", UCCUAEscola.Uad_ID.ToString());
+            filtros.Add("esc_id", UCCUAEscola.Esc_ID.ToString());
+            filtros.Add("uni_id", UCCUAEscola.Uni_ID.ToString());
+            filtros.Add("cur_id", UCCCursoCurriculo.Valor[0].ToString());
+            filtros.Add("crr_id", UCCCursoCurriculo.Valor[1].ToString());
+            filtros.Add("crp_id", UCCCurriculoPeriodo.Valor[2].ToString());
+            filtros.Add("cal_id", UCCCalendario.Valor.ToString());
+            filtros.Add("tur_id", UCCTurma.Valor[0].ToString());
+            filtros.Add("ttn_id", UCCTurma.Valor[2].ToString());
+            filtros.Add("crp_idTurma", UCCTurma.Valor[1].ToString());
+            filtros.Add("tipoBusca", UCCBuscaAluno.TipoBuscaNomeAluno);
 
-                filtros.Add("pes_nome", UCCBuscaAluno.NomeAluno);
-                filtros.Add("pes_dataNascimento", UCCBuscaAluno.DataNascAluno);
-                filtros.Add("pes_nomeMae", UCCBuscaAluno.NomeMaeAluno);
-                filtros.Add("alc_matriculaEstadual", UCCBuscaAluno.MatriculaEstadualAluno);
-                filtros.Add("alc_matricula", UCCBuscaAluno.MatriculaAluno);
-            }
+            filtros.Add("pes_nome", UCCBuscaAluno.NomeAluno);
+            filtros.Add("pes_dataNascimento", UCCBuscaAluno.DataNascAluno);
+            filtros.Add("pes_nomeMae", UCCBuscaAluno.NomeMaeAluno);
+            filtros.Add("alc_matriculaEstadual", UCCBuscaAluno.MatriculaEstadualAluno);
+            filtros.Add("alc_matricula", UCCBuscaAluno.MatriculaAluno);
 
-            filtros.Add("VS_Ordenacao", "pes_nome");
+            filtros.Add("VS_Ordenacao", VS_Ordenacao);
             filtros.Add("VS_SortDirection", VS_SortDirection.ToString());
 
-            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioNAAPA, Filtros = filtros };
+            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAcoesRealizadas, Filtros = filtros };
         }
 
         /// <summary>
@@ -404,28 +400,25 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
                 DateTime data;
                 string valor, valor2, valor3;
 
-                if (__SessionWEB.__UsuarioWEB.Docente.doc_id <= 0)
+                __SessionWEB.BuscaRealizada.Filtros.TryGetValue("uad_idSuperior", out valor);
+                if (!string.IsNullOrEmpty(valor))
                 {
-                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("uad_idSuperior", out valor);
-                    if (!string.IsNullOrEmpty(valor))
+                    UCCUAEscola.Uad_ID = new Guid(valor);
+                    UCCUAEscola.CarregaEscolaPorUASuperiorSelecionada();
+
+                    if (UCCUAEscola.Uad_ID != Guid.Empty)
                     {
-                        UCCUAEscola.Uad_ID = new Guid(valor);
-                        UCCUAEscola.CarregaEscolaPorUASuperiorSelecionada();
+                        UCCUAEscola.FocoEscolas = true;
+                        UCCUAEscola.PermiteAlterarCombos = true;
+                    }
+                    string esc_id;
+                    string uni_id;
 
-                        if (UCCUAEscola.Uad_ID != Guid.Empty)
-                        {
-                            UCCUAEscola.FocoEscolas = true;
-                            UCCUAEscola.PermiteAlterarCombos = true;
-                        }
-                        string esc_id;
-                        string uni_id;
-
-                        if ((__SessionWEB.BuscaRealizada.Filtros.TryGetValue("esc_id", out esc_id)) &&
-                            (__SessionWEB.BuscaRealizada.Filtros.TryGetValue("uni_id", out uni_id)))
-                        {
-                            UCCUAEscola.SelectedValueEscolas = new[] { Convert.ToInt32(esc_id), Convert.ToInt32(uni_id) };
-                            UCCUAEscola_IndexChangedUnidadeEscola();
-                        }
+                    if ((__SessionWEB.BuscaRealizada.Filtros.TryGetValue("esc_id", out esc_id)) &&
+                        (__SessionWEB.BuscaRealizada.Filtros.TryGetValue("uni_id", out uni_id)))
+                    {
+                        UCCUAEscola.SelectedValueEscolas = new[] { Convert.ToInt32(esc_id), Convert.ToInt32(uni_id) };
+                        UCCUAEscola_IndexChangedUnidadeEscola();
                     }
                 }
 
@@ -465,7 +458,7 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
 
             }
 
-            if (UCCTurma.Valor[0] > 0)
+            if (UCCCalendario.Valor > 0)
             {
                 Pesquisar();
             }
@@ -488,8 +481,7 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
 
                 grvResultados.PageIndex = 0;
                 grvResultados.PageSize = UCCQtdePaginacao.Valor;
-
-                grvResultados.DataBind();
+                SelecionaDados();
 
                 UCCQtdePaginacao.Visible = grvResultados.Rows.Count > 0;
 
@@ -509,32 +501,23 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         /// </summary>
         private void InicializarTela()
         {
-            if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+            pnlBusca.Visible = true;
+            pnlResultados.Visible = false;
+            UCCUAEscola.Inicializar();
+
+            if (UCCUAEscola.VisibleUA)
             {
-                pnlBusca.Visible = false;
-                pnlResultados.Visible = true;
-                pnlResultados.GroupingText = pnlBusca.GroupingText;
-                Pesquisar();
+                UCCUAEscola_IndexChangedUA();
             }
-            else
-            {
-                pnlBusca.Visible = true;
-                pnlResultados.Visible = false;
-                UCCUAEscola.Inicializar();
-                if (UCCUAEscola.VisibleUA)
-                {
-                    UCCUAEscola_IndexChangedUA();
-                }
 
-                // Carrega o nome referente ao parametro de matricula estadual.
-                string nomeMatriculaEstadual = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MATRICULA_ESTADUAL, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-                bool mostraMatriculaEstadual = !string.IsNullOrEmpty(nomeMatriculaEstadual);
+            // Carrega o nome referente ao parametro de matricula estadual.
+            string nomeMatriculaEstadual = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.MATRICULA_ESTADUAL, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+            bool mostraMatriculaEstadual = !string.IsNullOrEmpty(nomeMatriculaEstadual);
 
-                UCCBuscaAluno.MostrarMatriculaEstadual = mostraMatriculaEstadual;
-                UCCBuscaAluno.TituloMatriculaEstadual = nomeMatriculaEstadual;
+            UCCBuscaAluno.MostrarMatriculaEstadual = mostraMatriculaEstadual;
+            UCCBuscaAluno.TituloMatriculaEstadual = nomeMatriculaEstadual;
 
-                VerificarBusca();
-            }
+            VerificarBusca();
 
             UCCQtdePaginacao.GridViewRelacionado = grvResultados;
 
@@ -595,23 +578,14 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         protected void grvResultados_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grvResultados.PageIndex = e.NewPageIndex;
-            grvResultados.DataBind();
-            //grvResultados.VirtualItemCount = ACA_AlunoBO.GetTotalRecords();
-        }
-
-        protected void grvResultados_DataBinding(object sender, EventArgs e)
-        {
-            if (grvResultados.DataSource == null)
-            {
-                grvResultados.DataSource = SelecionaDados();
-            }
+            SelecionaDados();
         }
 
         protected void grvResultados_Sorting(object sender, GridViewSortEventArgs e)
         {
             VS_SortDirection = SortDir(e.SortExpression);
             VS_Ordenacao = e.SortExpression;
-            grvResultados.DataBind();
+            SelecionaDados();
         }
 
         protected void grvResultados_RowEditing(object sender, GridViewEditEventArgs e)
@@ -619,6 +593,40 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
             grvResultados.EditIndex = e.NewEditIndex;
         }
 
-      #endregion
+        protected void btnGerarRelatrorioAcoesRealizadas_Click(object sender, EventArgs e)
+        {
+            string report, parametros;
+            string alu_ids = String.Empty;
+            string tur_ids = String.Empty;
+
+            foreach (GridViewRow row in grvResultados.Rows)
+            {
+                CheckBox chkSelecionar = (CheckBox)row.FindControl("_chkSelecionar");
+                if (chkSelecionar.Checked)
+                {
+                    alu_ids = (String.IsNullOrEmpty(alu_ids) ? "" : alu_ids + ",") + grvResultados.DataKeys[row.RowIndex].Values["alu_id"];
+                    tur_ids = (String.IsNullOrEmpty(tur_ids) ? "" : tur_ids + ",") + grvResultados.DataKeys[row.RowIndex].Values["tur_id"];
+                }
+            }
+
+           /*report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioAcoesRealizadas).ToString();
+            parametros = "alu_ids=" + alu_ids +
+                         "&tur_ids=" + tur_ids +
+                         "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) +
+                         "&usu_id=" + __SessionWEB.__UsuarioWEB.Usuario.usu_id +
+                         "&gru_id=" + __SessionWEB.__UsuarioWEB.Grupo.gru_id +
+                         "&dre=" + UCCUAEscola.TextoComboUA +
+                         "&escola=" + UCCUAEscola.TextoComboEscola +
+                         "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
+                                               , ApplicationWEB.LogoRelatorioSSRS) +
+                         "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
+                         "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria") +
+                         "&documentoOficial=false";
+
+            MSTech.GestaoEscolar.BLL.CFG_RelatorioBO.CallReport("Relatorios", report, parametros, HttpContext.Current);*/
+        }
+
+
+        #endregion
     }
 }

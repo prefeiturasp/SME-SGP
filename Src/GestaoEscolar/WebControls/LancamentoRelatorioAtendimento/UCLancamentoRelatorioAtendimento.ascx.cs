@@ -439,6 +439,7 @@
             
             CarregarHipoteseDiagnostica();
             CarregarQuestionarios();
+            CarregarAcoesRealizadas();
 
             updLancamentoRelatorio.Update();
         }
@@ -458,6 +459,24 @@
 
                 HabilitaControles(fdsHipoteseDiagnostica.Controls, VS_RelatorioAtendimento.rea_permiteEditarHipoteseDiagnostica && PermiteEditar &&
                     (PermiteEditarAprovado || VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado));
+            }
+        }
+
+        /// <summary>
+        /// Carrega a aba de ações realizadas
+        /// </summary>
+        private void CarregarAcoesRealizadas()
+        {
+            liAcoesRealizadas.Visible = fdsAcoesRealizadas.Visible = false;
+            if (VS_RelatorioAtendimento.rea_permiteAcoesRealizadas)
+            {
+                if (VS_RelatorioPreenchimentoAluno.entityRelatorioPreenchimento.reap_id > 0)
+                {
+                    VS_AcoesRealizadas = CLS_RelatorioPreenchimentoAcoesRealizadasBO.SelecionaPorPreenchimento(VS_RelatorioPreenchimentoAluno.entityRelatorioPreenchimento.reap_id);
+                }
+                CarregarAcoes();
+
+                liAcoesRealizadas.Visible = fdsAcoesRealizadas.Visible = true;
             }
         }
 
@@ -540,6 +559,25 @@
                         dfd_id = dfd_id
                         ,
                         alu_id = VS_alu_id
+                    }).ToList();
+        }
+
+        /// <summary>
+        /// Retorna lista de ações realizadas.
+        /// </summary>
+        /// <returns></returns>
+        public List<CLS_RelatorioPreenchimentoAcoesRealizadas> RetornaListaAcoesRealizadas()
+        {
+            return (from sAcoesRealizadas itemAcao in VS_AcoesRealizadas
+                    where (!itemAcao.excluido || itemAcao.rpa_id > 0)
+                    select new CLS_RelatorioPreenchimentoAcoesRealizadas
+                    {
+                        rpa_id = itemAcao.rpa_id
+                        , rpa_data = Convert.ToDateTime(itemAcao.rpa_data)
+                        , rpa_impressao = itemAcao.rpa_impressao
+                        , rpa_acao = itemAcao.rpa_acao
+                        , rpa_situacao = itemAcao.excluido ? (byte)CLS_RelatorioPreenchimentoAcoesRealizadasSituacao.Excluido : (byte)CLS_RelatorioPreenchimentoAcoesRealizadasSituacao.Ativo
+                        , IsNew = itemAcao.rpa_id <= 0
                     }).ToList();
         }
 
@@ -638,7 +676,8 @@
             grvAcoes.DataSource = AcoesRealizadasAtivas;
             grvAcoes.DataBind();
 
-            btnNovaAcao.Visible = grvAcoes.EditIndex < 0;
+            btnNovaAcao.Visible = grvAcoes.EditIndex < 0 && PermiteEditar &&
+                                    (PermiteEditarAprovado || VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado);
         }
 
         #endregion
@@ -924,7 +963,7 @@
                     int indice = VS_AcoesRealizadas.FindIndex(p => (p.rpa_id > 0 && p.rpa_id == Convert.ToInt64(grv.DataKeys[e.RowIndex]["rpa_id"]))
                                                                 || (p.rpa_id <= 0 && p.idTemp == Convert.ToInt32(grv.DataKeys[e.RowIndex]["idTemp"])));
                     sAcoesRealizadas acao = VS_AcoesRealizadas[indice];
-                    acao.rpa_data = txtData.Text;
+                    acao.rpa_data = DateTime.Parse(txtData.Text).ToString("dd/MM/yyyy");
                     acao.rpa_acao = txtAcao.Text;
                     acao.rpa_impressao = ckbImpressao.Checked;
                     if (acao.rpa_id <= 0 && acao.idTemp <= 0)

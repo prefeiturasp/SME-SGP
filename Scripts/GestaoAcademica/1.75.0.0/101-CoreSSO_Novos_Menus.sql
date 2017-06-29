@@ -52,7 +52,7 @@ SET XACT_ABORT ON
 		,@nomeModulo = 'Ações realizadas' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Relatórios de ações realizadas'
 		,@SiteMap1Url = '~/Relatorios/AcoesRealizadas/Busca.aspx'
-		,@SiteMap2Nome = NULL
+		,@SiteMap2Nome = 'Relatórios de ações realizadas'
 		,@SiteMap2Url = NULL
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL

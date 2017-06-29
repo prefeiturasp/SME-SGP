@@ -94,7 +94,7 @@ namespace MSTech.GestaoEscolar.BLL
             throw new ValidationException(GestaoEscolarUtilBO.ErrosValidacao(entity)); 
         }
 
-        public static bool Salvar(RelatorioPreenchimentoAluno relatorio, List<CLS_AlunoDeficienciaDetalhe> lstDeficienciaDetalhe, bool permiteAlterarRacaCor, byte racaCor)
+        public static bool Salvar(RelatorioPreenchimentoAluno relatorio, List<CLS_AlunoDeficienciaDetalhe> lstDeficienciaDetalhe, bool permiteAlterarRacaCor, byte racaCor, List<CLS_RelatorioPreenchimentoAcoesRealizadas> lstAcoesRealizadas)
         {
             CLS_RelatorioPreenchimentoDAO dao = new CLS_RelatorioPreenchimentoDAO();
             dao._Banco.Open(IsolationLevel.ReadCommitted);
@@ -170,6 +170,22 @@ namespace MSTech.GestaoEscolar.BLL
                     p =>
                     {
                         retorno &= CLS_AlunoDeficienciaDetalheBO.Save(p, dao._Banco);
+                    }
+                );
+
+                lstAcoesRealizadas.ForEach
+                (
+                    p =>
+                    {
+                        if (p.rpa_situacao == (byte)CLS_RelatorioPreenchimentoAcoesRealizadasSituacao.Excluido)
+                        {
+                            retorno &= CLS_RelatorioPreenchimentoAcoesRealizadasBO.Delete(p, dao._Banco);
+                        }
+                        else
+                        {
+                            p.reap_id = relatorio.entityRelatorioPreenchimento.reap_id;
+                            retorno &= CLS_RelatorioPreenchimentoAcoesRealizadasBO.Save(p, dao._Banco);
+                        }
                     }
                 );
 

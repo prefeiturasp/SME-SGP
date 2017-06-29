@@ -634,6 +634,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         GraficoJustificativaFalta
+        
+        ,
+        RelatorioAcoesRealizadas
     }
 
     [Serializable]
@@ -763,9 +766,10 @@ namespace MSTech.GestaoEscolar.BLL
         AnaliseSondagem = 321,
         FrequenciaMensal = 322,
         RelatorioSugestoesCurriculo = 323,
-        QuantitativoSugestoes = 324,
+        QuantitativoSugestoes = 324,        
+        GraficoJustificativaFalta = 326,
         RelatorioGeralAtendimento = 325,
-        GraficoJustificativaFalta = 326
+        RelatorioAcoesRealizadas = 327
     }
 
     /// <summary>
