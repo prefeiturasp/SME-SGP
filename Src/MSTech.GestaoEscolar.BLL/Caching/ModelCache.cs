@@ -945,6 +945,12 @@
 
         public const string RELATORIO_ATENDIMENTO_BUSCA_ESTRUTURA_RELATORIO_KEY = "Cache_SelecionaRelatorio_{0}_{1}";
 
-        #endregion 
+        #endregion
+
+        #region Grafico atendimento
+
+        public const string GRAFICO_ATENDIMENTO_SELECIONA_POR_TIPO_RELATORIO_KEY = "Cache_SelecionaPorTipoRelatorio_{0}";
+
+        #endregion
     }
 }
