@@ -945,6 +945,20 @@
     <Compile Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuracao\Alertas\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Alertas\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Alertas\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Alertas\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx.cs">
       <DependentUpon>BuscaCabecalhoAvisosTextos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3605,6 +3619,8 @@
     <Content Include="Classe\RelatorioNaapa\Busca.aspx" />
     <Content Include="Classe\RelatorioNaapa\Cadastro.aspx" />
     <Content Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx" />
+    <Content Include="Configuracao\Alertas\Busca.aspx" />
+    <Content Include="Configuracao\Alertas\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
     <Content Include="Configuracao\DeficienciaDetalhe\Busca.aspx" />
     <Content Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx" />

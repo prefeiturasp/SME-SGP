@@ -193,6 +193,8 @@
     <Compile Include="Abstracts\Abstract_ACA_TurnoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TurnoEscolaDAO.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TurnoHorarioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_AlertaDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_AlertaGrupoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoAcademicoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoMigracaoRioDAO.cs" />
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoInscricaoCrecheDAO.cs" />
@@ -513,6 +515,8 @@
     <Compile Include="ACA_TurnoEscolaDAO.cs" />
     <Compile Include="ACA_TurnoHorarioDAO.cs" />
     <Compile Include="ApiDAO.cs" />
+    <Compile Include="CFG_AlertaDAO.cs" />
+    <Compile Include="CFG_AlertaGrupoDAO.cs" />
     <Compile Include="CFG_ConfiguracaoAcademicoDAO.cs" />
     <Compile Include="CFG_ConfiguracaoMigracaoRioDAO.cs" />
     <Compile Include="CFG_ConfiguracaoInscricaoCrecheDAO.cs" />

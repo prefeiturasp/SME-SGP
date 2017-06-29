@@ -426,6 +426,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, tur_id, tud_id, UCCPeriodoCalendario.Tpc_ID, UCCRelatorioAtendimento.Valor, false, reap_id);
                     pnlLancamento.Visible = true;
                     btnNovo.Visible = false;
+                    lblMensagem.Text = string.Empty;
                 }
                 catch (Exception ex)
                 {
@@ -479,6 +480,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                 UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, tur_id, tud_id, UCCPeriodoCalendario.Tpc_ID, UCCRelatorioAtendimento.Valor, false, 0);
                 pnlLancamento.Visible = true;
                 btnNovo.Visible = false;
+                lblMensagem.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -504,6 +506,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                 ddlDisciplina.SelectedIndex = 1;
                 ddlDisciplina_SelectedIndexChanged(null, null);
             }
+            lblMensagem.Text = string.Empty;
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -519,6 +522,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                                 && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir
                                 && VS_permissoesRP.permissaoEdicao
                                 && VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
+            lblMensagem.Text = string.Empty;
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -614,6 +618,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
             {
                 RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(false);
                 List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
+                List<CLS_RelatorioPreenchimentoAcoesRealizadas> lstAcoesRealizadas = UCLancamentoRelatorioAtendimento.RetornaListaAcoesRealizadas();
 
                 ACA_FormatoAvaliacao fav = TUR_TurmaBO.SelecionaFormatoAvaliacao(rel.entityPreenchimentoAlunoTurmaDisciplina.tur_id);
                 if (fav != null)
@@ -621,7 +626,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     rel.processarPendencia = fav.fav_fechamentoAutomatico;
                 }
 
-                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor))
+                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor, lstAcoesRealizadas))
                 {
                     string msg = GetGlobalResourceObject("Classe", "RelatorioRecuperacaoParalela.Cadastro.MensagemSucessoSalvar").ToString();
                     lblMensagem.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Sucesso);

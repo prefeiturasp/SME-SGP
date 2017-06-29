@@ -54,7 +54,7 @@
                         <asp:Literal runat="server" ID="litFdsAcoesRealizadas" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, litAcoesRealizadas.Text %>" />
                     </legend>
                     <div style="float:right" id="divNovaAcao" runat="server">
-                        <asp:Button ID="btnNovaAcao" runat="server" CausesValidation="False" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, btnNovaAcao.Text %>" OnClick="btnNovaAcao_Click"/>
+                        <asp:Button ID="btnNovaAcao" runat="server" CausesValidation="False" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, btnNovaAcao.Text %>" OnClick="btnNovaAcao_Click" style="font-size:0.9em;"/>
                         <br /><br />
                     </div>
                     <asp:GridView ID="grvAcoes" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, grvAcoes.EmptyDataText %>"
@@ -83,6 +83,9 @@
                                     <asp:TextBox ID="txtData" runat="server" Text='<%# Bind("rpa_data") %>' SkinID="Data" style="width:100px;"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvData" runat="server" ErrorMessage="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, rfvData.ErrorMessage %>"
                                         ControlToValidate="txtData" ValidationGroup="geral">*</asp:RequiredFieldValidator>
+                                    <asp:CustomValidator ID="ctvDataFormato" runat="server" ControlToValidate="txtData"
+                                        Display="Dynamic" ErrorMessage="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, ctvDataFormato.ErrorMessage %>"
+                                        OnServerValidate="ValidarData_ServerValidate" Text="*" ValidationGroup="geral" />
                                     <asp:Label ID="lblAcao" runat="server" Text='<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lblAcao.Text %>' AssociatedControlID="txtAcao"></asp:Label>
                                     <asp:TextBox ID="txtAcao" runat="server" Text='<%# Bind("rpa_acao") %>' TextMode="MultiLine" CssClass="questionario-conteudo-resposta-texto"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvAcao" runat="server" ErrorMessage="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, rfvAcao.ErrorMessage %>"

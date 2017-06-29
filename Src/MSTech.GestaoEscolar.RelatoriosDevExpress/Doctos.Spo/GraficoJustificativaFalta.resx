@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="sqlDataSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="sqlDataSource1.ResultSchemaSerializable" xml:space="preserve">
-    <value>PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9Ik5FV19SZWxhdG9yaW9fR3JhZmljb0p1c3RpZmljYXRpdmFGYWx0YSI+PEZpZWxkIE5hbWU9InRqZl9pZCIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9InRqZl9ub21lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InRqZl9hYm9uYUZhbHRhIiBUeXBlPSJCb29sZWFuIiAvPjxGaWVsZCBOYW1lPSJ0b3RhbEFsdW5vcyIgVHlwZT0iSW50MzIiIC8+PC9WaWV3PjwvRGF0YVNldD4=</value>
-  </data>
   <metadata name="dsGestaoEscolar1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
   </metadata>

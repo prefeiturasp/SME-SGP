@@ -64,7 +64,7 @@
                     <uc:UCCQtdePaginacao ID="UCCQtdePaginacao" runat="server" />                    
                     <br /> 
                     <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound"
-                        OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
+                        OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true" OnRowDataBound="grvResultados_RowDataBound"
                         EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>" OnDataBinding="grvResultados_DataBinding"
                         OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
                         <Columns>

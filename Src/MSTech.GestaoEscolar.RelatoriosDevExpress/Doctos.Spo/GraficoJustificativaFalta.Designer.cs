@@ -28,23 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery1 = new DevExpress.DataAccess.Sql.StoredProcQuery();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter1 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter2 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter3 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter4 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter5 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter6 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter7 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter8 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter9 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter10 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter11 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter12 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter13 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter14 = new DevExpress.DataAccess.Sql.QueryParameter();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraficoJustificativaFalta));
             DevExpress.XtraCharts.TextAnnotation textAnnotation1 = new DevExpress.XtraCharts.TextAnnotation();
             DevExpress.XtraCharts.ChartAnchorPoint chartAnchorPoint1 = new DevExpress.XtraCharts.ChartAnchorPoint();
             DevExpress.XtraCharts.FreePosition freePosition1 = new DevExpress.XtraCharts.FreePosition();
@@ -52,9 +35,9 @@
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
-            this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPanel1 = new DevExpress.XtraReports.UI.XRPanel();
+            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrChart1 = new DevExpress.XtraReports.UI.XRChart();
             this.GroupHeader2 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.lblSemRegistroGrafico = new DevExpress.XtraReports.UI.XRLabel();
@@ -84,7 +67,6 @@
             this.ImgLogo = new DevExpress.XtraReports.UI.XRPictureBox();
             this.dsGestaoEscolar1 = new MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo.DSGestaoEscolar();
             this.nEW_Relatorio_GraficoJustificativaFaltaTableAdapter = new MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo.DSGestaoEscolarTableAdapters.NEW_Relatorio_GraficoJustificativaFaltaTableAdapter();
-            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(textAnnotation1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(fullStackedBarSeriesView1)).BeginInit();
@@ -115,68 +97,6 @@
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
-            // sqlDataSource1
-            // 
-            this.sqlDataSource1.ConnectionName = "MSTech.GestaoEscolar.RelatoriosDevExpress.Properties.Settings.GestaoEscolarConnec" +
-    "tionString";
-            this.sqlDataSource1.Name = "sqlDataSource1";
-            storedProcQuery1.Name = "NEW_Relatorio_GraficoJustificativaFalta";
-            queryParameter1.Name = "@ent_id";
-            queryParameter1.Type = typeof(string);
-            queryParameter2.Name = "@cal_id";
-            queryParameter2.Type = typeof(int);
-            queryParameter2.ValueInfo = "0";
-            queryParameter3.Name = "@esc_id";
-            queryParameter3.Type = typeof(int);
-            queryParameter3.ValueInfo = "0";
-            queryParameter4.Name = "@uni_id";
-            queryParameter4.Type = typeof(int);
-            queryParameter4.ValueInfo = "0";
-            queryParameter5.Name = "@tur_id";
-            queryParameter5.Type = typeof(long);
-            queryParameter5.ValueInfo = "0";
-            queryParameter6.Name = "@cur_id";
-            queryParameter6.Type = typeof(int);
-            queryParameter6.ValueInfo = "0";
-            queryParameter7.Name = "@crr_id";
-            queryParameter7.Type = typeof(int);
-            queryParameter7.ValueInfo = "0";
-            queryParameter8.Name = "@crp_id";
-            queryParameter8.Type = typeof(int);
-            queryParameter8.ValueInfo = "0";
-            queryParameter9.Name = "@uad_idSuperior";
-            queryParameter9.Type = typeof(string);
-            queryParameter10.Name = "@adm";
-            queryParameter10.Type = typeof(bool);
-            queryParameter10.ValueInfo = "False";
-            queryParameter11.Name = "@usu_id";
-            queryParameter11.Type = typeof(string);
-            queryParameter12.Name = "@gru_id";
-            queryParameter12.Type = typeof(string);
-            queryParameter13.Name = "@MatriculaEstadual";
-            queryParameter13.Type = typeof(string);
-            queryParameter14.Name = "@documentoOficial";
-            queryParameter14.Type = typeof(bool);
-            queryParameter14.ValueInfo = "False";
-            storedProcQuery1.Parameters.Add(queryParameter1);
-            storedProcQuery1.Parameters.Add(queryParameter2);
-            storedProcQuery1.Parameters.Add(queryParameter3);
-            storedProcQuery1.Parameters.Add(queryParameter4);
-            storedProcQuery1.Parameters.Add(queryParameter5);
-            storedProcQuery1.Parameters.Add(queryParameter6);
-            storedProcQuery1.Parameters.Add(queryParameter7);
-            storedProcQuery1.Parameters.Add(queryParameter8);
-            storedProcQuery1.Parameters.Add(queryParameter9);
-            storedProcQuery1.Parameters.Add(queryParameter10);
-            storedProcQuery1.Parameters.Add(queryParameter11);
-            storedProcQuery1.Parameters.Add(queryParameter12);
-            storedProcQuery1.Parameters.Add(queryParameter13);
-            storedProcQuery1.Parameters.Add(queryParameter14);
-            storedProcQuery1.StoredProcName = "NEW_Relatorio_GraficoJustificativaFalta";
-            this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
-            storedProcQuery1});
-            this.sqlDataSource1.ResultSchemaSerializable = resources.GetString("sqlDataSource1.ResultSchemaSerializable");
-            // 
             // GroupHeader1
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
@@ -195,6 +115,19 @@
             this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPanel1.Name = "xrPanel1";
             this.xrPanel1.SizeF = new System.Drawing.SizeF(699.7068F, 337.9167F);
+            // 
+            // xrLabel1
+            // 
+            this.xrLabel1.Dpi = 100F;
+            this.xrLabel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+            this.xrLabel1.ForeColor = System.Drawing.Color.Black;
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(439.8839F, 21.83336F);
+            this.xrLabel1.Name = "xrLabel1";
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(164.5833F, 23F);
+            this.xrLabel1.StylePriority.UseFont = false;
+            this.xrLabel1.StylePriority.UseForeColor = false;
+            this.xrLabel1.Text = "Justificativas de falta";
             // 
             // xrChart1
             // 
@@ -461,19 +394,6 @@
             // 
             this.nEW_Relatorio_GraficoJustificativaFaltaTableAdapter.ClearBeforeFill = true;
             // 
-            // xrLabel1
-            // 
-            this.xrLabel1.Dpi = 100F;
-            this.xrLabel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabel1.ForeColor = System.Drawing.Color.Black;
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(439.8839F, 21.83336F);
-            this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(164.5833F, 23F);
-            this.xrLabel1.StylePriority.UseFont = false;
-            this.xrLabel1.StylePriority.UseForeColor = false;
-            this.xrLabel1.Text = "Justificativas de falta";
-            // 
             // GraficoJustificativaFalta
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -483,8 +403,6 @@
             this.GroupHeader1,
             this.GroupHeader2,
             this.GroupHeader3});
-            this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
-            this.sqlDataSource1});
             this.DataAdapter = this.nEW_Relatorio_GraficoJustificativaFaltaTableAdapter;
             this.DataMember = "NEW_Relatorio_GraficoJustificativaFalta";
             this.DataSource = this.dsGestaoEscolar1;
@@ -518,7 +436,6 @@
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
-        private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource1;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader2;
         private DevExpress.XtraReports.UI.XRLabel lblSemRegistroGrafico;
