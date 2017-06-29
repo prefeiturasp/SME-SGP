@@ -300,7 +300,9 @@
             {
                 RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(aprovar);
                 List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
-                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor))
+                List<CLS_RelatorioPreenchimentoAcoesRealizadas> lstAcoesRealizadas = UCLancamentoRelatorioAtendimento.RetornaListaAcoesRealizadas();
+
+                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor, lstAcoesRealizadas))
                 {
                     string msg = aprovar ? "Relatório de atendimento aprovado com sucesso." : "Relatório de atendimento preenchido com sucesso.";
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Sucesso);

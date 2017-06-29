@@ -133,6 +133,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Doctos.Spo\GraficoJustificativaFalta.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Doctos.Spo\GraficoJustificativaFalta.Designer.cs">
+      <DependentUpon>GraficoJustificativaFalta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Doctos.Spo\HistoricoEscolar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -269,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Doctos.Spo\DocDctPlanoCicloSerie.resx">
       <DependentUpon>DocDctPlanoCicloSerie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Doctos.Spo\GraficoJustificativaFalta.resx">
+      <DependentUpon>GraficoJustificativaFalta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Doctos.Spo\HistoricoEscolar.resx">
       <DependentUpon>HistoricoEscolar.cs</DependentUpon>

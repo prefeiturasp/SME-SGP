@@ -15,6 +15,45 @@ namespace MSTech.GestaoEscolar.DAL
     /// </summary>
     public class CLS_RelatorioPreenchimentoAcoesRealizadasDAO : Abstract_CLS_RelatorioPreenchimentoAcoesRealizadasDAO
 	{
+        #region Consulta
+
+        /// <summary>
+        /// Retorna as ações realizadas cadastradas em um preenchimento de relatório.
+        /// </summary>
+        /// <param name="reap_id">Id do preenchimento de relatório</param>
+        /// <returns></returns>
+        public DataTable SelecionaPorPreenchimento(long reap_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioPreenchimentoAcoesRealizadas_SelecionaPorPreenchimento", _Banco);
+
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@reap_id";
+                Param.Size = 8;
+                Param.Value = reap_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        #endregion Consulta
+
         #region Métodos Sobrescritos
 
         /// <summary>

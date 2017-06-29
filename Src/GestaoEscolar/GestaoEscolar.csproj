@@ -1786,6 +1786,13 @@
     <Compile Include="Relatorios\FrequenciaMensal\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\GraficoJustificativaFalta\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\GraficoJustificativaFalta\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\IndicadorFrequencia\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4307,6 +4314,7 @@
     <Content Include="Includes\jsAlunoJustificativaAbonoFalta.js" />
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
+    <Content Include="Includes\jsBuscaRelatorioGeralAtendimento.js" />
     <Content Include="Includes\jsCadastroAgendamento.js" />
     <Content Include="Includes\jsCadastroEixoObjConhecimento.js" />
     <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
@@ -4314,6 +4322,7 @@
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsCadastroLancamentoSondagem.js" />
     <Content Include="Includes\jsCadastroRelatorioAtendimento.js" />
+    <Content Include="Includes\jsCadastroRelatorioNaapa.js" />
     <Content Include="Includes\jsCadastroRelatorioRP.js" />
     <Content Include="Includes\jsCadastroSondagem.js" />
     <Content Include="Includes\jsConfirmaFormacaoDocente.js" />
@@ -4405,6 +4414,7 @@
     <Content Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx" />
     <Content Include="Relatorios\DivergenciasRematriculas\Busca.aspx" />
     <Content Include="Relatorios\FrequenciaMensal\Busca.aspx" />
+    <Content Include="Relatorios\GraficoJustificativaFalta\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Relatorios\QuantitativoSugestoes\Busca.aspx" />

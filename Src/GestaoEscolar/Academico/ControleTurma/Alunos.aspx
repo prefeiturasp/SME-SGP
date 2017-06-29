@@ -41,6 +41,7 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="Nome do aluno" SortExpression="pes_nome">
                                     <ItemTemplate>
+                                        <asp:Image ID="imgStatusAlertaAulaSemAnotacaoRP" runat="server" Visible="false" SkinID="imgStatusAlertaAulaSemAnotacaoRP" />
                                         <asp:Label ID="lblNomeAluno" runat="server" Text='<%# Bind("pes_nome") %>'></asp:Label>
                                         <div class="dropdown-relatorio">
                                             <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"

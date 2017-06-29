@@ -21,6 +21,7 @@
         <div id="divTabsRelatorio">
             <ul class="hide">
                 <li runat="server" id="liHipoteseDiagnostica"><a href="#divTabs-0"><asp:Literal ID="lit_22" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lit_22.Text %>"></asp:Literal></a></li>
+                <li runat="server" id="liAcoesRealizadas" visible="false"><a href="#divTabs-01"><asp:Literal ID="litAcoesRealizadas" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, litAcoesRealizadas.Text %>"></asp:Literal></a></li>
                 <asp:Repeater ID="rptAbaQuestionarios" runat="server">
                     <ItemTemplate>
                         <li><a href='#<%# RetornaTabID((int)Eval("qst_id"))%>'><%# Eval("qst_titulo") %></a></li>
@@ -45,6 +46,70 @@
                             </fieldset>
                         </ItemTemplate>
                     </asp:Repeater>
+                </fieldset>
+            </div>
+            <div id="divTabs-01">
+                <fieldset id="fdsAcoesRealizadas" runat="server">
+                    <legend>
+                        <asp:Literal runat="server" ID="litFdsAcoesRealizadas" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, litAcoesRealizadas.Text %>" />
+                    </legend>
+                    <div style="float:right" id="divNovaAcao" runat="server">
+                        <asp:Button ID="btnNovaAcao" runat="server" CausesValidation="False" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, btnNovaAcao.Text %>" OnClick="btnNovaAcao_Click" style="font-size:0.9em;"/>
+                        <br /><br />
+                    </div>
+                    <asp:GridView ID="grvAcoes" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, grvAcoes.EmptyDataText %>"
+                        DataKeyNames="idTemp,rpa_id"
+                        OnRowDataBound="grvAcoes_RowDataBound"
+                        OnDataBound="grvAcoes_DataBound"
+                        OnRowEditing="grvAcoes_RowEditing" 
+                        OnRowUpdating="grvAcoes_RowUpdating" 
+                        OnRowDeleting="grvAcoes_RowDeleting"
+                        OnRowCancelingEdit="grvAcoes_RowCancelingEdit" ShowHeader="false">
+                        <Columns>
+                            <asp:TemplateField HeaderText="" ItemStyle-Width="25" ItemStyle-CssClass="imgColumnGrid">
+                                <ItemTemplate>
+                                    <asp:Image ID="imgImpressao" runat="server" ImageUrl="~/App_Themes/IntranetSME/images/imprimir.png" Width="20" Height="20" Visible='<%# Bind("rpa_impressao") %>' />
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="" ItemStyle-CssClass="questionario-resposta">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblData" runat="server" Text='<%# Bind("rpa_data") %>' SkinID="textTitulo"></asp:Label>
+                                    <asp:Label ID="lblAcao" runat="server" Text='<%# Bind("rpa_acao") %>' Font-Bold="false"></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:Label ID="lblData" runat="server" Text='<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lblData.Text %>' AssociatedControlID="txtData"></asp:Label>
+                                    <asp:TextBox ID="txtData" runat="server" Text='<%# Bind("rpa_data") %>' SkinID="Data" style="width:100px;"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvData" runat="server" ErrorMessage="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, rfvData.ErrorMessage %>"
+                                        ControlToValidate="txtData" ValidationGroup="geral">*</asp:RequiredFieldValidator>
+                                    <asp:CustomValidator ID="ctvDataFormato" runat="server" ControlToValidate="txtData"
+                                        Display="Dynamic" ErrorMessage="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, ctvDataFormato.ErrorMessage %>"
+                                        OnServerValidate="ValidarData_ServerValidate" Text="*" ValidationGroup="geral" />
+                                    <asp:Label ID="lblAcao" runat="server" Text='<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lblAcao.Text %>' AssociatedControlID="txtAcao"></asp:Label>
+                                    <asp:TextBox ID="txtAcao" runat="server" Text='<%# Bind("rpa_acao") %>' TextMode="MultiLine" CssClass="questionario-conteudo-resposta-texto"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvAcao" runat="server" ErrorMessage="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, rfvAcao.ErrorMessage %>"
+                                        ControlToValidate="txtAcao" ValidationGroup="geral">*</asp:RequiredFieldValidator>
+                                    <asp:CheckBox ID="ckbImpressao" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, ckbImpressao.Text %>" Checked='<%# Bind("rpa_impressao") %>' CssClass="questionario-conteudo-resposta-multi-selecao" />
+                                    <br />
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="" ItemStyle-Width="50">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Padrao, Padrao.Editar.Text %>" CausesValidation="false" />
+                                    <asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Padrao, Padrao.Salvar.Text %>" ValidationGroup="geral" Visible="false" />
+                                    <asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Padrao, Padrao.Cancelar.Text %>" CausesValidation="false" Visible="false" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="" ItemStyle-Width="50">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Padrao, Padrao.Excluir.Text %>" CausesValidation="false" />
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
                 </fieldset>
             </div>
             <asp:Repeater ID="rptQuestionario" runat="server" OnItemDataBound="rptQuestionario_ItemDataBound">

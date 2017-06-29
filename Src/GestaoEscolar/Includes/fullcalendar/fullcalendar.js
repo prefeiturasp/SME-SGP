@@ -3736,7 +3736,7 @@ function AgendaView(element, calendar, viewName) {
 		var slotTime;
 		var slotDate;
 		var minutes;
-		var slotNormal = slotDuration.asMinutes() % 15 === 0;
+		var slotNormal = slotDuration.asMinutes() % 10 === 0;
 		
 		buildDayTable();
 		

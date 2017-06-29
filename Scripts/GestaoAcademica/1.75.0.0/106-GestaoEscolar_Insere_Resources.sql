@@ -102,6 +102,118 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Excluir'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.btnGerarRel.Text' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Gerar relatório'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.lblMessage.ErroPermissao' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.lblMessage.ErroCarregarSistema' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar carregar o sistema.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.lblMessage.ErroGerarRelatorio' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar carregar o relatório.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.lblMessage.ErroCarregarDados' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar carregar os dados.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.MensagemSucessoSalvar' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento do relatório salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'RelatorioNaapa.Cadastro.MensagemSucessoExcluir' 
+        , @rcr_NomeResource = 'Classe'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Lançamento do relatório excluído com sucesso.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'litAcoesRealizadas.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Ações realizadas'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'btnNovaAcao.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nova ação'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'grvAcoes.EmptyDataText' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Não existem ações realizadas cadastradas nesse lançamento.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ckbImpressao.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Exibir na impressão'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblData.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data *'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'rfvData.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data da ação realizada é obrigatório.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblAcao.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Ação realizada *'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'rfvAcao.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Ação realizada é obrigatório.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctvDataFormato.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data da ação realizada não está no formato dd/mm/aaaa ou é inexistente.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

@@ -4,14 +4,17 @@
 
 namespace MSTech.GestaoEscolar.DAL
 {
-	using MSTech.GestaoEscolar.DAL.Abstracts;
-	
-	/// <summary>
-	/// Description: .
-	/// </summary>
-	public class REL_GraficoAtendimentoDAO : Abstract_REL_GraficoAtendimentoDAO
+    using Data.Common;
+    using MSTech.GestaoEscolar.DAL.Abstracts;
+    using System;
+    using System.Data;
+
+    /// <summary>
+    /// Description: .
+    /// </summary>
+    public class REL_GraficoAtendimentoDAO : Abstract_REL_GraficoAtendimentoDAO
 	{
-		///// <summary>
+        ///// <summary>
         ///// Inseri os valores da classe em um registro ja existente.
         ///// </summary>
         ///// <param name="entity">Entidade com os dados a serem modificados.</param>
@@ -142,5 +145,54 @@ namespace MSTech.GestaoEscolar.DAL
         // {
         //    return base.DataRowToEntity(dr, entity, limparEntity);
         // }
-	}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rea_id"></param>
+        /// <param name="gra_titulo"></param>
+        /// <returns></returns>
+        public DataTable SelecionaGraficoPorRelatorio(bool paginado, int currentPage, int pageSize,int rea_id, string gra_titulo, out int totalRecords)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_SelecionaPorRelatorio", _Banco);
+
+            try
+            {
+                DataTable dt = new DataTable();
+
+                #region Parâmetro
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 16;
+                Param.Value = rea_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@gra_titulo";
+                Param.DbType = DbType.String;
+                Param.Value = String.IsNullOrEmpty(gra_titulo) ? String.Empty: gra_titulo;          
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                if (paginado)
+                    totalRecords = qs.Execute(currentPage, pageSize);
+                else
+                {
+                    qs.Execute();
+                    totalRecords = qs.Return.Rows.Count;
+                }
+
+                if (qs.Return.Rows.Count > 0)
+                    dt = qs.Return;
+
+                return dt;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+    }
 }
