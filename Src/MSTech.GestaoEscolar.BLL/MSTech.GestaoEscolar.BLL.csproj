@@ -258,6 +258,8 @@
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\ModelCache.cs" />
     <Compile Include="CalendarioBO.cs" />
+    <Compile Include="CFG_AlertaBO.cs" />
+    <Compile Include="CFG_AlertaGrupoBO.cs" />
     <Compile Include="CFG_ConfiguracaoAcademicoBO.cs" />
     <Compile Include="CFG_ConfiguracaoBO.cs" />
     <Compile Include="CFG_ConfiguracaoMigracaoRioBO.cs" />

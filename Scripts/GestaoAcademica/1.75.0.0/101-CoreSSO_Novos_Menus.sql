@@ -89,8 +89,21 @@ SET XACT_ABORT ON
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
-		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Configurações' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Alertas' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Consulta de alertas'
+		,@SiteMap1Url = '~/Configuracao/Alertas/Busca.aspx'
+		,@SiteMap2Nome = 'Cadastro de alertas'
+		,@SiteMap2Url = '~/Configuracao/Alertas/Cadastro.aspx'
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 
 -- Fechar transação
 SET XACT_ABORT OFF
