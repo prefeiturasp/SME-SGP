@@ -207,6 +207,13 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Ação realizada é obrigatório.'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctvDataFormato.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data da ação realizada não está no formato dd/mm/aaaa ou é inexistente.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

@@ -249,6 +249,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
                     UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, -1, -1, UCCRelatorioAtendimento.Valor, false, reap_id);
                     pnlLancamento.Visible = true;
                     btnNovo.Visible = false;
+                    lblMensagem.Text = string.Empty;
                 }
                 catch (Exception ex)
                 {
@@ -297,6 +298,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
                 UCLancamentoRelatorioAtendimento.Carregar(VS_alu_id, VS_tur_id, -1, -1, UCCRelatorioAtendimento.Valor, false, 0);
                 pnlLancamento.Visible = true;
                 btnNovo.Visible = false;
+                lblMensagem.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -311,6 +313,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
             UCCRelatorioAtendimento.PermiteEditar = true;
             fdsLancamento.Visible = false;
             btnNovo.Visible = false;
+            lblMensagem.Text = string.Empty;
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -324,6 +327,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
             grvLancamentos.Visible = true;
             btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir
                                 && VS_permissoesNAAPA.permissaoEdicao;
+            lblMensagem.Text = string.Empty;
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)
@@ -381,14 +385,9 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
             {
                 RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(false);
                 List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
+                List<CLS_RelatorioPreenchimentoAcoesRealizadas> lstAcoesRealizadas = UCLancamentoRelatorioAtendimento.RetornaListaAcoesRealizadas();
 
-                ACA_FormatoAvaliacao fav = TUR_TurmaBO.SelecionaFormatoAvaliacao(rel.entityPreenchimentoAlunoTurmaDisciplina.tur_id);
-                if (fav != null)
-                {
-                    rel.processarPendencia = fav.fav_fechamentoAutomatico;
-                }
-
-                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor))
+                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor, lstAcoesRealizadas))
                 {
                     string msg = GetGlobalResourceObject("Classe", "RelatorioNaapa.Cadastro.MensagemSucessoSalvar").ToString();
                     lblMensagem.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Sucesso);
