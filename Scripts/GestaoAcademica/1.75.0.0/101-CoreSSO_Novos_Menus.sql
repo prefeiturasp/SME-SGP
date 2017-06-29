@@ -36,14 +36,14 @@ SET XACT_ABORT ON
 		,@nomeModulo = 'Relatório geral' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Relatório geral'
 		,@SiteMap1Url = '~/Relatorios/RelatorioGeralAtendimento/Busca.aspx'
-		,@SiteMap2Nome = NULL
-		,@SiteMap2Url = NULL
+		,@SiteMap2Nome = 'Relatório geral'
+		,@SiteMap2Url = '~/Documentos/Relatorio.aspx?dummy=%27iGnoDuhcFtk%3d%27'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
-		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 		
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
