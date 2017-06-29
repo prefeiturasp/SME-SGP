@@ -106,7 +106,7 @@ namespace GestaoEscolar.Configuracao.Servico
                     
                     if (GestaoEscolarServicosBO.SelecionaExpressaoPorTrigger(trigger, out expressao))
                     {
-                        ConfigurarFrequencia(expressao);
+                        UCFrequenciaServico1.ConfigurarFrequencia(expressao);
                         chkDesativar.Visible = true;
                     }
                     else
@@ -140,131 +140,6 @@ namespace GestaoEscolar.Configuracao.Servico
             UCFrequenciaServico1.AtualizaDivs();
             chkDesativar.Checked = false;
             divCampos.Visible = true;
-        }
-
-        /// <summary>
-        /// Retorna a configuração do serviço de acordo com a expressão salva.
-        /// </summary>
-        /// <param name="expressaoInteira">Expressão das configurações.</param>
-        private void ConfigurarFrequencia(string expressaoInteira)
-        {
-            string[] expressao = expressaoInteira.Split(' ');
-
-
-            if (expressao[0].Contains('/'))
-            {
-                // Configuração de intervalo de segundos.
-                UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.IntervaloSegundos;
-                UCFrequenciaServico1.SegundosIntervalo = expressao[0].Split('/')[1];
-            }
-            else if (expressao[2].Contains(','))
-            {
-                UCFrequenciaServico1.VariosHorarios = new[] { expressao[1], expressao[2] };
-                UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.VariasVezesDia;
-            }
-            else if (expressao[2].Equals("*"))
-            {
-                if (expressao[3].Equals("*"))
-                {
-                    // Configuração da expressão de hora em hora.
-                    UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.HoraEmHora;
-                    UCFrequenciaServico1.Minuto = expressao[1].Split('/')[1];
-                }
-                else if (expressao[3].Equals("1/1"))
-                {
-                    // Configuração de intervalo de minutos.
-                    UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.IntervaloMinutos;
-                    UCFrequenciaServico1.MinutoIntervalo = expressao[1].Split('/')[1];
-                }
-            }
-            else
-            {
-                UCFrequenciaServico1.Horario = string.Format("{0}:{1}", expressao[2], expressao[1]);
-
-                switch (expressao[3])
-                {
-                    case "*":
-                        UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.Diario;
-                        break;
-
-                    case "?":
-                        switch (expressao[5])
-                        {
-                            case "MON-FRI":
-                                UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.SegundaSexta;
-                                break;
-
-                            case "SUN,SAT":
-                                UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.SabadoDomingo;
-                                break;
-
-                            default:
-                                string[] listaDias = expressao[5].Split(',');
-
-                                if (listaDias.Count() > 1)
-                                {
-                                    UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.Personalizado;
-
-                                    foreach (string dia in listaDias)
-                                    {
-                                        UCFrequenciaServico1.DiaSemanaVarios = RetornarTipoDiaSemana(dia);
-                                    }
-                                }
-                                else
-                                {
-                                    UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.Semanal;
-                                    UCFrequenciaServico1.DiaSemanaUnico = RetornarTipoDiaSemana(expressao[5]);
-                                }
-
-                                break;
-                        }
-
-                        break;
-
-                    default:
-                        UCFrequenciaServico1.TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.Mensal;
-                        UCFrequenciaServico1.DiaMesSelectedValue = expressao[3];
-                        break;
-                }
-            }
-
-            UCFrequenciaServico1.AtualizaDivs();
-        }
-
-        /// <summary>
-        /// Retorna o tipo do dia da semana de acordo com a sigla.
-        /// </summary>
-        /// <param name="dia">Sigla do dia da semana.</param>
-        /// <returns>Tipo do dia da semana.</returns>
-        private string RetornarTipoDiaSemana(string dia)
-        {
-            byte tipo = 0;
-            switch (dia)
-            {
-                case "SUN":
-                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Domingo;
-                    break;
-                case "MON":
-                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Segunda;
-                    break;
-                case "TUE":
-                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Terca;
-                    break;
-                case "WED":
-                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Quarta;
-                    break;
-                case "THU":
-                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Quinta;
-                    break;
-                case "FRI":
-                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Sexta;
-                    break;
-                case "SAT":
-                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Sabado;
-                    break;
-            }
-
-            return tipo.ToString();
         }
 
         /// <summary>

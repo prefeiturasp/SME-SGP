@@ -8,12 +8,40 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using MSTech.GestaoEscolar.DAL.Abstracts;
     using System;
+    using System.Data;
 
     /// <summary>
     /// Description: .
     /// </summary>
     public class CFG_AlertaDAO : Abstract_CFG_AlertaDAO
 	{
+        #region Consulta
+
+        /// <summary>
+        /// Retorna os alertas não excluídos.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SelecionarAlertas(out int totalRecords)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CFG_Alerta_SelecionarAlertas", _Banco);
+            try
+            {
+                qs.Execute();
+                totalRecords = qs.Return.Rows.Count;
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        #endregion Consulta
+
         #region Métodos Sobrescritos
 
         /// <summary>

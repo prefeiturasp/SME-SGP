@@ -96,7 +96,7 @@ SET XACT_ABORT ON
 		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
 		,@nomeModuloPai = 'Configurações' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Alertas' -- Nome do módulo (Obrigatório)
-		,@SiteMap1Nome = 'Consulta de alertas'
+		,@SiteMap1Nome = 'Listagem de alertas'
 		,@SiteMap1Url = '~/Configuracao/Alertas/Busca.aspx'
 		,@SiteMap2Nome = 'Cadastro de alertas'
 		,@SiteMap2Url = '~/Configuracao/Alertas/Cadastro.aspx'

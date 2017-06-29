@@ -766,7 +766,130 @@ namespace GestaoEscolar.WebControls.FrequenciaServico
             CarregarHorarios(dt);
         }
 
-        #endregion
+        /// <summary>
+        /// Retorna a configuração do serviço de acordo com a expressão salva.
+        /// </summary>
+        /// <param name="expressaoInteira">Expressão das configurações.</param>
+        public void ConfigurarFrequencia(string expressaoInteira)
+        {
+            string[] expressao = expressaoInteira.Split(' ');
 
+            if (expressao[0].Contains('/'))
+            {
+                // Configuração de intervalo de segundos.
+                TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.IntervaloSegundos;
+                SegundosIntervalo = expressao[0].Split('/')[1];
+            }
+            else if (expressao[2].Contains(','))
+            {
+                VariosHorarios = new[] { expressao[1], expressao[2] };
+                TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.VariasVezesDia;
+            }
+            else if (expressao[2].Equals("*"))
+            {
+                if (expressao[3].Equals("*"))
+                {
+                    // Configuração da expressão de hora em hora.
+                    TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.HoraEmHora;
+                    Minuto = expressao[1].Split('/')[1];
+                }
+                else if (expressao[3].Equals("1/1"))
+                {
+                    // Configuração de intervalo de minutos.
+                    TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.IntervaloMinutos;
+                    MinutoIntervalo = expressao[1].Split('/')[1];
+                }
+            }
+            else
+            {
+                Horario = string.Format("{0}:{1}", expressao[2], expressao[1]);
+
+                switch (expressao[3])
+                {
+                    case "*":
+                        TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.Diario;
+                        break;
+
+                    case "?":
+                        switch (expressao[5])
+                        {
+                            case "MON-FRI":
+                                TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.SegundaSexta;
+                                break;
+
+                            case "SUN,SAT":
+                                TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.SabadoDomingo;
+                                break;
+
+                            default:
+                                string[] listaDias = expressao[5].Split(',');
+
+                                if (listaDias.Count() > 1)
+                                {
+                                    TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.Personalizado;
+
+                                    foreach (string dia in listaDias)
+                                    {
+                                        DiaSemanaVarios = RetornarTipoDiaSemana(dia);
+                                    }
+                                }
+                                else
+                                {
+                                    TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.Semanal;
+                                    DiaSemanaUnico = RetornarTipoDiaSemana(expressao[5]);
+                                }
+
+                                break;
+                        }
+
+                        break;
+
+                    default:
+                        TipoFrequencia = (byte)GestaoEscolarServicosBO.Frequencias.Mensal;
+                        DiaMesSelectedValue = expressao[3];
+                        break;
+                }
+            }
+
+            AtualizaDivs();
+        }
+
+        /// <summary>
+        /// Retorna o tipo do dia da semana de acordo com a sigla.
+        /// </summary>
+        /// <param name="dia">Sigla do dia da semana.</param>
+        /// <returns>Tipo do dia da semana.</returns>
+        private string RetornarTipoDiaSemana(string dia)
+        {
+            byte tipo = 0;
+            switch (dia)
+            {
+                case "SUN":
+                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Domingo;
+                    break;
+                case "MON":
+                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Segunda;
+                    break;
+                case "TUE":
+                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Terca;
+                    break;
+                case "WED":
+                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Quarta;
+                    break;
+                case "THU":
+                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Quinta;
+                    break;
+                case "FRI":
+                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Sexta;
+                    break;
+                case "SAT":
+                    tipo = (byte)GestaoEscolarServicosBO.DiasSemana.Sabado;
+                    break;
+            }
+
+            return tipo.ToString();
+        }
+
+        #endregion
     }
 }
