@@ -196,6 +196,23 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.curriculos_periodoController.GetCurriculoPeriodoPorEscola(System.Int32)" -->
+        <member name="T:GestaoAcademica.WebApi.Controllers.graficoAtendimentoController">
+            <summary>
+            Recurso para renderizar gráficos de atendimento.
+            </summary>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.graficoAtendimentoController.Get(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Descrição: Retorna os dados para renderizar o gráfico de atendimento
+            </summary>
+            <param name="gra_id"></param>
+            <param name="esc_id"></param>
+            <param name="uni_id"></param>
+            <param name="cur_id"></param>
+            <param name="crr_id"></param>
+            <param name="crp_id"></param>
+            <returns></returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Controllers.matriculaTurmaController.Get(System.Int64,System.Int32)">
             <summary>
             Seleciona dados da matrícula do aluno

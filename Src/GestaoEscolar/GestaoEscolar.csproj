@@ -1800,6 +1800,20 @@
     <Compile Include="Relatorios\FrequenciaMensal\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\GraficoAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\GraficoAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\GraficoAtendimento\Relatorio.aspx.cs">
+      <DependentUpon>Relatorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\GraficoAtendimento\Relatorio.aspx.designer.cs">
+      <DependentUpon>Relatorio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\GraficoJustificativaFalta\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2211,6 +2225,13 @@
     </Compile>
     <Compile Include="WebControls\Combos\UCComboAtividadeAvaliativa.ascx.designer.cs">
       <DependentUpon>UCComboAtividadeAvaliativa.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboGraficoAtendimento.ascx.cs">
+      <DependentUpon>UCComboGraficoAtendimento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboGraficoAtendimento.ascx.designer.cs">
+      <DependentUpon>UCComboGraficoAtendimento.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Combos\UCComboMatrizHabilidades.ascx.cs">
       <DependentUpon>UCComboMatrizHabilidades.ascx</DependentUpon>
@@ -4430,6 +4451,8 @@
     <Content Include="Relatorios\DivergenciasAulasPrevistas\Busca.aspx" />
     <Content Include="Relatorios\DivergenciasRematriculas\Busca.aspx" />
     <Content Include="Relatorios\FrequenciaMensal\Busca.aspx" />
+    <Content Include="Relatorios\GraficoAtendimento\Busca.aspx" />
+    <Content Include="Relatorios\GraficoAtendimento\Relatorio.aspx" />
     <Content Include="Relatorios\GraficoJustificativaFalta\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
@@ -4473,6 +4496,7 @@
     <Content Include="WebControls\Combos\Novos\UCCTurmaDisciplina.ascx" />
     <Content Include="WebControls\Combos\UCComboAreaConhecimento.ascx" />
     <Content Include="WebControls\Combos\UCComboAtividadeAvaliativa.ascx" />
+    <Content Include="WebControls\Combos\UCComboGraficoAtendimento.ascx" />
     <Content Include="WebControls\Combos\UCComboMatrizHabilidades.ascx" />
     <Content Include="WebControls\Combos\UCComboMeioTransporte.ascx" />
     <Content Include="WebControls\Combos\UCComboMotivoBaixaFrequencia.ascx" />
