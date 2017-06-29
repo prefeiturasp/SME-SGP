@@ -102,6 +102,41 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Excluir'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.btnGerarRel.Text' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Gerar relatório'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.lblMessage.ErroPermissao' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Você não possui permissão para acessar a página solicitada.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.lblMessage.ErroCarregarSistema' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar carregar o sistema.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.lblMessage.ErroGerarRelatorio' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar carregar o relatório.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'GraficoJustificativaFalta.Busca.lblMessage.ErroCarregarDados' 
+		, @rcr_NomeResource = 'Relatorios'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Erro ao tentar carregar os dados.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
