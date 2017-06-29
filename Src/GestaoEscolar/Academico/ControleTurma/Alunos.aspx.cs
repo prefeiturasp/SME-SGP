@@ -261,6 +261,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
         private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
 
+        private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRPEncerramento = new List<Struct_PreenchimentoAluno>();
+
         #endregion
 
         #region Métodos
@@ -312,6 +314,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal)
                 {
                     lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio);
+                }
+
+                if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno)
+                {
+                    lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio).Where(p => p.tud_id == UCControleTurma1.VS_tud_id).ToList();
+
+                    lstAlunosRelatorioRPEncerramento = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(-1, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio).Where(p => p.tud_id == UCControleTurma1.VS_tud_id).ToList();
                 }
 
                 CancelaSelect = false;
@@ -968,6 +977,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     btnRelatorioAEE.CommandArgument = alu_id.ToString();
                 }
 
+                Image imgStatusAlertaAulaSemAnotacaoRP = (Image)e.Row.FindControl("imgStatusAlertaAulaSemAnotacaoRP");
+
                 // Mostra o ícone para as anotações de recuperação paralela (RP):
                 // - para todos os alunos, quando a turma for de recuperação paralela,
                 // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
@@ -979,6 +990,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                     {
                         btnRelatorioRP.Visible = true;
                         btnRelatorioRP.CommandArgument = string.Format("{0};-1", alu_id.ToString());
+                    }
+
+                    if (imgStatusAlertaAulaSemAnotacaoRP != null)
+                    {
+                        imgStatusAlertaAulaSemAnotacaoRP.Visible = UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno && 
+                            (!lstAlunosRelatorioRP.Any(p => p.alu_id == alu_id) ||
+                             !lstAlunosRelatorioRPEncerramento.Any(p => p.alu_id == alu_id));
                     }
                 }
             }
