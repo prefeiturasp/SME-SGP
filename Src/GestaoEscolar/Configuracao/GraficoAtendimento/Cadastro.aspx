@@ -3,10 +3,15 @@
 <%@ PreviousPageType VirtualPath="~/Configuracao/GraficoAtendimento/Busca.aspx" %>
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios"
     TagPrefix="uc1" %>
-<%@ Register Src="~/WebControls/Combos/UCComboQuestionario.ascx" TagName="UCComboQuestionario" 
+<%@ Register Src="~/WebControls/Combos/UCComboQuestionario.ascx" TagName="UCComboQuestionario"
     TagPrefix="uc2" %>
-<%@ Register Src="~/WebControls/Combos/UCComboTipoDisciplina.ascx" TagName="UCComboTipoDisciplina" 
+<%@ Register Src="~/WebControls/Combos/UCComboTipoDisciplina.ascx" TagName="UCComboTipoDisciplina"
     TagPrefix="uc3" %>
+<%@ Register Src="~/WebControls/Combos/UCComboRelatorioAtendimento.ascx" TagPrefix="uc1" TagName="UCComboRelatorioAtendimento" %>
+<%@ Register Src="~/WebControls/Combos/UCComboRacaCor.ascx" TagPrefix="uc1" TagName="UCComboRacaCor" %>
+<%@ Register Src="~/WebControls/Combos/UCComboSexo.ascx" TagPrefix="uc1" TagName="UCComboSexo" %>
+<%@ Register Src="~/WebControls/Combos/ComboTipoDeficiencia.ascx" TagPrefix="uc1" TagName="ComboTipoDeficiencia" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -24,94 +29,131 @@
         <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
         <asp:UpdatePanel runat="server" ID="updCadastro" UpdateMode="Always">
             <ContentTemplate>
-                <asp:Label ID="lblTitulo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTitulo.Text %>" AssociatedControlID="txtTitulo" />
-                <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
+
                 <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo" ValidationGroup="vgRelatorioAtendimento"
                     Display="Dynamic" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.rfvTitulo.ErrorMessage %>" Text="*" />
                 <asp:Label ID="lblTipo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTipo.Text %>" AssociatedControlID="ddlTipo"></asp:Label>
-                <asp:DropDownList ID="ddlTipo" runat="server"  
+                <asp:DropDownList ID="ddlTipo" runat="server"
                     OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" AutoPostBack="true">
                     <asp:ListItem Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.ddlTipo.msgSelecione %>" Value="0"></asp:ListItem>
                     <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.AEE %>" Value="1"></asp:ListItem>
                     <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.NAAPA %>" Value="2"></asp:ListItem>
                     <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.RP %>" Value="3"></asp:ListItem>
                 </asp:DropDownList>
-                <asp:CompareValidator ID="cpvTipo" runat="server" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.cpvTipo.ErrorMessage %>"
-                    ControlToValidate="ddlTipo" Operator="GreaterThan" ValueToCompare="0"
-                    Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
-                <div runat="server" id="divPeriodicidade" visible="false">
-                    <asp:Label ID="lblPeriodicidade" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblPeriodicidade.Text %>" AssociatedControlID="ddlPeriodicidade"></asp:Label>
-                    <asp:DropDownList ID="ddlPeriodicidade" runat="server">
-                        <asp:ListItem Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.ddlPeriodicidade.msgSelecione %>" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Periodico %>" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Encerramento %>" Value="2"></asp:ListItem>
+
+                <uc1:UCComboRelatorioAtendimento runat="server" ID="UCComboRelatorioAtendimento" />
+                <br />
+                <br />
+                <asp:Label ID="lblTitulo" runat="server" Text="Título do gráfico" AssociatedControlID="txtTitulo" />
+                <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
+                <div runat="server" id="divPeriodicidade">
+                    <asp:Label ID="lblPeriodicidade" runat="server" Text="Eixo de agrupamento: " AssociatedControlID="ddlEixoAgrupamento"></asp:Label>
+                    <asp:DropDownList ID="ddlEixoAgrupamento" runat="server">
+                        <asp:ListItem Text="-- Selecione um eixo de agrupamento --" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Curso" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Ciclo" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="Período do curso" Value="3"></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:CompareValidator ID="cpvPeriodicidade" runat="server" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.cpvPeriodicidade.ErrorMessage %>"
-                        ControlToValidate="ddlPeriodicidade" Operator="GreaterThan" ValueToCompare="0"
+                    <asp:CompareValidator ID="cpvPeriodicidade" runat="server" ErrorMessage="Eixo de agrupamento é obrigatório."
+                        ControlToValidate="ddlEixoAgrupamento" Operator="GreaterThan" ValueToCompare="0"
                         Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
                 </div>
-                <div runat="server" id="divRacaCor" visible="false">
-                    <asp:CheckBox runat="server" ID="chkExibeRacaCor" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkExibeRacaCor.Text %>" />
-                </div>
-                <div runat="server" id="divHipotese" visible="false">
-                    <asp:CheckBox runat="server" ID="chkExibeHipotese" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkExibeHipotese.Text %>" />
-                </div>
-                <div runat="server" id="divAcoesRealizadas" visible="false">
-                    <asp:CheckBox runat="server" ID="chkAcoesRealizadas" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkAcoesRealizadas.Text %>" />
-                </div>
-                <div runat="server" id="divDisciplina" visible="false">
-                    <uc3:UCComboTipoDisciplina runat="server" ID="UCComboTipoDisciplina" MostrarMessageSelecione="True" PermiteEditar="True" Obrigatorio="true" ValidationGroup="vgRelatorioAtendimento" />
-                </div>
+
             </ContentTemplate>
         </asp:UpdatePanel>
         <div>
             <br />
         </div>
-        <div>
-            <fieldset>
-                <legend>
-                    <asp:Label ID="lblLegendAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblLegendAnexo.Text %>" />
-                </legend>
-                <div runat="server" id="divAddAnexo" visible="false">
-                    <asp:ValidationSummary ID="vsAnexo" runat="server" ValidationGroup="vgAnexo" />
-                    <asp:Label ID="lblTituloAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTituloAnexo.Text %>" AssociatedControlID="txtTituloAnexo" />
-                    <asp:TextBox ID="txtTituloAnexo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
-                    <table><tr>
-                        <td>
-                            <asp:Label ID="lblAnexo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblAnexo.Text %>" AssociatedControlID="fupAnexo"></asp:Label>
-                            <asp:FileUpload ID="fupAnexo" runat="server" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.fupAnexo.ToolTip %>" />
-                        </td>
-                        <td>
-                            <asp:ImageButton runat="server" ID="btnAddAnexo" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnAddAnexo.Text %>" ValidationGroup="vgAnexo"
-                                SkinID="btNovo" OnClick="btnAddAnexo_Click" style="padding-left: 5px; padding-top: 25px" />
-                        </td>
-                    </tr></table>
-                </div>
-                <div runat="server" id="divAnexoAdicionado" visible="false">
-                    <asp:HyperLink runat="server" ID="hplAnexo"></asp:HyperLink>
-                    <asp:ImageButton runat="server" ID="btnExcluirAnexo" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnExcluirAnexo.Text %>" CausesValidation="false"
-                        SkinID="btExcluir" OnClick="btnExcluirAnexo_Click" />
-                </div>
-            </fieldset>
-        </div>
+        <asp:UpdatePanel ID="updFiltro" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <fieldset>
+                    <legend>
+                        <asp:Label runat="server" ID="Label1" Text="Filtros personalizados" />
+                    </legend>
+
+                    <asp:Label ID="lblFiltroFixo" runat="server" Text="Tipo de filtro: " AssociatedControlID="ddlFiltroFixo"></asp:Label>
+                    <asp:DropDownList ID="ddlFiltroFixo" runat="server" AutoPostBack="true">
+                        <asp:ListItem Text="-- Selecione um tipo de filtro --" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Período do preenchimento do relatório" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Raça/Cor" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="Faixa de idade" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="Sexo" Value="4"></asp:ListItem>
+                    </asp:DropDownList>
+
+                    <div runat="server" id="divRacaCor" visible="false">
+                        <uc1:UCComboRacaCor runat="server" ID="UCComboRacaCor" />
+                    </div>
+                    <div runat="server" id="divSexo" visible="false">
+                        <uc1:UCComboSexo runat="server" ID="UCComboSexo" />
+                    </div>
+                    <div runat="server" id="divIdade" visible="false">
+                        <asp:Label ID="Label2" runat="server" Text="Idade mínima" AssociatedControlID="txtIdadeInicial" />
+                        <asp:TextBox ID="txtIdadeInicial" runat="server" SkinID="text20C" MaxLength="2"></asp:TextBox>
+
+                        <asp:Label ID="Label3" runat="server" Text="Idade máxima" AssociatedControlID="txtIdadeFinal" />
+                        <asp:TextBox ID="txtIdadeFinal" runat="server" SkinID="text20C" MaxLength="2"></asp:TextBox>
+                    </div>
+                    <div runat="server" id="divDataPreenchimento" visible="false">
+                        <asp:Label ID="Label4" runat="server" Text="Preenchimento de relatório de:" AssociatedControlID="txtDtInicial" />
+                        <asp:TextBox ID="txtDtInicial" runat="server" SkinID="text30C" MaxLength="10"></asp:TextBox>
+
+                        <asp:Label ID="Label5" runat="server" Text="Até:" AssociatedControlID="txtDtFinal" />
+                        <asp:TextBox ID="txtDtFinal" runat="server" SkinID="text30C" MaxLength="10"></asp:TextBox>
+                    </div>
+                    <div runat="server" id="divDetalhamentoDeficiencia" visible="false">
+
+                        <!-- Tipo de deficiencia -->
+                        <uc1:ComboTipoDeficiencia runat="server" ID="ComboTipoDeficiencia" />
+                        <!-- Detalhamento -->
+                        <asp:UpdatePanel ID="updDetalhe" runat="server" UpdateMode="Always">
+                            <ContentTemplate>
+                                <fieldset>
+                                    <legend>
+                                        <asp:Label runat="server" ID="lblLegendGrupo" Text="Detalhamento da deficiência" />
+                                    </legend>
+                                    <asp:Panel runat="server" ID="pnlGrupo" Style="overflow: scroll; height: 500px;">
+                                        <asp:GridView runat="server" ID="gvDetalhe" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
+                                            EmptyDataText="Não existe detalhamento para essa deficiência." DataKeyNames="dfd_id">
+                                            <Columns>
+                                                <asp:BoundField HeaderText="Detalhamento" DataField="dfd_nome" />
+                                                <asp:TemplateField HeaderText="Selecionar" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:CheckBox runat="server" ID="chkSelecionar" />
+                                                    </ItemTemplate>
+                                                    <HeaderStyle CssClass="center"></HeaderStyle>
+                                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </asp:Panel>
+                                </fieldset>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </fieldset>
+            </ContentTemplate>
+        </asp:UpdatePanel>
         <asp:UpdatePanel ID="updQuestionario" runat="server" UpdateMode="Always">
             <ContentTemplate>
                 <fieldset>
                     <legend>
-                        <asp:Label runat="server" ID="lblLegendQuestionario" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblLegendQuestionario.Text %>" />
+                        <asp:Label runat="server" ID="lblLegendQuestionario" Text="Filtros personalizados" />
                     </legend>
                     <div runat="server" id="divAdicionarQuestionario">
                         <fieldset>
                             <asp:ValidationSummary ID="vsQuestionario" runat="server" ValidationGroup="vgQuestionario" />
-                            <table><tr>
-                                <td>
-                                    <uc2:UCComboQuestionario runat="server" id="UCComboQuestionario" ValidationGroup="vgQuestionario" Obrigatorio="True" MostrarMessageSelecione="True" PermiteEditar="True" />
-                                </td>
-                                <td>
-                                    <asp:ImageButton runat="server" ID="btnAddQuestionario" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnAdicionarQuestionario.Text %>" ValidationGroup="vgQuestionario"
-                                        SkinID="btNovo" OnClick="btnAdicionarQuestionario_Click" style="padding-left: 5px; padding-top: 25px" />
-                                </td>
-                            </tr></table>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <uc2:UCComboQuestionario runat="server" ID="UCComboQuestionario" ValidationGroup="vgQuestionario" Obrigatorio="True" MostrarMessageSelecione="True" PermiteEditar="True" />
+                                    </td>
+
+                                    <td>
+                                        <asp:ImageButton runat="server" ID="btnAddQuestionario" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnAdicionarQuestionario.Text %>" ValidationGroup="vgQuestionario"
+                                            SkinID="btNovo" OnClick="btnAdicionarQuestionario_Click" Style="padding-left: 5px; padding-top: 25px" />
+                                    </td>
+                                </tr>
+                            </table>
                         </fieldset>
                     </div>
                     <asp:GridView runat="server" ID="gvQuestionario" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
@@ -142,98 +184,6 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
-                </fieldset>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <asp:UpdatePanel ID="updGrupo" runat="server" UpdateMode="Always">
-            <ContentTemplate>
-                <fieldset>
-                    <legend>
-                        <asp:Label runat="server" ID="lblLegendGrupo" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblLegendGrupo.Text %>" />
-                    </legend>
-                    <asp:Panel runat="server" id="pnlGrupo" style="overflow: scroll; height: 500px;">
-                        <asp:GridView runat="server" ID="gvGrupo" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                            EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvGrupo.EmptyDataText %>" DataKeyNames="gru_id">
-                            <Columns>
-                                <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvGrupo.HeaderNome %>" DataField="gru_nome" />
-                                <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvGrupo.HeaderPermissaoConsulta %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="chkpermissaoConsulta" Checked='<%# Eval("rag_permissaoConsulta") %>' />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvGrupo.HeaderPermissaoEdicao %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="chkpermissaoEdicao" Checked='<%# Eval("rag_permissaoEdicao") %>' />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvGrupo.HeaderPermissaoExclusao %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="chkpermissaoExclusao" Checked='<%# Eval("rag_permissaoExclusao") %>' />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvGrupo.HeaderPermissaoAprovacao %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="chkpermissaoAprovacao" Checked='<%# Eval("rag_permissaoAprovacao") %>' />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
-                    </asp:Panel>
-                </fieldset>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <asp:UpdatePanel ID="updCargo" runat="server" UpdateMode="Always">
-            <ContentTemplate>
-                <fieldset>
-                    <legend>
-                        <asp:Label runat="server" ID="lblLegendCargo" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblLegendCargo.Text %>" />
-                    </legend>
-                    <asp:Panel runat="server" id="pnlCargo" style="overflow: scroll; height: 500px;">
-                        <asp:GridView runat="server" ID="gvCargo" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                            EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.EmptyDataText %>" DataKeyNames="crg_id">
-                            <Columns>
-                                <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderDescricao %>" DataField="crg_descricao" />
-                                <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderCodigo %>" DataField="crg_codigo" />
-                                <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderTipoVinculo %>" DataField="tvi_nome" />
-                                <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoConsulta %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="chkpermissaoConsulta" Checked='<%# Eval("rac_permissaoConsulta") %>' />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoEdicao %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="chkpermissaoEdicao" Checked='<%# Eval("rac_permissaoEdicao") %>' />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoExclusao %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="chkpermissaoExclusao" Checked='<%# Eval("rac_permissaoExclusao") %>' />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvCargo.HeaderPermissaoAprovacao %>" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                    <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="chkpermissaoAprovacao" Checked='<%# Eval("rac_permissaoAprovacao") %>' />
-                                    </ItemTemplate>
-                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
-                    </asp:Panel> 
                 </fieldset>
             </ContentTemplate>
         </asp:UpdatePanel>
