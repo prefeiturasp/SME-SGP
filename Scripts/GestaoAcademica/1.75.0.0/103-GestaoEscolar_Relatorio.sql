@@ -15,6 +15,10 @@ SET XACT_ABORT ON
 		,@rlt_nome = '[Preencher]' -- Nome do relatorio. (Obrigatório, igual a descricção do enumerador do sistema)
 
 	*/
+	
+	EXEC MS_InsereRelatorio
+		@rlt_id = 327 -- ID do relatório. (Obrigatório, igual ao enumerador do sistema)
+		,@rlt_nome = 'RelatorioAcoesRealizadas' -- Nome do relatorio. (Obrigatório, igual a descricção do enumerador do sistema)
 
 -- Fechar transação
 SET XACT_ABORT OFF

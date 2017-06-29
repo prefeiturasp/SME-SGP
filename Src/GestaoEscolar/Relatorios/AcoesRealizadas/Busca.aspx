@@ -31,7 +31,7 @@
                 <uc:UCCCurriculoPeriodo ID="UCCCurriculoPeriodo" MostrarMensagemSelecione="true" Obrigatorio="true"
                     runat="server" />
                 <uc:UCCCalendario ID="UCCCalendario" runat="server" MostrarMensagemSelecione="true" Obrigatorio="true" />
-                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" Obrigatorio="true" />
+                <uc:UCCTurma ID="UCCTurma" runat="server" MostrarMessageSelecione="true" Obrigatorio="false" />
                 <div id="divBuscaAvancadaAluno" runat="server" class="divBuscaAvancadaAluno">
                     <uc:UCCBuscaAluno ID="UCCBuscaAluno" runat="server" />
                 </div>
@@ -47,21 +47,15 @@
             <asp:Panel ID="pnlResultados" runat="server" GroupingText="<%$ Resources:Padrao, Padrao.Resultados.Text %>">
                 <div id="DivSelecionaTodos" runat="server">
                     <div style="float: left; width: 50%">
-                        <asp:CheckBox ID="_chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos" todososcursospeja='0' runat="server" />
+                        <asp:CheckBox ID="_chkTodos" SkinID="chkTodos" Text="Selecionar todos os alunos" todososcursospeja='0'
+                            runat="server" />
                     </div>
                     <uc:UCCQtdePaginacao ID="UCCQtdePaginacao" runat="server" />
                 </div>
                 <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound"
-                    OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
-                    EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>" OnDataBinding="grvResultados_DataBinding"
-                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id"                   
-                    EnableModelValidation="True" SkinID="GridResponsive">
-                    <%--<asp:GridView ID="_grvDocumentoAluno" runat="server" AllowPaging="True" AllowCustomPaging="true" AutoGenerateColumns="False"
-                        BorderStyle="None" DataKeyNames="alu_id,tur_id,cal_id,esc_id,mtu_id,EscolaUniDestino,GrupamentoDestino,pes_nome,tur_escolaUnidade"
-                        EmptyDataText="A pesquisa não encontrou resultados."
-                        OnRowDataBound="_grvDocumentoAluno_RowDataBound" OnDataBound="_grvDocumentoAluno_DataBound"
-                        AllowSorting="True" OnPageIndexChanging="_grvDocumentoAluno_PageIndexChanging" OnSorting="_grvDocumentoAluno_Sorting"
-                        EnableModelValidation="True" SkinID="GridResponsive">--%>
+                    OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowCustomPaging="true" AllowSorting="true"
+                    EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>"
+                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
                     <Columns>
                         <asp:TemplateField>
                             <HeaderTemplate>
@@ -71,20 +65,17 @@
                                     tur_id='<%# Eval("tur_id") %>' esc_id='<%# Eval("esc_id") %>' cursopeja='<%# Eval("CursoPeja") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:BoundField HeaderText="<%$ Resources:Mensagens, MSG_NUMEROMATRICULA %>" DataField="alc_matricula" SortExpression="alc_matricula" />
                         <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Nome.Text %>" DataField="pes_nome" SortExpression="pes_nome" />
-                        <%--<asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Idade.Text %>" DataField="pes_idade" SortExpression="pes_idade" />--%>
                         <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Escola.Text %>" DataField="tur_escolaUnidade" SortExpression="tur_escolaUnidade" />
-                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Curso.Text %>" DataField="tur_curso" SortExpression="tur_curso" />
                         <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Turma.Text %>" DataField="tur_codigo" SortExpression="tur_codigo" />
-                        <%--<asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.LancarRelatorio.Text %>" HeaderStyle-CssClass="center">
-                             <ItemTemplate>
-                                <asp:ImageButton ID="btnResponder" runat="server" SkinID="btRelatorio" CommandName="Edit" PostBackUrl="~/Classe/RelatorioNaapa/Cadastro.aspx"
-                                    ToolTip="<%$ Resources:GestaoEscolar.Classe.RelatorioNaapa.Busca, ctrl_61.ToolTip %>" />
-                            </ItemTemplate>
-                            <ItemStyle CssClass="center" HorizontalAlign="Center" />
-                        </asp:TemplateField>--%>
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Curso.Text %>" DataField="tur_curso" SortExpression="tur_curso" />
+                        <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Calendario.Text %>" DataField="tur_calendario" SortExpression="tur_calendario" />
                     </Columns>
                 </asp:GridView>
+                <div class="right">
+                    <asp:Button ID="btnGerarRelatrorioAcoesRealizadas" runat="server" Text="Gerar relatório" OnClick="btnGerarRelatrorioAcoesRealizadas_Click" />
+                </div>
                 <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
             </asp:Panel>
         </ContentTemplate>
