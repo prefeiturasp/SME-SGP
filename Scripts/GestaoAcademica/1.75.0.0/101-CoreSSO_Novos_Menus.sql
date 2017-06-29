@@ -63,6 +63,22 @@ SET XACT_ABORT ON
 
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = 'Relatórios' -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Gráficos' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Gráfico de justificativa de falta' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Gráfico de justificativa de falta'
+		,@SiteMap1Url = '~/Relatorios/GraficoJustificativaFalta/Busca.aspx'
+		,@SiteMap2Nome = 'Gráfico de justificativa de falta'
+		,@SiteMap2Url = '~/Documentos/RelatorioDev.aspx?dummy=%277RDgZU5k%2bhU%3d%27'
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
 		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
 		,@nomeModuloPai = 'Registro de Classe' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Relatório NAAPA' -- Nome do módulo (Obrigatório)

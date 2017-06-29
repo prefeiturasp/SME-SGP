@@ -7,19 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GestaoEscolar.Classe.RelatorioNaapa {
+namespace GestaoEscolar.Relatorios.GraficoJustificativaFalta {
     
     
-    public partial class Cadastro {
-        
-        /// <summary>
-        /// ValidationSummary1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+    public partial class Busca {
         
         /// <summary>
         /// updMensagem control.
@@ -31,159 +22,120 @@ namespace GestaoEscolar.Classe.RelatorioNaapa {
         protected global::System.Web.UI.UpdatePanel updMensagem;
         
         /// <summary>
-        /// lblMensagem control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensagem;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// pnlFiltros control.
+        /// ValidationSummary1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlFiltros;
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
         
         /// <summary>
-        /// UCCRelatorioAtendimento control.
+        /// uppPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::GestaoEscolar.WebControls.Combos.UCComboRelatorioAtendimento UCCRelatorioAtendimento;
+        protected global::System.Web.UI.UpdatePanel uppPesquisa;
         
         /// <summary>
-        /// btnVoltar control.
+        /// fdsPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVoltar;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsPesquisa;
         
         /// <summary>
-        /// btnLimparBusca control.
+        /// UCCamposObrigatorios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLimparBusca;
+        protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios;
         
         /// <summary>
-        /// btnNovo control.
+        /// _divPesquisa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNovo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl _divPesquisa;
         
         /// <summary>
-        /// fdsLancamento control.
+        /// lblAvisoMensagem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsLancamento;
+        protected global::System.Web.UI.WebControls.Label lblAvisoMensagem;
         
         /// <summary>
-        /// litLancamento control.
+        /// UCComboUAEscola control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litLancamento;
+        protected global::GestaoEscolar.WebControls.Combos.UCComboUAEscola UCComboUAEscola;
         
         /// <summary>
-        /// grvLancamentos control.
+        /// UCComboCalendario1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvLancamentos;
+        protected global::GestaoEscolar.WebControls.Combos.Novos.UCCCalendario UCComboCalendario1;
         
         /// <summary>
-        /// pnlLancamento control.
+        /// UCComboCursoCurriculo1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlLancamento;
+        protected global::GestaoEscolar.WebControls.Combos.Novos.UCCCursoCurriculo UCComboCursoCurriculo1;
         
         /// <summary>
-        /// btnSalvar control.
+        /// UCComboCurriculoPeriodo1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalvar;
+        protected global::GestaoEscolar.WebControls.Combos.Novos.UCCCurriculoPeriodo UCComboCurriculoPeriodo1;
         
         /// <summary>
-        /// btnCancelar control.
+        /// UCComboTurma1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::GestaoEscolar.WebControls.Combos.Novos.UCCTurma UCComboTurma1;
         
         /// <summary>
-        /// UCLancamentoRelatorioAtendimento control.
+        /// btnGerarRel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento UCLancamentoRelatorioAtendimento;
-        
-        /// <summary>
-        /// btnSalvarBaixo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalvarBaixo;
-        
-        /// <summary>
-        /// btnCancelarBaixo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarBaixo;
-        
-        /// <summary>
-        /// btnVoltarBaixo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVoltarBaixo;
-        
-        /// <summary>
-        /// PreviousPage property.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated property.
-        /// </remarks>
-        public new GestaoEscolar.Classe.RelatorioNaapa.Busca PreviousPage {
-            get {
-                return ((GestaoEscolar.Classe.RelatorioNaapa.Busca)(base.PreviousPage));
-            }
-        }
+        protected global::System.Web.UI.WebControls.Button btnGerarRel;
     }
 }

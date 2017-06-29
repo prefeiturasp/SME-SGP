@@ -209,6 +209,21 @@ namespace GestaoEscolar.WebControls.Combos
             }
         }
 
+        /// <summary>
+        /// Atribui valores para o combo
+        /// </summary>
+        public DropDownList _Combo
+        {
+            get
+            {
+                return ddlCombo;
+            }
+            set
+            {
+                ddlCombo = value;
+            }
+        }
+
         #endregion
 
         #region Métodos

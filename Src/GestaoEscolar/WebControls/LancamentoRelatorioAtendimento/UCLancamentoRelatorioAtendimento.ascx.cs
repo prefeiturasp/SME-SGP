@@ -18,6 +18,13 @@
 
     public partial class UCLancamentoRelatorioAtendimento : MotherUserControl
     {
+        #region Constantes
+
+        private const int grvAcoesColunaEditar = 2;
+        private const int grvAcoesColunaExcluir = 3;
+
+        #endregion Constantes
+
         #region Propriedades
 
         /// <summary>
@@ -257,6 +264,32 @@
             }
         }
 
+        private List<sAcoesRealizadas> VS_AcoesRealizadas
+        {
+            get
+            {
+                if (ViewState["VS_AcoesRealizadas"] == null)
+                {
+                    ViewState["VS_AcoesRealizadas"] = new List<sAcoesRealizadas>();
+                }
+
+                return (List<sAcoesRealizadas>)ViewState["VS_AcoesRealizadas"];
+            }
+
+            set
+            {
+                ViewState["VS_AcoesRealizadas"] = value;
+            }
+        }
+
+        private List<sAcoesRealizadas> AcoesRealizadasAtivas
+        {
+            get
+            {
+                return VS_AcoesRealizadas.FindAll(p => !p.excluido);
+            }
+        }
+
         #endregion
 
         #region Page Life Cycle
@@ -270,6 +303,7 @@
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsUCLancamentoRelatorioAtendimento.js"));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.UiAriaTabs));
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsTabs.js"));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.CamposData));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
@@ -338,6 +372,8 @@
             VS_RelatorioAtendimento = CLS_RelatorioAtendimentoBO.SelecionaRelatorio(rea_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo);
 
             VS_RelatorioPreenchimentoAluno = CLS_RelatorioPreenchimentoBO.SelecionaPorRelatorioAlunoTurmaDisciplina(VS_rea_id, VS_alu_id, VS_tur_id, VS_tud_id, VS_tpc_id, reap_id);
+
+            VS_AcoesRealizadas = new List<sAcoesRealizadas>();
 
             if (VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado &&
                 PermiteConsultar && !PermiteEditar && !PermiteAprovar)
@@ -597,6 +633,14 @@
             return rel;
         }
 
+        private void CarregarAcoes()
+        {
+            grvAcoes.DataSource = AcoesRealizadasAtivas;
+            grvAcoes.DataBind();
+
+            btnNovaAcao.Visible = grvAcoes.EditIndex < 0;
+        }
+
         #endregion
 
         #region Eventos
@@ -752,6 +796,191 @@
                         txtRespostaTextoAdicional.Text = VS_RelatorioPreenchimentoAluno.lstQuestionarioRespostaPreenchimento.Find(p => p.raq_id == raq_id && p.qtr_id == qtr_id).qrp_textoAdicional;
                     }
                 }
+            }
+        }
+
+        protected void btnNovaAcao_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Se ainda não existe outro item novo sendo cadastrado...
+                if (grvAcoes.EditIndex < 0 || Convert.ToInt64(grvAcoes.DataKeys[grvAcoes.EditIndex]["rpa_id"]) > 0 || Convert.ToInt32(grvAcoes.DataKeys[grvAcoes.EditIndex]["idTemp"]) > 0)
+                {
+                    sAcoesRealizadas entity = new sAcoesRealizadas
+                    {
+                        rpa_id = -1
+                        ,
+                        rpa_data = string.Empty
+                        ,
+                        rpa_impressao = false
+                        ,
+                        rpa_acao = string.Empty
+                        ,
+                        idTemp = -1
+                        ,
+                        excluido = false
+                    };
+                    VS_AcoesRealizadas.Add(entity);
+                    int index = AcoesRealizadasAtivas.Count() - 1;
+                    grvAcoes.EditIndex = index;
+                    CarregarAcoes();
+
+                    ImageButton btnSalvar = (ImageButton)grvAcoes.Rows[index].FindControl("btnSalvar");
+                    if (btnSalvar != null)
+                        btnSalvar.Visible = true;
+
+                    ImageButton btnEditar = (ImageButton)grvAcoes.Rows[index].FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                        ImageButton btnCancelarEdicao = (ImageButton)grvAcoes.Rows[index].FindControl("btnCancelarEdicao");
+                        if (btnCancelarEdicao != null)
+                            btnCancelarEdicao.Visible = true;
+                    }
+
+                    ImageButton btnExcluir = (ImageButton)grvAcoes.Rows[index].FindControl("btnExcluir");
+                    if (btnExcluir != null)
+                        btnExcluir.Visible = false;
+
+                    grvAcoes.Rows[index].Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void grvAcoes_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                GridView grv = (GridView)sender;
+                if (grv.EditIndex >= 0)
+                {
+                    ImageButton btnEditar = (ImageButton)e.Row.FindControl("btnEditar");
+                    if (btnEditar != null)
+                    {
+                        btnEditar.Visible = false;
+                    }
+                }
+            }
+        }
+
+        protected void grvAcoes_DataBound(object sender, EventArgs e)
+        {
+            GridView grv = (GridView)sender;
+            if (grv.EditIndex >= 0)
+            {
+                grv.Columns[grvAcoesColunaExcluir].Visible = false;
+            }
+            else
+            {
+                grv.Columns[grvAcoesColunaExcluir].Visible = grv.Columns[grvAcoesColunaEditar].Visible = PermiteEditar &&
+                                                                                                            (PermiteEditarAprovado || VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado);
+            }
+        }
+
+        protected void grvAcoes_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            try
+            {
+                GridView grv = (GridView)sender;
+                grv.EditIndex = e.NewEditIndex;
+                CarregarAcoes();
+
+                ImageButton btnSalvar = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnSalvar");
+                if (btnSalvar != null)
+                    btnSalvar.Visible = true;
+
+                ImageButton btnEditar = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnEditar");
+                if (btnEditar != null)
+                {
+                    btnEditar.Visible = false;
+                    ImageButton btnCancelarEdicao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnCancelarEdicao");
+                    if (btnCancelarEdicao != null)
+                        btnCancelarEdicao.Visible = true;
+                }
+
+                grv.Rows[e.NewEditIndex].Focus();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void grvAcoes_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridView grv = ((GridView)sender);
+            try
+            {
+                TextBox txtData = (TextBox)grv.Rows[e.RowIndex].FindControl("txtData");
+                TextBox txtAcao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtAcao");
+                CheckBox ckbImpressao = (CheckBox)grv.Rows[e.RowIndex].FindControl("ckbImpressao");
+
+                if (txtData != null && txtAcao != null && ckbImpressao != null)
+                {
+                    int indice = VS_AcoesRealizadas.FindIndex(p => (p.rpa_id > 0 && p.rpa_id == Convert.ToInt64(grv.DataKeys[e.RowIndex]["rpa_id"]))
+                                                                || (p.rpa_id <= 0 && p.idTemp == Convert.ToInt32(grv.DataKeys[e.RowIndex]["idTemp"])));
+                    sAcoesRealizadas acao = VS_AcoesRealizadas[indice];
+                    acao.rpa_data = txtData.Text;
+                    acao.rpa_acao = txtAcao.Text;
+                    acao.rpa_impressao = ckbImpressao.Checked;
+                    if (acao.rpa_id <= 0 && acao.idTemp <= 0)
+                    {
+                        acao.idTemp = VS_AcoesRealizadas.Count() + 1;
+                    }
+                    VS_AcoesRealizadas[indice] = acao;
+                    grv.EditIndex = -1;
+                    CarregarAcoes();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void grvAcoes_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            GridView grv = ((GridView)sender);
+            try
+            {
+                if (Convert.ToInt64(grv.DataKeys[e.RowIndex]["rpa_id"]) > 0
+                    || Convert.ToInt32(grv.DataKeys[e.RowIndex]["idTemp"]) > 0)
+                {
+                    int indice = VS_AcoesRealizadas.FindIndex(p => (p.rpa_id > 0 && p.rpa_id == Convert.ToInt64(grv.DataKeys[e.RowIndex]["rpa_id"]))
+                                                                || (p.rpa_id <= 0 && p.idTemp == Convert.ToInt32(grv.DataKeys[e.RowIndex]["idTemp"])));
+                    sAcoesRealizadas acao = VS_AcoesRealizadas[indice];
+                    acao.excluido = true;
+                    VS_AcoesRealizadas[indice] = acao;
+                    grv.EditIndex = -1;
+                    CarregarAcoes();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void grvAcoes_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            try
+            {
+                GridView grv = ((GridView)sender);
+                if (Convert.ToInt64(grv.DataKeys[e.RowIndex]["rpa_id"]) <= 0
+                    && Convert.ToInt32(grv.DataKeys[e.RowIndex]["idTemp"]) <= 0)
+                {
+                    VS_AcoesRealizadas.RemoveAll(p => p.rpa_id <= 0 && p.idTemp <= 0);
+                }
+                grv.EditIndex = -1;
+                CarregarAcoes();
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
             }
         }
 

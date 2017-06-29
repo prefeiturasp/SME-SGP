@@ -67,6 +67,24 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento {
         protected global::WebControls_Mensagens_UCCamposObrigatorios UCCObrigatorios;
         
         /// <summary>
+        /// UCCTipoRelatorioAtendimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.UCComboTipoRelatorioAtendimento UCCTipoRelatorioAtendimento;
+        
+        /// <summary>
+        /// UCCRelatorioAtendimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.UCComboRelatorioAtendimento UCCRelatorioAtendimento;
+        
+        /// <summary>
         /// UCCUAEscola control.
         /// </summary>
         /// <remarks>

@@ -8,6 +8,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="geral" />
     <div class="rel-atendimento">
         <asp:UpdatePanel ID="updMensagem" runat="server" UpdateMode="Always">
             <ContentTemplate>

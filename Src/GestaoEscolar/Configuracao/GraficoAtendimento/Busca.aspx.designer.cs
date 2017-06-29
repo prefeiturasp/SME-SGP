@@ -58,6 +58,33 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoRelatorio;
         
         /// <summary>
+        /// UCComboRelatorioAtendimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.UCComboRelatorioAtendimento UCComboRelatorioAtendimento;
+        
+        /// <summary>
+        /// lblTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitulo;
+        
+        /// <summary>
+        /// txtTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTitulo;
+        
+        /// <summary>
         /// btnPesquisar control.
         /// </summary>
         /// <remarks>
