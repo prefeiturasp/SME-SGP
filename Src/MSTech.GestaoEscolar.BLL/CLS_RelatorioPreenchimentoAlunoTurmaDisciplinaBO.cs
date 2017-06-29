@@ -121,9 +121,18 @@ namespace MSTech.GestaoEscolar.BLL
         /// Retorna os lançamentos feito para o aluno de acordo com os parâmetros.
         /// </summary>
         /// <returns></returns>
+        public static DataTable SelecionaPorAlunoTurmaRelatorio(long alu_id, long tur_id, int rea_id)
+        {
+            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, tur_id, -1, false, rea_id, -1);
+        }
+
+        /// <summary>
+        /// Retorna os lançamentos feito para o aluno de acordo com os parâmetros.
+        /// </summary>
+        /// <returns></returns>
         public static DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tud_id, bool apenasComPreenchimento, int rea_id, int tpc_id)
         {
-            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, tud_id, apenasComPreenchimento, rea_id, tpc_id);
+            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, -1, tud_id, apenasComPreenchimento, rea_id, tpc_id);
         }
 
         public static new bool Save(CLS_RelatorioPreenchimentoAlunoTurmaDisciplina entity, TalkDBTransaction banco)

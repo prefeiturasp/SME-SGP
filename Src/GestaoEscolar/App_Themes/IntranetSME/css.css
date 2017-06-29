@@ -5356,6 +5356,11 @@ table.radio td {
     opacity:0;   
 }
 
+.imgColumnGrid{
+    vertical-align:top !important;
+    padding-right:0px !important;
+}
+
 /* iframe relatorio pedagogico */
 #iframe-rel-pedagogico{
     border: none;

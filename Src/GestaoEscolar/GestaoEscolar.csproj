@@ -4314,6 +4314,7 @@
     <Content Include="Includes\jsAlunoJustificativaAbonoFalta.js" />
     <Content Include="Includes\jsBuscaJustificativaPendencia.js" />
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
+    <Content Include="Includes\jsBuscaRelatorioGeralAtendimento.js" />
     <Content Include="Includes\jsCadastroAgendamento.js" />
     <Content Include="Includes\jsCadastroEixoObjConhecimento.js" />
     <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
@@ -4321,6 +4322,7 @@
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsCadastroLancamentoSondagem.js" />
     <Content Include="Includes\jsCadastroRelatorioAtendimento.js" />
+    <Content Include="Includes\jsCadastroRelatorioNaapa.js" />
     <Content Include="Includes\jsCadastroRelatorioRP.js" />
     <Content Include="Includes\jsCadastroSondagem.js" />
     <Content Include="Includes\jsConfirmaFormacaoDocente.js" />
@@ -4328,6 +4330,7 @@
     <Content Include="Includes\jsMsgConfirmCancelamentoAgendamento.js" />
     <Content Include="Includes\jsPopupFrequenciaExterna.js" />
     <Content Include="Includes\jsQuadroHorarios.js" />
+    <Content Include="Includes\jsRelatorioAcoesRealizadas.js" />
     <Content Include="Includes\jsResponsividadeTabelas.js" />
     <Content Include="Includes\jsAtribuicaoDocente.js" />
     <Content Include="Includes\jsCadastroEventoLimite.js" />

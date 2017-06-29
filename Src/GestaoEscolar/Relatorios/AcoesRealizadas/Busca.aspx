@@ -54,7 +54,14 @@
                 <asp:GridView ID="grvResultados" runat="server" AutoGenerateColumns="false" OnDataBound="grvResultados_DataBound"
                     OnPageIndexChanging="grvResultados_PageIndexChanging" AllowPaging="true" AllowSorting="true"
                     EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>" OnDataBinding="grvResultados_DataBinding"
-                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
+                    OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id"                   
+                    EnableModelValidation="True" SkinID="GridResponsive">
+                    <%--<asp:GridView ID="_grvDocumentoAluno" runat="server" AllowPaging="True" AllowCustomPaging="true" AutoGenerateColumns="False"
+                        BorderStyle="None" DataKeyNames="alu_id,tur_id,cal_id,esc_id,mtu_id,EscolaUniDestino,GrupamentoDestino,pes_nome,tur_escolaUnidade"
+                        EmptyDataText="A pesquisa não encontrou resultados."
+                        OnRowDataBound="_grvDocumentoAluno_RowDataBound" OnDataBound="_grvDocumentoAluno_DataBound"
+                        AllowSorting="True" OnPageIndexChanging="_grvDocumentoAluno_PageIndexChanging" OnSorting="_grvDocumentoAluno_Sorting"
+                        EnableModelValidation="True" SkinID="GridResponsive">--%>
                     <Columns>
                         <asp:TemplateField>
                             <HeaderTemplate>

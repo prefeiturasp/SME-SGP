@@ -23,7 +23,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// ID da ação realizada.
 		/// </summary>
 		[MSNotNullOrEmpty("[rpa_id] é obrigatório.")]
-		[DataObjectField(true, false, false)]
+		[DataObjectField(true, true, false)]
 		public virtual long rpa_id { get; set; }
 
 		/// <summary>

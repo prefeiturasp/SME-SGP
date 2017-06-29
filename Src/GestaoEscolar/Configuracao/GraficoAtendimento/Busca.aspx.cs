@@ -36,7 +36,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 cancelaSelect = false;
                 odsDados.SelectParameters.Clear();
-                odsDados.SelectParameters.Add("rea_tipo", ddlTipoRelatorio.SelectedValue);
+                odsDados.SelectParameters.Add("rea_id", UCComboRelatorioAtendimento.Valor.ToString());
+                odsDados.SelectParameters.Add("gra_titulo", txtTitulo.Text);
 
                 grvDados.DataBind();
 
@@ -44,8 +45,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
             catch (Exception ex)
             {
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os relatórios.",
-                                                         UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os gráficos.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
             }
         }
@@ -81,6 +81,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
                 btnPesquisar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_consultar;
                 btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
+
+                UCComboRelatorioAtendimento._Combo.Enabled = false;
                 fdsResultados.Visible = false;
             }
         }
@@ -93,7 +95,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
         protected void btnNovo_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Configuracao/RelatorioAtendimento/Cadastro.aspx", false);
+            Response.Redirect("~/Configuracao/GraficoAtendimento/Cadastro.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
@@ -121,17 +123,17 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 try
                 {
                     int index = int.Parse(e.CommandArgument.ToString());
-                    int rea_id = Convert.ToInt32(grvDados.DataKeys[index].Value.ToString());
+                    int gra_id = Convert.ToInt32(grvDados.DataKeys[index].Value.ToString());
 
-                    CLS_RelatorioAtendimento entity = new CLS_RelatorioAtendimento { rea_id = rea_id };
-                    CLS_RelatorioAtendimentoBO.GetEntity(entity);
+                    REL_GraficoAtendimento entity = new REL_GraficoAtendimento { gra_id = gra_id };
+                    REL_GraficoAtendimentoBO.GetEntity(entity);
 
-                    if (CLS_RelatorioAtendimentoBO.Delete(entity))
+                    if (REL_GraficoAtendimentoBO.Delete(entity))
                     {
                         grvDados.PageIndex = 0;
                         Pesquisar();
-                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "rea_id: " + rea_id);
-                        lblMessage.Text = UtilBO.GetErroMessage("Relatório excluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "gra_id: " + gra_id);
+                        lblMessage.Text = UtilBO.GetErroMessage("Gráfico excluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
                 }
                 catch (ValidationException ex)
@@ -141,7 +143,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
-                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir o relatório.", UtilBO.TipoMensagem.Erro);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir o gráfico.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }
@@ -173,7 +175,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
             catch (Exception ex)
             {
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os relatórios.",
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os gráficos.",
                                                          UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
             }
@@ -187,6 +189,22 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         protected void grvDados_PageIndexChanged(object sender, EventArgs e)
         {
             cancelaSelect = false;
+        }
+
+
+        protected void ddlCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //carrega os relatorios
+            if (ddlTipoRelatorio.SelectedIndex > 0)
+            {
+                UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipoRelatorio.SelectedValue));
+                UCComboRelatorioAtendimento._Combo.Enabled = true;
+            }
+            else
+            {
+                UCComboRelatorioAtendimento.SelectedIndex = 0;
+                UCComboRelatorioAtendimento._Combo.Enabled = false;
+            }
         }
 
         #endregion

@@ -482,6 +482,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                             UCControleTurma1.LabelTurmas = listaDados["TextoTurmas"];
                         }
 
+                        int tpcIdPendencia = -1;
+                        if (Session["tpcIdPendencia"] != null)
+                        {
+                            tpcIdPendencia = Convert.ToInt32(Session["tpcIdPendencia"]);
+                        }
+
                         // Remove os dados que possam estar na sessao
                         Session.Remove("tud_id");
                         Session.Remove("tdt_posicao");
@@ -493,6 +499,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         Session.Remove("tur_idNormal");
                         Session.Remove("tud_idAluno");
                         Session.Remove("tur_tud_ids");
+                        Session.Remove("tpcIdPendencia");
                         //
 
                         List<Struct_MinhasTurmas.Struct_Turmas> dadosTurma = new List<Struct_MinhasTurmas.Struct_Turmas>();
@@ -598,7 +605,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         UCNavegacaoTelaPeriodo.CarregarPeriodos(VS_ltPermissaoFrequencia, VS_ltPermissaoEfetivacao,
                                                                 VS_ltPermissaoPlanejamentoAnual, VS_ltPermissaoAvaliacao,
                                                                 entDisciplinaRelacionada, UCControleTurma1.VS_esc_id,
-                                                                VS_EntitiesControleTurma.turmaDisciplina.tud_tipo, UCControleTurma1.VS_tdt_posicao, UCControleTurma1.VS_tur_id, VS_EntitiesControleTurma.turmaDisciplina.tud_id);
+                                                                VS_EntitiesControleTurma.turmaDisciplina.tud_tipo, UCControleTurma1.VS_tdt_posicao, UCControleTurma1.VS_tur_id, VS_EntitiesControleTurma.turmaDisciplina.tud_id, false, tpcIdPendencia);
 
                         if (UCNavegacaoTelaPeriodo.VS_tpc_id <= 0)
                         {
