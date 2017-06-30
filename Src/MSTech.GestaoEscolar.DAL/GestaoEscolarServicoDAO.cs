@@ -208,5 +208,55 @@ namespace MSTech.GestaoEscolar.DAL
             qs.TimeOut = 0;
             qs.Execute();
         }
+
+        /// <summary>
+        /// Processa o alerta de preenchimento de frequência.
+        /// </summary>
+        public void ExecJOB_AlertaPreenchimentoFrequencias()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaPreenchimentoFrequencia", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
+
+        /// <summary>
+        /// Processa o alerta de aviso de início de fechamento.
+        /// </summary>
+        public void ExecJOB_AlertaInicioFechamento()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaInicioFechamento", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
+
+        /// <summary>
+        /// Processa o alerta de aviso de final de fechamento.
+        /// </summary>
+        public void ExecJOB_AlertaFimFechamento()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaFimFechamento", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
+
+        /// <summary>
+        /// Processa o alerta de alunos com baixa frequência.
+        /// </summary>
+        public void ExecJOB_AlertaAlunosBaixaFrequencia()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaAlunosBaixaFrequencia", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
+
+        /// <summary>
+        /// Processa o alerta de alunos com faltas consecutivas.
+        /// </summary>
+        public void ExecJOB_AlertaAlunosFaltasConsecutivas()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaAlunosFaltasConsecutivas", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
     }
 }
