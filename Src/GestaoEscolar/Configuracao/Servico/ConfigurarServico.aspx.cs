@@ -131,13 +131,7 @@ namespace GestaoEscolar.Configuracao.Servico
         /// </summary>
         private void LimparCampos()
         {
-            UCFrequenciaServico1.TipoFrequencia = 0;
-            UCFrequenciaServico1.DiaMesSelectedValue = "1";
-            UCFrequenciaServico1.LimpaCheckboxList();
-            UCFrequenciaServico1.LimpaRadioButtonList();
-            UCFrequenciaServico1.Horario = string.Empty;
-            UCFrequenciaServico1.LimpaRepeater();
-            UCFrequenciaServico1.AtualizaDivs();
+            UCFrequenciaServico1.LimparCampos();
             chkDesativar.Checked = false;
             divCampos.Visible = true;
         }

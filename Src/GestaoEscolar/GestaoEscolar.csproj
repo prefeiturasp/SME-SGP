@@ -4353,6 +4353,7 @@
     <Content Include="Includes\jsBuscaParametroAlerta.js" />
     <Content Include="Includes\jsBuscaRelatorioGeralAtendimento.js" />
     <Content Include="Includes\jsCadastroAgendamento.js" />
+    <Content Include="Includes\jsCadastroAlerta.js" />
     <Content Include="Includes\jsCadastroEixoObjConhecimento.js" />
     <Content Include="Includes\jsCadastroFrequenciaExterna.js" />
     <Content Include="Includes\jsCadastroJustificativaFalta.js" />

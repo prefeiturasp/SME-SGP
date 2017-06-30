@@ -398,7 +398,7 @@ namespace GestaoEscolar.WebControls.FrequenciaServico
         /// <summary>
         /// Atualiza tela conforme tipo de frequencia do serviço selecionado.
         /// </summary>
-        public void AtualizaDivs()
+        private void AtualizaDivs()
         {
             divRadioDiasSemana.Visible = ddlFrequencia.SelectedValue == Convert.ToByte(GestaoEscolarServicosBO.Frequencias.Semanal).ToString();
             divDiaMes.Visible = ddlFrequencia.SelectedValue == Convert.ToByte(GestaoEscolarServicosBO.Frequencias.Mensal).ToString();
@@ -416,7 +416,7 @@ namespace GestaoEscolar.WebControls.FrequenciaServico
         /// <summary>
         /// Limpa os itens selecionados na checkboxlist
         /// </summary>
-        public void LimpaCheckboxList()
+        private void LimpaCheckboxList()
         {
             foreach (ListItem li in cblDiasSemana.Items)
                 li.Selected = false;
@@ -426,7 +426,7 @@ namespace GestaoEscolar.WebControls.FrequenciaServico
         /// <summary>
         /// Limpa os itens selecionados na radiobuttonlist
         /// </summary>
-        public void LimpaRadioButtonList()
+        private void LimpaRadioButtonList()
         {
             rblDiasSemana.SelectedValue = "2";
         }
@@ -760,7 +760,7 @@ namespace GestaoEscolar.WebControls.FrequenciaServico
         /// <summary>
         /// Remove todos os horários.
         /// </summary>
-        public void LimpaRepeater()
+        private void LimpaRepeater()
         {
             DataTable dt = CriaDataTable(true);
             CarregarHorarios(dt);
@@ -888,6 +888,17 @@ namespace GestaoEscolar.WebControls.FrequenciaServico
             }
 
             return tipo.ToString();
+        }
+
+        public void LimparCampos()
+        {
+            TipoFrequencia = 0;
+            DiaMesSelectedValue = "1";
+            LimpaCheckboxList();
+            LimpaRadioButtonList();
+            Horario = string.Empty;
+            LimpaRepeater();
+            AtualizaDivs();
         }
 
         #endregion

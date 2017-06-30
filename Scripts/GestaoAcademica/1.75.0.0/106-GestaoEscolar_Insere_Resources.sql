@@ -261,7 +261,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Período de validade da notificação'
+		, @rcr_valorPadrao = 'Período de validade da notificação (em horas)'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'litGrupos.Text' 
@@ -297,6 +297,27 @@ SET XACT_ABORT ON
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Alerta salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'chkDesativar.Text' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Desativar alerta'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'rfvNome.ErrorMessage' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Nome é obrigatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'litAgendamento.Text' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Agendamento'
 
 -- Fechar transação     
 SET XACT_ABORT OFF 
