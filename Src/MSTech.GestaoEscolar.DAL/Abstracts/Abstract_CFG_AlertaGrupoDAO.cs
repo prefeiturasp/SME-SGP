@@ -36,9 +36,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
-                Param.Size = 4;
+                Param.Size = 2;
                 Param.Value = entity.cfa_id;
                 qs.Parameters.Add(Param);
 
@@ -63,9 +63,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
-                Param.Size = 4;
+                Param.Size = 2;
                 Param.Value = entity.cfa_id;
                 qs.Parameters.Add(Param);
 
@@ -90,9 +90,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
-                Param.Size = 4;
+                Param.Size = 2;
                 Param.Value = entity.cfa_id;
                 qs.Parameters.Add(Param);
 
@@ -117,9 +117,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
-                Param.Size = 4;
+                Param.Size = 2;
                 Param.Value = entity.cfa_id;
                 qs.Parameters.Add(Param);
 

@@ -24,7 +24,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// </summary>
 		[MSNotNullOrEmpty("[cfa_id] é obrigatório.")]
 		[DataObjectField(true, false, false)]
-		public virtual int cfa_id { get; set; }
+		public virtual short cfa_id { get; set; }
 
 		/// <summary>
 		/// ID do grupo de usuário do Core.

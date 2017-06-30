@@ -194,5 +194,134 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
+
+        /// <summary>
+        /// Retorna os dados para renderizar o gráfico de atendimento
+        /// </summary>
+        /// <param name="gra_id"></param>
+        /// <param name="esc_id"></param>
+        /// <param name="uni_id"></param>
+        /// <param name="cur_id"></param>
+        /// <param name="crr_id"></param>
+        /// <param name="crp_id"></param>
+        /// <returns></returns>
+        public DataTable SelecionarDadosGrafico
+        (
+            int gra_id,
+            int esc_id,
+            int uni_id,
+            int cur_id,
+            int crr_id,
+            int crp_id
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_SelecionarDadosGrafico", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@gra_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = gra_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@esc_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = esc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@uni_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = uni_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@cur_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                if (cur_id > 0)
+                {
+                    Param.Value = cur_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@crr_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                if (crr_id > 0)
+                {
+                    Param.Value = crr_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@crp_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                if (crp_id > 0)
+                {
+                    Param.Value = crp_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Retorna os gráficos de atendimento por tipo de relatório
+        /// </summary>
+        /// <param name="rea_tipo"></param>
+        /// <returns></returns>
+        public DataTable SelecionaPorTipoRelatorio(byte rea_tipo)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_SelecionarPorTipoRelatorio", _Banco);
+
+            try
+            {
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_tipo";
+                Param.DbType = DbType.Byte;
+                Param.Size = 1;
+                Param.Value = rea_tipo;
+                qs.Parameters.Add(Param);
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
     }
 }
