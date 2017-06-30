@@ -94,7 +94,10 @@ namespace GestaoEscolar.Configuracao.Alertas
 
             if (sucessoSalvar && sucessoAgendar)
             {
-                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "mensagemSucessoSalvar").ToString(), UtilBO.TipoMensagem.Sucesso);
+                __SessionWEB.PostMessages = UtilBO.GetErroMessage(GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "mensagemSucessoSalvar").ToString(), UtilBO.TipoMensagem.Sucesso);
+
+                Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/Alertas/Busca.aspx", false);
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
             }
             else
             {
