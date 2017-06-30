@@ -43,6 +43,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
+                    <%-- Nome do aluno --%>
                     <asp:TemplateField HeaderText="<%$ Resources:UserControl, Fechamento.UCFechamentoPadrao.gvAlunos.ColunaNomeAluno %>">
                         <ItemTemplate>
                             <asp:Label ID="lblAluno" runat="server" Text='<%#Bind("pes_nome") %>' CssClass="tamanho-lbl-aluno">

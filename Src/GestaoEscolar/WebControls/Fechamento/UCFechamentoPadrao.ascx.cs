@@ -32,6 +32,7 @@ namespace GestaoEscolar.WebControls.Fechamento
         private const int colunaObservacaoConselho = 9;
         private const int colunaResultado = 10;
         private const int colunaBoletim = 11;
+        private const int colunaNomeAluno = 2;
 
         // constantes criadas para a ordem das colunas da tabela de efetivação de notas
         // para os componentes da Regencia
@@ -2259,11 +2260,24 @@ namespace GestaoEscolar.WebControls.Fechamento
                 Row.Cells[colunaBoletim].Enabled = true;
                 Row.Cells[colunaObservacaoConselho].Enabled = true;
                 Row.Cells[colunaFaltas].Enabled = true;
+                Row.Cells[colunaNomeAluno].Enabled = true;
 
                 ImageButton btnBoletim = (ImageButton)Row.FindControl("btnBoletim");
                 if (btnBoletim != null)
                 {
                     btnBoletim.Enabled = true;
+                }
+
+                LinkButton btnRelatorioRP = (LinkButton)Row.FindControl("btnRelatorioRP");
+                if (btnRelatorioRP != null)
+                {
+                    btnRelatorioRP.Enabled = true;
+                }
+
+                LinkButton btnRelatorioAEE = (LinkButton)Row.FindControl("btnRelatorioAEE");
+                if (btnRelatorioAEE != null)
+                {
+                    btnRelatorioAEE.Enabled = true;
                 }
 
                 ImageButton btnObservacaoConselho = (ImageButton)Row.FindControl("btnObservacaoConselho");
