@@ -3,7 +3,7 @@
 <asp:DropDownList ID="ddlCombo" runat="server" AppendDataBoundItems="True" SkinID="text30C" OnSelectedIndexChanged="ddlCombo_SelectedIndexChanged">
     <asp:ListItem Value="0">-- Selecione um tipo de turma --</asp:ListItem>
     <asp:ListItem Value="1">Normal</asp:ListItem>
-    <asp:ListItem Value="2">Eletiva de aluno</asp:ListItem>
+    <asp:ListItem Value="2">Recuperação paralela</asp:ListItem>
     <asp:ListItem Value="3">Multisseriada</asp:ListItem>
     <asp:ListItem Value="5">Atendimento educacional especializado</asp:ListItem>
 </asp:DropDownList>
