@@ -11,5 +11,7 @@ namespace MSTech.GestaoEscolar.Entities
 	/// </summary>
 	public class REL_GraficoAtendimento_FiltrosFixos : Abstract_REL_GraficoAtendimento_FiltrosFixos
 	{
-	}
+        public string gff_tituloFiltro { get; set; }
+        public string gff_valorDetalhado { get; set; }
+    }
 }

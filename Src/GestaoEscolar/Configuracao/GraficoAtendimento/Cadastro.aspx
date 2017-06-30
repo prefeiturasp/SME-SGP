@@ -64,15 +64,15 @@
         <div>
             <br />
         </div>
-        <asp:UpdatePanel ID="updFiltro" runat="server" UpdateMode="Always">
+        <asp:UpdatePanel ID="updFiltro" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <fieldset>
                     <legend>
-                        <asp:Label runat="server" ID="Label1" Text="Filtros personalizados" />
+                        <asp:Label runat="server" ID="Label1" Text="Filtros" />
                     </legend>
 
                     <asp:Label ID="lblFiltroFixo" runat="server" Text="Tipo de filtro: " AssociatedControlID="ddlFiltroFixo"></asp:Label>
-                    <asp:DropDownList ID="ddlFiltroFixo" runat="server" AutoPostBack="true">
+                    <asp:DropDownList ID="ddlFiltroFixo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFiltroFixo_SelectedIndexChanged">
                         <asp:ListItem Text="-- Selecione um tipo de filtro --" Value="0"></asp:ListItem>
                         <asp:ListItem Text="Período do preenchimento do relatório" Value="1"></asp:ListItem>
                         <asp:ListItem Text="Raça/Cor" Value="2"></asp:ListItem>
@@ -105,31 +105,55 @@
                         <!-- Tipo de deficiencia -->
                         <uc1:ComboTipoDeficiencia runat="server" ID="ComboTipoDeficiencia" />
                         <!-- Detalhamento -->
-                        <asp:UpdatePanel ID="updDetalhe" runat="server" UpdateMode="Always">
-                            <ContentTemplate>
-                                <fieldset>
-                                    <legend>
-                                        <asp:Label runat="server" ID="lblLegendGrupo" Text="Detalhamento da deficiência" />
-                                    </legend>
-                                    <asp:Panel runat="server" ID="pnlGrupo" Style="overflow: scroll; height: 500px;">
-                                        <asp:GridView runat="server" ID="gvDetalhe" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                                            EmptyDataText="Não existe detalhamento para essa deficiência." DataKeyNames="dfd_id">
-                                            <Columns>
-                                                <asp:BoundField HeaderText="Detalhamento" DataField="dfd_nome" />
-                                                <asp:TemplateField HeaderText="Selecionar" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:CheckBox runat="server" ID="chkSelecionar" />
-                                                    </ItemTemplate>
-                                                    <HeaderStyle CssClass="center"></HeaderStyle>
-                                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                        </asp:GridView>
-                                    </asp:Panel>
-                                </fieldset>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                        <div runat="server" id="divDetalhe" visible="false">
+                            <asp:UpdatePanel ID="updDetalhe" runat="server" UpdateMode="Always">
+                                <ContentTemplate>
+                                    <fieldset>
+                                        <legend>
+                                            <asp:Label runat="server" ID="lblLegendGrupo" Text="Detalhamento da deficiência" />
+                                        </legend>
+                                        <asp:Panel runat="server" ID="pnlGrupo" Style="overflow: scroll; height: 500px;">
+                                            <asp:GridView runat="server" ID="gvDetalhe" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
+                                                EmptyDataText="Não existe detalhamento para essa deficiência." DataKeyNames="dfd_id">
+                                                <Columns>
+                                                    <asp:BoundField HeaderText="Detalhamento" DataField="dfd_nome" />
+                                                    <asp:TemplateField HeaderText="Selecionar" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                            <asp:CheckBox runat="server" ID="chkSelecionar" />
+                                                        </ItemTemplate>
+                                                        <HeaderStyle CssClass="center"></HeaderStyle>
+                                                        <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </asp:Panel>
+                                    </fieldset>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
                     </div>
+                    <div id="divBotoesFiltro" runat="server" class="right" visible="false">
+                        <asp:Button ID="btnAdicionarFiltro" runat="server" Text="Adicionar filtro"
+                            OnClick="btnAdicionarFiltro_Click" />
+                        <asp:Button ID="btnCancelarFiltro" runat="server" Text="Cancelar filtro" CausesValidation="false"
+                            OnClick="btnCancelarFiltro_Click" />
+                    </div>
+                    <asp:GridView runat="server" ID="gvFiltroFixo" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
+                        DataKeyNames="gra_id, gff_tipoFiltro" EmptyDataText="Nenhum filtro fixo ligado ao gráfico."
+                        OnRowDataBound="gvFiltroFixo_RowDataBound" OnRowCommand="gvFiltroFixo_RowCommand">
+                        <Columns>
+                            <asp:BoundField HeaderText="Tipo de filtro" DataField="gff_tituloFiltro" />
+                            <asp:BoundField HeaderText="Valor" DataField="gff_valorDetalhado" />
+                            <asp:TemplateField HeaderText="Excluir">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"
+                                        ToolTip="Excluir filtro fixo." />
+                                </ItemTemplate>
+                                <HeaderStyle CssClass="center"></HeaderStyle>
+                                <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
                 </fieldset>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -158,19 +182,10 @@
                     </div>
                     <asp:GridView runat="server" ID="gvQuestionario" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
                         DataKeyNames="qst_id, raq_id, raq_ordem, IsNew, emUso" EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText %>"
-                        OnDataBound="gvQuestionario_DataBound" OnRowDataBound="gvQuestionario_RowDataBound" OnRowCommand="gvQuestionario_RowCommand">
+                        OnRowDataBound="gvQuestionario_RowDataBound" OnRowCommand="gvQuestionario_RowCommand">
                         <Columns>
                             <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.HeaderTitulo %>" DataField="qst_titulo" />
                             <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.HeaderOrdem %>">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("sdq_ordem") %>'></asp:TextBox>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="_btnSubir" runat="server" CausesValidation="false" CommandName="Subir"
-                                        Height="16" Width="16" />
-                                    <asp:ImageButton ID="_btnDescer" runat="server" CausesValidation="false" CommandName="Descer"
-                                        Height="16" Width="16" />
-                                </ItemTemplate>
                                 <HeaderStyle CssClass="center" HorizontalAlign="Center" />
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
