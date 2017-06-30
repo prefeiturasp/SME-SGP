@@ -19,9 +19,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="cfa_id">ID do alerta</param>
         /// <returns></returns>
-        public static DataTable SelecionarGruposPorAlerta(int cfa_id)
+        public static DataTable SelecionarGruposPorAlerta(short cfa_id, int sis_id)
         {
-            return new CFG_AlertaGrupoDAO().SelecionarGruposPorAlerta(cfa_id);
+            return new CFG_AlertaGrupoDAO().SelecionarGruposPorAlerta(cfa_id, sis_id);
         }
     }
 }

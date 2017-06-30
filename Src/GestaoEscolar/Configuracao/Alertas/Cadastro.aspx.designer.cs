@@ -13,6 +13,15 @@ namespace GestaoEscolar.Configuracao.Alertas {
     public partial class Cadastro {
         
         /// <summary>
+        /// updServico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updServico;
+        
+        /// <summary>
         /// lblMessage control.
         /// </summary>
         /// <remarks>
@@ -121,6 +130,24 @@ namespace GestaoEscolar.Configuracao.Alertas {
         protected global::System.Web.UI.WebControls.TextBox txtPeriodoValidade;
         
         /// <summary>
+        /// lblAssunto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAssunto;
+        
+        /// <summary>
+        /// txtAssunto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAssunto;
+        
+        /// <summary>
         /// litGrupos control.
         /// </summary>
         /// <remarks>
@@ -139,22 +166,22 @@ namespace GestaoEscolar.Configuracao.Alertas {
         protected global::System.Web.UI.WebControls.GridView grvGrupos;
         
         /// <summary>
-        /// lblAssunto control.
+        /// litAgendamento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAssunto;
+        protected global::System.Web.UI.WebControls.Literal litAgendamento;
         
         /// <summary>
-        /// txtAssunto control.
+        /// chkDesativar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAssunto;
+        protected global::System.Web.UI.WebControls.CheckBox chkDesativar;
         
         /// <summary>
         /// UCFrequenciaServico1 control.

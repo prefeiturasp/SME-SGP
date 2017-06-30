@@ -18,7 +18,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// </summary>
         /// <param name="cfa_id">ID do alerta</param>
         /// <returns></returns>
-        public DataTable SelecionarGruposPorAlerta(int cfa_id)
+        public DataTable SelecionarGruposPorAlerta(short cfa_id, int sis_id)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CFG_AlertaGrupo_SelecionarGruposPorAlerta", _Banco);
             try
@@ -26,10 +26,17 @@ namespace MSTech.GestaoEscolar.DAL
                 #region PARAMETROS
 
                 Param = qs.NewParameter();
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
+                Param.Size = 2;
+                Param.Value = cfa_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@sis_id";
                 Param.DbType = DbType.Int32;
                 Param.Size = 4;
-                Param.Value = cfa_id;
+                Param.Value = sis_id;
                 qs.Parameters.Add(Param);
 
                 #endregion
@@ -52,21 +59,21 @@ namespace MSTech.GestaoEscolar.DAL
         /// Remove os grupos ligados ao alerta.
         /// </summary>
         /// <returns></returns>
-        public bool ExcluirPorAlerta(int cfa_id)
+        public bool ExcluirPorAlerta(short cfa_id)
         {
             QueryStoredProcedure qs = new QueryStoredProcedure("NEW_CFG_AlertaGrupo_ExcluirPorAlerta", _Banco);
             try
             {
                 Param = qs.NewParameter();
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
-                Param.DbType = DbType.Int32;
-                Param.Size = 4;
+                Param.Size = 2;
                 Param.Value = cfa_id;
                 qs.Parameters.Add(Param);
 
                 qs.Execute();
 
-                return qs.Return > 0;
+                return true;
             }
             catch
             {

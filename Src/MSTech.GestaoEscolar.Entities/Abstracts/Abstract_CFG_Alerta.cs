@@ -18,24 +18,18 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 	[Serializable]
     public abstract class Abstract_CFG_Alerta : Abstract_Entity
     {
-		
-		/// <summary>
-		/// ID do alerta.
-		/// </summary>
-		[MSNotNullOrEmpty("[cfa_id] é obrigatório.")]
-		[DataObjectField(true, true, false)]
-		public virtual int cfa_id { get; set; }
 
-		/// <summary>
-		/// Tipo do alerta (1-Docente - Preenchimento de frequência; 2-Docente - Aviso de início de fechamento; 3-Docente - Aviso de final de fechamento; 4-Gestores - Alunos com baixa frequência; 5-Gestores - Alunos com faltas consecutivas).
-		/// </summary>
-		[MSNotNullOrEmpty("[cfa_tipo] é obrigatório.")]
-		public virtual byte cfa_tipo { get; set; }
+        /// <summary>
+        /// ID do alerta.
+        /// </summary>
+        [MSNotNullOrEmpty("[cfa_id] é obrigatório.")]
+        [DataObjectField(true, false, false)]
+        public virtual short cfa_id { get; set; }
 
-		/// <summary>
-		/// Nome do alerta.
-		/// </summary>
-		[MSValidRange(200)]
+        /// <summary>
+        /// Nome do alerta.
+        /// </summary>
+        [MSValidRange(200)]
 		[MSNotNullOrEmpty("[cfa_nome] é obrigatório.")]
 		public virtual string cfa_nome { get; set; }
 
@@ -62,10 +56,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// </summary>
 		public virtual int cfa_periodoValidade { get; set; }
 
-		/// <summary>
-		/// Situação do registro (1-Ativo, 3-Excluído).
-		/// </summary>
-		[MSNotNullOrEmpty("[cfa_situacao] é obrigatório.")]
+        /// <summary>
+        /// Situação do registro (1-Ativo, 3-Excluído, 4-Inativo).
+        /// </summary>
+        [MSNotNullOrEmpty("[cfa_situacao] é obrigatório.")]
 		public virtual byte cfa_situacao { get; set; }
 
 		/// <summary>

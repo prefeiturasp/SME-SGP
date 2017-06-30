@@ -10,7 +10,7 @@ SET XACT_ABORT ON
 		DECLARE @dataAtual DATETIME = GETDATE()
 
 		INSERT INTO CFG_Alerta
-           (cfa_tipo
+           (cfa_id
            ,cfa_nome
            ,cfa_nomeProcedimento
            ,cfa_assunto
@@ -31,7 +31,7 @@ SET XACT_ABORT ON
 			   ,@dataAtual)
 
 		INSERT INTO CFG_Alerta
-           (cfa_tipo
+           (cfa_id
            ,cfa_nome
            ,cfa_nomeProcedimento
            ,cfa_assunto
@@ -52,7 +52,7 @@ SET XACT_ABORT ON
 			   ,@dataAtual)
 
 		INSERT INTO CFG_Alerta
-           (cfa_tipo
+           (cfa_id
            ,cfa_nome
            ,cfa_nomeProcedimento
            ,cfa_assunto
@@ -73,7 +73,7 @@ SET XACT_ABORT ON
 			   ,@dataAtual)
 
 		INSERT INTO CFG_Alerta
-           (cfa_tipo
+           (cfa_id
            ,cfa_nome
            ,cfa_nomeProcedimento
            ,cfa_assunto
@@ -94,7 +94,7 @@ SET XACT_ABORT ON
 			   ,@dataAtual)
 
 		INSERT INTO CFG_Alerta
-           (cfa_tipo
+           (cfa_id
            ,cfa_nome
            ,cfa_nomeProcedimento
            ,cfa_assunto

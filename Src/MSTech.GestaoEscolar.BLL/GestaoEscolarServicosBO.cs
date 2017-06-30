@@ -467,5 +467,45 @@ namespace MSTech.GestaoEscolar.BLL
         {
             new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoDivergenciasAulasPrevistas();
         }
+
+        /// <summary>
+        /// Processa o alerta de preenchimento de frequência.
+        /// </summary>
+        public static void ExecJOB_AlertaPreenchimentoFrequencias()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_AlertaPreenchimentoFrequencias();
+        }
+
+        /// <summary>
+        /// Processa o alerta de aviso de início de fechamento.
+        /// </summary>
+        public static void ExecJOB_AlertaInicioFechamento()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_AlertaInicioFechamento();
+        }
+
+        /// <summary>
+        /// Processa o alerta de aviso de final de fechamento.
+        /// </summary>
+        public static void ExecJOB_AlertaFimFechamento()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_AlertaFimFechamento();
+        }
+
+        /// <summary>
+        /// Processa o alerta de alunos com baixa frequência.
+        /// </summary>
+        public static void ExecJOB_AlertaAlunosBaixaFrequencia()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosBaixaFrequencia();
+        }
+
+        /// <summary>
+        /// Processa o alerta de alunos com faltas consecutivas.
+        /// </summary>
+        public static void ExecJOB_AlertaAlunosFaltasConsecutivas()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosFaltasConsecutivas();
+        }
     }
 }

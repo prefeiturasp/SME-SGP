@@ -17,6 +17,27 @@ namespace MSTech.GestaoEscolar.BLL
     /// </summary>
     public class CFG_AlertaBO : BusinessBase<CFG_AlertaDAO, CFG_Alerta>
     {
+        #region Enumerador
+
+        public enum eChaveAlertas : byte
+        {
+            AlertaPreenchimentoFrequencia = 1
+            ,
+
+            AlertaInicioFechamento = 2
+            ,
+
+            AlertaFimFechamento = 3
+            ,
+
+            AlertaAlunosBaixaFrequencia = 4
+            ,
+
+            AlertaAlunosFaltasConsecutivas = 5
+        }
+
+        #endregion Enumerador
+
         /// <summary>
         /// Retorna os alertas não excluídos.
         /// </summary>      
