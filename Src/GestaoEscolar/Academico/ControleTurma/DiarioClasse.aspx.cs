@@ -3467,7 +3467,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     CLS_TurmaAulaBO.GetEntity(entity);
 
                     entity.tau_data = string.IsNullOrEmpty(txtDataAula.Text) ? new DateTime() : Convert.ToDateTime(txtDataAula.Text);
-                    entity.tau_numeroAulas = ((DisciplinaPrincipal || DisciplinaRegencia) &&
+                    entity.tau_numeroAulas = ((DisciplinaPrincipal || DisciplinaRegencia) && !RegenciaETemposAula &&
                                               !((VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia)
                                                 && (entity.tdt_posicao == (byte)EnumTipoDocente.Projeto)))
                                                     ? 1 : (string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 : Convert.ToInt32(txtQtdeAulas.Text));
