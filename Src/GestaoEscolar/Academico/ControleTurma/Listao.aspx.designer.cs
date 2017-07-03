@@ -742,6 +742,24 @@ namespace GestaoEscolar.Academico.ControleTurma {
         protected global::System.Web.UI.WebControls.CompareValidator cvCargaAtiExtra;
         
         /// <summary>
+        /// lblDisciplinasAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDisciplinasAtiExtra;
+        
+        /// <summary>
+        /// rptDisciplinasAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptDisciplinasAtiExtra;
+        
+        /// <summary>
         /// btnAdicionarAtiExtra control.
         /// </summary>
         /// <remarks>

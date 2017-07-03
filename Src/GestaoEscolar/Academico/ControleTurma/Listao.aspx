@@ -523,6 +523,19 @@
                                                         ErrorMessage="Carga horária da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
                                                     <asp:CompareValidator ID="cvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic" ValueToCompare="0" Operator="GreaterThan"
                                                         ErrorMessage="Carga horária da atividade extraclasse deve ser maior que 0." ValidationGroup="AtividadeExtraclasse">*</asp:CompareValidator>
+                                                    <asp:Label ID="lblDisciplinasAtiExtra" runat="server" Text="<%$ Resources:Mensagens, MSG_DISCIPLINA_PLURAL %>" AssociatedControlID="rptDisciplinasAtiExtra"></asp:Label>
+                                                    <asp:Repeater ID="rptDisciplinasAtiExtra" runat="server">
+                                                        <HeaderTemplate>
+                                                            <div class="checkboxlist-columns">
+                                                        </HeaderTemplate>
+                                                        <ItemTemplate>
+                                                            <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("tud_id") %>' />
+                                                            <asp:CheckBox ID="ckbDisciplinaAtiExtra" runat="server" Text='<%# Eval("tud_nome") %>' />
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                            </div> 
+                                                        </FooterTemplate>
+                                                    </asp:Repeater>
                                                     <div class="right">
                                                         <asp:Button ID="btnAdicionarAtiExtra" runat="server" Text="Salvar atividade extraclasse" OnClick="btnAdicionarAtiExtra_Click" ValidationGroup="AtividadeExtraclasse" />
                                                         <asp:Button ID="btnCancelarAtiExtra" runat="server" Text="Cancelar" OnClick="btnCancelarAtiExtra_Click" CausesValidation="false" />

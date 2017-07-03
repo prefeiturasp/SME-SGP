@@ -1009,6 +1009,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     UCComboTipoAtividadeAvaliativa.CarregarTipoAtividadeAvaliativa(true);
                     btnNovoAtiExtra.Visible = (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto;
+                    List<TUR_TurmaDisciplina> turmaDisciplina = TUR_TurmaDisciplinaBO.GetSelectBy_Turma(UCControleTurma1.VS_tur_id, null, GestaoEscolarUtilBO.MinutosCacheLongo);
+                    rptDisciplinasAtiExtra.DataSource = turmaDisciplina.FindAll(p => p.tud_id != EntTurmaDisciplina.tud_id);
+                    rptDisciplinasAtiExtra.DataBind();
+                    lblDisciplinasAtiExtra.Visible = rptDisciplinasAtiExtra.Visible = rptDisciplinasAtiExtra.Items.Count > 0;
                     CarregarListaoAtividadeExtraclasse();
                 }
 
@@ -2504,6 +2508,12 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             HabilitaControles(fdsCadastroAtiExtra.Controls, habilitaEdicao);
             btnCancelarAtiExtra.Enabled = true;
+
+            if (habilitaEdicao && entity.tav_id > 0)
+            {
+                // Não permitir alterar as disciplinas
+                HabilitaControles(rptDisciplinasAtiExtra.Controls, false);
+            }
             btnAdicionarAtiExtra.Visible = habilitaEdicao;
 
             fdsCadastroAtiExtra.Visible = true;
