@@ -19,12 +19,12 @@ namespace GestaoEscolar.Configuracao.Alertas
         /// <summary>
         /// Propriedade que armazena valor do id do alerta.
         /// </summary>
-        private int VS_cfa_id
+        private short VS_cfa_id
         {
             get
             {
                 if (ViewState["VS_cfa_id"] != null)
-                    return Convert.ToInt32(ViewState["VS_cfa_id"]);
+                    return Convert.ToInt16(ViewState["VS_cfa_id"]);
                 return -1;
             }
             set
@@ -37,8 +37,9 @@ namespace GestaoEscolar.Configuracao.Alertas
 
         #region Métodos
 
-        private void Carregar(int cfa_id)
+        private void Carregar(short cfa_id)
         {
+            UCFrequenciaServico1.LimparCampos();
             VS_cfa_id = cfa_id;
 
             CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = VS_cfa_id });
@@ -48,7 +49,7 @@ namespace GestaoEscolar.Configuracao.Alertas
             txtAssunto.Text = alerta.cfa_assunto;
 
             // Carrega os grupos
-            grvGrupos.DataSource = CFG_AlertaGrupoBO.SelecionarGruposPorAlerta(VS_cfa_id);
+            grvGrupos.DataSource = CFG_AlertaGrupoBO.SelecionarGruposPorAlerta(VS_cfa_id, __SessionWEB.__UsuarioWEB.Grupo.sis_id);
             grvGrupos.DataBind();
 
             // Carrega configuração serviço
@@ -57,12 +58,18 @@ namespace GestaoEscolar.Configuracao.Alertas
             if (GestaoEscolarServicosBO.SelecionaExpressaoPorTrigger(trigger, out expressao))
             {
                 UCFrequenciaServico1.ConfigurarFrequencia(expressao);
+                chkDesativar.Visible = true;
+            }
+            else
+            {
+                chkDesativar.Visible = false;
             }
         }
 
         private void Salvar()
         {
             bool sucessoSalvar = true;
+            bool sucessoAgendar = true;
 
             CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = VS_cfa_id });
             alerta.cfa_nome = txtNome.Text;
@@ -72,20 +79,29 @@ namespace GestaoEscolar.Configuracao.Alertas
 
             sucessoSalvar = CFG_AlertaBO.Salvar(alerta, CarregaGruposSelecionados());
 
-            try
-            {
-                SalvarTriggerQuartz(alerta.cfa_nomeProcedimento, (byte)GestaoEscolarServicosBO.eServicoAtivo.Ativo);
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
-                sucessoSalvar = false;
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar a configuração do serviço.", UtilBO.TipoMensagem.Erro);
-            }
-
             if (sucessoSalvar)
             {
-                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "mensagemSucessoSalvar").ToString(), UtilBO.TipoMensagem.Sucesso);
+                try
+                {
+                    SalvarTriggerQuartz(alerta.cfa_nomeProcedimento, chkDesativar.Checked ? (byte)GestaoEscolarServicosBO.eServicoAtivo.Desabilitado : (byte)GestaoEscolarServicosBO.eServicoAtivo.Ativo);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    sucessoAgendar = false;
+                }
+            }
+
+            if (sucessoSalvar && sucessoAgendar)
+            {
+                __SessionWEB.PostMessages = UtilBO.GetErroMessage(GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "mensagemSucessoSalvar").ToString(), UtilBO.TipoMensagem.Sucesso);
+
+                Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/Alertas/Busca.aspx", false);
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+            }
+            else
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(sucessoSalvar ? "Erro ao tentar agendar o alerta." : "Erro ao tentar salvar alerta.", UtilBO.TipoMensagem.Erro);
             }
         }
 
@@ -154,6 +170,7 @@ namespace GestaoEscolar.Configuracao.Alertas
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsCadastroAlerta.js"));
             }
 
             if (!IsPostBack)
@@ -161,13 +178,19 @@ namespace GestaoEscolar.Configuracao.Alertas
                 try
                 {
                     if (PreviousPage != null && PreviousPage.IsCrossPagePostBack)
+                    {
                         Carregar(PreviousPage.EditItem);
 
-                    Page.Form.DefaultFocus = txtNome.ClientID;
-                    btnSalvar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
-                    if (!__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar)
+                        Page.Form.DefaultFocus = txtNome.ClientID;
+                        btnSalvar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                        if (!__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar)
+                        {
+                            HabilitaControles(fdsAlertas.Controls, false);
+                        }
+                    }
+                    else
                     {
-                        HabilitaControles(fdsAlertas.Controls, false);
+                        btnCancelar_Click(null, null);
                     }
                 }
                 catch (Exception ex)
@@ -175,10 +198,12 @@ namespace GestaoEscolar.Configuracao.Alertas
                     ApplicationWEB._GravaErro(ex);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar alerta.", UtilBO.TipoMensagem.Erro);
                 }
-
-                UCFrequenciaServico1.ObrigatorioFrequencia = true;
-                UCFrequenciaServico1.ObrigatorioHorario = true;
             }
+        }
+
+        protected void chkDesativar_CheckedChanged(object sender, EventArgs e)
+        {
+            UCFrequenciaServico1.Visible = !chkDesativar.Checked;
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)

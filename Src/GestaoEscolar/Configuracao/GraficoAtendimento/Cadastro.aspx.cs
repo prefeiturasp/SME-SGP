@@ -11,6 +11,7 @@ using MSTech.Validation.Exceptions;
 using System.Web.UI;
 using System.Collections.Generic;
 using System.IO;
+using MSTech.CoreSSO.Entities;
 
 namespace GestaoEscolar.Configuracao.GraficoAtendimento
 {
@@ -68,14 +69,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
 
-        private List<REL_GraficoAtendimentoFiltrosFixos> VS_lstFiltrosFixos
+        private List<REL_GraficoAtendimento_FiltrosFixos> VS_lstFiltrosFixos
         {
             get
             {
                 if (ViewState["VS_lstFiltrosFixos"] == null)
-                    ViewState["VS_lstFiltrosFixos"] = new List<REL_GraficoAtendimentoFiltrosFixos>();
+                    ViewState["VS_lstFiltrosFixos"] = new List<REL_GraficoAtendimento_FiltrosFixos>();
 
-                return (List<REL_GraficoAtendimentoFiltrosFixos>)ViewState["VS_lstFiltrosFixos"];
+                return (List<REL_GraficoAtendimento_FiltrosFixos>)ViewState["VS_lstFiltrosFixos"];
             }
             set
             {
@@ -129,13 +130,16 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         {
             try
             {
+                REL_GraficoAtendimentoTipo tipoGrafico;
+                Enum.TryParse(ddlTipoGrafico.SelectedValue, out tipoGrafico);
+
                 REL_GraficoAtendimento gra = new REL_GraficoAtendimento
                 {
                     gra_id = VS_gra_id,
                     rea_id = UCComboRelatorioAtendimento.Valor,
                     gra_titulo = txtTitulo.Text,
                     gra_eixo = Convert.ToByte(ddlEixoAgrupamento.SelectedValue),
-                    gra_tipo = Convert.ToByte(REL_GraficoAtendimentoTipo.Barra),
+                    gra_tipo = Convert.ToByte(tipoGrafico),
                     gra_dataAlteracao = DateTime.Now,
                     IsNew = VS_gra_id <= 0
                 };
@@ -149,7 +153,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (VS_lstFiltrosFixos.Count == 0 && VS_lstQuestionarios.Count ==0)
                     throw new ValidationException("Selecione pelo menos um filtro.");
 
-                if (REL_GraficoAtendimentoBO.Save(gra)) //, VS_lstFiltrosFixos, VS_lstQuestionarios))
+                //if (REL_GraficoAtendimentoBO.Salvar(gra, VS_lstFiltrosFixos, VS_lstFiltrosPersonalizados))
+                if (REL_GraficoAtendimentoBO.Save(gra))
                 {
                     string message = "";
                     if (VS_gra_id <= 0)
@@ -211,7 +216,9 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         /// </summary>
         private void CarregaFiltrosFixos()
         {
-
+            //VS_lstFiltrosFixos = REL_GraficoAtendimento_FiltrosFixosBO.SelectBy_gra_id(VS_gra_id);
+            gvFiltroFixo.DataSource = VS_lstFiltrosFixos;
+            gvFiltroFixo.DataBind();
         }
 
         /// <summary>
@@ -252,6 +259,38 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
             return lstDetalhes;
         }
+        
+        private string RetornaValorFiltroFixo(int valor)
+        {
+            
+            string retorno = string.Empty;
+            if (valor > 0)
+            {
+                switch (valor)
+                {
+                    case 1:
+                        retorno = txtDtInicial.Text + txtDtFinal.Text;
+                        break;
+                    case 2:
+                        retorno = UCComboRacaCor._Combo.SelectedValue;
+                        break;
+                    case 3:
+                        retorno = txtIdadeInicial.Text + txtIdadeFinal.Text;
+                        break;
+                    case 4:
+                        retorno = UCComboSexo._Combo.SelectedValue;
+                        break;
+                    default:
+                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
+                        List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
+
+                        retorno = ComboTipoDeficiencia._Combo.SelectedValue + "(" + string.Join(",", detalhes.Select(x => x.dfd_id).ToArray());
+
+                        break;
+                }                
+            }
+            return retorno;
+        }
 
         
         /// <summary>
@@ -262,6 +301,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             VS_gra_id = -1;
             txtTitulo.Text = "";
             ddlTipo.SelectedValue = "0";
+            ddlTipoGrafico.SelectedIndex = ddlTipoGrafico.Items.Count == 2 ? 1 : 0;
+            UCComboRelatorioAtendimento._Combo.Enabled = false;
             ddlEixoAgrupamento.SelectedValue = "0";
             gvQuestionario.DataSource = VS_lstQuestionarios;
             gvQuestionario.DataBind();
@@ -280,6 +321,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
             }
+
+            ComboTipoDeficiencia._Combo.SelectedIndexChanged += ComboTipoDeficiencia_SelectedIndexChanged;
 
             if (!IsPostBack)
             {
@@ -335,22 +378,74 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+
+                //carrega os relatorios
+                if (ddlTipo.SelectedIndex > 0)
+                {
+                    UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
+                    UCComboRelatorioAtendimento._Combo.Enabled = true;
+                    if (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE)
+                        ddlFiltroFixo.Items.Add("Detalhamento das deficiências");
+                    else
+                        ddlFiltroFixo.Items.Remove("Detalhamento das deficiências");
+
+                     updFiltro.Update();
+                }
+                else
+                {
+                    UCComboRelatorioAtendimento.SelectedIndex = 0;
+                    UCComboRelatorioAtendimento._Combo.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar relatórios.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void ComboTipoDeficiencia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvDetalhe.DataSource = CFG_DeficienciaDetalheBO.SelectDetalheBy_Deficiencia(new Guid(ComboTipoDeficiencia._Combo.SelectedValue));
+            gvDetalhe.DataBind();
+        }
+
+        protected void ddlFiltroFixo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            divBotoesFiltro.Visible = divRacaCor.Visible = divSexo.Visible = divIdade.Visible = divDataPreenchimento.Visible = divDetalhamentoDeficiencia.Visible = false;
 
             //carrega os relatorios
-            if (ddlTipo.SelectedIndex > 0)
+            if (ddlFiltroFixo.SelectedIndex > 0)
             {
-                UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
-                UCComboRelatorioAtendimento._Combo.Enabled = true;
-                if (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.AEE)
-                    ddlFiltroFixo.Items.Add("Detalhamento das deficiências");
-            }
-            else
-            {
-                UCComboRelatorioAtendimento.SelectedIndex = 0;
-                UCComboRelatorioAtendimento._Combo.Enabled = false;
-            }            
+                switch (ddlFiltroFixo.SelectedIndex)
+                {
+                    case 1:
+                        divDataPreenchimento.Visible = true;
+                        break;
+                    case 2:
+                        divRacaCor.Visible = true;
+                        break;
+                    case 3:
+                        divIdade.Visible = true;                        
+                        break;
+                    case 4:
+                        divSexo.Visible = true;
+                        break;
+                    default:
+                        ComboTipoDeficiencia.Carregar();
+                        divDetalhe.Visible = false;
+                        divDetalhamentoDeficiencia.Visible = true;
+                        break;
+                }
+                divBotoesFiltro.Visible = true;
+                updFiltro.Update();
+            }          
+            
         }
-        
+
         protected void btnAdicionarQuestionario_Click(object sender, EventArgs e)
         {
             try
@@ -394,41 +489,12 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
         
-        protected void gvQuestionario_DataBound(object sender, EventArgs e)
-        {
-            GridView grv = (GridView)sender;
-            if (grv.Rows.Count > 0)
-            {
-                ((ImageButton)grv.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                ((ImageButton)grv.Rows[grv.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-            }
-        }
+
 
         protected void gvQuestionario_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                LinkButton btnAlterar = (LinkButton)e.Row.FindControl("btnAlterar");
-                if (btnAlterar != null)
-                {
-                    btnAlterar.CommandArgument = e.Row.RowIndex.ToString();
-                }
-                ImageButton _btnSubir = (ImageButton)e.Row.FindControl("_btnSubir");
-                if (_btnSubir != null)
-                {
-                    _btnSubir.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "cima.png";
-                    _btnSubir.CommandArgument = e.Row.RowIndex.ToString();
-                    _btnSubir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
-                }
-
-                ImageButton _btnDescer = (ImageButton)e.Row.FindControl("_btnDescer");
-                if (_btnDescer != null)
-                {
-                    _btnDescer.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "baixo.png";
-                    _btnDescer.CommandArgument = e.Row.RowIndex.ToString();
-                    _btnDescer.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
-                }
-
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
                 {
@@ -443,81 +509,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
         protected void gvQuestionario_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Subir")
-            {
-                try
-                {
-                    int index = int.Parse(e.CommandArgument.ToString());
-
-                    int idDescer = Convert.ToInt32(gvQuestionario.DataKeys[index - 1]["raq_id"]);
-                    int idSubir = Convert.ToInt32(gvQuestionario.DataKeys[index]["raq_id"]);
-                    int ordemSubir = VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idSubir).First())].raq_ordem;
-                    int ordemDescer = VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idDescer).First())].raq_ordem;
-
-                    VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idSubir).First())].raq_ordem = ordemDescer;
-                    VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idDescer).First())].raq_ordem = ordemSubir;
-
-                    VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
-
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
-                    gvQuestionario.DataBind();
-
-                    if (gvQuestionario.Rows.Count > 0)
-                    {
-                        ((ImageButton)gvQuestionario.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                        ((ImageButton)gvQuestionario.Rows[gvQuestionario.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                    }
-                }
-                catch (ValidationException ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-                }
-                catch (Exception ex)
-                {
-                    ApplicationWEB._GravaErro(ex);
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
-                }
-            }
-            else if (e.CommandName == "Descer")
-            {
-                try
-                {
-                    int index = int.Parse(e.CommandArgument.ToString());
-
-                    int idDescer = Convert.ToInt32(gvQuestionario.DataKeys[index]["raq_id"]);
-                    int idSubir = Convert.ToInt32(gvQuestionario.DataKeys[index + 1]["raq_id"]);
-                    int ordemSubir = VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idSubir).First())].raq_ordem;
-                    int ordemDescer = VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idDescer).First())].raq_ordem;
-
-                    VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idSubir).First())].raq_ordem = ordemDescer;
-                    VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idDescer).First())].raq_ordem = ordemSubir;
-
-                    VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
-
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
-                    gvQuestionario.DataBind();
-
-                    if (gvQuestionario.Rows.Count > 0)
-                    {
-                        ((ImageButton)gvQuestionario.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                        ((ImageButton)gvQuestionario.Rows[gvQuestionario.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                    }
-                }
-                catch (ValidationException ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-                }
-                catch (Exception ex)
-                {
-                    ApplicationWEB._GravaErro(ex);
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
-                }
-            }
-            else if (e.CommandName == "Excluir")
+             if (e.CommandName == "Excluir")
             {
                 try
                 {
@@ -550,11 +542,6 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
                     gvQuestionario.DataBind();
 
-                    if (gvQuestionario.Rows.Count > 0)
-                    {
-                        ((ImageButton)gvQuestionario.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                        ((ImageButton)gvQuestionario.Rows[gvQuestionario.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                    }
                 }
                 catch (ValidationException ex)
                 {
@@ -568,6 +555,114 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
                 }
             }
+        }
+
+        protected void gvFiltroFixo_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
+                if (btnExcluir != null)
+                {
+                    bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["IsNew"]);
+                    bool emUsoExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["emUso"]);
+
+                    btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
+                    btnExcluir.Visible = (isNewExcluir || !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                }
+            }
+        }
+
+        protected void gvFiltroFixo_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Excluir")
+            {
+                try
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+
+                    int idExcluir = Convert.ToInt32(gvQuestionario.DataKeys[index]["raq_id"]);
+
+                    int qst_idExcluir = Convert.ToInt32(gvQuestionario.DataKeys[index]["qst_id"]);
+                    bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[index]["IsNew"]);
+
+                    if (idExcluir > 0 && VS_lstQuestionarios.Any(l => l.raq_id == idExcluir))
+                    {
+                        int ind = VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idExcluir).First());
+                        int ordem = VS_lstQuestionarios.Where(l => l.raq_id == idExcluir).First().raq_ordem;
+
+                        //Ajusta as ordens
+                        for (int i = ind + 1; i < VS_lstQuestionarios.Count; i++)
+                        {
+                            VS_lstQuestionarios[i].raq_ordem = ordem;
+                            ordem += 1;
+                        }
+
+                        VS_lstQuestionarios.RemoveAt(ind);
+                    }
+                    VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
+
+                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                    gvQuestionario.DataBind();
+
+                }
+                catch (ValidationException ex)
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
+                }
+            }
+        }
+
+        //adicionar detalhes
+        protected void btnAdicionarFiltro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string mensagem = "";
+
+                //carrega o valor
+
+                if (VS_lstFiltrosFixos.Any(p => p.gff_tipoFiltro.Equals(ddlFiltroFixo.SelectedIndex)))
+                    throw new ValidationException(string.Format("Filtro já existe."));
+
+                VS_lstFiltrosFixos.Add(REL_GraficoAtendimento_FiltrosFixosBO.GetEntityDetalhado(new REL_GraficoAtendimento_FiltrosFixos
+                {     gra_id = VS_gra_id,
+                    gff_tipoFiltro = Convert.ToByte(ddlFiltroFixo.SelectedValue),
+                    gff_valorFiltro = RetornaValorFiltroFixo(ddlFiltroFixo.SelectedIndex),
+                    IsNew = true
+                }));
+
+
+                VS_lstFiltrosFixos = VS_lstFiltrosFixos.OrderBy(q => q.gff_tipoFiltro).ToList();
+
+                gvFiltroFixo.DataSource = VS_lstFiltrosFixos;
+                gvFiltroFixo.DataBind();
+
+                divBotoesFiltro.Visible = divRacaCor.Visible = divSexo.Visible = divIdade.Visible = divDataPreenchimento.Visible = divDetalhamentoDeficiencia.Visible = false;
+                updFiltro.Update();
+            }
+            catch (ValidationException ex)
+            {
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao adicionar filtro fixo.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void btnCancelarFiltro_Click(object sender, EventArgs e)
+        {
+            divBotoesFiltro.Visible = divRacaCor.Visible = divSexo.Visible = divIdade.Visible = divDataPreenchimento.Visible = divDetalhamentoDeficiencia.Visible = false;
+            updFiltro.Update();
         }
 
         #endregion

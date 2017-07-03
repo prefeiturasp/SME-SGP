@@ -14,11 +14,11 @@ namespace GestaoEscolar.Configuracao.Alertas
     {
         #region Propriedades
 
-        public int EditItem
+        public short EditItem
         {
             get
             {
-                return Convert.ToInt32(grvAlertas.DataKeys[grvAlertas.EditIndex].Value);
+                return Convert.ToInt16(grvAlertas.DataKeys[grvAlertas.EditIndex].Value);
             }
         }
 

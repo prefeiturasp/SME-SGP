@@ -36,9 +36,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
-                Param.Size = 4;
+                Param.Size = 2;
                 Param.Value = entity.cfa_id;
                 qs.Parameters.Add(Param);
 
@@ -56,10 +56,10 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Byte;
-                Param.ParameterName = "@cfa_tipo";
-                Param.Size = 1;
-                Param.Value = entity.cfa_tipo;
+                Param.DbType = DbType.Int16;
+                Param.ParameterName = "@cfa_id";
+                Param.Size = 2;
+                Param.Value = entity.cfa_id;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -153,17 +153,10 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
-                Param.Size = 4;
+                Param.Size = 2;
                 Param.Value = entity.cfa_id;
-                qs.Parameters.Add(Param);
-
-                Param = qs.NewParameter();
-                Param.DbType = DbType.Byte;
-                Param.ParameterName = "@cfa_tipo";
-                Param.Size = 1;
-                Param.Value = entity.cfa_tipo;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -257,9 +250,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             if (entity != null & qs != null)
             {
                 Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
+                Param.DbType = DbType.Int16;
                 Param.ParameterName = "@cfa_id";
-                Param.Size = 4;
+                Param.Size = 2;
                 Param.Value = entity.cfa_id;
                 qs.Parameters.Add(Param);
 
@@ -275,13 +268,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// <returns>TRUE - Se entity.ParametroId > 0</returns>
         protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, CFG_Alerta entity)
         {
-            if (entity != null & qs != null)
-            {
-                entity.cfa_id = Convert.ToInt32(qs.Return.Rows[0][0]);
-                return (entity.cfa_id > 0);
-            }
-
-            return false;
+            return true;
         }
     }
 }

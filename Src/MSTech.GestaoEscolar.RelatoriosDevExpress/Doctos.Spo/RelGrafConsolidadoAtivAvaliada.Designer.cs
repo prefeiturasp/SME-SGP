@@ -361,7 +361,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             new DevExpress.XtraReports.UI.GroupField("tds_id", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.GroupHeader3.HeightF = 438.4583F;
             this.GroupHeader3.Name = "GroupHeader3";
-            this.GroupHeader3.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBandExceptFirstEntry;
             this.GroupHeader3.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader3_BeforePrint);
             // 
             // xrPanel1

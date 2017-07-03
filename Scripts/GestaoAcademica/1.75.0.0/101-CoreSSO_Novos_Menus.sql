@@ -53,7 +53,7 @@ SET XACT_ABORT ON
 		,@SiteMap1Nome = 'Relatórios de ações realizadas'
 		,@SiteMap1Url = '~/Relatorios/AcoesRealizadas/Busca.aspx'
 		,@SiteMap2Nome = 'Relatórios de ações realizadas'
-		,@SiteMap2Url = NULL
+		,@SiteMap2Url = '~/Relatorios/Relatorio.aspx?dummy=%271VBlnYbVq7k%3d%27'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador

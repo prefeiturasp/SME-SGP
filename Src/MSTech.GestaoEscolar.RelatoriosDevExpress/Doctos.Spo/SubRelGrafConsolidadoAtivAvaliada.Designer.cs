@@ -43,6 +43,7 @@
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.lblAlunos = new DevExpress.XtraReports.UI.XRLabel();
             this.xrControlStyle1 = new DevExpress.XtraReports.UI.XRControlStyle();
+            this.TPCID = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.dsGestaoEscolar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -178,6 +179,10 @@
             this.xrControlStyle1.Name = "xrControlStyle1";
             this.xrControlStyle1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             // 
+            // TPCID
+            // 
+            this.TPCID.Name = "TPCID";
+            // 
             // SubRelGrafConsolidadoAtivAvaliada
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -194,7 +199,8 @@
             this.ESCID,
             this.UNIID,
             this.TURID,
-            this.TDSID});
+            this.TDSID,
+            this.TPCID});
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.xrControlStyle1});
             this.Version = "16.1";
@@ -221,5 +227,6 @@
         private DevExpress.XtraReports.UI.XRLabel lblpes_nome;
         private DevExpress.XtraReports.UI.XRLabel lblfar_descricao;
         private DSGestaoEscolarTableAdapters.NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaTableAdapter nEW_Relatorio_GrafConsAtivAvaliada_AlunosTurmaTableAdapter;
+        public DevExpress.XtraReports.Parameters.Parameter TPCID;
     }
 }
