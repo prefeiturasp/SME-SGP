@@ -65,6 +65,9 @@
                         <div class="grafico-cabecalho">
                             <asp:Label ID="lblCabecalho" runat="server"></asp:Label>
                         </div>
+                        <div class="grafico-dataImpressao">
+                            <asp:Label ID="lblDataImpressao" runat="server"></asp:Label>
+                        </div>
                         <div class="loader" ng-if="!mensagemErro && !mensagemAlerta && !loaded">
                             <img class="imgLoader" src="../../App_Themes/IntranetSME/images/ajax-loader.gif" style="border-width: 0px;">
                         </div>

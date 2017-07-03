@@ -100,6 +100,8 @@ namespace GestaoEscolar.WebControls.GraficoAtendimento
                 lblNomeGrafico.Text = pnlGrafico.GroupingText;
                 lblCabecalho.Text = (Session["cabecalho_GraficoAtendimento"] ?? string.Empty).ToString();
 
+                lblDataImpressao.Text = string.Format("<b>Data de impressão: </b>{0}", DateTime.Now.ToString("dd/MM/yyy HH:mm"));
+
                 URL_Retorno = (Session["URL_Retorno_GraficoAtendimento"] ?? "/Relatorios/GraficoAtendimento/Busca.aspx").ToString();
 
                 Session.Remove("gra_id_GraficoAtendimento");

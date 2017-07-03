@@ -3014,6 +3014,10 @@ tr.trDisciplina.global td {
     display: none;
 }
 
+.graficoAtendimento .grafico-dataImpressao {
+    display: none;
+}
+
 #graficoBarra, #graficoPizza {
     max-width: 290mm;
     width: 95%;
@@ -3213,6 +3217,12 @@ tr.trDisciplina.global td {
         margin: auto;
     }
 
+    .graficoAtendimento .grafico-dataImpressao {
+        display: block;
+        width: 297mm;
+        font-size: 18px;
+        line-height: 1.2;
+    }
     .graficoAtendimento .grafico-nome {
         display: block;
         font-weight: bold;
