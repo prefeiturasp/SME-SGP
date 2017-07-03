@@ -30,38 +30,22 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         }
 
         /// <summary>
-        /// Armazena em viewstate o arquivo selecionado.
-        /// </summary>
-        private long VS_arquivo
-        {
-            get
-            {
-                return (long)(ViewState["VS_arquivo"] ?? -1);
-            }
-
-            set
-            {
-                ViewState["VS_arquivo"] = value;
-            }
-        }
-
-        /// <summary>
         /// Propriedade em ViewState que armazena valor de rea_id
         /// no caso de atualização de um registro ja existente.
         /// </summary>
-        private int VS_rea_id
+        private int VS_gra_id
         {
             get
             {
-                if (ViewState["VS_rea_id"] != null)
+                if (ViewState["VS_gra_id"] != null)
                 {
-                    return Convert.ToInt32(ViewState["VS_rea_id"]);
+                    return Convert.ToInt32(ViewState["VS_gra_id"]);
                 }
                 return -1;
             }
             set
             {
-                ViewState["VS_rea_id"] = value;
+                ViewState["VS_gra_id"] = value;
             }
         }
         
@@ -84,6 +68,20 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
 
+        private List<REL_GraficoAtendimento_FiltrosFixos> VS_lstFiltrosFixos
+        {
+            get
+            {
+                if (ViewState["VS_lstFiltrosFixos"] == null)
+                    ViewState["VS_lstFiltrosFixos"] = new List<REL_GraficoAtendimento_FiltrosFixos>();
+
+                return (List<REL_GraficoAtendimento_FiltrosFixos>)ViewState["VS_lstFiltrosFixos"];
+            }
+            set
+            {
+                ViewState["VS_lstFiltrosFixos"] = value;
+            }
+        }
         #endregion
 
         #region Métodos
@@ -92,37 +90,28 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         /// Carrega dados do relatório
         /// </summary>
         /// <param name="rea_id">ID do relatório</param>
-        private void _LoadFromEntity(int rea_id)
+        private void _LoadFromEntity(int gra_id)
         {
             try
             {
-                VS_rea_id = rea_id;
+                VS_gra_id = gra_id;
 
-                CLS_RelatorioAtendimento rea = new CLS_RelatorioAtendimento { rea_id = VS_rea_id };
-                CLS_RelatorioAtendimentoBO.GetEntity(rea);
+                REL_GraficoAtendimento gra = new REL_GraficoAtendimento { gra_id = VS_gra_id };
+                REL_GraficoAtendimentoBO.GetEntity(gra);
 
-                txtTitulo.Text = rea.rea_titulo;
-                txtTituloAnexo.Text = rea.rea_tituloAnexo;
+                txtTitulo.Text = gra.gra_titulo;
                 ddlTipo.Enabled = false;
+               
+                CLS_RelatorioAtendimento rea = new CLS_RelatorioAtendimento { rea_id = gra.rea_id };
+                CLS_RelatorioAtendimentoBO.GetEntity(rea);
                 ddlTipo.SelectedValue = rea.rea_tipo.ToString();
-                ddlTipo_SelectedIndexChanged(ddlTipo, new EventArgs());
-                ddlPeriodicidade.Enabled = false;
-                ddlPeriodicidade.SelectedValue = rea.rea_periodicidadePreenchimento.ToString();
-                chkExibeHipotese.Enabled = false;
-                chkExibeHipotese.Checked = rea.rea_permiteEditarHipoteseDiagnostica;
-                chkAcoesRealizadas.Enabled = false;
-                chkAcoesRealizadas.Checked = rea.rea_permiteAcoesRealizadas;
-                chkExibeRacaCor.Enabled = false;
-                chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
-                hplAnexo.Text = rea.rea_tituloAnexo;
-                hplAnexo.NavigateUrl = rea.arq_idAnexo == 0 ? "" : String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
-                divAddAnexo.Visible = rea.arq_idAnexo == 0;
-                divAnexoAdicionado.Visible = rea.arq_idAnexo > 0;
-                UCComboTipoDisciplina.PermiteEditar = false;
-                UCComboTipoDisciplina.Valor = rea.tds_id;
+                UCComboRelatorioAtendimento._Combo.SelectedValue = gra.rea_id.ToString();
+                UCComboRelatorioAtendimento._Combo.Enabled = false;
 
-                CarregaCargos();
-                CarregaGrupos();
+                ddlEixoAgrupamento.Enabled = false;
+                ddlEixoAgrupamento.SelectedValue = gra.gra_eixo.ToString();
+  
+                CarregaFiltrosFixos();
                 CarregaQuestionarios();
             }
             catch (Exception ex)
@@ -140,50 +129,45 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         {
             try
             {
-                CLS_RelatorioAtendimento rea = new CLS_RelatorioAtendimento
+                REL_GraficoAtendimento gra = new REL_GraficoAtendimento
                 {
-                    rea_id = VS_rea_id,
-                    rea_titulo = txtTitulo.Text,
-                    rea_tipo = Convert.ToByte(ddlTipo.SelectedValue),
-                    rea_permiteEditarRecaCor = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE && chkExibeRacaCor.Checked,
-                    rea_permiteEditarHipoteseDiagnostica = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE && chkExibeHipotese.Checked,
-                    rea_permiteAcoesRealizadas = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.NAAPA && chkAcoesRealizadas.Checked,
-                    tds_id = (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.RP ? -1 : UCComboTipoDisciplina.Valor),
-                    rea_periodicidadePreenchimento = Convert.ToByte(ddlPeriodicidade.SelectedValue),
-                    rea_tituloAnexo = txtTituloAnexo.Text,
-                    IsNew = VS_rea_id <= 0
+                    gra_id = VS_gra_id,
+                    rea_id = UCComboRelatorioAtendimento.Valor,
+                    gra_titulo = txtTitulo.Text,
+                    gra_eixo = Convert.ToByte(ddlEixoAgrupamento.SelectedValue),
+                    gra_tipo = Convert.ToByte(REL_GraficoAtendimentoTipo.Barra),
+                    gra_dataAlteracao = DateTime.Now,
+                    IsNew = VS_gra_id <= 0
                 };
+
+                if(!gra.IsNew)
+                    gra.gra_dataCriacao = DateTime.Now;
 
                 if (!VS_lstQuestionarios.Any(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido))
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumQuestionarioAdicionado").ToString());
 
-                List<CLS_RelatorioAtendimentoGrupo> lstGrupo = CarregaGruposPreenchidos();
+                if (VS_lstFiltrosFixos.Count == 0 && VS_lstQuestionarios.Count ==0)
+                    throw new ValidationException("Selecione pelo menos um filtro.");
 
-                List<CLS_RelatorioAtendimentoCargo> lstCargo = CarregaCargosPreenchidos();
-
-                if (!lstGrupo.Any(g => g.rag_permissaoAprovacao || g.rag_permissaoConsulta || g.rag_permissaoEdicao || g.rag_permissaoExclusao) &&
-                    !lstCargo.Any(c => c.rac_permissaoAprovacao || c.rac_permissaoConsulta || c.rac_permissaoEdicao || c.rac_permissaoExclusao))
-                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumaPermissao").ToString());
-
-                if (CLS_RelatorioAtendimentoBO.Salvar(rea, lstGrupo, lstCargo, VS_lstQuestionarios, VS_arquivo, ApplicationWEB.TamanhoMaximoArquivo, ApplicationWEB.TiposArquivosPermitidos))
+                if (REL_GraficoAtendimentoBO.Save(gra)) //, VS_lstFiltrosFixos, VS_lstQuestionarios))
                 {
                     string message = "";
-                    if (VS_rea_id <= 0)
+                    if (VS_gra_id <= 0)
                     {
-                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "rea_id: " + rea.rea_id);
-                        message = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.RelatorioIncluidoSucesso").ToString(), UtilBO.TipoMensagem.Sucesso);
+                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "gra_id: " + gra.gra_id);
+                        message = UtilBO.GetErroMessage("Gráfico cadastrado com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
                     else
                     {
-                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "rea_id: " + rea.rea_id);
-                        message = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.RelatorioAlteradoSucesso").ToString(), UtilBO.TipoMensagem.Sucesso);
+                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "gra_id: " + gra.gra_id);
+                        message = UtilBO.GetErroMessage("Gráfico alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
                     if (ParametroPermanecerTela)
                     {
                         ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                         lblMessage.Text = message;
-                        VS_rea_id = rea.rea_id;
-                        _LoadFromEntity(VS_rea_id);
+                        VS_gra_id = gra.gra_id;
+                        _LoadFromEntity(VS_gra_id);
                     }
                     else
                     {
@@ -221,94 +205,13 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
 
-        /// <summary>
-        /// O método copia o stream do arquivo selecionado para uma MemoryStream, possibilitando sua leitura múltiplas vezes.
-        /// </summary>
-        /// <param name="inputStream"></param>
-        /// <returns></returns>
-        private Stream CopiarArquivo(Stream inputStream)
-        {
-            long tamanho = inputStream.Length;
-            byte[] buffer = new byte[tamanho];
-            MemoryStream memoryStream = new MemoryStream();
-
-            int cont = inputStream.Read(buffer, 0, (int)tamanho);
-
-            while (cont > 0)
-            {
-                memoryStream.Write(buffer, 0, cont);
-                cont = inputStream.Read(buffer, 0, (int)tamanho);
-            }
-
-            memoryStream.Position = 0;
-            inputStream.Close();
-            return memoryStream;
-        }
-
-        /// <summary>
-        /// Monta uma entidade de arquivo de acordo com o documento passado.
-        /// </summary>
-        /// <returns>Entidade de arquivo.</returns>
-        public SYS_Arquivo CriarAnexo(Stream arquivo, string nomeArquivo, int tamanho, string typeMime)
-        {
-            return !string.IsNullOrEmpty(nomeArquivo) ?
-                   new SYS_Arquivo
-                   {
-                       arq_nome = Path.GetFileName(nomeArquivo)
-                       ,
-                       arq_tamanhoKB = tamanho
-                       ,
-                       arq_typeMime = typeMime
-                       ,
-                       arq_data = GetBytes(arquivo)
-                       ,
-                       arq_situacao = (byte)SYS_ArquivoSituacao.Ativo
-                       ,
-                       arq_dataCriacao = DateTime.Now
-                       ,
-                       arq_dataAlteracao = DateTime.Now
-                   } : null;
-        }
-
-        /// <summary>
-        /// Retorna o array de Bytes do arquivo
-        /// </summary>
-        /// <param name="arquivo">Stream do arquivo</param>
-        /// <returns>Array de Bytes</returns>
-        public byte[] GetBytes(Stream arquivo)
-        {
-            byte[] file = null;
-
-            if (arquivo != null)
-            {
-                int tamanho = Convert.ToInt32(arquivo.Length);
-                file = new byte[tamanho];
-
-                if (arquivo.Length == 0)
-                    throw new ValidationException("O arquivo tem 0 bytes, por isso ele não será anexado.");
-
-                arquivo.Read(file, 0, tamanho);
-            }
-
-            return file;
-        }
 
         /// <summary>
         /// Carrega os cargos
         /// </summary>
-        private void CarregaCargos()
+        private void CarregaFiltrosFixos()
         {
-            gvCargo.DataSource = CLS_RelatorioAtendimentoCargoBO.SelectBy_rea_id(VS_rea_id);
-            gvCargo.DataBind();
-        }
 
-        /// <summary>
-        /// Carrega os grupos
-        /// </summary>
-        private void CarregaGrupos()
-        {
-            gvGrupo.DataSource = CLS_RelatorioAtendimentoGrupoBO.SelectBy_rea_id(VS_rea_id, __SessionWEB.__UsuarioWEB.Grupo.sis_id);
-            gvGrupo.DataBind();
         }
 
         /// <summary>
@@ -316,7 +219,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         /// </summary>
         private void CarregaQuestionarios()
         {
-            VS_lstQuestionarios = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(VS_rea_id);
+            //VS_lstQuestionarios = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(VS_rea_id);
             VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
             gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
@@ -326,94 +229,42 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         /// <summary>
         /// Carrega os cargos
         /// </summary>
-        private List<CLS_RelatorioAtendimentoCargo> CarregaCargosPreenchidos()
+        private List<CFG_DeficienciaDetalhe> CarregaDetalhePreenchidos()
         {
-            List<CLS_RelatorioAtendimentoCargo> lstCargo = new List<CLS_RelatorioAtendimentoCargo>();
+            List<CFG_DeficienciaDetalhe> lstDetalhes = new List<CFG_DeficienciaDetalhe>();
 
-            foreach (GridViewRow item in gvCargo.Rows)
+            foreach (GridViewRow item in gvDetalhe.Rows)
             {
-                CheckBox chkpermissaoConsulta = (CheckBox)item.FindControl("chkpermissaoConsulta");
-                CheckBox chkpermissaoEdicao = (CheckBox)item.FindControl("chkpermissaoEdicao");
-                CheckBox chkpermissaoExclusao = (CheckBox)item.FindControl("chkpermissaoExclusao");
-                CheckBox chkpermissaoAprovacao = (CheckBox)item.FindControl("chkpermissaoAprovacao");
+                CheckBox chkSeleciona = (CheckBox)item.FindControl("chkSelecionar");
 
-                if (chkpermissaoConsulta != null && chkpermissaoEdicao != null && chkpermissaoExclusao != null && chkpermissaoAprovacao != null)
+                if (chkSeleciona != null)
                 {
-                    if (!chkpermissaoConsulta.Checked && !chkpermissaoEdicao.Checked && !chkpermissaoExclusao.Checked && !chkpermissaoAprovacao.Checked)
+                    if (!chkSeleciona.Checked)
                         continue;
 
-                    lstCargo.Add(new CLS_RelatorioAtendimentoCargo
+                    lstDetalhes.Add(new CFG_DeficienciaDetalhe
                     {
-                        rea_id = VS_rea_id,
-                        crg_id = Convert.ToInt32(gvCargo.DataKeys[item.RowIndex]["crg_id"].ToString()),
-                        rac_permissaoConsulta = chkpermissaoConsulta.Checked,
-                        rac_permissaoAprovacao = chkpermissaoAprovacao.Checked,
-                        rac_permissaoExclusao = chkpermissaoExclusao.Checked,
-                        rac_permissaoEdicao = chkpermissaoEdicao.Checked
+                        tde_id = ComboTipoDeficiencia.Valor,
+                        dfd_id = Convert.ToInt32(gvDetalhe.DataKeys[item.RowIndex]["dfd_id"].ToString()),
                     });
                 }
             }
 
-            return lstCargo;
+            return lstDetalhes;
         }
 
-        /// <summary>
-        /// Carrega os grupos
-        /// </summary>
-        private List<CLS_RelatorioAtendimentoGrupo> CarregaGruposPreenchidos()
-        {
-            List<CLS_RelatorioAtendimentoGrupo> lstGrupo = new List<CLS_RelatorioAtendimentoGrupo>();
-
-            foreach (GridViewRow item in gvGrupo.Rows)
-            {
-                CheckBox chkpermissaoConsulta = (CheckBox)item.FindControl("chkpermissaoConsulta");
-                CheckBox chkpermissaoEdicao = (CheckBox)item.FindControl("chkpermissaoEdicao");
-                CheckBox chkpermissaoExclusao = (CheckBox)item.FindControl("chkpermissaoExclusao");
-                CheckBox chkpermissaoAprovacao = (CheckBox)item.FindControl("chkpermissaoAprovacao");
-
-                if (chkpermissaoConsulta != null && chkpermissaoEdicao != null && chkpermissaoExclusao != null && chkpermissaoAprovacao != null)
-                {
-                    if (!chkpermissaoConsulta.Checked && !chkpermissaoEdicao.Checked && !chkpermissaoExclusao.Checked && !chkpermissaoAprovacao.Checked)
-                        continue;
-
-                    lstGrupo.Add(new CLS_RelatorioAtendimentoGrupo
-                    {
-                        rea_id = VS_rea_id,
-                        gru_id = new Guid(gvGrupo.DataKeys[item.RowIndex]["gru_id"].ToString()),
-                        rag_permissaoConsulta = chkpermissaoConsulta.Checked,
-                        rag_permissaoAprovacao = chkpermissaoAprovacao.Checked,
-                        rag_permissaoExclusao = chkpermissaoExclusao.Checked,
-                        rag_permissaoEdicao = chkpermissaoEdicao.Checked
-                    });
-                }
-            }
-
-            return lstGrupo;
-        }
         
         /// <summary>
         /// Inicializa os campos da tela
         /// </summary>
         private void Inicializar()
         {
-            VS_arquivo = -1;
-            VS_rea_id = -1;
-            txtTitulo.Text = txtTituloAnexo.Text = "";
+            VS_gra_id = -1;
+            txtTitulo.Text = "";
             ddlTipo.SelectedValue = "0";
-            ddlPeriodicidade.SelectedValue = "0";
-            chkExibeHipotese.Checked = chkExibeRacaCor.Checked = divDisciplina.Visible = divPeriodicidade.Visible = false;
-            UCComboTipoDisciplina.Valor = -1;
-            hplAnexo.Text = "";
-            hplAnexo.NavigateUrl = "";
-            divAddAnexo.Visible = true;
-            divAnexoAdicionado.Visible = false;
-            UCComboQuestionario.CarregarQuestionario();
-            UCComboTipoDisciplina.CarregarTipoDisciplinaTipo((byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela);
-            gvCargo.DataSource = new DataTable();
-            gvGrupo.DataSource = new DataTable();
+            UCComboRelatorioAtendimento._Combo.Enabled = false;
+            ddlEixoAgrupamento.SelectedValue = "0";
             gvQuestionario.DataSource = VS_lstQuestionarios;
-            gvCargo.DataBind();
-            gvGrupo.DataBind();
             gvQuestionario.DataBind();
         }
 
@@ -454,8 +305,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                                            GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.btnVoltar.Text").ToString();
                         ckbBloqueado.Visible = false;
 
-                        CarregaCargos();
-                        CarregaGrupos();
+                        CarregaFiltrosFixos();
                         CarregaQuestionarios();
                     }
 
@@ -467,14 +317,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 {
                     ApplicationWEB._GravaErro(ex);
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarSistema").ToString(), UtilBO.TipoMensagem.Erro);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar dados do gráfico.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/RelatorioAtendimento/Busca.aspx", false);
+            Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/GraficoAtendimento/Busca.aspx", false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
 
@@ -486,24 +336,69 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            divHipotese.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE;
-            divRacaCor.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE;
-            divDisciplina.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP;
-            divPeriodicidade.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP;
-            divAcoesRealizadas.Visible = Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.NAAPA;
-
-            if (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.AEE)
-                chkExibeHipotese.Checked = chkExibeRacaCor.Checked = false;
-            if (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.RP)
+            try
             {
-                UCComboTipoDisciplina.Valor = -1;
-                ddlPeriodicidade.SelectedValue = "0";
+
+                //carrega os relatorios
+                if (ddlTipo.SelectedIndex > 0)
+                {
+                    UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
+                    UCComboRelatorioAtendimento._Combo.Enabled = true;
+                    if (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE)
+                        ddlFiltroFixo.Items.Add("Detalhamento das deficiências");
+                    else
+                        ddlFiltroFixo.Items.Remove("Detalhamento das deficiências");
+
+                     updFiltro.Update();
+                }
+                else
+                {
+                    UCComboRelatorioAtendimento.SelectedIndex = 0;
+                    UCComboRelatorioAtendimento._Combo.Enabled = false;
+                }
             }
-
-
-
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar relatórios.", UtilBO.TipoMensagem.Erro);
+            }
         }
-        
+
+
+        protected void ddlFiltroFixo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            divBotoesFiltro.Visible = divRacaCor.Visible = divSexo.Visible = divIdade.Visible = divDataPreenchimento.Visible = divDetalhamentoDeficiencia.Visible = false;
+
+            //carrega os relatorios
+            if (ddlFiltroFixo.SelectedIndex > 0)
+            {
+                switch (ddlFiltroFixo.SelectedIndex)
+                {
+                    case 1:
+                        divDataPreenchimento.Visible = true;
+                        break;
+                    case 2:
+                        divRacaCor.Visible = true;
+                        break;
+                    case 3:
+                        divIdade.Visible = true;                        
+                        break;
+                    case 4:
+                        divSexo.Visible = true;
+                        break;
+                    default:
+                        ComboTipoDeficiencia._Combo.DataBind();
+                        divDetalhe.Visible = false;
+                        divDetalhamentoDeficiencia.Visible = true;
+                        break;
+                }
+                divBotoesFiltro.Visible = true;
+                updFiltro.Update();
+            }          
+            
+        }
+
         protected void btnAdicionarQuestionario_Click(object sender, EventArgs e)
         {
             try
@@ -520,7 +415,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
                 VS_lstQuestionarios.Add(new CLS_RelatorioAtendimentoQuestionario
                 {
-                    rea_id = VS_rea_id,
+                    rea_id = UCComboRelatorioAtendimento.Valor,
                     raq_id = raq_id,
                     qst_id = UCComboQuestionario.Valor,
                     qst_titulo = UCComboQuestionario.Texto,
@@ -547,41 +442,12 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
         
-        protected void gvQuestionario_DataBound(object sender, EventArgs e)
-        {
-            GridView grv = (GridView)sender;
-            if (grv.Rows.Count > 0)
-            {
-                ((ImageButton)grv.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                ((ImageButton)grv.Rows[grv.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-            }
-        }
+
 
         protected void gvQuestionario_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                LinkButton btnAlterar = (LinkButton)e.Row.FindControl("btnAlterar");
-                if (btnAlterar != null)
-                {
-                    btnAlterar.CommandArgument = e.Row.RowIndex.ToString();
-                }
-                ImageButton _btnSubir = (ImageButton)e.Row.FindControl("_btnSubir");
-                if (_btnSubir != null)
-                {
-                    _btnSubir.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "cima.png";
-                    _btnSubir.CommandArgument = e.Row.RowIndex.ToString();
-                    _btnSubir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
-                }
-
-                ImageButton _btnDescer = (ImageButton)e.Row.FindControl("_btnDescer");
-                if (_btnDescer != null)
-                {
-                    _btnDescer.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "baixo.png";
-                    _btnDescer.CommandArgument = e.Row.RowIndex.ToString();
-                    _btnDescer.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
-                }
-
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
                 {
@@ -596,81 +462,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
         protected void gvQuestionario_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Subir")
-            {
-                try
-                {
-                    int index = int.Parse(e.CommandArgument.ToString());
-
-                    int idDescer = Convert.ToInt32(gvQuestionario.DataKeys[index - 1]["raq_id"]);
-                    int idSubir = Convert.ToInt32(gvQuestionario.DataKeys[index]["raq_id"]);
-                    int ordemSubir = VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idSubir).First())].raq_ordem;
-                    int ordemDescer = VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idDescer).First())].raq_ordem;
-
-                    VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idSubir).First())].raq_ordem = ordemDescer;
-                    VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idDescer).First())].raq_ordem = ordemSubir;
-
-                    VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
-
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
-                    gvQuestionario.DataBind();
-
-                    if (gvQuestionario.Rows.Count > 0)
-                    {
-                        ((ImageButton)gvQuestionario.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                        ((ImageButton)gvQuestionario.Rows[gvQuestionario.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                    }
-                }
-                catch (ValidationException ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-                }
-                catch (Exception ex)
-                {
-                    ApplicationWEB._GravaErro(ex);
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
-                }
-            }
-            else if (e.CommandName == "Descer")
-            {
-                try
-                {
-                    int index = int.Parse(e.CommandArgument.ToString());
-
-                    int idDescer = Convert.ToInt32(gvQuestionario.DataKeys[index]["raq_id"]);
-                    int idSubir = Convert.ToInt32(gvQuestionario.DataKeys[index + 1]["raq_id"]);
-                    int ordemSubir = VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idSubir).First())].raq_ordem;
-                    int ordemDescer = VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idDescer).First())].raq_ordem;
-
-                    VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idSubir).First())].raq_ordem = ordemDescer;
-                    VS_lstQuestionarios[VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idDescer).First())].raq_ordem = ordemSubir;
-
-                    VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
-
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
-                    gvQuestionario.DataBind();
-
-                    if (gvQuestionario.Rows.Count > 0)
-                    {
-                        ((ImageButton)gvQuestionario.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                        ((ImageButton)gvQuestionario.Rows[gvQuestionario.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                    }
-                }
-                catch (ValidationException ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-                }
-                catch (Exception ex)
-                {
-                    ApplicationWEB._GravaErro(ex);
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
-                }
-            }
-            else if (e.CommandName == "Excluir")
+             if (e.CommandName == "Excluir")
             {
                 try
                 {
@@ -681,8 +473,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     int qst_idExcluir = Convert.ToInt32(gvQuestionario.DataKeys[index]["qst_id"]);
                     bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[index]["IsNew"]);
 
-                    if (VS_rea_id > 0 && !isNewExcluir && CLS_QuestionarioBO.VerificaQuestionarioEmUso(qst_idExcluir, VS_rea_id))
-                        throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioEmUso").ToString());
+                  //  if (VS_rea_id > 0 && !isNewExcluir && CLS_QuestionarioBO.VerificaQuestionarioEmUso(qst_idExcluir, VS_rea_id))
+                  //      throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioEmUso").ToString());
 
                     if (idExcluir > 0 && VS_lstQuestionarios.Any(l => l.raq_id == idExcluir))
                     {
@@ -703,11 +495,6 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
                     gvQuestionario.DataBind();
 
-                    if (gvQuestionario.Rows.Count > 0)
-                    {
-                        ((ImageButton)gvQuestionario.Rows[0].Cells[2].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                        ((ImageButton)gvQuestionario.Rows[gvQuestionario.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                    }
                 }
                 catch (ValidationException ex)
                 {
@@ -723,71 +510,111 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
 
-        protected void btnAddAnexo_Click(object sender, ImageClickEventArgs e)
+        protected void gvFiltroFixo_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            try
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (string.IsNullOrEmpty(txtTituloAnexo.Text) && fupAnexo.HasFile)
-                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.TituloAnexoObrigatorio").ToString());
-
-                if (fupAnexo.HasFile)
+                ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
+                if (btnExcluir != null)
                 {
-                    string nomeArquivoSemExtensao = Path.GetFileNameWithoutExtension(fupAnexo.PostedFile.FileName);
-                    string nomeArquivo = fupAnexo.PostedFile.FileName;
-                    int tamanhoArquivo = fupAnexo.PostedFile.ContentLength;
-                    string typeMime = fupAnexo.PostedFile.ContentType;
+                    bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["IsNew"]);
+                    bool emUsoExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["emUso"]);
 
-                    Stream arquivo = CopiarArquivo(fupAnexo.PostedFile.InputStream);
-
-                    SYS_Arquivo arq = CriarAnexo(arquivo, nomeArquivo, tamanhoArquivo, typeMime);
-                    arq.arq_situacao = (byte)SYS_ArquivoSituacao.Temporario;
-                    SYS_ArquivoBO.Save(arq, ApplicationWEB.TamanhoMaximoArquivo, ApplicationWEB.TiposArquivosPermitidos);
-                    VS_arquivo = arq.arq_id;
-
-                    hplAnexo.Text = txtTituloAnexo.Text;
-                    hplAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", arq.arq_id);
-
-                    divAddAnexo.Visible = false;
-                    divAnexoAdicionado.Visible = true;
+                    btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
+                    btnExcluir.Visible = (isNewExcluir || !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
-                else
-                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.SelecioneArquivo").ToString());
-            }
-            catch (ValidationException ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroAdicionarArquivo").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
 
-        protected void btnExcluirAnexo_Click(object sender, ImageClickEventArgs e)
+        protected void gvFiltroFixo_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Excluir")
+            {
+                try
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+
+                    int idExcluir = Convert.ToInt32(gvQuestionario.DataKeys[index]["raq_id"]);
+
+                    int qst_idExcluir = Convert.ToInt32(gvQuestionario.DataKeys[index]["qst_id"]);
+                    bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[index]["IsNew"]);
+
+                    if (idExcluir > 0 && VS_lstQuestionarios.Any(l => l.raq_id == idExcluir))
+                    {
+                        int ind = VS_lstQuestionarios.IndexOf(VS_lstQuestionarios.Where(l => l.raq_id == idExcluir).First());
+                        int ordem = VS_lstQuestionarios.Where(l => l.raq_id == idExcluir).First().raq_ordem;
+
+                        //Ajusta as ordens
+                        for (int i = ind + 1; i < VS_lstQuestionarios.Count; i++)
+                        {
+                            VS_lstQuestionarios[i].raq_ordem = ordem;
+                            ordem += 1;
+                        }
+
+                        VS_lstQuestionarios.RemoveAt(ind);
+                    }
+                    VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
+
+                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                    gvQuestionario.DataBind();
+
+                }
+                catch (ValidationException ex)
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                    lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroCarregarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
+                }
+            }
+        }
+
+        //adicionar detalhes
+        protected void btnAdicionarFiltro_Click(object sender, EventArgs e)
         {
             try
             {
-                txtTituloAnexo.Text = "";
-                hplAnexo.Text = "";
-                hplAnexo.NavigateUrl = "";
-                VS_arquivo = -1;
-                divAddAnexo.Visible = true;
-                divAnexoAdicionado.Visible = false;
+                string mensagem = "";
+
+                //carrega o valor
+
+                if (VS_lstFiltrosFixos.Any(p => p.gff_tipoFiltro.Equals(ddlFiltroFixo.SelectedIndex)))
+                    throw new ValidationException(string.Format("Filtro já existe."));
+
+                VS_lstFiltrosFixos.Add(new REL_GraficoAtendimento_FiltrosFixos
+                {     gra_id = VS_gra_id,
+                    gff_tipoFiltro = Convert.ToByte(ddlFiltroFixo.SelectedIndex),
+                    IsNew = true
+                });
+
+
+                VS_lstFiltrosFixos = VS_lstFiltrosFixos.OrderBy(q => q.gff_tipoFiltro).ToList();
+
+                gvFiltroFixo.DataSource = VS_lstFiltrosFixos;
+                gvFiltroFixo.DataBind();
+
+                divBotoesFiltro.Visible = divRacaCor.Visible = divSexo.Visible = divIdade.Visible = divDataPreenchimento.Visible = divDetalhamentoDeficiencia.Visible = false;
+                updFiltro.Update();
             }
             catch (ValidationException ex)
             {
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroExcluirArquivo").ToString(), UtilBO.TipoMensagem.Erro);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao adicionar filtro fixo.", UtilBO.TipoMensagem.Erro);
             }
+        }
+
+        protected void btnCancelarFiltro_Click(object sender, EventArgs e)
+        {
+            divBotoesFiltro.Visible = divRacaCor.Visible = divSexo.Visible = divIdade.Visible = divDataPreenchimento.Visible = divDetalhamentoDeficiencia.Visible = false;
+            updFiltro.Update();
         }
 
         #endregion

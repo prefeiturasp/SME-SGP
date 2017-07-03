@@ -200,6 +200,8 @@
     <Compile Include="Abstracts\Abstract_ACA_Turno.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TurnoEscola.cs" />
     <Compile Include="Abstracts\Abstract_ACA_TurnoHorario.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_Alerta.cs" />
+    <Compile Include="Abstracts\Abstract_CFG_AlertaGrupo.cs" />
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoAcademico.cs" />
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoMigracaoRio.cs" />
     <Compile Include="Abstracts\Abstract_CFG_ConfiguracaoInscricaoCreche.cs" />
@@ -450,6 +452,8 @@
     <Compile Include="ACA_TipoJustificativaExclusaoAulas.cs" />
     <Compile Include="ACA_TipoResultado.cs" />
     <Compile Include="ACA_TipoResultadoCurriculoPeriodo.cs" />
+    <Compile Include="CFG_Alerta.cs" />
+    <Compile Include="CFG_AlertaGrupo.cs" />
     <Compile Include="CFG_CorRelatorio.cs" />
     <Compile Include="CFG_DeficienciaDetalhe.cs" />
     <Compile Include="CFG_DeficienciaFIlha.cs" />

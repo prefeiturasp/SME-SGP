@@ -142,5 +142,6 @@ namespace MSTech.GestaoEscolar.DAL
         // {
         //    return base.DataRowToEntity(dr, entity, limparEntity);
         // }
+
 	}
 }

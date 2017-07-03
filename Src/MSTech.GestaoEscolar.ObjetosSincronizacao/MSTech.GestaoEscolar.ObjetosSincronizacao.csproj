@@ -121,6 +121,7 @@
     <Compile Include="DTO\Saida\BuscaTipoCicloSaidaDTO.cs" />
     <Compile Include="DTO\Saida\ConselhoClasseSaidaDTO.cs" />
     <Compile Include="DTO\Saida\FilaAlunoFechamentoPendenciaDTO.cs" />
+    <Compile Include="DTO\Saida\GraficoAtendimentoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\MatriculaTurmaSaidaDTO.cs" />
     <Compile Include="DTO\Saida\PlanejamentoSaidaDTO.cs" />
     <Compile Include="DTO\Saida\ListagemTurmaSaidaDTO.cs" />

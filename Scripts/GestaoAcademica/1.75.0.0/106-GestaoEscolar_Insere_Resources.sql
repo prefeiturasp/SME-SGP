@@ -207,6 +207,118 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Ação realizada é obrigatório.'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ctvDataFormato.ErrorMessage' 
+		, @rcr_NomeResource = 'GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Data da ação realizada não está no formato dd/mm/aaaa ou é inexistente.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'litTitulo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Listagem de alertas'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'grvAlertas.ColunaNome' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Busca'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nome do alerta'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'litTitulo.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Cadastro de alerta'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblNome.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nome *'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblAssunto.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Assunto'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblPeriodoAnalise.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Quantidade de dias para análise de dados'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblPeriodoValidade.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Período de validade da notificação (em horas)'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'litGrupos.Text' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Grupos de envio da notificação'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'grvGrupos.EmptyDataText' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nenhum grupo foi encontrado.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'grvGrupos.ColunaNome' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Nome'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'grvGrupos.ColunaEnvioNotificacao' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Enviar notificação'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'mensagemSucessoSalvar' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Alerta salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'chkDesativar.Text' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Desativar alerta'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'rfvNome.ErrorMessage' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Nome é obrigatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'litAgendamento.Text' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Agendamento'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

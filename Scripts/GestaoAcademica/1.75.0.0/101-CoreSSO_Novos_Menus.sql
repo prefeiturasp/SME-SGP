@@ -36,14 +36,14 @@ SET XACT_ABORT ON
 		,@nomeModulo = 'Relatório geral' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Relatório geral'
 		,@SiteMap1Url = '~/Relatorios/RelatorioGeralAtendimento/Busca.aspx'
-		,@SiteMap2Nome = NULL
-		,@SiteMap2Url = NULL
+		,@SiteMap2Nome = 'Relatório geral'
+		,@SiteMap2Url = '~/Documentos/Relatorio.aspx?dummy=%27iGnoDuhcFtk%3d%27'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
-		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 		
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
@@ -52,8 +52,8 @@ SET XACT_ABORT ON
 		,@nomeModulo = 'Ações realizadas' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Relatórios de ações realizadas'
 		,@SiteMap1Url = '~/Relatorios/AcoesRealizadas/Busca.aspx'
-		,@SiteMap2Nome = NULL
-		,@SiteMap2Url = NULL
+		,@SiteMap2Nome = 'Relatórios de ações realizadas'
+		,@SiteMap2Url = '~/Relatorios/Relatorio.aspx?dummy=%271VBlnYbVq7k%3d%27'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
@@ -89,8 +89,21 @@ SET XACT_ABORT ON
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
-		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Configurações' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Alertas' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Listagem de alertas'
+		,@SiteMap1Url = '~/Configuracao/Alertas/Busca.aspx'
+		,@SiteMap2Nome = 'Cadastro de alertas'
+		,@SiteMap2Url = '~/Configuracao/Alertas/Cadastro.aspx'
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 
 -- Fechar transação
 SET XACT_ABORT OFF
