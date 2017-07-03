@@ -11,6 +11,7 @@ using MSTech.Validation.Exceptions;
 using System.Web.UI;
 using System.Collections.Generic;
 using System.IO;
+using MSTech.CoreSSO.Entities;
 
 namespace GestaoEscolar.Configuracao.GraficoAtendimento
 {
@@ -129,13 +130,16 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         {
             try
             {
+                REL_GraficoAtendimentoTipo tipoGrafico;
+                Enum.TryParse(ddlTipoGrafico.SelectedValue, out tipoGrafico);
+
                 REL_GraficoAtendimento gra = new REL_GraficoAtendimento
                 {
                     gra_id = VS_gra_id,
                     rea_id = UCComboRelatorioAtendimento.Valor,
                     gra_titulo = txtTitulo.Text,
                     gra_eixo = Convert.ToByte(ddlEixoAgrupamento.SelectedValue),
-                    gra_tipo = Convert.ToByte(REL_GraficoAtendimentoTipo.Barra),
+                    gra_tipo = Convert.ToByte(tipoGrafico),
                     gra_dataAlteracao = DateTime.Now,
                     IsNew = VS_gra_id <= 0
                 };
@@ -149,7 +153,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (VS_lstFiltrosFixos.Count == 0 && VS_lstQuestionarios.Count ==0)
                     throw new ValidationException("Selecione pelo menos um filtro.");
 
-                if (REL_GraficoAtendimentoBO.Save(gra)) //, VS_lstFiltrosFixos, VS_lstQuestionarios))
+                //if (REL_GraficoAtendimentoBO.Salvar(gra, VS_lstFiltrosFixos, VS_lstFiltrosPersonalizados))
+                if (REL_GraficoAtendimentoBO.Save(gra))
                 {
                     string message = "";
                     if (VS_gra_id <= 0)
@@ -211,7 +216,9 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         /// </summary>
         private void CarregaFiltrosFixos()
         {
-
+            //VS_lstFiltrosFixos = REL_GraficoAtendimento_FiltrosFixosBO.SelectBy_gra_id(VS_gra_id);
+            gvFiltroFixo.DataSource = VS_lstFiltrosFixos;
+            gvFiltroFixo.DataBind();
         }
 
         /// <summary>
@@ -252,6 +259,38 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
             return lstDetalhes;
         }
+        
+        private string RetornaValorFiltroFixo(int valor)
+        {
+            
+            string retorno = string.Empty;
+            if (valor > 0)
+            {
+                switch (valor)
+                {
+                    case 1:
+                        retorno = txtDtInicial.Text + txtDtFinal.Text;
+                        break;
+                    case 2:
+                        retorno = UCComboRacaCor._Combo.SelectedValue;
+                        break;
+                    case 3:
+                        retorno = txtIdadeInicial.Text + txtIdadeFinal.Text;
+                        break;
+                    case 4:
+                        retorno = UCComboSexo._Combo.SelectedValue;
+                        break;
+                    default:
+                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
+                        List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
+
+                        retorno = ComboTipoDeficiencia._Combo.SelectedValue + "(" + string.Join(",", detalhes.Select(x => x.dfd_id).ToArray());
+
+                        break;
+                }                
+            }
+            return retorno;
+        }
 
         
         /// <summary>
@@ -262,6 +301,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             VS_gra_id = -1;
             txtTitulo.Text = "";
             ddlTipo.SelectedValue = "0";
+            ddlTipoGrafico.SelectedIndex = ddlTipoGrafico.Items.Count == 2 ? 1 : 0;
             UCComboRelatorioAtendimento._Combo.Enabled = false;
             ddlEixoAgrupamento.SelectedValue = "0";
             gvQuestionario.DataSource = VS_lstQuestionarios;
@@ -281,6 +321,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
             }
+
+            ComboTipoDeficiencia._Combo.SelectedIndexChanged += ComboTipoDeficiencia_SelectedIndexChanged;
 
             if (!IsPostBack)
             {
@@ -365,6 +407,11 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
 
+        protected void ComboTipoDeficiencia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvDetalhe.DataSource = CFG_DeficienciaDetalheBO.SelectDetalheBy_Deficiencia(new Guid(ComboTipoDeficiencia._Combo.SelectedValue));
+            gvDetalhe.DataBind();
+        }
 
         protected void ddlFiltroFixo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -388,7 +435,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                         divSexo.Visible = true;
                         break;
                     default:
-                        ComboTipoDeficiencia._Combo.DataBind();
+                        ComboTipoDeficiencia.Carregar();
                         divDetalhe.Visible = false;
                         divDetalhamentoDeficiencia.Visible = true;
                         break;
@@ -585,11 +632,12 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (VS_lstFiltrosFixos.Any(p => p.gff_tipoFiltro.Equals(ddlFiltroFixo.SelectedIndex)))
                     throw new ValidationException(string.Format("Filtro já existe."));
 
-                VS_lstFiltrosFixos.Add(new REL_GraficoAtendimento_FiltrosFixos
+                VS_lstFiltrosFixos.Add(REL_GraficoAtendimento_FiltrosFixosBO.GetEntityDetalhado(new REL_GraficoAtendimento_FiltrosFixos
                 {     gra_id = VS_gra_id,
-                    gff_tipoFiltro = Convert.ToByte(ddlFiltroFixo.SelectedIndex),
+                    gff_tipoFiltro = Convert.ToByte(ddlFiltroFixo.SelectedValue),
+                    gff_valorFiltro = RetornaValorFiltroFixo(ddlFiltroFixo.SelectedIndex),
                     IsNew = true
-                });
+                }));
 
 
                 VS_lstFiltrosFixos = VS_lstFiltrosFixos.OrderBy(q => q.gff_tipoFiltro).ToList();
