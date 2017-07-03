@@ -24,7 +24,8 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                                 where Convert.ToInt32(dadosGeral.Field<object>("esc_id")) == Convert.ToInt32(ESCID.Value) &&
                                       Convert.ToInt32(dadosGeral.Field<object>("uni_id")) == Convert.ToInt32(UNIID.Value) &&
                                       Convert.ToInt64(dadosGeral.Field<object>("tur_id")) == Convert.ToInt64(TURID.Value) &&
-                                      Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == Convert.ToInt32(TDSID.Value)
+                                      Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == Convert.ToInt32(TDSID.Value) &&
+                                      Convert.ToInt32(dadosGeral.Field<object>("tpc_id")) == Convert.ToInt32(TPCID.Value)
                                 select dadosGeral).CopyToDataTable();
             }
             catch

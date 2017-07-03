@@ -123,6 +123,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.GroupHeader1.HeightF = 139.3749F;
             this.GroupHeader1.Level = 2;
             this.GroupHeader1.Name = "GroupHeader1";
+            this.GroupHeader1.RepeatEveryPage = true;
             this.GroupHeader1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader1_BeforePrint);
             // 
             // xrLabel7
