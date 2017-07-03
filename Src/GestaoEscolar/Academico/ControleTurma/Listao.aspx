@@ -83,7 +83,7 @@
                                         <asp:Label runat="server" ID="lblAvaliacao" Text="<%$ Resources:Academico, ControleTurma.Listao.lblAvaliacao.Text %>"></asp:Label> </a></li>
                                     <li><a href="#divTabsListao-2" id="aPlanoAula" runat="server" visible="false" onclick="$(idbtnCompensacaoAusencia).hide();">
                                         <asp:Label runat="server" ID="lblPlanoAula" Text="<%$ Resources:Academico, ControleTurma.Listao.lblPlanoAula.Text %>"></asp:Label> </a></li>
-                                    <li><a href="#divTabsListao-3" id="aAtividadeExtraClasse" runat="server" visible="false">
+                                    <li><a href="#divTabsListao-3" id="aAtividadeExtraClasse" runat="server" visible="false" onclick="$(idbtnCompensacaoAusencia).hide();">
                                         <asp:Label runat="server" ID="lblAtividadeExtraClasse" Text="Listão de atividades extraclasse"></asp:Label></a></li>
                                     <%--<div id="msgTabs" class="msgTabs">Navegue entre as abas utilizando as setas.</div>--%>
                                 </ul>
@@ -503,33 +503,33 @@
                                     <asp:Panel ID="pnlAtividadesExtraClasse" runat="server">
                                         <uc13:UCConfirmacaoOperacao ID="UCConfirmacaoOperacao" runat="server" ObservacaoVisivel="false" ObservacaoObrigatorio="false" />
                                         <asp:UpdatePanel ID="updAtiExtra" runat="server" UpdateMode="Conditional">
-                                            <ContentTemplate>
-                                                <fieldset id="fdsCadastroAtiExtra" runat="server">
-                                                    <div id="divCadastroAtiExtra" runat="server">
-                                                        <asp:HiddenField ID="hdnTaeId" runat="server" />
-                                                        <asp:HiddenField ID="hdnTaePosicao" runat="server" />
-                                                        <asp:HiddenField ID="hdnPermissao" runat="server" />
-                                                        <uc12:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
-                                                        <uc11:UCComboTipoAtividadeAvaliativa ID="UCComboTipoAtividadeAvaliativa" runat="server" Obrigatorio="true" ValidationGroup="AtividadeExtraclasse" />
-                                                        <asp:Label ID="lblNomeAtiExtra" runat="server" Text="Nome da atividade extraclasse *" AssociatedControlID="txtNomeAtiExtra"></asp:Label>
-                                                        <asp:TextBox ID="txtNomeAtiExtra" runat="server" SkinID="text60C" MaxLength="100"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="rfvNomeAtiExtra" runat="server" ControlToValidate="txtNomeAtiExtra" Display="Dynamic"
-                                                            ErrorMessage="Nome da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
-                                                        <asp:Label ID="lblDescricaoAtiExtra" runat="server" Text="Descrição da atividade extraclasse" AssociatedControlID="txtDescricaoAtiExtra"></asp:Label>
-                                                        <asp:TextBox ID="txtDescricaoAtiExtra" runat="server" TextMode="MultiLine" SkinID="limite2000"></asp:TextBox>
-                                                        <asp:Label ID="lblCargaAtiExtra" runat="server" Text="Carga horária da atividade extraclasse *" AssociatedControlID="txtCargaAtiExtra"></asp:Label>
-                                                        <asp:TextBox ID="txtCargaAtiExtra" runat="server" SkinID="Numerico" MaxLength="4"></asp:TextBox>
-                                                        <asp:RequiredFieldValidator ID="rfvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic"
-                                                            ErrorMessage="Carga horária da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
-                                                        <asp:CompareValidator ID="cvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic" ValueToCompare="0" Operator="GreaterThan"
-                                                            ErrorMessage="Carga horária da atividade extraclasse deve ser maior que 0." ValidationGroup="AtividadeExtraclasse">*</asp:CompareValidator>
-                                                    </div>
+                                            <ContentTemplate> 
+                                                <fieldset id="fdsCadastroAtiExtra" runat="server" visible="false">
+                                                    <legend>Cadastro de atividade extraclasse</legend>
+                                                    <asp:HiddenField ID="hdnTaeId" runat="server" />
+                                                    <asp:HiddenField ID="hdnTaePosicao" runat="server" />
+                                                    <asp:HiddenField ID="hdnPermissao" runat="server" />
+                                                    <uc12:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
+                                                    <uc11:UCComboTipoAtividadeAvaliativa ID="UCComboTipoAtividadeAvaliativa" runat="server" Obrigatorio="true" ValidationGroup="AtividadeExtraclasse" />
+                                                    <asp:Label ID="lblNomeAtiExtra" runat="server" Text="Nome da atividade extraclasse *" AssociatedControlID="txtNomeAtiExtra"></asp:Label>
+                                                    <asp:TextBox ID="txtNomeAtiExtra" runat="server" SkinID="text60C" MaxLength="100"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="rfvNomeAtiExtra" runat="server" ControlToValidate="txtNomeAtiExtra" Display="Dynamic"
+                                                        ErrorMessage="Nome da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
+                                                    <asp:Label ID="lblDescricaoAtiExtra" runat="server" Text="Descrição da atividade extraclasse" AssociatedControlID="txtDescricaoAtiExtra"></asp:Label>
+                                                    <asp:TextBox ID="txtDescricaoAtiExtra" runat="server" TextMode="MultiLine" SkinID="limite2000"></asp:TextBox>
+                                                    <asp:Label ID="lblCargaAtiExtra" runat="server" Text="Carga horária da atividade extraclasse *" AssociatedControlID="txtCargaAtiExtra"></asp:Label>
+                                                    <asp:TextBox ID="txtCargaAtiExtra" runat="server" SkinID="Numerico" MaxLength="4"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="rfvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic"
+                                                        ErrorMessage="Carga horária da atividade extraclasse é obrigatório." ValidationGroup="AtividadeExtraclasse">*</asp:RequiredFieldValidator>
+                                                    <asp:CompareValidator ID="cvCargaAtiExtra" runat="server" ControlToValidate="txtCargaAtiExtra" Display="Dynamic" ValueToCompare="0" Operator="GreaterThan"
+                                                        ErrorMessage="Carga horária da atividade extraclasse deve ser maior que 0." ValidationGroup="AtividadeExtraclasse">*</asp:CompareValidator>
                                                     <div class="right">
                                                         <asp:Button ID="btnAdicionarAtiExtra" runat="server" Text="Salvar atividade extraclasse" OnClick="btnAdicionarAtiExtra_Click" ValidationGroup="AtividadeExtraclasse" />
-                                                        <asp:Button ID="btnLimparCamposAtiExtra" runat="server" Text="Limpar cadastro de atividade extraclasse" OnClick="btnLimparCamposAtiExtra_Click" CausesValidation="false" />
+                                                        <asp:Button ID="btnCancelarAtiExtra" runat="server" Text="Cancelar" OnClick="btnCancelarAtiExtra_Click" CausesValidation="false" />
                                                     </div>
                                                 </fieldset>
-                                                <fieldset>
+                                                <fieldset id="fdsListagemAtiExtra" runat="server" visible="true">
+                                                    <asp:Button ID="btnNovoAtiExtra" runat="server" Text="Incluir nova atividade extraclasse" OnClick="btnNovoAtiExtra_Click" CausesValidation="false" style="float:right" />
                                                     <asp:Label ID="lblSemAtividadeExtra" runat="server"></asp:Label>
                                                     <uc2:UCComboOrdenacao ID="UCComboOrdenacaoAtivExtra" runat="server" />
                                                     <asp:Repeater ID="rptAlunoAtivExtra" runat="server" OnItemDataBound="rptAlunoAtivExtra_ItemDataBound" OnItemCommand="rptAlunoAtivExtra_ItemCommand">

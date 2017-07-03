@@ -1008,7 +1008,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (exibeAtividadeExtra)
                 {
                     UCComboTipoAtividadeAvaliativa.CarregarTipoAtividadeAvaliativa(true);
-                    LimparCamposAtividadeExtraclasse();
+                    btnNovoAtiExtra.Visible = (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto;
                     CarregarListaoAtividadeExtraclasse();
                 }
 
@@ -2252,8 +2252,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                                       string.Join(";", UCControleTurma1.TurmasNormaisMultisseriadas.Select(p => p.tur_id.ToString()).ToArray()) :
                                       string.Empty;
 
-            HabilitaControles(fdsCadastroAtiExtra.Controls, VS_Periodo_Aberto && usuarioPermissao && !VS_PeriodoEfetivado);
-
             // Carrega os alunos matriculados
             List<AlunosTurmaDisciplina> ListaAlunos = MTR_MatriculaTurmaDisciplinaBO.SelecionaAlunosAtivosCOCPorTurmaDisciplina(
                  VisibilidadeRegencia(ddlTurmaDisciplinaListao) ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id,
@@ -2295,18 +2293,6 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             }
 
-            updAtiExtra.Update();
-        }
-
-        /// <summary>
-        /// Limpa os campos de cadastro de atividade extraclasse.
-        /// </summary>
-        private void LimparCamposAtividadeExtraclasse()
-        {
-            UCComboTipoAtividadeAvaliativa.Valor = -1;
-            txtNomeAtiExtra.Text = txtDescricaoAtiExtra.Text = txtCargaAtiExtra.Text = hdnTaeId.Value = string.Empty;
-            HabilitaControles(divCadastroAtiExtra.Controls, (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto);
-            btnAdicionarAtiExtra.Visible = (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto;
             updAtiExtra.Update();
         }
 
@@ -2489,6 +2475,40 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             CarregaSessionPaginaRetorno();
             RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
+        }
+
+        private void CarregarCadastroAtividadeExtraclasse(long tud_id, int tae_id, bool habilitaEdicao)
+        {
+            CLS_TurmaAtividadeExtraClasse entity;
+            if (tud_id > 0 && tae_id > 0)
+            {
+                entity = new CLS_TurmaAtividadeExtraClasse
+                {
+                    tud_id = tud_id
+                    ,
+                    tae_id = tae_id
+                };
+                CLS_TurmaAtividadeExtraClasseBO.GetEntity(entity);
+            }
+            else
+            {
+                entity = new CLS_TurmaAtividadeExtraClasse();
+            }
+
+            UCComboTipoAtividadeAvaliativa.Valor = entity.tav_id > 0 ? entity.tav_id : -1;
+            txtNomeAtiExtra.Text = entity.tae_nome;
+            txtDescricaoAtiExtra.Text = entity.tae_descricao;
+            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? Convert.ToInt32(entity.tae_cargaHoraria).ToString() : string.Empty;
+
+            hdnTaeId.Value = entity.tae_id.ToString();
+
+            HabilitaControles(fdsCadastroAtiExtra.Controls, habilitaEdicao);
+            btnCancelarAtiExtra.Enabled = true;
+            btnAdicionarAtiExtra.Visible = habilitaEdicao;
+
+            fdsCadastroAtiExtra.Visible = true;
+            fdsListagemAtiExtra.Visible = false;
+            updAtiExtra.Update();
         }
 
         #endregion Métodos
@@ -3343,8 +3363,23 @@ namespace GestaoEscolar.Academico.ControleTurma
                 msg += UtilBO.GetErroMessage("Erro ao tentar salvar os planos de aula.", UtilBO.TipoMensagem.Erro);
             }
 
+            //Salva atividade extraclasse
             try
             {
+                if (fdsCadastroAtiExtra.Visible)
+                {
+                    if (btnAdicionarAtiExtra.Visible && btnAdicionarAtiExtra.Enabled)
+                    {
+                        Page.Validate("AtividadeExtraclasse");
+                        if (Page.IsValid)
+                            btnAdicionarAtiExtra_Click(null, null);
+                    }
+                    else
+                    {
+                        btnCancelarAtiExtra_Click(null, null);
+                    }
+                }
+
                 Int32.TryParse(hdnAlterouAtividadeExtra.Value, out alterouAtividadeExtra);
                 if (Page.IsValid && pnlAtividadesExtraClasse.Visible && aAtividadeExtraClasse.Visible && !VS_PeriodoEfetivado && alterouAtividadeExtra > 0 && PermiteLancarAtividadeExtraclasse)
                     SalvarAtividadeExtra(out msg);
@@ -4234,7 +4269,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Adição de atividade | tud_id: {0}, tae_id: {1}", entity.tud_id, entity.tae_id));
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse salva com sucesso.", UtilBO.TipoMensagem.Sucesso);
-                    LimparCamposAtividadeExtraclasse();
+                    fdsCadastroAtiExtra.Visible = false;
+                    fdsListagemAtiExtra.Visible = true;
                     CarregarListaoAtividadeExtraclasse();
                     hdnTaeId.Value = string.Empty;
                 }
@@ -4449,7 +4485,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     permiteEdicao = true;
                 }
                 
-                HabilitaControles(divAtividades.Controls, usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado && permiteEdicao);
+                HabilitaControles(divAtividades.Controls, usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado && permissaoAlteracao);
 
                 double eaeAvaliacao;
                 txtNota.Text = double.TryParse(avaliacao, out eaeAvaliacao) ? string.Format("{0:F" + NumeroCasasDecimais + "}", eaeAvaliacao) : avaliacao;
@@ -4515,31 +4551,16 @@ namespace GestaoEscolar.Academico.ControleTurma
                         if (long.TryParse(lbltud_id.Text, out tud_id) && tud_id > 0 &&
                             int.TryParse(lbltae_id.Text, out tae_id) && tae_id > 0)
                         {
-                            CLS_TurmaAtividadeExtraClasse entity = new CLS_TurmaAtividadeExtraClasse
-                            {
-                                tud_id = tud_id
-                                ,
-                                tae_id = tae_id
-                            };
-                            CLS_TurmaAtividadeExtraClasseBO.GetEntity(entity);
-
-                            UCComboTipoAtividadeAvaliativa.Valor = entity.tav_id > 0 ? entity.tav_id : -1;
-                            txtNomeAtiExtra.Text = entity.tae_nome;
-                            txtDescricaoAtiExtra.Text = entity.tae_descricao;
-                            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? Convert.ToInt32(entity.tae_cargaHoraria).ToString() : string.Empty;
-
-                            hdnTaeId.Value = entity.tae_id.ToString();
-
                             if (lblTaePosicao != null && lblPermissao != null)
                             {
-                                byte posicao = 0;
                                 int permissao = 0;
-                                byte.TryParse(lblTaePosicao.Text, out posicao);
                                 int.TryParse(lblPermissao.Text, out permissao);
-                                HabilitaControles(divCadastroAtiExtra.Controls, permissao > 0 && PermiteLancarAtividadeExtraclasse);
-                                btnAdicionarAtiExtra.Visible = permissao > 0 && PermiteLancarAtividadeExtraclasse;
+                                CarregarCadastroAtividadeExtraclasse(tud_id, tae_id, permissao > 0 && PermiteLancarAtividadeExtraclasse);
                             }
-
+                            else
+                            {
+                                CarregarCadastroAtividadeExtraclasse(tud_id, tae_id, (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto);
+                            }
                             updAtiExtra.Update();
                         }
                     }
@@ -4595,9 +4616,10 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
-        protected void btnLimparCamposAtiExtra_Click(object sender, EventArgs e)
+        protected void btnCancelarAtiExtra_Click(object sender, EventArgs e)
         {
-            LimparCamposAtividadeExtraclasse();
+            fdsCadastroAtiExtra.Visible = false;
+            fdsListagemAtiExtra.Visible = true;
         }
 
         protected void rptAtividadesExtraClasseHeader_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -4627,6 +4649,20 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     btnEditarAtiExtra.Visible = usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
                 }
+            }
+        }
+
+        protected void btnNovoAtiExtra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CarregarCadastroAtividadeExtraclasse(-1, -1, true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
             }
         }
 
