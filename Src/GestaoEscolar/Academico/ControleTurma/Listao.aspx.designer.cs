@@ -616,15 +616,6 @@ namespace GestaoEscolar.Academico.ControleTurma {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsCadastroAtiExtra;
         
         /// <summary>
-        /// divCadastroAtiExtra control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCadastroAtiExtra;
-        
-        /// <summary>
         /// hdnTaeId control.
         /// </summary>
         /// <remarks>
@@ -760,13 +751,31 @@ namespace GestaoEscolar.Academico.ControleTurma {
         protected global::System.Web.UI.WebControls.Button btnAdicionarAtiExtra;
         
         /// <summary>
-        /// btnLimparCamposAtiExtra control.
+        /// btnCancelarAtiExtra control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLimparCamposAtiExtra;
+        protected global::System.Web.UI.WebControls.Button btnCancelarAtiExtra;
+        
+        /// <summary>
+        /// fdsListagemAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsListagemAtiExtra;
+        
+        /// <summary>
+        /// btnNovoAtiExtra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNovoAtiExtra;
         
         /// <summary>
         /// lblSemAtividadeExtra control.
