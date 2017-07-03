@@ -15,7 +15,7 @@ namespace MSTech.GestaoEscolar.BLL
     public class REL_GraficoAtendimento_FiltrosFixosBO : BusinessBase<REL_GraficoAtendimento_FiltrosFixosDAO, REL_GraficoAtendimento_FiltrosFixos>
     {
 
-        public new static REL_GraficoAtendimento_FiltrosFixos GetEntity(REL_GraficoAtendimento_FiltrosFixos entity)
+        public new static REL_GraficoAtendimento_FiltrosFixos GetEntityDetalhado(REL_GraficoAtendimento_FiltrosFixos entity)
         {
             GetEntity(entity);
 

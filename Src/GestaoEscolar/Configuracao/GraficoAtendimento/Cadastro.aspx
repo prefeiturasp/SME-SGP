@@ -46,8 +46,18 @@
                 <br />
                 <asp:Label ID="lblTitulo" runat="server" Text="Título do gráfico" AssociatedControlID="txtTitulo" />
                 <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
+                <div>
+                    <asp:Label ID="lblTipoGrafico" runat="server" Text="Tipo de gráfico *" AssociatedControlID="ddlTipoGrafico"></asp:Label>                     
+                    <asp:DropDownList ID="ddlTipoGrafico" runat="server">
+                        <asp:ListItem Text="-- Selecione um tipo de gráfico --" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Barra" Value="1"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:CompareValidator ID="cpvTipoGrafico" runat="server" ErrorMessage="Tipo de gráfico é obrigatório."
+                        ControlToValidate="ddlTipoGrafico" Operator="GreaterThan" ValueToCompare="0"
+                        Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
+                </div>
                 <div runat="server" id="divPeriodicidade">
-                    <asp:Label ID="lblPeriodicidade" runat="server" Text="Eixo de agrupamento: " AssociatedControlID="ddlEixoAgrupamento"></asp:Label>
+                    <asp:Label ID="lblPeriodicidade" runat="server" Text="Eixo de agrupamento *" AssociatedControlID="ddlEixoAgrupamento"></asp:Label>                     
                     <asp:DropDownList ID="ddlEixoAgrupamento" runat="server">
                         <asp:ListItem Text="-- Selecione um eixo de agrupamento --" Value="0"></asp:ListItem>
                         <asp:ListItem Text="Curso" Value="1"></asp:ListItem>
@@ -95,10 +105,10 @@
                     </div>
                     <div runat="server" id="divDataPreenchimento" visible="false">
                         <asp:Label ID="Label4" runat="server" Text="Preenchimento de relatório de:" AssociatedControlID="txtDtInicial" />
-                        <asp:TextBox ID="txtDtInicial" runat="server" SkinID="text30C" MaxLength="10"></asp:TextBox>
+                        <asp:TextBox ID="txtDtInicial" runat="server" CssClass="maskData" SkinID="Data"></asp:TextBox>
 
                         <asp:Label ID="Label5" runat="server" Text="Até:" AssociatedControlID="txtDtFinal" />
-                        <asp:TextBox ID="txtDtFinal" runat="server" SkinID="text30C" MaxLength="10"></asp:TextBox>
+                        <asp:TextBox ID="txtDtFinal" runat="server" CssClass="maskData" SkinID="Data"></asp:TextBox>
                     </div>
                     <div runat="server" id="divDetalhamentoDeficiencia" visible="false">
 

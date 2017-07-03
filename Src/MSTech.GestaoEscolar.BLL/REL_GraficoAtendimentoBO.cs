@@ -13,6 +13,9 @@ namespace MSTech.GestaoEscolar.BLL
     using ObjetosSincronizacao.DTO.Saida;
     using System;
     using Caching;
+    using Data.Common;
+    using System.Web;
+
     public enum REL_GraficoAtendimentoTipo : byte
     {
         [Description("REL_GraficoAtendimentoBO.REL_GraficoAtendimentoTipo.Barra")]
@@ -138,6 +141,101 @@ namespace MSTech.GestaoEscolar.BLL
                     ,
                     appMinutosCacheLongo
                 );
+        }
+
+        public static bool Salvar(REL_GraficoAtendimento entity, List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos, List<REL_GraficoAtendimento_FiltrosPersonalizados> lstFiltrosPersonalizados, TalkDBTransaction banco = null)
+        {
+            REL_GraficoAtendimentoDAO dao = new REL_GraficoAtendimentoDAO();
+            if (banco == null)
+                dao._Banco.Open(IsolationLevel.ReadCommitted);
+            else
+                dao._Banco = banco;
+
+            try
+            {
+                //Carrega as questões ligadas à sondagem (se for uma sondagem que já existe)
+                //List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixosBanco = entity.IsNew ? new List<REL_GraficoAtendimento_FiltrosFixos>() :
+                //                                            REL_GraficoAtendimento_FiltrosFixosBO.SelectBy_gra_id(entity.gra_id, dao._Banco);
+
+                ////Carrega as respostas ligadas à sondagem (se for uma sondagem que já existe)
+                //List<REL_GraficoAtendimento_FiltrosPersonalizados> lstFiltrosPersonalizadosBanco = entity.IsNew ? new List<REL_GraficoAtendimento_FiltrosPersonalizados>() :
+                //                                              REL_GraficoAtendimento_FiltrosPersonalizadosBO.SelectBy_gra_id(entity.gra_id, dao._Banco);
+
+                //Salva a sondagem
+                if (!dao.Salvar(entity))
+                    return false;
+
+                LimpaCache(entity);
+
+                //Salva questões
+                foreach (REL_GraficoAtendimento_FiltrosFixos gff in lstFiltrosFixos)
+                {
+                    gff.gra_id = entity.gra_id;
+                    if (!REL_GraficoAtendimento_FiltrosFixosBO.Save(gff, dao._Banco))
+                        return false;
+                }
+
+                //Salva sub-questões
+                foreach (REL_GraficoAtendimento_FiltrosPersonalizados gfp in lstFiltrosPersonalizados)
+                {
+                    gfp.gra_id = entity.gra_id;
+                    if (!REL_GraficoAtendimento_FiltrosPersonalizadosBO.Save(gfp, dao._Banco))
+                        return false;
+                }
+
+                //Remove logicamente no banco as questões e sub-questões que foram removidas da sondagem
+                //foreach (REL_GraficoAtendimento_FiltrosFixos gffB in lstFiltrosFixosBanco)
+                //    if (!lstFiltrosFixos.Any(f => f. == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido) &&
+                //        !lstSubQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido))
+                //    {
+                //        ACA_SondagemQuestaoBO.Delete(sdqB, dao._Banco);
+                //    }
+
+                ////Salva respostas
+                //foreach (ACA_SondagemResposta sdr in lstResposta)
+                //{
+                //    sdr.snd_id = entity.snd_id;
+                //    if (sdr.IsNew)
+                //        sdr.sdr_id = -1;
+                //    if (!ACA_SondagemRespostaBO.Save(sdr, dao._Banco))
+                //        return false;
+                //}
+
+                ////Remove logicamente no banco as respostas que foram removidas da sondagem
+                //foreach (ACA_SondagemResposta sdrB in lstRespostaBanco)
+                //    if (!lstResposta.Any(r => r.sdr_id == sdrB.sdr_id && r.sdr_situacao != (byte)ACA_SondagemRespostaSituacao.Excluido))
+                //    {
+                //        ACA_SondagemRespostaBO.Delete(sdrB, dao._Banco);
+                //    }
+
+                return true;
+            }
+            catch (Exception err)
+            {
+                if (banco == null)
+                    dao._Banco.Close(err);
+
+                throw;
+            }
+            finally
+            {
+                if (banco == null)
+                    dao._Banco.Close();
+            }
+        }
+
+        private static void LimpaCache(REL_GraficoAtendimento entity)
+        {
+            if (HttpContext.Current != null)
+            {
+                // Chave padrão do cache - nome do método + parâmetros.
+                HttpContext.Current.Cache.Remove(RetornaChaveCache_GetEntity(entity));
+            }
+        }
+
+        private static string RetornaChaveCache_GetEntity(REL_GraficoAtendimento entity)
+        {
+            return string.Format("REL_GraficoAtendimento_GetEntity_{0}", entity.gra_id);
         }
     }
 }
