@@ -2954,6 +2954,20 @@
     <Compile Include="WebControls\Funcao\UCCadastroFuncao.ascx.designer.cs">
       <DependentUpon>UCCadastroFuncao.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\GraficoAtendimento\GraficoAtendimento.aspx.cs">
+      <DependentUpon>GraficoAtendimento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\GraficoAtendimento\GraficoAtendimento.aspx.designer.cs">
+      <DependentUpon>GraficoAtendimento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\GraficoAtendimento\UCGraficoAtendimento.ascx.cs">
+      <DependentUpon>UCGraficoAtendimento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\GraficoAtendimento\UCGraficoAtendimento.ascx.designer.cs">
+      <DependentUpon>UCGraficoAtendimento.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Habilidades\UCHabilidades.ascx.cs">
       <DependentUpon>UCHabilidades.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3970,6 +3984,7 @@
     <Content Include="Includes\Angular\angular-charts\angular-chart.js" />
     <Content Include="Includes\Angular\angular-charts\angular-chart.min.js" />
     <Content Include="Includes\Angular\conselhoClasse.controller.js" />
+    <Content Include="Includes\Angular\graficoAtendimento.controller.js" />
     <Content Include="Includes\Angular\justificativaFalta.controller.js" />
     <Content Include="Includes\Angular\matriculaTurma.controller.js" />
     <Content Include="Includes\Angular\module.js" />
@@ -4539,6 +4554,8 @@
     <Content Include="WebControls\Fechamento\UCFechamentoFinal.ascx" />
     <Content Include="WebControls\Fechamento\UCFechamentoPadrao.ascx" />
     <Content Include="WebControls\FrequenciaServico\UCFrequenciaServico.ascx" />
+    <Content Include="WebControls\GraficoAtendimento\GraficoAtendimento.aspx" />
+    <Content Include="WebControls\GraficoAtendimento\UCGraficoAtendimento.ascx" />
     <Content Include="WebControls\Habilidades\UCHabilidades.ascx" />
     <Content Include="WebControls\HistoricoEscolar\UCAddResultadoFinal.ascx" />
     <Content Include="WebControls\HistoricoEscolar\UCDadosAluno.ascx" />

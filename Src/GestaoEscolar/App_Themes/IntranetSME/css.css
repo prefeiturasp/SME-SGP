@@ -3010,6 +3010,17 @@ tr.trDisciplina.global td {
         color: #999 !important;
     }
 
+.graficoAtendimento .grafico-nome {
+    display: none;
+}
+
+#graficoBarra, #graficoPizza {
+    max-width: 290mm;
+    width: 95%;
+    margin: auto;
+}
+
+        
 @media print {
     * {
         -webkit-print-color-adjust: exact;
@@ -3186,6 +3197,33 @@ tr.trDisciplina.global td {
         .tblBoletim th.nomePeriodoColunas {
             font-size: 9px;
         }
+
+    .graficoAtendimento {
+        width: 297mm;
+    }
+    .graficoAtendimento .grafico-cabecalho {
+        width: 297mm;
+        font-size: 18px;
+        line-height: 1.2;
+    }
+
+    #graficoBarra, #graficoPizza {
+        max-width: 290mm;
+        width: 290mm;
+        margin: auto;
+    }
+
+    .graficoAtendimento .grafico-nome {
+        display: block;
+        font-weight: bold;
+        width: 297mm;
+        text-align: center;
+        text-transform: uppercase;
+        background: none;
+        font-size: 24px;
+        margin: auto;
+        line-height: 2;
+    }
 }
 
 /* -- TABELA BASICA PARA RESULTADOS GERAIS COMO HISTORICO -- */

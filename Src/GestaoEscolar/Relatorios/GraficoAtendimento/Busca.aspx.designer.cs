@@ -85,15 +85,6 @@ namespace GestaoEscolar.Relatorios.GraficoAtendimento {
         protected global::GestaoEscolar.WebControls.Combos.UCComboGraficoAtendimento UCCGraficoAtendimento;
         
         /// <summary>
-        /// UCCObrigatorios1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebControls_Mensagens_UCCamposObrigatorios UCCObrigatorios1;
-        
-        /// <summary>
         /// UCCUAEscola control.
         /// </summary>
         /// <remarks>

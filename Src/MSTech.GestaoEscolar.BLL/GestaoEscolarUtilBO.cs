@@ -637,6 +637,9 @@ namespace MSTech.GestaoEscolar.BLL
         
         ,
         RelatorioAcoesRealizadas
+        ,
+
+        GraficoAtendimento
     }
 
     [Serializable]
