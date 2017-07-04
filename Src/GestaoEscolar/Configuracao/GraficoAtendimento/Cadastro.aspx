@@ -47,7 +47,7 @@
                 <asp:Label ID="lblTitulo" runat="server" Text="Título do gráfico" AssociatedControlID="txtTitulo" />
                 <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
                 <div>
-                    <asp:Label ID="lblTipoGrafico" runat="server" Text="Tipo de gráfico *" AssociatedControlID="ddlTipoGrafico"></asp:Label>                     
+                    <asp:Label ID="lblTipoGrafico" runat="server" Text="Tipo de gráfico *" AssociatedControlID="ddlTipoGrafico"></asp:Label>
                     <asp:DropDownList ID="ddlTipoGrafico" runat="server">
                         <asp:ListItem Text="-- Selecione um tipo de gráfico --" Value="0"></asp:ListItem>
                         <asp:ListItem Text="Barra" Value="1"></asp:ListItem>
@@ -57,7 +57,7 @@
                         Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
                 </div>
                 <div runat="server" id="divPeriodicidade">
-                    <asp:Label ID="lblPeriodicidade" runat="server" Text="Eixo de agrupamento *" AssociatedControlID="ddlEixoAgrupamento"></asp:Label>                     
+                    <asp:Label ID="lblPeriodicidade" runat="server" Text="Eixo de agrupamento *" AssociatedControlID="ddlEixoAgrupamento"></asp:Label>
                     <asp:DropDownList ID="ddlEixoAgrupamento" runat="server">
                         <asp:ListItem Text="-- Selecione um eixo de agrupamento --" Value="0"></asp:ListItem>
                         <asp:ListItem Text="Curso" Value="1"></asp:ListItem>
@@ -181,7 +181,18 @@
                                     <td>
                                         <uc2:UCComboQuestionario runat="server" ID="UCComboQuestionario" ValidationGroup="vgQuestionario" Obrigatorio="True" MostrarMessageSelecione="True" PermiteEditar="True" />
                                     </td>
-
+                                    <td>
+                                        <asp:Label ID="Label6" runat="server" Text="Pergunta" AssociatedControlID="ddlPergunta"></asp:Label>
+                                        <asp:DropDownList ID="ddlPergunta" runat="server" OnSelectedIndexChanged="ddlPergunta_SelectedIndexChanged">
+                                            <asp:ListItem Text="-- Selecione uma pergunta --" Value="-1"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="Label7" runat="server" Text="Resposta" AssociatedControlID="ddlResposta"></asp:Label>
+                                        <asp:DropDownList ID="ddlResposta" runat="server">
+                                            <asp:ListItem Text="-- Selecione uma resposta --" Value="-1"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
                                     <td>
                                         <asp:ImageButton runat="server" ID="btnAddQuestionario" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnAdicionarQuestionario.Text %>" ValidationGroup="vgQuestionario"
                                             SkinID="btNovo" OnClick="btnAdicionarQuestionario_Click" Style="padding-left: 5px; padding-top: 25px" />
@@ -191,10 +202,12 @@
                         </fieldset>
                     </div>
                     <asp:GridView runat="server" ID="gvQuestionario" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="qst_id, raq_id, raq_ordem, IsNew, emUso" EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText %>"
+                        DataKeyNames="qst_id, qtc_id, qtr_id" EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText %>"
                         OnRowDataBound="gvQuestionario_RowDataBound" OnRowCommand="gvQuestionario_RowCommand">
                         <Columns>
-                            <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.HeaderTitulo %>" DataField="qst_titulo" />
+                            <asp:BoundField HeaderText="Questionário" DataField="qst_titulo" />
+                            <asp:BoundField HeaderText="Pergunta" DataField="qtc_texto" />
+                            <asp:BoundField HeaderText="Resposta" DataField="qtr_texto" />
                             <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.HeaderOrdem %>">
                                 <HeaderStyle CssClass="center" HorizontalAlign="Center" />
                                 <ItemStyle HorizontalAlign="Center" />

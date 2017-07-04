@@ -66,6 +66,48 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        public DataTable SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id
+           (
+              int rea_id
+           )
+        {
+            DataTable dt = new DataTable();
+
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_QuestionarioResposta_SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@rea_id";
+                if (rea_id > 0)
+                    Param.Value = rea_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+                
+                #endregion
+
+                qs.Execute();
+
+                if (qs.Return.Rows.Count > 0)
+                    dt = qs.Return;
+
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+
         #region Métodos sobrescritos
 
         protected override void ParamInserir(QuerySelectStoredProcedure qs, CLS_QuestionarioResposta entity)

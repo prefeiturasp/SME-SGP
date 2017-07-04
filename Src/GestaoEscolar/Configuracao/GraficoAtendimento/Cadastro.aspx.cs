@@ -31,7 +31,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         }
 
         /// <summary>
-        /// Propriedade em ViewState que armazena valor de rea_id
+        /// Propriedade em ViewState que armazena valor de gra_id
         /// no caso de atualização de um registro ja existente.
         /// </summary>
         private int VS_gra_id
@@ -49,7 +49,26 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 ViewState["VS_gra_id"] = value;
             }
         }
-        
+
+        /// <summary>
+        /// Propriedade em ViewState que armazena valor de rea_id.
+        /// </summary>
+        private int VS_rea_id
+        {
+            get
+            {
+                if (ViewState["VS_rea_id"] != null)
+                {
+                    return Convert.ToInt32(ViewState["VS_rea_id"]);
+                }
+                return -1;
+            }
+            set
+            {
+                ViewState["VS_rea_id"] = value;
+            }
+        }
+
         /// <summary>
         /// Propriedade em ViewState que armazena valor de rea_id
         /// no caso de atualização de um registro ja existente.
@@ -69,6 +88,20 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
 
+        private List<CLS_QuestionarioResposta> VS_lstRespostas
+        {
+            get
+            {
+                if (ViewState["VS_lstRespostas"] == null)
+                    ViewState["VS_lstRespostas"] = new List<CLS_QuestionarioResposta>();
+
+                return (List<CLS_QuestionarioResposta>)ViewState["VS_lstRespostas"];
+            }
+            set
+            {
+                ViewState["VS_lstRespostas"] = value;
+            }
+        }
         private List<REL_GraficoAtendimento_FiltrosFixos> VS_lstFiltrosFixos
         {
             get
@@ -99,6 +132,12 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
 
+        private List<CLS_Questionario> questionarios  { get; set; }
+
+        private List<CLS_QuestionarioConteudo> perguntas { get; set; }
+    
+        private List<CLS_QuestionarioResposta> respostas { get; set; }
+
         #endregion
 
         #region Métodos
@@ -118,16 +157,20 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
                 txtTitulo.Text = gra.gra_titulo;
                 ddlTipo.Enabled = false;
-               
+
+                VS_rea_id = gra.rea_id;
+
                 CLS_RelatorioAtendimento rea = new CLS_RelatorioAtendimento { rea_id = gra.rea_id };
                 CLS_RelatorioAtendimentoBO.GetEntity(rea);
                 ddlTipo.SelectedValue = rea.rea_tipo.ToString();
                 UCComboRelatorioAtendimento._Combo.SelectedValue = gra.rea_id.ToString();
                 UCComboRelatorioAtendimento._Combo.Enabled = false;
 
+                ddlTipoGrafico.SelectedValue = gra.gra_tipo.ToString();
+
                 ddlEixoAgrupamento.Enabled = false;
                 ddlEixoAgrupamento.SelectedValue = gra.gra_eixo.ToString();
-  
+
                 CarregaFiltrosFixos();
                 CarregaQuestionarios();
             }
@@ -160,48 +203,48 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     IsNew = VS_gra_id <= 0
                 };
 
-                if(!gra.IsNew)
+                if (!gra.IsNew)
                     gra.gra_dataCriacao = DateTime.Now;
 
                 if (!VS_lstQuestionarios.Any(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido))
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumQuestionarioAdicionado").ToString());
 
-                if (VS_lstFiltrosFixos.Count == 0 && VS_lstQuestionarios.Count ==0)
+                if (VS_lstFiltrosFixos.Count == 0 && VS_lstQuestionarios.Count == 0)
                     throw new ValidationException("Selecione pelo menos um filtro.");
 
                 if (REL_GraficoAtendimentoBO.Salvar(gra, VS_lstFiltrosFixos, VS_lstFiltrosPersonalizados))
-                if (REL_GraficoAtendimentoBO.Save(gra))
-                {
-                    string message = "";
-                    if (VS_gra_id <= 0)
+                    if (REL_GraficoAtendimentoBO.Save(gra))
                     {
-                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "gra_id: " + gra.gra_id);
-                        message = UtilBO.GetErroMessage("Gráfico cadastrado com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                        string message = "";
+                        if (VS_gra_id <= 0)
+                        {
+                            ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Insert, "gra_id: " + gra.gra_id);
+                            message = UtilBO.GetErroMessage("Gráfico cadastrado com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                        }
+                        else
+                        {
+                            ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "gra_id: " + gra.gra_id);
+                            message = UtilBO.GetErroMessage("Gráfico alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                        }
+                        if (ParametroPermanecerTela)
+                        {
+                            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                            lblMessage.Text = message;
+                            VS_gra_id = gra.gra_id;
+                            _LoadFromEntity(VS_gra_id);
+                        }
+                        else
+                        {
+                            __SessionWEB.PostMessages = message;
+                            Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/RelatorioAtendimento/Busca.aspx", false);
+                            HttpContext.Current.ApplicationInstance.CompleteRequest();
+                        }
                     }
                     else
-                    {
-                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "gra_id: " + gra.gra_id);
-                        message = UtilBO.GetErroMessage("Gráfico alterado com sucesso.", UtilBO.TipoMensagem.Sucesso);
-                    }
-                    if (ParametroPermanecerTela)
                     {
                         ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                        lblMessage.Text = message;
-                        VS_gra_id = gra.gra_id;
-                        _LoadFromEntity(VS_gra_id);
+                        lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroSalvarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
                     }
-                    else
-                    {
-                        __SessionWEB.PostMessages = message;
-                        Response.Redirect(__SessionWEB._AreaAtual._Diretorio + "Configuracao/RelatorioAtendimento/Busca.aspx", false);
-                        HttpContext.Current.ApplicationInstance.CompleteRequest();
-                    }
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                    lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroSalvarRelatorio").ToString(), UtilBO.TipoMensagem.Erro);
-                }
             }
             catch (ValidationException ex)
             {
@@ -232,17 +275,18 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         /// </summary>
         private void CarregaFiltrosFixos()
         {
-            //VS_lstFiltrosFixos = REL_GraficoAtendimento_FiltrosFixosBO.SelectBy_gra_id(VS_gra_id);
+            VS_lstFiltrosFixos = REL_GraficoAtendimento_FiltrosFixosBO.SelectBy_gra_id(VS_gra_id);
+
             gvFiltroFixo.DataSource = VS_lstFiltrosFixos;
             gvFiltroFixo.DataBind();
         }
-
+        
         /// <summary>
         /// Carrega os questionarios
         /// </summary>
         private void CarregaQuestionarios()
         {
-            //VS_lstQuestionarios = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(VS_rea_id);
+            VS_lstQuestionarios = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(VS_rea_id);
             VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
             gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
@@ -275,10 +319,10 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
             return lstDetalhes;
         }
-        
+
         private string RetornaValorFiltroFixo(int valor)
         {
-            
+
             string retorno = string.Empty;
             if (valor > 0)
             {
@@ -303,12 +347,12 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                         retorno = ComboTipoDeficiencia._Combo.SelectedValue + "(" + string.Join(",", detalhes.Select(x => x.dfd_id).ToArray());
 
                         break;
-                }                
+                }
             }
             return retorno;
         }
 
-        
+
         /// <summary>
         /// Inicializa os campos da tela
         /// </summary>
@@ -320,6 +364,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             ddlTipoGrafico.SelectedIndex = ddlTipoGrafico.Items.Count == 2 ? 1 : 0;
             UCComboRelatorioAtendimento._Combo.Enabled = false;
             ddlEixoAgrupamento.SelectedValue = "0";
+            ComboTipoDeficiencia.ExibeDeficienciaMultipla = false;
             gvQuestionario.DataSource = VS_lstQuestionarios;
             gvQuestionario.DataBind();
         }
@@ -338,7 +383,9 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
             }
 
-            ComboTipoDeficiencia._Combo.SelectedIndexChanged += ComboTipoDeficiencia_SelectedIndexChanged;
+            ComboTipoDeficiencia.OnSeletedIndexChanged += ComboTipoDeficiencia_SelectedIndexChanged;
+            UCComboRelatorioAtendimento.IndexChanged += UCComboRelatorioAtendimento_SelectedIndexChanged;
+            UCComboQuestionario.IndexChanged += UCComboQuestionario_SelectedIndexChanged;
 
             if (!IsPostBack)
             {
@@ -407,7 +454,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     else
                         ddlFiltroFixo.Items.Remove("Detalhamento das deficiências");
 
-                     updFiltro.Update();
+                    updFiltro.Update();
                 }
                 else
                 {
@@ -423,10 +470,102 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
         }
 
-        protected void ComboTipoDeficiencia_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ComboTipoDeficiencia_SelectedIndexChanged()
         {
             gvDetalhe.DataSource = CFG_DeficienciaDetalheBO.SelectDetalheBy_Deficiencia(new Guid(ComboTipoDeficiencia._Combo.SelectedValue));
             gvDetalhe.DataBind();
+        }
+
+        private void CriaListasParaCombosQuestionarios()
+        {
+            DataTable QuestionarioPerguntaResposta = CLS_QuestionarioRespostaBO.SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id(VS_rea_id);
+            questionarios = new List<CLS_Questionario>();
+            perguntas = new List<CLS_QuestionarioConteudo>();
+            respostas = new List<CLS_QuestionarioResposta>();
+            CLS_Questionario q;
+            CLS_QuestionarioConteudo p;
+            CLS_QuestionarioResposta r;
+            foreach (DataRow row in QuestionarioPerguntaResposta.Rows)
+            {
+                q = new CLS_Questionario
+                {
+                    qst_id = Convert.ToInt32(row["qst_id"].ToString())
+                };
+                CLS_QuestionarioBO.GetEntity(q);
+                if (questionarios.Find(x => x.qst_id == q.qst_id) == null)
+                    questionarios.Add(q);
+
+                p = new CLS_QuestionarioConteudo
+                {
+                    qst_id = Convert.ToInt32(row["qst_id"].ToString())
+                    , qtc_id = Convert.ToInt32(row["qtc_id"].ToString())
+                };
+                CLS_QuestionarioConteudoBO.GetEntity(p);
+                if (perguntas.Find(x => x.qst_id == q.qst_id && x.qtc_id == p.qtc_id) == null)
+                    perguntas.Add(p);
+
+                r = new CLS_QuestionarioResposta
+                {
+                    qtc_id = Convert.ToInt32(row["qtc_id"].ToString())
+                    , qtr_id = Convert.ToInt32(row["qtr_id"].ToString())
+                };
+                CLS_QuestionarioRespostaBO.GetEntity(r);
+                if (respostas.Find(x => x.qtc_id == r.qtc_id && x.qtr_id == r.qtr_id) == null)
+                    respostas.Add(r);
+            }
+        }
+
+        protected void UCComboRelatorioAtendimento_SelectedIndexChanged()
+        {
+            try
+            {
+                if (UCComboRelatorioAtendimento.Valor > 0)
+                {
+                    VS_rea_id = UCComboRelatorioAtendimento.Valor;
+                    VS_lstQuestionarios = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(VS_rea_id).OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
+                    CriaListasParaCombosQuestionarios();
+                    UCComboQuestionario.Combo.DataSource = questionarios; 
+                    UCComboQuestionario.Combo.DataBind();
+                    UCComboQuestionario.Combo.SelectedIndex = 0;
+                    UCComboQuestionario.Combo.Enabled = true;
+                }
+                else
+                {
+                    UCComboQuestionario.Combo.SelectedIndex = 0;
+                    UCComboQuestionario.Combo.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar questionários.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void UCComboQuestionario_SelectedIndexChanged()
+        {
+            try
+            {
+                if (UCComboQuestionario.Valor > 0)
+                {
+                    ddlPergunta.DataSource = perguntas.Where(x=> x.qst_id == UCComboQuestionario.Valor);
+                    UCComboQuestionario.Combo.DataBind();
+                    UCComboQuestionario.Combo.SelectedIndex = 0;
+                    UCComboQuestionario.Combo.Enabled = true;
+                }
+                else
+                {
+                    UCComboQuestionario.Combo.SelectedIndex = 0;
+                    UCComboQuestionario.Combo.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar questionários.", UtilBO.TipoMensagem.Erro);
+            }
         }
 
         protected void ddlFiltroFixo_SelectedIndexChanged(object sender, EventArgs e)
@@ -445,7 +584,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                         divRacaCor.Visible = true;
                         break;
                     case 3:
-                        divIdade.Visible = true;                        
+                        divIdade.Visible = true;
                         break;
                     case 4:
                         divSexo.Visible = true;
@@ -458,8 +597,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 }
                 divBotoesFiltro.Visible = true;
                 updFiltro.Update();
-            }          
-            
+            }
+
         }
 
         protected void btnAdicionarQuestionario_Click(object sender, EventArgs e)
@@ -467,8 +606,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             try
             {
                 if (UCComboQuestionario.Valor <= 0)
-                    throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioObrigatorio").ToString());
+                    throw new ValidationException("Selecione um questionário.");
 
+                if (Convert.ToInt32(ddlPergunta.SelectedValue )<= 0)
+                    throw new ValidationException("Selecione uma pergunta.");
+
+                if (Convert.ToInt32(ddlResposta.SelectedValue) <= 0)
+                    throw new ValidationException("Selecione uma resposta.");
+                
                 if (VS_lstQuestionarios.Any(q => q.qst_id == UCComboQuestionario.Valor && q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido))
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioJaAdicionado").ToString());
 
@@ -476,20 +621,16 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 while (VS_lstQuestionarios.Any(q => q.raq_id == raq_id))
                     raq_id++;
 
-                VS_lstQuestionarios.Add(new CLS_RelatorioAtendimentoQuestionario
+                VS_lstRespostas.Add(CLS_QuestionarioRespostaBO.GetEntity(new CLS_QuestionarioResposta
                 {
-                    rea_id = UCComboRelatorioAtendimento.Valor,
-                    raq_id = raq_id,
-                    qst_id = UCComboQuestionario.Valor,
-                    qst_titulo = UCComboQuestionario.Texto,
-                    raq_ordem = (VS_lstQuestionarios.Any() ? VS_lstQuestionarios.Max(q => q.raq_ordem) + 1 : 1),
-                    raq_situacao = 1,
-                    IsNew = true
-                });
+                    qtc_id = Convert.ToInt32(ddlPergunta.SelectedValue)
+                    , qtr_id = Convert.ToInt32(ddlResposta.SelectedValue)
+                }));
 
-                gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                //todo
+                //gvQuestionario.DataSource = CLS_QuestionarioRespostaBO.SelectQuestionarioConteudoResposta_By_tipoResposta(string.Join(",", VS_lstRespostas.Select(x => x.qtr_id).ToArray()), (byte)QuestionarioTipoResposta.MultiplaSelecao);
                 gvQuestionario.DataBind();
-                
+
                 UCComboQuestionario.Valor = -1;
             }
             catch (ValidationException ex)
@@ -504,7 +645,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 lblMessage.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.ErroAdicionarQuestionario").ToString(), UtilBO.TipoMensagem.Erro);
             }
         }
-        
+
 
 
         protected void gvQuestionario_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -525,7 +666,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
         protected void gvQuestionario_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-             if (e.CommandName == "Excluir")
+            if (e.CommandName == "Excluir")
             {
                 try
                 {
@@ -536,8 +677,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     int qst_idExcluir = Convert.ToInt32(gvQuestionario.DataKeys[index]["qst_id"]);
                     bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[index]["IsNew"]);
 
-                  //  if (VS_rea_id > 0 && !isNewExcluir && CLS_QuestionarioBO.VerificaQuestionarioEmUso(qst_idExcluir, VS_rea_id))
-                  //      throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioEmUso").ToString());
+                    //  if (VS_rea_id > 0 && !isNewExcluir && CLS_QuestionarioBO.VerificaQuestionarioEmUso(qst_idExcluir, VS_rea_id))
+                    //      throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.QuestionarioEmUso").ToString());
 
                     if (idExcluir > 0 && VS_lstQuestionarios.Any(l => l.raq_id == idExcluir))
                     {
@@ -649,7 +790,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     throw new ValidationException(string.Format("Filtro já existe."));
 
                 VS_lstFiltrosFixos.Add(REL_GraficoAtendimento_FiltrosFixosBO.GetEntityDetalhado(new REL_GraficoAtendimento_FiltrosFixos
-                {     gra_id = VS_gra_id,
+                {
+                    gra_id = VS_gra_id,
                     gff_tipoFiltro = Convert.ToByte(ddlFiltroFixo.SelectedValue),
                     gff_valorFiltro = RetornaValorFiltroFixo(ddlFiltroFixo.SelectedIndex),
                     IsNew = true
@@ -682,5 +824,30 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         }
 
         #endregion
+
+        protected void ddlPergunta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Convert.ToInt32(ddlPergunta.SelectedValue) > 0)
+                {
+                    ddlResposta.DataSource = respostas.Where(x => x.qtc_id == Convert.ToInt32(ddlPergunta.SelectedValue));
+                    ddlResposta.DataBind();
+                    ddlResposta.SelectedIndex = 0;
+                    ddlResposta.Enabled = true;
+                }
+                else
+                {
+                    ddlResposta.SelectedIndex = 0;
+                    ddlResposta.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar perguntas.", UtilBO.TipoMensagem.Erro);
+            }
+        }
     }
 }

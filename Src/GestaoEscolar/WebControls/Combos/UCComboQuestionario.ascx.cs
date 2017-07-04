@@ -7,6 +7,14 @@ namespace GestaoEscolar.WebControls.Combos
 {
     public partial class UCComboQuestionario : MotherUserControl
     {
+        #region Delegates
+
+        public delegate void SelectedIndexChanged();
+
+        public event SelectedIndexChanged IndexChanged;
+
+        #endregion
+
         #region PROPRIEDADES
 
         /// <summary>

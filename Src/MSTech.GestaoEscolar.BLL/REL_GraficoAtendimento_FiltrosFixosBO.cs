@@ -95,12 +95,30 @@ namespace MSTech.GestaoEscolar.BLL
             return valorDetalhado;
         }
 
+        public static List<REL_GraficoAtendimento_FiltrosFixos> RetornaListaDetalhada(List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos)
+        {
+            foreach (REL_GraficoAtendimento_FiltrosFixos gff in lstFiltrosFixos)
+            {
+                REL_GraficoAtendimento_FiltrosFixos gffB = new REL_GraficoAtendimento_FiltrosFixos { gff_id = gff.gff_id, gra_id = gff.gra_id };
+                GetEntityDetalhado(gffB);
+
+                gff.gff_tipoFiltro = gffB.gff_tipoFiltro;
+                gff.gff_tituloFiltro = gffB.gff_tituloFiltro;
+                gff.gff_valorDetalhado = gffB.gff_valorDetalhado;
+                gff.gff_valorFiltro = gffB.gff_valorFiltro;
+            }
+
+            return lstFiltrosFixos;
+        }
+
         public static List<REL_GraficoAtendimento_FiltrosFixos> SelectBy_gra_id(int gra_id, TalkDBTransaction banco = null)
         {
             REL_GraficoAtendimento_FiltrosFixosDAO dao = new REL_GraficoAtendimento_FiltrosFixosDAO();
             if (banco != null)
                 dao._Banco = banco;
-            return dao.SelectBy_gra_id(gra_id);
+            List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos = dao.SelectBy_gra_id(gra_id);
+            
+            return RetornaListaDetalhada(dao.SelectBy_gra_id(gra_id));
         }
     }
 }

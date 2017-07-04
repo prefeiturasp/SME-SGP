@@ -27,6 +27,15 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectByConteudo(true, currentPage / pageSize, pageSize, qtc_id, out totalRecords);
         }
 
+        public static DataTable SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id
+       (
+            int rea_id
+       )
+        {
+            CLS_QuestionarioRespostaDAO dao = new CLS_QuestionarioRespostaDAO();
+            return dao.SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id(rea_id);
+        }
+
         /// <summary>
         /// Altera a ordem da resposta
         /// </summary>
