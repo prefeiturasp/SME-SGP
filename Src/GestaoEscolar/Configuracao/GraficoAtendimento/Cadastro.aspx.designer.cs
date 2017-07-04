@@ -121,6 +121,33 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::System.Web.UI.WebControls.TextBox txtTitulo;
         
         /// <summary>
+        /// lblTipoGrafico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTipoGrafico;
+        
+        /// <summary>
+        /// ddlTipoGrafico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoGrafico;
+        
+        /// <summary>
+        /// cpvTipoGrafico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cpvTipoGrafico;
+        
+        /// <summary>
         /// divPeriodicidade control.
         /// </summary>
         /// <remarks>
@@ -337,6 +364,15 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::GestaoEscolar.WebControls.Combos.ComboTipoDeficiencia ComboTipoDeficiencia;
         
         /// <summary>
+        /// divDetalhe control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDetalhe;
+        
+        /// <summary>
         /// updDetalhe control.
         /// </summary>
         /// <remarks>
@@ -371,6 +407,42 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDetalhe;
+        
+        /// <summary>
+        /// divBotoesFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBotoesFiltro;
+        
+        /// <summary>
+        /// btnAdicionarFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdicionarFiltro;
+        
+        /// <summary>
+        /// btnCancelarFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarFiltro;
+        
+        /// <summary>
+        /// gvFiltroFixo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvFiltroFixo;
         
         /// <summary>
         /// updQuestionario control.

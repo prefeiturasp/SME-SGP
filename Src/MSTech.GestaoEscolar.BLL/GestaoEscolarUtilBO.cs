@@ -100,6 +100,50 @@ namespace MSTech.GestaoEscolar.BLL
             return string.Empty;
         }
 
+        /// <summary>
+        /// Retorna o sexo da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string SexoFormatado(int codigoSexo)
+        {
+            switch (codigoSexo)
+            {
+                case 1:
+                    return "Masculino";
+                case 2:
+                    return "Feminino";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Retorna a raça/core da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string RacaCorFormatado(int codigoRacaoCor)
+        {
+            switch (codigoRacaoCor)
+            {
+                case 1:
+                    return "Branca";
+                case 2:
+                    return "Preta";
+                case 3:
+                    return "Parda";
+                case 4:
+                    return "Amarela";
+                case 5:
+                    return "Indígena";
+                case 6:
+                    return "Não declarada";
+            }
+
+            return string.Empty;
+        }
+
         public static bool In<T>(this T valor, params T[] array)
         {
             return array.Contains(valor);
@@ -637,6 +681,9 @@ namespace MSTech.GestaoEscolar.BLL
         
         ,
         RelatorioAcoesRealizadas
+        ,
+
+        GraficoAtendimento
     }
 
     [Serializable]

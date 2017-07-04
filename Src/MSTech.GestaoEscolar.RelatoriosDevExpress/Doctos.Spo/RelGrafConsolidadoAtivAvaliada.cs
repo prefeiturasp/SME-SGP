@@ -99,13 +99,15 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                 !string.IsNullOrEmpty(this.GetCurrentColumnValue("esc_id").ToString()) && 
                 !string.IsNullOrEmpty(this.GetCurrentColumnValue("uni_id").ToString()) &&
                 !string.IsNullOrEmpty(this.GetCurrentColumnValue("tur_id").ToString()) && 
-                !string.IsNullOrEmpty(this.GetCurrentColumnValue("tds_id").ToString()))
+                !string.IsNullOrEmpty(this.GetCurrentColumnValue("tds_id").ToString()) &&
+                !string.IsNullOrEmpty(this.GetCurrentColumnValue("tpc_id").ToString()))
             {
                 xrChart1.Series[0].DataSource = (from dadosGeral in dsGestaoEscolar1.NEW_Relatorio_GrafConsAtivAvaliada_AlunosTurma.AsEnumerable()
                                                  where Convert.ToInt32(dadosGeral.Field<object>("esc_id")) == Convert.ToInt32(this.GetCurrentColumnValue("esc_id").ToString()) &&
                                                        Convert.ToInt32(dadosGeral.Field<object>("uni_id")) == Convert.ToInt32(this.GetCurrentColumnValue("uni_id").ToString()) &&
                                                        Convert.ToInt64(dadosGeral.Field<object>("tur_id")) == Convert.ToInt64(this.GetCurrentColumnValue("tur_id").ToString()) &&
-                                                       Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == Convert.ToInt32(this.GetCurrentColumnValue("tds_id").ToString())
+                                                       Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == Convert.ToInt32(this.GetCurrentColumnValue("tds_id").ToString()) &&
+                                                       Convert.ToInt32(dadosGeral.Field<object>("tpc_id")) == Convert.ToInt32(this.GetCurrentColumnValue("tpc_id").ToString())
                                                  group dadosGeral by new { tds_id = dadosGeral.tds_id
                                                                             , tds_nome = dadosGeral.tds_nome
                                                                             , far_ordenar = dadosGeral.far_ordenar
@@ -126,7 +128,8 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                                  where Convert.ToInt32(dadosGeral.Field<object>("esc_id")) == Convert.ToInt32(this.GetCurrentColumnValue("esc_id").ToString()) &&
                                        Convert.ToInt32(dadosGeral.Field<object>("uni_id")) == Convert.ToInt32(this.GetCurrentColumnValue("uni_id").ToString()) &&
                                        Convert.ToInt64(dadosGeral.Field<object>("tur_id")) == Convert.ToInt64(this.GetCurrentColumnValue("tur_id").ToString()) &&
-                                       Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == Convert.ToInt32(this.GetCurrentColumnValue("tds_id").ToString())
+                                       Convert.ToInt32(dadosGeral.Field<object>("tds_id")) == Convert.ToInt32(this.GetCurrentColumnValue("tds_id").ToString()) &&
+                                       Convert.ToInt32(dadosGeral.Field<object>("tpc_id")) == Convert.ToInt32(this.GetCurrentColumnValue("tpc_id").ToString())
                                  group dadosGeral by new
                                  {
                                      far_ordenar = dadosGeral.Field<object>("far_ordenar") != null
@@ -188,6 +191,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
                 subReport.UNIID.Value = this.GetCurrentColumnValue("uni_id").ToString();
                 subReport.TURID.Value = this.GetCurrentColumnValue("tur_id").ToString();
                 subReport.TDSID.Value = this.GetCurrentColumnValue("tds_id").ToString();
+                subReport.TPCID.Value = this.GetCurrentColumnValue("tpc_id").ToString();
             }
         }
 

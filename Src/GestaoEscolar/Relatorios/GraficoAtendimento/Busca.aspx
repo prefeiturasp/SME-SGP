@@ -18,13 +18,12 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <asp:Panel ID="pnlBusca" runat="server" GroupingText="Gráfico de atendimento">
+    <asp:Panel ID="pnlBusca" runat="server" GroupingText="Gráficos de atendimento">
         <uc:UCCObrigatorios ID="UCCObrigatorios" runat="server"></uc:UCCObrigatorios>
         <asp:UpdatePanel ID="updFiltros" runat="server">
             <ContentTemplate>
                 <uc:UCCTipoRelatorioAtendimento ID="UCCTipoRelatorioAtendimento" runat="server" Obrigatorio="true" MostrarMensagemSelecione="true" />
                 <uc:UCCGraficoAtendimento ID="UCCGraficoAtendimento" runat="server" Obrigatorio="true" MostrarMensagemSelecione="true" />
-                <uc:UCCObrigatorios ID="UCCObrigatorios1" runat="server" />
                 <uc:UCCUAEscola ID="UCCUAEscola" runat="server" CarregarEscolaAutomatico="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true"
                     ObrigatorioUA="true" ObrigatorioEscola="true" />
                 <uc:UCCCursoCurriculo ID="UCCCursoCurriculo" MostrarMensagemSelecione="true" Obrigatorio="false"
@@ -34,7 +33,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <div class="right">
-            <asp:Button ID="btnGerar" runat="server" Text="Gerar relatório" OnClick="btnGerar_Click" />
+            <asp:Button ID="btnGerar" runat="server" Text="Gerar relatório" PostBackUrl="~/Relatorios/GraficoAtendimento/Relatorio.aspx" />
             <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click" />
         </div>
     </asp:Panel>
