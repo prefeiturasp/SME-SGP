@@ -221,6 +221,70 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Retorna as disciplinas relacionadas pela atividade extraclasse.
+        /// </summary>
+        /// <param name="taer_id">ID do relacionamento entre atividades extraclasse.</param>
+        /// <returns></returns>
+        public DataTable SelecionaDisciplinaAtividadeExtraclasseRelacionada(Guid taer_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_TurmaAtividadeExtraClasse_SelecionaDisciplinaAtividadeExtraclasseRelacionada", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@taer_id";
+                Param.Size = 16;
+                Param.Value = taer_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Retorna atividades extraclasse relacionadas.
+        /// </summary>
+        /// <param name="taer_id">ID do relacionamento entre atividades extraclasse.</param>
+        /// <returns></returns>
+        public DataTable SelecionaAtividadeExtraclasseRelacionada(Guid taer_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_TurmaAtividadeExtraClasse_SelecionaAtividadeExtraclasseRelacionada", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@taer_id";
+                Param.Size = 16;
+                Param.Value = taer_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #endregion Métodos de consulta     
 
         #region Métodos de exclusão
