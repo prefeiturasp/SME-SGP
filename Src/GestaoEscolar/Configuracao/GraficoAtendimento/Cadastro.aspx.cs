@@ -83,6 +83,22 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 ViewState["VS_lstFiltrosFixos"] = value;
             }
         }
+
+        private List<REL_GraficoAtendimento_FiltrosPersonalizados> VS_lstFiltrosPersonalizados
+        {
+            get
+            {
+                if (ViewState["VS_lstFiltrosPersonalizados"] == null)
+                    ViewState["VS_lstFiltrosPersonalizados"] = new List<REL_GraficoAtendimento_FiltrosPersonalizados>();
+
+                return (List<REL_GraficoAtendimento_FiltrosPersonalizados>)ViewState["VS_lstFiltrosPersonalizados"];
+            }
+            set
+            {
+                ViewState["VS_lstFiltrosPersonalizados"] = value;
+            }
+        }
+
         #endregion
 
         #region Métodos
@@ -153,7 +169,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (VS_lstFiltrosFixos.Count == 0 && VS_lstQuestionarios.Count ==0)
                     throw new ValidationException("Selecione pelo menos um filtro.");
 
-                //if (REL_GraficoAtendimentoBO.Salvar(gra, VS_lstFiltrosFixos, VS_lstFiltrosPersonalizados))
+                if (REL_GraficoAtendimentoBO.Salvar(gra, VS_lstFiltrosFixos, VS_lstFiltrosPersonalizados))
                 if (REL_GraficoAtendimentoBO.Save(gra))
                 {
                     string message = "";

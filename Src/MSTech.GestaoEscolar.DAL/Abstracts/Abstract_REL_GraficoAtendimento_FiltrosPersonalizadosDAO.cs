@@ -37,16 +37,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             {
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@gra_id";
+			Param.ParameterName = "@gfp_id";
 			Param.Size = 4;
-			Param.Value = entity.gra_id;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@qtr_id";
-			Param.Size = 4;
-			Param.Value = entity.qtr_id;
+			Param.Value = entity.gfp_id;
 			qs.Parameters.Add(Param);
 
 
@@ -76,6 +69,27 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.qtr_id;
 			qs.Parameters.Add(Param);
 
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Int32;
+			Param.ParameterName = "@gfp_situacao";
+			Param.Size = 4;
+			Param.Value = entity.gfp_situacao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.DateTime;
+			Param.ParameterName = "@gfp_dataCriacao";
+
+			Param.Value = entity.gfp_dataCriacao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.DateTime;
+			Param.ParameterName = "@gfp_dataAlteracao";
+
+			Param.Value = entity.gfp_dataAlteracao;
+			qs.Parameters.Add(Param);
+
 
 			}
 		}
@@ -103,6 +117,34 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.qtr_id;
 			qs.Parameters.Add(Param);
 
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Int32;
+			Param.ParameterName = "@gfp_id";
+			Param.Size = 4;
+			Param.Value = entity.gfp_id;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Int32;
+			Param.ParameterName = "@gfp_situacao";
+			Param.Size = 4;
+			Param.Value = entity.gfp_situacao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.DateTime;
+			Param.ParameterName = "@gfp_dataCriacao";
+
+			Param.Value = entity.gfp_dataCriacao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.DateTime;
+			Param.ParameterName = "@gfp_dataAlteracao";
+
+			Param.Value = entity.gfp_dataAlteracao;
+			qs.Parameters.Add(Param);
+
 
 			}
 		}
@@ -118,16 +160,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
             {
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@gra_id";
+			Param.ParameterName = "@gfp_id";
 			Param.Size = 4;
-			Param.Value = entity.gra_id;
-			qs.Parameters.Add(Param);
-
-			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
-			Param.ParameterName = "@qtr_id";
-			Param.Size = 4;
-			Param.Value = entity.qtr_id;
+			Param.Value = entity.gfp_id;
 			qs.Parameters.Add(Param);
 
 
@@ -144,7 +179,8 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 		{
 			if (entity != null & qs != null)
             {
-				throw new NotImplementedException("Método 'ReceberAutoIncremento' não implementado.");
+			entity.gfp_id = Convert.ToInt32(qs.Return.Rows[0][0]);
+			return (entity.gfp_id > 0);
 			}
 
 			return false;
