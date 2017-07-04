@@ -54,7 +54,7 @@
                 </Columns>
             </asp:GridView>    
             <asp:Panel id="pnlLancamento" runat="server" Visible="false">
-                <div class="right area-botoes-top" style="border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+                <div class="right area-botoes-top" style="border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">                 
                     <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Padrao, Padrao.Salvar.Text %>" CausesValidation="false" OnClick="btnSalvar_Click" />
                     <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Padrao, Padrao.Cancelar.Text %>" CausesValidation="false" OnClick="btnCancelar_Click" />
                 </div><br />

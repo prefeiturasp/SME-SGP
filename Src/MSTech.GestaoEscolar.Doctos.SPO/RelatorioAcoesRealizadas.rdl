@@ -252,6 +252,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -589,9 +590,6 @@
           <QueryParameter Name="@alu_ids">
             <Value>=Parameters!alu_ids.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@tur_ids">
-            <Value>=Parameters!tur_ids.Value</Value>
-          </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
         <CommandText>NEW_Relatorio_AcoesRealizadas</CommandText>
@@ -645,10 +643,6 @@
     <ReportParameter Name="alu_ids">
       <DataType>String</DataType>
       <Prompt>alu ids</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="tur_ids">
-      <DataType>String</DataType>
-      <Prompt>tur ids</Prompt>
     </ReportParameter>
     <ReportParameter Name="dre">
       <DataType>String</DataType>

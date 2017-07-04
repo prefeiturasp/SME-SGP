@@ -890,6 +890,20 @@
             }
         }
 
+        protected void btnImprimir_Click(object sender, EventArgs e)
+        {           
+            string report, parametros;
+            long alu_ids = VS_alu_id;        
+
+            report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioAcoesRealizadas).ToString();
+            parametros = "alu_ids=" + alu_ids +
+                         "&logo="+  ApplicationWEB.LogoRelatorioDB+                        
+                         "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
+                         "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria");
+
+            MSTech.GestaoEscolar.BLL.CFG_RelatorioBO.CallReport("Relatorios", report, parametros, HttpContext.Current);
+        }
+
         protected void grvAcoes_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)

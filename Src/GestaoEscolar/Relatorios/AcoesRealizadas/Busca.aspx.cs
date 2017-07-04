@@ -395,7 +395,7 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         /// </summary>
         private void VerificarBusca()
         {
-            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioNAAPA)
+            if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAcoesRealizadas)
             {
                 DateTime data;
                 string valor, valor2, valor3;
@@ -596,32 +596,25 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         protected void btnGerarRelatrorioAcoesRealizadas_Click(object sender, EventArgs e)
         {
             string report, parametros;
-            string alu_ids = String.Empty;
-            string tur_ids = String.Empty;
+            string alu_ids = String.Empty;  
 
             foreach (GridViewRow row in grvResultados.Rows)
             {
                 CheckBox chkSelecionar = (CheckBox)row.FindControl("_chkSelecionar");
-                if (chkSelecionar.Checked)
-                {
+                if (chkSelecionar.Checked)                
                     alu_ids = (String.IsNullOrEmpty(alu_ids) ? "" : alu_ids + ",") + grvResultados.DataKeys[row.RowIndex].Values["alu_id"];
-                    tur_ids = (String.IsNullOrEmpty(tur_ids) ? "" : tur_ids + ",") + grvResultados.DataKeys[row.RowIndex].Values["tur_id"];
-                }
             }
 
            report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioAcoesRealizadas).ToString();
-            parametros = "alu_ids=" + alu_ids +
-                         "&tur_ids=" + tur_ids +
+            parametros = "alu_ids=" + alu_ids +                         
                          "&dre=" + UCCUAEscola.TextoComboUA +
                          "&escola=" + UCCUAEscola.TextoComboEscola +
                          "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString(), ApplicationWEB.LogoRelatorioSSRS) +
                          "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
                          "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Secretaria");
                          
-
             MSTech.GestaoEscolar.BLL.CFG_RelatorioBO.CallReport("Relatorios", report, parametros, HttpContext.Current);
         }
-
 
         #endregion
     }

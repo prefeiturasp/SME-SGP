@@ -53,8 +53,9 @@
                     <legend>
                         <asp:Literal runat="server" ID="litFdsAcoesRealizadas" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, litAcoesRealizadas.Text %>" />
                     </legend>
-                    <div style="float:right" id="divNovaAcao" runat="server">
+                    <div style="float:right" id="divNovaAcao" runat="server">                        
                         <asp:Button ID="btnNovaAcao" runat="server" CausesValidation="False" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, btnNovaAcao.Text %>" OnClick="btnNovaAcao_Click" style="font-size:0.9em;"/>
+                        <asp:Button ID="btnImprimir" runat="server" Text="Imprimir" CausesValidation="false" OnClick="btnImprimir_Click" />
                         <br /><br />
                     </div>
                     <asp:GridView ID="grvAcoes" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, grvAcoes.EmptyDataText %>"
