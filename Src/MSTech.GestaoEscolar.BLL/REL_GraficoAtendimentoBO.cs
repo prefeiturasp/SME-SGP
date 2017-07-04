@@ -15,6 +15,7 @@ namespace MSTech.GestaoEscolar.BLL
     using Caching;
     using Data.Common;
     using System.Web;
+    using System.Linq;
 
     public enum REL_GraficoAtendimentoTipo : byte
     {
@@ -153,61 +154,52 @@ namespace MSTech.GestaoEscolar.BLL
 
             try
             {
-                //Carrega as questões ligadas à sondagem (se for uma sondagem que já existe)
-                //List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixosBanco = entity.IsNew ? new List<REL_GraficoAtendimento_FiltrosFixos>() :
-                //                                            REL_GraficoAtendimento_FiltrosFixosBO.SelectBy_gra_id(entity.gra_id, dao._Banco);
+                //Carrega os filtros fixos ligados ao gráfico (se for um gráfico que já existe)
+                List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixosBanco = entity.IsNew ? new List<REL_GraficoAtendimento_FiltrosFixos>() :
+                                                            REL_GraficoAtendimento_FiltrosFixosBO.SelectBy_gra_id(entity.gra_id, dao._Banco);
 
-                ////Carrega as respostas ligadas à sondagem (se for uma sondagem que já existe)
-                //List<REL_GraficoAtendimento_FiltrosPersonalizados> lstFiltrosPersonalizadosBanco = entity.IsNew ? new List<REL_GraficoAtendimento_FiltrosPersonalizados>() :
-                //                                              REL_GraficoAtendimento_FiltrosPersonalizadosBO.SelectBy_gra_id(entity.gra_id, dao._Banco);
+                //Carrega os filtros personalizados ligados ao gráfico (se for um gráfico que já existe)
+                List<REL_GraficoAtendimento_FiltrosPersonalizados> lstFiltrosPersonalizadosBanco = entity.IsNew ? new List<REL_GraficoAtendimento_FiltrosPersonalizados>() :
+                                                              REL_GraficoAtendimento_FiltrosPersonalizadosBO.SelectBy_gra_id(entity.gra_id, dao._Banco);
 
-                //Salva a sondagem
+                //Salva o gráfico
                 if (!dao.Salvar(entity))
                     return false;
 
                 LimpaCache(entity);
 
-                //Salva questões
+                //Salva filtros fixos
                 foreach (REL_GraficoAtendimento_FiltrosFixos gff in lstFiltrosFixos)
                 {
                     gff.gra_id = entity.gra_id;
+                    if (gff.IsNew)
+                        gff.gff_id = -1;
                     if (!REL_GraficoAtendimento_FiltrosFixosBO.Save(gff, dao._Banco))
                         return false;
                 }
 
-                //Salva sub-questões
+                //Salva filtros personalizados
                 foreach (REL_GraficoAtendimento_FiltrosPersonalizados gfp in lstFiltrosPersonalizados)
                 {
                     gfp.gra_id = entity.gra_id;
+                    if (gfp.IsNew)
+                        gfp.gfp_id = -1;
                     if (!REL_GraficoAtendimento_FiltrosPersonalizadosBO.Save(gfp, dao._Banco))
                         return false;
                 }
 
-                //Remove logicamente no banco as questões e sub-questões que foram removidas da sondagem
-                //foreach (REL_GraficoAtendimento_FiltrosFixos gffB in lstFiltrosFixosBanco)
-                //    if (!lstFiltrosFixos.Any(f => f. == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido) &&
-                //        !lstSubQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido))
-                //    {
-                //        ACA_SondagemQuestaoBO.Delete(sdqB, dao._Banco);
-                //    }
-
-                ////Salva respostas
-                //foreach (ACA_SondagemResposta sdr in lstResposta)
-                //{
-                //    sdr.snd_id = entity.snd_id;
-                //    if (sdr.IsNew)
-                //        sdr.sdr_id = -1;
-                //    if (!ACA_SondagemRespostaBO.Save(sdr, dao._Banco))
-                //        return false;
-                //}
-
-                ////Remove logicamente no banco as respostas que foram removidas da sondagem
-                //foreach (ACA_SondagemResposta sdrB in lstRespostaBanco)
-                //    if (!lstResposta.Any(r => r.sdr_id == sdrB.sdr_id && r.sdr_situacao != (byte)ACA_SondagemRespostaSituacao.Excluido))
-                //    {
-                //        ACA_SondagemRespostaBO.Delete(sdrB, dao._Banco);
-                //    }
-
+                //Remove logicamente no banco os filtros fixos e personalizados que foram removidos do gráfico
+                foreach (REL_GraficoAtendimento_FiltrosFixos gffB in lstFiltrosFixosBanco)
+                    if (!lstFiltrosFixos.Any(f => f.gff_id == gffB.gff_id && f.gff_situacao != (byte)REL_GraficoAtendimento_FiltrosFixosSituacao.Excluido))
+                    {
+                        REL_GraficoAtendimento_FiltrosFixosBO.Delete(gffB, dao._Banco);
+                    }
+                foreach (REL_GraficoAtendimento_FiltrosPersonalizados gfpB in lstFiltrosPersonalizadosBanco)
+                    if (!lstFiltrosPersonalizados.Any(f => f.gfp_id == gfpB.gfp_id && f.gfp_situacao != (byte)REL_GraficoAtendimento_FiltrosPersonalizadosSituacao.Excluido))
+                    {
+                        REL_GraficoAtendimento_FiltrosPersonalizadosBO.Delete(gfpB, dao._Banco);
+                    }
+                
                 return true;
             }
             catch (Exception err)

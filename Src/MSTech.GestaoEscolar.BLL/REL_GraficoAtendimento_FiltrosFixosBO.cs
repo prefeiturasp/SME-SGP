@@ -8,6 +8,24 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.GestaoEscolar.Entities;
     using MSTech.GestaoEscolar.DAL;
     using System;
+    using Data.Common;
+    using System.Collections.Generic;
+
+    #region Enumeradores
+
+    /// <summary>
+    /// Situações do filtro fixo do gráfico
+    /// </summary>
+    public enum REL_GraficoAtendimento_FiltrosFixosSituacao : byte
+    {
+        Ativo = 1
+        ,
+
+        Excluido = 3
+    }
+
+    #endregion Enumeradores
+
 
     /// <summary>
     /// Description: REL_GraficoAtendimento_FiltrosFixos Business Object. 
@@ -75,6 +93,14 @@ namespace MSTech.GestaoEscolar.BLL
                     break;
             }
             return valorDetalhado;
+        }
+
+        public static List<REL_GraficoAtendimento_FiltrosFixos> SelectBy_gra_id(int gra_id, TalkDBTransaction banco = null)
+        {
+            REL_GraficoAtendimento_FiltrosFixosDAO dao = new REL_GraficoAtendimento_FiltrosFixosDAO();
+            if (banco != null)
+                dao._Banco = banco;
+            return dao.SelectBy_gra_id(gra_id);
         }
     }
 }
