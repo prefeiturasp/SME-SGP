@@ -6048,7 +6048,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        btnFrequencia.Visible &= VS_ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
+                        btnFrequencia.Visible &= (DisciplinaPrincipal && TurnoIntegral && tdt_posicao.In((byte)1, (byte)2, (byte)6)) ||
+                            VS_ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
                     }
                     else if (docenciaCompartilhada)
                     {
@@ -6070,7 +6071,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        btnAtividade.Visible &= VS_ltPermissaoAvaliacao.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
+                        btnAtividade.Visible &= (DisciplinaPrincipal && TurnoIntegral && tdt_posicao.In((byte)1, (byte)2, (byte)6)) ||
+                            VS_ltPermissaoAvaliacao.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
                     }
                     else if (docenciaCompartilhada)
                     {
@@ -6090,7 +6092,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        btnAnotacao.Visible = VS_ltPermissaoAnotacoes.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
+                        btnAnotacao.Visible = (DisciplinaPrincipal && TurnoIntegral && tdt_posicao.In((byte)1, (byte)2, (byte)6)) ||
+                            VS_ltPermissaoAnotacoes.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
                     }
 
                     Image imgAnotacaoSituacao = (Image)e.Row.FindControl("imgAnotacaoSituacao");
@@ -6102,7 +6105,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        btnPlanoAula.Visible = VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
+                        btnPlanoAula.Visible = (DisciplinaPrincipal && TurnoIntegral && tdt_posicao.In((byte)1, (byte)2, (byte)6)) ||
+                            VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
                     }
 
                     Image imgPlanoAulaSituacao = (Image)e.Row.FindControl("imgPlanoAulaSituacao");
@@ -6311,7 +6315,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (UCControleTurma1.VS_tdt_posicao > 0)
                     {
                         Int16 tdt_posicao = Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "tdt_posicao"));
-                        bool permiteEditar = VS_ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao & p.pdc_permissaoEdicao);
+                        bool permiteEditar = DisciplinaPrincipal && TurnoIntegral ?
+                            tdt_posicao.In((short)1, (short)2, (short)6) :
+                            VS_ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao & p.pdc_permissaoEdicao);
                         chkEfetivado.Enabled &= permiteEditar;
                     }
 
@@ -7298,7 +7304,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (VS_EntitiesControleTurma.formatoAvaliacao.fav_tipoApuracaoFrequencia == (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.Dia &&
                         VS_crp_controleTempo == (byte)ACA_CurriculoPeriodoControleTempo.Horas)
                     {
-                        if (VS_PossuiRegencia && VS_tud_tipo_Aula != (byte)TurmaDisciplinaTipo.Regencia)
+                        if ((VS_PossuiRegencia && VS_tud_tipo_Aula != (byte)TurmaDisciplinaTipo.Regencia) ||
+                            (DisciplinaPrincipal && TurnoIntegral))
                         {
                             for (int i = 0; i < numeroAulas; i++)
                             {
