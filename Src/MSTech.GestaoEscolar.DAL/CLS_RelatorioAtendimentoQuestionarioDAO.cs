@@ -47,6 +47,39 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        public DataTable SelectBy_RelatorioAtendimento(int rea_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioAtendimentoQuestionario_SelectBy_rea_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_id";
+                Param.DbType = DbType.Int32;
+                Param.Size = 4;
+                Param.Value = rea_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return.Rows.Count > 0 ?
+                    qs.Return :
+                    new DataTable();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+
         /// <summary>
         /// Parâmetros para efetuar a inclusão preservando a data de criação
         /// </summary>

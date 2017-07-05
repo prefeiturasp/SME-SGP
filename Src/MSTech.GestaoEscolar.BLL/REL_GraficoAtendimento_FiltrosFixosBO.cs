@@ -64,7 +64,7 @@ namespace MSTech.GestaoEscolar.BLL
 
         public new static string RetornaValor(REL_GraficoAtendimentoFiltrosFixos tipoFiltro, string valor)
         {
-            string valorDetalhado = "";
+            List<string> valoresDetalhados = new List<string>();
             switch (tipoFiltro)
             {
                 case REL_GraficoAtendimentoFiltrosFixos.DetalheDeficiencia:
@@ -72,27 +72,26 @@ namespace MSTech.GestaoEscolar.BLL
                     foreach (var item in codDetalhe)
                     {
                         CFG_DeficienciaDetalhe def = new CFG_DeficienciaDetalhe { dfd_id = Convert.ToInt32(item) };
-                        CFG_DeficienciaDetalheBO.GetEntity(def);
-                        valorDetalhado += "," + def.dfd_nome;
+                        def = CFG_DeficienciaDetalheBO.GetDetalhamento(def);
+                        valoresDetalhados.Add(def.dfd_nome);
                     }
-                    valorDetalhado = "";
                     break;
                 case REL_GraficoAtendimentoFiltrosFixos.FaixaIdade:
-                    valorDetalhado = valor;
+                    valoresDetalhados.Add(valor);
                     break;
                 case REL_GraficoAtendimentoFiltrosFixos.Sexo:
-                    valorDetalhado = MetodosExtensao.SexoFormatado(Convert.ToInt32(valor));
+                    valoresDetalhados.Add(MetodosExtensao.SexoFormatado(Convert.ToInt32(valor)));
                     break;
                 case REL_GraficoAtendimentoFiltrosFixos.PeriodoPreenchimento:
-                    valorDetalhado = valor;
+                    valoresDetalhados.Add(valor);
                     break;
-                case REL_GraficoAtendimentoFiltrosFixos.RacaCor:                   
-                    valorDetalhado = MetodosExtensao.RacaCorFormatado(Convert.ToInt32(valor));
+                case REL_GraficoAtendimentoFiltrosFixos.RacaCor:
+                    valoresDetalhados.Add(MetodosExtensao.RacaCorFormatado(Convert.ToInt32(valor)));
                     break;
                 default:
                     break;
             }
-            return valorDetalhado;
+            return string.Join(",", valoresDetalhados.ToArray());
         }
 
         public static List<REL_GraficoAtendimento_FiltrosFixos> RetornaListaDetalhada(List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos)

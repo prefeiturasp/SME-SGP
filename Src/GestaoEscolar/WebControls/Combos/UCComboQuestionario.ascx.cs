@@ -204,10 +204,22 @@ namespace GestaoEscolar.WebControls.Combos
         {
             ddlCombo.Items.Clear();
             ddlCombo.DataSource = CLS_QuestionarioBO.GetQuestionarioBy_qst_titulo("");
-            MostrarMessageSelecione = true;       
+            MostrarMessageSelecione = true;
             ddlCombo.DataBind();
         }
-        
+
         #endregion
+
+        protected void ddlCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (IndexChanged != null)
+                IndexChanged();
+
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            ddlCombo.AutoPostBack = (IndexChanged != null);
+        }
     }
 }

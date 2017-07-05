@@ -364,49 +364,22 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::GestaoEscolar.WebControls.Combos.ComboTipoDeficiencia ComboTipoDeficiencia;
         
         /// <summary>
-        /// divDetalhe control.
+        /// divDetalhes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDetalhe;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDetalhes;
         
         /// <summary>
-        /// updDetalhe control.
+        /// cklDetalhes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updDetalhe;
-        
-        /// <summary>
-        /// lblLegendGrupo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLegendGrupo;
-        
-        /// <summary>
-        /// pnlGrupo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlGrupo;
-        
-        /// <summary>
-        /// gvDetalhe control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvDetalhe;
+        protected global::System.Web.UI.WebControls.CheckBoxList cklDetalhes;
         
         /// <summary>
         /// divBotoesFiltro control.
