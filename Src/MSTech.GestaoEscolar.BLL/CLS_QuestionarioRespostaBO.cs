@@ -10,7 +10,19 @@ namespace MSTech.GestaoEscolar.BLL
     using System.ComponentModel;
     using System.Data;
     using Validation.Exceptions;
-    
+    using System;
+
+    [Serializable]
+    public class QuestionarioConteudoResposta
+    {
+        public int qtr_id { get; set; }
+        public int qtc_id { get; set; }
+        public int qst_id { get; set; }
+        public string qtr_texto { get; set; }
+        public string qtc_texto { get; set; }
+        public string qst_titulo { get; set; }
+    }
+
     /// <summary>
     /// Description: CLS_QuestionarioResposta Business Object. 
     /// </summary>
@@ -27,10 +39,52 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectByConteudo(true, currentPage / pageSize, pageSize, qtc_id, out totalRecords);
         }
 
-        public static DataTable SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id
+        public static DataTable SelectByConteudo
        (
-            int rea_id
+            int qtc_id
        )
+        {
+            CLS_QuestionarioRespostaDAO dao = new CLS_QuestionarioRespostaDAO();
+            return dao.SelectByConteudo(qtc_id);
+        }
+
+        public static QuestionarioConteudoResposta GetEntityQuestionarioConteudoResposta
+            (
+                QuestionarioConteudoResposta entity
+            )
+        {
+            CLS_QuestionarioRespostaDAO dao = new CLS_QuestionarioRespostaDAO();
+            DataTable dt = dao.GetEntityQuestionarioConteudoResposta(entity.qtr_id);
+            
+            if (dt.Rows.Count > 0)
+            {
+                entity.qst_id = dt.Rows[0].Field<int>("qst_id");
+                entity.qst_titulo = dt.Rows[0].Field<string>("qst_titulo");
+                entity.qtc_id = dt.Rows[0].Field<int>("qtc_id");
+                entity.qtc_texto = dt.Rows[0].Field<string>("qtc_texto");
+                entity.qtr_id = dt.Rows[0].Field<int>("qtr_id");
+                entity.qtr_texto = dt.Rows[0].Field<string>("qtr_texto");
+            }
+
+            return entity;
+        }
+
+        public static DataTable SelectByConteudoTipoResposta
+       (
+            int qtc_id
+            , byte tipoResposta
+       )
+        {
+            CLS_QuestionarioRespostaDAO dao = new CLS_QuestionarioRespostaDAO();
+            return dao.SelectByConteudo(qtc_id).AsEnumerable()
+                        .Where(row => row.Field<byte>("qtc_tipoResposta") == tipoResposta)
+                        .CopyToDataTable(); ;
+        }
+
+        public static DataTable SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id
+   (
+        int rea_id
+   )
         {
             CLS_QuestionarioRespostaDAO dao = new CLS_QuestionarioRespostaDAO();
             return dao.SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id(rea_id);

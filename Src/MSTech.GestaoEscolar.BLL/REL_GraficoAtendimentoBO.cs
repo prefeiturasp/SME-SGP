@@ -144,7 +144,7 @@ namespace MSTech.GestaoEscolar.BLL
                 );
         }
 
-        public static bool Salvar(REL_GraficoAtendimento entity, List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos, List<REL_GraficoAtendimento_FiltrosPersonalizados> lstFiltrosPersonalizados, TalkDBTransaction banco = null)
+        public static bool Salvar(REL_GraficoAtendimento entity, List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos, List<QuestionarioConteudoResposta> lstRespostas, TalkDBTransaction banco = null)
         {
             REL_GraficoAtendimentoDAO dao = new REL_GraficoAtendimentoDAO();
             if (banco == null)
@@ -172,18 +172,24 @@ namespace MSTech.GestaoEscolar.BLL
                 foreach (REL_GraficoAtendimento_FiltrosFixos gff in lstFiltrosFixos)
                 {
                     gff.gra_id = entity.gra_id;
-                    if (gff.IsNew)
-                        gff.gff_id = -1;
+                    REL_GraficoAtendimento_FiltrosFixosBO.GetEntity(gff);
                     if (!REL_GraficoAtendimento_FiltrosFixosBO.Save(gff, dao._Banco))
                         return false;
                 }
 
+                List<REL_GraficoAtendimento_FiltrosPersonalizados> lstFiltrosPersonalizados = new List<REL_GraficoAtendimento_FiltrosPersonalizados>();
+                REL_GraficoAtendimento_FiltrosPersonalizados gfp;
                 //Salva filtros personalizados
-                foreach (REL_GraficoAtendimento_FiltrosPersonalizados gfp in lstFiltrosPersonalizados)
+                foreach (QuestionarioConteudoResposta qcr in lstRespostas)
                 {
-                    gfp.gra_id = entity.gra_id;
-                    if (gfp.IsNew)
-                        gfp.gfp_id = -1;
+                    gfp = new REL_GraficoAtendimento_FiltrosPersonalizados
+                    {
+                        qtr_id = qcr.qtr_id
+                        , gra_id = entity.gra_id
+                    };
+                    REL_GraficoAtendimento_FiltrosPersonalizadosBO.GetEntity(gfp);
+                    lstFiltrosPersonalizados.Add(gfp);
+                   
                     if (!REL_GraficoAtendimento_FiltrosPersonalizadosBO.Save(gfp, dao._Banco))
                         return false;
                 }

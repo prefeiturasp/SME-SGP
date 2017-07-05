@@ -14,9 +14,9 @@ namespace MSTech.GestaoEscolar.DAL
     /// Description: .
     /// </summary>
     public class CLS_QuestionarioRespostaDAO : Abstract_CLS_QuestionarioRespostaDAO
-	{
+    {
         public DataTable SelectByConteudo
-            (   
+            (
                 bool paginado
                 , int currentPage
                 , int pageSize
@@ -66,6 +66,85 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        public DataTable GetEntityQuestionarioConteudoResposta
+            (
+                int qtr_id
+            )
+        {
+            DataTable dt = new DataTable();
+
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_QuestionarioResposta_SelectQuestionarioConteudoResposta_By_qtr_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@qtr_id";                
+                Param.Value = qtr_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+                
+                qs.Execute();
+                    
+                if (qs.Return.Rows.Count > 0)
+                    dt = qs.Return;
+
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        public DataTable SelectByConteudo
+            (
+               int qtc_id
+            )
+        {
+            DataTable dt = new DataTable();
+
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_QuestionarioResposta_SelectBy_qtc_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@qtc_id";
+                if (qtc_id > 0)
+                    Param.Value = qtc_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                #endregion
+                
+                qs.Execute();
+                
+                if (qs.Return.Rows.Count > 0)
+                    dt = qs.Return;
+
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         public DataTable SelectQuestionarioConteudoRespostaMultiplaSelecao_By_rea_id
            (
               int rea_id
@@ -87,7 +166,7 @@ namespace MSTech.GestaoEscolar.DAL
                 else
                     Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
-                
+
                 #endregion
 
                 qs.Execute();
