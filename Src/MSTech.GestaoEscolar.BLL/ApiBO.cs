@@ -5228,6 +5228,42 @@ namespace MSTech.GestaoEscolar.BLL
             return listaRetorno;
         }
 
+        /// <summary>
+        /// Seleciona os IDs dos usuários docentes por escola.
+        /// </summary>
+        /// <param name="uad_idEscola"></param>
+        /// <param name="ent_id"></param>
+        /// <returns></returns>
+        public static List<Guid> SelecionaUsuarioDocentePorEscola(Guid uad_idEscola, Guid ent_id)
+        {
+            List<Guid> listaRetorno = new List<Guid>();
+            DataTable dtUsuario = new ApiDAO().SelecionaUsuarioDocentePorEscola(uad_idEscola, ent_id);
+            if (dtUsuario.Rows.Count > 0)
+            {
+                listaRetorno = (from DataRow dr in dtUsuario.Rows
+                                select new Guid(dr["usu_id"].ToString())).ToList();
+            }
+            return listaRetorno.Distinct().ToList();
+        }
+
+        /// <summary>
+        /// Seleciona os IDs dos usuários docentes por diretoria.
+        /// </summary>
+        /// <param name="uad_idSuperior"></param>
+        /// <param name="ent_id"></param>
+        /// <returns></returns>
+        public static List<Guid> SelecionaUsuarioDocentePorDiretoria(Guid uad_idSuperior, Guid ent_id)
+        {
+            List<Guid> listaRetorno = new List<Guid>();
+            DataTable dtUsuario = new ApiDAO().SelecionaUsuarioDocentePorDiretoria(uad_idSuperior, ent_id);
+            if (dtUsuario.Rows.Count > 0)
+            {
+                listaRetorno = (from DataRow dr in dtUsuario.Rows
+                                select new Guid(dr["usu_id"].ToString())).ToList();
+            }
+            return listaRetorno.Distinct().ToList();
+        }
+
         #endregion Usuário
 
         #region ACA_TipoCiclo

@@ -1166,6 +1166,22 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:GestaoAcademica.WebApi.Controllers.usuariosController.SelecionaAlunoDocentePorUsuario(MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Entrada.UsuarioEntradaDTO)" -->
+        <member name="M:GestaoAcademica.WebApi.Controllers.usuariosController.GetDocentesPorEscola(System.Guid,System.Guid)">
+            <summary>
+            Seleciona os IDs dos usuários docentes por escola.
+            </summary>
+            <param name="uad_idEscola"></param>
+            <param name="ent_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GestaoAcademica.WebApi.Controllers.usuariosController.GetDocentesPorDiretoria(System.Guid,System.Guid)">
+            <summary>
+            Seleciona os IDs dos usuários docentes por diretoria.
+            </summary>
+            <param name="uad_idSuperior"></param>
+            <param name="ent_id"></param>
+            <returns></returns>
+        </member>
         <member name="M:GestaoAcademica.WebApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"

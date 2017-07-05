@@ -1646,6 +1646,86 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Seleciona os IDs dos usuários docentes por escola.
+        /// </summary>
+        /// <param name="uad_idEscola"></param>
+        /// <param name="ent_id"></param>
+        /// <returns></returns>
+        public DataTable SelecionaUsuarioDocentePorEscola(Guid uad_idEscola, Guid ent_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("API_SelecionaUsuarioDocentePorEscola", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@uad_idEscola";
+                Param.Size = 16;
+                Param.Value = uad_idEscola;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@ent_id";
+                Param.Size = 16;
+                Param.Value = ent_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Seleciona os IDs dos usuários docentes por diretoria.
+        /// </summary>
+        /// <param name="uad_idSuperior"></param>
+        /// <param name="ent_id"></param>
+        /// <returns></returns>
+        public DataTable SelecionaUsuarioDocentePorDiretoria(Guid uad_idSuperior, Guid ent_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("API_SelecionaUsuarioDocentePorDiretoria", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@uad_idSuperior";
+                Param.Size = 16;
+                Param.Value = uad_idSuperior;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@ent_id";
+                Param.Size = 16;
+                Param.Value = ent_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #endregion Usuário
 
         #region ACA_Aluno
