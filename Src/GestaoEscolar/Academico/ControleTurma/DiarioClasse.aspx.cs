@@ -1071,6 +1071,17 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Retorna um booleano informando se o tipo de turno da turma é integral.
+        /// </summary>
+        public bool TurnoIntegral
+        {
+            get
+            {
+                return VS_EntitiesControleTurma.tipoTurno.ttn_tipo == (byte)ACA_TipoTurnoBO.TipoTurno.Integral;
+            }
+        }
+
+        /// <summary>
         /// Retorna o Tud_ID selecionado no combo.
         /// </summary>
         protected long Tud_idComponente
@@ -3439,8 +3450,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         tpc_id = UCNavegacaoTelaPeriodo.VS_tpc_id,
                         tau_data = string.IsNullOrEmpty(txtDataAula.Text) ? new DateTime() : Convert.ToDateTime(txtDataAula.Text),
 
-                        tau_numeroAulas = 
-                        
+                        tau_numeroAulas = (DisciplinaPrincipal && TurnoIntegral) ? 2 :
                         (DisciplinaPrincipal || DisciplinaRegencia) && !RegenciaETemposAula ? 1 :
                             (string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 :
                                 Convert.ToInt32(txtQtdeAulas.Text)),
@@ -3467,7 +3477,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     CLS_TurmaAulaBO.GetEntity(entity);
 
                     entity.tau_data = string.IsNullOrEmpty(txtDataAula.Text) ? new DateTime() : Convert.ToDateTime(txtDataAula.Text);
-                    entity.tau_numeroAulas = ((DisciplinaPrincipal || DisciplinaRegencia) &&
+                    entity.tau_numeroAulas = DisciplinaPrincipal && TurnoIntegral ? 2 :
+                                            ((DisciplinaPrincipal || DisciplinaRegencia) &&
                                               !((VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia)
                                                 && (entity.tdt_posicao == (byte)EnumTipoDocente.Projeto)))
                                                     ? 1 : (string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 : Convert.ToInt32(txtQtdeAulas.Text));
