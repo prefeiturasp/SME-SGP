@@ -289,35 +289,35 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         {
 
             string retorno = string.Empty;
-            int[] vetor = { };
+            List<string> valores = new List<string>();
             if (valor > 0)
             {
                 switch (valor)
                 {
                     case 1:
-                        vetor[0] = Convert.ToInt32(txtDtInicial.Text);
-                        vetor[1] = Convert.ToInt32(txtDtFinal.Text);
+                        valores.Add(txtDtInicial.Text);
+                        valores.Add(txtDtFinal.Text);
                         break;
                     case 2:
-                        vetor[0] = Convert.ToInt32(UCComboRacaCor._Combo.SelectedValue);
+                        valores.Add(UCComboRacaCor._Combo.SelectedValue);
                         break;
                     case 3:
-                        vetor[0] = Convert.ToInt32(txtIdadeInicial.Text);
-                        vetor[1] = Convert.ToInt32(txtIdadeFinal.Text);
+                        valores.Add(txtIdadeInicial.Text);
+                        valores.Add(txtIdadeFinal.Text);
                         break;
                     case 4:
-                        vetor[0] = Convert.ToInt32(UCComboSexo._Combo.SelectedValue);
+                        valores.Add(UCComboSexo._Combo.SelectedValue);
                         break;
                     default:
                         PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
                         List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
 
-                        vetor = detalhes.Select(x => x.dfd_id).ToArray();
+                        valores = detalhes.Select(x => x.dfd_id.ToString()).ToList();
 
                         break;
                 }
 
-                retorno = string.Join(",", vetor);
+                retorno = string.Join(",", valores.ToArray());
             }
             return retorno;
         }
