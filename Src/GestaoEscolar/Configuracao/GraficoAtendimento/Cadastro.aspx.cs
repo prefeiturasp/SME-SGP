@@ -274,11 +274,11 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
                 if (item.Selected)
 
-                    lstDetalhes.Add(new CFG_DeficienciaDetalhe
+                    lstDetalhes.Add(CFG_DeficienciaDetalheBO.GetEntity(new CFG_DeficienciaDetalhe
                     {
                         tde_id = ComboTipoDeficiencia.Valor,
                         dfd_id = Convert.ToInt32(item.Value),
-                    });
+                    }));
 
             }
 
@@ -286,6 +286,43 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         }
 
         private string RetornaValorFiltroFixo(int valor)
+        {
+
+            string retorno = string.Empty;
+            int[] vetor = { };
+            if (valor > 0)
+            {
+                switch (valor)
+                {
+                    case 1:
+                        vetor[0] = Convert.ToInt32(txtDtInicial.Text);
+                        vetor[1] = Convert.ToInt32(txtDtFinal.Text);
+                        break;
+                    case 2:
+                        vetor[0] = Convert.ToInt32(UCComboRacaCor._Combo.SelectedValue);
+                        break;
+                    case 3:
+                        vetor[0] = Convert.ToInt32(txtIdadeInicial.Text);
+                        vetor[1] = Convert.ToInt32(txtIdadeFinal.Text);
+                        break;
+                    case 4:
+                        vetor[0] = Convert.ToInt32(UCComboSexo._Combo.SelectedValue);
+                        break;
+                    default:
+                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
+                        List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
+
+                        vetor = detalhes.Select(x => x.dfd_id).ToArray();
+
+                        break;
+                }
+
+                retorno = string.Join(",", vetor);
+            }
+            return retorno;
+        }
+
+        private string RetornaValorDetalhadoFiltroFixo(int valor)
         {
 
             string retorno = string.Empty;
@@ -299,14 +336,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                         vetor[1] = txtDtFinal.Text;
                         break;
                     case 2:
-                        vetor[0] = UCComboRacaCor._Combo.SelectedValue;
+                        vetor[0] = UCComboRacaCor._Combo.SelectedItem.Text;
                         break;
                     case 3:
                         vetor[0] = txtIdadeInicial.Text;
                         vetor[1] = txtIdadeFinal.Text;
                         break;
                     case 4:
-                        vetor[0] = UCComboSexo._Combo.SelectedValue;
+                        vetor[0] = UCComboSexo._Combo.SelectedItem.Text;
                         break;
                     default:
                         PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
