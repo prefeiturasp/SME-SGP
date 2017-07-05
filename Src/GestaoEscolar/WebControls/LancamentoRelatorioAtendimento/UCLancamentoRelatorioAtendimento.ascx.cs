@@ -468,6 +468,7 @@
         private void CarregarAcoesRealizadas()
         {
             liAcoesRealizadas.Visible = fdsAcoesRealizadas.Visible = false;
+            grvAcoes.EditIndex = -1;
             if (VS_RelatorioAtendimento.rea_permiteAcoesRealizadas)
             {
                 if (VS_RelatorioPreenchimentoAluno.entityRelatorioPreenchimento.reap_id > 0)
@@ -568,16 +569,27 @@
         /// <returns></returns>
         public List<CLS_RelatorioPreenchimentoAcoesRealizadas> RetornaListaAcoesRealizadas()
         {
+            if (grvAcoes.EditIndex >= 0)
+            {
+                GridViewUpdateEventArgs e = new GridViewUpdateEventArgs(grvAcoes.EditIndex);
+                grvAcoes_RowUpdating(grvAcoes, e);
+            }
+
             return (from sAcoesRealizadas itemAcao in VS_AcoesRealizadas
                     where (!itemAcao.excluido || itemAcao.rpa_id > 0)
                     select new CLS_RelatorioPreenchimentoAcoesRealizadas
                     {
                         rpa_id = itemAcao.rpa_id
-                        , rpa_data = Convert.ToDateTime(itemAcao.rpa_data)
-                        , rpa_impressao = itemAcao.rpa_impressao
-                        , rpa_acao = itemAcao.rpa_acao
-                        , rpa_situacao = itemAcao.excluido ? (byte)CLS_RelatorioPreenchimentoAcoesRealizadasSituacao.Excluido : (byte)CLS_RelatorioPreenchimentoAcoesRealizadasSituacao.Ativo
-                        , IsNew = itemAcao.rpa_id <= 0
+                        ,
+                        rpa_data = Convert.ToDateTime(itemAcao.rpa_data)
+                        ,
+                        rpa_impressao = itemAcao.rpa_impressao
+                        ,
+                        rpa_acao = itemAcao.rpa_acao
+                        ,
+                        rpa_situacao = itemAcao.excluido ? (byte)CLS_RelatorioPreenchimentoAcoesRealizadasSituacao.Excluido : (byte)CLS_RelatorioPreenchimentoAcoesRealizadasSituacao.Ativo
+                        ,
+                        IsNew = itemAcao.rpa_id <= 0
                     }).ToList();
         }
 
