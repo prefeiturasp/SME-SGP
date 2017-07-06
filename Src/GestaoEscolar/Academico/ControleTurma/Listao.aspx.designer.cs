@@ -625,6 +625,15 @@ namespace GestaoEscolar.Academico.ControleTurma {
         protected global::System.Web.UI.WebControls.HiddenField hdnTaeId;
         
         /// <summary>
+        /// hdnTaerId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTaerId;
+        
+        /// <summary>
         /// hdnTaePosicao control.
         /// </summary>
         /// <remarks>

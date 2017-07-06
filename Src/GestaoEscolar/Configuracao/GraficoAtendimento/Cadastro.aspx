@@ -47,7 +47,7 @@
                 <asp:Label ID="lblTitulo" runat="server" Text="Título do gráfico" AssociatedControlID="txtTitulo" />
                 <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
                 <div>
-                    <asp:Label ID="lblTipoGrafico" runat="server" Text="Tipo de gráfico *" AssociatedControlID="ddlTipoGrafico"></asp:Label>                     
+                    <asp:Label ID="lblTipoGrafico" runat="server" Text="Tipo de gráfico *" AssociatedControlID="ddlTipoGrafico"></asp:Label>
                     <asp:DropDownList ID="ddlTipoGrafico" runat="server">
                         <asp:ListItem Text="-- Selecione um tipo de gráfico --" Value="0"></asp:ListItem>
                         <asp:ListItem Text="Barra" Value="1"></asp:ListItem>
@@ -57,7 +57,7 @@
                         Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
                 </div>
                 <div runat="server" id="divPeriodicidade">
-                    <asp:Label ID="lblPeriodicidade" runat="server" Text="Eixo de agrupamento *" AssociatedControlID="ddlEixoAgrupamento"></asp:Label>                     
+                    <asp:Label ID="lblPeriodicidade" runat="server" Text="Eixo de agrupamento *" AssociatedControlID="ddlEixoAgrupamento"></asp:Label>
                     <asp:DropDownList ID="ddlEixoAgrupamento" runat="server">
                         <asp:ListItem Text="-- Selecione um eixo de agrupamento --" Value="0"></asp:ListItem>
                         <asp:ListItem Text="Curso" Value="1"></asp:ListItem>
@@ -115,32 +115,12 @@
                         <!-- Tipo de deficiencia -->
                         <uc1:ComboTipoDeficiencia runat="server" ID="ComboTipoDeficiencia" />
                         <!-- Detalhamento -->
-                        <div runat="server" id="divDetalhe" visible="false">
-                            <asp:UpdatePanel ID="updDetalhe" runat="server" UpdateMode="Always">
-                                <ContentTemplate>
-                                    <fieldset>
-                                        <legend>
-                                            <asp:Label runat="server" ID="lblLegendGrupo" Text="Detalhamento da deficiência" />
-                                        </legend>
-                                        <asp:Panel runat="server" ID="pnlGrupo" Style="overflow: scroll; height: 500px;">
-                                            <asp:GridView runat="server" ID="gvDetalhe" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                                                EmptyDataText="Não existe detalhamento para essa deficiência." DataKeyNames="dfd_id">
-                                                <Columns>
-                                                    <asp:BoundField HeaderText="Detalhamento" DataField="dfd_nome" />
-                                                    <asp:TemplateField HeaderText="Selecionar" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                                        <ItemTemplate>
-                                                            <asp:CheckBox runat="server" ID="chkSelecionar" />
-                                                        </ItemTemplate>
-                                                        <HeaderStyle CssClass="center"></HeaderStyle>
-                                                        <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                            </asp:GridView>
-                                        </asp:Panel>
-                                    </fieldset>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+
+                        <div runat="server" id="divDetalhes" visible="false">
+                            <asp:CheckBoxList ID="cklDetalhes" runat="server" RepeatDirection="Horizontal" DataTextField="dfd_nome" DataValueField="dfd_id">
+                            </asp:CheckBoxList>
                         </div>
+                                                
                     </div>
                     <div id="divBotoesFiltro" runat="server" class="right" visible="false">
                         <asp:Button ID="btnAdicionarFiltro" runat="server" Text="Adicionar filtro"
@@ -149,7 +129,7 @@
                             OnClick="btnCancelarFiltro_Click" />
                     </div>
                     <asp:GridView runat="server" ID="gvFiltroFixo" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="gra_id, gff_tipoFiltro" EmptyDataText="Nenhum filtro fixo ligado ao gráfico."
+                        DataKeyNames="gra_id, gff_tipoFiltro, gff_id" EmptyDataText="Nenhum filtro fixo ligado ao gráfico."
                         OnRowDataBound="gvFiltroFixo_RowDataBound" OnRowCommand="gvFiltroFixo_RowCommand">
                         <Columns>
                             <asp:BoundField HeaderText="Tipo de filtro" DataField="gff_tituloFiltro" />
@@ -179,9 +159,20 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <uc2:UCComboQuestionario runat="server" ID="UCComboQuestionario" ValidationGroup="vgQuestionario" Obrigatorio="True" MostrarMessageSelecione="True" PermiteEditar="True" />
+                                        <uc2:UCComboQuestionario runat="server" ID="UCComboQuestionario" ValidationGroup="vgQuestionario" Obrigatorio="True" MostrarMessageSelecione="True" PermiteEditar="false"/>
                                     </td>
-
+                                    <td Style="padding-left: 5px">
+                                        <asp:Label ID="Label6" runat="server" Text="Pergunta" AssociatedControlID="ddlPergunta"></asp:Label>
+                                        <asp:DropDownList ID="ddlPergunta" runat="server" OnSelectedIndexChanged="ddlPergunta_SelectedIndexChanged" AutoPostBack="true" Enabled="false">
+                                            <asp:ListItem Text="-- Selecione uma pergunta --" Value="-1"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
+                                    <td Style="padding-left: 5px">
+                                        <asp:Label ID="Label7" runat="server" Text="Resposta" AssociatedControlID="ddlResposta"></asp:Label>
+                                        <asp:DropDownList ID="ddlResposta" runat="server" Enabled="false">
+                                            <asp:ListItem Text="-- Selecione uma resposta --" Value="-1"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </td>
                                     <td>
                                         <asp:ImageButton runat="server" ID="btnAddQuestionario" ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnAdicionarQuestionario.Text %>" ValidationGroup="vgQuestionario"
                                             SkinID="btNovo" OnClick="btnAdicionarQuestionario_Click" Style="padding-left: 5px; padding-top: 25px" />
@@ -191,14 +182,12 @@
                         </fieldset>
                     </div>
                     <asp:GridView runat="server" ID="gvQuestionario" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="qst_id, raq_id, raq_ordem, IsNew, emUso" EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText %>"
+                        DataKeyNames="qst_id, qtc_id, qtr_id" EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText %>"
                         OnRowDataBound="gvQuestionario_RowDataBound" OnRowCommand="gvQuestionario_RowCommand">
                         <Columns>
-                            <asp:BoundField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.HeaderTitulo %>" DataField="qst_titulo" />
-                            <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.HeaderOrdem %>">
-                                <HeaderStyle CssClass="center" HorizontalAlign="Center" />
-                                <ItemStyle HorizontalAlign="Center" />
-                            </asp:TemplateField>
+                            <asp:BoundField HeaderText="Questionário" DataField="qst_titulo" />
+                            <asp:BoundField HeaderText="Pergunta" DataField="qtc_texto" />
+                            <asp:BoundField HeaderText="Resposta" DataField="qtr_texto" />                            
                             <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.grvQuestoes.HeaderExcluir %>">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"

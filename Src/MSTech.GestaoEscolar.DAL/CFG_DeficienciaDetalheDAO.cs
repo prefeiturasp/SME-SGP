@@ -204,5 +204,34 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
+
+        public CFG_DeficienciaDetalhe SelectDetelheBy_dfd_id(int dfd_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CFG_DeficienciaDetalhe_SelectBy_dfd_id", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@dfd_id";
+                Param.Value = dfd_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return DataRowToEntity(qs.Return.Rows[0], new CFG_DeficienciaDetalhe());
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
     }
 }

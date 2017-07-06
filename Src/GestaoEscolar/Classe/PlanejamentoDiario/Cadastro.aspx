@@ -73,7 +73,7 @@
                     <ContentTemplate>
                         <asp:Label ID="lblAviso" runat="server" Visible="true"></asp:Label>
                         <asp:GridView ID="gdvAulas" runat="server" AutoGenerateColumns="false" OnRowDataBound="gdvAulas_RowDataBound"
-                            DataKeyNames="uni_id, esc_id, cal_id, tur_id, tud_id, tud_cargaHorariaSemanal, TurmaDisciplina, tud_tipo, tdt_posicao, tud_idRelacionada, cap_dataInicio, cap_dataFim, cap_descricao, escola, curso, turno, fav_fechamentoAutomatico, fav_tipoApuracaoFrequencia"
+                            DataKeyNames="uni_id, esc_id, cal_id, tur_id, tud_id, tud_cargaHorariaSemanal, TurmaDisciplina, tud_tipo, tdt_posicao, tud_idRelacionada, cap_dataInicio, cap_dataFim, cap_descricao, escola, curso, turno, fav_fechamentoAutomatico, fav_tipoApuracaoFrequencia, ttn_tipo"
                             AllowPaging="false" EmptyDataText="Não existem turmas para gerar a agenda." SkinID="GridResponsive">
                             <%--DataKeyNames="tud_id, tur_id, tdt_posicao, cal_id, esc_id, uni_id, tud_tipo, segunda, terca, quarta, quinta, sexta, sabado, tud_cargaHorariaSemanal, tud_idRelacionada"--%>
                             <Columns>

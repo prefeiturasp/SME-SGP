@@ -498,6 +498,7 @@
                                                 <fieldset id="fdsCadastroAtiExtra" runat="server" visible="false">
                                                     <legend>Cadastro de atividade extraclasse</legend>
                                                     <asp:HiddenField ID="hdnTaeId" runat="server" />
+                                                    <asp:HiddenField ID="hdnTaerId" runat="server" />
                                                     <asp:HiddenField ID="hdnTaePosicao" runat="server" />
                                                     <asp:HiddenField ID="hdnPermissao" runat="server" />
                                                     <uc12:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
@@ -520,8 +521,8 @@
                                                             <div class="checkboxlist-columns">
                                                         </HeaderTemplate>
                                                         <ItemTemplate>
-                                                            <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("tud_id") %>' />
-                                                            <asp:CheckBox ID="ckbDisciplinaAtiExtra" runat="server" Text='<%# Eval("tud_nome") %>' />
+                                                            <asp:HiddenField ID="hdnIdDisciplinaAtiExtra" runat="server" Value='<%# Eval("tud_id") %>' />
+                                                            <asp:CheckBox ID="ckbDisciplinaAtiExtra" runat="server" Text='<%# Eval("tud_nome") %>' Checked="<%# !string.IsNullOrEmpty(hdnTaeId.Value) && Convert.ToInt32(hdnTaeId.Value) > 0 %>" />
                                                         </ItemTemplate>
                                                         <FooterTemplate>
                                                             </div> 
@@ -552,6 +553,7 @@
                                                                                 <ItemTemplate>
                                                                                     <th class="center {sorter :false}" style="border-left: 0.1em dotted #FFFFFF; padding-right: 3px;">
                                                                                         <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
+                                                                                        <asp:Label ID="lbltaer_id" runat="server" Text='<%#Bind("taer_id") %>' Visible="false"></asp:Label>
                                                                                         <asp:Label ID="lbltud_id" runat="server" Text='<%#Bind("tud_id") %>' Visible="false"></asp:Label>
                                                                                         <asp:Label ID="lblTaePosicao" runat="server" Text='<%#Bind("tdt_posicao") %>' Visible="false" />
                                                                                         <asp:Label ID="lblPermissao" runat="server" Text='<%#Bind("permissaoEdicao") %>' Visible="false" />
@@ -597,6 +599,7 @@
                                                                         <td runat="server" id="tdAtividadesAtivAva" class="center grid-responsive-item-inline grid-responsive-center" style="text-align: center;">
                                                                             <div id="divAtividades" runat="server" style="display: inline-block; width: 100%;">
                                                                                 <asp:Label ID="lbltae_id" runat="server" Text='<%#Bind("tae_id") %>' Visible="false"></asp:Label>
+                                                                                <asp:Label ID="lbltaer_id" runat="server" Text='<%#Bind("taer_id") %>' Visible="false"></asp:Label>
                                                                                 <asp:Label ID="lbltud_id" runat="server" Text='<%#Bind("tud_id") %>' Visible="false"></asp:Label>
                                                                                 <asp:Label ID="lblPermissao" runat="server" Text='<%#Bind("permissaoEdicao") %>' Visible="false" />
                                                                                 <asp:Label ID="lblTaePosicao" runat="server" Text='<%#Bind("tdt_posicao") %>' Visible="false" />

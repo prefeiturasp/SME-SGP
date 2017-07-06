@@ -137,5 +137,53 @@ namespace GestaoAcademica.WebApi.Controllers
 
             throw new HttpResponseException(HttpStatusCode.NotFound);
         }
+
+        /// <summary>
+        /// Seleciona os IDs dos usuários docentes por escola.
+        /// </summary>
+        /// <param name="uad_idEscola"></param>
+        /// <param name="ent_id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<Guid> GetDocentesPorEscola(Guid uad_idEscola, Guid ent_id)
+        {
+            try
+            {
+                return ApiBO.SelecionaUsuarioDocentePorEscola(uad_idEscola, ent_id);
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent("Erro: " + e.Message)
+                });
+            }
+
+            throw new HttpResponseException(HttpStatusCode.NotFound);
+        }
+
+        /// <summary>
+        /// Seleciona os IDs dos usuários docentes por diretoria.
+        /// </summary>
+        /// <param name="uad_idSuperior"></param>
+        /// <param name="ent_id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<Guid> GetDocentesPorDiretoria(Guid uad_idSuperior, Guid ent_id)
+        {
+            try
+            {
+                return ApiBO.SelecionaUsuarioDocentePorDiretoria(uad_idSuperior, ent_id);
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent("Erro: " + e.Message)
+                });
+            }
+
+            throw new HttpResponseException(HttpStatusCode.NotFound);
+        }
     }
 }

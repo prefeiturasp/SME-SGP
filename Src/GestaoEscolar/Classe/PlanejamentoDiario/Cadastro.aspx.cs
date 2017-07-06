@@ -215,17 +215,19 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+
+                Dictionary<CLS_TurmaAulaGeradaDiaSemana, string> diasSemana = CLS_TurmaAulaGeradaBO.RetornaDiasSemanaGerarAulas();
+
                 if (VS_PeriodoEfetivado(Convert.ToInt32(rbtPeriodo.SelectedValue), UCCCalendario1.Valor,
                                         Convert.ToInt64(gdvAulas.DataKeys[e.Row.RowIndex]["tur_id"]),
                                         Convert.ToDateTime(gdvAulas.DataKeys[e.Row.RowIndex]["cap_dataFim"])))
                 {
+
                     periodosEfetivados += "<br/>" + gdvAulas.DataKeys[e.Row.RowIndex]["cap_descricao"].ToString() + ", " +
                                                     gdvAulas.DataKeys[e.Row.RowIndex]["escola"].ToString() + ", " +
                                                     gdvAulas.DataKeys[e.Row.RowIndex]["curso"].ToString() + ", " +
                                                     gdvAulas.DataKeys[e.Row.RowIndex]["turno"].ToString() + ", " +
                                                     gdvAulas.DataKeys[e.Row.RowIndex]["TurmaDisciplina"].ToString();
-
-                    Dictionary<CLS_TurmaAulaGeradaDiaSemana, string> diasSemana = CLS_TurmaAulaGeradaBO.RetornaDiasSemanaGerarAulas();
 
                     foreach (var dia in diasSemana)
                     {
@@ -238,8 +240,23 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
                     }
                 }
                 else
+                {
+                    var tud_tipo = Convert.ToByte(gdvAulas.DataKeys[e.Row.RowIndex]["tud_tipo"]);
+                    var ttn_tipo = Convert.ToByte(gdvAulas.DataKeys[e.Row.RowIndex]["ttn_tipo"]);
+
+                    foreach (var dia in diasSemana)
+                    {
+                        TextBox txt = e.Row.FindControl(string.Format("txtAulas{0}", dia.Value)) as TextBox;
+                        if (txt != null && tud_tipo == (byte)TurmaDisciplinaTipo.DisciplinaPrincipal && ttn_tipo == (byte)ACA_TipoTurnoBO.TipoTurno.Integral)
+                        {
+                            //txt.Text = "";
+                            txt.Enabled = false;
+                        }
+                    }
+
                     btnGerar.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar ||
                                        __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir;
+                }
             }
         }
 
@@ -306,6 +323,7 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
                         var tdt_posicao = Convert.ToByte(gdvAulas.DataKeys[row.RowIndex]["tdt_posicao"].ToString());
                         var fav_fechamentoAutomatico = Convert.ToBoolean(gdvAulas.DataKeys[row.RowIndex]["fav_fechamentoAutomatico"]);
                         var fav_tipoApuracaoFrequencia = Convert.ToByte(gdvAulas.DataKeys[row.RowIndex]["fav_tipoApuracaoFrequencia"]);
+                        var ttn_tipo = Convert.ToByte(gdvAulas.DataKeys[row.RowIndex]["ttn_tipo"]);
 
                         //Se a turma estiver em um período efetivado não adiciona para salvar
                         if (VS_PeriodoEfetivado(tpc_id, Convert.ToInt32(gdvAulas.DataKeys[row.RowIndex]["cal_id"]),
@@ -378,6 +396,7 @@ namespace GestaoEscolar.Classe.PlanejamentoDiario
                             tag.tud_cargaHorariaSemanal = tud_cargaHorariaSemanal;
                             tag.fav_fechamentoAutomatico = fav_fechamentoAutomatico;
                             tag.fav_tipoApuracaoFrequencia = fav_tipoApuracaoFrequencia;
+                            tag.ttn_tipo = ttn_tipo;
                             aulasSalvar.Add(tag);
                         }
                     }

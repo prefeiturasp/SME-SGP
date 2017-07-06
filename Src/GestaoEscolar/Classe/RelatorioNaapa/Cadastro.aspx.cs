@@ -383,24 +383,28 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
         {
             try
             {
-                RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(false);
-                List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
-                List<CLS_RelatorioPreenchimentoAcoesRealizadas> lstAcoesRealizadas = UCLancamentoRelatorioAtendimento.RetornaListaAcoesRealizadas();
-
-                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor, lstAcoesRealizadas))
+                Page.Validate("geral");
+                if (Page.IsValid)
                 {
-                    string msg = GetGlobalResourceObject("Classe", "RelatorioNaapa.Cadastro.MensagemSucessoSalvar").ToString();
-                    lblMensagem.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Sucesso);
-                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, msg + " | reap_id: " + rel.entityRelatorioPreenchimento.reap_id);
+                    RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(false);
+                    List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
+                    List<CLS_RelatorioPreenchimentoAcoesRealizadas> lstAcoesRealizadas = UCLancamentoRelatorioAtendimento.RetornaListaAcoesRealizadas();
 
-                    pnlLancamento.Visible = false;
-                    grvLancamentos.Visible = true;
-                    btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir
-                                && VS_permissoesNAAPA.permissaoEdicao;
+                    if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor, lstAcoesRealizadas))
+                    {
+                        string msg = GetGlobalResourceObject("Classe", "RelatorioNaapa.Cadastro.MensagemSucessoSalvar").ToString();
+                        lblMensagem.Text = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Sucesso);
+                        ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, msg + " | reap_id: " + rel.entityRelatorioPreenchimento.reap_id);
 
-                    // Recarrega o grid de lançamentos
-                    grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaRelatorio(VS_alu_id, VS_tur_id, UCCRelatorioAtendimento.Valor);
-                    grvLancamentos.DataBind();
+                        pnlLancamento.Visible = false;
+                        grvLancamentos.Visible = true;
+                        btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir
+                                    && VS_permissoesNAAPA.permissaoEdicao;
+
+                        // Recarrega o grid de lançamentos
+                        grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaRelatorio(VS_alu_id, VS_tur_id, UCCRelatorioAtendimento.Valor);
+                        grvLancamentos.DataBind();
+                    }
                 }
             }
             catch (ValidationException ex)
