@@ -410,13 +410,11 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
             catch (ValidationException ex)
             {
                 lblMensagem.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-                updMensagem.Update();
             }
             catch (Exception ex)
             {
                 lblMensagem.Text = UtilBO.GetErroMessage("Erro ao tentar salvar lançamento do relatório.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
-                updMensagem.Update();
             }
         }
 
