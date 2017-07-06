@@ -59,7 +59,7 @@
                         ItemStyle-HorizontalAlign="Center"
                         HeaderStyle-Width="70px">
                         <ItemTemplate>
-                            <asp:ImageButton ID="_btnExcluir" SkinID="btExcluir" runat="server" CommandName="Deletar" ToolTip="Excluir relatório" />
+                            <asp:ImageButton ID="_btnExcluir" SkinID="btExcluir" runat="server" CommandName="Deletar" ToolTip="Excluir gráfico" />
                         </ItemTemplate>
                         <HeaderStyle CssClass="center"></HeaderStyle>
                         <ItemStyle HorizontalAlign="Center"></ItemStyle>

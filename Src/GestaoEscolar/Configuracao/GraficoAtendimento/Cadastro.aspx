@@ -138,7 +138,7 @@
                             <asp:TemplateField HeaderText="Excluir">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"
-                                        ToolTip="Excluir filtro fixo." />
+                                        ToolTip="Excluir filtro fixo" />
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="center"></HeaderStyle>
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -192,7 +192,7 @@
                             <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.grvQuestoes.HeaderExcluir %>">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"
-                                        ToolTip="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.btnExcluir.ToolTip %>" />
+                                        ToolTip="Excluir filtro personalizado" />
                                 </ItemTemplate>
                                 <HeaderStyle CssClass="center"></HeaderStyle>
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
