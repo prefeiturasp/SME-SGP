@@ -2554,6 +2554,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             fdsCadastroAtiExtra.Visible = true;
             fdsListagemAtiExtra.Visible = false;
+
+            UCComboTipoAtividadeAvaliativa.Obrigatorio = true;
             updAtiExtra.Update();
         }
 
