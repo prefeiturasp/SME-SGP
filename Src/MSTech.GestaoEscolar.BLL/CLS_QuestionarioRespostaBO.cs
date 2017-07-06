@@ -21,6 +21,7 @@ namespace MSTech.GestaoEscolar.BLL
         public string qtr_texto { get; set; }
         public string qtc_texto { get; set; }
         public string qst_titulo { get; set; }
+        public bool IsNew { get; set; }
     }
 
     /// <summary>

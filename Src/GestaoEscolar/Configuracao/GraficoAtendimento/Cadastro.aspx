@@ -78,7 +78,7 @@
             <ContentTemplate>
                 <fieldset>
                     <legend>
-                        <asp:Label runat="server" ID="Label1" Text="Filtros" />
+                        <asp:Label runat="server" ID="Label1" Text="Filtros fixos" />
                     </legend>
 
                     <asp:Label ID="lblFiltroFixo" runat="server" Text="Tipo de filtro: " AssociatedControlID="ddlFiltroFixo"></asp:Label>
@@ -129,7 +129,7 @@
                             OnClick="btnCancelarFiltro_Click" />
                     </div>
                     <asp:GridView runat="server" ID="gvFiltroFixo" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="gra_id, gff_tipoFiltro, gff_id" EmptyDataText="Nenhum filtro fixo ligado ao gráfico."
+                        DataKeyNames="gra_id, gff_tipoFiltro, gff_id, IsNew" EmptyDataText="Nenhum filtro fixo ligado ao gráfico."
                         OnRowDataBound="gvFiltroFixo_RowDataBound" OnRowCommand="gvFiltroFixo_RowCommand">
                         <Columns>
                             <asp:BoundField HeaderText="Tipo de filtro" DataField="gff_tituloFiltro" />
@@ -182,7 +182,7 @@
                         </fieldset>
                     </div>
                     <asp:GridView runat="server" ID="gvQuestionario" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="qst_id, qtc_id, qtr_id" EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText %>"
+                        DataKeyNames="qst_id, qtc_id, qtr_id, IsNew" EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText %>"
                         OnRowDataBound="gvQuestionario_RowDataBound" OnRowCommand="gvQuestionario_RowCommand">
                         <Columns>
                             <asp:BoundField HeaderText="Questionário" DataField="qst_titulo" />

@@ -162,7 +162,7 @@ namespace MSTech.GestaoEscolar.BLL
                 List<REL_GraficoAtendimento_FiltrosPersonalizados> lstFiltrosPersonalizadosBanco = entity.IsNew ? new List<REL_GraficoAtendimento_FiltrosPersonalizados>() :
                                                               REL_GraficoAtendimento_FiltrosPersonalizadosBO.SelectBy_gra_id(entity.gra_id, dao._Banco);
 
-                //Salva o gráfico
+                //Salva o gráfico                
                 if (!dao.Salvar(entity))
                     return false;
 
@@ -171,8 +171,7 @@ namespace MSTech.GestaoEscolar.BLL
                 //Salva filtros fixos
                 foreach (REL_GraficoAtendimento_FiltrosFixos gff in lstFiltrosFixos)
                 {
-                    gff.gra_id = entity.gra_id;
-                    REL_GraficoAtendimento_FiltrosFixosBO.GetEntity(gff);
+                    gff.gra_id = entity.gra_id;                    
                     if (!REL_GraficoAtendimento_FiltrosFixosBO.Save(gff, dao._Banco))
                         return false;
                 }
@@ -187,7 +186,7 @@ namespace MSTech.GestaoEscolar.BLL
                         qtr_id = qcr.qtr_id
                         , gra_id = entity.gra_id
                     };
-                    REL_GraficoAtendimento_FiltrosPersonalizadosBO.GetEntity(gfp);
+                    
                     lstFiltrosPersonalizados.Add(gfp);
                    
                     if (!REL_GraficoAtendimento_FiltrosPersonalizadosBO.Save(gfp, dao._Banco))
@@ -201,7 +200,7 @@ namespace MSTech.GestaoEscolar.BLL
                         REL_GraficoAtendimento_FiltrosFixosBO.Delete(gffB, dao._Banco);
                     }
                 foreach (REL_GraficoAtendimento_FiltrosPersonalizados gfpB in lstFiltrosPersonalizadosBanco)
-                    if (!lstFiltrosPersonalizados.Any(f => f.gfp_id == gfpB.gfp_id && f.gfp_situacao != (byte)REL_GraficoAtendimento_FiltrosPersonalizadosSituacao.Excluido))
+                    if (!lstFiltrosPersonalizados.Any(f => f.qtr_id == gfpB.qtr_id && f.gfp_situacao != (byte)REL_GraficoAtendimento_FiltrosPersonalizadosSituacao.Excluido))
                     {
                         REL_GraficoAtendimento_FiltrosPersonalizadosBO.Delete(gfpB, dao._Banco);
                     }

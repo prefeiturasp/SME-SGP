@@ -39,7 +39,7 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectBy_rea_id(rea_id);
         }
 
-        public static DataTable SelectPerguntaMultiplaEscola_By_rea_id(int rea_id)
+        public static DataTable SelectPerguntaMultiplaEscolha_By_rea_id(int rea_id)
         {
             CLS_RelatorioAtendimentoQuestionarioDAO dao = new CLS_RelatorioAtendimentoQuestionarioDAO();
 
