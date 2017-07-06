@@ -49,19 +49,6 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
             }
         }
 
-        private int VS_cal_id
-        {
-            get
-            {
-                return Convert.ToInt32(ViewState["VS_cal_id"] ?? -1);
-            }
-
-            set
-            {
-                ViewState["VS_cal_id"] = value;
-            }
-        }
-
         private sPermissoesNAAPA VS_permissoesNAAPA
         {
             get
@@ -113,11 +100,35 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
             {
                 try
                 {
+                    bool redirecionaPaginaBusca = true;
+                    int idRelatorio = -1;
+
+                    // Vem da tela de busca
                     if (PreviousPage != null && PreviousPage.IsCrossPagePostBack)
                     {
                         VS_alu_id = PreviousPage.EditItemAluId;
-                        VS_cal_id = PreviousPage.EditItemCalId;
                         VS_tur_id = PreviousPage.EditItemTurId;
+                        redirecionaPaginaBusca = false;
+                    }
+                    // Vem da volta do imprimir ações realizadas
+                    else if (Session["DadosPaginaRetorno"] != null)
+                    {
+                        string dadosRetorno = Session["DadosPaginaRetorno"].ToString();
+                        Session.Remove("DadosPaginaRetorno");
+                        Session.Remove("VS_DadosTurmas");
+
+                        string[] vetDadosRetorno = dadosRetorno.Split(';');
+                        if (vetDadosRetorno.Length == 3)
+                        {
+                            VS_alu_id = Convert.ToInt64(vetDadosRetorno[0]);
+                            VS_tur_id = Convert.ToInt64(vetDadosRetorno[1]);
+                            idRelatorio = Convert.ToInt32(vetDadosRetorno[2]);
+                            redirecionaPaginaBusca = false;
+                        }
+                    }
+                    if (redirecionaPaginaBusca)
+                    {
+                        RedirecionarPagina("~/Classe/RelatorioNaapa/Busca.aspx");
                     }
 
                     UCCRelatorioAtendimento.PermiteEditar = true;
@@ -130,6 +141,11 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
                     {
                         // Seleciona o único item
                         UCCRelatorioAtendimento.SelectedIndex = 1;
+                        UCCRelatorioAtendimento_IndexChanged();
+                    }
+                    else if (idRelatorio > 0)
+                    {
+                        UCCRelatorioAtendimento.Valor = idRelatorio;
                         UCCRelatorioAtendimento_IndexChanged();
                     }
                 }

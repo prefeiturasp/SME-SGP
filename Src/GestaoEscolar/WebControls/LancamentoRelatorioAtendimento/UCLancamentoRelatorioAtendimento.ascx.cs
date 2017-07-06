@@ -905,7 +905,9 @@
         protected void btnImprimir_Click(object sender, EventArgs e)
         {           
             string report, parametros;
-            long alu_ids = VS_alu_id;        
+            long alu_ids = VS_alu_id;
+
+            Session["DadosPaginaRetorno"] = string.Format("{0};{1};{2}", VS_alu_id, VS_tur_id, VS_rea_id);
 
             report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioAcoesRealizadas).ToString();
             parametros = "alu_ids=" + alu_ids +
