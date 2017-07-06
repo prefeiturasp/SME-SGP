@@ -59,6 +59,7 @@
                 <div runat="server" id="divAcoesRealizadas" visible="false">
                     <asp:CheckBox runat="server" ID="chkAcoesRealizadas" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkAcoesRealizadas.Text %>" />
                 </div>
+                <asp:CheckBox runat="server" ID="chkGerarPendenciasFechamento" Text="Gera pendências de fechamento" />
                 <div runat="server" id="divDisciplina" visible="false">
                     <uc3:UCComboTipoDisciplina runat="server" ID="UCComboTipoDisciplina" MostrarMessageSelecione="True" PermiteEditar="True" Obrigatorio="true" ValidationGroup="vgRelatorioAtendimento" />
                 </div>

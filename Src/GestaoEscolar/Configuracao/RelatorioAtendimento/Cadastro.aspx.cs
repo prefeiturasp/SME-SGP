@@ -114,6 +114,8 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 chkAcoesRealizadas.Checked = rea.rea_permiteAcoesRealizadas;
                 chkExibeRacaCor.Enabled = false;
                 chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
+                chkGerarPendenciasFechamento.Checked = rea.rea_gerarPendenciaFechamento;
+                chkGerarPendenciasFechamento.Enabled = false;
                 hplAnexo.Text = rea.rea_tituloAnexo;
                 hplAnexo.NavigateUrl = rea.arq_idAnexo == 0 ? "" : String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
                 divAddAnexo.Visible = rea.arq_idAnexo == 0;
@@ -151,6 +153,7 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     tds_id = (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.RP ? -1 : UCComboTipoDisciplina.Valor),
                     rea_periodicidadePreenchimento = Convert.ToByte(ddlPeriodicidade.SelectedValue),
                     rea_tituloAnexo = txtTituloAnexo.Text,
+                    rea_gerarPendenciaFechamento = chkGerarPendenciasFechamento.Checked,
                     IsNew = VS_rea_id <= 0
                 };
 
@@ -319,7 +322,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             VS_lstQuestionarios = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(VS_rea_id);
             VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
-            gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+            var questionarios = (from qst in VS_lstQuestionarios
+                                 where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                 group qst by qst.raq_id into grupo
+                                 select grupo.First());
+
+            gvQuestionario.DataSource = questionarios;
             gvQuestionario.DataBind();
         }
 
@@ -411,7 +419,13 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             UCComboTipoDisciplina.CarregarTipoDisciplinaTipo((byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela);
             gvCargo.DataSource = new DataTable();
             gvGrupo.DataSource = new DataTable();
-            gvQuestionario.DataSource = VS_lstQuestionarios;
+
+            var questionarios = (from qst in VS_lstQuestionarios
+                                 where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                 group qst by qst.raq_id into grupo
+                                 select grupo.First());
+
+            gvQuestionario.DataSource = questionarios;
             gvCargo.DataBind();
             gvGrupo.DataBind();
             gvQuestionario.DataBind();
@@ -529,7 +543,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     IsNew = true
                 });
 
-                gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                var questionarios = (from qst in VS_lstQuestionarios
+                                     where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                     group qst by qst.raq_id into grupo
+                                     select grupo.First());
+
+                gvQuestionario.DataSource = questionarios;
                 gvQuestionario.DataBind();
                 
                 UCComboQuestionario.Valor = -1;
@@ -612,7 +631,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
                     VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                    var questionarios = (from qst in VS_lstQuestionarios
+                                         where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                         group qst by qst.raq_id into grupo
+                                         select grupo.First());
+
+                    gvQuestionario.DataSource = questionarios;
                     gvQuestionario.DataBind();
 
                     if (gvQuestionario.Rows.Count > 0)
@@ -649,7 +673,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
                     VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                    var questionarios = (from qst in VS_lstQuestionarios
+                                         where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                         group qst by qst.raq_id into grupo
+                                         select grupo.First());
+
+                    gvQuestionario.DataSource = questionarios;
                     gvQuestionario.DataBind();
 
                     if (gvQuestionario.Rows.Count > 0)
@@ -700,7 +729,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     }
                     VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                    var questionarios = (from qst in VS_lstQuestionarios
+                                         where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                         group qst by qst.raq_id into grupo
+                                         select grupo.First());
+
+                    gvQuestionario.DataSource = questionarios;
                     gvQuestionario.DataBind();
 
                     if (gvQuestionario.Rows.Count > 0)
