@@ -154,6 +154,9 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 REL_GraficoAtendimentoTipo tipoGrafico;
                 Enum.TryParse(ddlTipoGrafico.SelectedValue, out tipoGrafico);
 
+                if (REL_GraficoAtendimentoBO.GetBy_titulo(txtTitulo.Text).Rows.Count > 0)
+                    throw new ValidationException("Já existe um gráfico de atendimento cadastrado com este título.");
+
                 REL_GraficoAtendimento gra = new REL_GraficoAtendimento
                 {
                     gra_id = VS_gra_id,
@@ -169,7 +172,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     gra.gra_dataCriacao = DateTime.Now;
 
                 if (VS_lstFiltrosFixos.Count == 0 && VS_listQuestionarioConteudoResposta.Count == 0)
-                    throw new ValidationException("Selecione pelo menos um filtro.");
+                    throw new ValidationException("Adicione pelo menos um filtro fixo ou personalizado.");
 
                 if (REL_GraficoAtendimentoBO.Salvar(gra, VS_lstFiltrosFixos, VS_listQuestionarioConteudoResposta))
                 {
@@ -378,6 +381,58 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             gvQuestionario.DataBind();
         }
 
+        private void ValidaCamposFiltroFixo(int valor)
+        {
+            try {
+                if (valor > 0)
+                {
+                    switch (valor)
+                    {
+                        case 1:
+                            if (String.IsNullOrEmpty(txtDtInicial.Text))
+                                throw new ValidationException("Data inicial é obrigatório.");
+                            if (String.IsNullOrEmpty(txtDtFinal.Text))
+                                throw new ValidationException("Data final é obrigatório.");
+                            break;
+                        case 2:
+                            if(Convert.ToInt32(UCComboRacaCor._Combo.SelectedValue) <= 0)
+                                throw new ValidationException(UCComboRacaCor._Combo.Text+" é obrigatório.");
+                            break;
+                        case 3:
+                            if (String.IsNullOrEmpty(txtIdadeInicial.Text))
+                                throw new ValidationException("Idade inicial é obrigatório.");
+                            if (String.IsNullOrEmpty(txtIdadeFinal.Text))
+                                throw new ValidationException("Idade final é obrigatório.");
+                            break;
+                        case 4:
+                            if (Convert.ToInt32(UCComboSexo._Combo.SelectedValue) <= 0)
+                                throw new ValidationException(UCComboSexo._Combo.Text + " é obrigatório.");
+                                break;
+                        default:
+                            PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
+                            List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
+
+                            if (detalhes.Select(x => x.dfd_id.ToString()).ToList().Count <= 0)
+                                throw new ValidationException("É obrigatório selecionar pelo menos um detalhamento.");
+
+                            break;
+                    }
+                }
+            }
+            catch (ValidationException ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao adicionar filtro fixo.", UtilBO.TipoMensagem.Erro);
+            }
+
+        }
+
         #endregion
 
         #region Eventos
@@ -546,7 +601,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         protected void ddlFiltroFixo_SelectedIndexChanged(object sender, EventArgs e)
         {
             divBotoesFiltro.Visible = divRacaCor.Visible = divSexo.Visible = divIdade.Visible = divDataPreenchimento.Visible = divDetalhamentoDeficiencia.Visible = false;
-            
+
             if (Convert.ToInt32(ddlFiltroFixo.SelectedValue) > 0)
             {
                 switch (Convert.ToInt32(ddlFiltroFixo.SelectedValue))
@@ -615,7 +670,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
                 UCComboQuestionario.Valor = -1;
                 UCComboQuestionario_SelectedIndexChanged();
-               
+
             }
             catch (ValidationException ex)
             {
@@ -639,10 +694,10 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 {
                     //todo
                     bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["IsNew"]);
-                    //bool emUsoExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["emUso"]);
+                    bool emUsoExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["emUso"]);
 
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = isNewExcluir && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    btnExcluir.Visible = (isNewExcluir && !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
             }
         }
@@ -690,9 +745,10 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 {
                     //todo
                     bool isNewExcluir = Convert.ToBoolean(gvFiltroFixo.DataKeys[e.Row.RowIndex]["IsNew"]);
+                    bool emUsoExcluir = Convert.ToBoolean(gvFiltroFixo.DataKeys[e.Row.RowIndex]["emUso"]);
 
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = isNewExcluir && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    btnExcluir.Visible = (isNewExcluir && !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
             }
         }
@@ -705,11 +761,11 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 {
                     int index = int.Parse(e.CommandArgument.ToString());
 
-                    int idExcluir = Convert.ToInt32(gvFiltroFixo.DataKeys[index]["gff_id"]);
+                    int idExcluir = Convert.ToInt32(gvFiltroFixo.DataKeys[index]["gff_tipoFiltro"]);
 
-                    if (idExcluir > 0 && VS_lstFiltrosFixos.Any(f => f.gff_id == idExcluir))
+                    if (idExcluir > 0 && VS_lstFiltrosFixos.Any(f => f.gff_tipoFiltro == idExcluir))
                     {
-                        int ind = VS_lstFiltrosFixos.IndexOf(VS_lstFiltrosFixos.Where(f => f.gff_id == idExcluir).First());
+                        int ind = VS_lstFiltrosFixos.IndexOf(VS_lstFiltrosFixos.Where(f => f.gff_tipoFiltro == idExcluir).First());
                         VS_lstFiltrosFixos.RemoveAt(ind);
                     }
 
@@ -730,11 +786,12 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 }
             }
         }
-        
+
         protected void btnAdicionarFiltro_Click(object sender, EventArgs e)
         {
             try
             {
+                ValidaCamposFiltroFixo(Convert.ToByte(ddlFiltroFixo.SelectedValue));
                 if (VS_lstFiltrosFixos.Any(p => p.gff_tipoFiltro == Convert.ToByte(ddlFiltroFixo.SelectedValue)))
                     throw new ValidationException(string.Format("Este tipo de filtro já existe."));
 
@@ -749,7 +806,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
                 VS_lstFiltrosFixos = VS_lstFiltrosFixos.OrderBy(q => q.gff_tipoFiltro).ToList();
 
-                gvFiltroFixo.DataSource = VS_lstFiltrosFixos.OrderBy(f=> f.gff_tituloFiltro);
+                gvFiltroFixo.DataSource = VS_lstFiltrosFixos.OrderBy(f => f.gff_tituloFiltro);
                 gvFiltroFixo.DataBind();
 
                 divBotoesFiltro.Visible = divRacaCor.Visible = divSexo.Visible = divIdade.Visible = divDataPreenchimento.Visible = divDetalhamentoDeficiencia.Visible = false;

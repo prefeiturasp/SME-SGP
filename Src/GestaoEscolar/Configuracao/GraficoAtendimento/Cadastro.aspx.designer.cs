@@ -31,13 +31,13 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// vsRelatorioAtendimento control.
+        /// vsGraficoAtendimento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary vsRelatorioAtendimento;
+        protected global::System.Web.UI.WebControls.ValidationSummary vsGraficoAtendimento;
         
         /// <summary>
         /// lblLegend control.
@@ -67,15 +67,6 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::System.Web.UI.UpdatePanel updCadastro;
         
         /// <summary>
-        /// rfvTitulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTitulo;
-        
-        /// <summary>
         /// lblTipo control.
         /// </summary>
         /// <remarks>
@@ -92,6 +83,15 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
+        
+        /// <summary>
+        /// cvTipo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTipo;
         
         /// <summary>
         /// UCComboRelatorioAtendimento control.

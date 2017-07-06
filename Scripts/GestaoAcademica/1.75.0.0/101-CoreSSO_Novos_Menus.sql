@@ -121,6 +121,22 @@ SET XACT_ABORT ON
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Configurações' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Gráficos de atendimento' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Listagem de gráficos de atendimento'
+		,@SiteMap1Url = '~/Configuracao/GraficoAtendimento/Busca.aspx'
+		,@SiteMap2Nome = 'Cadastro de gráficos de atendimento'
+		,@SiteMap2Url = '~/Configuracao/GraficoAtendimento/Cadastro.aspx'
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+
 -- Fechar transação
 SET XACT_ABORT OFF
 COMMIT TRANSACTION	
