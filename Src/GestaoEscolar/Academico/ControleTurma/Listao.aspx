@@ -535,7 +535,7 @@
                                                 </fieldset>
                                                 <fieldset id="fdsListagemAtiExtra" runat="server" visible="true">
                                                     <asp:Button ID="btnNovoAtiExtra" runat="server" Text="Incluir nova atividade extraclasse" OnClick="btnNovoAtiExtra_Click" CausesValidation="false" Style="float: right" />
-                                                    <asp:Label ID="lblSemAtividadeExtra" runat="server"></asp:Label>
+                                                    <br /><br /><asp:Label ID="lblSemAtividadeExtra" runat="server"></asp:Label>
                                                     <uc2:UCComboOrdenacao ID="UCComboOrdenacaoAtivExtra" runat="server" />
                                                     <asp:Repeater ID="rptAlunoAtivExtra" runat="server" OnItemDataBound="rptAlunoAtivExtra_ItemDataBound" OnItemCommand="rptAlunoAtivExtra_ItemCommand">
                                                         <HeaderTemplate>

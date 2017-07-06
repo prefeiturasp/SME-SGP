@@ -1024,7 +1024,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     UCComboTipoAtividadeAvaliativa.CarregarTipoAtividadeAvaliativa(true);
                     btnNovoAtiExtra.Visible = (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto;
+                    fdsCadastroAtiExtra.Visible = false;
+                    fdsListagemAtiExtra.Visible = true;
                     CarregarListaoAtividadeExtraclasse();
+                    hdnTaeId.Value = string.Empty;
+                    hdnTaerId.Value = string.Empty;
                 }
 
                 bool permissaoModuloAlteracao = false;
@@ -2550,6 +2554,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             fdsCadastroAtiExtra.Visible = true;
             fdsListagemAtiExtra.Visible = false;
+
+            UCComboTipoAtividadeAvaliativa.Obrigatorio = true;
             updAtiExtra.Update();
         }
 
