@@ -5,6 +5,7 @@
 namespace MSTech.GestaoEscolar.Entities
 {
     using MSTech.GestaoEscolar.Entities.Abstracts;
+    using Validation;
     using System;
 
     /// <summary>
@@ -13,5 +14,5 @@ namespace MSTech.GestaoEscolar.Entities
     [Serializable]
 	public class REL_GraficoAtendimento_FiltrosPersonalizados : Abstract_REL_GraficoAtendimento_FiltrosPersonalizados
 	{
-	}
+    }
 }

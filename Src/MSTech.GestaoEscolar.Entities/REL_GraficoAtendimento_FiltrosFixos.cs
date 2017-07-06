@@ -5,7 +5,9 @@
 namespace MSTech.GestaoEscolar.Entities
 {
     using MSTech.GestaoEscolar.Entities.Abstracts;
+    using Validation;
     using System;
+    using System.ComponentModel;
 
     /// <summary>
     /// Description: .

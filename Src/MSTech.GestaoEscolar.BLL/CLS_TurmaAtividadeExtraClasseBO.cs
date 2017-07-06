@@ -185,14 +185,14 @@ namespace MSTech.GestaoEscolar.BLL
                     {
                         if (VerificaExistePorDisciplinaNomeTipoBimestre(atividade))
                         {
-                            throw new ValidationException("Já existe uma atividade extraclasse com o mesmo nome e tipo para o componente curricular no bimestre.");
+                            throw new ValidationException(string.Format("Já existe uma atividade extraclasse com o mesmo nome e tipo para o componente curricular '{0}' no bimestre.", TUR_TurmaDisciplinaBO.GetEntity(new TUR_TurmaDisciplina { tud_id = atividade.tud_id }).tud_nome));
                         }
 
                         decimal dis_cargaHorariaExtraClasse = 0, cargaAtividadeExtraTotal = 0;
 
                         if (VerificaCargaHorariaCursoCalendario(atividade, cal_id, out dis_cargaHorariaExtraClasse, out cargaAtividadeExtraTotal))
                         {
-                            throw new ValidationException(string.Format("A soma de carga horária de atividades extraclasse ({0}) está acima da máxima permitida pelo componente curricular ({1}).", cargaAtividadeExtraTotal, dis_cargaHorariaExtraClasse));
+                            throw new ValidationException(string.Format("A soma de carga horária de atividades extraclasse ({0}) está acima da máxima permitida pelo componente curricular '{1}' ({2}).", cargaAtividadeExtraTotal, TUR_TurmaDisciplinaBO.GetEntity(new TUR_TurmaDisciplina { tud_id = atividade.tud_id }).tud_nome, dis_cargaHorariaExtraClasse));
                         }
 
                         if (dao.Salvar(atividade))

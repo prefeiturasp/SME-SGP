@@ -10,6 +10,7 @@ namespace MSTech.GestaoEscolar.DAL
     using Data.Common;
     using System.Data;
     using System.Linq;
+    using System;
 
     /// <summary>
     /// Description: .
@@ -45,16 +46,6 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
-
-        /// <summary>
-        /// Método alterado para que o delete não faça exclusão física e sim lógica (update).
-        /// </summary>
-        /// <param name="entity"> Entidade ACA_Sondagem</param>
-        /// <returns>true = sucesso | false = fracasso</returns>         
-        public override bool Delete(REL_GraficoAtendimento_FiltrosPersonalizados entity)
-        {
-            __STP_DELETE = "NEW_REL_GraficoAtendimento_FiltrosPersonalizados_UpdateSituacao";
-            return base.Delete(entity);
-        }
+        
     }
 }

@@ -10,13 +10,13 @@ namespace MSTech.GestaoEscolar.DAL
     using System.Data;
     using System.Collections.Generic;
     using System.Linq;
+    using System;
 
     /// <summary>
     /// Description: .
     /// </summary>
     public class REL_GraficoAtendimento_FiltrosFixosDAO : Abstract_REL_GraficoAtendimento_FiltrosFixosDAO
 	{
-
         public List<REL_GraficoAtendimento_FiltrosFixos> SelectBy_gra_id(int gra_id)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_FiltrosFixos_SelectBy_gra_id", _Banco);
@@ -46,17 +46,6 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
-
-        /// <summary>
-        /// Método alterado para que o delete não faça exclusão física e sim lógica (update).
-        /// </summary>
-        /// <param name="entity"> Entidade REL_GraficoAtendimento_FiltrosFixos</param>
-        /// <returns>true = sucesso | false = fracasso</returns>         
-        public override bool Delete(REL_GraficoAtendimento_FiltrosFixos entity)
-        {
-            __STP_DELETE = "NEW_REL_GraficoAtendimento_FiltrosFixos_UpdateSituacao";
-            return base.Delete(entity);
-        }
-
+        
     }
 }
