@@ -23,11 +23,26 @@ SET XACT_ABORT ON
 		tme_nome like '%Modular%'
 		AND tme_idSuperior = @tme_idEJA
 		AND tme_situacao <> 3
+		
+	DECLARE @tme_idEJACieja INT;
+	SELECT TOP 1
+		@tme_idEJACieja = tme_id
+	FROM
+		ACA_TipoModalidadeEnsino tme WITH(NOLOCK)
+	WHERE
+		tme_nome like '%CIEJA%'
+		AND tme_idSuperior = @tme_idEJA
+		AND tme_situacao <> 3
 
 	UPDATE ACA_ParametroAcademico
 	   SET pac_valor = @tme_idEJAModular
 		, pac_dataAlteracao = GETDATE()
 	 WHERE pac_chave = 'TIPO_MODALIDADES_EJA_REMOVER_RELATORIO'
+	 
+	 UPDATE ACA_ParametroAcademico
+	   SET pac_valor = @tme_idEJACieja
+		, pac_dataAlteracao = GETDATE()
+	 WHERE pac_chave = 'TIPO_MODALIDADE_CIEJA'
 
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
