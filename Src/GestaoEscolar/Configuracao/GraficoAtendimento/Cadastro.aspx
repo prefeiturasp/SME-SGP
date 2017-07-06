@@ -21,7 +21,7 @@
             <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:ValidationSummary ID="vsRelatorioAtendimento" runat="server" ValidationGroup="vgRelatorioAtendimento" />
+    <asp:ValidationSummary ID="vsGraficoAtendimento" runat="server" ValidationGroup="vgGraficoAtendimento" />
     <fieldset>
         <legend>
             <asp:Label runat="server" ID="lblLegend" Text="Gráfico de atendimento" />
@@ -29,9 +29,6 @@
         <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
         <asp:UpdatePanel runat="server" ID="updCadastro" UpdateMode="Always">
             <ContentTemplate>
-
-                <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo" ValidationGroup="vgRelatorioAtendimento"
-                    Display="Dynamic" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.rfvTitulo.ErrorMessage %>" Text="*" />
                 <asp:Label ID="lblTipo" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblTipo.Text %>" AssociatedControlID="ddlTipo"></asp:Label>
                 <asp:DropDownList ID="ddlTipo" runat="server"
                     OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" AutoPostBack="true">
@@ -40,12 +37,16 @@
                     <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.NAAPA %>" Value="2"></asp:ListItem>
                     <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.RP %>" Value="3"></asp:ListItem>
                 </asp:DropDownList>
-
-                <uc1:UCComboRelatorioAtendimento runat="server" ID="UCComboRelatorioAtendimento" />
+                <asp:CompareValidator ID="cvTipo" runat="server" ErrorMessage="Tipo de relatório é obrigatório."
+                        ControlToValidate="ddlTipo" Operator="GreaterThan" ValueToCompare="0" Display="Dynamic" 
+                        Text="*" ValidationGroup="vgGraficoAtendimento" />
+                <uc1:UCComboRelatorioAtendimento runat="server" ID="UCComboRelatorioAtendimento" Obrigatorio="true" ValidationGroup="vgGraficoAtendimento"/>
                 <br />
                 <br />
-                <asp:Label ID="lblTitulo" runat="server" Text="Título do gráfico" AssociatedControlID="txtTitulo" />
-                <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
+                <asp:Label ID="lblTitulo" runat="server" Text="Título do gráfico *" AssociatedControlID="txtTitulo" />
+                <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>                
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtTitulo" Display="Dynamic" ErrorMessage="Título do gráfico é obrigatório."
+                    ValidationGroup="vgGraficoAtendimento">*</asp:RequiredFieldValidator>
                 <div>
                     <asp:Label ID="lblTipoGrafico" runat="server" Text="Tipo de gráfico *" AssociatedControlID="ddlTipoGrafico"></asp:Label>
                     <asp:DropDownList ID="ddlTipoGrafico" runat="server">
@@ -54,7 +55,7 @@
                     </asp:DropDownList>
                     <asp:CompareValidator ID="cpvTipoGrafico" runat="server" ErrorMessage="Tipo de gráfico é obrigatório."
                         ControlToValidate="ddlTipoGrafico" Operator="GreaterThan" ValueToCompare="0"
-                        Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
+                        Display="Dynamic" ValidationGroup="vgGraficoAtendimento">*</asp:CompareValidator>
                 </div>
                 <div runat="server" id="divPeriodicidade">
                     <asp:Label ID="lblPeriodicidade" runat="server" Text="Eixo de agrupamento *" AssociatedControlID="ddlEixoAgrupamento"></asp:Label>
@@ -66,7 +67,7 @@
                     </asp:DropDownList>
                     <asp:CompareValidator ID="cpvPeriodicidade" runat="server" ErrorMessage="Eixo de agrupamento é obrigatório."
                         ControlToValidate="ddlEixoAgrupamento" Operator="GreaterThan" ValueToCompare="0"
-                        Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
+                        Display="Dynamic" ValidationGroup="vgGraficoAtendimento">*</asp:CompareValidator>
                 </div>
 
             </ContentTemplate>
@@ -120,7 +121,7 @@
                             <asp:CheckBoxList ID="cklDetalhes" runat="server" RepeatDirection="Horizontal" DataTextField="dfd_nome" DataValueField="dfd_id">
                             </asp:CheckBoxList>
                         </div>
-                                                
+
                     </div>
                     <div id="divBotoesFiltro" runat="server" class="right" visible="false">
                         <asp:Button ID="btnAdicionarFiltro" runat="server" Text="Adicionar filtro"
@@ -159,15 +160,15 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <uc2:UCComboQuestionario runat="server" ID="UCComboQuestionario" ValidationGroup="vgQuestionario" Obrigatorio="True" MostrarMessageSelecione="True" PermiteEditar="false"/>
+                                        <uc2:UCComboQuestionario runat="server" ID="UCComboQuestionario" ValidationGroup="vgQuestionario" MostrarMessageSelecione="True" PermiteEditar="false" />
                                     </td>
-                                    <td Style="padding-left: 5px">
+                                    <td style="padding-left: 5px">
                                         <asp:Label ID="Label6" runat="server" Text="Pergunta" AssociatedControlID="ddlPergunta"></asp:Label>
                                         <asp:DropDownList ID="ddlPergunta" runat="server" OnSelectedIndexChanged="ddlPergunta_SelectedIndexChanged" AutoPostBack="true" Enabled="false">
                                             <asp:ListItem Text="-- Selecione uma pergunta --" Value="-1"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
-                                    <td Style="padding-left: 5px">
+                                    <td style="padding-left: 5px">
                                         <asp:Label ID="Label7" runat="server" Text="Resposta" AssociatedControlID="ddlResposta"></asp:Label>
                                         <asp:DropDownList ID="ddlResposta" runat="server" Enabled="false">
                                             <asp:ListItem Text="-- Selecione uma resposta --" Value="-1"></asp:ListItem>
@@ -187,7 +188,7 @@
                         <Columns>
                             <asp:BoundField HeaderText="Questionário" DataField="qst_titulo" />
                             <asp:BoundField HeaderText="Pergunta" DataField="qtc_texto" />
-                            <asp:BoundField HeaderText="Resposta" DataField="qtr_texto" />                            
+                            <asp:BoundField HeaderText="Resposta" DataField="qtr_texto" />
                             <asp:TemplateField HeaderText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.grvQuestoes.HeaderExcluir %>">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="btnExcluir" SkinID="btExcluir" runat="server" CommandName="Excluir" CausesValidation="false"
@@ -203,7 +204,7 @@
         </asp:UpdatePanel>
         <asp:CheckBox ID="ckbBloqueado" runat="server" Visible="False" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.ckbBloqueado.Text %>" />
         <div class="right">
-            <asp:Button ID="bntSalvar" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.bntSalvar.Text %>" OnClick="bntSalvar_Click" ValidationGroup="vgRelatorioAtendimento" />
+            <asp:Button ID="bntSalvar" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.bntSalvar.Text %>" OnClick="bntSalvar_Click" ValidationGroup="vgGraficoAtendimento" />
             <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.btnCancelar.Text %>" CausesValidation="false"
                 OnClick="btnCancelar_Click" />
         </div>
