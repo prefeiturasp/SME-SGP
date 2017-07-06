@@ -994,6 +994,7 @@
                                                 DataTextField="tud_nome" DataValueField="tur_tud_id" RepeatDirection="Horizontal" CssClass="checkBoxListHorizontal">
                                             </asp:CheckBoxList>
                                             <div id="divPlanoAulaInfo" runat="server">
+                                                
                                                 <asp:Label ID="LabelPlanoAula" runat="server" Text="<%$ Resources:Mensagens, MSG_PLANODEAULA %>"
                                                     AssociatedControlID="txtPlanoAula" Width="480px">
                                                 </asp:Label>

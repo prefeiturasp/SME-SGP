@@ -318,6 +318,34 @@ SET XACT_ABORT ON
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Agendamento'
+		
+	EXEC MS_InsereResource 
+        @rcr_chave = 'MSG_PLANODEAULA' 
+        , @rcr_NomeResource = 'Mensagens'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Plano de aula (objetivos/conteúdos)'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'AULAS_PLANOAULA' 
+        , @rcr_NomeResource = 'Mensagens'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Relatar o que foi planejado com objetivo de aprendizagem para esta aula e quais os conteúdos abordados.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'MSG_SINTESEDAAULA' 
+        , @rcr_NomeResource = 'Mensagens'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Resumo das atividades desenvolvidas'	
+
+ EXEC MS_InsereResource 
+        @rcr_chave = 'AULAS_SINTESE' 
+        , @rcr_NomeResource = 'Mensagens'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Relatar de que forma as atividades foram desenvolvidas para o alcance dos objetivos (recursos didáticos e metodologia).'		
 
 -- Fechar transação     
 SET XACT_ABORT OFF 

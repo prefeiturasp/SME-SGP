@@ -9,7 +9,7 @@
 <%@ Register Src="~/WebControls/ControleTurma/UCControleTurma.ascx" TagName="UCControleTurma" TagPrefix="uc10" %>
 <%@ Register Src="~/WebControls/NavegacaoTelaPeriodo/UCNavegacaoTelaPeriodo.ascx" TagName="UCNavegacaoTelaPeriodo" TagPrefix="uc13" %>
 <%@ Register Src="~/WebControls/LancamentoFrequencia/UCLancamentoFrequencia.ascx" TagName="UCLancamentoFrequencia" TagPrefix="uc1" %>
-<%@ Register src="~/WebControls/ControleTurma/UCSelecaoDisciplinaCompartilhada.ascx" tagname="UCSelecaoDisciplinaCompartilhada" tagprefix="uc10" %>
+<%@ Register Src="~/WebControls/ControleTurma/UCSelecaoDisciplinaCompartilhada.ascx" TagName="UCSelecaoDisciplinaCompartilhada" TagPrefix="uc10" %>
 <%@ Register Src="~/WebControls/LancamentoFrequencia/UCLancamentoFrequenciaTerritorio.ascx" TagName="UCLancamentoFrequenciaTerritorio" TagPrefix="uc3" %>
 <%@ Register Src="~/WebControls/Combos/UCComboTipoAtividadeAvaliativa.ascx" TagName="UCComboTipoAtividadeAvaliativa" TagPrefix="uc11" %>
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagName="UCCamposObrigatorios" TagPrefix="uc12" %>
@@ -69,27 +69,31 @@
                             </div>
                             <br />
                             <div id="divTabsListao" style="font-size: 1em;" class="area-form">
-                                <asp:Panel ID="pnlListTurmaDisciplina" runat="server" Visible ="false">
+                                <asp:Panel ID="pnlListTurmaDisciplina" runat="server" Visible="false">
                                     <asp:DropDownList ID="ddlTurmaDisciplinaListao" runat="server" AppendDataBoundItems="True"
                                         AutoPostBack="true" DataTextField="tur_tud_nome" DataValueField="tur_tud_id"
                                         SkinID="text60C" OnSelectedIndexChanged="ddlTurmaDisciplinaListao_SelectedIndexChanged">
                                     </asp:DropDownList>
-                                    <br /><br />
+                                    <br />
+                                    <br />
                                 </asp:Panel>
                                 <ul class="hide">
                                     <li><a href="#divTabsListao-0" id="aFrequencia" runat="server" visible="false" onclick="if ($(idhdbtnCompensacaoAusenciaVisible).val() == 'True') $(idbtnCompensacaoAusencia).show();">
-                                        <asp:Label runat="server" ID="lblFrequencia" Text="<%$ Resources:Academico, ControleTurma.Listao.lblFrequencia.Text %>"></asp:Label> </a> </li>
+                                        <asp:Label runat="server" ID="lblFrequencia" Text="<%$ Resources:Academico, ControleTurma.Listao.lblFrequencia.Text %>"></asp:Label>
+                                    </a></li>
                                     <li><a href="#divTabsListao-1" id="aAvaliacao" runat="server" visible="false" onclick="$(idbtnCompensacaoAusencia).hide();">
-                                        <asp:Label runat="server" ID="lblAvaliacao" Text="<%$ Resources:Academico, ControleTurma.Listao.lblAvaliacao.Text %>"></asp:Label> </a></li>
+                                        <asp:Label runat="server" ID="lblAvaliacao" Text="<%$ Resources:Academico, ControleTurma.Listao.lblAvaliacao.Text %>"></asp:Label>
+                                    </a></li>
                                     <li><a href="#divTabsListao-2" id="aPlanoAula" runat="server" visible="false" onclick="$(idbtnCompensacaoAusencia).hide();">
-                                        <asp:Label runat="server" ID="lblPlanoAula" Text="<%$ Resources:Academico, ControleTurma.Listao.lblPlanoAula.Text %>"></asp:Label> </a></li>
+                                        <asp:Label runat="server" ID="lblPlanoAula" Text="<%$ Resources:Academico, ControleTurma.Listao.lblPlanoAula.Text %>"></asp:Label>
+                                    </a></li>
                                     <li><a href="#divTabsListao-3" id="aAtividadeExtraClasse" runat="server" visible="false" onclick="$(idbtnCompensacaoAusencia).hide();">
                                         <asp:Label runat="server" ID="lblAtividadeExtraClasse" Text="Listão de atividades extraclasse"></asp:Label></a></li>
                                     <%--<div id="msgTabs" class="msgTabs">Navegue entre as abas utilizando as setas.</div>--%>
                                 </ul>
                                 <div id="divTabsListao-0">
                                     <asp:Panel ID="pnlListaoLancamentoFrequencias" runat="server" Visible="false">
-                                        <uc1:UCLancamentoFrequencia ID="UCLancamentoFrequencia" runat="server" ></uc1:UCLancamentoFrequencia>
+                                        <uc1:UCLancamentoFrequencia ID="UCLancamentoFrequencia" runat="server"></uc1:UCLancamentoFrequencia>
                                         <uc3:UCLancamentoFrequenciaTerritorio ID="UCLancamentoFrequenciaTerritorio" runat="server"></uc3:UCLancamentoFrequenciaTerritorio>
                                     </asp:Panel>
                                 </div>
@@ -159,7 +163,7 @@
                                                                                         <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("nome") %>'></asp:Label>
                                                                                         <br />
                                                                                         <asp:Label ID="lbltnt_data" runat="server" Text='<%#Bind("tnt_data") %>'></asp:Label>
-                                                                                        <div id="divDetalharHabilidades" runat="server" Style="display: none;">
+                                                                                        <div id="divDetalharHabilidades" runat="server" style="display: none;">
                                                                                             <asp:ImageButton ID="btnDetalharHabilidades" runat="server" SkinID="btDetalhar" CommandName="DetalharHabilidades"
                                                                                                 CommandArgument='<%#Eval("tnt_id")+";"+ Eval("tud_id")%>' ToolTip="Detalhar habilidades relacionadas" Style="display: none;" />
                                                                                         </div>
@@ -236,7 +240,7 @@
                                                                             <div class="media">
                                                                                 <asp:HiddenField ID="lblNaoConstaMedia" runat="server" Value="false"></asp:HiddenField>
                                                                             </div>
-                                                                            <asp:CheckBox ID="chkParticipante" runat="server" Text="Participante" Style="display: inline-block;" /><br class="responsive-hide"/>
+                                                                            <asp:CheckBox ID="chkParticipante" runat="server" Text="Participante" Style="display: inline-block;" /><br class="responsive-hide" />
                                                                             <asp:TextBox ID="txtNota" runat="server" SkinID="Decimal" Width="50" MaxLength="6"></asp:TextBox>
                                                                             <asp:CheckBox ID="chkDesconsiderar" runat="server" Text="D" ToolTip="Desconsiderar nota no cálculo da média" Style="display: inline-block;" />
                                                                             <asp:DropDownList ID="ddlPareceres" runat="server" DataTextField="descricao" DataValueField="eap_valor">
@@ -289,7 +293,7 @@
                                                                             <div class="media">
                                                                                 <asp:HiddenField ID="lblNaoConstaMedia" runat="server" Value="false"></asp:HiddenField>
                                                                             </div>
-                                                                            <asp:CheckBox ID="chkParticipante" runat="server" Text="Participante" Style="display: inline-block;" /><br class="responsive-hide"/>
+                                                                            <asp:CheckBox ID="chkParticipante" runat="server" Text="Participante" Style="display: inline-block;" /><br class="responsive-hide" />
                                                                             <asp:TextBox ID="txtNota" runat="server" SkinID="Decimal" Width="50" MaxLength="6"></asp:TextBox>
                                                                             <asp:CheckBox ID="chkDesconsiderar" runat="server" Text="D" ToolTip="Desconsiderar nota no cálculo da média" Style="display: inline-block;" />
                                                                             <asp:DropDownList ID="ddlPareceres" runat="server" DataTextField="descricao" DataValueField="eap_valor">
@@ -320,17 +324,20 @@
                                                 <table id="tbLegendaListao" runat="server" style="border-style: solid; border-width: thin; width: 265px; border-collapse: separate !important; border-spacing: 2px !important;">
                                                     <tr>
                                                         <td style="border-style: solid; border-width: thin; width: 25px; height: 15px;"></td>
-                                                        <td><asp:Literal runat="server" ID="litAusente" Text="<%$ Resources:Mensagens, MSG_ALUNO_AUSENTE %>"></asp:Literal>
+                                                        <td>
+                                                            <asp:Literal runat="server" ID="litAusente" Text="<%$ Resources:Mensagens, MSG_ALUNO_AUSENTE %>"></asp:Literal>
                                                         </td>
                                                     </tr>
                                                     <tr id="trExibirAlunoDispensadoListao" runat="server">
                                                         <td style="border-style: solid; border-width: thin; width: 25px; height: 15px;"></td>
-                                                        <td><asp:Literal runat="server" ID="litDispensado" Text="<%$ Resources:Mensagens, MSG_ALUNO_DISPENSADO %>"></asp:Literal>
+                                                        <td>
+                                                            <asp:Literal runat="server" ID="litDispensado" Text="<%$ Resources:Mensagens, MSG_ALUNO_DISPENSADO %>"></asp:Literal>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="border-style: solid; border-width: thin; width: 25px; height: 15px;"></td>
-                                                        <td><asp:Literal runat="server" ID="litInativo" Text="<%$ Resources:Mensagens, MSG_ALUNO_INATIVO %>"></asp:Literal>
+                                                        <td>
+                                                            <asp:Literal runat="server" ID="litInativo" Text="<%$ Resources:Mensagens, MSG_ALUNO_INATIVO %>"></asp:Literal>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -376,23 +383,15 @@
                                                     </HeaderTemplate>
                                                     <AlternatingItemTemplate>
                                                         <tr class="gridRow">
+                                                            <td class="center grid-responsive-no-header" style="text-align: center;"></td>
+                                                            <td class="center grid-responsive-no-header" style="text-align: center;"></td>
+                                                            <td id="tdComponenteCurricularLayout" runat="server" style="text-align: center;" class="grid-responsive-no-header"></td>
                                                             <td class="center grid-responsive-no-header" style="text-align: center;">
-                                                               
+                                                                <asp:Button ID="btnTrocaPlano" runat="server" Text=" V " />
                                                             </td>
+                                                            <td class="grid-responsive-no-header"></td>
                                                             <td class="center grid-responsive-no-header" style="text-align: center;">
-                                                               
-                                                            </td>
-                                                            <td id="tdComponenteCurricularLayout" runat="server" style="text-align: center;" class="grid-responsive-no-header">
-                                                                
-                                                            </td>
-                                                            <td class="center grid-responsive-no-header" style="text-align: center;">
-                                                                <asp:Button ID="btnTrocaPlano" runat="server" Text=" V "/>
-                                                            </td>
-                                                            <td class="grid-responsive-no-header">
-                                                              
-                                                            </td>
-                                                            <td class="center grid-responsive-no-header" style="text-align: center;">
-                                                                <asp:Button ID="btnTrocaResumo" runat="server" Text=" V "/>
+                                                                <asp:Button ID="btnTrocaResumo" runat="server" Text=" V " />
                                                             </td>
                                                         </tr>
                                                         <tr class="gridAlternatingRow tdSemBordaInferior">
@@ -416,13 +415,13 @@
                                                             <td class="center" style="text-align: center;">
                                                                 <asp:HiddenField ID="hdfSemPlanoAula" runat="server" Value='<%#Bind("semPlanoAula") %>' />
                                                                 <asp:Image ID="imgSemPlanoAula" runat="server" Visible="false" SkinID="imgAviso" Width="16px" Height="16px" ImageAlign="Top" />
-                                                                <asp:TextBox ID="txtPlanoAula" runat="server" Text='<%#Bind("planoAula") %>' TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
+                                                                <asp:TextBox ID="txtPlanoAula" runat="server" Text='<%#Bind("planoAula") %>' placeholder="<%$ Resources:Mensagens, AULAS_PLANOAULA %>" TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
                                                             </td>
                                                             <td class="center grid-responsive-no-header" style="text-align: center;">
                                                                 <asp:Button ID="btnTrocaPlanoResumo" runat="server" Text=" > " />
                                                             </td>
                                                             <td class="center" style="text-align: center;">
-                                                                <asp:TextBox ID="txtSinteseAula" runat="server" Text='<%#Bind("sintese") %>' TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
+                                                                <asp:TextBox ID="txtSinteseAula" runat="server" Text='<%#Bind("sintese") %>' placeholder="<%$ Resources:Mensagens, AULAS_SINTESE %>"  TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr class="gridAlternatingRow">
@@ -430,23 +429,15 @@
                                                     </AlternatingItemTemplate>
                                                     <ItemTemplate>
                                                         <tr class="gridAlternatingRow">
+                                                            <td class="center grid-responsive-no-header" style="text-align: center;"></td>
+                                                            <td class="center grid-responsive-no-header" style="text-align: center;"></td>
+                                                            <td id="tdComponenteCurricularLayout" runat="server" style="text-align: center;" class="grid-responsive-no-header"></td>
                                                             <td class="center grid-responsive-no-header" style="text-align: center;">
-                                                               
+                                                                <asp:Button ID="btnTrocaPlano" runat="server" Text=" V " />
                                                             </td>
+                                                            <td class="grid-responsive-no-header"></td>
                                                             <td class="center grid-responsive-no-header" style="text-align: center;">
-                                                               
-                                                            </td>
-                                                            <td id="tdComponenteCurricularLayout" runat="server" style="text-align: center;" class="grid-responsive-no-header">
-                                                                
-                                                            </td>
-                                                            <td class="center grid-responsive-no-header" style="text-align: center;">
-                                                                <asp:Button ID="btnTrocaPlano" runat="server" Text=" V "/>
-                                                            </td>
-                                                            <td class="grid-responsive-no-header">
-                                                              
-                                                            </td>
-                                                            <td class="center grid-responsive-no-header" style="text-align: center;">
-                                                                <asp:Button ID="btnTrocaResumo" runat="server" Text=" V "/>
+                                                                <asp:Button ID="btnTrocaResumo" runat="server" Text=" V " />
                                                             </td>
                                                         </tr>
                                                         <tr class="gridRow tdSemBordaInferior">
@@ -470,13 +461,13 @@
                                                             <td class="center" style="text-align: center;">
                                                                 <asp:HiddenField ID="hdfSemPlanoAula" runat="server" Value='<%#Bind("semPlanoAula") %>' />
                                                                 <asp:Image ID="imgSemPlanoAula" runat="server" Visible="false" SkinID="imgAviso" Width="16px" Height="16px" ImageAlign="Top" />
-                                                                <asp:TextBox ID="txtPlanoAula" runat="server" Text='<%#Bind("planoAula") %>' TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
+                                                                <asp:TextBox ID="txtPlanoAula" runat="server" Text='<%#Bind("planoAula") %>' placeholder="<%$ Resources:Mensagens, AULAS_PLANOAULA %>" TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
                                                             </td>
                                                             <td class="center grid-responsive-no-header" style="text-align: center;">
                                                                 <asp:Button ID="btnTrocaPlanoResumo" runat="server" Text=" > " />
                                                             </td>
                                                             <td class="center" style="text-align: center;">
-                                                                <asp:TextBox ID="txtSinteseAula" runat="server" Text='<%#Bind("sintese") %>' TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
+                                                                <asp:TextBox ID="txtSinteseAula" runat="server" Text='<%#Bind("sintese") %>' placeholder="<%$ Resources:Mensagens, AULAS_SINTESE %>" TextMode="MultiLine" SkinID="limite4000" Width="90%"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr class="gridRow">
@@ -503,7 +494,7 @@
                                     <asp:Panel ID="pnlAtividadesExtraClasse" runat="server">
                                         <uc13:UCConfirmacaoOperacao ID="UCConfirmacaoOperacao" runat="server" ObservacaoVisivel="false" ObservacaoObrigatorio="false" />
                                         <asp:UpdatePanel ID="updAtiExtra" runat="server" UpdateMode="Conditional">
-                                            <ContentTemplate> 
+                                            <ContentTemplate>
                                                 <fieldset id="fdsCadastroAtiExtra" runat="server" visible="false">
                                                     <legend>Cadastro de atividade extraclasse</legend>
                                                     <asp:HiddenField ID="hdnTaeId" runat="server" />
@@ -542,7 +533,7 @@
                                                     </div>
                                                 </fieldset>
                                                 <fieldset id="fdsListagemAtiExtra" runat="server" visible="true">
-                                                    <asp:Button ID="btnNovoAtiExtra" runat="server" Text="Incluir nova atividade extraclasse" OnClick="btnNovoAtiExtra_Click" CausesValidation="false" style="float:right" />
+                                                    <asp:Button ID="btnNovoAtiExtra" runat="server" Text="Incluir nova atividade extraclasse" OnClick="btnNovoAtiExtra_Click" CausesValidation="false" Style="float: right" />
                                                     <asp:Label ID="lblSemAtividadeExtra" runat="server"></asp:Label>
                                                     <uc2:UCComboOrdenacao ID="UCComboOrdenacaoAtivExtra" runat="server" />
                                                     <asp:Repeater ID="rptAlunoAtivExtra" runat="server" OnItemDataBound="rptAlunoAtivExtra_ItemDataBound" OnItemCommand="rptAlunoAtivExtra_ItemCommand">
@@ -653,11 +644,11 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <fieldset id="fsdHabilidadesRelacionadas" runat="server">
-                    
-                        <legend>Habilidades relacionadas</legend>
-                        <div></div>
-                        <uc4:UCHabilidades runat="server" ID="UCHabilidades" TituloFildSet="Expectativa de aprendizagem" LegendaCheck="Não alcançada" bHabilidaEdicao="True" />
-                    
+
+                    <legend>Habilidades relacionadas</legend>
+                    <div></div>
+                    <uc4:UCHabilidades runat="server" ID="UCHabilidades" TituloFildSet="Expectativa de aprendizagem" LegendaCheck="Não alcançada" bHabilidaEdicao="True" />
+
 
                     <div class="right">
                         <asp:Button ID="btnSalvarHabilidadesRelacionadas" runat="server" Text="Salvar" OnClick="btnSalvarHabilidadesRelacionadas_Click" />
