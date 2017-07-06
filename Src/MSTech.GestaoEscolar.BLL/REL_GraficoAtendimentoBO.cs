@@ -113,6 +113,15 @@ namespace MSTech.GestaoEscolar.BLL
             return entity;
         }
 
+        public static DataTable GetBy_titulo
+           (
+                string titulo
+           )
+        {
+            REL_GraficoAtendimentoDAO dao = new REL_GraficoAtendimentoDAO();
+            return dao.SelectBy_titulo(titulo);
+        }
+
         /// <summary>
         /// Retorna os gráficos de atendimento por tipo de relatório
         /// </summary>
@@ -189,18 +198,19 @@ namespace MSTech.GestaoEscolar.BLL
                     
                     lstFiltrosPersonalizados.Add(gfp);
                    
+                    if (!lstFiltrosPersonalizadosBanco.Any(f=> f.qtr_id == gfp.qtr_id))
                     if (!REL_GraficoAtendimento_FiltrosPersonalizadosBO.Save(gfp, dao._Banco))
                         return false;
                 }
-
+                
                 //Remove logicamente no banco os filtros fixos e personalizados que foram removidos do gráfico
                 foreach (REL_GraficoAtendimento_FiltrosFixos gffB in lstFiltrosFixosBanco)
-                    if (!lstFiltrosFixos.Any(f => f.gff_id == gffB.gff_id && f.gff_situacao != (byte)REL_GraficoAtendimento_FiltrosFixosSituacao.Excluido))
+                    if (!lstFiltrosFixos.Any(f => f.gff_tipoFiltro == gffB.gff_tipoFiltro))
                     {
                         REL_GraficoAtendimento_FiltrosFixosBO.Delete(gffB, dao._Banco);
                     }
                 foreach (REL_GraficoAtendimento_FiltrosPersonalizados gfpB in lstFiltrosPersonalizadosBanco)
-                    if (!lstFiltrosPersonalizados.Any(f => f.qtr_id == gfpB.qtr_id && f.gfp_situacao != (byte)REL_GraficoAtendimento_FiltrosPersonalizadosSituacao.Excluido))
+                    if (!lstFiltrosPersonalizados.Any(f => f.qtr_id == gfpB.qtr_id))
                     {
                         REL_GraficoAtendimento_FiltrosPersonalizadosBO.Delete(gfpB, dao._Banco);
                     }

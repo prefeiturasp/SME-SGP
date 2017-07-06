@@ -14,14 +14,14 @@ namespace MSTech.GestaoEscolar.DAL
     /// Description: .
     /// </summary>
     public class REL_GraficoAtendimentoDAO : Abstract_REL_GraficoAtendimentoDAO
-	{        
+    {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="rea_id"></param>
         /// <param name="gra_titulo"></param>
         /// <returns></returns>
-        public DataTable SelecionaGraficoPorRelatorio(bool paginado, int currentPage, int pageSize,int rea_id, string gra_titulo, out int totalRecords)
+        public DataTable SelecionaGraficoPorRelatorio(bool paginado, int currentPage, int pageSize, int rea_id, string gra_titulo, out int totalRecords)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_SelecionaPorRelatorio", _Banco);
 
@@ -34,13 +34,19 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@rea_id";
                 Param.DbType = DbType.Int32;
                 Param.Size = 16;
-                Param.Value = rea_id;
+                if (rea_id > 0)
+                    Param.Value = rea_id;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.ParameterName = "@gra_titulo";
                 Param.DbType = DbType.String;
-                Param.Value = String.IsNullOrEmpty(gra_titulo) ? String.Empty: gra_titulo;          
+                if (!String.IsNullOrEmpty(gra_titulo))
+                    Param.Value = gra_titulo;
+                else
+                    Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
 
                 #endregion
@@ -63,6 +69,49 @@ namespace MSTech.GestaoEscolar.DAL
                 qs.Parameters.Clear();
             }
         }
+
+        public DataTable SelectBy_titulo
+            (
+                string gra_titulo
+            )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_SelecionaPorRelatorio", _Banco);
+
+            try
+            {
+                DataTable dt = new DataTable();
+
+                #region Parâmetro
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_id";
+                Param.DbType = DbType.Int32;
+                Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@gra_titulo";
+                Param.DbType = DbType.String;
+                if (!String.IsNullOrEmpty(gra_titulo))
+                    Param.Value = gra_titulo;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                #endregion
+                
+                qs.Execute();
+                
+                if (qs.Return.Rows.Count > 0)
+                    dt = qs.Return;
+
+                return dt;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
 
         /// <summary>
         /// Retorna os dados para renderizar o gráfico de atendimento
@@ -216,7 +265,7 @@ namespace MSTech.GestaoEscolar.DAL
             qs.Parameters.RemoveAt("@gra_dataCriacao");
             qs.Parameters["@gra_dataAlteracao"].Value = DateTime.Now;
         }
-        
+
         /// <summary>
         /// Método alterado para que o update não faça a alteração da data de criação
         /// </summary>

@@ -11,7 +11,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
     <fieldset id="fdsFiltro" runat="server">
-        <legend>Consulta de relatórios de atendimento</legend>
+        <legend>Consulta de gráficos de atendimento</legend>
         <div id="divPesquisa" runat="server">
             <asp:Label ID="lbl" runat="server" Text="Tipo de relatório" AssociatedControlID="ddlTipoRelatorio"></asp:Label>
             <asp:DropDownList ID="ddlTipoRelatorio" runat="server" SkinID="text30C" OnSelectedIndexChanged="ddlCombo_SelectedIndexChanged" AutoPostBack="True">

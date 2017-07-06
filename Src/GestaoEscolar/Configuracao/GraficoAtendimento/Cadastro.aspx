@@ -24,7 +24,7 @@
     <asp:ValidationSummary ID="vsRelatorioAtendimento" runat="server" ValidationGroup="vgRelatorioAtendimento" />
     <fieldset>
         <legend>
-            <asp:Label runat="server" ID="lblLegend" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblLegend.Text %>" />
+            <asp:Label runat="server" ID="lblLegend" Text="Gráfico de atendimento" />
         </legend>
         <uc1:UCCamposObrigatorios ID="UCCamposObrigatorios3" runat="server" />
         <asp:UpdatePanel runat="server" ID="updCadastro" UpdateMode="Always">
@@ -129,7 +129,7 @@
                             OnClick="btnCancelarFiltro_Click" />
                     </div>
                     <asp:GridView runat="server" ID="gvFiltroFixo" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="gra_id, gff_tipoFiltro, gff_id, IsNew" EmptyDataText="Nenhum filtro fixo ligado ao gráfico."
+                        DataKeyNames="gra_id, gff_tipoFiltro, IsNew" EmptyDataText="Nenhum filtro fixo ligado ao gráfico."
                         OnRowDataBound="gvFiltroFixo_RowDataBound" OnRowCommand="gvFiltroFixo_RowCommand">
                         <Columns>
                             <asp:BoundField HeaderText="Tipo de filtro" DataField="gff_tituloFiltro" />
@@ -182,7 +182,7 @@
                         </fieldset>
                     </div>
                     <asp:GridView runat="server" ID="gvQuestionario" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="qst_id, qtc_id, qtr_id, IsNew" EmptyDataText="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.gvQuestionario.EmptyDataText %>"
+                        DataKeyNames="qst_id, qtc_id, qtr_id, IsNew, emUso" EmptyDataText="Nenhum filtro personalizado ligado ao gráfico."
                         OnRowDataBound="gvQuestionario_RowDataBound" OnRowCommand="gvQuestionario_RowCommand">
                         <Columns>
                             <asp:BoundField HeaderText="Questionário" DataField="qst_titulo" />

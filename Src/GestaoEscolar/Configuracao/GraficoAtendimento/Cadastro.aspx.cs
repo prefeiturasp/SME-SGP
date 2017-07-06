@@ -154,6 +154,9 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 REL_GraficoAtendimentoTipo tipoGrafico;
                 Enum.TryParse(ddlTipoGrafico.SelectedValue, out tipoGrafico);
 
+                if (REL_GraficoAtendimentoBO.GetBy_titulo(txtTitulo.Text).Rows.Count > 0)
+                    throw new ValidationException("Já existe um gráfico de atendimento cadastrado com este título.");
+
                 REL_GraficoAtendimento gra = new REL_GraficoAtendimento
                 {
                     gra_id = VS_gra_id,
@@ -639,10 +642,10 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 {
                     //todo
                     bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["IsNew"]);
-                    //bool emUsoExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["emUso"]);
+                    bool emUsoExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["emUso"]);
 
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = isNewExcluir && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    btnExcluir.Visible = (isNewExcluir && !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
             }
         }
@@ -690,9 +693,10 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 {
                     //todo
                     bool isNewExcluir = Convert.ToBoolean(gvFiltroFixo.DataKeys[e.Row.RowIndex]["IsNew"]);
+                    bool emUsoExcluir = Convert.ToBoolean(gvFiltroFixo.DataKeys[e.Row.RowIndex]["emUso"]);
 
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = isNewExcluir && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    btnExcluir.Visible = (isNewExcluir && !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
             }
         }
@@ -705,11 +709,11 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 {
                     int index = int.Parse(e.CommandArgument.ToString());
 
-                    int idExcluir = Convert.ToInt32(gvFiltroFixo.DataKeys[index]["gff_id"]);
+                    int idExcluir = Convert.ToInt32(gvFiltroFixo.DataKeys[index]["gff_tipoFiltro"]);
 
-                    if (idExcluir > 0 && VS_lstFiltrosFixos.Any(f => f.gff_id == idExcluir))
+                    if (idExcluir > 0 && VS_lstFiltrosFixos.Any(f => f.gff_tipoFiltro == idExcluir))
                     {
-                        int ind = VS_lstFiltrosFixos.IndexOf(VS_lstFiltrosFixos.Where(f => f.gff_id == idExcluir).First());
+                        int ind = VS_lstFiltrosFixos.IndexOf(VS_lstFiltrosFixos.Where(f => f.gff_tipoFiltro == idExcluir).First());
                         VS_lstFiltrosFixos.RemoveAt(ind);
                     }
 

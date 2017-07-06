@@ -98,7 +98,7 @@ namespace MSTech.GestaoEscolar.BLL
         {
             foreach (REL_GraficoAtendimento_FiltrosFixos gff in lstFiltrosFixos)
             {
-                REL_GraficoAtendimento_FiltrosFixos gffB = new REL_GraficoAtendimento_FiltrosFixos { gff_id = gff.gff_id, gra_id = gff.gra_id };
+                REL_GraficoAtendimento_FiltrosFixos gffB = new REL_GraficoAtendimento_FiltrosFixos { gff_tipoFiltro = gff.gff_tipoFiltro, gra_id = gff.gra_id };
                 GetEntityDetalhado(gffB);
 
                 gff.gff_tipoFiltro = gffB.gff_tipoFiltro;
