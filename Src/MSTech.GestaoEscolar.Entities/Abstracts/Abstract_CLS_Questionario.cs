@@ -51,5 +51,17 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[qst_situacao] é obrigatório.")]
 		public virtual int qst_situacao { get; set; }
 
+		/// <summary>
+		/// Tipo do cálculo para questionários que compoem testes. (1- Sem cálculo; 2 - Soma).
+		/// </summary>
+		[MSNotNullOrEmpty("[qst_tipoCalculo] é obrigatório.")]
+		public virtual byte qst_tipoCalculo { get; set; }
+
+		/// <summary>
+		/// Título do cálculo para questionários que compoem testes..
+		/// </summary>
+		[MSValidRange(500)]
+		public virtual string qst_tituloCalculo { get; set; }
+
     }
 }
