@@ -383,54 +383,42 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
         private void ValidaCamposFiltroFixo(int valor)
         {
-            try {
-                if (valor > 0)
+            if (valor > 0)
+            {
+                switch (valor)
                 {
-                    switch (valor)
-                    {
-                        case 1:
-                            if (String.IsNullOrEmpty(txtDtInicial.Text))
-                                throw new ValidationException("Data inicial é obrigatório.");
-                            if (String.IsNullOrEmpty(txtDtFinal.Text))
-                                throw new ValidationException("Data final é obrigatório.");
-                            break;
-                        case 2:
-                            if(Convert.ToInt32(UCComboRacaCor._Combo.SelectedValue) <= 0)
-                                throw new ValidationException(UCComboRacaCor._Combo.Text+" é obrigatório.");
-                            break;
-                        case 3:
-                            if (String.IsNullOrEmpty(txtIdadeInicial.Text))
-                                throw new ValidationException("Idade inicial é obrigatório.");
-                            if (String.IsNullOrEmpty(txtIdadeFinal.Text))
-                                throw new ValidationException("Idade final é obrigatório.");
-                            break;
-                        case 4:
-                            if (Convert.ToInt32(UCComboSexo._Combo.SelectedValue) <= 0)
-                                throw new ValidationException(UCComboSexo._Combo.Text + " é obrigatório.");
-                                break;
-                        default:
-                            PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
-                            List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
+                    case 1:
+                        if (String.IsNullOrEmpty(txtDtInicial.Text))
+                            throw new ValidationException("Data inicial é obrigatório.");
+                        if (String.IsNullOrEmpty(txtDtFinal.Text))
+                            throw new ValidationException("Data final é obrigatório.");
+                        break;
+                    case 2:
+                        if (Convert.ToInt32(UCComboRacaCor._Combo.SelectedValue) <= 0)
+                            throw new ValidationException("Raça/Cor é obrigatório.");
+                        break;
+                    case 3:
+                        if (String.IsNullOrEmpty(txtIdadeInicial.Text))
+                            throw new ValidationException("Idade mínima é obrigatório.");
+                        if (String.IsNullOrEmpty(txtIdadeFinal.Text))
+                            throw new ValidationException("Idade máxima é obrigatório.");
+                        break;
+                    case 4:
+                        if (Convert.ToInt32(UCComboSexo._Combo.SelectedValue) <= 0)
+                            throw new ValidationException("Sexo é obrigatório.");
+                        break;
+                    default:
+                        if (new Guid(ComboTipoDeficiencia._Combo.SelectedValue) == Guid.Empty)
+                            throw new ValidationException("Tipo de deficiência é obrigatório.");
+                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
+                        List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
 
-                            if (detalhes.Select(x => x.dfd_id.ToString()).ToList().Count <= 0)
-                                throw new ValidationException("É obrigatório selecionar pelo menos um detalhamento.");
+                        if (detalhes.Select(x => x.dfd_id.ToString()).ToList().Count <= 0)
+                            throw new ValidationException("É obrigatório selecionar pelo menos um detalhamento.");
 
-                            break;
-                    }
+                        break;
                 }
             }
-            catch (ValidationException ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao adicionar filtro fixo.", UtilBO.TipoMensagem.Erro);
-            }
-
         }
 
         #endregion
@@ -445,6 +433,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MsgConfirmExclusao));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.CamposData));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
             }
 
             ComboTipoDeficiencia.OnSeletedIndexChanged += ComboTipoDeficiencia_SelectedIndexChanged;
@@ -792,6 +782,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             try
             {
                 ValidaCamposFiltroFixo(Convert.ToByte(ddlFiltroFixo.SelectedValue));
+
                 if (VS_lstFiltrosFixos.Any(p => p.gff_tipoFiltro == Convert.ToByte(ddlFiltroFixo.SelectedValue)))
                     throw new ValidationException(string.Format("Este tipo de filtro já existe."));
 
