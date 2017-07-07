@@ -71,6 +71,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Peso da resposta para respostas que compoem testes..
 		/// </summary>
+		[MSNotNullOrEmpty("[qtr_peso] é obrigatório.")]
 		public virtual int qtr_peso { get; set; }
 
     }
