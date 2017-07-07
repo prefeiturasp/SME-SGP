@@ -79,5 +79,20 @@ public partial class WebControls_Combos_UCComboSexo : MotherUserControl
         }
     }
 
+    /// <summary>
+    /// Retorna e seta o valor selecionado no combo
+    /// </summary>
+    public int Valor
+    {
+        get
+        {
+            return Convert.ToInt32(_ddlSexo.SelectedValue);
+        }
+        set
+        {
+            _ddlSexo.SelectedValue = value.ToString();
+        }
+    }
+
     #endregion
 }

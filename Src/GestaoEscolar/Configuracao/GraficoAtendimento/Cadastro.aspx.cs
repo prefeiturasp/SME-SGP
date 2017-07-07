@@ -124,8 +124,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 CLS_RelatorioAtendimento rea = new CLS_RelatorioAtendimento { rea_id = gra.rea_id };
                 CLS_RelatorioAtendimentoBO.GetEntity(rea);
                 ddlTipo.SelectedValue = rea.rea_tipo.ToString();
-                UCComboRelatorioAtendimento._Combo.SelectedValue = gra.rea_id.ToString();
-                UCComboRelatorioAtendimento._Combo.Enabled = false;
+                UCComboRelatorioAtendimento.Valor = gra.rea_id;
+                UCComboRelatorioAtendimento.PermiteEditar = false;
 
                 ddlTipoGrafico.SelectedValue = gra.gra_tipo.ToString();
                 ddlTipoGrafico.Enabled = false;
@@ -304,17 +304,17 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                         valores.Add(txtDtFinal.Text);
                         break;
                     case 2:
-                        valores.Add(UCComboRacaCor._Combo.SelectedValue);
+                        valores.Add(UCComboRacaCor.Valor.ToString());
                         break;
                     case 3:
                         valores.Add(txtIdadeInicial.Text);
                         valores.Add(txtIdadeFinal.Text);
                         break;
                     case 4:
-                        valores.Add(UCComboSexo._Combo.SelectedValue);
+                        valores.Add(UCComboSexo.Valor.ToString());
                         break;
                     default:
-                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
+                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = ComboTipoDeficiencia.Valor });
                         List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
 
                         valores = detalhes.Select(x => x.dfd_id.ToString()).ToList();
@@ -351,7 +351,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                         vetor[0] = UCComboSexo._Combo.SelectedItem.Text;
                         break;
                     default:
-                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
+                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = ComboTipoDeficiencia.Valor });
                         List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
 
                         vetor = detalhes.Select(x => x.dfd_nome.ToString()).ToArray();
@@ -374,7 +374,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             txtTitulo.Text = "";
             ddlTipo.SelectedValue = "0";
             ddlTipoGrafico.SelectedIndex = ddlTipoGrafico.Items.Count == 2 ? 1 : 0;
-            UCComboRelatorioAtendimento._Combo.Enabled = false;
+            UCComboRelatorioAtendimento.PermiteEditar = false;
             ddlEixoAgrupamento.SelectedValue = "0";
             ComboTipoDeficiencia.ExibeDeficienciaMultipla = false;
             gvQuestionario.DataSource = VS_listQuestionarioConteudoResposta.OrderBy(f => f.qst_titulo).ThenBy(f => f.qtc_texto).ThenBy(f => f.qtr_texto);
@@ -394,7 +394,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                             throw new ValidationException("Data final é obrigatório.");
                         break;
                     case 2:
-                        if (Convert.ToInt32(UCComboRacaCor._Combo.SelectedValue) <= 0)
+                        if (UCComboRacaCor.Valor <= 0)
                             throw new ValidationException("Raça/Cor é obrigatório.");
                         break;
                     case 3:
@@ -404,13 +404,13 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                             throw new ValidationException("Idade máxima é obrigatório.");
                         break;
                     case 4:
-                        if (Convert.ToInt32(UCComboSexo._Combo.SelectedValue) <= 0)
+                        if (UCComboSexo.Valor <= 0)
                             throw new ValidationException("Sexo é obrigatório.");
                         break;
                     default:
-                        if (new Guid(ComboTipoDeficiencia._Combo.SelectedValue) == Guid.Empty)
+                        if (ComboTipoDeficiencia.Valor == Guid.Empty)
                             throw new ValidationException("Tipo de deficiência é obrigatório.");
-                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = new Guid(ComboTipoDeficiencia._Combo.SelectedValue) });
+                        PES_TipoDeficiencia deficiencia = PES_TipoDeficienciaBO.GetEntity(new PES_TipoDeficiencia { tde_id = ComboTipoDeficiencia.Valor });
                         List<CFG_DeficienciaDetalhe> detalhes = CarregaDetalhePreenchidos();
 
                         if (detalhes.Select(x => x.dfd_id.ToString()).ToList().Count <= 0)
@@ -500,7 +500,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (Convert.ToInt32(ddlTipo.SelectedValue) > 0)
                 {
                     UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
-                    UCComboRelatorioAtendimento._Combo.Enabled = true;
+                    UCComboRelatorioAtendimento.PermiteEditar = true;
                     if (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE)
                         ddlFiltroFixo.Items.Add(new ListItem("Detalhamento das deficiências", "5"));
                     else
@@ -510,9 +510,10 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 }
                 else
                 {
-                    UCComboRelatorioAtendimento.SelectedIndex = 0;
-                    UCComboRelatorioAtendimento._Combo.Enabled = false;
+                    UCComboRelatorioAtendimento.PermiteEditar = false;
                 }
+                UCComboRelatorioAtendimento.SelectedIndex = 0;
+                UCComboRelatorioAtendimento_SelectedIndexChanged();
             }
             catch (Exception ex)
             {
@@ -524,7 +525,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
         protected void ComboTipoDeficiencia_SelectedIndexChanged()
         {
-            cklDetalhes.DataSource = CFG_DeficienciaDetalheBO.SelectDetalheBy_Deficiencia(new Guid(ComboTipoDeficiencia._Combo.SelectedValue));
+            cklDetalhes.DataSource = CFG_DeficienciaDetalheBO.SelectDetalheBy_Deficiencia(ComboTipoDeficiencia.Valor);
             cklDetalhes.DataBind();
             divDetalhes.Visible = true;
         }
@@ -536,17 +537,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (UCComboRelatorioAtendimento.Valor > 0)
                 {
                     VS_rea_id = UCComboRelatorioAtendimento.Valor;
-                    UCComboQuestionario.Combo.DataSource = CLS_RelatorioAtendimentoQuestionarioBO.SelectPerguntaMultiplaEscolha_By_rea_id(VS_rea_id);
-                    UCComboQuestionario.Combo.DataTextField = "qst_titulo";
-                    UCComboQuestionario.Combo.DataValueField = "qst_id";
-                    UCComboQuestionario.Combo.DataBind();
-                    UCComboQuestionario.Combo.Enabled = true;
+                    UCComboQuestionario.CarregarQuestionarioBy_rea_id(VS_rea_id);
+                    UCComboQuestionario.PermiteEditar = true;
                 }
                 else
                 {
-                    UCComboQuestionario.Combo.Enabled = false;
+                    UCComboQuestionario.PermiteEditar = false;
                 }
-                UCComboQuestionario.Combo.SelectedIndex = 0;
+                UCComboQuestionario.SelectedIndex = 0;
                 UCComboQuestionario_SelectedIndexChanged();
             }
             catch (Exception ex)
