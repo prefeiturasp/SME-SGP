@@ -1008,7 +1008,7 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
                                          "&tpc_id=" + UCCPeriodoCalendario.Valor[0] +
                                          "&tud_id=" + UCComboTurmaDisciplina.Valor +
                                          "&doc_id=" + UCBuscaDocenteTurma._VS_doc_id +
-                                         "&MSG_SinteseDaAula=" + GetGlobalResourceObject("Mensagens", "MSG_SINTESEDAAULA") +
+                                         "&MSG_SinteseDaAula=" + GetGlobalResourceObject("Mensagens", "MSG_SINTESEDAAULA2") +
                                          "&nomePeriodoCalendario=" + GestaoEscolarUtilBO.nomePadraoPeriodo_Calendario(__SessionWEB.__UsuarioWEB.Usuario.ent_id) +
                                          "&nomeDisciplina=" + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") +
                                          "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +

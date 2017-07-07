@@ -110,11 +110,6 @@
             UCCUAEscola.IndexChangedUnidadeEscola += UCCUAEscola_IndexChangedUnidadeEscola;
             UCCCursoCurriculo.IndexChanged += UCCCursoCurriculo_IndexChanged;
 
-            ScriptManager sm = ScriptManager.GetCurrent(this);
-            if (sm != null)
-            {
-            }
-
             if (!IsPostBack)
             {
                 try

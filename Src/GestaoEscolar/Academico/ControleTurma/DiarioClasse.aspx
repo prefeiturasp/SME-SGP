@@ -1006,7 +1006,7 @@
                                                 </div>
                                             </div>
                                             <div id="divSinteseDaAula" runat="server">
-                                                <asp:Label ID="LabelSinteseAula" runat="server" Text="<%$ Resources:Mensagens, MSG_SINTESEDAAULA %>"
+                                                <asp:Label ID="LabelSinteseAula" runat="server" Text="<%$ Resources:Mensagens, MSG_SINTESEDAAULA2 %>"
                                                     AssociatedControlID="txtSinteseAula" Width="480px" Font-Bold="true"></asp:Label>
                                                 <div class="textareaComInfo">
                                                     <asp:Label ID="lblSinteseAula" CssClass="textareaInfo" runat="server"

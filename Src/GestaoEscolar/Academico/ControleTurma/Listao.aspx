@@ -375,7 +375,7 @@
                                                                         </th>
                                                                         <th class="center"></th>
                                                                         <th class="center">
-                                                                            <asp:Label ID="lblResumo" runat="server" Text='<%$ Resources:Mensagens, MSG_SINTESEDAAULA %>'></asp:Label>
+                                                                            <asp:Label ID="lblResumo" runat="server" Text='<%$ Resources:Mensagens, MSG_SINTESEDAAULA2 %>'></asp:Label>                                                                            
                                                                         </th>
                                                                     </tr>
                                                                 </thead>
