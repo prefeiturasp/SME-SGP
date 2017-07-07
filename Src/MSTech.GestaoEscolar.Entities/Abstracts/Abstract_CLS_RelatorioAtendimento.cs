@@ -58,6 +58,12 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         public virtual bool rea_permiteAcoesRealizadas { get; set; }
 
         /// <summary>
+        /// Indica se o relatório vai gerar pendência de fechamento
+        /// </summary>
+        [MSNotNullOrEmpty("[rea_gerarPendenciaFechamento] é obrigatório.")]
+        public virtual bool rea_gerarPendenciaFechamento { get; set; }
+
+        /// <summary>
         /// ID do tipo de disciplina do relatório de atendimento.
         /// </summary>
         public virtual int tds_id { get; set; }

@@ -267,6 +267,7 @@
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimento.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoCargo.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoGrupo.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoPeriodo.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoQuestionario.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimento.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAcoesRealizadas.cs" />
@@ -590,6 +591,7 @@
     <Compile Include="CLS_RelatorioAtendimento.cs" />
     <Compile Include="CLS_RelatorioAtendimentoCargo.cs" />
     <Compile Include="CLS_RelatorioAtendimentoGrupo.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoPeriodo.cs" />
     <Compile Include="CLS_RelatorioAtendimentoQuestionario.cs" />
     <Compile Include="CLS_RelatorioPreenchimento.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAcoesRealizadas.cs" />

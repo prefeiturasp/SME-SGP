@@ -260,6 +260,7 @@
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoCargoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoGrupoDAO.cs" />
+    <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoPeriodoDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioAtendimentoQuestionarioDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAcoesRealizadasDAO.cs" />
     <Compile Include="Abstracts\Abstract_CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO.cs" />
@@ -584,6 +585,7 @@
     <Compile Include="CLS_RelatorioAtendimentoCargoDAO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoDAO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoGrupoDAO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoPeriodoDAO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoQuestionarioDAO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAcoesRealizadasDAO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO.cs" />

@@ -34,7 +34,7 @@
         </asp:UpdatePanel>
         <div class="right">
             <asp:Button ID="btnGerar" runat="server" Text="Gerar relatório" PostBackUrl="~/Relatorios/GraficoAtendimento/Relatorio.aspx" />
-            <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click" />
+            <asp:Button ID="btnLimparPesquisa" runat="server" Text="Limpar pesquisa" OnClick="btnLimparPesquisa_Click" CausesValidation="false" />
         </div>
     </asp:Panel>
 </asp:Content>

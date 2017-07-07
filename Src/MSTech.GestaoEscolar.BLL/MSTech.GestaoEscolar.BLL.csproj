@@ -325,6 +325,7 @@
     <Compile Include="CLS_RelatorioAtendimentoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoCargoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoGrupoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoPeriodoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoQuestionarioBO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAcoesRealizadasBO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.cs" />

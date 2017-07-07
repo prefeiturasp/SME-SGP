@@ -41,7 +41,7 @@
                     Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
                 <div runat="server" id="divPeriodicidade" visible="false">
                     <asp:Label ID="lblPeriodicidade" runat="server" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.lblPeriodicidade.Text %>" AssociatedControlID="ddlPeriodicidade"></asp:Label>
-                    <asp:DropDownList ID="ddlPeriodicidade" runat="server">
+                    <asp:DropDownList ID="ddlPeriodicidade" runat="server" OnSelectedIndexChanged="ddlPeriodicidade_SelectedIndexChanged" AutoPostBack="true">
                         <asp:ListItem Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.ddlPeriodicidade.msgSelecione %>" Value="0"></asp:ListItem>
                         <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Periodico %>" Value="1"></asp:ListItem>
                         <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoPeriodicidade.Encerramento %>" Value="2"></asp:ListItem>
@@ -49,6 +49,22 @@
                     <asp:CompareValidator ID="cpvPeriodicidade" runat="server" ErrorMessage="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.cpvPeriodicidade.ErrorMessage %>"
                         ControlToValidate="ddlPeriodicidade" Operator="GreaterThan" ValueToCompare="0"
                         Display="Dynamic" ValidationGroup="vgRelatorioAtendimento">*</asp:CompareValidator>
+                </div>
+                <div runat="server" id="divPeriodoCalendario" visible="false">
+                    <asp:Label ID="lblPeriodos" runat="server" Text="Períodos do calendário *" AssociatedControlID="rptPeriodoCalendario"></asp:Label>
+                    <asp:Repeater ID="rptPeriodoCalendario" runat="server" OnItemDataBound="rptPeriodoCalendario_ItemDataBound">
+                        <HeaderTemplate>
+                            <div></div>
+                            <div class="checkboxlist-columns">
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("tpc_id") %>' />
+                            <asp:CheckBox ID="chkPeriodo" runat="server" Text='<%# Eval("tpc_nome") %>' />
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </div>
+                        </FooterTemplate>
+                    </asp:Repeater>
                 </div>
                 <div runat="server" id="divRacaCor" visible="false">
                     <asp:CheckBox runat="server" ID="chkExibeRacaCor" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkExibeRacaCor.Text %>" />
@@ -59,6 +75,7 @@
                 <div runat="server" id="divAcoesRealizadas" visible="false">
                     <asp:CheckBox runat="server" ID="chkAcoesRealizadas" Text="<%$ Resources:Configuracao, RelatorioAtendimento.Cadastro.chkAcoesRealizadas.Text %>" />
                 </div>
+                <asp:CheckBox runat="server" ID="chkGerarPendenciasFechamento" Text="Gera pendências de fechamento" />
                 <div runat="server" id="divDisciplina" visible="false">
                     <uc3:UCComboTipoDisciplina runat="server" ID="UCComboTipoDisciplina" MostrarMessageSelecione="True" PermiteEditar="True" Obrigatorio="true" ValidationGroup="vgRelatorioAtendimento" />
                 </div>

@@ -84,6 +84,27 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             }
         }
 
+        /// <summary>
+        /// Lista de periodos do relatório.
+        /// </summary>
+        private List<CLS_RelatorioAtendimentoPeriodo> VS_lstRelatorioPeriodo
+        {
+            get
+            {
+                if (ViewState["VS_lstRelatorioPeriodo"] == null)
+                {
+                    ViewState["VS_lstRelatorioPeriodo"] = CLS_RelatorioAtendimentoPeriodoBO.SelecionaPorRelatorio(VS_rea_id);
+                }
+
+                return (List<CLS_RelatorioAtendimentoPeriodo>)ViewState["VS_lstRelatorioPeriodo"];
+            }
+
+            set
+            {
+                ViewState["VS_lstRelatorioPeriodo"] = value;
+            }
+        }
+
         #endregion
 
         #region Métodos
@@ -108,12 +129,15 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 ddlTipo_SelectedIndexChanged(ddlTipo, new EventArgs());
                 ddlPeriodicidade.Enabled = false;
                 ddlPeriodicidade.SelectedValue = rea.rea_periodicidadePreenchimento.ToString();
+                ddlPeriodicidade_SelectedIndexChanged(ddlPeriodicidade, new EventArgs());
                 chkExibeHipotese.Enabled = false;
                 chkExibeHipotese.Checked = rea.rea_permiteEditarHipoteseDiagnostica;
                 chkAcoesRealizadas.Enabled = false;
                 chkAcoesRealizadas.Checked = rea.rea_permiteAcoesRealizadas;
                 chkExibeRacaCor.Enabled = false;
                 chkExibeRacaCor.Checked = rea.rea_permiteEditarRecaCor;
+                chkGerarPendenciasFechamento.Checked = rea.rea_gerarPendenciaFechamento;
+                chkGerarPendenciasFechamento.Enabled = false;
                 hplAnexo.Text = rea.rea_tituloAnexo;
                 hplAnexo.NavigateUrl = rea.arq_idAnexo == 0 ? "" : String.Format("~/FileHandler.ashx?file={0}", rea.arq_idAnexo);
                 divAddAnexo.Visible = rea.arq_idAnexo == 0;
@@ -124,6 +148,8 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                 CarregaCargos();
                 CarregaGrupos();
                 CarregaQuestionarios();
+
+                HabilitaControles(divPeriodoCalendario.Controls, false);
             }
             catch (Exception ex)
             {
@@ -151,11 +177,16 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     tds_id = (Convert.ToByte(ddlTipo.SelectedValue) != (byte)CLS_RelatorioAtendimentoTipo.RP ? -1 : UCComboTipoDisciplina.Valor),
                     rea_periodicidadePreenchimento = Convert.ToByte(ddlPeriodicidade.SelectedValue),
                     rea_tituloAnexo = txtTituloAnexo.Text,
+                    rea_gerarPendenciaFechamento = chkGerarPendenciasFechamento.Checked,
                     IsNew = VS_rea_id <= 0
                 };
 
                 if (!VS_lstQuestionarios.Any(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido))
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumQuestionarioAdicionado").ToString());
+
+                List<CLS_RelatorioAtendimentoPeriodo> lstPeriodo = rea.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.RP && 
+                                                                   rea.rea_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Encerramento ?
+                                                                   CarregaPeriodosPreenchidos() : new List<CLS_RelatorioAtendimentoPeriodo>();
 
                 List<CLS_RelatorioAtendimentoGrupo> lstGrupo = CarregaGruposPreenchidos();
 
@@ -165,7 +196,14 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     !lstCargo.Any(c => c.rac_permissaoAprovacao || c.rac_permissaoConsulta || c.rac_permissaoEdicao || c.rac_permissaoExclusao))
                     throw new ValidationException(GetGlobalResourceObject("Configuracao", "RelatorioAtendimento.Cadastro.NenhumaPermissao").ToString());
 
-                if (CLS_RelatorioAtendimentoBO.Salvar(rea, lstGrupo, lstCargo, VS_lstQuestionarios, VS_arquivo, ApplicationWEB.TamanhoMaximoArquivo, ApplicationWEB.TiposArquivosPermitidos))
+                if (rea.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.RP &&
+                    rea.rea_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Encerramento &&
+                    !lstPeriodo.Any())
+                {
+                    throw new ValidationException("Selecione pelo menos um período do calendário.");
+                }
+
+                if (CLS_RelatorioAtendimentoBO.Salvar(rea, lstGrupo, lstCargo, VS_lstQuestionarios, lstPeriodo, VS_arquivo, ApplicationWEB.TamanhoMaximoArquivo, ApplicationWEB.TiposArquivosPermitidos))
                 {
                     string message = "";
                     if (VS_rea_id <= 0)
@@ -294,6 +332,14 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         }
 
         /// <summary>
+        /// Carrega os periodos do relatório
+        /// </summary>
+        private void CarregaPeriodoCalendario()
+        {
+            VS_lstRelatorioPeriodo = CLS_RelatorioAtendimentoPeriodoBO.SelecionaPorRelatorio(VS_rea_id);
+        }
+
+        /// <summary>
         /// Carrega os cargos
         /// </summary>
         private void CarregaCargos()
@@ -319,7 +365,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             VS_lstQuestionarios = CLS_RelatorioAtendimentoQuestionarioBO.SelectBy_rea_id(VS_rea_id);
             VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
-            gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+            var questionarios = (from qst in VS_lstQuestionarios
+                                 where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                 group qst by qst.raq_id into grupo
+                                 select grupo.First());
+
+            gvQuestionario.DataSource = questionarios;
             gvQuestionario.DataBind();
         }
 
@@ -392,6 +443,27 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
         }
         
         /// <summary>
+        /// Carrega os periodos selecionados
+        /// </summary>
+        /// <returns></returns>
+        private List<CLS_RelatorioAtendimentoPeriodo> CarregaPeriodosPreenchidos()
+        {
+            List<CLS_RelatorioAtendimentoPeriodo> lst = new List<CLS_RelatorioAtendimentoPeriodo>();
+            lst.AddRange
+            (from RepeaterItem item in rptPeriodoCalendario.Items
+             let tpc_id = item.FindControl<HiddenField>("hdnId").GetValue().ToInt32()
+             where item.FindControl<CheckBox>("chkPeriodo").IsChecked() && tpc_id > 0
+             select new CLS_RelatorioAtendimentoPeriodo
+             {
+                 rea_id = VS_rea_id
+                 ,
+                 tpc_id = tpc_id
+             });
+
+            return lst;
+        }
+
+        /// <summary>
         /// Inicializa os campos da tela
         /// </summary>
         private void Inicializar()
@@ -411,7 +483,13 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             UCComboTipoDisciplina.CarregarTipoDisciplinaTipo((byte)ACA_TipoDisciplinaBO.TipoDisciplina.RecuperacaoParalela);
             gvCargo.DataSource = new DataTable();
             gvGrupo.DataSource = new DataTable();
-            gvQuestionario.DataSource = VS_lstQuestionarios;
+
+            var questionarios = (from qst in VS_lstQuestionarios
+                                 where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                 group qst by qst.raq_id into grupo
+                                 select grupo.First());
+
+            gvQuestionario.DataSource = questionarios;
             gvCargo.DataBind();
             gvGrupo.DataBind();
             gvQuestionario.DataBind();
@@ -529,7 +607,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     IsNew = true
                 });
 
-                gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                var questionarios = (from qst in VS_lstQuestionarios
+                                     where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                     group qst by qst.raq_id into grupo
+                                     select grupo.First());
+
+                gvQuestionario.DataSource = questionarios;
                 gvQuestionario.DataBind();
                 
                 UCComboQuestionario.Valor = -1;
@@ -612,7 +695,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
                     VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                    var questionarios = (from qst in VS_lstQuestionarios
+                                         where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                         group qst by qst.raq_id into grupo
+                                         select grupo.First());
+
+                    gvQuestionario.DataSource = questionarios;
                     gvQuestionario.DataBind();
 
                     if (gvQuestionario.Rows.Count > 0)
@@ -649,7 +737,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
 
                     VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                    var questionarios = (from qst in VS_lstQuestionarios
+                                         where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                         group qst by qst.raq_id into grupo
+                                         select grupo.First());
+
+                    gvQuestionario.DataSource = questionarios;
                     gvQuestionario.DataBind();
 
                     if (gvQuestionario.Rows.Count > 0)
@@ -700,7 +793,12 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
                     }
                     VS_lstQuestionarios = VS_lstQuestionarios.OrderBy(q => q.raq_ordem).ThenBy(q => q.qst_titulo).ToList();
 
-                    gvQuestionario.DataSource = VS_lstQuestionarios.Where(q => q.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido);
+                    var questionarios = (from qst in VS_lstQuestionarios
+                                         where qst.raq_situacao != (byte)CLS_RelatorioAtendimentoQuestionarioSituacao.Excluido
+                                         group qst by qst.raq_id into grupo
+                                         select grupo.First());
+
+                    gvQuestionario.DataSource = questionarios;
                     gvQuestionario.DataBind();
 
                     if (gvQuestionario.Rows.Count > 0)
@@ -790,6 +888,40 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento
             }
         }
 
+        protected void ddlPeriodicidade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            divPeriodoCalendario.Visible = false;
+            if (Convert.ToByte(ddlPeriodicidade.SelectedValue) == (byte)CLS_RelatorioAtendimentoPeriodicidade.Encerramento && 
+                Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.RP)
+            {
+                divPeriodoCalendario.Visible = true;
+
+                if (rptPeriodoCalendario.Items.Count <= 0)
+                {
+                    rptPeriodoCalendario.DataSource = ACA_TipoPeriodoCalendarioBO.SelecionaTipoPeriodoCalendario(ApplicationWEB.AppMinutosCacheLongo);
+                    rptPeriodoCalendario.DataBind();
+                }
+            }
+        }
+
+        protected void rptPeriodoCalendario_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType.In(ListItemType.Item, ListItemType.AlternatingItem))
+            {
+                int tpc_id = e.Item.FindControl<HiddenField>("hdnId").GetValue().ToInt32();
+
+                if (VS_lstRelatorioPeriodo.Any(p => p.tpc_id == tpc_id))
+                {
+                    CheckBox chkPeriodo = e.Item.FindControl("chkPeriodo") as CheckBox;
+                    if (chkPeriodo != null)
+                    {
+                        chkPeriodo.Checked = true;
+                    }
+                }
+            }
+        }
+
         #endregion
+
     }
 }

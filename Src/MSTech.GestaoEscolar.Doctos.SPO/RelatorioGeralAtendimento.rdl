@@ -706,7 +706,7 @@
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!questionario.Value</Value>
+                  <Value>=Fields!orderQuestionario.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
@@ -753,7 +753,7 @@
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!conteudo.Value</Value>
+                      <Value>=Fields!orderConteudo.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
@@ -800,7 +800,7 @@
                       </Group>
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!resposta.Value</Value>
+                          <Value>=Fields!orderResposta.Value</Value>
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
@@ -836,6 +836,7 @@
                               <PaddingBottom>2pt</PaddingBottom>
                             </Style>
                           </Textbox>
+                          <rd:Selected>true</rd:Selected>
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>
@@ -1338,6 +1339,18 @@
         <Field Name="reap_id">
           <DataField>reap_id</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="orderQuestionario">
+          <DataField>orderQuestionario</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="orderConteudo">
+          <DataField>orderConteudo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="orderResposta">
+          <DataField>orderResposta</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
