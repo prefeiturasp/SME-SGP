@@ -382,8 +382,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         }
 
         private void ValidaCamposFiltroFixo(int valor)
-        {
-            try {
+        {            
                 if (valor > 0)
                 {
                     switch (valor)
@@ -418,19 +417,6 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                             break;
                     }
                 }
-            }
-            catch (ValidationException ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
-            }
-            catch (Exception ex)
-            {
-                ApplicationWEB._GravaErro(ex);
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
-                lblMessage.Text = UtilBO.GetErroMessage("Erro ao adicionar filtro fixo.", UtilBO.TipoMensagem.Erro);
-            }
-
         }
 
         #endregion
@@ -792,6 +778,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             try
             {
                 ValidaCamposFiltroFixo(Convert.ToByte(ddlFiltroFixo.SelectedValue));
+
                 if (VS_lstFiltrosFixos.Any(p => p.gff_tipoFiltro == Convert.ToByte(ddlFiltroFixo.SelectedValue)))
                     throw new ValidationException(string.Format("Este tipo de filtro já existe."));
 
