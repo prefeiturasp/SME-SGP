@@ -11,6 +11,20 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Collections.Generic;
     using System;
     using Data.Common;
+    using System.ComponentModel;
+
+    #region Enumeradores
+
+    public enum QuestionarioTipoCalculo
+    {
+        [Description("Sem cálculo")]
+        SemCalculo = 1,
+        [Description("Soma")]
+        Soma
+    }
+    
+    #endregion
+
     [Serializable]
     public class Questionario : CLS_Questionario
     {

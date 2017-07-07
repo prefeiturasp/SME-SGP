@@ -85,6 +85,69 @@ namespace GestaoEscolar.Configuracao.Questionario {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _rfvTitulo;
         
         /// <summary>
+        /// lblTipoCalculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTipoCalculo;
+        
+        /// <summary>
+        /// _ddlTipoCalculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList _ddlTipoCalculo;
+        
+        /// <summary>
+        /// divCalculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCalculo;
+        
+        /// <summary>
+        /// lblTituloCalculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloCalculo;
+        
+        /// <summary>
+        /// _txtTituloCalculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _txtTituloCalculo;
+        
+        /// <summary>
+        /// _rfvTituloCalculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator _rfvTituloCalculo;
+        
+        /// <summary>
+        /// _cpvTipoCalculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator _cpvTipoCalculo;
+        
+        /// <summary>
         /// _btnSalvar control.
         /// </summary>
         /// <remarks>
