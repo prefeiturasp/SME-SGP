@@ -157,6 +157,33 @@ namespace GestaoEscolar.Configuracao.RelatorioAtendimento {
         protected global::System.Web.UI.WebControls.CompareValidator cpvPeriodicidade;
         
         /// <summary>
+        /// divPeriodoCalendario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPeriodoCalendario;
+        
+        /// <summary>
+        /// lblPeriodos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPeriodos;
+        
+        /// <summary>
+        /// rptPeriodoCalendario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptPeriodoCalendario;
+        
+        /// <summary>
         /// divRacaCor control.
         /// </summary>
         /// <remarks>

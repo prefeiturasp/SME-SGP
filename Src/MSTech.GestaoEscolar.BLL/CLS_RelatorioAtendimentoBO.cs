@@ -156,7 +156,7 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="lstQuestionario">Lista de questionários</param>
         /// <param name="postedFile">Arquivo anexo</param>
         /// <returns></returns>
-        public static bool Salvar(CLS_RelatorioAtendimento rea, List<CLS_RelatorioAtendimentoGrupo> lstGrupo, List<CLS_RelatorioAtendimentoCargo> lstCargo, List<CLS_RelatorioAtendimentoQuestionario> lstQuestionario, long arquivo, int TamanhoMaximoArquivo, string[] TiposArquivosPermitidos)
+        public static bool Salvar(CLS_RelatorioAtendimento rea, List<CLS_RelatorioAtendimentoGrupo> lstGrupo, List<CLS_RelatorioAtendimentoCargo> lstCargo, List<CLS_RelatorioAtendimentoQuestionario> lstQuestionario, List<CLS_RelatorioAtendimentoPeriodo> lstRelatorioPeriodo, long arquivo, int TamanhoMaximoArquivo, string[] TiposArquivosPermitidos)
         {
             CLS_RelatorioAtendimentoDAO dao = new CLS_RelatorioAtendimentoDAO();
             dao._Banco.Open(IsolationLevel.ReadCommitted);
@@ -193,6 +193,12 @@ namespace MSTech.GestaoEscolar.BLL
                         if (!CLS_RelatorioAtendimentoQuestionarioBO.Delete(raq, dao._Banco))
                             throw new ValidationException("Erro ao remover questionário do relatório de atendimento.");
                     }
+                }
+
+                if (lstRelatorioPeriodo.Any())
+                {
+                    lstRelatorioPeriodo.ForEach(p => p.rea_id = rea.rea_id);
+                    CLS_RelatorioAtendimentoPeriodoBO.AtualizarPeriodos(lstRelatorioPeriodo, dao._Banco);
                 }
 
                 foreach (CLS_RelatorioAtendimentoGrupo rag in lstGrupo)
