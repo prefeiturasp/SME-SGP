@@ -340,12 +340,19 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Resumo das atividades desenvolvidas'	
 
- EXEC MS_InsereResource 
+	EXEC MS_InsereResource 
         @rcr_chave = 'AULAS_SINTESE' 
         , @rcr_NomeResource = 'Mensagens'
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
-        , @rcr_valorPadrao = 'Relatar de que forma as atividades foram desenvolvidas para o alcance dos objetivos (recursos didáticos e metodologia).'		
+        , @rcr_valorPadrao = 'Relatar de que forma as atividades foram desenvolvidas para o alcance dos objetivos (recursos didáticos e metodologia).'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'MSG_SINTESEDAAULA2' 
+        , @rcr_NomeResource = 'Mensagens'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Resumo das atividades desenvolvidas'		
 
 -- Fechar transação     
 SET XACT_ABORT OFF 

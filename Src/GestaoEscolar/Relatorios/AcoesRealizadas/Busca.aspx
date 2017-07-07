@@ -57,7 +57,7 @@
                     EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>"
                     OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
                     <Columns>
-                        <asp:TemplateField>
+                          <asp:TemplateField>
                             <HeaderTemplate>
                             </HeaderTemplate>
                             <ItemTemplate>
@@ -73,11 +73,11 @@
                         <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Calendario.Text %>" DataField="tur_calendario" SortExpression="tur_calendario" />
                     </Columns>
                 </asp:GridView>
+                 <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
                 <div class="right">
                     <asp:Button ID="btnGerarRelatrorioAcoesRealizadas" runat="server" Text="Gerar relatório" OnClick="btnGerarRelatrorioAcoesRealizadas_Click" />
-                </div>
-                <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
-            </asp:Panel>
+                </div>               
+            </asp:Panel>            
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

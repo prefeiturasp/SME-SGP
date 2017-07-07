@@ -57,7 +57,7 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         {
             get
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioNAAPA)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAcoesRealizadas)
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
                     string valor;
@@ -72,18 +72,19 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
 
             set
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioNAAPA)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAcoesRealizadas)
                 {
                     Dictionary<string, string> filtros = __SessionWEB.BuscaRealizada.Filtros;
                     if (filtros.ContainsKey("VS_SortDirection"))
                     {
                         filtros["VS_SortDirection"] = value.ToString();
-                        __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioNAAPA, Filtros = filtros };
+                        __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAcoesRealizadas, Filtros = filtros };
                     }
                 }
 
             }
         }
+
 
         /// <summary>
         /// Retorna o alu_id do registro que esta sendo editado.
