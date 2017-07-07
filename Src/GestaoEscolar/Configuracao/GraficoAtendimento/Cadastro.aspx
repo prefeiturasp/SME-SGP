@@ -105,11 +105,11 @@
                         <asp:TextBox ID="txtIdadeFinal" runat="server" SkinID="text20C" MaxLength="2"></asp:TextBox>
                     </div>
                     <div runat="server" id="divDataPreenchimento" visible="false">
-                        <asp:Label ID="Label4" runat="server" Text="Preenchimento de relatório de:" AssociatedControlID="txtDtInicial" />
-                        <asp:TextBox ID="txtDtInicial" runat="server" CssClass="maskData" SkinID="Data"></asp:TextBox>
+                        <asp:Label ID="Label4" runat="server" Text="Data inicial" AssociatedControlID="txtDtInicial" />
+                        <asp:TextBox ID="txtDtInicial" runat="server" MaxLength="10" SkinID="Data"></asp:TextBox>
 
-                        <asp:Label ID="Label5" runat="server" Text="Até:" AssociatedControlID="txtDtFinal" />
-                        <asp:TextBox ID="txtDtFinal" runat="server" CssClass="maskData" SkinID="Data"></asp:TextBox>
+                        <asp:Label ID="Label5" runat="server" Text="Data final" AssociatedControlID="txtDtFinal" />
+                        <asp:TextBox ID="txtDtFinal" runat="server" MaxLength="10" SkinID="Data"></asp:TextBox>
                     </div>
                     <div runat="server" id="divDetalhamentoDeficiencia" visible="false">
 
