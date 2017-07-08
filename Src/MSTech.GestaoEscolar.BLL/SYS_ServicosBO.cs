@@ -153,6 +153,12 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         ProcessamentoDivergenciasAulasPrevistas = 54
+        ,
+
+        ProcessamentoPreenchimentoFrequencia = 55
+        ,
+
+        ProcessamentoAlunosFrequencia = 56
     }
 
     #endregion Enumerador

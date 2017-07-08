@@ -583,4 +583,42 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
 
         #endregion IJob Members
     }
+
+    public class MS_JOB_ProcessamentoPreenchimentoFrequencia : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoPreenchimentoFrequencia();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
+
+    public class MS_JOB_ProcessamentoAlunosFrequencia : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoAlunosFrequencia();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
 }
