@@ -354,6 +354,27 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Resumo das atividades desenvolvidas'		
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'ACA_ConfiguracaoServicoPendenciaBO.eConfiguracaoServicoPendenciaSemRelatorioAtendimento.AEE' 
+        , @rcr_NomeResource = 'Enumerador'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Sem lançamento de relatório AEE'		
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'ACA_ConfiguracaoServicoPendenciaBO.eConfiguracaoServicoPendenciaSemRelatorioAtendimento.NAAPA' 
+        , @rcr_NomeResource = 'Enumerador'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Sem lançamento de relatório NAAPA'	
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'ACA_ConfiguracaoServicoPendenciaBO.eConfiguracaoServicoPendenciaSemRelatorioAtendimento.RP' 
+        , @rcr_NomeResource = 'Enumerador'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Sem lançamento de anotação de recuperação paralela'	
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
