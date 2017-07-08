@@ -258,5 +258,27 @@ namespace MSTech.GestaoEscolar.DAL
             qs.TimeOut = 0;
             qs.Execute();
         }
+
+        /// <summary>
+        /// Processa o preenchimento de frequência, conta as aulas sem a flag efetivado.
+        /// Utiliza a fila do fechamento.
+        /// </summary>
+        public void ExecJOB_ProcessamentoPreenchimentoFrequencia()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoPreenchimentoFrequencia", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
+
+        /// <summary>
+        /// Processa os alunos com baixa frequência e com faltas consecutivas.
+        /// Utiliza a fila do fechamento.
+        /// </summary>
+        public void ExecJOB_ProcessamentoAlunosFrequencia()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoAlunosFrequencia", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
     }
 }
