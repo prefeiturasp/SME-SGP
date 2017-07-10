@@ -28,15 +28,12 @@ namespace MSTech.GestaoEscolar.BLL
 
         public List<CLS_QuestionarioRespostaPreenchimento> lstQuestionarioRespostaPreenchimento { get; set; }
 
-        public bool processarPendencia { get; set; }
-
         public RelatorioPreenchimentoAluno()
         {
             entityRelatorioPreenchimento = new CLS_RelatorioPreenchimento();
             entityPreenchimentoAlunoTurmaDisciplina = new CLS_RelatorioPreenchimentoAlunoTurmaDisciplina();
             lstQuestionarioConteudoPreenchimento = new List<CLS_QuestionarioConteudoPreenchimento>();
             lstQuestionarioRespostaPreenchimento = new List<CLS_QuestionarioRespostaPreenchimento>();
-            processarPendencia = false;
         }
     }
 
@@ -196,25 +193,89 @@ namespace MSTech.GestaoEscolar.BLL
                     List<MTR_MatriculaTurma> matriculasAno = MTR_MatriculaTurmaBO.GetSelectMatriculasAlunoAno(relatorio.entityPreenchimentoAlunoTurmaDisciplina.alu_id, calendario.cal_ano);
                     matriculasAno.ForEach(p => CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, p.tur_id));
 
-                    if (relatorio.processarPendencia)
+                    if (relatorioAtendimento.rea_gerarPendenciaFechamento && 
+                        ACA_FormatoAvaliacaoBO.CarregarPorTur(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tur_id, dao._Banco).fav_fechamentoAutomatico)
                     {
-                        if (relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id > 0)
+                        List<AlunoFechamentoPendencia> FilaProcessamento = new List<AlunoFechamentoPendencia>();
+                        if (relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id > 0)
                         {
-                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id, relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id, dao._Banco);
+                            if (relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id > 0)
+                            {
+                                FilaProcessamento.Add(
+                                    new AlunoFechamentoPendencia
+                                    {
+                                        tud_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id
+                                        ,
+                                        tpc_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id
+                                        ,
+                                        afp_frequencia = true
+                                        ,
+                                        afp_nota = true
+                                        ,
+                                        afp_processado = 2
+                                    });
+                            }
+                            else
+                            {
+                                FilaProcessamento.AddRange(ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(calendario.cal_id, GestaoEscolarUtilBO.MinutosCacheLongo)
+                                   .Select(p => new AlunoFechamentoPendencia
+                                   {
+                                       tud_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id,
+                                       tpc_id = p.tpc_id,
+                                       afp_frequencia = true,
+                                       afp_nota = false,
+                                       afp_processado = 2
+                                   }).ToList());
+                            }
                         }
                         else
                         {
-                            ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(calendario.cal_id, GestaoEscolarUtilBO.MinutosCacheLongo);
-                            List<AlunoFechamentoPendencia> FilaProcessamento = new List<AlunoFechamentoPendencia>();
-                            FilaProcessamento.AddRange(ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(calendario.cal_id, GestaoEscolarUtilBO.MinutosCacheLongo)
-                                .Select(p => new AlunoFechamentoPendencia
-                                {
-                                    tud_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id,
-                                    tpc_id = p.tpc_id,
-                                    afp_frequencia = true,
-                                    afp_nota = false,
-                                    afp_processado = 2
-                                }).ToList());
+                            if (relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id > 0)
+                            {
+                                FilaProcessamento.AddRange(TUR_TurmaDisciplinaBO.GetSelectBy_Turma(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tur_id, dao._Banco, GestaoEscolarUtilBO.MinutosCacheLongo)
+                                    .Select(p => new AlunoFechamentoPendencia
+                                    {
+                                        tud_id = p.tud_id
+                                        ,
+                                        tpc_id = relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id
+                                        ,
+                                        afp_frequencia = true
+                                        ,
+                                        afp_nota = true
+                                        ,
+                                        afp_processado = 2
+                                    }).ToList());
+                            }
+                            else
+                            {
+                                var periodos = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(calendario.cal_id, GestaoEscolarUtilBO.MinutosCacheLongo);
+                                FilaProcessamento.AddRange(TUR_TurmaDisciplinaBO.GetSelectBy_Turma(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tur_id, dao._Banco, GestaoEscolarUtilBO.MinutosCacheLongo)
+                                    .SelectMany
+                                    (
+                                        tud =>
+
+                                        periodos.Select
+                                        (
+                                            tpc =>
+                                            new AlunoFechamentoPendencia
+                                            {
+                                                tud_id = tud.tud_id
+                                                ,
+                                                tpc_id = tpc.tpc_id
+                                                ,
+                                                afp_frequencia = true
+                                                ,
+                                                afp_nota = true
+                                                ,
+                                                afp_processado = 2
+                                            }
+                                        ).ToList()
+                                    ));
+                            }
+                        }
+
+                        if (FilaProcessamento.Any())
+                        {
                             CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(FilaProcessamento, dao._Banco);
                         }
                     }

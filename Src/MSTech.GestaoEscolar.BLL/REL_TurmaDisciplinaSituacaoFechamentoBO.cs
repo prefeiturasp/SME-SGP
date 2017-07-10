@@ -27,8 +27,10 @@ namespace MSTech.GestaoEscolar.BLL
         SemParecer = 5,
         PendentePlanejamento = 6,
         SemPlanoAula = 7,
-        PendenteAnotacaoRP = 8,
-        PendenteAnotacaoEncerramentoRP = 9
+        PendenteRelatorioAEE = 8,
+        PendenteRelatorioNAAPA = 9,
+        PendenteRelatorioRPPeriodico = 10,
+        PendenteRelatorioRPEncerramento = 11
     }
 
     #endregion
