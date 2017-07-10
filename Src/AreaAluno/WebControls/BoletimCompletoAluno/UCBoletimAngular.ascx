@@ -296,7 +296,7 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr class="trDisciplina linhaImpar" ng-repeat="(indexMat, materia) in boletim.matter" ng-class="checkParImpar(indexMat)" ng-if="!materia.enriquecimentoCurricular||!materia.recuperacao">
+                                                                            <tr class="trDisciplina linhaImpar" ng-repeat="(indexMat, materia) in boletim.matter" ng-class="checkParImpar(indexMat)" ng-if="!materia.enriquecimentoCurricular||!materia.recuperacao||!materia.aee">
                                                                                 <td class="nomeDisciplina">{{materia.Disciplina}}</td>
 
                                                                                 <td class="nota" ng-repeat="(indexAval, avaliacao) in materia.avaliacao"
@@ -349,7 +349,7 @@
                                                                             </thead>
                                                                             <tbody>
 
-                                                                                <tr class="trDisciplina" ng-repeat="(indexMat, materia) in boletim.enrichment" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
+                                                                                <tr class="trDisciplina" ng-repeat="(indexMat, materia) in boletim.enrichment" ng-class="checkParImpar(indexMat)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao||materia.aee">
                                                                                     <td class="nomeDisciplina">{{materia.Disciplina}}</td>
                                                                                     <td class="nota" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
                                                                                     <td class="nota">{{materia.totalFaltas}}</td>
@@ -422,7 +422,43 @@
                                                                             </thead>
                                                                             <tbody>
 
-                                                                                <tr class="trDisciplina" ng-repeat="(indexRec, materia) in boletim.recovery" ng-class="checkParImpar(indexRec)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao">
+                                                                                <tr class="trDisciplina" ng-repeat="(indexRec, materia) in boletim.recovery" ng-class="checkParImpar(indexRec)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao||materia.aee">
+                                                                                    <td class="nomeDisciplina">{{materia.Disciplina}}</td>
+                                                                                    <td class="nota" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
+                                                                                    <td class="nota">{{materia.totalFaltas}}</td>
+                                                                                    <td class="nota" ng-if="boletim.exibeCompensacaoAusencia">{{materia.parecerFinal}}</td>
+                                                                                </tr>
+
+                                                                            </tbody>
+                                                                            <!--tbody-->
+                                                                        </table>
+                                                                        <!--table-->
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <table class="tblBoletim" rules="none" ng-if="boletim.showAEE">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th rowspan="2" class="nomePeriodo colPrincipal">
+                                                                                        <span>
+                                                                                            <asp:Literal runat="server" Text="<%$ Resources:UserControl, UCDadosBoletim.lblAEETitulo.Text %>" /></span>
+                                                                                    </th>
+
+                                                                                    <th class="nomePeriodo colBimestre" ng-repeat="periodo in boletim.periodos" title="{{periodo.MatriculaPeriodo}}">
+                                                                                        <span>{{periodo.tpc_nome}}</span>
+                                                                                    </th>
+
+                                                                                    <th rowspan="2" class="nomePeriodo">Total de Ausências</th>
+                                                                                    <th rowspan="2" class="nomePeriodo" ng-if="boletim.exibeCompensacaoAusencia">Parecer Final</th>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th class="nomePeriodoColunas" ng-repeat="periodo in boletim.periodos">Faltas</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                                <tr class="trDisciplina" ng-repeat="(indexAee, materia) in boletim.aee" ng-class="checkParImpar(indexAee)" ng-if="materia.enriquecimentoCurricular||materia.recuperacao||materia.aee">
                                                                                     <td class="nomeDisciplina">{{materia.Disciplina}}</td>
                                                                                     <td class="nota" ng-repeat="(indexAval, avaliacao) in materia.notas">{{avaliacao.nota.numeroFaltas != null ? avaliacao.nota.numeroFaltas : "-"}}</td>
                                                                                     <td class="nota">{{materia.totalFaltas}}</td>

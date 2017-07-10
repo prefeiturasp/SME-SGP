@@ -591,7 +591,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CStr(Fields!totalFaltasRegencia.Value) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
+                              <Value>=CStr(IIf(Fields!fav_tipoApuracaoFrequencia.Value = 1, Fields!totalFaltasAnual.Value, Fields!totalFaltasRegencia.Value)) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -642,7 +642,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!totalAusenciasCompensadasRegencia.Value</Value>
+                              <Value>=Iif(Fields!fav_tipoApuracaoFrequencia.Value = 1, Fields!totalAusenciasCompensadas.Value, Fields!totalAusenciasCompensadasRegencia.Value)</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -693,7 +693,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=CStr(Fields!frequenciaFinalAjustadaRegencia.Value) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
+                              <Value>=CStr(Iif(Fields!fav_tipoApuracaoFrequencia.Value = 1, Fields!frequenciaAnual.Value, Fields!frequenciaFinalAjustadaRegencia.Value)) + IIF(CBool(Fields!PossuiFreqExternaAtual.Value) = true, "*", "")</Value>
                               <Style>
                                 <FontSize>5pt</FontSize>
                               </Style>
@@ -2320,6 +2320,14 @@
         <Field Name="PossuiFreqExterna">
           <DataField>possuiFreqExterna</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="fav_tipoApuracaoFrequencia">
+          <DataField>fav_tipoApuracaoFrequencia</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="totalFaltasAnual">
+          <DataField>totalFaltasAnual</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>

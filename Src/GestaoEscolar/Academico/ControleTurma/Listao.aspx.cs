@@ -12,6 +12,7 @@ using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.Validation.Exceptions;
+using System.IO;
 
 namespace GestaoEscolar.Academico.ControleTurma
 {
@@ -843,6 +844,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
+
         #endregion Propriedades
 
         #region Métodos
@@ -1249,6 +1252,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 tpc_id = UCNavegacaoTelaPeriodo.VS_tpc_id,
                                 atm_media = g.FirstOrDefault()["atm_media"].ToString()
                             }).ToList();
+                    }
+
+                    if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal)
+                    {
+                        lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, VisibilidadeRegencia(ddlTurmaDisciplinaListao)? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id, ApplicationWEB.AppMinutosCacheMedio);
                     }
 
                     // Carregar as atividades e notas dos alunos nas atividades.
@@ -2112,17 +2120,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                     }
                 }
 
-                // Recupera a data de saída do aluno na turma/disciplina
-                string sDataSaida = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "mtd_dataSaida"));
-                if (!string.IsNullOrEmpty(sDataSaida))
-                {
-                    DateTime dataSaida = Convert.ToDateTime(sDataSaida);
-                    if (dataSaida.Date < UCNavegacaoTelaPeriodo.cap_dataFim)
-                    {
-                        if (lblNome != null)
-                            lblNome.Text += "<br/>" + "<b>Data de saída:</b> " + dataSaida.ToString("dd/MM/yyyy");
-                    }
-                }
+                // Issue #313 - removi texto de data de saída, pois já traz a informação no nome do aluno.
+                //// Recupera a data de saída do aluno na turma/disciplina
+                //string sDataSaida = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "mtd_dataSaida"));
+                //if (!string.IsNullOrEmpty(sDataSaida))
+                //{
+                //    DateTime dataSaida = Convert.ToDateTime(sDataSaida);
+                //    if (dataSaida.Date < UCNavegacaoTelaPeriodo.cap_dataFim)
+                //    {
+                //        if (lblNome != null)
+                //            lblNome.Text += "<br/>" + "<b>Data de saída:</b> " + dataSaida.ToString("dd/MM/yyyy");
+                //    }
+                //}
             }
         }
 
@@ -2262,6 +2271,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                                    ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id
                                , UCNavegacaoTelaPeriodo.VS_tpc_id, __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao
                                 , PosicaoDocente, tur_ids);
+
+                if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal)
+                {
+                    lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio);
+                }
 
                 // Carregar as atividades e notas dos alunos nas atividades.
                 var x = (from DataRow dr in dt.Rows
@@ -2449,6 +2463,32 @@ namespace GestaoEscolar.Academico.ControleTurma
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
             }
+        }
+
+        private void AbrirRelatorioRP(long alu_id, string tds_idRP)
+        {
+            Session.Remove("alu_id_RelatorioRP");
+            Session.Remove("tds_id_RelatorioRP");
+            Session.Remove("PaginaRetorno_RelatorioRP");
+
+            Session.Add("alu_id_RelatorioRP", alu_id);
+            Session.Add("tds_id_RelatorioRP", tds_idRP);
+            Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            RedirecionarPagina("~/Classe/RelatorioRecuperacaoParalela/Cadastro.aspx");
+        }
+
+        private void AbrirRelatorioAEE(long alu_id)
+        {
+            Session.Remove("alu_id_RelatorioAEE");
+            Session.Remove("PaginaRetorno_RelatorioAEE");
+
+            Session.Add("alu_id_RelatorioAEE", alu_id);
+            Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
         }
 
         #endregion Métodos
@@ -2790,6 +2830,10 @@ namespace GestaoEscolar.Academico.ControleTurma
             UCSelecaoDisciplinaCompartilhada1.SelecionarDisciplina += UCSelecaoDisciplinaCompartilhada1_SelecionarDisciplina;
             UCControleTurma1.chkTurmasNormaisMultisseriadasIndexChanged += UCControleTurma_chkTurmasNormaisMultisseriadasIndexChanged;
             UCConfirmacaoOperacao.ConfimaOperacao += UCConfirmacaoOperacao_ConfimaOperacao;
+            UCLancamentoFrequencia.AbrirRelatorioRP += UCLancamentoFrequencia_AbrirRelatorioRP;
+            UCLancamentoFrequenciaTerritorio.AbrirRelatorioRP += UCLancamentoFrequencia_AbrirRelatorioRP;
+            UCLancamentoFrequencia.AbrirRelatorioAEE += UCLancamentoFrequencia_AbrirRelatorioAEE;
+            UCLancamentoFrequenciaTerritorio.AbrirRelatorioAEE += UCLancamentoFrequencia_AbrirRelatorioAEE;
 
             // Configura javascripts da tela.
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -2841,6 +2885,16 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             trExibirAlunoDispensadoListao.Visible = UCLancamentoFrequencia.VisivelAlunoDispensado = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_LEGENDA_ALUNO_DISPENSADO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+        }
+
+        private void UCLancamentoFrequencia_AbrirRelatorioRP(long alu_id, string tds_idRP)
+        {
+            AbrirRelatorioRP(alu_id, tds_idRP);
+        }
+
+        private void UCLancamentoFrequencia_AbrirRelatorioAEE(long alu_id)
+        {
+            AbrirRelatorioAEE(alu_id);
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -3514,6 +3568,35 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        protected void rptAlunosAvaliacao_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "RelatorioRP")
+            {
+                try
+                {
+                    string[] args = e.CommandArgument.ToString().Split(';');
+                    AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+        }
+
         protected void rptAlunosAvaliacao_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if ((e.Item.ItemType == ListItemType.Item) ||
@@ -3627,6 +3710,48 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                         tdNumChamadaAvaliacao.Style["background-color"] = tdNomeAvaliacao.Style["background-color"] =
                         tdMedia.Style["background-color"] = ApplicationWEB.AlunoInativo;
+                    }
+
+                    LinkButton btnRelatorioAEE = (LinkButton)e.Item.FindControl("btnRelatorioAEE");
+                    if (btnRelatorioAEE != null)
+                    {
+                        btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                    && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "PossuiDeficiencia"));
+                        btnRelatorioAEE.CommandArgument = Alu_id.ToString();
+                    }
+
+                    // Mostra o ícone para as anotações de recuperação paralela (RP):
+                    // - para todos os alunos, quando a turma for de recuperação paralela,
+                    // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
+                    if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno
+                        || lstAlunosRelatorioRP.Any(p => p.alu_id == Alu_id))
+                    {
+                        LinkButton btnRelatorioRP = (LinkButton)e.Item.FindControl("btnRelatorioRP");
+                        if (btnRelatorioRP != null)
+                        {
+                            btnRelatorioRP.Visible = true;
+                            btnRelatorioRP.CommandArgument = Alu_id.ToString();
+
+                            if (VisibilidadeRegencia(ddlTurmaDisciplinaListao))
+                            {
+                                string strTds = string.Empty;
+                                (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_id)
+                                 group preenchimento by new { tds_id = preenchimento.tds_idRelacionada } into grupo
+                                 select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
+                                if (strTds.Length > 1)
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
+                                }
+                                else
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                                }
+                            }
+                            else
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                            }
+                        }
                     }
                 }
             }
@@ -4104,7 +4229,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     IsNew = tae_id <= 0
                 };
 
-                if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity, EntTurmaDisciplina.tud_tipo, VS_EntitiesControleTurma.formatoAvaliacao.fav_fechamentoAutomatico, Ent_ID_UsuarioLogado))
+                if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity, VS_EntitiesControleTurma.calendarioAnual.cal_id, EntTurmaDisciplina.tud_tipo, VS_EntitiesControleTurma.formatoAvaliacao.fav_fechamentoAutomatico, Ent_ID_UsuarioLogado))
                 {
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Adição de atividade | tud_id: {0}, tae_id: {1}", entity.tud_id, entity.tae_id));
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
@@ -4124,6 +4249,35 @@ namespace GestaoEscolar.Academico.ControleTurma
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
                 ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void rptAlunoAtivExtra_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "RelatorioRP")
+            {
+                try
+                {
+                    string[] args = e.CommandArgument.ToString().Split(';');
+                    AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
             }
         }
 
@@ -4197,6 +4351,48 @@ namespace GestaoEscolar.Academico.ControleTurma
                         HtmlControl tdNomeAvaliacao = (HtmlControl)e.Item.FindControl("tdNomeAvaliacao");
 
                         tdNumChamadaAvaliacao.Style["background-color"] = tdNomeAvaliacao.Style["background-color"] = ApplicationWEB.AlunoInativo;
+                    }
+
+                    LinkButton btnRelatorioAEE = (LinkButton)e.Item.FindControl("btnRelatorioAEE");
+                    if (btnRelatorioAEE != null)
+                    {
+                        btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                    && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "PossuiDeficiencia"));
+                        btnRelatorioAEE.CommandArgument = Alu_id.ToString();
+                    }
+
+                    // Mostra o ícone para as anotações de recuperação paralela (RP):
+                    // - para todos os alunos, quando a turma for de recuperação paralela,
+                    // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
+                    if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno
+                        || lstAlunosRelatorioRP.Any(p => p.alu_id == Alu_idExtraClasse))
+                    {
+                        LinkButton btnRelatorioRP = (LinkButton)e.Item.FindControl("btnRelatorioRP");
+                        if (btnRelatorioRP != null)
+                        {
+                            btnRelatorioRP.Visible = true;
+                            btnRelatorioRP.CommandArgument = Alu_idExtraClasse.ToString();
+
+                            if (VisibilidadeRegencia(ddlTurmaDisciplinaListao))
+                            {
+                                string strTds = string.Empty;
+                                (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_idExtraClasse)
+                                 group preenchimento by new { tds_id = preenchimento.tds_idRelacionada } into grupo
+                                 select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
+                                if (strTds.Length > 1)
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
+                                }
+                                else
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                                }
+                            }
+                            else
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                            }
+                        }
                     }
                 }
             }

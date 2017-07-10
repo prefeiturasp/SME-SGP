@@ -246,3 +246,4 @@ ModelManifest.xml
 .fake/
 *.dll.config
 *Backup.rdl
+/Src/GestaoEscolar/App_Data/Includes

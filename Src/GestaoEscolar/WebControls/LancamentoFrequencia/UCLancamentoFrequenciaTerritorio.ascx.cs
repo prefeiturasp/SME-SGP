@@ -189,6 +189,8 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
         private CFG_PermissaoModuloOperacao permissaoModuloLancamentoFrequenciaInfantil;
         private int tne_id;
 
+        private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
+
         #endregion Propriedades
 
         #region Delegates
@@ -200,6 +202,14 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
         public delegate void commandCarregarAusencias(long alu_id, int mtu_id, int mtd_id);
 
         public event commandCarregarAusencias CarregarAusencias;
+
+        public delegate void commandAbrirRelatorioRP(long alu_id, string tds_idRP);
+
+        public event commandAbrirRelatorioRP AbrirRelatorioRP;
+
+        public delegate void commandAbrirRelatorioAEE(long alu_id);
+
+        public event commandAbrirRelatorioAEE AbrirRelatorioAEE;
 
         #endregion Delegates
 
@@ -310,6 +320,11 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
             rptAlunosFrequencia.DataSource = MTR_MatriculaTurmaDisciplinaBO.SelecionaAlunosAtivosCOCPorTurmaDisciplina(tudId,
             tpcId, tipoDocente, false, capDataInicio, capDataFim, ApplicationWEB.AppMinutosCacheMedio, tur_ids)
             .Where(p => ((p.mtd_dataSaida > dtInicio) || (p.mtd_dataSaida == null)) && (p.mtd_dataMatricula <= dtFim));
+
+            if (entitiesControleTurma.turma.tur_tipo == (byte)TUR_TurmaTipo.Normal)
+            {
+                lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(tpcId, turId, tudId, ApplicationWEB.AppMinutosCacheMedio);
+            }
 
             this.tudTipo = entitiesControleTurma.turmaDisciplina.tud_tipo;
 
@@ -766,6 +781,28 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                         imgDetalharCompensacaoSituacao.Visible = dados.Count > 0
                             ? dados.FirstOrDefault().AlunoComCompensacao
                             : false;
+
+                    LinkButton btnRelatorioAEE = (LinkButton)e.Item.FindControl("btnRelatorioAEE");
+                    if (btnRelatorioAEE != null)
+                    {
+                        btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                    && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "PossuiDeficiencia"));
+                        btnRelatorioAEE.CommandArgument = Alu_id.ToString();
+                    }
+
+                    // Mostra o ícone para as anotações de recuperação paralela (RP):
+                    // - para todos os alunos, quando a turma for de recuperação paralela,
+                    // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
+                    if (tudTipo == (byte)TurmaDisciplinaTipo.DisciplinaEletivaAluno
+                        || lstAlunosRelatorioRP.Any(p => p.alu_id == Alu_id))
+                    {
+                        LinkButton btnRelatorioRP = (LinkButton)e.Item.FindControl("btnRelatorioRP");
+                        if (btnRelatorioRP != null)
+                        {
+                            btnRelatorioRP.Visible = true;
+                            btnRelatorioRP.CommandArgument = string.Format("{0};-1", Alu_id.ToString());
+                        }
+                    }
                 }
 
                 rptAulas.DataSource = dados;
@@ -798,6 +835,34 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                 {
                     if (CarregarAusencias != null)
                         CarregarAusencias(alu_id, mtu_id, mtd_id);
+                }
+            }
+            else if (e.CommandName == "RelatorioRP")
+            {
+                try
+                {
+                    if (AbrirRelatorioRP != null)
+                    {
+                        string[] args = e.CommandArgument.ToString().Split(';');
+                        AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    //lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    //lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }

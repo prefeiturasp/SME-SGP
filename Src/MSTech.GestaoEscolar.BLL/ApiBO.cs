@@ -6044,6 +6044,8 @@ namespace MSTech.GestaoEscolar.BLL
                             ,
                             recuperacao = g.First().Recuperacao
                             ,
+                            aee = g.First().tud_tipo == (byte)TurmaDisciplinaTipo.AtendimentoEducacionalEspecializado
+                            ,
                             disRelacionadas = g.First().disRelacionadas
                             ,
                             notas = (

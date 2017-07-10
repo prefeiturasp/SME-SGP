@@ -48,6 +48,7 @@ namespace GestaoEscolar.Relatorios.AtaSinteseEnriquecimentoCurricular
         {
             UCBuscaDocenteTurma._VS_AnosAnteriores = true;
             UCBuscaDocenteTurma._VS_MostarComboEscola = false;
+            UCBuscaDocenteTurma._VS_CarregarApenasTurmasNormais = true;
             divPeriodoCalendario.Visible = true;
             UCBuscaDocenteTurma.ComboTurma.Obrigatorio &= UCBuscaDocenteTurma._VS_doc_id > 0;
             UCCPeriodoCalendario.MostrarMensagemSelecione = true;

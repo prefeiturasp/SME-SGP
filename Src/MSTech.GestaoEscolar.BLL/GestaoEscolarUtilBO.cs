@@ -27,6 +27,7 @@ using MSTech.GestaoEscolar.BLL.Caching;
 using MSTech.CoreSSO.DAL;
 using System.Runtime.CompilerServices;
 using MSTech.Validation;
+using System.Web.UI;
 
 namespace MSTech.GestaoEscolar.BLL
 {
@@ -53,6 +54,136 @@ namespace MSTech.GestaoEscolar.BLL
             }
 
             return entity.pes_nome;
+        }
+
+        /// <summary>
+        /// Retorna o sexo da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string SexoFormatado(this PES_Pessoa entity)
+        {
+            switch (entity.pes_sexo)
+            {
+                case 1:
+                    return "Masculino";
+                case 2:
+                    return "Feminino";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Retorna a raça/core da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string RacaCorFormatado(this PES_Pessoa entity)
+        {
+            switch (entity.pes_racaCor)
+            {
+                case 1:
+                    return "Branca";
+                case 2:
+                    return "Preta";
+                case 3:
+                    return "Parda";
+                case 4:
+                    return "Amarela";
+                case 5:
+                    return "Indígena";
+                case 6:
+                    return "Não declarada";
+            }
+
+            return string.Empty;
+        }
+
+        public static bool In<T>(this T valor, params T[] array)
+        {
+            return array.Contains(valor);
+        }
+
+        public static T ToEntity<T>(this DataRow dataRow) where T: class, new()
+        {
+            return (T)GestaoEscolarUtilBO.DataRowToEntity(dataRow, new T());
+        }
+
+        public static List<T> ToEntityList<T>(this DataTable datatable) where T : class, new()
+        {
+            if (datatable.Rows.Count > 0)
+            {
+                return GestaoEscolarUtilBO.MapToEnumerable<T>(datatable).ToList();
+            }
+
+            return new List<T>();
+        }
+
+        public static T FindControl<T>(this RepeaterItem item, string id) where T : Control
+        {
+            return item.FindControl(id) as T;
+        }
+
+        public static string GetValue(this HiddenField hdn)
+        {
+            if (hdn == null)
+            {
+                return string.Empty;
+            }
+
+            return hdn.Value;
+        }
+
+        public static string GetText(this TextBox txt)
+        {
+            if (txt == null)
+            {
+                return string.Empty;
+            }
+
+            return txt.Text;
+        }
+
+        public static bool IsChecked(this RadioButton rdb)
+        {
+            if (rdb == null)
+            {
+                return false;
+            }
+            
+            return rdb.Checked;
+        }
+
+        public static bool IsChecked(this CheckBox chk)
+        {
+            if (chk == null)
+            {
+                return false;
+            }
+
+            return chk.Checked;
+        }
+
+        public static int ToInt32(this string str)
+        {
+            int valor = -1;
+            int.TryParse(str, out valor);
+            return valor;
+        }
+
+        public static long ToInt64(this string str)
+        {
+            long valor = -1;
+            long.TryParse(str, out valor);
+            return valor;
+        }
+
+        public static byte ToByte(this string str)
+        {
+            byte valor = 0;
+            byte.TryParse(str, out valor);
+            return valor;
         }
     }
 
@@ -491,6 +622,8 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         QuantitativoSugestoes
+        ,
+        RelatorioAEE
     }
 
     [Serializable]

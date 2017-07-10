@@ -132,7 +132,7 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <asp:Repeater ID="rptAlunosAvaliacao" runat="server" OnItemDataBound="rptAlunosAvaliacao_ItemDataBound">
+                                                <asp:Repeater ID="rptAlunosAvaliacao" runat="server" OnItemDataBound="rptAlunosAvaliacao_ItemDataBound" OnItemCommand="rptAlunosAvaliacao_ItemCommand">
                                                     <HeaderTemplate>
                                                         <div>
                                                             <table id="tabela" class="grid tbLancamentoAvaliacoes sortableAvaliacoes grid-responsive-list" cellspacing="0">
@@ -212,10 +212,18 @@
                                                                 <asp:Label ID="lblava_id" runat="server" Text='<%#Bind("ava_id") %>' Visible="false"></asp:Label>
                                                                 <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("numeroChamada") %>'></asp:Label>
                                                             </td>
-                                                            <td runat="server" id="tdNomeAvaliacao">
+                                                            <td runat="server" id="tdNomeAvaliacao" class="td-relatorio">
                                                                 <asp:Label ID="lblNome" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
                                                                 <asp:Label ID="lblNomeOficial" runat="server" Text='<%#Bind("pes_nome") %>' Visible="false">
                                                                 </asp:Label>
+                                                                <div class="dropdown-relatorio">
+                                                                    <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                                                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                                                                    <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
+                                                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
+                                                                    <!-- botao dropdown -->
+                                                                    <button title="Seleção de relatório" class="btn-dropdown-relatorio"></button>
+                                                                </div>
                                                             </td>
                                                             <asp:Repeater ID="rptAtividadesAvaliacao" runat="server" OnItemDataBound="rptAtividades_ItemDataBound">
                                                                 <ItemTemplate>
@@ -258,10 +266,18 @@
                                                                 <asp:Label ID="lblava_id" runat="server" Text='<%#Bind("ava_id") %>' Visible="false"></asp:Label>
                                                                 <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("numeroChamada") %>'></asp:Label>
                                                             </td>
-                                                            <td runat="server" id="tdNomeAvaliacao">
+                                                            <td runat="server" id="tdNomeAvaliacao" class="td-relatorio">
                                                                 <asp:Label ID="lblNome" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
                                                                 <asp:Label ID="lblNomeOficial" runat="server" Text='<%#Bind("pes_nome") %>' Visible="false">
                                                                 </asp:Label>
+                                                                <div class="dropdown-relatorio">
+                                                                    <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                                                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                                                                    <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
+                                                                        ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
+                                                                    <!-- botao dropdown -->
+                                                                    <button title="Seleção de relatório" class="btn-dropdown-relatorio"></button>
+                                                                </div>
                                                             </td>
                                                             <asp:Repeater ID="rptAtividadesAvaliacao" runat="server" OnItemDataBound="rptAtividades_ItemDataBound">
                                                                 <ItemTemplate>
@@ -516,7 +532,7 @@
                                                 <fieldset>
                                                     <asp:Label ID="lblSemAtividadeExtra" runat="server"></asp:Label>
                                                     <uc2:UCComboOrdenacao ID="UCComboOrdenacaoAtivExtra" runat="server" />
-                                                    <asp:Repeater ID="rptAlunoAtivExtra" runat="server" OnItemDataBound="rptAlunoAtivExtra_ItemDataBound">
+                                                    <asp:Repeater ID="rptAlunoAtivExtra" runat="server" OnItemDataBound="rptAlunoAtivExtra_ItemDataBound" OnItemCommand="rptAlunoAtivExtra_ItemCommand">
                                                         <HeaderTemplate>
                                                             <div>
                                                                 <table id="tabela" class="grid tbLancamentoAvaliacoes sortableAtividadeExtra grid-responsive-list" cellspacing="0">
@@ -525,7 +541,7 @@
                                                                             <th class="center">
                                                                                 <asp:Label ID="lblNumChamada" runat="server" Text='Nº Chamada'></asp:Label>
                                                                             </th>
-                                                                            <th>
+                                                                            <th class="text-left">
                                                                                 <asp:Label ID="lblNome" runat="server" Text='Nome do aluno'></asp:Label>
                                                                             </th>
                                                                             <asp:Repeater ID="rptAtividades" runat="server" OnItemDataBound="rptAtividadesExtraClasseHeader_ItemDataBound">
@@ -559,10 +575,18 @@
                                                                     <asp:Label ID="lblava_id" runat="server" Text='<%#Bind("ava_id") %>' Visible="false"></asp:Label>
                                                                     <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("numeroChamada") %>'></asp:Label>
                                                                 </td>
-                                                                <td runat="server" id="tdNomeAvaliacao">
+                                                                <td runat="server" id="tdNomeAvaliacao" class="td-relatorio">
                                                                     <asp:Label ID="lblNome" runat="server" Text='<%#Bind("pes_nome") %>'></asp:Label>
                                                                     <asp:Label ID="lblNomeOficial" runat="server" Text='<%#Bind("pes_nome") %>' Visible="false">
                                                                     </asp:Label>
+                                                                    <div class="dropdown-relatorio">
+                                                                        <asp:LinkButton ID="btnRelatorioRP" runat="server" CausesValidation="False" CommandName="RelatorioRP"
+                                                                            ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioRP.ToolTip %>" SkinID="btRelatorioRP" Visible="false" />
+                                                                        <asp:LinkButton ID="btnRelatorioAEE" runat="server" CausesValidation="False" CommandName="RelatorioAEE"
+                                                                            ToolTip="<%$ Resources:Academico, ControleTurma.Alunos.btnRelatorioAEE.ToolTip %>" SkinID="btRelatorioAEE" Visible="false" />
+                                                                        <!-- botao dropdown -->
+                                                                        <button title="Seleção de relatório" class="btn-dropdown-relatorio"></button>
+                                                                    </div>
                                                                 </td>
                                                                 <asp:Repeater ID="rptAtividades" runat="server" OnItemDataBound="rptAtividadesExtraClasse_ItemDataBound">
                                                                     <ItemTemplate>

@@ -259,6 +259,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
+
         #endregion
 
         #region Métodos
@@ -307,6 +309,11 @@ namespace GestaoEscolar.Academico.ControleTurma
         {
             try
             {
+                if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal)
+                {
+                    lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio);
+                }
+
                 CancelaSelect = false;
 
                 if (zeraPagina)
@@ -861,13 +868,55 @@ namespace GestaoEscolar.Academico.ControleTurma
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar gerar o relatório pedagógico do aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
+            else if (e.CommandName == "RelatorioRP")
+            {
+                try
+                {
+                    string[] args = e.CommandArgument.ToString().Split(';');
 
+                    Session.Remove("alu_id_RelatorioRP");
+                    Session.Remove("tds_id_RelatorioRP");
+                    Session.Remove("PaginaRetorno_RelatorioRP");
+
+                    Session.Add("alu_id_RelatorioRP", Convert.ToInt64(args[0]));
+                    Session.Add("tds_id_RelatorioRP", -1);
+                    Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
+
+                    CarregaSessionPaginaRetorno();
+                    RedirecionarPagina("~/Classe/RelatorioRecuperacaoParalela/Cadastro.aspx");
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    Session.Remove("alu_id_RelatorioAEE");
+                    Session.Remove("PaginaRetorno_RelatorioAEE");
+
+                    Session.Add("alu_id_RelatorioAEE", Convert.ToInt64(e.CommandArgument.ToString()));
+                    Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
+
+                    CarregaSessionPaginaRetorno();
+                    RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
         }
 
         protected void grvAluno_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                long alu_id = Convert.ToInt64(DataBinder.Eval(e.Row.DataItem, "alu_id"));
                 byte situacao = Convert.ToByte(DataBinder.Eval(e.Row.DataItem, "mtu_situacao"));
                 long arq_idFoto = Convert.ToInt64((DataBinder.Eval(e.Row.DataItem, "arq_idFoto")) == DBNull.Value ? 0 : (DataBinder.Eval(e.Row.DataItem, "arq_idFoto")));
                 bool possuiimagem = (arq_idFoto > 0);
@@ -902,6 +951,28 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (_btnDetalhes != null)
                 {
                     _btnDetalhes.CommandArgument = e.Row.RowIndex.ToString();
+                }
+
+                LinkButton btnRelatorioAEE = (LinkButton)e.Row.FindControl("btnRelatorioAEE");
+                if (btnRelatorioAEE != null)
+                {
+                    btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Row.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo 
+                                                && Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "PossuiDeficiencia"));
+                    btnRelatorioAEE.CommandArgument = alu_id.ToString();
+                }
+
+                // Mostra o ícone para as anotações de recuperação paralela (RP):
+                // - para todos os alunos, quando a turma for de recuperação paralela,
+                // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
+                if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno
+                    || lstAlunosRelatorioRP.Any(p => p.alu_id == alu_id))
+                {
+                    LinkButton btnRelatorioRP = (LinkButton)e.Row.FindControl("btnRelatorioRP");
+                    if (btnRelatorioRP != null)
+                    {
+                        btnRelatorioRP.Visible = true;
+                        btnRelatorioRP.CommandArgument = string.Format("{0};-1", alu_id.ToString());
+                    }
                 }
             }
         }

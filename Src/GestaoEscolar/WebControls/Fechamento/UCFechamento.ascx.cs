@@ -19,6 +19,16 @@ namespace GestaoEscolar.WebControls.Fechamento
 {
     public partial class UCFechamento : MotherUserControl
     {
+        #region DELEGATES
+
+        public delegate void commandAbrirRelatorioRP(long alu_id, string tds_idRP);
+        public event commandAbrirRelatorioRP AbrirRelatorioRP;
+
+        public delegate void commandAbrirRelatorioAEE(long alu_id);
+        public event commandAbrirRelatorioAEE AbrirRelatorioAEE;
+
+        #endregion DELEGATES
+
         #region Estruturas
 
         /// <summary>
@@ -1197,6 +1207,12 @@ namespace GestaoEscolar.WebControls.Fechamento
 
                 UCFechamentoPadrao.AbrirRelatorio += UCFechamento_AbrirRelatorio;
                 UCFechamentoFinal.AbrirRelatorio += UCFechamento_AbrirRelatorio;
+
+                UCFechamentoPadrao.AbrirRelatorioRP += UCFechamento_AbrirRelatorioRP;
+                UCFechamentoFinal.AbrirRelatorioRP += UCFechamento_AbrirRelatorioRP;
+
+                UCFechamentoPadrao.AbrirRelatorioAEE += UCFechamento_AbrirRelatorioAEE;
+                UCFechamentoFinal.AbrirRelatorioAEE += UCFechamento_AbrirRelatorioAEE;
             }
             catch (Exception err)
             {
@@ -1463,6 +1479,22 @@ namespace GestaoEscolar.WebControls.Fechamento
         {
             VS_JanelaObservacaoAberta = false;
             UCAlunoEfetivacaoObservacao_AbrirRelatorio(idRelatorio, nota, arq_idRelatorio, dadosAluno);
+        }
+
+        private void UCFechamento_AbrirRelatorioRP(long alu_id, string tds_idRP)
+        {
+            if (AbrirRelatorioRP != null)
+            {
+                AbrirRelatorioRP(alu_id, tds_idRP);
+            }
+        }
+
+        private void UCFechamento_AbrirRelatorioAEE(long alu_id)
+        {
+            if (AbrirRelatorioAEE != null)
+            {
+                AbrirRelatorioAEE(alu_id);
+            }
         }
 
         #endregion Eventos

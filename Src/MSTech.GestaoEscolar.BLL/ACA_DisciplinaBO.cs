@@ -171,12 +171,11 @@ namespace MSTech.GestaoEscolar.BLL
         (
              int cur_id
             , int crr_id
-            , int tds_id
             , ACA_DisciplinaSituacao dis_situacao
         )
         {
             ACA_DisciplinaDAO dao = new ACA_DisciplinaDAO();
-            return dao.SelectBy_Tipo_Curso(cur_id, crr_id, tds_id, (byte)dis_situacao);
+            return dao.SelectBy_Tipo_Curso(cur_id, crr_id, (byte)dis_situacao);
         }
 
         /// <summary>
@@ -194,14 +193,13 @@ namespace MSTech.GestaoEscolar.BLL
         (
              int cur_id
             , int crr_id
-            , int tds_id
             , ACA_DisciplinaSituacao dis_situacao
             , int esc_id
             , int uni_id
         )
         {
             ACA_DisciplinaDAO dao = new ACA_DisciplinaDAO();
-            return dao.SelectBy_Tipo_CursoPeriodo(cur_id, crr_id, tds_id, (byte)dis_situacao, esc_id, uni_id);
+            return dao.SelectBy_Tipo_CursoPeriodo(cur_id, crr_id, (byte)dis_situacao, esc_id, uni_id);
         }
 
         /// <summary>
@@ -302,24 +300,6 @@ namespace MSTech.GestaoEscolar.BLL
 
             throw new ValidationException(entity.PropertiesErrorList[0].Message);
         }
-
-        /// <summary>
-        /// Override do método Save.
-        /// </summary>
-        /// <param name="entity">Entidade a ser salva</param>
-        /// <param name="cur_id">cur_id</param>
-        /// <param name="crr_id">crr_id</param>
-        /// <param name="banco">Transação com banco - obrigatório</param>
-        /// <param name="ent_id">Id da entidade do usuário logado.</param>
-        public static bool Save(ACA_Disciplina entity, int cur_id, int crr_id, TalkDBTransaction banco, Guid ent_id)
-        {
-            int tds_idEletiva = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, ent_id);
-
-            if (VerificaExistentePorCodigoTipo(entity, tds_idEletiva, cur_id, crr_id, banco))
-                throw new DuplicateNameException("Já existe um(a) " + CustomResource.GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " eletiva cadastrada com este código.");
-
-            return Save(entity, banco);
-        }
         
         /// <summary>
         /// Deleta logicamente uma disciplina
@@ -372,28 +352,6 @@ namespace MSTech.GestaoEscolar.BLL
                 if (banco == null)
                     dao._Banco.Close();
             }
-        }
-
-        /// <summary>
-        /// Verifica se já foi cadastrada algum disciplina com o mesmo codigo e tipo
-        /// </summary>
-        /// <param name="entity">Entidade ACA_Disciplina</param>
-        /// <param name="tds_id">Id do tipo de disciplina</param>
-        /// <param name="cur_id">Id co curso</param>
-        /// <param name="crr_id">Id do currículo</param>
-        /// <param name="banco">Transação com banco - obrigatório</param>
-        /// <returns>True | False</returns>
-        public static bool VerificaExistentePorCodigoTipo(ACA_Disciplina entity, int tds_id, int cur_id, int crr_id, TalkDBTransaction banco)
-        {
-            // Só verifica se já existe código da disciplina, se ele foi informado pelo usuário.
-            // Agora o campo é obrigatório, porém no início era opcional.
-            if (!string.IsNullOrEmpty(entity.dis_codigo))
-            {
-                ACA_DisciplinaDAO dao = new ACA_DisciplinaDAO { _Banco = banco };
-                return dao.VerificaExistentePorCodigoTipo(entity.dis_id, entity.dis_codigo, tds_id, cur_id, crr_id);
-            }
-
-            return false;
         }
 
         /// <summary>

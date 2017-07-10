@@ -56,7 +56,9 @@ namespace MSTech.GestaoEscolar.BLL
                                             {
                                                 tud_id = gHorario.Key
                                                 ,
-                                                tud_nome = gHorario.First().tud_nome
+                                                tud_codigo = tud.tud_codigo
+                                                ,
+                                                tud_nome = tud.tud_nome
                                                 ,
                                                 tud_tipo = tud.tud_tipo
                                                 ,
@@ -71,7 +73,7 @@ namespace MSTech.GestaoEscolar.BLL
 
                     mensagem = string.Join("<br />",
                         validacaoCargaSemanal.Where(p => p.quantidadeAulas > p.cargaHorarioSemanal && p.tud_tipo != (byte)TurmaDisciplinaTipo.DisciplinaPrincipal)
-                                             .Select(p => string.Format(CustomResource.GetGlobalResourceObject("BLL", "TUR_TurmaHorarioBO.SalvarTurmaHorario.ValidacaoTemposAula"), p.tud_nome, p.cargaHorarioSemanal))
+                                             .Select(p => string.Format(CustomResource.GetGlobalResourceObject("BLL", "TUR_TurmaHorarioBO.SalvarTurmaHorario.ValidacaoTemposAula"), p.tud_nome, p.cargaHorarioSemanal, p.tud_codigo, (p.quantidadeAulas - p.cargaHorarioSemanal)))
                                              .ToArray());
 
                     if (!string.IsNullOrEmpty(mensagem))

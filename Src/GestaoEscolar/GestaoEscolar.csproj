@@ -385,6 +385,13 @@
     <Compile Include="Academico\CalendarioAnual\Visualizar.aspx.designer.cs">
       <DependentUpon>Visualizar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Academico\CargaHorariaExtraclasse\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Academico\CargaHorariaExtraclasse\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -903,12 +910,47 @@
     <Compile Include="Classe\LancamentoSondagem\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Classe\RelatorioAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\RelatorioAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\RelatorioAtendimento\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\RelatorioAtendimento\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx.cs">
       <DependentUpon>BuscaCabecalhoAvisosTextos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx.designer.cs">
       <DependentUpon>BuscaCabecalhoAvisosTextos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\DeficienciaDetalhe\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\DeficienciaDetalhe\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuracao\FilaFechamento\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
@@ -1211,6 +1253,48 @@
     <Compile Include="Configuracao\PermissaoDocente\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Configuracao\Questionario\BuscaQuestionario.aspx.cs">
+      <DependentUpon>BuscaQuestionario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\BuscaQuestionario.aspx.designer.cs">
+      <DependentUpon>BuscaQuestionario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\BuscaConteudo.aspx.cs">
+      <DependentUpon>BuscaConteudo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\BuscaConteudo.aspx.designer.cs">
+      <DependentUpon>BuscaConteudo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\BuscaResposta.aspx.cs">
+      <DependentUpon>BuscaResposta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\BuscaResposta.aspx.designer.cs">
+      <DependentUpon>BuscaResposta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroQuestionario.aspx.cs">
+      <DependentUpon>CadastroQuestionario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroQuestionario.aspx.designer.cs">
+      <DependentUpon>CadastroQuestionario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroConteudo.aspx.cs">
+      <DependentUpon>CadastroConteudo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroConteudo.aspx.designer.cs">
+      <DependentUpon>CadastroConteudo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroResposta.aspx.cs">
+      <DependentUpon>CadastroResposta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\Questionario\CadastroResposta.aspx.designer.cs">
+      <DependentUpon>CadastroResposta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configuracao\Recomendacoes\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1237,6 +1321,20 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Configuracao\RecursosAula\Cadastro.aspx.designer.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\RelatorioAtendimento\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\RelatorioAtendimento\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracao\RelatorioAtendimento\Cadastro.aspx.cs">
+      <DependentUpon>Cadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracao\RelatorioAtendimento\Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuracao\RelatorioDocumentoAluno\Cadastro.aspx.cs">
@@ -2275,6 +2373,20 @@
     <Compile Include="WebControls\Combos\UCComboParametroGrupoPerfil.ascx.designer.cs">
       <DependentUpon>UCComboParametroGrupoPerfil.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Combos\UCComboQuestionario.ascx.cs">
+      <DependentUpon>UCComboQuestionario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboQuestionario.ascx.designer.cs">
+      <DependentUpon>UCComboQuestionario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboRelatorioAtendimento.ascx.cs">
+      <DependentUpon>UCComboRelatorioAtendimento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboRelatorioAtendimento.ascx.designer.cs">
+      <DependentUpon>UCComboRelatorioAtendimento.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Combos\UCComboServico.ascx.cs">
       <DependentUpon>UCComboServico.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2330,6 +2442,13 @@
     </Compile>
     <Compile Include="WebControls\Combos\UCComboTipoMovimentacaoMatriculaCombo.ascx.designer.cs">
       <DependentUpon>UCComboTipoMovimentacaoMatriculaCombo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboTipoRelatorioAtendimento.ascx.cs">
+      <DependentUpon>UCComboTipoRelatorioAtendimento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboTipoRelatorioAtendimento.ascx.designer.cs">
+      <DependentUpon>UCComboTipoRelatorioAtendimento.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Combos\UCComboTipoTurma.ascx.cs">
       <DependentUpon>UCComboTipoTurma.ascx</DependentUpon>
@@ -2828,6 +2947,13 @@
     <Compile Include="WebControls\LancamentoFrequencia\UCLancamentoFrequencia.ascx.designer.cs">
       <DependentUpon>UCLancamentoFrequencia.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\LancamentoRelatorioAtendimento\UCLancamentoRelatorioAtendimento.ascx.cs">
+      <DependentUpon>UCLancamentoRelatorioAtendimento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\LancamentoRelatorioAtendimento\UCLancamentoRelatorioAtendimento.ascx.designer.cs">
+      <DependentUpon>UCLancamentoRelatorioAtendimento.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Mensagens\UCCamposObrigatorios.ascx.cs">
       <DependentUpon>UCCamposObrigatorios.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2933,6 +3059,13 @@
     <Compile Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx.designer.cs">
       <DependentUpon>UCPlanejamentoProjetos.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx.cs">
+      <DependentUpon>UCRelatorioAtendimento.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx.designer.cs">
+      <DependentUpon>UCRelatorioAtendimento.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\RelatorioPedagogico\imagem.ashx.cs">
       <DependentUpon>imagem.ashx</DependentUpon>
     </Compile>
@@ -3013,6 +3146,7 @@
     <Content Include="Academico\Areas\Cadastro.aspx" />
     <Content Include="Academico\Areas\Documentos.aspx" />
     <Content Include="Academico\CalendarioAnual\CadastroLimites.aspx" />
+    <Content Include="Academico\CargaHorariaExtraclasse\Cadastro.aspx" />
     <Content Include="Academico\ConfiguracaoServicoPendencia\Busca.aspx" />
     <Content Include="Academico\ConfiguracaoServicoPendencia\Cadastro.aspx" />
     <Content Include="Academico\ControleSemanal\Busca.aspx" />
@@ -3285,6 +3419,9 @@
     <Content Include="App_Themes\IntranetSME\images\ico-avaliacao-gestor.png" />
     <Content Include="App_Themes\IntranetSME\images\ico-frequencia-gestor.png" />
     <Content Include="App_Themes\IntranetSME\images\icoAlerta.png" />
+    <Content Include="App_Themes\IntranetSME\images\ico_avaliacao_aee.png" />
+    <Content Include="App_Themes\IntranetSME\images\ico_avaliacao_drop.png" />
+    <Content Include="App_Themes\IntranetSME\images\ico_avaliacao_rp.png" />
     <Content Include="App_Themes\IntranetSME\images\img-checkboxlist-columns.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-barra-sp.gif" />
     <Content Include="App_Themes\IntranetSME\images\setaDestaque_.png" />
@@ -3407,13 +3544,19 @@
     <Content Include="App_Themes\IntranetSMEBootStrap\styles-custom\_layout-impressao.scss" />
     <Content Include="App_Themes\IntranetSME\new_css.scss" />
     <Content Include="App_Themes\IntranetSME\new_css.css.map" />
+    <Content Include="App_Themes\IntranetSME\_grid-layout.scss" />
     <None Include="Configs\Session.txt" />
     <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx" />
     <Content Include="Classe\LancamentoSondagem\Busca.aspx" />
     <Content Include="Classe\LancamentoSondagem\Cadastro.aspx" />
+    <Content Include="Classe\RelatorioAtendimento\Busca.aspx" />
+    <Content Include="Classe\RelatorioAtendimento\Cadastro.aspx" />
+    <Content Include="Classe\RelatorioRecuperacaoParalela\Cadastro.aspx" />
     <Content Include="Configuracao\CabecalhoAvisosTextosGerais\BuscaCabecalhoAvisosTextos.aspx" />
+    <Content Include="Configuracao\DeficienciaDetalhe\Busca.aspx" />
+    <Content Include="Configuracao\DeficienciaDetalhe\Cadastro.aspx" />
     <Content Include="Configuracao\FilaFechamento\Busca.aspx" />
     <Content Include="Configuracao\FilaFechamento\Fila.aspx" />
     <Content Include="Configuracao\ModuloClasse\Cadastro.aspx" />
@@ -3674,8 +3817,16 @@
     <Content Include="Configuracao\ParametroResultado\Busca.aspx" />
     <Content Include="Configuracao\ParametroResultado\Cadastro.aspx" />
     <Content Include="Configuracao\PermissaoDocente\Cadastro.aspx" />
+    <Content Include="Configuracao\Questionario\BuscaQuestionario.aspx" />
+    <Content Include="Configuracao\Questionario\BuscaConteudo.aspx" />
+    <Content Include="Configuracao\Questionario\BuscaResposta.aspx" />
+    <Content Include="Configuracao\Questionario\CadastroQuestionario.aspx" />
+    <Content Include="Configuracao\Questionario\CadastroConteudo.aspx" />
+    <Content Include="Configuracao\Questionario\CadastroResposta.aspx" />
     <Content Include="Configuracao\Recomendacoes\Busca.aspx" />
     <Content Include="Configuracao\Recomendacoes\Cadastro.aspx" />
+    <Content Include="Configuracao\RelatorioAtendimento\Busca.aspx" />
+    <Content Include="Configuracao\RelatorioAtendimento\Cadastro.aspx" />
     <Content Include="Configuracao\RelatorioDocumentoAluno\Cadastro.aspx" />
     <Content Include="Configuracao\Servico\ConfigurarServico.aspx" />
     <Content Include="Configuracao\ServidorRelatorios\Cadastro.aspx" />
@@ -4116,6 +4267,8 @@
     <Content Include="Includes\jsCadastroJustificativaFalta.js" />
     <Content Include="Includes\jsCadastroJustificativaPendencia.js" />
     <Content Include="Includes\jsCadastroLancamentoSondagem.js" />
+    <Content Include="Includes\jsCadastroRelatorioAtendimento.js" />
+    <Content Include="Includes\jsCadastroRelatorioRP.js" />
     <Content Include="Includes\jsCadastroSondagem.js" />
     <Content Include="Includes\jsConfirmaFormacaoDocente.js" />
     <Content Include="Includes\jsFilaFilaFechamento.js" />
@@ -4173,6 +4326,7 @@
     <Content Include="Includes\jsUCCalendario.js" />
     <Content Include="Includes\jsUCCurriculo.js" />
     <Content Include="Includes\jsUCInformacoesComplementares.js" />
+    <Content Include="Includes\jsUCLancamentoRelatorioAtendimento.js" />
     <Content Include="Includes\jsUCPlanejamentoProjetos.js" />
     <Content Include="Includes\jsUCSelecaoDisciplinaCompartilhada.js" />
     <Content Include="Includes\jsUCTransferencia.js" />
@@ -4258,6 +4412,8 @@
     <Content Include="WebControls\Combos\UCComboAvisoTextoGeralCampoAuxiliar.ascx" />
     <Content Include="WebControls\Combos\UCComboCargaHoraria.ascx" />
     <Content Include="WebControls\Combos\UCComboOrdenacaoPosNome.ascx" />
+    <Content Include="WebControls\Combos\UCComboQuestionario.ascx" />
+    <Content Include="WebControls\Combos\UCComboRelatorioAtendimento.ascx" />
     <Content Include="WebControls\Combos\UCComboServico.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoAvisoTextoGeral.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoCiclo.ascx" />
@@ -4266,6 +4422,7 @@
     <Content Include="WebControls\Combos\UCComboTipoDocente.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoHorario.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoMovimentacaoMatriculaCombo.ascx" />
+    <Content Include="WebControls\Combos\UCComboTipoRelatorioAtendimento.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoTurma.ascx" />
     <Content Include="WebControls\Combos\UCComboTurmaDisciplinaRelacionada.ascx" />
     <Content Include="WebControls\Combos\UCTipoMovimentacao_MatriculaAntesFechamento.ascx" />
@@ -4293,10 +4450,12 @@
     <Content Include="WebControls\LancamentoAvaliacao\UCCadastroAvaliacao.ascx" />
     <Content Include="WebControls\LancamentoFrequencia\UCLancamentoFrequenciaTerritorio.ascx" />
     <Content Include="WebControls\LancamentoFrequencia\UCLancamentoFrequencia.ascx" />
+    <Content Include="WebControls\LancamentoRelatorioAtendimento\UCLancamentoRelatorioAtendimento.ascx" />
     <Content Include="WebControls\NavegacaoTelaPeriodo\UCNavegacaoTelaPeriodo.ascx" />
     <Content Include="WebControls\OrientacaoCurricular\UCNivelOrientacao.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoAnual.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx" />
+    <Content Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx" />
     <Content Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx" />
     <Content Include="WebControls\Relatorio\UCDevReportView.ascx" />

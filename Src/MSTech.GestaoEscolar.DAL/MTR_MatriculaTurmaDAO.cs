@@ -207,7 +207,7 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
-        /// Retorna a ultima matricula cadastrada no sistema.
+        /// Retorna as matricula cadastrada no sistema.
         /// </summary>
         /// <param name="alu_id"></param>
         /// <returns>Retorna todos os dados de MatriculaTurma</returns>
@@ -226,6 +226,51 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@alu_id";
                 Param.Size = 8;
                 Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                #endregion PARAMETROS
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        ///  Retorna as matrículas do aluno não excluídas logicamente por ano.
+        /// </summary>
+        /// <param name="alu_id"></param>
+        public DataTable SelectBy_MatriculaAlunoAno
+        (
+            long alu_id
+            , int cal_ano
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_MTR_MatriculaTurma_SelectBy_AlunoAno", _Banco);
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@alu_id";
+                Param.Size = 8;
+                Param.Value = alu_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                Param.Value = cal_ano;
                 qs.Parameters.Add(Param);
 
                 #endregion PARAMETROS

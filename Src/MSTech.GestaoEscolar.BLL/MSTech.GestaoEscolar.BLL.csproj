@@ -175,6 +175,7 @@
     <Compile Include="ACA_CalendarioEscolaBO.cs" />
     <Compile Include="ACA_CalendarioEventoBO.cs" />
     <Compile Include="ACA_CalendarioPeriodoBO.cs" />
+    <Compile Include="ACA_CargaHorariaExtraclasseBO.cs" />
     <Compile Include="ACA_CompromissoEstudoBO.cs" />
     <Compile Include="ACA_ConfiguracaoServicoPendenciaBO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaBO.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="ACA_TipoDesempenhoAprendizadoBO.cs" />
     <Compile Include="ACA_TipoDisciplinaBO.cs" />
     <Compile Include="ACA_TipoDisciplinaDeficienciaBO.cs" />
+    <Compile Include="ACA_TipoDisciplinaRelacionadaBO.cs" />
     <Compile Include="ACA_TipoDocenteBO.cs" />
     <Compile Include="ACA_TipoEquipamentoDeficienteBO.cs" />
     <Compile Include="ACA_TipoEventoBO.cs" />
@@ -261,6 +263,8 @@
     <Compile Include="CFG_ConfiguracaoMigracaoRioBO.cs" />
     <Compile Include="CFG_ConfiguracaoInscricaoCrecheBO.cs" />
     <Compile Include="CFG_CorRelatorioBO.cs" />
+    <Compile Include="CFG_DeficienciaDetalheBO.cs" />
+    <Compile Include="CFG_DeficienciaFIlhaBO.cs" />
     <Compile Include="CFG_FaixaRelatorioBO.cs" />
     <Compile Include="CFG_HistoricoConceitoBO.cs" />
     <Compile Include="CFG_HistoricoPedagogicoBO.cs" />
@@ -285,6 +289,7 @@
     <Compile Include="CLS_AlunoAvaliacaoTurmaObservacaoBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaQualidadeBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacaoBO.cs" />
+    <Compile Include="CLS_AlunoDeficienciaDetalheBO.cs" />
     <Compile Include="CLS_AlunoFechamentoBO.cs" />
     <Compile Include="CLS_AlunoFechamentoPendenciaBO.cs" />
     <Compile Include="CLS_AlunoFrequenciaExternaBO.cs" />
@@ -310,6 +315,17 @@
     <Compile Include="CLS_PlanejamentoProjetoBO.cs" />
     <Compile Include="CLS_PlanejamentoProjetoRelacionadaBO.cs" />
     <Compile Include="CLS_QualificadorAtividadeBO.cs" />
+    <Compile Include="CLS_QuestionarioBO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoBO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoPreenchimentoBO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaBO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaPreenchimentoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoCargoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoGrupoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoQuestionarioBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoBO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaBO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoBO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseBO.cs" />

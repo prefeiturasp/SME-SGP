@@ -934,5 +934,17 @@
         public const string MENU_SISTEMA_GRUPO_VISAO_PATTERN_KEY = "Cache_CarregarMenuXML";
 
         #endregion MenuCoreSSO
+
+        #region Alunos
+
+        public const string ALUNO_BUSCA_RELATORIOS_AEE_DOCENTE_KEY = "Cache_BuscaAlunosRelatoriosAEEPorDocente_{0}_{1}_{2}";
+        
+        #endregion
+
+        #region Relatorio Atendimento
+
+        public const string RELATORIO_ATENDIMENTO_BUSCA_ESTRUTURA_RELATORIO_KEY = "Cache_SelecionaRelatorio_{0}_{1}";
+
+        #endregion 
     }
 }

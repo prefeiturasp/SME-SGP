@@ -228,6 +228,33 @@ public partial class Configuracao_TipoDisciplina_Cadastro {
     protected global::System.Web.UI.WebControls.TextBox txtQtdeDisciplinaRelacionada;
     
     /// <summary>
+    /// fdsRelacionadas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.HtmlControls.HtmlGenericControl fdsRelacionadas;
+    
+    /// <summary>
+    /// rptRelacionadas control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Repeater rptRelacionadas;
+    
+    /// <summary>
+    /// btnSalvar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Button btnSalvar;
+    
+    /// <summary>
     /// _btnCancelar control.
     /// </summary>
     /// <remarks>

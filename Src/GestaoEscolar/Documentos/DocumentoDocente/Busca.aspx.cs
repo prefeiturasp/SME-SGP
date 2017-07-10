@@ -155,9 +155,9 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
                     UCBuscaDocenteTurma.ComboCalendario.Valor,
                     UCBuscaDocenteTurma.ComboEscola.Esc_ID,
                     UCBuscaDocenteTurma.ComboEscola.Uni_ID,
-                    UCBuscaDocenteTurma.ComboCursoCurriculo.Valor[0],
-                    UCBuscaDocenteTurma.ComboCursoCurriculo.Valor[1],
-                    UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[2],
+                    UCBuscaDocenteTurma.ComboCursoCurriculo.Visible ? UCBuscaDocenteTurma.ComboCursoCurriculo.Valor[0] : -1,
+                    UCBuscaDocenteTurma.ComboCursoCurriculo.Visible ? UCBuscaDocenteTurma.ComboCursoCurriculo.Valor[1] : -1,
+                    UCBuscaDocenteTurma.ComboCurriculoPeriodo.Visible ? UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[2]: -1,
                     UCBuscaDocenteTurma.ComboTurma.Valor[0],
                     UCCPeriodoCalendario.Cap_ID,
                     UCComboTurmaDisciplina.Valor,
@@ -1141,9 +1141,9 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
                                          "&uni_id=" + UCBuscaDocenteTurma.ComboEscola.Uni_ID +
                                          "&cal_id=" + UCBuscaDocenteTurma.ComboCalendario.Valor +
                                          "&cal_ano=" + UCBuscaDocenteTurma.ComboCalendario.Cal_ano.ToString() +
-                                         "&cur_id=" + UCBuscaDocenteTurma.ComboCursoCurriculo.Valor[0] +
-                                         "&crr_id=" + UCBuscaDocenteTurma.ComboCursoCurriculo.Valor[1] +
-                                         "&crp_id=" + UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[2] +
+                                         "&cur_id=" + (UCBuscaDocenteTurma.ComboCursoCurriculo.Visible ? UCBuscaDocenteTurma.ComboCursoCurriculo.Valor[0] : -1) +
+                                         "&crr_id=" + (UCBuscaDocenteTurma.ComboCursoCurriculo.Visible ? UCBuscaDocenteTurma.ComboCursoCurriculo.Valor[1] : -1) +
+                                         "&crp_id=" + (UCBuscaDocenteTurma.ComboCurriculoPeriodo.Visible? UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[2] : -1) +
                                          "&tur_id=" + UCBuscaDocenteTurma.ComboTurma.Valor[0] +
                                          "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
                                          "&doc_id=" + __SessionWEB.__UsuarioWEB.Docente.doc_id +

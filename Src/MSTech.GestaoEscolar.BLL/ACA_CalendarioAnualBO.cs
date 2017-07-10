@@ -141,9 +141,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// Retorna a chave do cache utilizada para carregar o combo de calendário
         /// </summary>
         /// <returns></returns>
-        private static string RetornaChaveCache_SelecionaPorCursoComDisciplinaEletiva(int cur_id, int esc_id, int uni_id, int tds_id, Guid ent_id, long doc_id, Guid usu_id, Guid gru_id)
+        private static string RetornaChaveCache_SelecionaPorCursoComDisciplinaEletiva(int cur_id, int esc_id, int uni_id, Guid ent_id, long doc_id, Guid usu_id, Guid gru_id)
         {
-            return String.Format("Cache_SelecionaPorCursoComDisciplinaEletiva_{0}_{1}_{2}_{3}_{4}_{5}_{6}_{7}", cur_id, esc_id, uni_id, tds_id, ent_id, doc_id, usu_id, gru_id);
+            return String.Format("Cache_SelecionaPorCursoComDisciplinaEletiva_{0}_{1}_{2}_{3}_{4}_{5}_{6}", cur_id, esc_id, uni_id, ent_id, doc_id, usu_id, gru_id);
         }
 
         /// <summary>
@@ -1001,13 +1001,12 @@ namespace MSTech.GestaoEscolar.BLL
             int cur_id
             , int esc_id
             , int uni_id
-            , int tds_id
             , Guid ent_id
             , long doc_id
             , int appMinutosCacheLongo = 0
         )
         {
-            return SelecionaPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, tds_id, ent_id, appMinutosCacheLongo, doc_id, new Guid(), new Guid());
+            return SelecionaPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, ent_id, appMinutosCacheLongo, doc_id, new Guid(), new Guid());
         }
 
         /// <summary>
@@ -1024,14 +1023,13 @@ namespace MSTech.GestaoEscolar.BLL
             int cur_id
             , int esc_id
             , int uni_id
-            , int tds_id
             , Guid ent_id
             , Guid usu_id
             , Guid gru_id
             , int appMinutosCacheLongo = 0
         )
         {
-            return SelecionaPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, tds_id, ent_id, appMinutosCacheLongo, 0, usu_id, gru_id);
+            return SelecionaPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, ent_id, appMinutosCacheLongo, 0, usu_id, gru_id);
         }
 
         /// <summary>
@@ -1048,12 +1046,11 @@ namespace MSTech.GestaoEscolar.BLL
             int cur_id
             , int esc_id
             , int uni_id
-            , int tds_id
             , Guid ent_id
             , int appMinutosCacheLongo = 0
         )
         {
-            return SelecionaPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, tds_id, ent_id, appMinutosCacheLongo, 0, new Guid(), new Guid());
+            return SelecionaPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, ent_id, appMinutosCacheLongo, 0, new Guid(), new Guid());
         }
 
         /// <summary>
@@ -1070,7 +1067,6 @@ namespace MSTech.GestaoEscolar.BLL
             int cur_id
             ,int esc_id
             ,int uni_id
-            ,int tds_id
             , Guid ent_id
             , int appMinutosCacheLongo
             , long doc_id
@@ -1082,12 +1078,12 @@ namespace MSTech.GestaoEscolar.BLL
 
             if (appMinutosCacheLongo > 0 && HttpContext.Current != null)
             {
-                string chave = RetornaChaveCache_SelecionaPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, tds_id, ent_id, doc_id, usu_id, gru_id);
+                string chave = RetornaChaveCache_SelecionaPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, ent_id, doc_id, usu_id, gru_id);
                 object cache = HttpContext.Current.Cache[chave];
 
                 if (cache == null)
                 {
-                    using (DataTable dt = new ACA_CalendarioAnualDAO().GetSelectPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, tds_id, ent_id, doc_id, usu_id, gru_id))
+                    using (DataTable dt = new ACA_CalendarioAnualDAO().GetSelectPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, ent_id, doc_id, usu_id, gru_id))
                     {
                         dados = (from DataRow dr in dt.Rows
                                  select new sComboCalendario
@@ -1108,7 +1104,7 @@ namespace MSTech.GestaoEscolar.BLL
 
             if (dados == null)
             {
-                using (DataTable dt = new ACA_CalendarioAnualDAO().GetSelectPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, tds_id, ent_id, doc_id, usu_id, gru_id))
+                using (DataTable dt = new ACA_CalendarioAnualDAO().GetSelectPorCursoComDisciplinaEletiva(cur_id, esc_id, uni_id, ent_id, doc_id, usu_id, gru_id))
                 {
                     dados = (from DataRow dr in dt.Rows
                              select new sComboCalendario
