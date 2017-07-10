@@ -124,14 +124,16 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 CLS_RelatorioAtendimento rea = new CLS_RelatorioAtendimento { rea_id = gra.rea_id };
                 CLS_RelatorioAtendimentoBO.GetEntity(rea);
                 ddlTipo.SelectedValue = rea.rea_tipo.ToString();
+                ddlTipo_SelectedIndexChanged(null, null);
                 UCComboRelatorioAtendimento.Valor = gra.rea_id;
+                UCComboRelatorioAtendimento_SelectedIndexChanged();
                 UCComboRelatorioAtendimento.PermiteEditar = false;
 
                 ddlTipoGrafico.SelectedValue = gra.gra_tipo.ToString();
                 ddlTipoGrafico.Enabled = false;
 
-                ddlEixoAgrupamento.Enabled = false;
                 ddlEixoAgrupamento.SelectedValue = gra.gra_eixo.ToString();
+                ddlEixoAgrupamento.Enabled = false;
 
                 CarregaFiltrosFixos();
                 CarregaQuestionarios();
@@ -537,7 +539,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (UCComboRelatorioAtendimento.Valor > 0)
                 {
                     VS_rea_id = UCComboRelatorioAtendimento.Valor;
-                    UCComboQuestionario.CarregarQuestionarioBy_rea_id(VS_rea_id);
+                    UCComboQuestionario.CarregarQuestionarioComPerguntaMultiplaEscolhaBy_rea_id(VS_rea_id);
                     UCComboQuestionario.PermiteEditar = true;
                 }
                 else

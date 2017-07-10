@@ -21,7 +21,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="rea_id"></param>
         /// <param name="gra_titulo"></param>
         /// <returns></returns>
-        public DataTable SelecionaGraficoPorRelatorio(bool paginado, int currentPage, int pageSize, int rea_id, string gra_titulo, out int totalRecords)
+        public DataTable SelecionaGraficoPorTipoRelatorioRelatorio(bool paginado, int currentPage, int pageSize, int rea_id, int rea_tipo, string gra_titulo, out int totalRecords)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_SelecionaPorRelatorio", _Banco);
 
@@ -36,6 +36,16 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.Size = 16;
                 if (rea_id > 0)
                     Param.Value = rea_id;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@rea_tipo";
+                Param.DbType = DbType.Byte;
+                Param.Size = 16;
+                if (rea_tipo > 0)
+                    Param.Value = rea_tipo;
                 else
                     Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);

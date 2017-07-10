@@ -636,9 +636,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
                                  "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoPaisagem.Municipio") +
                                  "&nomeSecretaria=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoPaisagem.Secretaria") +
                                  "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
-                                      , ApplicationWEB.LogoRelatorioSSRS) +
-                                 "&DRE=" + UCCUAEscola.ValorComboUA +
-                                 "&escola=" + UCCUAEscola.ValorComboEscola;
+                                      , ApplicationWEB.LogoRelatorioSSRS);
 
                     SymmetricAlgorithm sa = new SymmetricAlgorithm(SymmetricAlgorithm.Tipo.TripleDES);
 

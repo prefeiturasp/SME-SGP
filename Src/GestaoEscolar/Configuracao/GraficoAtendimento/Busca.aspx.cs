@@ -37,6 +37,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 cancelaSelect = false;
                 odsDados.SelectParameters.Clear();
                 odsDados.SelectParameters.Add("rea_id", UCComboRelatorioAtendimento.Valor.ToString());
+                odsDados.SelectParameters.Add("rea_tipo", ddlTipoRelatorio.SelectedValue);
                 odsDados.SelectParameters.Add("gra_titulo", txtTitulo.Text);
 
                 grvDados.DataBind();
@@ -195,16 +196,16 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
         protected void ddlCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             //carrega os relatorios
-            if (ddlTipoRelatorio.SelectedIndex > 0)
+            if (Convert.ToInt32(ddlTipoRelatorio.SelectedValue) > 0)
             {
                 UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipoRelatorio.SelectedValue));
                 UCComboRelatorioAtendimento._Combo.Enabled = true;
             }
             else
             {
-                UCComboRelatorioAtendimento.SelectedIndex = 0;
                 UCComboRelatorioAtendimento._Combo.Enabled = false;
             }
+            UCComboRelatorioAtendimento.SelectedIndex = 0;
         }
 
         #endregion
