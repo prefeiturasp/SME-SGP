@@ -59,5 +59,10 @@ namespace MSTech.GestaoEscolar.Entities
         /// </summary>
         public override int qtr_ordem { get; set; }
 
+        /// <summary>
+		/// Peso da resposta para respostas que compoem testes..
+		/// </summary>
+        public override int qtr_peso { get; set; }
+
     }
 }
