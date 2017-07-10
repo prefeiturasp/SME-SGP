@@ -209,7 +209,7 @@ namespace GestaoEscolar.WebControls.Combos
             ddlCombo.DataBind();
         }
 
-        public void CarregarQuestionarioBy_rea_id(int rea_id)
+        public void CarregarQuestionarioComPerguntaMultiplaEscolhaBy_rea_id(int rea_id)
         {
             ddlCombo.Items.Clear();
             ddlCombo.DataSource = CLS_RelatorioAtendimentoQuestionarioBO.SelectPerguntaMultiplaEscolha_By_rea_id(rea_id);

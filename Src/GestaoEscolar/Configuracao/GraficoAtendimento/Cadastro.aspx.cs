@@ -537,7 +537,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (UCComboRelatorioAtendimento.Valor > 0)
                 {
                     VS_rea_id = UCComboRelatorioAtendimento.Valor;
-                    UCComboQuestionario.CarregarQuestionarioBy_rea_id(VS_rea_id);
+                    UCComboQuestionario.CarregarQuestionarioComPerguntaMultiplaEscolhaBy_rea_id(VS_rea_id);
                     UCComboQuestionario.PermiteEditar = true;
                 }
                 else
