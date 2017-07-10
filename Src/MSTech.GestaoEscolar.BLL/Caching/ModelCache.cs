@@ -356,6 +356,7 @@
         public const string FORMATO_AVALIACAO_MODEL_KEY = "ACA_FormatoAvaliacao_GetEntity_{0}";
         public const string FORMATO_AVALIACAO_PATTERN_KEY = "ACA_FormatoAvaliacao_GetEntity";
         public const string FORMATO_AVALIACAO_POR_TURMADISCIPLINA_MODEL_KEY = "Cache_SelecionaPorTud_{0}";
+        public const string FORMATO_AVALIACAO_POR_TURMA_MODEL_KEY = "Cache_SelecionaPorTur_{0}";
 
         #endregion Formato de avaliação
 
