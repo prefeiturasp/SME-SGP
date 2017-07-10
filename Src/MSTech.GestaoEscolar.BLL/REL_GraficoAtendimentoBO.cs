@@ -75,9 +75,9 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="currentPage"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public static DataTable PesquisaGraficoPorRelatorio(int rea_id, string gra_titulo, int currentPage, int pageSize)
+        public static DataTable PesquisaGraficoPorTipoRelatorioRelatorio(int rea_tipo, int rea_id, string gra_titulo, int currentPage, int pageSize)
         {
-            return new REL_GraficoAtendimentoDAO().SelecionaGraficoPorRelatorio(true, currentPage / pageSize, pageSize,rea_id, gra_titulo, out totalRecords);
+            return new REL_GraficoAtendimentoDAO().SelecionaGraficoPorTipoRelatorioRelatorio(true, currentPage / pageSize, pageSize, rea_id, rea_tipo, gra_titulo, out totalRecords);
         }
 
         /// <summary>

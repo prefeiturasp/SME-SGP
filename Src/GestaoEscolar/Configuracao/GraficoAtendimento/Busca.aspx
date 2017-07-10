@@ -68,7 +68,7 @@
             </asp:GridView>
             <uc2:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvDados" />
             <asp:ObjectDataSource ID="odsDados" runat="server" DataObjectTypeName="MSTech.GestaoEscolar.Entities.REL_GraficoAtendimento"
-                SelectMethod="PesquisaGraficoPorRelatorio" TypeName="MSTech.GestaoEscolar.BLL.REL_GraficoAtendimentoBO"
+                SelectMethod="PesquisaGraficoPorTipoRelatorioRelatorio" TypeName="MSTech.GestaoEscolar.BLL.REL_GraficoAtendimentoBO"
                 MaximumRowsParameterName="pageSize" SelectCountMethod="GetTotalRecords" StartRowIndexParameterName="currentPage"
                 EnablePaging="True"
                 OnSelecting="odsDados_Selecting">
