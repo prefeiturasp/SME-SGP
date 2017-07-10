@@ -14,6 +14,12 @@ namespace GestaoEscolar.Configuracao.Questionario
 {
     public partial class BuscaResposta : MotherPageLogado
     {
+        #region Constantes
+
+        private const int indiceColunaPeso = 1;
+
+        #endregion
+
         #region Propriedades
         public int _VS_qtc_id
         {
@@ -52,6 +58,20 @@ namespace GestaoEscolar.Configuracao.Questionario
                 else return -1;
             }
             set { }
+        }
+
+        public bool IsMultiplaSelecao
+        {
+            get
+            {
+                if (ViewState["IsMultiplaSelecao"] != null)
+                    return Convert.ToBoolean(ViewState["IsMultiplaSelecao"]);
+                return false;
+            }
+            set
+            {
+                ViewState["IsMultiplaSelecao"] = value;
+            }
         }
 
         #endregion
@@ -132,7 +152,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 // Permissões da pagina
                 btnNovo.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_inserir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
             }
-        }        
+        }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -288,6 +308,13 @@ namespace GestaoEscolar.Configuracao.Questionario
                     lblPermiteAdicionarTexto.Text = Convert.ToBoolean(grvResultado.DataKeys[e.Row.RowIndex].Values["qtr_permiteAdicionarTexto"].ToString()) ? "Sim" : "Não";
                 }
 
+                grvResultado.Columns[indiceColunaPeso].Visible = IsMultiplaSelecao;
+                Label lblPeso = (Label)e.Row.FindControl("lblPeso");
+                if (lblPeso != null)
+                {
+                    lblPeso.Text = grvResultado.DataKeys[e.Row.RowIndex].Values["qtr_peso"].ToString();
+                }
+
                 ImageButton _btnSubir = (ImageButton)e.Row.FindControl("_btnSubir");
                 if (_btnSubir != null)
                 {
@@ -328,6 +355,12 @@ namespace GestaoEscolar.Configuracao.Questionario
             {
                 fdsResultado.Visible = true;
 
+                CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id });
+                IsMultiplaSelecao = Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao;
+
+                lblInfo.Text = "<b>Questionário: </b>" + CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id }).qst_titulo +
+                                "<br><b>Conteúdo: </b>" + Conteudo.qtc_texto + "<br>";
+
                 odsResultado.SelectParameters.Clear();
 
                 grvResultado.PageIndex = 0;
@@ -344,17 +377,14 @@ namespace GestaoEscolar.Configuracao.Questionario
                 grvResultado.PageSize = itensPagina;
                 // atualiza o grid
                 grvResultado.DataBind();
+
                 if (grvResultado.Rows.Count > 0)
                 {
                     ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
                     ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
                 }
-
-                lblInfo.Text = "<b>Questionário: </b>"+CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id }).qst_titulo +
-                                "<br><b>Conteúdo: </b>"+ CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id }).qtc_texto +"<br>";
-
+                
                 updResultado.Update();
-
             }
             catch (Exception ex)
             {

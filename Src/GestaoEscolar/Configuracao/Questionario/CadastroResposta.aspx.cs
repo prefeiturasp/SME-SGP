@@ -91,9 +91,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                     _VS_qtc_id = PreviousPage._VS_qtc_id;
                     _VS_qtr_id = PreviousPage.PaginaResposta_qtr_id;
                     _VS_qst_id = PreviousPage._VS_qst_id;                    
-                    CLS_QuestionarioConteudo Conteudo = new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id, qst_id = _VS_qst_id };
-                    CLS_QuestionarioConteudoBO.GetEntity(Conteudo);
-                    IsMultiplaSelecao = Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao;
+                    IsMultiplaSelecao = PreviousPage.IsMultiplaSelecao;
                     _Carregar(_VS_qtc_id, _VS_qtr_id);
                 }
 
