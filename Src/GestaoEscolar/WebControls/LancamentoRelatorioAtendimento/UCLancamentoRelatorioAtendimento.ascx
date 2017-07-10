@@ -6,10 +6,9 @@
         <div id="divInformacao">
             <asp:Label ID="lblInformacaoAluno" runat="server"></asp:Label>
             <div class="row-custom">
-                <div class="m-col-custom-4 p-col-custom-12">
-                    <uc:UCCRacaCor ID="UCCRacaCor" runat="server" Visible="false" />
+                <div class="m-col-custom-4 p-col-custom-12" id="divRacaCor" runat="server" visible="false">
+                    <uc:UCCRacaCor ID="UCCRacaCor" runat="server" />
                 </div>
-
                 <div class="m-col-custom-4 p-col-custom-12 relatorio-manual" id="divDownloadAnexo" runat="server" visible="false">
                     <label><asp:Label ID="lblDownloadAnexo" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lblDownloadAnexo.Text %>"></asp:Label></label>
                     <asp:HyperLink ID="hplDownloadAnexo" runat="server" SkinID="hplAnexo" ToolTip="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, hplDownloadAnexo.ToolTip %>" Width="22px"></asp:HyperLink>

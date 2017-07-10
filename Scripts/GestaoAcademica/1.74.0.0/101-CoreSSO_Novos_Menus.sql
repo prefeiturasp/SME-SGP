@@ -35,9 +35,9 @@ SET XACT_ABORT ON
 		,@nomeModuloPai = 'Configurações' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Questionários' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Listagem de questionários'
-		,@SiteMap1Url = '~/Configuracao/Questionario/Busca.aspx'
+		,@SiteMap1Url = '~/Configuracao/Questionario/BuscaQuestionario.aspx'
 		,@SiteMap2Nome = 'Cadastro de questionários'
-		,@SiteMap2Url = '~/Configuracao/Questionario/Cadastro.aspx'
+		,@SiteMap2Url = '~/Configuracao/Questionario/CadastroQuestionario.aspx'
 		,@SiteMap3Nome = NULL 
 		,@SiteMap3Url = NULL
 		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador

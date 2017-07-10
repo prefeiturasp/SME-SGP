@@ -44,7 +44,7 @@
                     EmptyDataText="A pesquisa não encontrou resultados." OnRowCommand="grvResultado_RowCommand"
                     OnRowDataBound="grvResultado_RowDataBound" AllowSorting="true" EnableModelValidation="true" OnDataBound="grvResultado_DataBound">
                     <Columns>
-                        <asp:TemplateField HeaderText="Texto da resposta" SortExpression="qtr_texto">
+                        <asp:TemplateField HeaderText="Texto da resposta">
                             <ItemTemplate>
                                 <asp:Label ID="lblAlterar" runat="server" Text='<%# Bind("qtr_texto") %>' CssClass="wrap400px" Visible="false"></asp:Label>
                                 <asp:LinkButton ID="btnAlterar" runat="server" CommandName="Edit" Text='<%# Bind("qtr_texto") %>'

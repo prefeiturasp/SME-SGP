@@ -62,7 +62,7 @@
                             <HeaderStyle CssClass="center" />
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Ordem" SortExpression="qtc_ordem">
+                        <asp:TemplateField HeaderText="Ordem">
                             <ItemTemplate>
                                 <asp:ImageButton ID="_btnSubir" runat="server" CausesValidation="false" CommandName="Subir"
                                     Height="16" Width="16" />

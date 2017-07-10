@@ -57,6 +57,22 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectBy_qst_titulo(qst_titulo);
         }
 
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable GetSelectPaginado
+        (
+            int currentPage
+            , int pageSize
+        )
+        {
+            totalRecords = 0;
+
+            if (pageSize == 0)
+                pageSize = 1;
+
+            CLS_QuestionarioDAO dao = new CLS_QuestionarioDAO();
+            return dao.GetSelectPaginado(true, currentPage / pageSize, pageSize, out totalRecords);
+        }
+
         /// <summary>
         /// Verifica se o questionário estáem uso no relatório
         /// </summary>
