@@ -836,7 +836,6 @@
                               <PaddingBottom>2pt</PaddingBottom>
                             </Style>
                           </Textbox>
-                          <rd:Selected>true</rd:Selected>
                         </CellContents>
                       </TablixHeader>
                       <TablixMembers>
@@ -955,7 +954,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=IIF(Parameters!DRE.Value &lt;&gt; "", Parameters!DRE.Value, IIF(Parameters!escola.Value &lt;&gt; "", Parameters!escola.Value, ""))</Value>
+                    <Value>=First(Fields!DRE.Value, "DataSet1")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -987,7 +986,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=IIF(Parameters!escola.Value &lt;&gt; "" AND Parameters!DRE.Value &lt;&gt; "" AND Parameters!escola.Value &lt;&gt; Parameters!DRE.Value, Parameters!escola.Value, "")</Value>
+                    <Value>=First(Fields!Escola.Value, "DataSet1")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1371,14 +1370,6 @@
     <ReportParameter Name="ent_id">
       <DataType>String</DataType>
       <Prompt>ent id</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="DRE">
-      <DataType>String</DataType>
-      <Prompt>DRE</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="escola">
-      <DataType>String</DataType>
-      <Prompt>escola</Prompt>
     </ReportParameter>
     <ReportParameter Name="nomeMunicipio">
       <DataType>String</DataType>
