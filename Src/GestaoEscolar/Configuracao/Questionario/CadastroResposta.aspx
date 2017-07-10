@@ -22,7 +22,12 @@
         <asp:RequiredFieldValidator ID="_rfvTexto" runat="server" ErrorMessage="Texto da resposta é obrigatório."
             ControlToValidate="_txtTexto" ValidationGroup="Resposta">*</asp:RequiredFieldValidator>
         <br />
-        <asp:CheckBox ID="_chkPermiteAdicionarTexto" runat="server" Text="Permite adicionar texto"/>
+        <div runat="server" id="divPeso" visible="false">
+            <asp:Label ID="_lblPeso" runat="server" Text="Peso da resposta *" AssociatedControlID="_txtPeso"></asp:Label>
+            <asp:TextBox ID="_txtPeso" runat="server" SkinID="Numerico"></asp:TextBox>
+            <br />
+        </div>
+        <asp:CheckBox ID="_chkPermiteAdicionarTexto" runat="server" Text="Permite adicionar texto" />
         <div class="right">
             <asp:Button ID="_btnSalvar" runat="server" Text="Salvar" OnClick="_btnSalvar_Click" ValidationGroup="Resposta" />
             <asp:Button ID="_btnCancelar" runat="server" Text="Cancelar" CausesValidation="false"

@@ -28,6 +28,18 @@ SET XACT_ABORT ON
 
 	*/
 	
+	INSERT INTO ACA_TipoEvento (tev_nome, tev_periodoCalendario, tev_situacao, tev_dataCriacao, tev_dataAlteracao)
+	VALUES ('Cadastro de preferência de horário', 0, 1, GETDATE(), GETDATE())
+	
+	DECLARE @tev_id INT = (SELECT SCOPE_IDENTITY());
+	
+	EXEC MS_InsereParametroAcademico
+		@pac_chave = 'TIPO_EVENTO_PREFERENCIA_HORARIO' -- Chave do parâmetro. (Obrigatório)
+		,@pac_valor = @tev_id -- Valor do parâmetro. (Obrigatório)
+		,@pac_descricao = 'Tipo de evento de abertura de período para cadastro de preferência de horário de docente' -- Descrição do parâmetro. (Obrigatório)
+		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
+		,@ent_id = @entId
+	
 -- Fechar transação	
 SET XACT_ABORT OFF
 COMMIT TRANSACTION

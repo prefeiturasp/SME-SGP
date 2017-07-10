@@ -58,19 +58,41 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
+        public bool IsMultiplaSelecao {
+            get
+            { 
+                if (ViewState["IsMultiplaSelecao"] != null)
+                    return Convert.ToBoolean(ViewState["IsMultiplaSelecao"]);
+                return false;
+            }
+            set
+            {
+                ViewState["IsMultiplaSelecao"] = value;
+            }
+        }
+
         #endregion
 
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
+            }
+
             if (!IsPostBack)
             {
                 if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
-                {
-                    _Carregar(PreviousPage._VS_qtc_id, PreviousPage.PaginaResposta_qtr_id);
+                {                   
                     _VS_qtc_id = PreviousPage._VS_qtc_id;
                     _VS_qtr_id = PreviousPage.PaginaResposta_qtr_id;
-                    _VS_qst_id = PreviousPage._VS_qst_id;
+                    _VS_qst_id = PreviousPage._VS_qst_id;                    
+                    IsMultiplaSelecao = PreviousPage.IsMultiplaSelecao;
+                    _Carregar(_VS_qtc_id, _VS_qtr_id);
                 }
 
                 else
@@ -115,8 +137,12 @@ namespace GestaoEscolar.Configuracao.Questionario
                 if (_txtTexto.Text.Length > 4000)
                     throw new ValidationException("O texto da resposta não deve exceder 4000 caracteres.");
 
+                if (IsMultiplaSelecao && Convert.ToInt32(_txtPeso.Text) <= 0)
+                    throw new ValidationException("O peso da resposta deve ser maior que zero.");
+
                 Resposta.qtr_texto = _txtTexto.Text;
                 Resposta.qtr_permiteAdicionarTexto = _chkPermiteAdicionarTexto.Checked;
+                Resposta.qtr_peso = IsMultiplaSelecao ? Convert.ToInt32(_txtPeso.Text) : 0;
                 Resposta.qtr_situacao = 1; //ativo
 
                 if (CLS_QuestionarioRespostaBO.Save(Resposta))
@@ -166,10 +192,14 @@ namespace GestaoEscolar.Configuracao.Questionario
             try
             {
                 CLS_QuestionarioResposta Resposta = new CLS_QuestionarioResposta { qtc_id = qtc_id, qtr_id = qtr_id };
+                
                 CLS_QuestionarioRespostaBO.GetEntity(Resposta);
+                
                 _VS_qtr_id = Resposta.qtr_id;
                 _VS_qtc_id = Resposta.qtc_id;
                 _txtTexto.Text = Resposta.qtr_texto;
+                divPeso.Visible = IsMultiplaSelecao;
+                _txtPeso.Text = divPeso.Visible ? Resposta.qtr_peso.ToString() : "0";
                 _chkPermiteAdicionarTexto.Checked = Resposta.qtr_permiteAdicionarTexto;
             }
             catch (Exception e)
