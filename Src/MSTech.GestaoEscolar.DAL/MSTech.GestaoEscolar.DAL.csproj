@@ -644,6 +644,8 @@
     <Compile Include="ESC_UnidadeEscolaEquipamentosDAO.cs" />
     <Compile Include="ESC_UnidadeEscolaPredioDAO.cs" />
     <Compile Include="GestaoEscolarServicoDAO.cs" />
+    <Compile Include="LOG_AlertaFimFechamentoDAO.cs" />
+    <Compile Include="LOG_AlertaInicioFechamentoDAO.cs" />
     <Compile Include="LOG_AvaliacaoMedia_AlteracaoDAO.cs" />
     <Compile Include="LOG_CurriculoSugestaoDAO.cs" />
     <Compile Include="LOG_MatriculaTurmaDisciplinaExcluidaDAO.cs" />
