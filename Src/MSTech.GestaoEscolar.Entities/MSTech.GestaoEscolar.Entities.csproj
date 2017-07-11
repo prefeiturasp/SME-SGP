@@ -322,6 +322,8 @@
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEnsino.cs" />
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEquipamentos.cs" />
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaPredio.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_AlertaFimFechamento.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_AlertaInicioFechamento.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AvaliacaoMedia_Alteracao.cs" />
     <Compile Include="Abstracts\Abstract_LOG_CurriculoSugestao.cs" />
     <Compile Include="Abstracts\Abstract_LOG_MatriculaTurmaDisciplinaExcluida.cs" />
@@ -648,6 +650,8 @@
     <Compile Include="ESC_UnidadeEscolaEquipamentos.cs" />
     <Compile Include="ESC_UnidadeEscolaPredio.cs" />
     <Compile Include="Interfaces\ICFG_Configuracao.cs" />
+    <Compile Include="LOG_AlertaFimFechamento.cs" />
+    <Compile Include="LOG_AlertaInicioFechamento.cs" />
     <Compile Include="LOG_AvaliacaoMedia_Alteracao.cs" />
     <Compile Include="LOG_CurriculoSugestao.cs" />
     <Compile Include="LOG_MatriculaTurmaDisciplinaExcluida.cs" />
