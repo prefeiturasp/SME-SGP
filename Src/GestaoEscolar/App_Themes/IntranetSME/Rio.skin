@@ -135,8 +135,8 @@
 <asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/icoAlerta.png" ToolTip="Plano de aula não preenchido"
     SkinID="imgStatusAlertaAulaSemPlano" />
 
-<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/statusAlertaPendencia.png" ToolTip="Aluno sem lançamento de anotação para recuperação paralela"
-    SkinID="imgStatusAlertaAulaSemAnotacaoRP" Width="20" Height="20" />
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/statusAlertaPendencia.png"
+    SkinID="imgAlertaRelatorioAtendimento" Width="20" Height="20" />
 
 <asp:HyperLink runat="server" ImageUrl="~/App_Themes/IntranetSME/images/anexar.png" SkinID="hplAnexo" />
 <asp:HyperLink runat="server" ImageUrl="~/App_Themes/IntranetSME/images/iconeHelp.png" SkinID="hplHelp"

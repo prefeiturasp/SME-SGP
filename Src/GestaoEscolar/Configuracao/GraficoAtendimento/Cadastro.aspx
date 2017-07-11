@@ -99,10 +99,10 @@
                     </div>
                     <div runat="server" id="divIdade" visible="false">
                         <asp:Label ID="Label2" runat="server" Text="Idade mínima" AssociatedControlID="txtIdadeInicial" />
-                        <asp:TextBox ID="txtIdadeInicial" runat="server" SkinID="text20C" MaxLength="2"></asp:TextBox>
+                        <asp:TextBox ID="txtIdadeInicial" runat="server" SkinID="Numerico" MaxLength="2"></asp:TextBox>
 
                         <asp:Label ID="Label3" runat="server" Text="Idade máxima" AssociatedControlID="txtIdadeFinal" />
-                        <asp:TextBox ID="txtIdadeFinal" runat="server" SkinID="text20C" MaxLength="2"></asp:TextBox>
+                        <asp:TextBox ID="txtIdadeFinal" runat="server" SkinID="Numerico" MaxLength="2"></asp:TextBox>
                     </div>
                     <div runat="server" id="divDataPreenchimento" visible="false">
                         <asp:Label ID="Label4" runat="server" Text="Data inicial" AssociatedControlID="txtDtInicial" />
@@ -183,7 +183,7 @@
                         </fieldset>
                     </div>
                     <asp:GridView runat="server" ID="gvQuestionario" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="qst_id, qtc_id, qtr_id, IsNew, emUso" EmptyDataText="Nenhum filtro personalizado ligado ao gráfico."
+                        DataKeyNames="qst_id, qtc_id, qtr_id, IsNew" EmptyDataText="Nenhum filtro personalizado ligado ao gráfico."
                         OnRowDataBound="gvQuestionario_RowDataBound" OnRowCommand="gvQuestionario_RowCommand">
                         <Columns>
                             <asp:BoundField HeaderText="Questionário" DataField="qst_titulo" />

@@ -183,15 +183,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                     {
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
-
-                        if (grvResultado.Rows.Count > 0)
-                        {
-                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                        }
-
-                        
-
                         ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "qst_id: " + entity.qst_id + ", qtc_id: " + entity.qtc_id);
                         lblMessage.Text = UtilBO.GetErroMessage("Conteúdo excluído com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
@@ -230,12 +221,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                         grvResultado.DataBind();
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
-
-                        if (grvResultado.Rows.Count > 0)
-                        {
-                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                        }
                     }
 
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "qtc_id: " + qtc_idSubir + ", qts_id: " + _VS_qst_id);
@@ -271,12 +256,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                         grvResultado.DataBind();
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
-
-                        if (grvResultado.Rows.Count > 0)
-                        {
-                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                        }
                     }
 
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "qtc_id: " + qtc_idSubir + ", qts_id: " + _VS_qst_id);
@@ -294,7 +273,12 @@ namespace GestaoEscolar.Configuracao.Questionario
         {
             // Mostra o total de registros
             UCTotalRegistros1.Total = CLS_QuestionarioConteudoBO.GetTotalRecords();
-            ConfiguraColunasOrdenacao(grvResultado);
+
+            if (grvResultado.Rows.Count > 0)
+            {
+                ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+            }
         }        
         
         protected void odsResultado_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
@@ -329,12 +313,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                 // atualiza o grid
                 grvResultado.DataBind();
 
-                if (grvResultado.Rows.Count > 0)
-                {
-                    ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                    ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                }
-
                 lblInfo.Text = "<b>Questionário: </b>"+ CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id }).qst_titulo +"<br>";
 
                 updResultado.Update();
@@ -357,12 +335,6 @@ namespace GestaoEscolar.Configuracao.Questionario
             grvResultado.PageIndex = 0;
             // atualiza o grid
             grvResultado.DataBind();
-
-            if (grvResultado.Rows.Count > 0)
-            {
-                ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-            }
         }
 
         #endregion

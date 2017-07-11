@@ -221,5 +221,10 @@ namespace GestaoEscolar.Configuracao.Questionario
 
         #endregion
 
+        protected void odsResultado_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+        {
+            if (e.ExecutingSelectCount)
+                e.InputParameters.Clear();
+        }
     }
 }

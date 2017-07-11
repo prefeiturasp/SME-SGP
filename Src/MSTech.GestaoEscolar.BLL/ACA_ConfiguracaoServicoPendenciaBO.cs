@@ -13,6 +13,25 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Collections.Generic;
     using Data.Common;
     using Validation.Exceptions;
+    using System;
+
+    /// <summary>
+    /// Sem lançamento de relatorio (1 - AEE, 2 - NAAPA, 4 - RP) Enumerador binário
+    /// </summary>
+    [Flags]
+    public enum eConfiguracaoServicoPendenciaSemRelatorioAtendimento : int
+    {
+        Nenhum = 0
+        ,
+        [Description("ACA_ConfiguracaoServicoPendenciaBO.eConfiguracaoServicoPendenciaSemRelatorioAtendimento.AEE")]
+        AEE = 1
+        ,
+        [Description("ACA_ConfiguracaoServicoPendenciaBO.eConfiguracaoServicoPendenciaSemRelatorioAtendimento.NAAPA")]
+        NAAPA = 2
+        ,
+        [Description("ACA_ConfiguracaoServicoPendenciaBO.eConfiguracaoServicoPendenciaSemRelatorioAtendimento.RP")]
+        RP = 4
+    }
 
     /// <summary>
     /// Classe de excessão referente à entidade ACA_ConfiguracaoServicoPendencia

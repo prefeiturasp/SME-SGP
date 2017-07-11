@@ -61,6 +61,12 @@ namespace GestaoEscolar.Configuracao.Questionario
             _Salvar();
         }
 
+        protected void _ddlTipoCalculo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            byte valor = Convert.ToByte(_ddlTipoCalculo.SelectedValue);
+            divCalculo.Visible = _rfvTituloCalculo.Visible = valor > 0 && valor != (byte)QuestionarioTipoCalculo.SemCalculo;
+        }
+
         #endregion
 
         #region Métodos
@@ -73,6 +79,9 @@ namespace GestaoEscolar.Configuracao.Questionario
                 CLS_QuestionarioBO.GetEntity(Questionario);
                 _VS_qst_id = Questionario.qst_id;
                 _txtTitulo.Text = Questionario.qst_titulo;
+                _ddlTipoCalculo.SelectedValue = Questionario.qst_tipoCalculo.ToString();
+                _ddlTipoCalculo_SelectedIndexChanged(null, null);
+                _txtTituloCalculo.Text = Questionario.qst_tituloCalculo;
             }
             catch (Exception e)
             {
@@ -95,7 +104,13 @@ namespace GestaoEscolar.Configuracao.Questionario
                 if (_txtTitulo.Text.Length > 500)
                     throw new ValidationException("O título do questionário não deve exceder 500 caracteres.");
 
+                if (Convert.ToByte(_ddlTipoCalculo.SelectedValue) != (byte)QuestionarioTipoCalculo.SemCalculo
+                    && _txtTituloCalculo.Text.Length > 500)
+                    throw new ValidationException("O título do cálculo não deve exceder 500 caracteres.");
+
                 Questionario.qst_titulo = _txtTitulo.Text;
+                Questionario.qst_tipoCalculo = Convert.ToByte(_ddlTipoCalculo.SelectedValue);
+                Questionario.qst_tituloCalculo = _txtTituloCalculo.Text;
                 Questionario.qst_situacao = 1; //ativo
 
                 DataTable dtTituloRepetido = CLS_QuestionarioBO.GetQuestionarioBy_qst_titulo(_txtTitulo.Text.Trim());
@@ -148,5 +163,6 @@ namespace GestaoEscolar.Configuracao.Questionario
         }
 
         #endregion
+
     }
 }

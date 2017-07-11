@@ -40,5 +40,20 @@ public partial class WebControls_Combos_UCComboRacaCor : MotherUserControl
         }
     }
 
+    /// <summary>
+    /// Retorna e seta o valor selecionado no combo
+    /// </summary>
+    public int Valor
+    {
+        get
+        {
+            return Convert.ToInt32(_ddlRacaCor.SelectedValue);
+        }
+        set
+        {
+            _ddlRacaCor.SelectedValue = value.ToString();
+        }
+    }
+
     #endregion
 }

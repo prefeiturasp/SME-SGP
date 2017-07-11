@@ -619,13 +619,7 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                 RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(false);
                 List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
                 List<CLS_RelatorioPreenchimentoAcoesRealizadas> lstAcoesRealizadas = UCLancamentoRelatorioAtendimento.RetornaListaAcoesRealizadas();
-
-                ACA_FormatoAvaliacao fav = TUR_TurmaBO.SelecionaFormatoAvaliacao(rel.entityPreenchimentoAlunoTurmaDisciplina.tur_id);
-                if (fav != null)
-                {
-                    rel.processarPendencia = fav.fav_fechamentoAutomatico;
-                }
-
+                
                 if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor, lstAcoesRealizadas))
                 {
                     string msg = GetGlobalResourceObject("Classe", "RelatorioRecuperacaoParalela.Cadastro.MensagemSucessoSalvar").ToString();
@@ -636,6 +630,10 @@ namespace GestaoEscolar.Classe.RelatorioRecuperacaoParalela
                     {
                         pnlLancamento.Visible = false;
                         grvLancamentos.Visible = true;
+                        btnNovo.Visible = VS_disciplinaRP
+                                && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
+                                && VS_permissoesRP.permissaoEdicao
+                                && VS_periodicidadePreenchimento == (byte)CLS_RelatorioAtendimentoPeriodicidade.Periodico;
 
                         string[] ids = ddlDisciplina.SelectedValue.Split(';');
 

@@ -146,6 +146,14 @@ namespace MSTech.GestaoEscolar.Jobs.Schedulers
             jobDetail = new JobDetailImpl(typeof(MS_JOB_AlertaAlunosFaltasConsecutivas).Name, typeof(MS_JOB_AlertaAlunosFaltasConsecutivas));
             jobDetail.Durable = true;
             AddJob(jobDetail);
+
+            jobDetail = new JobDetailImpl(typeof(MS_JOB_ProcessamentoPreenchimentoFrequencia).Name, typeof(MS_JOB_ProcessamentoPreenchimentoFrequencia));
+            jobDetail.Durable = true;
+            AddJob(jobDetail);
+
+            jobDetail = new JobDetailImpl(typeof(MS_JOB_ProcessamentoAlunosFrequencia).Name, typeof(MS_JOB_ProcessamentoAlunosFrequencia));
+            jobDetail.Durable = true;
+            AddJob(jobDetail);
         }
     }
 }

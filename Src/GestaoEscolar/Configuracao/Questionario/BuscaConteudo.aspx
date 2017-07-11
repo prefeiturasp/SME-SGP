@@ -26,17 +26,11 @@
             </fieldset>
             <fieldset id="fdsResultado" runat="server" visible="false">
                 <legend>Consulta de conteúdos</legend>
-                <%--<div id="divInformacao" style="width: 60%; float: left; clear: none;">
-                    <asp:Label runat="server" ID="lblInfo" Visible="true"></asp:Label>
-                    <br />
-                </div>--%>
                 <uc4:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao1_IndexChanged" />
                 <br />
                 <div align="left">
                     <asp:Button ID="btnNovo" runat="server" Text="Incluir novo conteúdo" CommandName="Edit"
                         CausesValidation="False" PostBackUrl="~/Configuracao/Questionario/CadastroConteudo.aspx" />
-                    <%--<asp:Button ID="btnCancelar" runat="server" Text="Cancelar"
-                        CausesValidation="false" PostBackUrl="~/Configuracao/Questionario/BuscaQuestionario.aspx" />--%>
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
                     BorderStyle="None" DataKeyNames="qst_id, qtc_id, qtc_tipo, qtc_tipoResposta, qtc_ordem" DataSourceID="odsResultado" AllowCustomPaging="true"
@@ -68,7 +62,7 @@
                             <HeaderStyle CssClass="center" />
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Ordem" SortExpression="qtc_ordem">
+                        <asp:TemplateField HeaderText="Ordem">
                             <ItemTemplate>
                                 <asp:ImageButton ID="_btnSubir" runat="server" CausesValidation="false" CommandName="Subir"
                                     Height="16" Width="16" />

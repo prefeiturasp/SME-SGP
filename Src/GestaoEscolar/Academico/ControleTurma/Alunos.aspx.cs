@@ -261,7 +261,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
         private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
 
-        private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRPEncerramento = new List<Struct_PreenchimentoAluno>();
+        private Dictionary<byte, List<long>> dicAlunosPendentesRelatorio = new Dictionary<byte, List<long>>();
 
         #endregion
 
@@ -316,12 +316,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio);
                 }
 
-                if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno)
-                {
-                    lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio).Where(p => p.tud_id == UCControleTurma1.VS_tud_id).ToList();
-
-                    lstAlunosRelatorioRPEncerramento = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(-1, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio).Where(p => p.tud_id == UCControleTurma1.VS_tud_id).ToList();
-                }
+                dicAlunosPendentesRelatorio = CLS_RelatorioAtendimentoBO.SelecionaPendenciasPorTurmaPeriodo(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id);
 
                 CancelaSelect = false;
 
@@ -977,7 +972,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                     btnRelatorioAEE.CommandArgument = alu_id.ToString();
                 }
 
-                Image imgStatusAlertaAulaSemAnotacaoRP = (Image)e.Row.FindControl("imgStatusAlertaAulaSemAnotacaoRP");
 
                 // Mostra o ícone para as anotações de recuperação paralela (RP):
                 // - para todos os alunos, quando a turma for de recuperação paralela,
@@ -991,12 +985,37 @@ namespace GestaoEscolar.Academico.ControleTurma
                         btnRelatorioRP.Visible = true;
                         btnRelatorioRP.CommandArgument = string.Format("{0};-1", alu_id.ToString());
                     }
+                }
 
-                    if (imgStatusAlertaAulaSemAnotacaoRP != null)
+                Image imgAlertaRelatorio = (Image)e.Row.FindControl("imgAlertaRelatorio");
+                if (imgAlertaRelatorio != null)
+                {
+                    List<string> tooltip = new List<string>();
+                    foreach (KeyValuePair<byte, List<long>> pair in dicAlunosPendentesRelatorio)
                     {
-                        imgStatusAlertaAulaSemAnotacaoRP.Visible = UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno && 
-                            (!lstAlunosRelatorioRP.Any(p => p.alu_id == alu_id) ||
-                             !lstAlunosRelatorioRPEncerramento.Any(p => p.alu_id == alu_id));
+                        if (pair.Value.Contains(alu_id))
+                        {
+                            imgAlertaRelatorio.Visible = true;
+                            switch (pair.Key)
+                            {
+                                case (byte)CLS_RelatorioAtendimentoTipo.AEE:
+                                    tooltip.Add("Aluno sem lançamento de relatório AEE.");
+                                    break;
+                                case (byte)CLS_RelatorioAtendimentoTipo.NAAPA:
+                                    tooltip.Add("Aluno sem lançamento de relatório NAAPA.");
+                                    break;
+                                case (byte)CLS_RelatorioAtendimentoTipo.RP:
+                                    tooltip.Add("Aluno sem lançamento de anotação para turma de recuperação paralela.");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+
+                    if (tooltip.Any())
+                    {
+                        imgAlertaRelatorio.ToolTip = string.Join("<br />", tooltip.ToArray());
                     }
                 }
             }

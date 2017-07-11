@@ -57,41 +57,56 @@ namespace MSTech.GestaoEscolar.BLL
                 default:
                     break;
             }
-            entity.gff_valorDetalhado = RetornaValor((REL_GraficoAtendimentoFiltrosFixos)entity.gff_tipoFiltro, entity.gff_valorFiltro);
+            entity.gff_valorDetalhado = RetornaValorDetalhado((REL_GraficoAtendimentoFiltrosFixos)entity.gff_tipoFiltro, entity.gff_valorFiltro);
 
             return entity;
         }
 
-        public new static string RetornaValor(REL_GraficoAtendimentoFiltrosFixos tipoFiltro, string valor)
+        public new static string RetornaValorDetalhado(REL_GraficoAtendimentoFiltrosFixos tipoFiltro, string valor)
         {
-            List<string> valoresDetalhados = new List<string>();
+            string[] codDetalhe = valor.Split(',');
+            string retorno = string.Empty;
             switch (tipoFiltro)
             {
                 case REL_GraficoAtendimentoFiltrosFixos.DetalheDeficiencia:
-                    string[] codDetalhe = valor.Split(',');
+                    List<string> valoresDetalhados = new List<string>();
                     foreach (var item in codDetalhe)
                     {
                         CFG_DeficienciaDetalhe def = new CFG_DeficienciaDetalhe { dfd_id = Convert.ToInt32(item) };
                         def = CFG_DeficienciaDetalheBO.GetDetalhamento(def);
                         valoresDetalhados.Add(def.dfd_nome);
                     }
+                    codDetalhe = valoresDetalhados.ToArray();
+
+                    if (codDetalhe.Length == 1) retorno = codDetalhe[0];
+                    else if (codDetalhe.Length == 2) retorno = codDetalhe[0] + " ou " + codDetalhe[1];
+                    else if (codDetalhe.Length >= 3)
+                    {
+
+                        string[] concat = new string[codDetalhe.Length - 1];
+                        Array.Copy(codDetalhe, 0, concat, 0, codDetalhe.Length - 1);
+
+                        retorno = string.Join(", ", concat);
+                        retorno += " ou " + codDetalhe[codDetalhe.Length - 1];
+                    }
+                    else retorno = string.Empty;
                     break;
                 case REL_GraficoAtendimentoFiltrosFixos.FaixaIdade:
-                    valoresDetalhados.Add(valor);
+                    retorno = codDetalhe.Length >= 2 ? codDetalhe[0] + " até " + codDetalhe[1] + " anos" : string.Empty;
                     break;
                 case REL_GraficoAtendimentoFiltrosFixos.Sexo:
-                    valoresDetalhados.Add(MetodosExtensao.SexoFormatado(Convert.ToInt32(valor)));
+                    retorno = codDetalhe.Length >= 1 ? MetodosExtensao.SexoFormatado(Convert.ToInt32(codDetalhe[0])) : string.Empty;
                     break;
                 case REL_GraficoAtendimentoFiltrosFixos.PeriodoPreenchimento:
-                    valoresDetalhados.Add(valor);
+                    retorno = codDetalhe.Length >= 2 ? codDetalhe[0] + " até " + codDetalhe[1] : string.Empty;
                     break;
                 case REL_GraficoAtendimentoFiltrosFixos.RacaCor:
-                    valoresDetalhados.Add(MetodosExtensao.RacaCorFormatado(Convert.ToInt32(valor)));
+                    retorno = codDetalhe.Length >= 1 ? MetodosExtensao.RacaCorFormatado(Convert.ToInt32(codDetalhe[0])) : string.Empty;
                     break;
                 default:
                     break;
             }
-            return string.Join(",", valoresDetalhados.ToArray());
+            return retorno;
         }
 
         public static List<REL_GraficoAtendimento_FiltrosFixos> RetornaListaDetalhada(List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos)
@@ -116,7 +131,7 @@ namespace MSTech.GestaoEscolar.BLL
             if (banco != null)
                 dao._Banco = banco;
             List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos = dao.SelectBy_gra_id(gra_id);
-            
+
             return RetornaListaDetalhada(dao.SelectBy_gra_id(gra_id));
         }
     }

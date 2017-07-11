@@ -1088,6 +1088,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
         [parametroAcademicoAttributes("Permitir editar lançamento de relatório aprovado.", "Permitir editar lançamento de relatório aprovado é obrigatório.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
         PERMITIR_EDITAR_RELATORIO_APROVADO
+        ,
+        [parametroAcademicoAttributes("Tipo de evento de abertura de período para cadastro de preferência de horário de docente", "Tipo de evento de abertura de período para cadastro de preferência de horário de docente é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
+        TIPO_EVENTO_PREFERENCIA_HORARIO
     }   
 
     #endregion Enumerador

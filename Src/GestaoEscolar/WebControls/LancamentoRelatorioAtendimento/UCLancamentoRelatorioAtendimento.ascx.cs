@@ -372,10 +372,9 @@
             VS_RelatorioAtendimento = CLS_RelatorioAtendimentoBO.SelecionaRelatorio(rea_id, __SessionWEB.__UsuarioWEB.Usuario.usu_id, ApplicationWEB.AppMinutosCacheLongo);
 
             VS_RelatorioPreenchimentoAluno = CLS_RelatorioPreenchimentoBO.SelecionaPorRelatorioAlunoTurmaDisciplina(VS_rea_id, VS_alu_id, VS_tur_id, VS_tud_id, VS_tpc_id, reap_id);
-
             VS_AcoesRealizadas = new List<sAcoesRealizadas>();
-
-            if (VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado &&
+            if (VS_RelatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.AEE &&
+                VS_RelatorioPreenchimentoAluno.entityPreenchimentoAlunoTurmaDisciplina.ptd_situacao != (byte)RelatorioPreenchimentoAlunoSituacao.Aprovado &&
                 PermiteConsultar && !PermiteEditar && !PermiteAprovar)
             {
                 throw new PermissaoRelatorioPreenchimentoValidationException("O usuário tem permissão apenas para consultar relatórios aprovados.");
@@ -409,7 +408,7 @@
 
             if (!VS_RelatorioAtendimento.rea_permiteEditarRecaCor)
             {
-                UCCRacaCor.Visible = false;
+                divRacaCor.Visible = false;
 
                 string racaCor = entityPessoa.RacaCorFormatado();
 
@@ -420,7 +419,7 @@
             }
             else
             {
-                UCCRacaCor.Visible = true;
+                divRacaCor.Visible = true;
                 if (UCCRacaCor._Combo.Items.FindByValue(entityPessoa.pes_racaCor.ToString()) != null)
                 {
                     UCCRacaCor._Combo.SelectedValue = entityPessoa.pes_racaCor.ToString();
@@ -436,7 +435,11 @@
                 hplDownloadAnexo.Text = VS_RelatorioAtendimento.rea_tituloAnexo;
                 hplDownloadAnexo.NavigateUrl = String.Format("~/FileHandler.ashx?file={0}", VS_RelatorioAtendimento.arq_idAnexo);
             }
-            
+            else
+            {
+                divDownloadAnexo.Visible = false;
+            }
+
             CarregarHipoteseDiagnostica();
             CarregarQuestionarios();
             CarregarAcoesRealizadas();

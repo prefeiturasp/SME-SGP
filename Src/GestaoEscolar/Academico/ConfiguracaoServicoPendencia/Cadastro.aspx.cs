@@ -92,6 +92,12 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             chkSemSintese.Checked = entity.csp_semSintese;
             chkSemPlanoAula.Checked = entity.csp_semPlanoAula;
 
+            foreach (ListItem item in cblSemRelatorioAtendimento.Items)
+            {
+                eConfiguracaoServicoPendenciaSemRelatorioAtendimento valor = (eConfiguracaoServicoPendenciaSemRelatorioAtendimento)Enum.Parse(typeof(eConfiguracaoServicoPendenciaSemRelatorioAtendimento), item.Value);
+                item.Selected = ((eConfiguracaoServicoPendenciaSemRelatorioAtendimento)entity.csp_semRelatorioAtendimento).HasFlag(valor);
+            }
+
             UCComboTipoNivelEnsino.Valor = entity.tne_id > 0 ? entity.tne_id : -1;
             UCComboTipoNivelEnsino.PermiteEditar = false;
 
@@ -135,7 +141,12 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             entity.csp_semSintese = chkSemSintese.Checked;
             entity.csp_semPlanoAula = chkSemPlanoAula.Checked;
             entity.IsNew = (VS_csp_id > 0) ? false : true;
-            
+
+            var semRelatorioAtendimento = from ListItem item in cblSemRelatorioAtendimento.Items
+                                          where item.Selected
+                                          select (eConfiguracaoServicoPendenciaSemRelatorioAtendimento)Enum.Parse(typeof(eConfiguracaoServicoPendenciaSemRelatorioAtendimento), item.Value);
+
+            entity.csp_semRelatorioAtendimento = (int)semRelatorioAtendimento.Aggregate(eConfiguracaoServicoPendenciaSemRelatorioAtendimento.Nenhum, (acumulado, item) => acumulado | item);
 
             if (ACA_ConfiguracaoServicoPendenciaBO.SelectBy_VerificaConfiguracaoServicoPendencia(entity, null))
                     throw new ACA_ConfiguracaoServicoPendenciaDuplicateException(GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Configuracao.ErroDuplicacao").ToString());
@@ -199,6 +210,8 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
                 UCComboTipoModalidadeEnsino.CarregarTipoModalidadeEnsino();
                 UCComboTipoNivelEnsino.CarregarTipoNivelEnsino();
 
+                GestaoEscolarUtilBO.CarregarComboEnum<eConfiguracaoServicoPendenciaSemRelatorioAtendimento>(cblSemRelatorioAtendimento.Items, true);
+
                 if (PreviousPage != null && PreviousPage.IsCrossPagePostBack)
                 {
                     VS_csp_id = PreviousPage.Edit_csp_id;
@@ -223,7 +236,8 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
                         chkSemPlanejamento.Checked ||
                         chkSemPlanoAula.Checked ||
                         chkSemResultadoFinal.Checked ||
-                        chkSemSintese.Checked;
+                        chkSemSintese.Checked ||
+                        cblSemRelatorioAtendimento.Items.Cast<ListItem>().Any(p => p.Selected);
 
         if (!(UCComboTipoNivelEnsino.Valor > 0 || UCComboTipoModalidadeEnsino.Valor > 0 || UCComboTipoTurma.Valor > 0))
         {

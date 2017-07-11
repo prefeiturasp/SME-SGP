@@ -35,5 +35,8 @@ namespace MSTech.GestaoEscolar.Entities
 		/// </summary>
 		[MSDefaultValue(1)]
         public override int csp_situacao { get; set; }
+
+        [MSDefaultValue(0)]
+        public override int csp_semRelatorioAtendimento { get; set; }
     }
 }

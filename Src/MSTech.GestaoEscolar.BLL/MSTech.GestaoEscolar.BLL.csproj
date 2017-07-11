@@ -375,6 +375,8 @@
     <Compile Include="CLS_TurmaNotaBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaBO.cs" />
+    <Compile Include="LOG_AlertaFimFechamentoBO.cs" />
+    <Compile Include="LOG_AlertaInicioFechamentoBO.cs" />
     <Compile Include="LOG_AvaliacaoMedia_AlteracaoBO.cs" />
     <Compile Include="LOG_CurriculoSugestaoBO.cs" />
     <Compile Include="LOG_MatriculaTurmaDisciplinaExcluidaBO.cs" />

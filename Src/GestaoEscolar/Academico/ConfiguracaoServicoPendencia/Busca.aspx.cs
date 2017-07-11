@@ -5,8 +5,10 @@ using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -291,6 +293,24 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                         pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanejamento.Text").ToString() + " / ";
                         pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemSinteseFinal.Text").ToString() + " / ";
                         pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanoAula.Text").ToString() + " / ";
+
+                        eConfiguracaoServicoPendenciaSemRelatorioAtendimento pendenciaRelatorio =
+                            (eConfiguracaoServicoPendenciaSemRelatorioAtendimento)Enum.Parse(typeof(eConfiguracaoServicoPendenciaSemRelatorioAtendimento), grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semRelatorioAtendimento"].ToString());
+
+                        Type objType = typeof(eConfiguracaoServicoPendenciaSemRelatorioAtendimento);
+                        FieldInfo[] propriedades = objType.GetFields();
+                        foreach (FieldInfo objField in propriedades)
+                        {
+                            DescriptionAttribute[] attributes = (DescriptionAttribute[])objField.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                            if (attributes.Length > 0)
+                            {
+                                eConfiguracaoServicoPendenciaSemRelatorioAtendimento pend =
+                                (eConfiguracaoServicoPendenciaSemRelatorioAtendimento)Enum.Parse(typeof(eConfiguracaoServicoPendenciaSemRelatorioAtendimento), Convert.ToString(objField.GetRawConstantValue()));
+
+                                pendencias += pendenciaRelatorio.HasFlag(pend) ? GetGlobalResourceObject("Enumerador", attributes[0].Description).ToString() + " / " : "";
+                            }
+                        }
 
                         lblPendencias.Text = pendencias.Length > 0 ? pendencias.Substring(0, pendencias.Length - 3) : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Busca.lblPendencias.Text.Nenhuma").ToString();
                     }

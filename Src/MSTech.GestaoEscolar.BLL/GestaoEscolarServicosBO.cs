@@ -507,5 +507,23 @@ namespace MSTech.GestaoEscolar.BLL
         {
             new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosFaltasConsecutivas();
         }
+
+        /// <summary>
+        /// Processa o preenchimento de frequência, conta as aulas sem a flag efetivado.
+        /// Utiliza a fila do fechamento.
+        /// </summary>
+        public static void ExecJOB_ProcessamentoPreenchimentoFrequencia()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoPreenchimentoFrequencia();
+        }
+
+        /// <summary>
+        /// Processa os alunos com baixa frequência e com faltas consecutivas.
+        /// Utiliza a fila do fechamento.
+        /// </summary>
+        public static void ExecJOB_ProcessamentoAlunosFrequencia()
+        {
+            new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoAlunosFrequencia();
+        }
     }
 }

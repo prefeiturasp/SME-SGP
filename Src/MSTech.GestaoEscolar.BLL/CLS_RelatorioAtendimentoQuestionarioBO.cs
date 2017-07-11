@@ -45,10 +45,9 @@ namespace MSTech.GestaoEscolar.BLL
 
             DataTable dt = dao.SelectBy_RelatorioAtendimento(rea_id);
 
-            if (dt.AsEnumerable().Any(r => Convert.ToByte(r["qtc_tipo"]) == (byte)QuestionarioTipoConteudo.Pergunta && Convert.ToByte(r["qtc_tipoResposta"]) == (byte)QuestionarioTipoResposta.MultiplaSelecao))
+            if (dt.AsEnumerable().Any(r => Convert.ToBoolean(r["PossuiPerguntaMultiplaEscolha"]) == true))
                 dt = dt.AsEnumerable()
-                        .Where(row => row.Field<byte>("qtc_tipo") == (byte)QuestionarioTipoConteudo.Pergunta
-                            && row.Field<byte>("qtc_tipoResposta") == (byte)QuestionarioTipoResposta.MultiplaSelecao)
+                        .Where(row => row.Field<bool>("PossuiPerguntaMultiplaEscolha") == true)
                         .CopyToDataTable();
             else dt = new DataTable();
 

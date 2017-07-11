@@ -145,6 +145,34 @@ namespace MSTech.GestaoEscolar.BLL
             return dt;
         }
 
+        /// <summary>
+        /// Seleciona os tipos de relatório com pendencia e os alunos pendentes
+        /// </summary>
+        /// <param name="tpc_id"></param>
+        /// <param name="tur_id"></param>
+        /// <returns></returns>
+        public static Dictionary<byte, List<long>> SelecionaPendenciasPorTurmaPeriodo(int tpc_id, long tur_id)
+        {
+            Dictionary<byte, List<long>> dic = new Dictionary<byte, List<long>>();
+
+            using (DataTable dt = new CLS_RelatorioAtendimentoDAO().SelecionaPendenciasPorTurmaPeriodo(tpc_id, tur_id))
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    dic = (from DataRow dr in dt.Rows
+                           group dr by Convert.ToByte(dr["rea_tipo"]) into grupo
+                           select new
+                           {
+                               chave = grupo.Key
+                               ,
+                               valor = grupo.Select(p => Convert.ToInt64(p["alu_id"])).ToList()
+                           }).ToDictionary(p => p.chave, p => p.valor);
+                }
+
+                return dic;
+            }
+        }
+
         #endregion
 
         /// <summary>
