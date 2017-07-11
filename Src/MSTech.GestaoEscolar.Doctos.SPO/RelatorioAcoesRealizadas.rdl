@@ -476,7 +476,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Relatório ações realizadas</Value>
+                      <Value>Relatório de ações realizadas</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
