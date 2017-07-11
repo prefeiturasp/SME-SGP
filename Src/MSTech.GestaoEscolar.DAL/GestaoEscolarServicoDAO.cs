@@ -222,11 +222,24 @@ namespace MSTech.GestaoEscolar.DAL
         /// <summary>
         /// Processa o alerta de aviso de início de fechamento.
         /// </summary>
-        public void ExecJOB_AlertaInicioFechamento()
+        public DataTable ExecJOB_AlertaInicioFechamento(int cfa_periodoAnalise)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaInicioFechamento", _Banco);
+
+            #region Parâmetros
+
+            DbParameter Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@cfa_periodoAnalise";
+            Param.Size = 4;
+            Param.Value = cfa_periodoAnalise;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
             qs.TimeOut = 0;
             qs.Execute();
+            return qs.Return;
         }
 
         /// <summary>
