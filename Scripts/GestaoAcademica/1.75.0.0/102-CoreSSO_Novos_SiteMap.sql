@@ -35,6 +35,15 @@ SET XACT_ABORT ON
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+		
+	-- Alteração titulo do relatório do resumo das atividades desenvolvidas	
+	update SYS_ModuloSitemap 
+		set msm_nome = 'Resumo das atividades desenvolvidas' 
+		where msm_url = '~/Documentos/Relatorio.aspx?dummy=%27AU93aqlCeUI%3d%27'
+		
+		
+		
+		
 
 -- Fechar transação
 SET XACT_ABORT OFF
