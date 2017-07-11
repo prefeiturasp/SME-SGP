@@ -11,6 +11,10 @@ using MSTech.CoreSSO.DAL;
 using MSTech.Data.Common;
 using MSTech.GestaoEscolar.DAL;
 using System.Net;
+using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace MSTech.GestaoEscolar.BLL
 {
@@ -481,7 +485,38 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaInicioFechamento()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaInicioFechamento();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaInicioFechamento });
+            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaInicioFechamento(alerta.cfa_periodoAnalise);
+                List<sAlertaInicioFechamento> lstUsuarios = (from DataRow dr in dt.Rows
+                                                            select (sAlertaInicioFechamento)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaInicioFechamento())).ToList();
+                List<long> lstEventos = lstUsuarios.Select(p => p.evt_id).Distinct().ToList();
+                DateTime dataAtual = DateTime.UtcNow;
+                lstEventos.ForEach(e =>
+                    {
+                        NotificacaoDTO notificacao = new NotificacaoDTO();
+                        notificacao.SenderName = "SGP";
+                        notificacao.Recipient = new DestinatarioNotificacao();
+                        notificacao.Recipient.UserRecipient = new List<string>();
+                        notificacao.MessageType = 3;
+                        notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddDays(alerta.cfa_periodoValidade)) : null;
+                        notificacao.Title = alerta.cfa_nome;
+                        List<sAlertaInicioFechamento> lstUsuariosEvento = lstUsuarios.FindAll(u => u.evt_id == e);
+                        notificacao.Message = alerta.cfa_assunto
+                                                .Replace("[Dias]", lstUsuariosEvento.First().dias.ToString())
+                                                .Replace("[NomeEvento]", lstUsuariosEvento.First().evt_nome.ToString());
+                        lstUsuariosEvento.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                        if (EnviarNotificacao(notificacao))
+                        {
+                            // TODO: Gravar o log do envio da notificação
+                            //LOG_AlertaInicioFechamentoBO.
+                        }
+                    }
+                );
+            }
         }
 
         /// <summary>
@@ -524,6 +559,35 @@ namespace MSTech.GestaoEscolar.BLL
         public static void ExecJOB_ProcessamentoAlunosFrequencia()
         {
             new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoAlunosFrequencia();
+        }
+
+        /// <summary>
+        /// Envia o alerta por API para o sistema Notificações.
+        /// </summary>
+        /// <param name="notificacao"></param>
+        private static bool EnviarNotificacao(NotificacaoDTO notificacao)
+        {
+            SYS_RecursoAPI recurso = new SYS_RecursoAPI { rap_id = (int)eRecursoAPI.Notificacoes };
+            SYS_RecursoAPIBO.GetEntity(recurso);
+
+            if (recurso.IsNew || string.IsNullOrEmpty(recurso.rap_url) || recurso.rap_situacao == (byte)RecursoAPISituacao.Excluido)
+                return true;
+
+            HttpClient client = new HttpClient();
+            List<SYS_UsuarioAPI> lstUsuario = SYS_RecursoUsuarioAPIBO.SelecionaUsuarioPorRecurso(eRecursoAPI.Notificacoes);
+            if (lstUsuario.Any())
+            {
+                var auth = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", lstUsuario.First().uap_usuario, lstUsuario.First().uap_senha));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(auth));
+            }
+
+            HttpContent contentPost = new StringContent(JsonConvert.SerializeObject(notificacao), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(recurso.rap_url, contentPost).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
