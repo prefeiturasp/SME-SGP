@@ -85,11 +85,6 @@ namespace GestaoEscolar.Configuracao.Questionario
             grvResultado.PageIndex = 0;
             // atualiza o grid
             grvResultado.DataBind();
-            if (grvResultado.Rows.Count > 0)
-            {
-                ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-            }
         }
 
         #endregion
@@ -177,11 +172,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                     {
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
-                        if (grvResultado.Rows.Count > 0)
-                        {
-                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                        }
                         ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "qtr_id: " + entity.qtr_id + ", qtc_id: " + entity.qtc_id);
                         lblMessage.Text = UtilBO.GetErroMessage("Resposta excluída com sucesso.", UtilBO.TipoMensagem.Sucesso);
                     }
@@ -219,13 +209,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                     {
                         grvResultado.DataBind();
                         grvResultado.PageIndex = 0;
-                        grvResultado.DataBind();
-
-                        if (grvResultado.Rows.Count > 0)
-                        {
-                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                        }
+                        grvResultado.DataBind();                        
                     }
 
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "qtr_id: " + qtr_idSubir + ", qtc_id: " + _VS_qtc_id);
@@ -261,12 +245,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                         grvResultado.DataBind();
                         grvResultado.PageIndex = 0;
                         grvResultado.DataBind();
-
-                        if (grvResultado.Rows.Count > 0)
-                        {
-                            ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                            ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                        }
                     }
 
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "qtr_id: " + qtr_idSubir + ", qtc_id: " + _VS_qtc_id);
@@ -308,7 +286,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                     lblPermiteAdicionarTexto.Text = Convert.ToBoolean(grvResultado.DataKeys[e.Row.RowIndex].Values["qtr_permiteAdicionarTexto"].ToString()) ? "Sim" : "Não";
                 }
 
-                grvResultado.Columns[indiceColunaPeso].Visible = ExibePeso;
                 Label lblPeso = (Label)e.Row.FindControl("lblPeso");
                 if (lblPeso != null)
                 {
@@ -337,6 +314,12 @@ namespace GestaoEscolar.Configuracao.Questionario
         {
             // Mostra o total de registros
             UCTotalRegistros1.Total = CLS_QuestionarioRespostaBO.GetTotalRecords();
+
+            if (grvResultado.Rows.Count > 0)
+            {
+                ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
+                ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
+            }
         }
 
         protected void odsResultado_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
@@ -379,11 +362,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 // atualiza o grid
                 grvResultado.DataBind();
 
-                if (grvResultado.Rows.Count > 0)
-                {
-                    ((ImageButton)grvResultado.Rows[0].FindControl("_btnSubir")).Style.Add("visibility", "hidden");
-                    ((ImageButton)grvResultado.Rows[grvResultado.Rows.Count - 1].FindControl("_btnDescer")).Style.Add("visibility", "hidden");
-                }
+                grvResultado.Columns[indiceColunaPeso].Visible = ExibePeso;
                 
                 updResultado.Update();
             }
