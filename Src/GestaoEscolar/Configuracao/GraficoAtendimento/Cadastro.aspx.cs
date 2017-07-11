@@ -155,8 +155,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 REL_GraficoAtendimentoTipo tipoGrafico;
                 Enum.TryParse(ddlTipoGrafico.SelectedValue, out tipoGrafico);
-
-                if (REL_GraficoAtendimentoBO.GetBy_titulo(txtTitulo.Text).Rows.Count > 0)
+                                
+                if (REL_GraficoAtendimentoBO.GetBy_titulo(txtTitulo.Text).AsEnumerable().Any(g => Convert.ToInt32(g["gra_id"]) != VS_gra_id))
                     throw new ValidationException("Já existe um gráfico de atendimento cadastrado com este título.");
 
                 REL_GraficoAtendimento gra = new REL_GraficoAtendimento
@@ -681,13 +681,9 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
-                {
-                    //todo
-                    bool isNewExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["IsNew"]);
-                    bool emUsoExcluir = Convert.ToBoolean(gvQuestionario.DataKeys[e.Row.RowIndex]["emUso"]);
-
+                {                    
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = (isNewExcluir && !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
             }
         }
@@ -733,12 +729,8 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
                 {
-                    //todo
-                    bool isNewExcluir = Convert.ToBoolean(gvFiltroFixo.DataKeys[e.Row.RowIndex]["IsNew"]);
-                    bool emUsoExcluir = Convert.ToBoolean(gvFiltroFixo.DataKeys[e.Row.RowIndex]["emUso"]);
-
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
-                    btnExcluir.Visible = (isNewExcluir && !emUsoExcluir) && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
+                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
             }
         }

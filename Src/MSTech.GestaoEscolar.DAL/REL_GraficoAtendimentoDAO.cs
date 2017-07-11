@@ -85,26 +85,18 @@ namespace MSTech.GestaoEscolar.DAL
                 string gra_titulo
             )
         {
-            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_SelecionaPorRelatorio", _Banco);
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_REL_GraficoAtendimento_SelecionaPorTitulo", _Banco);
 
             try
             {
                 DataTable dt = new DataTable();
 
-                #region Parâmetro
-                Param = qs.NewParameter();
-                Param.ParameterName = "@rea_id";
-                Param.DbType = DbType.Int32;
-                Param.Value = DBNull.Value;
-                qs.Parameters.Add(Param);
+                #region Parâmetro                
 
                 Param = qs.NewParameter();
                 Param.ParameterName = "@gra_titulo";
                 Param.DbType = DbType.String;
-                if (!String.IsNullOrEmpty(gra_titulo))
-                    Param.Value = gra_titulo;
-                else
-                    Param.Value = DBNull.Value;
+                Param.Value = gra_titulo;
                 qs.Parameters.Add(Param);
 
                 #endregion

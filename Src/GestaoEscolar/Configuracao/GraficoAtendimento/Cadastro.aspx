@@ -183,7 +183,7 @@
                         </fieldset>
                     </div>
                     <asp:GridView runat="server" ID="gvQuestionario" AutoGenerateColumns="false" AllowPaging="false" AllowSorting="false"
-                        DataKeyNames="qst_id, qtc_id, qtr_id, IsNew, emUso" EmptyDataText="Nenhum filtro personalizado ligado ao gráfico."
+                        DataKeyNames="qst_id, qtc_id, qtr_id, IsNew" EmptyDataText="Nenhum filtro personalizado ligado ao gráfico."
                         OnRowDataBound="gvQuestionario_RowDataBound" OnRowCommand="gvQuestionario_RowCommand">
                         <Columns>
                             <asp:BoundField HeaderText="Questionário" DataField="qst_titulo" />
