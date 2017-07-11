@@ -60,17 +60,17 @@ namespace GestaoEscolar.Configuracao.Questionario
             set { }
         }
 
-        public bool IsMultiplaSelecao
+        public bool ExibePeso
         {
             get
             {
-                if (ViewState["IsMultiplaSelecao"] != null)
-                    return Convert.ToBoolean(ViewState["IsMultiplaSelecao"]);
+                if (ViewState["ExibePeso"] != null)
+                    return Convert.ToBoolean(ViewState["ExibePeso"]);
                 return false;
             }
             set
             {
-                ViewState["IsMultiplaSelecao"] = value;
+                ViewState["ExibePeso"] = value;
             }
         }
 
@@ -308,7 +308,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                     lblPermiteAdicionarTexto.Text = Convert.ToBoolean(grvResultado.DataKeys[e.Row.RowIndex].Values["qtr_permiteAdicionarTexto"].ToString()) ? "Sim" : "Não";
                 }
 
-                grvResultado.Columns[indiceColunaPeso].Visible = IsMultiplaSelecao;
+                grvResultado.Columns[indiceColunaPeso].Visible = ExibePeso;
                 Label lblPeso = (Label)e.Row.FindControl("lblPeso");
                 if (lblPeso != null)
                 {
@@ -354,8 +354,10 @@ namespace GestaoEscolar.Configuracao.Questionario
             {
                 fdsResultado.Visible = true;
 
-                CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id });
-                IsMultiplaSelecao = Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao;
+                CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id });                
+                CLS_Questionario Questionario = CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id });
+
+                ExibePeso = (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
 
                 lblInfo.Text = "<b>Questionário: </b>" + CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id }).qst_titulo +
                                 "<br><b>Conteúdo: </b>" + Conteudo.qtc_texto + "<br>";

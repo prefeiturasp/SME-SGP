@@ -58,17 +58,17 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
-        public bool IsMultiplaSelecao
+        public bool ExibePeso
         {
             get
             {
-                if (ViewState["IsMultiplaSelecao"] != null)
-                    return Convert.ToBoolean(ViewState["IsMultiplaSelecao"]);
+                if (ViewState["ExibePeso"] != null)
+                    return Convert.ToBoolean(ViewState["ExibePeso"]);
                 return false;
             }
             set
             {
-                ViewState["IsMultiplaSelecao"] = value;
+                ViewState["ExibePeso"] = value;
             }
         }
 
@@ -92,7 +92,6 @@ namespace GestaoEscolar.Configuracao.Questionario
                     _VS_qtc_id = PreviousPage._VS_qtc_id;
                     _VS_qtr_id = PreviousPage.PaginaResposta_qtr_id;
                     _VS_qst_id = PreviousPage._VS_qst_id;
-                    IsMultiplaSelecao = PreviousPage.IsMultiplaSelecao;
                     _Carregar(_VS_qtc_id, _VS_qtr_id);
                 }
 
@@ -138,7 +137,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 if (_txtTexto.Text.Length > 4000)
                     throw new ValidationException("O texto da resposta não deve exceder 4000 caracteres.");
 
-                if (IsMultiplaSelecao)
+                if (ExibePeso)
                 {
                     int peso = 0;
                     Int32.TryParse(_txtPeso.Text, out peso);
@@ -150,7 +149,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                 Resposta.qtr_texto = _txtTexto.Text;
                 Resposta.qtr_permiteAdicionarTexto = _chkPermiteAdicionarTexto.Checked;
-                Resposta.qtr_peso = IsMultiplaSelecao ? Convert.ToInt32(_txtPeso.Text) : 0;
+                Resposta.qtr_peso = ExibePeso ? Convert.ToInt32(_txtPeso.Text) : 0;
                 Resposta.qtr_situacao = 1; //ativo
 
                 if (CLS_QuestionarioRespostaBO.Save(Resposta))
@@ -203,10 +202,14 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                 CLS_QuestionarioRespostaBO.GetEntity(Resposta);
 
+                CLS_Questionario Questionario = CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id });
+                CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qst_id = _VS_qst_id, qtc_id = _VS_qtc_id });
+                ExibePeso = (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
+
                 _VS_qtr_id = Resposta.qtr_id;
                 _VS_qtc_id = Resposta.qtc_id;
                 _txtTexto.Text = Resposta.qtr_texto;
-                divPeso.Visible = IsMultiplaSelecao;
+                divPeso.Visible = ExibePeso;
                 _txtPeso.Text = divPeso.Visible ? Resposta.qtr_peso.ToString() : "0";
                 _chkPermiteAdicionarTexto.Checked = Resposta.qtr_permiteAdicionarTexto;
             }
