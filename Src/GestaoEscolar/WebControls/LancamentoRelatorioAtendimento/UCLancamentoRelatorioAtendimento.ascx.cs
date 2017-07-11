@@ -14,6 +14,7 @@
     using System.Reflection;
     using System.Web;
     using System.Web.UI;
+    using System.Web.UI.HtmlControls;
     using System.Web.UI.WebControls;
 
     public partial class UCLancamentoRelatorioAtendimento : MotherUserControl
@@ -307,6 +308,7 @@
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
+                sm.Scripts.Add(new ScriptReference("~/Includes/jsLancamentoRelatorioAtendimentoCalculo.js"));
             }
         }
 
@@ -731,6 +733,13 @@
 
                         rptConteudo.Visible = lstConteudo.Any();
                     }
+                }
+
+                HtmlGenericControl divCalculoSoma = (HtmlGenericControl)e.Item.FindControl("divCalculoSoma");
+                if (divCalculoSoma != null)
+                {
+                    byte qst_tipoCalculo = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "qst_tipoCalculo"));
+                    divCalculoSoma.Visible = qst_tipoCalculo == (byte)QuestionarioTipoCalculo.Soma;
                 }
             }
         }
