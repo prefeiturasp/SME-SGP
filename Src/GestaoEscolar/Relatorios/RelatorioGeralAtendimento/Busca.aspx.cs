@@ -521,31 +521,59 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
         {
             DataTable dt;
 
-            dt = ACA_AlunoBO.BuscaAlunosRelatorioGeralAtendimento
-                (
-                    UCCCalendario.Valor,
-                    UCCUAEscola.Esc_ID,
-                    UCCUAEscola.Uni_ID,
-                    UCCCursoCurriculo.Valor[0],
-                    UCCCursoCurriculo.Valor[1],
-                    UCCCurriculoPeriodo.Valor[2],
-                    UCCTurma.Valor[0],
-                    Convert.ToByte(UCCBuscaAluno.TipoBuscaNomeAluno),
-                    UCCBuscaAluno.NomeAluno,
-                    Convert.ToDateTime(string.IsNullOrEmpty(UCCBuscaAluno.DataNascAluno) ? new DateTime().ToString() : UCCBuscaAluno.DataNascAluno),
-                    UCCBuscaAluno.NomeMaeAluno,
-                    UCCBuscaAluno.MatriculaAluno,
-                    UCCBuscaAluno.MatriculaEstadualAluno,
-                    __SessionWEB.__UsuarioWEB.Usuario.ent_id,
-                    UCCUAEscola.Uad_ID,
-                    (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao),
-                    __SessionWEB.__UsuarioWEB.Usuario.usu_id,
-                    __SessionWEB.__UsuarioWEB.Grupo.gru_id,
-                    false,
-                    ApplicationWEB.AppMinutosCacheLongo
-                );
-
-
+            if (UCCTipoRelatorioAtendimento.Valor == (byte)CLS_RelatorioAtendimentoTipo.AEE)
+            {
+                dt = ACA_AlunoBO.BuscaAlunosRelatoriosAEE
+                                    (
+                                        UCCCalendario.Valor,
+                                        UCCUAEscola.Esc_ID,
+                                        UCCUAEscola.Uni_ID,
+                                        UCCCursoCurriculo.Valor[0],
+                                        UCCCursoCurriculo.Valor[1],
+                                        UCCCurriculoPeriodo.Valor[2],
+                                        UCCTurma.Valor[0],
+                                        Convert.ToByte(UCCBuscaAluno.TipoBuscaNomeAluno),
+                                        UCCBuscaAluno.NomeAluno,
+                                        Convert.ToDateTime(string.IsNullOrEmpty(UCCBuscaAluno.DataNascAluno) ? new DateTime().ToString() : UCCBuscaAluno.DataNascAluno),
+                                        UCCBuscaAluno.NomeMaeAluno,
+                                        UCCBuscaAluno.MatriculaAluno,
+                                        UCCBuscaAluno.MatriculaEstadualAluno,
+                                        __SessionWEB.__UsuarioWEB.Usuario.ent_id,
+                                        UCCUAEscola.Uad_ID,
+                                        (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao),
+                                        __SessionWEB.__UsuarioWEB.Usuario.usu_id,
+                                        __SessionWEB.__UsuarioWEB.Grupo.gru_id,
+                                        false,
+                                        ApplicationWEB.AppMinutosCacheLongo
+                                    );
+            }
+            else
+            {
+                dt = ACA_AlunoBO.BuscaAlunosRelatorioGeralAtendimento
+                                (
+                                    UCCCalendario.Valor,
+                                    UCCUAEscola.Esc_ID,
+                                    UCCUAEscola.Uni_ID,
+                                    UCCCursoCurriculo.Valor[0],
+                                    UCCCursoCurriculo.Valor[1],
+                                    UCCCurriculoPeriodo.Valor[2],
+                                    UCCTurma.Valor[0],
+                                    Convert.ToByte(UCCBuscaAluno.TipoBuscaNomeAluno),
+                                    UCCBuscaAluno.NomeAluno,
+                                    Convert.ToDateTime(string.IsNullOrEmpty(UCCBuscaAluno.DataNascAluno) ? new DateTime().ToString() : UCCBuscaAluno.DataNascAluno),
+                                    UCCBuscaAluno.NomeMaeAluno,
+                                    UCCBuscaAluno.MatriculaAluno,
+                                    UCCBuscaAluno.MatriculaEstadualAluno,
+                                    __SessionWEB.__UsuarioWEB.Usuario.ent_id,
+                                    UCCUAEscola.Uad_ID,
+                                    (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao),
+                                    __SessionWEB.__UsuarioWEB.Usuario.usu_id,
+                                    __SessionWEB.__UsuarioWEB.Grupo.gru_id,
+                                    false,
+                                    ApplicationWEB.AppMinutosCacheLongo
+                                );
+            }
+            
             dt.DefaultView.Sort = VS_Ordenacao + " " + VS_SortDirection;
 
             return dt;
