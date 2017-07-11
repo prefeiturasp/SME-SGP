@@ -80,6 +80,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 _VS_qst_id = Questionario.qst_id;
                 _txtTitulo.Text = Questionario.qst_titulo;
                 _ddlTipoCalculo.SelectedValue = Questionario.qst_tipoCalculo.ToString();
+                _ddlTipoCalculo_SelectedIndexChanged(null, null);
                 _txtTituloCalculo.Text = Questionario.qst_tituloCalculo;
             }
             catch (Exception e)
