@@ -1,5 +1,7 @@
 ﻿using MSTech.CoreSSO.BLL;
+using MSTech.CoreSSO.Entities;
 using MSTech.GestaoEscolar.BLL;
+using MSTech.GestaoEscolar.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Collections.Generic;
@@ -597,7 +599,37 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         protected void btnGerarRelatrorioAcoesRealizadas_Click(object sender, EventArgs e)
         {
             string report, parametros;
-            string alu_ids = String.Empty;  
+            string alu_ids = String.Empty;
+
+            Guid uad_idSuperior = UCCUAEscola.Uad_ID;
+            string DRE = UCCUAEscola.DdlUA.SelectedItem.Text;
+
+            if (uad_idSuperior.Equals(Guid.Empty))
+            {
+                ESC_Escola esc = new ESC_Escola { esc_id = UCCUAEscola.Esc_ID };
+                ESC_EscolaBO.GetEntity(esc);
+
+                uad_idSuperior = esc.uad_idSuperiorGestao;
+
+                if (uad_idSuperior.Equals(Guid.Empty))
+                {
+                    SYS_UnidadeAdministrativa uad = new SYS_UnidadeAdministrativa
+                    {
+                        uad_id = esc.uad_id,
+                        ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id
+                    };
+                    SYS_UnidadeAdministrativaBO.GetEntity(uad);
+                    uad_idSuperior = uad.uad_idSuperior;
+                }
+
+                SYS_UnidadeAdministrativa uadSuperior = new SYS_UnidadeAdministrativa
+                {
+                    uad_id = uad_idSuperior,
+                    ent_id = __SessionWEB.__UsuarioWEB.Usuario.ent_id
+                };
+                SYS_UnidadeAdministrativaBO.GetEntity(uadSuperior);
+                DRE = uadSuperior.uad_nome;
+            }
 
             foreach (GridViewRow row in grvResultados.Rows)
             {
@@ -607,8 +639,11 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
             }
 
            report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioAcoesRealizadas).ToString();
-            parametros = "alu_ids=" + alu_ids +                         
-                         "&dre=" + UCCUAEscola.TextoComboUA +
+
+
+            parametros = "alu_ids=" + alu_ids +
+                         //"&dre=" + UCCUAEscola.TextoComboUA +
+                         "&dre=" + DRE +
                          "&escola=" + UCCUAEscola.TextoComboEscola +
                          "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString(), ApplicationWEB.LogoRelatorioSSRS) +
                          "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
