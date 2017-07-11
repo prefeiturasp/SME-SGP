@@ -140,7 +140,9 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                 if (IsMultiplaSelecao)
                 {
-                    if (Convert.ToInt32(_txtPeso.Text) <= 0)
+                    int peso = 0;
+                    Int32.TryParse(_txtPeso.Text, out peso);
+                    if (peso <= 0)
                         throw new ValidationException("O peso da resposta deve ser maior que zero.");
                     if (_txtPeso.Text.Length > 2)
                         throw new ValidationException("O peso da resposta deve ter, no máximo, 2 caracteres.");
