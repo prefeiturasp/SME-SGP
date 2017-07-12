@@ -20,6 +20,9 @@
             <TablixColumn>
               <Width>1in</Width>
             </TablixColumn>
+            <TablixColumn>
+              <Width>0.98425in</Width>
+            </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
@@ -166,6 +169,37 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>valorResposta1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox142">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(CDec(Fields!valorResposta.Value))</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox142</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -844,6 +878,47 @@
                     </TablixMember>
                   </TablixMembers>
                 </TablixMember>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>0.5in</Size>
+                    <CellContents>
+                      <Textbox Name="qst_tituloCalculo">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>=Fields!qst_tituloCalculo.Value</Value>
+                                <Style>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style>
+                              <TextAlign>Center</TextAlign>
+                            </Style>
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>qst_tituloCalculo</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>LightGrey</BackgroundColor>
+                          <VerticalAlign>Middle</VerticalAlign>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                  <Visibility>
+                    <Hidden>=IIf(Fields!qst_tituloCalculo.Value &lt;&gt; "", False, True)</Hidden>
+                  </Visibility>
+                </TablixMember>
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
@@ -872,7 +947,7 @@
         <Top>1.73777in</Top>
         <Left>0.0125in</Left>
         <Height>1in</Height>
-        <Width>6.8in</Width>
+        <Width>7.78425in</Width>
         <Visibility>
           <Hidden>=iif(RowNumber("DataSet1") &lt;= 0, true, false)</Hidden>
         </Visibility>
@@ -1327,9 +1402,17 @@
           <DataField>resposta</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="qst_tipoCalculo">
+          <DataField>qst_tipoCalculo</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
         <Field Name="dataPreenchimento">
           <DataField>dataPreenchimento</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="qtc_tipoResposta">
+          <DataField>qtc_tipoResposta</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
         </Field>
         <Field Name="qtr_id">
           <DataField>qtr_id</DataField>
@@ -1350,6 +1433,10 @@
         <Field Name="orderResposta">
           <DataField>orderResposta</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="qst_tituloCalculo">
+          <DataField>qst_tituloCalculo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
