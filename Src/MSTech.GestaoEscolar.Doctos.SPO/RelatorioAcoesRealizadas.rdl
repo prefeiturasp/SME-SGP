@@ -75,7 +75,10 @@
               <Width>3.4054cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>15.56285cm</Width>
+              <Width>5.33104cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>10.23181cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -112,9 +115,10 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>2</ColSpan>
+                    <ColSpan>3</ColSpan>
                   </CellContents>
                 </TablixCell>
+                <TablixCell />
                 <TablixCell />
               </TablixCells>
             </TablixRow>
@@ -157,6 +161,40 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Relatório</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox20">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -164,7 +202,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Ação</Value>
+                              <Value>Ação realizada</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -227,6 +265,35 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="rea_dataText1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!rea_titulo.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>rea_dataText1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="rpa_acao">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -260,6 +327,7 @@
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
           </TablixMembers>
@@ -316,7 +384,7 @@
     <Height>2.86744cm</Height>
     <Style />
   </Body>
-  <Width>19cm</Width>
+  <Width>19.01292cm</Width>
   <Page>
     <PageHeader>
       <Height>3.09808cm</Height>
@@ -589,6 +657,10 @@
           <QueryParameter Name="@alu_ids">
             <Value>=Parameters!alu_ids.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@rea_id">
+            <Value>=Parameters!rea_id.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
         <CommandText>NEW_Relatorio_AcoesRealizadas</CommandText>
@@ -635,6 +707,10 @@
           <DataField>alunoescola</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="rea_titulo">
+          <DataField>rea_titulo</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
       </Fields>
     </DataSet>
   </DataSets>
@@ -672,6 +748,10 @@
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>nomeSecretaria</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="rea_id">
+      <DataType>String</DataType>
+      <Prompt>rea id</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>

@@ -1,4 +1,5 @@
-﻿using MSTech.CoreSSO.BLL;
+﻿using GestaoEscolar.WebControls.RelatorioAtendimento;
+using MSTech.CoreSSO.BLL;
 using MSTech.CoreSSO.Entities;
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Entities;
@@ -133,7 +134,7 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
             UCCCursoCurriculo.IndexChanged += UCCCursoCurriculo_IndexChanged;
             UCCCurriculoPeriodo.IndexChanged += UCCCurriculoPeriodo_IndexChanged;
             UCCCalendario.IndexChanged += UCCCalendario_IndexChanged;
-            UCCQtdePaginacao.IndexChanged += UCCQtdePaginacao_IndexChanged;
+            UCCQtdePaginacao.IndexChanged += UCCQtdePaginacao_IndexChanged;           
 
             ScriptManager sm = ScriptManager.GetCurrent(this);
             if (sm != null)
@@ -159,6 +160,10 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
                         updMensagem.Update();
                     }
 
+                    UCCRelatorioAtendimento.PermiteEditar = true;                  
+                    // Carrega o combo de relatórios
+                    UCCRelatorioAtendimento.CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo.NAAPA);
+              
                     InicializarTela();
                 }
                 catch (Exception ex)
@@ -318,7 +323,7 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
                 updFiltros.Update();
             }
         }
-
+             
         #endregion
 
         #region Métodos
@@ -599,11 +604,13 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
         protected void btnGerarRelatrorioAcoesRealizadas_Click(object sender, EventArgs e)
         {
             string report, parametros;
-            string alu_ids = String.Empty;
+            string alu_ids = String.Empty;           
+            //int? reaid = UCCRelatorioAtendimento.Valor == - 1 ? 0 : UCCRelatorioAtendimento.Valor;
 
             Guid uad_idSuperior = UCCUAEscola.Uad_ID;
+           
             string DRE = UCCUAEscola.DdlUA.SelectedItem.Text;
-
+                      
             if (uad_idSuperior.Equals(Guid.Empty))
             {
                 ESC_Escola esc = new ESC_Escola { esc_id = UCCUAEscola.Esc_ID };
@@ -639,10 +646,9 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
             }
 
            report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.RelatorioAcoesRealizadas).ToString();
-
-
-            parametros = "alu_ids=" + alu_ids +
-                         //"&dre=" + UCCUAEscola.TextoComboUA +
+            
+           parametros = "alu_ids=" + alu_ids +
+                         "&rea_id=" + UCCRelatorioAtendimento.IdSelecionado +
                          "&dre=" + DRE +
                          "&escola=" + UCCUAEscola.TextoComboEscola +
                          "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString(), ApplicationWEB.LogoRelatorioSSRS) +

@@ -112,6 +112,15 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas {
         protected global::GestaoEscolar.WebControls.Combos.Novos.UCCTurma UCCTurma;
         
         /// <summary>
+        /// UCCRelatorioAtendimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::GestaoEscolar.WebControls.Combos.UCComboRelatorioAtendimento UCCRelatorioAtendimento;
+        
+        /// <summary>
         /// divBuscaAvancadaAluno control.
         /// </summary>
         /// <remarks>

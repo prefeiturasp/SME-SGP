@@ -36,11 +36,15 @@ SET XACT_ABORT ON
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 		
-	-- Alteração titulo do relatório do resumo das atividades desenvolvidas	
+	-- Alteração titulo do relatório do resumo das atividades desenvolvidas	no banco DO CORESSO
 	update SYS_ModuloSitemap 
 		set msm_nome = 'Resumo das atividades desenvolvidas' 
 		where msm_url = '~/Documentos/Relatorio.aspx?dummy=%27AU93aqlCeUI%3d%27'
-		
+	
+	-- Alteração na opção do menudo do relatório de docente
+	update cfg_relatoriodocumentodocente 
+		set rdd_nomeDocumento = 'Resumo das atividades desenvolvidas' 
+		where rlt_id = 248	
 		
 		
 		
