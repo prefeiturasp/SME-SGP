@@ -24,7 +24,7 @@
         <br />
         <div runat="server" id="divPeso" visible="false">
             <asp:Label ID="_lblPeso" runat="server" Text="Peso da resposta *" AssociatedControlID="_txtPeso"></asp:Label>
-            <asp:TextBox ID="_txtPeso" runat="server" SkinID="Numerico2c" MaxLength="2"></asp:TextBox>
+            <asp:TextBox ID="_txtPeso" runat="server" SkinID="Decimal"></asp:TextBox>
             <br />
         </div>
         <asp:CheckBox ID="_chkPermiteAdicionarTexto" runat="server" Text="Permite adicionar texto" />

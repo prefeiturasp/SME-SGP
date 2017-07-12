@@ -62,8 +62,8 @@ namespace MSTech.GestaoEscolar.Entities
         /// <summary>
 		/// Peso da resposta para respostas que compoem testes..
 		/// </summary>
-        [MSDefaultValue(0)]
-        public override int qtr_peso { get; set; }
+        [MSDefaultValue(0.00)]
+        public override decimal qtr_peso { get; set; }
 
     }
 }
