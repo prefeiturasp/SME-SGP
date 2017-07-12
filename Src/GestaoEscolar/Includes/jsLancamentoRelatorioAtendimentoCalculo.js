@@ -21,11 +21,12 @@ function CalculoSoma(fieldset)
             var peso = $(this).parents('.questionario-resposta').find('input[id$=hdnPeso]').first();
             if (peso != undefined && peso.val() != "")
             {
-                soma += parseFloat(peso.val());
+                soma += parseFloat(peso.val().replace(',','.'));
             }
         });
     });
 
+    soma = soma.toString().replace('.',',');
     fieldset.find('#resultadoCalculo').attr('innerText', soma);
 }
 
