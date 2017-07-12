@@ -511,8 +511,9 @@ namespace MSTech.GestaoEscolar.BLL
                         lstUsuariosEvento.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
                         if (EnviarNotificacao(notificacao))
                         {
-                            // TODO: Gravar o log do envio da notificação
-                            //LOG_AlertaInicioFechamentoBO.
+                            List<LOG_AlertaInicioFechamento> lstLog = new List<LOG_AlertaInicioFechamento>();
+                            notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaInicioFechamento { usu_id = new Guid(ur), evt_id = e, lif_dataEnvio = DateTime.Now }));
+                            LOG_AlertaInicioFechamentoBO.SalvarEmLote(lstLog);
                         }
                     }
                 );
