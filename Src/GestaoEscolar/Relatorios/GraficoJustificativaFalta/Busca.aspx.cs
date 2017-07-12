@@ -285,7 +285,7 @@ namespace GestaoEscolar.Relatorios.GraficoJustificativaFalta
 
             string report, parameter;
             parameter = string.Empty;
-            report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.GraficoConsolidadoAtividadeAvaliativa).ToString();
+            report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.GraficoJustificativaFalta).ToString();
             XtraReport DevReport = null;
             SymmetricAlgorithm sa = new SymmetricAlgorithm(SymmetricAlgorithm.Tipo.TripleDES);
 
