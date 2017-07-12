@@ -26,7 +26,7 @@ function CalculoSoma(fieldset)
         });
     });
 
-    soma = soma.toString().replace('.',',');
+    soma = soma.toFixed(2).toString().replace('.', ',');
     fieldset.find('#resultadoCalculo').attr('innerText', soma);
 }
 
