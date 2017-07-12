@@ -1,5 +1,4 @@
-﻿using GestaoEscolar.WebControls.RelatorioAtendimento;
-using MSTech.CoreSSO.BLL;
+﻿using MSTech.CoreSSO.BLL;
 using MSTech.CoreSSO.Entities;
 using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Entities;
@@ -7,7 +6,6 @@ using MSTech.GestaoEscolar.Web.WebProject;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
