@@ -149,7 +149,7 @@
                             </asp:Repeater>
                             <div class="questionario-conteudo-titulo2" id="divCalculoSoma" runat="server" visible="false">
                                 <br />
-                                <asp:Label ID="lblNomeCalculo" runat="server" Text='<%# Eval("qst_tituloCalculo") %>'></asp:Label>
+                                <asp:Label ID="lblNomeCalculo" runat="server" Text='<%# Eval("qst_tituloCalculo") %>'></asp:Label>:
                                 <span id="resultadoCalculo"></span>
                             </div>
                         </fieldset>
