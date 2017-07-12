@@ -204,7 +204,7 @@ namespace GestaoEscolar.Configuracao.Questionario
 
                 CLS_Questionario Questionario = CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id });
                 CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qst_id = _VS_qst_id, qtc_id = _VS_qtc_id });
-                ExibePeso = (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
+                ExibePeso = ((Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.SelecaoUnica) || (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao)) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
 
                 _VS_qtr_id = Resposta.qtr_id;
                 _VS_qtc_id = Resposta.qtc_id;

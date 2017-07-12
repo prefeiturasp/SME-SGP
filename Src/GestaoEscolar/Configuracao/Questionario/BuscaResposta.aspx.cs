@@ -60,20 +60,6 @@ namespace GestaoEscolar.Configuracao.Questionario
             set { }
         }
 
-        public bool ExibePeso
-        {
-            get
-            {
-                if (ViewState["ExibePeso"] != null)
-                    return Convert.ToBoolean(ViewState["ExibePeso"]);
-                return false;
-            }
-            set
-            {
-                ViewState["ExibePeso"] = value;
-            }
-        }
-
         #endregion
 
         #region Delegates
@@ -336,14 +322,9 @@ namespace GestaoEscolar.Configuracao.Questionario
             try
             {
                 fdsResultado.Visible = true;
-
-                CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id });                
-                CLS_Questionario Questionario = CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id });
-
-                ExibePeso = (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
-
+                
                 lblInfo.Text = "<b>Questionário: </b>" + CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id }).qst_titulo +
-                                "<br><b>Conteúdo: </b>" + Conteudo.qtc_texto + "<br>";
+                                "<br><b>Conteúdo: </b>" + CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id }).qtc_texto + "<br>";
 
                 odsResultado.SelectParameters.Clear();
 
@@ -361,9 +342,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 grvResultado.PageSize = itensPagina;
                 // atualiza o grid
                 grvResultado.DataBind();
-
-                grvResultado.Columns[indiceColunaPeso].Visible = ExibePeso;
-                
+                                
                 updResultado.Update();
             }
             catch (Exception ex)
