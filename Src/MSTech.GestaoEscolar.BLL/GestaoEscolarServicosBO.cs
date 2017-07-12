@@ -525,7 +525,40 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaFimFechamento()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaFimFechamento();
+            //new GestaoEscolarServicoDAO().ExecJOB_AlertaFimFechamento();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaFimFechamento });
+            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaFimFechamento(alerta.cfa_periodoAnalise);
+                List<sAlertaFimFechamento> lstUsuarios = (from DataRow dr in dt.Rows
+                                                            select (sAlertaFimFechamento)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaFimFechamento())).ToList();
+                List<long> lstEventos = lstUsuarios.Select(p => p.evt_id).Distinct().ToList();
+                DateTime dataAtual = DateTime.UtcNow;
+                lstEventos.ForEach(e =>
+                    {
+                        NotificacaoDTO notificacao = new NotificacaoDTO();
+                        notificacao.SenderName = "SGP";
+                        notificacao.Recipient = new DestinatarioNotificacao();
+                        notificacao.Recipient.UserRecipient = new List<string>();
+                        notificacao.MessageType = 3;
+                        notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddDays(alerta.cfa_periodoValidade)) : null;
+                        notificacao.Title = alerta.cfa_nome;
+                        List<sAlertaFimFechamento> lstUsuariosEvento = lstUsuarios.FindAll(u => u.evt_id == e);
+                        notificacao.Message = alerta.cfa_assunto
+                                                .Replace("[Dias]", lstUsuariosEvento.First().dias.ToString())
+                                                .Replace("[NomeEvento]", lstUsuariosEvento.First().evt_nome.ToString());
+                        lstUsuariosEvento.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                        if (EnviarNotificacao(notificacao))
+                        {
+                            List<LOG_AlertaFimFechamento> lstLog = new List<LOG_AlertaFimFechamento>();
+                            notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaFimFechamento { usu_id = new Guid(ur), evt_id = e, lff_dataEnvio = DateTime.Now }));
+                            LOG_AlertaFimFechamentoBO.SalvarEmLote(lstLog);
+                        }
+                    }
+                );
+            }
         }
 
         /// <summary>

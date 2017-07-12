@@ -199,7 +199,7 @@ namespace MSTech.GestaoEscolar.DAL
         /// <param name="tpc_id"></param>
         /// <param name="tur_id"></param>
         /// <returns></returns>
-        public DataTable SelecionaPendenciasPorTurmaPeriodo(int tpc_id, long tur_id)
+        public DataTable SelecionaPendenciasPorTurmaPeriodo(int tpc_id, long tur_id, long tud_id)
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_RelatorioAtendimento_SelecionaPendenciasPorTurmaPeriodo", _Banco);
 
@@ -217,6 +217,13 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.DbType = DbType.Int64;
                 Param.Size = 8;
                 Param.Value = tur_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.ParameterName = "@tud_id";
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                Param.Value = tud_id;
                 qs.Parameters.Add(Param);
 
                 qs.Execute();

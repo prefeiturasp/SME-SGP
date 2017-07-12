@@ -14,7 +14,7 @@ namespace MSTech.GestaoEscolar.BLL
     #region Estruturas
 
     /// <summary>
-    /// Estrutura para controle das sugestões nos capítulos do currículo.
+    /// Estrutura que guarda os usuários para envio do alerta.
     /// </summary>
     [Serializable]
     public struct sAlertaInicioFechamento
