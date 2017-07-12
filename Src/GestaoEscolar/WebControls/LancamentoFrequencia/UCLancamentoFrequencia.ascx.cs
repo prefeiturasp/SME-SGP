@@ -867,9 +867,10 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                 {
                     chkEfetivado.Checked = tau_efetivado;
 
-                    if (posicaoDocente > 0)
+                    if (posicaoDocente > 0 && !(tudTipo == (byte)TurmaDisciplinaTipo.DisciplinaPrincipal && ttn_tipo == (byte)ACA_TipoTurnoBO.TipoTurno.Integral))
                     {
                         Int16 tdt_posicao = Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "tdt_posicao"));
+
                         bool permiteEditar = (__SessionWEB.__UsuarioWEB.Docente.doc_id == 0 || (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0 && ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao & p.pdc_permissaoEdicao)));
                         chkEfetivado.Enabled &= permiteEditar;
                     }

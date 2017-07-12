@@ -316,7 +316,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio);
                 }
 
-                dicAlunosPendentesRelatorio = CLS_RelatorioAtendimentoBO.SelecionaPendenciasPorTurmaPeriodo(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id);
+                dicAlunosPendentesRelatorio = CLS_RelatorioAtendimentoBO.SelecionaPendenciasPorTurmaPeriodo(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id);
 
                 CancelaSelect = false;
 

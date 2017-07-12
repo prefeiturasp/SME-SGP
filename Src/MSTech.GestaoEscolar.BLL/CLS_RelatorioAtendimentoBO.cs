@@ -151,11 +151,11 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="tpc_id"></param>
         /// <param name="tur_id"></param>
         /// <returns></returns>
-        public static Dictionary<byte, List<long>> SelecionaPendenciasPorTurmaPeriodo(int tpc_id, long tur_id)
+        public static Dictionary<byte, List<long>> SelecionaPendenciasPorTurmaPeriodo(int tpc_id, long tur_id, long tud_id)
         {
             Dictionary<byte, List<long>> dic = new Dictionary<byte, List<long>>();
 
-            using (DataTable dt = new CLS_RelatorioAtendimentoDAO().SelecionaPendenciasPorTurmaPeriodo(tpc_id, tur_id))
+            using (DataTable dt = new CLS_RelatorioAtendimentoDAO().SelecionaPendenciasPorTurmaPeriodo(tpc_id, tur_id, tud_id))
             {
                 if (dt.Rows.Count > 0)
                 {

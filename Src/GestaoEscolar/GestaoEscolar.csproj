@@ -3157,13 +3157,6 @@
     <Compile Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx.designer.cs">
       <DependentUpon>UCPlanejamentoProjetos.ascx</DependentUpon>
     </Compile>
-    <Compile Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx.cs">
-      <DependentUpon>UCRelatorioAtendimento.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx.designer.cs">
-      <DependentUpon>UCRelatorioAtendimento.ascx</DependentUpon>
-    </Compile>
     <Compile Include="WebControls\RelatorioPedagogico\imagem.ashx.cs">
       <DependentUpon>imagem.ashx</DependentUpon>
     </Compile>
@@ -3799,17 +3792,10 @@
     <Content Include="App_Themes\IntranetSME\images\logos\logo-blue-control-web.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-blueCore-full.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-blueCore.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-educopedia.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-escola-3-0-login.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-escola-3-0-login_.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-gestao-academica-full.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-gestao-academica.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-gfreq.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-gpag.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-inscricao-creche-full.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-inscricao-creche.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-integracao-rio-full.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-integracao-rio.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-LiveEdu-full.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-liveEdu.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-matricula-full.png" />
@@ -3823,20 +3809,12 @@
     <Content Include="App_Themes\IntranetSME\images\logos\logo-mstech-ft.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-mstech-ft_.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-padrao.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-pic-full.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-pic.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-portal-integracoes-full.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-portal-integracoes.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-prefeitura-4.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-quadro-horario-full.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\logo-quadro-horario.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-remocao.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-rio-educacao.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-rioeduca.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-transporteescolar-full.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\logo-transporteescolar.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\LOGO_CLIENTE.png" />
-    <Content Include="App_Themes\IntranetSME\images\logos\LOGO_CLIENTE_.png" />
     <Content Include="App_Themes\IntranetSME\images\logos\LOGO_GERAL_SISTEMA.png" />
     <Content Include="App_Themes\IntranetSME\images\mcdropdown\mcdd_icon_hover.gif" />
     <Content Include="App_Themes\IntranetSME\images\mcdropdown\mcdd_icon_normal.gif" />
@@ -4380,6 +4358,7 @@
     <Content Include="Includes\jsCadastroSondagem.js" />
     <Content Include="Includes\jsConfirmaFormacaoDocente.js" />
     <Content Include="Includes\jsFilaFilaFechamento.js" />
+    <Content Include="Includes\jsLancamentoRelatorioAtendimentoCalculo.js" />
     <Content Include="Includes\jsMsgConfirmCancelamentoAgendamento.js" />
     <Content Include="Includes\jsPopupFrequenciaExterna.js" />
     <Content Include="Includes\jsQuadroHorarios.js" />
@@ -4572,7 +4551,6 @@
     <Content Include="WebControls\OrientacaoCurricular\UCNivelOrientacao.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoAnual.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx" />
-    <Content Include="WebControls\RelatorioAtendimento\UCRelatorioAtendimento.ascx" />
     <Content Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx" />
     <Content Include="WebControls\Relatorio\UCDevReportView.ascx" />

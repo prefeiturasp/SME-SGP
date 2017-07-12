@@ -37,7 +37,6 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPanel1 = new DevExpress.XtraReports.UI.XRPanel();
-            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrChart1 = new DevExpress.XtraReports.UI.XRChart();
             this.GroupHeader2 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.lblSemRegistroGrafico = new DevExpress.XtraReports.UI.XRLabel();
@@ -109,25 +108,11 @@
             // xrPanel1
             // 
             this.xrPanel1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrLabel1,
             this.xrChart1});
             this.xrPanel1.Dpi = 100F;
             this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPanel1.Name = "xrPanel1";
             this.xrPanel1.SizeF = new System.Drawing.SizeF(699.7068F, 337.9167F);
-            // 
-            // xrLabel1
-            // 
-            this.xrLabel1.Dpi = 100F;
-            this.xrLabel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabel1.ForeColor = System.Drawing.Color.Black;
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(439.8839F, 21.83336F);
-            this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(164.5833F, 23F);
-            this.xrLabel1.StylePriority.UseFont = false;
-            this.xrLabel1.StylePriority.UseForeColor = false;
-            this.xrLabel1.Text = "Justificativas de falta";
             // 
             // xrChart1
             // 
@@ -467,6 +452,5 @@
         private DevExpress.XtraReports.UI.XRPictureBox ImgLogo;
         private DSGestaoEscolar dsGestaoEscolar1;
         private DSGestaoEscolarTableAdapters.NEW_Relatorio_GraficoJustificativaFaltaTableAdapter nEW_Relatorio_GraficoJustificativaFaltaTableAdapter;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
     }
 }

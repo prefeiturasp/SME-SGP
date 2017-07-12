@@ -10,7 +10,8 @@
                     <uc:UCCRacaCor ID="UCCRacaCor" runat="server" />
                 </div>
                 <div class="m-col-custom-4 p-col-custom-12 relatorio-manual" id="divDownloadAnexo" runat="server" visible="false">
-                    <label><asp:Label ID="lblDownloadAnexo" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lblDownloadAnexo.Text %>"></asp:Label></label>
+                    <label>
+                        <asp:Label ID="lblDownloadAnexo" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lblDownloadAnexo.Text %>"></asp:Label></label>
                     <asp:HyperLink ID="hplDownloadAnexo" runat="server" SkinID="hplAnexo" ToolTip="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, hplDownloadAnexo.ToolTip %>" Width="22px"></asp:HyperLink>
                 </div>
             </div>
@@ -19,8 +20,10 @@
         <div class="clear"></div>
         <div id="divTabsRelatorio">
             <ul class="hide">
-                <li runat="server" id="liHipoteseDiagnostica"><a href="#divTabs-0"><asp:Literal ID="lit_22" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lit_22.Text %>"></asp:Literal></a></li>
-                <li runat="server" id="liAcoesRealizadas" visible="false"><a href="#divTabs-01"><asp:Literal ID="litAcoesRealizadas" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, litAcoesRealizadas.Text %>"></asp:Literal></a></li>
+                <li runat="server" id="liHipoteseDiagnostica"><a href="#divTabs-0">
+                    <asp:Literal ID="lit_22" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lit_22.Text %>"></asp:Literal></a></li>
+                <li runat="server" id="liAcoesRealizadas" visible="false"><a href="#divTabs-01">
+                    <asp:Literal ID="litAcoesRealizadas" runat="server" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, litAcoesRealizadas.Text %>"></asp:Literal></a></li>
                 <asp:Repeater ID="rptAbaQuestionarios" runat="server">
                     <ItemTemplate>
                         <li><a href='#<%# RetornaTabID((int)Eval("qst_id"))%>'><%# Eval("qst_titulo") %></a></li>
@@ -52,17 +55,18 @@
                     <legend>
                         <asp:Literal runat="server" ID="litFdsAcoesRealizadas" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, litAcoesRealizadas.Text %>" />
                     </legend>
-                    <div style="float:right" id="divNovaAcao" runat="server">                        
-                        <asp:Button ID="btnNovaAcao" runat="server" CausesValidation="False" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, btnNovaAcao.Text %>" OnClick="btnNovaAcao_Click" style="font-size:0.9em;"/>
+                    <div style="float: right" id="divNovaAcao" runat="server">
+                        <asp:Button ID="btnNovaAcao" runat="server" CausesValidation="False" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, btnNovaAcao.Text %>" OnClick="btnNovaAcao_Click" Style="font-size: 0.9em;" />
                         <asp:Button ID="btnImprimir" runat="server" Text="Imprimir" CausesValidation="false" OnClick="btnImprimir_Click" />
-                        <br /><br />
+                        <br />
+                        <br />
                     </div>
                     <asp:GridView ID="grvAcoes" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, grvAcoes.EmptyDataText %>"
                         DataKeyNames="idTemp,rpa_id"
                         OnRowDataBound="grvAcoes_RowDataBound"
                         OnDataBound="grvAcoes_DataBound"
-                        OnRowEditing="grvAcoes_RowEditing" 
-                        OnRowUpdating="grvAcoes_RowUpdating" 
+                        OnRowEditing="grvAcoes_RowEditing"
+                        OnRowUpdating="grvAcoes_RowUpdating"
                         OnRowDeleting="grvAcoes_RowDeleting"
                         OnRowCancelingEdit="grvAcoes_RowCancelingEdit" ShowHeader="false">
                         <Columns>
@@ -80,7 +84,7 @@
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <asp:Label ID="lblData" runat="server" Text='<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, lblData.Text %>' AssociatedControlID="txtData"></asp:Label>
-                                    <asp:TextBox ID="txtData" runat="server" Text='<%# Bind("rpa_data") %>' SkinID="Data" style="width:100px;"></asp:TextBox>
+                                    <asp:TextBox ID="txtData" runat="server" Text='<%# Bind("rpa_data") %>' SkinID="Data" Style="width: 100px;"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="rfvData" runat="server" ErrorMessage="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, rfvData.ErrorMessage %>"
                                         ControlToValidate="txtData" ValidationGroup="geral">*</asp:RequiredFieldValidator>
                                     <asp:CustomValidator ID="ctvDataFormato" runat="server" ControlToValidate="txtData"
@@ -129,16 +133,25 @@
                                         <asp:Repeater ID="rptResposta" runat="server" OnItemDataBound="rptResposta_ItemDataBound">
                                             <ItemTemplate>
                                                 <div class="questionario-resposta">
+                                                    <asp:HiddenField ID="hdnPeso" runat="server" Value='<%# Eval("qtr_peso") %>' />
                                                     <asp:HiddenField ID="hdnQtrId" runat="server" Value='<%# Eval("qtr_id") %>' />
-                                                    <asp:CheckBox ID="chkResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-multi-selecao" Visible="false" />
-                                                    <asp:RadioButton ID="rdbResposta" runat="server" Text='<%# Eval("qtr_texto") %>' CssClass="questionario-conteudo-resposta-selecao-unica" Visible="false" />
-                                                    <asp:TextBox ID="txtRespostaTextoAdicional" runat="server" CssClass="questionario-conteudo-resposta-texto-adicional" Visible="false" MaxLength="500"></asp:TextBox>
+                                                    <asp:CheckBox ID="chkResposta" runat="server" Text='<%# Eval("qtr_texto") %>'
+                                                        CssClass="questionario-conteudo-resposta-multi-selecao" Visible="false" />
+                                                    <asp:RadioButton ID="rdbResposta" runat="server" Text='<%# Eval("qtr_texto") %>'
+                                                        CssClass="questionario-conteudo-resposta-selecao-unica" Visible="false" />
+                                                    <asp:TextBox ID="txtRespostaTextoAdicional" runat="server"
+                                                        CssClass="questionario-conteudo-resposta-texto-adicional" Visible="false" MaxLength="500"></asp:TextBox>
                                                 </div>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
+                            <div class="questionario-conteudo-titulo2" id="divCalculoSoma" runat="server" visible="false">
+                                <br />
+                                <asp:Label ID="lblNomeCalculo" runat="server" Text='<%# Eval("qst_tituloCalculo") %>'></asp:Label>
+                                <span id="resultadoCalculo"></span>
+                            </div>
                         </fieldset>
                     </div>
                 </ItemTemplate>

@@ -2426,6 +2426,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                         )
                                     ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
                                     {
+                                        tud_id = p.tud_id,
                                         tipo_ordem = p.tipo_ordem,
                                         tpc_id = p.tpc_id,
                                         tpc_ordem = p.tpc_ordem,
@@ -2485,11 +2486,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                                            )
                                        ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
                                        {
+                                           tud_idRegencia = p.tud_idRegencia,
                                            tipo_ordem = p.tipo_ordem,
                                            tpc_id = p.tpc_id,
                                            tpc_ordem = p.tpc_ordem,
                                            tipoPendencia = p.tipoPendencia
-                                       }).Select(p => p.Key).OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ToList()
+                                       }).Select(p => p.First()).OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ToList()
                                    );
                                 }
                                 else
@@ -2539,11 +2541,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                                            )
                                        ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
                                        {
+                                           tud_idRegencia = p.tud_idRegencia,
                                            tipo_ordem = p.tipo_ordem,
                                            tpc_id = p.tpc_id,
                                            tpc_ordem = p.tpc_ordem,
                                            tipoPendencia = p.tipoPendencia
-                                       }).Select(p => p.Key).OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ToList()
+                                       }).Select(p => p.First()).OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ToList()
                                    );
                                 }
                             }
