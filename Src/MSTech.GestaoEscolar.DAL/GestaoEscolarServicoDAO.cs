@@ -212,11 +212,12 @@ namespace MSTech.GestaoEscolar.DAL
         /// <summary>
         /// Processa o alerta de preenchimento de frequência.
         /// </summary>
-        public void ExecJOB_AlertaPreenchimentoFrequencias()
+        public DataTable ExecJOB_AlertaPreenchimentoFrequencias()
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaPreenchimentoFrequencia", _Banco);
             qs.TimeOut = 0;
             qs.Execute();
+            return qs.Return;
         }
 
         /// <summary>

@@ -477,7 +477,34 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaPreenchimentoFrequencias()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaPreenchimentoFrequencias();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaPreenchimentoFrequencia });
+            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaPreenchimentoFrequencias();
+                List<sAlertaPreenchimentoFrequencia> lstUsuarios = (from DataRow dr in dt.Rows
+                                                                    select (sAlertaPreenchimentoFrequencia)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaPreenchimentoFrequencia())).ToList();
+                if (lstUsuarios.Any())
+                {
+                    DateTime dataAtual = DateTime.UtcNow;
+                    NotificacaoDTO notificacao = new NotificacaoDTO();
+                    notificacao.SenderName = "SGP";
+                    notificacao.Recipient = new DestinatarioNotificacao();
+                    notificacao.Recipient.UserRecipient = new List<string>();
+                    notificacao.MessageType = 3;
+                    notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                    notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
+                    notificacao.Title = alerta.cfa_nome;
+                    notificacao.Message = alerta.cfa_assunto;
+                    lstUsuarios.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                    if (EnviarNotificacao(notificacao))
+                    {
+                        List<LOG_AlertaPreenchimentoFrequencia> lstLog = new List<LOG_AlertaPreenchimentoFrequencia>();
+                        notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaPreenchimentoFrequencia { usu_id = new Guid(ur), lpf_dataEnvio = DateTime.Now }));
+                        LOG_AlertaPreenchimentoFrequenciaBO.SalvarEmLote(lstLog);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -502,7 +529,7 @@ namespace MSTech.GestaoEscolar.BLL
                         notificacao.Recipient.UserRecipient = new List<string>();
                         notificacao.MessageType = 3;
                         notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
-                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddDays(alerta.cfa_periodoValidade)) : null;
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
                         notificacao.Title = alerta.cfa_nome;
                         List<sAlertaInicioFechamento> lstUsuariosEvento = lstUsuarios.FindAll(u => u.evt_id == e);
                         notificacao.Message = alerta.cfa_assunto
@@ -525,7 +552,6 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaFimFechamento()
         {
-            //new GestaoEscolarServicoDAO().ExecJOB_AlertaFimFechamento();
             CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaFimFechamento });
             if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
             {
@@ -543,7 +569,7 @@ namespace MSTech.GestaoEscolar.BLL
                         notificacao.Recipient.UserRecipient = new List<string>();
                         notificacao.MessageType = 3;
                         notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
-                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddDays(alerta.cfa_periodoValidade)) : null;
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
                         notificacao.Title = alerta.cfa_nome;
                         List<sAlertaFimFechamento> lstUsuariosEvento = lstUsuarios.FindAll(u => u.evt_id == e);
                         notificacao.Message = alerta.cfa_assunto
