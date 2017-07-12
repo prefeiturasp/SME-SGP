@@ -105,9 +105,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
+			Param.DbType = DbType.Decimal;
 			Param.ParameterName = "@qtr_peso";
-			Param.Size = 4;
+
 			Param.Value = entity.qtr_peso;
 			qs.Parameters.Add(Param);
 
@@ -181,9 +181,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.Int32;
+			Param.DbType = DbType.Decimal;
 			Param.ParameterName = "@qtr_peso";
-			Param.Size = 4;
+
 			Param.Value = entity.qtr_peso;
 			qs.Parameters.Add(Param);
 

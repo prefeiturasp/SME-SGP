@@ -137,19 +137,17 @@ namespace GestaoEscolar.Configuracao.Questionario
                 if (_txtTexto.Text.Length > 4000)
                     throw new ValidationException("O texto da resposta não deve exceder 4000 caracteres.");
 
+                decimal peso = 0;
                 if (ExibePeso)
                 {
-                    int peso = 0;
-                    Int32.TryParse(_txtPeso.Text, out peso);
-                    if (peso <= 0)
-                        throw new ValidationException("O peso da resposta deve ser maior que zero.");
-                    if (_txtPeso.Text.Length > 2)
-                        throw new ValidationException("O peso da resposta deve ter, no máximo, 2 caracteres.");
+                    Decimal.TryParse(_txtPeso.Text, out peso);
+                    if (peso < 0)
+                        throw new ValidationException("O peso da resposta deve ser maior ou igual a zero.");
                 }
 
                 Resposta.qtr_texto = _txtTexto.Text;
                 Resposta.qtr_permiteAdicionarTexto = _chkPermiteAdicionarTexto.Checked;
-                Resposta.qtr_peso = ExibePeso ? Convert.ToInt32(_txtPeso.Text) : 0;
+                Resposta.qtr_peso = peso;
                 Resposta.qtr_situacao = 1; //ativo
 
                 if (CLS_QuestionarioRespostaBO.Save(Resposta))
@@ -210,7 +208,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 _VS_qtc_id = Resposta.qtc_id;
                 _txtTexto.Text = Resposta.qtr_texto;
                 divPeso.Visible = ExibePeso;
-                _txtPeso.Text = divPeso.Visible ? Resposta.qtr_peso.ToString() : "0";
+                _txtPeso.Text = divPeso.Visible ? String.Format("{0:0.00}", Resposta.qtr_peso) : String.Format("{0:0.00}", 0);
                 _chkPermiteAdicionarTexto.Checked = Resposta.qtr_permiteAdicionarTexto;
             }
             catch (Exception e)
