@@ -113,6 +113,13 @@ namespace MSTech.GestaoEscolar.DAL
             sqlParam.Value = dtAlunoFechamentoPendencia;
             qs.Parameters.Add(sqlParam);
 
+            Param = qs.NewParameter();
+            Param.DbType = DbType.Byte;
+            Param.ParameterName = "@processado";
+            Param.Size = 4;
+            Param.Value = 0;
+            qs.Parameters.Add(Param);
+
             #endregion PARAMETROS
 
             qs.Execute();

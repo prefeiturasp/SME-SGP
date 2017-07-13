@@ -23,9 +23,9 @@
                         CausesValidation="False" />
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
-                    BorderStyle="None" DataKeyNames="qst_id" DataSourceID="odsResultado" AllowCustomPaging="true"
+                    BorderStyle="None" DataKeyNames="qst_id, emUso" DataSourceID="odsResultado"
                     EmptyDataText="A pesquisa não encontrou resultados." OnRowCommand="grvResultado_RowCommand"
-                    OnRowDataBound="grvResultado_RowDataBound" AllowSorting="true" EnableModelValidation="true" OnDataBound="grvResultado_DataBound">
+                    OnRowDataBound="grvResultado_RowDataBound" AllowSorting="true" OnDataBound="grvResultado_DataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="Título" SortExpression="qst_titulo">
                             <ItemTemplate>
@@ -54,7 +54,6 @@
                 </asp:GridView>
                 <uc3:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="grvResultado" />
                 <asp:ObjectDataSource ID="odsResultado" runat="server" SelectMethod="GetSelectPaginado" TypeName="MSTech.GestaoEscolar.BLL.CLS_QuestionarioBO"
-                    StartRowIndexParameterName="currentPage" EnablePaging="True" MaximumRowsParameterName="pageSize"
                     SelectCountMethod="GetTotalRecords" DataObjectTypeName="MSTech.GestaoEscolar.Entities.CLS_Questionario"
                     OnSelecting="odsResultado_Selecting"></asp:ObjectDataSource>
             </fieldset>

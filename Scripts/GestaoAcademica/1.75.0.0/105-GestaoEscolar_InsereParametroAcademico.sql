@@ -47,6 +47,13 @@ SET XACT_ABORT ON
 		,@pac_descricao = 'Tipo de evento de abertura de período para cadastro de preferência de horário de docente' -- Descrição do parâmetro. (Obrigatório)
 		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
 		,@ent_id = @entId
+		
+	EXEC MS_InsereParametroAcademico
+		@pac_chave = 'EXIBIR_ALERTA_AULA_SEM_PLANO' -- Chave do parâmetro. (Obrigatório)
+		,@pac_valor = 'False' -- Valor do parâmetro. (Obrigatório)
+		,@pac_descricao = 'Exibir alerta de aula criada sem plano' -- Descrição do parâmetro. (Obrigatório)
+		,@pac_obrigatorio = 0 -- indica se o parâmetro é obrigatório no sistema. (Obrigatório)
+		,@ent_id = @entId
 	
 -- Fechar transação	
 SET XACT_ABORT OFF
