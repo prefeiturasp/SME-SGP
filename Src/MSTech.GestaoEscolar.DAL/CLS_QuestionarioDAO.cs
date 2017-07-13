@@ -67,6 +67,7 @@ namespace MSTech.GestaoEscolar.DAL
             , out int totalRecords
         )
         {
+            DataTable dt = new DataTable();
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_CLS_Questionario_SelectAtivos", _Banco);
             try
             {
@@ -78,7 +79,10 @@ namespace MSTech.GestaoEscolar.DAL
                     totalRecords = qs.Return.Rows.Count;
                 }
 
-                return qs.Return;
+                if (qs.Return.Rows.Count > 0)
+                    dt = qs.Return;
+
+                return dt;
             }
             catch
             {

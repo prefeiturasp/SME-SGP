@@ -112,6 +112,15 @@ namespace GestaoEscolar.Configuracao.Alertas {
         protected global::System.Web.UI.WebControls.TextBox txtPeriodoAnalise;
         
         /// <summary>
+        /// rfvPeriodoAnalise control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPeriodoAnalise;
+        
+        /// <summary>
         /// lblPeriodoValidade control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace GestaoEscolar.Configuracao.Alertas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAssunto;
+        
+        /// <summary>
+        /// rfvAssunto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAssunto;
         
         /// <summary>
         /// litGrupos control.
