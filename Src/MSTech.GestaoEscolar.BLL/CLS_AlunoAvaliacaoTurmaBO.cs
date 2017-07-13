@@ -275,6 +275,7 @@ namespace MSTech.GestaoEscolar.BLL
         public int tme_id;
         public byte tur_tipo;
         public bool possuiAnotacaoRP;
+        public bool existeAulaSemPlano;
     }
 
     /// <summary>
