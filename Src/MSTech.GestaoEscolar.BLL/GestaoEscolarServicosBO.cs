@@ -478,7 +478,7 @@ namespace MSTech.GestaoEscolar.BLL
         public static void ExecJOB_AlertaPreenchimentoFrequencias()
         {
             CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaPreenchimentoFrequencia });
-            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            if (!string.IsNullOrEmpty(alerta.cfa_assunto))
             {
                 // Busca os usuários para envio da notificação
                 DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaPreenchimentoFrequencias();
@@ -513,7 +513,7 @@ namespace MSTech.GestaoEscolar.BLL
         public static void ExecJOB_AlertaInicioFechamento()
         {
             CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaInicioFechamento });
-            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            if (!string.IsNullOrEmpty(alerta.cfa_assunto))
             {
                 // Busca os usuários para envio da notificação
                 DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaInicioFechamento(alerta.cfa_periodoAnalise);
@@ -554,7 +554,7 @@ namespace MSTech.GestaoEscolar.BLL
         public static void ExecJOB_AlertaFimFechamento()
         {
             CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaFimFechamento });
-            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            if (!string.IsNullOrEmpty(alerta.cfa_assunto))
             {
                 // Busca os usuários para envio da notificação
                 DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaFimFechamento(alerta.cfa_periodoAnalise);

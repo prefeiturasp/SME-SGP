@@ -226,7 +226,7 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Busca'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Nome do alerta'
+		, @rcr_valorPadrao = 'Título do alerta'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'litTitulo.Text' 
@@ -240,21 +240,21 @@ SET XACT_ABORT ON
 		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Nome *'
+		, @rcr_valorPadrao = 'Título *'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'lblAssunto.Text' 
 		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Assunto'
+		, @rcr_valorPadrao = 'Mensagem *'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'lblPeriodoAnalise.Text' 
 		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
-		, @rcr_valorPadrao = 'Quantidade de dias para análise de dados'
+		, @rcr_valorPadrao = 'Quantidade de dias para análise de dados *'
 
 	EXEC MS_InsereResource 
 		@rcr_chave = 'lblPeriodoValidade.Text' 
@@ -310,7 +310,21 @@ SET XACT_ABORT ON
         , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
-        , @rcr_valorPadrao = 'Nome é obrigatório.'
+        , @rcr_valorPadrao = 'Título é obrigatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'rfvPeriodoAnalise.ErrorMessage' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Quantidade de dias para análise de dados é obrigatório.'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'rfvAssunto.ErrorMessage' 
+        , @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Mensagem é obrigatório.'
 
 	EXEC MS_InsereResource 
         @rcr_chave = 'litAgendamento.Text' 
