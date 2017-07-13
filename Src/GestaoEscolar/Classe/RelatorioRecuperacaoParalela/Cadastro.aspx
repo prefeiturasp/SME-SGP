@@ -23,7 +23,7 @@
             <uc:UCCPeriodoCalendario ID="UCCPeriodoCalendario" runat="server" MostrarMensagemSelecione="true" Visible="false" />
             <div class="right">
                 <asp:Button ID="btnVoltar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text %>" CausesValidation="false" OnClick="btnVoltar_Click" />
-                <asp:Button ID="btnLimparBusca" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparBusca_Click" Visible="false" />
+                <asp:Button ID="btnLimparBusca" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparBusca_Click" />
                 <asp:Button ID="btnNovo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnNovo.Text %>" CausesValidation="false" OnClick="btnNovo_Click" Visible="false" />
             </div>
         </asp:Panel>

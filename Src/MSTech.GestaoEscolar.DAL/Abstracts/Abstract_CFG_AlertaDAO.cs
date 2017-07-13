@@ -79,7 +79,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
                 Param.ParameterName = "@cfa_assunto";
-                Param.Size = 500;
                 if (!string.IsNullOrEmpty(entity.cfa_assunto))
                 {
                     Param.Value = entity.cfa_assunto;
@@ -176,7 +175,6 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
                 Param.ParameterName = "@cfa_assunto";
-                Param.Size = 500;
                 if (!string.IsNullOrEmpty(entity.cfa_assunto))
                 {
                     Param.Value = entity.cfa_assunto;
