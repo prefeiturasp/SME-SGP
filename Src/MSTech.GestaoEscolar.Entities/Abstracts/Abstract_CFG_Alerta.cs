@@ -43,7 +43,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// <summary>
 		/// Assunto do alerta.
 		/// </summary>
-		[MSValidRange(500)]
 		public virtual string cfa_assunto { get; set; }
 
 		/// <summary>
