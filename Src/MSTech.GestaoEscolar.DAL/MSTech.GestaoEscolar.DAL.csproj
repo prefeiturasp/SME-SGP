@@ -315,6 +315,7 @@
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEnsinoDAO.cs" />
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEquipamentosDAO.cs" />
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaPredioDAO.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_AlertaAlunosBaixaFrequenciaDAO.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AlertaFimFechamentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AlertaInicioFechamentoDAO.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AlertaPreenchimentoFrequenciaDAO.cs" />
@@ -645,6 +646,7 @@
     <Compile Include="ESC_UnidadeEscolaEquipamentosDAO.cs" />
     <Compile Include="ESC_UnidadeEscolaPredioDAO.cs" />
     <Compile Include="GestaoEscolarServicoDAO.cs" />
+    <Compile Include="LOG_AlertaAlunosBaixaFrequenciaDAO.cs" />
     <Compile Include="LOG_AlertaFimFechamentoDAO.cs" />
     <Compile Include="LOG_AlertaInicioFechamentoDAO.cs" />
     <Compile Include="LOG_AlertaPreenchimentoFrequenciaDAO.cs" />
