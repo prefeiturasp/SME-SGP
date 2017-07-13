@@ -42,6 +42,10 @@
                                 <ItemTemplate>
                                     <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' SkinID="textTitulo"></asp:Label>
                                     <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
+                                    <div>
+                                        <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" />                                
+                                        <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+                                    </div>
                                     <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                     <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                 </ItemTemplate>
@@ -76,9 +80,7 @@
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" />                                
-                                    <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+                                <ItemTemplate>                                    
                                     <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="geral" Visible="false" />
                                     <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
                                     <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
@@ -134,7 +136,11 @@
                                     <ItemTemplate>
                                         <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' CssClass="text-titulo"></asp:Label>
                                         <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
-                                        <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
+                                        <div>
+                                            <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" />
+                                            <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+                                        </div>
+                                        <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />                                        
                                         <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                     </ItemTemplate>
                                     <EditItemTemplate>
@@ -147,7 +153,7 @@
 			                                <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' MaxLength="4000" TextMode="MultiLine" SkinID="limite4000"></asp:TextBox>
 		                                    <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                             <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
-                                        </asp:Panel>
+                                        </asp:Panel>                                         
 		                                <asp:Panel ID="pnlSugestao" runat="server">
 			                                <asp:Label ID="lblTituloSugestao" runat="server" Text='<%# Bind("crc_titulo") %>' Font-Bold="true"></asp:Label>
 			                                <br /><br />
@@ -168,9 +174,7 @@
 	                                </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-                                    <ItemTemplate>                                
-		                                <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
-                                        <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+                                    <ItemTemplate>                                          
 		                                <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="disciplina" Visible="false" />
 		                                <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
 		                                <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
@@ -223,6 +227,10 @@
                                     <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.ColunaEixo %>">
                                         <ItemTemplate>
                                             <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                            <div>
+                                                <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" />   
+                                                <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />                                          
+                                            </div>
                                             <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                             <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                         </ItemTemplate>
@@ -254,9 +262,7 @@
                                         <ItemStyle CssClass="accordion-head" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-	                                    <ItemTemplate>                                
-		                                    <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
-                                            <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+	                                    <ItemTemplate>                                              
 		                                    <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
 		                                    <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
 		                                    <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
@@ -304,6 +310,10 @@
                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.ColunaObjetivo %>">
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                                                <div>
+                                                                    <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
+                                                                    <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+                                                                </div>
                                                                 <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                                                 <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                             </ItemTemplate>
@@ -334,12 +344,8 @@
                                                             </EditItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-	                                                        <ItemTemplate>                                
-		                                                        <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
-                                                                <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
-		                                                        <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
-		                                                        <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
-		                                                        <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />
+	                                                        <ItemTemplate>                                                                
+		                                                        <div class="btnsEdicaoObjetivo"><asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" /><asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" /><asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" /></div>                                                                
 	                                                        </ItemTemplate>
 	                                                        <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
@@ -352,11 +358,10 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaEditar %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                                             <ItemTemplate>
-                                                                <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnEditar.ToolTip %>" CausesValidation="false" />
-                                                                <asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
-                                                                <asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
+                                                                <asp:ImageButton ID="btnEditar" runat="server" CommandName="Edit" SkinID="btEditar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnEditar.ToolTip %>" CausesValidation="false" />                                                                
+                                                                    <div class="btnsEdicaoObjetivo"><asp:ImageButton ID="btnSalvar" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" /><asp:ImageButton ID="btnCancelarEdicao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" /></div>                                                                
                                                             </ItemTemplate>
-                                                            <ItemStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center"/>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaExcluir %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
                                                             <ItemTemplate>
@@ -382,6 +387,10 @@
                                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.ColunaObjetivoAprendizagem %>">
                                                                             <ItemTemplate>
                                                                                 <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' Font-Bold="false"></asp:Label>
+                                                                                <div>
+                                                                                    <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
+                                                                                    <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+                                                                                </div>
                                                                                 <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                                                                 <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                                             </ItemTemplate>
@@ -412,9 +421,7 @@
                                                                             </EditItemTemplate>
                                                                         </asp:TemplateField>
                                                                         <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaSugestão %>" HeaderStyle-CssClass="center" HeaderStyle-Width="50">
-	                                                                        <ItemTemplate>                                
-		                                                                        <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" /> 
-                                                                                <asp:ImageButton ID="btnIncluirSugestao" runat="server" CausesValidation="false" CommandName="Edit" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnIncluirSugestao.ToolTip %>" />
+	                                                                        <ItemTemplate>  
 		                                                                        <asp:ImageButton ID="btnSalvarSugestao" runat="server" CommandName="Update" SkinID="btConfirmar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnSalvar.ToolTip %>" ValidationGroup="eixo" Visible="false" />
 		                                                                        <asp:ImageButton ID="btnCancelarSugestao" runat="server" CommandName="Cancel" SkinID="btCancelar" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnCancelarEdicao.ToolTip %>" CausesValidation="false" Visible="false" />
 		                                                                        <asp:ImageButton ID="btnExcluirSugestao" runat="server" CommandName="Delete" SkinID="btExcluir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnExcluirSugestao.ToolTip %>" CausesValidation="false" Visible="false" />

@@ -23,7 +23,7 @@
                         CausesValidation="False" />
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
-                    BorderStyle="None" DataKeyNames="qst_id" DataSourceID="odsResultado"
+                    BorderStyle="None" DataKeyNames="qst_id, emUso" DataSourceID="odsResultado"
                     EmptyDataText="A pesquisa não encontrou resultados." OnRowCommand="grvResultado_RowCommand"
                     OnRowDataBound="grvResultado_RowDataBound" AllowSorting="true" OnDataBound="grvResultado_DataBound">
                     <Columns>
