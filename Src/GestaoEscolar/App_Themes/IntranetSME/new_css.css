@@ -898,4 +898,27 @@ div[id*="divTabsListao"] .grid.tbLancamentoAvaliacoes br.responsive-hide {
   display: block;
   margin: 5px 0 10px 20px; }
 
+#hd .hplHelp {
+  background: #0163a2;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -ms-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  -webkit-box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+  right: 42px;
+  top: 24px;
+  width: auto !important;
+  height: auto !important;
+  padding: 2px 4px;
+  -moz-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  border: 2px solid transparent;
+  border-top: 0; }
+  #hd .hplHelp:hover {
+    border-color: #0c9ffd; }
+
 /*# sourceMappingURL=new_css.css.map */

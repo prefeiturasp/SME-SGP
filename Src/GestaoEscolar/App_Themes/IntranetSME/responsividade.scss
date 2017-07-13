@@ -86,6 +86,12 @@
       }
 
       #acessibilidade{ display:none;}
+
+      .hplHelp{
+        top:0;
+        right:12px;
+        padding:0;
+      }
     }
   }
 
@@ -132,11 +138,12 @@
 
   // NOME BANCO
   .spnHelpDesk{
-    top:0;
-    right:0;
+    top: auto;
+    right: 12px;
+    bottom: 2px;
 
     > div{
-      font-size:1rem !important;
+      font-size:0.85rem !important;
     }
   }
 
