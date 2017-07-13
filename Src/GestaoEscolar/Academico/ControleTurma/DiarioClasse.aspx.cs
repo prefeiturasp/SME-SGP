@@ -6122,7 +6122,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (imgSemPlanoAula != null && dataAula.Date < DateTime.Now.Date &&
                         UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                     { 
-                        imgSemPlanoAula.Visible = semPlanoAula
+                        imgSemPlanoAula.Visible = semPlanoAula && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                         || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));

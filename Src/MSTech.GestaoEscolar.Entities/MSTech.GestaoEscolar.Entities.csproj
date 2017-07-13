@@ -323,6 +323,7 @@
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaEquipamentos.cs" />
     <Compile Include="Abstracts\Abstract_ESC_UnidadeEscolaPredio.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AlertaAlunosBaixaFrequencia.cs" />
+    <Compile Include="Abstracts\Abstract_LOG_AlertaAlunosFaltasConsecutivas.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AlertaFimFechamento.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AlertaInicioFechamento.cs" />
     <Compile Include="Abstracts\Abstract_LOG_AlertaPreenchimentoFrequencia.cs" />
@@ -653,6 +654,7 @@
     <Compile Include="ESC_UnidadeEscolaPredio.cs" />
     <Compile Include="Interfaces\ICFG_Configuracao.cs" />
     <Compile Include="LOG_AlertaAlunosBaixaFrequencia.cs" />
+    <Compile Include="LOG_AlertaAlunosFaltasConsecutivas.cs" />
     <Compile Include="LOG_AlertaFimFechamento.cs" />
     <Compile Include="LOG_AlertaInicioFechamento.cs" />
     <Compile Include="LOG_AlertaPreenchimentoFrequencia.cs" />

@@ -636,7 +636,40 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaAlunosFaltasConsecutivas()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosFaltasConsecutivas();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaAlunosFaltasConsecutivas });
+            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosFaltasConsecutivas();
+                List<sAlertaAlunosFaltasConsecutivas> lstUsuarios = (from DataRow dr in dt.Rows
+                                                                        select (sAlertaAlunosFaltasConsecutivas)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaAlunosFaltasConsecutivas())).ToList();
+                List<int> lstEscolas = lstUsuarios.Select(p => p.esc_id).Distinct().ToList();
+                DateTime dataAtual = DateTime.UtcNow;
+                lstEscolas.ForEach(e =>
+                    {
+                        NotificacaoDTO notificacao = new NotificacaoDTO();
+                        notificacao.SenderName = "SGP";
+                        notificacao.Recipient = new DestinatarioNotificacao();
+                        notificacao.Recipient.UserRecipient = new List<string>();
+                        notificacao.MessageType = 3;
+                        notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
+                        notificacao.Title = alerta.cfa_nome;
+                        List<sAlertaAlunosFaltasConsecutivas> lstUsuariosEscola = lstUsuarios.FindAll(u => u.esc_id == e);
+                        notificacao.Message = alerta.cfa_assunto
+                                                .Replace("[NomeEscola]", lstUsuariosEscola.First().esc_nome.ToString())
+                                                .Replace("[Dias]", alerta.cfa_periodoAnalise.ToString())
+                                                .Replace("[PulaLinha]", "<br/>");
+                        lstUsuariosEscola.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                        if (EnviarNotificacao(notificacao))
+                        {
+                            List<LOG_AlertaAlunosFaltasConsecutivas> lstLog = new List<LOG_AlertaAlunosFaltasConsecutivas>();
+                            notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaAlunosFaltasConsecutivas { usu_id = new Guid(ur), esc_id = e, lfc_dataEnvio = DateTime.Now }));
+                            LOG_AlertaAlunosFaltasConsecutivasBO.SalvarEmLote(lstLog);
+                        }
+                    }
+                );
+            }
         }
 
         /// <summary>
