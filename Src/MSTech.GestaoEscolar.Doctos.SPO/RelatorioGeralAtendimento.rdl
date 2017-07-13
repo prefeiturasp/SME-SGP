@@ -982,9 +982,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.1905cm</Top>
-            <Left>7.06502cm</Left>
+            <Left>2.32814cm</Left>
             <Height>0.4cm</Height>
-            <Width>13.06996cm</Width>
+            <Width>24.04372cm</Width>
             <Style>
               <Border />
               <VerticalAlign>Middle</VerticalAlign>
@@ -1013,9 +1013,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.73427cm</Top>
-            <Left>7.06502cm</Left>
+            <Left>2.32814cm</Left>
             <Height>0.4cm</Height>
-            <Width>13.06996cm</Width>
+            <Width>24.04372cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border />
@@ -1045,9 +1045,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>1.27185cm</Top>
-            <Left>7.06502cm</Left>
+            <Left>2.32814cm</Left>
             <Height>0.4cm</Height>
-            <Width>13.06996cm</Width>
+            <Width>24.04372cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border />
@@ -1077,9 +1077,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>1.8219cm</Top>
-            <Left>7.06502cm</Left>
+            <Left>2.32814cm</Left>
             <Height>0.4cm</Height>
-            <Width>13.06996cm</Width>
+            <Width>24.04372cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border />
@@ -1088,21 +1088,6 @@
               <PaddingRight>2pt</PaddingRight>
             </Style>
           </Textbox>
-          <Image Name="Image3">
-            <Source>External</Source>
-            <Value>=Parameters!logo.Value</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.19314cm</Top>
-            <Left>0.03175cm</Left>
-            <Height>2.12cm</Height>
-            <Width>2.12cm</Width>
-            <ZIndex>4</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="Textbox10">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -1126,7 +1111,7 @@
             <Top>2.68357cm</Top>
             <Height>0.66287cm</Height>
             <Width>28.7cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1137,6 +1122,21 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Image Name="Image3">
+            <Source>External</Source>
+            <Value>=Parameters!logo.Value</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.19314cm</Top>
+            <Left>0.03175cm</Left>
+            <Height>2.12cm</Height>
+            <Width>2.12cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Height>3.34644cm</Height>
