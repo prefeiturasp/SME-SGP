@@ -5463,6 +5463,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 try
                 {
+                    
                     if (PreviousPage == null && Session["DadosPaginaRetorno"] == null && Session["tud_id"] == null)
                     {
                         // Se não carregou nenhuma turma, redireciona pra busca.
@@ -5564,7 +5565,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         {
                             tpcIdPendencia = Convert.ToInt32(Session["tpcIdPendencia"]);
                         }
-
+                       
                         // Remove os dados que possam estar na sessao
                         Session.Remove("tud_id");
                         Session.Remove("tdt_posicao");
@@ -5786,6 +5787,14 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             trExibirAlunoDispensadoFrequencia.Visible = trExibirAlunoDispensadoAtividade.Visible = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_LEGENDA_ALUNO_DISPENSADO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
+            // REMOVE LIÇÃO DE CASA CASO SEJA TURMA DE AEE 
+            if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                  updAtividadeCasa.Visible = false;
+
+            // REMOVE LIÇÃO DE CASA CASO SEJA EDUCAÇÃO INFANTIL
+            if (VS_EntitiesControleTurma.curso.tne_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
+                updAtividadeCasa.Visible = false;
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -8158,7 +8167,6 @@ namespace GestaoEscolar.Academico.ControleTurma
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "FecharConfirmacaoExclusaoAula", "var exibirMensagemConfirmacao=false;$('#divConfirmacaoExclusaoAulaDiretor').dialog('close');", true);
         }
         #endregion Eventos
-
-
+        
     }
 }
