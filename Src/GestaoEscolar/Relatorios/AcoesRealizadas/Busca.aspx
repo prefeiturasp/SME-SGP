@@ -59,12 +59,11 @@
                     EmptyDataText="<%$ Resources:Padrao, Padrao.SemResultado.Text %>"
                     OnSorting="grvResultados_Sorting" OnRowEditing="grvResultados_RowEditing" DataKeyNames="alu_id,cal_id,tur_id">
                     <Columns>
-                          <asp:TemplateField>
+                        <asp:TemplateField>
                             <HeaderTemplate>
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <asp:CheckBox ID="_chkSelecionar" runat="server" alu_id='<%# Eval("alu_id") %>' cal_id='<%# Eval("cal_id") %>'
-                                    tur_id='<%# Eval("tur_id") %>' esc_id='<%# Eval("esc_id") %>' cursopeja='<%# Eval("CursoPeja") %>' />
+                                <asp:CheckBox ID="_chkSelecionar" runat="server" alu_id='<%# Eval("alu_id") %>'  cursopeja='<%# Eval("CursoPeja") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField HeaderText="<%$ Resources:Mensagens, MSG_NUMEROMATRICULA %>" DataField="alc_matricula" SortExpression="alc_matricula" />
@@ -75,11 +74,11 @@
                         <asp:BoundField HeaderText="<%$ Resources:Padrao, Padrao.Calendario.Text %>" DataField="tur_calendario" SortExpression="tur_calendario" />
                     </Columns>
                 </asp:GridView>
-                 <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
+                <uc:UCTotalRegistros ID="UCTotalRegistros" runat="server" AssociatedGridViewID="grvResultados" />
                 <div class="right">
                     <asp:Button ID="btnGerarRelatrorioAcoesRealizadas" runat="server" Text="Gerar relatório" OnClick="btnGerarRelatrorioAcoesRealizadas_Click" />
-                </div>               
-            </asp:Panel>            
+                </div>
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
