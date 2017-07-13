@@ -154,6 +154,19 @@ SET XACT_ABORT ON
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+	-- EXCLUSÃO DO MENU "CURRÍCULO"
+	EXEC MS_RemovePaginaMenu
+		@nomeSistema = @nomeSistema 
+		,@NomeModulo = 'Currículo'
+		,@nomeModuloPai = 'Administração'
+	-- ALTERAÇÃO DE MENU E NOME 	
+	UPDATE SYS_Modulo
+		SET mod_nome = 'Registro de sugestões de currículo' , mod_idPai = 4 , mod_dataAlteracao = GETDATE()
+		WHERE mod_id = 316
+	-- ALTERAÇÃO DE MENU
+	UPDATE SYS_Modulo
+		SET mod_idPai = 310 , mod_dataAlteracao = GETDATE()
+		WHERE mod_id = 317
 
 -- Fechar transação
 SET XACT_ABORT OFF
