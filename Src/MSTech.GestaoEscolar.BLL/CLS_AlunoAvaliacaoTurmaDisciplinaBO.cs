@@ -422,7 +422,8 @@ namespace MSTech.GestaoEscolar.BLL
                             usuarioParecerConclusivo = itemCopiar.usuarioParecerConclusivo,
                             dataAlteracaoParecerConclusivo = itemCopiar.dataAlteracaoParecerConclusivo,
                             faltasExternas = itemCopiar.faltasExternas,
-                            possuiAnotacaoRP = itemCopiar.possuiAnotacaoRP
+                            possuiAnotacaoRP = itemCopiar.possuiAnotacaoRP,
+                            existeAulaSemPlano = itemCopiar.existeAulaSemPlano
                         });
                     }
                 }
