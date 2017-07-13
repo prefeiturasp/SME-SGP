@@ -11,9 +11,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
     using MSTech.GestaoEscolar.Entities;
 
     /// <summary>
-    /// Classe abstrata de LOG_AlertaAlunosBaixaFrequencia.
+    /// Classe abstrata de LOG_AlertaAlunosFaltasConsecutivas.
     /// </summary>
-    public abstract class Abstract_LOG_AlertaAlunosBaixaFrequenciaDAO : Abstract_DAL<LOG_AlertaAlunosBaixaFrequencia>
+    public abstract class Abstract_LOG_AlertaAlunosFaltasConsecutivasDAO : Abstract_DAL<LOG_AlertaAlunosFaltasConsecutivas>
     {
         /// <summary>
 		/// ConnectionString.
@@ -31,7 +31,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// </summary>
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        protected override void ParamCarregar(QuerySelectStoredProcedure qs, LOG_AlertaAlunosBaixaFrequencia entity)
+        protected override void ParamCarregar(QuerySelectStoredProcedure qs, LOG_AlertaAlunosFaltasConsecutivas entity)
         {
             if (entity != null & qs != null)
             {
@@ -51,9 +51,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.DateTime;
-                Param.ParameterName = "@lbf_dataEnvio";
+                Param.ParameterName = "@lfc_dataEnvio";
 
-                Param.Value = entity.lbf_dataEnvio;
+                Param.Value = entity.lfc_dataEnvio;
                 qs.Parameters.Add(Param);
 
 
@@ -65,7 +65,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// </summary>
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        protected override void ParamInserir(QuerySelectStoredProcedure qs, LOG_AlertaAlunosBaixaFrequencia entity)
+        protected override void ParamInserir(QuerySelectStoredProcedure qs, LOG_AlertaAlunosFaltasConsecutivas entity)
         {
             if (entity != null & qs != null)
             {
@@ -85,9 +85,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.DateTime;
-                Param.ParameterName = "@lbf_dataEnvio";
+                Param.ParameterName = "@lfc_dataEnvio";
 
-                Param.Value = entity.lbf_dataEnvio;
+                Param.Value = entity.lfc_dataEnvio;
                 qs.Parameters.Add(Param);
 
 
@@ -99,7 +99,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// </summary>
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        protected override void ParamAlterar(QueryStoredProcedure qs, LOG_AlertaAlunosBaixaFrequencia entity)
+        protected override void ParamAlterar(QueryStoredProcedure qs, LOG_AlertaAlunosFaltasConsecutivas entity)
         {
             if (entity != null & qs != null)
             {
@@ -119,9 +119,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.DateTime;
-                Param.ParameterName = "@lbf_dataEnvio";
+                Param.ParameterName = "@lfc_dataEnvio";
 
-                Param.Value = entity.lbf_dataEnvio;
+                Param.Value = entity.lfc_dataEnvio;
                 qs.Parameters.Add(Param);
 
 
@@ -133,7 +133,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// </summary>
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
-        protected override void ParamDeletar(QueryStoredProcedure qs, LOG_AlertaAlunosBaixaFrequencia entity)
+        protected override void ParamDeletar(QueryStoredProcedure qs, LOG_AlertaAlunosFaltasConsecutivas entity)
         {
             if (entity != null & qs != null)
             {
@@ -153,9 +153,9 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.DateTime;
-                Param.ParameterName = "@lbf_dataEnvio";
+                Param.ParameterName = "@lfc_dataEnvio";
 
-                Param.Value = entity.lbf_dataEnvio;
+                Param.Value = entity.lfc_dataEnvio;
                 qs.Parameters.Add(Param);
 
 
@@ -168,7 +168,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
         /// <param name="qs">Objeto da Store Procedure.</param>
         /// <param name="entity">Entidade com os dados para preenchimento dos parametros.</param>
         /// <returns>TRUE - Se entity.ParametroId > 0</returns>
-        protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, LOG_AlertaAlunosBaixaFrequencia entity)
+        protected override bool ReceberAutoIncremento(QuerySelectStoredProcedure qs, LOG_AlertaAlunosFaltasConsecutivas entity)
         {
             return true;
         }
