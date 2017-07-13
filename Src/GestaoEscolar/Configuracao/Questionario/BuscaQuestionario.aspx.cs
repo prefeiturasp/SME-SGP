@@ -167,7 +167,9 @@ namespace GestaoEscolar.Configuracao.Questionario
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
                 {
-                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
+                    bool emUso = Convert.ToBoolean(grvResultado.DataKeys[e.Row.RowIndex].Values["emUso"].ToString());
+
+                    btnExcluir.Visible = !emUso && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
                 }
             }
