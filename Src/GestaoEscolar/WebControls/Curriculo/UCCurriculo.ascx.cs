@@ -774,14 +774,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                     if (btnSalvarSugestao != null)
                         btnSalvarSugestao.Visible = !string.IsNullOrEmpty(VS_abertoSugestao);
 
-                    ImageButton btnIncluirSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnIncluirSugestao");
-                    if (btnIncluirSugestao != null)
-                    {
-                        btnIncluirSugestao.Visible = false;
-                        ImageButton btnCancelarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnCancelarSugestao");
-                        if (btnCancelarSugestao != null)
-                            btnCancelarSugestao.Visible = true;
-                    }
+                    ImageButton btnCancelarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnCancelarSugestao");
+                    if (btnCancelarSugestao != null)
+                        btnCancelarSugestao.Visible = true;
 
                     HiddenField hdnCrsId = (HiddenField)grv.Rows[e.NewEditIndex].FindControl("hdnCrsId");
                     if (hdnCrsId != null)
@@ -1294,14 +1289,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                     if (btnSalvarSugestao != null)
                         btnSalvarSugestao.Visible = !string.IsNullOrEmpty(VS_abertoSugestao);
 
-                    ImageButton btnIncluirSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnIncluirSugestao");
-                    if (btnIncluirSugestao != null)
-                    {
-                        btnIncluirSugestao.Visible = false;
-                        ImageButton btnCancelarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnCancelarSugestao");
-                        if (btnCancelarSugestao != null)
-                            btnCancelarSugestao.Visible = true;
-                    }
+                    ImageButton btnCancelarSugestao = (ImageButton)grv.Rows[e.NewEditIndex].FindControl("btnCancelarSugestao");
+                    if (btnCancelarSugestao != null)
+                        btnCancelarSugestao.Visible = true;
 
                     HiddenField hdnCrsId = (HiddenField)grv.Rows[e.NewEditIndex].FindControl("hdnCrsId");
                     if (hdnCrsId != null)
