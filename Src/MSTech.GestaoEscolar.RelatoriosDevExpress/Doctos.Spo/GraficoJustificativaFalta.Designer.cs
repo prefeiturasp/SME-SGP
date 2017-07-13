@@ -66,7 +66,6 @@
             this.ImgLogo = new DevExpress.XtraReports.UI.XRPictureBox();
             this.dsGestaoEscolar1 = new MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo.DSGestaoEscolar();
             this.nEW_Relatorio_GraficoJustificativaFaltaTableAdapter = new MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo.DSGestaoEscolarTableAdapters.NEW_Relatorio_GraficoJustificativaFaltaTableAdapter();
-            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(textAnnotation1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(fullStackedBarSeriesView1)).BeginInit();
@@ -236,7 +235,6 @@
             // GroupHeader3
             // 
             this.GroupHeader3.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrPictureBox1,
             this.lblCalendario,
             this.lblNomeMunicipio,
             this.lblNomeSecretaria,
@@ -381,14 +379,6 @@
             // 
             this.nEW_Relatorio_GraficoJustificativaFaltaTableAdapter.ClearBeforeFill = true;
             // 
-            // xrPictureBox1
-            // 
-            this.xrPictureBox1.Dpi = 100F;
-            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(924.2495F, 0F);
-            this.xrPictureBox1.Name = "xrPictureBox1";
-            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(94.7505F, 80.00001F);
-            this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
-            // 
             // GraficoJustificativaFalta
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -466,6 +456,5 @@
         private DevExpress.XtraReports.UI.XRPictureBox ImgLogo;
         private DSGestaoEscolar dsGestaoEscolar1;
         private DSGestaoEscolarTableAdapters.NEW_Relatorio_GraficoJustificativaFaltaTableAdapter nEW_Relatorio_GraficoJustificativaFaltaTableAdapter;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
     }
 }
