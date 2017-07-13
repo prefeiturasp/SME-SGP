@@ -483,6 +483,25 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         }
 
         /// <summary>
+        /// Carrega todos os tipos de período calendário da turma, que esteja parametrizada no relatório.
+        /// </summary>
+        /// <param name="cal_id">ID do calendário</param>
+        /// <param name="tud_id">ID da disciplina</param>
+        /// <param name="tur_id">ID da turma</param>
+        public void CarregarPorRelatorioAtendimento(int rea_id, long tur_id)
+        {
+            List<CLS_RelatorioAtendimentoPeriodo> dt =
+                CLS_RelatorioAtendimentoPeriodoBO.SelecionaPorRelatorio(rea_id, ApplicationWEB.AppMinutosCacheLongo);
+
+            List<sTipoPeriodoCalendario> periodos = ACA_TipoPeriodoCalendarioBO.SelecionaTipoPeriodoCalendario_Tur(tur_id, ApplicationWEB.AppMinutosCacheLongo);
+
+            periodos = periodos.Where(p => dt.Exists(x => x.tpc_id == p.tpc_id)).ToList();
+
+            CarregarCombo(periodos);
+            CarregarPeriodoAtual(periodos, true);
+        }
+
+        /// <summary>
         /// Carrega todos os tipos de período calendário de períodos vigentes ou com um evento de efetivação vigente ligado ao tpc_id
         /// (se for disciplina eletiva ou eletiva do aluno, traz somente os períodos que a disciplina oferece)
         /// filtrando por calendário e disciplina e turma

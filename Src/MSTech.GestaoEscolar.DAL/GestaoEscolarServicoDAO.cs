@@ -212,11 +212,12 @@ namespace MSTech.GestaoEscolar.DAL
         /// <summary>
         /// Processa o alerta de preenchimento de frequência.
         /// </summary>
-        public void ExecJOB_AlertaPreenchimentoFrequencias()
+        public DataTable ExecJOB_AlertaPreenchimentoFrequencias()
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaPreenchimentoFrequencia", _Banco);
             qs.TimeOut = 0;
             qs.Execute();
+            return qs.Return;
         }
 
         /// <summary>
@@ -268,21 +269,23 @@ namespace MSTech.GestaoEscolar.DAL
         /// <summary>
         /// Processa o alerta de alunos com baixa frequência.
         /// </summary>
-        public void ExecJOB_AlertaAlunosBaixaFrequencia()
+        public DataTable ExecJOB_AlertaAlunosBaixaFrequencia()
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaAlunosBaixaFrequencia", _Banco);
             qs.TimeOut = 0;
             qs.Execute();
+            return qs.Return;
         }
 
         /// <summary>
         /// Processa o alerta de alunos com faltas consecutivas.
         /// </summary>
-        public void ExecJOB_AlertaAlunosFaltasConsecutivas()
+        public DataTable ExecJOB_AlertaAlunosFaltasConsecutivas()
         {
             QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaAlunosFaltasConsecutivas", _Banco);
             qs.TimeOut = 0;
             qs.Execute();
+            return qs.Return;
         }
 
         /// <summary>
