@@ -1091,6 +1091,10 @@ namespace MSTech.GestaoEscolar.BLL
         ,
         [parametroAcademicoAttributes("Tipo de evento de abertura de período para cadastro de preferência de horário de docente", "Tipo de evento de abertura de período para cadastro de preferência de horário de docente é obrigatório.", false, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.specific)]
         TIPO_EVENTO_PREFERENCIA_HORARIO
+        ,
+
+        [parametroAcademicoAttributes("Exibir alerta de aula criada sem plano", "É obrigatório selecionar uma opção.", true, false, TipoParametroAcademico.Unico, DataTypeParametroAcademico.logic)]
+        EXIBIR_ALERTA_AULA_SEM_PLANO
     }   
 
     #endregion Enumerador
