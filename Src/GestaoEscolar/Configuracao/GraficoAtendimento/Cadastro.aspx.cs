@@ -522,13 +522,15 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     if (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE)
                         ddlFiltroFixo.Items.Add(new ListItem("Detalhamento das deficiências", "5"));
                     else
-                        ddlFiltroFixo.Items.Remove(new ListItem("Detalhamento das deficiências", "5"));
+                        ddlFiltroFixo.Items.Remove(ddlFiltroFixo.Items.FindByValue("5"));
 
                     updFiltro.Update();
                 }
                 else
                 {
                     UCComboRelatorioAtendimento.PermiteEditar = false;
+                    ddlFiltroFixo.Items.Remove(ddlFiltroFixo.Items.FindByValue("5"));
+                    updFiltro.Update();
                 }
                 UCComboRelatorioAtendimento.SelectedIndex = 0;
                 UCComboRelatorioAtendimento_SelectedIndexChanged();
