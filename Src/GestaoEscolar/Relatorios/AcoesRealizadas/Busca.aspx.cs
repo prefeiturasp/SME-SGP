@@ -160,7 +160,7 @@ namespace GestaoEscolar.Relatorios.AcoesRealizadas
 
                     UCCRelatorioAtendimento.PermiteEditar = true;
                     // Carrega o combo de relatórios
-                    UCCRelatorioAtendimento.CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo.NAAPA);
+                    UCCRelatorioAtendimento.CarregarPorPermissaoUsuarioTipo(CLS_RelatorioAtendimentoTipo.NAAPA);
 
                     InicializarTela();
                 }

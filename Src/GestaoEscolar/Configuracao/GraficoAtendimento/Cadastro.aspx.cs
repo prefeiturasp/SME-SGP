@@ -518,7 +518,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 if (Convert.ToInt32(ddlTipo.SelectedValue) > 0)
                 {
-                    UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
+                    UCComboRelatorioAtendimento.CarregarPorPermissaoUsuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
                     UCComboRelatorioAtendimento.PermiteEditar = true;
                     if (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE)
                     {
