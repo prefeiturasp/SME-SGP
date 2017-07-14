@@ -10,3 +10,6 @@
     <asp:ListItem Value="5">Indígena</asp:ListItem>
     <asp:ListItem Value="6">Não declarada</asp:ListItem>
 </asp:DropDownList>
+<asp:CompareValidator ID="cpvCombo" runat="server" ErrorMessage="Raça/Cor é obrigatório."
+    ControlToValidate="_ddlRacaCor" Operator="NotEqual" ValueToCompare="-1" Display="Dynamic"
+    Visible="false">*</asp:CompareValidator>
