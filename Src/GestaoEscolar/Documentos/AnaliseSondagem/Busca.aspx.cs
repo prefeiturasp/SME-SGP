@@ -670,7 +670,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                              "&gru_id=" + __SessionWEB.__UsuarioWEB.Grupo.gru_id +
                              "&suprimirPercentual=" + chkSuprimirPercentual.Checked +
                              "&dre=" + UCComboUAEscola.TextoComboUA +
-                             "&escola=" + UCComboUAEscola.TextoComboEscola +
+                             "&escola=" + (UCComboUAEscola.Esc_ID > 0 ? UCComboUAEscola.TextoComboEscola : "") +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
                                                    , ApplicationWEB.LogoRelatorioSSRS) +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +

@@ -1154,6 +1154,42 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="esc_nome1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!esc_nome.Value</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>esc_nome1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
                   <Height>0.3cm</Height>
                   <TablixCells>
                     <TablixCell>
@@ -2247,34 +2283,54 @@
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="Details2">
+                  <Group Name="esc_id1">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!snd_id.Value</GroupExpression>
-                      <GroupExpression>=Fields!sda_id.Value</GroupExpression>
+                      <GroupExpression>=Fields!esc_id.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!snd_titulo.Value</Value>
-                    </SortExpression>
-                    <SortExpression>
-                      <Value>=Fields!sda_dataInicio.Value</Value>
-                    </SortExpression>
-                    <SortExpression>
-                      <Value>=Fields!sda_dataFim.Value</Value>
+                      <Value>=Fields!esc_nome.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
-                    <TablixMember />
-                    <TablixMember />
-                    <TablixMember />
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=IIF(Parameters!esc_id.Value &gt; 0, true, false)</Hidden>
+                      </Visibility>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="Details2">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!snd_id.Value</GroupExpression>
+                          <GroupExpression>=Fields!sda_id.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!snd_titulo.Value</Value>
+                        </SortExpression>
+                        <SortExpression>
+                          <Value>=Fields!sda_dataInicio.Value</Value>
+                        </SortExpression>
+                        <SortExpression>
+                          <Value>=Fields!sda_dataFim.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                      <TablixMembers>
+                        <TablixMember />
+                        <TablixMember />
+                        <TablixMember />
+                      </TablixMembers>
+                    </TablixMember>
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.3187cm</Top>
-            <Height>5.65cm</Height>
+            <Top>0.0012cm</Top>
+            <Height>6.25cm</Height>
             <Width>27.66825cm</Width>
             <ZIndex>2</ZIndex>
             <Visibility>
@@ -2337,7 +2393,6 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-            <Top>5.98417cm</Top>
             <Height>0.99688cm</Height>
             <Width>25.5cm</Width>
             <ZIndex>3</ZIndex>
@@ -2360,6 +2415,42 @@
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="esc_nome">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!esc_nome.Value</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>esc_nome</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
                 <TablixRow>
                   <Height>0.3cm</Height>
                   <TablixCells>
@@ -3606,34 +3697,54 @@
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="Details4">
+                  <Group Name="esc_id">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!snd_id.Value</GroupExpression>
-                      <GroupExpression>=Fields!sda_id.Value</GroupExpression>
+                      <GroupExpression>=Fields!esc_id.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!snd_titulo.Value</Value>
-                    </SortExpression>
-                    <SortExpression>
-                      <Value>=Fields!sda_dataInicio.Value</Value>
-                    </SortExpression>
-                    <SortExpression>
-                      <Value>=Fields!sda_dataFim.Value</Value>
+                      <Value>=Fields!esc_nome.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
-                    <TablixMember />
-                    <TablixMember />
-                    <TablixMember />
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=IIF(Parameters!esc_id.Value &gt; 0, true, false)</Hidden>
+                      </Visibility>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="Details4">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!snd_id.Value</GroupExpression>
+                          <GroupExpression>=Fields!sda_id.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!snd_titulo.Value</Value>
+                        </SortExpression>
+                        <SortExpression>
+                          <Value>=Fields!sda_dataInicio.Value</Value>
+                        </SortExpression>
+                        <SortExpression>
+                          <Value>=Fields!sda_dataFim.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                      <TablixMembers>
+                        <TablixMember />
+                        <TablixMember />
+                        <TablixMember />
+                      </TablixMembers>
+                    </TablixMember>
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.3175cm</Top>
-            <Height>5.66667cm</Height>
+            <Height>6.26667cm</Height>
             <Width>27.66825cm</Width>
             <ZIndex>4</ZIndex>
             <Visibility>
@@ -4675,7 +4786,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>6.98105cm</Height>
+        <Height>6.26667cm</Height>
         <Style />
       </Body>
       <Width>27.7cm</Width>
