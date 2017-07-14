@@ -155,7 +155,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 REL_GraficoAtendimentoTipo tipoGrafico;
                 Enum.TryParse(ddlTipoGrafico.SelectedValue, out tipoGrafico);
-                                
+
                 if (REL_GraficoAtendimentoBO.GetBy_titulo(txtTitulo.Text).AsEnumerable().Any(g => Convert.ToInt32(g["gra_id"]) != VS_gra_id))
                     throw new ValidationException("Já existe um gráfico de atendimento cadastrado com este título.");
 
@@ -681,7 +681,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
-                {                    
+                {
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
                     btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
@@ -778,14 +778,18 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (VS_lstFiltrosFixos.Any(p => p.gff_tipoFiltro == Convert.ToByte(ddlFiltroFixo.SelectedValue)))
                     throw new ValidationException(string.Format("Este tipo de filtro já existe."));
 
-                VS_lstFiltrosFixos.Add(REL_GraficoAtendimento_FiltrosFixosBO.GetEntityDetalhado(new REL_GraficoAtendimento_FiltrosFixos
+                REL_GraficoAtendimento_FiltrosFixos gff = new REL_GraficoAtendimento_FiltrosFixos
                 {
                     gra_id = VS_gra_id,
                     gff_tipoFiltro = Convert.ToByte(ddlFiltroFixo.SelectedValue),
                     gff_valorFiltro = RetornaValorFiltroFixo(Convert.ToByte(ddlFiltroFixo.SelectedValue)),
                     IsNew = true
-                }));
+                };
 
+                gff.gff_tituloFiltro = REL_GraficoAtendimento_FiltrosFixosBO.RetornaTituloFiltro(gff.gff_tipoFiltro);
+                gff.gff_valorDetalhado = REL_GraficoAtendimento_FiltrosFixosBO.RetornaValorDetalhado((REL_GraficoAtendimentoFiltrosFixos)gff.gff_tipoFiltro, gff.gff_valorFiltro);
+
+                VS_lstFiltrosFixos.Add(gff);
 
                 VS_lstFiltrosFixos = VS_lstFiltrosFixos.OrderBy(q => q.gff_tipoFiltro).ToList();
 
