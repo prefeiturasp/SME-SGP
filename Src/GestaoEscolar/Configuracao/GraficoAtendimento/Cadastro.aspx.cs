@@ -394,6 +394,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                             throw new ValidationException("Data inicial é obrigatório.");
                         if (String.IsNullOrEmpty(txtDtFinal.Text))
                             throw new ValidationException("Data final é obrigatório.");
+                        DateTime dtInicial, dtFinal;
+                        if (DateTime.TryParse(txtDtInicial.Text, out dtInicial) && DateTime.TryParse(txtDtFinal.Text, out dtFinal))
+                        {
+                            if (dtInicial >= dtFinal)
+                                throw new ValidationException("Data inicial deve ser menor que a data final.");
+                        }
+                        else
+                            throw new ValidationException("Data inválida.");
                         break;
                     case 2:
                         if (UCComboRacaCor.Valor <= 0)
@@ -404,6 +412,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                             throw new ValidationException("Idade mínima é obrigatório.");
                         if (String.IsNullOrEmpty(txtIdadeFinal.Text))
                             throw new ValidationException("Idade máxima é obrigatório.");
+                        int idMin, idMax;
+                        if (Int32.TryParse(txtIdadeInicial.Text, out idMin) && Int32.TryParse(txtIdadeFinal.Text, out idMax))
+                        {
+                            if (idMin >= idMax)
+                                throw new ValidationException("Idade mínima deve ser menor que idade máxima.");
+                        }
+                        else
+                            throw new ValidationException("Idade inválida.");
                         break;
                     case 4:
                         if (UCComboSexo.Valor <= 0)
@@ -803,11 +819,13 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao adicionar filtro fixo.", UtilBO.TipoMensagem.Erro);
             }
         }
