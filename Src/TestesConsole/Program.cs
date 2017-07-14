@@ -19,6 +19,10 @@ namespace TestesConsole
                     GestaoEscolarServicosBO.ExecJOB_ProcessamentoNotaFrequenciaFechamentoAsync(limpacache: false);
                     Console.WriteLine("Processando pendências...");
                     GestaoEscolarServicosBO.ExecJOB_ProcessamentoRelatorioDisciplinasAlunosPendenciasAsync(limpacache: false);
+                    Console.WriteLine("Processando preenchimento de frequência...");
+                    GestaoEscolarServicosBO.ExecJOB_ProcessamentoPreenchimentoFrequencia();
+                    Console.WriteLine("Processando alunos com baixa frequência e com faltas consecutivas...");
+                    GestaoEscolarServicosBO.ExecJOB_ProcessamentoAlunosFrequencia();
                     Console.WriteLine("Finalizado.");
                 }
             }
