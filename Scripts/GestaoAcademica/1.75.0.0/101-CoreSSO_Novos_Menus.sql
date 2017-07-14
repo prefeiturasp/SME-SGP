@@ -203,6 +203,10 @@ SET XACT_ABORT ON
 
 	UPDATE SYS_Modulo
 		SET mod_idPai = @mod_idGerais , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Divergências das rematrículas' and sis_id = 102 and mod_idPai = @mod_idPaiAntigogestor
+
+	UPDATE SYS_Modulo
+		SET mod_idPai = @mod_idGerais , mod_dataAlteracao = GETDATE()
 		WHERE mod_nome = 'Objetos de conhecimento' and sis_id = 102 and mod_idPai = @mod_idPaiAntigogestor
 
 	UPDATE SYS_Modulo
