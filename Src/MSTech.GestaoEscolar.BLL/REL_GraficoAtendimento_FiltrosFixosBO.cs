@@ -61,7 +61,7 @@ namespace MSTech.GestaoEscolar.BLL
                     codDetalhe = valoresDetalhados.ToArray();
 
                     if (codDetalhe.Length == 1) retorno = codDetalhe[0];
-                    else if (codDetalhe.Length == 2) retorno = codDetalhe[0] + " ou " + codDetalhe[1];
+                    else if (codDetalhe.Length == 2) retorno = codDetalhe[0] + " e " + codDetalhe[1];
                     else if (codDetalhe.Length >= 3)
                     {
 
@@ -69,7 +69,7 @@ namespace MSTech.GestaoEscolar.BLL
                         Array.Copy(codDetalhe, 0, concat, 0, codDetalhe.Length - 1);
 
                         retorno = string.Join(", ", concat);
-                        retorno += " ou " + codDetalhe[codDetalhe.Length - 1];
+                        retorno += " e " + codDetalhe[codDetalhe.Length - 1];
                     }
                     else retorno = string.Empty;
                     break;
