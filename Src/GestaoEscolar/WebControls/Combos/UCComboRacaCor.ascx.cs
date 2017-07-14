@@ -55,5 +55,37 @@ public partial class WebControls_Combos_UCComboRacaCor : MotherUserControl
         }
     }
 
+    /// <summary>
+    /// Propriedade que seta a label e a validação do combo
+    /// </summary>
+    public bool Obrigatorio
+    {
+        set
+        {
+            if (value)
+            {
+                AdicionaAsteriscoObrigatorio(LabelRacaCor);
+            }
+            else
+            {
+                RemoveAsteriscoObrigatorio(LabelRacaCor);
+
+            }
+
+            cpvCombo.Visible = value;
+        }
+    }
+
+    /// <summary>
+    /// Seta o validationGroup do combo.
+    /// </summary>
+    public string ValidationGroup
+    {
+        set
+        {
+            cpvCombo.ValidationGroup = value;
+        }
+    }
+
     #endregion
 }

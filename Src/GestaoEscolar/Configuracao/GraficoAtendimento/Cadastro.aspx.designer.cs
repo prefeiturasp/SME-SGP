@@ -40,6 +40,15 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::System.Web.UI.WebControls.ValidationSummary vsGraficoAtendimento;
         
         /// <summary>
+        /// vsFiltroFixo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsFiltroFixo;
+        
+        /// <summary>
         /// lblLegend control.
         /// </summary>
         /// <remarks>
@@ -283,6 +292,24 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::System.Web.UI.WebControls.TextBox txtIdadeInicial;
         
         /// <summary>
+        /// cpvIdadeInicial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cpvIdadeInicial;
+        
+        /// <summary>
+        /// rfvIdadeInicial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIdadeInicial;
+        
+        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>
@@ -299,6 +326,24 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtIdadeFinal;
+        
+        /// <summary>
+        /// cpvIdadeFinal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cpvIdadeFinal;
+        
+        /// <summary>
+        /// rfvIdadeFinal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIdadeFinal;
         
         /// <summary>
         /// divDataPreenchimento control.
@@ -328,6 +373,24 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         protected global::System.Web.UI.WebControls.TextBox txtDtInicial;
         
         /// <summary>
+        /// rfvDtInicial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDtInicial;
+        
+        /// <summary>
+        /// cvDtInicial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvDtInicial;
+        
+        /// <summary>
         /// Label5 control.
         /// </summary>
         /// <remarks>
@@ -344,6 +407,24 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDtFinal;
+        
+        /// <summary>
+        /// rfvDtFinal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDtFinal;
+        
+        /// <summary>
+        /// vdDtFinal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator vdDtFinal;
         
         /// <summary>
         /// divDetalhamentoDeficiencia control.
