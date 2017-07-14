@@ -20,13 +20,13 @@
     }
   }
 
-  .grid{
+  .grid td{
     input[type="image"]:not([style*="hidden"]){
-      height: 20px !important;
-      width: 20px !important;
       border: 1px dotted #0163a2 !important;
       padding: 3px;
       box-sizing: border-box;
+      height: 20px !important;
+      width: 20px !important;
     }
 
     input[type="image"]{
@@ -38,6 +38,15 @@
       &:disabled{
         opacity:0.65;
         background: rgba(0,0,0,.15);
+      }
+    }
+
+    &:first-child{
+      input[type="image"]:not([style*="hidden"]){
+        margin: 5px 0 0;
+        height: 32px !important;
+        width: 32px !important;
+        position:static;
       }
     }
   }
@@ -65,53 +74,58 @@
       background: #eee;
       border-left: 5px solid rgba(0,0,0,.5);
       margin-bottom:6px;
+      overflow:hidden;
 
       > td{
         display:inline-block;
         border-bottom:0;
         padding:0;
         @include border-radius(0);
+        float:left;
 
-        > input[type="image"]{
-          position:absolute;
-          top:5px;
+        input[type="image"]{
+            position:absolute;
+            top:5px;
 
-          &[id*="btnExcluir"], &[id*="btnIncluirSugestao"]{
-            right:5px;
+            &[id*="btnExcluir"]{
+              right:5px;
+            }
+
+            &[id*="btnExcluirSugestao"]{
+              position:static;
+            }
+
+            &[id*="btnEditar"]{
+              right:30px;
+            }
+
+            &[id*="btnDescer"]{
+              right:55px;
+            }
+
+            &[id*="btnSubir"]{
+              right:80px;
+            }
+
+            &[id*="btnSalvar"]{
+              position:static;
+              margin-left: 15px;
+              margin-bottom: 8px;
+              float: left;
+              margin-right: 5px;
+            }
+
+            &[id*="btnCancelar"]{
+              position:static;
+              margin-bottom: 8px;
+              float: left;
+              margin-right: 5px;
+            }
+
+            /*&[id*="btnListaSugestoes"]{
+              right:105px;
+            }*/
           }
-
-          &[id*="btnEditar"]{
-            right:30px;
-          }
-
-          &[id*="btnDescer"]{
-            right:55px;
-          }
-
-          &[id*="btnSubir"]{
-            right:80px;
-          }
-
-          &[id*="btnSalvar"]{
-            position:static;
-            margin-left: 15px;
-            margin-bottom: 8px;
-          }
-
-          &[id*="btnCancelar"]{
-            position:static;
-            margin-bottom: 8px;
-          }
-
-          &[id*="btnListaSugestoes"]{
-            right:105px;
-          }
-
-          &.preenchido{
-            border:1px solid #0163a2 !important;
-            @include box-shadow(0 1px 0 #0163a2);
-          }
-        }
 
         &:first-child{
           display:block;
@@ -119,6 +133,29 @@
           position:static;
           padding:10px 130px 10px 12px;
           width:100%;
+          float:left;
+
+          input[type="image"]{
+            position:static;
+            margin: 5px 0 0;
+            width: 32px !important;
+            height: 32px !important;
+
+            &.preenchido{
+              border:1px solid #0163a2 !important;
+              @include box-shadow(0 1px 0 #0163a2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .grid-itens-right{
+    > tbody > tr{
+      > td:first-child{
+        input[type="image"]{
+          margin: 5px 0 0 8px !important;
         }
       }
     }
@@ -171,6 +208,7 @@
 
             &:last-child{
               display:block;
+              width:100%;
             }
 
             > input[type="image"][id*="btnSalvar"]{
@@ -182,6 +220,11 @@
             > div{
               margin-left: 25px;
               margin-bottom: 6px;
+            }
+
+            > .ul-sugestoes{
+              margin-left: 25px !important;
+              margin-bottom: 6px !important;
             }
           }
 
@@ -219,11 +262,16 @@
 
       > td{
         border-bottom: 8px solid #fff;
+        vertical-align: top;
 
         &:not(:first-child):not(:last-child){
           vertical-align: top;
           width: 20px;
           padding: 5px 3px;
+
+          input[type="image"]{
+            position:static !important;
+          }
         }
 
         &.td-acao-dupla{
@@ -261,7 +309,18 @@
         }
       }
     }
+
+    .btnsEdicaoObjetivo:not(:empty){
+      min-width: 85px;
+      text-align: left !important;
+      padding-top: 24px !important;
+
+      input[type="image"]{
+        margin-left:0 !important;
+      }
+    }
   }
+
 
   .grid-itens-right{
     border:none !important;
@@ -292,6 +351,10 @@
         }
       }
     }
+
+    .ul-sugestoes{
+      margin-left: 8px !important;
+    }
   }
 
   .grid tr:hover td, .tbGrid tr:hover td,
@@ -321,9 +384,10 @@
       padding: 10px 10px 10px 40px;
       border-bottom: 1px solid rgba(0,0,0,.2);
       line-height: 1.3;
-      background:url('images/sugerir.png') 15px 10px no-repeat;
+      background:url('images/sugerir.png') 15px 8px no-repeat;
       height:auto;
       @include transition(all 0.2s ease-out);
+      background-size: 20px;
 
       small{
         display: block;
@@ -400,6 +464,7 @@
     tr{
       display:block;
       width:100%;
+      float:left;
 
       td{
         display:inline-block;
@@ -407,6 +472,7 @@
         &:first-child, &:last-child{
           display:block;
           width:100%;
+          float:left;
 
           .btn{
             float:left;
@@ -415,6 +481,7 @@
 
         &:not(:first-child):not(:last-child){
           float:right;
+          width:auto;
 
           input[type="image"]{
             position: absolute;
@@ -431,6 +498,7 @@
     }
   }
 }
+
 
 @media screen and (max-width:960px){
   .fieldset-curriculo .painel-habilidades input[type="submit"][id*="btnNovoEixo"]{
@@ -728,6 +796,27 @@ div[id*="divTabsListao"] .grid.tbLancamentoAvaliacoes{
     + .questionario-conteudo-resposta-texto-adicional{
       display:block;
       margin:5px 0 10px 20px;
+    }
+  }
+}
+
+// BOTAO DE AJUDA NO TOPO (WIKI)
+#hd{
+  .hplHelp{
+    background:$corTerciaria;
+    @include border-radius(0 0 5px 5px);
+    @include box-shadow(inset 0 -2px rgba(0,0,0,.2));
+    right: 42px;
+    top: 24px;
+    width: auto !important;
+    height: auto !important;
+    padding: 2px 4px;
+    @include transition(all 0.2s ease-out);
+    border:2px solid transparent;
+    border-top:0;
+
+    &:hover{
+      border-color: lighten($corTerciaria, 20%);
     }
   }
 }

@@ -51,6 +51,7 @@
                 </fieldset>
             </div>
             <div id="divTabs-01">
+                <asp:ValidationSummary ID="vsGeral" runat="server" ValidationGroup="geral"/>
                 <fieldset id="fdsAcoesRealizadas" runat="server">
                     <legend>
                         <asp:Literal runat="server" ID="litFdsAcoesRealizadas" Text="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, litAcoesRealizadas.Text %>" />
@@ -60,7 +61,7 @@
                         <asp:Button ID="btnImprimir" runat="server" Text="Imprimir" CausesValidation="false" OnClick="btnImprimir_Click" />
                         <br />
                         <br />
-                    </div>
+                    </div>                    
                     <asp:GridView ID="grvAcoes" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:GestaoEscolar.WebControls.LancamentoRelatorioAtendimento.UCLancamentoRelatorioAtendimento, grvAcoes.EmptyDataText %>"
                         DataKeyNames="idTemp,rpa_id"
                         OnRowDataBound="grvAcoes_RowDataBound"

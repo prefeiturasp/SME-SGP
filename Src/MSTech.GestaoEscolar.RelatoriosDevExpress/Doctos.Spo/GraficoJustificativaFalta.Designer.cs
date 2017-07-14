@@ -101,7 +101,7 @@
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPanel1});
             this.GroupHeader1.Dpi = 100F;
-            this.GroupHeader1.HeightF = 337.9167F;
+            this.GroupHeader1.HeightF = 438.9584F;
             this.GroupHeader1.Name = "GroupHeader1";
             this.GroupHeader1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader1_BeforePrint);
             // 
@@ -112,7 +112,7 @@
             this.xrPanel1.Dpi = 100F;
             this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPanel1.Name = "xrPanel1";
-            this.xrPanel1.SizeF = new System.Drawing.SizeF(699.7068F, 337.9167F);
+            this.xrPanel1.SizeF = new System.Drawing.SizeF(1019F, 438.9584F);
             // 
             // xrChart1
             // 
@@ -145,7 +145,7 @@
             this.xrChart1.Name = "xrChart1";
             this.xrChart1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.xrChart1.SeriesTemplate.View = fullStackedBarSeriesView1;
-            this.xrChart1.SizeF = new System.Drawing.SizeF(680F, 318.0417F);
+            this.xrChart1.SizeF = new System.Drawing.SizeF(999F, 418.9584F);
             // 
             // GroupHeader2
             // 
@@ -170,7 +170,7 @@
             this.lblSemRegistroGrafico.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblSemRegistroGrafico.Name = "lblSemRegistroGrafico";
             this.lblSemRegistroGrafico.Padding = new DevExpress.XtraPrinting.PaddingInfo(20, 0, 10, 10, 100F);
-            this.lblSemRegistroGrafico.SizeF = new System.Drawing.SizeF(699.9997F, 45F);
+            this.lblSemRegistroGrafico.SizeF = new System.Drawing.SizeF(1019F, 45F);
             this.lblSemRegistroGrafico.StylePriority.UseBackColor = false;
             this.lblSemRegistroGrafico.StylePriority.UseBorderColor = false;
             this.lblSemRegistroGrafico.StylePriority.UseBorders = false;
@@ -255,10 +255,10 @@
             // 
             this.lblCalendario.Dpi = 100F;
             this.lblCalendario.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
-            this.lblCalendario.LocationFloat = new DevExpress.Utils.PointFloat(0.5074987F, 115F);
+            this.lblCalendario.LocationFloat = new DevExpress.Utils.PointFloat(0.5074978F, 115F);
             this.lblCalendario.Name = "lblCalendario";
             this.lblCalendario.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblCalendario.SizeF = new System.Drawing.SizeF(698.7068F, 18F);
+            this.lblCalendario.SizeF = new System.Drawing.SizeF(1018.492F, 18.00001F);
             this.lblCalendario.StylePriority.UseFont = false;
             this.lblCalendario.StylePriority.UseTextAlignment = false;
             this.lblCalendario.Text = "lblCalendario";
@@ -271,7 +271,7 @@
             this.lblNomeMunicipio.LocationFloat = new DevExpress.Utils.PointFloat(95.25801F, 0F);
             this.lblNomeMunicipio.Name = "lblNomeMunicipio";
             this.lblNomeMunicipio.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblNomeMunicipio.SizeF = new System.Drawing.SizeF(509.2094F, 20F);
+            this.lblNomeMunicipio.SizeF = new System.Drawing.SizeF(828.9915F, 20F);
             this.lblNomeMunicipio.StylePriority.UseFont = false;
             this.lblNomeMunicipio.StylePriority.UseTextAlignment = false;
             this.lblNomeMunicipio.Text = "lblNomeMunicipio";
@@ -284,7 +284,7 @@
             this.lblNomeSecretaria.LocationFloat = new DevExpress.Utils.PointFloat(95.25801F, 20.00001F);
             this.lblNomeSecretaria.Name = "lblNomeSecretaria";
             this.lblNomeSecretaria.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblNomeSecretaria.SizeF = new System.Drawing.SizeF(509.2093F, 20F);
+            this.lblNomeSecretaria.SizeF = new System.Drawing.SizeF(828.9916F, 20F);
             this.lblNomeSecretaria.StylePriority.UseFont = false;
             this.lblNomeSecretaria.StylePriority.UseTextAlignment = false;
             this.lblNomeSecretaria.Text = "lblNomeSecretaria";
@@ -297,7 +297,7 @@
             this.lblEscola.LocationFloat = new DevExpress.Utils.PointFloat(95.25801F, 60.00004F);
             this.lblEscola.Name = "lblEscola";
             this.lblEscola.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblEscola.SizeF = new System.Drawing.SizeF(509.21F, 20F);
+            this.lblEscola.SizeF = new System.Drawing.SizeF(828.9915F, 20F);
             this.lblEscola.StylePriority.UseFont = false;
             this.lblEscola.StylePriority.UseTextAlignment = false;
             this.lblEscola.Text = "lblEscola";
@@ -308,7 +308,7 @@
             this.xrPageInfo1.Dpi = 100F;
             this.xrPageInfo1.Font = new System.Drawing.Font("Arial", 8F);
             this.xrPageInfo1.Format = "Data de emissão: {0:dd/MM/yyyy}";
-            this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(544.0092F, 135.67F);
+            this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(863.7917F, 135.67F);
             this.xrPageInfo1.Name = "xrPageInfo1";
             this.xrPageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrPageInfo1.PageInfo = DevExpress.XtraPrinting.PageInfo.DateTime;
@@ -321,10 +321,10 @@
             // 
             this.lblFiltros.Dpi = 100F;
             this.lblFiltros.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
-            this.lblFiltros.LocationFloat = new DevExpress.Utils.PointFloat(0.2174988F, 135.67F);
+            this.lblFiltros.LocationFloat = new DevExpress.Utils.PointFloat(0.2175013F, 135.67F);
             this.lblFiltros.Name = "lblFiltros";
             this.lblFiltros.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblFiltros.SizeF = new System.Drawing.SizeF(543.7916F, 18F);
+            this.lblFiltros.SizeF = new System.Drawing.SizeF(863.5742F, 18F);
             this.lblFiltros.StylePriority.UseFont = false;
             this.lblFiltros.StylePriority.UseTextAlignment = false;
             this.lblFiltros.Text = "lblFiltros";
@@ -334,10 +334,10 @@
             // 
             this.lblTitulo.Dpi = 100F;
             this.lblTitulo.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.LocationFloat = new DevExpress.Utils.PointFloat(0.2174988F, 90F);
+            this.lblTitulo.LocationFloat = new DevExpress.Utils.PointFloat(0.2175013F, 89.99999F);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblTitulo.SizeF = new System.Drawing.SizeF(699.71F, 23F);
+            this.lblTitulo.SizeF = new System.Drawing.SizeF(1018.782F, 23F);
             this.lblTitulo.StylePriority.UseFont = false;
             this.lblTitulo.StylePriority.UseTextAlignment = false;
             this.lblTitulo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
@@ -349,7 +349,7 @@
             this.lblDRE.LocationFloat = new DevExpress.Utils.PointFloat(95.25801F, 40.00003F);
             this.lblDRE.Name = "lblDRE";
             this.lblDRE.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblDRE.SizeF = new System.Drawing.SizeF(509.21F, 20F);
+            this.lblDRE.SizeF = new System.Drawing.SizeF(828.9915F, 20F);
             this.lblDRE.StylePriority.UseFont = false;
             this.lblDRE.StylePriority.UseTextAlignment = false;
             this.lblDRE.Text = "lblDRE";
@@ -358,9 +358,9 @@
             // xrLine2
             // 
             this.xrLine2.Dpi = 100F;
-            this.xrLine2.LocationFloat = new DevExpress.Utils.PointFloat(0.07250977F, 153.67F);
+            this.xrLine2.LocationFloat = new DevExpress.Utils.PointFloat(0.07251104F, 153.67F);
             this.xrLine2.Name = "xrLine2";
-            this.xrLine2.SizeF = new System.Drawing.SizeF(699.4134F, 8F);
+            this.xrLine2.SizeF = new System.Drawing.SizeF(1018.927F, 8F);
             // 
             // ImgLogo
             // 
@@ -391,7 +391,11 @@
             this.DataAdapter = this.nEW_Relatorio_GraficoJustificativaFaltaTableAdapter;
             this.DataMember = "NEW_Relatorio_GraficoJustificativaFalta";
             this.DataSource = this.dsGestaoEscolar1;
+            this.Landscape = true;
             this.Margins = new System.Drawing.Printing.Margins(75, 75, 75, 75);
+            this.PageHeight = 827;
+            this.PageWidth = 1169;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.ENTID,
             this.CALID,

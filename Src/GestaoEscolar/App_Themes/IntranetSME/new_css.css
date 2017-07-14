@@ -349,21 +349,26 @@
   float: right;
   margin-right: 12px;
   font-size: 0.8rem; }
-.fieldset-curriculo .grid input[type="image"]:not([style*="hidden"]) {
-  height: 20px !important;
-  width: 20px !important;
+.fieldset-curriculo .grid td input[type="image"]:not([style*="hidden"]) {
   border: 1px dotted #0163a2 !important;
   padding: 3px;
-  box-sizing: border-box; }
-.fieldset-curriculo .grid input[type="image"].preenchido {
+  box-sizing: border-box;
+  height: 20px !important;
+  width: 20px !important; }
+.fieldset-curriculo .grid td input[type="image"].preenchido {
   border: 1px solid #0163a2 !important;
   -webkit-box-shadow: 0 1px 0 #0163a2;
   -moz-box-shadow: 0 1px 0 #0163a2;
   -ms-box-shadow: 0 1px 0 #0163a2;
   box-shadow: 0 1px 0 #0163a2; }
-.fieldset-curriculo .grid input[type="image"]:disabled {
+.fieldset-curriculo .grid td input[type="image"]:disabled {
   opacity: 0.65;
   background: rgba(0, 0, 0, 0.15); }
+.fieldset-curriculo .grid td:first-child input[type="image"]:not([style*="hidden"]) {
+  margin: 5px 0 0;
+  height: 32px !important;
+  width: 32px !important;
+  position: static; }
 .fieldset-curriculo .accordion-grid, .fieldset-curriculo .grid-topico, .fieldset-curriculo .grid-itens-right {
   border: 0;
   margin-bottom: 0; }
@@ -377,7 +382,8 @@
     display: block;
     background: #eee;
     border-left: 5px solid rgba(0, 0, 0, 0.5);
-    margin-bottom: 6px; }
+    margin-bottom: 6px;
+    overflow: hidden; }
     .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td, .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td, .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td {
       display: inline-block;
       border-bottom: 0;
@@ -385,39 +391,55 @@
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
       -ms-border-radius: 0;
-      border-radius: 0; }
-      .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"] {
+      border-radius: 0;
+      float: left; }
+      .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td input[type="image"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td input[type="image"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td input[type="image"] {
         position: absolute;
-        top: 5px; }
-        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnExcluir"], .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnIncluirSugestao"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"][id*="btnExcluir"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"][id*="btnIncluirSugestao"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"][id*="btnExcluir"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"][id*="btnIncluirSugestao"] {
+        top: 5px;
+        /*&[id*="btnListaSugestoes"]{
+          right:105px;
+        }*/ }
+        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td input[type="image"][id*="btnExcluir"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td input[type="image"][id*="btnExcluir"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td input[type="image"][id*="btnExcluir"] {
           right: 5px; }
-        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnEditar"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"][id*="btnEditar"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"][id*="btnEditar"] {
+        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td input[type="image"][id*="btnExcluirSugestao"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td input[type="image"][id*="btnExcluirSugestao"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td input[type="image"][id*="btnExcluirSugestao"] {
+          position: static; }
+        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td input[type="image"][id*="btnEditar"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td input[type="image"][id*="btnEditar"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td input[type="image"][id*="btnEditar"] {
           right: 30px; }
-        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnDescer"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"][id*="btnDescer"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"][id*="btnDescer"] {
+        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td input[type="image"][id*="btnDescer"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td input[type="image"][id*="btnDescer"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td input[type="image"][id*="btnDescer"] {
           right: 55px; }
-        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnSubir"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"][id*="btnSubir"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"][id*="btnSubir"] {
+        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td input[type="image"][id*="btnSubir"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td input[type="image"][id*="btnSubir"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td input[type="image"][id*="btnSubir"] {
           right: 80px; }
-        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnSalvar"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"][id*="btnSalvar"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"][id*="btnSalvar"] {
+        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td input[type="image"][id*="btnSalvar"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td input[type="image"][id*="btnSalvar"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td input[type="image"][id*="btnSalvar"] {
           position: static;
           margin-left: 15px;
-          margin-bottom: 8px; }
-        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnCancelar"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"][id*="btnCancelar"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"][id*="btnCancelar"] {
+          margin-bottom: 8px;
+          float: left;
+          margin-right: 5px; }
+        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td input[type="image"][id*="btnCancelar"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td input[type="image"][id*="btnCancelar"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td input[type="image"][id*="btnCancelar"] {
           position: static;
-          margin-bottom: 8px; }
-        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnListaSugestoes"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"][id*="btnListaSugestoes"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"][id*="btnListaSugestoes"] {
-          right: 105px; }
-        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"].preenchido, .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td > input[type="image"].preenchido, .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td > input[type="image"].preenchido {
-          border: 1px solid #0163a2 !important;
-          -webkit-box-shadow: 0 1px 0 #0163a2;
-          -moz-box-shadow: 0 1px 0 #0163a2;
-          -ms-box-shadow: 0 1px 0 #0163a2;
-          box-shadow: 0 1px 0 #0163a2; }
+          margin-bottom: 8px;
+          float: left;
+          margin-right: 5px; }
       .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td:first-child, .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td:first-child, .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td:first-child {
         display: block;
         border-bottom: 0;
         position: static;
         padding: 10px 130px 10px 12px;
-        width: 100%; }
+        width: 100%;
+        float: left; }
+        .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td:first-child input[type="image"], .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td:first-child input[type="image"], .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td:first-child input[type="image"] {
+          position: static;
+          margin: 5px 0 0;
+          width: 32px !important;
+          height: 32px !important; }
+          .fieldset-curriculo .accordion-grid > tbody > tr:not(.summary) > td:first-child input[type="image"].preenchido, .fieldset-curriculo .grid-topico > tbody > tr:not(.summary) > td:first-child input[type="image"].preenchido, .fieldset-curriculo .grid-itens-right > tbody > tr:not(.summary) > td:first-child input[type="image"].preenchido {
+            border: 1px solid #0163a2 !important;
+            -webkit-box-shadow: 0 1px 0 #0163a2;
+            -moz-box-shadow: 0 1px 0 #0163a2;
+            -ms-box-shadow: 0 1px 0 #0163a2;
+            box-shadow: 0 1px 0 #0163a2; }
+.fieldset-curriculo .grid-itens-right > tbody > tr > td:first-child input[type="image"] {
+  margin: 5px 0 0 8px !important; }
 .fieldset-curriculo .grid-topico + fieldset {
   margin-top: 16px; }
 .fieldset-curriculo .painel-habilidades {
@@ -447,12 +469,16 @@
             left: -3px;
             top: 5px; }
       .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) > td:last-child {
-        display: block; }
+        display: block;
+        width: 100%; }
       .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) > td > input[type="image"][id*="btnSalvar"] {
         margin-left: 25px; }
     .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-head > div {
       margin-left: 25px;
       margin-bottom: 6px; }
+    .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-head > .ul-sugestoes {
+      margin-left: 25px !important;
+      margin-bottom: 6px !important; }
     .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-closed {
       display: block;
       height: 0;
@@ -474,11 +500,14 @@
     margin-bottom: 6px;
     background: #eee; }
     .fieldset-curriculo .grid-itens-left > tbody > tr:not(.summary) > td {
-      border-bottom: 8px solid #fff; }
+      border-bottom: 8px solid #fff;
+      vertical-align: top; }
       .fieldset-curriculo .grid-itens-left > tbody > tr:not(.summary) > td:not(:first-child):not(:last-child) {
         vertical-align: top;
         width: 20px;
         padding: 5px 3px; }
+        .fieldset-curriculo .grid-itens-left > tbody > tr:not(.summary) > td:not(:first-child):not(:last-child) input[type="image"] {
+          position: static !important; }
       .fieldset-curriculo .grid-itens-left > tbody > tr:not(.summary) > td.td-acao-dupla {
         width: 50px !important; }
       .fieldset-curriculo .grid-itens-left > tbody > tr:not(.summary) > td:last-child {
@@ -503,6 +532,12 @@
         .fieldset-curriculo .grid-itens-left > tbody > tr:not(.summary) > td:last-child > .btn {
           float: right;
           margin: 3px 6px; }
+  .fieldset-curriculo .grid-itens-left .btnsEdicaoObjetivo:not(:empty) {
+    min-width: 85px;
+    text-align: left !important;
+    padding-top: 24px !important; }
+    .fieldset-curriculo .grid-itens-left .btnsEdicaoObjetivo:not(:empty) input[type="image"] {
+      margin-left: 0 !important; }
 .fieldset-curriculo .grid-itens-right {
   border: none !important;
   margin-top: 0 !important; }
@@ -524,6 +559,8 @@
         position: absolute;
         left: -7px;
         top: 6px; }
+  .fieldset-curriculo .grid-itens-right .ul-sugestoes {
+    margin-left: 8px !important; }
 .fieldset-curriculo .grid tr:hover td, .fieldset-curriculo .tbGrid tr:hover td,
 .fieldset-curriculo .grid tr td .grid tr:hover td, .fieldset-curriculo .tbGrid tr td .grid tr:hover td {
   background: transparent !important; }
@@ -549,11 +586,12 @@
     padding: 10px 10px 10px 40px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     line-height: 1.3;
-    background: url("images/sugerir.png") 15px 10px no-repeat;
+    background: url("images/sugerir.png") 15px 8px no-repeat;
     height: auto;
     -moz-transition: all 0.2s ease-out;
     -webkit-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out; }
+    transition: all 0.2s ease-out;
+    background-size: 20px; }
     .fieldset-curriculo .ul-sugestoes li small {
       display: block;
       opacity: 0.75;
@@ -608,16 +646,19 @@
 @media screen and (max-width: 700px) {
   .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid tr {
     display: block;
-    width: 100%; }
+    width: 100%;
+    float: left; }
     .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid tr td {
       display: inline-block; }
       .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid tr td:first-child, .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid tr td:last-child {
         display: block;
-        width: 100%; }
+        width: 100%;
+        float: left; }
         .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid tr td:first-child .btn, .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid tr td:last-child .btn {
           float: left; }
       .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid tr td:not(:first-child):not(:last-child) {
-        float: right; }
+        float: right;
+        width: auto; }
         .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid tr td:not(:first-child):not(:last-child) input[type="image"] {
           position: absolute;
           border-width: 0px;
@@ -856,5 +897,28 @@ div[id*="divTabsListao"] .grid.tbLancamentoAvaliacoes br.responsive-hide {
 .rel-atendimento .questionario-conteudo-resposta-selecao-unica + .questionario-conteudo-resposta-texto-adicional, .rel-atendimento .questionario-resposta .checkbox + .questionario-conteudo-resposta-texto-adicional {
   display: block;
   margin: 5px 0 10px 20px; }
+
+#hd .hplHelp {
+  background: #0163a2;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -ms-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  -webkit-box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+  right: 42px;
+  top: 24px;
+  width: auto !important;
+  height: auto !important;
+  padding: 2px 4px;
+  -moz-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  border: 2px solid transparent;
+  border-top: 0; }
+  #hd .hplHelp:hover {
+    border-color: #0c9ffd; }
 
 /*# sourceMappingURL=new_css.css.map */
