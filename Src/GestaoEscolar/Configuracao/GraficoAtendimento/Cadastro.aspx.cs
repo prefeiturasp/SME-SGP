@@ -137,6 +137,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
                 CarregaFiltrosFixos();
                 CarregaQuestionarios();
+                updFiltro.Update();
             }
             catch (Exception ex)
             {
@@ -520,7 +521,10 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                     UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
                     UCComboRelatorioAtendimento.PermiteEditar = true;
                     if (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE)
-                        ddlFiltroFixo.Items.Add(new ListItem("Detalhamento das deficiências", "5"));
+                    {
+                        if (ddlFiltroFixo.Items.FindByValue("5") == null)
+                            ddlFiltroFixo.Items.Add(new ListItem("Detalhamento das deficiências", "5"));
+                    }
                     else
                         ddlFiltroFixo.Items.Remove(ddlFiltroFixo.Items.FindByValue("5"));
 
