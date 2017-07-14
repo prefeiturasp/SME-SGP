@@ -136,7 +136,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
                     btnNovo.Visible = false;
 
                     // Carrega o combo de relatórios
-                    UCCRelatorioAtendimento.CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo.NAAPA);
+                    UCCRelatorioAtendimento.CarregarPorPermissaoUsuarioTipo(CLS_RelatorioAtendimentoTipo.NAAPA);
                     if (UCCRelatorioAtendimento.QuantidadeItensCombo == 2)
                     {
                         // Seleciona o único item

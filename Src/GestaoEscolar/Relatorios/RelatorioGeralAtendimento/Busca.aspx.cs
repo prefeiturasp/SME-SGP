@@ -315,7 +315,7 @@ namespace GestaoEscolar.Relatorios.RelatorioGeralAtendimento
 
                 if (UCCTipoRelatorioAtendimento.Valor > 0)
                 {
-                    UCCRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)UCCTipoRelatorioAtendimento.Valor);
+                    UCCRelatorioAtendimento.CarregarPorPermissaoUsuarioTipo((CLS_RelatorioAtendimentoTipo)UCCTipoRelatorioAtendimento.Valor);
                     UCCRelatorioAtendimento.PermiteEditar = true;
                     UCCRelatorioAtendimento.Focus();
                 }

@@ -22,6 +22,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:ValidationSummary ID="vsGraficoAtendimento" runat="server" ValidationGroup="vgGraficoAtendimento" />
+    <asp:ValidationSummary runat="server" ID="vsFiltroFixo" ValidationGroup="vgFiltroFixo" />
     <fieldset>
         <legend>
             <asp:Label runat="server" ID="lblLegend" Text="Gráfico de atendimento" />
@@ -38,13 +39,13 @@
                     <asp:ListItem Text="<%$ Resources:Enumerador, CLS_RelatorioAtendimentoBO.CLS_RelatorioAtendimentoTipo.RP %>" Value="3"></asp:ListItem>
                 </asp:DropDownList>
                 <asp:CompareValidator ID="cvTipo" runat="server" ErrorMessage="Tipo de relatório é obrigatório."
-                        ControlToValidate="ddlTipo" Operator="GreaterThan" ValueToCompare="0" Display="Dynamic" 
-                        Text="*" ValidationGroup="vgGraficoAtendimento" />
-                <uc1:UCComboRelatorioAtendimento runat="server" ID="UCComboRelatorioAtendimento" Obrigatorio="true" ValidationGroup="vgGraficoAtendimento"/>
+                    ControlToValidate="ddlTipo" Operator="GreaterThan" ValueToCompare="0" Display="Dynamic"
+                    Text="*" ValidationGroup="vgGraficoAtendimento" />
+                <uc1:UCComboRelatorioAtendimento runat="server" ID="UCComboRelatorioAtendimento" Obrigatorio="true" ValidationGroup="vgGraficoAtendimento" />
                 <br />
                 <br />
                 <asp:Label ID="lblTitulo" runat="server" Text="Título do gráfico *" AssociatedControlID="txtTitulo" />
-                <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>                
+                <asp:TextBox ID="txtTitulo" runat="server" SkinID="text60C" MaxLength="200"></asp:TextBox>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtTitulo" Display="Dynamic" ErrorMessage="Título do gráfico é obrigatório."
                     ValidationGroup="vgGraficoAtendimento">*</asp:RequiredFieldValidator>
                 <div>
@@ -78,10 +79,10 @@
         <asp:UpdatePanel ID="updFiltro" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <fieldset>
+
                     <legend>
                         <asp:Label runat="server" ID="Label1" Text="Filtros fixos" />
                     </legend>
-
                     <asp:Label ID="lblFiltroFixo" runat="server" Text="Tipo de filtro: " AssociatedControlID="ddlFiltroFixo"></asp:Label>
                     <asp:DropDownList ID="ddlFiltroFixo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFiltroFixo_SelectedIndexChanged">
                         <asp:ListItem Text="-- Selecione um tipo de filtro --" Value="0"></asp:ListItem>
@@ -92,29 +93,48 @@
                     </asp:DropDownList>
 
                     <div runat="server" id="divRacaCor" visible="false">
-                        <uc1:UCComboRacaCor runat="server" ID="UCComboRacaCor" />
+                        <uc1:UCComboRacaCor runat="server" ID="UCComboRacaCor" Obrigatorio="true" ValidationGroup="vgFiltroFixo"/>
                     </div>
                     <div runat="server" id="divSexo" visible="false">
-                        <uc1:UCComboSexo runat="server" ID="UCComboSexo" />
+                        <uc1:UCComboSexo runat="server" ID="UCComboSexo" Obrigatorio="true" ValidationGroup="vgFiltroFixo"/>
                     </div>
                     <div runat="server" id="divIdade" visible="false">
                         <asp:Label ID="Label2" runat="server" Text="Idade mínima" AssociatedControlID="txtIdadeInicial" />
                         <asp:TextBox ID="txtIdadeInicial" runat="server" SkinID="Numerico" MaxLength="2"></asp:TextBox>
+                        <asp:CompareValidator ID="cpvIdadeInicial" runat="server" ErrorMessage="Idade mínima deve ser maior ou igual a zero."
+                            ControlToValidate="txtIdadeInicial" Operator="GreaterThanEqual" ValueToCompare="0" Display="Dynamic" ValidationGroup="vgFiltroFixo">*</asp:CompareValidator>
+                        <asp:RequiredFieldValidator ID="rfvIdadeInicial" ControlToValidate="txtIdadeInicial" ValidationGroup="vgFiltroFixo"
+                            runat="server" ErrorMessage="Idade mínima é obrigatório.">*</asp:RequiredFieldValidator>
 
                         <asp:Label ID="Label3" runat="server" Text="Idade máxima" AssociatedControlID="txtIdadeFinal" />
                         <asp:TextBox ID="txtIdadeFinal" runat="server" SkinID="Numerico" MaxLength="2"></asp:TextBox>
+                        <asp:CompareValidator ID="cpvIdadeFinal" runat="server" ErrorMessage="Idade máxima deve ser maior ou igual a zero."
+                            ControlToValidate="txtIdadeFinal" Operator="GreaterThanEqual" ValueToCompare="0" Display="Dynamic" ValidationGroup="vgFiltroFixo">*</asp:CompareValidator>
+                        <asp:RequiredFieldValidator ID="rfvIdadeFinal" ControlToValidate="txtIdadeFinal" ValidationGroup="vgFiltroFixo"
+                            runat="server" ErrorMessage="Idade máxima é obrigatório.">*</asp:RequiredFieldValidator>
+
                     </div>
                     <div runat="server" id="divDataPreenchimento" visible="false">
+
                         <asp:Label ID="Label4" runat="server" Text="Data inicial" AssociatedControlID="txtDtInicial" />
                         <asp:TextBox ID="txtDtInicial" runat="server" MaxLength="10" SkinID="Data"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvDtInicial" ControlToValidate="txtDtInicial" ValidationGroup="vgFiltroFixo"
+                            runat="server" ErrorMessage="Data inicial é obrigatório.">*</asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="cvDtInicial" runat="server" ControlToValidate="txtDtInicial" ErrorMessage="Data inicial é inválida." Display="Dynamic" OnServerValidate="ValidarData_ServerValidate"
+                            ValidationGroup="vgFiltroFixo">*</asp:CustomValidator>
 
                         <asp:Label ID="Label5" runat="server" Text="Data final" AssociatedControlID="txtDtFinal" />
                         <asp:TextBox ID="txtDtFinal" runat="server" MaxLength="10" SkinID="Data"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvDtFinal" ControlToValidate="txtDtFinal" ValidationGroup="vgFiltroFixo"
+                            runat="server" ErrorMessage="Data final é obrigatório.">*</asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="vdDtFinal" runat="server" ControlToValidate="txtDtFinal" ErrorMessage="Data final é inválida." Display="Dynamic" OnServerValidate="ValidarData_ServerValidate"
+                            ValidationGroup="vgFiltroFixo">*</asp:CustomValidator>
+
                     </div>
                     <div runat="server" id="divDetalhamentoDeficiencia" visible="false">
 
                         <!-- Tipo de deficiencia -->
-                        <uc1:ComboTipoDeficiencia runat="server" ID="ComboTipoDeficiencia" />
+                        <uc1:ComboTipoDeficiencia runat="server" ID="ComboTipoDeficiencia" Obrigatorio="true" />
                         <!-- Detalhamento -->
 
                         <div runat="server" id="divDetalhes" visible="false">
@@ -125,7 +145,7 @@
                     </div>
                     <div id="divBotoesFiltro" runat="server" class="right" visible="false">
                         <asp:Button ID="btnAdicionarFiltro" runat="server" Text="Adicionar filtro"
-                            OnClick="btnAdicionarFiltro_Click" />
+                            OnClick="btnAdicionarFiltro_Click" ValidationGroup="vgFiltroFixo" />
                         <asp:Button ID="btnCancelarFiltro" runat="server" Text="Cancelar filtro" CausesValidation="false"
                             OnClick="btnCancelarFiltro_Click" />
                     </div>
@@ -164,13 +184,15 @@
                                     </td>
                                     <td style="padding-left: 5px">
                                         <asp:Label ID="Label6" runat="server" Text="Pergunta" AssociatedControlID="ddlPergunta"></asp:Label>
-                                        <asp:DropDownList ID="ddlPergunta" runat="server" OnSelectedIndexChanged="ddlPergunta_SelectedIndexChanged" AutoPostBack="true" Enabled="false">
+                                        <asp:DropDownList ID="ddlPergunta" runat="server"
+                                            OnSelectedIndexChanged="ddlPergunta_SelectedIndexChanged" AutoPostBack="true" Enabled="false"
+                                            SkinID="text60C">
                                             <asp:ListItem Text="-- Selecione uma pergunta --" Value="-1"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
                                     <td style="padding-left: 5px">
                                         <asp:Label ID="Label7" runat="server" Text="Resposta" AssociatedControlID="ddlResposta"></asp:Label>
-                                        <asp:DropDownList ID="ddlResposta" runat="server" Enabled="false">
+                                        <asp:DropDownList ID="ddlResposta" runat="server" Enabled="false" SkinID="text60C">
                                             <asp:ListItem Text="-- Selecione uma resposta --" Value="-1"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>

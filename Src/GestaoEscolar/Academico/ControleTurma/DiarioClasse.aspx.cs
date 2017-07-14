@@ -2697,7 +2697,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             //Não vai exibir o lançamento de objetos de aprendizagem ainda
-            DataTable dtCampos = new DataTable();// CLS_ObjetoAprendizagemTurmaDisciplinaBO.SelecionaObjTudTpc(VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id);
+            DataTable dtCampos = CLS_ObjetoAprendizagemTurmaDisciplinaBO.SelecionaObjTudTpc(VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id);
             divObjetosAprendizagem.Visible = dtCampos.Rows.Count > 0;
             if (divObjetosAprendizagem.Visible)
             {

@@ -137,6 +137,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
 
                 CarregaFiltrosFixos();
                 CarregaQuestionarios();
+                updFiltro.Update();
             }
             catch (Exception ex)
             {
@@ -155,7 +156,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 REL_GraficoAtendimentoTipo tipoGrafico;
                 Enum.TryParse(ddlTipoGrafico.SelectedValue, out tipoGrafico);
-                                
+
                 if (REL_GraficoAtendimentoBO.GetBy_titulo(txtTitulo.Text).AsEnumerable().Any(g => Convert.ToInt32(g["gra_id"]) != VS_gra_id))
                     throw new ValidationException("Já existe um gráfico de atendimento cadastrado com este título.");
 
@@ -394,6 +395,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                             throw new ValidationException("Data inicial é obrigatório.");
                         if (String.IsNullOrEmpty(txtDtFinal.Text))
                             throw new ValidationException("Data final é obrigatório.");
+                        DateTime dtInicial, dtFinal;
+                        if (DateTime.TryParse(txtDtInicial.Text, out dtInicial) && DateTime.TryParse(txtDtFinal.Text, out dtFinal))
+                        {
+                            if (dtInicial >= dtFinal)
+                                throw new ValidationException("Data inicial deve ser menor que a data final.");
+                        }
+                        else
+                            throw new ValidationException("Data inválida.");
                         break;
                     case 2:
                         if (UCComboRacaCor.Valor <= 0)
@@ -404,6 +413,14 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                             throw new ValidationException("Idade mínima é obrigatório.");
                         if (String.IsNullOrEmpty(txtIdadeFinal.Text))
                             throw new ValidationException("Idade máxima é obrigatório.");
+                        int idMin, idMax;
+                        if (Int32.TryParse(txtIdadeInicial.Text, out idMin) && Int32.TryParse(txtIdadeFinal.Text, out idMax))
+                        {
+                            if (idMin >= idMax)
+                                throw new ValidationException("Idade mínima deve ser menor que idade máxima.");
+                        }
+                        else
+                            throw new ValidationException("Idade inválida.");
                         break;
                     case 4:
                         if (UCComboSexo.Valor <= 0)
@@ -501,18 +518,23 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 if (Convert.ToInt32(ddlTipo.SelectedValue) > 0)
                 {
-                    UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
+                    UCComboRelatorioAtendimento.CarregarPorPermissaoUsuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipo.SelectedValue));
                     UCComboRelatorioAtendimento.PermiteEditar = true;
                     if (Convert.ToByte(ddlTipo.SelectedValue) == (byte)CLS_RelatorioAtendimentoTipo.AEE)
-                        ddlFiltroFixo.Items.Add(new ListItem("Detalhamento das deficiências", "5"));
+                    {
+                        if (ddlFiltroFixo.Items.FindByValue("5") == null)
+                            ddlFiltroFixo.Items.Add(new ListItem("Detalhamento das deficiências", "5"));
+                    }
                     else
-                        ddlFiltroFixo.Items.Remove(new ListItem("Detalhamento das deficiências", "5"));
+                        ddlFiltroFixo.Items.Remove(ddlFiltroFixo.Items.FindByValue("5"));
 
                     updFiltro.Update();
                 }
                 else
                 {
                     UCComboRelatorioAtendimento.PermiteEditar = false;
+                    ddlFiltroFixo.Items.Remove(ddlFiltroFixo.Items.FindByValue("5"));
+                    updFiltro.Update();
                 }
                 UCComboRelatorioAtendimento.SelectedIndex = 0;
                 UCComboRelatorioAtendimento_SelectedIndexChanged();
@@ -681,7 +703,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             {
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
-                {                    
+                {
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
                     btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar;
                 }
@@ -778,14 +800,18 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 if (VS_lstFiltrosFixos.Any(p => p.gff_tipoFiltro == Convert.ToByte(ddlFiltroFixo.SelectedValue)))
                     throw new ValidationException(string.Format("Este tipo de filtro já existe."));
 
-                VS_lstFiltrosFixos.Add(REL_GraficoAtendimento_FiltrosFixosBO.GetEntityDetalhado(new REL_GraficoAtendimento_FiltrosFixos
+                REL_GraficoAtendimento_FiltrosFixos gff = new REL_GraficoAtendimento_FiltrosFixos
                 {
                     gra_id = VS_gra_id,
                     gff_tipoFiltro = Convert.ToByte(ddlFiltroFixo.SelectedValue),
                     gff_valorFiltro = RetornaValorFiltroFixo(Convert.ToByte(ddlFiltroFixo.SelectedValue)),
                     IsNew = true
-                }));
+                };
 
+                gff.gff_tituloFiltro = REL_GraficoAtendimento_FiltrosFixosBO.RetornaTituloFiltro(gff.gff_tipoFiltro);
+                gff.gff_valorDetalhado = REL_GraficoAtendimento_FiltrosFixosBO.RetornaValorDetalhado((REL_GraficoAtendimentoFiltrosFixos)gff.gff_tipoFiltro, gff.gff_valorFiltro);
+
+                VS_lstFiltrosFixos.Add(gff);
 
                 VS_lstFiltrosFixos = VS_lstFiltrosFixos.OrderBy(q => q.gff_tipoFiltro).ToList();
 
@@ -799,11 +825,13 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             }
             catch (ValidationException ex)
             {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao adicionar filtro fixo.", UtilBO.TipoMensagem.Erro);
             }
         }

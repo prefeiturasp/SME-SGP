@@ -37,7 +37,7 @@ namespace MSTech.GestaoEscolar.BLL
         [Description("REL_GraficoAtendimentoBO.REL_GraficoAtendimentoEixoAgrupamento.PeridoCurso")]
         PeridoCurso = 3
     }
-    
+
     public enum REL_GraficoAtendimentoFiltrosFixos : byte
     {
         [Description("REL_GraficoAtendimentoBO.REL_GraficoAtendimentoFiltrosFixos.PeriodoPreenchimento")]
@@ -66,7 +66,7 @@ namespace MSTech.GestaoEscolar.BLL
     /// Description: REL_GraficoAtendimento Business Object. 
     /// </summary>
     public class REL_GraficoAtendimentoBO : BusinessBase<REL_GraficoAtendimentoDAO, REL_GraficoAtendimento>
-	{
+    {
         /// <summary>
         /// 
         /// </summary>
@@ -180,7 +180,11 @@ namespace MSTech.GestaoEscolar.BLL
                 //Salva filtros fixos
                 foreach (REL_GraficoAtendimento_FiltrosFixos gff in lstFiltrosFixos)
                 {
-                    gff.gra_id = entity.gra_id;                    
+                    gff.gra_id = entity.gra_id;
+
+                    if (lstFiltrosFixosBanco.Any(f => f.gff_tipoFiltro == gff.gff_tipoFiltro))
+                        gff.IsNew = false;
+
                     if (!REL_GraficoAtendimento_FiltrosFixosBO.Save(gff, dao._Banco))
                         return false;
                 }
@@ -193,16 +197,17 @@ namespace MSTech.GestaoEscolar.BLL
                     gfp = new REL_GraficoAtendimento_FiltrosPersonalizados
                     {
                         qtr_id = qcr.qtr_id
-                        , gra_id = entity.gra_id
+                        ,
+                        gra_id = entity.gra_id
                     };
-                    
+
                     lstFiltrosPersonalizados.Add(gfp);
-                   
-                    if (!lstFiltrosPersonalizadosBanco.Any(f=> f.qtr_id == gfp.qtr_id))
-                    if (!REL_GraficoAtendimento_FiltrosPersonalizadosBO.Save(gfp, dao._Banco))
-                        return false;
+
+                    if (!lstFiltrosPersonalizadosBanco.Any(f => f.qtr_id == gfp.qtr_id))
+                        if (!REL_GraficoAtendimento_FiltrosPersonalizadosBO.Save(gfp, dao._Banco))
+                            return false;
                 }
-                
+
                 //Remove logicamente no banco os filtros fixos e personalizados que foram removidos do gráfico
                 foreach (REL_GraficoAtendimento_FiltrosFixos gffB in lstFiltrosFixosBanco)
                     if (!lstFiltrosFixos.Any(f => f.gff_tipoFiltro == gffB.gff_tipoFiltro))
@@ -214,7 +219,7 @@ namespace MSTech.GestaoEscolar.BLL
                     {
                         REL_GraficoAtendimento_FiltrosPersonalizadosBO.Delete(gfpB, dao._Banco);
                     }
-                
+
                 return true;
             }
             catch (Exception err)

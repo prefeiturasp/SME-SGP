@@ -265,7 +265,7 @@ namespace GestaoEscolar.WebControls.Combos
             ddlCombo.Focus();
         }
 
-        public void CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo rea_tipo)
+        public void CarregarPorPermissaoUsuarioTipo(CLS_RelatorioAtendimentoTipo rea_tipo)
         {
             try
             {

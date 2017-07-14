@@ -2478,6 +2478,13 @@
     <Compile Include="WebControls\Combos\UCComboServico.ascx.designer.cs">
       <DependentUpon>UCComboServico.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\Combos\UCComboSondagem.ascx.cs">
+      <DependentUpon>UCComboSondagem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboSondagem.ascx.designer.cs">
+      <DependentUpon>UCComboSondagem.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\Combos\UCComboTipoAvisoTextoGeral.ascx.cs">
       <DependentUpon>UCComboTipoAvisoTextoGeral.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3466,12 +3473,9 @@
     <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\logo-quadro-horario-full.png" />
     <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\logo-quadro-horario.png" />
     <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\logo-remocao.png" />
-    <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\logo-rio-educacao.png" />
-    <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\logo-rioeduca.png" />
     <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\logo-transporteescolar-full.png" />
     <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\logo-transporteescolar.png" />
     <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\LOGO_CLIENTE.png" />
-    <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\LOGO_CLIENTE_.png" />
     <Content Include="App_Themes\IntranetSMEBootStrap\images\logos\LOGO_GERAL_SISTEMA.png" />
     <Content Include="App_Themes\IntranetSMEBootStrap\images\mcdropdown\mcdd_icon_hover.gif" />
     <Content Include="App_Themes\IntranetSMEBootStrap\images\mcdropdown\mcdd_icon_normal.gif" />
@@ -4509,6 +4513,7 @@
     <Content Include="WebControls\Combos\UCComboQuestionario.ascx" />
     <Content Include="WebControls\Combos\UCComboRelatorioAtendimento.ascx" />
     <Content Include="WebControls\Combos\UCComboServico.ascx" />
+    <Content Include="WebControls\Combos\UCComboSondagem.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoAvisoTextoGeral.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoCiclo.ascx" />
     <Content Include="WebControls\Combos\UCComboTipoClassificacaoEscola.ascx" />

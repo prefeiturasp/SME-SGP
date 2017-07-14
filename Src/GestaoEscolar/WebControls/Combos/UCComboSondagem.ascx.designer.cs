@@ -9,25 +9,25 @@
 
 
 
-public partial class WebControls_Combos_UCComboRacaCor {
+public partial class WebControls_Combos_UCComboSondagem {
     
     /// <summary>
-    /// LabelRacaCor control.
+    /// lblSondagem control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Label LabelRacaCor;
+    protected global::System.Web.UI.WebControls.Label lblSondagem;
     
     /// <summary>
-    /// _ddlRacaCor control.
+    /// ddlCombo control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DropDownList _ddlRacaCor;
+    protected global::System.Web.UI.WebControls.DropDownList ddlCombo;
     
     /// <summary>
     /// cpvCombo control.
@@ -37,4 +37,13 @@ public partial class WebControls_Combos_UCComboRacaCor {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.CompareValidator cpvCombo;
+    
+    /// <summary>
+    /// lblMessage control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label lblMessage;
 }

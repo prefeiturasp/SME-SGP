@@ -33,36 +33,18 @@ namespace MSTech.GestaoEscolar.BLL
     public class REL_GraficoAtendimento_FiltrosFixosBO : BusinessBase<REL_GraficoAtendimento_FiltrosFixosDAO, REL_GraficoAtendimento_FiltrosFixos>
     {
 
-        public new static REL_GraficoAtendimento_FiltrosFixos GetEntityDetalhado(REL_GraficoAtendimento_FiltrosFixos entity)
+        public static REL_GraficoAtendimento_FiltrosFixos GetEntityDetalhado(REL_GraficoAtendimento_FiltrosFixos entity)
         {
             GetEntity(entity);
 
-            switch (entity.gff_tipoFiltro)
-            {
-                case (byte)REL_GraficoAtendimentoFiltrosFixos.DetalheDeficiencia:
-                    entity.gff_tituloFiltro = "Detalhamento das deficiências";
-                    break;
-                case (byte)REL_GraficoAtendimentoFiltrosFixos.FaixaIdade:
-                    entity.gff_tituloFiltro = "Faixa de idade";
-                    break;
-                case (byte)REL_GraficoAtendimentoFiltrosFixos.Sexo:
-                    entity.gff_tituloFiltro = "Sexo";
-                    break;
-                case (byte)REL_GraficoAtendimentoFiltrosFixos.PeriodoPreenchimento:
-                    entity.gff_tituloFiltro = "Período do preenchimento do relatório";
-                    break;
-                case (byte)REL_GraficoAtendimentoFiltrosFixos.RacaCor:
-                    entity.gff_tituloFiltro = "Raça/Cor";
-                    break;
-                default:
-                    break;
-            }
+            entity.gff_tituloFiltro = RetornaTituloFiltro(entity.gff_tipoFiltro);
+
             entity.gff_valorDetalhado = RetornaValorDetalhado((REL_GraficoAtendimentoFiltrosFixos)entity.gff_tipoFiltro, entity.gff_valorFiltro);
 
             return entity;
         }
 
-        public new static string RetornaValorDetalhado(REL_GraficoAtendimentoFiltrosFixos tipoFiltro, string valor)
+        public static string RetornaValorDetalhado(REL_GraficoAtendimentoFiltrosFixos tipoFiltro, string valor)
         {
             string[] codDetalhe = valor.Split(',');
             string retorno = string.Empty;
@@ -79,7 +61,7 @@ namespace MSTech.GestaoEscolar.BLL
                     codDetalhe = valoresDetalhados.ToArray();
 
                     if (codDetalhe.Length == 1) retorno = codDetalhe[0];
-                    else if (codDetalhe.Length == 2) retorno = codDetalhe[0] + " ou " + codDetalhe[1];
+                    else if (codDetalhe.Length == 2) retorno = codDetalhe[0] + " e " + codDetalhe[1];
                     else if (codDetalhe.Length >= 3)
                     {
 
@@ -87,7 +69,7 @@ namespace MSTech.GestaoEscolar.BLL
                         Array.Copy(codDetalhe, 0, concat, 0, codDetalhe.Length - 1);
 
                         retorno = string.Join(", ", concat);
-                        retorno += " ou " + codDetalhe[codDetalhe.Length - 1];
+                        retorno += " e " + codDetalhe[codDetalhe.Length - 1];
                     }
                     else retorno = string.Empty;
                     break;
@@ -107,6 +89,25 @@ namespace MSTech.GestaoEscolar.BLL
                     break;
             }
             return retorno;
+        }
+
+        public static String RetornaTituloFiltro(byte tipoFiltro)
+        {
+            switch (tipoFiltro)
+            {
+                case (byte)REL_GraficoAtendimentoFiltrosFixos.DetalheDeficiencia:
+                    return "Detalhamento das deficiências";
+                case (byte)REL_GraficoAtendimentoFiltrosFixos.FaixaIdade:
+                    return "Faixa de idade";
+                case (byte)REL_GraficoAtendimentoFiltrosFixos.Sexo:
+                    return "Sexo";
+                case (byte)REL_GraficoAtendimentoFiltrosFixos.PeriodoPreenchimento:
+                    return "Período do preenchimento do relatório";
+                case (byte)REL_GraficoAtendimentoFiltrosFixos.RacaCor:
+                    return "Raça/Cor";
+                default:
+                    return String.Empty;
+            }
         }
 
         public static List<REL_GraficoAtendimento_FiltrosFixos> RetornaListaDetalhada(List<REL_GraficoAtendimento_FiltrosFixos> lstFiltrosFixos)

@@ -66,7 +66,7 @@ SET XACT_ABORT ON
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
 		,@nomeModuloAvo = 'Relatórios' -- Nome do módulo avó (Opcional, apenas quando houver) 
-		,@nomeModuloPai = 'Gestor' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModuloPai = 'Relatórios de atendimento' -- Nome do módulo pai (Opcional, apenas quando houver)
 		,@nomeModulo = 'Ações realizadas' -- Nome do módulo (Obrigatório)
 		,@SiteMap1Nome = 'Relatórios de ações realizadas'
 		,@SiteMap1Url = '~/Relatorios/AcoesRealizadas/Busca.aspx'
@@ -154,19 +154,68 @@ SET XACT_ABORT ON
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+				
+	-- ALTERAÇÃO DE MENU E NOME 
+	DECLARE @mod_idRegistroClasse int
+				set @mod_idRegistroClasse = (select mod_id from SYS_Modulo where mod_nome = 'Registro de classe' and sis_id = 102)
+	UPDATE SYS_Modulo
+		SET mod_nome = 'Registro de sugestões de currículo' , mod_idPai = @mod_idRegistroClasse , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Registro de sugestões' and sis_id = 102
+		
+	-- ALTERAÇÃO DE MENU
+	DECLARE @mod_idConfiguracoes int
+				set @mod_idConfiguracoes = (select mod_id from SYS_Modulo where mod_nome = 'Configurações' and sis_id = 102)
+	UPDATE SYS_Modulo
+		SET mod_idPai = @mod_idConfiguracoes , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Cadastro de currículo' and sis_id = 102
+	
 	-- EXCLUSÃO DO MENU "CURRÍCULO"
 	EXEC MS_RemovePaginaMenu
 		@nomeSistema = @nomeSistema 
 		,@NomeModulo = 'Currículo'
 		,@nomeModuloPai = 'Administração'
-	-- ALTERAÇÃO DE MENU E NOME 	
+		
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL  -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Relatórios' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Gerais' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = NULL 
+		,@SiteMap1Url = NULL 
+		,@SiteMap2Nome = NULL 
+		,@SiteMap2Url = NULL 
+		,@SiteMap3Nome = NULL 
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 1 -- Indicar se possui visão de individual
+		
+	-- ALTERAÇÕES MENU 
+	DECLARE @mod_idGerais int
+				set @mod_idGerais = (select mod_id from SYS_Modulo where mod_nome = 'Gerais' and sis_id = 102)
+	DECLARE @mod_idPaiAntigogestor int
+				set @mod_idPaiAntigogestor = (select mod_id from SYS_Modulo where mod_nome = 'Gestor' and sis_id = 102)
+
 	UPDATE SYS_Modulo
-		SET mod_nome = 'Registro de sugestões de currículo' , mod_idPai = 4 , mod_dataAlteracao = GETDATE()
-		WHERE mod_id = 316
-	-- ALTERAÇÃO DE MENU
+		SET mod_idPai = @mod_idGerais , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Consulta da versão do aplicativo SGP tablet' and sis_id = 102 and mod_idPai = @mod_idPaiAntigogestor
+
 	UPDATE SYS_Modulo
-		SET mod_idPai = 310 , mod_dataAlteracao = GETDATE()
-		WHERE mod_id = 317
+		SET mod_idPai = @mod_idGerais , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Objetos de conhecimento' and sis_id = 102 and mod_idPai = @mod_idPaiAntigogestor
+
+	UPDATE SYS_Modulo
+		SET mod_idPai = @mod_idGerais , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Análise de sondagem' and sis_id = 102 and mod_idPai = @mod_idPaiAntigogestor
+
+	UPDATE SYS_Modulo
+		SET mod_idPai = @mod_idGerais , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Sugestões de currículos' and sis_id = 102 and mod_idPai = @mod_idPaiAntigogestor
+	
+	UPDATE SYS_Modulo
+		SET mod_idPai = @mod_idGerais , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Quantitativo de sugestões de currículos' and sis_id = 102 and mod_idPai = @mod_idPaiAntigogestor
 
 -- Fechar transação
 SET XACT_ABORT OFF
