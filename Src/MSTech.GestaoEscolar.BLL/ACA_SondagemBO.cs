@@ -16,7 +16,7 @@ namespace MSTech.GestaoEscolar.BLL
     using Validation.Exceptions;
     using System.Collections.Generic;
     using CustomResourceProviders;
-    
+
     #region Enumeradores
 
     /// <summary>
@@ -85,7 +85,7 @@ namespace MSTech.GestaoEscolar.BLL
     #endregion Estruturas
 
     public class ACA_SondagemBO : BusinessBase<ACA_SondagemDAO, ACA_Sondagem>
-	{
+    {
         /// <summary>
         /// Salva a sondagem
         /// </summary>
@@ -112,13 +112,13 @@ namespace MSTech.GestaoEscolar.BLL
                 //Carrega as respostas ligadas à sondagem (se for uma sondagem que já existe)
                 List<ACA_SondagemResposta> lstRespostaBanco = entity.IsNew ? new List<ACA_SondagemResposta>() :
                                                               ACA_SondagemRespostaBO.SelectRespostasBy_Sondagem(entity.snd_id, dao._Banco);
-                
+
                 //Salva a sondagem
                 if (!dao.Salvar(entity))
                     return false;
 
                 LimpaCache(entity);
-                
+
                 //Salva questões
                 foreach (ACA_SondagemQuestao sdq in lstQuestao)
                 {
@@ -143,7 +143,7 @@ namespace MSTech.GestaoEscolar.BLL
 
                 //Remove logicamente no banco as questões e sub-questões que foram removidas da sondagem
                 foreach (ACA_SondagemQuestao sdqB in lstQuestaoBanco)
-                    if (!lstQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido) && 
+                    if (!lstQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido) &&
                         !lstSubQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido))
                     {
                         ACA_SondagemQuestaoBO.Delete(sdqB, dao._Banco);
@@ -165,7 +165,7 @@ namespace MSTech.GestaoEscolar.BLL
                     {
                         ACA_SondagemRespostaBO.Delete(sdrB, dao._Banco);
                     }
-                
+
                 return true;
             }
             catch (Exception err)
@@ -274,6 +274,26 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna todas as sondagens ativas.
+        /// </summary>
+        /// <returns></returns>
+        public static List<ACA_Sondagem> SelecionaSondagemAtiva()
+        {
+            ACA_SondagemDAO dao = new ACA_SondagemDAO();
+
+            DataTable dtSondagem = dao.SelectBy_Ativas();
+
+            List<ACA_Sondagem> retorno = new List<ACA_Sondagem>();
+
+            if (dtSondagem.Rows.Count > 0)
+            {
+                retorno = dtSondagem.Rows.Cast<DataRow>().Select(p => (ACA_Sondagem)GestaoEscolarUtilBO.DataRowToEntity(p, new ACA_Sondagem())).ToList();
+            }
+            return retorno;
+
+        }
+
+        /// <summary>
         /// Deleta logicamente uma sondagem
         /// </summary>
         /// <param name="entity">Entidade ACA_Sondagem</param>        
@@ -299,7 +319,7 @@ namespace MSTech.GestaoEscolar.BLL
                 //Verifica se a disciplina pode ser deletada
                 if (GestaoEscolarUtilBO.VerificarIntegridade("snd_id", entity.snd_id.ToString(), tabelasNaoVerificarIntegridade, dao._Banco))
                     throw new ValidationException("Não é possível excluir a sondagem " + entity.snd_titulo + ", pois possui outros registros ligados a ela.");
-                
+
                 LimpaCache(entity);
 
                 //Deleta logicamente a disciplina

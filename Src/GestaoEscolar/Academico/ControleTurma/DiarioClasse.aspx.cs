@@ -1813,7 +1813,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 lblDataAula.Text = "<b>Aula:</b> " + strDataAula;
 
                 bool permiteEditar = (VS_permissaoAlteracao && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
-                                        && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao)) 
+                                        && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao))
                                         || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoEdicao);
 
                 if (permiteEditar)
@@ -1911,7 +1911,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                UCNavegacaoTelaPeriodo.VS_tpc_id,
                                VS_tipoDocente,
                                false,
-                               UCNavegacaoTelaPeriodo.cap_dataInicio, 
+                               UCNavegacaoTelaPeriodo.cap_dataInicio,
                                UCNavegacaoTelaPeriodo.cap_dataFim,
                                ApplicationWEB.AppMinutosCacheMedio,
                                tur_ids
@@ -2696,7 +2696,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             //Não vai exibir o lançamento de objetos de aprendizagem ainda
-            DataTable dtCampos = new DataTable();// CLS_ObjetoAprendizagemTurmaDisciplinaBO.SelecionaObjTudTpc(VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id);
+            DataTable dtCampos = CLS_ObjetoAprendizagemTurmaDisciplinaBO.SelecionaObjTudTpc(VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id);
             divObjetosAprendizagem.Visible = dtCampos.Rows.Count > 0;
             if (divObjetosAprendizagem.Visible)
             {
@@ -3550,7 +3550,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             try
             {
                 bool permiteEditar = (VS_permissaoAlteracao && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
-                                        && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao)) 
+                                        && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao))
                                         || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoEdicao);
                 if (permiteEditar)
                 {
@@ -4780,7 +4780,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 // Apenas aulas dos dias anteriores sem plano de aula devem exibir o aviso.
                 Image imgSemPlanoAula = (Image)grvAulas.Rows[VS_grvRow].FindControl("imgSemPlanoAula");
-                if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date && 
+                if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
                     imgSemPlanoAula.Visible = string.IsNullOrEmpty(entity.tau_planoAula)
@@ -5093,11 +5093,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (hdnId != null)
                     {
                         lstObjTudTau.Add(new CLS_ObjetoAprendizagemTurmaAula
-                                            {
-                                                tud_id = VS_tud_id_Aula,
-                                                tau_id = VS_tau_id,
-                                                oap_id = Convert.ToInt32(hdnId.Value)
-                                            });
+                        {
+                            tud_id = VS_tud_id_Aula,
+                            tau_id = VS_tau_id,
+                            oap_id = Convert.ToInt32(hdnId.Value)
+                        });
                     }
                 }
             }
@@ -6121,7 +6121,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     Image imgSemPlanoAula = (Image)e.Row.FindControl("imgSemPlanoAula");
                     if (imgSemPlanoAula != null && dataAula.Date < DateTime.Now.Date &&
                         UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
-                    { 
+                    {
                         imgSemPlanoAula.Visible = semPlanoAula
                                                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
@@ -6321,7 +6321,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         chkEfetivado.Enabled &= permiteEditar;
                     }
 
-                    chkEfetivado.Enabled &= ((usuarioPermissao && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao)) 
+                    chkEfetivado.Enabled &= ((usuarioPermissao && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao))
                                                 || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoEdicao)) && VS_Periodo_Aberto;//&& permissaoAlteracao;
                 }
             }
@@ -6930,7 +6930,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 UCNavegacaoTelaPeriodo.VS_tpc_id,
                                 VS_tipoDocente,
                                 false,
-                                UCNavegacaoTelaPeriodo.cap_dataInicio, 
+                                UCNavegacaoTelaPeriodo.cap_dataInicio,
                                 UCNavegacaoTelaPeriodo.cap_dataFim,
                                 ApplicationWEB.AppMinutosCacheMedio,
                                 tur_ids
@@ -7443,7 +7443,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                UCNavegacaoTelaPeriodo.VS_tpc_id,
                                VS_tipoDocente,
                                false,
-                               UCNavegacaoTelaPeriodo.cap_dataInicio, 
+                               UCNavegacaoTelaPeriodo.cap_dataInicio,
                                UCNavegacaoTelaPeriodo.cap_dataFim,
                                ApplicationWEB.AppMinutosCacheMedio,
                                tur_ids
@@ -7924,7 +7924,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         protected void grvAulas_DataBound(object sender, EventArgs e)
         {
             grvAulas.Columns[grvAulas_ColunaExcluirAula].Visible = ((__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoExclusao))
-                                                                    || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoExclusao)) 
+                                                                    || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoExclusao))
                                                                     && !VS_PeriodoEfetivado;
         }
 

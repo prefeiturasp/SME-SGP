@@ -132,8 +132,8 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Plano de aula">
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="btnPlanoAula" runat="server" SkinID="btAulas" CommandArgument='<%# Container.DataItemIndex %>' CommandName="PlanoAula" ToolTip="Adicionar ou editar o plano de aula" 
-                                           style="height:20px;width:20px;border-width:0px;"/>
+                                        <asp:ImageButton ID="btnPlanoAula" runat="server" SkinID="btAulas" CommandArgument='<%# Container.DataItemIndex %>' CommandName="PlanoAula" ToolTip="Adicionar ou editar o plano de aula"
+                                            Style="height: 20px; width: 20px; border-width: 0px;" />
                                         <asp:Image ID="imgPlanoAulaSituacao" runat="server" SkinID="imgConfirmar" ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.imgPlanoAulaSituacao %>"
                                             Width="16px" Height="16px" Visible="false" ImageAlign="Top" />
                                         <asp:Image ID="imgPlanoAulaSituacaoIncompleta" runat="server" SkinID="imgConfirmarAmarelo" Visible="false"
@@ -183,7 +183,7 @@
                         </div>
                         <div id="divAvisoAulaSemPlano" runat="server" style="float: left; width: 100%;" visible="false">
                             <asp:Image ID="imgLegendaAvisoAulaSemPlano" runat="server" SkinID="imgAviso"
-                                ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>" Width="18px" Height="18px" ImageAlign="AbsMiddle"/>
+                                ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>" Width="18px" Height="18px" ImageAlign="AbsMiddle" />
                             <asp:Literal ID="lit3" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>"></asp:Literal>
                         </div>
 
@@ -275,9 +275,9 @@
                                                             <asp:Label ID="lbltau_id" runat="server" Text='<%#Bind("tau_id") %>' Visible="false">
                                                             </asp:Label>
                                                             <asp:HiddenField ID="hdnPosicao" runat="server" Value='<%#Bind("tdt_posicao") %>' />
-                                                            <asp:Label ID="lbltnt_data" runat="server" Text='Ausência' style="display:none;">
+                                                            <asp:Label ID="lbltnt_data" runat="server" Text='Ausência' Style="display: none;">
                                                             </asp:Label>
-                                                            <asp:CheckBox ID="chkEfetivado" runat="server" Text="Efetivado" style="text-align:center;" />
+                                                            <asp:CheckBox ID="chkEfetivado" runat="server" Text="Efetivado" Style="text-align: center;" />
                                                         </td>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -390,9 +390,9 @@
                                                             <asp:Label ID="lbltau_id" runat="server" Text='<%#Bind("tau_id") %>' Visible="false">
                                                             </asp:Label>
                                                             <asp:HiddenField ID="hdnPosicao" runat="server" Value='<%#Bind("tdt_posicao") %>' />
-                                                            <asp:Label ID="lbltnt_data" runat="server" Text='Ausência' style="display:none;">
+                                                            <asp:Label ID="lbltnt_data" runat="server" Text='Ausência' Style="display: none;">
                                                             </asp:Label>
-                                                            <asp:CheckBox ID="chkEfetivado" runat="server" Text="Efetivado" style="text-align:center;"/>
+                                                            <asp:CheckBox ID="chkEfetivado" runat="server" Text="Efetivado" Style="text-align: center;" />
                                                         </th>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -804,8 +804,8 @@
                                                                 <asp:Label ID="lblUsuIdAtiv" runat="server" Text='<%#Bind("usu_id") %>' Visible="false"></asp:Label>
 
                                                                 <div style="display: inline-block; width: 100%;">
-                                                                    <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("tnt_nome") %>' style="display:none;"></asp:Label>
-                                                                    <asp:Label ID="lbltnt_data" runat="server" Text='<%#Bind("tnt_data") %>' style="display:none;"></asp:Label>
+                                                                    <asp:Label ID="lblAtividade" runat="server" Text='<%#Bind("tnt_nome") %>' Style="display: none;"></asp:Label>
+                                                                    <asp:Label ID="lbltnt_data" runat="server" Text='<%#Bind("tnt_data") %>' Style="display: none;"></asp:Label>
                                                                     <div style="text-align: center; display: none;">
                                                                         <asp:ImageButton ID="btnExcluirAtividadePopup" runat="server" CausesValidation="false"
                                                                             ToolTip='<%#"Excluir " + MSTech.GestaoEscolar.BLL.GestaoEscolarUtilBO.nomePadraoAtividadeAvaliativa(__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower() + " \"" + Eval("tnt_nome") + "\"" %>'
@@ -815,7 +815,7 @@
                                                                             ToolTip='<%#"Editar " + MSTech.GestaoEscolar.BLL.GestaoEscolarUtilBO.nomePadraoAtividadeAvaliativa(__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower() + " \"" + Eval("tnt_nome") + "\"" %>'
                                                                             SkinID="btEditar" Style="display: inline-block; vertical-align: middle;" OnClick="btnEditarAtividadePopup_Click" Visible="false" />
                                                                     </div>
-                                                                    <asp:CheckBox ID="chkEfetivado" runat="server" Text="Efetivado" style="text-align: center;" />
+                                                                    <asp:CheckBox ID="chkEfetivado" runat="server" Text="Efetivado" Style="text-align: center;" />
                                                                 </div>
                                                             </td>
                                                         </ItemTemplate>
@@ -843,7 +843,7 @@
                                                         <asp:Label ID="lblPosicao" runat="server" Text='<%#Bind("tdt_posicao") %>' Visible="false"></asp:Label>
                                                         <asp:Label ID="lblUsuIdAtiv2" runat="server" Text='<%#Bind("usu_id") %>' Visible="false"></asp:Label>
 
-                                                        <asp:CheckBox ID="chkParticipante" runat="server" Text="Participante" Style="display: inline-block;" /><br class="responsive-hide"/>
+                                                        <asp:CheckBox ID="chkParticipante" runat="server" Text="Participante" Style="display: inline-block;" /><br class="responsive-hide" />
                                                         <asp:TextBox ID="txtNota" runat="server" SkinID="Decimal" Width="50"></asp:TextBox>
                                                         <asp:CheckBox ID="chkDesconsiderar" runat="server" Text="D" ToolTip="Desconsiderar nota no cálculo da média" />
                                                         <asp:DropDownList ID="ddlPareceres" runat="server" DataTextField="descricao" DataValueField="eap_valor">
@@ -994,7 +994,7 @@
                                                 DataTextField="tud_nome" DataValueField="tur_tud_id" RepeatDirection="Horizontal" CssClass="checkBoxListHorizontal">
                                             </asp:CheckBoxList>
                                             <div id="divPlanoAulaInfo" runat="server">
-                                                
+
                                                 <asp:Label ID="LabelPlanoAula" runat="server" Text="<%$ Resources:Mensagens, MSG_PLANODEAULA %>"
                                                     AssociatedControlID="txtPlanoAula" Width="480px">
                                                 </asp:Label>
@@ -1042,8 +1042,9 @@
                                                 <asp:UpdatePanel ID="updCalendario" runat="server" UpdateMode="Always">
                                                     <ContentTemplate>
                                                         <fieldset>
-                                                            <legend><asp:Label ID="lblLgdObjAprendizagem" CssClass="textareaInfo" runat="server"
-                                                                    Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.lblLgdObjAprendizagem.Text %>"></asp:Label></legend>
+                                                            <legend>
+                                                                <asp:Label ID="lblLgdObjAprendizagem" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.lblLgdObjAprendizagem.Text %>"></asp:Label>
+                                                            </legend>
                                                             <div></div>
                                                             <asp:Repeater ID="rptCampos" runat="server">
                                                                 <HeaderTemplate>
@@ -1296,8 +1297,8 @@
                     </div>
                     <div class="right">
                         <asp:Button ID="btnSalvarJustificativa" runat="server" ValidationGroup="ConfirmacaoExclusaoAulaDiretor" OnClick="btnSalvarJustificativa_Click"
-                            Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.btnSalvarJustificativa.Text %>" 
-                            ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.btnSalvarJustificativa.ToolTip %>"/>
+                            Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.btnSalvarJustificativa.Text %>"
+                            ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.btnSalvarJustificativa.ToolTip %>" />
                         <asp:Button ID="btnCancelarJustificativa" runat="server" CausesValidation="False" OnClientClick="$('#divConfirmacaoExclusaoAulaDiretor').dialog('close'); return false;"
                             Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.btnCancelarJustificativa.Text %>"
                             ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.btnCancelarJustificativa.ToolTip %>" />
