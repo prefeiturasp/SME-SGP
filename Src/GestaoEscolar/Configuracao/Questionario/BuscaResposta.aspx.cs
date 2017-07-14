@@ -336,8 +336,7 @@ namespace GestaoEscolar.Configuracao.Questionario
             try
             {
                 fdsResultado.Visible = true;
-
-                CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id });                
+                CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id });
                 CLS_Questionario Questionario = CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id });
 
                 ExibePeso = (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
@@ -363,7 +362,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 grvResultado.DataBind();
 
                 grvResultado.Columns[indiceColunaPeso].Visible = ExibePeso;
-                
+
                 updResultado.Update();
             }
             catch (Exception ex)

@@ -18,6 +18,7 @@ using MSTech.Security.Cryptography;
 using MSTech.Validation.Exceptions;
 using CFG_RelatorioBO = MSTech.GestaoEscolar.BLL.CFG_RelatorioBO;
 using ReportNameGestaoAcademicaDocumentosDocente = MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademicaDocumentosDocente;
+using System.Data.SqlTypes;
 
 namespace GestaoEscolar.Academico.ControleTurma
 {
@@ -3419,6 +3420,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             DateTime dtAula;
             try
             {
+                DateTime sqlMax = Convert.ToDateTime(SqlDateTime.MaxValue.ToString());
+                DateTime sqlMin = Convert.ToDateTime(SqlDateTime.MinValue.ToString());
                 if (!DateTime.TryParse(txtDataAula.Text, out dtAula))
                 {
                     if (String.IsNullOrEmpty(txtDataAula.Text.Trim()))
@@ -3429,6 +3432,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                     {
                         lblMessage3.Text = UtilBO.GetErroMessage("Data da aula é inválida.", UtilBO.TipoMensagem.Alerta);
                     }
+                    return false;
+                }
+                else if (dtAula > sqlMax || dtAula < sqlMin)
+                {
+                    lblMessage3.Text = UtilBO.GetErroMessage("Data da aula é inválida.", UtilBO.TipoMensagem.Alerta);
                     return false;
                 }
                 else if ((VS_EntitiesControleTurma.turma.tur_situacao == (byte)TUR_TurmaSituacao.Encerrada
@@ -5455,6 +5463,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 try
                 {
+                    
                     if (PreviousPage == null && Session["DadosPaginaRetorno"] == null && Session["tud_id"] == null)
                     {
                         // Se não carregou nenhuma turma, redireciona pra busca.
@@ -5556,7 +5565,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         {
                             tpcIdPendencia = Convert.ToInt32(Session["tpcIdPendencia"]);
                         }
-
+                       
                         // Remove os dados que possam estar na sessao
                         Session.Remove("tud_id");
                         Session.Remove("tdt_posicao");
@@ -5778,6 +5787,14 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             trExibirAlunoDispensadoFrequencia.Visible = trExibirAlunoDispensadoAtividade.Visible = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_LEGENDA_ALUNO_DISPENSADO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
+            // REMOVE LIÇÃO DE CASA CASO SEJA TURMA DE AEE 
+            if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                  updAtividadeCasa.Visible = false;
+
+            // REMOVE LIÇÃO DE CASA CASO SEJA EDUCAÇÃO INFANTIL
+            if (VS_EntitiesControleTurma.curso.tne_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
+                updAtividadeCasa.Visible = false;
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -6122,7 +6139,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (imgSemPlanoAula != null && dataAula.Date < DateTime.Now.Date &&
                         UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                     {
-                        imgSemPlanoAula.Visible = semPlanoAula
+                        imgSemPlanoAula.Visible = semPlanoAula && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                         || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
@@ -8150,7 +8167,6 @@ namespace GestaoEscolar.Academico.ControleTurma
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "FecharConfirmacaoExclusaoAula", "var exibirMensagemConfirmacao=false;$('#divConfirmacaoExclusaoAulaDiretor').dialog('close');", true);
         }
         #endregion Eventos
-
-
+        
     }
 }

@@ -224,6 +224,24 @@ namespace GestaoEscolar.WebControls.Combos
             }
         }
 
+        /// <summary>
+        /// Retorna e seta o valor selecionado no combo - retorna 0 caso não tenha selecionado nada
+        /// </summary>
+        public int IdSelecionado
+        {
+            get
+            {
+                if (Convert.ToInt32(ddlCombo.SelectedValue) == -1)
+                    return 0;
+
+                return Convert.ToInt32(ddlCombo.SelectedValue);
+            }
+            set
+            {
+                ddlCombo.SelectedValue = value.ToString();
+            }
+        }
+
         #endregion
 
         #region Métodos

@@ -164,13 +164,15 @@
                                     </td>
                                     <td style="padding-left: 5px">
                                         <asp:Label ID="Label6" runat="server" Text="Pergunta" AssociatedControlID="ddlPergunta"></asp:Label>
-                                        <asp:DropDownList ID="ddlPergunta" runat="server" OnSelectedIndexChanged="ddlPergunta_SelectedIndexChanged" AutoPostBack="true" Enabled="false">
+                                        <asp:DropDownList ID="ddlPergunta" runat="server"
+                                            OnSelectedIndexChanged="ddlPergunta_SelectedIndexChanged" AutoPostBack="true" Enabled="false"
+                                            SkinID="text60C">
                                             <asp:ListItem Text="-- Selecione uma pergunta --" Value="-1"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>
                                     <td style="padding-left: 5px">
                                         <asp:Label ID="Label7" runat="server" Text="Resposta" AssociatedControlID="ddlResposta"></asp:Label>
-                                        <asp:DropDownList ID="ddlResposta" runat="server" Enabled="false">
+                                        <asp:DropDownList ID="ddlResposta" runat="server" Enabled="false" SkinID="text60C">
                                             <asp:ListItem Text="-- Selecione uma resposta --" Value="-1"></asp:ListItem>
                                         </asp:DropDownList>
                                     </td>

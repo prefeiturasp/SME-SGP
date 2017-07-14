@@ -121,6 +121,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             if (lstTipoJustificativa.Count > 0)
             {
                 xrChart1.Legend.Direction = LegendDirection.BottomToTop;
+                ((TextAnnotation)xrChart1.AnnotationRepository[0]).Visible = true;
                 ((TextAnnotation)xrChart1.AnnotationRepository[0]).Text = "Justificativas de falta";
                 (xrChart1.Diagram as XYDiagram).AxisY.Label.Angle = 0;
                 (xrChart1.Diagram as XYDiagram).AxisY.Label.Visible = false;

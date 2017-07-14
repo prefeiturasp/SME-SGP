@@ -11,6 +11,10 @@ using MSTech.CoreSSO.DAL;
 using MSTech.Data.Common;
 using MSTech.GestaoEscolar.DAL;
 using System.Net;
+using MSTech.GestaoEscolar.ObjetosSincronizacao.DTO.Saida;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace MSTech.GestaoEscolar.BLL
 {
@@ -473,7 +477,34 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaPreenchimentoFrequencias()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaPreenchimentoFrequencias();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaPreenchimentoFrequencia });
+            if (!string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaPreenchimentoFrequencias();
+                List<sAlertaPreenchimentoFrequencia> lstUsuarios = (from DataRow dr in dt.Rows
+                                                                    select (sAlertaPreenchimentoFrequencia)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaPreenchimentoFrequencia())).ToList();
+                if (lstUsuarios.Any())
+                {
+                    DateTime dataAtual = DateTime.UtcNow;
+                    NotificacaoDTO notificacao = new NotificacaoDTO();
+                    notificacao.SenderName = "SGP";
+                    notificacao.Recipient = new DestinatarioNotificacao();
+                    notificacao.Recipient.UserRecipient = new List<string>();
+                    notificacao.MessageType = 3;
+                    notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                    notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
+                    notificacao.Title = alerta.cfa_nome;
+                    notificacao.Message = alerta.cfa_assunto.Replace("[PulaLinha]", "<br/>");
+                    lstUsuarios.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                    if (EnviarNotificacao(notificacao))
+                    {
+                        List<LOG_AlertaPreenchimentoFrequencia> lstLog = new List<LOG_AlertaPreenchimentoFrequencia>();
+                        notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaPreenchimentoFrequencia { usu_id = new Guid(ur), lpf_dataEnvio = DateTime.Now }));
+                        LOG_AlertaPreenchimentoFrequenciaBO.SalvarEmLote(lstLog);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -481,7 +512,40 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaInicioFechamento()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaInicioFechamento();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaInicioFechamento });
+            if (!string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaInicioFechamento(alerta.cfa_periodoAnalise);
+                List<sAlertaInicioFechamento> lstUsuarios = (from DataRow dr in dt.Rows
+                                                            select (sAlertaInicioFechamento)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaInicioFechamento())).ToList();
+                List<long> lstEventos = lstUsuarios.Select(p => p.evt_id).Distinct().ToList();
+                DateTime dataAtual = DateTime.UtcNow;
+                lstEventos.ForEach(e =>
+                    {
+                        NotificacaoDTO notificacao = new NotificacaoDTO();
+                        notificacao.SenderName = "SGP";
+                        notificacao.Recipient = new DestinatarioNotificacao();
+                        notificacao.Recipient.UserRecipient = new List<string>();
+                        notificacao.MessageType = 3;
+                        notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
+                        notificacao.Title = alerta.cfa_nome;
+                        List<sAlertaInicioFechamento> lstUsuariosEvento = lstUsuarios.FindAll(u => u.evt_id == e);
+                        notificacao.Message = alerta.cfa_assunto
+                                                .Replace("[Dias]", lstUsuariosEvento.First().dias.ToString())
+                                                .Replace("[NomeEvento]", lstUsuariosEvento.First().evt_nome.ToString())
+                                                .Replace("[PulaLinha]", "<br/>");
+                        lstUsuariosEvento.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                        if (EnviarNotificacao(notificacao))
+                        {
+                            List<LOG_AlertaInicioFechamento> lstLog = new List<LOG_AlertaInicioFechamento>();
+                            notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaInicioFechamento { usu_id = new Guid(ur), evt_id = e, lif_dataEnvio = DateTime.Now }));
+                            LOG_AlertaInicioFechamentoBO.SalvarEmLote(lstLog);
+                        }
+                    }
+                );
+            }
         }
 
         /// <summary>
@@ -489,7 +553,40 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaFimFechamento()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaFimFechamento();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaFimFechamento });
+            if (!string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaFimFechamento(alerta.cfa_periodoAnalise);
+                List<sAlertaFimFechamento> lstUsuarios = (from DataRow dr in dt.Rows
+                                                            select (sAlertaFimFechamento)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaFimFechamento())).ToList();
+                List<long> lstEventos = lstUsuarios.Select(p => p.evt_id).Distinct().ToList();
+                DateTime dataAtual = DateTime.UtcNow;
+                lstEventos.ForEach(e =>
+                    {
+                        NotificacaoDTO notificacao = new NotificacaoDTO();
+                        notificacao.SenderName = "SGP";
+                        notificacao.Recipient = new DestinatarioNotificacao();
+                        notificacao.Recipient.UserRecipient = new List<string>();
+                        notificacao.MessageType = 3;
+                        notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
+                        notificacao.Title = alerta.cfa_nome;
+                        List<sAlertaFimFechamento> lstUsuariosEvento = lstUsuarios.FindAll(u => u.evt_id == e);
+                        notificacao.Message = alerta.cfa_assunto
+                                                .Replace("[Dias]", lstUsuariosEvento.First().dias.ToString())
+                                                .Replace("[NomeEvento]", lstUsuariosEvento.First().evt_nome.ToString())
+                                                .Replace("[PulaLinha]", "<br/>");
+                        lstUsuariosEvento.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                        if (EnviarNotificacao(notificacao))
+                        {
+                            List<LOG_AlertaFimFechamento> lstLog = new List<LOG_AlertaFimFechamento>();
+                            notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaFimFechamento { usu_id = new Guid(ur), evt_id = e, lff_dataEnvio = DateTime.Now }));
+                            LOG_AlertaFimFechamentoBO.SalvarEmLote(lstLog);
+                        }
+                    }
+                );
+            }
         }
 
         /// <summary>
@@ -497,7 +594,41 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaAlunosBaixaFrequencia()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosBaixaFrequencia();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaAlunosBaixaFrequencia });
+            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosBaixaFrequencia();
+                List<sAlertaAlunosBaixaFrequencia> lstUsuarios = (from DataRow dr in dt.Rows
+                                                                    select (sAlertaAlunosBaixaFrequencia)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaAlunosBaixaFrequencia())).ToList();
+                List<int> lstEscolas = lstUsuarios.Select(p => p.esc_id).Distinct().ToList();
+                DateTime dataAtual = DateTime.UtcNow;
+                lstEscolas.ForEach(e =>
+                    {
+                        NotificacaoDTO notificacao = new NotificacaoDTO();
+                        notificacao.SenderName = "SGP";
+                        notificacao.Recipient = new DestinatarioNotificacao();
+                        notificacao.Recipient.UserRecipient = new List<string>();
+                        notificacao.MessageType = 3;
+                        notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
+                        notificacao.Title = alerta.cfa_nome;
+                        List<sAlertaAlunosBaixaFrequencia> lstUsuariosEscola = lstUsuarios.FindAll(u => u.esc_id == e);
+                        notificacao.Message = alerta.cfa_assunto
+                                                .Replace("[NomeEscola]", lstUsuariosEscola.First().esc_nome.ToString())
+                                                .Replace("[PercentualMinimoFrequencia]", lstUsuariosEscola.First().percentualBaixaFrequencia.ToString())
+                                                .Replace("[Dias]", alerta.cfa_periodoAnalise.ToString())
+                                                .Replace("[PulaLinha]", "<br/>");
+                        lstUsuariosEscola.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                        if (EnviarNotificacao(notificacao))
+                        {
+                            List<LOG_AlertaAlunosBaixaFrequencia> lstLog = new List<LOG_AlertaAlunosBaixaFrequencia>();
+                            notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaAlunosBaixaFrequencia { usu_id = new Guid(ur), esc_id = e, lbf_dataEnvio = DateTime.Now }));
+                            LOG_AlertaAlunosBaixaFrequenciaBO.SalvarEmLote(lstLog);
+                        }
+                    }
+                );
+            }
         }
 
         /// <summary>
@@ -505,7 +636,40 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         public static void ExecJOB_AlertaAlunosFaltasConsecutivas()
         {
-            new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosFaltasConsecutivas();
+            CFG_Alerta alerta = CFG_AlertaBO.GetEntity(new CFG_Alerta { cfa_id = (byte)CFG_AlertaBO.eChaveAlertas.AlertaAlunosFaltasConsecutivas });
+            if (alerta.cfa_periodoAnalise > 0 && !string.IsNullOrEmpty(alerta.cfa_assunto))
+            {
+                // Busca os usuários para envio da notificação
+                DataTable dt = new GestaoEscolarServicoDAO().ExecJOB_AlertaAlunosFaltasConsecutivas();
+                List<sAlertaAlunosFaltasConsecutivas> lstUsuarios = (from DataRow dr in dt.Rows
+                                                                        select (sAlertaAlunosFaltasConsecutivas)GestaoEscolarUtilBO.DataRowToEntity(dr, new sAlertaAlunosFaltasConsecutivas())).ToList();
+                List<int> lstEscolas = lstUsuarios.Select(p => p.esc_id).Distinct().ToList();
+                DateTime dataAtual = DateTime.UtcNow;
+                lstEscolas.ForEach(e =>
+                    {
+                        NotificacaoDTO notificacao = new NotificacaoDTO();
+                        notificacao.SenderName = "SGP";
+                        notificacao.Recipient = new DestinatarioNotificacao();
+                        notificacao.Recipient.UserRecipient = new List<string>();
+                        notificacao.MessageType = 3;
+                        notificacao.DateStartNotification = string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual);
+                        notificacao.DateEndNotification = alerta.cfa_periodoValidade > 0 ? string.Format("{0:yyyy-MM-ddTHH:mm:ss.0000000-00:00}", dataAtual.AddHours(alerta.cfa_periodoValidade)) : null;
+                        notificacao.Title = alerta.cfa_nome;
+                        List<sAlertaAlunosFaltasConsecutivas> lstUsuariosEscola = lstUsuarios.FindAll(u => u.esc_id == e);
+                        notificacao.Message = alerta.cfa_assunto
+                                                .Replace("[NomeEscola]", lstUsuariosEscola.First().esc_nome.ToString())
+                                                .Replace("[Dias]", alerta.cfa_periodoAnalise.ToString())
+                                                .Replace("[PulaLinha]", "<br/>");
+                        lstUsuariosEscola.ForEach(ue => notificacao.Recipient.UserRecipient.Add(ue.usu_id.ToString()));
+                        if (EnviarNotificacao(notificacao))
+                        {
+                            List<LOG_AlertaAlunosFaltasConsecutivas> lstLog = new List<LOG_AlertaAlunosFaltasConsecutivas>();
+                            notificacao.Recipient.UserRecipient.ForEach(ur => lstLog.Add(new LOG_AlertaAlunosFaltasConsecutivas { usu_id = new Guid(ur), esc_id = e, lfc_dataEnvio = DateTime.Now }));
+                            LOG_AlertaAlunosFaltasConsecutivasBO.SalvarEmLote(lstLog);
+                        }
+                    }
+                );
+            }
         }
 
         /// <summary>
@@ -524,6 +688,35 @@ namespace MSTech.GestaoEscolar.BLL
         public static void ExecJOB_ProcessamentoAlunosFrequencia()
         {
             new GestaoEscolarServicoDAO().ExecJOB_ProcessamentoAlunosFrequencia();
+        }
+
+        /// <summary>
+        /// Envia o alerta por API para o sistema Notificações.
+        /// </summary>
+        /// <param name="notificacao"></param>
+        private static bool EnviarNotificacao(NotificacaoDTO notificacao)
+        {
+            SYS_RecursoAPI recurso = new SYS_RecursoAPI { rap_id = (int)eRecursoAPI.Notificacoes };
+            SYS_RecursoAPIBO.GetEntity(recurso);
+
+            if (recurso.IsNew || string.IsNullOrEmpty(recurso.rap_url) || recurso.rap_situacao == (byte)RecursoAPISituacao.Excluido)
+                return true;
+
+            HttpClient client = new HttpClient();
+            List<SYS_UsuarioAPI> lstUsuario = SYS_RecursoUsuarioAPIBO.SelecionaUsuarioPorRecurso(eRecursoAPI.Notificacoes);
+            if (lstUsuario.Any())
+            {
+                var auth = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", lstUsuario.First().uap_usuario, lstUsuario.First().uap_senha));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(auth));
+            }
+
+            HttpContent contentPost = new StringContent(JsonConvert.SerializeObject(notificacao), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(recurso.rap_url, contentPost).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

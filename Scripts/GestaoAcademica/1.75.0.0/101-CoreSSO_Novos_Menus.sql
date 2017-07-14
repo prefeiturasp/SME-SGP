@@ -29,6 +29,24 @@ SET XACT_ABORT ON
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
 	*/
 
+	
+
+	EXEC MS_InserePaginaMenu
+		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
+		,@nomeModuloAvo = NULL -- Nome do módulo avó (Opcional, apenas quando houver) 
+		,@nomeModuloPai = 'Relatórios' -- Nome do módulo pai (Opcional, apenas quando houver)
+		,@nomeModulo = 'Relatórios de atendimento' -- Nome do módulo (Obrigatório)
+		,@SiteMap1Nome = 'Relatórios de atendimento'
+		,@SiteMap1Url = NULL
+		,@SiteMap2Nome = NULL
+		,@SiteMap2Url = NULL
+		,@SiteMap3Nome = NULL
+		,@SiteMap3Url = NULL
+		,@possuiVisaoAdm = 1 -- Indicar se possui visão de administador
+		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
+		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
+		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+
 	EXEC MS_InserePaginaMenu
 		@nomeSistema = @nomeSistema -- Nome do sistema (obrigatório)
 		,@nomeModuloAvo = 'Relatórios' -- Nome do módulo avó (Opcional, apenas quando houver) 
@@ -136,6 +154,26 @@ SET XACT_ABORT ON
 		,@possuiVisaoGestao = 1 -- Indicar se possui visão de Gestão
 		,@possuiVisaoUA = 1 -- Indicar se possui visão de UA
 		,@possuiVisaoIndividual = 0 -- Indicar se possui visão de individual
+				
+	-- ALTERAÇÃO DE MENU E NOME 
+	DECLARE @mod_idRegistroClasse int
+				set @mod_idRegistroClasse = (select mod_id from SYS_Modulo where mod_nome = 'Registro de classe' and sis_id = 102)
+	UPDATE SYS_Modulo
+		SET mod_nome = 'Registro de sugestões de currículo' , mod_idPai = @mod_idRegistroClasse , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Registro de sugestões' and and sis_id = 102
+		
+	-- ALTERAÇÃO DE MENU
+	DECLARE @mod_idConfiguracoes int
+				set @mod_idConfiguracoes = (select mod_id from SYS_Modulo where mod_nome = 'Configurações' and sis_id = 102)
+	UPDATE SYS_Modulo
+		SET mod_idPai = @mod_idConfiguracoes , mod_dataAlteracao = GETDATE()
+		WHERE mod_nome = 'Cadastro de currículo' and and sis_id = 102
+	
+	-- EXCLUSÃO DO MENU "CURRÍCULO"
+	EXEC MS_RemovePaginaMenu
+		@nomeSistema = @nomeSistema 
+		,@NomeModulo = 'Currículo'
+		,@nomeModuloPai = 'Administração'
 
 -- Fechar transação
 SET XACT_ABORT OFF

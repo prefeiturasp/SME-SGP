@@ -193,17 +193,13 @@ namespace MSTech.GestaoEscolar.BLL
         public static DataTable SelecionaSondagensPaginado
         (
             string snd_titulo
-            , int currentPage
-            , int pageSize
         )
         {
             totalRecords = 0;
-
-            if (pageSize == 0)
-                pageSize = 1;
+            
 
             ACA_SondagemDAO dao = new ACA_SondagemDAO();
-            return dao.SelectBy_Pesquisa(snd_titulo, true, currentPage / pageSize, pageSize, out totalRecords);
+            return dao.SelectBy_Pesquisa(snd_titulo, false, 1, 1, out totalRecords);
         }
 
         /// <summary>

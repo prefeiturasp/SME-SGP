@@ -131,7 +131,7 @@
                         VS_cal_id = PreviousPage.EditItemCalId;
                         VS_tur_id = PreviousPage.EditItemTurId;
                     }
-                    else if (Session["PaginaRetorno_RelatorioAEE"] != null)
+                    else if (Session["PaginaRetorno_RelatorioAEE"] != null && !string.IsNullOrEmpty(Session["PaginaRetorno_RelatorioAEE"].ToString()))
                     {
                         VS_PaginaRetorno = Session["PaginaRetorno_RelatorioAEE"].ToString();
                         Session.Remove("PaginaRetorno_RelatorioAEE");
@@ -331,7 +331,7 @@
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, msg  + " | reap_id: " + rel.entityRelatorioPreenchimento.reap_id);
                     lblMensagem.Text = __SessionWEB.PostMessages;
                     updMensagem.Update();
-                    Inicializar();
+                    CarregarRelatorio();
                 }
             }
             catch (ValidationException ex)
@@ -448,6 +448,10 @@
             Session["alu_idLimpaBusca"] = VS_alu_id;
             Session["cal_idLimpaBusca"] = VS_cal_id;
             Session["tur_idLimpaBusca"] = VS_tur_id;
+            Session["PaginaRetorno_RelatorioAEE"] = VS_PaginaRetorno;
+            Session["DadosPaginaRetorno"] = VS_DadosPaginaRetorno;
+            Session["VS_DadosTurmas"] = VS_DadosPaginaRetorno_MinhasTurmas;
+            Session["alu_id_RelatorioAEE"] = VS_alu_id;
             RedirecionarPagina("Cadastro.aspx");
         }
 

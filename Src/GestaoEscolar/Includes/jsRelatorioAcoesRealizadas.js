@@ -10,22 +10,28 @@
 function checarTodos() {
     $("input:checkbox[name*='chkTodos']").change(function () {
         var checaTudo = $(this).attr("checked");
-        //        $(this).parents(".grid").find("td:first-child .checkbox input:checkbox").each(function() {
-        $(".grid td:first-child .checkbox input:checkbox").each(function () {
-            $(this).attr("checked", checaTudo);
-            if ($(this).attr("checked")) {
-                $(this).parents("tr").addClass("gridSelectedRow");
-                $(".divSeleciona").fadeIn();
+
+        //$(this).parents(".grid").find("td:first-child .checkbox input:checkbox").each(function (){
+
+            $(".grid td:first-child .checkbox input:checkbox").each(function () {
+                $(this).attr("checked", checaTudo);
+                if ($(this).attr("checked")) {
+                    $(this).parents("tr").addClass("gridSelectedRow");
+                    $(".divSeleciona").fadeIn();
+                } else {
+                    $(this).parents("tr").removeClass("gridSelectedRow");
+                    $(".divSeleciona").fadeOut();
+                }
+            });
+
+            if (checaTudo == true) {
+                selecionaTudo();
             } else {
-                $(this).parents("tr").removeClass("gridSelectedRow");
-                $(".divSeleciona").fadeOut();
+                limpaTudo();
             }
-        });
-        if (checaTudo == true) {
-            selecionaTudo();
-        } else {
-            limpaTudo();
-        }
+
+        //});
+
     });
 }
 function changeCheckbox() {
@@ -47,7 +53,7 @@ function changeCheckbox() {
     });
 }
 function selecionaTudo() {
-    $("input:checkbox[name*='chkTodos']").attr("checked", true);
+    $("input:checkbox[name*='_chkSelecionar']").attr("checked", true);
     //    $(".divSelecionaPaginas").css("display", "inline");
     //    $(".divSelecionaPaginas").children('[id$="hdnSelecionaGrid"]').val("false");
     //    $(".divSelecionaPaginas").children('[id$="lkbSelecionaGrid"]').text("Selecionar os " + $(".lblTotalRegistros").attr("valor") + " registros em todas as páginas.");
@@ -55,8 +61,8 @@ function selecionaTudo() {
 }
 function SelecionaPaginas() {
     $(".divSelecionaPaginas").children('[id$="lkbSelecionaGrid"]').click(function () {
-        var texto = $(".divSelecionaPaginas").children('[id$="hdnSelecionaGrid"]').val();
 
+        var texto = $(".divSelecionaPaginas").children('[id$="hdnSelecionaGrid"]').val();
         if (texto == "false") {
             $(".divSelecionaPaginas").children('[id$="hdnSelecionaGrid"]').val("true");
             $(this).text("Limpar seleção");
@@ -65,6 +71,7 @@ function SelecionaPaginas() {
         else {
             $("input:checkbox[name*='chkTodos']").attr("checked", false).trigger("change");
         }
+
     });
 }
 

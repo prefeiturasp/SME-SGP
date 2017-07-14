@@ -11,9 +11,12 @@ namespace MSTech.GestaoEscolar.BLL
     using Data.Common;
     using System.Data;
     using System;
-    using System.Linq;/// <summary>
-                      /// Description: CLS_RelatorioAtendimentoPeriodo Business Object. 
-                      /// </summary>
+    using System.Linq;
+    using Caching;
+
+    /// <summary>
+    /// Description: CLS_RelatorioAtendimentoPeriodo Business Object. 
+    /// </summary>
     public class CLS_RelatorioAtendimentoPeriodoBO : BusinessBase<CLS_RelatorioAtendimentoPeriodoDAO, CLS_RelatorioAtendimentoPeriodo>
 	{
         /// <summary>
@@ -52,6 +55,29 @@ namespace MSTech.GestaoEscolar.BLL
                     dao._Banco.Close();
                 }
             }
+        }
+
+        /// <summary>
+        /// Seleciona os tipos de período de calendário para preenchimento do relatório de atendimento
+        /// </summary>
+        /// <param name="rea_id"></param>
+        /// <returns></returns>
+        public static List<CLS_RelatorioAtendimentoPeriodo> SelecionaPorRelatorio(int rea_id, int appMinutosCacheLongo)
+        {
+            Func<List<CLS_RelatorioAtendimentoPeriodo>> retorno = delegate ()
+            {
+                CLS_RelatorioAtendimentoPeriodoDAO dao = new CLS_RelatorioAtendimentoPeriodoDAO();
+                return dao.SelecionaPorRelatorio(rea_id);
+            };
+
+            return CacheManager.Factory.Get
+                        (
+                            string.Format(ModelCache.RELATORIO_ATENDIMENTO_BUSCA_PERIODO_PorRelatorio, rea_id)
+                            ,
+                            retorno
+                            ,
+                            appMinutosCacheLongo
+                        );
         }
 
         /// <summary>

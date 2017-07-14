@@ -946,6 +946,8 @@
 
         public const string RELATORIO_ATENDIMENTO_BUSCA_ESTRUTURA_RELATORIO_KEY = "Cache_SelecionaRelatorio_{0}_{1}";
 
+        public const string RELATORIO_ATENDIMENTO_BUSCA_PERIODO_PorRelatorio = "Cache_SelecionaPeriodos_PorRelatorio_{0}";
+
         #endregion
 
         #region Grafico atendimento

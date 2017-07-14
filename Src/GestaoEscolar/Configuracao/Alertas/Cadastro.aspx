@@ -21,12 +21,14 @@
 
                 <asp:Label ID="lblPeriodoAnalise" runat="server" Text="<%$ Resources:GestaoEscolar.Configuracao.Alertas.Cadastro, lblPeriodoAnalise.Text %>" AssociatedControlID="txtPeriodoAnalise"></asp:Label>
                 <asp:TextBox ID="txtPeriodoAnalise" runat="server" MaxLength="3" SkinID="Numerico"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvPeriodoAnalise" runat="server" ControlToValidate="txtPeriodoAnalise" Display="Dynamic" ValidationGroup="Alerta" ErrorMessage="<%$ Resources:GestaoEscolar.Configuracao.Alertas.Cadastro, rfvPeriodoAnalise.ErrorMessage %>">*</asp:RequiredFieldValidator>
 
                 <asp:Label ID="lblPeriodoValidade" runat="server" Text="<%$ Resources:GestaoEscolar.Configuracao.Alertas.Cadastro, lblPeriodoValidade.Text %>" AssociatedControlID="txtPeriodoValidade"></asp:Label>
                 <asp:TextBox ID="txtPeriodoValidade" runat="server" MaxLength="3" SkinID="Numerico"></asp:TextBox>
     
                 <asp:Label ID="lblAssunto" runat="server" Text="<%$ Resources:GestaoEscolar.Configuracao.Alertas.Cadastro, lblAssunto.Text %>" AssociatedControlID="txtAssunto"></asp:Label>
-                <asp:TextBox ID="txtAssunto" runat="server" MaxLength="500" SkinID="limite500" TextMode="MultiLine"></asp:TextBox>
+                <asp:TextBox ID="txtAssunto" runat="server" TextMode="MultiLine" Height="100"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvAssunto" runat="server" ControlToValidate="txtAssunto" Display="Dynamic" ValidationGroup="Alerta" ErrorMessage="<%$ Resources:GestaoEscolar.Configuracao.Alertas.Cadastro, rfvAssunto.ErrorMessage %>">*</asp:RequiredFieldValidator>
 
                 <br /><br />
                 <fieldset>
