@@ -35,7 +35,7 @@
                         <uc2:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged" />
                         <div class="divScrollResponsivo">
                         <asp:GridView ID="grvAluno" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-                            DataSourceID="odsAluno" DataKeyNames="alu_id,mtu_id" EmptyDataText="Não foram encontrados alunos."
+                            DataSourceID="odsAluno" DataKeyNames="alu_id,mtu_id,tur_id" EmptyDataText="Não foram encontrados alunos."
                             OnPageIndexChanging="grvAluno_PageIndexChanging"
                             OnRowCommand="grvAluno_RowCommand" OnRowDataBound="grvAluno_RowDataBound" OnDataBound="grvAluno_DataBound" SkinID="GridResponsive">
                             <Columns>
