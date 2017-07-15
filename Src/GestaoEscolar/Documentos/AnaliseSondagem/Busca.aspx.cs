@@ -617,7 +617,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
             UCComboTurma.Obrigatorio = UCCCursoCurriculo.Obrigatorio = UCComboCurriculoPeriodo.Obrigatorio = false;
 
             UCComboSondagem.Obrigatorio = true;
-            UCComboSondagem.Carregar();
+            UCComboSondagem.Carregar(true);
 
             InicializaCamposBusca();
         }

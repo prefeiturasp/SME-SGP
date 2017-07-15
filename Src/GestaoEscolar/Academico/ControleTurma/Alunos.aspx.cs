@@ -906,11 +906,21 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 try
                 {
+                    string[] args = e.CommandArgument.ToString().Split(';');
+
                     Session.Remove("alu_id_RelatorioAEE");
                     Session.Remove("PaginaRetorno_RelatorioAEE");
 
-                    Session.Add("alu_id_RelatorioAEE", Convert.ToInt64(e.CommandArgument.ToString()));
+                    Session.Add("alu_id_RelatorioAEE", Convert.ToInt64(args[0]));
                     Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
+
+                    if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                    {
+                        int index = int.Parse(args[1]);
+                        long tur_id = Convert.ToInt64(grvAluno.DataKeys[index].Values["tur_id"]);
+
+                        Session.Add("tur_idRegular_RelatorioAEE", tur_id);
+                    }
 
                     CarregaSessionPaginaRetorno();
                     RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
@@ -969,7 +979,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Row.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo 
                                                 && Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "PossuiDeficiencia"));
-                    btnRelatorioAEE.CommandArgument = alu_id.ToString();
+                    btnRelatorioAEE.CommandArgument = string.Format("{0};{1}", alu_id.ToString() , e.Row.RowIndex.ToString());
                 }
 
 
@@ -1015,7 +1025,18 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     if (tooltip.Any())
                     {
-                        imgAlertaRelatorio.ToolTip = string.Join("<br />", tooltip.ToArray());
+                        imgAlertaRelatorio.ToolTip = string.Empty;
+                        foreach (string t in tooltip)
+                        {
+                            if (string.IsNullOrEmpty(imgAlertaRelatorio.ToolTip))
+                            {
+                                imgAlertaRelatorio.ToolTip = t;
+                            }
+                            else
+                            {
+                                imgAlertaRelatorio.ToolTip = imgAlertaRelatorio.ToolTip + Environment.NewLine + t;
+                            }
+                        }
                     }
                 }
             }
