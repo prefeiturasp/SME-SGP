@@ -620,20 +620,28 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
                 {
                     case 1:
                         divDataPreenchimento.Visible = true;
+                        txtDtInicial.Text = String.Empty;
+                        txtDtFinal.Text = String.Empty;
                         break;
                     case 2:
                         divRacaCor.Visible = true;
+                        UCComboRacaCor._Combo.SelectedIndex = 0;
                         break;
                     case 3:
                         divIdade.Visible = true;
+                        txtIdadeInicial.Text = String.Empty;
+                        txtIdadeFinal.Text = String.Empty;
                         break;
                     case 4:
                         divSexo.Visible = true;
+                        UCComboSexo._Combo.SelectedIndex = 0;
                         break;
                     default:
                         ComboTipoDeficiencia.Carregar();
                         divDetalhes.Visible = false;
                         divDetalhamentoDeficiencia.Visible = true;
+                        ComboTipoDeficiencia._Combo.SelectedIndex = 0;
+                        ComboTipoDeficiencia_SelectedIndexChanged();
                         break;
                 }
                 divBotoesFiltro.Visible = true;
