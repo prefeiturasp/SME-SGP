@@ -1025,7 +1025,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     if (tooltip.Any())
                     {
-                        imgAlertaRelatorio.ToolTip = string.Join("<br />", tooltip.ToArray());
+                        imgAlertaRelatorio.ToolTip = string.Join("\n", tooltip.ToArray());
                     }
                 }
             }
