@@ -119,12 +119,12 @@ public partial class WebControls_Combos_UCComboSondagem : MotherUserControl
     /// <summary>
     /// Carrega todos as Sondagens ativas
     /// </summary>
-    public void Carregar()
+    public void Carregar(bool naoBloqueados = false)
     {
         try
         {
             List<ACA_Sondagem> lstSondagem = ACA_SondagemBO.SelecionaSondagemAtiva();
-            ddlCombo.DataSource = lstSondagem;
+            ddlCombo.DataSource = lstSondagem.Where(s => !naoBloqueados || s.snd_situacao != (byte)ACA_SondagemSituacao.Bloqueado);
 
             ddlCombo.Items.Insert(0, new ListItem("-- Selecione a sondagem --", "-1", true));
 
