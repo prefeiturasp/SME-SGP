@@ -190,7 +190,7 @@
 
         private void Inicializar()
         {
-            UCCRelatorioAtendimento.CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo.AEE);
+            UCCRelatorioAtendimento.CarregarPorPermissaoUsuarioTipo(CLS_RelatorioAtendimentoTipo.AEE);
             UCCRelatorioAtendimento.PermiteEditar = true;
             UCCPeriodoCalendario.CarregarPorCalendario(VS_cal_id);
 

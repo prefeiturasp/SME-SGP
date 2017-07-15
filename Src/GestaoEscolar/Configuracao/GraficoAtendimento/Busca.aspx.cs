@@ -198,7 +198,7 @@ namespace GestaoEscolar.Configuracao.GraficoAtendimento
             //carrega os relatorios
             if (Convert.ToInt32(ddlTipoRelatorio.SelectedValue) > 0)
             {
-                UCComboRelatorioAtendimento.CarregarPorPermissaoUuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipoRelatorio.SelectedValue));
+                UCComboRelatorioAtendimento.CarregarPorPermissaoUsuarioTipo((CLS_RelatorioAtendimentoTipo)Convert.ToByte(ddlTipoRelatorio.SelectedValue));
                 UCComboRelatorioAtendimento._Combo.Enabled = true;
             }
             else
