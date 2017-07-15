@@ -146,7 +146,19 @@
                         Dictionary<string, string> dadosPaginaRetorno = (Dictionary<string, string>)VS_DadosPaginaRetorno;
 
                         VS_cal_id = Convert.ToInt32(dadosPaginaRetorno["Edit_cal_id"]);
-                        VS_tur_id = Convert.ToInt64(dadosPaginaRetorno["Edit_tur_id"]);
+
+                        byte tur_tipo = Convert.ToByte(dadosPaginaRetorno["Edit_tur_tipo"]);
+
+                        if (tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                        {
+                            VS_tur_id = Convert.ToInt64(Session["tur_idRegular_RelatorioAEE"].ToString());
+                            Session.Remove("tur_idRegular_RelatorioAEE");
+                        }
+                        else
+                        {
+                            VS_tur_id = Convert.ToInt64(dadosPaginaRetorno["Edit_tur_id"]);
+                        }
+
                         tpc_idSelecionado = Convert.ToInt32(dadosPaginaRetorno["Edit_tpc_id"]);
                     }
                     else if (Session["alu_idLimpaBusca"] != null)
