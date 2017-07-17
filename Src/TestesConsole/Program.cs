@@ -13,7 +13,7 @@ namespace TestesConsole
         {
             try
             {
-                while (Console.ReadLine() == "e")
+                while (Console.ReadLine().ToLower() == "e")
                 {
                     Console.WriteLine("Processando fechamento...");
                     GestaoEscolarServicosBO.ExecJOB_ProcessamentoNotaFrequenciaFechamentoAsync(limpacache: false);

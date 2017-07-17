@@ -24,11 +24,6 @@ SET XACT_ABORT ON
 		set msm_nome = 'Resumo das atividades desenvolvidas' 
 		where msm_url = '~/Documentos/Relatorio.aspx?dummy=%27AU93aqlCeUI%3d%27'
 	
-	-- Alteração na opção do menudo do relatório de docente
-	update cfg_relatoriodocumentodocente 
-		set rdd_nomeDocumento = 'Resumo das atividades desenvolvidas' 
-		where rlt_id = 248	
-		
 		
 		
 

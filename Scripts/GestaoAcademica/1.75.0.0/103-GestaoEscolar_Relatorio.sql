@@ -29,6 +29,12 @@ SET XACT_ABORT ON
 		@rlt_id = 325 -- ID do relatório. (Obrigatório, igual ao enumerador do sistema)
 		,@rlt_nome = 'RelatorioGeralAtendimento' -- Nome do relatorio. (Obrigatório, igual a descricção do enumerador do sistema)
 
+
+	-- Alteração na opção do menudo do relatório de docente
+	update cfg_relatoriodocumentodocente 
+		set rdd_nomeDocumento = 'Resumo das atividades desenvolvidas' 
+		where rlt_id = 248	
+
 -- Fechar transação
 SET XACT_ABORT OFF
 COMMIT TRANSACTION
