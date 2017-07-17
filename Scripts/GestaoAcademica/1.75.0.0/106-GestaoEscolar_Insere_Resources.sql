@@ -402,6 +402,13 @@ SET XACT_ABORT ON
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Resumo das atividades desenvolvidas preenchido'	
+		
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.litHabilidades.Text' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Objetos de conhecimento e objetivos de aprendizagem e desenvolvimento'
 	
 
 -- Fechar transação     
