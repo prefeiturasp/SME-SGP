@@ -196,7 +196,8 @@ namespace MSTech.GestaoEscolar.BLL
                     ACA_FormatoAvaliacaoBO.CarregarPorTur(relatorio.entityPreenchimentoAlunoTurmaDisciplina.tur_id, dao._Banco).fav_fechamentoAutomatico)
                 {
                     List<AlunoFechamentoPendencia> FilaProcessamento = new List<AlunoFechamentoPendencia>();
-                    if (relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id > 0)
+                    if (relatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.RP &&
+                        relatorio.entityPreenchimentoAlunoTurmaDisciplina.tud_id > 0)
                     {
                         if (relatorio.entityPreenchimentoAlunoTurmaDisciplina.tpc_id > 0)
                         {
