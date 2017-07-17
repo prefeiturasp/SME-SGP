@@ -799,6 +799,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                             int index = Convert.ToInt32(args[0]);
                             long tud_id = Convert.ToInt64(args[1]);
                             byte tud_tipo = Convert.ToByte(args[2]);
+                            RepeaterItem rptItemTurmaCiclo = (RepeaterItem)grid.NamingContainer;
+                            Repeater rptTurma = (Repeater)rptItemTurmaCiclo.NamingContainer;
+                            RepeaterItem rptItemTurma = (RepeaterItem)rptTurma.NamingContainer;
 
                             List<REL_TurmaDisciplinaSituacaoFechamento_Pendencia> pendencias;
                             if (tud_tipo != (byte)TurmaDisciplinaTipo.Regencia)
@@ -822,7 +825,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                                 pendencias.AddRange
                                (
-                                   VS_listaPendencias[grid.ClientID].FindAll
+                                   VS_listaPendencias[rptItemTurma.ClientID].FindAll
                                    (
                                        p =>
                                        p.tud_id == tud_id
@@ -871,7 +874,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                                     pendencias.AddRange
                                    (
-                                       VS_listaPendencias[grid.ClientID].FindAll
+                                       VS_listaPendencias[rptItemTurma.ClientID].FindAll
                                        (
                                            p =>
                                            p.tud_idRegencia == tud_id
@@ -915,7 +918,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                                     pendencias.AddRange
                                    (
-                                       VS_listaPendencias[grid.ClientID].FindAll
+                                       VS_listaPendencias[rptItemTurma.ClientID].FindAll
                                        (
                                            p =>
                                            p.tud_idRegencia == tud_id
@@ -2961,6 +2964,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         /// <param name="listaGrid">Lista de grids.</param>
         private void VerificaPendenciasFechamento(RepeaterItem itemTurma, List<GridView> listaGrid, List<sTurmaDisciplinaEscolaCalendario> lstCarregarPendencias, bool mostrarPendencia)
         {
+
             if (lstCarregarPendencias != null)
             {
                 List<REL_TurmaDisciplinaSituacaoFechamento_Pendencia> lst = REL_TurmaDisciplinaSituacaoFechamentoBO.SelecionaPendencias(lstCarregarPendencias, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo);
