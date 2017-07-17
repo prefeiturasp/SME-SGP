@@ -52,7 +52,7 @@ namespace MSTech.GestaoEscolar.Web.WebProject
 
                 if (!UserIsAuthenticated())
                 {
-                    string provider = "mstech";
+                    string provider = IdentitySettingsConfig.IDSSettings.AuthenticationType;
                     Context.GetOwinContext().Authentication.Challenge(provider);
                 }
                 else

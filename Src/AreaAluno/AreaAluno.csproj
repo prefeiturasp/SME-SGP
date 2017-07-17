@@ -582,7 +582,6 @@
     <None Include="Configs\samlProvider.config" />
     <None Include="Configs\session.config" />
     <Content Include="packages.config" />
-    <Content Include="Configs\identitysettings.json" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

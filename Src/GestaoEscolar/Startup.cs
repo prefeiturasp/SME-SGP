@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
+using MSTech.GestaoEscolar.Web.WebProject;
 using Owin;
 using System;
 using System.Linq;

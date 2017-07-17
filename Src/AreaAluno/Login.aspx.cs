@@ -20,7 +20,7 @@ namespace AreaAluno
             {
                if (!HttpContext.Current.User.Identity.IsAuthenticated)
                 {
-                    string provider = "mstech";
+                    string provider = IdentitySettingsConfig.IDSSettings.AuthenticationType;
                     Context.GetOwinContext().Authentication.Challenge(provider);
                 }
                 else

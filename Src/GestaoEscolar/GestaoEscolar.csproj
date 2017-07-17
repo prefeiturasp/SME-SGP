@@ -1544,7 +1544,6 @@
     <Compile Include="Documentos\RelatorioPedagogico\RelatorioPedagogico.aspx.designer.cs">
       <DependentUpon>RelatorioPedagogico.aspx</DependentUpon>
     </Compile>
-    <Compile Include="IdentitySettingsConfig.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4273,7 +4272,6 @@
     <Content Include="Includes\ckeditor\skins\moono\readme.md" />
     <Content Include="Includes\Angular\angular-charts\angular-chart.min.js.map" />
     <Content Include="Includes\Charts\LICENSE.md" />
-    <Content Include="Configs\identitysettings.json" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
