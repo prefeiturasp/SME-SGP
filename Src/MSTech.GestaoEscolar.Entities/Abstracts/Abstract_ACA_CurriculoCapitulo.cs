@@ -47,15 +47,13 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 
 		/// <summary>
 		/// Título do capítulo.
-		/// </summary>
-		[MSValidRange(200)]
+		/// </summary>		
 		[MSNotNullOrEmpty]
 		public virtual string crc_titulo { get; set; }
 
 		/// <summary>
 		/// Descrição do capítulo.
-		/// </summary>
-		[MSValidRange(4000)]
+		/// </summary>		
 		public virtual string crc_descricao { get; set; }
 
 		/// <summary>
