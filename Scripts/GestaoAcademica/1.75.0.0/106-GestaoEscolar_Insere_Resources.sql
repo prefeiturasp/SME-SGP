@@ -388,6 +388,21 @@ SET XACT_ABORT ON
         , @rcr_cultura = 'pt-BR'
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Sem lançamento de anotação de recuperação paralela'	
+		
+	EXEC MS_InsereResource 
+        @rcr_chave = 'ControleTurma.DiarioClasse.imgPlanoAulaSituacaoIncompleta' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Plano de aula preenchido sem o resumo das atividades desenvolvidas'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'ControleTurma.DiarioClasse.imgPlanoAulaSituacao' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Resumo das atividades desenvolvidas preenchido'	
+	
 
 -- Fechar transação     
 SET XACT_ABORT OFF 
