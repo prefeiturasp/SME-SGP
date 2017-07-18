@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using System.Configuration;
 using System.IO;
+using System.Web.Configuration;
 
 namespace MSTech.GestaoEscolar.Web.WebProject
 {
@@ -29,19 +30,19 @@ namespace MSTech.GestaoEscolar.Web.WebProject
             {
                 IdentitySettings settings = new IdentitySettings
                 {
-                    Cookies_AuthenticationType = ConfigurationManager.AppSettings["Cookies_AuthenticationType"],
-                    Cookies_CookieName = ConfigurationManager.AppSettings["Cookies_CookieName"],
-                    Cookies_LoginPath = ConfigurationManager.AppSettings["Cookies_LoginPath"],
-                    Cookies_CookieDomain = ConfigurationManager.AppSettings["Cookies_CookieDomain"],
-                    AuthenticationType = ConfigurationManager.AppSettings["AuthenticationType"],
-                    Authority = ConfigurationManager.AppSettings["Authority"],
-                    ClientId = ConfigurationManager.AppSettings["ClientId"],
-                    ClientSecret = ConfigurationManager.AppSettings["ClientSecret"],
-                    EndpointUserInfo = ConfigurationManager.AppSettings["EndpointUserInfo"],
-                    RedirectUri = ConfigurationManager.AppSettings["RedirectUri"],
-                    ResponseType = ConfigurationManager.AppSettings["ResponseType"],
-                    Scope = ConfigurationManager.AppSettings["Scope"],
-                    SignInAsAuthenticationType = ConfigurationManager.AppSettings["SignInAsAuthenticationType"]
+                    Cookies_AuthenticationType = WebConfigurationManager.AppSettings["Cookies_AuthenticationType"],
+                    Cookies_CookieName = WebConfigurationManager.AppSettings["Cookies_CookieName"],
+                    Cookies_LoginPath = WebConfigurationManager.AppSettings["Cookies_LoginPath"],
+                    Cookies_CookieDomain = WebConfigurationManager.AppSettings["Cookies_CookieDomain"],
+                    AuthenticationType = WebConfigurationManager.AppSettings["AuthenticationType"],
+                    Authority = WebConfigurationManager.AppSettings["Authority"],
+                    ClientId = WebConfigurationManager.AppSettings["ClientId"],
+                    ClientSecret = WebConfigurationManager.AppSettings["ClientSecret"],
+                    EndpointUserInfo = WebConfigurationManager.AppSettings["EndpointUserInfo"],
+                    RedirectUri = WebConfigurationManager.AppSettings["RedirectUri"],
+                    ResponseType = WebConfigurationManager.AppSettings["ResponseType"],
+                    Scope = WebConfigurationManager.AppSettings["Scope"],
+                    SignInAsAuthenticationType = WebConfigurationManager.AppSettings["SignInAsAuthenticationType"]
                 };
 
                 if (!settings.IsValid)
