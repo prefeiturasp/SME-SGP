@@ -604,14 +604,6 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
         /// </summary>
         private void InicializarTela()
         {
-            //Se for usuário administrador ou gestor permite gerar o relatório sem filtrar por escola
-            if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao ||
-                __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao)
-            {
-                _VS_PermiteSemEscola = true;
-                UCComboUAEscola.ObrigatorioEscola = false;
-            }
-
             _VS_AnosAnteriores = true;
             _VS_MostarComboEscola = false;
             UCComboTurma.Obrigatorio = UCCCursoCurriculo.Obrigatorio = UCComboCurriculoPeriodo.Obrigatorio = false;
