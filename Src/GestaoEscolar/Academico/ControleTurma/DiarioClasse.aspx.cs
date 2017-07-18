@@ -4789,6 +4789,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 // Apenas aulas dos dias anteriores sem plano de aula devem exibir o aviso.
                 Image imgSemPlanoAula = (Image)grvAulas.Rows[VS_grvRow].FindControl("imgSemPlanoAula");
                 if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date &&
+                    VS_EntitiesControleTurma.turma.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
                     imgSemPlanoAula.Visible = string.IsNullOrEmpty(entity.tau_planoAula)
@@ -4944,6 +4945,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 Image imgSemPlanoAula = (Image)grvAulas.Rows[VS_grvRow].FindControl("imgSemPlanoAula");
 
                 if (imgSemPlanoAula != null && entityTurmaAula.tau_data.Date < DateTime.Now.Date &&
+                    VS_EntitiesControleTurma.turma.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
                     imgSemPlanoAula.Visible = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula)
@@ -6137,6 +6139,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     // Apenas aulas dos dias anteriores sem plano de aula devem exibir o aviso.
                     Image imgSemPlanoAula = (Image)e.Row.FindControl("imgSemPlanoAula");
                     if (imgSemPlanoAula != null && dataAula.Date < DateTime.Now.Date &&
+                        VS_EntitiesControleTurma.turma.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno &&
                         UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                     {
                         imgSemPlanoAula.Visible = semPlanoAula && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)

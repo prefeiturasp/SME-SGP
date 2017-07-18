@@ -4188,7 +4188,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                 // Apenas aulas dos dias anteriores sem plano de aula devem exibir o aviso.
                 Image imgSemPlanoAula = (Image)e.Item.FindControl("imgSemPlanoAula");
                 HiddenField hdfSemPlanoAula = (HiddenField)e.Item.FindControl("hdfSemPlanoAula");
-                if (imgSemPlanoAula != null && hdfSemPlanoAula != null && Convert.ToDateTime(lblData.Text).Date < DateTime.Now.Date)
+                if (imgSemPlanoAula != null && hdfSemPlanoAula != null &&
+                    UCControleTurma1.VS_tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno &&
+                    Convert.ToDateTime(lblData.Text).Date < DateTime.Now.Date)
                 {
                     imgSemPlanoAula.Visible = Convert.ToBoolean(hdfSemPlanoAula.Value)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
