@@ -2910,6 +2910,14 @@
     <Compile Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx.designer.cs">
       <DependentUpon>UCPlanejamentoProjetos.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebControls\PluginNotificacao\NotificacaoConfig.cs" />
+    <Compile Include="WebControls\PluginNotificacao\UCPluginNotificacao.ascx.cs">
+      <DependentUpon>UCPluginNotificacao.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\PluginNotificacao\UCPluginNotificacao.ascx.designer.cs">
+      <DependentUpon>UCPluginNotificacao.ascx</DependentUpon>
+    </Compile>
     <Compile Include="WebControls\RelatorioPedagogico\imagem.ashx.cs">
       <DependentUpon>imagem.ashx</DependentUpon>
     </Compile>
@@ -4139,6 +4147,12 @@
     <Content Include="Includes\jsUtilGestao.js" />
     <Content Include="Includes\jsBuscaParametrizacaoDisciplinas.js" />
     <Content Include="Includes\modernizr-custom.js" />
+    <None Include="Includes\notify\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Includes\notify\jquery-1.6.4.js" />
+    <Content Include="Includes\notify\jquery-1.6.4.min.js" />
+    <Content Include="Includes\notify\jquery.signalR-2.2.2.js" />
+    <Content Include="Includes\notify\jquery.signalR-2.2.2.min.js" />
+    <Content Include="Includes\notify\plg-notify.min.js" />
     <Content Include="Includes\printThis.js" />
     <Content Include="Includes\jquery.PrintBoletinsAlunos.js" />
     <Content Include="Includes\redactor\redactor-iframe.css" />
@@ -4252,6 +4266,7 @@
     <Content Include="WebControls\OrientacaoCurricular\UCNivelOrientacao.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoAnual.ascx" />
     <Content Include="WebControls\PlanejamentoAnual\UCPlanejamentoProjetos.ascx" />
+    <Content Include="WebControls\PluginNotificacao\UCPluginNotificacao.ascx" />
     <Content Include="WebControls\RelatorioPedagogico\RelatorioPedagogico.aspx" />
     <Content Include="WebControls\RelatorioPedagogico\UCRelatorioPedagogico.ascx" />
     <Content Include="WebControls\Relatorio\UCDevReportView.ascx" />

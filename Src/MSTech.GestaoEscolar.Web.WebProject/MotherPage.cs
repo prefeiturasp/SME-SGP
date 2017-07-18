@@ -176,6 +176,7 @@ namespace MSTech.GestaoEscolar.Web.WebProject
             if (sm != null)
             {
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryCore));
+                sm.Scripts.Add(new ScriptReference("~/Includes/notify/jquery-1.6.4.min.js"));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryUI));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryScrollTo));
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.StylesheetToggle));
@@ -185,6 +186,9 @@ namespace MSTech.GestaoEscolar.Web.WebProject
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsUtilGestao.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/jsResponsividadeTabelas.js"));
                 sm.Scripts.Add(new ScriptReference("~/Includes/modernizr-custom.js"));
+                                
+                sm.Scripts.Add(new ScriptReference("~/Includes/notify/jquery.signalR-2.2.2.min.js"));
+                sm.Scripts.Add(new ScriptReference("~/Includes/notify/plg-notify.min.js"));
             }
         }
 
