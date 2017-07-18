@@ -41,7 +41,7 @@ SET XACT_ABORT ON
 	
 	EXEC MS_InsereResource 
 		@rcr_chave = 'pnlBusca.Text' 
-		, @rcr_NomeResource = 'GestaoEscolar.Relatorios.AcoesRealizadas.Busca, pnlBusca.Text'
+		, @rcr_NomeResource = 'GestaoEscolar.Relatorios.AcoesRealizadas.Busca'
 		, @rcr_cultura = 'pt-BR'
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Consulta de ações realizadas'

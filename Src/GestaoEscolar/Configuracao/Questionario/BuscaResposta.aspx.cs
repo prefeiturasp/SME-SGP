@@ -339,7 +339,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qtc_id = _VS_qtc_id });
                 CLS_Questionario Questionario = CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id });
 
-                ExibePeso = (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
+                ExibePeso = ((Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao) || (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.SelecaoUnica)) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
 
                 lblInfo.Text = "<b>Questionário: </b>" + CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id }).qst_titulo +
                                 "<br><b>Conteúdo: </b>" + Conteudo.qtc_texto + "<br>";
