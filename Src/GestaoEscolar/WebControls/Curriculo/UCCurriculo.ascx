@@ -323,7 +323,7 @@
                                                             <EditItemTemplate>
                                                                 <asp:Panel ID="pnlItem" runat="server">
                                                                     <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' TextMode="MultiLine" Rows="2" SkinID="text60C"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' TextMode="MultiLine" Rows="2"></asp:TextBox>
                                                                     <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage %>"
                                                                         ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
                                                                     <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
@@ -400,7 +400,7 @@
                                                                             <EditItemTemplate>
                                                                                 <asp:Panel ID="pnlItem" runat="server">
                                                                                     <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
-                                                                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' TextMode="MultiLine" Rows="2" SkinID="text60C"></asp:TextBox>
+                                                                                    <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("cro_descricao") %>' TextMode="MultiLine" Rows="2" ></asp:TextBox>
                                                                                     <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.rfvDescricao.ErrorMessage %>"
                                                                                         ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
                                                                                     <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
