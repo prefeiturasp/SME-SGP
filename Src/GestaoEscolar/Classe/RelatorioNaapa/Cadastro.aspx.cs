@@ -280,7 +280,7 @@ namespace GestaoEscolar.Classe.RelatorioNaapa
                     index = int.Parse(e.CommandArgument.ToString());
                     reap_id = Convert.ToInt32(grvLancamentos.DataKeys[index].Values["reap_id"]);
 
-                    if (CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.Delete(new CLS_RelatorioPreenchimentoAlunoTurmaDisciplina { reap_id = reap_id }))
+                    if (CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.Delete(new CLS_RelatorioPreenchimentoAlunoTurmaDisciplina { reap_id = reap_id, tur_id = VS_tur_id }, UCCRelatorioAtendimento.Valor))
                     {
                         // Recarrega o grid de lançamentos
                         grvLancamentos.DataSource = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaPorAlunoTurmaRelatorio(VS_alu_id, VS_tur_id, UCCRelatorioAtendimento.Valor);

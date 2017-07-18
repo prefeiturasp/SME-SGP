@@ -168,6 +168,39 @@ namespace MSTech.GestaoEscolar.BLL
                             CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(entity.tud_id, entity.tpc_id, dao._Banco);
                         }
                     }
+                    else if (relatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.NAAPA)
+                    {
+                        List<AlunoFechamentoPendencia> FilaProcessamento = new List<AlunoFechamentoPendencia>();
+                        ACA_CalendarioAnual cal = ACA_CalendarioAnualBO.SelecionaPorTurma(entity.tur_id, dao._Banco);
+                        var periodos = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(cal.cal_id, GestaoEscolarUtilBO.MinutosCacheLongo);
+                        FilaProcessamento.AddRange(TUR_TurmaDisciplinaBO.GetSelectBy_Turma(entity.tur_id, dao._Banco, GestaoEscolarUtilBO.MinutosCacheLongo)
+                            .SelectMany
+                            (
+                                tud =>
+
+                                periodos.Select
+                                (
+                                    tpc =>
+                                    new AlunoFechamentoPendencia
+                                    {
+                                        tud_id = tud.tud_id
+                                        ,
+                                        tpc_id = tpc.tpc_id
+                                        ,
+                                        afp_frequencia = true
+                                        ,
+                                        afp_nota = true
+                                        ,
+                                        afp_processado = 2
+                                    }
+                                ).ToList()
+                            ));
+
+                        if (FilaProcessamento.Any())
+                        {
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(FilaProcessamento, dao._Banco);
+                        }
+                    }
                 }
                 return sucesso;
             }
@@ -184,5 +217,6 @@ namespace MSTech.GestaoEscolar.BLL
                 }
             }
         }
+        
     }
 }
