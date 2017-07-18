@@ -162,6 +162,7 @@
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!crc_titulo.Value</Value>
+                              <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
