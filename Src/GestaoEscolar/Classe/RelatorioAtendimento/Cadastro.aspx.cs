@@ -464,6 +464,7 @@
             Session["DadosPaginaRetorno"] = VS_DadosPaginaRetorno;
             Session["VS_DadosTurmas"] = VS_DadosPaginaRetorno_MinhasTurmas;
             Session["alu_id_RelatorioAEE"] = VS_alu_id;
+            Session["tur_idRegular_RelatorioAEE"] = VS_tur_id;
             RedirecionarPagina("Cadastro.aspx");
         }
 
