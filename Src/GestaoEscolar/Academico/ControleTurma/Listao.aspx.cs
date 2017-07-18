@@ -1393,7 +1393,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                            where (bool)dr["semPlanoAula"] && Convert.ToDateTime(dr["data"]).Date < DateTime.Now
                                            select dr).Count() > 0;
 
-                if (existeAulaSemPlano
+                if (existeAulaSemPlano && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                         || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
