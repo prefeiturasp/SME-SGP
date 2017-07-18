@@ -609,7 +609,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                 __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao)
             {
                 _VS_PermiteSemEscola = true;
-                UCComboUAEscola.ObrigatorioEscola = false;
+                UCComboUAEscola.ObrigatorioEscola = true;
             }
 
             _VS_AnosAnteriores = true;
