@@ -14,6 +14,7 @@ namespace MSTech.GestaoEscolar.BLL
     using Data.Common;
     using Validation.Exceptions;
     using System;
+    using MSTech.GestaoEscolar.BLL.Caching;
 
     /// <summary>
     /// Sem lançamento de relatorio (1 - AEE, 2 - NAAPA, 4 - RP) Enumerador binário
@@ -94,6 +95,24 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Limpa o cache
+        /// </summary>
+        public static void LimpaCache()
+        {
+            GestaoEscolarUtilBO.LimpaCache("Cache_ConfiguracaoServicoPendencia_SelectTodasBy_tne_id_tme_id_tur_tipo");
+        }
+
+        /// <summary>
+        /// Retorna a chave do cache utilizada para guardar as configurações de serviço de pendência não excluídas logicamente, de acordo com tipo de nível de ensino,
+        /// tipo de modalidade de ensino e tipo de turma.
+        /// </summary>
+        /// <returns>Chave</returns>
+        private static string RetornaChaveCache_SelectTodasBy_tne_id_tme_id_tur_tipo(int tne_id, int tme_id, int tur_tipo)
+        {
+            return string.Format("Cache_ConfiguracaoServicoPendencia_SelectTodasBy_tne_id_tme_id_tur_tipo_{0}_{1}_{2}", tne_id, tme_id, tur_tipo);
+        }
+
+        /// <summary>
         /// Retorna as configurações de serviço de pendência não excluídas logicamente, de acordo com tipo de nível de ensino,
         /// tipo de modalidade de ensino e tipo de turma.
         /// </summary>   
@@ -105,13 +124,36 @@ namespace MSTech.GestaoEscolar.BLL
             int tne_id
             , int tme_id
             , int tur_tipo
+            , int appMinutosCacheLongo = 0
         )
         {
             ACA_ConfiguracaoServicoPendenciaDAO dao = new ACA_ConfiguracaoServicoPendenciaDAO();
-            DataTable dt = dao.SelectTodasBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo, false, 1, 0, out totalRecords);
+            List<ACA_ConfiguracaoServicoPendencia> dados = null;
 
-            return (from DataRow dr in dt.Rows
-                    select (ACA_ConfiguracaoServicoPendencia)GestaoEscolarUtilBO.DataRowToEntity(dr, new ACA_ConfiguracaoServicoPendencia())).ToList();
+            if (appMinutosCacheLongo > 0)
+            {
+                // Chave padrão do cache - nome do método + parâmetros.
+                string chave = RetornaChaveCache_SelectTodasBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo);
+
+                dados = CacheManager.Factory.Get
+                            (
+                                chave,
+                                () =>
+                                {
+                                     return (from DataRow dr in dao.SelectTodasBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo, false, 1, 0, out totalRecords).Rows
+                                             select (ACA_ConfiguracaoServicoPendencia)GestaoEscolarUtilBO.DataRowToEntity(dr, new ACA_ConfiguracaoServicoPendencia())).ToList();
+                                },
+                                appMinutosCacheLongo
+                            );
+            }
+            else
+            {
+                DataTable dt = dao.SelectTodasBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo, false, 1, 0, out totalRecords);
+                dados = (from DataRow dr in dt.Rows
+                         select (ACA_ConfiguracaoServicoPendencia)GestaoEscolarUtilBO.DataRowToEntity(dr, new ACA_ConfiguracaoServicoPendencia())).ToList();
+            }
+
+            return dados;
         }
     }
 }
