@@ -701,25 +701,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     );
             }
         }
-            
-        /// <summary>
-        /// Guarda as configurações do serviço de pendência.
-        /// </summary>
-        private List<ACA_ConfiguracaoServicoPendencia> VS_ListaConfiguracaoServicoPendencia
-        {
-            get
-            {
-                return
-                    (List<ACA_ConfiguracaoServicoPendencia>)
-                    (
-                        ViewState["VS_ListaConfiguracaoServicoPendencia"] ??
-                        (
-                            ViewState["VS_ListaConfiguracaoServicoPendencia"] = ACA_ConfiguracaoServicoPendenciaBO.SelectTodasBy_tne_id_tme_id_tur_tipo(VS_EntitiesControleTurma.curso.tne_id, VS_EntitiesControleTurma.curso.tme_id, VS_EntitiesControleTurma.turma.tur_tipo, ApplicationWEB.AppMinutosCacheLongo)
-                        )
-                    );
-            }
-        }
-
+           
         /// <summary>
         /// Guarda as notas de relatório.
         /// </summary>
@@ -4807,7 +4789,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                 // Apenas aulas dos dias anteriores sem plano de aula devem exibir o aviso.
                 Image imgSemPlanoAula = (Image)grvAulas.Rows[VS_grvRow].FindControl("imgSemPlanoAula");
                 if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date &&
-                    !VS_ListaConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula) &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
                     imgSemPlanoAula.Visible = string.IsNullOrEmpty(entity.tau_planoAula)
@@ -4963,7 +4944,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                 Image imgSemPlanoAula = (Image)grvAulas.Rows[VS_grvRow].FindControl("imgSemPlanoAula");
 
                 if (imgSemPlanoAula != null && entityTurmaAula.tau_data.Date < DateTime.Now.Date &&
-                    !VS_ListaConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula) &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
                     imgSemPlanoAula.Visible = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula)
@@ -6157,7 +6137,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                     // Apenas aulas dos dias anteriores sem plano de aula devem exibir o aviso.
                     Image imgSemPlanoAula = (Image)e.Row.FindControl("imgSemPlanoAula");
                     if (imgSemPlanoAula != null && dataAula.Date < DateTime.Now.Date &&
-                        !VS_ListaConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula) &&
                         UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                     {
                         imgSemPlanoAula.Visible = semPlanoAula && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)

@@ -350,7 +350,6 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
 
                     if (ACA_ConfiguracaoServicoPendenciaBO.Delete(entity))
                     {
-                        ACA_ConfiguracaoServicoPendenciaBO.LimpaCache();
                         grvConfigServPendencia.PageIndex = 0;
                         grvConfigServPendencia.DataBind();
                         ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, "csp_id: " + csp_id);

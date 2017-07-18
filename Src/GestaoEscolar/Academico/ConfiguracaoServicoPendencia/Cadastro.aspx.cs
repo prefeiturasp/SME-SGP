@@ -153,7 +153,6 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             
             if (ACA_ConfiguracaoServicoPendenciaBO.Save(entity))
             {
-                ACA_ConfiguracaoServicoPendenciaBO.LimpaCache();
                 string message = "";
                 if (VS_csp_id <= 0)
                 {

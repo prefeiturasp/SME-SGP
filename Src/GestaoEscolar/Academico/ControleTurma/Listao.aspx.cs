@@ -363,25 +363,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     );
             }
         }
-
-        /// <summary>
-        /// Guarda as configurações do serviço de pendência.
-        /// </summary>
-        private List<ACA_ConfiguracaoServicoPendencia> VS_ListaConfiguracaoServicoPendencia
-        {
-            get
-            {
-                return
-                    (List<ACA_ConfiguracaoServicoPendencia>)
-                    (
-                        ViewState["VS_ListaConfiguracaoServicoPendencia"] ??
-                        (
-                            ViewState["VS_ListaConfiguracaoServicoPendencia"] = ACA_ConfiguracaoServicoPendenciaBO.SelectTodasBy_tne_id_tme_id_tur_tipo(VS_EntitiesControleTurma.curso.tne_id, VS_EntitiesControleTurma.curso.tme_id, UCControleTurma1.VS_tur_tipo, ApplicationWEB.AppMinutosCacheLongo)
-                        )
-                    );
-            }
-        }
-
+        
         /// <summary>
         /// Propriedade que indica o COC está fechado para lançamento.
         /// </summary>
@@ -1411,7 +1393,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                            where (bool)dr["semPlanoAula"] && Convert.ToDateTime(dr["data"]).Date < DateTime.Now
                                            select dr).Count() > 0;
 
-                if (existeAulaSemPlano && !VS_ListaConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula)
+                if (existeAulaSemPlano
                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                         || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
@@ -4207,7 +4189,6 @@ namespace GestaoEscolar.Academico.ControleTurma
                 Image imgSemPlanoAula = (Image)e.Item.FindControl("imgSemPlanoAula");
                 HiddenField hdfSemPlanoAula = (HiddenField)e.Item.FindControl("hdfSemPlanoAula");
                 if (imgSemPlanoAula != null && hdfSemPlanoAula != null &&
-                    !VS_ListaConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula) &&
                     Convert.ToDateTime(lblData.Text).Date < DateTime.Now.Date)
                 {
                     imgSemPlanoAula.Visible = Convert.ToBoolean(hdfSemPlanoAula.Value)
