@@ -99,15 +99,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
-                Param.ParameterName = "@crc_titulo";
-                Param.Size = 200;
+                Param.ParameterName = "@crc_titulo";         
                 Param.Value = entity.crc_titulo;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
                 Param.ParameterName = "@crc_descricao";
-                Param.Size = 4000;
                 if (!string.IsNullOrEmpty(entity.crc_descricao))
                 {
                     Param.Value = entity.crc_descricao;

@@ -55,8 +55,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 
 		/// <summary>
 		/// Descrição do objetivo.
-		/// </summary>
-		[MSValidRange(500)]
+		/// </summary>		
 		[MSNotNullOrEmpty]
 		public virtual string cro_descricao { get; set; }
 

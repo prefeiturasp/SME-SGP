@@ -35,14 +35,11 @@ public partial class Configuracao_TipoJustificativaFalta_Cadastro : MotherPageLo
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        ckbAbonaFaltas.Visible = false;
         if (!IsPostBack)
         {
             if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
             {
                 Carregar(PreviousPage.EditItem);
-                ckbAbonaFaltas.Enabled = false;
-                ckbAbonaFaltas.Visible = false;
                 chkStuacao.Visible = true;
             }
             else

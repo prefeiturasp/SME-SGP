@@ -92,7 +92,7 @@ namespace MSTech.GestaoEscolar.BLL
             ACA_ConfiguracaoServicoPendenciaDAO dao = new ACA_ConfiguracaoServicoPendenciaDAO();
             return dao.SelectBy_tne_id_tme_id_tur_tipo(tne_id, tme_id, tur_tipo, paginado, currentPage / pageSize, pageSize, out totalRecords);
         }
-
+        
         /// <summary>
         /// Retorna as configurações de serviço de pendência não excluídas logicamente, de acordo com tipo de nível de ensino,
         /// tipo de modalidade de ensino e tipo de turma.
