@@ -54,8 +54,8 @@
                     </div>
                 </div>
 
-                <uc1:UCComboUAEscola runat="server" ID="UCComboUAEscola" AsteriscoObg="true" ObrigatorioEscola="true" ObrigatorioUA="true" ValidationGroup="Relatorio"
-                    CarregarEscolaAutomatico="true" MostraApenasAtivas="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" />
+                <uc1:UCComboUAEscola runat="server" ID="UCComboUAEscola" ValidationGroup="Relatorio" CarregarEscolaAutomatico="true" MostraApenasAtivas="true" 
+                    MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" AsteriscoObg="true" ObrigatorioEscola="true" ObrigatorioUA="true" />
 
                 <uc1:UCCCalendario runat="server" ID="UCCCalendario" Obrigatorio="false" MostrarMensagemSelecione="true" PermiteEditar="false" ValidationGroup="Relatorio" />
 
