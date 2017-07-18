@@ -1467,13 +1467,16 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                         ddlPareceres, lblNotaPosConselho, tpc_id, true, esconderPendencia, true, false);
 
                     bool existeAulaBimestre = false;
-                    bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.existeAulaBimestre")), out existeAulaBimestre);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.existeAulaBimestre") != null)
+                        bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.existeAulaBimestre")), out existeAulaBimestre);
 
                     bool possuiAnotacaoRP = false;
-                    bool.TryParse(DataBinder.Eval(e.Item.DataItem, "nota.possuiAnotacaoRP").ToString(), out possuiAnotacaoRP);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.possuiAnotacaoRP") != null)
+                        bool.TryParse(DataBinder.Eval(e.Item.DataItem, "nota.possuiAnotacaoRP").ToString(), out possuiAnotacaoRP);
 
                     bool existeAulaSemPlano = false;
-                    bool.TryParse(DataBinder.Eval(e.Item.DataItem, "nota.existeAulaSemPlano").ToString(), out existeAulaSemPlano);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.existeAulaSemPlano") != null)
+                        bool.TryParse(DataBinder.Eval(e.Item.DataItem, "nota.existeAulaSemPlano").ToString(), out existeAulaSemPlano);
 
                     eSituacaoMatriculaTurmaDisicplina SituacaoDisciplina = (eSituacaoMatriculaTurmaDisicplina)(DataBinder.Eval(e.Item.DataItem, "nota.SituacaoDisciplina") ?? eSituacaoMatriculaTurmaDisicplina.Ativo);
 
@@ -1493,9 +1496,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     bool recuperacao = false;
                     bool enriquecimentoCurricular = false;
                     bool ensinoInfantil = false;
-                    bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.recuperacao")), out recuperacao);
-                    bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.enriquecimentoCurricular")), out enriquecimentoCurricular);
-                    bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.ensinoInfantil")), out ensinoInfantil);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.recuperacao") != null)
+                        bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.recuperacao")), out recuperacao);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.enriquecimentoCurricular") != null)
+                        bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.enriquecimentoCurricular")), out enriquecimentoCurricular);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.ensinoInfantil") != null)
+                        bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.ensinoInfantil")), out ensinoInfantil);
 
                     bool validarQtdAulas = (recuperacao || enriquecimentoCurricular || ensinoInfantil);
                     HtmlTableCell tdQtdFaltas = (HtmlTableCell)e.Item.FindControl("tdFaltas");
