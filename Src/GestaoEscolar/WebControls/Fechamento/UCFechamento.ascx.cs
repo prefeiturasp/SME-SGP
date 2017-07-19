@@ -19,6 +19,16 @@ namespace GestaoEscolar.WebControls.Fechamento
 {
     public partial class UCFechamento : MotherUserControl
     {
+        #region DELEGATES
+
+        public delegate void commandAbrirRelatorioRP(long alu_id, string tds_idRP);
+        public event commandAbrirRelatorioRP AbrirRelatorioRP;
+
+        public delegate void commandAbrirRelatorioAEE(long alu_id);
+        public event commandAbrirRelatorioAEE AbrirRelatorioAEE;
+
+        #endregion DELEGATES
+
         #region Estruturas
 
         /// <summary>
@@ -1197,6 +1207,12 @@ namespace GestaoEscolar.WebControls.Fechamento
 
                 UCFechamentoPadrao.AbrirRelatorio += UCFechamento_AbrirRelatorio;
                 UCFechamentoFinal.AbrirRelatorio += UCFechamento_AbrirRelatorio;
+
+                UCFechamentoPadrao.AbrirRelatorioRP += UCFechamento_AbrirRelatorioRP;
+                UCFechamentoFinal.AbrirRelatorioRP += UCFechamento_AbrirRelatorioRP;
+
+                UCFechamentoPadrao.AbrirRelatorioAEE += UCFechamento_AbrirRelatorioAEE;
+                UCFechamentoFinal.AbrirRelatorioAEE += UCFechamento_AbrirRelatorioAEE;
             }
             catch (Exception err)
             {
@@ -1465,6 +1481,22 @@ namespace GestaoEscolar.WebControls.Fechamento
             UCAlunoEfetivacaoObservacao_AbrirRelatorio(idRelatorio, nota, arq_idRelatorio, dadosAluno);
         }
 
+        private void UCFechamento_AbrirRelatorioRP(long alu_id, string tds_idRP)
+        {
+            if (AbrirRelatorioRP != null)
+            {
+                AbrirRelatorioRP(alu_id, tds_idRP);
+            }
+        }
+
+        private void UCFechamento_AbrirRelatorioAEE(long alu_id)
+        {
+            if (AbrirRelatorioAEE != null)
+            {
+                AbrirRelatorioAEE(alu_id);
+            }
+        }
+
         #endregion Eventos
 
         #region Fila de processamento
@@ -1500,9 +1532,7 @@ namespace GestaoEscolar.WebControls.Fechamento
                     CacheManager.Factory.RemoveByPattern(pattern);
                     pattern = String.Format("{0}_{1}", ModelCache.FECHAMENTO_AUTO_FINAL_COMPONENTES_REGENCIA_PATTERN_KEY, VS_tur_id);
                     CacheManager.Factory.RemoveByPattern(pattern);
-                    pattern = String.Format(ModelCache.PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY, VS_Turma.esc_id, VS_Turma.uni_id, VS_Turma.cal_id, Tud_id);
-                    CacheManager.Factory.Remove(pattern);
-                    pattern = String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, VS_Turma.esc_id, VS_Turma.uni_id, VS_Turma.cal_id, Tud_id);
+                    pattern = String.Format(ModelCache.PENDENCIAS_DISCIPLINA_MODEL_KEY, VS_Turma.esc_id, VS_Turma.uni_id, VS_CalendarioAnual.cal_ano , Tud_id);
                     CacheManager.Factory.Remove(pattern);
                     AsyncProcessarFilaPendente = new CLS_AlunoFechamentoPendenciaBO.ProcessarFilaPendente(CLS_AlunoFechamentoPendenciaBO.Processar);
 

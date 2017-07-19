@@ -114,6 +114,10 @@
       <FullPath>DocDctSubRelTarjetaBimestralRegencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>FrequenciaMensal.rdl</Name>
+      <FullPath>FrequenciaMensal.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>IndicadorFrequenciaDRE.rdl</Name>
       <FullPath>IndicadorFrequenciaDRE.rdl</FullPath>
     </ProjectItem>
@@ -122,8 +126,20 @@
       <FullPath>IndicadorFrequenciaPeriodoCurso.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>QuantitativoSugestoes.rdl</Name>
+      <FullPath>QuantitativoSugestoes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>RelatorioGeralAtendimento.rdl</Name>
+      <FullPath>RelatorioGeralAtendimento.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>RelatorioObjetoAprendizagem.rdl</Name>
       <FullPath>RelatorioObjetoAprendizagem.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>RelatorioSugestoesCurriculo.rdl</Name>
+      <FullPath>RelatorioSugestoesCurriculo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SubAtaEnriquecimentoCurricular.rdl</Name>
@@ -154,8 +170,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>FrequenciaMensal.rdl</Name>
-      <FullPath>FrequenciaMensal.rdl</FullPath>
+      <Name>RelatorioAcoesRealizadas.rdl</Name>
+      <FullPath>RelatorioAcoesRealizadas.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -176,9 +192,9 @@
       <Options>
         <OutputPath>bin\DebugLocal</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://dev-sql14cli/ReportServer</TargetServerURL>
-        <TargetFolder>/GestaoEscolar/DES_SPO_GestaoPedagogica/</TargetFolder>
-        <TargetDataSourceFolder>/GestaoEscolar/DES_SPO_GestaoPedagogica/</TargetDataSourceFolder>
+        <TargetServerURL>http://10.10.10.54/Reportserver</TargetServerURL>
+        <TargetFolder>/GestaoEscolar/PUB_DEV_SPO_GestaoPedagogica/</TargetFolder>
+        <TargetDataSourceFolder>/GestaoEscolar/PUB_DEV_SPO_GestaoPedagogica/</TargetDataSourceFolder>
       </Options>
     </Configuration>
     <Configuration>

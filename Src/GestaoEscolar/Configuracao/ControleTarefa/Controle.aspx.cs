@@ -120,6 +120,17 @@ namespace GestaoEscolar.Configuracao.ControleTarefa
             }
         }
 
+        protected void Page_Load(object source, EventArgs e)
+        {
+            if (__SessionWEB.__UsuarioWEB != null && __SessionWEB.__UsuarioWEB.Grupo != null)
+            {
+                if (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.Administracao)
+                {
+                    Response.Redirect("~/Index.aspx", false);
+                }
+            }
+        }
+
         #endregion
 
         #region Eventos
@@ -167,15 +178,15 @@ namespace GestaoEscolar.Configuracao.ControleTarefa
             catch (Exception ex)
             {
                 _lblMessage.Visible = true;
-                _lblMessage.Text = UtilBO.GetErroMessage("Erro na operação "+ e.CommandName +" trigger!", UtilBO.TipoMensagem.Erro);
-                MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB._GravaErro(ex);  
+                _lblMessage.Text = UtilBO.GetErroMessage("Erro na operação " + e.CommandName + " trigger!", UtilBO.TipoMensagem.Erro);
+                MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB._GravaErro(ex);
             }
         }
-        
+
         protected void btnAddTrigger_Click(object sender, EventArgs e)
         {
             try
-            {                   
+            {
                 if (Page.IsValid)
                 {
                     string groupName = GroupName;
@@ -192,11 +203,11 @@ namespace GestaoEscolar.Configuracao.ControleTarefa
                     this.txtTrigger.Text = "";
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 _lblMessage.Visible = true;
                 _lblMessage.Text = UtilBO.GetErroMessage("Erro ao salvar trigger!", UtilBO.TipoMensagem.Erro);
-                MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB._GravaErro(ex);   
+                MSTech.GestaoEscolar.Web.WebProject.ApplicationWEB._GravaErro(ex);
             }
         }
 

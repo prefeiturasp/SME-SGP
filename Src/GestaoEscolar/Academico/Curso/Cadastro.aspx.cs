@@ -493,17 +493,6 @@ public partial class Academico_Curso_Cadastro : MotherPageLogado
                 UCComboTipoCurriculoPeriodo.MostrarMessageSelecione = true;
                 UCComboTipoCurriculoPeriodo.PermiteEditar = true;
 
-                // Se o parâmetro disciplina eletiva do aluno não estiver setado, não exibe essa aba de cadastro
-                string stds_id = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-                if (string.IsNullOrEmpty(stds_id))
-                {
-                    _lblEletivasAlunos.Visible = false;
-                    _txtEletivasAlunos.Visible = false;
-                    aDisciplinasEletivasAlunos.Visible = false;
-                    divGridEletivasAlunos.Visible = false;
-                    divDadosEletivasAlunos.Visible = false;
-                }
-
                 divFundoFrente.Visible = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_FUNDO_CARTEIRINHA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
             }
             catch (Exception ex)
@@ -1398,6 +1387,7 @@ public partial class Academico_Curso_Cadastro : MotherPageLogado
                 {
                     UCComboTipoDisciplina1.Valor = Convert.ToInt32(_VS_disciplinas.Rows[i]["tds_id"].ToString());
                     _txtCodigoDisciplina.Text = _VS_disciplinas.Rows[i]["dis_codigo"].ToString();
+                    _txtCargaHorariaExtraClasse.Text = _VS_disciplinas.Rows[i]["dis_cargaHorariaExtraClasse"].ToString();
                     _txtNomeDisciplina.Text = _VS_disciplinas.Rows[i]["dis_nome"].ToString().Trim();
                     _txtNomeAbreviadoDisciplina.Text = _VS_disciplinas.Rows[i]["dis_nomeAbreviado"].ToString().Trim();
 
@@ -1417,6 +1407,7 @@ public partial class Academico_Curso_Cadastro : MotherPageLogado
             {
                 _txtNomeAbreviadoDisciplina.Enabled = false;
                 _txtCodigoDisciplina.Enabled = false;
+                _txtCargaHorariaExtraClasse.Enabled = false;
             }
         }
 

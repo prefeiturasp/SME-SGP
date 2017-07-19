@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace GestaoEscolar.Academico.ControleTurma
 {
@@ -654,6 +655,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 UCNavegacaoTelaPeriodo.OnAlteraPeriodo += CarregarTela;
                 UCSelecaoDisciplinaCompartilhada1.SelecionarDisciplina += UCSelecaoDisciplinaCompartilhada1_SelecionarDisciplina;
                 UCControleTurma1.chkTurmasNormaisMultisseriadasIndexChanged += UCControleTurma_chkTurmasNormaisMultisseriadasIndexChanged;
+                UCFechamento.AbrirRelatorioRP += UCFechamento_AbrirRelatorioRP;
+                UCFechamento.AbrirRelatorioAEE += UCFechamento_AbrirRelatorioAEE;
 
                 bool mudaCorTitulo = VS_cal_ano < DateTime.Now.Year && VS_turmasAnoAtual && VS_EntitiesControleTurma.turma.tur_situacao == 1;
 
@@ -668,6 +671,32 @@ namespace GestaoEscolar.Academico.ControleTurma
                 ApplicationWEB._GravaErro(ex);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
+        }
+
+        private void UCFechamento_AbrirRelatorioRP(long alu_id, string tds_idRP)
+        {
+            Session.Remove("alu_id_RelatorioRP");
+            Session.Remove("tds_id_RelatorioRP");
+            Session.Remove("PaginaRetorno_RelatorioRP");
+
+            Session.Add("alu_id_RelatorioRP", alu_id);
+            Session.Add("tds_id_RelatorioRP", -1);
+            Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            RedirecionarPagina("~/Classe/RelatorioRecuperacaoParalela/Cadastro.aspx");
+        }
+
+        private void UCFechamento_AbrirRelatorioAEE(long alu_id)
+        {
+            Session.Remove("alu_id_RelatorioAEE");
+            Session.Remove("PaginaRetorno_RelatorioAEE");
+
+            Session.Add("alu_id_RelatorioAEE", alu_id);
+            Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Fechamento.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
         }
 
         #endregion Eventos

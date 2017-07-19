@@ -84,7 +84,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
+			Param.DbType = DbType.String;
 			Param.ParameterName = "@cur_codigo";
 			Param.Size = 10;
 				if(!string.IsNullOrEmpty(entity.cur_codigo))
@@ -98,14 +98,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
+			Param.DbType = DbType.String;
 			Param.ParameterName = "@cur_nome";
 			Param.Size = 200;
 			Param.Value = entity.cur_nome;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
+			Param.DbType = DbType.String;
 			Param.ParameterName = "@cur_nome_abreviado";
 			Param.Size = 20;
 				if(!string.IsNullOrEmpty(entity.cur_nome_abreviado))
@@ -147,16 +147,16 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.DateTime2;
+			Param.DbType = DbType.Date;
 			Param.ParameterName = "@cur_vigenciaInicio";
-			Param.Size = 20;
+
 			Param.Value = entity.cur_vigenciaInicio;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.DateTime2;
+			Param.DbType = DbType.Date;
 			Param.ParameterName = "@cur_vigenciaFim";
-			Param.Size = 20;
+
 				if(entity.cur_vigenciaFim!= new DateTime())
 				{
 					Param.Value = entity.cur_vigenciaFim;
@@ -178,7 +178,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.DbType = DbType.Boolean;
 			Param.ParameterName = "@cur_conflitoTurnoSR";
 			Param.Size = 1;
-				Param.Value = entity.cur_conflitoTurnoSR;
+			Param.Value = entity.cur_conflitoTurnoSR;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
@@ -188,16 +188,11 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.cur_situacao;
 			qs.Parameters.Add(Param);
 
-			
-
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Decimal;
 			Param.ParameterName = "@cur_cargaHoraria";
-			Param.Size = 9;
-				Param.Value = entity.cur_cargaHoraria;
+			Param.Value = entity.cur_cargaHoraria;
 			qs.Parameters.Add(Param);
-
-
 			}
 		}
 		
@@ -246,7 +241,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
+			Param.DbType = DbType.String;
 			Param.ParameterName = "@cur_codigo";
 			Param.Size = 10;
 				if(!string.IsNullOrEmpty(entity.cur_codigo))
@@ -260,14 +255,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
+			Param.DbType = DbType.String;
 			Param.ParameterName = "@cur_nome";
 			Param.Size = 200;
 			Param.Value = entity.cur_nome;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.AnsiString;
+			Param.DbType = DbType.String;
 			Param.ParameterName = "@cur_nome_abreviado";
 			Param.Size = 20;
 				if(!string.IsNullOrEmpty(entity.cur_nome_abreviado))
@@ -309,16 +304,16 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.DateTime2;
+			Param.DbType = DbType.Date;
 			Param.ParameterName = "@cur_vigenciaInicio";
-			Param.Size = 20;
+
 			Param.Value = entity.cur_vigenciaInicio;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
-			Param.DbType = DbType.DateTime2;
+			Param.DbType = DbType.Date;
 			Param.ParameterName = "@cur_vigenciaFim";
-			Param.Size = 20;
+
 				if(entity.cur_vigenciaFim!= new DateTime())
 				{
 					Param.Value = entity.cur_vigenciaFim;
@@ -353,21 +348,21 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param = qs.NewParameter();
 			Param.DbType = DbType.DateTime;
 			Param.ParameterName = "@cur_dataCriacao";
-			Param.Size = 16;
+
 			Param.Value = entity.cur_dataCriacao;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.DateTime;
 			Param.ParameterName = "@cur_dataAlteracao";
-			Param.Size = 16;
+
 			Param.Value = entity.cur_dataAlteracao;
 			qs.Parameters.Add(Param);
 
 			Param = qs.NewParameter();
 			Param.DbType = DbType.Decimal;
 			Param.ParameterName = "@cur_cargaHoraria";
-			Param.Size = 9;
+
 				Param.Value = entity.cur_cargaHoraria;
 			qs.Parameters.Add(Param);
 

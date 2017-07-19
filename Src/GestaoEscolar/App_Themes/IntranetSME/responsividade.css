@@ -4,9 +4,9 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("fonts/material-icons/MaterialIcons-Regular.eot");
+  src: url("fonts/materialicons/MaterialIcons-Regular.eot");
   /* For IE6-8 */
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("fonts/material-icons/MaterialIcons-Regular.woff2") format("woff2"), url("fonts/material-icons/MaterialIcons-Regular.woff") format("woff"), url("fonts/material-icons/MaterialIcons-Regular.ttf") format("truetype"); }
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("fonts/materialicons/MaterialIcons-Regular.woff2") format("woff2"), url("fonts/materialicons/MaterialIcons-Regular.woff") format("woff"), url("fonts/materialicons/MaterialIcons-Regular.ttf") format("truetype"); }
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -121,6 +121,10 @@
       height: 40px; }
     body div#hd #acessibilidade {
       display: none; }
+    body div#hd .hplHelp {
+      top: 0;
+      right: 12px;
+      padding: 0; }
 
   .msgInformacao {
     display: none !important; }
@@ -168,10 +172,11 @@
       display: none; }
 
   .spnHelpDesk {
-    top: 0;
-    right: 0; }
+    top: auto;
+    right: 12px;
+    bottom: 2px; }
     .spnHelpDesk > div {
-      font-size: 1rem !important; }
+      font-size: 0.85rem !important; }
 
   .m {
     height: auto;
@@ -527,7 +532,6 @@
     display: none; }
 
   .area-botoes-bottom {
-    display: inline-block;
     position: fixed;
     bottom: 0;
     left: 0;

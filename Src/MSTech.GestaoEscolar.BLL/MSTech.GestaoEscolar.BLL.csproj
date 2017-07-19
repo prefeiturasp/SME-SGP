@@ -133,6 +133,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -175,18 +176,24 @@
     <Compile Include="ACA_CalendarioEscolaBO.cs" />
     <Compile Include="ACA_CalendarioEventoBO.cs" />
     <Compile Include="ACA_CalendarioPeriodoBO.cs" />
+    <Compile Include="ACA_CargaHorariaExtraclasseBO.cs" />
     <Compile Include="ACA_CompromissoEstudoBO.cs" />
     <Compile Include="ACA_ConfiguracaoServicoPendenciaBO.cs" />
     <Compile Include="ACA_CoordenadorDisciplinaBO.cs" />
     <Compile Include="ACA_CurriculoBO.cs" />
+    <Compile Include="ACA_CurriculoCapituloBO.cs" />
+    <Compile Include="ACA_CurriculoCapituloSugestaoBO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaBO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralDisciplinaPeriodoBO.cs" />
     <Compile Include="ACA_CurriculoControleSemestralVigenciaBO.cs" />
     <Compile Include="ACA_CurriculoDisciplinaBO.cs" />
     <Compile Include="ACA_CurriculoDisciplinaEletivaBO.cs" />
     <Compile Include="ACA_CurriculoEscolaBO.cs" />
+    <Compile Include="ACA_CurriculoObjetivoBO.cs" />
+    <Compile Include="ACA_CurriculoObjetivoSugestaoBO.cs" />
     <Compile Include="ACA_CurriculoPeriodoBO.cs" />
     <Compile Include="ACA_CurriculoPeriodoVigenciaBO.cs" />
+    <Compile Include="ACA_CurriculoSugestaoBO.cs" />
     <Compile Include="ACA_CurriculoTurnoBO.cs" />
     <Compile Include="ACA_CursoBO.cs" />
     <Compile Include="ACA_CursoRelacionadoBO.cs" />
@@ -225,6 +232,7 @@
     <Compile Include="ACA_TipoDesempenhoAprendizadoBO.cs" />
     <Compile Include="ACA_TipoDisciplinaBO.cs" />
     <Compile Include="ACA_TipoDisciplinaDeficienciaBO.cs" />
+    <Compile Include="ACA_TipoDisciplinaRelacionadaBO.cs" />
     <Compile Include="ACA_TipoDocenteBO.cs" />
     <Compile Include="ACA_TipoEquipamentoDeficienteBO.cs" />
     <Compile Include="ACA_TipoEventoBO.cs" />
@@ -251,11 +259,15 @@
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\ModelCache.cs" />
     <Compile Include="CalendarioBO.cs" />
+    <Compile Include="CFG_AlertaBO.cs" />
+    <Compile Include="CFG_AlertaGrupoBO.cs" />
     <Compile Include="CFG_ConfiguracaoAcademicoBO.cs" />
     <Compile Include="CFG_ConfiguracaoBO.cs" />
     <Compile Include="CFG_ConfiguracaoMigracaoRioBO.cs" />
     <Compile Include="CFG_ConfiguracaoInscricaoCrecheBO.cs" />
     <Compile Include="CFG_CorRelatorioBO.cs" />
+    <Compile Include="CFG_DeficienciaDetalheBO.cs" />
+    <Compile Include="CFG_DeficienciaFIlhaBO.cs" />
     <Compile Include="CFG_FaixaRelatorioBO.cs" />
     <Compile Include="CFG_HistoricoConceitoBO.cs" />
     <Compile Include="CFG_HistoricoPedagogicoBO.cs" />
@@ -280,6 +292,7 @@
     <Compile Include="CLS_AlunoAvaliacaoTurmaObservacaoBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaQualidadeBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaRecomendacaoBO.cs" />
+    <Compile Include="CLS_AlunoDeficienciaDetalheBO.cs" />
     <Compile Include="CLS_AlunoFechamentoBO.cs" />
     <Compile Include="CLS_AlunoFechamentoPendenciaBO.cs" />
     <Compile Include="CLS_AlunoFrequenciaExternaBO.cs" />
@@ -305,7 +318,23 @@
     <Compile Include="CLS_PlanejamentoProjetoBO.cs" />
     <Compile Include="CLS_PlanejamentoProjetoRelacionadaBO.cs" />
     <Compile Include="CLS_QualificadorAtividadeBO.cs" />
+    <Compile Include="CLS_QuestionarioBO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoBO.cs" />
+    <Compile Include="CLS_QuestionarioConteudoPreenchimentoBO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaBO.cs" />
+    <Compile Include="CLS_QuestionarioRespostaPreenchimentoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoCargoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoGrupoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoPeriodoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoQuestionarioBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAcoesRealizadasBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoBO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaBO.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoBO.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseBO.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseRelacionadaBO.cs" />
     <Compile Include="CLS_TurmaAulaAlunoTipoAnotacaoBO.cs" />
     <Compile Include="CLS_TurmaAulaDisciplinaRelacionadaBO.cs" />
     <Compile Include="CLS_TurmaAulaGeradaBO.cs" />
@@ -347,7 +376,13 @@
     <Compile Include="CLS_TurmaNotaBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaBO.cs" />
+    <Compile Include="LOG_AlertaAlunosBaixaFrequenciaBO.cs" />
+    <Compile Include="LOG_AlertaAlunosFaltasConsecutivasBO.cs" />
+    <Compile Include="LOG_AlertaFimFechamentoBO.cs" />
+    <Compile Include="LOG_AlertaInicioFechamentoBO.cs" />
+    <Compile Include="LOG_AlertaPreenchimentoFrequenciaBO.cs" />
     <Compile Include="LOG_AvaliacaoMedia_AlteracaoBO.cs" />
+    <Compile Include="LOG_CurriculoSugestaoBO.cs" />
     <Compile Include="LOG_MatriculaTurmaDisciplinaExcluidaBO.cs" />
     <Compile Include="LOG_MovimentacaoAcertoSituacaoAlunoBO.cs" />
     <Compile Include="LOG_TurmaAula_AlteracaoBO.cs" />
@@ -385,6 +420,9 @@
     <Compile Include="ORC_OrientacaoCurricularBO.cs" />
     <Compile Include="ORC_OrientacaoCurricularNivelAprendizadoBO.cs" />
     <Compile Include="ORC_OrientacaoCurricularRelacionamentoBO.cs" />
+    <Compile Include="REL_GraficoAtendimentoBO.cs" />
+    <Compile Include="REL_GraficoAtendimento_FiltrosFixosBO.cs" />
+    <Compile Include="REL_GraficoAtendimento_FiltrosPersonalizadosBO.cs" />
     <Compile Include="REL_TurmaDisciplinaSituacaoFechamentoBO.cs" />
     <Compile Include="RHU_CargaHorariaBO.cs" />
     <Compile Include="RHU_CargoDisciplinaBO.cs" />

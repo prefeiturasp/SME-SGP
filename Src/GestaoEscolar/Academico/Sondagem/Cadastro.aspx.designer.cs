@@ -40,13 +40,13 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.UpdatePanel updCadastro;
         
         /// <summary>
-        /// ValidationSummary1 control.
+        /// vsSondagem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::System.Web.UI.WebControls.ValidationSummary vsSondagem;
         
         /// <summary>
         /// lblLegend control.
@@ -112,6 +112,33 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.WebControls.TextBox txtDescricao;
         
         /// <summary>
+        /// lblOpcaoResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOpcaoResposta;
+        
+        /// <summary>
+        /// ddlOpcaoResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlOpcaoResposta;
+        
+        /// <summary>
+        /// cpvCombo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cpvCombo;
+        
+        /// <summary>
         /// lblLegendQuestoes control.
         /// </summary>
         /// <remarks>
@@ -121,6 +148,96 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.WebControls.Label lblLegendQuestoes;
         
         /// <summary>
+        /// btnNovaQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNovaQuestao;
+        
+        /// <summary>
+        /// divInserirQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divInserirQuestao;
+        
+        /// <summary>
+        /// updMessagePopUpQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updMessagePopUpQuestao;
+        
+        /// <summary>
+        /// lblMessagePopUpQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessagePopUpQuestao;
+        
+        /// <summary>
+        /// updPopUpQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPopUpQuestao;
+        
+        /// <summary>
+        /// vsQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsQuestao;
+        
+        /// <summary>
+        /// lblTituloPopUpQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloPopUpQuestao;
+        
+        /// <summary>
+        /// lblCampoQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCampoQuestao;
+        
+        /// <summary>
+        /// txtItemQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtItemQuestao;
+        
+        /// <summary>
+        /// revtxtItemQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator revtxtItemQuestao;
+        
+        /// <summary>
         /// btnAdicionarQuestao control.
         /// </summary>
         /// <remarks>
@@ -128,6 +245,15 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAdicionarQuestao;
+        
+        /// <summary>
+        /// btnCancelarItemQuestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarItemQuestao;
         
         /// <summary>
         /// grvQuestoes control.
@@ -148,13 +274,112 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.WebControls.Label lblLegendSubQuestoes;
         
         /// <summary>
-        /// btnAdicionarSubQuestao control.
+        /// btnNovaSubQuestao control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdicionarSubQuestao;
+        protected global::System.Web.UI.WebControls.Button btnNovaSubQuestao;
+        
+        /// <summary>
+        /// divInserirSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divInserirSubquestao;
+        
+        /// <summary>
+        /// updMessagePopUpSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updMessagePopUpSubquestao;
+        
+        /// <summary>
+        /// lblMessagePopUpSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessagePopUpSubquestao;
+        
+        /// <summary>
+        /// updPopUpSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPopUpSubquestao;
+        
+        /// <summary>
+        /// vsSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsSubquestao;
+        
+        /// <summary>
+        /// lblTituloPopUpSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloPopUpSubquestao;
+        
+        /// <summary>
+        /// lblCampoSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCampoSubquestao;
+        
+        /// <summary>
+        /// txtItemSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtItemSubquestao;
+        
+        /// <summary>
+        /// revtxtItemSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator revtxtItemSubquestao;
+        
+        /// <summary>
+        /// btnAdicionarSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdicionarSubquestao;
+        
+        /// <summary>
+        /// btnCancelarItemSubquestao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarItemSubquestao;
         
         /// <summary>
         /// grvSubQuestoes control.
@@ -175,6 +400,123 @@ namespace GestaoEscolar.Academico.Sondagem {
         protected global::System.Web.UI.WebControls.Label lblLegendRespostas;
         
         /// <summary>
+        /// btnNovaResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNovaResposta;
+        
+        /// <summary>
+        /// divInserirResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divInserirResposta;
+        
+        /// <summary>
+        /// updMessagePopUpResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updMessagePopUpResposta;
+        
+        /// <summary>
+        /// lblMessagePopUpResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessagePopUpResposta;
+        
+        /// <summary>
+        /// updPopUpResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPopUpResposta;
+        
+        /// <summary>
+        /// vsResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsResposta;
+        
+        /// <summary>
+        /// lblTituloPopUpResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloPopUpResposta;
+        
+        /// <summary>
+        /// lblSigla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSigla;
+        
+        /// <summary>
+        /// txtSigla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSigla;
+        
+        /// <summary>
+        /// revtxtSigla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator revtxtSigla;
+        
+        /// <summary>
+        /// lblCampoResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCampoResposta;
+        
+        /// <summary>
+        /// txtItemResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtItemResposta;
+        
+        /// <summary>
+        /// revtxtItemResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator revtxtItemResposta;
+        
+        /// <summary>
         /// btnAdicionarResposta control.
         /// </summary>
         /// <remarks>
@@ -182,6 +524,15 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAdicionarResposta;
+        
+        /// <summary>
+        /// btnCancelarItemResposta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarItemResposta;
         
         /// <summary>
         /// grvRespostas control.
@@ -218,105 +569,6 @@ namespace GestaoEscolar.Academico.Sondagem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar;
-        
-        /// <summary>
-        /// updMessagePopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updMessagePopUp;
-        
-        /// <summary>
-        /// lblMessagePopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessagePopUp;
-        
-        /// <summary>
-        /// updPopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updPopUp;
-        
-        /// <summary>
-        /// lblTituloPopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloPopUp;
-        
-        /// <summary>
-        /// divSigla control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSigla;
-        
-        /// <summary>
-        /// lblSigla control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSigla;
-        
-        /// <summary>
-        /// txtSigla control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSigla;
-        
-        /// <summary>
-        /// lblCampo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCampo;
-        
-        /// <summary>
-        /// txtItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtItem;
-        
-        /// <summary>
-        /// btnAdicionar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdicionar;
-        
-        /// <summary>
-        /// btnCancelarItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarItem;
         
         /// <summary>
         /// PreviousPage property.

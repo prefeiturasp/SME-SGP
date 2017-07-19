@@ -12,6 +12,7 @@ using MSTech.GestaoEscolar.BLL;
 using MSTech.GestaoEscolar.Entities;
 using MSTech.GestaoEscolar.Web.WebProject;
 using MSTech.Validation.Exceptions;
+using System.IO;
 
 namespace GestaoEscolar.Academico.ControleTurma
 {
@@ -31,6 +32,16 @@ namespace GestaoEscolar.Academico.ControleTurma
             public int mtu_id;
             public string valor;
             public string arq_idRelatorio;
+        }
+
+        [Serializable]
+        private struct NotasRelatorioAtiExtra
+        {
+            public string Id;
+            public long alu_id;
+            public int tae_id;
+            public int mtu_id;
+            public string valor;
         }
 
         /// <summary>
@@ -135,6 +146,23 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Lista de permissões do docente para cadastro de avaliações.
+        /// </summary>
+        private List<sPermissaoDocente> VS_ltPermissaoAtividadeExtraclasse
+        {
+            get
+            {
+                return (List<sPermissaoDocente>)
+                        (
+                            ViewState["VS_ltPermissaoAtividadeExtraclasse"] ??
+                            (
+                                ViewState["VS_ltPermissaoAtividadeExtraclasse"] = CFG_PermissaoDocenteBO.SelecionaPermissaoModulo(UCControleTurma1.VS_tdt_posicao, (byte)EnumModuloPermissao.AtividadesExtraClasse)
+                            )
+                        );
+            }
+        }
+
+        /// <summary>
         /// Lista de permissões do docente para cadastro de efetivacap.
         /// </summary>
         private List<sPermissaoDocente> VS_ltPermissaoEfetivacao
@@ -200,6 +228,23 @@ namespace GestaoEscolar.Academico.ControleTurma
             set
             {
                 ViewState["VS_Nota_Relatorio"] = value;
+            }
+        }
+
+        /// <summary>
+        /// Guarda as notas de relatório.
+        /// </summary>
+        private List<NotasRelatorioAtiExtra> VS_Nota_RelatorioAtiExtra
+        {
+            get
+            {
+                if (ViewState["VS_Nota_RelatorioAtiExtra"] == null)
+                    ViewState["VS_Nota_RelatorioAtiExtra"] = new List<NotasRelatorioAtiExtra>();
+                return (List<NotasRelatorioAtiExtra>)(ViewState["VS_Nota_RelatorioAtiExtra"]);
+            }
+            set
+            {
+                ViewState["VS_Nota_RelatorioAtiExtra"] = value;
             }
         }
 
@@ -318,7 +363,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     );
             }
         }
-
+        
         /// <summary>
         /// Propriedade que indica o COC está fechado para lançamento.
         /// </summary>
@@ -599,6 +644,15 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        private bool PermiteLancarAtividadeExtraclasse
+        {
+            get
+            {
+                return !EntTurmaDisciplina.tud_naoLancarNota && VS_ltPermissaoAtividadeExtraclasse.Any(p => p.pdc_permissaoEdicao);
+            }
+        }
+
+
         private List<sComboTurmaDisciplina> dtTurmaDisciplinaDoc
         {
             get
@@ -755,6 +809,58 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
         }
 
+        public DataTable DTAtividadeExtraclasse;
+
+        private long Alu_idExtraClasse;
+        private int Mtu_idExtraClasse;
+
+        private long VS_tud_idAtiExtraExcluir
+        {
+            get
+            {
+                if (ViewState["VS_tud_idAtiExtraExcluir"] == null)
+                    ViewState["VS_tud_idAtiExtraExcluir"] = 1;
+                return Convert.ToInt64(ViewState["VS_tud_idAtiExtraExcluir"]);
+            }
+
+            set
+            {
+                ViewState["VS_tud_idAtiExtraExcluir"] = value;
+            }
+        }
+
+        private int VS_tae_idAtiExtraExcluir
+        {
+            get
+            {
+                if (ViewState["VS_tae_idAtiExtraExcluir"] == null)
+                    ViewState["VS_tae_idAtiExtraExcluir"] = 1;
+                return Convert.ToInt32(ViewState["VS_tae_idAtiExtraExcluir"]);
+            }
+
+            set
+            {
+                ViewState["VS_tae_idAtiExtraExcluir"] = value;
+            }
+        }
+
+        private Guid VS_taer_idAtiExtraExcluir
+        {
+            get
+            {
+                if (ViewState["VS_taer_idAtiExtraExcluir"] == null)
+                    ViewState["VS_taer_idAtiExtraExcluir"] = Guid.Empty;
+                return (Guid)ViewState["VS_taer_idAtiExtraExcluir"];
+            }
+
+            set
+            {
+                ViewState["VS_taer_idAtiExtraExcluir"] = value;
+            }
+        }
+
+        private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
+
         #endregion Propriedades
 
         #region Métodos
@@ -910,6 +1016,21 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (aPlanoAula.Visible)
                     CarregarListaoPlanoAula(EntTurmaDisciplina.tud_id, UCNavegacaoTelaPeriodo.VS_tpc_id, true);
 
+                bool exibeAtividadeExtra = VS_EntitiesControleTurma.curso.tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_CIEJA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
+                aAtividadeExtraClasse.Visible = pnlAtividadesExtraClasse.Visible = exibeAtividadeExtra;
+
+                if (exibeAtividadeExtra)
+                {
+                    UCComboTipoAtividadeAvaliativa.CarregarTipoAtividadeAvaliativa(true);
+                    btnNovoAtiExtra.Visible = (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto;
+                    fdsCadastroAtiExtra.Visible = false;
+                    fdsListagemAtiExtra.Visible = true;
+                    CarregarListaoAtividadeExtraclasse();
+                    hdnTaeId.Value = string.Empty;
+                    hdnTaerId.Value = string.Empty;
+                }
+
                 bool permissaoModuloAlteracao = false;
                 if (PermiteLancarFrequencia)
                 {
@@ -941,6 +1062,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o listão.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1016,6 +1138,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as frequências.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1079,6 +1202,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as frequências.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1147,6 +1271,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 tpc_id = UCNavegacaoTelaPeriodo.VS_tpc_id,
                                 atm_media = g.FirstOrDefault()["atm_media"].ToString()
                             }).ToList();
+                    }
+
+                    if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal)
+                    {
+                        lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, VisibilidadeRegencia(ddlTurmaDisciplinaListao)? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id, ApplicationWEB.AppMinutosCacheMedio);
                     }
 
                     // Carregar as atividades e notas dos alunos nas atividades.
@@ -1227,6 +1356,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as notas.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1263,7 +1393,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                            where (bool)dr["semPlanoAula"] && Convert.ToDateTime(dr["data"]).Date < DateTime.Now
                                            select dr).Count() > 0;
 
-                if (existeAulaSemPlano
+                if (existeAulaSemPlano && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                         || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
@@ -1293,7 +1423,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     rptPlanoAula.Visible = false;
                     lblDadoPlanoAula.Visible = true;
-                    lblDadoPlanoAula.Text = UtilBO.GetErroMessage("Não há aulas cadastradas no bimestre selecionado.", UtilBO.TipoMensagem.Nenhuma);
+                    lblDadoPlanoAula.Text = UtilBO.GetErroMessage("Não há aulas cadastradas no bimestre selecionado.", UtilBO.TipoMensagem.Alerta);
                 }
                 else
                 {
@@ -1307,6 +1437,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os planos de aula.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -1358,6 +1489,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     }
                     else
                     {
+                        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                         lblMessage.Text = UtilBO.GetErroMessage("Docente não possui permissão em disciplinas para lançamento de notas.", UtilBO.TipoMensagem.Alerta);
                         return false;
                     }
@@ -1442,6 +1574,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
                 return false;
             }
@@ -1899,6 +2032,27 @@ namespace GestaoEscolar.Academico.ControleTurma
         }
 
         /// <summary>
+        /// Adiciona um item na lista de relatórios do ViewState.
+        /// </summary>
+        /// <param name="tnt_id"></param>
+        /// <param name="alu_id"></param>
+        /// <param name="mtu_id"></param>
+        /// <param name="valor"></param>
+        private void AdicionaItemRelatorioAtiExtra(int tae_id, long alu_id, int mtu_id, string valor)
+        {
+            VS_Nota_RelatorioAtiExtra.Add(new NotasRelatorioAtiExtra
+            {
+                tae_id = tae_id
+                ,
+                alu_id = alu_id
+                ,
+                mtu_id = mtu_id
+                ,
+                valor = valor
+            });
+        }
+
+        /// <summary>
         /// Seta imagem de relatório lançado para o item.
         /// </summary>
         /// <param name="itemAtividade">Item do repeater de atividades</param>
@@ -1917,6 +2071,37 @@ namespace GestaoEscolar.Academico.ControleTurma
             NotasRelatorio rel = VS_Nota_Relatorio.Find(p =>
                                     p.alu_id == alu_id
                                     && p.tnt_id == tnt_id
+                                    && p.mtu_id == mtu_id);
+
+            //Verifica se o relatório já foi lançado e seta a visibilidade do imgSituacao
+            if (!string.IsNullOrEmpty(rel.valor))
+            {
+                imgSituacao.Visible = true;
+                btnRelatorio.ToolTip = "Alterar lançamento do relatório";
+            }
+            else
+                imgSituacao.Visible = false;
+        }
+
+        /// <summary>
+        /// Seta imagem de relatório lançado para o item.
+        /// </summary>
+        /// <param name="itemAtividade">Item do repeater de atividades</param>
+        private void SetaImgRelatorioAtiExtra(RepeaterItem itemAtividade)
+        {
+            ImageButton btnRelatorio = (ImageButton)itemAtividade.FindControl("btnRelatorio");
+            Image imgSituacao = (Image)itemAtividade.FindControl("imgSituacao");
+
+            Repeater rptAtividades = (Repeater)itemAtividade.NamingContainer;
+            RepeaterItem itemAluno = (RepeaterItem)rptAtividades.NamingContainer;
+
+            long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
+            int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
+            int tae_id = Convert.ToInt32(((Label)itemAtividade.FindControl("lbltae_id")).Text);
+
+            NotasRelatorioAtiExtra rel = VS_Nota_RelatorioAtiExtra.Find(p =>
+                                    p.alu_id == alu_id
+                                    && p.tae_id == tae_id
                                     && p.mtu_id == mtu_id);
 
             //Verifica se o relatório já foi lançado e seta a visibilidade do imgSituacao
@@ -1954,17 +2139,18 @@ namespace GestaoEscolar.Academico.ControleTurma
                     }
                 }
 
-                // Recupera a data de saída do aluno na turma/disciplina
-                string sDataSaida = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "mtd_dataSaida"));
-                if (!string.IsNullOrEmpty(sDataSaida))
-                {
-                    DateTime dataSaida = Convert.ToDateTime(sDataSaida);
-                    if (dataSaida.Date < UCNavegacaoTelaPeriodo.cap_dataFim)
-                    {
-                        if (lblNome != null)
-                            lblNome.Text += "<br/>" + "<b>Data de saída:</b> " + dataSaida.ToString("dd/MM/yyyy");
-                    }
-                }
+                // Issue #313 - removi texto de data de saída, pois já traz a informação no nome do aluno.
+                //// Recupera a data de saída do aluno na turma/disciplina
+                //string sDataSaida = Convert.ToString(DataBinder.Eval(e.Item.DataItem, "mtd_dataSaida"));
+                //if (!string.IsNullOrEmpty(sDataSaida))
+                //{
+                //    DateTime dataSaida = Convert.ToDateTime(sDataSaida);
+                //    if (dataSaida.Date < UCNavegacaoTelaPeriodo.cap_dataFim)
+                //    {
+                //        if (lblNome != null)
+                //            lblNome.Text += "<br/>" + "<b>Data de saída:</b> " + dataSaida.ToString("dd/MM/yyyy");
+                //    }
+                //}
             }
         }
 
@@ -2074,6 +2260,303 @@ namespace GestaoEscolar.Academico.ControleTurma
                       "var DisciplinaRegencia='" + DisciplinaRegencia + "';";
 
             return script;
+        }
+
+        /// <summary>
+        /// Carrega os listão de atividade extraclasse.
+        /// </summary>
+        private void CarregarListaoAtividadeExtraclasse()
+        {
+            string tur_ids = UCControleTurma1.TurmasNormaisMultisseriadas.Any() ?
+                                      string.Join(";", UCControleTurma1.TurmasNormaisMultisseriadas.Select(p => p.tur_id.ToString()).ToArray()) :
+                                      string.Empty;
+
+            // Carrega os alunos matriculados
+            List<AlunosTurmaDisciplina> ListaAlunos = MTR_MatriculaTurmaDisciplinaBO.SelecionaAlunosAtivosCOCPorTurmaDisciplina(
+                 VisibilidadeRegencia(ddlTurmaDisciplinaListao) ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id,
+                UCNavegacaoTelaPeriodo.VS_tpc_id, VS_tipoDocente, false, UCNavegacaoTelaPeriodo.cap_dataInicio, UCNavegacaoTelaPeriodo.cap_dataFim, ApplicationWEB.AppMinutosCacheMedio, tur_ids);
+
+            if (ListaAlunos.Count <= 0)
+            {
+                rptAlunoAtivExtra.Visible = UCComboOrdenacaoAtivExtra.Visible = false;
+                hdnOrdenacaoAtivExtra.Value = "";
+            }
+            else
+            {
+                DataTable dt = CLS_TurmaAtividadeExtraClasseBO.SelecionaPorPeriodoDisciplina_Alunos(
+                           VisibilidadeRegencia(ddlTurmaDisciplinaListao) ?
+                                   ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id
+                               , UCNavegacaoTelaPeriodo.VS_tpc_id, __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao
+                                , PosicaoDocente, tur_ids);
+
+                if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal)
+                {
+                    lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio);
+                }
+
+                // Carregar as atividades e notas dos alunos nas atividades.
+                var x = (from DataRow dr in dt.Rows
+                         where !string.IsNullOrEmpty(dr["tae_id"].ToString())
+                         select dr);
+
+                DTAtividadeExtraclasse = x.Any() ? x.CopyToDataTable() : new DataTable();
+
+                lblSemAtividadeExtra.Text = UtilBO.GetErroMessage("Não foi encontrada atividade extraclasse para a turma no período e componente curricular selecionados.", UtilBO.TipoMensagem.Alerta);
+
+                lblSemAtividadeExtra.Visible = !x.Any();
+
+                rptAlunoAtivExtra.DataSource = ListaAlunos;
+                rptAlunoAtivExtra.DataBind();
+
+                hdnOrdenacaoAtivExtra.Value = "";
+
+            }
+
+            updAtiExtra.Update();
+        }
+
+        private void UCConfirmacaoOperacao_ConfimaOperacao()
+        {
+            ExcluirAtividadeExtraClasse();
+        }
+
+
+        /// <summary>
+        /// Salva listão de avaliações.
+        /// </summary>
+        /// <param name="PermaneceTela"></param>
+        /// <returns></returns>
+        public bool SalvarAtividadeExtra(out string msg)
+        {
+            msg = "";
+            if (!VS_Periodo_Aberto)
+                throw new ValidationException(String.Format("Listão de atividades extraclasse de {0} disponível apenas para consulta.", GestaoEscolarUtilBO.nomePadraoPeriodo_Calendario(__SessionWEB.__UsuarioWEB.Usuario.ent_id)));
+
+            List<CLS_TurmaAtividadeExtraClasseAluno> listaTumaAtividadeExtraclasse = new List<CLS_TurmaAtividadeExtraClasseAluno>();
+
+            bool visibilidadeRegencia = VisibilidadeRegencia(ddlTurmaDisciplinaListao);
+            List<CLS_TurmaAtividadeExtraClasse> lstRelacionamento = new List<CLS_TurmaAtividadeExtraClasse>();
+            foreach (RepeaterItem itemAluno in rptAlunoAtivExtra.Items)
+            {
+                Repeater rptAtividades = (Repeater)itemAluno.FindControl("rptAtividades");
+                long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
+                int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
+                int mtd_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtd_id")).Text);
+                string pes_nome = Convert.ToString(((Label)itemAluno.FindControl("lblNomeOficial")).Text);
+
+                // Adiciona itens na lista de TurmaNota - só pra alterar o tnt_efetivado.
+                foreach (RepeaterItem itemAtividadeAluno in rptAtividades.Items)
+                {
+                    HtmlGenericControl divAtividades = (HtmlGenericControl)itemAtividadeAluno.FindControl("divAtividades");
+                    if (divAtividades != null)
+                    {
+                        CheckBox chkEntregou = (CheckBox)itemAtividadeAluno.FindControl("chkEntregou");
+                        bool aea_entregue = chkEntregou != null ? chkEntregou.Checked : false;
+
+                        Int16 tdt_posicao = Convert.ToInt16(((Label)itemAtividadeAluno.FindControl("lblTaePosicao")).Text);
+
+                        if (!(PosicaoDocente > 0 && !VS_ltPermissaoAtividadeExtraclasse.Any(p => p.tdt_posicaoPermissao == tdt_posicao && p.pdc_permissaoEdicao)))
+                        {
+                            if (CLS_TurmaNotaAlunoBO.VerificaValoresNotas(VS_EntitiesControleTurma.escalaDocente.escalaAvaliacaoNumerica, RetornaAvaliacao(itemAtividadeAluno), pes_nome))
+                            {
+                                int tae_id = Convert.ToInt32(((Label)itemAtividadeAluno.FindControl("lbltae_id")).Text);
+
+                                // Busca relatório lançado.
+                                NotasRelatorioAtiExtra rel = VS_Nota_RelatorioAtiExtra.Find(p =>
+                                    p.alu_id == alu_id
+                                    && p.tae_id == tae_id
+                                    && p.mtu_id == mtu_id);
+
+                                CLS_TurmaAtividadeExtraClasseAluno ent = new CLS_TurmaAtividadeExtraClasseAluno
+                                {
+                                    tud_id = visibilidadeRegencia ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id,
+                                    tae_id = tae_id,
+                                    alu_id = alu_id,
+                                    mtu_id = mtu_id,
+                                    mtd_id = mtd_id,
+                                    aea_avaliacao = RetornaAvaliacao(itemAtividadeAluno),
+                                    aea_relatorio = rel.valor,
+                                    aea_entregue = aea_entregue,
+                                    aea_dataAlteracao = DateTime.Now,
+                                    aea_situacao = 1
+                                };
+                                listaTumaAtividadeExtraclasse.Add(ent);
+
+                                Label lbltaer_id = itemAtividadeAluno.FindControl("lbltaer_id") as Label;
+                                if (lbltaer_id != null && !string.IsNullOrEmpty(lbltaer_id.Text))
+                                {
+                                    lstRelacionamento.Add(new CLS_TurmaAtividadeExtraClasse { tud_id = ent.tud_id, tae_id = ent.tae_id, taer_id = new Guid(lbltaer_id.Text) });
+                                }
+                            }
+                        }
+
+                        HabilitaControles(divAtividades.Controls, true);
+                    }
+                }
+            }
+
+            hdnAlterouAtividadeExtra.Value = "";
+
+            if (CLS_TurmaAtividadeExtraClasseAlunoBO.SalvarEmLote(listaTumaAtividadeExtraclasse, EntTurmaDisciplina.tud_id, UCNavegacaoTelaPeriodo.VS_tpc_id, EntTurmaDisciplina.tud_tipo, VS_EntitiesControleTurma.formatoAvaliacao.fav_fechamentoAutomatico, Ent_ID_UsuarioLogado, lstRelacionamento.FindAll(p => p.taer_id != Guid.Empty).GroupBy(p => p.taer_id).Select(g => g.First()).ToList(), UCControleTurma1.VS_tur_id))
+            {
+                ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, "Listão de atividade extraclasse | " +
+                                                                        "cal_id: " + UCNavegacaoTelaPeriodo.VS_cal_id + " | tpc_id: " + UCNavegacaoTelaPeriodo.VS_tpc_id +
+                                                                        " | tur_id: " + UCControleTurma1.VS_tur_id + "; tud_id: " + (visibilidadeRegencia ?
+                                                    ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id));
+
+                msg = UtilBO.GetErroMessage("Listão de atividades extraclasse salvo com sucesso.", UtilBO.TipoMensagem.Sucesso);
+
+                CarregarListaoAtividadeExtraclasse();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Exclui atividade extraclasse
+        /// </summary>
+        private void ExcluirAtividadeExtraClasse()
+        {
+            try
+            {
+                CLS_TurmaAtividadeExtraClasse entity = new CLS_TurmaAtividadeExtraClasse
+                {
+                    tud_id = VS_tud_idAtiExtraExcluir
+                    ,
+                    tae_id = VS_tae_idAtiExtraExcluir
+                    ,
+                    taer_id = VS_taer_idAtiExtraExcluir
+                };
+
+                var lstNota =
+                    (from RepeaterItem itemAluno in rptAlunoAtivExtra.Items
+                     let rptAtividades = itemAluno.FindControl("rptAtividades") as Repeater
+                     from RepeaterItem itemNota in rptAtividades.Items
+                     let lbltud_idNota = itemNota.FindControl("lbltud_id") as Label
+                     let lbltae_idNota = itemNota.FindControl("lbltae_id") as Label
+                     where (lbltud_idNota != null && lbltud_idNota.Text == VS_tud_idAtiExtraExcluir.ToString()) &&
+                           (lbltae_idNota != null && lbltae_idNota.Text == VS_tae_idAtiExtraExcluir.ToString())
+                     let txtNota = itemNota.FindControl("txtNota") as TextBox
+                     let ddlPareceres = itemNota.FindControl("ddlPareceres") as DropDownList
+                     let imgSituacao = itemNota.FindControl("imgSituacao") as Image
+                     let chkEntregou = itemNota.FindControl("chkEntregou") as CheckBox
+                     select new
+                     {
+                         possuiNota = (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Numerica && !string.IsNullOrEmpty(txtNota.Text)) ||
+                                      (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Pareceres && ddlPareceres.SelectedValue != "-1") ||
+                                      (VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo == (byte)EscalaAvaliacaoTipo.Relatorios && imgSituacao.Visible) ||
+                                      chkEntregou.Checked
+                     }).ToList();
+
+                if (lstNota.Any(p => p.possuiNota))
+                {
+                    throw new ValidationException("Não foi possível excluir a atividade extraclasse, pois já foram registrados os lançamentos.");
+                }
+
+                if (CLS_TurmaAtividadeExtraClasseBO.Deletar(entity))
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                    lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse excluída com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Exclusão de atividade | tud_id: {0}, tae_id: {1}", VS_tud_idAtiExtraExcluir, VS_tae_idAtiExtraExcluir));
+                    CarregarListaoAtividadeExtraclasse();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        private void AbrirRelatorioRP(long alu_id, string tds_idRP)
+        {
+            Session.Remove("alu_id_RelatorioRP");
+            Session.Remove("tds_id_RelatorioRP");
+            Session.Remove("PaginaRetorno_RelatorioRP");
+
+            Session.Add("alu_id_RelatorioRP", alu_id);
+            Session.Add("tds_id_RelatorioRP", tds_idRP);
+            Session.Add("PaginaRetorno_RelatorioRP", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            RedirecionarPagina("~/Classe/RelatorioRecuperacaoParalela/Cadastro.aspx");
+        }
+
+        private void AbrirRelatorioAEE(long alu_id)
+        {
+            Session.Remove("alu_id_RelatorioAEE");
+            Session.Remove("PaginaRetorno_RelatorioAEE");
+
+            Session.Add("alu_id_RelatorioAEE", alu_id);
+            Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Listao.aspx"));
+
+            CarregaSessionPaginaRetorno();
+            RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
+        }
+
+        private void CarregarCadastroAtividadeExtraclasse(long tud_id, int tae_id, bool habilitaEdicao)
+        {
+            CLS_TurmaAtividadeExtraClasse entity;
+            if (tud_id > 0 && tae_id > 0)
+            {
+                entity = new CLS_TurmaAtividadeExtraClasse
+                {
+                    tud_id = tud_id
+                    ,
+                    tae_id = tae_id
+                };
+                CLS_TurmaAtividadeExtraClasseBO.GetEntity(entity);
+            }
+            else
+            {
+                entity = new CLS_TurmaAtividadeExtraClasse();
+            }
+
+            hdnTaeId.Value = entity.tae_id.ToString();
+            hdnTaerId.Value = entity.taer_id.ToString();
+            UCComboTipoAtividadeAvaliativa.Valor = entity.tav_id > 0 ? entity.tav_id : -1;
+            txtNomeAtiExtra.Text = entity.tae_nome;
+            txtDescricaoAtiExtra.Text = entity.tae_descricao;
+            txtCargaAtiExtra.Text = entity.tae_cargaHoraria > 0 ? Convert.ToInt32(entity.tae_cargaHoraria).ToString() : string.Empty;
+            List<TUR_TurmaDisciplina> turmaDisciplina = new List<TUR_TurmaDisciplina>();
+            if (entity.tae_id > 0)
+            {
+                if (entity.taer_id != Guid.Empty)
+                {
+                    turmaDisciplina = CLS_TurmaAtividadeExtraClasseBO.SelecionaDisciplinaAtividadeExtraclasseRelacionada(entity.taer_id);
+                }
+            }
+            else
+            {
+                turmaDisciplina = TUR_TurmaDisciplinaBO.GetSelectBy_Turma(UCControleTurma1.VS_tur_id, null, GestaoEscolarUtilBO.MinutosCacheLongo);
+            }
+            rptDisciplinasAtiExtra.DataSource = turmaDisciplina.FindAll(p => p.tud_id != EntTurmaDisciplina.tud_id);
+            rptDisciplinasAtiExtra.DataBind();
+            lblDisciplinasAtiExtra.Visible = rptDisciplinasAtiExtra.Visible = rptDisciplinasAtiExtra.Items.Count > 0;
+
+            HabilitaControles(fdsCadastroAtiExtra.Controls, habilitaEdicao);
+            btnCancelarAtiExtra.Enabled = true;
+
+            if (habilitaEdicao && entity.tav_id > 0)
+            {
+                // Não permitir alterar as disciplinas
+                HabilitaControles(rptDisciplinasAtiExtra.Controls, false);
+            }
+            btnAdicionarAtiExtra.Visible = habilitaEdicao;
+
+            fdsCadastroAtiExtra.Visible = true;
+            fdsListagemAtiExtra.Visible = false;
+
+            UCComboTipoAtividadeAvaliativa.Obrigatorio = true;
+            updAtiExtra.Update();
         }
 
         #endregion Métodos
@@ -2399,6 +2882,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -2413,6 +2897,11 @@ namespace GestaoEscolar.Academico.ControleTurma
             UCLancamentoFrequenciaTerritorio.CarregarAusencias += UCLancamentoFrequenciaTerritorio_CarregarAusencias;
             UCSelecaoDisciplinaCompartilhada1.SelecionarDisciplina += UCSelecaoDisciplinaCompartilhada1_SelecionarDisciplina;
             UCControleTurma1.chkTurmasNormaisMultisseriadasIndexChanged += UCControleTurma_chkTurmasNormaisMultisseriadasIndexChanged;
+            UCConfirmacaoOperacao.ConfimaOperacao += UCConfirmacaoOperacao_ConfimaOperacao;
+            UCLancamentoFrequencia.AbrirRelatorioRP += UCLancamentoFrequencia_AbrirRelatorioRP;
+            UCLancamentoFrequenciaTerritorio.AbrirRelatorioRP += UCLancamentoFrequencia_AbrirRelatorioRP;
+            UCLancamentoFrequencia.AbrirRelatorioAEE += UCLancamentoFrequencia_AbrirRelatorioAEE;
+            UCLancamentoFrequenciaTerritorio.AbrirRelatorioAEE += UCLancamentoFrequencia_AbrirRelatorioAEE;
 
             // Configura javascripts da tela.
             ScriptManager sm = ScriptManager.GetCurrent(this);
@@ -2466,6 +2955,16 @@ namespace GestaoEscolar.Academico.ControleTurma
             trExibirAlunoDispensadoListao.Visible = UCLancamentoFrequencia.VisivelAlunoDispensado = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_LEGENDA_ALUNO_DISPENSADO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
         }
 
+        private void UCLancamentoFrequencia_AbrirRelatorioRP(long alu_id, string tds_idRP)
+        {
+            AbrirRelatorioRP(alu_id, tds_idRP);
+        }
+
+        private void UCLancamentoFrequencia_AbrirRelatorioAEE(long alu_id)
+        {
+            AbrirRelatorioAEE(alu_id);
+        }
+
         protected void Page_PreRender(object sender, EventArgs e)
         {
             if (VS_PeriodoEfetivado)
@@ -2511,6 +3010,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 catch (Exception ex)
                 {
                     ApplicationWEB._GravaErro(ex);
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
                 }
             }
@@ -2565,6 +3065,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2585,6 +3086,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2615,6 +3117,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2628,6 +3131,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2682,6 +3186,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as compensações de ausências.", UtilBO.TipoMensagem.Erro);
             }
             finally
@@ -2740,6 +3245,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as compensações de ausências.", UtilBO.TipoMensagem.Erro);
             }
             finally
@@ -2761,6 +3267,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar as compensações.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2774,6 +3281,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             int alterouFrequencia = 0;
             int alterouNota = 0;
             int alterouPlano = 0;
+            int alterouAtividadeExtra = 0;
 
             //Salva frequência
             try
@@ -2837,7 +3345,10 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             if (!string.IsNullOrEmpty(msg))
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = msg;
+            }
             msg = "";
 
             //Salva avaliação
@@ -2868,7 +3379,10 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             if (!string.IsNullOrEmpty(msg))
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text += msg;
+            }
             msg = "";
 
             //Salva plano de aula
@@ -2897,7 +3411,46 @@ namespace GestaoEscolar.Academico.ControleTurma
                 msg += UtilBO.GetErroMessage("Erro ao tentar salvar os planos de aula.", UtilBO.TipoMensagem.Erro);
             }
 
-            if (alterouFrequencia + alterouNota + alterouPlano == 0)
+            //Salva atividade extraclasse
+            try
+            {
+                if (fdsCadastroAtiExtra.Visible)
+                {
+                    if (btnAdicionarAtiExtra.Visible && btnAdicionarAtiExtra.Enabled)
+                    {
+                        Page.Validate("AtividadeExtraclasse");
+                        if (Page.IsValid)
+                            btnAdicionarAtiExtra_Click(null, null);
+                    }
+                    else
+                    {
+                        btnCancelarAtiExtra_Click(null, null);
+                    }
+                }
+
+                Int32.TryParse(hdnAlterouAtividadeExtra.Value, out alterouAtividadeExtra);
+                if (Page.IsValid && pnlAtividadesExtraClasse.Visible && aAtividadeExtraClasse.Visible && !VS_PeriodoEfetivado && alterouAtividadeExtra > 0 && PermiteLancarAtividadeExtraclasse)
+                    SalvarAtividadeExtra(out msg);
+            }
+            catch (ValidationException ex)
+            {
+                msg += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (DuplicateNameException ex)
+            {
+                msg += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (ArgumentException ex)
+            {
+                msg += UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                msg += UtilBO.GetErroMessage("Erro ao tentar salvar as notas de atividades extraclasse.", UtilBO.TipoMensagem.Erro);
+            }
+
+            if (alterouFrequencia + alterouNota + alterouPlano + alterouAtividadeExtra == 0)
             {
                 msg += UtilBO.GetErroMessage("Nenhum dado foi alterado.", UtilBO.TipoMensagem.Alerta);
             }
@@ -2909,7 +3462,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 VS_Data_Listao_TurmaNota = DateTime.Now.AddSeconds(1);
 
             if (!string.IsNullOrEmpty(msg))
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text += msg;
+            }
             msg = "";
         }
 
@@ -2933,7 +3489,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     && p.mtu_id == mtu_id);
 
                 // Guarda o tipo de alteração, o alu_id, o mtu_id e o tnt_id da linha que está sendo editada.
-                hdnIds.Value = 1 + ";" + alu_id + ";" + tnt_id + ";" + mtu_id;
+                hdnIds.Value = 1 + ";" + alu_id + ";" + tnt_id + ";" + mtu_id + ";1";
 
                 lblDadosRelatorio.Text = "<b>Nome do aluno:</b> " + ((Label)itemAluno.FindControl("lblNome")).Text;
                 txtRelatorio.Text = rel.valor;
@@ -2944,9 +3500,47 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o relatório.", UtilBO.TipoMensagem.Erro);
             }
         }
+
+        protected void btnRelatorioAtiExtra_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                // Recuperando item que chamou.
+                ImageButton btnRelatorio = (ImageButton)sender;
+                RepeaterItem itemAtividade = (RepeaterItem)btnRelatorio.NamingContainer;
+                Repeater rptAtividades = (Repeater)itemAtividade.NamingContainer;
+                RepeaterItem itemAluno = (RepeaterItem)rptAtividades.NamingContainer;
+
+                long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
+                int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
+                int tae_id = Convert.ToInt32(((Label)itemAtividade.FindControl("lbltae_id")).Text);
+
+                NotasRelatorioAtiExtra rel = VS_Nota_RelatorioAtiExtra.Find(p =>
+                    p.alu_id == alu_id
+                    && p.tae_id == tae_id
+                    && p.mtu_id == mtu_id);
+
+                // Guarda o tipo de alteração, o alu_id, o mtu_id e o tnt_id da linha que está sendo editada.
+                hdnIds.Value = 1 + ";" + alu_id + ";" + tae_id + ";" + mtu_id + ";2";
+
+                lblDadosRelatorio.Text = "<b>Nome do aluno:</b> " + ((Label)itemAluno.FindControl("lblNome")).Text;
+                txtRelatorio.Text = rel.valor;
+
+                // Abrir relatório.
+                ScriptManager.RegisterStartupScript(Page, typeof(Page), "RelatorioNota", "$(document).ready(function(){ $('#divRelatorio').dialog('open'); });", true);
+            }
+            catch (Exception ex)
+            {
+                ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o relatório.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
 
         protected void btnCompensacaoAusencia_Click(object sender, EventArgs e)
         {
@@ -2961,6 +3555,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao carregar o sistema.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -2975,8 +3570,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                 long alu_id = Convert.ToInt32(s[1]);
                 int id = Convert.ToInt32(s[2]);
                 int mtu_id = Convert.ToInt32(s[3]);
+                int tipoListao = Convert.ToInt32(s[4]);
 
-                if (tipoAlteracao == 1)
+                if (tipoAlteracao == 1 && tipoListao == 1)
                 {
                     if (VS_Nota_Relatorio.Exists(p =>
                         p.tnt_id == id
@@ -3010,13 +3606,77 @@ namespace GestaoEscolar.Academico.ControleTurma
                             SetaImgRelatorio(itemAtividade);
                     }
                 }
+                else if (tipoAlteracao == 1 && tipoListao == 2)
+                {
+                    if (VS_Nota_RelatorioAtiExtra.Exists(p =>
+                        p.tae_id == id
+                        && p.alu_id == alu_id
+                        && p.mtu_id == mtu_id))
+                    {
+                        int alterar = VS_Nota_RelatorioAtiExtra.FindIndex(p =>
+                            p.tae_id == id
+                            && p.alu_id == alu_id
+                            && p.mtu_id == mtu_id);
+
+                        VS_Nota_RelatorioAtiExtra[alterar] = new NotasRelatorioAtiExtra
+                        {
+                            valor = txtRelatorio.Text
+                            ,
+                            tae_id = id
+                            ,
+                            alu_id = alu_id
+                            ,
+                            mtu_id = mtu_id
+                        };
+                    }
+                    else
+                        AdicionaItemRelatorioAtiExtra(id, alu_id, mtu_id, txtRelatorio.Text);
+
+                    // Percorre os itens do repeater para atualizar os botões de relatório.
+                    foreach (RepeaterItem item in rptAlunoAtivExtra.Items)
+                    {
+                        Repeater rptAtividades = (Repeater)item.FindControl("rptAtividades");
+                        foreach (RepeaterItem itemAtividade in rptAtividades.Items)
+                            SetaImgRelatorioAtiExtra(itemAtividade);
+                    }
+                }
 
                 ScriptManager.RegisterStartupScript(Page, GetType(), "RelatorioNota", "$(document).ready(function(){ $('#divRelatorio').dialog('close'); });", true);
             }
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar o relatório.", UtilBO.TipoMensagem.Erro);
+            }
+        }
+
+        protected void rptAlunosAvaliacao_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "RelatorioRP")
+            {
+                try
+                {
+                    string[] args = e.CommandArgument.ToString().Split(';');
+                    AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
             }
         }
 
@@ -3133,6 +3793,48 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                         tdNumChamadaAvaliacao.Style["background-color"] = tdNomeAvaliacao.Style["background-color"] =
                         tdMedia.Style["background-color"] = ApplicationWEB.AlunoInativo;
+                    }
+
+                    LinkButton btnRelatorioAEE = (LinkButton)e.Item.FindControl("btnRelatorioAEE");
+                    if (btnRelatorioAEE != null)
+                    {
+                        btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                    && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "PossuiDeficiencia"));
+                        btnRelatorioAEE.CommandArgument = Alu_id.ToString();
+                    }
+
+                    // Mostra o ícone para as anotações de recuperação paralela (RP):
+                    // - para todos os alunos, quando a turma for de recuperação paralela,
+                    // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
+                    if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno
+                        || lstAlunosRelatorioRP.Any(p => p.alu_id == Alu_id))
+                    {
+                        LinkButton btnRelatorioRP = (LinkButton)e.Item.FindControl("btnRelatorioRP");
+                        if (btnRelatorioRP != null)
+                        {
+                            btnRelatorioRP.Visible = true;
+                            btnRelatorioRP.CommandArgument = Alu_id.ToString();
+
+                            if (VisibilidadeRegencia(ddlTurmaDisciplinaListao))
+                            {
+                                string strTds = string.Empty;
+                                (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_id)
+                                 group preenchimento by new { tds_id = preenchimento.tds_idRelacionada } into grupo
+                                 select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
+                                if (strTds.Length > 1)
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
+                                }
+                                else
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                                }
+                            }
+                            else
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                            }
+                        }
                     }
                 }
             }
@@ -3388,6 +4090,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar as habilidades relacionadas a avaliação.", UtilBO.TipoMensagem.Erro);
             }
         }
@@ -3485,9 +4188,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 // Apenas aulas dos dias anteriores sem plano de aula devem exibir o aviso.
                 Image imgSemPlanoAula = (Image)e.Item.FindControl("imgSemPlanoAula");
                 HiddenField hdfSemPlanoAula = (HiddenField)e.Item.FindControl("hdfSemPlanoAula");
-                if (imgSemPlanoAula != null && hdfSemPlanoAula != null && Convert.ToDateTime(lblData.Text).Date < DateTime.Now.Date)
+                if (imgSemPlanoAula != null && hdfSemPlanoAula != null &&
+                    Convert.ToDateTime(lblData.Text).Date < DateTime.Now.Date)
                 {
-                    imgSemPlanoAula.Visible = Convert.ToBoolean(hdfSemPlanoAula.Value)
+                    imgSemPlanoAula.Visible = Convert.ToBoolean(hdfSemPlanoAula.Value) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
@@ -3578,10 +4282,466 @@ namespace GestaoEscolar.Academico.ControleTurma
             catch (Exception ex)
             {
                 ApplicationWEB._GravaErro(ex);
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar o sistema.", UtilBO.TipoMensagem.Erro);
             }
         }
-        
+
+        protected void btnAdicionarAtiExtra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int tae_id = string.IsNullOrEmpty(hdnTaeId.Value) ? -1 : Convert.ToInt32(hdnTaeId.Value);
+                CLS_TurmaAtividadeExtraClasse entity = new CLS_TurmaAtividadeExtraClasse
+                {
+                    tud_id = VisibilidadeRegencia(ddlTurmaDisciplinaListao) ? ddlComponenteListao_Tud_Id_Selecionado : EntTurmaDisciplina.tud_id
+                    ,
+                    tae_id = tae_id
+                    ,
+                    tpc_id = UCNavegacaoTelaPeriodo.VS_tpc_id
+                    ,
+                    tav_id = UCComboTipoAtividadeAvaliativa.Valor
+                    ,
+                    tae_nome = txtNomeAtiExtra.Text
+                    ,
+                    tae_descricao = txtDescricaoAtiExtra.Text
+                    ,
+                    tae_cargaHoraria = Convert.ToInt32(string.IsNullOrEmpty(txtCargaAtiExtra.Text) ? "0" : txtCargaAtiExtra.Text)
+                    ,
+                    tdt_posicao = __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao ? (byte)1 : PosicaoDocente
+                    ,
+                    taer_id = new Guid(hdnTaerId.Value)
+                    ,
+                    IsNew = tae_id <= 0
+                };
+
+                List<long> lstDisciplinas = new List<long>();
+                if (rptDisciplinasAtiExtra.Visible)
+                {
+                    foreach (RepeaterItem disciplina in rptDisciplinasAtiExtra.Items)
+                    {
+                        CheckBox ckbDisciplinaAtiExtra = (CheckBox)disciplina.FindControl("ckbDisciplinaAtiExtra");
+                        if (ckbDisciplinaAtiExtra != null && ckbDisciplinaAtiExtra.Checked)
+                        {
+                            HiddenField hdnIdDisciplinaAtiExtra = (HiddenField)disciplina.FindControl("hdnIdDisciplinaAtiExtra");
+                            if (hdnIdDisciplinaAtiExtra != null)
+                            {
+                                lstDisciplinas.Add(Convert.ToInt64(hdnIdDisciplinaAtiExtra.Value));
+                            }
+                        }
+                    }
+                }
+
+                if (CLS_TurmaAtividadeExtraClasseBO.Salvar(entity, VS_EntitiesControleTurma.calendarioAnual.cal_id, VS_EntitiesControleTurma.formatoAvaliacao.fav_fechamentoAutomatico, Ent_ID_UsuarioLogado, lstDisciplinas, __SessionWEB.__UsuarioWEB.Usuario.usu_id, UCControleTurma1.VS_tur_id))
+                {
+                    ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Delete, string.Format("Listão de atividade extraclasse | Adição de atividade | tud_id: {0}, tae_id: {1}", entity.tud_id, entity.tae_id));
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                    lblMessage.Text = UtilBO.GetErroMessage("Atividade extraclasse salva com sucesso.", UtilBO.TipoMensagem.Sucesso);
+                    fdsCadastroAtiExtra.Visible = false;
+                    fdsListagemAtiExtra.Visible = true;
+                    CarregarListaoAtividadeExtraclasse();
+                    hdnTaeId.Value = string.Empty;
+                    hdnTaerId.Value = string.Empty;
+                }
+            }
+            catch (ValidationException ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar salvar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void rptAlunoAtivExtra_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "RelatorioRP")
+            {
+                try
+                {
+                    string[] args = e.CommandArgument.ToString().Split(';');
+                    AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+        }
+
+        protected void rptAlunoAtivExtra_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if ((e.Item.ItemType == ListItemType.Item) ||
+                (e.Item.ItemType == ListItemType.AlternatingItem) ||
+                (e.Item.ItemType == ListItemType.Header))
+            {
+                EscalaAvaliacaoTipo tipo = (EscalaAvaliacaoTipo)VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo;
+
+                // Altera o texto do nome do aluno de acordo com a data de matrícula e saída.
+                SetaNomeAluno(e);
+
+                Alu_idExtraClasse = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "alu_id"));
+
+                //Parametros dispensa disciplina - pinta linha
+                Mtu_idExtraClasse = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "mtu_id"));
+                UCNavegacaoTelaPeriodo.VS_cal_id = VS_EntitiesControleTurma.turma.cal_id;
+
+                // Aluno inativo - pinta a linha
+                int mtd_situacao = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "mtd_situacao"));
+
+                Repeater rptAtividades = (Repeater)e.Item.FindControl("rptAtividades");
+                DataTable dtAtividades = new DataTable();
+                List<DataRow> ltAtividades;
+                if (e.Item.ItemType == ListItemType.Header)
+                {
+                    // Busca todas as atividades para o cabeçalho.
+                    ltAtividades = (from DataRow dr in DTAtividadeExtraclasse.Rows
+                                    group dr by dr["tae_id"] into g
+                                    orderby Convert.ToInt32(g.FirstOrDefault()["tae_id"])
+                                            , Convert.ToInt64(g.FirstOrDefault()["tud_id"])
+                                    select g.FirstOrDefault()).ToList();
+
+                    if (ltAtividades.Count > 0)
+                        dtAtividades = ltAtividades.CopyToDataTable();
+                }
+                else
+                {
+                    int mtu_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "mtu_id"));
+                    int mtd_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "mtd_id"));
+
+                    // Busca as notas das atividades para o aluno.
+                    ltAtividades = (from DataRow dr in DTAtividadeExtraclasse.Rows
+                                    where
+                                        Convert.ToInt64(dr["alu_id"]) == Alu_idExtraClasse
+                                        && Convert.ToInt32(dr["mtu_id"]) == mtu_id
+                                        && Convert.ToInt32(dr["mtd_id"]) == mtd_id
+                                    group dr by dr["tae_id"] into g
+                                    orderby Convert.ToInt32(g.FirstOrDefault()["tae_id"])
+                                            , Convert.ToInt64(g.FirstOrDefault()["tud_id"])
+                                    select g.FirstOrDefault()).ToList();
+
+                    if (ltAtividades.Count > 0)
+                        dtAtividades = ltAtividades.CopyToDataTable();
+                }
+
+                if (rptAtividades != null)
+                {
+                    rptAtividades.DataSource = dtAtividades;
+                    rptAtividades.DataBind();
+                }
+
+                if ((e.Item.ItemType == ListItemType.Item) ||
+                    (e.Item.ItemType == ListItemType.AlternatingItem))
+                {
+                    if (mtd_situacao == Convert.ToInt32(MTR_MatriculaTurmaDisciplinaSituacao.Inativo))
+                    {
+                        HtmlControl tdNumChamadaAvaliacao = (HtmlControl)e.Item.FindControl("tdNumChamadaAvaliacao");
+                        HtmlControl tdNomeAvaliacao = (HtmlControl)e.Item.FindControl("tdNomeAvaliacao");
+
+                        tdNumChamadaAvaliacao.Style["background-color"] = tdNomeAvaliacao.Style["background-color"] = ApplicationWEB.AlunoInativo;
+                    }
+
+                    LinkButton btnRelatorioAEE = (LinkButton)e.Item.FindControl("btnRelatorioAEE");
+                    if (btnRelatorioAEE != null)
+                    {
+                        btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Item.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                    && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "PossuiDeficiencia"));
+                        btnRelatorioAEE.CommandArgument = Alu_id.ToString();
+                    }
+
+                    // Mostra o ícone para as anotações de recuperação paralela (RP):
+                    // - para todos os alunos, quando a turma for de recuperação paralela,
+                    // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
+                    if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno
+                        || lstAlunosRelatorioRP.Any(p => p.alu_id == Alu_idExtraClasse))
+                    {
+                        LinkButton btnRelatorioRP = (LinkButton)e.Item.FindControl("btnRelatorioRP");
+                        if (btnRelatorioRP != null)
+                        {
+                            btnRelatorioRP.Visible = true;
+                            btnRelatorioRP.CommandArgument = Alu_idExtraClasse.ToString();
+
+                            if (VisibilidadeRegencia(ddlTurmaDisciplinaListao))
+                            {
+                                string strTds = string.Empty;
+                                (from Struct_PreenchimentoAluno preenchimento in lstAlunosRelatorioRP.FindAll(p => p.alu_id == Alu_idExtraClasse)
+                                 group preenchimento by new { tds_id = preenchimento.tds_idRelacionada } into grupo
+                                 select grupo.Key.tds_id).ToList().ForEach(p => strTds += string.Format(",{0}", p.ToString()));
+                                if (strTds.Length > 1)
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", strTds.Substring(1));
+                                }
+                                else
+                                {
+                                    btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                                }
+                            }
+                            else
+                            {
+                                btnRelatorioRP.CommandArgument += string.Format(";{0}", "-1");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void rptAtividadesExtraClasse_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if ((e.Item.ItemType == ListItemType.Item) ||
+                (e.Item.ItemType == ListItemType.AlternatingItem))
+            {
+                // Seta o campo de nota de acordo com o tipo de escala de avaliação.
+                TextBox txtNota = (TextBox)e.Item.FindControl("txtNota");
+                DropDownList ddlPareceres = (DropDownList)e.Item.FindControl("ddlPareceres");
+                ImageButton btnRelatorio = (ImageButton)e.Item.FindControl("btnRelatorio");
+                CheckBox chkEntregou = (CheckBox)e.Item.FindControl("chkEntregou");
+
+                // Setar relatórios.
+                RepeaterItem itemAtividade = e.Item;
+                Repeater rptAtividades = (Repeater)itemAtividade.NamingContainer;
+                RepeaterItem itemAluno = (RepeaterItem)rptAtividades.NamingContainer;
+                long alu_id = Convert.ToInt64(((Label)itemAluno.FindControl("lblalu_id")).Text);
+                int mtu_id = Convert.ToInt32(((Label)itemAluno.FindControl("lblmtu_id")).Text);
+                HtmlGenericControl divAtividades = (HtmlGenericControl)e.Item.FindControl("divAtividades");
+                string avaliacao = DataBinder.Eval(e.Item.DataItem, "avaliacao").ToString();
+
+                long tud_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "tud_id").ToString());
+                int tae_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "tae_id").ToString());
+
+                EscalaAvaliacaoTipo tipo = (EscalaAvaliacaoTipo)VS_EntitiesControleTurma.escalaDocente.escalaAvaliacao.esa_tipo;
+
+                txtNota.Visible = tipo == EscalaAvaliacaoTipo.Numerica;
+                ddlPareceres.Visible = tipo == EscalaAvaliacaoTipo.Pareceres;
+                btnRelatorio.Visible = tipo == EscalaAvaliacaoTipo.Relatorios;
+
+                if (tipo == EscalaAvaliacaoTipo.Pareceres)
+                {
+                    // Carregar combo de pareceres.
+                    ddlPareceres.Items.Insert(0, new ListItem("-- Selecione um conceito --", "-1", true));
+                    ddlPareceres.AppendDataBoundItems = true;
+                    ddlPareceres.DataSource = LtPareceres;
+                    ddlPareceres.DataBind();
+
+                    ddlPareceres.SelectedValue = avaliacao;
+                }
+
+                bool permissaoAlteracao = PermiteLancarAtividadeExtraclasse && Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "permissaoEdicao")) > 0;
+                if (permissaoAlteracao && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                {
+                    permissaoAlteracao = (VS_situacaoTurmaDisciplina == 1 || (VS_situacaoTurmaDisciplina != 1));
+                }
+                if (permissaoAlteracao)
+                {
+                    permiteEdicao = true;
+                }
+                
+                HabilitaControles(divAtividades.Controls, usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado && permissaoAlteracao);
+
+                double eaeAvaliacao;
+                txtNota.Text = double.TryParse(avaliacao, out eaeAvaliacao) ? string.Format("{0:F" + NumeroCasasDecimais + "}", eaeAvaliacao) : avaliacao;
+
+                if (tipo == EscalaAvaliacaoTipo.Relatorios)
+                {
+                    string aea_relatorio = DataBinder.Eval(itemAtividade.DataItem, "relatorio").ToString();
+                    AdicionaItemRelatorioAtiExtra(tae_id, alu_id, mtu_id, aea_relatorio);
+
+                    SetaImgRelatorioAtiExtra(itemAtividade);
+                }
+
+                chkEntregou.Checked = Convert.ToBoolean(DataBinder.Eval(itemAtividade.DataItem, "entregou").ToString());
+
+                txtNota.TabIndex = Convert.ToInt16(e.Item.ItemIndex + 1);
+                ddlPareceres.TabIndex = Convert.ToInt16(e.Item.ItemIndex + 1);
+
+                bool AlunoDispensado = Convert.ToBoolean((DataBinder.Eval(e.Item.DataItem, "AlunoDispensado") ?? false));
+
+                if (AlunoDispensado)
+                {
+                    // Pinta célula que possui aluno dispensado.
+                    if (divAtividades != null)
+                    {
+                        divAtividades.Style["background-color"] = ApplicationWEB.AlunoDispensado;
+                    }
+                }
+
+                // Aluno Inativo
+                int mtd_situacao = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "mtd_situacao"));
+                HtmlTableCell tdAtividadesAtivAva = (HtmlTableCell)e.Item.FindControl("tdAtividadesAtivAva");
+
+                if (mtd_situacao == Convert.ToInt32(MTR_MatriculaTurmaDisciplinaSituacao.Inativo))
+                {
+                    // Pinta célula que possui aluno ausente.
+                    if (tdAtividadesAtivAva != null)
+                    {
+                        tdAtividadesAtivAva.Style["background-color"] = ApplicationWEB.AlunoInativo;
+                    }
+                }
+            }
+        }
+
+        protected void btnEditarAtiExtra_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                ImageButton btnEditarAtiExtra = sender as ImageButton;
+                if (btnEditarAtiExtra != null)
+                {
+                    RepeaterItem itemAtividade = btnEditarAtiExtra.NamingContainer as RepeaterItem;
+                    Label lbltud_id = itemAtividade.FindControl("lbltud_id") as Label;
+                    Label lbltae_id = itemAtividade.FindControl("lbltae_id") as Label;
+
+                    Label lblTaePosicao = itemAtividade.FindControl("lblTaePosicao") as Label;
+                    Label lblPermissao = itemAtividade.FindControl("lblPermissao") as Label;
+
+                    if (lbltud_id != null && lbltae_id != null)
+                    {
+                        long tud_id = 0;
+                        int tae_id = 0;
+
+                        if (long.TryParse(lbltud_id.Text, out tud_id) && tud_id > 0 &&
+                            int.TryParse(lbltae_id.Text, out tae_id) && tae_id > 0)
+                        {
+                            if (lblTaePosicao != null && lblPermissao != null)
+                            {
+                                int permissao = 0;
+                                int.TryParse(lblPermissao.Text, out permissao);
+                                CarregarCadastroAtividadeExtraclasse(tud_id, tae_id, permissao > 0 && PermiteLancarAtividadeExtraclasse);
+                            }
+                            else
+                            {
+                                CarregarCadastroAtividadeExtraclasse(tud_id, tae_id, (PermiteLancarAtividadeExtraclasse || __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) && VS_Periodo_Aberto);
+                            }
+                            updAtiExtra.Update();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar editar a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void btnExcluirAtiExtra_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                ImageButton btnExcluirAtiExtra = sender as ImageButton;
+                if (btnExcluirAtiExtra != null)
+                {
+                    RepeaterItem itemAtividade = btnExcluirAtiExtra.NamingContainer as RepeaterItem;
+                    Label lbltud_id = itemAtividade.FindControl("lbltud_id") as Label;
+                    Label lbltae_id = itemAtividade.FindControl("lbltae_id") as Label;
+
+                    if (lbltud_id != null && lbltae_id != null)
+                    {
+                        long tud_id = 0;
+                        int tae_id = 0;
+
+                        if (long.TryParse(lbltud_id.Text, out tud_id) && tud_id > 0 &&
+                            int.TryParse(lbltae_id.Text, out tae_id) && tae_id > 0)
+                        {
+                            Label lbltaer_id = itemAtividade.FindControl("lbltaer_id") as Label;
+                            Guid taer_id = Guid.Empty;
+                            if (!string.IsNullOrEmpty(lbltaer_id.Text))
+                            {
+                                taer_id = new Guid(lbltaer_id.Text);
+                            }
+
+                            VS_tud_idAtiExtraExcluir = tud_id;
+                            VS_tae_idAtiExtraExcluir = tae_id;
+                            VS_taer_idAtiExtraExcluir = taer_id;
+                            UCConfirmacaoOperacao.Mensagem = "Confirma exclusão?";
+                            UCConfirmacaoOperacao.EventBtnNao = false;
+                            UCConfirmacaoOperacao.Update();
+                            ScriptManager.RegisterStartupScript(Page, typeof(Page), "ConfirmaExclusaoAtiExtra", "$(document).ready(function(){ scrollToTop(); $('#divConfirmacao').dialog('open'); });", true);
+                        }
+                    }
+                }
+            }
+            catch (ValidationException ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage(ex.Message, UtilBO.TipoMensagem.Alerta);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar excluir a atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
+        protected void btnCancelarAtiExtra_Click(object sender, EventArgs e)
+        {
+            fdsCadastroAtiExtra.Visible = false;
+            fdsListagemAtiExtra.Visible = true;
+        }
+
+        protected void rptAtividadesExtraClasseHeader_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                bool permissaoAlteracao = PermiteLancarAtividadeExtraclasse && Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "permissaoEdicao")) > 0;
+                if (permissaoAlteracao && __SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                {
+                    permissaoAlteracao = (VS_situacaoTurmaDisciplina == 1 || (VS_situacaoTurmaDisciplina != 1));
+                }
+                if (permissaoAlteracao)
+                {
+                    permiteEdicao = true;
+                }
+
+                // Verifico se a atividade é de uma avaliação paralela.
+                ImageButton btnExcluirAtiExtra = (ImageButton)e.Item.FindControl("btnExcluirAtiExtra");
+                if (btnExcluirAtiExtra != null)
+                {
+                    btnExcluirAtiExtra.Visible = usuarioPermissao && permissaoAlteracao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
+                }
+
+                ImageButton btnEditarAtiExtra = (ImageButton)e.Item.FindControl("btnEditarAtiExtra");
+                if (btnEditarAtiExtra != null)
+                {
+                    btnEditarAtiExtra.Visible = usuarioPermissao && VS_Periodo_Aberto && !VS_PeriodoEfetivado;
+                }
+            }
+        }
+
+        protected void btnNovoAtiExtra_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CarregarCadastroAtividadeExtraclasse(-1, -1, true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "ScrollToTop", "setTimeout('window.scrollTo(0,0);', 0);", true);
+                lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar atividade extraclasse.", UtilBO.TipoMensagem.Erro);
+                ApplicationWEB._GravaErro(ex);
+            }
+        }
+
         #endregion Eventos
     }
 }

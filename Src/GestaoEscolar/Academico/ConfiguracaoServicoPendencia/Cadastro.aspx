@@ -25,6 +25,7 @@
         <asp:CheckBox ID="chkSemPlanejamento" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemPlanejamento.Text %>" CssClass="wrap150px"></asp:CheckBox>
         <asp:CheckBox ID="chkSemSintese" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemSinteseFinal.Text %>" CssClass="wrap150px"></asp:CheckBox>
         <asp:CheckBox ID="chkSemPlanoAula" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.chkSemPlanoAula.Text %>" CssClass="wrap150px"></asp:CheckBox>
+        <asp:CheckBoxList ID="cblSemRelatorioAtendimento" runat="server" RepeatDirection="Vertical"></asp:CheckBoxList>
         <div class="right">
             <asp:Button ID="btnSalvar" runat="server" Text="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.btnSalvar.Text %>" OnClick="btnSalvar_Click"
                 ToolTip="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Cadastro.btnSalvar.Text %>" />

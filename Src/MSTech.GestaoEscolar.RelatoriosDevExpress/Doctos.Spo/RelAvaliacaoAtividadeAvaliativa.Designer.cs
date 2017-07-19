@@ -47,7 +47,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             DevExpress.XtraCharts.TextAnnotation textAnnotation1 = new DevExpress.XtraCharts.TextAnnotation();
             DevExpress.XtraCharts.ChartAnchorPoint chartAnchorPoint1 = new DevExpress.XtraCharts.ChartAnchorPoint();
             DevExpress.XtraCharts.FreePosition freePosition1 = new DevExpress.XtraCharts.FreePosition();
-            DevExpress.XtraCharts.SimpleDiagram simpleDiagram1 = new DevExpress.XtraCharts.SimpleDiagram();
             DevExpress.XtraCharts.Series series7 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.PieSeriesLabel pieSeriesLabel1 = new DevExpress.XtraCharts.PieSeriesLabel();
             DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView();
@@ -122,7 +121,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrPizza)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(textAnnotation1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(simpleDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(series7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pieSeriesLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).BeginInit();
@@ -134,6 +132,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable1});
+            this.Detail.Dpi = 100F;
             this.Detail.HeightF = 15F;
             this.Detail.MultiColumn.ColumnCount = 2;
             this.Detail.MultiColumn.Layout = DevExpress.XtraPrinting.ColumnLayout.AcrossThenDown;
@@ -147,6 +146,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // xrTable1
             // 
+            this.xrTable1.Dpi = 100F;
             this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(1.000086F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -157,6 +157,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrTableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.xrTableCell2});
+            this.xrTableRow2.Dpi = 100F;
             this.xrTableRow2.Name = "xrTableRow2";
             this.xrTableRow2.Weight = 1D;
             // 
@@ -164,6 +165,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrTableCell2.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_AtAvaliativa.NomeAluno")});
+            this.xrTableCell2.Dpi = 100F;
             this.xrTableCell2.Font = new System.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
@@ -175,6 +177,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // xrTableAlunos
             // 
+            this.xrTableAlunos.Dpi = 100F;
             this.xrTableAlunos.LocationFloat = new DevExpress.Utils.PointFloat(3.178914E-05F, 46.875F);
             this.xrTableAlunos.Name = "xrTableAlunos";
             this.xrTableAlunos.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -185,6 +188,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrTableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.xrTableCell1});
+            this.xrTableRow1.Dpi = 100F;
             this.xrTableRow1.Name = "xrTableRow1";
             this.xrTableRow1.Weight = 1D;
             // 
@@ -192,12 +196,14 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrTableCell1.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_AtAvaliativa.6")});
+            this.xrTableCell1.Dpi = 100F;
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.Text = "xrTableCell1";
             this.xrTableCell1.Weight = 3D;
             // 
             // TopMargin
             // 
+            this.TopMargin.Dpi = 100F;
             this.TopMargin.HeightF = 75F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -205,6 +211,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // BottomMargin
             // 
+            this.BottomMargin.Dpi = 100F;
             this.BottomMargin.HeightF = 75F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -278,6 +285,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrLabelDescAvaliacao.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_DescricaoAtividade.Descricao")});
+            this.xrLabelDescAvaliacao.Dpi = 100F;
             this.xrLabelDescAvaliacao.LocationFloat = new DevExpress.Utils.PointFloat(0F, 37.58332F);
             this.xrLabelDescAvaliacao.Name = "xrLabelDescAvaliacao";
             this.xrLabelDescAvaliacao.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -290,6 +298,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrLabel9.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_DescricaoAtividade.Nome")});
+            this.xrLabel9.Dpi = 100F;
             this.xrLabel9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 165F);
             this.xrLabel9.Name = "xrLabel9";
@@ -305,6 +314,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrLabelDescricaoAvaliacao.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_DescricaoAtividade.Descricao")});
+            this.xrLabelDescricaoAvaliacao.Dpi = 100F;
             this.xrLabelDescricaoAvaliacao.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabelDescricaoAvaliacao.LocationFloat = new DevExpress.Utils.PointFloat(1.000214F, 188F);
             this.xrLabelDescricaoAvaliacao.Name = "xrLabelDescricaoAvaliacao";
@@ -320,14 +330,14 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.xrBarra.BorderColor = System.Drawing.Color.Black;
             this.xrBarra.Borders = DevExpress.XtraPrinting.BorderSide.None;
             xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram1.AxisX.WholeRange.AutoSideMargins = true;
             xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram1.AxisY.WholeRange.AutoSideMargins = true;
             xyDiagram1.DefaultPane.EnableAxisXScrolling = DevExpress.Utils.DefaultBoolean.False;
             xyDiagram1.DefaultPane.EnableAxisXZooming = DevExpress.Utils.DefaultBoolean.False;
             xyDiagram1.DefaultPane.EnableAxisYScrolling = DevExpress.Utils.DefaultBoolean.False;
             xyDiagram1.DefaultPane.EnableAxisYZooming = DevExpress.Utils.DefaultBoolean.False;
             this.xrBarra.Diagram = xyDiagram1;
+            this.xrBarra.Dpi = 100F;
+            this.xrBarra.Legend.Name = "Default Legend";
             this.xrBarra.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
             this.xrBarra.LocationFloat = new DevExpress.Utils.PointFloat(0F, 229.3733F);
             this.xrBarra.Name = "xrBarra";
@@ -393,7 +403,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // xrPizza
             // 
-            chartAnchorPoint1.X = 0;
             chartAnchorPoint1.Y = 43;
             textAnnotation1.AnchorPoint = chartAnchorPoint1;
             textAnnotation1.AutoSize = false;
@@ -413,8 +422,8 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             textAnnotation1});
             this.xrPizza.BorderColor = System.Drawing.Color.Black;
             this.xrPizza.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            simpleDiagram1.EqualPieSize = false;
-            this.xrPizza.Diagram = simpleDiagram1;
+            this.xrPizza.Dpi = 100F;
+            this.xrPizza.Legend.Name = "Default Legend";
             this.xrPizza.Legend.Padding.Right = 20;
             this.xrPizza.Legend.Padding.Top = 20;
             this.xrPizza.LocationFloat = new DevExpress.Utils.PointFloat(0F, 229.3733F);
@@ -430,15 +439,11 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             series7.LabelsVisibility = DevExpress.Utils.DefaultBoolean.False;
             series7.Name = "Series 1";
             series7.ValueDataMembersSerializable = "NEW_RelatorioAvaliacao_AtAvaliativa_Grafico.Total";
-            pieSeriesView1.RuntimeExploding = false;
-            pieSeriesView1.SweepDirection = DevExpress.XtraCharts.PieSweepDirection.Counterclockwise;
             series7.View = pieSeriesView1;
             this.xrPizza.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series7};
             pieSeriesLabel2.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
             this.xrPizza.SeriesTemplate.Label = pieSeriesLabel2;
-            pieSeriesView2.RuntimeExploding = false;
-            pieSeriesView2.SweepDirection = DevExpress.XtraCharts.PieSweepDirection.Counterclockwise;
             this.xrPizza.SeriesTemplate.View = pieSeriesView2;
             this.xrPizza.SizeF = new System.Drawing.SizeF(697.9993F, 293.6266F);
             this.xrPizza.Visible = false;
@@ -461,6 +466,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.xrBarra,
             this.xrLabelDescricaoAvaliacao,
             this.xrLabel9});
+            this.PageHeader.Dpi = 100F;
             this.PageHeader.HeightF = 533F;
             this.PageHeader.Name = "PageHeader";
             this.PageHeader.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PageHeader_BeforePrint);
@@ -469,6 +475,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrLabel2.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_Cabecalho.CalendarioAno", "Ano letivo: {0}")});
+            this.xrLabel2.Dpi = 100F;
             this.xrLabel2.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(1.000293F, 115F);
             this.xrLabel2.Name = "xrLabel2";
@@ -480,6 +487,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // ImgLogo
             // 
+            this.ImgLogo.Dpi = 100F;
             this.ImgLogo.LocationFloat = new DevExpress.Utils.PointFloat(1.000293F, 0F);
             this.ImgLogo.Name = "ImgLogo";
             this.ImgLogo.SizeF = new System.Drawing.SizeF(94.7505F, 80.00001F);
@@ -489,6 +497,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrLabel6.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_Cabecalho.Escola")});
+            this.xrLabel6.Dpi = 100F;
             this.xrLabel6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(95.75079F, 60.00001F);
             this.xrLabel6.Name = "xrLabel6";
@@ -501,6 +510,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // lblNomeMunicipio
             // 
+            this.lblNomeMunicipio.Dpi = 100F;
             this.lblNomeMunicipio.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.lblNomeMunicipio.LocationFloat = new DevExpress.Utils.PointFloat(95.75072F, 0F);
             this.lblNomeMunicipio.Name = "lblNomeMunicipio";
@@ -513,6 +523,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // lblNomeSecretaria
             // 
+            this.lblNomeSecretaria.Dpi = 100F;
             this.lblNomeSecretaria.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.lblNomeSecretaria.LocationFloat = new DevExpress.Utils.PointFloat(95.75072F, 20.00001F);
             this.lblNomeSecretaria.Name = "lblNomeSecretaria";
@@ -525,6 +536,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // xrLabel22
             // 
+            this.xrLabel22.Dpi = 100F;
             this.xrLabel22.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel22.LocationFloat = new DevExpress.Utils.PointFloat(0F, 90F);
             this.xrLabel22.Name = "xrLabel22";
@@ -539,6 +551,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrLabel1.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_Cabecalho.DRE")});
+            this.xrLabel1.Dpi = 100F;
             this.xrLabel1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(95.75079F, 40.00003F);
             this.xrLabel1.Name = "xrLabel1";
@@ -553,6 +566,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrLabel4.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_Cabecalho.Docente", "Docente: {0}")});
+            this.xrLabel4.Dpi = 100F;
             this.xrLabel4.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(317.92F, 133F);
             this.xrLabel4.Name = "xrLabel4";
@@ -567,6 +581,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrLabel7.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_Cabecalho.CicloTurDiscBim", "{0}")});
+            this.xrLabel7.Dpi = 100F;
             this.xrLabel7.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(0F, 133F);
             this.xrLabel7.Name = "xrLabel7";
@@ -579,6 +594,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // xrPageInfo1
             // 
+            this.xrPageInfo1.Dpi = 100F;
             this.xrPageInfo1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrPageInfo1.Format = "Data de emissão: {0:dd/MM/yyyy}";
             this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(545.25F, 133F);
@@ -592,6 +608,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // xrLine1
             // 
+            this.xrLine1.Dpi = 100F;
             this.xrLine1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 156F);
             this.xrLine1.Name = "xrLine1";
             this.xrLine1.SizeF = new System.Drawing.SizeF(699.9999F, 8F);
@@ -600,6 +617,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabelHeader});
+            this.GroupHeader1.Dpi = 100F;
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("OrdemFaixa", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("Descricao", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
@@ -616,6 +634,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.xrLabelHeader.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.xrLabelHeader.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_RelatorioAvaliacao_AtAvaliativa.Descricao")});
+            this.xrLabelHeader.Dpi = 100F;
             this.xrLabelHeader.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabelHeader.LocationFloat = new DevExpress.Utils.PointFloat(0F, 3.000005F);
             this.xrLabelHeader.Name = "xrLabelHeader";
@@ -631,6 +650,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.GroupHeader2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.lblSemRegistroGrafico});
+            this.GroupHeader2.Dpi = 100F;
             this.GroupHeader2.HeightF = 45F;
             this.GroupHeader2.Level = 1;
             this.GroupHeader2.Name = "GroupHeader2";
@@ -644,6 +664,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblSemRegistroGrafico.CanShrink = true;
+            this.lblSemRegistroGrafico.Dpi = 100F;
             this.lblSemRegistroGrafico.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSemRegistroGrafico.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblSemRegistroGrafico.Name = "lblSemRegistroGrafico";
@@ -699,7 +720,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.NOMEPERIODOCALENDARIO,
             this.NOMEDISCIPLINA,
             this.ARQID_LOGO});
-            this.Version = "14.2";
+            this.Version = "16.1";
             this.DataSourceDemanded += new System.EventHandler<System.EventArgs>(this.RelAvaliacaoAtividadeAvaliativa_DataSourceDemanded);
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.RelAvaliacaoAtividadeAvaliativa_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -721,7 +742,6 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrBarra)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(textAnnotation1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(simpleDiagram1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(pieSeriesLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series7)).EndInit();

@@ -32,6 +32,7 @@ namespace GestaoEscolar.WebControls.Fechamento
         private const int colunaObservacaoConselho = 9;
         private const int colunaResultado = 10;
         private const int colunaBoletim = 11;
+        private const int colunaNomeAluno = 2;
 
         // constantes criadas para a ordem das colunas da tabela de efetivação de notas
         // para os componentes da Regencia
@@ -825,6 +826,8 @@ namespace GestaoEscolar.WebControls.Fechamento
 
         private List<UCFechamento.AlunoDisciplina> lstAlunosPendentes = new List<UCFechamento.AlunoDisciplina>();
 
+        private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
+
         #endregion Propriedades
 
         #region DELEGATES
@@ -844,6 +847,14 @@ namespace GestaoEscolar.WebControls.Fechamento
         public delegate void commandMostrarLoading(int tempoProcessar);
 
         public event commandMostrarLoading MostrarLoading;
+
+        public delegate void commandAbrirRelatorioRP(long alu_id, string tds_idRP);
+
+        public event commandAbrirRelatorioRP AbrirRelatorioRP;
+
+        public delegate void commandAbrirRelatorioAEE(long alu_id);
+
+        public event commandAbrirRelatorioAEE AbrirRelatorioAEE;
 
         #endregion DELEGATES
 
@@ -1248,6 +1259,11 @@ namespace GestaoEscolar.WebControls.Fechamento
 
             if (Tud_id > 0)
             {
+                if (VS_Turma.tur_tipo == (byte)TUR_TurmaTipo.Normal)
+                {
+                    lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(VS_tpc_id, VS_Turma.tur_id, Tud_id, ApplicationWEB.AppMinutosCacheMedio);
+                }
+
                 gvAlunos.DataSource = listaDisciplina;
             }
             gvAlunos.DataBind();
@@ -2244,11 +2260,24 @@ namespace GestaoEscolar.WebControls.Fechamento
                 Row.Cells[colunaBoletim].Enabled = true;
                 Row.Cells[colunaObservacaoConselho].Enabled = true;
                 Row.Cells[colunaFaltas].Enabled = true;
+                Row.Cells[colunaNomeAluno].Enabled = true;
 
                 ImageButton btnBoletim = (ImageButton)Row.FindControl("btnBoletim");
                 if (btnBoletim != null)
                 {
                     btnBoletim.Enabled = true;
+                }
+
+                LinkButton btnRelatorioRP = (LinkButton)Row.FindControl("btnRelatorioRP");
+                if (btnRelatorioRP != null)
+                {
+                    btnRelatorioRP.Enabled = true;
+                }
+
+                LinkButton btnRelatorioAEE = (LinkButton)Row.FindControl("btnRelatorioAEE");
+                if (btnRelatorioAEE != null)
+                {
+                    btnRelatorioAEE.Enabled = true;
                 }
 
                 ImageButton btnObservacaoConselho = (ImageButton)Row.FindControl("btnObservacaoConselho");
@@ -3988,6 +4017,7 @@ namespace GestaoEscolar.WebControls.Fechamento
             }
             else if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                long alu_id = Convert.ToInt64(DataBinder.Eval(e.Row.DataItem, "alu_id"));
                 ImageButton btnObservacaoConselho = (ImageButton)e.Row.FindControl("btnObservacaoConselho");
                 Image imgObservacaoConselhoSituacao = (Image)e.Row.FindControl("imgObservacaoConselhoSituacao");
                 ImageButton btnBoletim = (ImageButton)e.Row.FindControl("btnBoletim");
@@ -4027,7 +4057,7 @@ namespace GestaoEscolar.WebControls.Fechamento
                 if (imgStatusFechamento != null)
                 {
                     //verifica se o aluno tem pendencia de fechamento
-                    if (lstAlunosPendentes != null && lstAlunosPendentes.Any(p => p.aluId == Convert.ToInt64(DataBinder.Eval(e.Row.DataItem, "alu_id"))))
+                    if (lstAlunosPendentes != null && lstAlunosPendentes.Any(p => p.aluId == alu_id))
                     {
                         imgStatusFechamento.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "statusAlertaPendencia.png";
                         if (EntTurmaDisciplina.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia)
@@ -4079,7 +4109,6 @@ namespace GestaoEscolar.WebControls.Fechamento
                 ImageButton btnFaltasExternas = (ImageButton)e.Row.FindControl("btnFaltasExternas");
                 if (btnFaltasExternas != null && listaFrequenciaExterna != null && listaFrequenciaExterna.Count > 0)
                 {
-                    long alu_id = Convert.ToInt64(gvAlunos.DataKeys[e.Row.RowIndex]["alu_id"]);
                     int mtu_id = Convert.ToInt32(gvAlunos.DataKeys[e.Row.RowIndex]["mtu_id"]);
                     int mtd_id = Convert.ToInt32(gvAlunos.DataKeys[e.Row.RowIndex]["mtd_id"]);
 
@@ -4090,6 +4119,28 @@ namespace GestaoEscolar.WebControls.Fechamento
                         btnFaltasExternas.OnClientClick =
                             "AbrePopupFrequenciaExterna('" + ext.afx_qtdAulas + "','" + ext.afx_qtdFaltas +
                                 "'); return false;";
+                    }
+                }
+
+                LinkButton btnRelatorioAEE = (LinkButton)e.Row.FindControl("btnRelatorioAEE");
+                if (btnRelatorioAEE != null)
+                {
+                    btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Row.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo
+                                                && Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "PossuiDeficiencia"));
+                    btnRelatorioAEE.CommandArgument = alu_id.ToString();
+                }
+
+                // Mostra o ícone para as anotações de recuperação paralela (RP):
+                // - para todos os alunos, quando a turma for de recuperação paralela,
+                // - ou apenas para alunos com anotações de RP, quando for a turma regular relacionada com a recuperação paralela.
+                if (VS_Turma.tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno
+                    || lstAlunosRelatorioRP.Any(p => p.alu_id == alu_id))
+                {
+                    LinkButton btnRelatorioRP = (LinkButton)e.Row.FindControl("btnRelatorioRP");
+                    if (btnRelatorioRP != null)
+                    {
+                        btnRelatorioRP.Visible = true;
+                        btnRelatorioRP.CommandArgument = string.Format("{0};-1", alu_id.ToString());
                     }
                 }
             }
@@ -4145,6 +4196,37 @@ namespace GestaoEscolar.WebControls.Fechamento
                 {
                     ApplicationWEB._GravaErro(ex);
                     lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar gerar o boletim completo do aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioRP")
+            {
+                try
+                {
+                    if (AbrirRelatorioRP != null)
+                    {
+                        string[] args = e.CommandArgument.ToString().Split(';');
+                        AbrirRelatorioRP(Convert.ToInt64(args[0]), args[1]);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir as anotações da recuperação paralela para o aluno.", UtilBO.TipoMensagem.Erro);
+                }
+            }
+            else if (e.CommandName == "RelatorioAEE")
+            {
+                try
+                {
+                    if (AbrirRelatorioAEE != null)
+                    {
+                        AbrirRelatorioAEE(Convert.ToInt64(e.CommandArgument.ToString()));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ApplicationWEB._GravaErro(ex);
+                    lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar abrir os relatórios do AEE para o aluno.", UtilBO.TipoMensagem.Erro);
                 }
             }
         }

@@ -488,4 +488,137 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
 
         #endregion IJob Members
     }
+
+    public class MS_JOB_AlertaPreenchimentoFrequencia : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_AlertaPreenchimentoFrequencias();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
+
+    public class MS_JOB_AlertaInicioFechamento : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_AlertaInicioFechamento();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
+
+    public class MS_JOB_AlertaFimFechamento : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_AlertaFimFechamento();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
+
+    public class MS_JOB_AlertaAlunosBaixaFrequencia : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_AlertaAlunosBaixaFrequencia();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
+
+    public class MS_JOB_AlertaAlunosFaltasConsecutivas : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_AlertaAlunosFaltasConsecutivas();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
+
+    public class MS_JOB_ProcessamentoPreenchimentoFrequencia : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoPreenchimentoFrequencia();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
+
+    public class MS_JOB_ProcessamentoAlunosFrequencia : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecJOB_ProcessamentoAlunosFrequencia();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
 }

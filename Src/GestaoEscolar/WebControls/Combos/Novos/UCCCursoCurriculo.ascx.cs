@@ -405,6 +405,20 @@ namespace GestaoEscolar.WebControls.Combos.Novos
 
         /// <summary>
         /// Carrega todos os cursos/currículos não excluídos logicamente
+        /// filtrando por escola, ano letivo e tipo de ciclo
+        /// </summary>
+        /// <param name="esc_id">ID da escola</param>
+        /// <param name="uni_id">ID da unidade</param>
+        /// <param name="cal_ano">Ano do calendario</param>
+        /// <param name="tci_id">ID do tipo de ciclo</param>
+        public void CarregarPorEscolaCalendarioAnoTipoCiclo(int esc_id, int uni_id, int cal_ano, int tci_id)
+        {
+            CarregarCombo(ACA_CursoBO.SelecionaCursoCurriculoPorEscolaCalendarioAnoTipoCiclo(esc_id, uni_id, cal_ano, tci_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
+        }
+
+
+        /// <summary>
+        /// Carrega todos os cursos/currículos não excluídos logicamente
         /// filtrando por escola e tipo nivel de ensino
         /// </summary>
         /// <param name="esc_id">ID da escola</param>
@@ -424,7 +438,7 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         /// <param name="cur_situacao">Situação do curso</param>
         public void CarregarComDisciplinaEletiva(int esc_id, int uni_id, int cur_situacao, bool mostraEJAModalidades = false)
         {
-            CarregarCombo(ACA_CursoBO.SelectCursoComDisciplinaEletiva(esc_id, uni_id, ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id), __SessionWEB.__UsuarioWEB.Usuario.ent_id, cur_situacao, mostraEJAModalidades, ApplicationWEB.AppMinutosCacheLongo));
+            CarregarCombo(ACA_CursoBO.SelectCursoComDisciplinaEletiva(esc_id, uni_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, cur_situacao, mostraEJAModalidades, ApplicationWEB.AppMinutosCacheLongo));
         }
 
         /// <summary>
@@ -487,6 +501,15 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         public void CarregarPorTipoNivelEnsino(int tne_id)
         {
             CarregarCombo(ACA_CursoBO.SelecionaCursoCurriculoPorNivelEnsino(tne_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
+        }
+
+        /// <summary>
+        /// Carregar por modalidade de ensino.
+        /// </summary>
+        /// <param name="tme_id"></param>
+        public void CarregarPorModalidadeEnsino(int tme_id)
+        {
+            CarregarCombo(ACA_CursoBO.Seleciona_Cursos_Por_ModalidadeEnsino(tme_id, -1, -1, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo));
         }
 
         #endregion Métodos

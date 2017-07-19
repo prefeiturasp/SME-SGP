@@ -76,31 +76,13 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem {
         protected global::WebControls_Mensagens_UCCamposObrigatorios UCCamposObrigatorios;
         
         /// <summary>
-        /// lblTituloSondagem control.
+        /// UCComboSondagem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloSondagem;
-        
-        /// <summary>
-        /// txtTituloSondagem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTituloSondagem;
-        
-        /// <summary>
-        /// rfvTituloSondagem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTituloSondagem;
+        protected global::WebControls_Combos_UCComboSondagem UCComboSondagem;
         
         /// <summary>
         /// divData control.

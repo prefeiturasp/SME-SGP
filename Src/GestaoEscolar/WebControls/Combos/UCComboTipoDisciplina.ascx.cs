@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using MSTech.GestaoEscolar.Web.WebProject;
+using MSTech.GestaoEscolar.BLL;
 
 public partial class WebControls_Combos_UCComboTipoDisciplina : MotherUserControl
 {
@@ -191,6 +192,24 @@ public partial class WebControls_Combos_UCComboTipoDisciplina : MotherUserContro
     }
 
     /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist    
+    /// </summary>
+    public void CarregarTipoDisciplinaTipo(byte tds_tipo)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectParameters.Add("tds_tipo", tds_tipo.ToString());
+        odsDados.SelectParameters.Add("AppMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
+
+        odsDados.SelectMethod = "SelecionaTipoDisciplinaTipo";
+        ddlCombo.DataTextField = "tds_nome";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um tipo de " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " --", "-1", true));
+        ddlCombo.DataBind();
+    }
+
+    /// <summary>
     /// Mostra os dados não excluídos logicamente no dropdownlist exibindo o nível de ensino
     /// e o tipo de disciplina no combo   
     /// </summary>
@@ -329,6 +348,27 @@ public partial class WebControls_Combos_UCComboTipoDisciplina : MotherUserContro
         odsDados.SelectParameters.Add("tci_id", tci_id.ToString());
         odsDados.SelectParameters.Add("esc_id", esc_id.ToString());
         odsDados.SelectParameters.Add("AppMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um tipo de " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " --", "-1", true));
+        ddlCombo.DataBind();
+    }
+
+    /// <summary>
+    /// Retorna todos os tipos de disciplina obrigatórias para o nível de ensino
+    /// e o tipo de disciplina no combo   
+    /// </summary>
+    public void CarregarObrigatoriasPorNivelEnsinoEvento(int tne_id, int tme_id, Guid ent_id, long doc_id, string eventosAbertos)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("tne_id", tne_id.ToString());
+        odsDados.SelectParameters.Add("tme_id", tme_id.ToString());
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectParameters.Add("doc_id", doc_id.ToString());
+        odsDados.SelectParameters.Add("eventosAbertos", eventosAbertos.ToString());
+
+        ddlCombo.DataTextField = "tne_tds_nome";
+        odsDados.SelectMethod = "SelecionaObrigatoriasPorNivelEnsinoEvento";
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um tipo de " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " --", "-1", true));
         ddlCombo.DataBind();

@@ -706,7 +706,7 @@
         /// </summary>
         public void CarregarTurma(long tur_id, int cal_id, int esc_id, int uni_id, int cur_id, int crr_id, int crp_id,
                                   long tud_id, int tds_id, byte tud_tipo, byte tdt_posicao, string tciIds, string tur_ids = null, 
-                                  int tne_id = -1, bool permiteEditarObjAprendizagem = false, long tudIdPendencia = -1)
+                                  int tne_id = -1, int tme_id = -1, bool permiteEditarObjAprendizagem = false, long tudIdPendencia = -1)
         {
             VS_TurmasNormais_Ids = tur_ids;
             VS_tur_id = tur_id;
@@ -742,6 +742,13 @@
             abaPlanoCiclo.Visible = divTabsPlanoCiclo.Visible = !ensinoInfantil || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ABA_PLANEJAMENTO_PLANO_CICLO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
             abaPlanoAnual.Visible = divTabsPlanoAnual.Visible = !ensinoInfantil || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ABA_PLANEJAMENTO_PLANO_ANUAL_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
             abaPlanoAluno.Visible = divTabsPlanoAluno.Visible = !ensinoInfantil || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ABA_PLANEJAMENTO_PLANO_ALUNO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
+            bool modalidadeEJA = tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_EJA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+            bool modalidadeCIEJA = tme_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_MODALIDADE_CIEJA, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
+            litPlanoCiclo.Text = modalidadeEJA || modalidadeCIEJA ? GetGlobalResourceObject("UserControl", "UCPlanejamentoProjetos.litPlanoCiclo.Text.Etapa").ToString() : litPlanoCiclo.Text;
+            litPlanoAnual.Text = modalidadeEJA && !modalidadeCIEJA ? GetGlobalResourceObject("UserControl", "UCPlanejamentoProjetos.litPlanoAnual.Text.Semestral").ToString() : litPlanoAnual.Text;
+
 
             if (VS_tciIdsTurma.Count > 0 && abaPlanoCiclo.Visible)
             {
@@ -803,7 +810,7 @@
 
             abaObjAprendVisivel = abaobjAprendizagem.Visible = divTabsObjetoAprendizagem.Visible = VS_permiteEditarObjAprendizagem &&
                                 Convert.ToBoolean(tcp.tcp_objetoAprendizagem) && Convert.ToBoolean(tci.tci_objetoAprendizagem) &&
-                                entityTurma.tur_tipo == (byte)TUR_TurmaTipo.Normal;
+                                (entityTurma.tur_tipo == (byte)TUR_TurmaTipo.Normal || entityTurma.tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado);
 
             if (abaobjAprendizagem.Visible)
             {

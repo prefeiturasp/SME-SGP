@@ -1399,7 +1399,6 @@ namespace MSTech.GestaoEscolar.DAL
         (
             int esc_id
             , int uni_id
-            , int tds_id
             , Guid ent_id
             , int cur_situacao
             , bool mostraEJAModalidades
@@ -1427,16 +1426,6 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.Size = 4;
                 if (uni_id > 0)
                     Param.Value = uni_id;
-                else
-                    Param.Value = DBNull.Value;
-                qs.Parameters.Add(Param);
-
-                Param = qs.NewParameter();
-                Param.DbType = DbType.Int32;
-                Param.ParameterName = "@tds_id";
-                Param.Size = 4;
-                if (tds_id > 0)
-                    Param.Value = tds_id;
                 else
                     Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
@@ -2244,6 +2233,71 @@ namespace MSTech.GestaoEscolar.DAL
                 Param.ParameterName = "@cal_id";
                 Param.Size = 4;
                 Param.Value = cal_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tci_id";
+                Param.Size = 4;
+                Param.Value = tci_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Guid;
+                Param.ParameterName = "@ent_id";
+                Param.Size = 16;
+                Param.Value = ent_id;
+                qs.Parameters.Add(Param);
+
+                #endregion Parâmetros
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Retorna todos os cursos/currículos não excluídos logicamente
+        /// filtrado por escola, ano letivo e tipo de ciclo
+        /// </summary>
+        /// <param name="esc_id">Escola do curso</param>
+        /// <param name="uni_id">Unidade da escola </param>
+        /// <param name="tci_id">Tipo de ciclo</param>
+        /// <param name="cal_ano">Ano letivo</param>
+        /// <param name="ent_id">Entidade do usuário logado</param>
+        /// <returns>DataTable com os dados</returns>
+        public DataTable SelecionaPorEscolaCalendarioAnoTipoCiclo(int esc_id, int uni_id, int cal_ano, int tci_id, Guid ent_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_CursoCurriculo_SelecionaPorEscolaCalendarioAnoTipoCiclo", _Banco);
+
+            try
+            {
+                #region Parâmetros
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@esc_id";
+                Param.Size = 4;
+                Param.Value = esc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@uni_id";
+                Param.Size = 4;
+                Param.Value = uni_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                Param.Value = cal_ano;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

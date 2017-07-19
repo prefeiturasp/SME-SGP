@@ -419,8 +419,6 @@ public partial class WebControls_Combos_UCComboCalendario : MotherUserControl
         odsDados.SelectParameters.Add("cur_id", cur_id.ToString());
         odsDados.SelectParameters.Add("esc_id", esc_id.ToString());
         odsDados.SelectParameters.Add("uni_id", uni_id.ToString());
-        odsDados.SelectParameters.Add("tds_id", ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.TIPO_DISCIPLINA_ELETIVA_ALUNO
-            , __SessionWEB.__UsuarioWEB.Usuario.ent_id).ToString());
         odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
         odsDados.SelectParameters.Add("appMinutosCacheLongo", ApplicationWEB.AppMinutosCacheLongo.ToString());
 

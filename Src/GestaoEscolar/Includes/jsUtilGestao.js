@@ -351,5 +351,11 @@ function UtilGestao() {
             link.parent().toggleClass("active");
         }
     })
+
+    // JS DROPDOWN RELATORIOS AVALIATIVOS
+   $('.btn-dropdown-relatorio').click(function (e) {
+        e.preventDefault();
+        $(this).parent('.dropdown-relatorio').toggleClass('opened');
+    });
 }
 arrFNC.push(UtilGestao); arrFNCSys.push(UtilGestao)

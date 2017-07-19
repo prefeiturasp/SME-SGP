@@ -759,6 +759,24 @@ public partial class Academico_Curso_Cadastro {
     protected global::System.Web.UI.WebControls.TextBox _txtCodigoDisciplina;
     
     /// <summary>
+    /// LabelCargaHorariaExtraClasse control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Label LabelCargaHorariaExtraClasse;
+    
+    /// <summary>
+    /// _txtCargaHorariaExtraClasse control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.TextBox _txtCargaHorariaExtraClasse;
+    
+    /// <summary>
     /// _btnCancelarDisciplina control.
     /// </summary>
     /// <remarks>

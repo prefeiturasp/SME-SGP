@@ -83,10 +83,13 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[csp_semPlanoAula] é obrigatório.")]
 		public virtual bool csp_semPlanoAula { get; set; }
 
-		/// <summary>
-		/// Situação do registro..
-		/// </summary>
-		[MSNotNullOrEmpty("[csp_situacao] é obrigatório.")]
+        [MSNotNullOrEmpty("[csp_semRelatorioAtendimento] é obrigatório.")]
+        public virtual int csp_semRelatorioAtendimento { get; set; }
+
+        /// <summary>
+        /// Situação do registro..
+        /// </summary>
+        [MSNotNullOrEmpty("[csp_situacao] é obrigatório.")]
 		public virtual int csp_situacao { get; set; }
 
 		/// <summary>

@@ -362,6 +362,32 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                     Param.Value = DBNull.Value;
                 }
                 qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@atd_numeroAtividadeExtraclassePrevista";
+                if (entity.atd_numeroAtividadeExtraclassePrevista > 0)
+                {
+                    Param.Value = entity.atd_numeroAtividadeExtraclassePrevista;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@atd_numeroAtividadeExtraclasseEntregue";
+                if (entity.atd_numeroAtividadeExtraclasseEntregue > 0)
+                {
+                    Param.Value = entity.atd_numeroAtividadeExtraclasseEntregue;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
             }
         }
 		
@@ -647,6 +673,32 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 if (entity.atd_numeroAulasExterna > 0)
                 {
                     Param.Value = entity.atd_numeroAulasExterna;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@atd_numeroAtividadeExtraclassePrevista";
+                if (entity.atd_numeroAtividadeExtraclassePrevista > 0)
+                {
+                    Param.Value = entity.atd_numeroAtividadeExtraclassePrevista;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@atd_numeroAtividadeExtraclasseEntregue";
+                if (entity.atd_numeroAtividadeExtraclasseEntregue > 0)
+                {
+                    Param.Value = entity.atd_numeroAtividadeExtraclasseEntregue;
                 }
                 else
                 {

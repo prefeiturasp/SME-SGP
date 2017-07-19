@@ -1,0 +1,822 @@
+@import 'variaveis';
+@import 'fonts';
+@import 'grid-layout';
+
+// TELA CURRICULO
+.text-titulo{
+  font-size:1rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom:8px;
+  display:block;
+}
+
+.fieldset-curriculo{
+  legend{
+    .btn{
+      float:right;
+      margin-right:12px;
+      font-size:0.8rem;
+    }
+  }
+
+  .grid td{
+    input[type="image"]:not([style*="hidden"]){
+      border: 1px dotted #0163a2 !important;
+      padding: 3px;
+      box-sizing: border-box;
+      height: 20px !important;
+      width: 20px !important;
+    }
+
+    input[type="image"]{
+      &.preenchido{
+        border:1px solid #0163a2 !important;
+        @include box-shadow(0 1px 0 #0163a2);
+      }
+
+      &:disabled{
+        opacity:0.65;
+        background: rgba(0,0,0,.15);
+      }
+    }
+
+    &:first-child{
+      input[type="image"]:not([style*="hidden"]){
+        margin: 5px 0 0;
+        height: 32px !important;
+        width: 32px !important;
+        position:static;
+      }
+    }
+  }
+
+  .accordion-grid, .grid-topico, .grid-itens-right{
+    border:0;
+    margin-bottom:0;
+
+    tr{
+      position:relative;
+
+      &:hover > td{
+        background:transparent !important;
+      }
+
+      td{
+        &:hover{
+          background:transparent !important;
+        }
+      }
+    }
+
+    > tbody > tr:not(.summary){
+      display:block;
+      background: #eee;
+      border-left: 5px solid rgba(0,0,0,.5);
+      margin-bottom:6px;
+      overflow:hidden;
+
+      > td{
+        display:inline-block;
+        border-bottom:0;
+        padding:0;
+        @include border-radius(0);
+        float:left;
+
+        input[type="image"]{
+            position:absolute;
+            top:5px;
+
+            &[id*="btnExcluir"]{
+              right:5px;
+            }
+
+            &[id*="btnExcluirSugestao"]{
+              position:static;
+            }
+
+            &[id*="btnEditar"]{
+              right:30px;
+            }
+
+            &[id*="btnDescer"]{
+              right:55px;
+            }
+
+            &[id*="btnSubir"]{
+              right:80px;
+            }
+
+            &[id*="btnSalvar"]{
+              position:static;
+              margin-left: 15px;
+              margin-bottom: 8px;
+              float: left;
+              margin-right: 5px;
+            }
+
+            &[id*="btnCancelar"]{
+              position:static;
+              margin-bottom: 8px;
+              float: left;
+              margin-right: 5px;
+            }
+
+            /*&[id*="btnListaSugestoes"]{
+              right:105px;
+            }*/
+          }
+
+        &:first-child{
+          display:block;
+          border-bottom: 0;
+          position:static;
+          padding:10px 130px 10px 12px;
+          width:100%;
+          float:left;
+
+          input[type="image"]{
+            position:static;
+            margin: 5px 0 0;
+            width: 32px !important;
+            height: 32px !important;
+
+            &.preenchido{
+              border:1px solid #0163a2 !important;
+              @include box-shadow(0 1px 0 #0163a2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .grid-itens-right{
+    > tbody > tr{
+      > td:first-child{
+        input[type="image"]{
+          margin: 5px 0 0 8px !important;
+        }
+      }
+    }
+  }
+
+  .grid-topico{
+    + fieldset{
+      margin-top:16px;
+    }
+  }
+
+  .painel-habilidades{
+    position:relative;
+
+    input[type="submit"][id*="btnNovoEixo"]{
+        position: absolute;
+        right: 0;
+        top: -35px;
+    }
+
+    .accordion-grid{
+      > tbody{
+        > tr:not(.summary){
+          border-bottom:1px dashed rgba(0,0,0,.5);
+          border-left:0;
+          background:none;
+          
+          > td{
+            padding:0;
+
+            &:first-child {
+              cursor:pointer;
+              position:relative;
+
+              > span {
+                display:block;
+                padding:10px 130px 0 25px;
+
+                &:before {
+                  content: '\e313';
+                  font-family: 'Material Icons';
+                  font-size: 24px;
+                  display: inline-block;
+                  position:absolute;
+                  left:-3px;
+                  top:5px;
+                }
+              }
+            }
+
+            &:last-child{
+              display:block;
+              width:100%;
+            }
+
+            > input[type="image"][id*="btnSalvar"]{
+              margin-left:25px;
+            }
+          }
+
+          .accordion-head{
+            > div{
+              margin-left: 25px;
+              margin-bottom: 6px;
+            }
+
+            > .ul-sugestoes{
+              margin-left: 25px !important;
+              margin-bottom: 6px !important;
+            }
+          }
+
+          .accordion-closed{
+            display:block;
+            height:0;
+            overflow:hidden;
+            padding:0;
+          }
+
+          .accordion-opened{
+            height:auto;
+            padding:0 0 15px 25px;
+          }
+
+          .accordion-body{
+            @include transition(padding 0.2s ease-out);
+
+            .grid{
+              width:100%;
+              margin-top:6px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .grid-itens-left{
+    border:none !important;
+
+    > tbody > tr:not(.summary){
+      margin-bottom:6px;
+      background:#eee;
+
+      > td{
+        border-bottom: 8px solid #fff;
+        vertical-align: top;
+
+        &:not(:first-child):not(:last-child){
+          vertical-align: top;
+          width: 20px;
+          padding: 5px 3px;
+
+          input[type="image"]{
+            position:static !important;
+          }
+        }
+
+        &.td-acao-dupla{
+          width:50px !important;
+        }
+
+        &:last-child{
+          width:70%;
+          max-width:none;
+          padding:0;
+          position:relative;
+
+          &:before{
+            content:'';
+            display:inline-block;
+            position:absolute;
+            left:0;
+            bottom:0;
+            top:0;
+            width:5px;
+            background:rgba(0,0,0,.5);
+            z-index: 1;
+          }
+
+          > div{
+            border-top:1px solid rgba(0,0,0,.2);
+            width: 100%;
+            clear: both;
+          }
+
+          > .btn{
+            float:right;
+            margin:3px 6px;
+          }
+        }
+      }
+    }
+
+    .btnsEdicaoObjetivo:not(:empty){
+      min-width: 85px;
+      text-align: left !important;
+      padding-top: 24px !important;
+
+      input[type="image"]{
+        margin-left:0 !important;
+      }
+    }
+  }
+
+
+  .grid-itens-right{
+    border:none !important;
+    margin-top:0 !important;
+
+    > tbody > tr:not(.summary){
+      border-bottom:1px solid rgba(0,0,0,.2);
+      margin-bottom:0;
+      border-left:0;
+
+      > td:first-child{
+        > span{
+          display:inline-block;
+          position:relative;
+          padding: 5px 0 0 7px;
+
+          &:before{
+            content:'';
+            display:inline-block;
+            width:0;
+            height:0;
+            border:6px solid transparent;
+            border-left-color:rgba(0,0,0,.5);
+            position:absolute;
+            left: -7px;
+            top: 6px;
+          }
+        }
+      }
+    }
+
+    .ul-sugestoes{
+      margin-left: 8px !important;
+    }
+  }
+
+  .grid tr:hover td, .tbGrid tr:hover td,
+  .grid tr td .grid tr:hover td, .tbGrid tr td .grid tr:hover td{
+    background:transparent !important;
+  }
+
+  .ul-sugestoes{
+    list-style: none;
+    border: 1px solid rgba(0,0,0,.2);
+    @include border-radius(3px);
+    margin: 10px 0 0 !important;
+
+    &.list-closed{
+      border:none;
+
+      li{
+        padding:0;
+        height:0;
+        overflow:hidden;
+        @include transition(all 0.2s ease-out);
+        border:none;
+      }
+    }
+
+    li{
+      padding: 10px 10px 10px 40px;
+      border-bottom: 1px solid rgba(0,0,0,.2);
+      line-height: 1.3;
+      background:url('images/sugerir.png') 15px 8px no-repeat;
+      height:auto;
+      @include transition(all 0.2s ease-out);
+      background-size: 20px;
+
+      small{
+        display: block;
+        opacity: 0.75;
+        font-size: 0.65rem;
+      }
+    }
+  }
+}
+
+.selecao-disciplina{
+  table.radio{
+    tbody{
+      @include flex();
+      @include flex-wrap();
+    }
+
+    tr{
+      display:inline-block;
+      width:20%;
+
+      td{
+        display:block;
+        padding:5px;
+        height:100%;
+      }
+
+      input[type="radio"]{
+        display:none;
+      }
+
+      label{
+        display:block;
+        padding:10px;
+        border:1px solid #0163a2;
+        width:100%;
+        @include transition(all 0.2s ease-out);
+        @include border-radius(3px);
+        height:100%;
+        margin:0 !important;
+
+        &:hover{
+          background:#eee;
+          cursor:pointer;
+        }
+      }
+
+      input[type="radio"]:checked + label{
+        background:#0163a2;
+        color:#fff;
+      }
+    }
+  }
+}
+
+.scroll-table-full{
+  max-width: calc(100vw - 120px);
+  overflow: auto;
+}
+
+@media screen and (max-width:600px){
+  .selecao-disciplina{
+    table.radio{
+      tr{
+        width:33.3%;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width:700px){
+  .fieldset-curriculo .painel-habilidades .accordion-grid > tbody > tr:not(.summary) .accordion-body .grid{
+    tr{
+      display:block;
+      width:100%;
+      float:left;
+
+      td{
+        display:inline-block;
+
+        &:first-child, &:last-child{
+          display:block;
+          width:100%;
+          float:left;
+
+          .btn{
+            float:left;
+          }
+        }
+
+        &:not(:first-child):not(:last-child){
+          float:right;
+          width:auto;
+
+          input[type="image"]{
+            position: absolute;
+            border-width: 0px;
+            top: 5px;
+            @include transform(translateX(-15px));
+          }
+        }
+
+        &:not(:last-child){
+          border-bottom:0;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width:960px){
+  .fieldset-curriculo .painel-habilidades input[type="submit"][id*="btnNovoEixo"]{
+    position:static;
+  }
+
+  .scroll-table-full{
+    max-width: calc(100vw - 40px);
+  }
+}
+
+
+// RELATORIOS AVALIATIVOS
+a.btRelatorioRP, a.btRelatorioAEE, .btn-dropdown-relatorio {
+  width:26px;
+  height:20px;
+  background-image:url(images/ico_avaliacao_rp.png);
+  background-repeat:no-repeat;
+  display:none;
+  border:none;
+  outline:none;
+  background-color:transparent;
+}
+
+a.btRelatorioAEE {
+  width:30px;
+  background-image:url(images/ico_avaliacao_aee.png);
+}
+
+.td-relatorio{
+  position:relative;
+  min-width:175px;
+  padding-right: 38px !important;
+  height:42px;
+}
+
+.dropdown-relatorio{
+  display:inline-block;
+  position:absolute;
+  right: 5px;
+  top: 11px;
+  z-index:1;
+  min-height:0;
+
+  a{
+    text-decoration: none;
+    line-height: 1.3;
+
+    &:only-of-type{
+      display:inline-block;
+    }
+  }
+
+  &.opened{
+    position:absolute;
+    background-color:#fff;
+    border:1px solid #ddd;
+    width: 175px;
+    top:36px;
+    min-height:36px;
+    @include box-shadow(-1px 1px 3px rgba(0,0,0,.2));
+    z-index:2;
+
+    .item-dropdown-relatorio{
+      background-position: 8px 6px;
+      display:block;
+      height:auto;
+      padding: 10px 6px 10px 45px;
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+
+      &:hover{
+        background-color:#eee;
+        @include transition(background-color 0.2s ease-out);
+      }
+
+      &:after{
+        content:attr(title);
+        width:120px;
+        display:inline-block;
+      }
+    }
+
+    .btn-dropdown-relatorio{
+      position:absolute;
+      right:0;
+      top:-26px;
+    }
+  }
+}
+
+.btn-dropdown-relatorio{
+  width:21px;
+  background-image:url(images/ico_avaliacao_drop.png);
+  cursor:pointer;
+}
+
+a + a + .btn-dropdown-relatorio{
+  display:inline-block;
+}
+
+div[id*="divTabsListao"] .grid.sortableFrequencia{
+  .checkBoxList {
+    margin: 6px 0 0;
+  }
+}
+
+div[id*="divTabsListao"] .grid.tbLancamentoAvaliacoes{
+  br.responsive-hide{
+    display:none;
+  }
+}
+
+.text-left{
+  text-align:left !important;
+}
+
+.rel-atendimento{
+  #divInformacao{
+    padding:15px 10px;
+  }
+
+  #divTabsRelatorio{
+    position:relative;
+
+    &.ui-tabs{
+      border:1px solid #ddd !important;
+      padding:0;
+      @include border-radius(0);
+      margin: 10px 10px 20px;
+
+      &:after{
+        content:'';
+        display:block;
+        width:100%;
+        clear:both;
+      }
+    }
+
+    .ui-tabs-nav{
+      width: 25%;
+      float:left;
+      border-bottom:0;
+      min-height: 500px;
+      background: #eee;
+
+      &:before{
+        content:'';
+        display:inline-block;
+        background:#eee;
+        position:absolute;
+        left:0;
+        top:0;
+        bottom:0;
+        height:100%;
+        width:25%;
+      }
+
+      li{
+        display: block;
+        width: 100%;
+        @include border-radius(0);
+        border: none;
+        border-bottom:1px solid rgba(0,0,0,.15) !important;
+        margin:0;
+        background:transparent;
+        top:0;
+
+        &:after{
+          content:'\e5cc';
+          font-family: 'Material Icons';
+          font-size:20px;
+          color:$corTexto;
+          position:absolute;
+          right:8px;
+          top:50%;
+          @include transform(translateY(-50%));
+        }
+
+        &.ui-state-active{
+          &, &:hover{
+            padding-bottom:0px !important;
+            margin-bottom:0px !important;
+            background:$corAcao !important;
+
+            a{
+              color:#fff !important;
+            }
+
+            &:after{
+              color:#fff;
+            }
+          }
+        }
+
+        &.ui-state-focus:focus{
+          border:none;
+          outline:none;
+        }
+
+        a{
+          display: block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          width: 100%;
+          color:$corTexto;
+          @include transition(all 0.2s ease-out);
+          padding:8px 20px 8px 10px;
+        }
+
+        &.ui-state-hover{
+          background:rgba(0,0,0,.05) !important;
+
+          a{
+            color:$corTexto !important;
+          }
+        }
+      }
+    }
+
+    .ui-tabs-panel{
+      float:right;
+      width: 75%;
+      padding: 5px 14px 10px !important;
+
+      fieldset{
+        border:none;
+        @include border-radius(0);
+        @include box-shadow(none);
+      }
+    }
+  }
+
+  .questionario-conteudo-texto{
+    display: block;
+    font-size: 1.1rem;
+    margin: 5px 0;
+  }
+
+  .questionario-conteudo-titulo1{
+    display: block;
+    font-size: 0.9rem;
+    color: $corAcao;
+    font-weight: bold;
+    padding: 6px 10px;
+    border: 2px solid $corAcao;
+    @include border-radius(3px);
+    margin: 8px 0;
+  }
+
+  .questionario-conteudo-titulo2{
+    display: block;
+    font-size: 0.9rem;
+    color: $corAcao;
+    padding:6px 0;
+    margin: 8px 0 8px 0;
+    border-bottom:1px dotted $corAcao;
+    margin-left:20px;
+  }
+
+  .questionario-conteudo-pergunta{
+    font-weight:bold;
+    display: block;
+    font-size: 0.9rem;
+    margin: 10px 0 8px;
+  }
+
+  .questionario-conteudo-pergunta, .questionario-resposta, .questionario-conteudo > textarea{
+    margin-left:20px;
+  }
+
+  .questionario-conteudo{
+    + .questionario-conteudo{
+      margin-top:24px;
+    }
+  }
+
+  .questionario-resposta{
+    input[type="radio"], input[type="checkbox"]{
+      float: left;
+      margin-right: 4px;
+    }
+
+    input[type="radio"]{
+      margin-top: 13px;
+    }
+
+    input[type="checkbox"]{
+      margin-top:4px;
+    }
+  }
+
+  .questionario-conteudo-resposta-selecao-unica, .questionario-resposta .checkbox{
+    + .questionario-conteudo-resposta-texto-adicional{
+      display:block;
+      margin:5px 0 10px 20px;
+    }
+  }
+}
+
+// BOTAO DE AJUDA NO TOPO (WIKI)
+#hd{
+  .hplHelp{
+    background:$corTerciaria;
+    @include border-radius(0 0 5px 5px);
+    @include box-shadow(inset 0 -2px rgba(0,0,0,.2));
+    right: 42px;
+    top: 24px;
+    width: auto !important;
+    height: auto !important;
+    padding: 2px 4px;
+    @include transition(all 0.2s ease-out);
+    border:2px solid transparent;
+    border-top:0;
+
+    &:hover{
+      border-color: lighten($corTerciaria, 20%);
+    }
+  }
+}

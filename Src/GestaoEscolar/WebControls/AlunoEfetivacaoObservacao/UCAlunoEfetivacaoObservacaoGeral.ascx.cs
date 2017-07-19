@@ -1173,12 +1173,12 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                         Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()), fechamentoFinalAberto, true);
                     
                     HtmlTableCell tdNotaFinal = (HtmlTableCell)e.Item.FindControl("tdNotaFinal");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdNotaFinal, true, DataBinder.Eval(e.Item.DataItem, "MediaFinal").ToString(), false, false,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdNotaFinal, true, DataBinder.Eval(e.Item.DataItem, "MediaFinal").ToString(), false, false, false, false, false, false,
                                     eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()), -1, -1,
                                     VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semSintese));
 
                     HtmlTableCell tdFrequenciaAjustada = (HtmlTableCell)e.Item.FindControl("tdTotFrequenciaAjustada");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false, false, false, false, false,
                                     eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                     string freqFinal = DataBinder.Eval(e.Item.DataItem, "FrequenciaFinalAjustada").ToString();
 
@@ -1202,11 +1202,11 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     }
 
                     HtmlTableCell tdAusenciasCompensadas = (HtmlTableCell)e.Item.FindControl("tdTotAusenciasCompensadas");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdAusenciasCompensadas, false, "", false, false,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdAusenciasCompensadas, false, "", false, false, false, false, false, false,
                                     eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
 
                     HtmlTableCell tdFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false, false, false, false, false,
                                     eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                 }
             }
@@ -1243,7 +1243,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                             ddlParecerFinal.SelectedValue = ddlParecerFinal.Items.FindByText(valor).Value;
 
                         HtmlTableCell tdParecerFinal = (HtmlTableCell)e.Item.FindControl("tdParecerFinal");
-                        AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, lancaParecerFinal, valor, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
+                        AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, lancaParecerFinal, valor, false, false, false, false, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
                                         Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()), -1, -1,
                                         VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semResultadoFinal));
                         ddlParecerFinal.Enabled = permiteEditar && TipoFechamento <= 0 && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "UltimoBimestre"));
@@ -1283,7 +1283,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     }
 
                     HtmlTableCell tdFrequenciaAjustada = (HtmlTableCell)e.Item.FindControl("tdTotFrequenciaAjustada");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false, false, false, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
                                     Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                     string freqFinal = DataBinder.Eval(e.Item.DataItem, "FrequenciaFinalAjustada").ToString();
 
@@ -1307,7 +1307,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     }
 
                     HtmlTableCell tdFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false, false, false, false, false,
                                     eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                 }
             }
@@ -1344,7 +1344,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                             ddlParecerFinal.SelectedValue = ddlParecerFinal.Items.FindByText(valor).Value;
 
                         HtmlTableCell tdParecerFinal = (HtmlTableCell)e.Item.FindControl("tdParecerFinal");
-                        AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, lancaParecerFinal, valor, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
+                        AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, lancaParecerFinal, valor, false, false, false, false, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
                                         Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()), -1, -1,
                                         VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semResultadoFinal));
                         ddlParecerFinal.Enabled = permiteEditar && TipoFechamento <= 0 && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "UltimoBimestre"));
@@ -1384,7 +1384,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     }
 
                     HtmlTableCell tdFrequenciaAjustada = (HtmlTableCell)e.Item.FindControl("tdTotFrequenciaAjustada");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false, false, false, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
                                     Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                     string freqFinal = DataBinder.Eval(e.Item.DataItem, "FrequenciaFinalAjustada").ToString();
 
@@ -1408,7 +1408,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     }
 
                     HtmlTableCell tdFaltasExternas = (HtmlTableCell)e.Item.FindControl("tdTotFaltasExternas");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFaltasExternas, false, "", false, false, false, false, false, false,
                                     eSituacaoMatriculaTurmaDisicplina.Ativo, Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto);
                 }
             }
@@ -1467,29 +1467,41 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                         ddlPareceres, lblNotaPosConselho, tpc_id, true, esconderPendencia, true, false);
 
                     bool existeAulaBimestre = false;
-                    bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.existeAulaBimestre")), out existeAulaBimestre);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.existeAulaBimestre") != null)
+                        bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.existeAulaBimestre")), out existeAulaBimestre);
+
+                    bool possuiAnotacaoRP = false;
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.possuiAnotacaoRP") != null)
+                        bool.TryParse(DataBinder.Eval(e.Item.DataItem, "nota.possuiAnotacaoRP").ToString(), out possuiAnotacaoRP);
+
+                    bool existeAulaSemPlano = false;
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.existeAulaSemPlano") != null)
+                        bool.TryParse(DataBinder.Eval(e.Item.DataItem, "nota.existeAulaSemPlano").ToString(), out existeAulaSemPlano);
 
                     eSituacaoMatriculaTurmaDisicplina SituacaoDisciplina = (eSituacaoMatriculaTurmaDisicplina)(DataBinder.Eval(e.Item.DataItem, "nota.SituacaoDisciplina") ?? eSituacaoMatriculaTurmaDisicplina.Ativo);
 
 
                     HtmlTableCell tdConceito = (HtmlTableCell)e.Item.FindControl("tdConceito");
-                    AlterarCorFundo(tpc_id, tdConceito, false, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, -1, -1,
+                    AlterarCorFundo(tpc_id, tdConceito, false, nota, false, existeAulaBimestre, false, false, false, existeAulaSemPlano, SituacaoDisciplina, esconderPendencia, -1, -1,
                                     VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semNota));
 
                     HtmlTableCell tdNota = (HtmlTableCell)e.Item.FindControl("tdNota");
-                    AlterarCorFundo(tpc_id, tdNota, true, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, -1, -1,
+                    AlterarCorFundo(tpc_id, tdNota, true, nota, false, existeAulaBimestre, false, false, false, existeAulaSemPlano, SituacaoDisciplina, esconderPendencia, -1, -1,
                                     VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semNota));
 
                     HtmlTableCell tdNotaPosConselho = (HtmlTableCell)e.Item.FindControl("tdNotaPosConselho");
-                    AlterarCorFundo(tpc_id, tdNotaPosConselho, true, nota, false, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, -1, -1,
+                    AlterarCorFundo(tpc_id, tdNotaPosConselho, true, nota, false, existeAulaBimestre, false, false, false, existeAulaSemPlano, SituacaoDisciplina, esconderPendencia, -1, -1,
                                     VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semNota));
 
                     bool recuperacao = false;
                     bool enriquecimentoCurricular = false;
                     bool ensinoInfantil = false;
-                    bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.recuperacao")), out recuperacao);
-                    bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.enriquecimentoCurricular")), out enriquecimentoCurricular);
-                    bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.ensinoInfantil")), out ensinoInfantil);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.recuperacao") != null)
+                        bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.recuperacao")), out recuperacao);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.enriquecimentoCurricular") != null)
+                        bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.enriquecimentoCurricular")), out enriquecimentoCurricular);
+                    if (DataBinder.Eval(e.Item.DataItem, "nota.ensinoInfantil") != null)
+                        bool.TryParse(Convert.ToString(DataBinder.Eval(e.Item.DataItem, "nota.ensinoInfantil")), out ensinoInfantil);
 
                     bool validarQtdAulas = (recuperacao || enriquecimentoCurricular || ensinoInfantil);
                     HtmlTableCell tdQtdFaltas = (HtmlTableCell)e.Item.FindControl("tdFaltas");
@@ -1497,13 +1509,34 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     {
                         long tud_id = Convert.ToInt64(DataBinder.Eval(e.Item.DataItem, "nota.tud_id"));
                         int cal_id = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "nota.cal_id"));
-                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, validarQtdAulas, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, tud_id, cal_id,
+                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, validarQtdAulas, existeAulaBimestre, false, false, false, existeAulaSemPlano, SituacaoDisciplina, esconderPendencia, tud_id, cal_id,
                                         VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_disciplinaSemAula));
+
+                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, false, existeAulaBimestre, false, false, validarQtdAulas, existeAulaSemPlano, SituacaoDisciplina, esconderPendencia, tud_id, cal_id,
+                                        VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semPlanoAula));
+
+                        eConfiguracaoServicoPendenciaSemRelatorioAtendimento cspRelatorio = eConfiguracaoServicoPendenciaSemRelatorioAtendimento.Nenhum;
+                        if (VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semRelatorioAtendimento > 0))
+                        {
+                            cspRelatorio = 
+                                (eConfiguracaoServicoPendenciaSemRelatorioAtendimento)Enum.Parse
+                                (typeof(eConfiguracaoServicoPendenciaSemRelatorioAtendimento), 
+                                VS_ConfiguracaoServicoPendencia.Find(p => (p.tne_id == tne_id || p.tne_id <= 0) && 
+                                                                          (p.tme_id == tme_id || p.tme_id <= 0) && 
+                                                                          (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && 
+                                                                          p.csp_semRelatorioAtendimento > 0).csp_semRelatorioAtendimento.ToString());
+                        }
+
+                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, false, existeAulaBimestre, true, possuiAnotacaoRP, false, existeAulaSemPlano, SituacaoDisciplina, esconderPendencia, tud_id, cal_id,
+                                      cspRelatorio.HasFlag(eConfiguracaoServicoPendenciaSemRelatorioAtendimento.RP));
                     }
                     else
                     {
-                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, validarQtdAulas, existeAulaBimestre, SituacaoDisciplina, esconderPendencia, -1, -1,
+                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, validarQtdAulas, existeAulaBimestre, false, false, false, existeAulaSemPlano, SituacaoDisciplina, esconderPendencia, -1, -1,
                                         VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_disciplinaSemAula));
+
+                        AlterarCorFundo(tpc_id, tdQtdFaltas, false, nota, false, existeAulaBimestre, false, false, true, existeAulaSemPlano, SituacaoDisciplina, esconderPendencia, -1, -1,
+                                        VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semPlanoAula));
                     }
                 }
             }
@@ -1537,7 +1570,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                             ddlParecerFinal.SelectedValue = ddlParecerFinal.Items.FindByText(valor).Value;
 
                         HtmlTableCell tdParecerFinal = (HtmlTableCell)e.Item.FindControl("tdParecerFinal");
-                        AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, true, valor, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
+                        AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdParecerFinal, true, valor, false, false, false, false, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
                                         Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto
                                         , tud_id, cal_id, VS_ConfiguracaoServicoPendencia.Any(p => (p.tne_id == tne_id || p.tne_id <= 0) && (p.tme_id == tme_id || p.tme_id <= 0) && (p.tur_tipo == tur_tipo || p.tur_tipo <= 0) && p.csp_semResultadoFinal));
                         ddlParecerFinal.Enabled = permiteEditar && TipoFechamento <= 0 && Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "UltimoBimestre"));
@@ -1560,7 +1593,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     }
 
                     HtmlTableCell tdFrequenciaAjustada = (HtmlTableCell)e.Item.FindControl("tdTotFrequenciaAjustada");
-                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
+                    AlterarCorFundo(VS_tpc_idUltimoPeriodo, tdFrequenciaAjustada, false, "", false, false, false, false, false, false, eSituacaoMatriculaTurmaDisicplina.Ativo,
                                     Convert.ToBoolean(DataBinder.Eval(e.Item.DataItem, "esconderPendenciaFinal").ToString()) || !fechamentoFinalAberto
                                     , tud_id, cal_id);
                     string freqFinal = DataBinder.Eval(e.Item.DataItem, "FrequenciaFinalAjustada").ToString();
@@ -2269,8 +2302,11 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                     decimal variacao = dadosAluno.listaNotasEFaltas.FirstOrDefault().fav_variacao;
                     VS_FormatacaoPorcentagemFrequencia = GestaoEscolarUtilBO.CriaFormatacaoDecimal(variacao > 0 ? GestaoEscolarUtilBO.RetornaNumeroCasasDecimais(variacao) : 2);
 
-                    decimal FrequenciaFinalAjustadaRegencia = dadosAluno.listaNotasEFaltas.LastOrDefault(p => ((p.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || p.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia)
-                                                                                && (p.FrequenciaFinalAjustada > 0 && p.bimestreComLancamento))).FrequenciaFinalAjustada;
+                    decimal FrequenciaFinalAjustadaRegencia = dadosAluno.listaNotasEFaltas.LastOrDefault
+                        (p => ((p.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia || p.tud_tipo == (byte)TurmaDisciplinaTipo.Regencia)
+                                // Só considera a regência, quando a turma tem tipo de apuração de frequência por Horas (pois EJA é regência mas é por tempos).
+                                && EntFormatoAvaliacao.fav_tipoApuracaoFrequencia != (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.TemposAula
+                                && (p.FrequenciaFinalAjustada > 0 && p.bimestreComLancamento))).FrequenciaFinalAjustada;
 
                     if (FrequenciaFinalAjustadaRegencia > 0)
                     {
@@ -2768,6 +2804,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                 var thFreqFinalRecuperacao = new HtmlTableCell();
                 thFreqFinalRecuperacao = (HtmlTableCell)divBoletim.FindControl("thFreqFinalRecuperacao");
                 thFreqFinalRecuperacao.Visible = true;
+
+                var thFreqFinalAEE = new HtmlTableCell();
+                thFreqFinalAEE = (HtmlTableCell)divBoletim.FindControl("thFreqFinalAEE");
+                thFreqFinalAEE.Visible = true;
             }
 
             #region Periodos / COCs / Bimestres
@@ -2794,6 +2834,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             rptPeriodosColunasFixasEI.DataSource = periodos;
             rptPeriodosNomesRecuperacao.DataSource = periodos;
             rptPeriodosColunasFixasRecuperacao.DataSource = periodos;
+            rptPeriodosNomesAEE.DataSource = periodos;
+            rptPeriodosColunasFixasAEE.DataSource = periodos;
             rptPeriodosNomes.DataBind();
             rptPeriodosColunasFixas.DataBind();
             rptPeriodosNomesEnriquecimento.DataBind();
@@ -2802,6 +2844,8 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             rptPeriodosColunasFixasEI.DataBind();
             rptPeriodosNomesRecuperacao.DataBind();
             rptPeriodosColunasFixasRecuperacao.DataBind();
+            rptPeriodosNomesAEE.DataBind();
+            rptPeriodosColunasFixasAEE.DataBind();
 
             #endregion Periodos / COCs / Bimestres
 
@@ -2975,6 +3019,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                                            esconderPendencia = bNota.esconderPendencia
                                                                            ,
                                                                            bNota.cal_id
+                                                                           ,
+                                                                           possuiAnotacaoRP = bNota.possuiAnotacaoRP
+                                                                           ,
+                                                                           existeAulaSemPlano = bNota.existeAulaSemPlano
                                                                        }).FirstOrDefault()
                                                             ,
                                                             tur_tipo = g.First().tur_tipo
@@ -3163,6 +3211,10 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                                                        esconderPendencia = bNota.esconderPendencia
                                                                        ,
                                                                        bNota.cal_id
+                                                                       ,
+                                                                       possuiAnotacaoRP = bNota.possuiAnotacaoRP
+                                                                       ,
+                                                                       existeAulaSemPlano = bNota.existeAulaSemPlano
                                                                    }).FirstOrDefault()
                                                         ,
                                                         tur_tipo = g.First().tur_tipo
@@ -3200,6 +3252,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             var disciplinas = (from item in todasDisciplinas
                                where !item.enriquecimentoCurricular //Retira as que são de enriquecimento curricular
                                && !item.recuperacao //Retira as recuperacoes
+                               && item.tud_Tipo != (byte)TurmaDisciplinaTipo.AtendimentoEducacionalEspecializado //Retira AEE
                                select item
                                );
 
@@ -3247,6 +3300,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             var disciplinasEnriquecimentoCurricular = (from item in todasDisciplinas
                                                        where item.enriquecimentoCurricular //Verifica se são de enriquecimento curricular
                                                        && !item.recuperacao //Retira as recuperacoes
+                                                       && item.tud_Tipo != (byte)TurmaDisciplinaTipo.AtendimentoEducacionalEspecializado //Retira AEE
                                                        select item
                               );
 
@@ -3333,6 +3387,30 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
             }
 
             #endregion Recuperacao
+
+            #region AEE
+
+            var disciplinasAEE = (from item in todasDisciplinas
+                                  where item.tud_Tipo == (byte)TurmaDisciplinaTipo.AtendimentoEducacionalEspecializado //Seleciona AEE
+                                  select item
+                              );
+
+            if (disciplinasAEE.Count() > 0)
+            {
+                divAEE.Visible = true;
+                var dispOrdenadasAEE = from item in disciplinasAEE
+                                       orderby item.regencia, controleOrdemDisciplinas ? item.tds_ordem.ToString() : item.Disciplina
+                                       select item;
+
+                rptDisciplinasAEE.DataSource = dispOrdenadasAEE.Where(p => p.mostrarDisciplina > 0);
+                rptDisciplinasAEE.DataBind();
+            }
+            else
+            {
+                divAEE.Visible = false;
+            }
+
+            #endregion AEE
         }
 
         /// <summary>
@@ -3344,7 +3422,7 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
         /// <param name="nota">Nota.</param>
         /// <param name="validarFreq">Indica se deve validar frequência</param>
         /// <param name="existeAulaBimestre">Indica se existe aula no bimestre.</param>
-        private void AlterarCorFundo(int tpc_id, HtmlTableCell td, bool validarNota, string nota, bool validarFreq, bool existeAulaBimestre
+        private void AlterarCorFundo(int tpc_id, HtmlTableCell td, bool validarNota, string nota, bool validarFreq, bool existeAulaBimestre, bool validarAnotacaoRP, bool possuiAnotacaoRP, bool validarAulaSemPlano, bool aulaSemPlano
             , eSituacaoMatriculaTurmaDisicplina SituacaoDisciplina, bool esconderPendencia, long tud_id = -1, int cal_id = -1, bool configServPendencia = false)
         {
             if (td != null)
@@ -3404,6 +3482,24 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
                                     if (validarFreq)
                                     {
                                         if (!existeAulaBimestre)
+                                        {
+                                            if (!esconderPendencia && !configServPendencia)
+                                                td.Style.Add("background-color", ApplicationWEB.CorPendenciaDisciplina);
+                                        }
+                                    }
+
+                                    if (validarAnotacaoRP)
+                                    {
+                                        if (!possuiAnotacaoRP)
+                                        {
+                                            if (!esconderPendencia && !configServPendencia)
+                                                td.Style.Add("background-color", ApplicationWEB.CorPendenciaDisciplina);
+                                        }
+                                    }
+
+                                    if (validarAulaSemPlano)
+                                    {
+                                        if (aulaSemPlano)
                                         {
                                             if (!esconderPendencia && !configServPendencia)
                                                 td.Style.Add("background-color", ApplicationWEB.CorPendenciaDisciplina);
@@ -3713,6 +3809,33 @@ namespace GestaoEscolar.WebControls.AlunoEfetivacaoObservacao
 
 
                 foreach (RepeaterItem rptItem in rptDisciplinasRecuperacao.Items)
+                {
+                    if (rptItem.FindControl("tdParecerFinal").Visible)
+                    {
+                        DropDownList ddlParecerFinal = (DropDownList)rptItem.FindControl("ddlParecerFinal");
+                        if (ddlParecerFinal != null && ddlParecerFinal.Visible)
+                        {
+                            listaMatriculaTurmaDisciplina.Add(new MTR_MatriculaTurmaDisciplina
+                            {
+                                alu_id = VS_alu_id
+                                        ,
+                                mtu_id = VS_mtu_id
+                                        ,
+                                mtd_id = Convert.ToInt32(((HiddenField)rptItem.FindControl("hfMtdId")).Value)
+                                        ,
+                                mtd_resultado = Convert.ToByte(ddlParecerFinal.SelectedValue == "-1" ? "0" : ddlParecerFinal.SelectedValue)
+                                        ,
+                                tud_id = Convert.ToInt64(((HiddenField)rptItem.FindControl("hfTudId")).Value)
+                                        ,
+                                apenasResultado = true
+                            });
+
+                            AdicionaLinhaDisciplina(rptItem, ref listaDisciplina);
+                        }
+                    }
+                }
+
+                foreach (RepeaterItem rptItem in rptDisciplinasAEE.Items)
                 {
                     if (rptItem.FindControl("tdParecerFinal").Visible)
                     {

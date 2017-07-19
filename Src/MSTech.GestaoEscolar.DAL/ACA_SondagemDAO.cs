@@ -8,10 +8,11 @@ namespace MSTech.GestaoEscolar.DAL
     using Entities;
     using MSTech.GestaoEscolar.DAL.Abstracts;
     using System;
-    using System.Data; 
+    using System.Data;
 
     public class ACA_SondagemDAO : Abstract_ACA_SondagemDAO
     {
+
         /// <summary>
         /// Retorna todos as sondagens não excluídas logicamente
         /// Com paginação
@@ -32,7 +33,7 @@ namespace MSTech.GestaoEscolar.DAL
             try
             {
                 #region PARAMETROS
-                
+
                 Param = qs.NewParameter();
                 Param.DbType = DbType.AnsiString;
                 Param.ParameterName = "@snd_titulo";
@@ -42,7 +43,7 @@ namespace MSTech.GestaoEscolar.DAL
                 else
                     Param.Value = DBNull.Value;
                 qs.Parameters.Add(Param);
-                
+
                 #endregion
 
                 if (paginado)
@@ -293,6 +294,30 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna todas as sondagens ativas.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SelectBy_Ativas()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_Sondagem_Select_Ativas", _Banco);
+            try
+            {
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+
+        /// <summary>
         /// Parâmetros para efetuar a inclusão preservando a data de criação
         /// </summary>
         /// <param name="qs"></param>
@@ -300,7 +325,7 @@ namespace MSTech.GestaoEscolar.DAL
         protected override void ParamInserir(QuerySelectStoredProcedure qs, ACA_Sondagem entity)
         {
             base.ParamInserir(qs, entity);
-            
+
             qs.Parameters["@snd_dataCriacao"].Value = DateTime.Now;
             qs.Parameters["@snd_dataAlteracao"].Value = DateTime.Now;
         }
@@ -311,7 +336,7 @@ namespace MSTech.GestaoEscolar.DAL
         protected override void ParamAlterar(QueryStoredProcedure qs, ACA_Sondagem entity)
         {
             base.ParamAlterar(qs, entity);
-            
+
             qs.Parameters.RemoveAt("@snd_dataCriacao");
             qs.Parameters["@snd_dataAlteracao"].Value = DateTime.Now;
         }

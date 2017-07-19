@@ -57,10 +57,12 @@
 			$scope.listBoletins = [];
 			$scope.matter = [];
 			$scope.recovery = [];
+			$scope.aee = [];
 			$scope.enrichment = [];
 			$scope.params = params;
 			$scope.showCurricularEnrichment = false;
 			$scope.showRecuperacao = false;
+			$scope.showAEE = false;
 			$scope.docenciaCompartilhada = [];
 			$scope.docenciaCompartilhadaSign = "*";
 			$scope.mensagemErro = "";
@@ -148,8 +150,10 @@
 				$scope.matter = [];
 				$scope.recovery = [];
 				$scope.enrichment = [];
+				$scope.aee = [];
 				$scope.showCurricularEnrichment = false;
 				$scope.showRecuperacao = false;
+				$scope.showAEE = false;
 				$scope.docenciaCompartilhada = [];
 				$scope.docenciaCompartilhadaSign = "*";
 				for (j; j < maxJ; j++) {
@@ -173,7 +177,9 @@
 				}//for j
 				list[i]["matter"] = $scope.matter;
 				list[i]["recovery"] = $scope.recovery;
+				list[i]["aee"] = $scope.aee;
 				list[i]["showRecuperacao"] = $scope.showRecuperacao;
+				list[i]["showAEE"] = $scope.showAEE;
 				list[i]["enrichment"] = $scope.enrichment;
 				list[i]["showCurricularEnrichment"] = $scope.showCurricularEnrichment;
 				list[i]["docenciaCompartilhada"] = $scope.docenciaCompartilhada;
@@ -197,6 +203,9 @@
 			} else if (item.recuperacao) {
 				$scope.showRecuperacao = true;
 				$scope.recovery.push(item);
+			} else if (item.aee) {
+			    $scope.showAEE = true;
+			    $scope.aee.push(item);
 			} else {
 				$scope.matter.push(item);
 			};

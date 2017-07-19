@@ -56,6 +56,8 @@ namespace MSTech.GestaoEscolar.BLL
         Experiencia = 18
         ,
         TerritorioSaber = 19
+        ,
+        AtendimentoEducacionalEspecializado = 20
     }
 
     /// <summary>
@@ -203,6 +205,7 @@ namespace MSTech.GestaoEscolar.BLL
         public ACA_FormatoAvaliacao formatoAvaliacao;
         public ACA_CalendarioAnual calendarioAnual;
         public ACA_CurriculoPeriodo curriculoPeriodo;
+        public ACA_TipoTurno tipoTurno;
         public string tciIds;
 
         public Avaliacao escalaDocente;
@@ -299,7 +302,7 @@ namespace MSTech.GestaoEscolar.BLL
         public byte tud_tipo { get; set; }
         public int esc_id { get; set; }
         public int uni_id { get; set; }
-        public int cal_id { get; set; }
+        public int cal_ano { get; set; }
     }
 
     #endregion
@@ -1481,33 +1484,34 @@ namespace MSTech.GestaoEscolar.BLL
         /// <returns>Turmas e disciplinas que o docente leciona.</returns>
         public static ControleTurmas SelecionaEntidadesControleTurmas(long tud_id, int appMinutosCacheLongo = 0)
         {
-            Func<ControleTurmas> retorno = delegate()
-        {
-            ControleTurmas controleTurmas = new ControleTurmas();
+            Func<ControleTurmas> retorno = delegate ()
+            {
+                ControleTurmas controleTurmas = new ControleTurmas();
 
                 using (DataTable dt = new TUR_TurmaDisciplinaDAO().SelecionaEntidadesControleTurmas(tud_id))
                 {
-            if (dt.Rows.Count > 0)
-            {
-                controleTurmas.turma = new TUR_TurmaDAO().DataRowToEntity(dt.Rows[0], new TUR_Turma());
-                controleTurmas.turmaDisciplina = new TUR_TurmaDisciplinaDAO().DataRowToEntity(dt.Rows[0], new TUR_TurmaDisciplina());
-                controleTurmas.disciplina = new ACA_DisciplinaDAO().DataRowToEntity(dt.Rows[0], new ACA_Disciplina());
-                controleTurmas.escola = new ESC_EscolaDAO().DataRowToEntity(dt.Rows[0], new ESC_Escola());
-                controleTurmas.curriculo = new ACA_CurriculoDAO().DataRowToEntity(dt.Rows[0], new ACA_Curriculo());
-                controleTurmas.curso = new ACA_CursoDAO().DataRowToEntity(dt.Rows[0], new ACA_Curso());
-                controleTurmas.curriculoPeriodo = new ACA_CurriculoPeriodoDAO().DataRowToEntity(dt.Rows[0], new ACA_CurriculoPeriodo());
-                controleTurmas.formatoAvaliacao = new ACA_FormatoAvaliacaoDAO().DataRowToEntity(dt.Rows[0], new ACA_FormatoAvaliacao());
-                controleTurmas.calendarioAnual = new ACA_CalendarioAnualDAO().DataRowToEntity(dt.Rows[0], new ACA_CalendarioAnual());
-                controleTurmas.tciIds = dt.Rows[0]["tciIds"].ToString();
+                    if (dt.Rows.Count > 0)
+                    {
+                        controleTurmas.turma = new TUR_TurmaDAO().DataRowToEntity(dt.Rows[0], new TUR_Turma());
+                        controleTurmas.turmaDisciplina = new TUR_TurmaDisciplinaDAO().DataRowToEntity(dt.Rows[0], new TUR_TurmaDisciplina());
+                        controleTurmas.disciplina = new ACA_DisciplinaDAO().DataRowToEntity(dt.Rows[0], new ACA_Disciplina());
+                        controleTurmas.escola = new ESC_EscolaDAO().DataRowToEntity(dt.Rows[0], new ESC_Escola());
+                        controleTurmas.curriculo = new ACA_CurriculoDAO().DataRowToEntity(dt.Rows[0], new ACA_Curriculo());
+                        controleTurmas.curso = new ACA_CursoDAO().DataRowToEntity(dt.Rows[0], new ACA_Curso());
+                        controleTurmas.curriculoPeriodo = new ACA_CurriculoPeriodoDAO().DataRowToEntity(dt.Rows[0], new ACA_CurriculoPeriodo());
+                        controleTurmas.formatoAvaliacao = new ACA_FormatoAvaliacaoDAO().DataRowToEntity(dt.Rows[0], new ACA_FormatoAvaliacao());
+                        controleTurmas.calendarioAnual = new ACA_CalendarioAnualDAO().DataRowToEntity(dt.Rows[0], new ACA_CalendarioAnual());
+                        controleTurmas.tciIds = dt.Rows[0]["tciIds"].ToString();
 
-                controleTurmas.escalaDiciplina = new Avaliacao(dt.Rows[0], "Dis_");
-                controleTurmas.escalaDocente = new Avaliacao(dt.Rows[0], "Doc_");
-                controleTurmas.escalaGlobal = new Avaliacao(dt.Rows[0], "Global_");
-                controleTurmas.escalaGlobalAdicinal = new Avaliacao(dt.Rows[0], "GlobalAdic_");
-            }
+                        controleTurmas.escalaDiciplina = new Avaliacao(dt.Rows[0], "Dis_");
+                        controleTurmas.escalaDocente = new Avaliacao(dt.Rows[0], "Doc_");
+                        controleTurmas.escalaGlobal = new Avaliacao(dt.Rows[0], "Global_");
+                        controleTurmas.escalaGlobalAdicinal = new Avaliacao(dt.Rows[0], "GlobalAdic_");
+                        controleTurmas.tipoTurno = new ACA_TipoTurnoDAO().DataRowToEntity(dt.Rows[0], new ACA_TipoTurno());
+                    }
                 }
 
-            return controleTurmas;
+                return controleTurmas;
             };
 
             if (appMinutosCacheLongo > 0)
@@ -1526,7 +1530,7 @@ namespace MSTech.GestaoEscolar.BLL
                 return retorno();
             }
         }
-       
+
         /// <summary>
         /// Valida dados necessários para salvar a turma eletiva do aluno, se esse for o tipo
         /// da turma.

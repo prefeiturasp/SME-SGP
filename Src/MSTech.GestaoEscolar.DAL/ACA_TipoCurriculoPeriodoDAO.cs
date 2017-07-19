@@ -117,6 +117,81 @@ namespace MSTech.GestaoEscolar.DAL
         }
 
         /// <summary>
+        /// Retorna os tipos de currículo período ativos por nível e modalidade de ensino
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="tne_id">Tipo nivel de ensino</param>
+        /// <param name="tme_id">Tipo modalidade de ensino</param>
+        /// <param name="doc_id">ID do docente</param>
+        public DataTable SelecionaTipoCurriculoPeriodoDocenteEvento
+        (
+            int tne_id
+            , int tme_id
+            , long doc_id
+            , string eventosAbertos
+            , int cal_ano
+        )
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_TipoCurriculoPeriodo_SelecionaTipoCurriculoPeriodoDocenteEvento", _Banco);
+
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tne_id";
+                Param.Size = 4;
+                Param.Value = tne_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_id";
+                Param.Size = 4;
+                Param.Value = tme_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.ParameterName = "@doc_id";
+                Param.Size = 8;
+                Param.Value = doc_id;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.AnsiString;
+                Param.ParameterName = "@eventosAbertos";
+                Param.Value = eventosAbertos;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@cal_ano";
+                Param.Size = 4;
+                if (cal_ano > 0)
+                    Param.Value = cal_ano;
+                else
+                    Param.Value = DBNull.Value;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                return qs.Return;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
+        /// <summary>
         /// Verifica o maior número de ordem cadastado de tipo de curriculo periodo
         /// </summary>     
         public int Select_MaiorOrdem()

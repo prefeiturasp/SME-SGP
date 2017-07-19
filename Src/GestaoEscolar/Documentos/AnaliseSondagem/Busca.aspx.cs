@@ -518,7 +518,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
         }
 
         #endregion
-        
+
         #region Métodos
 
         /// <summary>
@@ -604,21 +604,14 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
         /// </summary>
         private void InicializarTela()
         {
-            //Se for usuário administrador ou gestor permite gerar o relatório sem filtrar por escola
-            if (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao ||
-                __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Gestao)
-            {
-                _VS_PermiteSemEscola = true;
-                UCComboUAEscola.ObrigatorioEscola = false;
-            }
-
             _VS_AnosAnteriores = true;
             _VS_MostarComboEscola = false;
             UCComboTurma.Obrigatorio = UCCCursoCurriculo.Obrigatorio = UCComboCurriculoPeriodo.Obrigatorio = false;
 
-            InicializaCamposBusca();
+            UCComboSondagem.Obrigatorio = true;
+            UCComboSondagem.Carregar(true);
 
-            txtTituloSondagem.Focus();
+            InicializaCamposBusca();
         }
 
         /// <summary>
@@ -647,7 +640,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
 
                 if (dataInicio > dataFim)
                     throw new ValidationException(GetGlobalResourceObject("Documentos", "AnaliseSondagem.Busca.DataFimMenorInicio").ToString());
-                
+
                 SalvaBusca();
 
                 report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.AnaliseSondagem).ToString();
@@ -661,7 +654,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                              "&crp_id=" + UCComboCurriculoPeriodo.Valor[2] +
                              "&tur_id=" + UCComboTurma.Valor[0] +
                              "&ent_id=" + __SessionWEB.__UsuarioWEB.Usuario.ent_id +
-                             "&snd_descricao=" + txtTituloSondagem.Text +
+                             "&snd_id=" + UCComboSondagem.Valor +
                              "&dataInicio=" + txtDataInicio.Text +
                              "&dataFim=" + txtDataFim.Text +
                              "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) +
@@ -669,7 +662,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                              "&gru_id=" + __SessionWEB.__UsuarioWEB.Grupo.gru_id +
                              "&suprimirPercentual=" + chkSuprimirPercentual.Checked +
                              "&dre=" + UCComboUAEscola.TextoComboUA +
-                             "&escola=" + UCComboUAEscola.TextoComboEscola +
+                             "&escola=" + (UCComboUAEscola.Esc_ID > 0 ? UCComboUAEscola.TextoComboEscola : "") +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
                                                    , ApplicationWEB.LogoRelatorioSSRS) +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +
@@ -705,7 +698,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
             filtros.Add("tur_id", UCComboTurma.Valor[0].ToString());
             filtros.Add("crp_idTurma", UCComboTurma.Valor[1].ToString());
             filtros.Add("ttn_id", UCComboTurma.Valor[2].ToString());
-            filtros.Add("snd_descricao", txtTituloSondagem.Text);
+            filtros.Add("snd_id", UCComboSondagem.Valor.ToString());
             filtros.Add("snd_dataIncio", Convert.ToDateTime(txtDataInicio.Text).ToString());
             filtros.Add("snd_dataFim", Convert.ToDateTime(txtDataFim.Text).ToString());
             filtros.Add("suprimirPercentual", chkSuprimirPercentual.Checked.ToString());
@@ -790,10 +783,10 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                     __SessionWEB.BuscaRealizada.Filtros.TryGetValue("crp_idTurma", out valor3);
                     UCComboTurma.Valor = new[] { Convert.ToInt64(valor), Convert.ToInt64(valor3), Convert.ToInt64(valor2) };
 
-                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_descricao", out valor);
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_id", out valor);
                     __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataIncio", out valor2);
                     __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataFim", out valor3);
-                    txtTituloSondagem.Text = valor;
+                    UCComboSondagem.Valor = Convert.ToInt32(valor);
                     txtDataInicio.Text = valor2;
                     txtDataFim.Text = valor3;
 

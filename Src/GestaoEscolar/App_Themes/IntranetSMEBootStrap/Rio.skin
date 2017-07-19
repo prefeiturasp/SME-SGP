@@ -12,6 +12,8 @@
 <asp:TextBox   runat="server" CSSClass="text4C currency" SkinID="Decimal" />
 <asp:TextBox   runat="server" CSSClass="text10C numeric tbCep_incremental" SkinID="CepIncremental" />
 <asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite4000" onkeypress="Max(this,4000);" OnKeyUp="Max(this,4000);" />
+<asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite400" onkeypress="Max(this,400);" OnKeyUp="Max(this,400);" />
+<asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite500" onkeypress="Max(this,500);" OnKeyUp="Max(this,500);" />
 <asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite2000" onkeypress="Max(this,2000);" OnKeyUp="Max(this,2000);" />
 <asp:TextBox   runat="server" CSSClass="text30C maskCodValidacao"  SkinID="CodigoValidacao" />
 <asp:TextBox   runat="server" CSSClass="text60C input-search"  SkinID="text60CSearch" />

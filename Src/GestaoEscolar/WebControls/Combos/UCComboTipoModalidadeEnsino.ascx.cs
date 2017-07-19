@@ -100,6 +100,35 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
         }
     }
 
+    /// <summary>
+    /// Indica se deve trazer o primeiro item selecinado caso seja o único
+    /// (Sem contar a MensagemSelecione)
+    /// </summary>
+    public bool TrazerComboCarregado
+    {
+        get
+        {
+            if (ViewState["TrazerComboCarregado"] != null)
+                return Convert.ToBoolean(ViewState["TrazerComboCarregado"]);
+            return false;
+        }
+        set
+        {
+            ViewState["TrazerComboCarregado"] = value;
+        }
+    }
+
+    /// <summary>
+    /// Propriedade que verifica quantos items existem no combo
+    /// </summary>
+    public int QuantidadeItensCombo
+    {
+        get
+        {
+            return ddlCombo.Items.Count;
+        }
+    }
+
     #endregion
 
     #region Delegates
@@ -121,6 +150,22 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
     #endregion
 
     #region METODOS
+
+    /// <summary>
+    /// Traz o primeiro item selecinado caso seja o único
+    /// </summary>
+    private void SelecionaPrimeiroItem()
+    {
+        if (TrazerComboCarregado && ddlCombo.Items.Count == 2 && ddlCombo.Items[0].Value == "-1")
+        {
+            // Seleciona o primeiro item.
+            ddlCombo.SelectedValue = ddlCombo.Items[1].Value;
+
+            if (IndexChanged != null)
+                IndexChanged();
+        }
+    }
+
     protected void ddlCombo_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (IndexChanged != null)
@@ -148,11 +193,7 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
       
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione uma modalidade de ensino --", "-1", true));
         ddlCombo.DataBind();
-
-        //if (ddlCombo.Items.Count == 2)
-        //{
-        //    ddlCombo.SelectedIndex = 1;
-        //}
+        SelecionaPrimeiroItem();
     }
 
     /// <summary>
@@ -173,6 +214,34 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
     }
 
     /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist  
+    /// de acordo com as atribuições do docente.
+    /// </summary>
+    public void CarregarTipoModalidadeEnsinoDocenteEventoAno(long doc_id, string eventosAbertos, int cal_ano)
+    {
+        ddlCombo.Items.Clear();
+        ddlCombo.DataSource = ACA_TipoModalidadeEnsinoBO.SelecionaTipoModalidadeEnsinoFilhosDocenteEventoAno(doc_id, eventosAbertos, cal_ano);
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione uma modalidade de ensino --", "-1", true));
+        ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
+    }
+
+    /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist  
+    /// de acordo com as atribuições do docente.
+    /// </summary>
+    public void CarregarTipoModalidadeEnsinoDocenteEvento(long doc_id, string eventosAbertos)
+    {
+        ddlCombo.Items.Clear();
+        ddlCombo.DataSource = ACA_TipoModalidadeEnsinoBO.SelecionaTipoModalidadeEnsinoFilhosDocenteEvento(doc_id, eventosAbertos);
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione uma modalidade de ensino --", "-1", true));
+        ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
+    }
+
+    /// <summary>
     /// Adciona e remove a mensagem "Selecione um Cruso" do dropdownlist.
     /// Por padrão é false e a mensagem "Selecione um Curso" não é exibida.
     /// </summary>
@@ -185,6 +254,7 @@ public partial class WebControls_Combos_UCComboModalidadeEnsino : MotherUserCont
             ddlCombo.AppendDataBoundItems = value;
         }
     }
+
     #endregion
 
     #region EVENTOS

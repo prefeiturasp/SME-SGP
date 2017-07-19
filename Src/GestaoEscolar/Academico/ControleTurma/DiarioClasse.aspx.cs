@@ -18,6 +18,7 @@ using MSTech.Security.Cryptography;
 using MSTech.Validation.Exceptions;
 using CFG_RelatorioBO = MSTech.GestaoEscolar.BLL.CFG_RelatorioBO;
 using ReportNameGestaoAcademicaDocumentosDocente = MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademicaDocumentosDocente;
+using System.Data.SqlTypes;
 
 namespace GestaoEscolar.Academico.ControleTurma
 {
@@ -700,7 +701,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     );
             }
         }
-
+           
         /// <summary>
         /// Guarda as notas de relatório.
         /// </summary>
@@ -1067,6 +1068,17 @@ namespace GestaoEscolar.Academico.ControleTurma
             get
             {
                 return (VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Experiencia);
+            }
+        }
+
+        /// <summary>
+        /// Retorna um booleano informando se o tipo de turno da turma é integral.
+        /// </summary>
+        public bool TurnoIntegral
+        {
+            get
+            {
+                return VS_EntitiesControleTurma.tipoTurno.ttn_tipo == (byte)ACA_TipoTurnoBO.TipoTurno.Integral;
             }
         }
 
@@ -1526,7 +1538,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
             divEventoSemAtividade.Visible = divAvisoSubstituto.Visible = divAvisoAulaSemPlano.Visible = false;
 
-            if (ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_RELATORIOS_DIARIO_DE_CLASSE, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
+            if (ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.MOSTRAR_RELATORIOS_DIARIO_DE_CLASSE, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                && VS_EntitiesControleTurma.turma.tur_tipo == (byte)TUR_TurmaTipo.Normal)
             {
                 if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                 {  // validação especifica para o tipo do docente logado
@@ -1801,7 +1814,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 lblDataAula.Text = "<b>Aula:</b> " + strDataAula;
 
                 bool permiteEditar = (VS_permissaoAlteracao && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
-                                        && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao)) 
+                                        && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao))
                                         || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoEdicao);
 
                 if (permiteEditar)
@@ -1899,7 +1912,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                UCNavegacaoTelaPeriodo.VS_tpc_id,
                                VS_tipoDocente,
                                false,
-                               UCNavegacaoTelaPeriodo.cap_dataInicio, 
+                               UCNavegacaoTelaPeriodo.cap_dataInicio,
                                UCNavegacaoTelaPeriodo.cap_dataFim,
                                ApplicationWEB.AppMinutosCacheMedio,
                                tur_ids
@@ -2684,7 +2697,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             //Não vai exibir o lançamento de objetos de aprendizagem ainda
-            DataTable dtCampos = new DataTable();// CLS_ObjetoAprendizagemTurmaDisciplinaBO.SelecionaObjTudTpc(VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id);
+            DataTable dtCampos = CLS_ObjetoAprendizagemTurmaDisciplinaBO.SelecionaObjTudTpc(VS_tud_id_Aula, UCNavegacaoTelaPeriodo.VS_tpc_id);
             divObjetosAprendizagem.Visible = dtCampos.Rows.Count > 0;
             if (divObjetosAprendizagem.Visible)
             {
@@ -3407,6 +3420,8 @@ namespace GestaoEscolar.Academico.ControleTurma
             DateTime dtAula;
             try
             {
+                DateTime sqlMax = Convert.ToDateTime(SqlDateTime.MaxValue.ToString());
+                DateTime sqlMin = Convert.ToDateTime(SqlDateTime.MinValue.ToString());
                 if (!DateTime.TryParse(txtDataAula.Text, out dtAula))
                 {
                     if (String.IsNullOrEmpty(txtDataAula.Text.Trim()))
@@ -3417,6 +3432,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                     {
                         lblMessage3.Text = UtilBO.GetErroMessage("Data da aula é inválida.", UtilBO.TipoMensagem.Alerta);
                     }
+                    return false;
+                }
+                else if (dtAula > sqlMax || dtAula < sqlMin)
+                {
+                    lblMessage3.Text = UtilBO.GetErroMessage("Data da aula é inválida.", UtilBO.TipoMensagem.Alerta);
                     return false;
                 }
                 else if ((VS_EntitiesControleTurma.turma.tur_situacao == (byte)TUR_TurmaSituacao.Encerrada
@@ -3438,8 +3458,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         tpc_id = UCNavegacaoTelaPeriodo.VS_tpc_id,
                         tau_data = string.IsNullOrEmpty(txtDataAula.Text) ? new DateTime() : Convert.ToDateTime(txtDataAula.Text),
 
-                        tau_numeroAulas = 
-                        
+                        tau_numeroAulas = (DisciplinaPrincipal && TurnoIntegral) ? 2 :
                         (DisciplinaPrincipal || DisciplinaRegencia) && !RegenciaETemposAula ? 1 :
                             (string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 :
                                 Convert.ToInt32(txtQtdeAulas.Text)),
@@ -3466,7 +3485,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     CLS_TurmaAulaBO.GetEntity(entity);
 
                     entity.tau_data = string.IsNullOrEmpty(txtDataAula.Text) ? new DateTime() : Convert.ToDateTime(txtDataAula.Text);
-                    entity.tau_numeroAulas = ((DisciplinaPrincipal || DisciplinaRegencia) &&
+                    entity.tau_numeroAulas = DisciplinaPrincipal && TurnoIntegral ? 2 :
+                                            ((DisciplinaPrincipal || DisciplinaRegencia) &&
                                               !((VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia)
                                                 && (entity.tdt_posicao == (byte)EnumTipoDocente.Projeto)))
                                                     ? 1 : (string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 : Convert.ToInt32(txtQtdeAulas.Text));
@@ -3538,7 +3558,7 @@ namespace GestaoEscolar.Academico.ControleTurma
             try
             {
                 bool permiteEditar = (VS_permissaoAlteracao && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_alterar
-                                        && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao)) 
+                                        && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao))
                                         || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoEdicao);
                 if (permiteEditar)
                 {
@@ -4768,10 +4788,10 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 // Apenas aulas dos dias anteriores sem plano de aula devem exibir o aviso.
                 Image imgSemPlanoAula = (Image)grvAulas.Rows[VS_grvRow].FindControl("imgSemPlanoAula");
-                if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date && 
+                if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
-                    imgSemPlanoAula.Visible = string.IsNullOrEmpty(entity.tau_planoAula)
+                    imgSemPlanoAula.Visible = string.IsNullOrEmpty(entity.tau_planoAula) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
@@ -4926,7 +4946,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && entityTurmaAula.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
-                    imgSemPlanoAula.Visible = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula)
+                    imgSemPlanoAula.Visible = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
@@ -5081,11 +5101,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (hdnId != null)
                     {
                         lstObjTudTau.Add(new CLS_ObjetoAprendizagemTurmaAula
-                                            {
-                                                tud_id = VS_tud_id_Aula,
-                                                tau_id = VS_tau_id,
-                                                oap_id = Convert.ToInt32(hdnId.Value)
-                                            });
+                        {
+                            tud_id = VS_tud_id_Aula,
+                            tau_id = VS_tau_id,
+                            oap_id = Convert.ToInt32(hdnId.Value)
+                        });
                     }
                 }
             }
@@ -5443,6 +5463,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 try
                 {
+                    
                     if (PreviousPage == null && Session["DadosPaginaRetorno"] == null && Session["tud_id"] == null)
                     {
                         // Se não carregou nenhuma turma, redireciona pra busca.
@@ -5544,7 +5565,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         {
                             tpcIdPendencia = Convert.ToInt32(Session["tpcIdPendencia"]);
                         }
-
+                       
                         // Remove os dados que possam estar na sessao
                         Session.Remove("tud_id");
                         Session.Remove("tdt_posicao");
@@ -5766,6 +5787,14 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
 
             trExibirAlunoDispensadoFrequencia.Visible = trExibirAlunoDispensadoAtividade.Visible = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_LEGENDA_ALUNO_DISPENSADO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
+
+            // REMOVE LIÇÃO DE CASA CASO SEJA TURMA DE AEE 
+            if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                  updAtividadeCasa.Visible = false;
+
+            // REMOVE LIÇÃO DE CASA CASO SEJA EDUCAÇÃO INFANTIL
+            if (VS_EntitiesControleTurma.curso.tne_id == ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
+                updAtividadeCasa.Visible = false;
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -6036,7 +6065,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        btnFrequencia.Visible &= VS_ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
+                        btnFrequencia.Visible &= (DisciplinaPrincipal && TurnoIntegral && tdt_posicao.In((byte)1, (byte)2, (byte)6)) ||
+                            VS_ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
                     }
                     else if (docenciaCompartilhada)
                     {
@@ -6058,7 +6088,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        btnAtividade.Visible &= VS_ltPermissaoAvaliacao.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
+                        btnAtividade.Visible &= (DisciplinaPrincipal && TurnoIntegral && tdt_posicao.In((byte)1, (byte)2, (byte)6)) ||
+                            VS_ltPermissaoAvaliacao.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
                     }
                     else if (docenciaCompartilhada)
                     {
@@ -6078,7 +6109,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        btnAnotacao.Visible = VS_ltPermissaoAnotacoes.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
+                        btnAnotacao.Visible = (DisciplinaPrincipal && TurnoIntegral && tdt_posicao.In((byte)1, (byte)2, (byte)6)) ||
+                            VS_ltPermissaoAnotacoes.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
                     }
 
                     Image imgAnotacaoSituacao = (Image)e.Row.FindControl("imgAnotacaoSituacao");
@@ -6090,7 +6122,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                     {
-                        btnPlanoAula.Visible = VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
+                        btnPlanoAula.Visible = (DisciplinaPrincipal && TurnoIntegral && tdt_posicao.In((byte)1, (byte)2, (byte)6)) ||
+                            VS_ltPermissaoPlanoAula.Any(p => p.tdt_posicaoPermissao == tdt_posicao && (p.pdc_permissaoConsulta || p.pdc_permissaoEdicao));
                     }
 
                     Image imgPlanoAulaSituacao = (Image)e.Row.FindControl("imgPlanoAulaSituacao");
@@ -6105,8 +6138,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     Image imgSemPlanoAula = (Image)e.Row.FindControl("imgSemPlanoAula");
                     if (imgSemPlanoAula != null && dataAula.Date < DateTime.Now.Date &&
                         UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
-                    { 
-                        imgSemPlanoAula.Visible = semPlanoAula
+                    {
+                        imgSemPlanoAula.Visible = semPlanoAula && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                         || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
@@ -6299,11 +6332,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (UCControleTurma1.VS_tdt_posicao > 0)
                     {
                         Int16 tdt_posicao = Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "tdt_posicao"));
-                        bool permiteEditar = VS_ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao & p.pdc_permissaoEdicao);
+                        bool permiteEditar = DisciplinaPrincipal && TurnoIntegral ?
+                            tdt_posicao.In((short)1, (short)2, (short)6) :
+                            VS_ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao & p.pdc_permissaoEdicao);
                         chkEfetivado.Enabled &= permiteEditar;
                     }
 
-                    chkEfetivado.Enabled &= ((usuarioPermissao && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao)) 
+                    chkEfetivado.Enabled &= ((usuarioPermissao && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoEdicao))
                                                 || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoEdicao)) && VS_Periodo_Aberto;//&& permissaoAlteracao;
                 }
             }
@@ -6912,7 +6947,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 UCNavegacaoTelaPeriodo.VS_tpc_id,
                                 VS_tipoDocente,
                                 false,
-                                UCNavegacaoTelaPeriodo.cap_dataInicio, 
+                                UCNavegacaoTelaPeriodo.cap_dataInicio,
                                 UCNavegacaoTelaPeriodo.cap_dataFim,
                                 ApplicationWEB.AppMinutosCacheMedio,
                                 tur_ids
@@ -7286,7 +7321,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (VS_EntitiesControleTurma.formatoAvaliacao.fav_tipoApuracaoFrequencia == (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.Dia &&
                         VS_crp_controleTempo == (byte)ACA_CurriculoPeriodoControleTempo.Horas)
                     {
-                        if (VS_PossuiRegencia && VS_tud_tipo_Aula != (byte)TurmaDisciplinaTipo.Regencia)
+                        if ((VS_PossuiRegencia && VS_tud_tipo_Aula != (byte)TurmaDisciplinaTipo.Regencia) ||
+                            (DisciplinaPrincipal && TurnoIntegral))
                         {
                             for (int i = 0; i < numeroAulas; i++)
                             {
@@ -7424,7 +7460,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                UCNavegacaoTelaPeriodo.VS_tpc_id,
                                VS_tipoDocente,
                                false,
-                               UCNavegacaoTelaPeriodo.cap_dataInicio, 
+                               UCNavegacaoTelaPeriodo.cap_dataInicio,
                                UCNavegacaoTelaPeriodo.cap_dataFim,
                                ApplicationWEB.AppMinutosCacheMedio,
                                tur_ids
@@ -7905,7 +7941,7 @@ namespace GestaoEscolar.Academico.ControleTurma
         protected void grvAulas_DataBound(object sender, EventArgs e)
         {
             grvAulas.Columns[grvAulas_ColunaExcluirAula].Visible = ((__SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && (PermissaoModuloLancamentoFrequenciaInfantil.IsNew || PermissaoModuloLancamentoFrequenciaInfantil.pmo_permissaoExclusao))
-                                                                    || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoExclusao)) 
+                                                                    || (!PermissaoModuloLancamentoFrequencia.IsNew && PermissaoModuloLancamentoFrequencia.pmo_permissaoExclusao))
                                                                     && !VS_PeriodoEfetivado;
         }
 
@@ -8131,7 +8167,6 @@ namespace GestaoEscolar.Academico.ControleTurma
             ScriptManager.RegisterStartupScript(Page, typeof(Page), "FecharConfirmacaoExclusaoAula", "var exibirMensagemConfirmacao=false;$('#divConfirmacaoExclusaoAulaDiretor').dialog('close');", true);
         }
         #endregion Eventos
-
-
+        
     }
 }

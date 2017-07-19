@@ -257,6 +257,32 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                     Param.Value = DBNull.Value;
                 }
                 qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@caf_qtAtividadeExtraclassePrevista";
+                if (entity.caf_qtAtividadeExtraclassePrevista > 0)
+                {
+                    Param.Value = entity.caf_qtAtividadeExtraclassePrevista;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@caf_qtAtividadeExtraclasseEntregue";
+                if (entity.caf_qtAtividadeExtraclasseEntregue > 0)
+                {
+                    Param.Value = entity.caf_qtAtividadeExtraclasseEntregue;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
             }
         }
 
@@ -437,6 +463,32 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 if (entity.caf_qtAulasExterna > 0)
                 {
                     Param.Value = entity.caf_qtAulasExterna;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@caf_qtAtividadeExtraclassePrevista";
+                if (entity.caf_qtAtividadeExtraclassePrevista > 0)
+                {
+                    Param.Value = entity.caf_qtAtividadeExtraclassePrevista;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Decimal;
+                Param.ParameterName = "@caf_qtAtividadeExtraclasseEntregue";
+                if (entity.caf_qtAtividadeExtraclasseEntregue > 0)
+                {
+                    Param.Value = entity.caf_qtAtividadeExtraclasseEntregue;
                 }
                 else
                 {

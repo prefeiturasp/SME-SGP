@@ -57,7 +57,24 @@ namespace MSTech.GestaoEscolar.BLL
             ACA_TipoNivelEnsinoDAO dao = new ACA_TipoNivelEnsinoDAO();
             return dao.SelectBy_Pesquisa(false, 1, 1, out totalRecords);
         }
-        
+
+        /// <summary>
+        /// Retorna todos os tipos de nível de ensino não excluídos logicamente,
+        /// desconsiderando o nível infantil
+        /// Sem paginação
+        /// </summary>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoNivelEnsinoSemInfantil(Guid ent_id)
+        {
+            int tne_idInfantil = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, ent_id);
+            DataTable dt = SelecionaTipoNivelEnsino();
+            if (dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).Length > 0)
+            {
+                return dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).CopyToDataTable();
+            }
+            return new DataTable();
+        }
+
         /// <summary>
         /// Verifica o maior número de ordem cadastado de tipo de nivel de ensino
         /// </summary>
@@ -106,5 +123,39 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectBy_Pesquisa_Area_Conhecimento(false, 1, 1, out totalRecords);
         }
 
+        /// <summary>
+        /// Retorna todos os tipos de nível de ensino não excluídos logicamente
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="doc_id">ID do docente</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoNivelEnsinoDocenteEventoSemInfantilAno(long doc_id, string eventosAbertos, Guid ent_id, int cal_ano)
+        {
+            int tne_idInfantil = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, ent_id);
+            DataTable dt = new ACA_TipoNivelEnsinoDAO().SelecionaTipoNivelEnsinoDocenteEvento(doc_id, eventosAbertos, cal_ano);
+            if (dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).Length > 0)
+            {
+                return dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).CopyToDataTable();
+            }
+            return new DataTable();
+        }
+        /// <summary>
+        /// Retorna todos os tipos de nível de ensino não excluídos logicamente
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="doc_id">ID do docente</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoNivelEnsinoDocenteEventoSemInfantil(long doc_id, string eventosAbertos, Guid ent_id)
+        {
+            int tne_idInfantil = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, ent_id);
+            DataTable dt = new ACA_TipoNivelEnsinoDAO().SelecionaTipoNivelEnsinoDocenteEvento(doc_id, eventosAbertos, 0);
+            if (dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).Length > 0)
+            {
+                return dt.Select(string.Format("tne_id <> {0}", tne_idInfantil)).CopyToDataTable();
+            }
+            return new DataTable();
+        }
     }    
 }

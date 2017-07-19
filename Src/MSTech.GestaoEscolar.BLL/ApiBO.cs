@@ -5228,6 +5228,42 @@ namespace MSTech.GestaoEscolar.BLL
             return listaRetorno;
         }
 
+        /// <summary>
+        /// Seleciona os IDs dos usuários docentes por escola.
+        /// </summary>
+        /// <param name="uad_idEscola"></param>
+        /// <param name="ent_id"></param>
+        /// <returns></returns>
+        public static List<Guid> SelecionaUsuarioDocentePorEscola(Guid uad_idEscola, Guid ent_id)
+        {
+            List<Guid> listaRetorno = new List<Guid>();
+            DataTable dtUsuario = new ApiDAO().SelecionaUsuarioDocentePorEscola(uad_idEscola, ent_id);
+            if (dtUsuario.Rows.Count > 0)
+            {
+                listaRetorno = (from DataRow dr in dtUsuario.Rows
+                                select new Guid(dr["usu_id"].ToString())).ToList();
+            }
+            return listaRetorno.Distinct().ToList();
+        }
+
+        /// <summary>
+        /// Seleciona os IDs dos usuários docentes por diretoria.
+        /// </summary>
+        /// <param name="uad_idSuperior"></param>
+        /// <param name="ent_id"></param>
+        /// <returns></returns>
+        public static List<Guid> SelecionaUsuarioDocentePorDiretoria(Guid uad_idSuperior, Guid ent_id)
+        {
+            List<Guid> listaRetorno = new List<Guid>();
+            DataTable dtUsuario = new ApiDAO().SelecionaUsuarioDocentePorDiretoria(uad_idSuperior, ent_id);
+            if (dtUsuario.Rows.Count > 0)
+            {
+                listaRetorno = (from DataRow dr in dtUsuario.Rows
+                                select new Guid(dr["usu_id"].ToString())).ToList();
+            }
+            return listaRetorno.Distinct().ToList();
+        }
+
         #endregion Usuário
 
         #region ACA_TipoCiclo
@@ -6044,6 +6080,8 @@ namespace MSTech.GestaoEscolar.BLL
                             ,
                             recuperacao = g.First().Recuperacao
                             ,
+                            aee = g.First().tud_tipo == (byte)TurmaDisciplinaTipo.AtendimentoEducacionalEspecializado
+                            ,
                             disRelacionadas = g.First().disRelacionadas
                             ,
                             notas = (
@@ -6132,8 +6170,8 @@ namespace MSTech.GestaoEscolar.BLL
                                         }).ToList()
                         }).ToList();
 
-                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalAulas = d.totalAulas + (d.notas.Any(n => n.nota.possuiFreqExterna) ? "*" : ""));
-                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalFaltas = d.totalFaltas + (d.notas.Any(n => n.nota.possuiFreqExterna) ? "*" : ""));
+                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalAulas = d.totalAulas + (d.notas.Any(n => n.nota != null && n.nota.possuiFreqExterna) ? "*" : ""));
+                    buscaBoletimEscolarDosAlunosSaidaDTO.todasDisciplinas.ForEach(d => d.totalFaltas = d.totalFaltas + (d.notas.Any(n => n.nota != null && n.nota.possuiFreqExterna) ? "*" : ""));
 
                     if (controleOrdemDisciplinas)
                     {
@@ -7408,14 +7446,16 @@ namespace MSTech.GestaoEscolar.BLL
                                               ,
                                              respostasAluno = (from dr in dt.AsEnumerable()
                                                                group dr by new { snd_id = dr.Field<int>("snd_id"), sda_id = dr.Field<int>("sda_id"), sdq_id = dr.Field<int>("sdq_id"), sdq_idSub = dr.Field<int>("sdq_idSub") } into asn
+                                                               orderby Convert.ToInt32(asn.FirstOrDefault()["sdq_ordemSub"]), Convert.ToInt32(asn.FirstOrDefault()["sdq_ordem"])
                                                                where asn.Key.snd_id == sda.Key.snd_id && asn.Key.sda_id == sda.Key.sda_id
+                                                               from resposta in asn
                                                                select new RespostaAlunoDTO
                                                                {
                                                                    idQuestao = asn.Key.sdq_id
                                                                    ,
                                                                    idSubQuestao = asn.Key.sdq_idSub
                                                                    ,
-                                                                   idResposta = Convert.ToInt32(asn.FirstOrDefault()["sdr_id"])
+                                                                   idResposta = Convert.ToInt32(resposta["sdr_id"])
                                                                }).ToList()
                                          }).ToList()
                      }

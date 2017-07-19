@@ -29,8 +29,7 @@
                             PermiteEditar="false" ValidationGroup="vgTipoPeriodoCurso" />   
                         <asp:Label ID="lblDescricao" runat="server" AssociatedControlID="txtDescricao"></asp:Label>
                         <asp:TextBox ID="txtDescricao" runat="server" MaxLength="100" Width="100px" ValidationGroup ="vgTipoPeriodoCurso" Enabled="false"></asp:TextBox>
-                        <asp:Label ID="lblObjetoAprendizagem" runat="server" AssociatedControlID="chkObjetoAprendizagem"></asp:Label>
-                        <asp:CheckBox ID="chkObjetoAprendizagem" runat="server" />
+                        <asp:CheckBox ID="chkObjetoAprendizagem" runat="server" Text="Possui objeto de conhecimento"/>
                         <asp:RequiredFieldValidator ID="rfvDescricaoPeriodo" runat="server" ControlToValidate="txtDescricao"
                             ValidationGroup="vgTipoPeriodoCurso" Display="Dynamic" ErrorMessage="Tipo de período do curso é obrigatório.">*</asp:RequiredFieldValidator>
                 </fieldset>

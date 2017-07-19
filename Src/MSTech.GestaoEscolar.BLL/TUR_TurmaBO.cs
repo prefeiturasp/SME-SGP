@@ -283,6 +283,8 @@ namespace MSTech.GestaoEscolar.BLL
             public bool divergenciasAulasPrevistas { get; set; }
 
             public int tne_id { get; set; }
+
+            public int tme_id { get; set; }
         }
     }
 
@@ -363,6 +365,8 @@ namespace MSTech.GestaoEscolar.BLL
         public int cal_ano { get; set; }
 
         public byte tdt_situacao { get; set; }
+
+        public int tme_id { get; set; }
     }
 
     [Serializable]
@@ -442,6 +446,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         MultisseriadaDocente = 4
+        ,
+
+        AtendimentoEducacionalEspecializado = 5
     }
 
     /// <summary>
@@ -1340,13 +1347,14 @@ namespace MSTech.GestaoEscolar.BLL
                         totalRecords = 0;
                         DataTable dtDados = dao.SelectBy_Docente_TodosTipos_Posicao(ent_id, doc_id, posicao, esc_id, cal_id, mostrarCodigoNome, turmasNormais, mostraEletivas, out totalRecords);
                         dados = (from DataRow dr in dtDados.Rows
+                                 group dr by dr["tur_id"] into g
                                  select new sComboTurmas
                                  {
-                                     tur_id = dr["tur_id"].ToString(),
-                                     tur_codigo = dr["tur_codigo"].ToString(),
-                                     tur_crp_ttn_id = dr["tur_crp_ttn_id"].ToString(),
-                                     tur_cod_desc_nome = dr["tur_cod_desc_nome"].ToString(),
-                                     tur_esc_nome = dr["tur_esc_nome"].ToString(),
+                                     tur_id = g.First()["tur_id"].ToString(),
+                                     tur_codigo = g.First()["tur_codigo"].ToString(),
+                                     tur_crp_ttn_id = g.First()["tur_crp_ttn_id"].ToString(),
+                                     tur_cod_desc_nome = g.First()["tur_cod_desc_nome"].ToString(),
+                                     tur_esc_nome = g.First()["tur_esc_nome"].ToString(),
                                  }).ToList();
 
                         // Adiciona cache com validade do tempo informado na configuração.
@@ -1366,13 +1374,14 @@ namespace MSTech.GestaoEscolar.BLL
                 totalRecords = 0;
                 DataTable dtDados = dao.SelectBy_Docente_TodosTipos_Posicao(ent_id, doc_id, posicao, esc_id, cal_id, mostrarCodigoNome, turmasNormais, mostraEletivas, out totalRecords);
                 dados = (from DataRow dr in dtDados.Rows
+                         group dr by dr["tur_id"] into g
                          select new sComboTurmas
                          {
-                             tur_id = dr["tur_id"].ToString(),
-                             tur_codigo = dr["tur_codigo"].ToString(),
-                             tur_crp_ttn_id = dr["tur_crp_ttn_id"].ToString(),
-                             tur_cod_desc_nome = dr["tur_cod_desc_nome"].ToString(),
-                             tur_esc_nome = dr["tur_esc_nome"].ToString(),
+                             tur_id = g.First()["tur_id"].ToString(),
+                             tur_codigo = g.First()["tur_codigo"].ToString(),
+                             tur_crp_ttn_id = g.First()["tur_crp_ttn_id"].ToString(),
+                             tur_cod_desc_nome = g.First()["tur_cod_desc_nome"].ToString(),
+                             tur_esc_nome = g.First()["tur_esc_nome"].ToString(),
                          }).ToList();
             }
 
@@ -2289,7 +2298,7 @@ namespace MSTech.GestaoEscolar.BLL
                                                         esc_nome = g.FirstOrDefault()["tur_escolaUnidade"].ToString()
                                                         ,
                                                         lengendTitulo = g.FirstOrDefault()["tur_escolaUnidade"].ToString()
-                                                           + "<br />" + g.FirstOrDefault()["tur_calendario"].ToString()
+                                                                        + "<br />Ano letivo: " + g.FirstOrDefault()["cal_ano"].ToString()
                                                         ,
                                                         cal_id = g.Key.calendario
                                                         ,
@@ -3545,6 +3554,8 @@ namespace MSTech.GestaoEscolar.BLL
                          tdt_id = Convert.ToInt32(g.FirstOrDefault()["tdt_id"])
                          ,
                          crg_tipo = Convert.ToByte(g.FirstOrDefault()["crg_tipo"])
+                         ,
+                         tme_id = Convert.ToInt32(g.FirstOrDefault()["tme_id"] != DBNull.Value ? g.FirstOrDefault()["tme_id"] : "-1")
                      }).ToList();
             return dados;
         }
@@ -3747,7 +3758,7 @@ namespace MSTech.GestaoEscolar.BLL
                          esc_nome = g.FirstOrDefault()["tur_escolaUnidade"].ToString()
                          ,
                          lengendTitulo = g.FirstOrDefault()["tur_escolaUnidade"].ToString()
-                            + "<br />" + g.FirstOrDefault()["tur_calendario"].ToString()
+                            + "<br />Ano letivo: " + g.FirstOrDefault()["cal_ano"].ToString()
                          ,
                          cal_id = g.Key.calendario
                          ,
@@ -3836,6 +3847,8 @@ namespace MSTech.GestaoEscolar.BLL
                                        fav_fechamentoAutomatico = Convert.ToBoolean(drTurmas["fav_fechamentoAutomatico"])
                                        ,
                                        tne_id = drTurmas["tne_id"] != DBNull.Value ? Convert.ToInt32(drTurmas["tne_id"].ToString()) : -1
+                                       ,
+                                       tme_id = drTurmas["tme_id"] != DBNull.Value ? Convert.ToInt32(drTurmas["tme_id"].ToString()) : -1
                                    }).ToList()
                      }).ToList();
 

@@ -559,24 +559,6 @@ public partial class Configuracao_ParametroAcademico_Cadastro : MotherPageLogado
 
         #endregion Parametro - CURSO_ENSINO_FUNDAMENTAL
 
-        #region Parametro - TIPO_DISCIPLINA_ELETIVA_ALUNO
-
-        else if (pac_chave == "TIPO_DISCIPLINA_ELETIVA_ALUNO")
-        {
-            parametroTextBox.Visible = false;
-            _cvParametroAcademicoValor.ErrorMessage = "Tipo de " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " eletivo(a) é obrigatório.";
-            _ddlParametroAcademicoValor.Items.Clear();
-            _ddlParametroAcademicoValor.DataTextField = "tne_tds_nome";
-            _ddlParametroAcademicoValor.DataValueField = "tds_id";
-            _ddlParametroAcademicoValor.DataSource = ACA_TipoDisciplinaBO.SelecionaTipoDisciplinaTodasEletivaAluno(__SessionWEB.__UsuarioWEB.Usuario.ent_id);
-            _ddlParametroAcademicoValor.Items.Insert(0, new ListItem("-- Selecione uma " + GetGlobalResourceObject("Mensagens", "MSG_DISCIPLINA") + " --", "-1", true));
-            _ddlParametroAcademicoValor.AppendDataBoundItems = true;
-            _ddlParametroAcademicoValor.DataBind();
-            parametroCombo.Visible = true;
-        }
-
-        #endregion Parametro - TIPO_DISCIPLINA_ELETIVA_ALUNO
-
         #region Parametro - TIPO_EVENTO_EFETIVACAO_FINAL
 
         else if (pac_chave == "TIPO_EVENTO_EFETIVACAO_FINAL")
@@ -1033,6 +1015,42 @@ public partial class Configuracao_ParametroAcademico_Cadastro : MotherPageLogado
         }
 
         #endregion Parametro - TIPO_PERIODO_CALENDARIO_RECESSO
+
+        #region Parametro - TIPO_EVENTO_ABERTURA_SUGESTOES
+
+        else if (pac_chave == "TIPO_EVENTO_ABERTURA_SUGESTOES")
+        {
+            parametroTextBox.Visible = false;
+            _cvParametroAcademicoValor.ErrorMessage = "Tipo de evento de abertura de período para cadastro de sugestões no currículo é obrigatório.";
+            _ddlParametroAcademicoValor.Items.Clear();
+            _ddlParametroAcademicoValor.DataTextField = "tev_nome";
+            _ddlParametroAcademicoValor.DataValueField = "tev_id";
+            _ddlParametroAcademicoValor.DataSource = ACA_TipoEventoBO.SelecionaTodosNaoRelacionados();
+            _ddlParametroAcademicoValor.Items.Insert(0, new ListItem("-- Selecione um tipo de evento --", "-1", true));
+            _ddlParametroAcademicoValor.AppendDataBoundItems = true;
+            _ddlParametroAcademicoValor.DataBind();
+            parametroCombo.Visible = true;
+        }
+
+        #endregion Parametro - TIPO_EVENTO_ABERTURA_SUGESTOES
+
+        #region Parametro - TIPO_EVENTO_PREFERENCIA_HORARIO
+
+        else if (pac_chave == "TIPO_EVENTO_PREFERENCIA_HORARIO")
+        {
+            parametroTextBox.Visible = false;
+            _cvParametroAcademicoValor.ErrorMessage = "Tipo de evento de abertura de período para cadastro de preferência de horário de docente é obrigatório.";
+            _ddlParametroAcademicoValor.Items.Clear();
+            _ddlParametroAcademicoValor.DataTextField = "tev_nome";
+            _ddlParametroAcademicoValor.DataValueField = "tev_id";
+            _ddlParametroAcademicoValor.DataSource = ACA_TipoEventoBO.SelecionaTodosNaoRelacionados();
+            _ddlParametroAcademicoValor.Items.Insert(0, new ListItem("-- Selecione um tipo de evento --", "-1", true));
+            _ddlParametroAcademicoValor.AppendDataBoundItems = true;
+            _ddlParametroAcademicoValor.DataBind();
+            parametroCombo.Visible = true;
+        }
+
+        #endregion Parametro - TIPO_EVENTO_PREFERENCIA_HORARIO
     }
 
     private void SetaBuscaLogica(parametroAttributes parametroattributes)

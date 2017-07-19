@@ -43,7 +43,7 @@
         <fieldset id="fdsResultados" runat="server">
             <legend><asp:Label runat="server" ID="lblLegendResultados" Text="<%$ Resources:Classe, LancamentoSondagem.Busca.lblLegendResultados.Text %>" /></legend>
             <uc2:UCComboQtdePaginacao ID="UCComboQtdePaginacao1" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged" />
-            <asp:GridView ID="dgvSondagem" runat="server" DataKeyNames="snd_id,sda_id,situacao" AutoGenerateColumns="False"
+            <asp:GridView ID="dgvSondagem" runat="server" DataKeyNames="snd_id,sda_id,snd_opcaoResposta,situacao" AutoGenerateColumns="False"
                 DataSourceID="odsSondagem" AllowPaging="True" OnRowDataBound="dgvSondagem_RowDataBound"
                 EmptyDataText="<%$ Resources:Classe, LancamentoSondagem.Busca.dgvSondagem.EmptyDataText %>"
                 OnDataBound="dgvSondagem_DataBound" AllowSorting="true" SkinID="GridResponsive">

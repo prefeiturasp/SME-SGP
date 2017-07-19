@@ -37,6 +37,20 @@ namespace GestaoEscolar.WebControls.Combos
             }
         }
 
+        public bool ExibeDeficienciaMultipla
+        {
+            set
+            {
+                foreach (ListItem def in ddlCombo.Items)
+                {
+                    if (CFG_DeficienciaFIlhaBO.SelectFilhaBy_Deficiencia(new Guid(def.Value)).Count > 0)
+                    {
+                        ddlCombo.Items.Remove(def);
+                    }
+                }
+            }
+        }
+
         public Guid Valor
         {
             get
@@ -83,7 +97,7 @@ namespace GestaoEscolar.WebControls.Combos
             {
                 if (value && __SessionWEB != null && __SessionWEB.__UsuarioWEB != null && __SessionWEB.__UsuarioWEB.Usuario != null)
                     ddlCombo.Items.Insert(0, new ListItem("-- Selecione um(a) " + GestaoEscolarUtilBO.nomePadraoTipoDeficiencia
-                        (__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower() + 
+                        (__SessionWEB.__UsuarioWEB.Usuario.ent_id).ToLower() +
                         " --", Guid.Empty.ToString(), true));
             }
         }

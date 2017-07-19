@@ -16,7 +16,7 @@ namespace MSTech.GestaoEscolar.BLL
     using Validation.Exceptions;
     using System.Collections.Generic;
     using CustomResourceProviders;
-    
+
     #region Enumeradores
 
     /// <summary>
@@ -33,6 +33,17 @@ namespace MSTech.GestaoEscolar.BLL
         Excluido = 3
     }
 
+    /// <summary>
+    /// Tipo de opção de resposta
+    /// </summary>
+    public enum ACA_SondagemOpcaoResposta : byte
+    {
+        Multiselecao = 1
+        ,
+
+        SelecaoUnica = 2
+    }
+
     #endregion Enumeradores
 
     #region Estruturas
@@ -43,6 +54,9 @@ namespace MSTech.GestaoEscolar.BLL
     [Serializable]
     public class ACA_Sondagem_Lancamento
     {
+        public int sda_id { get; set; }
+        public string dataInicio { get; set; }
+        public string dataFim { get; set; }
         public long alu_id { get; set; }
         public string pes_nome { get; set; }
         public int mtu_numeroChamada { get; set; }
@@ -59,10 +73,19 @@ namespace MSTech.GestaoEscolar.BLL
         public bool respAluno { get; set; }
     }
 
+    [Serializable]
+    public class ACA_Sondagem_ListAgendamentos
+    {
+        public long alu_id { get; set; }
+        public int sda_id { get; set; }
+        public string dataInicio { get; set; }
+        public string dataAgendamento { get; set; }
+    }
+
     #endregion Estruturas
 
     public class ACA_SondagemBO : BusinessBase<ACA_SondagemDAO, ACA_Sondagem>
-	{
+    {
         /// <summary>
         /// Salva a sondagem
         /// </summary>
@@ -90,32 +113,19 @@ namespace MSTech.GestaoEscolar.BLL
                 List<ACA_SondagemResposta> lstRespostaBanco = entity.IsNew ? new List<ACA_SondagemResposta>() :
                                                               ACA_SondagemRespostaBO.SelectRespostasBy_Sondagem(entity.snd_id, dao._Banco);
 
-                //Verifica se existe agendamento vigente ou se possui sondagem lançada para alunos em agendamento não cancelados
-                List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(entity.snd_id, dao._Banco);
-                List<CLS_AlunoSondagem> lstAlunoSondagem = CLS_AlunoSondagemBO.SelectAgendamentosBy_Sondagem(entity.snd_id, 0, dao._Banco);
-                bool permiteRemover = !lstAgendamentos.Any(a => a.sda_dataFim >= DateTime.Today && a.sda_dataInicio <= DateTime.Today &&
-                                                                a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado) &&
-                                      !lstAlunoSondagem.Any(a => a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado);
-
                 //Salva a sondagem
                 if (!dao.Salvar(entity))
                     return false;
 
                 LimpaCache(entity);
-                
+
                 //Salva questões
                 foreach (ACA_SondagemQuestao sdq in lstQuestao)
                 {
                     sdq.snd_id = entity.snd_id;
                     sdq.sdq_subQuestao = false;
-                    if (!permiteRemover && sdq.IsNew)
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteAdicionarItem"));
-                    else if (sdq.IsNew)
+                    if (sdq.IsNew)
                         sdq.sdq_id = -1;
-                    else if (!permiteRemover && sdq.sdq_situacao == (byte)ACA_SondagemQuestaoSituacao.Excluido)
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteExcluirItem"));
-                    else if (!permiteRemover && lstQuestaoBanco.Any(q => q.sdq_id == sdq.sdq_id && q.sdq_ordem != sdq.sdq_ordem))
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteReordenar"));
                     if (!ACA_SondagemQuestaoBO.Save(sdq, dao._Banco))
                         return false;
                 }
@@ -125,25 +135,17 @@ namespace MSTech.GestaoEscolar.BLL
                 {
                     sdq.snd_id = entity.snd_id;
                     sdq.sdq_subQuestao = true;
-                    if (!permiteRemover && sdq.IsNew)
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteAdicionarItem"));
-                    else if (sdq.IsNew)
+                    if (sdq.IsNew)
                         sdq.sdq_id = -1;
-                    else if (!permiteRemover && sdq.sdq_situacao == (byte)ACA_SondagemQuestaoSituacao.Excluido)
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteExcluirItem"));
-                    else if (!permiteRemover && lstQuestaoBanco.Any(q => q.sdq_id == sdq.sdq_id && q.sdq_ordem != sdq.sdq_ordem))
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteReordenar"));
                     if (!ACA_SondagemQuestaoBO.Save(sdq, dao._Banco))
                         return false;
                 }
 
                 //Remove logicamente no banco as questões e sub-questões que foram removidas da sondagem
                 foreach (ACA_SondagemQuestao sdqB in lstQuestaoBanco)
-                    if (!lstQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido) && 
+                    if (!lstQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido) &&
                         !lstSubQuestao.Any(q => q.sdq_id == sdqB.sdq_id && q.sdq_situacao != (byte)ACA_SondagemQuestaoSituacao.Excluido))
                     {
-                        if (!permiteRemover)
-                            throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteExcluirItem"));
                         ACA_SondagemQuestaoBO.Delete(sdqB, dao._Banco);
                     }
 
@@ -151,14 +153,8 @@ namespace MSTech.GestaoEscolar.BLL
                 foreach (ACA_SondagemResposta sdr in lstResposta)
                 {
                     sdr.snd_id = entity.snd_id;
-                    if (!permiteRemover && sdr.IsNew)
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteAdicionarItem"));
-                    else if (sdr.IsNew)
+                    if (sdr.IsNew)
                         sdr.sdr_id = -1;
-                    else if (!permiteRemover && sdr.sdr_situacao == (byte)ACA_SondagemRespostaSituacao.Excluido)
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteExcluirItem"));
-                    else if (!permiteRemover && lstRespostaBanco.Any(r => r.sdr_id == sdr.sdr_id && r.sdr_ordem != sdr.sdr_ordem))
-                        throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteReordenar"));
                     if (!ACA_SondagemRespostaBO.Save(sdr, dao._Banco))
                         return false;
                 }
@@ -167,11 +163,9 @@ namespace MSTech.GestaoEscolar.BLL
                 foreach (ACA_SondagemResposta sdrB in lstRespostaBanco)
                     if (!lstResposta.Any(r => r.sdr_id == sdrB.sdr_id && r.sdr_situacao != (byte)ACA_SondagemRespostaSituacao.Excluido))
                     {
-                        if (!permiteRemover)
-                            throw new ValidationException(CustomResource.GetGlobalResourceObject("BLL", "ACA_SondagemBO.NaoPermiteExcluirItem"));
                         ACA_SondagemRespostaBO.Delete(sdrB, dao._Banco);
                     }
-                
+
                 return true;
             }
             catch (Exception err)
@@ -199,17 +193,13 @@ namespace MSTech.GestaoEscolar.BLL
         public static DataTable SelecionaSondagensPaginado
         (
             string snd_titulo
-            , int currentPage
-            , int pageSize
         )
         {
             totalRecords = 0;
-
-            if (pageSize == 0)
-                pageSize = 1;
+            
 
             ACA_SondagemDAO dao = new ACA_SondagemDAO();
-            return dao.SelectBy_Pesquisa(snd_titulo, true, currentPage / pageSize, pageSize, out totalRecords);
+            return dao.SelectBy_Pesquisa(snd_titulo, false, 1, 1, out totalRecords);
         }
 
         /// <summary>
@@ -280,6 +270,26 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Retorna todas as sondagens ativas.
+        /// </summary>
+        /// <returns></returns>
+        public static List<ACA_Sondagem> SelecionaSondagemAtiva()
+        {
+            ACA_SondagemDAO dao = new ACA_SondagemDAO();
+
+            DataTable dtSondagem = dao.SelectBy_Ativas();
+
+            List<ACA_Sondagem> retorno = new List<ACA_Sondagem>();
+
+            if (dtSondagem.Rows.Count > 0)
+            {
+                retorno = dtSondagem.Rows.Cast<DataRow>().Select(p => (ACA_Sondagem)GestaoEscolarUtilBO.DataRowToEntity(p, new ACA_Sondagem())).ToList();
+            }
+            return retorno;
+
+        }
+
+        /// <summary>
         /// Deleta logicamente uma sondagem
         /// </summary>
         /// <param name="entity">Entidade ACA_Sondagem</param>        
@@ -304,16 +314,6 @@ namespace MSTech.GestaoEscolar.BLL
             {
                 //Verifica se a disciplina pode ser deletada
                 if (GestaoEscolarUtilBO.VerificarIntegridade("snd_id", entity.snd_id.ToString(), tabelasNaoVerificarIntegridade, dao._Banco))
-                    throw new ValidationException("Não é possível excluir a sondagem " + entity.snd_titulo + ", pois possui outros registros ligados a ela.");
-
-                //Verifica se existe agendamento vigente ou se possui sondagem lançada para alunos em agendamento não cancelados
-                //List<ACA_SondagemAgendamento> lstAgendamentos = ACA_SondagemAgendamentoBO.SelectAgendamentosBy_Sondagem(entity.snd_id, dao._Banco);
-                List<CLS_AlunoSondagem> lstAlunoSondagem = CLS_AlunoSondagemBO.SelectAgendamentosBy_Sondagem(entity.snd_id, 0, dao._Banco);
-                bool permiteRemover = //!lstAgendamentos.Any(a => a.sda_dataFim >= DateTime.Today && a.sda_dataInicio <= DateTime.Today &&
-                                      //                          a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado) &&
-                                      !lstAlunoSondagem.Any(a => a.sda_situacao != (byte)ACA_SondagemAgendamentoSituacao.Cancelado);
-
-                if (!permiteRemover)
                     throw new ValidationException("Não é possível excluir a sondagem " + entity.snd_titulo + ", pois possui outros registros ligados a ela.");
 
                 LimpaCache(entity);

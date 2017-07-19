@@ -11,6 +11,7 @@ namespace MSTech.GestaoEscolar.BLL
     public enum eRecursoAPI
     {
         ParecerConclusivoEOL = 1
+        , Notificacoes = 2
     }
 
     public enum RecursoAPISituacao

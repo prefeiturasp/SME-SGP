@@ -130,9 +130,53 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
         }
     }
 
+    /// <summary>
+    /// Indica se deve trazer o primeiro item selecinado caso seja o único
+    /// (Sem contar a MensagemSelecione)
+    /// </summary>
+    public bool TrazerComboCarregado
+    {
+        get
+        {
+            if (ViewState["TrazerComboCarregado"] != null)
+                return Convert.ToBoolean(ViewState["TrazerComboCarregado"]);
+            return false;
+        }
+        set
+        {
+            ViewState["TrazerComboCarregado"] = value;
+        }
+    }
+
+    /// <summary>
+    /// Propriedade que verifica quantos items existem no combo
+    /// </summary>
+    public int QuantidadeItensCombo
+    {
+        get
+        {
+            return ddlCombo.Items.Count;
+        }
+    }
+
     #endregion
 
     #region METODOS
+
+    /// <summary>
+    /// Traz o primeiro item selecinado caso seja o único
+    /// </summary>
+    private void SelecionaPrimeiroItem()
+    {
+        if (TrazerComboCarregado && ddlCombo.Items.Count == 2 && ddlCombo.Items[0].Value == "-1")
+        {
+            // Seleciona o primeiro item.
+            ddlCombo.SelectedValue = ddlCombo.Items[1].Value;
+
+            if (IndexChanged != null)
+                IndexChanged();
+        }
+    }
 
     /// <summary>
     /// Seta o foco no combo    
@@ -153,9 +197,25 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
 
         ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
         ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
     }
 
-      /// <summary>
+    /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist    
+    /// </summary>
+    public void CarregarTipoNivelEnsinoSemInfantil()
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectMethod = "SelecionaTipoNivelEnsinoSemInfantil";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
+        ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
+    }
+
+    /// <summary>
     /// Mostra os dados não excluídos logicamente no dropdownlist    
     /// </summary>
     public void CarregarTipoNivelEnsinoEscola(int esc_id, int uni_id)
@@ -170,10 +230,47 @@ public partial class WebControls_Combos_UCComboNivelEnsino : MotherUserControl
     }
 
     /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist    
+    /// de acordo com as atribuições do docente.
+    /// </summary>
+    public void CarregarTipoNivelEnsinoDocenteEventoSemInfantilAno(long doc_id, string eventosAbertos, int cal_ano)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("doc_id", doc_id.ToString());
+        odsDados.SelectParameters.Add("cal_ano", cal_ano.ToString());
+        odsDados.SelectParameters.Add("eventosAbertos", eventosAbertos);
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectMethod = "SelecionaTipoNivelEnsinoDocenteEventoSemInfantilAno";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
+        ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
+    }
+
+    /// <summary>
+    /// Mostra os dados não excluídos logicamente no dropdownlist    
+    /// de acordo com as atribuições do docente.
+    /// </summary>
+    public void CarregarTipoNivelEnsinoDocenteEventoSemInfantil(long doc_id, string eventosAbertos)
+    {
+        ddlCombo.Items.Clear();
+        odsDados.SelectParameters.Clear();
+        odsDados.SelectParameters.Add("doc_id", doc_id.ToString());
+        odsDados.SelectParameters.Add("eventosAbertos", eventosAbertos);
+        odsDados.SelectParameters.Add("ent_id", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+        odsDados.SelectMethod = "SelecionaTipoNivelEnsinoDocenteEventoSemInfantil";
+
+        ddlCombo.Items.Insert(0, new ListItem("-- Selecione um nível de ensino --", "-1", true));
+        ddlCombo.DataBind();
+        SelecionaPrimeiroItem();
+    }
+
+    /// <summary>
     /// Adciona e remove a mensagem "Selecione um Cruso" do dropdownlist.
     /// Por padrão é false e a mensagem "Selecione um Curso" não é exibida.
     /// </summary>
-    
+
     #endregion
 
     #region EVENTOS

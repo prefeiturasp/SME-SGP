@@ -356,6 +356,7 @@
         public const string FORMATO_AVALIACAO_MODEL_KEY = "ACA_FormatoAvaliacao_GetEntity_{0}";
         public const string FORMATO_AVALIACAO_PATTERN_KEY = "ACA_FormatoAvaliacao_GetEntity";
         public const string FORMATO_AVALIACAO_POR_TURMADISCIPLINA_MODEL_KEY = "Cache_SelecionaPorTud_{0}";
+        public const string FORMATO_AVALIACAO_POR_TURMA_MODEL_KEY = "Cache_SelecionaPorTur_{0}";
 
         #endregion Formato de avaliação
 
@@ -655,21 +656,6 @@
         /// {0} : ID da escola.
         /// {1} : ID da unidade de escola.
         /// {2} : ID do calendario.
-        /// {3} : ID da turma disciplina.
-        /// </summary>
-        /// <remarks>
-        /// {0} : ID da escola.
-        /// {1} : ID da unidade de escola.
-        /// {2} : ID do calendario.
-        /// {3} : ID da turma disciplina.
-        /// </remarks>
-        public const string PENDENCIA_FECHAMENTO_ESCOLA_TURMA_DISCIPLINA_MODEL_KEY = "Cache_SelecionaPendenciasFechamentoDisciplinas_{0}_{1}_{2}_{3}";
-
-        /// <summary>
-        /// Key para carregar pendências de fechamento
-        /// {0} : ID da escola.
-        /// {1} : ID da unidade de escola.
-        /// {2} : ID do calendario.
         
         /// </summary>
         /// <remarks>
@@ -949,5 +935,25 @@
         public const string MENU_SISTEMA_GRUPO_VISAO_PATTERN_KEY = "Cache_CarregarMenuXML";
 
         #endregion MenuCoreSSO
+
+        #region Alunos
+
+        public const string ALUNO_BUSCA_RELATORIOS_AEE_DOCENTE_KEY = "Cache_BuscaAlunosRelatoriosAEEPorDocente_{0}_{1}_{2}";
+        
+        #endregion
+
+        #region Relatorio Atendimento
+
+        public const string RELATORIO_ATENDIMENTO_BUSCA_ESTRUTURA_RELATORIO_KEY = "Cache_SelecionaRelatorio_{0}_{1}";
+
+        public const string RELATORIO_ATENDIMENTO_BUSCA_PERIODO_PorRelatorio = "Cache_SelecionaPeriodos_PorRelatorio_{0}";
+
+        #endregion
+
+        #region Grafico atendimento
+
+        public const string GRAFICO_ATENDIMENTO_SELECIONA_POR_TIPO_RELATORIO_KEY = "Cache_SelecionaPorTipoRelatorio_{0}";
+
+        #endregion
     }
 }

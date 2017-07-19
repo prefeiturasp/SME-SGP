@@ -25,6 +25,9 @@ using MSTech.Security.Cryptography;
 using MSTech.Validation.Exceptions;
 using MSTech.GestaoEscolar.BLL.Caching;
 using MSTech.CoreSSO.DAL;
+using System.Runtime.CompilerServices;
+using MSTech.Validation;
+using System.Web.UI;
 
 namespace MSTech.GestaoEscolar.BLL
 {
@@ -51,6 +54,180 @@ namespace MSTech.GestaoEscolar.BLL
             }
 
             return entity.pes_nome;
+        }
+
+        /// <summary>
+        /// Retorna o sexo da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string SexoFormatado(this PES_Pessoa entity)
+        {
+            switch (entity.pes_sexo)
+            {
+                case 1:
+                    return "Masculino";
+                case 2:
+                    return "Feminino";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Retorna a raça/core da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string RacaCorFormatado(this PES_Pessoa entity)
+        {
+            switch (entity.pes_racaCor)
+            {
+                case 1:
+                    return "Branca";
+                case 2:
+                    return "Preta";
+                case 3:
+                    return "Parda";
+                case 4:
+                    return "Amarela";
+                case 5:
+                    return "Indígena";
+                case 6:
+                    return "Não declarada";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Retorna o sexo da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string SexoFormatado(int codigoSexo)
+        {
+            switch (codigoSexo)
+            {
+                case 1:
+                    return "Masculino";
+                case 2:
+                    return "Feminino";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Retorna a raça/core da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string RacaCorFormatado(int codigoRacaoCor)
+        {
+            switch (codigoRacaoCor)
+            {
+                case 1:
+                    return "Branca";
+                case 2:
+                    return "Preta";
+                case 3:
+                    return "Parda";
+                case 4:
+                    return "Amarela";
+                case 5:
+                    return "Indígena";
+                case 6:
+                    return "Não declarada";
+            }
+
+            return string.Empty;
+        }
+
+        public static bool In<T>(this T valor, params T[] array)
+        {
+            return array.Contains(valor);
+        }
+
+        public static T ToEntity<T>(this DataRow dataRow) where T: class, new()
+        {
+            return (T)GestaoEscolarUtilBO.DataRowToEntity(dataRow, new T());
+        }
+
+        public static List<T> ToEntityList<T>(this DataTable datatable) where T : class, new()
+        {
+            if (datatable.Rows.Count > 0)
+            {
+                return GestaoEscolarUtilBO.MapToEnumerable<T>(datatable).ToList();
+            }
+
+            return new List<T>();
+        }
+
+        public static T FindControl<T>(this RepeaterItem item, string id) where T : Control
+        {
+            return item.FindControl(id) as T;
+        }
+
+        public static string GetValue(this HiddenField hdn)
+        {
+            if (hdn == null)
+            {
+                return string.Empty;
+            }
+
+            return hdn.Value;
+        }
+
+        public static string GetText(this TextBox txt)
+        {
+            if (txt == null)
+            {
+                return string.Empty;
+            }
+
+            return txt.Text;
+        }
+
+        public static bool IsChecked(this RadioButton rdb)
+        {
+            if (rdb == null)
+            {
+                return false;
+            }
+            
+            return rdb.Checked;
+        }
+
+        public static bool IsChecked(this CheckBox chk)
+        {
+            if (chk == null)
+            {
+                return false;
+            }
+
+            return chk.Checked;
+        }
+
+        public static int ToInt32(this string str)
+        {
+            int valor = -1;
+            int.TryParse(str, out valor);
+            return valor;
+        }
+
+        public static long ToInt64(this string str)
+        {
+            long valor = -1;
+            long.TryParse(str, out valor);
+            return valor;
+        }
+
+        public static byte ToByte(this string str)
+        {
+            byte valor = 0;
+            byte.TryParse(str, out valor);
+            return valor;
         }
     }
 
@@ -483,6 +660,30 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         FrequenciaMensal
+        ,
+
+        RelatorioSugestoesCurriculo
+        ,
+
+        QuantitativoSugestoes
+        ,
+
+        RelatorioAEE
+        ,
+
+        RelatorioNAAPA
+        ,
+
+        RelatorioGeralAtendimento
+        ,
+
+        GraficoJustificativaFalta
+        
+        ,
+        RelatorioAcoesRealizadas
+        ,
+
+        GraficoAtendimento
     }
 
     [Serializable]
@@ -610,7 +811,12 @@ namespace MSTech.GestaoEscolar.BLL
         AlunosJustificativaFalta = 319,
         DivergenciasAulasPrevistas = 320,
         AnaliseSondagem = 321,
-        FrequenciaMensal = 322
+        FrequenciaMensal = 322,
+        RelatorioSugestoesCurriculo = 323,
+        QuantitativoSugestoes = 324,        
+        GraficoJustificativaFalta = 326,
+        RelatorioGeralAtendimento = 325,
+        RelatorioAcoesRealizadas = 327
     }
 
     /// <summary>
@@ -2853,6 +3059,136 @@ namespace MSTech.GestaoEscolar.BLL
             }
             zs.Close();
             return ms.ToArray();
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public sealed class OrderAttribute : Attribute
+    {
+        private readonly int order;
+        public OrderAttribute([CallerLineNumber]int order = 0)
+        {
+            this.order = order;
+        }
+
+        public int Order { get { return this.order; } }
+    }
+
+    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public sealed class DBNullValueAttribute : Attribute
+    {
+        private readonly string nullValue;
+        public DBNullValueAttribute(Type type)
+        {
+            if (type == typeof(DateTime))
+            {
+                this.nullValue = new DateTime().ToString();
+            }
+
+            if (type == typeof(string))
+            {
+                this.nullValue = string.Empty;
+            }
+
+            if (type == typeof(long) || type == typeof(int))
+            {
+                this.nullValue = "-1";
+            }
+        }
+
+        public string NullValue { get { return this.nullValue; } }
+    }
+
+    public abstract class TipoTabela
+    {
+        public TipoTabela(Abstract_Entity entity)
+        {
+            Type tp = GetType();
+
+            var properties = from property in tp.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                             let orderAttribute = property.GetCustomAttributes(typeof(OrderAttribute), false).SingleOrDefault() as OrderAttribute
+                             where orderAttribute != null
+                             orderby orderAttribute.Order
+                             select property;
+
+            foreach (PropertyInfo prop in properties)
+            {
+                PropertyInfo propClone = entity.GetType().GetProperty(prop.Name);
+
+                if (propClone != null && propClone.CanWrite)
+                {
+                    var value = propClone.GetValue(entity, null);
+
+                    if (value != null)
+                    {
+                        if (prop.PropertyType == typeof(string))
+                        {
+                            if (value.GetType() == typeof(DateTime))
+                            {
+                                DateTime date = Convert.ToDateTime(value);
+                                prop.SetValue(this, date.ToString(DateUtil.DATA_HORA_SEGUNDOS_MILIS), null);
+                            }
+                            else
+                            {
+                                prop.SetValue(this, value.ToString(), null);
+                            }
+                        }
+                        else
+                        {
+                            prop.SetValue(this, value, null);
+                        }
+                    }
+                }
+            }
+        }
+
+        public DataRow ToDataRow()
+        {
+            var properties = GetType().GetProperties();
+            var dt = new DataTable();
+
+            foreach (var property in properties)
+                dt.Columns.Add(property.Name, property.PropertyType);
+
+            DataRow drRetorno = dt.NewRow();
+
+            DataColumnCollection columnList = dt.Columns;
+
+            FieldInfo[] fields = GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (DataColumn coluna in columnList)
+            {
+                PropertyInfo prop = properties.ToList().Find(p => p.Name == coluna.ColumnName);
+                var emptyValueAttribute = prop.GetCustomAttributes(typeof(DBNullValueAttribute), false).SingleOrDefault() as DBNullValueAttribute;
+
+                if (prop != null)
+                {
+
+                    if (emptyValueAttribute != null && (prop.GetValue(this) ?? string.Empty).ToString() == emptyValueAttribute.NullValue)
+                    {
+                        drRetorno[coluna] = DBNull.Value;
+                    }
+                    else
+                    {
+                        drRetorno[coluna] = prop.GetValue(this);
+                    }
+                }
+
+                FieldInfo field = fields.ToList().Find(p => p.Name == coluna.ColumnName);
+                if (field != null)
+                {
+                    if (emptyValueAttribute != null && (field.GetValue(this) ?? string.Empty).ToString() == emptyValueAttribute.NullValue)
+                    {
+                        drRetorno[coluna] = DBNull.Value;
+                    }
+                    else
+                    {
+                        drRetorno[coluna] = field.GetValue(this);
+                    }
+                }
+            }
+
+            return drRetorno;
         }
     }
 

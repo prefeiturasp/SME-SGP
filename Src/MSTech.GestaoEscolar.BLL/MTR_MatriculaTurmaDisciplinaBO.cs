@@ -136,12 +136,15 @@ namespace MSTech.GestaoEscolar.BLL
         public DateTime? mtd_dataSaida { get; set; }
         public byte mtd_situacao { get; set; }
         public int? ava_id { get; set; }
+        public bool PossuiDeficienciaDisciplina { get; set; }
         public bool PossuiDeficiencia { get; set; }
         public string Nome { get; set; }
         public string alu_mtu_mtd_id { get; set; }
         public bool AlunoDispensado { get; set; }
         public DateTime dataAlteracao { get; set; }
         public byte mtu_situacao { get; set; }
+
+        public long tur_id { get; set; }
     }
 
     /// <summary>
@@ -336,6 +339,8 @@ namespace MSTech.GestaoEscolar.BLL
         public decimal FrequenciaFinalAjustada { get; set; }
         public byte mtu_resultado { get; set; }
         public int QtAulasEfetivado { get; set; }
+        public bool PossuiDeficiencia { get; set; }
+        public byte alu_situacaoID { get; set; }
     }
 
     /// <summary>
@@ -399,6 +404,8 @@ namespace MSTech.GestaoEscolar.BLL
         public int AlunoForaDaRede { get; set; }
         public int QtAulasEfetivado { get; set; }
         public int tpc_ordem { get; set; }
+        public bool PossuiDeficiencia { get; set; }
+        public byte alu_situacaoID { get; set; }
     }
 
     /// <summary>
@@ -1699,7 +1706,7 @@ namespace MSTech.GestaoEscolar.BLL
 
             return new MTR_MatriculaTurmaDisciplinaDAO().SelecionaAlunosAtivosCOCPorTurmaDisciplina(tud_id, tpc_id, dtTurma, documentoOficial, cap_dataInicio, cap_dataFim)
                 .Rows.Cast<DataRow>()
-                .Where(dr => ((tipoDocente == EnumTipoDocente.Especial) ? Convert.ToBoolean(dr["PossuiDeficiencia"]) : !Convert.ToBoolean(dr["PossuiDeficiencia"])))
+                .Where(dr => ((tipoDocente == EnumTipoDocente.Especial) ? Convert.ToBoolean(dr["PossuiDeficienciaDisciplina"]) : !Convert.ToBoolean(dr["PossuiDeficienciaDisciplina"])))
                 .Select(dr =>
                 new AlunosTurmaDisciplina
                 {
@@ -1736,7 +1743,11 @@ namespace MSTech.GestaoEscolar.BLL
                     ,
                     ava_id = Convert.ToInt32(string.IsNullOrEmpty(dr["ava_id"].ToString()) ? null : dr["ava_id"])
                     ,
+                    tur_id = Convert.ToInt64(dr["tur_id"])
+                    ,
                     arq_idFoto = string.IsNullOrEmpty(dr["arq_idFoto"].ToString()) ? (long?)null : Convert.ToInt64(dr["arq_idFoto"])
+                    ,
+                    PossuiDeficienciaDisciplina = Convert.ToBoolean(dr["PossuiDeficienciaDisciplina"])
                     ,
                     PossuiDeficiencia = Convert.ToBoolean(dr["PossuiDeficiencia"])
                     ,

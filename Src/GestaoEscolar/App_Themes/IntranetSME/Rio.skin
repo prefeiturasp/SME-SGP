@@ -12,6 +12,8 @@
 <asp:TextBox   runat="server" CSSClass="text4C currency" SkinID="Decimal" />
 <asp:TextBox   runat="server" CSSClass="text10C numeric tbCep_incremental" SkinID="CepIncremental" />
 <asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite4000" onkeypress="Max(this,4000);" OnKeyUp="Max(this,4000);" />
+<asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite400" onkeypress="Max(this,400);" OnKeyUp="Max(this,400);" />
+<asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite500" onkeypress="Max(this,500);" OnKeyUp="Max(this,500);" />
 <asp:TextBox   runat="server" CSSClass="text60C" SkinID="limite2000" onkeypress="Max(this,2000);" OnKeyUp="Max(this,2000);" />
 <asp:TextBox   runat="server" CSSClass="text30C maskCodValidacao"  SkinID="CodigoValidacao" />
 <asp:TextBox   runat="server" CSSClass="text60C input-search"  SkinID="text60CSearch" />
@@ -77,6 +79,9 @@
 
 <asp:LinkButton runat="server" CssClass="ui-icon ui-icon-circle-triangle-e" SkinID="Arrow" />
 <asp:LinkButton runat="server" CssClass="btn" SkinID="botao" />
+<asp:LinkButton runat="server" CssClass="btRelatorioRP item-dropdown-relatorio" SkinID="btRelatorioRP" />
+<asp:LinkButton runat="server" CssClass="btRelatorioAEE item-dropdown-relatorio" SkinID="btRelatorioAEE" />
+
 <asp:Button runat="server" CssClass="btn btLoader" SkinID="btLoader" />
 <asp:Button runat="server" CssClass="btn" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/tempo-real.png"  SkinID="btTempoReal" Width="20px" Height="20px" />
@@ -108,6 +113,7 @@
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/ico-aulas.png"  SkinID="btAulas" Width="24px" Height="24px" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/atualizar.png" SkinID="btAtualizar" Width="24px" Height="24px" />
 <asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/statusAlertaPendencia.png" SkinID="btStatusAlertaPendencia" ToolTip="Foram encontradas pendências para esse item." Width="16px" Height="16px" ImageAlign="Top" />
+<asp:ImageButton runat="server" ImageUrl="~/App_Themes/IntranetSME/images/sugerir.png" SkinID="btSugerir" />
 
 <asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/tempo-real.png" SkinID="imgTempoReal" Width="20px" Height="20px" />
 <asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/confirmar.png"  SkinID="imgConfirmar" />
@@ -129,6 +135,9 @@
 <asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/icoAlerta.png" ToolTip="Plano de aula não preenchido"
     SkinID="imgStatusAlertaAulaSemPlano" />
 
+<asp:Image runat="server" ImageUrl="~/App_Themes/IntranetSME/images/statusAlertaPendencia.png"
+    SkinID="imgAlertaRelatorioAtendimento" Width="20" Height="20" />
+
 <asp:HyperLink runat="server" ImageUrl="~/App_Themes/IntranetSME/images/anexar.png" SkinID="hplAnexo" />
 <asp:HyperLink runat="server" ImageUrl="~/App_Themes/IntranetSME/images/iconeHelp.png" SkinID="hplHelp"
      CssClass="hplHelp" Width="32" Height="32" />
@@ -147,6 +156,8 @@
 <asp:Label   runat="server" CssClass="DragCell" SkinID="Drag" />
 <asp:Label   runat="server" CssClass="msgErroCombo" SkinID="SkinMsgErroCombo" />
 <asp:Label   runat="server" CssClass="summaryRed" SkinID="SummaryRed" />
+<asp:Label   runat="server" CssClass="text-titulo" SkinID="textTitulo" />
+
 <asp:ValidationSummary runat="server"  CssClass="summaryMensagem" DisplayMode="List" />
 <asp:CompareValidator runat="server" ForeColor="#df0000" />
 <asp:RequiredFieldValidator runat="server" ForeColor="#df0000" />
@@ -164,6 +175,36 @@
 </asp:GridView>
 
 <asp:GridView SkinID="GridResponsive" runat="server" CssClass="grid grid-responsive-list"  GridLines="None">
+    <RowStyle CssClass="gridRow collapsibleContainer" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow collapsibleContainer" />
+</asp:GridView>
+
+<asp:GridView SkinID="GridTopico" runat="server" CssClass="grid grid-topico"  GridLines="None">
+    <RowStyle CssClass="gridRow collapsibleContainer" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow collapsibleContainer" />
+</asp:GridView>
+
+<asp:GridView SkinID="GridItensLeft" runat="server" CssClass="grid grid-itens-left"  GridLines="None">
+    <RowStyle CssClass="gridRow collapsibleContainer" />
+    <EmptyDataRowStyle CssClass="summary" />
+    <PagerStyle CssClass="gridPager" />
+    <SelectedRowStyle CssClass="gridSelectedRow" />
+    <HeaderStyle CssClass="gridHeader" />
+    <EditRowStyle CssClass="gridRow" />
+    <AlternatingRowStyle CssClass="gridAlternatingRow collapsibleContainer" />
+</asp:GridView>
+
+<asp:GridView SkinID="GridItensRight" runat="server" CssClass="grid grid-itens-right"  GridLines="None">
     <RowStyle CssClass="gridRow collapsibleContainer" />
     <EmptyDataRowStyle CssClass="summary" />
     <PagerStyle CssClass="gridPager" />

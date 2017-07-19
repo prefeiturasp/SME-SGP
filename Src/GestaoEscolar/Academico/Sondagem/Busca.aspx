@@ -63,8 +63,7 @@
             </asp:GridView>
             <uc1:UCTotalRegistros ID="UCTotalRegistros1" runat="server" AssociatedGridViewID="dgvSondagem" />
         </fieldset>
-        <asp:ObjectDataSource ID="odsSondagem" runat="server" EnablePaging="True"
-            MaximumRowsParameterName="pageSize" SelectCountMethod="GetTotalRecords" StartRowIndexParameterName="currentPage"
+        <asp:ObjectDataSource ID="odsSondagem" runat="server" SelectCountMethod="GetTotalRecords"
             DataObjectTypeName="MSTech.GestaoEscolar.Entities.ACA_Sondagem" SelectMethod="SelecionaSondagensPaginado"
             TypeName="MSTech.GestaoEscolar.BLL.ACA_SondagemBO" OnSelecting="odsSondagem_Selecting">
         </asp:ObjectDataSource>

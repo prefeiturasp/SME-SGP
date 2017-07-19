@@ -83,6 +83,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // Detail
             // 
+            this.Detail.Dpi = 100F;
             this.Detail.HeightF = 0F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -90,6 +91,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // TopMargin
             // 
+            this.TopMargin.Dpi = 100F;
             this.TopMargin.HeightF = 100F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -97,6 +99,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // BottomMargin
             // 
+            this.BottomMargin.Dpi = 100F;
             this.BottomMargin.HeightF = 100F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -112,6 +115,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.xrLabel2,
             this.lblTitulo,
             this.lblDRE});
+            this.GroupHeader1.Dpi = 100F;
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("uadSuperior_nome", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("uad_idSuperior", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
@@ -119,12 +123,14 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.GroupHeader1.HeightF = 139.3749F;
             this.GroupHeader1.Level = 2;
             this.GroupHeader1.Name = "GroupHeader1";
+            this.GroupHeader1.RepeatEveryPage = true;
             this.GroupHeader1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader1_BeforePrint);
             // 
             // xrLabel7
             // 
             this.xrLabel7.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_Relatorio_GrafTurmaMatrizCurricular.cal_ano", "Ano letivo: {0}")});
+            this.xrLabel7.Dpi = 100F;
             this.xrLabel7.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
             this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(0.29F, 115F);
             this.xrLabel7.Name = "xrLabel7";
@@ -136,6 +142,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // ImgLogo
             // 
+            this.ImgLogo.Dpi = 100F;
             this.ImgLogo.LocationFloat = new DevExpress.Utils.PointFloat(0F, 3.178914E-05F);
             this.ImgLogo.Name = "ImgLogo";
             this.ImgLogo.SizeF = new System.Drawing.SizeF(94.7505F, 80.00001F);
@@ -143,6 +150,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // lblNomeMunicipio
             // 
+            this.lblNomeMunicipio.Dpi = 100F;
             this.lblNomeMunicipio.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.lblNomeMunicipio.LocationFloat = new DevExpress.Utils.PointFloat(94.7505F, 0F);
             this.lblNomeMunicipio.Name = "lblNomeMunicipio";
@@ -155,6 +163,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // lblNomeSecretaria
             // 
+            this.lblNomeSecretaria.Dpi = 100F;
             this.lblNomeSecretaria.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.lblNomeSecretaria.LocationFloat = new DevExpress.Utils.PointFloat(94.7505F, 20.00001F);
             this.lblNomeSecretaria.Name = "lblNomeSecretaria";
@@ -169,6 +178,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.xrLabel2.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_Relatorio_GrafTurmaMatrizCurricular.esc_nome")});
+            this.xrLabel2.Dpi = 100F;
             this.xrLabel2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(94.7505F, 60.00004F);
             this.xrLabel2.Name = "xrLabel2";
@@ -181,6 +191,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             // lblTitulo
             // 
+            this.lblTitulo.Dpi = 100F;
             this.lblTitulo.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.LocationFloat = new DevExpress.Utils.PointFloat(0F, 90F);
             this.lblTitulo.Name = "lblTitulo";
@@ -194,6 +205,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.lblDRE.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_Relatorio_GrafTurmaMatrizCurricular.uadSuperior_nome")});
+            this.lblDRE.Dpi = 100F;
             this.lblDRE.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.lblDRE.LocationFloat = new DevExpress.Utils.PointFloat(94.7505F, 40.00003F);
             this.lblDRE.Name = "lblDRE";
@@ -208,6 +220,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.GroupHeader2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.lblSemRegistroGrafico});
+            this.GroupHeader2.Dpi = 100F;
             this.GroupHeader2.HeightF = 45F;
             this.GroupHeader2.Level = 1;
             this.GroupHeader2.Name = "GroupHeader2";
@@ -221,6 +234,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblSemRegistroGrafico.CanShrink = true;
+            this.lblSemRegistroGrafico.Dpi = 100F;
             this.lblSemRegistroGrafico.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSemRegistroGrafico.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblSemRegistroGrafico.Name = "lblSemRegistroGrafico";
@@ -239,10 +253,14 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.GroupHeader3.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPanel1});
+            this.GroupHeader3.Dpi = 100F;
             this.GroupHeader3.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("tur_codigo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
+            new DevExpress.XtraReports.UI.GroupField("tpc_ordem", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
+            new DevExpress.XtraReports.UI.GroupField("tpc_nome", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("tur_codigoBimestre", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
-            new DevExpress.XtraReports.UI.GroupField("tur_id", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            new DevExpress.XtraReports.UI.GroupField("tur_id", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
+            new DevExpress.XtraReports.UI.GroupField("tpc_id", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.GroupHeader3.HeightF = 371.6667F;
             this.GroupHeader3.Name = "GroupHeader3";
             this.GroupHeader3.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.GroupHeader3_BeforePrint);
@@ -254,18 +272,21 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.xrPageInfo1,
             this.lblTurma,
             this.xrChart1});
+            this.xrPanel1.Dpi = 100F;
             this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(0.2932072F, 0F);
             this.xrPanel1.Name = "xrPanel1";
             this.xrPanel1.SizeF = new System.Drawing.SizeF(699.7068F, 371.6667F);
             // 
             // xrLine2
             // 
+            this.xrLine2.Dpi = 100F;
             this.xrLine2.LocationFloat = new DevExpress.Utils.PointFloat(0.2934138F, 22.99999F);
             this.xrLine2.Name = "xrLine2";
             this.xrLine2.SizeF = new System.Drawing.SizeF(699.4134F, 8F);
             // 
             // xrPageInfo1
             // 
+            this.xrPageInfo1.Dpi = 100F;
             this.xrPageInfo1.Font = new System.Drawing.Font("Arial", 8F);
             this.xrPageInfo1.Format = "Data de emissão: {0:dd/MM/yyyy}";
             this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(541.08F, 0F);
@@ -281,6 +302,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.lblTurma.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "NEW_Relatorio_GrafTurmaMatrizCurricular.tur_codigoBimestre")});
+            this.lblTurma.Dpi = 100F;
             this.lblTurma.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold);
             this.lblTurma.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblTurma.Name = "lblTurma";
@@ -315,6 +337,8 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             textAnnotation1});
             this.xrChart1.BorderColor = System.Drawing.Color.Black;
             this.xrChart1.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrChart1.Dpi = 100F;
+            this.xrChart1.Legend.Name = "Default Legend";
             this.xrChart1.Legend.Padding.Right = 20;
             this.xrChart1.Legend.Padding.Top = 22;
             this.xrChart1.LocationFloat = new DevExpress.Utils.PointFloat(9.71F, 43.42F);
@@ -395,11 +419,13 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.lblMensagem});
+            this.ReportFooter.Dpi = 100F;
             this.ReportFooter.HeightF = 13.625F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // lblMensagem
             // 
+            this.lblMensagem.Dpi = 100F;
             this.lblMensagem.Font = new System.Drawing.Font("Arial", 7F);
             this.lblMensagem.LocationFloat = new DevExpress.Utils.PointFloat(0.2930959F, 0F);
             this.lblMensagem.Name = "lblMensagem";
@@ -448,7 +474,7 @@ namespace MSTech.GestaoEscolar.RelatoriosDevExpress.Doctos.Spo
             this.ADM,
             this.NIVELENSINOEDUCACAOINFANTIL,
             this.ARQID_LOGO});
-            this.Version = "14.2";
+            this.Version = "16.1";
             this.DataSourceDemanded += new System.EventHandler<System.EventArgs>(this.RelGrafTurmaMatrizCurricular_DataSourceDemanded);
             ((System.ComponentModel.ISupportInitialize)(textAnnotation1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(fullStackedBarSeriesLabel1)).EndInit();
