@@ -5,6 +5,19 @@
 <%@ Register Src="~/WebControls/Combos/UCComboTipoCurriculoPeriodo.ascx" TagName="UCComboTipoCurriculoPeriodo" TagPrefix="uc3" %>
 <%@ Register Src="~/WebControls/Curriculo/UCListaSugestoes.ascx" TagName="UCListaSugestoes" TagPrefix="uc4" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
+
+<style type="text/css">
+tr.gridRow.collapsibleContainer strong {
+    color: inherit;
+}
+ul {
+    padding: 0px 0px 0px 14px
+}
+ol {
+    padding: 0px 0px 0px 14px
+}
+</style>
+
 <asp:UpdatePanel runat="server" ID="updMessage" UpdateMode="Always">
     <ContentTemplate>
         <asp:Label ID="lblMessage" runat="server" EnableViewState="False"></asp:Label>
@@ -42,6 +55,7 @@
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.ColunaTopico %>">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' SkinID="textTitulo"></asp:Label>
+                                    <br />
                                     <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
                                     <div>
                                         <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" />
@@ -144,7 +158,7 @@
                         <Columns>
                             <asp:TemplateField HeaderText="<%$ Resources:Academico, Curriculo.Cadastro.grvDisciplina.ColunaTopico %>">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>' CssClass="text-titulo"></asp:Label>
+                                    <asp:Label ID="lblTitulo" runat="server" Text='<%# Bind("crc_titulo") %>'></asp:Label>
                                     <asp:Label ID="lblDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' Font-Bold="false"></asp:Label>
                                     <div>
                                         <asp:ImageButton ID="btnListaSugestoes" runat="server" CausesValidation="false" SkinID="btSugerir" ToolTip="<%$ Resources:Academico, Curriculo.Cadastro.btnListaSugestoes.ToolTip %>" OnClientClick="ListarSugestoes($(this)); return false;" />

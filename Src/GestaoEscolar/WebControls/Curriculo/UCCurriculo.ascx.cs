@@ -628,8 +628,16 @@ namespace GestaoEscolar.WebControls.Curriculo
                     btnDescer.ImageUrl = __SessionWEB._AreaAtual._DiretorioImagens + "baixo.png";
                     btnDescer.CommandArgument = e.Row.RowIndex.ToString();
                 }
-
+                
                 GridView grv = (GridView)sender;
+
+                Label lblTitulo = (Label)e.Row.FindControl("lblTitulo");
+
+                if (lblTitulo != null)
+                {
+                    lblTitulo.CssClass = lblTitulo.CssClass.Replace("text-titulo", "");
+                }
+
                 if (grv.EditIndex >= 0)
                 {
                     ImageButton btnEditar = (ImageButton)e.Row.FindControl("btnEditar");
