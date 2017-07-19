@@ -3604,7 +3604,7 @@ namespace MSTech.GestaoEscolar.BLL
             try
             {
                 if (listObjTudTau != null)
-                    CLS_ObjetoAprendizagemTurmaAulaBO.SalvarLista(listObjTudTau, dao._Banco);
+                    CLS_ObjetoAprendizagemTurmaAulaBO.SalvarLista(entity.tau_id, entity.tud_id, listObjTudTau, dao._Banco);
 
                 if (listOriCurTurAula != null)
                     CLS_TurmaAulaOrientacaoCurricularBO.Salvar(listOriCurTurAula, dao._Banco);

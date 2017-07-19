@@ -410,6 +410,13 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Objetos de conhecimento e objetivos de aprendizagem e desenvolvimento'
 	
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.btnNovoObjeto.Text' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Novo objeto de conhecimento'
+	
 
 -- Fechar transação     
 SET XACT_ABORT OFF 
