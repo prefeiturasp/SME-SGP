@@ -417,7 +417,34 @@ SET XACT_ABORT ON
         , @rcr_codigo = 0 
         , @rcr_valorPadrao = 'Novo objeto de conhecimento'
 	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Curriculo.Cadastro.grvObjetivo.EmptyDataText' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Não existem objetos de conhecimento cadastrados.'
+	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Descrição do objeto de conhecimento é obrigatório.'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Curriculo.Cadastro.MensagemSucessoSalvarObjetivo' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Objeto de conhecimento salvo com sucesso.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Curriculo.Cadastro.MensagemSucessoExcluirObjetivo' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Objeto de conhecimento excluído com sucesso.'			
+	
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
