@@ -332,7 +332,7 @@ ol {
                                                 <!-- Objetivo -->
                                                 <div class="accordion-body">
                                                     <asp:HiddenField ID="hdnAberto" runat="server" Value="0" />
-                                                    <asp:Button ID="btnNovoObjetivo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoObjetivo.Text %>" OnClick="btnNovoObjetivo_Click" />
+                                                    <asp:Button ID="btnNovoObjetivo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoObjeto.Text %>" OnClick="btnNovoObjetivo_Click" />
                                                     <asp:GridView ID="grvObjetivo" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.EmptyDataText %>"
                                                         DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai"
                                                         OnRowDataBound="grvEixo_RowDataBound"
