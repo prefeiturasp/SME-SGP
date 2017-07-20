@@ -43,7 +43,7 @@ ol {
                         <asp:Button ID="btnNovoGeral" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoGeral.Text %>" OnClick="btnNovoGeral_Click" />
                     </legend>
                     <asp:GridView ID="grvGeral" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvGeral.EmptyDataText %>"
-                        DataKeyNames="crc_id,crc_ordem,tds_id"
+                        DataKeyNames="crc_id,crc_ordem,tds_id,crc_permiteSugestao"
                         OnRowDataBound="grvGeral_RowDataBound"
                         OnRowCommand="grvGeral_RowCommand"
                         OnDataBound="grvGeral_DataBound"
@@ -78,6 +78,8 @@ ol {
                                         <CKEditor:CKEditorControl ID="txtDescricao" 
                                                 BasePath="/includes/ckeditor/" runat="server"
                                              Text='<%# Bind("crc_descricao") %>'></CKEditor:CKEditorControl>
+
+                                        <br /><asp:CheckBox ID="ckbPermiteSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.ckbPermiteSugestao.Text %>' Checked='<%# Bind("crc_permiteSugestao") %>' />
 
                                         <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                         <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
@@ -147,7 +149,7 @@ ol {
                         <asp:Button ID="btnNovoDisciplina" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoDisciplina.Text %>" OnClick="btnNovoDisciplina_Click" />
                     </legend>
                     <asp:GridView ID="grvDisciplina" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvDisciplina.EmptyDataText %>"
-                        DataKeyNames="crc_id,crc_ordem,tds_id"
+                        DataKeyNames="crc_id,crc_ordem,tds_id,crc_permiteSugestao"
                         OnRowDataBound="grvGeral_RowDataBound"
                         OnRowCommand="grvGeral_RowCommand"
                         OnDataBound="grvGeral_DataBound"
@@ -179,6 +181,8 @@ ol {
                                         <asp:Label ID="lblDescricao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.lblDescricao.Text %>' AssociatedControlID="txtDescricao"></asp:Label>
                                         <%-- <asp:TextBox ID="txtDescricao" runat="server" Text='<%# Bind("crc_descricao") %>' TextMode="MultiLine" Rows="4"></asp:TextBox>--%>
                                         <CKEditor:CKEditorControl ID="txtDescricao" BasePath="/includes/ckeditor/" runat="server" Text='<%# Bind("crc_descricao") %>'></CKEditor:CKEditorControl>
+
+                                        <br /><asp:CheckBox ID="ckbPermiteSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.ckbPermiteSugestao.Text %>' Checked='<%# Bind("crc_permiteSugestao") %>' />
 
                                         <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                         <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
@@ -247,7 +251,7 @@ ol {
                                 <!-- Eixo -->
                                 <asp:Button ID="btnNovoEixo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoEixo.Text %>" OnClick="btnNovoEixo_Click" />
                                 <asp:GridView ID="grvEixo" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.EmptyDataText %>"
-                                    DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai"
+                                    DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai,cro_permiteSugestao"
                                     OnRowDataBound="grvEixo_RowDataBound"
                                     OnRowCommand="grvEixo_RowCommand"
                                     OnDataBound="grvEixo_DataBound"
@@ -275,6 +279,9 @@ ol {
 
                                                     <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvEixo.rfvDescricao.ErrorMessage %>"
                                                         ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                    
+                                                    <asp:CheckBox ID="ckbPermiteSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.ckbPermiteSugestao.Text %>' Checked='<%# Bind("cro_permiteSugestao") %>' />
+
                                                     <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                                     <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                 </asp:Panel>
@@ -334,7 +341,7 @@ ol {
                                                     <asp:HiddenField ID="hdnAberto" runat="server" Value="0" />
                                                     <asp:Button ID="btnNovoObjetivo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoObjeto.Text %>" OnClick="btnNovoObjetivo_Click" />
                                                     <asp:GridView ID="grvObjetivo" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.EmptyDataText %>"
-                                                        DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai"
+                                                        DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai,cro_permiteSugestao"
                                                         OnRowDataBound="grvEixo_RowDataBound"
                                                         OnRowCommand="grvEixo_RowCommand"
                                                         OnDataBound="grvEixo_DataBound"
@@ -362,6 +369,9 @@ ol {
 
                                                                         <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivo.rfvDescricao.ErrorMessage %>"
                                                                             ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                        
+                                                                        <asp:CheckBox ID="ckbPermiteSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.ckbPermiteSugestao.Text %>' Checked='<%# Bind("cro_permiteSugestao") %>' />
+
                                                                         <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                                                         <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                                     </asp:Panel>
@@ -419,7 +429,7 @@ ol {
                                                                     <!-- Objetivo de aprendizagem -->
                                                                     <asp:Button ID="btnNovoObjetivo" runat="server" CausesValidation="False" Text="<%$ Resources:Academico, Curriculo.Cadastro.btnNovoObjetivoAprendizagem.Text %>" OnClick="btnNovoObjetivoAprendizagem_Click" />
                                                                     <asp:GridView ID="grvObjetivo" runat="server" AutoGenerateColumns="false" EmptyDataText="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.EmptyDataText %>"
-                                                                        DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai"
+                                                                        DataKeyNames="cro_id,cro_ordem,cro_tipo,cro_idPai,cro_permiteSugestao"
                                                                         OnRowDataBound="grvEixo_RowDataBound"
                                                                         OnRowCommand="grvEixo_RowCommand"
                                                                         OnDataBound="grvEixo_DataBound"
@@ -447,6 +457,9 @@ ol {
 
                                                                                         <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ErrorMessage="<%$ Resources:Academico, Curriculo.Cadastro.grvObjetivoAprendizagem.rfvDescricao.ErrorMessage %>"
                                                                                             ControlToValidate="txtDescricao" ValidationGroup="eixo">*</asp:RequiredFieldValidator>
+                                                                                        
+                                                                                        <asp:CheckBox ID="ckbPermiteSugestao" runat="server" Text='<%$ Resources:Academico, Curriculo.Cadastro.ckbPermiteSugestao.Text %>' Checked='<%# Bind("cro_permiteSugestao") %>' />
+                                                                                        
                                                                                         <asp:HiddenField ID="hdnAbertoSugestao" runat="server" Value="0" />
                                                                                         <uc4:UCListaSugestoes ID="UCListaSugestoes1" runat="server"></uc4:UCListaSugestoes>
                                                                                     </asp:Panel>

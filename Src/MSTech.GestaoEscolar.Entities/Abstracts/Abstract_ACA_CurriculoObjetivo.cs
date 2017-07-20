@@ -98,6 +98,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// Flag que indica se o objetivo permite sugestão.
 		/// </summary>
 		[MSNotNullOrEmpty]
-        public virtual byte cro_permiteSugestao { get; set; }
+        public virtual bool cro_permiteSugestao { get; set; }
     }
 }

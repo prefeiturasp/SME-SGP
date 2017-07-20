@@ -84,6 +84,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		/// Flag que indica se o capítulo permite sugestão.
 		/// </summary>
 		[MSNotNullOrEmpty]
-        public virtual byte crc_permiteSugestao { get; set; }
+        public virtual bool crc_permiteSugestao { get; set; }
     }
 }
