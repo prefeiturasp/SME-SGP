@@ -80,5 +80,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual DateTime crc_dataAlteracao { get; set; }
 
+        /// <summary>
+		/// Flag que indica se o capítulo permite sugestão.
+		/// </summary>
+		[MSNotNullOrEmpty]
+        public virtual byte crc_permiteSugestao { get; set; }
     }
 }

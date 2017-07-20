@@ -94,5 +94,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual DateTime cro_dataAlteracao { get; set; }
 
+        /// <summary>
+		/// Flag que indica se o objetivo permite sugestão.
+		/// </summary>
+		[MSNotNullOrEmpty]
+        public virtual byte cro_permiteSugestao { get; set; }
     }
 }
