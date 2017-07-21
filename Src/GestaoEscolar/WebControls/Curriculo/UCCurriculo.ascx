@@ -24,6 +24,9 @@ tr.gridRow.collapsibleContainer strong, tr.gridAlternatingRow.collapsibleContain
     width: 100%;
     border-bottom: 1px solid #ccc;
 }
+.fieldset-curriculo .grid-itens-left .btnsEdicaoObjetivo:not(:empty) {
+    min-width: inherit;
+}
 </style>
 
 <asp:UpdatePanel runat="server" ID="updMessage" UpdateMode="Always">
