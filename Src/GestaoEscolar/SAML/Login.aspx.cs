@@ -78,8 +78,10 @@ public partial class SAML_Login : MotherPageLogadoCompressedViewState
                         {
                             __SessionWEB.__UsuarioWEB.Grupo = list[0];
 
-                            // Realiza autenticação do usuário no Sistema Gestão Acadêmica
-                            SYS_UsuarioBO.AutenticarUsuario(__SessionWEB.__UsuarioWEB.Usuario, __SessionWEB.__UsuarioWEB.Grupo);
+                            //// Realiza autenticação do usuário no Sistema Gestão Acadêmica
+                            HttpContext.Current.User.Identity.AddGrupoId(Request, __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+                            //SYS_UsuarioBO.AutenticarUsuario(__SessionWEB.__UsuarioWEB.Usuario, __SessionWEB.__UsuarioWEB.Grupo);
+
                             ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Login, String.Format("Autenticação do usuário ( {0} ) com grupo ( {1} ) no sistema ( {2} ).", __SessionWEB.__UsuarioWEB.Usuario.usu_login, __SessionWEB.__UsuarioWEB.Grupo.gru_nome, __SessionWEB.TituloSistema));
 
                             RedirecionaPaginaInicial();
@@ -125,7 +127,8 @@ public partial class SAML_Login : MotherPageLogadoCompressedViewState
                 __SessionWEB.__UsuarioWEB.Grupo = SYS_GrupoBO.GetEntity(grupo);
 
                 // Realiza autenticação do usuário no Sistema Gestão Acadêmica
-                SYS_UsuarioBO.AutenticarUsuario(__SessionWEB.__UsuarioWEB.Usuario, __SessionWEB.__UsuarioWEB.Grupo);
+                HttpContext.Current.User.Identity.AddGrupoId(Request, __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+                //SYS_UsuarioBO.AutenticarUsuario(__SessionWEB.__UsuarioWEB.Usuario, __SessionWEB.__UsuarioWEB.Grupo);
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Login, String.Format("Autenticação do usuário ( {0} ) com grupo ( {1} ) no sistema ( {2} ).", __SessionWEB.__UsuarioWEB.Usuario.usu_login, __SessionWEB.__UsuarioWEB.Grupo.gru_nome, __SessionWEB.TituloSistema));
 
                 RedirecionaPaginaInicial();

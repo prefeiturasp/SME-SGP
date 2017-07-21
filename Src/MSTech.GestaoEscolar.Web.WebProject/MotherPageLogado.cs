@@ -45,7 +45,7 @@ namespace MSTech.GestaoEscolar.Web.WebProject
             {
                 try
                 {
-                    HttpContext.Current.Response.Redirect("~/logout.ashx", true);
+                    HttpContext.Current.Response.Redirect("~/SAML/login.ashx", true);
                 }
                 catch (ThreadAbortException)
                 {

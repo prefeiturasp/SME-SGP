@@ -49,96 +49,98 @@ namespace MSTech.GestaoEscolar.Web.WebProject
         {
             try
             {
-                // Carrega as configurações do ServiceProvider
-                ServiceProvider config = ServiceProvider.GetConfig();
-                ServiceProviderEndpoint spend = SAMLUtility.GetServiceProviderEndpoint(config.ServiceEndpoint, SAMLTypeSSO.logout);
+                context.Request.GetOwinContext().Authentication.SignOut();
+                Session.Abandon();
+                //// Carrega as configurações do ServiceProvider
+                //ServiceProvider config = ServiceProvider.GetConfig();
+                //ServiceProviderEndpoint spend = SAMLUtility.GetServiceProviderEndpoint(config.ServiceEndpoint, SAMLTypeSSO.logout);
 
-                // Verifica configuração do ServiceProvider para logout
-                if (spend == null)
-                    throw new ValidationException("Não foi possível encontrar as configurações do ServiceProvider para logout.");
+                //// Verifica configuração do ServiceProvider para logout
+                //if (spend == null)
+                //    throw new ValidationException("Não foi possível encontrar as configurações do ServiceProvider para logout.");
 
-                // ***** RESPONSE *****
-                if (!String.IsNullOrEmpty(context.Request[HttpBindingConstants.SAMLResponse]))
-                {
-                    // Recupera LogoutResponse
-                    string samlresponse = context.Request[HttpBindingConstants.SAMLResponse];
-                    XmlDocument doc = new XmlDocument();
-                    doc.PreserveWhitespace = true;
-                    doc.LoadXml(samlresponse);
-                    SAMLResponse = SAMLUtility.DeserializeFromXmlString<ResponseType>(doc.InnerXml);
+                //// ***** RESPONSE *****
+                //if (!String.IsNullOrEmpty(context.Request[HttpBindingConstants.SAMLResponse]))
+                //{
+                //    // Recupera LogoutResponse
+                //    string samlresponse = context.Request[HttpBindingConstants.SAMLResponse];
+                //    XmlDocument doc = new XmlDocument();
+                //    doc.PreserveWhitespace = true;
+                //    doc.LoadXml(samlresponse);
+                //    SAMLResponse = SAMLUtility.DeserializeFromXmlString<ResponseType>(doc.InnerXml);
 
-                    FormsAuthentication.SignOut();
-                    if (context.Session != null)
-                        context.Session.Abandon();
+                //    FormsAuthentication.SignOut();
+                //    if (context.Session != null)
+                //        context.Session.Abandon();
 
-                    if (ApplicationWEB.LoginProprioDoSistema)
-                    {
-                        FormsAuthentication.RedirectToLoginPage();
-                    }
-                    else
-                    {
-                        string url = spend.redirectUrl;
+                //    if (ApplicationWEB.LoginProprioDoSistema)
+                //    {
+                //        FormsAuthentication.RedirectToLoginPage();
+                //    }
+                //    else
+                //    {
+                //        string url = spend.redirectUrl;
 
-                        if (ApplicationWEB.RedirecionarAutomaticoSistema)
-                        {
-                            // Redirecionar passando o sis_id como parâmetro, caso esteja configurado
-                            // para redirecionar automaticamente (quando logar no core, já vai cair direto
-                            // no gestão).
-                            url += "?sis=" + ApplicationWEB.SistemaID;
-                        }
-                        
-                        HttpContext.Current.Response.Redirect(url, false);
-                        HttpContext.Current.ApplicationInstance.CompleteRequest();
-                    }
-                }
-                // ***** REQUEST *****
-                else if (!String.IsNullOrEmpty(context.Request[HttpBindingConstants.SAMLRequest]))
-                {
-                    // Recupera LogoutRequest
-                    StringBuilder result = new StringBuilder();
+                //        if (ApplicationWEB.RedirecionarAutomaticoSistema)
+                //        {
+                //            // Redirecionar passando o sis_id como parâmetro, caso esteja configurado
+                //            // para redirecionar automaticamente (quando logar no core, já vai cair direto
+                //            // no gestão).
+                //            url += "?sis=" + ApplicationWEB.SistemaID;
+                //        }
 
-                    byte[] encoded = Convert.FromBase64String(HttpUtility.UrlDecode(context.Request[HttpBindingConstants.SAMLRequest]).Replace(" ", "+"));
-                    MemoryStream memoryStream = new MemoryStream(encoded);
-                    using (DeflateStream stream = new DeflateStream(memoryStream, CompressionMode.Decompress))
-                    {
-                        StreamReader reader = new StreamReader(new BufferedStream(stream), Encoding.GetEncoding("iso-8859-1"));
-                        reader.Peek();
-                        result.Append(reader.ReadToEnd());
-                        stream.Close();
-                    }
-                    SAMLRequest = SAMLUtility.DeserializeFromXmlString<LogoutRequestType>(result.ToString());
-                    
-                    // Criação e configuração LogoutResponse
-                    SAMLResponse = new ResponseType();
-                    CreateSAMLResponse();
-                }
-                else
-                {
-                    // Criação e configuração LogoutRequest
-                    SAMLRequest = new LogoutRequestType();
-                    SAMLRequest.ID = SAMLUtility.GenerateID();
-                    SAMLRequest.Version = SAMLUtility.VERSION;
-                    SAMLRequest.IssueInstant = DateTime.UtcNow.AddMinutes(10);
-                    SAMLRequest.SessionIndex = new string[] { context.Session.SessionID };
+                //        HttpContext.Current.Response.Redirect(url, false);
+                //        HttpContext.Current.ApplicationInstance.CompleteRequest();
+                //    }
+                //}
+                //// ***** REQUEST *****
+                //else if (!String.IsNullOrEmpty(context.Request[HttpBindingConstants.SAMLRequest]))
+                //{
+                //    // Recupera LogoutRequest
+                //    StringBuilder result = new StringBuilder();
 
-                    NameIDType nameID = new NameIDType();
-                    nameID.Format = SAMLUtility.NameIdentifierFormats.Transient;
-                    nameID.Value = spend.localpath;
+                //    byte[] encoded = Convert.FromBase64String(HttpUtility.UrlDecode(context.Request[HttpBindingConstants.SAMLRequest]).Replace(" ", "+"));
+                //    MemoryStream memoryStream = new MemoryStream(encoded);
+                //    using (DeflateStream stream = new DeflateStream(memoryStream, CompressionMode.Decompress))
+                //    {
+                //        StreamReader reader = new StreamReader(new BufferedStream(stream), Encoding.GetEncoding("iso-8859-1"));
+                //        reader.Peek();
+                //        result.Append(reader.ReadToEnd());
+                //        stream.Close();
+                //    }
+                //    SAMLRequest = SAMLUtility.DeserializeFromXmlString<LogoutRequestType>(result.ToString());
 
-                    SAMLRequest.Item = nameID;
-                    SAMLRequest.Issuer = new NameIDType();
-                    SAMLRequest.Issuer.Value = config.id;
+                //    // Criação e configuração LogoutResponse
+                //    SAMLResponse = new ResponseType();
+                //    CreateSAMLResponse();
+                //}
+                //else
+                //{
+                //    // Criação e configuração LogoutRequest
+                //    SAMLRequest = new LogoutRequestType();
+                //    SAMLRequest.ID = SAMLUtility.GenerateID();
+                //    SAMLRequest.Version = SAMLUtility.VERSION;
+                //    SAMLRequest.IssueInstant = DateTime.UtcNow.AddMinutes(10);
+                //    SAMLRequest.SessionIndex = new string[] { context.Session.SessionID };
 
-                    MemoryStream ms = new MemoryStream();
-                    using (StreamWriter writer = new StreamWriter(new DeflateStream(ms, CompressionMode.Compress, true), Encoding.GetEncoding("iso-8859-1")))
-                    {
-                        writer.Write(SAMLUtility.SerializeToXmlString(SAMLRequest));
-                        writer.Close();
-                    }
-                    string message = HttpUtility.UrlEncode(Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length, Base64FormattingOptions.None));
-                    HttpRedirectBinding binding = new HttpRedirectBinding(message, spend.localpath);
-                    binding.SendRequest(context, spend.redirectUrl);
-                }
+                //    NameIDType nameID = new NameIDType();
+                //    nameID.Format = SAMLUtility.NameIdentifierFormats.Transient;
+                //    nameID.Value = spend.localpath;
+
+                //    SAMLRequest.Item = nameID;
+                //    SAMLRequest.Issuer = new NameIDType();
+                //    SAMLRequest.Issuer.Value = config.id;
+
+                //    MemoryStream ms = new MemoryStream();
+                //    using (StreamWriter writer = new StreamWriter(new DeflateStream(ms, CompressionMode.Compress, true), Encoding.GetEncoding("iso-8859-1")))
+                //    {
+                //        writer.Write(SAMLUtility.SerializeToXmlString(SAMLRequest));
+                //        writer.Close();
+                //    }
+                //    string message = HttpUtility.UrlEncode(Convert.ToBase64String(ms.GetBuffer(), 0, (int)ms.Length, Base64FormattingOptions.None));
+                //    HttpRedirectBinding binding = new HttpRedirectBinding(message, spend.localpath);
+                //    binding.SendRequest(context, spend.redirectUrl);
+                //}
             }
             catch (ValidationException ex)
             {
@@ -165,60 +167,60 @@ namespace MSTech.GestaoEscolar.Web.WebProject
                  );
         }
 
-        private void CreateSAMLResponse()
-        {
-            IDProvider config = IDProvider.GetConfig();
+        //private void CreateSAMLResponse()
+        //{
+        //    IDProvider config = IDProvider.GetConfig();
 
-            SAMLResponse.ID = SAMLUtility.GenerateID();
-            SAMLResponse.Version = SAMLUtility.VERSION;
-            SAMLResponse.IssueInstant = DateTime.UtcNow.AddMinutes(10);
-            SAMLResponse.InResponseTo = SAMLRequest.ID;
+        //    SAMLResponse.ID = SAMLUtility.GenerateID();
+        //    SAMLResponse.Version = SAMLUtility.VERSION;
+        //    SAMLResponse.IssueInstant = DateTime.UtcNow.AddMinutes(10);
+        //    SAMLResponse.InResponseTo = SAMLRequest.ID;
 
-            SAMLResponse.Issuer = new NameIDType();
-            SAMLResponse.Issuer.Value = config.id;
+        //    SAMLResponse.Issuer = new NameIDType();
+        //    SAMLResponse.Issuer.Value = config.id;
 
-            SAMLResponse.Status = new StatusType();
-            SAMLResponse.Status.StatusCode = new StatusCodeType();
+        //    SAMLResponse.Status = new StatusType();
+        //    SAMLResponse.Status.StatusCode = new StatusCodeType();
 
-            // Atualiza Cookie de sistemas autenticados e configura Status
-            HttpCookie cookie = this.Context.Request.Cookies["SistemasLogged"];
-            if (cookie != null)
-            {
-                // Carrega a Entidade SYS_Sistema apartir do caminho de logout
-                SYS_Sistema entitySistema = new SYS_Sistema { sis_caminhoLogout = ((NameIDType)SAMLRequest.Item).Value };
-                if (SYS_SistemaBO.GetSelectBy_sis_caminho(entitySistema, SYS_SistemaBO.TypePath.logout))
-                {
-                    // Remove o sistema do Cookie
-                    cookie.Values.Remove(entitySistema.sis_id.ToString());
-                    // Atualiza dados do Cookie
-                    this.Context.Response.Cookies.Set(cookie);
+        //    // Atualiza Cookie de sistemas autenticados e configura Status
+        //    HttpCookie cookie = this.Context.Request.Cookies["SistemasLogged"];
+        //    if (cookie != null)
+        //    {
+        //        // Carrega a Entidade SYS_Sistema apartir do caminho de logout
+        //        SYS_Sistema entitySistema = new SYS_Sistema { sis_caminhoLogout = ((NameIDType)SAMLRequest.Item).Value };
+        //        if (SYS_SistemaBO.GetSelectBy_sis_caminho(entitySistema, SYS_SistemaBO.TypePath.logout))
+        //        {
+        //            // Remove o sistema do Cookie
+        //            cookie.Values.Remove(entitySistema.sis_id.ToString());
+        //            // Atualiza dados do Cookie
+        //            this.Context.Response.Cookies.Set(cookie);
 
-                    if (!cookie.Values.AllKeys.Contains(entitySistema.sis_id.ToString()))
-                    {
-                        SAMLResponse.Status.StatusCode.Value = SAMLUtility.StatusCodes.Success;
-                        SAMLResponse.Status.StatusMessage = "A solicitação foi realizada com sucesso.";
-                    }
-                    else
-                    {
-                        SAMLResponse.Status.StatusCode.Value = SAMLUtility.StatusCodes.RequestDenied;
-                        SAMLResponse.Status.StatusMessage = "Não foi possível atender a solicitação, o sistema emissor da requisição não está autenticado.";
-                    }
-                }
-                else
-                {
-                    SAMLResponse.Status.StatusCode.Value = SAMLUtility.StatusCodes.RequestDenied;
-                    SAMLResponse.Status.StatusMessage = "Não foi possível atender a solicitação, sistema emissor da requisição não está cadastrado corretamente."; ;
-                }
-            }
-            else
-            {
-                SAMLResponse.Status.StatusCode.Value = SAMLUtility.StatusCodes.RequestDenied;
-                SAMLResponse.Status.StatusMessage = "Não foi possível atender a solicitação.";
-            }
+        //            if (!cookie.Values.AllKeys.Contains(entitySistema.sis_id.ToString()))
+        //            {
+        //                SAMLResponse.Status.StatusCode.Value = SAMLUtility.StatusCodes.Success;
+        //                SAMLResponse.Status.StatusMessage = "A solicitação foi realizada com sucesso.";
+        //            }
+        //            else
+        //            {
+        //                SAMLResponse.Status.StatusCode.Value = SAMLUtility.StatusCodes.RequestDenied;
+        //                SAMLResponse.Status.StatusMessage = "Não foi possível atender a solicitação, o sistema emissor da requisição não está autenticado.";
+        //            }
+        //        }
+        //        else
+        //        {
+        //            SAMLResponse.Status.StatusCode.Value = SAMLUtility.StatusCodes.RequestDenied;
+        //            SAMLResponse.Status.StatusMessage = "Não foi possível atender a solicitação, sistema emissor da requisição não está cadastrado corretamente."; ;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        SAMLResponse.Status.StatusCode.Value = SAMLUtility.StatusCodes.RequestDenied;
+        //        SAMLResponse.Status.StatusMessage = "Não foi possível atender a solicitação.";
+        //    }
 
-            HttpPostBinding binding = new HttpPostBinding(SAMLResponse, HttpUtility.UrlDecode(this.Context.Request[HttpBindingConstants.RelayState]));
-            binding.SendResponse(this.Context, HttpUtility.UrlDecode(this.Context.Request[HttpBindingConstants.RelayState]), SAMLTypeSSO.logout);
-        }
+        //    HttpPostBinding binding = new HttpPostBinding(SAMLResponse, HttpUtility.UrlDecode(this.Context.Request[HttpBindingConstants.RelayState]));
+        //    binding.SendResponse(this.Context, HttpUtility.UrlDecode(this.Context.Request[HttpBindingConstants.RelayState]), SAMLTypeSSO.logout);
+        //}
 
         #endregion Métodos
     }
