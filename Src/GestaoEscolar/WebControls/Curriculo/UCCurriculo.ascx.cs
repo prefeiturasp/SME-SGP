@@ -318,12 +318,12 @@ namespace GestaoEscolar.WebControls.Curriculo
                     {
                         if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                         {
-                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoSemInfantilAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                         }
                         else
                         {
-                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoSemInfantil();
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
                             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
                         }
                         grvEixo.CssClass += " accordion-grid";
@@ -655,13 +655,14 @@ namespace GestaoEscolar.WebControls.Curriculo
 
                 int tds_id = Convert.ToInt32(grv.DataKeys[e.Row.RowIndex]["tds_id"]);
                 int crc_id = Convert.ToInt32(grv.DataKeys[e.Row.RowIndex]["crc_id"]);
+                bool crc_permiteSugestao = Convert.ToBoolean(grv.DataKeys[e.Row.RowIndex]["crc_permiteSugestao"]);
 
                 Panel pnlSugestao = (Panel)e.Row.FindControl("pnlSugestao");
                 if (pnlSugestao != null)
                 {
-                    pnlSugestao.Visible = VS_permiteIncluirSugestao;
+                    pnlSugestao.Visible = VS_permiteIncluirSugestao && crc_permiteSugestao;
 
-                    if (VS_permiteIncluirSugestao)
+                    if (VS_permiteIncluirSugestao && crc_permiteSugestao)
                     {
                         TextBox txtSugestao = (TextBox)e.Row.FindControl("txtSugestao");
                         if (txtSugestao != null)
@@ -711,8 +712,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                 ImageButton btnIncluirSugestao = (ImageButton)e.Row.FindControl("btnIncluirSugestao");
                 if (btnIncluirSugestao != null)
                 {
-                    btnIncluirSugestao.Visible = VS_permiteIncluirSugestao;
-                    if (VS_permiteIncluirSugestao)
+                    btnIncluirSugestao.Visible = VS_permiteIncluirSugestao && crc_permiteSugestao;
+                    if (VS_permiteIncluirSugestao && crc_permiteSugestao)
                     {
                         btnIncluirSugestao.CssClass += (tds_id > 0 && VS_ltCurriculoSugestaoCapituloDisciplina.Any(p => p.crc_id == crc_id))
                                                         || (tds_id <= 0 && VS_ltCurriculoSugestaoCapitulo.Any(p => p.crc_id == crc_id)) ? " preenchido" : " vazio";
@@ -722,8 +723,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                 ImageButton btnListaSugestoes = (ImageButton)e.Row.FindControl("btnListaSugestoes");
                 if (btnListaSugestoes != null)
                 {
-                    btnListaSugestoes.Visible = VS_permiteConsultarSugestao;
-                    if (VS_permiteConsultarSugestao)
+                    btnListaSugestoes.Visible = VS_permiteConsultarSugestao && crc_permiteSugestao;
+                    if (VS_permiteConsultarSugestao && crc_permiteSugestao)
                     {
                         UCListaSugestoes UCListaSugestoes1 = (UCListaSugestoes)e.Row.FindControl("UCListaSugestoes1");
                         if (UCListaSugestoes1 != null)
@@ -812,8 +813,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                 {
                     TextBox txtTitulo = (TextBox)grv.Rows[e.RowIndex].FindControl("txtTitulo");
                     TextBox txtDescricao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtDescricao");
+                    CheckBox ckbPermiteSugestao = (CheckBox)grv.Rows[e.RowIndex].FindControl("ckbPermiteSugestao");
 
-                    if (txtTitulo != null && txtDescricao != null)
+                    if (txtTitulo != null && txtDescricao != null && ckbPermiteSugestao != null)
                     {
                         DataKey chave = grv.DataKeys[e.RowIndex];
                         int tds_id = Convert.ToInt32(chave["tds_id"]);
@@ -836,6 +838,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                             crc_descricao = txtDescricao.Text
                             ,
                             crc_ordem = Convert.ToInt32(chave["crc_ordem"])
+                            ,
+                            crc_permiteSugestao = ckbPermiteSugestao.Checked
                             ,
                             crc_situacao = 1
                             ,
@@ -1150,6 +1154,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 }
 
                 int cro_id = Convert.ToInt32(grv.DataKeys[e.Row.RowIndex]["cro_id"]);
+                bool cro_permiteSugestao = Convert.ToBoolean(grv.DataKeys[e.Row.RowIndex]["cro_permiteSugestao"]);
                 Button btnNovoObjetivo = (Button)e.Row.FindControl("btnNovoObjetivo");
                 if (btnNovoObjetivo != null)
                 {
@@ -1186,9 +1191,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                 Panel pnlSugestao = (Panel)e.Row.FindControl("pnlSugestao");
                 if (pnlSugestao != null)
                 {
-                    pnlSugestao.Visible = VS_permiteIncluirSugestao;
+                    pnlSugestao.Visible = VS_permiteIncluirSugestao && cro_permiteSugestao;
 
-                    if (VS_permiteIncluirSugestao)
+                    if (VS_permiteIncluirSugestao && cro_permiteSugestao)
                     {
                         TextBox txtSugestao = (TextBox)e.Row.FindControl("txtSugestao");
                         if (txtSugestao != null)
@@ -1227,8 +1232,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                 ImageButton btnIncluirSugestao = (ImageButton)e.Row.FindControl("btnIncluirSugestao");
                 if (btnIncluirSugestao != null)
                 {
-                    btnIncluirSugestao.Visible = VS_permiteIncluirSugestao;
-                    if (VS_permiteIncluirSugestao)
+                    btnIncluirSugestao.Visible = VS_permiteIncluirSugestao && cro_permiteSugestao;
+                    if (VS_permiteIncluirSugestao && cro_permiteSugestao)
                     {
                         btnIncluirSugestao.CssClass += VS_ltCurriculoSugestaoObjetivo.Any(p => p.cro_id == cro_id) ? " preenchido" : " vazio";
                     }
@@ -1237,8 +1242,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                 ImageButton btnListaSugestoes = (ImageButton)e.Row.FindControl("btnListaSugestoes");
                 if (btnListaSugestoes != null)
                 {
-                    btnListaSugestoes.Visible = VS_permiteConsultarSugestao;
-                    if (VS_permiteConsultarSugestao)
+                    btnListaSugestoes.Visible = VS_permiteConsultarSugestao && cro_permiteSugestao;
+                    if (VS_permiteConsultarSugestao && cro_permiteSugestao)
                     {
                         UCListaSugestoes UCListaSugestoes1 = (UCListaSugestoes)e.Row.FindControl("UCListaSugestoes1");
                         if (UCListaSugestoes1 != null)
@@ -1326,6 +1331,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                 if (VS_permiteEditar)
                 {
                     TextBox txtDescricao = (TextBox)grv.Rows[e.RowIndex].FindControl("txtDescricao");
+                    CheckBox ckbPermiteSugestao = (CheckBox)grv.Rows[e.RowIndex].FindControl("ckbPermiteSugestao");
                     if (txtDescricao != null)
                     {
                         DataKey chave = grv.DataKeys[e.RowIndex];
@@ -1354,6 +1360,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                             cro_tipo = cro_tipo
                             ,
                             cro_idPai = cro_idPai
+                            ,
+                            cro_permiteSugestao = ckbPermiteSugestao.Checked
                             ,
                             cro_situacao = 1
                             ,
@@ -1564,6 +1572,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                         crc_descricao = string.Empty
                         ,
                         crc_ordem = grvGeral.Rows.Count > 0 ? Convert.ToInt32(grvGeral.DataKeys[grvGeral.Rows.Count - 1]["crc_ordem"]) + 1 : 1
+                        ,
+                        crc_permiteSugestao = true
                     };
                     VS_ltCurriculoCapituloGeral.Add(entity);
                     int index = VS_ltCurriculoCapituloGeral.Count - 1;
@@ -1616,6 +1626,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                         crc_descricao = string.Empty
                         ,
                         crc_ordem = grvDisciplina.Rows.Count > 0 ? Convert.ToInt32(grvDisciplina.DataKeys[grvDisciplina.Rows.Count - 1]["crc_ordem"]) + 1 : 1
+                        ,
+                        crc_permiteSugestao = true
                     };
                     VS_ltCurriculoCapituloDisciplina.Add(entity);
                     int index = VS_ltCurriculoCapituloDisciplina.Count - 1;
@@ -1668,6 +1680,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                         cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Eixo
                         ,
                         cro_idPai = -1
+                        ,
+                        cro_permiteSugestao = true
                     };
                     VS_ltCurriculoObjetivo.Add(entity);
                     int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Eixo && p.cro_idPai <= 0).Count - 1;
@@ -1724,6 +1738,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                         cro_tipo = (byte)ACA_CurriculoObjetivoTipo.Topico
                         ,
                         cro_idPai = cro_idPai
+                        ,
+                        cro_permiteSugestao = true
                     };
                     VS_ltCurriculoObjetivo.Add(entity);
                     int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.Topico && p.cro_idPai == cro_idPai).Count - 1;
@@ -1779,6 +1795,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                         cro_tipo = (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem
                         ,
                         cro_idPai = cro_idPai
+                        ,
+                        cro_permiteSugestao = true
                     };
                     VS_ltCurriculoObjetivo.Add(entity);
                     int index = VS_ltCurriculoObjetivo.FindAll(p => p.cro_tipo == (byte)ACA_CurriculoObjetivoTipo.ObjetivoAprendizagem && p.cro_idPai == cro_idPai).Count - 1;
