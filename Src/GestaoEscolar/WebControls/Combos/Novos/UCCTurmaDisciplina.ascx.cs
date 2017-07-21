@@ -444,6 +444,31 @@ namespace GestaoEscolar.WebControls.Combos.Novos
         }
 
         /// <summary>
+        /// Carrega as disciplinas de uma turma.
+        /// </summary>
+        /// <param name="tur_id">id da turma</param>
+        /// <param name="doc_id">id do docente</param>
+        public void CarregarTurmaDisciplinaFiltraProjetos(long tur_id, long doc_id, int cap_id = 0, bool exibirApenasDisciplinasPermiteAbonoFalta = false)
+        {
+            List<sTurmaDisciplina> lista = TUR_TurmaDisciplinaBO.GetSelectBy_TurmaDocente
+                (tur_id
+                , __SessionWEB.__UsuarioWEB.Usuario.ent_id
+                , VS_MostraFilhosRegencia, VS_MostraRegencia, VS_MostraExperiencia, VS_MostraTerritorio
+                , doc_id
+                , cap_id
+                , ApplicationWEB.AppMinutosCacheLongo).Where(p => p.tud_tipo != (byte)TurmaDisciplinaTipo.DocenciaCompartilhada).ToList();
+
+            if (exibirApenasDisciplinasPermiteAbonoFalta)
+            {
+                CarregarCombo(lista.Where(p => p.tud_permitirLancarAbonoFalta));
+            }
+            else
+            {
+                CarregarCombo(lista);
+            }
+        }
+
+        /// <summary>
         /// Carrega as turmas de recuperação paralela de acordo com a escola e o calendário.
         /// </summary>
         /// <param name="esc_id">Id da escola</param>
