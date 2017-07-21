@@ -29,7 +29,8 @@
                 <asp:Label ID="lblAssunto" runat="server" Text="<%$ Resources:GestaoEscolar.Configuracao.Alertas.Cadastro, lblAssunto.Text %>" AssociatedControlID="txtAssunto"></asp:Label>
                 <asp:TextBox ID="txtAssunto" runat="server" TextMode="MultiLine" Height="100"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvAssunto" runat="server" ControlToValidate="txtAssunto" Display="Dynamic" ValidationGroup="Alerta" ErrorMessage="<%$ Resources:GestaoEscolar.Configuracao.Alertas.Cadastro, rfvAssunto.ErrorMessage %>">*</asp:RequiredFieldValidator>
-
+                
+                <asp:Label runat="server" ID="lblLegendaMensagem" Text=""></asp:Label>
                 <br /><br />
                 <fieldset>
                     <legend><asp:Literal ID="litGrupos" runat="server" Text='<%$ Resources:GestaoEscolar.Configuracao.Alertas.Cadastro, litGrupos.Text %>'></asp:Literal></legend>

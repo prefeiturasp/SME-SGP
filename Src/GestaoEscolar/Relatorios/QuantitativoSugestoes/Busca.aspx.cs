@@ -66,7 +66,7 @@ namespace GestaoEscolar.Relatorios.QuantitativoSugestoes
         private void InicializarTela()
         {
             UCComboAnoLetivo1.Carregar();
-            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoSemInfantil();
+            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
             updFiltros.Update();
         }

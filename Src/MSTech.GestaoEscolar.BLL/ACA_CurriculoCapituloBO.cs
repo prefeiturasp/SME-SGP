@@ -28,6 +28,7 @@ namespace MSTech.GestaoEscolar.BLL
         public string crc_titulo { get; set; }
         public string crc_descricao { get; set; }
         public int crc_ordem { get; set; }
+        public bool crc_permiteSugestao { get; set; }
     }
 
     #endregion
@@ -61,6 +62,8 @@ namespace MSTech.GestaoEscolar.BLL
                                 crc_descricao = dr["crc_descricao"].ToString()
                                 ,
                                 crc_ordem = Convert.ToInt32(dr["crc_ordem"])
+                                ,
+                                crc_permiteSugestao = Convert.ToBoolean(dr["crc_permiteSugestao"])
                             }).ToList();
             return retorno;
         }

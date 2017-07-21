@@ -48,6 +48,40 @@ namespace GestaoEscolar.Configuracao.Alertas
             txtPeriodoValidade.Text = alerta.cfa_periodoValidade.ToString();
             txtAssunto.Text = alerta.cfa_assunto;
 
+            switch (alerta.cfa_nomeProcedimento)
+            {
+                case "MS_JOB_AlertaPreenchimentoFrequencia":
+                    {
+                        lblLegendaMensagem.Text = GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "lblLegendaMensagem.Text.MS_JOB_AlertaPreenchimentoFrequencia").ToString();
+                        break;
+                    }
+                case "MS_JOB_AlertaInicioFechamento":
+                    {
+                        lblLegendaMensagem.Text = GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "lblLegendaMensagem.Text.MS_JOB_AlertaInicioFechamento").ToString();
+                        break;
+                    }
+                case "MS_JOB_AlertaFimFechamento":
+                    {
+                        lblLegendaMensagem.Text = GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "lblLegendaMensagem.Text.MS_JOB_AlertaFimFechamento").ToString();
+                        break;
+                    }
+                case "MS_JOB_AlertaAlunosBaixaFrequencia":
+                    {
+                        lblLegendaMensagem.Text = GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "lblLegendaMensagem.Text.MS_JOB_AlertaAlunosBaixaFrequencia").ToString();
+                        break;
+                    }
+                case "MS_JOB_AlertaAlunosFaltasConsecutivas":
+                    {
+                        lblLegendaMensagem.Text = GetGlobalResourceObject("GestaoEscolar.Configuracao.Alertas.Cadastro", "lblLegendaMensagem.Text.MS_JOB_AlertaAlunosFaltasConsecutivas").ToString();
+                        break;
+                    }
+                default:
+                    {
+                        lblLegendaMensagem.Text = "";
+                        break;
+                    }
+            }
+
             // Carrega os grupos
             grvGrupos.DataSource = CFG_AlertaGrupoBO.SelecionarGruposPorAlerta(VS_cfa_id, __SessionWEB.__UsuarioWEB.Grupo.sis_id);
             grvGrupos.DataBind();

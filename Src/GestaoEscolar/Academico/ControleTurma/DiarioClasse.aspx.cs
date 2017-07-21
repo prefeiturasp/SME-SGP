@@ -3376,8 +3376,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                     //Se for regência e o tipo de apuração de frequência for por tempos de aula, exibe o campo de quantidade de aulas.
 
                     // Se o professor que criou a aula for de projeto, exibe o campo de quantidade de aulas.
-                    if (((VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia) && // Verifica se é regencia.
-                            (entity.tdt_posicao == (byte)EnumTipoDocente.Projeto)) || RegenciaETemposAula)
+                    if (VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia && // Verifica se é regencia.
+                        entity.tdt_posicao == (byte)EnumTipoDocente.Projeto)
                     {
                         txtQtdeAulas.Visible = lblQtdeAulas.Visible = true;
                     }
@@ -3458,12 +3458,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                         tpc_id = UCNavegacaoTelaPeriodo.VS_tpc_id,
                         tau_data = string.IsNullOrEmpty(txtDataAula.Text) ? new DateTime() : Convert.ToDateTime(txtDataAula.Text),
 
-                        tau_numeroAulas = (DisciplinaPrincipal && TurnoIntegral) ? 2 :
-                        (DisciplinaPrincipal || DisciplinaRegencia) && !RegenciaETemposAula ? 1 :
-                            (string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 :
-                                Convert.ToInt32(txtQtdeAulas.Text)),
-
-
+                        tau_numeroAulas = (DisciplinaPrincipal && TurnoIntegral) &&
+                                          !(DisciplinaRegencia && UCControleTurma1.VS_tdt_posicao == (byte)EnumTipoDocente.Projeto) ? 2 :
+                                          (DisciplinaPrincipal || DisciplinaRegencia) && !RegenciaETemposAula &&
+                                          !(DisciplinaRegencia && UCControleTurma1.VS_tdt_posicao == (byte)EnumTipoDocente.Projeto) ? 1 :
+                                          string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 :
+                                          Convert.ToInt32(txtQtdeAulas.Text),
                         tdt_posicao = UCControleTurma1.VS_tdt_posicao,
                         tau_reposicao = chkReposicao.Visible && chkReposicao.Checked,
                         tau_dataAlteracao = VS_DataAlteracaoAula_Validacao,
@@ -3485,11 +3485,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                     CLS_TurmaAulaBO.GetEntity(entity);
 
                     entity.tau_data = string.IsNullOrEmpty(txtDataAula.Text) ? new DateTime() : Convert.ToDateTime(txtDataAula.Text);
-                    entity.tau_numeroAulas = DisciplinaPrincipal && TurnoIntegral ? 2 :
-                                            ((DisciplinaPrincipal || DisciplinaRegencia) &&
-                                              !((VS_tud_tipo_Aula == (byte)TurmaDisciplinaTipo.Regencia)
-                                                && (entity.tdt_posicao == (byte)EnumTipoDocente.Projeto)))
-                                                    ? 1 : (string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 : Convert.ToInt32(txtQtdeAulas.Text));
+                    entity.tau_numeroAulas = (DisciplinaPrincipal && TurnoIntegral) &&
+                                             !(DisciplinaRegencia && UCControleTurma1.VS_tdt_posicao == (byte)EnumTipoDocente.Projeto) ? 2 :
+                                             (DisciplinaPrincipal || DisciplinaRegencia) && !RegenciaETemposAula &&
+                                             !(DisciplinaRegencia && UCControleTurma1.VS_tdt_posicao == (byte)EnumTipoDocente.Projeto) ? 1 :
+                                             string.IsNullOrEmpty(txtQtdeAulas.Text) ? 0 :
+                                             Convert.ToInt32(txtQtdeAulas.Text);
                     entity.tdt_posicao = UCControleTurma1.VS_tdt_posicao;
                     entity.tau_reposicao = chkReposicao.Visible && chkReposicao.Checked;
                     entity.tau_dataAlteracao = VS_DataAlteracaoAula_Validacao;

@@ -1454,7 +1454,12 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
                         if (UCBuscaDocenteTurma._VS_doc_id <= 0)
                             UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0]);
                         else
-                            UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0], UCBuscaDocenteTurma._VS_doc_id);
+                        {
+                            if (Convert.ToInt32(rdbRelatorios.SelectedValue) == DocDctRelTarjetaBimestral)
+                                UCComboTurmaDisciplina.CarregarTurmaDisciplinaFiltraProjetos(UCBuscaDocenteTurma.ComboTurma.Valor[0], UCBuscaDocenteTurma._VS_doc_id);
+                            else
+                                UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0], UCBuscaDocenteTurma._VS_doc_id);
+                        }
 
                         UCCPeriodoCalendario.CarregarPorTurma(UCBuscaDocenteTurma.ComboTurma.Valor[0]);
                         UCCPeriodoCalendario.SetarFoco();
@@ -1519,7 +1524,12 @@ namespace GestaoEscolar.Documentos.DocumentoDocente
                         if (UCBuscaDocenteTurma._VS_doc_id <= 0)
                             UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0], true, UCCPeriodoCalendario.Valor[1]);
                         else
-                            UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0], UCBuscaDocenteTurma._VS_doc_id, UCCPeriodoCalendario.Valor[1]);
+                        {
+                            if (Convert.ToInt32(rdbRelatorios.SelectedValue) == DocDctRelTarjetaBimestral)
+                                UCComboTurmaDisciplina.CarregarTurmaDisciplinaFiltraProjetos(UCBuscaDocenteTurma.ComboTurma.Valor[0], UCBuscaDocenteTurma._VS_doc_id, UCCPeriodoCalendario.Valor[1]);
+                            else
+                                UCComboTurmaDisciplina.CarregarTurmaDisciplina(UCBuscaDocenteTurma.ComboTurma.Valor[0], UCBuscaDocenteTurma._VS_doc_id, UCCPeriodoCalendario.Valor[1]);
+                        }
 
                         UCComboTurmaDisciplina.SetarFoco();
                         UCComboTurmaDisciplina.PermiteEditar = UCCPeriodoCalendario.PermiteEditar;

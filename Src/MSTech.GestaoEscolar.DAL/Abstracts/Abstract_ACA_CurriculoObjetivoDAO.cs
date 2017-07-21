@@ -125,6 +125,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@cro_permiteSugestao";
+                Param.Size = 1;
+                Param.Value = entity.cro_permiteSugestao;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
                 Param.DbType = DbType.Byte;
                 Param.ParameterName = "@cro_situacao";
                 Param.Size = 1;
@@ -232,6 +239,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 {
                     Param.Value = DBNull.Value;
                 }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@cro_permiteSugestao";
+                Param.Size = 1;
+                Param.Value = entity.cro_permiteSugestao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

@@ -445,6 +445,69 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Objeto de conhecimento excluído com sucesso.'			
 	
+	EXEC MS_InsereResource 
+		@rcr_chave = 'Curriculo.Cadastro.ckbPermiteSugestao.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Permite sugestão'		
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.litIntroducao.Text' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Carta de apresentação'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.grvObjetivo.ColunaObjetivo' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Objetos de conhecimento'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.grvObjetivoAprendizagem.ColunaObjetivoAprendizagem' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Objetivos de aprendizagem e desenvolvimento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblLegendaMensagem.Text.MS_JOB_AlertaPreenchimentoFrequencia' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<b>Variável disponível:</b><br/>[PulaLinha] - Pula uma linha no texto.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblLegendaMensagem.Text.MS_JOB_AlertaInicioFechamento' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<b>Variáveis disponíveis:</b><br/>[Dias] - Quantidade de dias antes do evento.<br/>[NomeEvento] - Nome do evento de fechamento.<br/>[PulaLinha] - Pula uma linha no texto.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblLegendaMensagem.Text.MS_JOB_AlertaFimFechamento' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<b>Variáveis disponíveis:</b><br/>[Dias] - Quantidade de dias até o fim do evento.<br/>[NomeEvento] - Nome do evento de fechamento.<br/>[PulaLinha] - Pula uma linha no texto.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblLegendaMensagem.Text.MS_JOB_AlertaAlunosBaixaFrequencia' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<b>Variáveis disponíveis:</b><br/>[NomeEscola] - Nome da escola.<br/>[Dias] - Quantidade de dias do alerta.<br/>[PercentualMinimoFrequencia] - Percentual mínimo de frequência do aluno.<br/>[PulaLinha] - Pula uma linha no texto.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'lblLegendaMensagem.Text.MS_JOB_AlertaAlunosFaltasConsecutivas' 
+		, @rcr_NomeResource = 'GestaoEscolar.Configuracao.Alertas.Cadastro'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = '<b>Variáveis disponíveis:</b><br/>[NomeEscola] - Nome da escola.<br/>[Dias] - Quantidade de dias do alerta.<br/>[PulaLinha] - Pula uma linha no texto.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
