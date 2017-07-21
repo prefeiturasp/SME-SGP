@@ -18,45 +18,45 @@ public partial class SAML_Login : MotherPageLogado
         {
             try
             {
-                #region Trace
-                // ***** TRACE *****
-                // Write a trace message
-                if (Trace.IsEnabled)
-                {
-                    // Forms
-                    if (HttpContext.Current.User != null)
-                    {
-                        Trace.Write("HttpContext.Current.User", HttpContext.Current.User.ToString());
-                        Trace.Write("HttpContext.Current.User.Identity", HttpContext.Current.User.Identity.ToString());
-                        if (HttpContext.Current.User.Identity is FormsIdentity)
-                        {
-                            Trace.Write("HttpContext.Current.User.Identity.IsAuthenticated", HttpContext.Current.User.Identity.IsAuthenticated.ToString());
-                            if (HttpContext.Current.User.Identity.IsAuthenticated)
-                            {
-                                FormsIdentity id = (FormsIdentity)HttpContext.Current.User.Identity;
-                                Trace.Write("FormsIdentity.Ticket.Name", id.Ticket.Name);
-                                Trace.Write("FormsIdentity.Ticket.IssueDate", id.Ticket.IssueDate.ToString());
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Trace.Write("HttpContext.Current.User", "NULL");
-                    }
+                //#region Trace
+                //// ***** TRACE *****
+                //// Write a trace message
+                //if (Trace.IsEnabled)
+                //{
+                //    // Forms
+                //    if (HttpContext.Current.User != null)
+                //    {
+                //        Trace.Write("HttpContext.Current.User", HttpContext.Current.User.ToString());
+                //        Trace.Write("HttpContext.Current.User.Identity", HttpContext.Current.User.Identity.ToString());
+                //        if (HttpContext.Current.User.Identity is FormsIdentity)
+                //        {
+                //            Trace.Write("HttpContext.Current.User.Identity.IsAuthenticated", HttpContext.Current.User.Identity.IsAuthenticated.ToString());
+                //            if (HttpContext.Current.User.Identity.IsAuthenticated)
+                //            {
+                //                FormsIdentity id = (FormsIdentity)HttpContext.Current.User.Identity;
+                //                Trace.Write("FormsIdentity.Ticket.Name", id.Ticket.Name);
+                //                Trace.Write("FormsIdentity.Ticket.IssueDate", id.Ticket.IssueDate.ToString());
+                //            }
+                //        }
+                //    }
+                //    else
+                //    {
+                //        Trace.Write("HttpContext.Current.User", "NULL");
+                //    }
 
-                    // Session
-                    if(__SessionWEB.__UsuarioWEB.Usuario != null)
-                    {
-                        Trace.Write("__SessionWEB.__UsuarioWEB.Usuario.usu_login", __SessionWEB.__UsuarioWEB.Usuario.usu_login);
-                        Trace.Write("__SessionWEB.__UsuarioWEB.Usuario.usu_login", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
-                    }
-                    else
-                    {
-                        Trace.Write("__SessionWEB.__UsuarioWEB.Usuario", "NULL");
-                    }
-                }
-                // ***** FIM *****
-                #endregion
+                //    // Session
+                //    if(__SessionWEB.__UsuarioWEB.Usuario != null)
+                //    {
+                //        Trace.Write("__SessionWEB.__UsuarioWEB.Usuario.usu_login", __SessionWEB.__UsuarioWEB.Usuario.usu_login);
+                //        Trace.Write("__SessionWEB.__UsuarioWEB.Usuario.usu_login", __SessionWEB.__UsuarioWEB.Usuario.ent_id.ToString());
+                //    }
+                //    else
+                //    {
+                //        Trace.Write("__SessionWEB.__UsuarioWEB.Usuario", "NULL");
+                //    }
+                //}
+                //// ***** FIM *****
+                //#endregion
 
                 // Verifica se usuário está autenticado
                 if (UserIsAuthenticated())
@@ -77,8 +77,10 @@ public partial class SAML_Login : MotherPageLogado
                         {
                             __SessionWEB.__UsuarioWEB.Grupo = list[0];
 
-                            // Realiza autenticação do usuário no Sistema Gestão Acadêmica
-                            SYS_UsuarioBO.AutenticarUsuario(__SessionWEB.__UsuarioWEB.Usuario, __SessionWEB.__UsuarioWEB.Grupo);
+                            HttpContext.Current.User.Identity.AddGrupoId(Request, __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+                            //// Realiza autenticação do usuário no Sistema Gestão Acadêmica
+                            //SYS_UsuarioBO.AutenticarUsuario(__SessionWEB.__UsuarioWEB.Usuario, __SessionWEB.__UsuarioWEB.Grupo);
+
                             ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Login, String.Format("Autenticação do usuário ( {0} ) com grupo ( {1} ) no sistema ( {2} ).", __SessionWEB.__UsuarioWEB.Usuario.usu_login, __SessionWEB.__UsuarioWEB.Grupo.gru_nome, __SessionWEB.TituloSistema));
 
                             Response.Redirect("~/Index.aspx", false);

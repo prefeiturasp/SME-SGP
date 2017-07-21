@@ -4,6 +4,8 @@
 <%@ Register Src="WebControls/Mensagens/UCLoader.ascx" TagName="UCLoader" TagPrefix="uc2" %>
 
 <%@ Register Src="~/WebControls/Imagem/UCImagem.ascx" TagName="UCImagem" TagPrefix="uc3" %>
+<%@ Register Src="~/WebControls/PluginNotificacao/UCPluginNotificacao.ascx" TagPrefix="uc1" TagName="UCPluginNotificacao" %>
+
 
 <!doctype html>
 <html class="no-js" lang="pt-br">
@@ -157,5 +159,8 @@
             </form>
         </div>
     </div>
+
+    <uc1:UCPluginNotificacao runat="server" id="UCPluginNotificacao" />
+
 </body>
 </html>

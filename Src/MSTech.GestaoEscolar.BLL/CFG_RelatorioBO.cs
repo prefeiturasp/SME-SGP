@@ -13,6 +13,8 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.Validation.Exceptions;
     using System.Collections.Generic;
 using System.Web.Security;
+    using System.Security.Principal;
+    using System.Security.Claims;
 
     /// <summary>
     /// Description: CFG_Relatorio Business Object. 
@@ -281,12 +283,17 @@ using System.Web.Security;
                     FormsIdentity id = identity;
                     FormsAuthenticationTicket ticket = id.Ticket;
 
-                    usu_login = MSTech.CoreSSO.BLL.UtilBO.GetNameFormsAuthentication(ticket.Name, MSTech.CoreSSO.BLL.UtilBO.TypeName.Login);
+                    usu_login = GetUsuLogin(HttpContext.Current.User.Identity);// MSTech.CoreSSO.BLL.UtilBO.GetNameFormsAuthentication(ticket.Name, MSTech.CoreSSO.BLL.UtilBO.TypeName.Login);
                 }
             }
             return usu_login;
         }
 
+        public static string GetUsuLogin(IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.Name);
+            return (claim != null) ? claim.Value : string.Empty;
+        }
 
         /// <summary>
         /// Remover os valores da session com parâmetros para geração dos relatórios.
