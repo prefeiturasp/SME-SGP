@@ -452,6 +452,27 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Permite sugestão'		
 
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.litIntroducao.Text' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Carta de apresentação'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.grvObjetivo.ColunaObjetivo' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Objetos de conhecimento'
+
+	EXEC MS_InsereResource 
+        @rcr_chave = 'Curriculo.Cadastro.grvObjetivoAprendizagem.ColunaObjetivoAprendizagem' 
+        , @rcr_NomeResource = 'Academico'
+        , @rcr_cultura = 'pt-BR'
+        , @rcr_codigo = 0 
+        , @rcr_valorPadrao = 'Objetivos de aprendizagem e desenvolvimento'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
