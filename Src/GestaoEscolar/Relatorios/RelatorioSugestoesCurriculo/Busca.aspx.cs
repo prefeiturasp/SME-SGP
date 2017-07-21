@@ -68,7 +68,7 @@ namespace GestaoEscolar.Relatorios.RelatorioSugestoesCurriculo
         /// </summary>
         private void InicializarTela()
         {
-            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoSemInfantil();
+            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
             UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor);
             UCComboTipoDisciplina1.CarregarObrigatoriasPorNivelEnsinoEvento(UCComboTipoNivelEnsino1.Valor, UCComboTipoModalidadeEnsino1.Valor, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, "-1");
