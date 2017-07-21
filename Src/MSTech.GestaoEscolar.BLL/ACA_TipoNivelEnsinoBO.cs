@@ -130,6 +130,18 @@ namespace MSTech.GestaoEscolar.BLL
         /// <param name="doc_id">ID do docente</param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public static DataTable SelecionaTipoNivelEnsinoDocenteEventoAno(long doc_id, string eventosAbertos, Guid ent_id, int cal_ano)
+        {
+            return new ACA_TipoNivelEnsinoDAO().SelecionaTipoNivelEnsinoDocenteEvento(doc_id, eventosAbertos, cal_ano);
+        }
+
+        /// <summary>
+        /// Retorna todos os tipos de nível de ensino não excluídos logicamente
+        /// de acordo com as atribuições do docente.
+        /// </summary>
+        /// <param name="doc_id">ID do docente</param>
+        /// <returns></returns>
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public static DataTable SelecionaTipoNivelEnsinoDocenteEventoSemInfantilAno(long doc_id, string eventosAbertos, Guid ent_id, int cal_ano)
         {
             int tne_idInfantil = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, ent_id);
@@ -140,6 +152,7 @@ namespace MSTech.GestaoEscolar.BLL
             }
             return new DataTable();
         }
+
         /// <summary>
         /// Retorna todos os tipos de nível de ensino não excluídos logicamente
         /// de acordo com as atribuições do docente.

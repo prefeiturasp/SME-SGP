@@ -318,12 +318,12 @@ namespace GestaoEscolar.WebControls.Curriculo
                     {
                         if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
                         {
-                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoSemInfantilAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                         }
                         else
                         {
-                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoSemInfantil();
+                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
                             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
                         }
                         grvEixo.CssClass += " accordion-grid";
