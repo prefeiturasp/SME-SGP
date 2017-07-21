@@ -92,8 +92,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
-                Param.ParameterName = "@cro_descricao";
-                Param.Size = 500;
+                Param.ParameterName = "@cro_descricao";           
                 Param.Value = entity.cro_descricao;
                 qs.Parameters.Add(Param);
 
@@ -123,6 +122,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 {
                     Param.Value = DBNull.Value;
                 }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@cro_permiteSugestao";
+                Param.Size = 1;
+                Param.Value = entity.cro_permiteSugestao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -203,8 +209,7 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
-                Param.ParameterName = "@cro_descricao";
-                Param.Size = 500;
+                Param.ParameterName = "@cro_descricao";             
                 Param.Value = entity.cro_descricao;
                 qs.Parameters.Add(Param);
 
@@ -234,6 +239,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 {
                     Param.Value = DBNull.Value;
                 }
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@cro_permiteSugestao";
+                Param.Size = 1;
+                Param.Value = entity.cro_permiteSugestao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

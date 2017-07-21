@@ -32,10 +32,10 @@ namespace GestaoEscolar.Relatorios.SinteseResultadosAvaliacao.GraficoComponenteC
             divDisciplina.Visible = false;
             UCCPeriodoCalendario.SelecionaPeriodoAtualAoCarregar = true;
             UCCPeriodoCalendario.MostrarMensagemSelecione = true;
-            UCCPeriodoCalendario.Obrigatorio = true;
+            UCCPeriodoCalendario.Obrigatorio = false;
             divPeriodoCalendario.Visible = false;
             UCComboTipoDisciplina._MostrarMessageSelecione = true;
-            UCComboTipoDisciplina.Obrigatorio = true;
+            UCComboTipoDisciplina.Obrigatorio = false;
 
             btnGerar.Visible =
             UCBuscaDocenteTurma.Visible =
@@ -272,7 +272,7 @@ namespace GestaoEscolar.Relatorios.SinteseResultadosAvaliacao.GraficoComponenteC
             try
             {
                 if (UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[0] > 0 && UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[1] > 0 && UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[2] > 0 &&
-                    UCBuscaDocenteTurma.ComboEscola.Esc_ID > 0 && UCBuscaDocenteTurma.ComboEscola.Uni_ID > 0 && UCBuscaDocenteTurma.ComboCalendario.Valor > 0 && UCCPeriodoCalendario.Valor[1] > 0)
+                    UCBuscaDocenteTurma.ComboEscola.Esc_ID > 0 && UCBuscaDocenteTurma.ComboEscola.Uni_ID > 0 && UCBuscaDocenteTurma.ComboCalendario.Valor > 0)
                 {
                     UCComboTipoDisciplina.CarregarTipoDisciplinaPorCursoCurriculoPeriodoEscola(UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[0],
                                                                                                UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[1],
@@ -305,7 +305,7 @@ namespace GestaoEscolar.Relatorios.SinteseResultadosAvaliacao.GraficoComponenteC
             try
             {
                 if (UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[0] > 0 && UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[1] > 0 && UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[2] > 0 &&
-                    UCBuscaDocenteTurma.ComboEscola.Esc_ID > 0 && UCBuscaDocenteTurma.ComboEscola.Uni_ID > 0 && UCBuscaDocenteTurma.ComboCalendario.Valor > 0 && UCCPeriodoCalendario.Valor[1] > 0)
+                    UCBuscaDocenteTurma.ComboEscola.Esc_ID > 0 && UCBuscaDocenteTurma.ComboEscola.Uni_ID > 0 && UCBuscaDocenteTurma.ComboCalendario.Valor > 0)
                 {
                     UCComboTipoDisciplina.CarregarTipoDisciplinaPorCursoCurriculoPeriodoEscola(UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[0],
                                                                                                UCBuscaDocenteTurma.ComboCurriculoPeriodo.Valor[1],

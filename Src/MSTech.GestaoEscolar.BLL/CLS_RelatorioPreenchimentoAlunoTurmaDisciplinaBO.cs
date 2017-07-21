@@ -121,9 +121,18 @@ namespace MSTech.GestaoEscolar.BLL
         /// Retorna os lançamentos feito para o aluno de acordo com os parâmetros.
         /// </summary>
         /// <returns></returns>
+        public static DataTable SelecionaPorAlunoTurmaRelatorio(long alu_id, long tur_id, int rea_id)
+        {
+            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, tur_id, -1, false, rea_id, -1);
+        }
+
+        /// <summary>
+        /// Retorna os lançamentos feito para o aluno de acordo com os parâmetros.
+        /// </summary>
+        /// <returns></returns>
         public static DataTable SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(long alu_id, long tud_id, bool apenasComPreenchimento, int rea_id, int tpc_id)
         {
-            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, tud_id, apenasComPreenchimento, rea_id, tpc_id);
+            return new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO().SelecionaPorAlunoTurmaDisciplinaRelatorioPeriodo(alu_id, -1, tud_id, apenasComPreenchimento, rea_id, tpc_id);
         }
 
         public static new bool Save(CLS_RelatorioPreenchimentoAlunoTurmaDisciplina entity, TalkDBTransaction banco)
@@ -138,18 +147,76 @@ namespace MSTech.GestaoEscolar.BLL
 
         public static bool Delete(CLS_RelatorioPreenchimentoAlunoTurmaDisciplina entity, int rea_id)
         {
-            bool sucesso = Delete(entity);
-            if (sucesso)
+            CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO dao = new CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaDAO();
+            dao._Banco.Open(IsolationLevel.ReadCommitted);
+
+            try
             {
-                CLS_RelatorioAtendimento relatorioAtendimento = CLS_RelatorioAtendimentoBO.GetEntity(new CLS_RelatorioAtendimento { rea_id = rea_id });
-                if (relatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.RP)
+                bool sucesso = Delete(entity, dao._Banco);
+                if (sucesso)
                 {
-                    ACA_CalendarioAnual calendario = ACA_CalendarioAnualBO.SelecionaPorTurma(entity.tur_id);
-                    List<MTR_MatriculaTurma> matriculasAno = MTR_MatriculaTurmaBO.GetSelectMatriculasAlunoAno(entity.alu_id, calendario.cal_ano);
-                    matriculasAno.ForEach(p => LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(entity.tpc_id, p.tur_id));
+                    CLS_RelatorioAtendimento relatorioAtendimento = CLS_RelatorioAtendimentoBO.GetEntity(new CLS_RelatorioAtendimento { rea_id = rea_id });
+                    if (relatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.RP)
+                    {
+                        ACA_CalendarioAnual calendario = ACA_CalendarioAnualBO.SelecionaPorTurma(entity.tur_id);
+                        List<MTR_MatriculaTurma> matriculasAno = MTR_MatriculaTurmaBO.GetSelectMatriculasAlunoAno(entity.alu_id, calendario.cal_ano);
+                        matriculasAno.ForEach(p => LimpaCache_AlunoPreenchimentoPorPeriodoDisciplina(entity.tpc_id, p.tur_id));
+
+                        ACA_FormatoAvaliacao fav = TUR_TurmaBO.SelecionaFormatoAvaliacao(entity.tur_id, dao._Banco);
+                        if (fav != null && fav.fav_fechamentoAutomatico)
+                        {
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(entity.tud_id, entity.tpc_id, dao._Banco);
+                        }
+                    }
+                    else if (relatorioAtendimento.rea_tipo == (byte)CLS_RelatorioAtendimentoTipo.NAAPA)
+                    {
+                        List<AlunoFechamentoPendencia> FilaProcessamento = new List<AlunoFechamentoPendencia>();
+                        ACA_CalendarioAnual cal = ACA_CalendarioAnualBO.SelecionaPorTurma(entity.tur_id, dao._Banco);
+                        var periodos = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario(cal.cal_id, GestaoEscolarUtilBO.MinutosCacheLongo);
+                        FilaProcessamento.AddRange(TUR_TurmaDisciplinaBO.GetSelectBy_Turma(entity.tur_id, dao._Banco, GestaoEscolarUtilBO.MinutosCacheLongo)
+                            .SelectMany
+                            (
+                                tud =>
+
+                                periodos.Select
+                                (
+                                    tpc =>
+                                    new AlunoFechamentoPendencia
+                                    {
+                                        tud_id = tud.tud_id
+                                        ,
+                                        tpc_id = tpc.tpc_id
+                                        ,
+                                        afp_frequencia = true
+                                        ,
+                                        afp_nota = true
+                                        ,
+                                        afp_processado = 2
+                                    }
+                                ).ToList()
+                            ));
+
+                        if (FilaProcessamento.Any())
+                        {
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaPendencias(FilaProcessamento, dao._Banco);
+                        }
+                    }
+                }
+                return sucesso;
+            }
+            catch (Exception ex)
+            {
+                dao._Banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                if (dao._Banco.ConnectionIsOpen)
+                {
+                    dao._Banco.Close();
                 }
             }
-            return sucesso;
         }
+        
     }
 }

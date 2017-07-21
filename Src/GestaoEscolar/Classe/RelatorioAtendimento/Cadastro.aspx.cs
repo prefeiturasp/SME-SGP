@@ -51,6 +51,17 @@
             }
         }
 
+        private int VS_tpc_idSelecionado {
+            get
+            {
+                return Convert.ToInt32(ViewState["VS_tpc_idSelecionado"] ?? -1);
+            }
+            set
+            {
+                ViewState["VS_tpc_idSelecionado"] = value;
+            }
+        }
+
         /// <summary>
         /// Propriedade que seta a url de retorno da página.
         /// </summary>
@@ -120,7 +131,7 @@
                         VS_cal_id = PreviousPage.EditItemCalId;
                         VS_tur_id = PreviousPage.EditItemTurId;
                     }
-                    else if (Session["PaginaRetorno_RelatorioAEE"] != null)
+                    else if (Session["PaginaRetorno_RelatorioAEE"] != null && !string.IsNullOrEmpty(Session["PaginaRetorno_RelatorioAEE"].ToString()))
                     {
                         VS_PaginaRetorno = Session["PaginaRetorno_RelatorioAEE"].ToString();
                         Session.Remove("PaginaRetorno_RelatorioAEE");
@@ -135,7 +146,19 @@
                         Dictionary<string, string> dadosPaginaRetorno = (Dictionary<string, string>)VS_DadosPaginaRetorno;
 
                         VS_cal_id = Convert.ToInt32(dadosPaginaRetorno["Edit_cal_id"]);
-                        VS_tur_id = Convert.ToInt64(dadosPaginaRetorno["Edit_tur_id"]);
+
+                        byte tur_tipo = Convert.ToByte(dadosPaginaRetorno["Edit_tur_tipo"]);
+
+                        if (tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                        {
+                            VS_tur_id = Convert.ToInt64(Session["tur_idRegular_RelatorioAEE"].ToString());
+                            Session.Remove("tur_idRegular_RelatorioAEE");
+                        }
+                        else
+                        {
+                            VS_tur_id = Convert.ToInt64(dadosPaginaRetorno["Edit_tur_id"]);
+                        }
+
                         tpc_idSelecionado = Convert.ToInt32(dadosPaginaRetorno["Edit_tpc_id"]);
                     }
                     else if (Session["alu_idLimpaBusca"] != null)
@@ -147,22 +170,13 @@
                         Session.Remove("cal_idLimpaBusca");
                         Session.Remove("tur_idLimpaBusca");
                     }
-
-                    UCCRelatorioAtendimento.CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo.AEE);
-                    UCCPeriodoCalendario.CarregarPorCalendario(VS_cal_id);
-
-                    if (tpc_idSelecionado > 0)
+                    else
                     {
-                        ACA_CalendarioPeriodo cap = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario_TipoPeriodo(VS_cal_id, tpc_idSelecionado, ApplicationWEB.AppMinutosCacheLongo);
-
-                        if (cap != null && cap.cap_id > 0)
-                        {
-                            UCCPeriodoCalendario.Valor = new[] { tpc_idSelecionado, cap.cap_id };
-                            UCCPeriodoCalendario_IndexChanged();
-                        }
+                        RedirecionarPagina("~/Classe/RelatorioAtendimento/Busca.aspx");
                     }
 
-                    updFiltros.Update();
+                    VS_tpc_idSelecionado = tpc_idSelecionado;
+                    Inicializar();
                 }
                 catch (Exception ex)
                 {
@@ -185,6 +199,26 @@
         #endregion
 
         #region Métodos
+
+        private void Inicializar()
+        {
+            UCCRelatorioAtendimento.CarregarPorPermissaoUsuarioTipo(CLS_RelatorioAtendimentoTipo.AEE);
+            UCCRelatorioAtendimento.PermiteEditar = true;
+            UCCPeriodoCalendario.CarregarPorCalendario(VS_cal_id);
+
+            if (VS_tpc_idSelecionado > 0)
+            {
+                ACA_CalendarioPeriodo cap = ACA_CalendarioPeriodoBO.SelecionaPor_Calendario_TipoPeriodo(VS_cal_id, VS_tpc_idSelecionado, ApplicationWEB.AppMinutosCacheLongo);
+
+                if (cap != null && cap.cap_id > 0)
+                {
+                    UCCPeriodoCalendario.Valor = new[] { VS_tpc_idSelecionado, cap.cap_id };
+                    UCCPeriodoCalendario_IndexChanged();
+                }
+            }
+
+            updFiltros.Update();
+        }
 
         /// <summary>
         /// Carrega o relatório para preenchimento
@@ -300,12 +334,16 @@
             {
                 RelatorioPreenchimentoAluno rel = UCLancamentoRelatorioAtendimento.RetornaQuestionarioPreenchimento(aprovar);
                 List<CLS_AlunoDeficienciaDetalhe> lstAlunoDeficienciaDetalhe = UCLancamentoRelatorioAtendimento.RetornaListaDeficienciaDetalhe();
-                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor))
+                List<CLS_RelatorioPreenchimentoAcoesRealizadas> lstAcoesRealizadas = UCLancamentoRelatorioAtendimento.RetornaListaAcoesRealizadas();
+
+                if (CLS_RelatorioPreenchimentoBO.Salvar(rel, lstAlunoDeficienciaDetalhe, UCLancamentoRelatorioAtendimento.PermiteAlterarRacaCor, UCLancamentoRelatorioAtendimento.RacaCor, lstAcoesRealizadas))
                 {
                     string msg = aprovar ? "Relatório de atendimento aprovado com sucesso." : "Relatório de atendimento preenchido com sucesso.";
                     __SessionWEB.PostMessages = UtilBO.GetErroMessage(msg, UtilBO.TipoMensagem.Sucesso);
                     ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Update, msg  + " | reap_id: " + rel.entityRelatorioPreenchimento.reap_id);
-                    VerificaPaginaRedirecionar();
+                    lblMensagem.Text = __SessionWEB.PostMessages;
+                    updMensagem.Update();
+                    CarregarRelatorio();
                 }
             }
             catch (ValidationException ex)
@@ -422,6 +460,11 @@
             Session["alu_idLimpaBusca"] = VS_alu_id;
             Session["cal_idLimpaBusca"] = VS_cal_id;
             Session["tur_idLimpaBusca"] = VS_tur_id;
+            Session["PaginaRetorno_RelatorioAEE"] = VS_PaginaRetorno;
+            Session["DadosPaginaRetorno"] = VS_DadosPaginaRetorno;
+            Session["VS_DadosTurmas"] = VS_DadosPaginaRetorno_MinhasTurmas;
+            Session["alu_id_RelatorioAEE"] = VS_alu_id;
+            Session["tur_idRegular_RelatorioAEE"] = VS_tur_id;
             RedirecionarPagina("Cadastro.aspx");
         }
 

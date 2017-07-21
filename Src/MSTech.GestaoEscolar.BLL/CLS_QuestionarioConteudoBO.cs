@@ -12,6 +12,8 @@ namespace MSTech.GestaoEscolar.BLL
     using Validation.Exceptions;
     using System.Collections.Generic;
     using System;
+    using System.Linq;
+
     #region Enumeradores
 
     public enum QuestionarioTipoConteudo
@@ -88,6 +90,32 @@ namespace MSTech.GestaoEscolar.BLL
         {
             CLS_QuestionarioConteudoDAO dao = new CLS_QuestionarioConteudoDAO();
             return dao.SelectByQuestionario(qst_id);
+        }
+
+        /// <summary>
+        ///Busca os conteúdos filtrado por questionário
+        /// </summary>
+        /// <param name="qst_id"></param>
+        /// <returns></returns>
+        public static DataTable SelectConteudoRespostaByQuestionario
+           (
+                int qst_id
+                , byte tipoConteudo
+                , byte tipoResposta
+           )
+        {
+            CLS_QuestionarioConteudoDAO dao = new CLS_QuestionarioConteudoDAO();
+
+            DataTable dt = dao.SelectByQuestionario(qst_id);
+
+            if (dt.AsEnumerable().Any(r => Convert.ToByte(r["qtc_tipo"]) == tipoConteudo && Convert.ToByte(r["qtc_tipoResposta"]) == tipoResposta))
+                dt = dt.AsEnumerable()
+                        .Where(row => row.Field<byte>("qtc_tipo") == tipoConteudo
+                            && row.Field<byte>("qtc_tipoResposta") == tipoResposta)
+                        .CopyToDataTable();
+            else dt = new DataTable();
+
+            return dt;            
         }
 
         /// <summary>

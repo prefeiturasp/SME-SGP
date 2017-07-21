@@ -70,12 +70,15 @@ namespace GestaoEscolar.Configuracao.Questionario
                 sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
             }
 
+            UCComboQtdePaginacao1.GridViewRelacionado = grvResultado;
+
             if (!IsPostBack)
             {
                 string message = __SessionWEB.PostMessages;
                 if (!String.IsNullOrEmpty(message))
                     lblMessage.Text = message;
 
+                grvResultado.PageIndex = 0;
                 grvResultado.PageSize = ApplicationWEB._Paginacao;
 
                 try
@@ -164,7 +167,9 @@ namespace GestaoEscolar.Configuracao.Questionario
                 ImageButton btnExcluir = (ImageButton)e.Row.FindControl("btnExcluir");
                 if (btnExcluir != null)
                 {
-                    btnExcluir.Visible = __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
+                    bool emUso = Convert.ToBoolean(grvResultado.DataKeys[e.Row.RowIndex].Values["emUso"].ToString());
+
+                    btnExcluir.Visible = !emUso && __SessionWEB.__UsuarioWEB.GrupoPermissao.grp_excluir && (__SessionWEB.__UsuarioWEB.Grupo.vis_id != SysVisaoID.UnidadeAdministrativa);
                     btnExcluir.CommandArgument = e.Row.RowIndex.ToString();
                 }
             }
@@ -192,9 +197,7 @@ namespace GestaoEscolar.Configuracao.Questionario
             try
             {
                 fdsResultado.Visible = true;
-
-                odsResultado.SelectParameters.Clear();
-
+                
                 grvResultado.PageIndex = 0;
                 odsResultado.SelectParameters.Clear();
 
@@ -202,13 +205,15 @@ namespace GestaoEscolar.Configuracao.Questionario
                 string qtItensPagina = SYS_ParametroBO.ParametroValor(SYS_ParametroBO.eChave.QT_ITENS_PAGINACAO);
                 int itensPagina = string.IsNullOrEmpty(qtItensPagina) ? ApplicationWEB._Paginacao : Convert.ToInt32(qtItensPagina);
 
+                grvResultado.Sort("", SortDirection.Ascending);
+                
                 // mostra essa quantidade no combobox
                 UCComboQtdePaginacao1.Valor = itensPagina;
                 // atribui essa quantidade para o grid
                 grvResultado.PageSize = itensPagina;
                 // atualiza o grid
                 grvResultado.DataBind();
-                grvResultado.Sort("", SortDirection.Ascending);
+                //grvResultado.Sort("qst_titulo", SortDirection.Ascending);
                 updResultado.Update();
 
             }

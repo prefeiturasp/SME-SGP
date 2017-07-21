@@ -13,6 +13,8 @@ namespace MSTech.GestaoEscolar.BLL
     using ObjetosSincronizacao.Util;
     using System.Data;
     using System.Linq;
+    using Data.Common;
+
     public class TipoTabela_TurmaAtividadeExtraClasseALuno : TipoTabela
     {
         private string dataVazia = new DateTime().ToString();
@@ -59,23 +61,88 @@ namespace MSTech.GestaoEscolar.BLL
         /// </summary>
         /// <param name="lstTurmaAtividadeExtraClasseAluno"></param>
         /// <returns></returns>
-        public static bool SalvarEmLote(List<CLS_TurmaAtividadeExtraClasseAluno> lstTurmaAtividadeExtraClasseAluno, long tud_id, int tpc_id, byte tud_tipo, bool fechamentoAutomatico, Guid ent_id)
+        public static bool SalvarEmLote(List<CLS_TurmaAtividadeExtraClasseAluno> lstTurmaAtividadeExtraClasseAluno, long tud_id, int tpc_id, byte tud_tipo, bool fechamentoAutomatico, Guid ent_id, List<CLS_TurmaAtividadeExtraClasse> lstRelacionamento, long tur_id)
         {
-            using (DataTable dt = lstTurmaAtividadeExtraClasseAluno.Select(p => new TipoTabela_TurmaAtividadeExtraClasseALuno(p).ToDataRow()).CopyToDataTable())
+            TalkDBTransaction banco = new CLS_TurmaAtividadeExtraClasseAlunoDAO()._Banco.CopyThisInstance();
+            banco.Open(IsolationLevel.ReadCommitted);
+            try
             {
-                CLS_TurmaAtividadeExtraClasseAlunoDAO dao = new CLS_TurmaAtividadeExtraClasseAlunoDAO();
-                if (dao.SalvarEmLote(dt))
+                List<long> lstTudId = new List<long>();
+                foreach (CLS_TurmaAtividadeExtraClasse atividade in lstRelacionamento)
                 {
-                    // Caso o fechamento seja automático, grava na fila de processamento.
-                    if (fechamentoAutomatico && tud_tipo != (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia && tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, ent_id))
-                    {
-                        CLS_AlunoFechamentoPendenciaBO.SalvarFilaFrequencia(tud_id, tpc_id, dao._Banco);
-                    }
+                    List<CLS_TurmaAtividadeExtraClasse> lstRelacionadas = CLS_TurmaAtividadeExtraClasseBO.SelecionaAtividadeExtraclasseRelacionada(atividade.taer_id);
+                    List<CLS_TurmaAtividadeExtraClasseAluno> lstLancamento = lstTurmaAtividadeExtraClasseAluno.FindAll(p => p.tud_id == atividade.tud_id && p.tae_id == atividade.tae_id);
+                    List<MTR_MatriculaTurmaDisciplina> lstMatriculaDisciplina = new List<MTR_MatriculaTurmaDisciplina>();
 
-                    return true;
+                    lstRelacionadas.FindAll(p => p.tud_id != atividade.tud_id || p.tae_id != atividade.tae_id).ForEach(p =>
+                    {
+                        if (!lstMatriculaDisciplina.Any(m => m.tud_id == p.tud_id))
+                        {
+                            lstMatriculaDisciplina.AddRange(MTR_MatriculaTurmaDisciplinaBO.SelecionaMatriculasPorTurmaDisciplina(p.tud_id.ToString(), banco));
+                        }
+                        lstLancamento.ForEach(a =>
+                        {
+                            CLS_TurmaAtividadeExtraClasseAluno ent = new CLS_TurmaAtividadeExtraClasseAluno
+                            {
+                                tud_id = p.tud_id,
+                                tae_id = p.tae_id,
+                                alu_id = a.alu_id,
+                                mtu_id = a.mtu_id,
+                                mtd_id = lstMatriculaDisciplina.Find(m => m.alu_id == a.alu_id && m.mtu_id == a.mtu_id && m.tud_id == p.tud_id).mtd_id,
+                                aea_avaliacao = a.aea_avaliacao,
+                                aea_relatorio = a.aea_relatorio,
+                                aea_entregue = a.aea_entregue,
+                                aea_dataAlteracao = a.aea_dataAlteracao,
+                                aea_situacao = 1
+                            };
+                            lstTurmaAtividadeExtraClasseAluno.Add(ent);
+                        });
+                        if (!lstTudId.Any(t => t == p.tud_id))
+                        {
+                            lstTudId.Add(p.tud_id);
+                        }
+                    });
                 }
 
-                return false;
+                using (DataTable dt = lstTurmaAtividadeExtraClasseAluno.Select(p => new TipoTabela_TurmaAtividadeExtraClasseALuno(p).ToDataRow()).CopyToDataTable())
+                {
+                    CLS_TurmaAtividadeExtraClasseAlunoDAO dao = new CLS_TurmaAtividadeExtraClasseAlunoDAO();
+                    dao._Banco = banco;
+                    if (dao.SalvarEmLote(dt))
+                    {
+                        // Caso o fechamento seja automático, grava na fila de processamento.
+                        if (fechamentoAutomatico && tud_tipo != (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia && tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, ent_id))
+                        {
+                            CLS_AlunoFechamentoPendenciaBO.SalvarFilaFrequencia(tud_id, tpc_id, banco);
+                        }
+
+                        if (lstTudId.Any())
+                        {
+                            List<TUR_TurmaDisciplina> turmaDisciplina = TUR_TurmaDisciplinaBO.GetSelectBy_Turma(tur_id, null, GestaoEscolarUtilBO.MinutosCacheLongo);
+                            lstTudId.ForEach(p =>
+                                {
+                                    if (fechamentoAutomatico && turmaDisciplina.Find(t => t.tud_id == p).tud_tipo != (byte)TurmaDisciplinaTipo.DocenteEspecificoComplementacaoRegencia && tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, ent_id))
+                                    {
+                                        CLS_AlunoFechamentoPendenciaBO.SalvarFilaFrequencia(p, tpc_id, banco);
+                                    }
+                                }
+                            );
+                        }
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                banco.Close(ex);
+                throw;
+            }
+            finally
+            {
+                if (banco.ConnectionIsOpen)
+                    banco.Close();
             }
         }
 

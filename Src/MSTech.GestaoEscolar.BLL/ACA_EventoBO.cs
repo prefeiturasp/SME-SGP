@@ -1304,7 +1304,7 @@ namespace MSTech.GestaoEscolar.BLL
                 (
                     "evt_id"
                     , entity.evt_id.ToString()
-                    , "ACA_Evento,ACA_CalendarioEvento"
+                    , "ACA_Evento,ACA_CalendarioEvento,LOG_AlertaInicioFechamento,LOG_AlertaFimFechamento"
                     , evtDao._Banco
                 ))
                 {

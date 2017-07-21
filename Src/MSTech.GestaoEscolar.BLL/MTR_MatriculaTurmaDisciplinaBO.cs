@@ -143,6 +143,8 @@ namespace MSTech.GestaoEscolar.BLL
         public bool AlunoDispensado { get; set; }
         public DateTime dataAlteracao { get; set; }
         public byte mtu_situacao { get; set; }
+
+        public long tur_id { get; set; }
     }
 
     /// <summary>
@@ -1740,6 +1742,8 @@ namespace MSTech.GestaoEscolar.BLL
                     mtd_situacao = Convert.ToByte(dr["mtd_situacao"])
                     ,
                     ava_id = Convert.ToInt32(string.IsNullOrEmpty(dr["ava_id"].ToString()) ? null : dr["ava_id"])
+                    ,
+                    tur_id = Convert.ToInt64(dr["tur_id"])
                     ,
                     arq_idFoto = string.IsNullOrEmpty(dr["arq_idFoto"].ToString()) ? (long?)null : Convert.ToInt64(dr["arq_idFoto"])
                     ,

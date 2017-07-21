@@ -356,6 +356,7 @@
         public const string FORMATO_AVALIACAO_MODEL_KEY = "ACA_FormatoAvaliacao_GetEntity_{0}";
         public const string FORMATO_AVALIACAO_PATTERN_KEY = "ACA_FormatoAvaliacao_GetEntity";
         public const string FORMATO_AVALIACAO_POR_TURMADISCIPLINA_MODEL_KEY = "Cache_SelecionaPorTud_{0}";
+        public const string FORMATO_AVALIACAO_POR_TURMA_MODEL_KEY = "Cache_SelecionaPorTur_{0}";
 
         #endregion Formato de avaliação
 
@@ -945,6 +946,14 @@
 
         public const string RELATORIO_ATENDIMENTO_BUSCA_ESTRUTURA_RELATORIO_KEY = "Cache_SelecionaRelatorio_{0}_{1}";
 
-        #endregion 
+        public const string RELATORIO_ATENDIMENTO_BUSCA_PERIODO_PorRelatorio = "Cache_SelecionaPeriodos_PorRelatorio_{0}";
+
+        #endregion
+
+        #region Grafico atendimento
+
+        public const string GRAFICO_ATENDIMENTO_SELECIONA_POR_TIPO_RELATORIO_KEY = "Cache_SelecionaPorTipoRelatorio_{0}";
+
+        #endregion
     }
 }

@@ -14,8 +14,7 @@ namespace MSTech.GestaoEscolar.Entities
 	{
         /// <summary>
         /// Descrição do objetivo.
-        /// </summary>
-        [MSValidRange(500, "Descrição do capítulo pode conter até 500 caracteres.")]
+        /// </summary>       
         public override string cro_descricao { get; set; }
 
         /// <summary>

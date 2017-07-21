@@ -14,6 +14,7 @@ namespace MSTech.GestaoEscolar.BLL
     using System.Linq;
     using Data.Common;
     using Validation.Exceptions;
+    
     #region Estruturas
 
     /// <summary>
@@ -27,6 +28,7 @@ namespace MSTech.GestaoEscolar.BLL
         public int cro_ordem { get; set; }
         public byte cro_tipo { get; set; }
         public int cro_idPai { get; set; }
+        public bool cro_permiteSugestao { get; set; }
     }
 
     /// <summary>
@@ -75,6 +77,8 @@ namespace MSTech.GestaoEscolar.BLL
                                                     cro_tipo = Convert.ToByte(dr["cro_tipo"])
                                                     ,
                                                     cro_idPai = Convert.ToInt32(dr["cro_idPai"])
+                                                    ,
+                                                    cro_permiteSugestao = Convert.ToBoolean(dr["cro_permiteSugestao"])
                                                 }).ToList();
             return retorno;
         }

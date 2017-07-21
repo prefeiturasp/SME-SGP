@@ -60,5 +60,15 @@ namespace MSTech.GestaoEscolar.Entities
         /// Variável auxiliar que informa se o questionário está em uso no relatório
         /// </summary>
         public bool emUso { get; set; }
+
+        /// <summary>
+        /// Variável auxiliar que informa o tipo de conteúdo do questionário (Enum QuestionarioTipoConteudo)
+        /// </summary>
+        public byte qtc_tipo { get; set; }
+
+        /// <summary>
+        /// Variável auxiliar que informa o tipo de resposta do conteúdo do questionário que for do tipo pergunta (Enum QuestionarioTipoResposta)
+        /// </summary>
+        public byte qtc_tipoResposta { get; set; }
     }
 }

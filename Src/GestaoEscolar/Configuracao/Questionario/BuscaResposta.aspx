@@ -39,23 +39,28 @@
                         CausesValidation="false" OnClick="btnCancelar_Click" />--%>
                 </div>
                 <asp:GridView ID="grvResultado" runat="server" AllowPaging="true" AutoGenerateColumns="false"
-                    BorderStyle="None" DataKeyNames="qtr_id, qtc_id, qtr_texto, qtr_permiteAdicionarTexto, qtr_ordem"
+                    BorderStyle="None" DataKeyNames="qtr_id, qtc_id, qtr_texto, qtr_permiteAdicionarTexto, qtr_peso, qtr_ordem"
                     DataSourceID="odsResultado" AllowCustomPaging="true"
                     EmptyDataText="A pesquisa não encontrou resultados." OnRowCommand="grvResultado_RowCommand"
                     OnRowDataBound="grvResultado_RowDataBound" AllowSorting="true" EnableModelValidation="true" OnDataBound="grvResultado_DataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="Texto da resposta">
                             <ItemTemplate>
-                                <asp:Label ID="lblAlterar" runat="server" Text='<%# Bind("qtr_texto") %>' CssClass="wrap400px"></asp:Label>
+                                <asp:Label ID="lblAlterar" runat="server" Text='<%# Bind("qtr_texto") %>' CssClass="wrap400px" Visible="false"></asp:Label>
                                 <asp:LinkButton ID="btnAlterar" runat="server" CommandName="Edit" Text='<%# Bind("qtr_texto") %>'
-                                    PostBackUrl="~/Configuracao/Questionario/CadastroResposta.aspx" CssClass="wrap400px"></asp:LinkButton>
+                                    PostBackUrl="~/Configuracao/Questionario/CadastroResposta.aspx" CssClass="wrap400px" Visible="false"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Peso">
+                            <ItemTemplate>
+                                <asp:Label ID="lblPeso" runat="server"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Permite adicionar texto">
                             <ItemTemplate>
                                 <asp:Label ID="lblPermiteAdicionarTexto" runat="server"></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>                        
                         <asp:TemplateField HeaderText="Ordem">
                             <ItemTemplate>
                                 <asp:ImageButton ID="_btnSubir" runat="server" CausesValidation="false" CommandName="Subir"

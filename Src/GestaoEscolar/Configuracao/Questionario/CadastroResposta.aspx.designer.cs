@@ -85,6 +85,33 @@ namespace GestaoEscolar.Configuracao.Questionario {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator _rfvTexto;
         
         /// <summary>
+        /// divPeso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPeso;
+        
+        /// <summary>
+        /// _lblPeso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label _lblPeso;
+        
+        /// <summary>
+        /// _txtPeso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox _txtPeso;
+        
+        /// <summary>
         /// _chkPermiteAdicionarTexto control.
         /// </summary>
         /// <remarks>

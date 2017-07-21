@@ -9,6 +9,8 @@ namespace MSTech.GestaoEscolar.BLL
     using MSTech.GestaoEscolar.DAL;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Data;
 
     /// <summary>
     /// Situações do questionário do relatório
@@ -35,6 +37,21 @@ namespace MSTech.GestaoEscolar.BLL
         {
             CLS_RelatorioAtendimentoQuestionarioDAO dao = new CLS_RelatorioAtendimentoQuestionarioDAO();
             return dao.SelectBy_rea_id(rea_id);
+        }
+
+        public static DataTable SelectPerguntaMultiplaEscolha_By_rea_id(int rea_id)
+        {
+            CLS_RelatorioAtendimentoQuestionarioDAO dao = new CLS_RelatorioAtendimentoQuestionarioDAO();
+
+            DataTable dt = dao.SelectBy_RelatorioAtendimento(rea_id);
+
+            if (dt.AsEnumerable().Any(r => Convert.ToBoolean(r["PossuiPerguntaMultiplaEscolha"]) == true))
+                dt = dt.AsEnumerable()
+                        .Where(row => row.Field<bool>("PossuiPerguntaMultiplaEscolha") == true)
+                        .CopyToDataTable();
+            else dt = new DataTable();
+
+            return dt;
         }
     }
 }

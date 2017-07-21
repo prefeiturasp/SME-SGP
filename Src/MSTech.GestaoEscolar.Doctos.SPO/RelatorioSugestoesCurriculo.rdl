@@ -147,7 +147,7 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="crc_titulo">
+                    <Textbox Name="Textbox23">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -162,9 +162,9 @@
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!crc_titulo.Value</Value>
+                              <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -173,7 +173,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>crc_titulo</rd:DefaultName>
+                      <rd:DefaultName>Textbox18</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -527,7 +527,7 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="crc_titulo2">
+                    <Textbox Name="Textbox22">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -542,9 +542,9 @@
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!crc_titulo.Value</Value>
+                              <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -553,7 +553,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>crc_titulo</rd:DefaultName>
+                      <rd:DefaultName>Textbox18</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -928,6 +928,7 @@
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!cro_descricaoEixo.Value</Value>
+                              <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontSize>9pt</FontSize>
                               </Style>
@@ -984,6 +985,7 @@
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!cro_descricaoTopico.Value</Value>
+                              <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontSize>9pt</FontSize>
                               </Style>
@@ -1040,6 +1042,7 @@
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!cro_descricao.Value</Value>
+                              <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontSize>9pt</FontSize>
                               </Style>

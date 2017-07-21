@@ -100,6 +100,50 @@ namespace MSTech.GestaoEscolar.BLL
             return string.Empty;
         }
 
+        /// <summary>
+        /// Retorna o sexo da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string SexoFormatado(int codigoSexo)
+        {
+            switch (codigoSexo)
+            {
+                case 1:
+                    return "Masculino";
+                case 2:
+                    return "Feminino";
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Retorna a raça/core da pessoa
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string RacaCorFormatado(int codigoRacaoCor)
+        {
+            switch (codigoRacaoCor)
+            {
+                case 1:
+                    return "Branca";
+                case 2:
+                    return "Preta";
+                case 3:
+                    return "Parda";
+                case 4:
+                    return "Amarela";
+                case 5:
+                    return "Indígena";
+                case 6:
+                    return "Não declarada";
+            }
+
+            return string.Empty;
+        }
+
         public static bool In<T>(this T valor, params T[] array)
         {
             return array.Contains(valor);
@@ -623,7 +667,23 @@ namespace MSTech.GestaoEscolar.BLL
 
         QuantitativoSugestoes
         ,
+
         RelatorioAEE
+        ,
+
+        RelatorioNAAPA
+        ,
+
+        RelatorioGeralAtendimento
+        ,
+
+        GraficoJustificativaFalta
+        
+        ,
+        RelatorioAcoesRealizadas
+        ,
+
+        GraficoAtendimento
     }
 
     [Serializable]
@@ -753,7 +813,10 @@ namespace MSTech.GestaoEscolar.BLL
         AnaliseSondagem = 321,
         FrequenciaMensal = 322,
         RelatorioSugestoesCurriculo = 323,
-        QuantitativoSugestoes = 324
+        QuantitativoSugestoes = 324,        
+        GraficoJustificativaFalta = 326,
+        RelatorioGeralAtendimento = 325,
+        RelatorioAcoesRealizadas = 327
     }
 
     /// <summary>

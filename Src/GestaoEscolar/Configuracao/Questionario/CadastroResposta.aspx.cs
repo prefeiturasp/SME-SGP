@@ -58,19 +58,41 @@ namespace GestaoEscolar.Configuracao.Questionario
             }
         }
 
+        public bool ExibePeso
+        {
+            get
+            {
+                if (ViewState["ExibePeso"] != null)
+                    return Convert.ToBoolean(ViewState["ExibePeso"]);
+                return false;
+            }
+            set
+            {
+                ViewState["ExibePeso"] = value;
+            }
+        }
+
         #endregion
 
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager sm = ScriptManager.GetCurrent(this);
+            if (sm != null)
+            {
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JQueryValidation));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.JqueryMask));
+                sm.Scripts.Add(new ScriptReference(ArquivoJS.MascarasCampos));
+            }
+
             if (!IsPostBack)
             {
                 if ((PreviousPage != null) && (PreviousPage.IsCrossPagePostBack))
                 {
-                    _Carregar(PreviousPage._VS_qtc_id, PreviousPage.PaginaResposta_qtr_id);
                     _VS_qtc_id = PreviousPage._VS_qtc_id;
                     _VS_qtr_id = PreviousPage.PaginaResposta_qtr_id;
                     _VS_qst_id = PreviousPage._VS_qst_id;
+                    _Carregar(_VS_qtc_id, _VS_qtr_id);
                 }
 
                 else
@@ -82,7 +104,7 @@ namespace GestaoEscolar.Configuracao.Questionario
                 Page.Form.DefaultButton = _btnSalvar.UniqueID;
             }
         }
-        
+
         protected void _btnSalvar_Click(object sender, EventArgs e)
         {
             _Salvar();
@@ -115,8 +137,17 @@ namespace GestaoEscolar.Configuracao.Questionario
                 if (_txtTexto.Text.Length > 4000)
                     throw new ValidationException("O texto da resposta não deve exceder 4000 caracteres.");
 
+                decimal peso = 0;
+                if (ExibePeso)
+                {
+                    Decimal.TryParse(_txtPeso.Text, out peso);
+                    if (peso < 0)
+                        throw new ValidationException("O peso da resposta deve ser maior ou igual a zero.");
+                }
+
                 Resposta.qtr_texto = _txtTexto.Text;
                 Resposta.qtr_permiteAdicionarTexto = _chkPermiteAdicionarTexto.Checked;
+                Resposta.qtr_peso = peso;
                 Resposta.qtr_situacao = 1; //ativo
 
                 if (CLS_QuestionarioRespostaBO.Save(Resposta))
@@ -166,10 +197,18 @@ namespace GestaoEscolar.Configuracao.Questionario
             try
             {
                 CLS_QuestionarioResposta Resposta = new CLS_QuestionarioResposta { qtc_id = qtc_id, qtr_id = qtr_id };
+
                 CLS_QuestionarioRespostaBO.GetEntity(Resposta);
+
+                CLS_Questionario Questionario = CLS_QuestionarioBO.GetEntity(new CLS_Questionario { qst_id = _VS_qst_id });
+                CLS_QuestionarioConteudo Conteudo = CLS_QuestionarioConteudoBO.GetEntity(new CLS_QuestionarioConteudo { qst_id = _VS_qst_id, qtc_id = _VS_qtc_id });
+                ExibePeso = ((Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.SelecaoUnica) || (Conteudo.qtc_tipoResposta == (byte)QuestionarioTipoResposta.MultiplaSelecao)) && (Questionario.qst_tipoCalculo != (byte)QuestionarioTipoCalculo.SemCalculo);
+
                 _VS_qtr_id = Resposta.qtr_id;
                 _VS_qtc_id = Resposta.qtc_id;
                 _txtTexto.Text = Resposta.qtr_texto;
+                divPeso.Visible = ExibePeso;
+                _txtPeso.Text = divPeso.Visible ? String.Format("{0:0.00}", Resposta.qtr_peso) : String.Format("{0:0.00}", 0);
                 _chkPermiteAdicionarTexto.Checked = Resposta.qtr_permiteAdicionarTexto;
             }
             catch (Exception e)

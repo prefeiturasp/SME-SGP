@@ -15,14 +15,12 @@ namespace MSTech.GestaoEscolar.Entities
         /// <summary>
         /// Título do capítulo.
         /// </summary>
-        [MSNotNullOrEmpty("Título do capítulo é obrigatório.")]
-        [MSValidRange(200, "Título do capítulo pode conter até 200 caracteres.")]
+        [MSNotNullOrEmpty("Título do capítulo é obrigatório.")]        
         public override string crc_titulo { get; set; }
 
         /// <summary>
         /// Descrição do capítulo.
-        /// </summary>
-        [MSValidRange(4000, "Descrição do capítulo pode conter até 4000 caracteres.")]
+        /// </summary>      
         public override string crc_descricao { get; set; }
 
         /// <summary>

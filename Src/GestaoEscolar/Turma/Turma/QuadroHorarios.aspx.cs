@@ -258,7 +258,7 @@ namespace GestaoEscolar.Turma.Turma
                               p.trh_tipo == (byte)ACA_TurnoHorarioTipo.AulaForaPeriodo) ? "1" : "0")
                     ,
                         title = "<span class=\"quadro-title\">" + (p.tud_id > 0 && !string.IsNullOrEmpty(p.tud_nome) ? p.tud_nome + "</span>" : disciplinaNaoInformada(p.trh_tipo)) +
-                                "<br/><span class=\"quadro-tipo\">" + GestaoEscolarUtilBO.GetEnumDescription((ACA_TurnoHorarioTipo)Enum.ToObject(typeof(ACA_TurnoHorarioTipo), p.trh_tipo)) + "</span>"
+                                (p.trh_tipo == (byte)ACA_TurnoHorarioTipo.IntervaloEntreAulas || p.trh_tipo == (byte)ACA_TurnoHorarioTipo.IntervaloEntrePeriodos ? "" : "<br/>") + "<span class=\"quadro-tipo\">" + GestaoEscolarUtilBO.GetEnumDescription((ACA_TurnoHorarioTipo)Enum.ToObject(typeof(ACA_TurnoHorarioTipo), p.trh_tipo)) + "</span>"
                     ,
                         allDay = false
                     ,
@@ -325,11 +325,11 @@ namespace GestaoEscolar.Turma.Turma
             {
                 if (minTime != new TimeSpan(23, 59, 00))
                 {
-                    maxTime = minTime.Add(TimeSpan.FromMinutes(15));
+                    maxTime = minTime.Add(TimeSpan.FromMinutes(10));
                 }
                 else if (maxTime != new TimeSpan(00, 00, 00))
                 {
-                    minTime = maxTime.Subtract(TimeSpan.FromMinutes(15));
+                    minTime = maxTime.Subtract(TimeSpan.FromMinutes(10));
                 }
                 else
                 {
@@ -354,7 +354,7 @@ namespace GestaoEscolar.Turma.Turma
                 ,
                 timeFormat = "HH:mm"
                 ,
-                slotDuration = new TimeSpan(00, 15, 00)
+                slotDuration = new TimeSpan(00, 10, 00)
                 ,
                 minTime = minTime
                 ,
@@ -386,13 +386,13 @@ namespace GestaoEscolar.Turma.Turma
             int slotMin = -1;
             if (VS_turno.trn_horaInicio != new TimeSpan())
             {
-                slotMin = (int)Math.Ceiling((double)((VS_turno.trn_horaInicio.Hours * 60 + VS_turno.trn_horaInicio.Minutes) - (minTime.Hours * 60 + minTime.Minutes)) / 15) + 1;
+                slotMin = (int)Math.Ceiling((double)((VS_turno.trn_horaInicio.Hours * 60 + VS_turno.trn_horaInicio.Minutes) - (minTime.Hours * 60 + minTime.Minutes)) / 10) + 1;
             }
 
             int slotMax = -1;
             if (VS_turno.trn_horaFim != new TimeSpan())
             {
-                slotMax = (int)Math.Ceiling((double)((VS_turno.trn_horaFim.Hours * 60 + VS_turno.trn_horaFim.Minutes) - (minTime.Hours * 60 + minTime.Minutes)) / 15);
+                slotMax = (int)Math.Ceiling((double)((VS_turno.trn_horaFim.Hours * 60 + VS_turno.trn_horaFim.Minutes) - (minTime.Hours * 60 + minTime.Minutes)) / 10);
             }
 
             UCCalendario.CarregarCalendarioSemanal(lstEventos, option, inicializar, slotMin, slotMax);

@@ -209,6 +209,39 @@ namespace GestaoEscolar.WebControls.Combos
             }
         }
 
+        /// <summary>
+        /// Atribui valores para o combo
+        /// </summary>
+        public DropDownList _Combo
+        {
+            get
+            {
+                return ddlCombo;
+            }
+            set
+            {
+                ddlCombo = value;
+            }
+        }
+
+        /// <summary>
+        /// Retorna e seta o valor selecionado no combo - retorna 0 caso não tenha selecionado nada
+        /// </summary>
+        public int IdSelecionado
+        {
+            get
+            {
+                if (Convert.ToInt32(ddlCombo.SelectedValue) == -1)
+                    return 0;
+
+                return Convert.ToInt32(ddlCombo.SelectedValue);
+            }
+            set
+            {
+                ddlCombo.SelectedValue = value.ToString();
+            }
+        }
+
         #endregion
 
         #region Métodos
@@ -232,7 +265,7 @@ namespace GestaoEscolar.WebControls.Combos
             ddlCombo.Focus();
         }
 
-        public void CarregarPorPermissaoUuarioTipo(CLS_RelatorioAtendimentoTipo rea_tipo)
+        public void CarregarPorPermissaoUsuarioTipo(CLS_RelatorioAtendimentoTipo rea_tipo)
         {
             try
             {

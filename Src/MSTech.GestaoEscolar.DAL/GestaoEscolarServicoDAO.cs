@@ -208,5 +208,106 @@ namespace MSTech.GestaoEscolar.DAL
             qs.TimeOut = 0;
             qs.Execute();
         }
+
+        /// <summary>
+        /// Processa o alerta de preenchimento de frequência.
+        /// </summary>
+        public DataTable ExecJOB_AlertaPreenchimentoFrequencias()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaPreenchimentoFrequencia", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+            return qs.Return;
+        }
+
+        /// <summary>
+        /// Processa o alerta de aviso de início de fechamento.
+        /// </summary>
+        public DataTable ExecJOB_AlertaInicioFechamento(int cfa_periodoAnalise)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaInicioFechamento", _Banco);
+
+            #region Parâmetros
+
+            DbParameter Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@cfa_periodoAnalise";
+            Param.Size = 4;
+            Param.Value = cfa_periodoAnalise;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.TimeOut = 0;
+            qs.Execute();
+            return qs.Return;
+        }
+
+        /// <summary>
+        /// Processa o alerta de aviso de final de fechamento.
+        /// </summary>
+        public DataTable ExecJOB_AlertaFimFechamento(int cfa_periodoAnalise)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaFimFechamento", _Banco);
+
+            #region Parâmetros
+
+            DbParameter Param = qs.NewParameter();
+            Param.DbType = DbType.Int32;
+            Param.ParameterName = "@cfa_periodoAnalise";
+            Param.Size = 4;
+            Param.Value = cfa_periodoAnalise;
+            qs.Parameters.Add(Param);
+
+            #endregion
+
+            qs.TimeOut = 0;
+            qs.Execute();
+            return qs.Return;
+        }
+
+        /// <summary>
+        /// Processa o alerta de alunos com baixa frequência.
+        /// </summary>
+        public DataTable ExecJOB_AlertaAlunosBaixaFrequencia()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaAlunosBaixaFrequencia", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+            return qs.Return;
+        }
+
+        /// <summary>
+        /// Processa o alerta de alunos com faltas consecutivas.
+        /// </summary>
+        public DataTable ExecJOB_AlertaAlunosFaltasConsecutivas()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_AlertaAlunosFaltasConsecutivas", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+            return qs.Return;
+        }
+
+        /// <summary>
+        /// Processa o preenchimento de frequência, conta as aulas sem a flag efetivado.
+        /// Utiliza a fila do fechamento.
+        /// </summary>
+        public void ExecJOB_ProcessamentoPreenchimentoFrequencia()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoPreenchimentoFrequencia", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
+
+        /// <summary>
+        /// Processa os alunos com baixa frequência e com faltas consecutivas.
+        /// Utiliza a fila do fechamento.
+        /// </summary>
+        public void ExecJOB_ProcessamentoAlunosFrequencia()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoAlunosFrequencia", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
     }
 }

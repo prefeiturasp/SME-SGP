@@ -83,6 +83,27 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.qst_situacao;
 			qs.Parameters.Add(Param);
 
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Byte;
+			Param.ParameterName = "@qst_tipoCalculo";
+			Param.Size = 1;
+			Param.Value = entity.qst_tipoCalculo;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.String;
+			Param.ParameterName = "@qst_tituloCalculo";
+			Param.Size = 500;
+				if(!string.IsNullOrEmpty(entity.qst_tituloCalculo))
+				{
+					Param.Value = entity.qst_tituloCalculo;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
+			qs.Parameters.Add(Param);
+
 
 			}
 		}
@@ -129,6 +150,27 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.ParameterName = "@qst_situacao";
 			Param.Size = 4;
 			Param.Value = entity.qst_situacao;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.Byte;
+			Param.ParameterName = "@qst_tipoCalculo";
+			Param.Size = 1;
+			Param.Value = entity.qst_tipoCalculo;
+			qs.Parameters.Add(Param);
+
+			Param = qs.NewParameter();
+			Param.DbType = DbType.String;
+			Param.ParameterName = "@qst_tituloCalculo";
+			Param.Size = 500;
+				if(!string.IsNullOrEmpty(entity.qst_tituloCalculo))
+				{
+					Param.Value = entity.qst_tituloCalculo;
+				}
+				else
+				{
+					Param.Value = DBNull.Value;
+				}
 			qs.Parameters.Add(Param);
 
 

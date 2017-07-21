@@ -268,6 +268,38 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Seleciona o formato de avaliação de acordo com a turma.
+        /// </summary>
+        /// <param name="tur_id">Id da turma.</param>
+        /// <returns>Formato de avaliação.</returns>
+        public new static ACA_FormatoAvaliacao CarregarPorTur(long tur_id, TalkDBTransaction banco = null)
+        {
+            ACA_FormatoAvaliacao entity = new ACA_FormatoAvaliacao();
+            string chave = string.Format(ModelCache.FORMATO_AVALIACAO_POR_TURMA_MODEL_KEY, tur_id);
+
+            ACA_FormatoAvaliacaoDAO dao = new ACA_FormatoAvaliacaoDAO();
+            if (banco != null)
+                dao._Banco = banco;
+
+            GestaoEscolarUtilBO.CopiarEntity
+            (
+                CacheManager.Factory.Get
+                (
+                    chave,
+                    () =>
+                    {
+                        entity = dao.SelecionarPorTur(tur_id);
+                        return entity;
+                    },
+                    GestaoEscolarUtilBO.MinutosCacheMedio
+                ),
+                entity
+            );
+
+            return entity;
+        }
+
+        /// <summary>
         /// Remove do cache a entidade.
         /// </summary>
         /// <param name="entity"></param>

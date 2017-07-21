@@ -102,5 +102,14 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelectDetelheBy_Deficiencia(tde_id);
         }
 
+        
+        public static CFG_DeficienciaDetalhe GetDetalhamento(CFG_DeficienciaDetalhe entity, TalkDBTransaction banco = null)
+        {
+            CFG_DeficienciaDetalheDAO dao = new CFG_DeficienciaDetalheDAO();
+            if (banco != null)
+                dao._Banco = banco;
+            return dao.SelectDetelheBy_dfd_id(entity.dfd_id);
+        }
+
     }
 }

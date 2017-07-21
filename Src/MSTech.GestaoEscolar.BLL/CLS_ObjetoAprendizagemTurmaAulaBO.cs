@@ -28,9 +28,9 @@ namespace MSTech.GestaoEscolar.BLL
             return dao.SelecionaObjTudTau(tud_id, tau_id);
         }
 
-        public static void SalvarLista(List<CLS_ObjetoAprendizagemTurmaAula> listObjTudTau, TalkDBTransaction banco = null)
+        public static void SalvarLista(int tau_id, long tud_id, List<CLS_ObjetoAprendizagemTurmaAula> listObjTudTau, TalkDBTransaction banco = null)
         {
-            DeletarObjTud(listObjTudTau.First().tud_id, listObjTudTau.First().tau_id, banco);
+            DeletarObjTud(tud_id, tau_id, banco);
 
             foreach (CLS_ObjetoAprendizagemTurmaAula oaa in listObjTudTau)
                 Save(oaa, banco);

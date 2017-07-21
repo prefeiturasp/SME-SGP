@@ -658,6 +658,44 @@ namespace MSTech.GestaoEscolar.DAL
             }
         }
 
+        /// <summary>
+        /// Seleciona o formato de avaliação de acordo com a disciplina da turma.
+        /// </summary>
+        /// <param name="tud_id">Id da disciplina da turma.</param>
+        /// <returns>Formato de avaliação.</returns>
+        public ACA_FormatoAvaliacao SelecionarPorTur(long tur_id)
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("NEW_ACA_FormatoAvaliacao_SelecionaPorTur", _Banco);
+
+            try
+            {
+                #region PARAMETROS
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int64;
+                Param.Size = 8;
+                Param.ParameterName = "@tur_id";
+                Param.Value = tur_id;
+                qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
+
+                ACA_FormatoAvaliacao entity = new ACA_FormatoAvaliacao();
+                if (qs.Return.Rows.Count > 0)
+                {
+                    entity = DataRowToEntity(qs.Return.Rows[0], entity);
+                }
+
+                return entity;
+            }
+            finally
+            {
+                qs.Parameters.Clear();
+            }
+        }
+
         #endregion
 
         #region Métodos Sobrescritos

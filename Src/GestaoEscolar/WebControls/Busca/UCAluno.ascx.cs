@@ -258,7 +258,7 @@ namespace GestaoEscolar.WebControls.Busca
                 {
                     _grvAluno.Columns[INDEX_COLUMN_MATRICULA].Visible = true;
                 }
-                _lblMatricula.Text = GestaoEscolarUtilBO.nomePadraoMatriculaEstadual(__SessionWEB.__UsuarioWEB.Usuario.ent_id);
+                _lblMatricula.Text = GetGlobalResourceObject("Mensagens", "MSG_NUMEROMATRICULA").ToString();
             }
         }
 

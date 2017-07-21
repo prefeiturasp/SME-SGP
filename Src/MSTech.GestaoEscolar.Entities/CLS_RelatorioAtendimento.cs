@@ -46,6 +46,18 @@ namespace MSTech.GestaoEscolar.Entities
         /// </summary>
         [MSNotNullOrEmpty("Permite editar campo de Hipótese Diagnóstica é obrigatório.")]
         public override bool rea_permiteEditarHipoteseDiagnostica { get; set; }
+        
+        /// <summary>
+        /// Indica se o relatório vai gerar pendência de fechamento
+        /// </summary>
+        [MSDefaultValue(0)]
+        public override bool rea_gerarPendenciaFechamento { get; set; }
+
+        /// <summary>
+        /// Permite editar campo de Acoes Realizadas.
+        /// </summary>
+        [MSNotNullOrEmpty("Permite Ações realizadas é obrigatório.")]
+        public override bool rea_permiteAcoesRealizadas { get; set; }
 
         /// <summary>
         /// ID do tipo de disciplina do relatório de atendimento.

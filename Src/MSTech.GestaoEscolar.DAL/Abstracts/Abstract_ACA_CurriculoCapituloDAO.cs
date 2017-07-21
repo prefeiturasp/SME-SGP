@@ -99,15 +99,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
-                Param.ParameterName = "@crc_titulo";
-                Param.Size = 200;
+                Param.ParameterName = "@crc_titulo";         
                 Param.Value = entity.crc_titulo;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
                 Param.ParameterName = "@crc_descricao";
-                Param.Size = 4000;
                 if (!string.IsNullOrEmpty(entity.crc_descricao))
                 {
                     Param.Value = entity.crc_descricao;
@@ -123,6 +121,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param.ParameterName = "@crc_ordem";
                 Param.Size = 4;
                 Param.Value = entity.crc_ordem;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@crc_permiteSugestao";
+                Param.Size = 1;
+                Param.Value = entity.crc_permiteSugestao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
@@ -210,15 +215,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
-                Param.ParameterName = "@crc_titulo";
-                Param.Size = 200;
+                Param.ParameterName = "@crc_titulo";     
                 Param.Value = entity.crc_titulo;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();
                 Param.DbType = DbType.String;
-                Param.ParameterName = "@crc_descricao";
-                Param.Size = 4000;
+                Param.ParameterName = "@crc_descricao";     
                 if (!string.IsNullOrEmpty(entity.crc_descricao))
                 {
                     Param.Value = entity.crc_descricao;
@@ -234,6 +237,13 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
                 Param.ParameterName = "@crc_ordem";
                 Param.Size = 4;
                 Param.Value = entity.crc_ordem;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@crc_permiteSugestao";
+                Param.Size = 1;
+                Param.Value = entity.crc_permiteSugestao;
                 qs.Parameters.Add(Param);
 
                 Param = qs.NewParameter();

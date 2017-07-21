@@ -51,10 +51,22 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[rea_permiteEditarHipoteseDiagnostica] é obrigatório.")]
 		public virtual bool rea_permiteEditarHipoteseDiagnostica { get; set; }
 
-		/// <summary>
-		/// ID do tipo de disciplina do relatório de atendimento.
+        /// <summary>
+		/// Permite editar campo de Ações Realizadas.
 		/// </summary>
-		public virtual int tds_id { get; set; }
+		[MSNotNullOrEmpty("[rea_permiteAcoesRealizadas] é obrigatório.")]
+        public virtual bool rea_permiteAcoesRealizadas { get; set; }
+
+        /// <summary>
+        /// Indica se o relatório vai gerar pendência de fechamento
+        /// </summary>
+        [MSNotNullOrEmpty("[rea_gerarPendenciaFechamento] é obrigatório.")]
+        public virtual bool rea_gerarPendenciaFechamento { get; set; }
+
+        /// <summary>
+        /// ID do tipo de disciplina do relatório de atendimento.
+        /// </summary>
+        public virtual int tds_id { get; set; }
 
 		/// <summary>
 		/// Periodicidade de preenchimento do relatório de atendimento (1 - Periódico, 2 - Encerramento).

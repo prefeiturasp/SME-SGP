@@ -121,10 +121,17 @@ namespace MSTech.GestaoEscolar.DAL
                     Param.Size = 1;
                     Param.Value = entity.csp_semPlanoAula;
                     qs.Parameters.Add(Param);
-                
-                    #endregion
 
-                    qs.Execute();
+                    Param = qs.NewParameter();
+                    Param.DbType = DbType.Int32;
+                    Param.ParameterName = "@csp_semRelatorioAtendimento";
+                    Param.Size = 4;
+                    Param.Value = entity.csp_semRelatorioAtendimento;
+                    qs.Parameters.Add(Param);
+
+                #endregion
+
+                qs.Execute();
 
                 return qs.Return.Rows.Count > 0;
             }

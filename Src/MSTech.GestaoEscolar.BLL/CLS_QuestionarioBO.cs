@@ -13,6 +13,18 @@ namespace MSTech.GestaoEscolar.BLL
     using Data.Common;
     using System.ComponentModel;
 
+    #region Enumeradores
+
+    public enum QuestionarioTipoCalculo
+    {
+        [Description("Sem cálculo")]
+        SemCalculo = 1,
+        [Description("Soma")]
+        Soma
+    }
+    
+    #endregion
+
     [Serializable]
     public class Questionario : CLS_Questionario
     {
@@ -48,17 +60,12 @@ namespace MSTech.GestaoEscolar.BLL
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public static DataTable GetSelectPaginado
         (
-            int currentPage
-            , int pageSize
         )
         {
             totalRecords = 0;
 
-            if (pageSize == 0)
-                pageSize = 1;
-
             CLS_QuestionarioDAO dao = new CLS_QuestionarioDAO();
-            return dao.GetSelectPaginado(true, currentPage / pageSize, pageSize, out totalRecords);
+            return dao.GetSelectPaginado(false, 1, 1, out totalRecords);
         }
 
         /// <summary>

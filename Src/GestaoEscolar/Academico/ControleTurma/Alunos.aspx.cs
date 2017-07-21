@@ -261,6 +261,8 @@ namespace GestaoEscolar.Academico.ControleTurma
 
         private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
 
+        private Dictionary<byte, List<long>> dicAlunosPendentesRelatorio = new Dictionary<byte, List<long>>();
+
         #endregion
 
         #region Métodos
@@ -313,6 +315,8 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     lstAlunosRelatorioRP = CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.SelecionaAlunoPreenchimentoPorPeriodoDisciplina(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id, ApplicationWEB.AppMinutosCacheMedio);
                 }
+
+                dicAlunosPendentesRelatorio = CLS_RelatorioAtendimentoBO.SelecionaPendenciasPorTurmaPeriodo(UCNavegacaoTelaPeriodo.VS_tpc_id, UCControleTurma1.VS_tur_id, UCControleTurma1.VS_tud_id);
 
                 CancelaSelect = false;
 
@@ -482,6 +486,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                             UCControleTurma1.LabelTurmas = listaDados["TextoTurmas"];
                         }
 
+                        int tpcIdPendencia = -1;
+                        if (Session["tpcIdPendencia"] != null)
+                        {
+                            tpcIdPendencia = Convert.ToInt32(Session["tpcIdPendencia"]);
+                        }
+
                         // Remove os dados que possam estar na sessao
                         Session.Remove("tud_id");
                         Session.Remove("tdt_posicao");
@@ -493,6 +503,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         Session.Remove("tur_idNormal");
                         Session.Remove("tud_idAluno");
                         Session.Remove("tur_tud_ids");
+                        Session.Remove("tpcIdPendencia");
                         //
 
                         List<Struct_MinhasTurmas.Struct_Turmas> dadosTurma = new List<Struct_MinhasTurmas.Struct_Turmas>();
@@ -598,7 +609,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         UCNavegacaoTelaPeriodo.CarregarPeriodos(VS_ltPermissaoFrequencia, VS_ltPermissaoEfetivacao,
                                                                 VS_ltPermissaoPlanejamentoAnual, VS_ltPermissaoAvaliacao,
                                                                 entDisciplinaRelacionada, UCControleTurma1.VS_esc_id,
-                                                                VS_EntitiesControleTurma.turmaDisciplina.tud_tipo, UCControleTurma1.VS_tdt_posicao, UCControleTurma1.VS_tur_id, VS_EntitiesControleTurma.turmaDisciplina.tud_id);
+                                                                VS_EntitiesControleTurma.turmaDisciplina.tud_tipo, UCControleTurma1.VS_tdt_posicao, UCControleTurma1.VS_tur_id, VS_EntitiesControleTurma.turmaDisciplina.tud_id, false, tpcIdPendencia);
 
                         if (UCNavegacaoTelaPeriodo.VS_tpc_id <= 0)
                         {
@@ -895,11 +906,21 @@ namespace GestaoEscolar.Academico.ControleTurma
             {
                 try
                 {
+                    string[] args = e.CommandArgument.ToString().Split(';');
+
                     Session.Remove("alu_id_RelatorioAEE");
                     Session.Remove("PaginaRetorno_RelatorioAEE");
 
-                    Session.Add("alu_id_RelatorioAEE", Convert.ToInt64(e.CommandArgument.ToString()));
+                    Session.Add("alu_id_RelatorioAEE", Convert.ToInt64(args[0]));
                     Session.Add("PaginaRetorno_RelatorioAEE", Path.Combine(MSTech.Web.WebProject.ApplicationWEB._DiretorioVirtual, "Academico/ControleTurma/Alunos.aspx"));
+
+                    if (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                    {
+                        int index = int.Parse(args[1]);
+                        long tur_id = Convert.ToInt64(grvAluno.DataKeys[index].Values["tur_id"]);
+
+                        Session.Add("tur_idRegular_RelatorioAEE", tur_id);
+                    }
 
                     CarregaSessionPaginaRetorno();
                     RedirecionarPagina("~/Classe/RelatorioAtendimento/Cadastro.aspx");
@@ -958,8 +979,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     btnRelatorioAEE.Visible = Convert.ToByte(DataBinder.Eval(e.Row.DataItem, "alu_situacaoID")) == (byte)ACA_AlunoSituacao.Ativo 
                                                 && Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "PossuiDeficiencia"));
-                    btnRelatorioAEE.CommandArgument = alu_id.ToString();
+                    btnRelatorioAEE.CommandArgument = string.Format("{0};{1}", alu_id.ToString() , e.Row.RowIndex.ToString());
                 }
+
 
                 // Mostra o ícone para as anotações de recuperação paralela (RP):
                 // - para todos os alunos, quando a turma for de recuperação paralela,
@@ -972,6 +994,49 @@ namespace GestaoEscolar.Academico.ControleTurma
                     {
                         btnRelatorioRP.Visible = true;
                         btnRelatorioRP.CommandArgument = string.Format("{0};-1", alu_id.ToString());
+                    }
+                }
+
+                Image imgAlertaRelatorio = (Image)e.Row.FindControl("imgAlertaRelatorio");
+                if (imgAlertaRelatorio != null)
+                {
+                    List<string> tooltip = new List<string>();
+                    foreach (KeyValuePair<byte, List<long>> pair in dicAlunosPendentesRelatorio)
+                    {
+                        if (pair.Value.Contains(alu_id))
+                        {
+                            imgAlertaRelatorio.Visible = true;
+                            switch (pair.Key)
+                            {
+                                case (byte)CLS_RelatorioAtendimentoTipo.AEE:
+                                    tooltip.Add("Aluno sem lançamento de relatório AEE.");
+                                    break;
+                                case (byte)CLS_RelatorioAtendimentoTipo.NAAPA:
+                                    tooltip.Add("Aluno sem lançamento de relatório NAAPA.");
+                                    break;
+                                case (byte)CLS_RelatorioAtendimentoTipo.RP:
+                                    tooltip.Add("Aluno sem lançamento de anotação para turma de recuperação paralela.");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+
+                    if (tooltip.Any())
+                    {
+                        imgAlertaRelatorio.ToolTip = string.Empty;
+                        foreach (string t in tooltip)
+                        {
+                            if (string.IsNullOrEmpty(imgAlertaRelatorio.ToolTip))
+                            {
+                                imgAlertaRelatorio.ToolTip = t;
+                            }
+                            else
+                            {
+                                imgAlertaRelatorio.ToolTip = imgAlertaRelatorio.ToolTip + Environment.NewLine + t;
+                            }
+                        }
                     }
                 }
             }

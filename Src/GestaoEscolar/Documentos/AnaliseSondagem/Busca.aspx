@@ -7,6 +7,7 @@
 <%@ Register Src="~/WebControls/Combos/Novos/UCCTurma.ascx" TagPrefix="uc1" TagName="UCComboTurma" %>
 <%@ Register Src="~/WebControls/Combos/UCComboCurriculoPeriodo.ascx" TagPrefix="uc1" TagName="UCComboCurriculoPeriodo" %>
 <%@ Register Src="~/WebControls/Combos/UCComboTipoCiclo.ascx" TagPrefix="uc1" TagName="UCComboTipoCiclo" %>
+<%@ Register Src="~/WebControls/Combos/UCComboSondagem.ascx" TagPrefix="uc1" TagName="UCComboSondagem" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -24,10 +25,11 @@
                 <legend id="relTitulo" runat="server"></legend>
                 <uc2:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
 
-                <asp:Label ID="lblTituloSondagem" runat="server" Text="Título da sondagem *" AssociatedControlID="txtTituloSondagem"></asp:Label>
-                <asp:TextBox ID="txtTituloSondagem" runat="server" SkinID="text60C"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvTituloSondagem" runat="server" ControlToValidate="txtTituloSondagem"
-                    Display="Dynamic" ValidationGroup="Relatorio" ErrorMessage="Título da sondagem é obrigatório.">*</asp:RequiredFieldValidator>
+                <%--<asp:Label ID="lblTituloSondagem" runat="server" Text="Título da sondagem *" AssociatedControlID="txtTituloSondagem"></asp:Label>--%>
+                <%--<asp:TextBox ID="txtTituloSondagem" runat="server" SkinID="text60C"></asp:TextBox>--%>
+                <uc1:UCComboSondagem runat="server" id="UCComboSondagem" />
+                <%--<asp:RequiredFieldValidator ID="rfvTituloSondagem" runat="server" ControlToValidate="txtTituloSondagem"
+                    Display="Dynamic" ValidationGroup="Relatorio" ErrorMessage="Título da sondagem é obrigatório.">*</asp:RequiredFieldValidator>--%>
 
                 <div runat="server" id="divData">
                     <div style="display: inline-block">
@@ -52,8 +54,8 @@
                     </div>
                 </div>
 
-                <uc1:UCComboUAEscola runat="server" ID="UCComboUAEscola" AsteriscoObg="true" ObrigatorioEscola="true" ObrigatorioUA="true" ValidationGroup="Relatorio"
-                    CarregarEscolaAutomatico="true" MostraApenasAtivas="true" MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" />
+                <uc1:UCComboUAEscola runat="server" ID="UCComboUAEscola" ValidationGroup="Relatorio" CarregarEscolaAutomatico="true" MostraApenasAtivas="true" 
+                    MostrarMessageSelecioneEscola="true" MostrarMessageSelecioneUA="true" AsteriscoObg="true" ObrigatorioEscola="true" ObrigatorioUA="true" />
 
                 <uc1:UCCCalendario runat="server" ID="UCCCalendario" Obrigatorio="false" MostrarMensagemSelecione="true" PermiteEditar="false" ValidationGroup="Relatorio" />
 

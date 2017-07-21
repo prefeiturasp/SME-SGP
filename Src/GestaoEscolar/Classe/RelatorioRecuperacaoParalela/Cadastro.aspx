@@ -23,8 +23,8 @@
             <uc:UCCPeriodoCalendario ID="UCCPeriodoCalendario" runat="server" MostrarMensagemSelecione="true" Visible="false" />
             <div class="right">
                 <asp:Button ID="btnVoltar" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnVoltar.Text %>" CausesValidation="false" OnClick="btnVoltar_Click" />
-                <asp:Button ID="btnLimparBusca" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparBusca_Click" Visible="false" />
-                <asp:Button ID="btnNovo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnNovo.Text %>" CausesValidation="false" OnClick="btnNovo_Click" />
+                <asp:Button ID="btnLimparBusca" runat="server" Text="<%$ Resources:Padrao, Padrao.LimparPesquisa.Text %>" OnClick="btnLimparBusca_Click" />
+                <asp:Button ID="btnNovo" runat="server" Text="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.btnNovo.Text %>" CausesValidation="false" OnClick="btnNovo_Click" Visible="false" />
             </div>
         </asp:Panel>
         <fieldset id="fdsLancamento" runat="server">
@@ -35,21 +35,21 @@
                 DataKeyNames="reap_id" OnRowCommand="grvLancamentos_RowCommand" OnRowDataBound="grvLancamentos_RowDataBound">
                 <Columns>
                     <asp:BoundField DataField="reap_descricao" HeaderText="<%$ Resources:Classe, RelatorioRecuperacaoParalela.Cadastro.grvLancamentos.ColunaDescricao %>"></asp:BoundField>
-                    <asp:TemplateField HeaderText="Detalhar" HeaderStyle-Width="100">
+                    <asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.Detalhar.Text %>" HeaderStyle-Width="100">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnDetalhar" runat="server" CommandName="Detalhar" SkinID="btDetalhar" CausesValidation="False" />
                         </ItemTemplate>
                         <HeaderStyle CssClass="center" />
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Alterar" HeaderStyle-Width="100">
+                    <asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.Alterar.Text %>" HeaderStyle-Width="100">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnAlterar" runat="server" CommandName="Alterar" SkinID="btEditar" CausesValidation="False" />
                         </ItemTemplate>
                         <HeaderStyle CssClass="center" />
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Excluir" HeaderStyle-Width="100">
+                    <asp:TemplateField HeaderText="<%$ Resources:Padrao, Padrao.Excluir.Text %>" HeaderStyle-Width="100">
                         <ItemTemplate>
                             <asp:ImageButton ID="btnExcluir" runat="server" CommandName="Deletar" SkinID="btExcluir" CausesValidation="False" />
                         </ItemTemplate>

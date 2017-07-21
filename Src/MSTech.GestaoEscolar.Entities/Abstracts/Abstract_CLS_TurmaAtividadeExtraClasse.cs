@@ -85,5 +85,6 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[tae_dataAlteracao] é obrigatório.")]
 		public virtual DateTime tae_dataAlteracao { get; set; }
 
+        public virtual Guid taer_id { get; set; }
     }
 }

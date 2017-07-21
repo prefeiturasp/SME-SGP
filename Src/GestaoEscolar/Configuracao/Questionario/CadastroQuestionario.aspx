@@ -23,6 +23,22 @@
         <asp:TextBox ID="_txtTitulo" runat="server" CssClass="wrap150px" SkinID="limite500" MaxLength="500"></asp:TextBox>
         <asp:RequiredFieldValidator ID="_rfvTitulo" runat="server" ErrorMessage="Título do questionário é obrigatório."
             ControlToValidate="_txtTitulo" ValidationGroup="Questionario">*</asp:RequiredFieldValidator>
+        <asp:Label ID="lblTipoCalculo" runat="server" Text="Tipo de cálculo *" AssociatedControlID="_ddlTipoCalculo"></asp:Label>
+        <asp:DropDownList ID="_ddlTipoCalculo" runat="server"  
+            OnSelectedIndexChanged="_ddlTipoCalculo_SelectedIndexChanged" AutoPostBack="true">
+            <asp:ListItem Text="-- Selecione --" Value="0"></asp:ListItem>
+            <asp:ListItem Text="Sem cálculo" Value="1"></asp:ListItem>
+            <asp:ListItem Text="Soma" Value="2"></asp:ListItem>
+        </asp:DropDownList>
+        <div runat="server" id="divCalculo" visible="false">
+            <asp:Label ID="lblTituloCalculo" runat="server" Text="Título do cálculo *" AssociatedControlID="_txtTituloCalculo"></asp:Label>
+            <asp:TextBox ID="_txtTituloCalculo" runat="server" CssClass="wrap150px" SkinID="limite500" MaxLength="500"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="_rfvTituloCalculo" runat="server" ErrorMessage="Título do cálculo é obrigatório."
+            ControlToValidate="_txtTituloCalculo" ValidationGroup="Questionario" Visible="false">*</asp:RequiredFieldValidator>
+        </div>
+        <asp:CompareValidator ID="_cpvTipoCalculo" runat="server" ErrorMessage="Tipo de cálculo é obrigatório."
+            ControlToValidate="_ddlTipoCalculo" Operator="GreaterThan" ValueToCompare="0"
+            Display="Dynamic" ValidationGroup="Questionario">*</asp:CompareValidator>
         <div class="right">
             <asp:Button ID="_btnSalvar" runat="server" Text="Salvar" OnClick="_btnSalvar_Click" ValidationGroup="Questionario"/>
             <asp:Button ID="_btnCancelar" runat="server" Text="Cancelar" CausesValidation="false"

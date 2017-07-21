@@ -55,8 +55,7 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 
 		/// <summary>
 		/// Descrição do objetivo.
-		/// </summary>
-		[MSValidRange(500)]
+		/// </summary>		
 		[MSNotNullOrEmpty]
 		public virtual string cro_descricao { get; set; }
 
@@ -95,5 +94,10 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty]
 		public virtual DateTime cro_dataAlteracao { get; set; }
 
+        /// <summary>
+		/// Flag que indica se o objetivo permite sugestão.
+		/// </summary>
+		[MSNotNullOrEmpty]
+        public virtual bool cro_permiteSugestao { get; set; }
     }
 }

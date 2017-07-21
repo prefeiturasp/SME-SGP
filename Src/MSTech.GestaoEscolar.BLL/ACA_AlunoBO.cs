@@ -2788,6 +2788,98 @@ namespace MSTech.GestaoEscolar.BLL
             return dt;
         }
 
+        public static DataTable BuscaAlunosRelatorioGeralAtendimento
+        (
+            int cal_id
+            , int esc_id
+            , int uni_id
+            , int cur_id
+            , int crr_id
+            , int crp_id
+            , Int64 tur_id
+            , byte tipoBusca
+            , string pes_nome
+            , DateTime pes_dataNascimento
+            , string pes_nomeMae
+            , string alc_matricula
+            , string alc_matriculaEstadual
+            , Guid ent_id
+            , Guid uad_idSuperior
+            , bool adm
+            , Guid usu_id
+            , Guid gru_id
+            , bool documentoOficial
+            , int appMinutosCacheLongo = 0
+        )
+        {
+            bool buscaMatriculaIgual = VerificaBuscaMatriculaIgual;
+            bool MostraCodigoEscola = ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.ORDENAR_ESCOLAS_POR_CODIGO, ent_id);
+
+            // Verificar se o usuário informou pelo menos um filtro da tela, pois se não informou, a procedure não
+            // trará resultados (ficou assim pela melhoria de performance - antes dava timeout).
+            if (esc_id <= 0 && uni_id <= 0 && cal_id <= 0 && cur_id <= 0 &&
+                crr_id <= 0 && crp_id <= 0 && tur_id <= 0 && uad_idSuperior == Guid.Empty &&
+                string.IsNullOrEmpty((pes_nome ?? "").Trim()) &&
+                string.IsNullOrEmpty((alc_matricula ?? "").Trim()) &&
+                string.IsNullOrEmpty((alc_matriculaEstadual ?? "").Trim()) &&
+                string.IsNullOrEmpty((pes_nomeMae ?? "").Trim()) &&
+                pes_dataNascimento == new DateTime()
+                )
+            {
+                throw new ValidationException(
+                    "É necessário selecionar/preencher pelo menos uma opção de filtro para pesquisar alunos.");
+            }
+
+            totalRecords = 0;
+
+            DataTable dt = new ACA_AlunoDAO().BuscaAlunosRelatorioGeralAtendimento(
+                                cal_id
+                                , esc_id
+                                , uni_id
+                                , cur_id
+                                , crr_id
+                                , crp_id
+                                , tur_id
+                                , tipoBusca
+                                , pes_nome
+                                , pes_dataNascimento
+                                , pes_nomeMae
+                                , alc_matricula
+                                , alc_matriculaEstadual
+                                , ent_id
+                                , uad_idSuperior
+                                , adm, usu_id, gru_id
+                                , buscaMatriculaIgual
+                                , MostraCodigoEscola
+                                , documentoOficial
+                                , out totalRecords);
+
+            if (dt.Columns.Contains("pes_idade"))
+            {
+                dt.Columns.Remove("pes_idade");
+            }
+
+            DataColumn dcIdade = new DataColumn();
+            dcIdade.DataType = typeof(string);
+            dcIdade.ColumnName = "pes_idade";
+
+            dt.Columns.Add(dcIdade);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                try
+                {
+                    dr["pes_idade"] = GestaoEscolarUtilBO.DiferencaDataExtenso(Convert.ToDateTime(dr["pes_dataNascimento"].ToString()), DateTime.Today);
+                }
+                catch
+                {
+                    dr["pes_idade"] = string.Empty;
+                }
+            }
+
+            return dt;
+        }
+
 
         #endregion Métodos de consulta
 

@@ -146,7 +146,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.csp_semPlanoAula;
 			qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@csp_semRelatorioAtendimento";
+                Param.Size = 4;
+                Param.Value = entity.csp_semRelatorioAtendimento;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@csp_situacao";
 			Param.Size = 4;
@@ -278,7 +285,14 @@ namespace MSTech.GestaoEscolar.DAL.Abstracts
 			Param.Value = entity.csp_semPlanoAula;
 			qs.Parameters.Add(Param);
 
-			Param = qs.NewParameter();
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@csp_semRelatorioAtendimento";
+                Param.Size = 4;
+                Param.Value = entity.csp_semRelatorioAtendimento;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
 			Param.DbType = DbType.Int32;
 			Param.ParameterName = "@csp_situacao";
 			Param.Size = 4;

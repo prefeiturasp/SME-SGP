@@ -133,6 +133,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -258,6 +259,8 @@
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Caching\ModelCache.cs" />
     <Compile Include="CalendarioBO.cs" />
+    <Compile Include="CFG_AlertaBO.cs" />
+    <Compile Include="CFG_AlertaGrupoBO.cs" />
     <Compile Include="CFG_ConfiguracaoAcademicoBO.cs" />
     <Compile Include="CFG_ConfiguracaoBO.cs" />
     <Compile Include="CFG_ConfiguracaoMigracaoRioBO.cs" />
@@ -323,12 +326,15 @@
     <Compile Include="CLS_RelatorioAtendimentoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoCargoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoGrupoBO.cs" />
+    <Compile Include="CLS_RelatorioAtendimentoPeriodoBO.cs" />
     <Compile Include="CLS_RelatorioAtendimentoQuestionarioBO.cs" />
+    <Compile Include="CLS_RelatorioPreenchimentoAcoesRealizadasBO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoAlunoTurmaDisciplinaBO.cs" />
     <Compile Include="CLS_RelatorioPreenchimentoBO.cs" />
     <Compile Include="CLS_TipoAtividadeAvaliativaBO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseAlunoBO.cs" />
     <Compile Include="CLS_TurmaAtividadeExtraClasseBO.cs" />
+    <Compile Include="CLS_TurmaAtividadeExtraClasseRelacionadaBO.cs" />
     <Compile Include="CLS_TurmaAulaAlunoTipoAnotacaoBO.cs" />
     <Compile Include="CLS_TurmaAulaDisciplinaRelacionadaBO.cs" />
     <Compile Include="CLS_TurmaAulaGeradaBO.cs" />
@@ -370,6 +376,11 @@
     <Compile Include="CLS_TurmaNotaBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaBO.cs" />
     <Compile Include="CLS_AlunoAvaliacaoTurmaDisciplinaBO.cs" />
+    <Compile Include="LOG_AlertaAlunosBaixaFrequenciaBO.cs" />
+    <Compile Include="LOG_AlertaAlunosFaltasConsecutivasBO.cs" />
+    <Compile Include="LOG_AlertaFimFechamentoBO.cs" />
+    <Compile Include="LOG_AlertaInicioFechamentoBO.cs" />
+    <Compile Include="LOG_AlertaPreenchimentoFrequenciaBO.cs" />
     <Compile Include="LOG_AvaliacaoMedia_AlteracaoBO.cs" />
     <Compile Include="LOG_CurriculoSugestaoBO.cs" />
     <Compile Include="LOG_MatriculaTurmaDisciplinaExcluidaBO.cs" />
@@ -409,6 +420,9 @@
     <Compile Include="ORC_OrientacaoCurricularBO.cs" />
     <Compile Include="ORC_OrientacaoCurricularNivelAprendizadoBO.cs" />
     <Compile Include="ORC_OrientacaoCurricularRelacionamentoBO.cs" />
+    <Compile Include="REL_GraficoAtendimentoBO.cs" />
+    <Compile Include="REL_GraficoAtendimento_FiltrosFixosBO.cs" />
+    <Compile Include="REL_GraficoAtendimento_FiltrosPersonalizadosBO.cs" />
     <Compile Include="REL_TurmaDisciplinaSituacaoFechamentoBO.cs" />
     <Compile Include="RHU_CargaHorariaBO.cs" />
     <Compile Include="RHU_CargoDisciplinaBO.cs" />

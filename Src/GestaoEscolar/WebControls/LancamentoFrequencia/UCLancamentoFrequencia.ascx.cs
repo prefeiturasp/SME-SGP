@@ -175,6 +175,7 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
         private CFG_PermissaoModuloOperacao permissaoModuloLancamentoFrequencia;
         private CFG_PermissaoModuloOperacao permissaoModuloLancamentoFrequenciaInfantil;
         private int tne_id;
+        private byte ttn_tipo;
 
         private List<Struct_PreenchimentoAluno> lstAlunosRelatorioRP = new List<Struct_PreenchimentoAluno>();
 
@@ -324,6 +325,7 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
             this.possuiRegencia = TUR_TurmaBO.VerificaPossuiDisciplinaPorTipo(turId, TurmaDisciplinaTipo.Regencia, ApplicationWEB.AppMinutosCacheLongo);
             this.tipoApuracaoFrequencia = entitiesControleTurma.formatoAvaliacao.fav_tipoApuracaoFrequencia;
             this.tne_id = tne_id;
+            this.ttn_tipo = entitiesControleTurma.tipoTurno.ttn_tipo;
             rptAlunosFrequencia.DataBind();
             // Limpa o hiddenfield do listão de frequência pra zerar a ordenação.
             hdnOrdenacaoFrequencia.Value = "";
@@ -865,9 +867,10 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
                 {
                     chkEfetivado.Checked = tau_efetivado;
 
-                    if (posicaoDocente > 0)
+                    if (posicaoDocente > 0 && !(tudTipo == (byte)TurmaDisciplinaTipo.DisciplinaPrincipal && ttn_tipo == (byte)ACA_TipoTurnoBO.TipoTurno.Integral))
                     {
                         Int16 tdt_posicao = Convert.ToInt16(DataBinder.Eval(e.Item.DataItem, "tdt_posicao"));
+
                         bool permiteEditar = (__SessionWEB.__UsuarioWEB.Docente.doc_id == 0 || (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0 && ltPermissaoFrequencia.Any(p => p.tdt_posicaoPermissao == tdt_posicao & p.pdc_permissaoEdicao)));
                         chkEfetivado.Enabled &= permiteEditar;
                     }
@@ -938,7 +941,8 @@ namespace GestaoEscolar.WebControls.LancamentoFrequencia
 
                     if (tipoApuracaoFrequencia == (byte)ACA_FormatoAvaliacaoTipoApuracaoFrequencia.Dia && crpControleTempo == (byte)ACA_CurriculoPeriodoControleTempo.Horas)
                     {
-                        if (possuiRegencia && tudTipo != (byte)TurmaDisciplinaTipo.Regencia)
+                        if ((possuiRegencia && tudTipo != (byte)TurmaDisciplinaTipo.Regencia) ||
+                            (tudTipo == (byte)TurmaDisciplinaTipo.DisciplinaPrincipal && ttn_tipo == (byte)ACA_TipoTurnoBO.TipoTurno.Integral))
                         {
                             for (int i = 0; i < numeroAulas; i++)
                             {

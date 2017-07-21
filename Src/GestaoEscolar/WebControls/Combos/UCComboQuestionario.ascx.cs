@@ -7,6 +7,14 @@ namespace GestaoEscolar.WebControls.Combos
 {
     public partial class UCComboQuestionario : MotherUserControl
     {
+        #region Delegates
+
+        public delegate void SelectedIndexChanged();
+
+        public event SelectedIndexChanged IndexChanged;
+
+        #endregion
+
         #region PROPRIEDADES
 
         /// <summary>
@@ -77,6 +85,7 @@ namespace GestaoEscolar.WebControls.Combos
                 ddlCombo.SelectedIndex = value;
             }
         }
+        
 
         /// <summary>
         /// Propriedade que verifica quantos items existem no combo
@@ -196,10 +205,30 @@ namespace GestaoEscolar.WebControls.Combos
         {
             ddlCombo.Items.Clear();
             ddlCombo.DataSource = CLS_QuestionarioBO.GetQuestionarioBy_qst_titulo("");
-            MostrarMessageSelecione = true;       
+            MostrarMessageSelecione = true;
             ddlCombo.DataBind();
         }
-        
+
+        public void CarregarQuestionarioComPerguntaMultiplaEscolhaBy_rea_id(int rea_id)
+        {
+            ddlCombo.Items.Clear();
+            ddlCombo.DataSource = CLS_RelatorioAtendimentoQuestionarioBO.SelectPerguntaMultiplaEscolha_By_rea_id(rea_id);
+            MostrarMessageSelecione = true;
+            ddlCombo.DataBind();
+        }
+
         #endregion
+
+        protected void ddlCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (IndexChanged != null)
+                IndexChanged();
+
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            ddlCombo.AutoPostBack = (IndexChanged != null);
+        }
     }
 }
