@@ -157,6 +157,10 @@ namespace MSTech.GestaoEscolar.Web.WebProject
                 try
                 {
                     Trace.Write("__SessionWEB", __SessionWEB == null ? "NULL" : "OK");
+                    if (__SessionWEB != null)
+                    {
+                        Trace.Write("__SessionWEB.__UsuarioWEB", __SessionWEB.__UsuarioWEB == null ? "NULL" : "OK");
+                    }
                     Trace.Write("__SessionWEB._AreaAtual", __SessionWEB._AreaAtual == null ? "NULL" : "OK");
                 }
                 catch (Exception ex)

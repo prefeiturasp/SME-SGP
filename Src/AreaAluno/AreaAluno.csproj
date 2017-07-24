@@ -391,7 +391,6 @@
     <Compile Include="Consulta\Documentos\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
-    <Compile Include="IdentitySettingsConfig.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
