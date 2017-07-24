@@ -67,6 +67,34 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Limpar pesquisa'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Se esse ícone estiver ao lado de um plano de aula, significa que esse plano de aula não foi preenchido ou está sem objeto de conhecimento. Para regularizar, é necessário que o plano dessa aula seja preenchido e que tenha algum objeto de conhecimento.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Listao.MensagemAulaSemPlanoAula' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Se esse ícone estiver ao lado de um plano de aula, significa que esse plano de aula não foi preenchido. Para regularizar, é necessário que o plano dessa aula seja preenchido.'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.DiarioClasse.imgSemPlanoAula' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Plano de aula não preenchido ou sem objeto de conhecimento'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Listao.imgSemPlanoAula' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Plano de aula não preenchido'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION

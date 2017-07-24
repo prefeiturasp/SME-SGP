@@ -4195,7 +4195,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
-                    imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
+                    imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.Listao.imgSemPlanoAula").ToString();
                 }
 
                 if (e.Item.ItemIndex > 0)

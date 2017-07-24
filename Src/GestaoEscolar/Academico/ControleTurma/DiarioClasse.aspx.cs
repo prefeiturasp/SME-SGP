@@ -4792,10 +4792,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
-                    imgSemPlanoAula.Visible = string.IsNullOrEmpty(entity.tau_planoAula) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                    imgSemPlanoAula.Visible = (string.IsNullOrEmpty(entity.tau_planoAula) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                                                    || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
+                                                    || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
+                                                || ((listObjTudTau == null || listObjTudTau.Count == 0)
+                                                    && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado) 
+                                                    && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia 
+                                                    && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia);
                     imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
                 }
                 ControlarExibicaoLegendaAulaSemPlano();
@@ -4815,6 +4819,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && imgSemPlanoAula.Visible)
                 {
                     divAvisoAulaSemPlano.Visible = true;
+                    break;
                 }
             }
 
@@ -5951,6 +5956,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 byte statusAnotacoes = Convert.ToByte(grvAulas.DataKeys[e.Row.RowIndex].Values["tau_statusAnotacoes"].ToString());
                 byte statusPlanoAula = Convert.ToByte(grvAulas.DataKeys[e.Row.RowIndex].Values["tau_statusPlanoAula"].ToString());
                 bool semPlanoAula = Convert.ToBoolean(grvAulas.DataKeys[e.Row.RowIndex].Values["semPlanoAula"].ToString());
+                bool semObjetoConhecimento = Convert.ToBoolean(grvAulas.DataKeys[e.Row.RowIndex].Values["semObjetoConhecimento"].ToString());
 
                 bool permissaoAlteracao = Convert.ToInt16(grvAulas.DataKeys[e.Row.RowIndex].Values["permissaoAlteracao"].ToString()) > 0;
                 bool permissaoModuloAlteracao = false;
@@ -6140,10 +6146,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (imgSemPlanoAula != null && dataAula.Date < DateTime.Now.Date &&
                         UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                     {
-                        imgSemPlanoAula.Visible = semPlanoAula && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                        imgSemPlanoAula.Visible = (semPlanoAula && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                                                        || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
+                                                        || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
+                                                    || (semObjetoConhecimento
+                                                        && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                                                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                                                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia);
                         imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
                     }
 
