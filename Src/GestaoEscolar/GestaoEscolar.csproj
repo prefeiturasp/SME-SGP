@@ -1860,6 +1860,13 @@
     <Compile Include="Relatorios\IndicadorFrequencia\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\LogNotificacoes\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\LogNotificacoes\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\ObjetoAprendizagem\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2216,6 +2223,13 @@
     </Compile>
     <Compile Include="WebControls\Combos\Novos\UCCTipoEvento.ascx.designer.cs">
       <DependentUpon>UCCTipoEvento.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboAlerta.ascx.cs">
+      <DependentUpon>UCComboAlerta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboAlerta.ascx.designer.cs">
+      <DependentUpon>UCComboAlerta.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Combos\UCComboAnoLetivo.ascx.cs">
       <DependentUpon>UCComboAnoLetivo.ascx</DependentUpon>
@@ -4501,6 +4515,7 @@
     <Content Include="Relatorios\GraficoAtendimento\Relatorio.aspx" />
     <Content Include="Relatorios\GraficoJustificativaFalta\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
+    <Content Include="Relatorios\LogNotificacoes\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Relatorios\QuantitativoSugestoes\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />
@@ -4536,6 +4551,7 @@
     <Content Include="WebControls\Combos\ComboTipoDeficiencia.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoEvento.ascx" />
+    <Content Include="WebControls\Combos\UCComboAlerta.ascx" />
     <Content Include="WebControls\Combos\UCComboAnoLetivo.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCEscalaAvaliacaoParecer.ascx" />
     <Content Include="WebControls\Combos\Novos\UCComboGenerico.ascx" />
