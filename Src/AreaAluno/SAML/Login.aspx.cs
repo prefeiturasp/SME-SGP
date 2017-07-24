@@ -83,7 +83,8 @@ public partial class SAML_Login : MotherPageLogado
 
                             ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Login, String.Format("Autenticação do usuário ( {0} ) com grupo ( {1} ) no sistema ( {2} ).", __SessionWEB.__UsuarioWEB.Usuario.usu_login, __SessionWEB.__UsuarioWEB.Grupo.gru_nome, __SessionWEB.TituloSistema));
 
-                            Response.Redirect("~/Index.aspx", false);
+                            //Response.Redirect("~/Index.aspx", false);
+                            Response.Redirect("~/Login.aspx", false);
                             HttpContext.Current.ApplicationInstance.CompleteRequest();
                         }
                         else
@@ -127,10 +128,12 @@ public partial class SAML_Login : MotherPageLogado
                 __SessionWEB.__UsuarioWEB.Grupo = SYS_GrupoBO.GetEntity(grupo);
 
                 // Realiza autenticação do usuário no Sistema Gestão Acadêmica
-                SYS_UsuarioBO.AutenticarUsuario(__SessionWEB.__UsuarioWEB.Usuario, __SessionWEB.__UsuarioWEB.Grupo);
+                HttpContext.Current.User.Identity.AddGrupoId(Request, __SessionWEB.__UsuarioWEB.Grupo.gru_id.ToString());
+
                 ApplicationWEB._GravaLogSistema(LOG_SistemaTipo.Login, String.Format("Autenticação do usuário ( {0} ) com grupo ( {1} ) no sistema ( {2} ).", __SessionWEB.__UsuarioWEB.Usuario.usu_login, __SessionWEB.__UsuarioWEB.Grupo.gru_nome, __SessionWEB.TituloSistema));
 
-                Response.Redirect("~/Index.aspx", false);
+                //Response.Redirect("~/Index.aspx", false);
+                Response.Redirect("~/Login.aspx", false);
                 HttpContext.Current.ApplicationInstance.CompleteRequest();
             }
         }
