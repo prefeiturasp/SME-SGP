@@ -684,6 +684,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         GraficoAtendimento
+        ,
+
+        LogNotificacoes
     }
 
     [Serializable]
@@ -816,7 +819,8 @@ namespace MSTech.GestaoEscolar.BLL
         QuantitativoSugestoes = 324,        
         GraficoJustificativaFalta = 326,
         RelatorioGeralAtendimento = 325,
-        RelatorioAcoesRealizadas = 327
+        RelatorioAcoesRealizadas = 327,
+        LogNotificacoes = 328
     }
 
     /// <summary>
