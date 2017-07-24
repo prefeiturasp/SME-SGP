@@ -32,6 +32,7 @@ namespace AreaAluno
                 {
                     AuthenticationType = IDSSettings.Cookies_AuthenticationType,
                     LoginPath = new PathString(IDSSettings.Cookies_LoginPath),
+                    CookieDomain = IDSSettings.Cookies_CookieDomain,
                     CookieName = IDSSettings.Cookies_CookieName
                 });
 

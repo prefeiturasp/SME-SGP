@@ -2,6 +2,71 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
+      <Rectangle Name="Rectangle4">
+        <ReportItems>
+          <Image Name="warning2">
+            <Source>Embedded</Source>
+            <Value>icoInformacoes</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.26458cm</Top>
+            <Left>0.26978cm</Left>
+            <Height>0.64348cm</Height>
+            <Width>0.68775cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox71">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Não existe resultado para a pesquisa selecionada.</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>0.26458cm</Top>
+            <Left>1.29751cm</Left>
+            <Height>0.6cm</Height>
+            <Width>11.91365cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
+        <Top>0.00056cm</Top>
+        <Height>0.99688cm</Height>
+        <Width>19cm</Width>
+        <Visibility>
+          <Hidden>=iif(RowNumber("DataSet1") &gt; 0, true, false)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Color>#e8b909</Color>
+            <Style>Solid</Style>
+          </Border>
+          <BackgroundColor>#fffcdf</BackgroundColor>
+        </Style>
+      </Rectangle>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
@@ -326,6 +391,7 @@
         <Top>0.17639cm</Top>
         <Height>1.1cm</Height>
         <Width>19cm</Width>
+        <ZIndex>1</ZIndex>
         <Visibility>
           <Hidden>=iif(RowNumber("DataSet1") &gt; 0, false, true)</Hidden>
         </Visibility>
@@ -335,74 +401,8 @@
           </Border>
         </Style>
       </Tablix>
-      <Rectangle Name="Rectangle4">
-        <ReportItems>
-          <Image Name="warning2">
-            <Source>Embedded</Source>
-            <Value>icoInformacoes</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.26458cm</Top>
-            <Left>0.26978cm</Left>
-            <Height>0.64348cm</Height>
-            <Width>0.68775cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-          <Textbox Name="Textbox71">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Não existe resultado para a pesquisa selecionada.</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>0.26458cm</Top>
-            <Left>1.29751cm</Left>
-            <Height>0.6cm</Height>
-            <Width>11.91365cm</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-        </ReportItems>
-        <KeepTogether>true</KeepTogether>
-        <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-        <Top>1.27056cm</Top>
-        <Height>0.99688cm</Height>
-        <Width>19cm</Width>
-        <ZIndex>1</ZIndex>
-        <Visibility>
-          <Hidden>=iif(RowNumber("DataSet1") &gt; 0, true, false)</Hidden>
-        </Visibility>
-        <Style>
-          <Border>
-            <Color>#e8b909</Color>
-            <Style>Solid</Style>
-          </Border>
-          <BackgroundColor>#fffcdf</BackgroundColor>
-        </Style>
-      </Rectangle>
     </ReportItems>
-    <Height>2.26744cm</Height>
+    <Height>1.27639cm</Height>
     <Style />
   </Body>
   <Width>19cm</Width>
@@ -530,6 +530,31 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
+                  <Value>Período:</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value xml:space="preserve"> </Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Parameters!periodo.Value</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value xml:space="preserve"> </Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
                   <Value>Data de emissão:</Value>
                   <Style>
                     <FontSize>8pt</FontSize>
@@ -556,9 +581,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
           <Top>3.27641cm</Top>
-          <Left>11.12944cm</Left>
+          <Left>9.51548cm</Left>
           <Height>0.54708cm</Height>
-          <Width>7.87056cm</Width>
+          <Width>9.48452cm</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>
@@ -580,7 +605,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Período:</Value>
+                  <Value>Alerta:</Value>
                   <Style>
                     <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -593,7 +618,7 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=Parameters!dataInicio.Value + " - " + Parameters!dataFim.Value</Value>
+                  <Value>=Parameters!cfa_nome.Value</Value>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -607,7 +632,7 @@
           <rd:DefaultName>Textbox11</rd:DefaultName>
           <Top>3.27641cm</Top>
           <Height>0.54708cm</Height>
-          <Width>11.12944cm</Width>
+          <Width>9.51548cm</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>
@@ -615,44 +640,6 @@
             </Border>
             <BottomBorder>
               <Style>Solid</Style>
-            </BottomBorder>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox18">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Parameters!cfa_nome.Value</Value>
-                  <Style>
-                    <FontSize>9pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox11</rd:DefaultName>
-          <Top>1.32884cm</Top>
-          <Left>2.29639cm</Left>
-          <Height>0.54708cm</Height>
-          <Width>14.40722cm</Width>
-          <ZIndex>6</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <BottomBorder>
-              <Style>None</Style>
             </BottomBorder>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
@@ -846,6 +833,12 @@
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>nomeSecretaria</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="periodo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>periodo</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
