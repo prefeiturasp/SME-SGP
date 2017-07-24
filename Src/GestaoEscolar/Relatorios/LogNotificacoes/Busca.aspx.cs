@@ -98,7 +98,8 @@ namespace GestaoEscolar.Relatorios.LogNotificacoes
                              "&cfa_nome=" + UCComboAlerta1.Texto +
                              "&dataInicio=" + txtDataInicio.Text +
                              "&dataFim=" + txtDataFim.Text +
-                             "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) +
+                             "&periodo=" + txtDataInicio.Text + " - " + txtDataFim.Text +
+                             "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) +
                              "&usu_id=" + __SessionWEB.__UsuarioWEB.Usuario.usu_id +
                              "&gru_id=" + __SessionWEB.__UsuarioWEB.Grupo.gru_id +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
