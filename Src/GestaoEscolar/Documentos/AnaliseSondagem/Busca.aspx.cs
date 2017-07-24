@@ -657,7 +657,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagem
                              "&snd_id=" + UCComboSondagem.Valor +
                              "&dataInicio=" + txtDataInicio.Text +
                              "&dataFim=" + txtDataFim.Text +
-                             "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.UnidadeAdministrativa) +
+                             "&adm=" + (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao) +
                              "&usu_id=" + __SessionWEB.__UsuarioWEB.Usuario.usu_id +
                              "&gru_id=" + __SessionWEB.__UsuarioWEB.Grupo.gru_id +
                              "&suprimirPercentual=" + chkSuprimirPercentual.Checked +

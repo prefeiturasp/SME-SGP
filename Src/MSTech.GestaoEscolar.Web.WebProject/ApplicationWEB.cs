@@ -64,6 +64,7 @@ namespace MSTech.GestaoEscolar.Web.WebProject
         private const string appMinutosCacheFechamento = "appMinutosCacheFechamento";
         private const string appSincronizarPlanejamentoTablet = "AppSincronizarPlanejamentoTablet";
         private const string appUtilizarIntegracaoADUsuario = "appUtilizarIntegracaoADUsuario";
+        private const string PluginNotificacoes = "PluginNotificacoes";
         private const string AppCorNotaPosConselho = "AppCorNotaPosConselho";
         private const string AppCorAlunoForaDaRede = "AppCorAlunoForaDaRede";
         private const string AppCorDocenciaCompartilhada = "AppCorDocenciaCompartilhada";
@@ -983,6 +984,21 @@ namespace MSTech.GestaoEscolar.Web.WebProject
             {
                 if (Configuracoes.Keys.Contains(appUtilizarIntegracaoADUsuario))
                     return Convert.ToBoolean(Configuracoes[appUtilizarIntegracaoADUsuario].cfg_valor);
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Retorna a configuração que informa se vai exibir o plugin do notificações
+        /// Valor padrão = false;
+        /// </summary>
+        public static bool LigarPluginNotificacoes
+        {
+            get
+            {
+                if (Configuracoes.Keys.Contains(PluginNotificacoes))
+                    return Convert.ToBoolean(Configuracoes[PluginNotificacoes].cfg_valor);
 
                 return false;
             }
