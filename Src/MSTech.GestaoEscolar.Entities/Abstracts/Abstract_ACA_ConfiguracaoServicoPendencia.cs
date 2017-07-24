@@ -87,6 +87,12 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
         public virtual int csp_semRelatorioAtendimento { get; set; }
 
         /// <summary>
+		/// Aula sem objeto de conhecimento no plano de aula.
+		/// </summary>
+		[MSNotNullOrEmpty("[csp_semObjetoConhecimento] é obrigatório.")]
+        public virtual bool csp_semObjetoConhecimento { get; set; }
+
+        /// <summary>
         /// Situação do registro..
         /// </summary>
         [MSNotNullOrEmpty("[csp_situacao] é obrigatório.")]
