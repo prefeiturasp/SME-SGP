@@ -30,104 +30,111 @@ namespace MSTech.GestaoEscolar.DAL
             try
             {
                 #region PARAMETROS
-                
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Int32;
-                    Param.ParameterName = "@tne_id";
-                    Param.Size = 4;
-                    if (entity.tne_id > 0)
-                    {
-                        Param.Value = entity.tne_id;
-                    }
-                    else
-                    {
-                        Param.Value = DBNull.Value;
-                    }
-                    qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Int32;
-                    Param.ParameterName = "@tme_id";
-                    Param.Size = 4;
-                    if (entity.tme_id > 0)
-                    {
-                        Param.Value = entity.tme_id;
-                    }
-                    else
-                    {
-                        Param.Value = DBNull.Value;
-                    }
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tne_id";
+                Param.Size = 4;
+                if (entity.tne_id > 0)
+                {
+                    Param.Value = entity.tne_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Byte;
-                    Param.ParameterName = "@tur_tipo";
-                    Param.Size = 1;
-                    if (entity.tur_tipo > 0)
-                    {
-                        Param.Value = entity.tur_tipo;
-                    }
-                    else
-                    {
-                        Param.Value = DBNull.Value;
-                    }
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@tme_id";
+                Param.Size = 4;
+                if (entity.tme_id > 0)
+                {
+                    Param.Value = entity.tme_id;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Boolean;
-                    Param.ParameterName = "@csp_semNota";
-                    Param.Size = 1;
-                    Param.Value = entity.csp_semNota;
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Byte;
+                Param.ParameterName = "@tur_tipo";
+                Param.Size = 1;
+                if (entity.tur_tipo > 0)
+                {
+                    Param.Value = entity.tur_tipo;
+                }
+                else
+                {
+                    Param.Value = DBNull.Value;
+                }
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Boolean;
-                    Param.ParameterName = "@csp_semParecer";
-                    Param.Size = 1;
-                    Param.Value = entity.csp_semParecer;
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@csp_semNota";
+                Param.Size = 1;
+                Param.Value = entity.csp_semNota;
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Boolean;
-                    Param.ParameterName = "@csp_disciplinaSemAula";
-                    Param.Size = 1;
-                    Param.Value = entity.csp_disciplinaSemAula;
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@csp_semParecer";
+                Param.Size = 1;
+                Param.Value = entity.csp_semParecer;
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Boolean;
-                    Param.ParameterName = "@csp_semResultadoFinal";
-                    Param.Size = 1;
-                    Param.Value = entity.csp_semResultadoFinal;
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@csp_disciplinaSemAula";
+                Param.Size = 1;
+                Param.Value = entity.csp_disciplinaSemAula;
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Boolean;
-                    Param.ParameterName = "@csp_semPlanejamento";
-                    Param.Size = 1;
-                    Param.Value = entity.csp_semPlanejamento;
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@csp_semResultadoFinal";
+                Param.Size = 1;
+                Param.Value = entity.csp_semResultadoFinal;
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Boolean;
-                    Param.ParameterName = "@csp_semSintese";
-                    Param.Size = 1;
-                    Param.Value = entity.csp_semSintese;
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@csp_semPlanejamento";
+                Param.Size = 1;
+                Param.Value = entity.csp_semPlanejamento;
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Boolean;
-                    Param.ParameterName = "@csp_semPlanoAula";
-                    Param.Size = 1;
-                    Param.Value = entity.csp_semPlanoAula;
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@csp_semSintese";
+                Param.Size = 1;
+                Param.Value = entity.csp_semSintese;
+                qs.Parameters.Add(Param);
 
-                    Param = qs.NewParameter();
-                    Param.DbType = DbType.Int32;
-                    Param.ParameterName = "@csp_semRelatorioAtendimento";
-                    Param.Size = 4;
-                    Param.Value = entity.csp_semRelatorioAtendimento;
-                    qs.Parameters.Add(Param);
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@csp_semPlanoAula";
+                Param.Size = 1;
+                Param.Value = entity.csp_semPlanoAula;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Int32;
+                Param.ParameterName = "@csp_semRelatorioAtendimento";
+                Param.Size = 4;
+                Param.Value = entity.csp_semRelatorioAtendimento;
+                qs.Parameters.Add(Param);
+
+                Param = qs.NewParameter();
+                Param.DbType = DbType.Boolean;
+                Param.ParameterName = "@csp_semObjetoConhecimento";
+                Param.Size = 1;
+                Param.Value = entity.csp_semObjetoConhecimento;
+                qs.Parameters.Add(Param);
 
                 #endregion
 

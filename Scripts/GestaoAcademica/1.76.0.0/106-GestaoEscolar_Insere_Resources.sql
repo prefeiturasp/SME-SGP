@@ -95,6 +95,20 @@ SET XACT_ABORT ON
 		, @rcr_codigo = 0 
 		, @rcr_valorPadrao = 'Plano de aula não preenchido'
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ControleTurma.Busca.grvPendencias.lblPendencia.ObjetoConhecimento' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Objetos de conhecimento no plano de aula'
+
+	EXEC MS_InsereResource 
+		@rcr_chave = 'ConfiguracaoServicoPendencia.Cadastro.chkSemObjetoConhecimento.Text' 
+		, @rcr_NomeResource = 'Academico'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Sem objeto de conhecimento no plano de aula'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
