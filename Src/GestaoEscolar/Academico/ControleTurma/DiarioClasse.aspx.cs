@@ -4792,15 +4792,25 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
-                    imgSemPlanoAula.Visible = (string.IsNullOrEmpty(entity.tau_planoAula) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                    bool pendentePlanoAula = string.IsNullOrEmpty(entity.tau_planoAula)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                                                    || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
-                                                || ((listObjTudTau == null || listObjTudTau.Count == 0)
-                                                    && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado) 
-                                                    && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia 
-                                                    && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia);
-                    imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
+                                                    || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
+                    bool pendenteObjetoConhecimento = (listObjTudTau == null || listObjTudTau.Count == 0)
+                                                        && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                                                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                                                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia;
+                    imgSemPlanoAula.Visible = pendentePlanoAula || pendenteObjetoConhecimento;
+                    if ((UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia)
+                    {
+                        imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
+                    }
+                    else
+                    {
+                        imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.Listao.imgSemPlanoAula").ToString();
+                    }
                 }
                 ControlarExibicaoLegendaAulaSemPlano();
 
@@ -4822,7 +4832,19 @@ namespace GestaoEscolar.Academico.ControleTurma
                     break;
                 }
             }
-
+            if (divAvisoAulaSemPlano.Visible)
+            {
+                if ((UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                    && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                    && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia)
+                {
+                    imgLegendaAvisoAulaSemPlano.ToolTip = lit3.Text = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula").ToString();
+                }
+                else
+                {
+                    imgLegendaAvisoAulaSemPlano.ToolTip = lit3.Text = GetGlobalResourceObject("Academico", "ControleTurma.Listao.MensagemAulaSemPlanoAula").ToString();
+                }
+            }
         }
 
         /// <summary>
@@ -4952,11 +4974,12 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && entityTurmaAula.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
-                    imgSemPlanoAula.Visible = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                    bool pendentePlanoAula = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
-                    imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
+                    imgSemPlanoAula.Visible = pendentePlanoAula;
+                    imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.Listao.imgSemPlanoAula").ToString();
                 }
                 ControlarExibicaoLegendaAulaSemPlano();
 
@@ -6146,19 +6169,41 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (imgSemPlanoAula != null && dataAula.Date < DateTime.Now.Date &&
                         UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                     {
-                        imgSemPlanoAula.Visible = (semPlanoAula && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                        bool pendentePlanoAula = semPlanoAula
                                                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                                                        || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
-                                                    || (semObjetoConhecimento
-                                                        && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
-                                                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
-                                                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia);
-                        imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
+                                                        || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
+                        bool pendenteObjetoConhecimento = semObjetoConhecimento
+                                                            && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                                                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                                                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia;
+                        imgSemPlanoAula.Visible = pendentePlanoAula || pendenteObjetoConhecimento;
+                        if ((UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia)
+                        {
+                            imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
+                        }
+                        else
+                        {
+                            imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.Listao.imgSemPlanoAula").ToString();
+                        }
                     }
 
                     if (imgSemPlanoAula.Visible)
+                    {
                         divAvisoAulaSemPlano.Visible = true;
+                        if ((UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia)
+                        {
+                            imgLegendaAvisoAulaSemPlano.ToolTip = lit3.Text = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula").ToString();
+                        }
+                        else
+                        {
+                            imgLegendaAvisoAulaSemPlano.ToolTip = lit3.Text = GetGlobalResourceObject("Academico", "ControleTurma.Listao.MensagemAulaSemPlanoAula").ToString();
+                        }
+                    }
                 }
 
                 if (btnExcluir != null)
