@@ -1451,6 +1451,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
         private CFG_PermissaoModuloOperacao permissaoModuloLancamentoFrequencia;
         private CFG_PermissaoModuloOperacao permissaoModuloLancamentoFrequenciaInfantil;
+        private bool permissaoObjetoConhecimento = true;
 
         #endregion Propriedades
 
@@ -1618,6 +1619,19 @@ namespace GestaoEscolar.Academico.ControleTurma
                     }
                 }
             }
+            ACA_CurriculoPeriodo crp = new ACA_CurriculoPeriodo { cur_id = VS_EntitiesControleTurma.curso.cur_id, crr_id = VS_EntitiesControleTurma.curriculo.crr_id, crp_id = VS_EntitiesControleTurma.curriculoPeriodo.crp_id };
+            ACA_CurriculoPeriodoBO.GetEntity(crp);
+
+            ACA_TipoCiclo tci = new ACA_TipoCiclo { tci_id = crp.tci_id };
+            ACA_TipoCicloBO.GetEntity(tci);
+
+            ACA_TipoCurriculoPeriodo tcp = new ACA_TipoCurriculoPeriodo { tcp_id = crp.tcp_id };
+            ACA_TipoCurriculoPeriodoBO.GetEntity(tcp);
+
+            permissaoObjetoConhecimento = tci.tci_objetoAprendizagem && tcp.tcp_objetoAprendizagem
+                                            && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia;
             grvAulas.DataSource = dtAulasDistintas;
             grvAulas.DataBind();
 
@@ -4792,18 +4806,27 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && entity.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
+                    ACA_CurriculoPeriodo crp = new ACA_CurriculoPeriodo { cur_id = VS_EntitiesControleTurma.curso.cur_id, crr_id = VS_EntitiesControleTurma.curriculo.crr_id, crp_id = VS_EntitiesControleTurma.curriculoPeriodo.crp_id };
+                    ACA_CurriculoPeriodoBO.GetEntity(crp);
+
+                    ACA_TipoCiclo tci = new ACA_TipoCiclo { tci_id = crp.tci_id };
+                    ACA_TipoCicloBO.GetEntity(tci);
+
+                    ACA_TipoCurriculoPeriodo tcp = new ACA_TipoCurriculoPeriodo { tcp_id = crp.tcp_id };
+                    ACA_TipoCurriculoPeriodoBO.GetEntity(tcp);
+
+                    permissaoObjetoConhecimento = tci.tci_objetoAprendizagem && tcp.tcp_objetoAprendizagem
+                                                    && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                                                    && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
+                                                    && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia;
+
                     bool pendentePlanoAula = string.IsNullOrEmpty(entity.tau_planoAula)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
-                    bool pendenteObjetoConhecimento = (listObjTudTau == null || listObjTudTau.Count == 0)
-                                                        && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
-                                                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
-                                                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia;
+                    bool pendenteObjetoConhecimento = (listObjTudTau == null || listObjTudTau.Count == 0) && permissaoObjetoConhecimento;
                     imgSemPlanoAula.Visible = pendentePlanoAula || pendenteObjetoConhecimento;
-                    if ((UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
-                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
-                        && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia)
+                    if (permissaoObjetoConhecimento)
                     {
                         imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
                     }
@@ -4834,7 +4857,17 @@ namespace GestaoEscolar.Academico.ControleTurma
             }
             if (divAvisoAulaSemPlano.Visible)
             {
-                if ((UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
+                ACA_CurriculoPeriodo crp = new ACA_CurriculoPeriodo { cur_id = VS_EntitiesControleTurma.curso.cur_id, crr_id = VS_EntitiesControleTurma.curriculo.crr_id, crp_id = VS_EntitiesControleTurma.curriculoPeriodo.crp_id };
+                ACA_CurriculoPeriodoBO.GetEntity(crp);
+
+                ACA_TipoCiclo tci = new ACA_TipoCiclo { tci_id = crp.tci_id };
+                ACA_TipoCicloBO.GetEntity(tci);
+
+                ACA_TipoCurriculoPeriodo tcp = new ACA_TipoCurriculoPeriodo { tcp_id = crp.tcp_id };
+                ACA_TipoCurriculoPeriodoBO.GetEntity(tcp);
+
+                if (tci.tci_objetoAprendizagem && tcp.tcp_objetoAprendizagem
+                    && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
                     && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
                     && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia)
                 {
@@ -6173,14 +6206,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                         || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
-                        bool pendenteObjetoConhecimento = semObjetoConhecimento
-                                                            && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
-                                                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
-                                                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia;
+                        bool pendenteObjetoConhecimento = semObjetoConhecimento && permissaoObjetoConhecimento;
                         imgSemPlanoAula.Visible = pendentePlanoAula || pendenteObjetoConhecimento;
-                        if ((UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
-                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
-                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia)
+                        if (permissaoObjetoConhecimento)
                         {
                             imgSemPlanoAula.ToolTip = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.imgSemPlanoAula").ToString();
                         }
@@ -6193,9 +6221,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     if (imgSemPlanoAula.Visible)
                     {
                         divAvisoAulaSemPlano.Visible = true;
-                        if ((UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
-                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
-                            && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia)
+                        if (permissaoObjetoConhecimento)
                         {
                             imgLegendaAvisoAulaSemPlano.ToolTip = lit3.Text = GetGlobalResourceObject("Academico", "ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula").ToString();
                         }
