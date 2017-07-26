@@ -37,7 +37,7 @@
         <uc4:UCComboQtdePaginacao ID="UCComboQtdePaginacao" runat="server" OnIndexChanged="UCComboQtdePaginacao_IndexChanged"
             ComboDefaultValue="true" />
         <asp:GridView ID="grvConfigServPendencia" runat="server" AutoGenerateColumns="False" DataSourceID="odsConfigServPendencia"
-            DataKeyNames="csp_id, tne_id, tme_id, tur_tipo, csp_semNota, csp_semParecer, csp_disciplinaSemAula, csp_semResultadoFinal, csp_semPlanejamento, csp_semSintese, csp_semPlanoAula,csp_semRelatorioAtendimento"
+            DataKeyNames="csp_id, tne_id, tme_id, tur_tipo, csp_semNota, csp_semParecer, csp_disciplinaSemAula, csp_semResultadoFinal, csp_semPlanejamento, csp_semSintese, csp_semPlanoAula, csp_semRelatorioAtendimento, csp_semObjetoConhecimento"
             AllowPaging="True" EmptyDataText="<%$ Resources:Academico, ConfiguracaoServicoPendencia.Busca.grvConfigServPendencia.EmptyDataText %>" AllowSorting="True"
             OnDataBound="grvConfigServPendencia_DataBound" OnRowDataBound="grvConfigServPendencia_RowDataBound" OnRowCommand="grvConfigServPendencia_RowCommand">
             <Columns>

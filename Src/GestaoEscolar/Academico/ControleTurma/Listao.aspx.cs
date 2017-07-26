@@ -1393,7 +1393,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                            where (bool)dr["semPlanoAula"] && Convert.ToDateTime(dr["data"]).Date < DateTime.Now
                                            select dr).Count() > 0;
 
-                if (existeAulaSemPlano && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                if (existeAulaSemPlano
                     && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                         || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                         || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)))
@@ -4191,7 +4191,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && hdfSemPlanoAula != null &&
                     Convert.ToDateTime(lblData.Text).Date < DateTime.Now.Date)
                 {
-                    imgSemPlanoAula.Visible = Convert.ToBoolean(hdfSemPlanoAula.Value) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                    imgSemPlanoAula.Visible = Convert.ToBoolean(hdfSemPlanoAula.Value)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));

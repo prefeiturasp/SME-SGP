@@ -293,6 +293,7 @@ namespace GestaoEscolar.Academico.ConfiguracaoServicoPendencia
                         pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanejamento"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanejamento.Text").ToString() + " / ";
                         pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semSintese"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemSinteseFinal.Text").ToString() + " / ";
                         pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semPlanoAula"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemPlanoAula.Text").ToString() + " / ";
+                        pendencias += grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semObjetoConhecimento"].ToString() == false.ToString() ? "" : GetGlobalResourceObject("Academico", "ConfiguracaoServicoPendencia.Cadastro.chkSemObjetoConhecimento.Text").ToString() + " / ";
 
                         eConfiguracaoServicoPendenciaSemRelatorioAtendimento pendenciaRelatorio =
                             (eConfiguracaoServicoPendenciaSemRelatorioAtendimento)Enum.Parse(typeof(eConfiguracaoServicoPendenciaSemRelatorioAtendimento), grvConfigServPendencia.DataKeys[e.Row.RowIndex].Values["csp_semRelatorioAtendimento"].ToString());
