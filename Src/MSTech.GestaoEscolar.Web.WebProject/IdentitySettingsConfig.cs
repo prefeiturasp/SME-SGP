@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Configuration;
-using System.IO;
-using System.Web.Configuration;
+﻿using System.Web.Configuration;
 
 namespace MSTech.GestaoEscolar.Web.WebProject
 {
