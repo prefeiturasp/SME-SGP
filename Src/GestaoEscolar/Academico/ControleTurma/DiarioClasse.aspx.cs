@@ -1453,6 +1453,27 @@ namespace GestaoEscolar.Academico.ControleTurma
         private CFG_PermissaoModuloOperacao permissaoModuloLancamentoFrequenciaInfantil;
         private bool permissaoObjetoConhecimento = true;
 
+        /// <summary>
+        /// Guarda as notas de relatório.
+        /// </summary>
+        private List<ACA_ConfiguracaoServicoPendencia> VS_ListConfiguracaoServicoPendencia
+        {
+            get
+            {
+                if (ViewState["VS_ListConfiguracaoServicoPendencia"] == null)
+                {
+                    ViewState["VS_ListConfiguracaoServicoPendencia"] = ACA_ConfiguracaoServicoPendenciaBO.SelectTodasBy_tne_id_tme_id_tur_tipo(VS_EntitiesControleTurma.curso.tne_id, VS_EntitiesControleTurma.curso.tme_id, UCControleTurma1.VS_tur_tipo);
+                }
+                
+                return (List<ACA_ConfiguracaoServicoPendencia>)ViewState["VS_ListConfiguracaoServicoPendencia"];
+            }
+
+            set
+            {
+                ViewState["VS_ListConfiguracaoServicoPendencia"] = value;
+            }
+        }
+
         #endregion Propriedades
 
         #region Métodos
@@ -4820,11 +4841,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                     && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
                                                     && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia;
 
-                    bool pendentePlanoAula = string.IsNullOrEmpty(entity.tau_planoAula)
+                    bool pendentePlanoAula = string.IsNullOrEmpty(entity.tau_planoAula) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
-                    bool pendenteObjetoConhecimento = (listObjTudTau == null || listObjTudTau.Count == 0) && permissaoObjetoConhecimento;
+                    bool pendenteObjetoConhecimento = (listObjTudTau == null || listObjTudTau.Count == 0) && permissaoObjetoConhecimento && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semObjetoConhecimento);
                     imgSemPlanoAula.Visible = pendentePlanoAula || pendenteObjetoConhecimento;
                     if (permissaoObjetoConhecimento)
                     {
@@ -5007,7 +5028,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && entityTurmaAula.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
-                    bool pendentePlanoAula = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula)
+                    bool pendentePlanoAula = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula)
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
@@ -5522,6 +5543,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 imgLegendaEventoSemAtividade.ToolTip = string.Empty;
                 LabelSinteseAula.Text += ApplicationWEB.TextoAsteriscoObrigatorio;
+                VS_ListConfiguracaoServicoPendencia = null;
 
                 try
                 {
@@ -7897,6 +7919,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 string[] valor = UCControleTurma1.ValorTurmas.Split(';');
                 if (valor.Length > 4)
                 {
+                    VS_ListConfiguracaoServicoPendencia = null;
                     byte tud_tipo = Convert.ToByte(valor[4]);
                     bool dialogDocCompartilhada = false;
                     if (tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada)
