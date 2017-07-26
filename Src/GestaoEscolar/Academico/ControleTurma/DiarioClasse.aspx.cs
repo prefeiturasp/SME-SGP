@@ -5543,6 +5543,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                 imgLegendaEventoSemAtividade.ToolTip = string.Empty;
                 LabelSinteseAula.Text += ApplicationWEB.TextoAsteriscoObrigatorio;
+                VS_ListConfiguracaoServicoPendencia = null;
 
                 try
                 {
@@ -7918,6 +7919,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                 string[] valor = UCControleTurma1.ValorTurmas.Split(';');
                 if (valor.Length > 4)
                 {
+                    VS_ListConfiguracaoServicoPendencia = null;
                     byte tud_tipo = Convert.ToByte(valor[4]);
                     bool dialogDocCompartilhada = false;
                     if (tud_tipo == (byte)ACA_CurriculoDisciplinaTipo.DocenciaCompartilhada)
