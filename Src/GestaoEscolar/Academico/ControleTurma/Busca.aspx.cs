@@ -1726,6 +1726,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento
                             //|| item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
                             )
                             && item.tud_tipo == (byte)TurmaDisciplinaTipo.ComponenteRegencia
@@ -1765,6 +1766,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
                                 || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                                || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento
                             //|| item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
                             )
                             && item.tud_id == tud_id))
@@ -1789,20 +1791,20 @@ namespace GestaoEscolar.Academico.ControleTurma
                         }
                     }
 
-                    if (VS_listaPendencias[grid.ClientID].Any(item =>
-                            item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
-                            && item.tud_id == tud_id) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                        &&
-                        (
-                            // Mesma regra para exibir o ícone no Listão e no Diário de Classe.
-                            __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
-                            || Convert.ToInt32(grid.DataKeys[row.RowIndex].Values["tne_id"]) != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                            || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
-                        ))
-                    {
-                        if (imgPendenciaPlanoAula != null)
-                            imgPendenciaPlanoAula.Visible = true;
-                    }
+                    //if (VS_listaPendencias[grid.ClientID].Any(item =>
+                    //        item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                    //        && item.tud_id == tud_id) && ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                    //    &&
+                    //    (
+                    //        // Mesma regra para exibir o ícone no Listão e no Diário de Classe.
+                    //        __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
+                    //        || Convert.ToInt32(grid.DataKeys[row.RowIndex].Values["tne_id"]) != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                    //        || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
+                    //    ))
+                    //{
+                    //    if (imgPendenciaPlanoAula != null)
+                    //        imgPendenciaPlanoAula.Visible = true;
+                    //}
                 }
 
                 if (!possuiPendencia && VS_listaPendencias[grid.ClientID].Any(item =>
@@ -1817,6 +1819,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
                         || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
                         || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                        || item.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento
                     )))
                 {
                     possuiPendencia = true;
@@ -2395,7 +2398,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
                                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
                                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
-                                        //|| p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                                            //|| p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioAEE
+                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioNAAPA
+                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
+                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
+                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento
                                         )
                                     )
                                 ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
@@ -2410,33 +2419,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                     tud_idRegencia = p.tud_idRegencia,
                                     tud_tipo = p.tud_tipo
                                 }).Select(p => p.Key)
-                                .OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ToList();
-
-                                pendencias.AddRange
-                                (
-                                    VS_listaPendencias[grid.ClientID].FindAll
-                                    (
-                                        p =>
-                                        p.tud_id == tud_id
-                                        &&
-                                        (
-
-
-                                            p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioAEE
-                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioNAAPA
-                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
-                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
-                                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
-                                        )
-                                    ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
-                                    {
-                                        tud_id = p.tud_id,
-                                        tipo_ordem = p.tipo_ordem,
-                                        tpc_id = p.tpc_id,
-                                        tpc_ordem = p.tpc_ordem,
-                                        tipoPendencia = p.tipoPendencia
-                                    }).Select(p => p.Key).OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ToList()
-                                );
+                                .OrderBy(p => p.tpc_ordem).ThenBy(p => p.tipo_ordem).ToList();
                             }
                             else
                             {
@@ -2456,7 +2439,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                 || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
                                                 || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
                                                 || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
-                                            //|| p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                                                //|| p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioAEE
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioNAAPA
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento
                                             )
                                         )
                                     ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
@@ -2471,33 +2460,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                         tud_idRegencia = p.tud_idRegencia,
                                         tud_tipo = p.tud_tipo
                                     }).Select(p => p.First())
-                                    .OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ThenBy(p => p.tds_ordem).ToList();
-
-                                    pendencias.AddRange
-                                   (
-                                       VS_listaPendencias[grid.ClientID].FindAll
-                                       (
-                                           p =>
-                                           p.tud_idRegencia == tud_id
-                                           &&
-                                           (
-
-
-                                               p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioAEE
-                                               || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioNAAPA
-                                               || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
-                                               || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
-                                               || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
-                                           )
-                                       ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
-                                       {
-                                           tud_idRegencia = p.tud_idRegencia,
-                                           tipo_ordem = p.tipo_ordem,
-                                           tpc_id = p.tpc_id,
-                                           tpc_ordem = p.tpc_ordem,
-                                           tipoPendencia = p.tipoPendencia
-                                       }).Select(p => p.First()).OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ToList()
-                                   );
+                                    .OrderBy(p => p.tpc_ordem).ThenBy(p => p.tipo_ordem).ThenBy(p => p.tds_ordem).ToList();
                                 }
                                 else
                                 {
@@ -2512,7 +2475,13 @@ namespace GestaoEscolar.Academico.ControleTurma
                                                 || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.DisciplinaSemAula
                                                 || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemSintese
                                                 || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemResultadoFinal
-                                            //|| p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                                                //|| p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemParecer
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioAEE
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioNAAPA
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                                                || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento
                                             )
                                         )
                                     ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
@@ -2527,33 +2496,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                                         tud_idRegencia = p.tud_idRegencia,
                                         tud_tipo = p.tud_tipo
                                     }).Select(p => p.First())
-                                    .OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ThenBy(p => p.tud_nome).ToList();
-
-                                    pendencias.AddRange
-                                   (
-                                       VS_listaPendencias[grid.ClientID].FindAll
-                                       (
-                                           p =>
-                                           p.tud_idRegencia == tud_id
-                                           &&
-                                           (
-
-
-                                               p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioAEE
-                                               || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioNAAPA
-                                               || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
-                                               || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
-                                               || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
-                                           )
-                                       ).GroupBy(p => new REL_TurmaDisciplinaSituacaoFechamento_Pendencia
-                                       {
-                                           tud_idRegencia = p.tud_idRegencia,
-                                           tipo_ordem = p.tipo_ordem,
-                                           tpc_id = p.tpc_id,
-                                           tpc_ordem = p.tpc_ordem,
-                                           tipoPendencia = p.tipoPendencia
-                                       }).Select(p => p.First()).OrderBy(p => p.tipo_ordem).ThenBy(p => p.tpc_ordem).ToList()
-                                   );
+                                    .OrderBy(p => p.tpc_ordem).ThenBy(p => p.tipo_ordem).ThenBy(p => p.tud_nome).ToList();
                                 }
                             }
 
@@ -2594,6 +2537,11 @@ namespace GestaoEscolar.Academico.ControleTurma
                                 {
                                     // Redireciona para o Listão de plano de aula
                                     RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_Listao").ToString(), "Listao", grid, index.ToString(), true, pendencia.tipoPendencia, pendencia.tpc_id);
+                                }
+                                else if (pendencia.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento)
+                                {
+                                    // Redireciona para o Diário de classe
+                                    RedirecionaTelaMinhasTurmas("Diário de Classe", "DiarioClasse", grid, index.ToString(), true, pendencia.tipoPendencia, pendencia.tpc_id);
                                 }
                             }
                         }
@@ -3796,6 +3744,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento
                         )
                     ).Select(p => p.tud_id);
 
@@ -3819,6 +3768,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPPeriodico
                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioRPEncerramento
                             || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula
+                            || p.tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento
                         )
                     ).Select(p => p.tud_idRegencia);
 
@@ -3900,6 +3850,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                     else if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.PendenteRelatorioNAAPA)
                     {
                         lblPendencia.Text = "Lançamento de relatório NAAPA";
+                    }
+                    else if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento)
+                    {
+                        lblPendencia.Text = GetGlobalResourceObject("Academico", "ControleTurma.Busca.grvPendencias.lblPendencia.ObjetoConhecimento").ToString();
                     }
                 }
 
@@ -3988,10 +3942,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 {
                     RedirecionaTelaMinhasTurmas("Alunos", "Alunos", gridPendencia, hdnIndexTurma.Value, true, pendencia.tipoPendencia, pendencia.tpc_id, pendencia.tud_id);
                 }
-                else if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemPlanoAula)
+                else if (tipoPendencia == (byte)REL_TurmaDisciplinaSituacaoFechamentoTipoPendencia.SemObjetoConhecimento)
                 {
-                    // Redireciona para o Listão de plano de aula
-                    RedirecionaTelaMinhasTurmas(GetGlobalResourceObject("Mensagens", "MSG_Listao").ToString(), "Listao", gridPendencia, hdnIndexTurma.Value, true, pendencia.tipoPendencia, pendencia.tpc_id);
+                    // Redireciona para o Diário de Classe
+                    RedirecionaTelaMinhasTurmas("Diário de Classe", "DiarioClasse", gridPendencia, hdnIndexTurma.Value, true, pendencia.tipoPendencia, pendencia.tpc_id);
                 }
             }
         }

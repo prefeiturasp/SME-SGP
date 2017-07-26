@@ -91,6 +91,7 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             chkSemResultadoFinal.Checked = entity.csp_semResultadoFinal;
             chkSemSintese.Checked = entity.csp_semSintese;
             chkSemPlanoAula.Checked = entity.csp_semPlanoAula;
+            chkSemObjetoConhecimento.Checked = entity.csp_semObjetoConhecimento;
 
             foreach (ListItem item in cblSemRelatorioAtendimento.Items)
             {
@@ -140,6 +141,7 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
             entity.csp_semResultadoFinal = chkSemResultadoFinal.Checked;
             entity.csp_semSintese = chkSemSintese.Checked;
             entity.csp_semPlanoAula = chkSemPlanoAula.Checked;
+            entity.csp_semObjetoConhecimento = chkSemObjetoConhecimento.Checked;
             entity.IsNew = (VS_csp_id > 0) ? false : true;
 
             var semRelatorioAtendimento = from ListItem item in cblSemRelatorioAtendimento.Items
@@ -237,6 +239,7 @@ public partial class Academico_ConfiguracaoServicoPendencia_Cadastro : MotherPag
                         chkSemPlanoAula.Checked ||
                         chkSemResultadoFinal.Checked ||
                         chkSemSintese.Checked ||
+                        chkSemObjetoConhecimento.Checked ||
                         cblSemRelatorioAtendimento.Items.Cast<ListItem>().Any(p => p.Selected);
 
         if (!(UCComboTipoNivelEnsino.Valor > 0 || UCComboTipoModalidadeEnsino.Valor > 0 || UCComboTipoTurma.Valor > 0))
