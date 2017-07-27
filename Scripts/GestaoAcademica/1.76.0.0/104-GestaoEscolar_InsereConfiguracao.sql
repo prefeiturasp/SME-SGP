@@ -1,4 +1,4 @@
-USE [PUB_DEV_SPO_GestaoPedagogica]
+USE [GestaoPedagogica]
 GO
 
 --Iniciar transação
