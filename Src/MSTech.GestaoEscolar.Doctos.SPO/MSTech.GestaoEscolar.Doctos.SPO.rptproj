@@ -126,6 +126,10 @@
       <FullPath>IndicadorFrequenciaPeriodoCurso.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>LogNotificacoes.rdl</Name>
+      <FullPath>LogNotificacoes.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>QuantitativoSugestoes.rdl</Name>
       <FullPath>QuantitativoSugestoes.rdl</FullPath>
     </ProjectItem>
@@ -174,8 +178,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>LogNotificacoes.rdl</Name>
-      <FullPath>LogNotificacoes.rdl</FullPath>
+      <Name>FrequenciaEfetivada.rdl</Name>
+      <FullPath>FrequenciaEfetivada.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

@@ -12,7 +12,7 @@ using MSTech.Validation.Exceptions;
 using MSTech.GestaoEscolar.Entities;
 using MSTech.CoreSSO.Entities;
 
-namespace GestaoEscolar.Relatorios.FrequenciaMensal
+namespace GestaoEscolar.Relatorios.FrequenciaEfetivada
 {
     public partial class Busca : MotherPageLogado
     {
@@ -337,7 +337,7 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
             {
                 UCComboCurriculoPeriodo.Valor = new[] { -1, -1, -1 };
                 UCComboCurriculoPeriodo.PermiteEditar = false;
-                
+
                 if (UCCCursoCurriculo.Valor[0] > 0 && UCCCursoCurriculo.Valor[1] > 0)
                 {
                     UCComboCurriculoPeriodo._Load(UCCCursoCurriculo.Valor[0], UCCCursoCurriculo.Valor[1]);
@@ -358,7 +358,7 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
                 lblMessage.Text = UtilBO.GetErroMessage("Erro ao tentar carregar os dados.", UtilBO.TipoMensagem.Erro);
             }
         }
-        
+
         /// <summary>
         /// Verifica alteracao do index do combo curriculoperiodo e trata o combo turma
         /// </summary>
@@ -602,10 +602,10 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
 
                 if (string.IsNullOrEmpty(txtDataInicio.Text) || !DateTime.TryParse(txtDataInicio.Text, out dataInicio))
                     throw new ValidationException("Data inicial deve estar no formato DD/MM/AAAA.");
-                
+
                 if (string.IsNullOrEmpty(txtDataFim.Text) || !DateTime.TryParse(txtDataFim.Text, out dataFim))
                     throw new ValidationException("Data final deve estar no formato DD/MM/AAAA.");
-                
+
                 if (dataInicio > dataFim)
                     throw new ValidationException("Data final do período deve ser maior ou igual à data inicial.");
 
@@ -629,7 +629,7 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
                     dre = uadSup.uad_nome;
                 }
 
-                report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.FrequenciaMensal).ToString();
+                report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.FrequenciaEfetivada).ToString();
                 parametros = "tur_id=" + UCComboTurma.Valor[0] +
                              "&tur_codigo=" + UCComboTurma.Texto +
                              "&tud_nome=" + (UCComboTurmaDisciplina.Valor > 0 ? UCComboTurmaDisciplina.Texto : "Todos") +
@@ -677,7 +677,7 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
             filtros.Add("dataIncio", Convert.ToDateTime(txtDataInicio.Text).ToString());
             filtros.Add("dataFim", Convert.ToDateTime(txtDataFim.Text).ToString());
 
-            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.FrequenciaMensal, Filtros = filtros };
+            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.FrequenciaEfetivada, Filtros = filtros };
 
         }
 
@@ -688,7 +688,7 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
         {
             try
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.FrequenciaMensal)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.FrequenciaEfetivada)
                 {
                     // Recuperar busca realizada e pesquisar automaticamente
                     string valor, valor2, valor3;
@@ -765,7 +765,7 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
                     __SessionWEB.BuscaRealizada.Filtros.TryGetValue("dataFim", out valor3);
                     txtDataInicio.Text = valor2;
                     txtDataFim.Text = valor3;
-                    
+
                     updFiltros.Update();
                 }
             }
