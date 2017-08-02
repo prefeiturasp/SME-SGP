@@ -400,14 +400,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox24">
+                    <Textbox Name="frequencia">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=IIF(CStr(Fields!frequencia.Value) = "", "-", CStr(Fields!frequencia.Value) + "%")</Value>
                               <Style>
                                 <FontSize>8.5pt</FontSize>
                               </Style>
@@ -418,7 +418,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox24</rd:DefaultName>
+                      <rd:DefaultName>frequencia</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -560,7 +560,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Frequência mensal</Value>
+                  <Value>=Parameters!tituloRelatorio.Value</Value>
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -766,7 +766,7 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=CStr(Day(Parameters!dataInicio.Value)) + "/" + CStr(Month(Parameters!dataInicio.Value)) + "/" + CStr(Year(Parameters!dataInicio.Value))</Value>
+                  <Value>=IIF(Day(Parameters!dataInicio.Value) &lt; 10, "0" , "") + CStr(Day(Parameters!dataInicio.Value)) + "/" + IIF(Month(Parameters!dataInicio.Value) &lt; 10, "0", "") + CStr(Month(Parameters!dataInicio.Value)) + "/" + CStr(Year(Parameters!dataInicio.Value))</Value>
                   <Style>
                     <FontSize>9pt</FontSize>
                   </Style>
@@ -791,7 +791,7 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=CStr(Day(Parameters!dataFim.Value)) + "/" + CStr(Month(Parameters!dataFim.Value)) + "/" + CStr(Year(Parameters!dataFim.Value))</Value>
+                  <Value>=IIF(Day(Parameters!dataFim.Value) &lt; 10, "0", "") + CStr(Day(Parameters!dataFim.Value)) + "/" + IIF(Month(Parameters!dataFim.Value) &lt; 10, "0", "") + CStr(Month(Parameters!dataFim.Value)) + "/" + CStr(Year(Parameters!dataFim.Value))</Value>
                   <Style>
                     <FontSize>9pt</FontSize>
                   </Style>
@@ -810,7 +810,7 @@
               <Style>None</Style>
             </Border>
             <BottomBorder>
-              <Style>Solid</Style>
+              <Style>None</Style>
             </BottomBorder>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
@@ -860,7 +860,7 @@
               <Style>None</Style>
             </Border>
             <BottomBorder>
-              <Style>Solid</Style>
+              <Style>None</Style>
             </BottomBorder>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
@@ -981,6 +981,10 @@
           <DataField>numeroAulasNaoEfetivadas</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="frequencia">
+          <DataField>frequencia</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
   </DataSets>
@@ -1045,6 +1049,10 @@
     <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documento Oficial</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tituloRelatorio">
+      <DataType>String</DataType>
+      <Prompt>tituloRelatorio</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
