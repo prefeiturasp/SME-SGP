@@ -545,7 +545,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                         hdnIndiceRptTurmas.Value = indiceRptTurmas.ToString();
                     }
 
-                    var turmasRecuperacao = lista.Where(x => x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno).ToList();
+                    var turmasRecuperacao = lista.Where(x => x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && (x.tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno || x.tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)).ToList();
 
                     grvProjetosRecParalela.DataSource = turmasRecuperacao;
                     grvProjetosRecParalela.DataBind();
