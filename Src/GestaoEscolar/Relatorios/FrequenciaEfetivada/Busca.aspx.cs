@@ -638,6 +638,7 @@ namespace GestaoEscolar.Relatorios.FrequenciaEfetivada
                              "&dataFim=" + txtDataFim.Text +
                              "&dre=" + dre +
                              "&escola=" + UCComboUAEscola.TextoComboEscola +
+                             "&tituloRelatorio=" + Modulo.mod_nome +
                              "&logo=" + String.Concat(MSTech.GestaoEscolar.BLL.CFG_ServidorRelatorioBO.CarregarServidorRelatorioPorEntidade(__SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo).srr_pastaRelatorios.ToString()
                                                    , ApplicationWEB.LogoRelatorioSSRS) +
                              "&nomeMunicipio=" + GetGlobalResourceObject("Reporting", "Reporting.DocDctSubCabecalhoRetrato.Municipio") +

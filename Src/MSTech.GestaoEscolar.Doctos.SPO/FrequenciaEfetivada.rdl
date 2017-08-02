@@ -53,7 +53,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-        <Top>1.63902cm</Top>
+        <Top>2.23902cm</Top>
         <Height>0.99688cm</Height>
         <Width>19cm</Width>
         <Visibility>
@@ -71,7 +71,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>8.33586cm</Width>
+              <Width>9cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -80,7 +80,7 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.16415cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -114,7 +114,11 @@
                         <Border>
                           <Style>Solid</Style>
                         </Border>
+                        <BottomBorder>
+                          <Style>None</Style>
+                        </BottomBorder>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Bottom</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -156,43 +160,10 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <ColSpan>2</ColSpan>
                   </CellContents>
                 </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox17">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Qtde. de faltas</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox17</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
+                <TablixCell />
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox19">
@@ -202,7 +173,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Qtde. de chamadas não efetivadas</Value>
+                              <Value>Qtde. de faltas</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -226,18 +197,61 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <ColSpan>2</ColSpan>
                   </CellContents>
                 </TablixCell>
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox23">
+                    <Textbox Name="Textbox28">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Frequência</Value>
+                              <Value />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox28</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <TopBorder>
+                          <Style>None</Style>
+                        </TopBorder>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox29">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Efetivadas</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -249,7 +263,112 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox23</rd:DefaultName>
+                      <rd:DefaultName>Textbox29</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox30">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Não efetivadas</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox30</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox37">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Efetivadas</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox29</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox38">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Não efetivadas</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox30</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -301,14 +420,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="numeroAulas">
+                    <Textbox Name="numeroAulasEfetivadas">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!numeroAulas.Value</Value>
+                              <Value>=Fields!numeroAulasEfetivadas.Value</Value>
                               <Style>
                                 <FontSize>8.5pt</FontSize>
                               </Style>
@@ -319,40 +438,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>numeroAulas</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="faltas">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!faltas.Value</Value>
-                              <Style>
-                                <FontSize>8.5pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>faltas</rd:DefaultName>
+                      <rd:DefaultName>numeroAulasEfetivadas</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -400,14 +486,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox24">
+                    <Textbox Name="faltasEfetivadas">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!faltasEfetivadas.Value</Value>
                               <Style>
                                 <FontSize>8.5pt</FontSize>
                               </Style>
@@ -418,7 +504,40 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox24</rd:DefaultName>
+                      <rd:DefaultName>faltasEfetivadas</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="faltas">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!faltasNaoEfetivadas.Value</Value>
+                              <Style>
+                                <FontSize>8.5pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>faltas</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -450,6 +569,9 @@
               <KeepWithGroup>After</KeepWithGroup>
             </TablixMember>
             <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+            </TablixMember>
+            <TablixMember>
               <Group Name="Details" />
               <SortExpressions>
                 <SortExpression>
@@ -461,7 +583,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.03902cm</Top>
-        <Height>1.6cm</Height>
+        <Height>2.2cm</Height>
         <Width>19cm</Width>
         <ZIndex>1</ZIndex>
         <Visibility>
@@ -474,7 +596,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.6359cm</Height>
+    <Height>3.2359cm</Height>
     <Style />
   </Body>
   <Width>19cm</Width>
@@ -560,7 +682,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Frequência mensal</Value>
+                  <Value>=Parameters!tituloRelatorio.Value</Value>
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -766,7 +888,7 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=CStr(Day(Parameters!dataInicio.Value)) + "/" + CStr(Month(Parameters!dataInicio.Value)) + "/" + CStr(Year(Parameters!dataInicio.Value))</Value>
+                  <Value>=IIF(Day(Parameters!dataInicio.Value) &lt; 10, "0" , "") + CStr(Day(Parameters!dataInicio.Value)) + "/" + IIF(Month(Parameters!dataInicio.Value) &lt; 10, "0", "") + CStr(Month(Parameters!dataInicio.Value)) + "/" + CStr(Year(Parameters!dataInicio.Value))</Value>
                   <Style>
                     <FontSize>9pt</FontSize>
                   </Style>
@@ -791,7 +913,7 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=CStr(Day(Parameters!dataFim.Value)) + "/" + CStr(Month(Parameters!dataFim.Value)) + "/" + CStr(Year(Parameters!dataFim.Value))</Value>
+                  <Value>=IIF(Day(Parameters!dataFim.Value) &lt; 10, "0", "") + CStr(Day(Parameters!dataFim.Value)) + "/" + IIF(Month(Parameters!dataFim.Value) &lt; 10, "0", "") + CStr(Month(Parameters!dataFim.Value)) + "/" + CStr(Year(Parameters!dataFim.Value))</Value>
                   <Style>
                     <FontSize>9pt</FontSize>
                   </Style>
@@ -810,7 +932,7 @@
               <Style>None</Style>
             </Border>
             <BottomBorder>
-              <Style>Solid</Style>
+              <Style>None</Style>
             </BottomBorder>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
@@ -860,7 +982,7 @@
               <Style>None</Style>
             </Border>
             <BottomBorder>
-              <Style>Solid</Style>
+              <Style>None</Style>
             </BottomBorder>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
@@ -969,16 +1091,20 @@
           <DataField>pes_nome</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="numeroAulas">
-          <DataField>numeroAulas</DataField>
+        <Field Name="numeroAulasEfetivadas">
+          <DataField>numeroAulasEfetivadas</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="faltas">
-          <DataField>faltas</DataField>
+        <Field Name="faltasEfetivadas">
+          <DataField>faltasEfetivadas</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="numeroAulasNaoEfetivadas">
           <DataField>numeroAulasNaoEfetivadas</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="faltasNaoEfetivadas">
+          <DataField>faltasNaoEfetivadas</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
@@ -1045,6 +1171,10 @@
     <ReportParameter Name="documentoOficial">
       <DataType>Boolean</DataType>
       <Prompt>documento Oficial</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="tituloRelatorio">
+      <DataType>String</DataType>
+      <Prompt>tituloRelatorio</Prompt>
     </ReportParameter>
   </ReportParameters>
   <EmbeddedImages>
