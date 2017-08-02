@@ -2313,6 +2313,11 @@ tr.trDisciplina.global td {
     .cicloEja .divPerfil {
         width: 210mm;
     }
+    
+    /* Ciclo um sem caixa proposta */
+    .cicloLayoutPadrao .divPerfil {
+        width: 210mm;
+    }
 
     .divProposta {
         float: none;
