@@ -114,6 +114,10 @@
       <FullPath>DocDctSubRelTarjetaBimestralRegencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>FrequenciaEfetivada.rdl</Name>
+      <FullPath>FrequenciaEfetivada.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>FrequenciaMensal.rdl</Name>
       <FullPath>FrequenciaMensal.rdl</FullPath>
     </ProjectItem>
@@ -178,8 +182,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>FrequenciaEfetivada.rdl</Name>
-      <FullPath>FrequenciaEfetivada.rdl</FullPath>
+      <Name>AnaliseSondagemDRE.rdl</Name>
+      <FullPath>AnaliseSondagemDRE.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
