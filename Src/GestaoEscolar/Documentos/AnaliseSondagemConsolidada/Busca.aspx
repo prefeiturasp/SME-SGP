@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Busca.aspx.cs" Inherits="GestaoEscolar.Documentos.AnaliseSondagemDRE.Busca" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeBehind="Busca.aspx.cs" Inherits="GestaoEscolar.Documentos.AnaliseSondagemConsolidada.Busca" %>
 
 <%@ Register Src="~/WebControls/Mensagens/UCCamposObrigatorios.ascx" TagPrefix="uc2" TagName="UCCamposObrigatorios" %>
 <%@ Register Src="~/WebControls/Combos/UCComboUAEscola.ascx" TagPrefix="uc1" TagName="UCComboUAEscola" %>
@@ -23,7 +23,6 @@
         <ContentTemplate>
             <fieldset id="fdsRelatorioSondagem" runat="server" style="margin-left: 10px;">
                 <legend id="relTitulo" runat="server"></legend>
-                <asp:Label ID="lblMessageAviso" runat="server"></asp:Label>
                 <uc2:UCCamposObrigatorios ID="UCCamposObrigatorios" runat="server" />
 
                 <%--<asp:Label ID="lblTituloSondagem" runat="server" Text="Título da sondagem *" AssociatedControlID="txtTituloSondagem"></asp:Label>--%>

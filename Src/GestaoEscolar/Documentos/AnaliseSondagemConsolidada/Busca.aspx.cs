@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MSTech.Validation.Exceptions;
 
-namespace GestaoEscolar.Documentos.AnaliseSondagemDRE
+namespace GestaoEscolar.Documentos.AnaliseSondagemConsolidada
 {
     public partial class Busca : MotherPageLogado
     {
@@ -403,8 +403,6 @@ namespace GestaoEscolar.Documentos.AnaliseSondagemDRE
             UCComboSondagem.Carregar(true);
 
             InicializaCamposBusca();
-
-            lblMessageAviso.Text = UtilBO.GetErroMessage(GetGlobalResourceObject("Documentos", "AnaliseSondagemDRE.Busca.AvisoDadosConsolidados").ToString(), UtilBO.TipoMensagem.Informacao);
         }
 
         /// <summary>
@@ -436,7 +434,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagemDRE
 
                 SalvaBusca();
 
-                report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.AnaliseSondagemDRE).ToString();
+                report = ((int)MSTech.GestaoEscolar.BLL.ReportNameGestaoAcademica.AnaliseSondagemConsolidada).ToString();
                 parametros = "uad_idSuperiorGestao=" + UCComboUAEscola.Uad_ID +
                              "&cal_id=" + UCCCalendario.Valor +
                              "&cal_ano=" + UCCCalendario.Cal_ano.ToString() +
@@ -483,7 +481,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagemDRE
             filtros.Add("snd_dataFim", Convert.ToDateTime(txtDataFim.Text).ToString());
             filtros.Add("suprimirPercentual", chkSuprimirPercentual.Checked.ToString());
 
-            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAnaliseSondagemDRE, Filtros = filtros };
+            __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.RelatorioAnaliseSondagemConsolidada, Filtros = filtros };
 
         }
 
@@ -494,7 +492,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagemDRE
         {
             try
             {
-                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAnaliseSondagemDRE)
+                if (__SessionWEB.BuscaRealizada.PaginaBusca == PaginaGestao.RelatorioAnaliseSondagemConsolidada)
                 {
                     // Recuperar busca realizada e pesquisar automaticamente
                     string valor, valor2, valor3;

@@ -154,6 +154,10 @@ namespace MSTech.GestaoEscolar.Jobs.Schedulers
             jobDetail = new JobDetailImpl(typeof(MS_JOB_ProcessamentoAlunosFrequencia).Name, typeof(MS_JOB_ProcessamentoAlunosFrequencia));
             jobDetail.Durable = true;
             AddJob(jobDetail);
+
+            jobDetail = new JobDetailImpl(typeof(MS_JOB_ProcessamentoAnaliseSondagemConsolidada).Name, typeof(MS_JOB_ProcessamentoAnaliseSondagemConsolidada));
+            jobDetail.Durable = true;
+            AddJob(jobDetail);
         }
     }
 }

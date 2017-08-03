@@ -656,7 +656,7 @@ namespace MSTech.GestaoEscolar.BLL
         RelatorioAnaliseSondagem
         ,
 
-        RelatorioAnaliseSondagemDRE
+        RelatorioAnaliseSondagemConsolidada
         ,
 
         LancamentoSondagem
@@ -828,7 +828,7 @@ namespace MSTech.GestaoEscolar.BLL
         RelatorioAcoesRealizadas = 327,
         LogNotificacoes = 328,
         FrequenciaEfetivada = 329,
-        AnaliseSondagemDRE = 330
+        AnaliseSondagemConsolidada = 330
     }
 
     /// <summary>

@@ -26,6 +26,10 @@
       <FullPath>AnaliseSondagem.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>AnaliseSondagemConsolidada.rdl</Name>
+      <FullPath>AnaliseSondagemConsolidada.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>AtaEnriquecimentoCurricular.rdl</Name>
       <FullPath>AtaEnriquecimentoCurricular.rdl</FullPath>
     </ProjectItem>
@@ -180,10 +184,6 @@
     <ProjectItem>
       <Name>TurmasProgramaSocialFrequencia.rdl</Name>
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>AnaliseSondagemDRE.rdl</Name>
-      <FullPath>AnaliseSondagemDRE.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

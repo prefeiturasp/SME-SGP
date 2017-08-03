@@ -309,5 +309,15 @@ namespace MSTech.GestaoEscolar.DAL
             qs.TimeOut = 0;
             qs.Execute();
         }
+
+        /// <summary>
+        /// Processa os dados para o relatório de análise de sondagem da DRE.
+        /// </summary>
+        public void ExecMS_JOB_ProcessamentoAnaliseSondagemConsolidada()
+        {
+            QuerySelectStoredProcedure qs = new QuerySelectStoredProcedure("MS_JOB_ProcessamentoAnaliseSondagemConsolidada", _Banco);
+            qs.TimeOut = 0;
+            qs.Execute();
+        }
     }
 }

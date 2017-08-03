@@ -1656,11 +1656,11 @@
     <Compile Include="Documentos\AlunosPendenciaEfetivacao\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Documentos\AnaliseSondagemDRE\Busca.aspx.cs">
+    <Compile Include="Documentos\AnaliseSondagemConsolidada\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Documentos\AnaliseSondagemDRE\Busca.aspx.designer.cs">
+    <Compile Include="Documentos\AnaliseSondagemConsolidada\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documentos\AnaliseSondagem\Busca.aspx.cs">
@@ -4002,7 +4002,7 @@
     <Content Include="App_Themes\IntranetSME\GestaoEscolar.skin" />
     <Content Include="App_Themes\IntranetSME\Rio.skin" />
     <Content Include="Documentos\AlunosPendenciaEfetivacao\Busca.aspx" />
-    <Content Include="Documentos\AnaliseSondagemDRE\Busca.aspx" />
+    <Content Include="Documentos\AnaliseSondagemConsolidada\Busca.aspx" />
     <Content Include="Documentos\AnaliseSondagem\Busca.aspx" />
     <Content Include="Documentos\BoletimEscolar\BoletimEscolarDosAlunos.aspx" />
     <Content Include="Documentos\DocumentoDocente\Busca.aspx" />

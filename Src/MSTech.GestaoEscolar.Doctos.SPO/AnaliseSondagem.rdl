@@ -73,8 +73,16 @@
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
+        <Field Name="uad_idSuperior">
+          <DataField>uad_idSuperior</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
         <Field Name="esc_id">
           <DataField>esc_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="cal_id">
+          <DataField>cal_id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="tur_id">
@@ -89,13 +97,25 @@
           <DataField>alu_id</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
+        <Field Name="cur_id">
+          <DataField>cur_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="pes_nome">
           <DataField>pes_nome</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="crr_id">
+          <DataField>crr_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="tur_codigo">
           <DataField>tur_codigo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="crp_id">
+          <DataField>crp_id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="snd_id">
           <DataField>snd_id</DataField>

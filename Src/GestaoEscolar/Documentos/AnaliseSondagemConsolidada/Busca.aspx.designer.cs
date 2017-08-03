@@ -7,7 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GestaoEscolar.Documentos.AnaliseSondagemDRE {
+namespace GestaoEscolar.Documentos.AnaliseSondagemConsolidada
+{
     
     
     public partial class Busca {
@@ -65,15 +66,6 @@ namespace GestaoEscolar.Documentos.AnaliseSondagemDRE {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl relTitulo;
-        
-        /// <summary>
-        /// lblMessageAviso control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessageAviso;
         
         /// <summary>
         /// UCCamposObrigatorios control.

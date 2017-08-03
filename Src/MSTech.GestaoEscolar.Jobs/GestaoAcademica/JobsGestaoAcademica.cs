@@ -621,4 +621,23 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
 
         #endregion IJob Members
     }
+
+    public class MS_JOB_ProcessamentoAnaliseSondagemConsolidada : IJob
+    {
+        #region IJob Members
+
+        public void Execute(IJobExecutionContext context)
+        {
+            try
+            {
+                GestaoEscolarServicosBO.ExecMS_JOB_ProcessamentoAnaliseSondagemConsolidada();
+            }
+            catch (Exception ex)
+            {
+                Util.GravarErro(ex, context.Scheduler.Context);
+            }
+        }
+
+        #endregion IJob Members
+    }
 }
