@@ -75,6 +75,50 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox14">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Data de processamento dos dados: </Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=First(Fields!ultimaExecucao.Value)</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox12</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
               <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
@@ -1238,6 +1282,10 @@
         <TablixRowHierarchy>
           <TablixMembers>
             <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </TablixMember>
+            <TablixMember>
               <Group Name="esc_id1">
                 <GroupExpressions>
                   <GroupExpression>=Fields!esc_id.Value</GroupExpression>
@@ -1284,8 +1332,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
+        <Top>0cm</Top>
         <Left>0.01587cm</Left>
-        <Height>6.85cm</Height>
+        <Height>7.35cm</Height>
         <Width>27.66825cm</Width>
         <ZIndex>1</ZIndex>
         <Visibility>
@@ -1305,6 +1354,50 @@
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox12">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Data de processamento dos dados: </Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=First(Fields!ultimaExecucao.Value)</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox12</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
             <TablixRow>
               <Height>0.6cm</Height>
               <TablixCells>
@@ -1413,7 +1506,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox63</rd:DefaultName>
@@ -2621,6 +2716,10 @@
         <TablixRowHierarchy>
           <TablixMembers>
             <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </TablixMember>
+            <TablixMember>
               <Group Name="esc_id">
                 <GroupExpressions>
                   <GroupExpression>=Fields!esc_id.Value</GroupExpression>
@@ -2666,9 +2765,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0cm</Top>
         <Left>0.01587cm</Left>
-        <Height>6.86667cm</Height>
+        <Height>7.36667cm</Height>
         <Width>27.66825cm</Width>
         <ZIndex>2</ZIndex>
         <Visibility>
@@ -2681,10 +2779,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>6.86667cm</Height>
+    <Height>7.36667cm</Height>
     <Style />
   </Body>
-  <Width>27.7cm</Width>
+  <Width>27.71587cm</Width>
   <Page>
     <PageHeader>
       <Height>3.31116cm</Height>
@@ -2712,6 +2810,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
           <Top>2.64829cm</Top>
+          <Left>0.01587cm</Left>
           <Height>0.66287cm</Height>
           <Width>27.7cm</Width>
           <Style>
@@ -2872,6 +2971,7 @@
             </Image>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
+          <Left>0.01587cm</Left>
           <Height>2.64829cm</Height>
           <Width>27.7cm</Width>
           <ZIndex>1</ZIndex>
@@ -2911,7 +3011,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.07056cm</Top>
-          <Left>24.80312cm</Left>
+          <Left>24.81899cm</Left>
           <Height>0.6cm</Height>
           <Width>2.89688cm</Width>
           <Style>
@@ -3104,7 +3204,7 @@
         </Field>
         <Field Name="ultimaExecucao">
           <DataField>ultimaExecucao</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
