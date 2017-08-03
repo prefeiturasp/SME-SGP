@@ -511,6 +511,7 @@ namespace GestaoEscolar.Documentos.AnaliseSondagemConsolidada
                             UCComboUAEscola.PermiteAlterarCombos = true;
                         }
                     }
+                    UCComboUAEscola_IndexChangedUA();
 
                     __SessionWEB.BuscaRealizada.Filtros.TryGetValue("cal_id", out valor);
                     UCCCalendario.Valor = Convert.ToInt32(valor);
