@@ -18,6 +18,13 @@ SET XACT_ABORT ON
 
 	*/
 
+	EXEC MS_InsereResource 
+		@rcr_chave = 'AnaliseSondagemDRE.Busca.AvisoDadosConsolidados' 
+		, @rcr_NomeResource = 'Documentos'
+		, @rcr_cultura = 'pt-BR'
+		, @rcr_codigo = 0 
+		, @rcr_valorPadrao = 'Os dados da análise de sondagem da DRE são pré-processados por um serviço.'
+
 -- Fechar transação     
 SET XACT_ABORT OFF 
 COMMIT TRANSACTION
