@@ -130,6 +130,10 @@
       <FullPath>QuantitativoSugestoes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>RelatorioAcoesRealizadas.rdl</Name>
+      <FullPath>RelatorioAcoesRealizadas.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>RelatorioGeralAtendimento.rdl</Name>
       <FullPath>RelatorioGeralAtendimento.rdl</FullPath>
     </ProjectItem>
@@ -170,8 +174,8 @@
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>RelatorioAcoesRealizadas.rdl</Name>
-      <FullPath>RelatorioAcoesRealizadas.rdl</FullPath>
+      <Name>LogNotificacoes.rdl</Name>
+      <FullPath>LogNotificacoes.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

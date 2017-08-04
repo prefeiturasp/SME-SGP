@@ -35,6 +35,7 @@ namespace AreaAluno
                     //  ou caso tenha mais, redireciona para uma tela de selação de alunos
                     if (responsavel)
                     {
+                        __SessionWEB.__UsuarioWEB.responsavel = true;
                         string prefixoAluno = ACA_ParametroAcademicoBO.ParametroValorPorEntidade(eChaveAcademico.PREFIXO_LOGIN_ALUNO_AREA_ALUNO, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
                         //Troca o prefixo de responsável por aluno
                         var regex = new Regex(Regex.Escape(prefixoRESP));

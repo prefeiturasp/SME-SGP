@@ -481,8 +481,8 @@
                                                 <div id="divAvisoAulaSemPlano" runat="server" style="float: left; width: 100%;" visible="false">
                                                     <br />
                                                     <asp:Image ID="imgLegendaAvisoAulaSemPlano" runat="server" SkinID="imgAviso"
-                                                        ToolTip="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>" Width="18px" Height="18px" ImageAlign="AbsMiddle" />
-                                                    <asp:Literal ID="lit3" runat="server" Text="<%$ Resources:Academico, ControleTurma.DiarioClasse.MensagemAulaSemPlanoAula %>"></asp:Literal>
+                                                        ToolTip="<%$ Resources:Academico, ControleTurma.Listao.MensagemAulaSemPlanoAula %>" Width="18px" Height="18px" ImageAlign="AbsMiddle" />
+                                                    <asp:Literal ID="lit3" runat="server" Text="<%$ Resources:Academico, ControleTurma.Listao.MensagemAulaSemPlanoAula %>"></asp:Literal>
                                                     <br />
                                                     <br />
                                                 </div>

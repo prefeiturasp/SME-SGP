@@ -184,7 +184,9 @@ public partial class MasterPage : MotherMasterPage
 
         ImgLogoSistemaAtual.ToolTip = __SessionWEB.TituloSistema;
         ImgLogoSistemaAtual.NavigateUrl = "~/Index.aspx";
-
+        
+        UCPluginNotificacao.Visible = ApplicationWEB.LigarPluginNotificacoes;
+        
         if (!IsPostBack)
         {
             // Esconde o link "Meus dados" caso o sistema esteja utilizando a integração com AD (a alteração dos dados

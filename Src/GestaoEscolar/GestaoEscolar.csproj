@@ -22,7 +22,7 @@
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -1860,6 +1860,13 @@
     <Compile Include="Relatorios\IndicadorFrequencia\Busca.aspx.designer.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Relatorios\LogNotificacoes\Busca.aspx.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios\LogNotificacoes\Busca.aspx.designer.cs">
+      <DependentUpon>Busca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\ObjetoAprendizagem\Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2216,6 +2223,13 @@
     </Compile>
     <Compile Include="WebControls\Combos\Novos\UCCTipoEvento.ascx.designer.cs">
       <DependentUpon>UCCTipoEvento.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboAlerta.ascx.cs">
+      <DependentUpon>UCComboAlerta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebControls\Combos\UCComboAlerta.ascx.designer.cs">
+      <DependentUpon>UCComboAlerta.ascx</DependentUpon>
     </Compile>
     <Compile Include="WebControls\Combos\UCComboAnoLetivo.ascx.cs">
       <DependentUpon>UCComboAnoLetivo.ascx</DependentUpon>
@@ -4466,11 +4480,6 @@
     <Content Include="Includes\jsUtilGestao.js" />
     <Content Include="Includes\jsBuscaParametrizacaoDisciplinas.js" />
     <Content Include="Includes\modernizr-custom.js" />
-    <None Include="Includes\notify\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Includes\notify\jquery-1.6.4.js" />
-    <Content Include="Includes\notify\jquery-1.6.4.min.js" />
-    <Content Include="Includes\notify\jquery.signalR-2.2.2.js" />
-    <Content Include="Includes\notify\jquery.signalR-2.2.2.min.js" />
     <Content Include="Includes\notify\plg-notify.min.js" />
     <Content Include="Includes\printThis.js" />
     <Content Include="Includes\jquery.PrintBoletinsAlunos.js" />
@@ -4501,6 +4510,7 @@
     <Content Include="Relatorios\GraficoAtendimento\Relatorio.aspx" />
     <Content Include="Relatorios\GraficoJustificativaFalta\Busca.aspx" />
     <Content Include="Relatorios\IndicadorFrequencia\Busca.aspx" />
+    <Content Include="Relatorios\LogNotificacoes\Busca.aspx" />
     <Content Include="Relatorios\ObjetoAprendizagem\Busca.aspx" />
     <Content Include="Relatorios\QuantitativoSugestoes\Busca.aspx" />
     <Content Include="Relatorios\RelatorioDev.aspx" />
@@ -4536,6 +4546,7 @@
     <Content Include="WebControls\Combos\ComboTipoDeficiencia.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoJustificativa.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCTipoEvento.ascx" />
+    <Content Include="WebControls\Combos\UCComboAlerta.ascx" />
     <Content Include="WebControls\Combos\UCComboAnoLetivo.ascx" />
     <Content Include="WebControls\Combos\Novos\UCCEscalaAvaliacaoParecer.ascx" />
     <Content Include="WebControls\Combos\Novos\UCComboGenerico.ascx" />
@@ -5012,15 +5023,14 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>50176</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50176/</IISUrl>
+          <IISUrl>http://sgpids.mstech.com.br</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://sgpids.mstech.com.br</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

@@ -39,10 +39,16 @@ namespace MSTech.GestaoEscolar.Entities.Abstracts
 		[MSNotNullOrEmpty("[apn_semPlanoAula] é obrigatório.")]
 		public virtual bool apn_semPlanoAula { get; set; }
 
-		/// <summary>
-		/// Data do processamento do serviço.
+        /// <summary>
+		/// Indica se a aula não possui objeto de conhecimento no plano de aula.
 		/// </summary>
-		[MSNotNullOrEmpty("[apn_data] é obrigatório.")]
+		[MSNotNullOrEmpty("[apn_semObjetoConhecimento] é obrigatório.")]
+        public virtual bool apn_semObjetoConhecimento { get; set; }
+
+        /// <summary>
+        /// Data do processamento do serviço.
+        /// </summary>
+        [MSNotNullOrEmpty("[apn_data] é obrigatório.")]
 		public virtual DateTime apn_data { get; set; }
 
     }
