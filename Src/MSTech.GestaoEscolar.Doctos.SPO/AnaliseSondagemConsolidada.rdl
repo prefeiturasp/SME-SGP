@@ -53,7 +53,6 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-        <Left>0cm</Left>
         <Height>0.99688cm</Height>
         <Width>25.5cm</Width>
         <Visibility>
@@ -755,6 +754,8 @@
                               </TablixMember>
                             </TablixMembers>
                           </TablixRowHierarchy>
+                          <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                          <RepeatRowHeaders>true</RepeatRowHeaders>
                           <DataSetName>DataSet1</DataSetName>
                           <Height>2.65cm</Height>
                           <Width>10.43688cm</Width>
@@ -1214,6 +1215,8 @@
                               </TablixMember>
                             </TablixMembers>
                           </TablixRowHierarchy>
+                          <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                          <RepeatRowHeaders>true</RepeatRowHeaders>
                           <DataSetName>DataSet1</DataSetName>
                           <Top>2.65cm</Top>
                           <Height>2.1cm</Height>
@@ -1284,7 +1287,6 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
-              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="esc_id1">
@@ -1320,8 +1322,12 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
-                    <TablixMember />
-                    <TablixMember />
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
                     <TablixMember />
                   </TablixMembers>
                 </TablixMember>
@@ -1332,6 +1338,8 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Height>7.35cm</Height>
         <Width>27.66825cm</Width>
@@ -2111,6 +2119,8 @@
                               </TablixMember>
                             </TablixMembers>
                           </TablixRowHierarchy>
+                          <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                          <RepeatRowHeaders>true</RepeatRowHeaders>
                           <DataSetName>DataSet1</DataSetName>
                           <Height>2.65cm</Height>
                           <Width>10.43688cm</Width>
@@ -2646,6 +2656,8 @@
                               </TablixMember>
                             </TablixMembers>
                           </TablixRowHierarchy>
+                          <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                          <RepeatRowHeaders>true</RepeatRowHeaders>
                           <DataSetName>DataSet1</DataSetName>
                           <Top>2.65cm</Top>
                           <Height>2.1cm</Height>
@@ -2716,7 +2728,6 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
-              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="esc_id">
@@ -2732,7 +2743,6 @@
               <TablixMembers>
                 <TablixMember>
                   <KeepWithGroup>After</KeepWithGroup>
-                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Details4">
@@ -2753,8 +2763,12 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
-                    <TablixMember />
-                    <TablixMember />
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
                     <TablixMember />
                     <TablixMember />
                   </TablixMembers>
@@ -2763,7 +2777,10 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
+        <Top>0cm</Top>
         <Height>7.36667cm</Height>
         <Width>27.66825cm</Width>
         <ZIndex>2</ZIndex>

@@ -212,38 +212,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Textbox10">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Análise de sondagem</Value>
-                    <Style>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Height>0.66287cm</Height>
-            <Width>27.7cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Tablix Name="Tablix3">
             <TablixBody>
               <TablixColumns>
@@ -742,6 +710,8 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                              <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet1</DataSetName>
                               <Height>2.65cm</Height>
                               <Width>8.67771cm</Width>
@@ -1091,6 +1061,8 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                              <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet1</DataSetName>
                               <Top>2.65cm</Top>
                               <Height>2.1cm</Height>
@@ -1144,18 +1116,22 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
-                    <TablixMember />
-                    <TablixMember />
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
                     <TablixMember />
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.635cm</Top>
             <Height>5.65cm</Height>
             <Width>27.66825cm</Width>
-            <ZIndex>1</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!tur_id.Value &gt; 0 AND RowNumber("DataSet1") &gt; 0 AND CBool(Parameters!suprimirPercentual.Value), false, true)</Hidden>
             </Visibility>
@@ -1809,6 +1785,8 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                              <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet1</DataSetName>
                               <Height>2.65cm</Height>
                               <Width>10.43688cm</Width>
@@ -2268,6 +2246,8 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                              <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet1</DataSetName>
                               <Top>2.65cm</Top>
                               <Height>2.1cm</Height>
@@ -2339,8 +2319,12 @@
                         </SortExpression>
                       </SortExpressions>
                       <TablixMembers>
-                        <TablixMember />
-                        <TablixMember />
+                        <TablixMember>
+                          <KeepWithGroup>After</KeepWithGroup>
+                        </TablixMember>
+                        <TablixMember>
+                          <KeepWithGroup>After</KeepWithGroup>
+                        </TablixMember>
                         <TablixMember />
                       </TablixMembers>
                     </TablixMember>
@@ -2348,11 +2332,13 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.6362cm</Top>
+            <Top>0.0012cm</Top>
             <Height>6.25cm</Height>
             <Width>27.66825cm</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Visibility>
               <Hidden>=IIF((IsNothing(Parameters!tur_id.Value) OR Parameters!tur_id.Value &lt;= 0) And RowNumber("DataSet1") &gt; 0 AND CBool(Parameters!suprimirPercentual.Value), False, True)</Hidden>
             </Visibility>
@@ -2413,10 +2399,9 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
-            <Top>0.635cm</Top>
             <Height>0.99688cm</Height>
             <Width>25.5cm</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Visibility>
               <Hidden>=iif(RowNumber("DataSet1") &gt; 0, true, false)</Hidden>
             </Visibility>
@@ -3148,6 +3133,8 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                              <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet1</DataSetName>
                               <Height>2.65cm</Height>
                               <Width>10.43688cm</Width>
@@ -3683,6 +3670,8 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                              <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet1</DataSetName>
                               <Top>2.65cm</Top>
                               <Height>2.1cm</Height>
@@ -3734,7 +3723,6 @@
                         <Hidden>=IIF(Parameters!esc_id.Value &gt; 0, true, false)</Hidden>
                       </Visibility>
                       <KeepWithGroup>After</KeepWithGroup>
-                      <RepeatOnNewPage>true</RepeatOnNewPage>
                     </TablixMember>
                     <TablixMember>
                       <Group Name="Details4">
@@ -3755,8 +3743,12 @@
                         </SortExpression>
                       </SortExpressions>
                       <TablixMembers>
-                        <TablixMember />
-                        <TablixMember />
+                        <TablixMember>
+                          <KeepWithGroup>After</KeepWithGroup>
+                        </TablixMember>
+                        <TablixMember>
+                          <KeepWithGroup>After</KeepWithGroup>
+                        </TablixMember>
                         <TablixMember />
                       </TablixMembers>
                     </TablixMember>
@@ -3764,11 +3756,13 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.635cm</Top>
+            <Top>0cm</Top>
             <Height>6.26667cm</Height>
             <Width>27.66825cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=IIF((IsNothing(Parameters!tur_id.Value) Or Parameters!tur_id.Value &lt;= 0) And RowNumber("DataSet1") &gt; 0 AND NOT CBool(Parameters!suprimirPercentual.Value), False, True)</Hidden>
             </Visibility>
@@ -4330,6 +4324,8 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                              <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet1</DataSetName>
                               <Height>2.65cm</Height>
                               <Width>8.67771cm</Width>
@@ -4733,6 +4729,8 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <RepeatColumnHeaders>true</RepeatColumnHeaders>
+                              <RepeatRowHeaders>true</RepeatRowHeaders>
                               <DataSetName>DataSet1</DataSetName>
                               <Top>2.65cm</Top>
                               <Height>2.1cm</Height>
@@ -4786,18 +4784,24 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
-                    <TablixMember />
-                    <TablixMember />
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
                     <TablixMember />
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.635cm</Top>
+            <Top>0cm</Top>
             <Height>5.65cm</Height>
             <Width>27.66825cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!tur_id.Value &gt; 0 And RowNumber("DataSet1") &gt; 0 AND NOT CBool(Parameters!suprimirPercentual.Value), False, True)</Hidden>
             </Visibility>
@@ -4808,13 +4812,13 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>6.90167cm</Height>
+        <Height>6.26667cm</Height>
         <Style />
       </Body>
       <Width>27.7cm</Width>
       <Page>
         <PageHeader>
-          <Height>2.64829cm</Height>
+          <Height>3.31116cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -4974,6 +4978,41 @@
                 </Border>
               </Style>
             </Rectangle>
+            <Textbox Name="Textbox10">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Análise de sondagem</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox10</rd:DefaultName>
+              <Top>2.64829cm</Top>
+              <Left>0cm</Left>
+              <Height>0.66287cm</Height>
+              <Width>27.7cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>
