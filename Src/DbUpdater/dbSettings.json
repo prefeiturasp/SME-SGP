@@ -1,22 +1,35 @@
 ﻿{
   "SystemId": 102,
-  "Databases": [
+  "DbSettings": [
     {
       "ProjectDatabase": "CoreSSO.Database",
-      "DeployConnectionString": "$DeployConnectionStringCoreSSO$",
+      "DeployConnectionString": "$DeployConnectionStringCore$",
+      "RestoreInitialVersion": "False",
+      "BackupFilePath": "",
       "Variables": {
-        "SystemName": "$SystemName$"
+        "SystemName": "$SystemName$",
+        "UrlSGPLogin": "$UrlSGPLogin$",
+        "UrlSGPLogout": "$UrlSGPLogout$",
+        "UrlBoletimLogin": "$UrlBoletimLogin$",
+        "UrlBoletimLogout": "$UrlBoletimLogout$"
       }
     },
     {
       "ProjectDatabase": "SGP.Database",
       "DeployConnectionString": "$DeployConnectionStringSGP$",
+      "RestoreInitialVersion": "False",
+      "BackupFilePath": "",
       "Variables": {
         "SystemName": "$SystemName$",
-        "SystemUser": "$SystemUser$",
+        "UserName": "$UserName$",
+        "UserPass": "$UserPass$",
         "SystemDatabase": "$SystemDatabase$",
-        "CoreSSO": "$CoreSSO$",
-        "CoreSSO_Log": "$CoreSSO_Log$"
+        "UrlApi": "$UrlApi$",
+        "HostService": "$HostService$",
+        "CoreSource": "$CoreSource$",
+        "CoreTarget": "$CoreTarget$",
+        "CoreLogSource": "$CoreLogSource$",
+        "CoreLogTarget": "$CoreLogTarget$"
       }
     }
   ]

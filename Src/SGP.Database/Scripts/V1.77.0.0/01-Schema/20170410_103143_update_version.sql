@@ -2,9 +2,9 @@
    Project/Ticket#: SGP
    Description: Atualiza a versão na tabela de controle
 -------------------------------------------------------------------------------------*/
-    
+	
 DECLARE
-	@Versao VARCHAR(MAX) = '1.68.0.0'
+	@Versao VARCHAR(MAX) = '1.77.0.0'
 
 IF EXISTS (SELECT ver_id FROM CFG_Versao WHERE ver_Versao = @Versao)
 BEGIN

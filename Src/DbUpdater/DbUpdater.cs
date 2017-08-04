@@ -3,17 +3,47 @@ using System;
 using System.Reflection;
 using DbUp.Engine;
 using System.Collections.Generic;
-using static System.Console;
-using System.Data.SqlClient;
+using DbUpdater.Core.Config;
+using DbUpdater.Core.SqlHelpers;
 
 namespace DbUpdater
 {
     internal class DbUpdater
     {
+        /// <summary>
+        /// Update Performer with journal
+        /// </summary>
+        /// <param name="dbConfig">
+        /// </param>
+        /// <returns>
+        /// </returns>
+        public static DatabaseUpgradeResult DeployDataBase(DatabasesSettings dbConfig)
+        {
+            var assembly = Assembly.Load(dbConfig.ProjectDatabase);
+
+            ConsoleOutput.Warning($"Deploying {dbConfig.InitialCatalog}...");
+            Func<string, bool> filterSqlFiles = (x) => x.StartsWith(dbConfig.ProjectDatabase, StringComparison.OrdinalIgnoreCase)
+                                                        && x.EndsWith(".sql", StringComparison.OrdinalIgnoreCase);
+
+            SqlJournalSystem journal = new SqlJournalSystem(dbConfig.ConnectionFactory, dbConfig.SystemId);
+
+            var upgradeDB =
+            DeployChanges.To
+                .SqlDatabase(dbConfig.DeployConnectionString)
+                .WithScriptsEmbeddedInAssembly(assembly, x => filterSqlFiles(x))
+                .WithVariables(dbConfig.Variables)
+                .WithExecutionTimeout(TimeSpan.FromSeconds(dbConfig.ConnectTimeout))
+                .JournalTo(journal)
+                .WithTransaction()
+                .LogToConsole()
+                .Build();
+
+            return upgradeDB.PerformUpgrade();
+        }
+
         private static int Main(string[] args)
         {
             List<DatabaseUpgradeResult> results = new List<DatabaseUpgradeResult>();
-
             bool log = false;
 
             try
@@ -33,89 +63,39 @@ namespace DbUpdater
                     }
                 }
 
-                Config config = new Config(file);
+                var config = Config.CreateFromFile(file);
+                Config.Validate(config);
 
-                foreach (DatabaseConfig databaseConfig in config.DbSettings)
+                foreach (var dbSettings in config.DbSettings)
                 {
-                    databaseConfig.SystemId = config.SystemId;
+                    dbSettings.SystemId = config.SystemId;
 
-                    var result = DeployDataBase(databaseConfig);
+                    if (!new DbRestore(dbSettings).RestoreIfNotExist())
+                    {
+                        throw new Exception("Error Restore!");
+                    }
 
+                    var result = DeployDataBase(dbSettings);
                     results.Add(result);
 
                     if (!result.Successful)
                     {
-                        Error("Error!");
+                        ConsoleOutput.Error("Error!");
                         return -1;
                     }
                 }
 
-                Sucess("Sucess!");
-                WriteConsole(Log.SaveLog(results, log), ConsoleColor.Yellow);
-
+                ConsoleOutput.Sucess("Sucess!");
+                ConsoleOutput.Warning(Log.SaveLog(results, log));
                 return 0;
             }
             catch (Exception e)
             {
                 results.Add(new DatabaseUpgradeResult(new List<SqlScript>(), false, e));
-                WriteConsole(Log.SaveLog(results, log), ConsoleColor.Yellow);
-
-                Error(e.Message);
+                ConsoleOutput.Warning(Log.SaveLog(results, log));
+                ConsoleOutput.Error(e.Message);
                 return -1;
             }
-        }
-
-        /// <summary>
-        /// Update Performer with journal
-        /// </summary>
-        /// <param name="dbConfig"></param>
-        /// <returns></returns>
-        public static DatabaseUpgradeResult DeployDataBase(DatabaseConfig dbConfig)
-        {
-            var databaseConnectionString = dbConfig.DeployConnectionString;
-            var connection = new SqlConnectionStringBuilder(databaseConnectionString);
-            var database = connection.InitialCatalog;
-            var timeout = TimeSpan.FromSeconds(connection.ConnectTimeout);
-            var assembly = Assembly.GetExecutingAssembly();
-
-            WriteConsole($"Deploying {database}...", ConsoleColor.Yellow);
-
-            EnsureDatabase.For.SqlDatabase(databaseConnectionString);
-
-            Func<string, bool> filterSqlFiles = (x) => x.StartsWith(dbConfig.ProjectDatabase, StringComparison.OrdinalIgnoreCase)
-                                                        && x.EndsWith(".sql", StringComparison.OrdinalIgnoreCase);
-
-            SqlJournalSystem journal = new SqlJournalSystem(dbConfig.ConnectionFactory, dbConfig.SystemId);
-
-            var upgradeDB =
-            DeployChanges.To
-                .SqlDatabase(databaseConnectionString)
-                .WithScriptsEmbeddedInAssembly(assembly, x => filterSqlFiles(x))
-                .WithVariables(dbConfig.Variables)
-                .WithExecutionTimeout(timeout)
-                .JournalTo(journal)
-                .WithTransaction()
-                .LogToConsole()
-                .Build();
-
-            return upgradeDB.PerformUpgrade();
-        }
-
-        private static void WriteConsole(string msg, ConsoleColor color)
-        {
-            ForegroundColor = color;
-            WriteLine(msg);
-            ResetColor();
-        }
-
-        private static void Sucess(string msg)
-        {
-            WriteConsole(msg, ConsoleColor.Green);
-        }
-
-        private static void Error(string msg)
-        {
-            WriteConsole(msg, ConsoleColor.Red);
         }
     }
 }
