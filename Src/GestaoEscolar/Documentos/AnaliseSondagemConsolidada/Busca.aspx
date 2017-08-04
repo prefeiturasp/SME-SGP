@@ -27,7 +27,7 @@
 
                 <%--<asp:Label ID="lblTituloSondagem" runat="server" Text="Título da sondagem *" AssociatedControlID="txtTituloSondagem"></asp:Label>--%>
                 <%--<asp:TextBox ID="txtTituloSondagem" runat="server" SkinID="text60C"></asp:TextBox>--%>
-                <uc1:UCComboSondagem runat="server" id="UCComboSondagem" />
+                <uc1:UCComboSondagem runat="server" id="UCComboSondagem" Obrigatorio="true" ValidationGroup="Relatorio"/>
                 <%--<asp:RequiredFieldValidator ID="rfvTituloSondagem" runat="server" ControlToValidate="txtTituloSondagem"
                     Display="Dynamic" ValidationGroup="Relatorio" ErrorMessage="Título da sondagem é obrigatório.">*</asp:RequiredFieldValidator>--%>
 

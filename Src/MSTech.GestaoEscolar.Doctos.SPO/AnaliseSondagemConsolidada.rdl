@@ -53,6 +53,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
+        <Left>0cm</Left>
         <Height>0.99688cm</Height>
         <Width>25.5cm</Width>
         <Visibility>
@@ -1332,8 +1333,6 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0cm</Top>
-        <Left>0.01587cm</Left>
         <Height>7.35cm</Height>
         <Width>27.66825cm</Width>
         <ZIndex>1</ZIndex>
@@ -2765,7 +2764,6 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Left>0.01587cm</Left>
         <Height>7.36667cm</Height>
         <Width>27.66825cm</Width>
         <ZIndex>2</ZIndex>
@@ -2782,7 +2780,7 @@
     <Height>7.36667cm</Height>
     <Style />
   </Body>
-  <Width>27.71587cm</Width>
+  <Width>27.7cm</Width>
   <Page>
     <PageHeader>
       <Height>3.31116cm</Height>
@@ -2810,7 +2808,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
           <Top>2.64829cm</Top>
-          <Left>0.01587cm</Left>
           <Height>0.66287cm</Height>
           <Width>27.7cm</Width>
           <Style>
@@ -2971,7 +2968,6 @@
             </Image>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Left>0.01587cm</Left>
           <Height>2.64829cm</Height>
           <Width>27.7cm</Width>
           <ZIndex>1</ZIndex>
@@ -3011,7 +3007,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.07056cm</Top>
-          <Left>24.81899cm</Left>
+          <Left>24.77137cm</Left>
           <Height>0.6cm</Height>
           <Width>2.89688cm</Width>
           <Style>
