@@ -630,7 +630,7 @@ namespace MSTech.GestaoEscolar.Jobs.GestaoAcademica
         {
             try
             {
-                Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoDivergenciasRematriculas);
+                Guid sle_id = SYS_ServicosLogExecucaoBO.IniciarServico(eChaveServicos.ProcessamentoAnaliseSondagemConsolidada);
                 GestaoEscolarServicosBO.ExecMS_JOB_ProcessamentoAnaliseSondagemConsolidada();
                 SYS_ServicosLogExecucaoBO.FinalizarServio(sle_id);
             }

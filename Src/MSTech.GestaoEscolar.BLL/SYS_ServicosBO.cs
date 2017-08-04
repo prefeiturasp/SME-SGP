@@ -159,6 +159,9 @@ namespace MSTech.GestaoEscolar.BLL
         ,
 
         ProcessamentoAlunosFrequencia = 56
+        ,
+
+        ProcessamentoAnaliseSondagemConsolidada = 57
     }
 
     #endregion Enumerador
