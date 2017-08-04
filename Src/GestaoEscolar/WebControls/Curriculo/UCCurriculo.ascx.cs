@@ -366,7 +366,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                     Carregar(-1);
                     
                     DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEventoAno
-                        (VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                        (VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, -1, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
@@ -429,7 +429,7 @@ namespace GestaoEscolar.WebControls.Curriculo
                     Carregar(-1);
 
                     DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEventoAno
-                        (VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                        (VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, -1, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
