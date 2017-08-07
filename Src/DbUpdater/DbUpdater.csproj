@@ -108,6 +108,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreIDS.Database\CoreIDS.Database.csproj">
+      <Project>{3bf79376-c31f-4778-a7cb-c7e7cb524016}</Project>
+      <Name>CoreIDS.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoreSSO.Database\CoreSSO.Database.csproj">
       <Project>{75471803-1dec-44ae-8699-dafe1334bfbf}</Project>
       <Name>CoreSSO.Database</Name>
@@ -119,7 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".\ExternalDependencies\DbUpdater.Core.dll" />
-    <None Include="FodyWeavers.xml" />
+    <None Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

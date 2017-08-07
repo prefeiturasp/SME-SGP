@@ -1,5 +1,5 @@
 
--- Gestão Escolar
+-- SGP
 UPDATE SYS_Sistema
 SET sis_caminho = '$UrlSGPLogin$', sis_caminhoLogout = '$UrlSGPLogout$'
 WHERE sis_id = 102

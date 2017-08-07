@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EADF70C0-7FF0-4292-BE9E-632369BB053A}</ProjectGuid>
+    <ProjectGuid>{3BF79376-C31F-4778-A7CB-C7E7CB524016}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SGP.Database</RootNamespace>
-    <AssemblyName>SGP.Database</AssemblyName>
+    <RootNamespace>CoreIDS.Database</RootNamespace>
+    <AssemblyName>CoreIDS.Database</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,16 +43,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Always\createRole.sql" />
-    <EmbeddedResource Include="Scripts\V1.77.0.0\01-Schema\20170410_103143_update_version.sql" />
+    <Folder Include="Always\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Restore\updateConfigSGP.sql" />
-    <EmbeddedResource Include="Always\updateSynonymSGP_Core.sql" />
-    <EmbeddedResource Include="Always\updateSynonymSGP_CoreLog.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\V1.77.0.0\02-Data\" />
+    <EmbeddedResource Include="Restore\updateConfigCoreIDS.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

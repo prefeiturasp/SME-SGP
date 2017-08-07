@@ -5,7 +5,7 @@
       "ProjectDatabase": "CoreSSO.Database",
       "DeployConnectionString": "Server=localhost\\MSSQLSERVER2014;Database=CoreSSO;Integrated Security=SSPI;Connection Timeout=30;",
       "RestoreInitialVersion": "False",
-      "BackupFilePath": "C:\\SQL\\Backups\\CoreSSO.bak",
+      "BackupFilePath": "",
       "Variables": {
         "SystemName": " SGP",
         "UrlSGPLogin": "http://localhost/SAML/Login.ashx",
@@ -22,7 +22,7 @@
       "Variables": {
         "SystemName": " SGP",
         "UserName": "user_Name",
-        "UserPass": "user_pass",
+        "UserPass": "User_pass@123",
         "SystemDatabase": "GestaoPedagogica",
         "UrlApi": "http://localhost/api",
         "HostService": "localhost:555",
@@ -30,6 +30,17 @@
         "CoreTarget": "CoreSSO",
         "CoreLogSource": "CoreSSO_Log",
         "CoreLogTarget": "CoreSSO_Log"
+      }
+    },
+    {
+      "ProjectDatabase": "CoreIDS.Database",
+      "DeployConnectionString": "Server=localhost\\MSSQLSERVER2014;Database=CoreIDS;Integrated Security=SSPI;Connection Timeout=30;",
+      "RestoreInitialVersion": "False",
+      "BackupFilePath": "",
+      "Variables": {
+        "UrlSGP": "http://localhost/",
+        "UrlSGPLogin": "http://localhost/SAML/Login.ashx",
+        "UrlBoletimLogin": "http://localhost/SAML/Login.ashx"
       }
     }
   ]

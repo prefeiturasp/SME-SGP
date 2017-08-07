@@ -31,6 +31,17 @@
         "CoreLogSource": "$CoreLogSource$",
         "CoreLogTarget": "$CoreLogTarget$"
       }
+    },
+    {
+      "ProjectDatabase": "CoreIDS.Database",
+      "DeployConnectionString": "$DeployConnectionStringCoreIDS$",
+      "RestoreInitialVersion": "False",
+      "BackupFilePath": "",
+      "Variables": {
+        "UrlSGP": "$UrlSGP$",
+        "UrlSGPLogin": "$UrlSGPLogin$",
+        "UrlBoletimLogin": "$UrlBoletimLogin$"
+      }
     }
   ]
 }

@@ -5,6 +5,7 @@
       DbUp
       DbUpdater.Core
       Newtonsoft.Json
+      CoreIDS.Database
       CoreSSO.Database
       SGP.Database
     </IncludeAssemblies>

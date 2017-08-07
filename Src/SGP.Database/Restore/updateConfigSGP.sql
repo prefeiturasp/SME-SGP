@@ -33,5 +33,3 @@ DELETE FROM QTZ_Simple_Triggers
 DELETE FROM QTZ_Simprop_Triggers
 DELETE FROM QTZ_Triggers
 DELETE FROM QTZ_Job_Details
-
-
