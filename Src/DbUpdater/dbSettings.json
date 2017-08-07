@@ -17,8 +17,8 @@
     {
       "ProjectDatabase": "SGP.Database",
       "DeployConnectionString": "$DeployConnectionStringSGP$",
-      "RestoreInitialVersion": "False",
-      "BackupFilePath": "",
+      "RestoreInitialVersion": "$RestoreInitialVersionSGP$",
+      "BackupFilePath": "$BackupFilePathSGP$",
       "Variables": {
         "SystemName": "$SystemName$",
         "UserName": "$UserName$",
