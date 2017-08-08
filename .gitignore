@@ -21,6 +21,9 @@
 bld/
 [Bb]in/
 [Oo]bj/
+*.cache   
+Debug/
+[o]bj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -246,4 +249,17 @@ ModelManifest.xml
 .fake/
 *.dll.config
 *Backup.rdl
-/Src/GestaoEscolar/App_Data/Includes
+
+
+# Build related
+tools/**
+!tools/packages.config	
+[Oo]utput/	 
+
+[Bb]uild/**
+!build/*.cake
+!build/*.targets
+!build/*.json
+
+
+
