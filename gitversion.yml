@@ -1,0 +1,6 @@
+next-version: 1.78.0  
+branches: 
+  release[/-]: 
+    tag: rc 
+  hotfix(es)?[/-]:
+    tag: rc 
