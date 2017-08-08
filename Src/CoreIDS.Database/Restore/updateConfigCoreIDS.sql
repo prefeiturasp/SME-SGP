@@ -1,7 +1,7 @@
 DECLARE
 	@clientId INT
 
-SELECT @clientId = id FROM IDS_Clients WHERE ClientId = 'smespmvc'
+SELECT @clientId = id FROM IDS_Clients WHERE ClientId = '$ClientIdMvc$'
 
 -- SGP
 IF(NOT EXISTS(SELECT * FROM IDS_ClientCorsOrigins AS icco WHERE icco.ClientId = @clientId AND icco.Origin = '$UrlSGP$'))
