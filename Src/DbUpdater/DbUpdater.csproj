@@ -87,7 +87,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="dbSettings.json" />
+    <None Include="dbSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="deploy.ps1" />
     <None Include="Deploy\dbSettings.DEV.json" />
     <None Include="Deploy\deploy.dev.ps1" />
