@@ -14,7 +14,7 @@
     },
     {
       "UpdateVersionXml": true,
-      "ProjectName": "GestaoAcademica.WebApi",
+      "ProjectName": "GestaoAcademicaWebApi",
       "ProjectFile": "./src/GestaoAcademica.WebApi/GestaoAcademica.WebApi.csproj",
       "PublishMethod": {
         "Type": "Package"
