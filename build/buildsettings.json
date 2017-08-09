@@ -14,7 +14,7 @@
     },
     {
       "UpdateVersionXml": true,
-      "ProjectName": "GestaoAcademica.WebApi",
+      "ProjectName": "GestaoAcademicaWebApi",
       "ProjectFile": "./src/GestaoAcademica.WebApi/GestaoAcademica.WebApi.csproj",
       "PublishMethod": {
         "Type": "Package"
@@ -27,6 +27,13 @@
       "PublishMethod": {
         "Type": "Package"
       }
+    }
+  ],
+   "DatabaseProjects": [
+    {
+      "DatabaseProjectType": "DbUp",
+      "ProjectName": "DbUpdater",
+      "ProjectFile": "./src/DbUpdater/DbUpdater.csproj"
     }
   ]  
 }
