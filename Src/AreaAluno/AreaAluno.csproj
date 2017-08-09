@@ -298,7 +298,9 @@
     <Content Include="App_Themes\IntranetSME\jquery-ui-1.8.12.custom\jquery-ui-1.8.12.custom.css" />
     <Content Include="Cadastro\CompromissoEstudo\Busca.aspx" />
     <Content Include="Cadastro\CompromissoEstudo\Cadastro.aspx" />
-    <Content Include="Configs\Session.txt" />
+    <Content Include="Configs\Session.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Consulta\BoletimCompleto\Busca.aspx" />
     <Content Include="Consulta\Boletim\Busca.aspx" />
     <Content Include="Consulta\CalendarioEscolar\Visualizar.aspx" />
@@ -574,12 +576,24 @@
     <Content Include="MasterPagePaginaInicial.Master" />
     <Content Include="Consulta\BoletimCompleto\imagem.ashx" />
     <Content Include="includes\Angular\boletim.controller.js" />
-    <None Include="Configs\appSettings.config" />
-    <None Include="Configs\authentication.config" />
-    <None Include="Configs\pages.config" />
-    <None Include="Configs\saml.config" />
-    <None Include="Configs\samlProvider.config" />
-    <None Include="Configs\session.config" />
+    <None Include="Configs\appSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Configs\authentication.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Configs\pages.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Configs\saml.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Configs\samlProvider.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Configs\session.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">
