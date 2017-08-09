@@ -1,5 +1,5 @@
 ﻿{
-  "SystemId": "SystemId",
+  "SystemId": "$SystemId$",
   "DbSettings": [
     {
       "ProjectDatabase": "SGP.Database",
