@@ -28,5 +28,12 @@
         "Type": "Package"
       }
     }
+  ],
+   "DatabaseProjects": [
+    {
+      "DatabaseProjectType": "DbUp",
+      "ProjectName": "DbUpdater",
+      "ProjectFile": "./src/DbUpdater/DbUpdater.csproj"
+    }
   ]  
 }
