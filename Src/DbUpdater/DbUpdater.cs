@@ -49,26 +49,12 @@ namespace DbUpdater
         private static int Main(string[] args)
         {
             List<DatabaseUpgradeResult> results = new List<DatabaseUpgradeResult>();
-            bool log = false;
+
+            var options = Argument.Load(args);
 
             try
             {
-                string file = "dbSettings.json";
-
-                foreach (string arg in args)
-                {
-                    if (arg.EndsWith(".json"))
-                    {
-                        file = arg;
-                    }
-
-                    if (arg.ToUpper().Equals(@"/LOG"))
-                    {
-                        log = true;
-                    }
-                }
-
-                var config = Config.CreateFromFile(file);
+                var config = Config.CreateFromFile(options.SettingFile);
                 Config.Validate(config);
 
                 foreach (var dbSettings in config.DbSettings)
@@ -91,13 +77,13 @@ namespace DbUpdater
                 }
 
                 ConsoleOutput.Sucess("Sucess!");
-                ConsoleOutput.Warning(Log.SaveLog(results, log));
+                ConsoleOutput.Warning(Log.SaveLog(results, options.Log));
                 return 0;
             }
             catch (Exception e)
             {
                 results.Add(new DatabaseUpgradeResult(new List<SqlScript>(), false, e));
-                ConsoleOutput.Warning(Log.SaveLog(results, log));
+                ConsoleOutput.Warning(Log.SaveLog(results, options.Log));
                 ConsoleOutput.Error(e.Message);
                 return -1;
             }

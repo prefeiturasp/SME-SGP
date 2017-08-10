@@ -1,2 +1,2 @@
 ﻿param([string]$dbSettingsFile="")
-.\DbUpdater.exe $dbSettingsFile
+.\DbUpdater.exe --Setting $dbSettingsFile
