@@ -90,9 +90,6 @@
     <None Include="dbSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="deploy.ps1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Deploy\dbSettings.DEV.json" />
     <None Include="Deploy\deploy.dev.ps1" />
     <None Include="packages.config">

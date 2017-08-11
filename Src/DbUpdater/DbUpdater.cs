@@ -72,7 +72,7 @@ namespace DbUpdater
                     if (!result.Successful)
                     {
                         ConsoleOutput.Error("Error!");
-                        return -1;
+                        return 1;
                     }
                 }
 
@@ -85,7 +85,8 @@ namespace DbUpdater
                 results.Add(new DatabaseUpgradeResult(new List<SqlScript>(), false, e));
                 ConsoleOutput.Warning(Log.SaveLog(results, options.Log));
                 ConsoleOutput.Error(e.Message);
-                return -1;
+                Log.Error(e);
+                return 2;
             }
         }
     }
