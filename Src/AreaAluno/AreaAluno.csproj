@@ -576,24 +576,24 @@
     <Content Include="MasterPagePaginaInicial.Master" />
     <Content Include="Consulta\BoletimCompleto\imagem.ashx" />
     <Content Include="includes\Angular\boletim.controller.js" />
-    <None Include="Configs\appSettings.config">
+    <Content Include="Configs\appSettings.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\authentication.config">
+    </Content>
+    <Content Include="Configs\authentication.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\pages.config">
+    </Content>
+    <Content Include="Configs\pages.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\saml.config">
+    </Content>
+    <Content Include="Configs\saml.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\samlProvider.config">
+    </Content>
+    <Content Include="Configs\samlProvider.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\session.config">
+    </Content>
+    <Content Include="Configs\session.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">

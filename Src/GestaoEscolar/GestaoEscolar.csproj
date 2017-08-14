@@ -3709,9 +3709,9 @@
     <Content Include="App_Themes\IntranetSME\new_css.scss" />
     <Content Include="App_Themes\IntranetSME\new_css.css.map" />
     <Content Include="App_Themes\IntranetSME\_grid-layout.scss" />
-    <None Include="Configs\Session.txt">
+    <Content Include="Configs\Session.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="Classe\JustificativaFalta\Cadastro.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Busca.aspx" />
     <Content Include="Classe\LancamentoFrequenciaExterna\Cadastro.aspx" />
@@ -4011,24 +4011,24 @@
     <Content Include="Academico\HistoricoEscolar\MasterPageHistorico.master" />
     <Content Include="Academico\ControleTurma\CacheEfetivacaoHandler.ashx" />
     <Content Include="Configuracao\Conteudo\LimpaCache.ashx" />
-    <None Include="Configs\pages.config">
+    <Content Include="Configs\pages.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\saml.config">
+    </Content>
+    <Content Include="Configs\saml.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\session.config">
+    </Content>
+    <Content Include="Configs\session.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\authentication.config">
+    </Content>
+    <Content Include="Configs\authentication.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\appSettings.config">
+    </Content>
+    <Content Include="Configs\appSettings.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Configs\siteMap.config">
+    </Content>
+    <Content Include="Configs\siteMap.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="App_Themes\IntranetSME\responsividade.scss" />
     <Content Include="App_Themes\IntranetSME\_fonts.scss" />
     <Content Include="App_Themes\IntranetSME\_variaveis.scss" />
