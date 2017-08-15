@@ -152,9 +152,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Arquivos\version.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="app.config" />
     <Content Include="Arquivos\MSTech.Data.Common.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
