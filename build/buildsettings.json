@@ -1,5 +1,5 @@
 {
-  "BuildName": "SGP",
+  "BuildName": "sgp",
   "SolutionFile": "./src/MSTech.GestaoEscolar.sln",
   "Configuration": "Release",
   "SemVer": null,
