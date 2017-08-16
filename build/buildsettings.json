@@ -35,5 +35,12 @@
       "ProjectName": "DbUpdater",
       "ProjectFile": "./src/DbUpdater/DbUpdater.csproj"
     }
-  ]  
+  ],
+  "WindowsServiceProjects": [
+    {
+      "WindowsServiceProjectType": "CopyFiles",
+      "ProjectName": "GestaoEscolarServerScheduler",
+      "ProjectFile": "./src/GestaoEscolarServerScheduler/GestaoEscolarServerScheduler.csproj"
+    }
+  ]
 }
