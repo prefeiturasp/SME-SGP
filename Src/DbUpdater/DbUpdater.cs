@@ -23,12 +23,7 @@ namespace DbUpdater
 
             ConsoleOutput.Warning($"Deploying {dbConfig.InitialCatalog}...");
 
-            Func<string, bool> filterSqlFiles =
-                (x) => x.StartsWith(dbConfig.ProjectDatabase, StringComparison.OrdinalIgnoreCase)
-                        && x.EndsWith(".sql", StringComparison.OrdinalIgnoreCase);
-
-            if (!dbConfig.RestoreInitialVersion)
-                filterSqlFiles += (x) => (!x.StartsWith(string.Concat(dbConfig.ProjectDatabase, ".", SqlJournalSystem.folderRestore, "."), StringComparison.OrdinalIgnoreCase));
+            Func<string, bool> filterSqlFiles = dbConfig.GetFilterSqlFiles();
 
             SqlJournalSystem journal = new SqlJournalSystem(dbConfig);
 
@@ -37,7 +32,7 @@ namespace DbUpdater
                 .SqlDatabase(dbConfig.DeployConnectionString)
                 .WithScriptsEmbeddedInAssembly(assembly, x => filterSqlFiles(x))
                 .WithVariables(dbConfig.Variables)
-                .WithExecutionTimeout(TimeSpan.FromSeconds(dbConfig.ConnectTimeout))
+                .WithExecutionTimeout(dbConfig.ConnectTimeout)
                 .JournalTo(journal)
                 .WithTransaction()
                 .LogToConsole()
@@ -71,8 +66,7 @@ namespace DbUpdater
 
                     if (!result.Successful)
                     {
-                        ConsoleOutput.Error("Error!");
-                        return 1;
+                        throw result.Error;
                     }
                 }
 
