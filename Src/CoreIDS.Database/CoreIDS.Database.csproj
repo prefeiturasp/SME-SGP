@@ -43,11 +43,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Restore\" />
-    <Folder Include="Scripts\" />
+    <Folder Include="01-Restore\" />
+    <Folder Include="03-Scripts\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Always\updateConfigCoreIDS.sql" />
+    <EmbeddedResource Include="02-Always\updateConfigCoreIDS.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,18 +9,6 @@ SET
 	,srr_diretorioRelatorios = ''
 	,srr_pastaRelatorios = ''
 
--- Configuração do API
-UPDATE CFG_Configuracao
-SET cfg_valor = '$UrlApi$'
-WHERE
-	cfg_chave = 'UrlGestaoAcademicaWebApi'
-
--- Configuração do serviço
-UPDATE CFG_Configuracao
-SET cfg_valor = '$HostService$'
-WHERE
-	cfg_chave = 'AppSchedulerHost'
-
 -- Deletar serviços do Gestao Escolar
 DELETE FROM QTZ_Blob_Triggers
 DELETE FROM QTZ_Calendars
