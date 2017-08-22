@@ -56,7 +56,7 @@ namespace DbUpdater
                 {
                     dbSettings.SystemId = config.SystemId;
 
-                    if (!new DbRestore(dbSettings).RestoreIfNotExist())
+                    if (!new DbRestore(dbSettings).InitialVersionRestore())
                     {
                         throw new Exception("Error Restore!");
                     }
