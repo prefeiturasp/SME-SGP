@@ -43,10 +43,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Restore\" />
     <Folder Include="Scripts\V1.77.0.0\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Restore\updateConfigCore.sql" />
+    <EmbeddedResource Include="Always\updateConfigCore.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Always\createRole.sql" />
