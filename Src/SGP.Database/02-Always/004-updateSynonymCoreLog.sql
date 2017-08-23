@@ -35,7 +35,7 @@ DECLARE
 	WHILE (@id > 0)
 	BEGIN
 	
-		SELECT 	
+		SELECT 	@exec =
 			'DROP SYNONYM ' + name + ';' + 
 			'CREATE SYNONYM ' + name + ' FOR ' + REPLACE(base_object_name, '[' + @anterior + ']', '[' + @novo + ']') + ';'
 		FROM
