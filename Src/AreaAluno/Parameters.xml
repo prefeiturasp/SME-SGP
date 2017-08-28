@@ -72,10 +72,4 @@
   <parameter name="EndpointUserInfo" defaultvalue="$EndpointUserInfo$" description="EndpointUserInfo description." tags="">
     <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='EndpointUserInfo']/@value" scope="\\web.config$" />
   </parameter>
-  <parameter name="UrlNotificationAPI" defaultvalue="$UrlNotificationAPI$" description="UrlNotificationAPI description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='UrlNotificationAPI']/@value" scope="\\web.config$" />
-  </parameter>
-  <parameter name="UrlNotificationSignalR" defaultvalue="$UrlNotificationSignalR$" description="UrlNotificationSignalR description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='UrlNotificationSignalR']/@value" scope="\\web.config$" />
-  </parameter>
 </parameters>
