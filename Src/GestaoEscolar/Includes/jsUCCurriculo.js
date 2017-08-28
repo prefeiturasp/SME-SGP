@@ -57,11 +57,6 @@ function jsUCCurriculo() {
         focoCampo = $(this);
         setTimeout(function() { if (btnSalvar.length > 0) { btnSalvar.focus(); focoCampo.focus(); }; }, 1);
     });
-    // Move a tela para o topo, quando tiver mensagem
-    if ($("[id$='lblMessage']").length > 0 && $("[id$='lblMessage']").html() != "")
-    {
-        setTimeout('window.scrollTo(0,0);', 0);
-    }
     // Confirmação excluir customizado
     $(".btExcluir").die("click").live("click", function () {
         var item = $(this).parents("tr").first();
