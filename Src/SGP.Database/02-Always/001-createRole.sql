@@ -4,7 +4,7 @@ DECLARE
 
 IF NOT EXISTS (SELECT loginname FROM master.dbo.syslogins WHERE name = '$UserName$')
 BEGIN
-	SET @SQL = 'CREATE LOGIN [' + '$UserName$' + '] WITH PASSWORD= N''' + '$UserPass$' + ''', DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=ON';
+	SET @SQL = 'CREATE LOGIN [' + '$UserName$' + '] WITH PASSWORD= N''' + '$UserPass$' + ''', DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF';
 	EXEC(@SQL)
 END
 
