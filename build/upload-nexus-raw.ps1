@@ -17,5 +17,7 @@ $Headers = @{
 $fileToUpload = (ls .\output\*zip)
 $uploadUrl="$nexusUrl/repository/$projectRepository/$($fileToUpload.Name)"
 
+Write-Host "Nexus: $uploadUrl"
+
 Invoke-RestMethod -Uri $uploadUrl -Headers $Headers -Method Put -InFile $fileToUpload.FullName
 
