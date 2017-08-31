@@ -25,13 +25,7 @@
         scope="\\bin\\MSTech.Data.Common.dll.config$"
         match="/configuration/connectionStrings/add[@name='GestaoEscolar']/@connectionString" />
   </parameter>
-
-  <parameter name="IDProvider.Id" defaultvalue="$IDProvider.Id$" description="IDProvider.">
-    <parameterEntry kind="XmlFile"
-                    scope="\\web.config$"
-                    match="/*[local-name()='IDProvider'][namespace-uri()='urn:MSTech.SAML20.Configuration'][1]/@id" />
-  </parameter>
-  
+    
   <!--Identity-->
   <parameter name="Cookies_AuthenticationType" defaultvalue="$Cookies_AuthenticationType$" description="Cookies_AuthenticationType description." tags="">
     <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='Cookies_AuthenticationType']/@value" scope="\\web.config$" />
