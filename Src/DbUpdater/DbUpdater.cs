@@ -4,7 +4,7 @@ using System.Reflection;
 using DbUp.Engine;
 using System.Collections.Generic;
 using DbUpdater.Core.Config;
-using DbUpdater.Core.SqlHelpers;
+using DbUpdater.Core.DbHelpers;
 
 namespace DbUpdater
 {
@@ -56,7 +56,7 @@ namespace DbUpdater
                 {
                     dbSettings.SystemId = config.SystemId;
 
-                    if (!new DbRestore(dbSettings).InitialVersionRestore())
+                    if (!new SqlRestore(dbSettings).InitialVersionRestore())
                     {
                         throw new Exception("Error Restore!");
                     }
