@@ -2,7 +2,7 @@
 <configuration>
   <versionNumber>
     <Major value="1" />
-    <Minor value="77" />
+    <Minor value="78" />
     <Revision value="0" />
     <Build value="0" />
   </versionNumber>
