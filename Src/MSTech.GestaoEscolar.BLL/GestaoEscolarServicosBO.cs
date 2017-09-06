@@ -691,6 +691,14 @@ namespace MSTech.GestaoEscolar.BLL
         }
 
         /// <summary>
+        /// Processa os dados para o relatório de análise de sondagem da DRE.
+        /// </summary>
+        public static void ExecMS_JOB_ProcessamentoAnaliseSondagemConsolidada()
+        {
+            new GestaoEscolarServicoDAO().ExecMS_JOB_ProcessamentoAnaliseSondagemConsolidada();
+        }
+
+        /// <summary>
         /// Envia o alerta por API para o sistema Notificações.
         /// </summary>
         /// <param name="notificacao"></param>

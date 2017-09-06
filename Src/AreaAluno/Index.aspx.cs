@@ -191,7 +191,7 @@ namespace AreaAluno
 
                 IDictionary<string, ICFG_Configuracao> configuracao;
                 MSTech.GestaoEscolar.BLL.CFG_ConfiguracaoBO.Consultar(eConfig.Academico, out configuracao);
-                if (configuracao.ContainsKey("AppURLAreaAlunoInfantil") && configuracao["AppURLAreaAlunoInfantil"].cfg_valor != null)
+                if (configuracao.ContainsKey("AppURLAreaAlunoInfantil") && !string.IsNullOrEmpty(configuracao["AppURLAreaAlunoInfantil"].cfg_valor))
                 {
                     string url = HttpContext.Current.Request.Url.AbsoluteUri;
                     string configInfantil = configuracao["AppURLAreaAlunoInfantil"].cfg_valor;

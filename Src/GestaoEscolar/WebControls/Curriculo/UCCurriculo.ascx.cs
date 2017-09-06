@@ -272,7 +272,10 @@ namespace GestaoEscolar.WebControls.Curriculo
                 if (ViewState["VS_abertoSugestao"] == null)
                 {
                     int tev_id = ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_EVENTO_ABERTURA_SUGESTOES, __SessionWEB.__UsuarioWEB.Usuario.ent_id);
-                    ViewState["VS_abertoSugestao"] = ACA_EventoBO.VerificaEventoVigentePorUsuario(tev_id, __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao, __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, -1);
+                    ViewState["VS_abertoSugestao"] = ACA_EventoBO.VerificaEventoVigentePorUsuario
+                        (tev_id, __SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Administracao
+                        , __SessionWEB.__UsuarioWEB.Usuario.usu_id, __SessionWEB.__UsuarioWEB.Grupo.gru_id
+                        , __SessionWEB.__UsuarioWEB.Docente.doc_id, -1);
                 }
                 return (string)ViewState["VS_abertoSugestao"];
             }
@@ -316,16 +319,17 @@ namespace GestaoEscolar.WebControls.Curriculo
                     }
                     else
                     {
-                        if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
-                        {
-                            UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
-                            UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
-                        }
-                        else
-                        {
+                        // Removido carregar por permissão do docente, permitir carregar todas as disciplinas.
+                        //if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                        //{
+                        //    UCComboTipoNivelEnsino1.CarregarTipoNivelEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                        //    UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsinoDocenteEventoAno(__SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                        //}
+                        //else
+                        //{
                             UCComboTipoNivelEnsino1.CarregarTipoNivelEnsino();
                             UCComboTipoModalidadeEnsino1.CarregarTipoModalidadeEnsino();
-                        }
+                        //}
                         grvEixo.CssClass += " accordion-grid";
 
                         if (UCComboTipoNivelEnsino1.QuantidadeItensCombo == 1 
@@ -361,7 +365,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                 {
                     Carregar(-1);
                     
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEventoAno
+                        (VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, -1, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
@@ -371,14 +376,14 @@ namespace GestaoEscolar.WebControls.Curriculo
                         rblDisciplina_SelectedIndexChanged(null, null);
                     }
 
-                    if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
-                    {
-                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocenteEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
-                    }
-                    else
-                    {
+                    //if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                    //{
+                    //    UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocenteEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                    //}
+                    //else
+                    //{
                         UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
-                    }
+                    //}
 
                     if (VS_permiteIncluirSugestao)
                     {
@@ -423,7 +428,8 @@ namespace GestaoEscolar.WebControls.Curriculo
                 {
                     Carregar(-1);
 
-                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                    DataTable dtDisciplinas = ACA_TipoDisciplinaBO.SelecionaObrigatoriasPorNivelEnsinoEventoAno
+                        (VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, -1, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
                     rblDisciplina.DataSource = dtDisciplinas;
                     rblDisciplina.DataBind();
                     rblDisciplina.Visible = dtDisciplinas.Rows.Count > 0;
@@ -433,14 +439,14 @@ namespace GestaoEscolar.WebControls.Curriculo
                         rblDisciplina_SelectedIndexChanged(null, null);
                     }
 
-                    if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
-                    {
-                        UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocenteEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
-                    }
-                    else
-                    {
+                    //if (__SessionWEB.__UsuarioWEB.Docente.doc_id > 0)
+                    //{
+                    //    UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidadeDocenteEventoAno(VS_tne_id, VS_tme_id, __SessionWEB.__UsuarioWEB.Docente.doc_id, VS_permiteIncluirSugestao ? VS_abertoSugestao : "-1", cal_ano);
+                    //}
+                    //else
+                    //{
                         UCComboTipoCurriculoPeriodo1.CarregarPorNivelEnsinoModalidade(VS_tne_id, VS_tme_id);
-                    }
+                    //}
 
                     if (VS_permiteIncluirSugestao)
                     {

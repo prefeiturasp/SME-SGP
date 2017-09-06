@@ -26,6 +26,10 @@
       <FullPath>AnaliseSondagem.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>AnaliseSondagemConsolidada.rdl</Name>
+      <FullPath>AnaliseSondagemConsolidada.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>AtaEnriquecimentoCurricular.rdl</Name>
       <FullPath>AtaEnriquecimentoCurricular.rdl</FullPath>
     </ProjectItem>
@@ -114,6 +118,10 @@
       <FullPath>DocDctSubRelTarjetaBimestralRegencia.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>FrequenciaEfetivada.rdl</Name>
+      <FullPath>FrequenciaEfetivada.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>FrequenciaMensal.rdl</Name>
       <FullPath>FrequenciaMensal.rdl</FullPath>
     </ProjectItem>
@@ -124,6 +132,10 @@
     <ProjectItem>
       <Name>IndicadorFrequenciaPeriodoCurso.rdl</Name>
       <FullPath>IndicadorFrequenciaPeriodoCurso.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>LogNotificacoes.rdl</Name>
+      <FullPath>LogNotificacoes.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>QuantitativoSugestoes.rdl</Name>
@@ -172,10 +184,6 @@
     <ProjectItem>
       <Name>TurmasProgramaSocialFrequencia.rdl</Name>
       <FullPath>TurmasProgramaSocialFrequencia.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>LogNotificacoes.rdl</Name>
-      <FullPath>LogNotificacoes.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

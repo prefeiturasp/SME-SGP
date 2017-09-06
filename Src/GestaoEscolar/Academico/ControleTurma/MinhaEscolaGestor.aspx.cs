@@ -544,9 +544,9 @@ namespace GestaoEscolar.Academico.ControleTurma
                     {
                         hdnIndiceRptTurmas.Value = indiceRptTurmas.ToString();
                     }
-
-                    var turmasRecuperacao = lista.Where(x => x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno).ToList();
-
+                    
+                    var turmasRecuperacao = lista.Where(x => x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && (x.tur_tipo == (byte)TUR_TurmaTipo.EletivaAluno || x.tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)).ToList();
+                    
                     grvProjetosRecParalela.DataSource = turmasRecuperacao;
                     grvProjetosRecParalela.DataBind();
 
@@ -675,7 +675,7 @@ namespace GestaoEscolar.Academico.ControleTurma
                     GridView grdVw = e.Item.FindControl("grvTurma") as GridView;
                     if (grdVw != null)
                     {
-                        var turmas = lista.Where(x => x.tci_id == ciclo && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno).ToList();
+                        var turmas = lista.Where(x => x.tci_id == ciclo && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno && x.tur_tipo != (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado).ToList();
 
                         grdVw.Visible = true;
                         grdVw.DataSource = turmas;
@@ -2674,7 +2674,7 @@ namespace GestaoEscolar.Academico.ControleTurma
 
                                         if (carregaGridTurmas && cur_id > 0 && crr_id > 0 && crp_id > 0 && tds_id > 0)
                                         {
-                                            var turmas = lista.Where(x => x.tci_id == ciclo_id && x.cur_id == cur_id && x.crr_id == crr_id && x.crp_id == crp_id && x.tds_id == tds_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno).ToList();
+                                            var turmas = lista.Where(x => x.tci_id == ciclo_id && x.cur_id == cur_id && x.crr_id == crr_id && x.crp_id == crp_id && x.tds_id == tds_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno && x.tur_tipo != (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado).ToList();
 
                                             grvTurma.DataSource = turmas;
                                             grvTurma.DataBind();
@@ -2683,21 +2683,21 @@ namespace GestaoEscolar.Academico.ControleTurma
                                         {
                                             if (crp_id > 0)
                                             {
-                                                var turmas = lista.Where(x => x.tci_id == ciclo_id && x.cur_id == cur_id && x.crr_id == crr_id && x.crp_id == crp_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno).ToList();
+                                                var turmas = lista.Where(x => x.tci_id == ciclo_id && x.cur_id == cur_id && x.crr_id == crr_id && x.crp_id == crp_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno && x.tur_tipo != (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado).ToList();
 
                                                 grvTurma.DataSource = turmas;
                                                 grvTurma.DataBind();
                                             }
                                             else if (tds_id > 0)
                                             {
-                                                var turmas = lista.Where(x => x.tci_id == ciclo_id && x.cur_id == cur_id && x.crr_id == crr_id && x.tds_id == tds_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno).ToList();
+                                                var turmas = lista.Where(x => x.tci_id == ciclo_id && x.cur_id == cur_id && x.crr_id == crr_id && x.tds_id == tds_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno && x.tur_tipo != (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado).ToList();
 
                                                 grvTurma.DataSource = turmas;
                                                 grvTurma.DataBind();
                                             }
                                             else
                                             {
-                                                var turmas = lista.Where(x => x.tci_id == ciclo_id && x.cur_id == cur_id && x.crr_id == crr_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno).ToList();
+                                                var turmas = lista.Where(x => x.tci_id == ciclo_id && x.cur_id == cur_id && x.crr_id == crr_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno && x.tur_tipo != (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado).ToList();
 
                                                 grvTurma.DataSource = turmas;
                                                 grvTurma.DataBind();
@@ -2705,14 +2705,14 @@ namespace GestaoEscolar.Academico.ControleTurma
                                         }
                                         else if (carregaGridTurmas && tds_id > 0)
                                         {
-                                            var turmas = lista.Where(x => x.tci_id == ciclo_id && x.tds_id == tds_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno).ToList();
+                                            var turmas = lista.Where(x => x.tci_id == ciclo_id && x.tds_id == tds_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno && x.tur_tipo != (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado).ToList();
 
                                             grvTurma.DataSource = turmas;
                                             grvTurma.DataBind();
                                         }
                                         else if (carregaGridTurmas)
                                         {
-                                            var turmas = lista.Where(x => x.tci_id == ciclo_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno).ToList();
+                                            var turmas = lista.Where(x => x.tci_id == ciclo_id && x.tur_situacao == (byte)TUR_TurmaSituacao.Ativo && x.tur_tipo != (byte)TUR_TurmaTipo.EletivaAluno && x.tur_tipo != (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado).ToList();
 
                                             grvTurma.DataSource = turmas;
                                             grvTurma.DataBind();

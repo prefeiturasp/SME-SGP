@@ -1,0 +1,32 @@
+{
+  "BuildName": "SGP",
+  "SolutionFile": "./src/MSTech.GestaoEscolar.sln",
+  "Configuration": "Release",
+  "SemVer": null,
+  "WebProjects": [
+    {
+      "UpdateVersionXml": true,
+      "ProjectName": "GestaoEscolar",
+      "ProjectFile": "./src/GestaoEscolar/GestaoEscolar.csproj",
+      "PublishMethod": {
+        "Type": "Package"
+      }
+    },
+    {
+      "UpdateVersionXml": true,
+      "ProjectName": "GestaoAcademica.WebApi",
+      "ProjectFile": "./src/GestaoAcademica.WebApi/GestaoAcademica.WebApi.csproj",
+      "PublishMethod": {
+        "Type": "Package"
+      }
+    },
+    {
+      "UpdateVersionXml": true,
+      "ProjectName": "AreaAluno",
+      "ProjectFile": "./src/AreaAluno/AreaAluno.csproj",
+      "PublishMethod": {
+        "Type": "Package"
+      }
+    }
+  ]  
+}

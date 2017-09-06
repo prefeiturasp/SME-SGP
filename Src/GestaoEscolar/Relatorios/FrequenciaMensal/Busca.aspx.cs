@@ -674,8 +674,8 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
             filtros.Add("crp_idTurma", UCComboTurma.Valor[1].ToString());
             filtros.Add("ttn_id", UCComboTurma.Valor[2].ToString());
             filtros.Add("tud_id", UCComboTurmaDisciplina.Valor.ToString());
-            filtros.Add("snd_dataIncio", Convert.ToDateTime(txtDataInicio.Text).ToString());
-            filtros.Add("snd_dataFim", Convert.ToDateTime(txtDataFim.Text).ToString());
+            filtros.Add("dataIncio", Convert.ToDateTime(txtDataInicio.Text).ToString());
+            filtros.Add("dataFim", Convert.ToDateTime(txtDataFim.Text).ToString());
 
             __SessionWEB.BuscaRealizada = new BuscaGestao { PaginaBusca = PaginaGestao.FrequenciaMensal, Filtros = filtros };
 
@@ -761,8 +761,8 @@ namespace GestaoEscolar.Relatorios.FrequenciaMensal
                     __SessionWEB.BuscaRealizada.Filtros.TryGetValue("tud_id", out valor);
                     UCComboTurmaDisciplina.Valor = Convert.ToInt64(valor);
 
-                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataIncio", out valor2);
-                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("snd_dataFim", out valor3);
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("dataIncio", out valor2);
+                    __SessionWEB.BuscaRealizada.Filtros.TryGetValue("dataFim", out valor3);
                     txtDataInicio.Text = valor2;
                     txtDataFim.Text = valor3;
                     
