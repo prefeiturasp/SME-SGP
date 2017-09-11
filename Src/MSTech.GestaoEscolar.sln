@@ -108,6 +108,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesConsole", "TestesCons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbUpdater", "DbUpdater\DbUpdater.csproj", "{556E9FB5-CD7A-4ED6-8E58-4CB456CEB8BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreIDS.Database", "CoreIDS.Database\CoreIDS.Database.csproj", "{3BF79376-C31F-4778-A7CB-C7E7CB524016}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -802,6 +804,42 @@ Global
 		{556E9FB5-CD7A-4ED6-8E58-4CB456CEB8BB}.ReleaseAlunos|Mixed Platforms.Build.0 = Release|Any CPU
 		{556E9FB5-CD7A-4ED6-8E58-4CB456CEB8BB}.ReleaseAlunos|x86.ActiveCfg = Release|Any CPU
 		{556E9FB5-CD7A-4ED6-8E58-4CB456CEB8BB}.ReleaseAlunos|x86.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Debug|x86.Build.0 = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.DebugLocal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.DebugLocal|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.DebugLocal|x86.ActiveCfg = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.DebugLocal|x86.Build.0 = Debug|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.GestaoEscolar|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.GestaoEscolar|Any CPU.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.GestaoEscolar|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.GestaoEscolar|Mixed Platforms.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.GestaoEscolar|x86.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.GestaoEscolar|x86.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release Serviços|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release Serviços|Any CPU.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release Serviços|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release Serviços|Mixed Platforms.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release Serviços|x86.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release Serviços|x86.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release|x86.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.Release|x86.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.ReleaseAlunos|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.ReleaseAlunos|Any CPU.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.ReleaseAlunos|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.ReleaseAlunos|Mixed Platforms.Build.0 = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.ReleaseAlunos|x86.ActiveCfg = Release|Any CPU
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016}.ReleaseAlunos|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -836,5 +874,6 @@ Global
 		{6376EB97-0276-4C31-BA63-62B2D8FA6A72} = {9D9FCAB2-B05C-483E-8AAE-636E5F8E8849}
 		{DB9F6A76-6F76-47AE-8B4A-76D841E3593D} = {6B734CAA-5F81-46B3-BB95-6181FFEDB15D}
 		{556E9FB5-CD7A-4ED6-8E58-4CB456CEB8BB} = {CD0D5A5D-5F68-47D0-8189-0D0926C71293}
+		{3BF79376-C31F-4778-A7CB-C7E7CB524016} = {CD0D5A5D-5F68-47D0-8189-0D0926C71293}
 	EndGlobalSection
 EndGlobal

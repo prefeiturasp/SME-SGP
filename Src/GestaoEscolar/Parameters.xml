@@ -25,57 +25,51 @@
         scope="\\bin\\MSTech.Data.Common.dll.config$"
         match="/configuration/connectionStrings/add[@name='GestaoEscolar']/@connectionString" />
   </parameter>
-
-  <parameter name="IDProvider.Id" defaultvalue="$IDProvider.Id$" description="IDProvider.">
-    <parameterEntry kind="XmlFile"
-                    scope="\\web.config$"
-                    match="/*[local-name()='IDProvider'][namespace-uri()='urn:MSTech.SAML20.Configuration'][1]/@id" />
-  </parameter>
   
   <!--Identity-->
   <parameter name="Cookies_AuthenticationType" defaultvalue="$Cookies_AuthenticationType$" description="Cookies_AuthenticationType description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='Cookies_AuthenticationType']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='Cookies_AuthenticationType']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="Cookies_CookieName" defaultvalue="$Cookies_CookieName$" description="Cookies_CookieName description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='Cookies_CookieName']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='Cookies_CookieName']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="Cookies_LoginPath" defaultvalue="$Cookies_LoginPath$" description="Cookies_LoginPath description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='Cookies_LoginPath']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='Cookies_LoginPath']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="Cookies_CookieDomain" defaultvalue="$Cookies_CookieDomain$" description="Cookies_CookieDomain description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='Cookies_CookieDomain']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='Cookies_CookieDomain']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="AuthenticationType" defaultvalue="$AuthenticationType$" description="AuthenticationType description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='AuthenticationType']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='AuthenticationType']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="SignInAsAuthenticationType" defaultvalue="$SignInAsAuthenticationType$" description="SignInAsAuthenticationType description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='SignInAsAuthenticationType']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='SignInAsAuthenticationType']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="Authority" defaultvalue="$Authority$" description="Authority description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='Authority']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='Authority']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="RedirectUri" defaultvalue="$RedirectUri$" description="RedirectUri description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='RedirectUri']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='RedirectUri']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="ClientId" defaultvalue="$ClientId$" description="ClientId description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='ClientId']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='ClientId']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="ClientSecret" defaultvalue="$ClientSecret$" description="ClientSecret description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='ClientSecret']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='ClientSecret']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="Scope" defaultvalue="$Scope$" description="Scope description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='Scope']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='Scope']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="ResponseType" defaultvalue="$ResponseType$" description="ResponseType description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='ResponseType']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='ResponseType']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="EndpointUserInfo" defaultvalue="$EndpointUserInfo$" description="EndpointUserInfo description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='EndpointUserInfo']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='EndpointUserInfo']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="UrlNotificationAPI" defaultvalue="$UrlNotificationAPI$" description="UrlNotificationAPI description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='UrlNotificationAPI']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='UrlNotificationAPI']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
   <parameter name="UrlNotificationSignalR" defaultvalue="$UrlNotificationSignalR$" description="UrlNotificationSignalR description." tags="">
-    <parameterentry kind="XmlFile" match="/configuration/appSettings/add[@key='UrlNotificationSignalR']/@value" scope="\\web.config$" />
+    <parameterentry kind="XmlFile" match="/appSettings/add[@key='UrlNotificationSignalR']/@value" scope="\\Configs\\appSettings.config$" />
   </parameter>
 </parameters>

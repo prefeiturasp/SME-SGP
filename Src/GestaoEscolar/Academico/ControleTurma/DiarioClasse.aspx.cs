@@ -4836,16 +4836,20 @@ namespace GestaoEscolar.Academico.ControleTurma
                     ACA_TipoCurriculoPeriodo tcp = new ACA_TipoCurriculoPeriodo { tcp_id = crp.tcp_id };
                     ACA_TipoCurriculoPeriodoBO.GetEntity(tcp);
 
+                    List<Cache_EventosEfetivacaoTodos> eventos = ACA_EventoBO.Select_EventoEfetivacaoTodos(VS_EntitiesControleTurma.turma.cal_id, VS_EntitiesControleTurma.turma.tur_id, UCNavegacaoTelaPeriodo.VS_tpc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo);
+                    bool eventoAberto = eventos.Any(p => p.evt_dataInicio <= DateTime.Today);
+
                     permissaoObjetoConhecimento = tci.tci_objetoAprendizagem && tcp.tcp_objetoAprendizagem
                                                     && (UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.Normal || UCControleTurma1.VS_tur_tipo == (byte)TUR_TurmaTipo.AtendimentoEducacionalEspecializado)
                                                     && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.Regencia
                                                     && VS_EntitiesControleTurma.turmaDisciplina.tud_tipo != (byte)TurmaDisciplinaTipo.ComponenteRegencia;
 
-                    bool pendentePlanoAula = string.IsNullOrEmpty(entity.tau_planoAula) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula)
+                    bool pendentePlanoAula = string.IsNullOrEmpty(entity.tau_planoAula) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula) && eventoAberto
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));
-                    bool pendenteObjetoConhecimento = (listObjTudTau == null || listObjTudTau.Count == 0) && permissaoObjetoConhecimento && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semObjetoConhecimento);
+                    bool pendenteObjetoConhecimento = (listObjTudTau == null || listObjTudTau.Count == 0) && permissaoObjetoConhecimento && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semObjetoConhecimento) && eventoAberto;
+                    
                     imgSemPlanoAula.Visible = pendentePlanoAula || pendenteObjetoConhecimento;
                     if (permissaoObjetoConhecimento)
                     {
@@ -5028,7 +5032,10 @@ namespace GestaoEscolar.Academico.ControleTurma
                 if (imgSemPlanoAula != null && entityTurmaAula.tau_data.Date < DateTime.Now.Date &&
                     UCNavegacaoTelaPeriodo.VS_tpc_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_PERIODO_CALENDARIO_RECESSO, __SessionWEB.__UsuarioWEB.Usuario.ent_id))
                 {
-                    bool pendentePlanoAula = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula)
+                    List<Cache_EventosEfetivacaoTodos> eventos = ACA_EventoBO.Select_EventoEfetivacaoTodos(VS_EntitiesControleTurma.turma.cal_id, VS_EntitiesControleTurma.turma.tur_id, UCNavegacaoTelaPeriodo.VS_tpc_id, __SessionWEB.__UsuarioWEB.Usuario.ent_id, ApplicationWEB.AppMinutosCacheLongo);
+                    bool eventoAberto = eventos.Any(p => p.evt_dataInicio <= DateTime.Today);
+
+                    bool pendentePlanoAula = string.IsNullOrEmpty(entityTurmaAula.tau_planoAula) && !VS_ListConfiguracaoServicoPendencia.Any(p => p.csp_semPlanoAula) && eventoAberto
                                                 && (__SessionWEB.__UsuarioWEB.Grupo.vis_id == SysVisaoID.Individual
                                                     || VS_EntitiesControleTurma.curso.tne_id != ACA_ParametroAcademicoBO.ParametroValorInt32PorEntidade(eChaveAcademico.TIPO_NIVEL_ENSINO_EDUCACAO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id)
                                                     || ACA_ParametroAcademicoBO.ParametroValorBooleanoPorEntidade(eChaveAcademico.EXIBIR_ALERTA_AULA_SEM_PLANO_ENSINO_INFANTIL, __SessionWEB.__UsuarioWEB.Usuario.ent_id));

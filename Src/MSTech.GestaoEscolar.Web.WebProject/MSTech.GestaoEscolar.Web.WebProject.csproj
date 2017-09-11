@@ -97,22 +97,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MSTechLibrary\DLLS\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_External_Dependencies\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_External_Dependencies\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_External_Dependencies\Microsoft.SqlServer.Smo.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_External_Dependencies\Microsoft.SqlServer.SqlEnum.dll</HintPath>
-    </Reference>
     <Reference Include="MSTech.Business.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MSTechLibrary\DLLS\MSTech.Business.Common.dll</HintPath>
@@ -219,9 +203,6 @@
     <Compile Include="HttpHandlers\FileHandler.cs" />
     <Compile Include="HttpHandlers\ImageHandler.cs" />
     <Compile Include="HttpHandlers\LimpaCacheHandler.cs" />
-    <Compile Include="HttpHandlers\Status.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="HttpModules\MinifyHTML\HttpModule.cs" />
     <Compile Include="HttpModules\MinifyHTML\WhitespaceFilter.cs" />
     <Compile Include="IdentitySettingsConfig.cs" />

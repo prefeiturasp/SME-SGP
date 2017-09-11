@@ -782,6 +782,10 @@ namespace GestaoEscolar.WebControls.Curriculo
                         if (btnCancelarEdicao != null)
                             btnCancelarEdicao.Visible = true;
                     }
+
+                    Control txtDescricao = grv.Rows[e.NewEditIndex].FindControl("txtDescricao");
+                    if (txtDescricao != null)
+                        txtDescricao.Focus();
                 }
                 else if (VS_permiteIncluirSugestao)
                 {
@@ -800,8 +804,11 @@ namespace GestaoEscolar.WebControls.Curriculo
                         if (btnExcluirSugestao != null)
                             btnExcluirSugestao.Visible = Convert.ToInt32(hdnCrsId.Value) > 0;
                     }
+
+                    Control txtSugestao = grv.Rows[e.NewEditIndex].FindControl("txtSugestao");
+                    if (txtSugestao != null)
+                        txtSugestao.Focus();
                 }
-                grv.Rows[e.NewEditIndex].Focus();
             }
             catch (Exception ex)
             {
@@ -1301,6 +1308,10 @@ namespace GestaoEscolar.WebControls.Curriculo
                         if (btnCancelarEdicao != null)
                             btnCancelarEdicao.Visible = true;
                     }
+
+                    Control txtDescricao = grv.Rows[e.NewEditIndex].FindControl("txtDescricao");
+                    if (txtDescricao != null)
+                        txtDescricao.Focus();
                 }
                 else if (VS_permiteIncluirSugestao)
                 {
@@ -1319,8 +1330,11 @@ namespace GestaoEscolar.WebControls.Curriculo
                         if (btnExcluirSugestao != null)
                             btnExcluirSugestao.Visible = Convert.ToInt32(hdnCrsId.Value) > 0;
                     }
+
+                    Control txtSugestao = grv.Rows[e.NewEditIndex].FindControl("txtSugestao");
+                    if (txtSugestao != null)
+                        txtSugestao.Focus();
                 }
-                grv.Rows[e.NewEditIndex].Focus();
             }
             catch (Exception ex)
             {
@@ -1604,7 +1618,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                     if (btnExcluir != null)
                         btnExcluir.Visible = false;
 
-                    grvGeral.Rows[index].Focus();
+                    Control txtTitulo = grvGeral.Rows[index].FindControl("txtTitulo");
+                    if (txtTitulo != null)
+                        txtTitulo.Focus();
                 }
             }
             catch (Exception ex)
@@ -1658,7 +1674,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                     if (btnExcluir != null)
                         btnExcluir.Visible = false;
 
-                    grvDisciplina.Rows[index].Focus();
+                    Control txtTitulo = grvDisciplina.Rows[index].FindControl("txtTitulo");
+                    if (txtTitulo != null)
+                        txtTitulo.Focus();
                 }
             }
             catch (Exception ex)
@@ -1713,7 +1731,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                     if (btnExcluir != null)
                         btnExcluir.Visible = false;
 
-                    grvEixo.Rows[index].Focus();
+                    Control txtDescricao = grvEixo.Rows[index].FindControl("txtDescricao");
+                    if (txtDescricao != null)
+                        txtDescricao.Focus();
                 }
             }
             catch (Exception ex)
@@ -1770,7 +1790,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                     if (btnExcluir != null)
                         btnExcluir.Visible = false;
 
-                    grvObjetivo.Rows[index].Focus();
+                    Control txtDescricao = grvObjetivo.Rows[index].FindControl("txtDescricao");
+                    if (txtDescricao != null)
+                        txtDescricao.Focus();
                 }
             }
             catch (Exception ex)
@@ -1827,7 +1849,9 @@ namespace GestaoEscolar.WebControls.Curriculo
                     if (btnExcluir != null)
                         btnExcluir.Visible = false;
 
-                    grvObjetivo.Rows[index].Focus();
+                    Control txtDescricao = grvObjetivo.Rows[index].FindControl("txtDescricao");
+                    if (txtDescricao != null)
+                        txtDescricao.Focus();
                 }
             }
             catch (Exception ex)

@@ -1,3 +1,3 @@
-﻿..\bin\debug\DbUpdater.exe "dbSettings.DEV.json" "/LOG"
+﻿..\bin\debug\DbUpdater.exe --Setting dbSettings.DEV.json --Log
 
 $host.UI.RawUI.ReadKey()

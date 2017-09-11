@@ -1,5 +1,5 @@
 {
-  "BuildName": "SGP",
+  "BuildName": "sgp",
   "SolutionFile": "./src/MSTech.GestaoEscolar.sln",
   "Configuration": "Release",
   "SemVer": null,
@@ -14,7 +14,7 @@
     },
     {
       "UpdateVersionXml": true,
-      "ProjectName": "GestaoAcademica.WebApi",
+      "ProjectName": "GestaoAcademicaWebApi",
       "ProjectFile": "./src/GestaoAcademica.WebApi/GestaoAcademica.WebApi.csproj",
       "PublishMethod": {
         "Type": "Package"
@@ -28,5 +28,19 @@
         "Type": "Package"
       }
     }
-  ]  
+  ],
+   "DatabaseProjects": [
+    {
+      "DatabaseProjectType": "DbUp",
+      "ProjectName": "DbUpdater",
+      "ProjectFile": "./src/DbUpdater/DbUpdater.csproj"
+    }
+  ],
+  "WindowsServiceProjects": [
+    {
+      "WindowsServiceProjectType": "CopyFiles",
+      "ProjectName": "GestaoEscolarServerScheduler",
+      "ProjectFile": "./src/GestaoEscolarServerScheduler/GestaoEscolarServerScheduler.csproj"
+    }
+  ]
 }

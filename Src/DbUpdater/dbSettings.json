@@ -1,24 +1,11 @@
 ﻿{
-  "SystemId": 102,
+  "SystemId": "$SystemId$",
   "DbSettings": [
-    {
-      "ProjectDatabase": "CoreSSO.Database",
-      "DeployConnectionString": "$DeployConnectionStringCore$",
-      "RestoreInitialVersion": "False",
-      "BackupFilePath": "",
-      "Variables": {
-        "SystemName": "$SystemName$",
-        "UrlSGPLogin": "$UrlSGPLogin$",
-        "UrlSGPLogout": "$UrlSGPLogout$",
-        "UrlBoletimLogin": "$UrlBoletimLogin$",
-        "UrlBoletimLogout": "$UrlBoletimLogout$"
-      }
-    },
     {
       "ProjectDatabase": "SGP.Database",
       "DeployConnectionString": "$DeployConnectionStringSGP$",
-      "RestoreInitialVersion": "False",
-      "BackupFilePath": "",
+      "InitialVersionRestoreType": "$InitialVersionRestoreTypeSGP$",
+      "BackupFilePath": "$BackupFilePathSGP$",
       "Variables": {
         "SystemName": "$SystemName$",
         "UserName": "$UserName$",
@@ -30,6 +17,33 @@
         "CoreTarget": "$CoreTarget$",
         "CoreLogSource": "$CoreLogSource$",
         "CoreLogTarget": "$CoreLogTarget$"
+      }
+    },
+    {
+      "ProjectDatabase": "CoreSSO.Database",
+      "DeployConnectionString": "$DeployConnectionStringCore$",
+      "InitialVersionRestoreType": "None",
+      "BackupFilePath": "",
+      "Variables": {
+        "SystemName": "$SystemName$",
+        "UserName": "$UserName$",
+        "UserPass": "$UserPass$",
+        "UrlSGPLogin": "$UrlSGPLogin$",
+        "UrlSGPLogout": "$UrlSGPLogout$",
+        "UrlBoletimLogin": "$UrlBoletimLogin$",
+        "UrlBoletimLogout": "$UrlBoletimLogout$"
+      }
+    },
+    {
+      "ProjectDatabase": "CoreIDS.Database",
+      "DeployConnectionString": "$DeployConnectionStringCoreIDS$",
+      "InitialVersionRestoreType": "None",
+      "BackupFilePath": "",
+      "Variables": {
+        "ClientIdMvc": "$ClientIdMvc$",
+        "UrlSGP": "$UrlSGP$",
+        "UrlSGPLogin": "$UrlSGPLogin$",
+        "UrlBoletimLogin": "$UrlBoletimLogin$"
       }
     }
   ]

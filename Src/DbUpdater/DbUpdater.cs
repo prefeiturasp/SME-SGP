@@ -4,7 +4,7 @@ using System.Reflection;
 using DbUp.Engine;
 using System.Collections.Generic;
 using DbUpdater.Core.Config;
-using DbUpdater.Core.SqlHelpers;
+using DbUpdater.Core.DbHelpers;
 
 namespace DbUpdater
 {
@@ -22,17 +22,17 @@ namespace DbUpdater
             var assembly = Assembly.Load(dbConfig.ProjectDatabase);
 
             ConsoleOutput.Warning($"Deploying {dbConfig.InitialCatalog}...");
-            Func<string, bool> filterSqlFiles = (x) => x.StartsWith(dbConfig.ProjectDatabase, StringComparison.OrdinalIgnoreCase)
-                                                        && x.EndsWith(".sql", StringComparison.OrdinalIgnoreCase);
 
-            SqlJournalSystem journal = new SqlJournalSystem(dbConfig.ConnectionFactory, dbConfig.SystemId);
+            Func<string, bool> filterSqlFiles = dbConfig.GetFilterSqlFiles();
+
+            SqlJournalSystem journal = new SqlJournalSystem(dbConfig);
 
             var upgradeDB =
             DeployChanges.To
                 .SqlDatabase(dbConfig.DeployConnectionString)
                 .WithScriptsEmbeddedInAssembly(assembly, x => filterSqlFiles(x))
                 .WithVariables(dbConfig.Variables)
-                .WithExecutionTimeout(TimeSpan.FromSeconds(dbConfig.ConnectTimeout))
+                .WithExecutionTimeout(dbConfig.ConnectTimeout)
                 .JournalTo(journal)
                 .WithTransaction()
                 .LogToConsole()
@@ -44,33 +44,19 @@ namespace DbUpdater
         private static int Main(string[] args)
         {
             List<DatabaseUpgradeResult> results = new List<DatabaseUpgradeResult>();
-            bool log = false;
+
+            var options = Argument.Load(args);
 
             try
             {
-                string file = "dbSettings.json";
-
-                foreach (string arg in args)
-                {
-                    if (arg.EndsWith(".json"))
-                    {
-                        file = arg;
-                    }
-
-                    if (arg.ToUpper().Equals(@"/LOG"))
-                    {
-                        log = true;
-                    }
-                }
-
-                var config = Config.CreateFromFile(file);
+                var config = Config.CreateFromFile(options.SettingFile);
                 Config.Validate(config);
 
                 foreach (var dbSettings in config.DbSettings)
                 {
                     dbSettings.SystemId = config.SystemId;
 
-                    if (!new DbRestore(dbSettings).RestoreIfNotExist())
+                    if (!new SqlRestore(dbSettings).InitialVersionRestore())
                     {
                         throw new Exception("Error Restore!");
                     }
@@ -80,21 +66,21 @@ namespace DbUpdater
 
                     if (!result.Successful)
                     {
-                        ConsoleOutput.Error("Error!");
-                        return -1;
+                        throw result.Error;
                     }
                 }
 
                 ConsoleOutput.Sucess("Sucess!");
-                ConsoleOutput.Warning(Log.SaveLog(results, log));
+                ConsoleOutput.Warning(Log.SaveLog(results, options.Log));
                 return 0;
             }
             catch (Exception e)
             {
                 results.Add(new DatabaseUpgradeResult(new List<SqlScript>(), false, e));
-                ConsoleOutput.Warning(Log.SaveLog(results, log));
+                ConsoleOutput.Warning(Log.SaveLog(results, options.Log));
                 ConsoleOutput.Error(e.Message);
-                return -1;
+                Log.Error(e);
+                return 2;
             }
         }
     }
