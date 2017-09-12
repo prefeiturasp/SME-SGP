@@ -50,7 +50,7 @@
     <EmbeddedResource Include="02-Always\002-updateConfigCore.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="02-Always\001-createRole.sql" />
+    <EmbeddedResource Include="02-Always\001-addUserRole.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

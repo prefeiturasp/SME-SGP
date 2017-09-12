@@ -43,9 +43,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="02-Always\001-createRole.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="01-Restore\001-updateConfigRestore.sql" />
     <EmbeddedResource Include="02-Always\003-updateSynonymCore.sql" />
     <EmbeddedResource Include="02-Always\004-updateSynonymCoreLog.sql" />
@@ -55,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="02-Always\002-updateConfigSGP.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="01-Restore\002-createRole.sql" />
+    <EmbeddedResource Include="02-Always\001-addUserRole.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
