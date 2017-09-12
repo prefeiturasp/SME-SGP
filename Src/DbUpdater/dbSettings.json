@@ -6,6 +6,7 @@
       "DeployConnectionString": "$DeployConnectionStringSGP$",
       "InitialVersionRestoreType": "$InitialVersionRestoreTypeSGP$",
       "BackupFilePath": "$BackupFilePathSGP$",
+      "AllowSnapshotIsolation": true,
       "Variables": {
         "SystemName": "$SystemName$",
         "UserName": "$UserName$",

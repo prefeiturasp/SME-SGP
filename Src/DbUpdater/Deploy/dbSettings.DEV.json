@@ -6,6 +6,7 @@
       "DeployConnectionString": "Server=localhost\\MSSQLSERVER2014;Database=Local_GestaoPedagogica;Integrated Security=SSPI;Connection Timeout=30;",
       "InitialVersionRestoreType": "Backup",
       "BackupFilePath": "C:\\SQL\\Backups\\GestaoPedagogica.bak",
+      "AllowSnapshotIsolation": true,
       "Variables": {
         "SystemName": " SGP",
         "UserName": "user_Name",
