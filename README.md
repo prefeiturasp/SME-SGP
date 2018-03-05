@@ -81,6 +81,12 @@ Clicar em testar conexão e salvar
 
 ### Homologação (Acesso restrito pela Intranet da SME)
 
+#### Versão atual
+[hom-sgp.sme.prefeitura.sp.gov.br](http://hom-sgp.sme.prefeitura.sp.gov.br)
+
+[hom-boletimonline](http://hom-boletimonline.sme.prefeitura.sp.gov.br/Login.aspx)
+
+#### Versão antiga, descontinuada
 [h-sgp.sme.prefeitura.sp.gov.br](http://h-sgp.sme.prefeitura.sp.gov.br)
 
 [h-boletimonline](http://h-boletimonline.sme.prefeitura.sp.gov.br/Login.aspx)
